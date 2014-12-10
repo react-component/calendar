@@ -17,7 +17,7 @@ require(['../',
              YearPanel,
              DecadePanel,
              React) {
-  var formatter = new GregorianCalendarFormat('yyyy-mm-dd');
+  var formatter = new GregorianCalendarFormat('yyyy-MM-dd');
   var value = new GregorianCalendar();
   value.setTime(Date.now());
   function onSelect(value){
