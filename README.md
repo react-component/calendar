@@ -40,6 +40,11 @@ npm install
 npm start
 ```
 
+## Example
+
+http://localhost:8001/examples/index.html
+
+
 ## Test Case
 
 http://localhost:8001/tests/runner.html?coverage

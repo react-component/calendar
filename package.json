@@ -59,7 +59,8 @@
     "precommit-hook": "^1.0.7",
     "react": "~0.12.1",
     "react-tools": "~0.12.1",
-    "simulate-dom-event": "^1.0.1"
+    "simulate-dom-event": "^1.0.1",
+    "sinon": "^1.12.1"
   },
   "precommit": [
     "lint"

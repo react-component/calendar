@@ -4,11 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <title>calendar Mocha Runner</title>
 </head>
 <body>
-<h1>rc-<%= appname%> Mocha Runner</h1>
+<h1>rc-calendar Mocha Runner</h1>
 <div id="mocha"></div>
 <script src="/node_modules/es5-shim/es5-shim.js?nowrap"></script>
 <script src="/node_modules/modulex/build/modulex-debug.js?nowrap"></script>
@@ -18,6 +17,8 @@
 <script src="/node_modules/mocha/mocha.js?nowrap"></script>
 <script src='/node_modules/node-jscover/lib/reporters/mocha/console.js?nowrap'></script>
 <script src='/node_modules/node-jscover-coveralls/lib/reports/mocha.js?nowrap'></script>
+<link href="/assets/dpl.css" rel="stylesheet"/>
+<div id="content"></div>
 <script>
     (function () {
         window.process = {
