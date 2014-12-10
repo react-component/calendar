@@ -5,8 +5,8 @@ notifications:
 node_js:
 - 0.11
 before_script:
-- node start &
-- npm install gulp mocha-phantomjs -g
+- npm start &
+- npm install mocha-phantomjs -g
 - phantomjs --version
 script:
 - npm test
