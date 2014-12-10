@@ -5,7 +5,7 @@ notifications:
 node_js:
 - 0.11
 before_script:
-- node --harmony server &
+- node start &
 - npm install gulp mocha-phantomjs -g
 - phantomjs --version
 script:
