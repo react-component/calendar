@@ -1,0 +1,14 @@
+language: node_js
+notifications:
+  email:
+  - yiminghe@gmail.com
+node_js:
+- 0.11
+before_script:
+- node --harmony server &
+- npm install gulp mocha-phantomjs -g
+- phantomjs --version
+script:
+- npm test
+- npm run-script browser-test
+- npm run-script browser-test-cover

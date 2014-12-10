@@ -1,0 +1,128 @@
+.rc-calendar-month-panel {
+    width: 100%;
+    height:100%;
+    left: 0;
+    top:0;
+    z-index: 10;
+    background: #ffffff;
+    position: absolute;
+    outline: none;
+    border-bottom: 1px solid #9bc0e0;
+}
+
+.ks-ie6 .rc-calendar-month-panel{
+    height:~'expression(this.parentNode.offsetHeight)'
+}
+
+.rc-calendar-month-panel-hidden {
+    display: none;
+}
+
+.rc-calendar-month-panel-prev-year-btn,
+.rc-calendar-month-panel-next-year-btn,
+.rc-calendar-month-panel-header {
+    background: url('//gtms04.alicdn.com/tps/i4/TB1.L9bFVXXXXbAXpXXDM4qIXXX-19-300.png');
+}
+
+.ks-ie6 .rc-calendar-month-panel-prev-year-btn,
+.ks-ie6 .rc-calendar-month-panel-next-year-btn,
+.ks-ie6 .rc-calendar-month-panel-header {
+    background-image: url('//gtms04.alicdn.com/tps/i4/TB1.L9bFVXXXXbAXpXXDM4qIXXX-19-300.png');
+}
+
+.rc-calendar-month-panel-header {
+    background-repeat: repeat-x;
+    background-position: 0 -240px;
+    height: 26px;
+    position: relative;
+    text-align: center;
+}
+
+.rc-calendar-month-panel-prev-year-btn, .rc-calendar-month-panel-next-year-btn {
+    width: 19px;
+    height: 19px;
+    position: absolute;
+    top: 2px;
+}
+
+.rc-calendar-month-panel-prev-year-btn {
+    background-position: 0 -60px;
+    left: 0;
+}
+
+.rc-calendar-month-panel-prev-year-btn:hover {
+    background-position: 0 -80px;
+}
+
+.rc-calendar-month-panel-year-select {
+    color: #ffffff;
+    line-height: 26px;
+    text-decoration: none;
+    border: 1px solid transparent;
+}
+
+.rc-calendar-month-panel-year-select-arrow {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    font-size: 0;
+    vertical-align: middle;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #ffffff;
+}
+
+.rc-calendar-month-panel-year-select:hover .rc-calendar-month-panel-year-select-arrow {
+    border-top-color: #f0ff00;
+}
+
+.rc-calendar-month-panel-year-select:hover {
+    color: #f0ff00;
+    border: 1px solid #8cc6ff;
+    background: url('//gtms04.alicdn.com/tps/i4/TB1.L9bFVXXXXbAXpXXDM4qIXXX-19-300.png') 0 -268px;
+}
+
+.rc-calendar-month-panel-next-year-btn {
+    background-position: 0 0;
+    right: 0;
+
+}
+
+.rc-calendar-month-panel-next-year-btn:hover {
+    background-position: 0 -20px;
+}
+
+.rc-calendar-month-panel-table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: separate;
+}
+.rc-calendar-month-panel-cell {
+    text-align: center;
+}
+
+.rc-calendar-month-panel-month {
+    color: #004499;
+    line-height: 42px;
+    text-decoration: none;
+    display: block;
+    border-radius: 2px;
+    border: 1px solid transparent;
+}
+
+.ks-ie6 .rc-calendar-month-panel-month {
+    border-color: tomato;
+    zoom: 1;
+    filter: chroma(color=tomato);
+}
+
+.rc-calendar-month-panel-month:hover {
+    background-color: #f3f9ff;
+    border-color: #88b1ea;
+}
+
+.rc-calendar-month-panel-selected-cell .rc-calendar-month-panel-month {
+    color: #fff;
+    background-color: #4187e7;
+    border-color: #4187e7;
+}
