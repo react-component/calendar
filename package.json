@@ -1,6 +1,6 @@
 {
   "name": "rc-calendar",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "calendar ui component for react",
   "keywords": [
     "react",
@@ -37,8 +37,6 @@
     "es5-shim": "~4.0.5",
     "expect.js": "~0.3.1",
     "gh-changelog": "^1.0.5",
-    "gregorian-calendar": "^2.0.0",
-    "gregorian-calendar-format": "^2.0.0",
     "gulp": "^3.8.7",
     "gulp-jscs": "^1.1.0",
     "gulp-jshint": "^1.8.4",
@@ -85,6 +83,8 @@
     ]
   },
   "dependencies": {
+    "gregorian-calendar": "^2.0.0",
+    "gregorian-calendar-format": "^2.0.0",
     "browserify-shim": "^3.8.0",
     "browserify-jsx": "^0.1.0"
   }
