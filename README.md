@@ -45,6 +45,8 @@ var React = require('react');
 React.render(<Calendar />, container);
 ```
 
+For details to see: [https://github.com/yiminghe/learning-react/tree/master/example/rc-calendar](https://github.com/yiminghe/learning-react/tree/master/example/rc-calendar)
+
 ## API
 
 ### props
