@@ -26,11 +26,10 @@ require(['../',
   }
   React.render(
     <div>
-      <h1 style={{"textAlign": "center"}}>rc-calendar@1.0.0 demo</h1>
       <h2>calendar (en-us)</h2>
       <Calendar showWeekNumber="1" onSelect={onSelect}/>
       <h2>input (zh-cn)</h2>
       <CalendarInput />
-    </div>, document.body);
+    </div>, document.getElementById('body'));
 
 });

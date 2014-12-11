@@ -8,6 +8,7 @@
 }
 .rc-calendar a {
   text-decoration: none;
+  cursor: pointer;
 }
 .rc-pop-up-calendar {
   position: absolute;
@@ -42,6 +43,7 @@
 .rc-calendar-next-month-btn,
 .rc-calendar-prev-year-btn,
 .rc-calendar-next-year-btn {
+  text-indent: -9999px;
   width: 19px;
   height: 19px;
   position: absolute;
@@ -211,6 +213,7 @@
 }
 .rc-calendar-decade-panel-prev-century-btn,
 .rc-calendar-decade-panel-next-century-btn {
+  text-indent: -9999px;
   width: 19px;
   height: 19px;
   position: absolute;
@@ -236,6 +239,7 @@
   background-position: 0 -20px;
 }
 .rc-calendar-decade-panel-table {
+  margin-top: 5px;
   table-layout: fixed;
   width: 100%;
   border-collapse: separate;
@@ -246,6 +250,7 @@
   vertical-align: middle;
 }
 .rc-calendar-decade-panel-decade {
+  line-height: 20px;
   color: #004499;
   text-decoration: none;
   display: block;
@@ -293,6 +298,7 @@
 }
 .rc-calendar-month-panel-prev-year-btn,
 .rc-calendar-month-panel-next-year-btn {
+  text-indent: -9999px;
   width: 19px;
   height: 19px;
   position: absolute;
@@ -337,6 +343,7 @@
   background-position: 0 -20px;
 }
 .rc-calendar-month-panel-table {
+  margin-top: 5px;
   table-layout: fixed;
   width: 100%;
   border-collapse: separate;
@@ -389,6 +396,7 @@
 }
 .rc-calendar-year-panel-prev-decade-btn,
 .rc-calendar-year-panel-next-decade-btn {
+  text-indent: -9999px;
   width: 19px;
   height: 19px;
   position: absolute;
@@ -433,6 +441,7 @@
   background-position: 0 -20px;
 }
 .rc-calendar-year-panel-table {
+  margin-top: 5px;
   table-layout: fixed;
   width: 100%;
   border-collapse: separate;

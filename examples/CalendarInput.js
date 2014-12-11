@@ -44,25 +44,28 @@ var CalendarInput = React.createClass({
     });
   },
 
+  onChange: function () {
+  },
+
   onCalendarSelect: function (d) {
+    this.refs.input.getDOMNode().focus();
     this.setState({
       value: formatter.format(d),
       showCalendar: 0
     });
-    this.refs.input.getDOMNode().focus();
   },
 
   render: function () {
     var state = this.state;
     var calendar;
     if (state.showCalendar) {
-      calendar = (<div style={{position: "absolute", left: 0, top: 21}}>
+      calendar = (<div style={{position: "absolute", left: 0, top: 24}}>
         <Calendar locale={CalendarLocale} value={state.calendarValue} focused="1" onBlur={this.onCalendarBlur} onSelect={this.onCalendarSelect}/>
       </div>);
     }
     return (
       <span style={{display: "inline-block", position: "relative"}}>
-        <input value={state.value} style={{height: 21}} onFocus={this.onFocus} ref='input' onKeyDown={this.onKeyDown}/>
+        <input value={state.value} style={{height: 21}} onFocus={this.onFocus} onChange={this.onChange} ref='input' onKeyDown={this.onKeyDown}/>
       {calendar}
       </span>)
   }

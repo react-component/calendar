@@ -6,12 +6,26 @@
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
-    <link href="/assets/dpl.css" rel="stylesheet"/>
+    <link href="/assets/bootstrap.css" rel="stylesheet" id="skin"/>
     <title>rc-calendar@1.0.0 demo</title>
 </head>
 <body>
+<h1 style="text-align: center">rc-calendar@1.0.0 demo</h1>
+
+<div>
+    <button id="change">change skin</button>
+</div>
+<div id="body"></div>
 <script src="/node_modules/modulex/build/modulex-debug.js?nowrap"></script>
 <script>
+    var skin = document.getElementById('skin');
+    document.getElementById('change').onclick = function () {
+        if (skin.href.indexOf('bootstrap') != -1) {
+            skin.href = '/assets/dpl.css';
+        } else {
+            skin.href = '/assets/bootstrap.css';
+        }
+    };
     window.process = {
         env: {}
     };

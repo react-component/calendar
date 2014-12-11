@@ -37,8 +37,11 @@ gulp.task('gh-changelog', function (done) {
 
 gulp.task('less', function () {
   var less = require('gulp-less');
-  return gulp.src('assets/dpl.less')
+   gulp.src('assets/*.less')
     .pipe(less())
-    .pipe(rename('dpl.css'))
     .pipe(gulp.dest('assets/'));
+});
+
+gulp.task('watch-less',function(){
+  gulp.watch('assets/**/*.less',['less']);
 });
