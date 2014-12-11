@@ -12,4 +12,6 @@ describe('calendar', function () {
   }
 
   React.render(<Calendar showToday={1} onSelect={onSelect}/>, document.getElementById('content'));
+
+  it('works',function(){});
 });
