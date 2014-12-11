@@ -22,6 +22,10 @@ calendar ui component for react, port from https://github.com/kissyteam/date-pic
 [download-image]: https://img.shields.io/npm/dm/rc-calendar.svg?style=flat-square
 [download-url]: https://npmjs.org/package/rc-calendar
 
+## Screenshots
+
+![rc-calendar](http://gtms04.alicdn.com/tps/i4/TB1WifJGVXXXXa3XXXX6tFy4VXX-328-742.png)
+
 ## Feature
 
 * support date, month, year, decade select panel
