@@ -33,6 +33,7 @@
     "browser-test-cover": "mocha-phantomjs -R node_modules/node-jscover/lib/reporters/mocha/console http://localhost:$npm_package_config_port/tests/runner.html?coverage"
   },
   "devDependencies": {
+    "console-polyfill": "^0.1.2",
     "es5-shim": "~4.0.5",
     "expect.js": "~0.3.1",
     "gh-changelog": "^1.0.5",
