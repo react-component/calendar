@@ -22,6 +22,13 @@ calendar ui component for react, port from https://github.com/kissyteam/date-pic
 [download-image]: https://img.shields.io/npm/dm/rc-calendar.svg?style=flat-square
 [download-url]: https://npmjs.org/package/rc-calendar
 
+## Feature
+
+* support date, month, year, decade select panel
+* support week number
+* support en-us and zh-cn locale (ui and timeOffset)
+* support aria and keyboard accessibility
+
 ## install
 
 [![rc-calendar](https://nodei.co/npm/rc-calendar.png)](https://npmjs.org/package/rc-calendar)
@@ -29,9 +36,63 @@ calendar ui component for react, port from https://github.com/kissyteam/date-pic
 ## Usage
 
 ```js
-var calendar = require('rc-calendar');
-// use calendar
+var Calendar = require('rc-calendar');
+var React = require('react');
+React.render(<Calendar />, container);
 ```
+
+## API
+
+### props
+
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th style="width: 100px;">name</th>
+        <th style="width: 50px;">type</th>
+        <th style="width: 50px;">default</th>
+        <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>locale</td>
+          <td>Object</td>
+          <td>require('rc-calendar/lib/locale/en-use')</td>
+          <td>calendar locale</td>
+        </tr>
+        <tr>
+          <td>showWeekNumber</td>
+          <td>Boolean</td>
+          <td>false</td>
+          <td>whether to show week number of year</td>
+        </tr>
+        <tr>
+          <td>showToday</td>
+          <td>Boolean</td>
+          <td>true</td>
+          <td>whether to show today button</td>
+        </tr>
+        <tr>
+           <td>focused</td>
+           <td>Boolean</td>
+           <td>false</td>
+           <td>whether to focus on render</td>
+        </tr>
+        <tr>
+          <td>onSelect</td>
+          <td>Function(GregorianCalendar date)</td>
+          <td>function(){}</td>
+          <td>called when a date is selected from calendar</td>
+        </tr>
+        <tr>
+           <td>onBlur</td>
+           <td>Function()</td>
+           <td>function(){}</td>
+           <td>called when calendar loose focus</td>
+         </tr>
+    </tbody>
+</table>
 
 ## Development
 

@@ -2,7 +2,7 @@
 
 
 require(['../',
-  '../lib/locale/en-us',
+  './CalendarInput',
   '/node_modules/gregorian-calendar/index',
   '/node_modules/gregorian-calendar-format/index',
   '../lib/MonthPanel',
@@ -10,7 +10,7 @@ require(['../',
   '../lib/DecadePanel',
   '/node_modules/react/react'
 ], function (Calendar,
-             Locale,
+             CalendarInput,
              GregorianCalendar,
              GregorianCalendarFormat,
              MonthPanel,
@@ -27,8 +27,10 @@ require(['../',
   React.render(
     <div>
       <h1 style={{"textAlign": "center"}}>rc-calendar@1.0.0 demo</h1>
-      <a href="#">link</a>
-      <Calendar showToday={1} onSelect={onSelect}/>
+      <h2>calendar (en-us)</h2>
+      <Calendar showWeekNumber="1" onSelect={onSelect}/>
+      <h2>input (zh-cn)</h2>
+      <CalendarInput />
     </div>, document.body);
 
 });

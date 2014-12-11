@@ -1,10 +1,14 @@
 {
   "name": "rc-calendar",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "calendar ui component for react",
   "keywords": [
     "react",
-    "react-calendar"
+    "react-calendar",
+    "calendar",
+    "ui component",
+    "ui",
+    "component"
   ],
   "homepage": "http://github.com/react-component/calendar",
   "author": "yiminghe@gmail.com",
