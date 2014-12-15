@@ -118,7 +118,7 @@ http://localhost:8001/tests/runner.html?coverage
 
 ## Coverage
 
-http://localhost:8001/node_modules/node-jscover/lib/front-end/jscoverage.html?w=http://localhost:8001/tests/runner.html?coverage
+http://localhost:8001/node_modules/rc-server/node_modules/node-jscover/lib/front-end/jscoverage.html?w=http://localhost:8001/tests/runner.html?coverage
 
 ## License
 

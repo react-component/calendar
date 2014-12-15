@@ -30,7 +30,7 @@
     "lint": "gulp lint",
     "test": "",
     "browser-test": "mocha-phantomjs http://localhost:$npm_package_config_port/tests/runner.html",
-    "browser-test-cover": "mocha-phantomjs -R node_modules/node-jscover/lib/reporters/mocha/console http://localhost:$npm_package_config_port/tests/runner.html?coverage"
+    "browser-test-cover": "mocha-phantomjs -R node_modules/rc-server/node_modules/node-jscover/lib/reporters/mocha/console http://localhost:$npm_package_config_port/tests/runner.html?coverage"
   },
   "devDependencies": {
     "expect.js": "~0.3.1",
