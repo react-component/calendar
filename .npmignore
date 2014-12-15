@@ -1,4 +1,4 @@
-asset/**/*.css
+assets/**/*.css
 bower_components/
 *.cfg
 node_modules/

@@ -34,14 +34,3 @@ gulp.task('gh-changelog', function (done) {
     done();
   });
 });
-
-gulp.task('less', function () {
-  var less = require('gulp-less');
-   gulp.src('assets/*.less')
-    .pipe(less())
-    .pipe(gulp.dest('assets/'));
-});
-
-gulp.task('watch-less',function(){
-  gulp.watch('assets/**/*.less',['less']);
-});

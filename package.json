@@ -39,7 +39,6 @@
     "gulp-jscs": "^1.1.0",
     "gulp-jshint": "^1.8.4",
     "gulp-jsx": "~0.6.0",
-    "gulp-less": "~2.0.1",
     "gulp-rename": "~1.2.0",
     "gulp-util": "^3.0.1",
     "jquery": "~1.11.1",
