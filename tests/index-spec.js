@@ -16,11 +16,14 @@ describe('calendar', function () {
   var container = $('#content')[0];
 
   beforeEach(function (done) {
-    React.unmountComponentAtNode(container);
     React.render(<Calendar showToday={1} />, container, function () {
       calendar = this;
       done();
     });
+  });
+
+  afterEach(function () {
+    React.unmountComponentAtNode(container);
   });
 
   it('render works', function () {
