@@ -25,7 +25,7 @@
     "port": 8001
   },
   "scripts": {
-    "start": "node --harmony server",
+    "start": "node --harmony node_modules/.bin/rc-server",
     "publish": "gulp tag",
     "lint": "gulp lint",
     "test": "",
@@ -33,8 +33,6 @@
     "browser-test-cover": "mocha-phantomjs -R node_modules/node-jscover/lib/reporters/mocha/console http://localhost:$npm_package_config_port/tests/runner.html?coverage"
   },
   "devDependencies": {
-    "console-polyfill": "^0.1.2",
-    "es5-shim": "~4.0.5",
     "expect.js": "~0.3.1",
     "gh-changelog": "^1.0.5",
     "gulp": "^3.8.7",
@@ -47,23 +45,11 @@
     "jquery": "~1.11.1",
     "jshint": "^2.5.5",
     "jshint-stylish": "^0.4.0",
-    "koa": "~0.13.0",
-    "koa-body": "^0.4.0",
-    "koa-jsx": "^1.1.3",
-    "koa-modularize": "^3.0.0",
-    "koa-mount": "~1.3.0",
-    "koa-node-jscover": "^1.0.0",
-    "koa-serve-index": "~1.0.1",
-    "koa-static": "~1.4.7",
-    "mocha": "~2.0.1",
-    "modulex": "~1.7.3",
-    "node-jscover": "^0.6.8",
-    "node-jscover-coveralls": "^1.0.13",
     "precommit-hook": "^1.0.7",
     "react": "~0.12.1",
-    "react-tools": "~0.12.1",
     "simulate-dom-event": "^1.0.1",
-    "sinon": "^1.12.1"
+    "sinon": "^1.12.1",
+    "rc-server": "^1.0.0"
   },
   "precommit": [
     "lint"
@@ -83,9 +69,9 @@
     ]
   },
   "dependencies": {
-    "gregorian-calendar": "^2.0.0",
-    "gregorian-calendar-format": "^2.0.0",
+    "browserify-jsx": "^0.1.0",
     "browserify-shim": "^3.8.0",
-    "browserify-jsx": "^0.1.0"
+    "gregorian-calendar": "^2.0.0",
+    "gregorian-calendar-format": "^2.0.0"
   }
 }

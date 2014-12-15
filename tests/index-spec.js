@@ -8,6 +8,9 @@ var $ = require('jquery');
 var simulateDomEvent = require('simulate-dom-event');
 
 describe('calendar', function () {
+  $('<link href="/assets/dpl.css" rel="stylesheet"/>').appendTo(document.getElementsByTagName('head')[0]);
+
+
   function onSelect() {
   }
 
