@@ -29,6 +29,7 @@
     "publish": "gulp tag",
     "lint": "gulp lint",
     "test": "",
+    "saucelabs": "DEBUG=saucelabs-runner gulp saucelabs",
     "browser-test": "mocha-phantomjs http://localhost:$npm_package_config_port/tests/runner.html",
     "browser-test-cover": "mocha-phantomjs -R node_modules/rc-server/node_modules/node-jscover/lib/reporters/mocha/console http://localhost:$npm_package_config_port/tests/runner.html?coverage"
   },
@@ -49,8 +50,10 @@
     "rc-server": "^1.0.0",
     "rc-test-utils": "~1.0.0",
     "react": "~0.12.1",
+    "saucelabs-runner": "~2.0.0",
     "simulate-dom-event": "^1.0.1",
-    "sinon": "^1.12.1"
+    "sinon": "^1.12.1",
+    "wd": "^0.3.11"
   },
   "precommit": [
     "lint"

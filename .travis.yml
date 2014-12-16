@@ -12,3 +12,8 @@ script:
 - npm test
 - npm run browser-test
 - npm run browser-test-cover
+- npm run saucelabs
+env:
+  global:
+  - secure: N8diSizWEc4yeutG1r+RQXNAHqymCPo0Smr0SKvIYuyadm/4vSY/HGGZszyusQ3rPMjnj2Px3azeFfLx5FAEg38wGN76tOwvdX/YuAxGYAGTr1Epcfwk+tUW5zQGLLTD3FQRKyR+fJD+Z74F5/EDcTEnyIp2acbYHD7kHN5bJ9I=
+  - secure: nkoMJEWKe8ovH1yGT4ynLjEg0qkiK4tu8hBjFMhnUtEIqO0bkeknTFRfnohPupyIQx48PuQH+ZOBNuyQ38iwTcrq6SEG5ewUSeJyXvvV6SaAUtZlCQPgNyDVTalMV2mDi/0o+ywtSlZIFLd1auCGYyT9XLHFI8z47TRm9+G8FZ0=

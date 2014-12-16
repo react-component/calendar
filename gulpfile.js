@@ -34,3 +34,16 @@ gulp.task('gh-changelog', function (done) {
     done();
   });
 });
+
+gulp.task('saucelabs', function (done) {
+  require('saucelabs-runner')({
+    browsers: [{
+      browserName: 'chrome'
+    }, {
+      browserName: 'firefox'
+    }]
+  }).fin(function () {
+    done();
+    process.exit(0);
+  });
+});
