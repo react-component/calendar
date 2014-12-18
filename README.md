@@ -29,6 +29,7 @@ calendar ui component for react, port from https://github.com/kissyteam/date-pic
 
 ## Feature
 
+* support ie8,ie8+,chrome,firefox,safari
 * support date, month, year, decade select panel
 * support week number
 * support en-us and zh-cn locale (ui and timeOffset)

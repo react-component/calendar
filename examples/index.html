@@ -8,6 +8,10 @@
     <meta name="apple-touch-fullscreen" content="yes">
     <link href="/assets/bootstrap.css" rel="stylesheet" id="skin"/>
     <title>rc-calendar@1.0.0 demo</title>
+    <script src="/node_modules/rc-server/node_modules/es5-shim/es5-shim.js?nowrap"></script>
+    <script src="/node_modules/rc-server/node_modules/es5-shim/es5-sham.js?nowrap"></script>
+    <script src="/node_modules/rc-server/node_modules/console-polyfill/index.js?nowrap"></script>
+    <script src="/node_modules/modulex/build/modulex-debug.js?nowrap"></script>
 </head>
 <body>
 <h1 style="text-align: center">rc-calendar@1.0.0 demo</h1>
@@ -16,7 +20,6 @@
     <button id="change">change skin</button>
 </div>
 <div id="body"></div>
-<script src="/node_modules/modulex/build/modulex-debug.js?nowrap"></script>
 <script>
     var skin = document.getElementById('skin');
     document.getElementById('change').onclick = function () {
