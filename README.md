@@ -8,6 +8,8 @@ calendar ui component for react, port from https://github.com/kissyteam/date-pic
 [![gemnasium deps][gemnasium-image]][gemnasium-url]
 [![node version][node-image]][node-url]
 [![npm download][download-image]][download-url]
+[![Sauce Test Status](https://saucelabs.com/buildstatus/rc-calendar)](https://saucelabs.com/u/rc-calendar)
+
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/rc-calendar.svg)](https://saucelabs.com/u/rc-calendar)
 
 [npm-image]: http://img.shields.io/npm/v/rc-calendar.svg?style=flat-square
@@ -111,7 +113,7 @@ npm start
 
 ## Example
 
-http://localhost:8001/examples/index.html
+http://localhost:8001/examples/index.md
 
 
 ## Test Case
