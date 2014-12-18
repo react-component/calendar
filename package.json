@@ -20,7 +20,6 @@
     "url": "http://github.com/react-component/calendar/issues"
   },
   "licenses": "MIT",
-  "spm": {},
   "config": {
     "port": 8001
   },
@@ -81,6 +80,7 @@
   },
   "spm": {
     "dependencies": {
+      "react": "0.12.1",
       "gregorian-calendar": "^2.0.0",
       "gregorian-calendar-format": "^2.0.0"
     }
