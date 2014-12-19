@@ -18,6 +18,13 @@ gulp.task('lint', function () {
     .pipe(jscs());
 });
 
+gulp.task('less', function () {
+  var less = require('gulp-less');
+  return gulp.src('assets/*.less')
+    .pipe(less())
+    .pipe(gulp.dest('assets/'));
+});
+
 gulp.task('tag', function (done) {
   var cp = require('child_process');
   var version = packageInfo.version;
