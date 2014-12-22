@@ -85,6 +85,9 @@
       "react": "~0.12.1",
       "gregorian-calendar": "^2.0.0",
       "gregorian-calendar-format": "^2.0.0"
-    }
+    },
+    "output": [
+      "lib/locale/*.js"
+    ]
   }
 }
