@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "precommit-hook": "^1.0.7",
-    "rc-server": "^1.3.1",
+    "rc-server": "^1.3.2",
     "rc-tools": "^1.0.1",
     "async": "~0.9.0",
     "expect.js": "~0.3.1",

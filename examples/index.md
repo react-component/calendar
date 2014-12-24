@@ -1,4 +1,7 @@
 # rc-calendar@1.x demo
+---
+
+## 单独渲染于 input 封装
 
 ````js
 if(window.seajs){
@@ -8,9 +11,10 @@ if(window.seajs){
 
 ````html
 <div id='react-content'></div>
-```
+````
 
 ````js
+/** @jsx React.DOM */
 require(['../','./CalendarInput','gregorian-calendar','gregorian-calendar-format','react'],
 function(Calendar,CalendarInput,GregorianCalendar,GregorianCalendarFormat,React){
     var formatter = new GregorianCalendarFormat('yyyy-MM-dd');
