@@ -4,16 +4,14 @@ var expect = require('expect.js');
 var Calendar = require('../index');
 var React = require('react/addons');
 // var sinon = require('sinon');
-var $ = require('jquery');
 var TestUtils = React.addons.TestUtils;
 var Simulate = TestUtils.Simulate;
 var async = require('async');
+require('/assets/dpl.css');
 
 describe('calendar', function () {
-  $('<link href="/assets/dpl.css" rel="stylesheet"/>').appendTo(document.getElementsByTagName('head')[0]);
-
   var calendar;
-  var container = $('#content')[0];
+  var container = document.getElementById('content');
 
   beforeEach(function (done) {
     React.render(<Calendar showToday={1} />, container, function () {

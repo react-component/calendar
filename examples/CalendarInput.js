@@ -59,7 +59,7 @@ var CalendarInput = React.createClass({
     var state = this.state;
     var calendar;
     if (state.showCalendar) {
-      calendar = (<div style={{position: "absolute", left: 0, top: 24}}>
+      calendar = (<div style={{position: "absolute", left: 0, top: 24,zIndex:99}}>
         <Calendar locale={CalendarLocale} value={state.calendarValue} focused="1" onBlur={this.onCalendarBlur} onSelect={this.onCalendarSelect}/>
       </div>);
     }
