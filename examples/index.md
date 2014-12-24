@@ -1,11 +1,13 @@
 # rc-calendar@1.x demo
 ---
 
-<script>
-require('./skin');
-</script>
-
+````html
 <div id='skin'></div>
+````
+
+````js
+require('./skin');
+````
 
 ## 单独渲染
 
