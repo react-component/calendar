@@ -1,12 +1,6 @@
 # rc-calendar@1.x demo
 ---
 
-````js
-if(window.seajs){
-    window.require = seajs.use;
-}
-````
-
 <script>
 require('./skin');
 </script>
@@ -21,23 +15,25 @@ require('./skin');
 
 ````js
 /** @jsx React.DOM */
-require(['../','./CalendarInput','gregorian-calendar','gregorian-calendar-format','react'],
-function(Calendar,CalendarInput,GregorianCalendar,GregorianCalendarFormat,React){
-    var formatter = new GregorianCalendarFormat('yyyy-MM-dd');
-    var value = new GregorianCalendar();
-    value.setTime(Date.now());
+var Calendar = require('../');
+var CalendarInput = require('./CalendarInput');
+var GregorianCalendar = require('gregorian-calendar');
+var GregorianCalendarFormat = require('gregorian-calendar-format');
+var React = require('react');
+var formatter = new GregorianCalendarFormat('yyyy-MM-dd');
+var value = new GregorianCalendar();
+value.setTime(Date.now());
 
-    function onSelect(value) {
-      console.log('onSelect');
-      console.log(formatter.format(value))
-    }
+function onSelect(value) {
+  console.log('onSelect');
+  console.log(formatter.format(value))
+}
 
-    React.render(
-      <div>
-        <h2>calendar (en-us)</h2>
-        <Calendar showWeekNumber="1" onSelect={onSelect}/>
-      </div>, document.getElementById('react-content-standalone'));
-});
+React.render(
+  <div>
+    <h2>calendar (en-us)</h2>
+    <Calendar showWeekNumber="1" onSelect={onSelect}/>
+  </div>, document.getElementById('react-content-standalone'));
 ````
 
 ## 和 input 结合
@@ -50,12 +46,11 @@ function(Calendar,CalendarInput,GregorianCalendar,GregorianCalendarFormat,React)
 
 ````js
 /** @jsx React.DOM */
-require(['./CalendarInput','react'],
-function(CalendarInput, React){
-    React.render(
-      <div>
-        <h2>input (zh-cn)</h2>
-        <CalendarInput />
-      </div>, document.getElementById('react-content-input'));
-});
+var React = require('react');
+var CalendarInput = require('./CalendarInput');
+React.render(
+  <div>
+    <h2>input (zh-cn)</h2>
+    <CalendarInput />
+  </div>, document.getElementById('react-content-input'));
 ````
