@@ -4,6 +4,7 @@
 calendar ui component for react, port from https://github.com/kissyteam/date-picker
 
 [![NPM version][npm-image]][npm-url]
+[![SPM version](http://spmjs.io/badge/rc-calendar)](http://spmjs.io/package/rc-calendar)
 [![build status][travis-image]][travis-url]
 [![Test coverage][coveralls-image]][coveralls-url]
 [![gemnasium deps][gemnasium-image]][gemnasium-url]
@@ -105,6 +106,9 @@ For details to see: [https://github.com/yiminghe/learning-react/tree/master/exam
     </tbody>
 </table>
 
+
+online docs: http://spmjs.io/docs/rc-calendar/
+
 ## Development
 
 ```
@@ -116,6 +120,7 @@ npm start
 
 http://localhost:8001/examples/index.md
 
+online example: http://spmjs.io/docs/rc-calendar/examples/
 
 ## Test Case
 

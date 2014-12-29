@@ -9,7 +9,7 @@
 require('./skin');
 ````
 
-## 单独渲染
+## render standalone
 
 ````html
 <div id='react-content-standalone'></div>
@@ -38,9 +38,9 @@ React.render(
   </div>, document.getElementById('react-content-standalone'));
 ````
 
-## 和 input 结合
+## render with input
 
-请参考 demo 并自行封装 CalendarInput
+please create your own CalendarInput
 
 ````html
 <div id='react-content-input'></div>

@@ -16,13 +16,13 @@ function onSelect(value) {
 var Skin = React.createClass({
   getInitialState: function () {
     return {
-      skin: '/assets/bootstrap.css'
+      skin: '../assets/bootstrap.css'
     }
   },
 
   onClick: function () {
     this.setState({
-      skin: this.state.skin.indexOf('bootstrap') !== -1 ? '/assets/dpl.css' : '/assets/bootstrap.css'
+      skin: this.state.skin.indexOf('bootstrap') !== -1 ? '../assets/dpl.css' : '../assets/bootstrap.css'
     });
   },
 

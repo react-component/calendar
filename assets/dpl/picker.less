@@ -1,4 +1,5 @@
 .rc-calendar {
+  text-rendering: auto;
   box-shadow: 1px 1px 0 #ccc;
   background: #ffffff;
   border: 1px solid #9bc0e0;
@@ -37,7 +38,7 @@
   background-image: url('//gtms04.alicdn.com/tps/i4/TB1.L9bFVXXXXbAXpXXDM4qIXXX-19-300.png');
 }
 
-.rc-calendar-header {
+.rc-calendar .rc-calendar-header {
   background-repeat: repeat-x;
   background-position: 0 -240px;
   height: 26px;
@@ -93,13 +94,13 @@
   background-position: 0 -140px;
 }
 
-.rc-calendar-month-select {
+.rc-calendar .rc-calendar-month-select {
   color: #ffffff;
   line-height: 26px;
   border: 1px solid transparent;
 }
 
-.rc-calendar-month-select-arrow {
+.rc-calendar .rc-calendar-month-select-arrow {
   width: 0;
   height: 0;
   overflow: hidden;
@@ -200,8 +201,7 @@
   text-align: center;
 }
 
-.rc-calendar-today-btn,
-.rc-calendar-clear-btn {
+.rc-calendar .rc-calendar-today-btn {
   line-height: 16px;
   height: 16px;
   margin: 0 3px 0 2px;
@@ -216,8 +216,7 @@
   display: inline-block;
 }
 
-.rc-calendar-today-btn:hover,
-.rc-calendar-clear-btn:hover {
+.rc-calendar .rc-calendar-today-btn:hover {
   color: #ffffff;
 }
 
