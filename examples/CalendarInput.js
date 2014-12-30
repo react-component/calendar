@@ -7,6 +7,7 @@ var DateTimeFormat = require('gregorian-calendar-format');
 var GregorianCalendar = require('gregorian-calendar');
 var formatter = new DateTimeFormat('yyyy-MM-dd', zhCn);
 var CalendarLocale = require('../lib/locale/zh-cn');
+require('./calendar-input.css');
 
 var CalendarInput = React.createClass({
   getInitialState: function () {
@@ -59,13 +60,11 @@ var CalendarInput = React.createClass({
     var state = this.state;
     var calendar;
     if (state.showCalendar) {
-      calendar = (<div style={{position: "absolute", left: 0, top: 24, zIndex: 99}}>
-        <Calendar locale={CalendarLocale} value={state.calendarValue} focused="1" onBlur={this.onCalendarBlur} onSelect={this.onCalendarSelect}/>
-      </div>);
+      calendar = (<Calendar className="rc-popup-calendar" orient={['left','bottom']} locale={CalendarLocale} value={state.calendarValue} focused="1" onBlur={this.onCalendarBlur} onSelect={this.onCalendarSelect}/>);
     }
     return (
-      <span style={{display: "inline-block", position: "relative"}}>
-        <input value={state.value} style={{height: 21}} onFocus={this.onFocus} onChange={this.onChange} ref='input' onKeyDown={this.onKeyDown}/>
+      <span className='rc-calendar-input'>
+        <input value={state.value} onFocus={this.onFocus} onChange={this.onChange} ref='input' onKeyDown={this.onKeyDown}/>
       {calendar}
       </span>)
   }

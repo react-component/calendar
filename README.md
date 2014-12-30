@@ -29,7 +29,9 @@ calendar ui component for react, port from https://github.com/kissyteam/date-pic
 
 ## Screenshots
 
-![rc-calendar](http://gtms04.alicdn.com/tps/i4/TB1WifJGVXXXXa3XXXX6tFy4VXX-328-742.png)
+![rc-calendar](http://gtms01.alicdn.com/tps/i1/TB1cC0cHXXXXXbOXpXX06lmNXXX-684-684.png)
+
+![rc-calendar-input](http://gtms03.alicdn.com/tps/i3/TB1lmz_GFXXXXbEXVXXbMpwQXXX-692-732.png)
 
 ## Feature
 
