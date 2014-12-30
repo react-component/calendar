@@ -1,0 +1,15 @@
+.rc-calendar-input {
+  display: inline-block;
+  position: relative;
+}
+
+.rc-calendar-input .rc-popup-calendar {
+  position: absolute;
+  left: 0;
+  bottom: 30px;
+  z-index: 99
+}
+
+.rc-calendar-input > input {
+  height:21px;
+}
