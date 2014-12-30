@@ -70,6 +70,18 @@ For details to see: [https://github.com/yiminghe/learning-react/tree/master/exam
     </thead>
     <tbody>
         <tr>
+          <td>className</td>
+          <td>String</td>
+          <td></td>
+          <td>additional css class of root dom node</td>
+        </tr>
+        <tr>
+          <td>orient</td>
+          <td>String[]</td>
+          <td></td>
+          <td>affect the position of arrow. exp: ['left','top']</td>
+        </tr>
+        <tr>
           <td>locale</td>
           <td>Object</td>
           <td>require('rc-calendar/lib/locale/en-use')</td>
