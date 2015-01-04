@@ -17,7 +17,7 @@ if (location.href.indexOf('spmjs.io')!==-1) {
     document.body.appendChild(container);
 
     beforeEach(function (done) {
-      React.render(<Calendar showToday={1} />, container, function () {
+      React.render(<Calendar showToday={true} />, container, function () {
         calendar = this;
         done();
       });

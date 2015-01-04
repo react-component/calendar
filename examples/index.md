@@ -34,7 +34,7 @@ function onSelect(value) {
 React.render(
   <div>
     <h2>calendar (en-us)</h2>
-    <Calendar showWeekNumber="1" onSelect={onSelect}/>
+    <Calendar showWeekNumber={true} onSelect={onSelect}/>
   </div>, document.getElementById('react-content-standalone'));
 ````
 

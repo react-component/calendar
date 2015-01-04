@@ -30,7 +30,7 @@ var Skin = React.createClass({
     return <div>
       <link href={this.state.skin} rel="stylesheet"/>
       <div>
-        <button class="btn btn-default" onClick={this.onClick}>change skin</button>
+        <button className="btn btn-default" onClick={this.onClick}>change skin</button>
       </div>
     </div>;
   }

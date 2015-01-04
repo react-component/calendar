@@ -60,7 +60,7 @@ var CalendarInput = React.createClass({
     var state = this.state;
     var calendar;
     if (state.showCalendar) {
-      calendar = (<Calendar className="rc-popup-calendar" orient={['left','bottom']} locale={CalendarLocale} value={state.calendarValue} focused="1" onBlur={this.onCalendarBlur} onSelect={this.onCalendarSelect}/>);
+      calendar = (<Calendar className="rc-popup-calendar" orient={['left','bottom']} locale={CalendarLocale} value={state.calendarValue} focused={true} onBlur={this.onCalendarBlur} onSelect={this.onCalendarSelect}/>);
     }
     return (
       <span className='rc-calendar-input'>
