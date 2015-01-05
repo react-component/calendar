@@ -36,12 +36,12 @@
     "browser-test-cover": "mocha-phantomjs -R node_modules/rc-server/node_modules/node-jscover/lib/reporters/mocha/console http://localhost:$npm_package_config_port/tests/runner.html?coverage"
   },
   "devDependencies": {
-    "precommit-hook": "^1.0.7",
-    "rc-server": "^1.4.2",
-    "rc-tools": "^1.0.1",
     "async": "~0.9.0",
     "expect.js": "~0.3.1",
     "modulex": "^1.7.4",
+    "precommit-hook": "^1.0.7",
+    "rc-server": "^1.5.0",
+    "rc-tools": "^1.1.0",
     "react": "~0.12.1"
   },
   "precommit": [

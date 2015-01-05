@@ -34,6 +34,7 @@
   border-bottom-color: rgba(0, 0, 0, 0.2);
   position: absolute;
 }
+
 .rc-calendar:after {
   display: none;
   content: '';
@@ -48,32 +49,39 @@
   display: inline-block;
   left: 6px;
 }
+
 .rc-calendar.rc-calendar-orient-left:after {
   display: inline-block;
   left: 7px;
 }
+
 .rc-calendar.rc-calendar-orient-right:before {
   display: inline-block;
   right: 6px;
 }
+
 .rc-calendar.rc-calendar-orient-right:after {
   display: inline-block;
   right: 7px;
 }
+
 .rc-calendar.rc-calendar-orient-top:before {
   display: inline-block;
   top: -7px;
 }
+
 .rc-calendar.rc-calendar-orient-top:after {
   display: inline-block;
   top: -6px;
 }
+
 .rc-calendar.rc-calendar-orient-bottom:before {
   display: inline-block;
   bottom: -7px;
   border-bottom: 0;
   border-top: 7px solid #999;
 }
+
 .rc-calendar.rc-calendar-orient-bottom:after {
   display: inline-block;
   bottom: -6px;
@@ -108,16 +116,18 @@
 .rc-calendar-next-month-btn,
 .rc-calendar-prev-year-btn,
 .rc-calendar-next-year-btn {
+  user-select: none;
   position: absolute;
   top: 0;
 }
 
 .rc-calendar-next-year-btn {
-  right:0;
+  right: 0;
 }
 
 .rc-calendar-header .rc-calendar-prev-month-btn {
-  display: none;
+  position: absolute;
+  left: 25px;
 }
 
 .rc-calendar-prev-year-btn {
@@ -128,11 +138,12 @@
 }
 
 .rc-calendar-header .rc-calendar-next-month-btn {
-  display: none;
+  position: absolute;
+  right: 25px;
 }
 
 .rc-calendar-header .rc-calendar-month-select {
-  width: 180px;
+  width: 140px;
 }
 
 .rc-calendar-month-select-arrow {
