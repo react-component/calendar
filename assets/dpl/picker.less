@@ -1,4 +1,4 @@
-.rc-calendar {
+.classic-calendar {
   text-rendering: auto;
   box-shadow: 1px 1px 0 #ccc;
   background: #ffffff;
@@ -6,39 +6,45 @@
   width: 215px;
   outline: none;
   position: relative;
+  box-sizing: content-box;
 }
 
-.rc-calendar a {
+.classic-calendar * {
+  box-sizing: content-box;
+}
+
+.classic-calendar a {
   text-decoration: none;
   cursor: pointer;
 }
 
-.rc-pop-up-calendar {
+.classic-pop-up-calendar {
   position: absolute;
   left: -9999px;
   top: -9999px;
 }
 
-.rc-calendar-hidden {
+.classic-calendar-hidden {
   display: none;
 }
 
-.rc-pop-up-calendar-hidden {
+.classic-pop-up-calendar-hidden {
   display: block;
   visibility: hidden;
   left: -9999px;
   top: -9999px;
 }
 
-.rc-calendar-prev-month-btn,
-.rc-calendar-next-month-btn,
-.rc-calendar-prev-year-btn,
-.rc-calendar-next-year-btn,
-.rc-calendar-header {
+.classic-calendar-prev-month-btn,
+.classic-calendar-next-month-btn,
+.classic-calendar-prev-year-btn,
+.classic-calendar-next-year-btn,
+.classic-calendar-header {
+  user-select: none;
   background-image: url('//gtms04.alicdn.com/tps/i4/TB1.L9bFVXXXXbAXpXXDM4qIXXX-19-300.png');
 }
 
-.rc-calendar .rc-calendar-header {
+.classic-calendar .classic-calendar-header {
   background-repeat: repeat-x;
   background-position: 0 -240px;
   height: 26px;
@@ -47,10 +53,10 @@
   text-align: center;
 }
 
-.rc-calendar-prev-month-btn,
-.rc-calendar-next-month-btn,
-.rc-calendar-prev-year-btn,
-.rc-calendar-next-year-btn {
+.classic-calendar-prev-month-btn,
+.classic-calendar-next-month-btn,
+.classic-calendar-prev-year-btn,
+.classic-calendar-next-year-btn {
   text-indent: -9999px;
   width: 19px;
   height: 19px;
@@ -58,49 +64,49 @@
   top: 2px;
 }
 
-.rc-calendar-prev-month-btn {
+.classic-calendar-prev-month-btn {
   background-position: 0 -60px;
   left: 24px;
 }
 
-.rc-calendar-prev-month-btn:hover {
+.classic-calendar-prev-month-btn:hover {
   background-position: 0 -80px;
 }
 
-.rc-calendar-prev-year-btn {
+.classic-calendar-prev-year-btn {
   background-position: 0 -180px;
   left: 0;
 }
 
-.rc-calendar-prev-year-btn:hover {
+.classic-calendar-prev-year-btn:hover {
   background-position: 0 -200px;
 }
 
-.rc-calendar-next-month-btn {
+.classic-calendar-next-month-btn {
   background-position: 0 0;
   right: 24px;
 }
 
-.rc-calendar-next-month-btn:hover {
+.classic-calendar-next-month-btn:hover {
   background-position: 0 -20px;
 }
 
-.rc-calendar-next-year-btn {
+.classic-calendar-next-year-btn {
   background-position: 0 -120px;
   right: 0;
 }
 
-.rc-calendar-next-year-btn:hover {
+.classic-calendar-next-year-btn:hover {
   background-position: 0 -140px;
 }
 
-.rc-calendar .rc-calendar-month-select {
+.classic-calendar .classic-calendar-month-select {
   color: #ffffff;
   line-height: 26px;
   border: 1px solid transparent;
 }
 
-.rc-calendar .rc-calendar-month-select-arrow {
+.classic-calendar .classic-calendar-month-select-arrow {
   width: 0;
   height: 0;
   overflow: hidden;
@@ -112,33 +118,33 @@
   border-bottom-width: 0px;
 }
 
-.rc-calendar-month-select:hover .rc-calendar-month-select-arrow {
+.classic-calendar-month-select:hover .classic-calendar-month-select-arrow {
   border-top-color: #f0ff00;
 }
 
-.rc-calendar-month-select:hover {
+.classic-calendar-month-select:hover {
   color: #f0ff00;
   border: 1px solid #8cc6ff;
   background: url('//gtms04.alicdn.com/tps/i4/TB1.L9bFVXXXXbAXpXXDM4qIXXX-19-300.png');
   background-position: 0 -268px;
 }
 
-.rc-calendar-week-number-cell {
+.classic-calendar-week-number-cell {
   text-align: center;
   line-height: 22px;
 }
 
-.rc-calendar-week-number-header {
+.classic-calendar-week-number-header {
   text-indent: -9999px;
 }
 
-.rc-calendar-table {
+.classic-calendar-table {
   table-layout: fixed;
   width: 100%;
   border-collapse: separate;
 }
 
-.rc-calendar-column-header {
+.classic-calendar-column-header {
   width: 25px;
   color: black;
   font-weight: bold;
@@ -146,17 +152,17 @@
   padding: 4px 0;
 }
 
-.rc-calendar-column-header-inner {
+.classic-calendar-column-header-inner {
   display: block;
   padding-bottom: 4px;
   border-bottom: 1px dashed #c9c9c9
 }
 
-.rc-calendar-cell {
+.classic-calendar-cell {
   text-align: center;
 }
 
-.rc-calendar-date {
+.classic-calendar-date {
   color: #004499;
   line-height: 22px;
   text-decoration: none;
@@ -166,42 +172,42 @@
   outline: none;
 }
 
-.rc-calendar-last-month-cell .rc-calendar-date,
-.rc-calendar-next-month-btn-day .rc-calendar-date {
+.classic-calendar-last-month-cell .classic-calendar-date,
+.classic-calendar-next-month-btn-day .classic-calendar-date {
   color: #bfbfbf;
 }
 
-.rc-calendar-date:hover {
+.classic-calendar-date:hover {
   background-color: #f3f9ff;
   border-color: #88b1ea;
 }
 
-.rc-calendar-disabled-cell .rc-calendar-date {
+.classic-calendar-disabled-cell .classic-calendar-date {
   cursor: default;
 }
 
-.rc-calendar-disabled-cell .rc-calendar-date:hover {
+.classic-calendar-disabled-cell .classic-calendar-date:hover {
   border-color: transparent;
 }
 
-.rc-calendar-today .rc-calendar-date {
+.classic-calendar-today .classic-calendar-date {
   color: #357c00;
   border-color: #7dba4e;
 }
 
-.rc-calendar-selected-day .rc-calendar-date {
+.classic-calendar-selected-day .classic-calendar-date {
   color: #fff;
   background-color: #4187e7;
   border-color: #4187e7;
 }
 
-.rc-calendar-footer {
+.classic-calendar-footer {
   padding: 3px 0;
   background-color: #f5f5f5;
   text-align: center;
 }
 
-.rc-calendar .rc-calendar-today-btn {
+.classic-calendar .classic-calendar-today-btn {
   line-height: 16px;
   height: 16px;
   margin: 0 3px 0 2px;
@@ -216,7 +222,7 @@
   display: inline-block;
 }
 
-.rc-calendar .rc-calendar-today-btn:hover {
+.classic-calendar .classic-calendar-today-btn:hover {
   color: #ffffff;
 }
 
