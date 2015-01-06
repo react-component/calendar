@@ -31,9 +31,9 @@
     "publish": "spm publish && rc-tools run tag",
     "lint": "rc-tools run lint",
     "test": "",
-    "saucelabs": "DEBUG=saucelabs-runner rc-tools run saucelabs",
-    "browser-test": "mocha-phantomjs http://localhost:$npm_package_config_port/tests/runner.html",
-    "browser-test-cover": "mocha-phantomjs -R node_modules/rc-server/node_modules/node-jscover/lib/reporters/mocha/console http://localhost:$npm_package_config_port/tests/runner.html?coverage"
+    "saucelabs": "rc-tools run saucelabs",
+    "browser-test": "rc-tools run browser-test",
+    "browser-test-cover": "rc-tools run browser-test-cover"
   },
   "devDependencies": {
     "async": "~0.9.0",
