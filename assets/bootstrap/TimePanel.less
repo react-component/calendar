@@ -1,0 +1,61 @@
+.rc-calendar-time-panel {
+  left: 4px;
+  top: 4px;
+  bottom: 4px;
+  right: 4px;
+  background: #ffffff;
+  z-index: 10;
+  position: absolute;
+  outline: none;
+}
+
+.rc-calendar-time-panel-header {
+  height: 30px;
+  line-height: 30px;
+  position: relative;
+  text-align: center;
+}
+
+
+.rc-calendar-time-panel-title {
+  width: 180px;
+  font-weight: bold;
+  box-sizing: border-box;
+  display: inline-block;
+  padding: 4px 5px;
+  text-align: center;
+  height: 30px;
+  line-height: 22px;
+  border-radius: 4px;
+}
+
+
+.rc-calendar-time-panel-table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: separate;
+}
+
+.rc-calendar-time-panel-cell {
+  text-align: center;
+  height: 42px;
+  vertical-align: middle;
+}
+
+.rc-calendar-time-panel-time {
+  line-height: 26px;
+  text-decoration: none;
+  display: block;
+  border-radius: 4px;
+  border: 1px solid transparent;
+}
+
+.rc-calendar-time-panel-time:hover {
+  background: #eeeeee;
+}
+
+.rc-calendar-time-panel-selected-cell .rc-calendar-time-panel-time {
+  color: #ffffff;
+  background-color: #3276b1;
+  border-color: #285e8e;
+}

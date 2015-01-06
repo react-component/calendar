@@ -1,14 +1,12 @@
 # rc-calendar@1.x demo
 ---
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-
 <link rel="stylesheet" href="../../assets/classic.css">
 
 <link rel="stylesheet" href="../../assets/bootstrap.css">
 
 
-## render standalone
+## render
 
 ````html
 <div id='react-content-standalone'></div>
@@ -18,12 +16,9 @@
 /** @jsx React.DOM */
 var Calendar = require('../');
 var CalendarInput = require('./CalendarInput');
-var GregorianCalendar = require('gregorian-calendar');
 var GregorianCalendarFormat = require('gregorian-calendar-format');
 var React = require('react');
-var formatter = new GregorianCalendarFormat('yyyy-MM-dd');
-var value = new GregorianCalendar();
-value.setTime(Date.now());
+var formatter = new GregorianCalendarFormat('yyyy-MM-dd HH:mm:ss');
 
 function onSelect(value) {
   console.log('onSelect');
@@ -32,8 +27,8 @@ function onSelect(value) {
 
 React.render(
   <div>
-    <h2>calendar (en-us)</h2>
-    <Calendar showWeekNumber={true} onSelect={onSelect}/>
+    <h2>calendar (en-us, U.S.A.  California  San Francisco)</h2>
+    <Calendar showWeekNumber={true} onSelect={onSelect} showTime={true}/>
   </div>, document.getElementById('react-content-standalone'));
 ````
 
@@ -47,12 +42,9 @@ React.render(
 /** @jsx React.DOM */
 var Calendar = require('../');
 var CalendarInput = require('./CalendarInput');
-var GregorianCalendar = require('gregorian-calendar');
 var GregorianCalendarFormat = require('gregorian-calendar-format');
 var React = require('react');
-var formatter = new GregorianCalendarFormat('yyyy-MM-dd');
-var value = new GregorianCalendar();
-value.setTime(Date.now());
+var formatter = new GregorianCalendarFormat('yyyy-MM-dd HH:mm:ss');
 
 function onSelect(value) {
   console.log('onSelect');
@@ -61,8 +53,10 @@ function onSelect(value) {
 
 React.render(
   <div>
-    <h2>calendar (en-us)</h2>
-    <Calendar showWeekNumber={true} onSelect={onSelect} prefixCls='classic-calendar'/>
+    <h2>calendar (en-us, U.S.A.  California  San Francisco)</h2>
+    <Calendar showWeekNumber={true}
+    showTime={true}
+    onSelect={onSelect} prefixCls='classic-calendar'/>
   </div>, document.getElementById('react-content-standalone2'));
 ````
 
@@ -81,7 +75,7 @@ var React = require('react');
 var CalendarInput = require('./CalendarInput');
 React.render(
   <div>
-    <h2>input (zh-cn)</h2>
+    <h2>input (zh-cn, Beijing)</h2>
     <CalendarInput />
   </div>, document.getElementById('react-content-input'));
 ````

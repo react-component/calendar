@@ -5,7 +5,7 @@ var Calendar = require('../');
 var zhCn = require('gregorian-calendar/lib/locale/zh-cn');
 var DateTimeFormat = require('gregorian-calendar-format');
 var GregorianCalendar = require('gregorian-calendar');
-var formatter = new DateTimeFormat('yyyy-MM-dd', zhCn);
+var formatter = new DateTimeFormat('yyyy-MM-dd HH:mm:ss', zhCn);
 var CalendarLocale = require('../lib/locale/zh-cn');
 require('./calendar-input.css');
 
@@ -60,7 +60,9 @@ var CalendarInput = React.createClass({
     var state = this.state;
     var calendar;
     if (state.showCalendar) {
-      calendar = (<Calendar className="rc-popup-calendar" orient={['left','bottom']} locale={CalendarLocale} value={state.calendarValue} focused={true} onBlur={this.onCalendarBlur} onSelect={this.onCalendarSelect}/>);
+      calendar = (<Calendar className="rc-popup-calendar" orient={['left','bottom']}
+        showTime={true}
+        locale={CalendarLocale} value={state.calendarValue} focused={true} onBlur={this.onCalendarBlur} onSelect={this.onCalendarSelect}/>);
     }
     return (
       <span className='rc-calendar-input'>

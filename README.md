@@ -29,9 +29,11 @@ calendar ui component for react, port from https://github.com/kissyteam/date-pic
 
 ## Screenshots
 
-![rc-calendar](http://gtms01.alicdn.com/tps/i1/TB1cC0cHXXXXXbOXpXX06lmNXXX-684-684.png)
+<img src="http://gtms02.alicdn.com/tps/i2/TB1luFKHXXXXXb3XXXXl4OqLpXX-574-596.png" width="288"/>
 
-![rc-calendar-input](http://gtms03.alicdn.com/tps/i3/TB1lmz_GFXXXXbEXVXXbMpwQXXX-692-732.png)
+<img src="http://gtms04.alicdn.com/tps/i4/TB1yVNEHXXXXXc5XFXXbyv.ZFXX-528-586.png" width="288"/>
+
+<img src="http://gtms03.alicdn.com/tps/i3/TB1lmz_GFXXXXbEXVXXbMpwQXXX-692-732.png" width="288"/>
 
 ## Feature
 
@@ -40,6 +42,16 @@ calendar ui component for react, port from https://github.com/kissyteam/date-pic
 * support week number
 * support en-us and zh-cn locale (ui and timeOffset)
 * support aria and keyboard accessibility
+
+### Keyboard
+
+* Previous month (PageUp)
+* Next month (PageDown)
+* tab into hour input: Last hour(Up), Next hour(Down)
+* tab into hour input: Last minute(Up), Next minute(Down)
+* tab into hour input: Last second(Up), Next second(Down)
+* Last year (Control + left)
+* Next year (Control + right)
 
 ## install
 
@@ -98,6 +110,12 @@ For details to see: [https://github.com/yiminghe/learning-react/tree/master/exam
           <td>Boolean</td>
           <td>true</td>
           <td>whether to show today button</td>
+        </tr>
+        <tr>
+          <td>showTime</td>
+          <td>Boolean</td>
+          <td>true</td>
+          <td>whether to support time select</td>
         </tr>
         <tr>
            <td>focused</td>
