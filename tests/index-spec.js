@@ -1,5 +1,5 @@
 /** @jsx React.DOM */
-if (location.href.indexOf('spmjs.io')!==-1) {
+if (location.href.indexOf('spmjs.io') !== -1) {
   alert('not support SPM!');
 } else {
   var expect = require('expect.js');
@@ -9,7 +9,7 @@ if (location.href.indexOf('spmjs.io')!==-1) {
   var TestUtils = React.addons.TestUtils;
   var Simulate = TestUtils.Simulate;
   var async = require('async');
-  require('/assets/dpl.css');
+  require('/assets/classic.css');
 
   describe('calendar', function () {
     var calendar;
