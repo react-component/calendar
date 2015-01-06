@@ -1,9 +1,9 @@
 # rc-calendar@1.x demo
 ---
 
-<link rel="stylesheet" href="../../assets/classic.css">
+<link rel="stylesheet" href="../assets/classic.css">
 
-<link rel="stylesheet" href="../../assets/bootstrap.css">
+<link rel="stylesheet" href="../assets/bootstrap.css">
 
 
 ## render
