@@ -100,6 +100,12 @@ For details to see: [https://github.com/yiminghe/learning-react/tree/master/exam
           <td>calendar locale</td>
         </tr>
         <tr>
+          <td>disabledDate</td>
+          <td>Function(current:GregorianCalendar):Boolean</td>
+          <td>null</td>
+          <td>whether to disable select of current date</td>
+        </tr>
+        <tr>
           <td>showWeekNumber</td>
           <td>Boolean</td>
           <td>false</td>
