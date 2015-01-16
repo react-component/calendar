@@ -49,8 +49,7 @@
     "less"
   ],
   "browserify-shim": {
-    "react": "global:React",
-    "jquery": "global:jQuery"
+    "react": "global:React"
   },
   "browserify": {
     "transform": [
@@ -74,6 +73,7 @@
       "gregorian-calendar": "^2.0.0",
       "gregorian-calendar-format": "^2.0.0"
     },
+    "buildArgs": "--global react:window.React",
     "output": [
       "lib/locale/*.js"
     ]
