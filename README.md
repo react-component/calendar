@@ -69,7 +69,7 @@ For details to see: [https://github.com/yiminghe/learning-react/tree/master/exam
 
 ## API
 
-### props
+### Calendar props
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -144,6 +144,39 @@ For details to see: [https://github.com/yiminghe/learning-react/tree/master/exam
     </tbody>
 </table>
 
+### Calendar.Picker props
+
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th style="width: 100px;">name</th>
+        <th style="width: 50px;">type</th>
+        <th style="width: 50px;">default</th>
+        <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>calendar</td>
+          <td>Calendar React Element</td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>formatter</td>
+          <td>GregorianCalendarFormatter</td>
+          <td></td>
+          <td>use to format/parse value to/from input</td>
+        </tr>
+        <tr>
+          <td>value</td>
+          <td>GregorianCalendar/td>
+          <td></td>
+          <td>current time</td>
+        </tr>
+    </tbody>
+</table>
+
 
 online docs: http://spmjs.io/docs/rc-calendar/
 
@@ -157,6 +190,8 @@ npm start
 ## Example
 
 http://localhost:8001/examples/index.md
+
+http://localhost:8001/examples/picker.md
 
 online example: http://spmjs.io/docs/rc-calendar/examples/
 

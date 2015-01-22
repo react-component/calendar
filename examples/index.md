@@ -15,7 +15,6 @@
 ````js
 /** @jsx React.DOM */
 var Calendar = require('../');
-var CalendarInput = require('./CalendarInput');
 var GregorianCalendarFormat = require('gregorian-calendar-format');
 var React = require('react');
 var formatter = new GregorianCalendarFormat('yyyy-MM-dd HH:mm:ss');
@@ -41,7 +40,6 @@ React.render(
 ````js
 /** @jsx React.DOM */
 var Calendar = require('../');
-var CalendarInput = require('./CalendarInput');
 var GregorianCalendarFormat = require('gregorian-calendar-format');
 var React = require('react');
 var formatter = new GregorianCalendarFormat('yyyy-MM-dd HH:mm:ss');
@@ -95,24 +93,4 @@ React.render(
     disabledDate={disabledDate}
     onSelect={onSelect}/>
   </div>, document.getElementById('react-content-standalone3'));
-````
-
-
-## render with input
-
-please create your own CalendarInput
-
-````html
-<div id='react-content-input'></div>
-````
-
-````js
-/** @jsx React.DOM */
-var React = require('react');
-var CalendarInput = require('./CalendarInput');
-React.render(
-  <div>
-    <h2>input (zh-cn, Beijing)</h2>
-    <CalendarInput />
-  </div>, document.getElementById('react-content-input'));
 ````
