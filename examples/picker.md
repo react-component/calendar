@@ -30,6 +30,10 @@ var Test = React.createClass({
     });
   },
 
+  handleChange:function(value){
+    console.log('DatePicker change: '+(this.props.formatter.format(value)));
+  },
+
   handleCalendarSelect: function (v) {
     //console.log('outer knows: ' + this.props.formatter.format(v));
     // sync status
@@ -69,7 +73,8 @@ var Test = React.createClass({
          <span><input type='checkbox' checked={this.state.showTime} onChange={this.handleShowTimeChange} /> showTime</span>
          </div>
         <div className="input-group">
-          <DatePicker ref='picker' formatter={this.props.formatter} calendar={calendar}  value={state.value}>
+          <DatePicker ref='picker' formatter={this.props.formatter} calendar={calendar}
+          value={state.value} onChange={this.handleChange}>
             <input type="text" className="form-control" style={{background:'white',cursor:'pointer'}}/>
           </DatePicker>
           <span className="input-group-addon" onClick={this.open}>

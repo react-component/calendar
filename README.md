@@ -174,6 +174,12 @@ For details to see: [https://github.com/yiminghe/learning-react/tree/master/exam
           <td></td>
           <td>current time</td>
         </tr>
+        <tr>
+          <td>onChange</td>
+          <td>Function/td>
+          <td></td>
+          <td>called when select a different value</td>
+        </tr>
     </tbody>
 </table>
 
