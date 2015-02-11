@@ -1,6 +1,6 @@
 /** @jsx React.DOM */
 
-var keyCode = require('../lib/util').KeyCode;
+var keyCode = require('rc-util').KeyCode;
 var expect = require('expect.js');
 var Calendar = require('../index');
 var React = require('react/addons');
