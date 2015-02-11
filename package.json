@@ -1,6 +1,6 @@
 {
   "name": "rc-calendar",
-  "version": "1.5.5",
+  "version": "1.5.6",
   "description": "calendar ui component for react",
   "keywords": [
     "react",
@@ -66,11 +66,13 @@
     "browserify-shim": "^3.8.0",
     "dom-align": "~1.0.1",
     "gregorian-calendar": "^2.0.0",
-    "gregorian-calendar-format": "^2.0.0"
+    "gregorian-calendar-format": "^2.0.0",
+    "rc-util": "^1.0.0"
   },
   "spm": {
     "dependencies": {
       "react": "~0.12.1",
+      "rc-util": "^1.0.0",
       "gregorian-calendar": "^2.0.0",
       "gregorian-calendar-format": "^2.0.0",
       "dom-align": "^1.0.1"
