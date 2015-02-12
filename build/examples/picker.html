@@ -1,0 +1,235 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .hljs {
+            display: block;
+            overflow-x: auto;
+            padding: 0.5em;
+            color: #333;
+            background: #f8f8f8;
+            -webkit-text-size-adjust: none;
+        }
+
+        .hljs-comment,
+        .diff .hljs-header,
+        .hljs-javadoc {
+            color: #998;
+            font-style: italic;
+        }
+
+        .hljs-keyword,
+        .css .rule .hljs-keyword,
+        .hljs-winutils,
+        .nginx .hljs-title,
+        .hljs-subst,
+        .hljs-request,
+        .hljs-status {
+            color: #333;
+            font-weight: bold;
+        }
+
+        .hljs-number,
+        .hljs-hexcolor,
+        .ruby .hljs-constant {
+            color: #008080;
+        }
+
+        .hljs-string,
+        .hljs-tag .hljs-value,
+        .hljs-phpdoc,
+        .hljs-dartdoc,
+        .tex .hljs-formula {
+            color: #d14;
+        }
+
+        .hljs-title,
+        .hljs-id,
+        .scss .hljs-preprocessor {
+            color: #900;
+            font-weight: bold;
+        }
+
+        .hljs-list .hljs-keyword,
+        .hljs-subst {
+            font-weight: normal;
+        }
+
+        .hljs-class .hljs-title,
+        .hljs-type,
+        .vhdl .hljs-literal,
+        .tex .hljs-command {
+            color: #458;
+            font-weight: bold;
+        }
+
+        .hljs-tag,
+        .hljs-tag .hljs-title,
+        .hljs-rules .hljs-property,
+        .django .hljs-tag .hljs-keyword {
+            color: #000080;
+            font-weight: normal;
+        }
+
+        .hljs-attribute,
+        .hljs-variable,
+        .lisp .hljs-body {
+            color: #008080;
+        }
+
+        .hljs-regexp {
+            color: #009926;
+        }
+
+        .hljs-symbol,
+        .ruby .hljs-symbol .hljs-string,
+        .lisp .hljs-keyword,
+        .clojure .hljs-keyword,
+        .scheme .hljs-keyword,
+        .tex .hljs-special,
+        .hljs-prompt {
+            color: #990073;
+        }
+
+        .hljs-built_in {
+            color: #0086b3;
+        }
+
+        .hljs-preprocessor,
+        .hljs-pragma,
+        .hljs-pi,
+        .hljs-doctype,
+        .hljs-shebang,
+        .hljs-cdata {
+            color: #999;
+            font-weight: bold;
+        }
+
+        .hljs-deletion {
+            background: #fdd;
+        }
+
+        .hljs-addition {
+            background: #dfd;
+        }
+
+        .diff .hljs-change {
+            background: #0086b3;
+        }
+
+        .hljs-chunk {
+            color: #aaa;
+        }
+        .highlight {
+            background-color: transparent;
+            padding-top: 1px;
+            position: relative;
+        }
+
+        .highlight pre {
+            font-family: Consolas, "Liberation Mono", Courier, monospace;
+            margin: 6px 0;
+            border: 1px solid #eee;
+            padding: 6px 10px;
+            overflow: auto;
+            border-radius: 2px;
+            background-color: #f8f8f9;
+            line-height: 19px;
+            font-size: 13px;
+            white-space: pre;
+        }
+
+        .highlight pre code {
+            color: #5D6A6A;
+            background-color: transparent;
+            margin: auto;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="__react-content"></div>
+<script src="common.js?nowrap"></script>
+<script src="picker.js?nowrap"></script>
+<div class="highlight">
+<pre>
+<span class="hljs-comment">/** @jsx React.DOM */</span>
+require(<span class="hljs-string">'bootstrap/dist/css/bootstrap.css'</span>);
+require(<span class="hljs-string">'rc-calendar/assets/bootstrap.css'</span>);
+<span class="hljs-keyword">var</span> React = require(<span class="hljs-string">'react'</span>);
+<span class="hljs-keyword">var</span> Calendar = require(<span class="hljs-string">'rc-calendar'</span>);
+<span class="hljs-keyword">var</span> DatePicker = Calendar.Picker;
+<span class="hljs-keyword">var</span> zhCn; <span class="hljs-comment">// = require('gregorian-calendar/lib/locale/zh-cn'); // spm error</span>
+<span class="hljs-keyword">var</span> DateTimeFormat = require(<span class="hljs-string">'gregorian-calendar-format'</span>);
+<span class="hljs-keyword">var</span> GregorianCalendar = require(<span class="hljs-string">'gregorian-calendar'</span>);
+<span class="hljs-keyword">var</span> CalendarLocale; <span class="hljs-comment">// = require('../lib/locale/zh-cn');</span>
+
+<span class="hljs-keyword">var</span> Test = React.createClass({
+  open: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">this</span>.refs.picker.setState({
+      open: <span class="hljs-literal">true</span>
+    });
+  },
+
+  handleChange:<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(value)</span></span>{
+    console.log(<span class="hljs-string">'DatePicker change: '</span>+(<span class="hljs-keyword">this</span>.props.formatter.format(value)));
+  },
+
+  handleCalendarSelect: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(v)</span> </span>{
+    <span class="hljs-comment">//console.log('outer knows: ' + this.props.formatter.format(v));</span>
+    <span class="hljs-comment">// sync status</span>
+    <span class="hljs-keyword">this</span>.setState({
+      value: v
+    });
+  },
+
+  getDefaultProps: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">return</span> {
+      formatter: <span class="hljs-keyword">new</span> DateTimeFormat(<span class="hljs-string">'yyyy-MM-dd HH:mm:ss'</span>, zhCn)
+    }
+  },
+
+  getInitialState: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">var</span> value = <span class="hljs-keyword">new</span> GregorianCalendar(zhCn);
+    value.setTime(Date.now());
+    <span class="hljs-keyword">return</span> {
+      showTime:<span class="hljs-literal">true</span>,
+      value: value
+    };
+  },
+
+  handleShowTimeChange:<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(e)</span></span>{
+    <span class="hljs-keyword">this</span>.setState({
+      showTime:e.target.checked
+    });
+  },
+
+  render: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">var</span> state = <span class="hljs-keyword">this</span>.state;
+    <span class="hljs-keyword">var</span> calendar = &lt;Calendar locale={CalendarLocale}
+      orient={[<span class="hljs-string">'bottom'</span>,<span class="hljs-string">'left'</span>]}
+      showTime={<span class="hljs-keyword">this</span>.state.showTime} onSelect={<span class="hljs-keyword">this</span>.handleCalendarSelect}/&gt;;
+    <span class="hljs-keyword">return</span>  &lt;div className=<span class="hljs-string">"form-group"</span> style={{width:<span class="hljs-number">400</span>,margin:<span class="hljs-number">20</span>}}&gt;
+      &lt;div className=<span class="hljs-string">"input-group"</span>&gt;
+        &lt;span&gt;&lt;input type=<span class="hljs-string">'checkbox'</span> checked={<span class="hljs-keyword">this</span>.state.showTime} onChange={<span class="hljs-keyword">this</span>.handleShowTimeChange} /&gt; showTime&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div className=<span class="hljs-string">"input-group"</span>&gt;
+        &lt;DatePicker ref=<span class="hljs-string">'picker'</span> formatter={<span class="hljs-keyword">this</span>.props.formatter} calendar={calendar}
+          value={state.value} onChange={<span class="hljs-keyword">this</span>.handleChange}&gt;
+          &lt;input type=<span class="hljs-string">"text"</span> className=<span class="hljs-string">"form-control"</span> style={{background:<span class="hljs-string">'white'</span>,cursor:<span class="hljs-string">'pointer'</span>}}/&gt;
+        &lt;/DatePicker&gt;
+        &lt;span className=<span class="hljs-string">"input-group-addon"</span> onClick={<span class="hljs-keyword">this</span>.open}&gt;
+          &lt;span className=<span class="hljs-string">"glyphicon glyphicon-calendar"</span>&gt;&lt;/span&gt;
+        &lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;;
+  }
+});
+
+React.render(&lt;Test /&gt;, document.getElementById(<span class="hljs-string">'__react-content'</span>));
+
+</pre>
+</div>
+</body>
+</html>

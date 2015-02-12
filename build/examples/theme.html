@@ -151,12 +151,11 @@
 <body>
 <div id="__react-content"></div>
 <script src="common.js?nowrap"></script>
-<script src="simple.js?nowrap"></script>
+<script src="theme.js?nowrap"></script>
 <div class="highlight">
 <pre>
 <span class="hljs-comment">/** @jsx React.DOM */</span>
-<span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-calendar/assets/bootstrap.css'</span>);
-
+<span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-calendar/assets/classic.css'</span>);
 <span class="hljs-keyword">var</span> Calendar = <span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-calendar'</span>);
 <span class="hljs-keyword">var</span> GregorianCalendarFormat = <span class="hljs-built_in">require</span>(<span class="hljs-string">'gregorian-calendar-format'</span>);
 <span class="hljs-keyword">var</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react'</span>);
@@ -170,9 +169,10 @@
 React.render(
   &lt;div&gt;
     &lt;h2&gt;calendar (en-us, U.S.A.  California  San Francisco)&lt;/h2&gt;
-    &lt;Calendar showWeekNumber={<span class="hljs-literal">true</span>} onSelect={onSelect} showTime={<span class="hljs-literal">true</span>}/&gt;
+    &lt;Calendar showWeekNumber={<span class="hljs-literal">true</span>}
+      showTime={<span class="hljs-literal">true</span>}
+      onSelect={onSelect} prefixCls=<span class="hljs-string">"classic-calendar"</span>/&gt;
   &lt;/div&gt;, <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'__react-content'</span>));
-
 
 </pre>
 </div>

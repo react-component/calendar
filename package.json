@@ -25,10 +25,12 @@
     "port": 8001
   },
   "scripts": {
+    "example": "webpack -d && rc-tools run jsx2html",
     "less": "rc-tools run less",
     "history": "rc-tools run history",
     "start": "node --harmony node_modules/.bin/rc-server",
-    "publish": "spm publish && rc-tools run tag",
+    "publish": "spm publish && rc-tools run tag && git push origin master:gh-pages",
+    "push":"git push origin master:master && git push origin master:gh-pages",
     "lint": "rc-tools run lint",
     "test": "",
     "saucelabs": "rc-tools run saucelabs",
@@ -53,7 +55,8 @@
   },
   "precommit": [
     "lint",
-    "less"
+    "less",
+    "example"
   ],
   "browserify-shim": {
     "react": "global:React"

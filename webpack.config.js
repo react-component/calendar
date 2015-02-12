@@ -2,8 +2,6 @@ var webpack = require("webpack");
 var path = require('path');
 
 module.exports = {
-  debug:true,
-
   entry: {
     'simple': ['./examples/simple.js'],
     'disabled': ['./examples/disabled.js'],

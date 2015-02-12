@@ -158,8 +158,8 @@
 	var DateTimeFormat = __webpack_require__(/*! gregorian-calendar-format */ 6);
 	var GregorianCalendar = __webpack_require__(/*! gregorian-calendar */ 7);
 	var KeyCode = __webpack_require__(/*! rc-util */ 27).KeyCode;
-	var MonthPanel = __webpack_require__(/*! ./MonthPanel */ 22);
-	var Time = __webpack_require__(/*! ./Time */ 23);
+	var MonthPanel = __webpack_require__(/*! ./MonthPanel */ 21);
+	var Time = __webpack_require__(/*! ./Time */ 22);
 	
 	function noop() {
 	}
@@ -245,7 +245,7 @@
 	    onBlur: React.PropTypes.func
 	  },
 	
-	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 24),
+	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 23),
 	
 	  getInitialState: function () {
 	    var value = this.props.value;
@@ -262,7 +262,7 @@
 	
 	  getDefaultProps: function () {
 	    return {
-	      locale: __webpack_require__(/*! ./locale/en-us */ 25),
+	      locale: __webpack_require__(/*! ./locale/en-us */ 24),
 	      onKeyDown: noop,
 	      className: '',
 	      showToday: true,
@@ -703,7 +703,7 @@
 	      prefixCls: 'rc-calendar-picker',
 	      onChange: function () {
 	      },
-	      formatter: new DateTimeFormat('yyyy-MM-dd', __webpack_require__(/*! gregorian-calendar/lib/locale/en-us */ 21))
+	      formatter: new DateTimeFormat('yyyy-MM-dd', __webpack_require__(/*! gregorian-calendar/lib/locale/en-us */ 25))
 	    };
 	  },
 	
@@ -1886,7 +1886,7 @@
 	 */
 	var toInt = parseInt;
 	var Utils = __webpack_require__(/*! ./utils */ 29);
-	var defaultLocale = __webpack_require__(/*! ./locale/en-us */ 21);
+	var defaultLocale = __webpack_require__(/*! ./locale/en-us */ 25);
 	var Const = __webpack_require__(/*! ./const */ 30);
 	
 	/**
@@ -3255,40 +3255,6 @@
 
 /***/ },
 /* 21 */
-/*!**************************************************!*\
-  !*** ./~/gregorian-calendar/lib/locale/en-us.js ***!
-  \**************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * en-us locale
-	 * @ignore
-	 * @author yiminghe@gmail.com
-	 */
-	module.exports = {
-	    // in minutes
-	    timezoneOffset: -8 * 60,
-	    firstDayOfWeek: 0,
-	    minimalDaysInFirstWeek: 1,
-	
-	    // DateFormatSymbols
-	    eras: ['BC', 'AD'],
-	    months: ['January', 'February', 'March', 'April', 'May', 'June', 'July',
-	        'August', 'September', 'October', 'November', 'December'],
-	    shortMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
-	        'Oct', 'Nov', 'Dec'],
-	    weekdays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday',
-	        'Saturday'],
-	    shortWeekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-	    ampms: ['AM', 'PM'],
-	    datePatterns: ['EEEE, MMMM d, yyyy', 'MMMM d, yyyy', 'MMM d, yyyy', 'M/d/yy'],
-	    timePatterns: ['h:mm:ss a \'GMT\'Z', 'h:mm:ss a', 'h:mm:ss a', 'h:mm a'],
-	    dateTimePattern: '{date} {time}'
-	};
-
-
-/***/ },
-/* 22 */
 /*!***************************!*\
   !*** ./lib/MonthPanel.js ***!
   \***************************/
@@ -3301,7 +3267,7 @@
 	var ROW = 3;
 	var COL = 4;
 	var cx = __webpack_require__(/*! rc-util */ 27).classSet;
-	var YearPanel = __webpack_require__(/*! ./YearPanel */ 36);
+	var YearPanel = __webpack_require__(/*! ./YearPanel */ 37);
 	
 	function goYear(self, direction) {
 	  var next = self.state.value.clone();
@@ -3310,7 +3276,7 @@
 	}
 	
 	var MonthPanel = React.createClass({displayName: "MonthPanel",
-	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 24),
+	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 23),
 	
 	  getInitialState: function () {
 	    return {
@@ -3458,7 +3424,7 @@
 
 
 /***/ },
-/* 23 */
+/* 22 */
 /*!*********************!*\
   !*** ./lib/Time.js ***!
   \*********************/
@@ -3472,7 +3438,7 @@
 	
 	var React = __webpack_require__(/*! react */ 8);
 	var KeyCode = __webpack_require__(/*! rc-util */ 27).KeyCode;
-	var TimePanel = __webpack_require__(/*! ./TimePanel */ 37);
+	var TimePanel = __webpack_require__(/*! ./TimePanel */ 36);
 	
 	function padding(number) {
 	  if (number < 10) {
@@ -3626,7 +3592,7 @@
 
 
 /***/ },
-/* 24 */
+/* 23 */
 /*!****************************!*\
   !*** ./lib/prefixClsFn.js ***!
   \****************************/
@@ -3642,7 +3608,7 @@
 
 
 /***/ },
-/* 25 */
+/* 24 */
 /*!*****************************!*\
   !*** ./lib/locale/en-us.js ***!
   \*****************************/
@@ -3677,6 +3643,40 @@
 	  previousCentury: 'Last century',
 	  nextCentury: 'Next century',
 	  veryShortWeekdays: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
+	};
+
+
+/***/ },
+/* 25 */
+/*!**************************************************!*\
+  !*** ./~/gregorian-calendar/lib/locale/en-us.js ***!
+  \**************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * en-us locale
+	 * @ignore
+	 * @author yiminghe@gmail.com
+	 */
+	module.exports = {
+	    // in minutes
+	    timezoneOffset: -8 * 60,
+	    firstDayOfWeek: 0,
+	    minimalDaysInFirstWeek: 1,
+	
+	    // DateFormatSymbols
+	    eras: ['BC', 'AD'],
+	    months: ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+	        'August', 'September', 'October', 'November', 'December'],
+	    shortMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
+	        'Oct', 'Nov', 'Dec'],
+	    weekdays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday',
+	        'Saturday'],
+	    shortWeekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+	    ampms: ['AM', 'PM'],
+	    datePatterns: ['EEEE, MMMM d, yyyy', 'MMMM d, yyyy', 'MMM d, yyyy', 'M/d/yy'],
+	    timePatterns: ['h:mm:ss a \'GMT\'Z', 'h:mm:ss a', 'h:mm:ss a', 'h:mm a'],
+	    dateTimePattern: '{date} {time}'
 	};
 
 
@@ -4555,6 +4555,101 @@
 /* 35 */,
 /* 36 */
 /*!**************************!*\
+  !*** ./lib/TimePanel.js ***!
+  \**************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/** @jsx React.DOM */
+	
+	var React = __webpack_require__(/*! react */ 8);
+	var cx = __webpack_require__(/*! rc-util */ 27).classSet;
+	
+	var TimePanel = React.createClass({displayName: "TimePanel",
+	  getInitialState: function () {
+	    return {
+	      value: this.props.value,
+	      prefixCls: this.props.rootPrefixCls + '-time-panel'
+	    };
+	  },
+	
+	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 23),
+	
+	  getDefaultProps: function () {
+	    return {
+	      onSelect: function () {
+	      }
+	    };
+	  },
+	
+	  choose: function (hour, e) {
+	    var next = this.state.value.clone();
+	    var method = this.props.setter;
+	    next[method](hour);
+	    this.props.onSelect(next);
+	    e.preventDefault();
+	  },
+	
+	  render: function () {
+	    var value = this.state.value;
+	    var props = this.props;
+	    var method = props.getter;
+	    var currentHour = value[method]();
+	    var data = [];
+	    var prefixClsFn = this.prefixClsFn;
+	    var ROW = props.rowCount;
+	    var COL = props.colCount;
+	
+	    for (var i = 0; i < ROW; i++) {
+	      data[i] = [];
+	      for (var j = 0; j < COL; j++) {
+	        data[i][j] = i * COL + j;
+	      }
+	    }
+	
+	    var self = this;
+	    var hoursEls = data.map(function (row, index) {
+	      var tds = row.map(function (d) {
+	        var classNameMap = {};
+	        classNameMap[prefixClsFn('cell')] = 1;
+	        classNameMap[prefixClsFn('selected-cell')] = d === currentHour;
+	        return (React.createElement("td", {
+	          key: d, 
+	          onClick: self.choose.bind(self, d), 
+	          role: "gridcell", 
+	          className: cx(classNameMap)}, 
+	          React.createElement("a", {
+	            className: prefixClsFn('time')}, 
+	          d
+	          )
+	        ));
+	      });
+	      return (React.createElement("tr", {key: index, role: "row"}, tds));
+	    });
+	
+	    return (
+	      React.createElement("div", {className: this.state.prefixCls}, 
+	        React.createElement("div", {className: prefixClsFn('header')}, 
+	          React.createElement("div", {className: prefixClsFn('title')}, 
+	                props.title
+	          )
+	        ), 
+	        React.createElement("div", {className: prefixClsFn('body')}, 
+	          React.createElement("table", {className: prefixClsFn('table'), cellSpacing: "0", role: "grid"}, 
+	            React.createElement("tbody", {className: prefixClsFn('tbody')}, 
+	            hoursEls
+	            )
+	          )
+	        )
+	      ));
+	  }
+	});
+	
+	module.exports = TimePanel;
+
+
+/***/ },
+/* 37 */
+/*!**************************!*\
   !*** ./lib/YearPanel.js ***!
   \**************************/
 /***/ function(module, exports, __webpack_require__) {
@@ -4575,7 +4670,7 @@
 	}
 	
 	var YearPanel = React.createClass({displayName: "YearPanel",
-	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 24),
+	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 23),
 	
 	  getInitialState: function () {
 	    return {
@@ -4725,101 +4820,6 @@
 	});
 	
 	module.exports = YearPanel;
-
-
-/***/ },
-/* 37 */
-/*!**************************!*\
-  !*** ./lib/TimePanel.js ***!
-  \**************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	/** @jsx React.DOM */
-	
-	var React = __webpack_require__(/*! react */ 8);
-	var cx = __webpack_require__(/*! rc-util */ 27).classSet;
-	
-	var TimePanel = React.createClass({displayName: "TimePanel",
-	  getInitialState: function () {
-	    return {
-	      value: this.props.value,
-	      prefixCls: this.props.rootPrefixCls + '-time-panel'
-	    };
-	  },
-	
-	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 24),
-	
-	  getDefaultProps: function () {
-	    return {
-	      onSelect: function () {
-	      }
-	    };
-	  },
-	
-	  choose: function (hour, e) {
-	    var next = this.state.value.clone();
-	    var method = this.props.setter;
-	    next[method](hour);
-	    this.props.onSelect(next);
-	    e.preventDefault();
-	  },
-	
-	  render: function () {
-	    var value = this.state.value;
-	    var props = this.props;
-	    var method = props.getter;
-	    var currentHour = value[method]();
-	    var data = [];
-	    var prefixClsFn = this.prefixClsFn;
-	    var ROW = props.rowCount;
-	    var COL = props.colCount;
-	
-	    for (var i = 0; i < ROW; i++) {
-	      data[i] = [];
-	      for (var j = 0; j < COL; j++) {
-	        data[i][j] = i * COL + j;
-	      }
-	    }
-	
-	    var self = this;
-	    var hoursEls = data.map(function (row, index) {
-	      var tds = row.map(function (d) {
-	        var classNameMap = {};
-	        classNameMap[prefixClsFn('cell')] = 1;
-	        classNameMap[prefixClsFn('selected-cell')] = d === currentHour;
-	        return (React.createElement("td", {
-	          key: d, 
-	          onClick: self.choose.bind(self, d), 
-	          role: "gridcell", 
-	          className: cx(classNameMap)}, 
-	          React.createElement("a", {
-	            className: prefixClsFn('time')}, 
-	          d
-	          )
-	        ));
-	      });
-	      return (React.createElement("tr", {key: index, role: "row"}, tds));
-	    });
-	
-	    return (
-	      React.createElement("div", {className: this.state.prefixCls}, 
-	        React.createElement("div", {className: prefixClsFn('header')}, 
-	          React.createElement("div", {className: prefixClsFn('title')}, 
-	                props.title
-	          )
-	        ), 
-	        React.createElement("div", {className: prefixClsFn('body')}, 
-	          React.createElement("table", {className: prefixClsFn('table'), cellSpacing: "0", role: "grid"}, 
-	            React.createElement("tbody", {className: prefixClsFn('tbody')}, 
-	            hoursEls
-	            )
-	          )
-	        )
-	      ));
-	  }
-	});
-	
-	module.exports = TimePanel;
 
 
 /***/ },
@@ -5272,9 +5272,9 @@
 	
 	"use strict";
 	
-	var PooledClass = __webpack_require__(/*! ./PooledClass */ 82);
+	var PooledClass = __webpack_require__(/*! ./PooledClass */ 85);
 	
-	var traverseAllChildren = __webpack_require__(/*! ./traverseAllChildren */ 83);
+	var traverseAllChildren = __webpack_require__(/*! ./traverseAllChildren */ 86);
 	var warning = __webpack_require__(/*! ./warning */ 79);
 	
 	var twoArgumentPooler = PooledClass.twoArgumentPooler;
@@ -5429,12 +5429,12 @@
 	"use strict";
 	
 	var ReactElement = __webpack_require__(/*! ./ReactElement */ 45);
-	var ReactOwner = __webpack_require__(/*! ./ReactOwner */ 84);
-	var ReactUpdates = __webpack_require__(/*! ./ReactUpdates */ 85);
+	var ReactOwner = __webpack_require__(/*! ./ReactOwner */ 82);
+	var ReactUpdates = __webpack_require__(/*! ./ReactUpdates */ 83);
 	
 	var assign = __webpack_require__(/*! ./Object.assign */ 58);
 	var invariant = __webpack_require__(/*! ./invariant */ 81);
-	var keyMirror = __webpack_require__(/*! ./keyMirror */ 86);
+	var keyMirror = __webpack_require__(/*! ./keyMirror */ 84);
 	
 	/**
 	 * Every React component is in one of these life cycles.
@@ -5885,17 +5885,17 @@
 	var ReactEmptyComponent = __webpack_require__(/*! ./ReactEmptyComponent */ 87);
 	var ReactErrorUtils = __webpack_require__(/*! ./ReactErrorUtils */ 88);
 	var ReactLegacyElement = __webpack_require__(/*! ./ReactLegacyElement */ 51);
-	var ReactOwner = __webpack_require__(/*! ./ReactOwner */ 84);
+	var ReactOwner = __webpack_require__(/*! ./ReactOwner */ 82);
 	var ReactPerf = __webpack_require__(/*! ./ReactPerf */ 54);
 	var ReactPropTransferer = __webpack_require__(/*! ./ReactPropTransferer */ 89);
 	var ReactPropTypeLocations = __webpack_require__(/*! ./ReactPropTypeLocations */ 90);
 	var ReactPropTypeLocationNames = __webpack_require__(/*! ./ReactPropTypeLocationNames */ 91);
-	var ReactUpdates = __webpack_require__(/*! ./ReactUpdates */ 85);
+	var ReactUpdates = __webpack_require__(/*! ./ReactUpdates */ 83);
 	
 	var assign = __webpack_require__(/*! ./Object.assign */ 58);
 	var instantiateReactComponent = __webpack_require__(/*! ./instantiateReactComponent */ 92);
 	var invariant = __webpack_require__(/*! ./invariant */ 81);
-	var keyMirror = __webpack_require__(/*! ./keyMirror */ 86);
+	var keyMirror = __webpack_require__(/*! ./keyMirror */ 84);
 	var keyOf = __webpack_require__(/*! ./keyOf */ 93);
 	var monitorCodeUse = __webpack_require__(/*! ./monitorCodeUse */ 94);
 	var mapObject = __webpack_require__(/*! ./mapObject */ 95);
@@ -12895,7 +12895,7 @@
 	    };
 	  },
 	
-	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 24),
+	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 23),
 	
 	  getDefaultProps: function () {
 	    return {
@@ -13469,7 +13469,7 @@
 	
 	"use strict";
 	
-	var keyMirror = __webpack_require__(/*! ./keyMirror */ 86);
+	var keyMirror = __webpack_require__(/*! ./keyMirror */ 84);
 	
 	var PropagationPhases = keyMirror({bubbled: null, captured: null});
 	
@@ -13593,317 +13593,6 @@
 
 /***/ },
 /* 82 */
-/*!************************************!*\
-  !*** ./~/react/lib/PooledClass.js ***!
-  \************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {/**
-	 * Copyright 2013-2014, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule PooledClass
-	 */
-	
-	"use strict";
-	
-	var invariant = __webpack_require__(/*! ./invariant */ 81);
-	
-	/**
-	 * Static poolers. Several custom versions for each potential number of
-	 * arguments. A completely generic pooler is easy to implement, but would
-	 * require accessing the `arguments` object. In each of these, `this` refers to
-	 * the Class itself, not an instance. If any others are needed, simply add them
-	 * here, or in their own files.
-	 */
-	var oneArgumentPooler = function(copyFieldsFrom) {
-	  var Klass = this;
-	  if (Klass.instancePool.length) {
-	    var instance = Klass.instancePool.pop();
-	    Klass.call(instance, copyFieldsFrom);
-	    return instance;
-	  } else {
-	    return new Klass(copyFieldsFrom);
-	  }
-	};
-	
-	var twoArgumentPooler = function(a1, a2) {
-	  var Klass = this;
-	  if (Klass.instancePool.length) {
-	    var instance = Klass.instancePool.pop();
-	    Klass.call(instance, a1, a2);
-	    return instance;
-	  } else {
-	    return new Klass(a1, a2);
-	  }
-	};
-	
-	var threeArgumentPooler = function(a1, a2, a3) {
-	  var Klass = this;
-	  if (Klass.instancePool.length) {
-	    var instance = Klass.instancePool.pop();
-	    Klass.call(instance, a1, a2, a3);
-	    return instance;
-	  } else {
-	    return new Klass(a1, a2, a3);
-	  }
-	};
-	
-	var fiveArgumentPooler = function(a1, a2, a3, a4, a5) {
-	  var Klass = this;
-	  if (Klass.instancePool.length) {
-	    var instance = Klass.instancePool.pop();
-	    Klass.call(instance, a1, a2, a3, a4, a5);
-	    return instance;
-	  } else {
-	    return new Klass(a1, a2, a3, a4, a5);
-	  }
-	};
-	
-	var standardReleaser = function(instance) {
-	  var Klass = this;
-	  ("production" !== process.env.NODE_ENV ? invariant(
-	    instance instanceof Klass,
-	    'Trying to release an instance into a pool of a different type.'
-	  ) : invariant(instance instanceof Klass));
-	  if (instance.destructor) {
-	    instance.destructor();
-	  }
-	  if (Klass.instancePool.length < Klass.poolSize) {
-	    Klass.instancePool.push(instance);
-	  }
-	};
-	
-	var DEFAULT_POOL_SIZE = 10;
-	var DEFAULT_POOLER = oneArgumentPooler;
-	
-	/**
-	 * Augments `CopyConstructor` to be a poolable class, augmenting only the class
-	 * itself (statically) not adding any prototypical fields. Any CopyConstructor
-	 * you give this may have a `poolSize` property, and will look for a
-	 * prototypical `destructor` on instances (optional).
-	 *
-	 * @param {Function} CopyConstructor Constructor that can be used to reset.
-	 * @param {Function} pooler Customizable pooler.
-	 */
-	var addPoolingTo = function(CopyConstructor, pooler) {
-	  var NewKlass = CopyConstructor;
-	  NewKlass.instancePool = [];
-	  NewKlass.getPooled = pooler || DEFAULT_POOLER;
-	  if (!NewKlass.poolSize) {
-	    NewKlass.poolSize = DEFAULT_POOL_SIZE;
-	  }
-	  NewKlass.release = standardReleaser;
-	  return NewKlass;
-	};
-	
-	var PooledClass = {
-	  addPoolingTo: addPoolingTo,
-	  oneArgumentPooler: oneArgumentPooler,
-	  twoArgumentPooler: twoArgumentPooler,
-	  threeArgumentPooler: threeArgumentPooler,
-	  fiveArgumentPooler: fiveArgumentPooler
-	};
-	
-	module.exports = PooledClass;
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 62)))
-
-/***/ },
-/* 83 */
-/*!********************************************!*\
-  !*** ./~/react/lib/traverseAllChildren.js ***!
-  \********************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {/**
-	 * Copyright 2013-2014, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule traverseAllChildren
-	 */
-	
-	"use strict";
-	
-	var ReactElement = __webpack_require__(/*! ./ReactElement */ 45);
-	var ReactInstanceHandles = __webpack_require__(/*! ./ReactInstanceHandles */ 50);
-	
-	var invariant = __webpack_require__(/*! ./invariant */ 81);
-	
-	var SEPARATOR = ReactInstanceHandles.SEPARATOR;
-	var SUBSEPARATOR = ':';
-	
-	/**
-	 * TODO: Test that:
-	 * 1. `mapChildren` transforms strings and numbers into `ReactTextComponent`.
-	 * 2. it('should fail when supplied duplicate key', function() {
-	 * 3. That a single child and an array with one item have the same key pattern.
-	 * });
-	 */
-	
-	var userProvidedKeyEscaperLookup = {
-	  '=': '=0',
-	  '.': '=1',
-	  ':': '=2'
-	};
-	
-	var userProvidedKeyEscapeRegex = /[=.:]/g;
-	
-	function userProvidedKeyEscaper(match) {
-	  return userProvidedKeyEscaperLookup[match];
-	}
-	
-	/**
-	 * Generate a key string that identifies a component within a set.
-	 *
-	 * @param {*} component A component that could contain a manual key.
-	 * @param {number} index Index that is used if a manual key is not provided.
-	 * @return {string}
-	 */
-	function getComponentKey(component, index) {
-	  if (component && component.key != null) {
-	    // Explicit key
-	    return wrapUserProvidedKey(component.key);
-	  }
-	  // Implicit key determined by the index in the set
-	  return index.toString(36);
-	}
-	
-	/**
-	 * Escape a component key so that it is safe to use in a reactid.
-	 *
-	 * @param {*} key Component key to be escaped.
-	 * @return {string} An escaped string.
-	 */
-	function escapeUserProvidedKey(text) {
-	  return ('' + text).replace(
-	    userProvidedKeyEscapeRegex,
-	    userProvidedKeyEscaper
-	  );
-	}
-	
-	/**
-	 * Wrap a `key` value explicitly provided by the user to distinguish it from
-	 * implicitly-generated keys generated by a component's index in its parent.
-	 *
-	 * @param {string} key Value of a user-provided `key` attribute
-	 * @return {string}
-	 */
-	function wrapUserProvidedKey(key) {
-	  return '$' + escapeUserProvidedKey(key);
-	}
-	
-	/**
-	 * @param {?*} children Children tree container.
-	 * @param {!string} nameSoFar Name of the key path so far.
-	 * @param {!number} indexSoFar Number of children encountered until this point.
-	 * @param {!function} callback Callback to invoke with each child found.
-	 * @param {?*} traverseContext Used to pass information throughout the traversal
-	 * process.
-	 * @return {!number} The number of children in this subtree.
-	 */
-	var traverseAllChildrenImpl =
-	  function(children, nameSoFar, indexSoFar, callback, traverseContext) {
-	    var nextName, nextIndex;
-	    var subtreeCount = 0;  // Count of children found in the current subtree.
-	    if (Array.isArray(children)) {
-	      for (var i = 0; i < children.length; i++) {
-	        var child = children[i];
-	        nextName = (
-	          nameSoFar +
-	          (nameSoFar ? SUBSEPARATOR : SEPARATOR) +
-	          getComponentKey(child, i)
-	        );
-	        nextIndex = indexSoFar + subtreeCount;
-	        subtreeCount += traverseAllChildrenImpl(
-	          child,
-	          nextName,
-	          nextIndex,
-	          callback,
-	          traverseContext
-	        );
-	      }
-	    } else {
-	      var type = typeof children;
-	      var isOnlyChild = nameSoFar === '';
-	      // If it's the only child, treat the name as if it was wrapped in an array
-	      // so that it's consistent if the number of children grows
-	      var storageName =
-	        isOnlyChild ? SEPARATOR + getComponentKey(children, 0) : nameSoFar;
-	      if (children == null || type === 'boolean') {
-	        // All of the above are perceived as null.
-	        callback(traverseContext, null, storageName, indexSoFar);
-	        subtreeCount = 1;
-	      } else if (type === 'string' || type === 'number' ||
-	                 ReactElement.isValidElement(children)) {
-	        callback(traverseContext, children, storageName, indexSoFar);
-	        subtreeCount = 1;
-	      } else if (type === 'object') {
-	        ("production" !== process.env.NODE_ENV ? invariant(
-	          !children || children.nodeType !== 1,
-	          'traverseAllChildren(...): Encountered an invalid child; DOM ' +
-	          'elements are not valid children of React components.'
-	        ) : invariant(!children || children.nodeType !== 1));
-	        for (var key in children) {
-	          if (children.hasOwnProperty(key)) {
-	            nextName = (
-	              nameSoFar + (nameSoFar ? SUBSEPARATOR : SEPARATOR) +
-	              wrapUserProvidedKey(key) + SUBSEPARATOR +
-	              getComponentKey(children[key], 0)
-	            );
-	            nextIndex = indexSoFar + subtreeCount;
-	            subtreeCount += traverseAllChildrenImpl(
-	              children[key],
-	              nextName,
-	              nextIndex,
-	              callback,
-	              traverseContext
-	            );
-	          }
-	        }
-	      }
-	    }
-	    return subtreeCount;
-	  };
-	
-	/**
-	 * Traverses children that are typically specified as `props.children`, but
-	 * might also be specified through attributes:
-	 *
-	 * - `traverseAllChildren(this.props.children, ...)`
-	 * - `traverseAllChildren(this.props.leftPanelChildren, ...)`
-	 *
-	 * The `traverseContext` is an optional argument that is passed through the
-	 * entire traversal. It can be used to store accumulations or anything else that
-	 * the callback might find relevant.
-	 *
-	 * @param {?*} children Children tree object.
-	 * @param {!function} callback To invoke upon traversing each child.
-	 * @param {?*} traverseContext Context for traversal.
-	 * @return {!number} The number of children in this subtree.
-	 */
-	function traverseAllChildren(children, callback, traverseContext) {
-	  if (children == null) {
-	    return 0;
-	  }
-	
-	  return traverseAllChildrenImpl(children, '', 0, callback, traverseContext);
-	}
-	
-	module.exports = traverseAllChildren;
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 62)))
-
-/***/ },
-/* 84 */
 /*!***********************************!*\
   !*** ./~/react/lib/ReactOwner.js ***!
   \***********************************/
@@ -14065,7 +13754,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 62)))
 
 /***/ },
-/* 85 */
+/* 83 */
 /*!*************************************!*\
   !*** ./~/react/lib/ReactUpdates.js ***!
   \*************************************/
@@ -14085,7 +13774,7 @@
 	"use strict";
 	
 	var CallbackQueue = __webpack_require__(/*! ./CallbackQueue */ 135);
-	var PooledClass = __webpack_require__(/*! ./PooledClass */ 82);
+	var PooledClass = __webpack_require__(/*! ./PooledClass */ 85);
 	var ReactCurrentOwner = __webpack_require__(/*! ./ReactCurrentOwner */ 44);
 	var ReactPerf = __webpack_require__(/*! ./ReactPerf */ 54);
 	var Transaction = __webpack_require__(/*! ./Transaction */ 136);
@@ -14361,7 +14050,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 62)))
 
 /***/ },
-/* 86 */
+/* 84 */
 /*!**********************************!*\
   !*** ./~/react/lib/keyMirror.js ***!
   \**********************************/
@@ -14418,6 +14107,317 @@
 	};
 	
 	module.exports = keyMirror;
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 62)))
+
+/***/ },
+/* 85 */
+/*!************************************!*\
+  !*** ./~/react/lib/PooledClass.js ***!
+  \************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2013-2014, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule PooledClass
+	 */
+	
+	"use strict";
+	
+	var invariant = __webpack_require__(/*! ./invariant */ 81);
+	
+	/**
+	 * Static poolers. Several custom versions for each potential number of
+	 * arguments. A completely generic pooler is easy to implement, but would
+	 * require accessing the `arguments` object. In each of these, `this` refers to
+	 * the Class itself, not an instance. If any others are needed, simply add them
+	 * here, or in their own files.
+	 */
+	var oneArgumentPooler = function(copyFieldsFrom) {
+	  var Klass = this;
+	  if (Klass.instancePool.length) {
+	    var instance = Klass.instancePool.pop();
+	    Klass.call(instance, copyFieldsFrom);
+	    return instance;
+	  } else {
+	    return new Klass(copyFieldsFrom);
+	  }
+	};
+	
+	var twoArgumentPooler = function(a1, a2) {
+	  var Klass = this;
+	  if (Klass.instancePool.length) {
+	    var instance = Klass.instancePool.pop();
+	    Klass.call(instance, a1, a2);
+	    return instance;
+	  } else {
+	    return new Klass(a1, a2);
+	  }
+	};
+	
+	var threeArgumentPooler = function(a1, a2, a3) {
+	  var Klass = this;
+	  if (Klass.instancePool.length) {
+	    var instance = Klass.instancePool.pop();
+	    Klass.call(instance, a1, a2, a3);
+	    return instance;
+	  } else {
+	    return new Klass(a1, a2, a3);
+	  }
+	};
+	
+	var fiveArgumentPooler = function(a1, a2, a3, a4, a5) {
+	  var Klass = this;
+	  if (Klass.instancePool.length) {
+	    var instance = Klass.instancePool.pop();
+	    Klass.call(instance, a1, a2, a3, a4, a5);
+	    return instance;
+	  } else {
+	    return new Klass(a1, a2, a3, a4, a5);
+	  }
+	};
+	
+	var standardReleaser = function(instance) {
+	  var Klass = this;
+	  ("production" !== process.env.NODE_ENV ? invariant(
+	    instance instanceof Klass,
+	    'Trying to release an instance into a pool of a different type.'
+	  ) : invariant(instance instanceof Klass));
+	  if (instance.destructor) {
+	    instance.destructor();
+	  }
+	  if (Klass.instancePool.length < Klass.poolSize) {
+	    Klass.instancePool.push(instance);
+	  }
+	};
+	
+	var DEFAULT_POOL_SIZE = 10;
+	var DEFAULT_POOLER = oneArgumentPooler;
+	
+	/**
+	 * Augments `CopyConstructor` to be a poolable class, augmenting only the class
+	 * itself (statically) not adding any prototypical fields. Any CopyConstructor
+	 * you give this may have a `poolSize` property, and will look for a
+	 * prototypical `destructor` on instances (optional).
+	 *
+	 * @param {Function} CopyConstructor Constructor that can be used to reset.
+	 * @param {Function} pooler Customizable pooler.
+	 */
+	var addPoolingTo = function(CopyConstructor, pooler) {
+	  var NewKlass = CopyConstructor;
+	  NewKlass.instancePool = [];
+	  NewKlass.getPooled = pooler || DEFAULT_POOLER;
+	  if (!NewKlass.poolSize) {
+	    NewKlass.poolSize = DEFAULT_POOL_SIZE;
+	  }
+	  NewKlass.release = standardReleaser;
+	  return NewKlass;
+	};
+	
+	var PooledClass = {
+	  addPoolingTo: addPoolingTo,
+	  oneArgumentPooler: oneArgumentPooler,
+	  twoArgumentPooler: twoArgumentPooler,
+	  threeArgumentPooler: threeArgumentPooler,
+	  fiveArgumentPooler: fiveArgumentPooler
+	};
+	
+	module.exports = PooledClass;
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 62)))
+
+/***/ },
+/* 86 */
+/*!********************************************!*\
+  !*** ./~/react/lib/traverseAllChildren.js ***!
+  \********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2013-2014, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule traverseAllChildren
+	 */
+	
+	"use strict";
+	
+	var ReactElement = __webpack_require__(/*! ./ReactElement */ 45);
+	var ReactInstanceHandles = __webpack_require__(/*! ./ReactInstanceHandles */ 50);
+	
+	var invariant = __webpack_require__(/*! ./invariant */ 81);
+	
+	var SEPARATOR = ReactInstanceHandles.SEPARATOR;
+	var SUBSEPARATOR = ':';
+	
+	/**
+	 * TODO: Test that:
+	 * 1. `mapChildren` transforms strings and numbers into `ReactTextComponent`.
+	 * 2. it('should fail when supplied duplicate key', function() {
+	 * 3. That a single child and an array with one item have the same key pattern.
+	 * });
+	 */
+	
+	var userProvidedKeyEscaperLookup = {
+	  '=': '=0',
+	  '.': '=1',
+	  ':': '=2'
+	};
+	
+	var userProvidedKeyEscapeRegex = /[=.:]/g;
+	
+	function userProvidedKeyEscaper(match) {
+	  return userProvidedKeyEscaperLookup[match];
+	}
+	
+	/**
+	 * Generate a key string that identifies a component within a set.
+	 *
+	 * @param {*} component A component that could contain a manual key.
+	 * @param {number} index Index that is used if a manual key is not provided.
+	 * @return {string}
+	 */
+	function getComponentKey(component, index) {
+	  if (component && component.key != null) {
+	    // Explicit key
+	    return wrapUserProvidedKey(component.key);
+	  }
+	  // Implicit key determined by the index in the set
+	  return index.toString(36);
+	}
+	
+	/**
+	 * Escape a component key so that it is safe to use in a reactid.
+	 *
+	 * @param {*} key Component key to be escaped.
+	 * @return {string} An escaped string.
+	 */
+	function escapeUserProvidedKey(text) {
+	  return ('' + text).replace(
+	    userProvidedKeyEscapeRegex,
+	    userProvidedKeyEscaper
+	  );
+	}
+	
+	/**
+	 * Wrap a `key` value explicitly provided by the user to distinguish it from
+	 * implicitly-generated keys generated by a component's index in its parent.
+	 *
+	 * @param {string} key Value of a user-provided `key` attribute
+	 * @return {string}
+	 */
+	function wrapUserProvidedKey(key) {
+	  return '$' + escapeUserProvidedKey(key);
+	}
+	
+	/**
+	 * @param {?*} children Children tree container.
+	 * @param {!string} nameSoFar Name of the key path so far.
+	 * @param {!number} indexSoFar Number of children encountered until this point.
+	 * @param {!function} callback Callback to invoke with each child found.
+	 * @param {?*} traverseContext Used to pass information throughout the traversal
+	 * process.
+	 * @return {!number} The number of children in this subtree.
+	 */
+	var traverseAllChildrenImpl =
+	  function(children, nameSoFar, indexSoFar, callback, traverseContext) {
+	    var nextName, nextIndex;
+	    var subtreeCount = 0;  // Count of children found in the current subtree.
+	    if (Array.isArray(children)) {
+	      for (var i = 0; i < children.length; i++) {
+	        var child = children[i];
+	        nextName = (
+	          nameSoFar +
+	          (nameSoFar ? SUBSEPARATOR : SEPARATOR) +
+	          getComponentKey(child, i)
+	        );
+	        nextIndex = indexSoFar + subtreeCount;
+	        subtreeCount += traverseAllChildrenImpl(
+	          child,
+	          nextName,
+	          nextIndex,
+	          callback,
+	          traverseContext
+	        );
+	      }
+	    } else {
+	      var type = typeof children;
+	      var isOnlyChild = nameSoFar === '';
+	      // If it's the only child, treat the name as if it was wrapped in an array
+	      // so that it's consistent if the number of children grows
+	      var storageName =
+	        isOnlyChild ? SEPARATOR + getComponentKey(children, 0) : nameSoFar;
+	      if (children == null || type === 'boolean') {
+	        // All of the above are perceived as null.
+	        callback(traverseContext, null, storageName, indexSoFar);
+	        subtreeCount = 1;
+	      } else if (type === 'string' || type === 'number' ||
+	                 ReactElement.isValidElement(children)) {
+	        callback(traverseContext, children, storageName, indexSoFar);
+	        subtreeCount = 1;
+	      } else if (type === 'object') {
+	        ("production" !== process.env.NODE_ENV ? invariant(
+	          !children || children.nodeType !== 1,
+	          'traverseAllChildren(...): Encountered an invalid child; DOM ' +
+	          'elements are not valid children of React components.'
+	        ) : invariant(!children || children.nodeType !== 1));
+	        for (var key in children) {
+	          if (children.hasOwnProperty(key)) {
+	            nextName = (
+	              nameSoFar + (nameSoFar ? SUBSEPARATOR : SEPARATOR) +
+	              wrapUserProvidedKey(key) + SUBSEPARATOR +
+	              getComponentKey(children[key], 0)
+	            );
+	            nextIndex = indexSoFar + subtreeCount;
+	            subtreeCount += traverseAllChildrenImpl(
+	              children[key],
+	              nextName,
+	              nextIndex,
+	              callback,
+	              traverseContext
+	            );
+	          }
+	        }
+	      }
+	    }
+	    return subtreeCount;
+	  };
+	
+	/**
+	 * Traverses children that are typically specified as `props.children`, but
+	 * might also be specified through attributes:
+	 *
+	 * - `traverseAllChildren(this.props.children, ...)`
+	 * - `traverseAllChildren(this.props.leftPanelChildren, ...)`
+	 *
+	 * The `traverseContext` is an optional argument that is passed through the
+	 * entire traversal. It can be used to store accumulations or anything else that
+	 * the callback might find relevant.
+	 *
+	 * @param {?*} children Children tree object.
+	 * @param {!function} callback To invoke upon traversing each child.
+	 * @param {?*} traverseContext Context for traversal.
+	 * @return {!number} The number of children in this subtree.
+	 */
+	function traverseAllChildren(children, callback, traverseContext) {
+	  if (children == null) {
+	    return 0;
+	  }
+	
+	  return traverseAllChildrenImpl(children, '', 0, callback, traverseContext);
+	}
+	
+	module.exports = traverseAllChildren;
 	
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/process/browser.js */ 62)))
 
@@ -14736,7 +14736,7 @@
 	
 	"use strict";
 	
-	var keyMirror = __webpack_require__(/*! ./keyMirror */ 86);
+	var keyMirror = __webpack_require__(/*! ./keyMirror */ 84);
 	
 	var ReactPropTypeLocations = keyMirror({
 	  prop: null,
@@ -15966,7 +15966,7 @@
 	var EventPluginHub = __webpack_require__(/*! ./EventPluginHub */ 143);
 	var EventPropagators = __webpack_require__(/*! ./EventPropagators */ 147);
 	var ExecutionEnvironment = __webpack_require__(/*! ./ExecutionEnvironment */ 61);
-	var ReactUpdates = __webpack_require__(/*! ./ReactUpdates */ 85);
+	var ReactUpdates = __webpack_require__(/*! ./ReactUpdates */ 83);
 	var SyntheticEvent = __webpack_require__(/*! ./SyntheticEvent */ 149);
 	
 	var isEventSupported = __webpack_require__(/*! ./isEventSupported */ 100);
@@ -17235,7 +17235,7 @@
 	
 	"use strict";
 	
-	var ReactUpdates = __webpack_require__(/*! ./ReactUpdates */ 85);
+	var ReactUpdates = __webpack_require__(/*! ./ReactUpdates */ 83);
 	var Transaction = __webpack_require__(/*! ./Transaction */ 136);
 	
 	var assign = __webpack_require__(/*! ./Object.assign */ 58);
@@ -17321,7 +17321,7 @@
 	var ReactElement = __webpack_require__(/*! ./ReactElement */ 45);
 	var ReactDOM = __webpack_require__(/*! ./ReactDOM */ 47);
 	
-	var keyMirror = __webpack_require__(/*! ./keyMirror */ 86);
+	var keyMirror = __webpack_require__(/*! ./keyMirror */ 84);
 	
 	// Store a reference to the <button> `ReactDOMComponent`. TODO: use string
 	var button = ReactElement.createFactory(ReactDOM.button.type);
@@ -17507,7 +17507,7 @@
 	var ReactElement = __webpack_require__(/*! ./ReactElement */ 45);
 	var ReactDOM = __webpack_require__(/*! ./ReactDOM */ 47);
 	var ReactMount = __webpack_require__(/*! ./ReactMount */ 52);
-	var ReactUpdates = __webpack_require__(/*! ./ReactUpdates */ 85);
+	var ReactUpdates = __webpack_require__(/*! ./ReactUpdates */ 83);
 	
 	var assign = __webpack_require__(/*! ./Object.assign */ 58);
 	var invariant = __webpack_require__(/*! ./invariant */ 81);
@@ -17748,7 +17748,7 @@
 	var ReactCompositeComponent = __webpack_require__(/*! ./ReactCompositeComponent */ 42);
 	var ReactElement = __webpack_require__(/*! ./ReactElement */ 45);
 	var ReactDOM = __webpack_require__(/*! ./ReactDOM */ 47);
-	var ReactUpdates = __webpack_require__(/*! ./ReactUpdates */ 85);
+	var ReactUpdates = __webpack_require__(/*! ./ReactUpdates */ 83);
 	
 	var assign = __webpack_require__(/*! ./Object.assign */ 58);
 	
@@ -17940,7 +17940,7 @@
 	var ReactCompositeComponent = __webpack_require__(/*! ./ReactCompositeComponent */ 42);
 	var ReactElement = __webpack_require__(/*! ./ReactElement */ 45);
 	var ReactDOM = __webpack_require__(/*! ./ReactDOM */ 47);
-	var ReactUpdates = __webpack_require__(/*! ./ReactUpdates */ 85);
+	var ReactUpdates = __webpack_require__(/*! ./ReactUpdates */ 83);
 	
 	var assign = __webpack_require__(/*! ./Object.assign */ 58);
 	var invariant = __webpack_require__(/*! ./invariant */ 81);
@@ -18083,10 +18083,10 @@
 	
 	var EventListener = __webpack_require__(/*! ./EventListener */ 161);
 	var ExecutionEnvironment = __webpack_require__(/*! ./ExecutionEnvironment */ 61);
-	var PooledClass = __webpack_require__(/*! ./PooledClass */ 82);
+	var PooledClass = __webpack_require__(/*! ./PooledClass */ 85);
 	var ReactInstanceHandles = __webpack_require__(/*! ./ReactInstanceHandles */ 50);
 	var ReactMount = __webpack_require__(/*! ./ReactMount */ 52);
-	var ReactUpdates = __webpack_require__(/*! ./ReactUpdates */ 85);
+	var ReactUpdates = __webpack_require__(/*! ./ReactUpdates */ 83);
 	
 	var assign = __webpack_require__(/*! ./Object.assign */ 58);
 	var getEventTarget = __webpack_require__(/*! ./getEventTarget */ 162);
@@ -18280,7 +18280,7 @@
 	var ReactNativeComponent = __webpack_require__(/*! ./ReactNativeComponent */ 138);
 	var ReactPerf = __webpack_require__(/*! ./ReactPerf */ 54);
 	var ReactRootIndex = __webpack_require__(/*! ./ReactRootIndex */ 126);
-	var ReactUpdates = __webpack_require__(/*! ./ReactUpdates */ 85);
+	var ReactUpdates = __webpack_require__(/*! ./ReactUpdates */ 83);
 	
 	var ReactInjection = {
 	  Component: ReactComponent.injection,
@@ -19556,7 +19556,7 @@
 	
 	"use strict";
 	
-	var keyMirror = __webpack_require__(/*! ./keyMirror */ 86);
+	var keyMirror = __webpack_require__(/*! ./keyMirror */ 84);
 	
 	/**
 	 * When a component's children are updated, a series of update configuration
@@ -19598,7 +19598,7 @@
 	
 	var ReactTextComponent = __webpack_require__(/*! ./ReactTextComponent */ 57);
 	
-	var traverseAllChildren = __webpack_require__(/*! ./traverseAllChildren */ 83);
+	var traverseAllChildren = __webpack_require__(/*! ./traverseAllChildren */ 86);
 	var warning = __webpack_require__(/*! ./warning */ 79);
 	
 	/**
@@ -19768,7 +19768,7 @@
 	
 	"use strict";
 	
-	var PooledClass = __webpack_require__(/*! ./PooledClass */ 82);
+	var PooledClass = __webpack_require__(/*! ./PooledClass */ 85);
 	var CallbackQueue = __webpack_require__(/*! ./CallbackQueue */ 135);
 	var ReactPutListenerQueue = __webpack_require__(/*! ./ReactPutListenerQueue */ 178);
 	var Transaction = __webpack_require__(/*! ./Transaction */ 136);
@@ -19917,7 +19917,7 @@
 	
 	"use strict";
 	
-	var PooledClass = __webpack_require__(/*! ./PooledClass */ 82);
+	var PooledClass = __webpack_require__(/*! ./PooledClass */ 85);
 	
 	var assign = __webpack_require__(/*! ./Object.assign */ 58);
 	var invariant = __webpack_require__(/*! ./invariant */ 81);
@@ -21552,7 +21552,7 @@
 	
 	"use strict";
 	
-	var PooledClass = __webpack_require__(/*! ./PooledClass */ 82);
+	var PooledClass = __webpack_require__(/*! ./PooledClass */ 85);
 	
 	var assign = __webpack_require__(/*! ./Object.assign */ 58);
 	var emptyFunction = __webpack_require__(/*! ./emptyFunction */ 131);
@@ -22291,7 +22291,7 @@
 	"use strict";
 	
 	var CallbackQueue = __webpack_require__(/*! ./CallbackQueue */ 135);
-	var PooledClass = __webpack_require__(/*! ./PooledClass */ 82);
+	var PooledClass = __webpack_require__(/*! ./PooledClass */ 85);
 	var ReactBrowserEventEmitter = __webpack_require__(/*! ./ReactBrowserEventEmitter */ 99);
 	var ReactInputSelection = __webpack_require__(/*! ./ReactInputSelection */ 151);
 	var ReactPutListenerQueue = __webpack_require__(/*! ./ReactPutListenerQueue */ 178);
@@ -23888,7 +23888,7 @@
 	
 	"use strict";
 	
-	var PooledClass = __webpack_require__(/*! ./PooledClass */ 82);
+	var PooledClass = __webpack_require__(/*! ./PooledClass */ 85);
 	var ReactBrowserEventEmitter = __webpack_require__(/*! ./ReactBrowserEventEmitter */ 99);
 	
 	var assign = __webpack_require__(/*! ./Object.assign */ 58);
