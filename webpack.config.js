@@ -40,6 +40,6 @@ module.exports = {
   },
   plugins: [
     // ./robot is automatically detected as common module and extracted
-    new webpack.optimize.CommonsChunkPlugin("__common.js")
+    new webpack.optimize.CommonsChunkPlugin("common.js")
   ]
 };
