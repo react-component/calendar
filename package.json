@@ -37,12 +37,19 @@
   },
   "devDependencies": {
     "async": "~0.9.0",
+    "bootstrap": "~3.3.2",
+    "css-loader": "^0.9.1",
     "expect.js": "~0.3.1",
+    "file-loader": "^0.8.1",
+    "jsx-loader": "^0.12.2",
     "modulex": "^1.7.4",
     "precommit-hook": "^1.0.7",
-    "rc-server": "^1.5.0",
+    "rc-server": "^2.0.0",
     "rc-tools": "^1.1.0",
-    "react": "~0.12.1"
+    "react": "~0.12.1",
+    "style-loader": "^0.8.3",
+    "url-loader": "^0.5.5",
+    "webpack": "~1.5.3"
   },
   "precommit": [
     "lint",

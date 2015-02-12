@@ -183,9 +183,6 @@ For details to see: [https://github.com/yiminghe/learning-react/tree/master/exam
     </tbody>
 </table>
 
-
-online docs: http://spmjs.io/docs/rc-calendar/
-
 ## Development
 
 ```
@@ -195,11 +192,11 @@ npm start
 
 ## Example
 
-http://localhost:8001/examples/index.md
+http://localhost:8001/examples/
 
-http://localhost:8001/examples/picker.md
+online example:
 
-online example: http://spmjs.io/docs/rc-calendar/examples/
+http://react-component.github.io/calendar/build/examples/simple.html
 
 ## Test Case
 
