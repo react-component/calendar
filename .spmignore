@@ -1,5 +1,6 @@
 bower_components/
 node_modules/
+build/
 nohup.out
 *.iml
 .idea/
