@@ -29,8 +29,7 @@
     "less": "rc-tools run less",
     "history": "rc-tools run history",
     "start": "node --harmony node_modules/.bin/rc-server",
-    "publish": "spm publish && rc-tools run tag && git push origin master:gh-pages",
-    "push":"git push origin master:master && git push origin master:gh-pages",
+    "publish": "spm publish && rc-tools run tag",
     "lint": "rc-tools run lint",
     "test": "",
     "saucelabs": "rc-tools run saucelabs",
@@ -55,8 +54,7 @@
   },
   "precommit": [
     "lint",
-    "less",
-    "example"
+    "less"
   ],
   "browserify-shim": {
     "react": "global:React"
