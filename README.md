@@ -176,7 +176,7 @@ For details to see: [https://github.com/yiminghe/learning-react/tree/master/exam
         </tr>
         <tr>
           <td>onChange</td>
-          <td>Function/td>
+          <td>Function</td>
           <td></td>
           <td>called when select a different value</td>
         </tr>
