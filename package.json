@@ -56,22 +56,7 @@
     "lint",
     "less"
   ],
-  "browserify-shim": {
-    "react": "global:React"
-  },
-  "browserify": {
-    "transform": [
-      [
-        "browserify-jsx"
-      ],
-      [
-        "browserify-shim"
-      ]
-    ]
-  },
   "dependencies": {
-    "browserify-jsx": "^0.1.0",
-    "browserify-shim": "^3.8.0",
     "dom-align": "~1.0.1",
     "gregorian-calendar": "^2.0.0",
     "gregorian-calendar-format": "^2.0.0",

@@ -36,6 +36,11 @@ module.exports = {
       'rc-calendar': 'index.js'
     }
   },
+
+  externals: {
+    react: "React"
+  },
+
   plugins: [
     // ./robot is automatically detected as common module and extracted
     new webpack.optimize.CommonsChunkPlugin("common.js")
