@@ -1,7 +1,7 @@
 # rc-calendar
 ---
 
-calendar ui component for react, port from https://github.com/kissyteam/date-picker
+calendar ui component for react, port from https://github.com/modulex/date-picker
 
 [![NPM version][npm-image]][npm-url]
 [![SPM version](http://spmjs.io/badge/rc-calendar)](http://spmjs.io/package/rc-calendar)
