@@ -75,7 +75,7 @@
 /******/ 			script.type = 'text/javascript';
 /******/ 			script.charset = 'utf-8';
 /******/ 			script.async = true;
-/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"simple","1":"theme","2":"picker","3":"disabled"}[chunkId]||chunkId) + ".js";
+/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"disabled","1":"theme","2":"picker","3":"simple"}[chunkId]||chunkId) + ".js";
 /******/ 			head.appendChild(script);
 /******/ 		}
 /******/ 	};
@@ -111,36 +111,38 @@
   \******************/
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(/*! ./lib/Calendar */ 15);
-	module.exports.Picker = __webpack_require__(/*! ./lib/Picker */ 16);
+	module.exports = __webpack_require__(/*! ./lib/Calendar */ 17);
+	module.exports.Picker = __webpack_require__(/*! ./lib/Picker */ 18);
 
 
 /***/ },
-/* 7 */
+/* 7 */,
+/* 8 */
 /*!**********************************************!*\
   !*** ./~/gregorian-calendar-format/index.js ***!
   \**********************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(/*! ./lib/gregorian-calendar-format */ 18);
+	module.exports = __webpack_require__(/*! ./lib/gregorian-calendar-format */ 21);
 
 /***/ },
-/* 8 */
+/* 9 */
 /*!***************************************!*\
   !*** ./~/gregorian-calendar/index.js ***!
   \***************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(/*! ./lib/gregorian-calendar */ 19);
+	module.exports = __webpack_require__(/*! ./lib/gregorian-calendar */ 22);
 
 /***/ },
-/* 9 */,
 /* 10 */,
 /* 11 */,
 /* 12 */,
 /* 13 */,
 /* 14 */,
-/* 15 */
+/* 15 */,
+/* 16 */,
+/* 17 */
 /*!*************************!*\
   !*** ./lib/Calendar.js ***!
   \*************************/
@@ -154,11 +156,11 @@
 	var React = __webpack_require__(/*! react */ 5);
 	var DATE_ROW_COUNT = 6;
 	var DATE_COL_COUNT = 7;
-	var DateTimeFormat = __webpack_require__(/*! gregorian-calendar-format */ 7);
-	var GregorianCalendar = __webpack_require__(/*! gregorian-calendar */ 8);
-	var KeyCode = __webpack_require__(/*! rc-util */ 26).KeyCode;
-	var MonthPanel = __webpack_require__(/*! ./MonthPanel */ 21);
-	var Time = __webpack_require__(/*! ./Time */ 22);
+	var DateTimeFormat = __webpack_require__(/*! gregorian-calendar-format */ 8);
+	var GregorianCalendar = __webpack_require__(/*! gregorian-calendar */ 9);
+	var KeyCode = __webpack_require__(/*! rc-util */ 28).KeyCode;
+	var MonthPanel = __webpack_require__(/*! ./MonthPanel */ 24);
+	var Time = __webpack_require__(/*! ./Time */ 25);
 	
 	function noop() {
 	}
@@ -234,6 +236,8 @@
 	
 	var Calendar = React.createClass({displayName: "Calendar",
 	  propTypes: {
+	    value: React.PropTypes.object,
+	    defaultValue: React.PropTypes.object,
 	    className: React.PropTypes.string,
 	    orient: React.PropTypes.arrayOf(React.PropTypes.oneOf(['left', 'top', 'right', 'bottom'])),
 	    locale: React.PropTypes.object,
@@ -244,14 +248,15 @@
 	    onBlur: React.PropTypes.func
 	  },
 	
-	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 23),
+	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 26),
 	
 	  getInitialState: function () {
-	    var value = this.props.value;
+	    var value = this.props.value || this.props.defaultValue;
 	    if (!value) {
 	      value = new GregorianCalendar();
 	      value.setTime(Date.now());
 	    }
+	    this.dateFormatter = new DateTimeFormat(this.props.locale.dateFormat);
 	    return {
 	      orient: this.props.orient,
 	      prefixCls: this.props.prefixCls || 'rc-calendar',
@@ -261,7 +266,7 @@
 	
 	  getDefaultProps: function () {
 	    return {
-	      locale: __webpack_require__(/*! ./locale/en-us */ 24),
+	      locale: __webpack_require__(/*! ./locale/en-us */ 27),
 	      onKeyDown: noop,
 	      className: '',
 	      showToday: true,
@@ -276,6 +281,14 @@
 	      this.setState({
 	        value: nextProps.value
 	      });
+	    }
+	    if (nextProps.orient) {
+	      this.setState({
+	        orient: nextProps.orient
+	      });
+	    }
+	    if (nextProps.locale) {
+	      this.dateFormatter = new DateTimeFormat(nextProps.locale.dateFormat);
 	    }
 	  },
 	
@@ -402,27 +415,24 @@
 	
 	  renderDates: function () {
 	    var props = this.props;
-	    var self = this,
-	      i, j,
-	      dateTable = [],
-	      current,
-	      showWeekNumber = props.showWeekNumber,
-	      locale = props.locale,
-	      value = this.state.value,
-	      today = value.clone(),
-	      prefixClsFn = this.prefixClsFn,
-	      cellClass = prefixClsFn('cell'),
-	      weekNumberCellClass = prefixClsFn('week-number-cell'),
-	      dateClass = prefixClsFn('date'),
-	      dateRender = props.dateRender,
-	      disabledDate = props.disabledDate,
-	      dateLocale = value.getLocale(),
-	      dateFormatter = new DateTimeFormat(locale.dateFormat, dateLocale),
-	      todayClass = prefixClsFn('today'),
-	      selectedClass = prefixClsFn('selected-day'),
-	      lastMonthDayClass = prefixClsFn('last-month-cell'),
-	      nextMonthDayClass = prefixClsFn('next-month-btn-day'),
-	      disabledClass = prefixClsFn('disabled-cell');
+	    var self = this;
+	    var i, j, current;
+	    var dateTable = [];
+	    var showWeekNumber = props.showWeekNumber;
+	    var value = this.state.value;
+	    var today = value.clone();
+	    var prefixClsFn = this.prefixClsFn;
+	    var cellClass = prefixClsFn('cell');
+	    var weekNumberCellClass = prefixClsFn('week-number-cell');
+	    var dateClass = prefixClsFn('date');
+	    var dateRender = props.dateRender;
+	    var disabledDate = props.disabledDate;
+	    var dateFormatter = this.dateFormatter;
+	    var todayClass = prefixClsFn('today');
+	    var selectedClass = prefixClsFn('selected-day');
+	    var lastMonthDayClass = prefixClsFn('last-month-cell');
+	    var nextMonthDayClass = prefixClsFn('next-month-btn-day');
+	    var disabledClass = prefixClsFn('disabled-cell');
 	    today.setTime(Date.now());
 	    var month1 = value.clone();
 	    month1.set(value.getYear(), value.getMonth(), 1);
@@ -508,20 +518,17 @@
 	
 	  getTodayTime: function () {
 	    var self = this;
-	    var locale = self.props.locale;
 	    var value = self.state.value;
-	    var dateLocale = value.getLocale();
 	    var today = value.clone();
 	    today.setTime(Date.now());
-	    return new DateTimeFormat(locale.dateFormat, dateLocale).format(today);
+	    return this.dateFormatter.format(today);
 	  },
 	
 	  getMonthYear: function () {
 	    var self = this;
 	    var locale = self.props.locale;
 	    var value = self.state.value;
-	    var dateLocale = value.getLocale();
-	    return new DateTimeFormat(locale.monthYearFormat, dateLocale).format(value);
+	    return new DateTimeFormat(locale.monthYearFormat).format(value);
 	  },
 	
 	  onFocus: function () {
@@ -549,7 +556,6 @@
 	    var locale = props.locale;
 	    var state = this.state;
 	    var value = state.value;
-	    var dateLocale = value.getLocale();
 	    var veryShortWeekdays = [];
 	    var weekDays = [];
 	    var firstDayOfWeek = value.getFirstDayOfWeek();
@@ -558,8 +564,8 @@
 	
 	    for (var i = 0; i < DATE_COL_COUNT; i++) {
 	      var index = (firstDayOfWeek + i) % DATE_COL_COUNT;
-	      veryShortWeekdays[i] = locale.veryShortWeekdays[index];
-	      weekDays[i] = dateLocale.weekdays[index];
+	      veryShortWeekdays[i] = locale.format.veryShortWeekdays[index];
+	      weekDays[i] = locale.format.weekdays[index];
 	    }
 	
 	    if (props.showWeekNumber) {
@@ -668,7 +674,7 @@
 
 
 /***/ },
-/* 16 */
+/* 18 */
 /*!***********************!*\
   !*** ./lib/Picker.js ***!
   \***********************/
@@ -677,11 +683,11 @@
 	/** @jsx React.DOM */
 	
 	var React = __webpack_require__(/*! react */ 5);
-	var DateTimeFormat = __webpack_require__(/*! gregorian-calendar-format */ 7);
-	var cloneWithProps = __webpack_require__(/*! rc-util */ 26).cloneWithProps;
-	var createChainedFunction = __webpack_require__(/*! rc-util */ 26).createChainedFunction;
-	var KeyCode = __webpack_require__(/*! rc-util */ 26).KeyCode;
-	var domAlign = __webpack_require__(/*! dom-align */ 27);
+	var DateTimeFormat = __webpack_require__(/*! gregorian-calendar-format */ 8);
+	var cloneWithProps = __webpack_require__(/*! rc-util */ 28).cloneWithProps;
+	var createChainedFunction = __webpack_require__(/*! rc-util */ 28).createChainedFunction;
+	var KeyCode = __webpack_require__(/*! rc-util */ 28).KeyCode;
+	var domAlign = __webpack_require__(/*! dom-align */ 29);
 	var orientMap = {
 	  tl: ['top', 'left'],
 	  tr: ['top', 'right'],
@@ -702,28 +708,43 @@
 	      prefixCls: 'rc-calendar-picker',
 	      onChange: function () {
 	      },
-	      formatter: new DateTimeFormat('yyyy-MM-dd', __webpack_require__(/*! gregorian-calendar/lib/locale/en-us */ 25))
+	      formatter: new DateTimeFormat('yyyy-MM-dd')
 	    };
 	  },
 	
 	  getInitialState: function () {
 	    return {
 	      open: this.props.open,
-	      value: this.props.value,
+	      value: this.props.value || this.props.defaultValue,
 	      orient: this.props.calendar.props.orient || ['top', 'left']
 	    };
 	  },
 	
 	  componentWillReceiveProps: function (nextProps) {
 	    this.setState({
-	      value: nextProps.value
+	      orient: nextProps.calendar.props.orient || ['top', 'left']
 	    });
+	    if (nextProps.value) {
+	      this.setState({
+	        value: nextProps.value
+	      });
+	    }
+	  },
+	
+	  open: function (callback) {
+	    this.setState({
+	      open: true
+	    }, callback);
+	  },
+	
+	  close: function (callback) {
+	    this.setState({
+	      open: false
+	    }, callback);
 	  },
 	
 	  handleInputClick: function () {
-	    this.setState({
-	      open: true
-	    });
+	    this.open();
 	  },
 	
 	  handleKeyDown: function (e) {
@@ -738,9 +759,7 @@
 	    var self = this;
 	    if (e.keyCode === KeyCode.ESC) {
 	      e.stopPropagation();
-	      self.setState({
-	        open: false
-	      }, function () {
+	      self.close(function () {
 	        self.refs.input.getDOMNode().focus();
 	      });
 	    }
@@ -853,7 +872,7 @@
 
 
 /***/ },
-/* 17 */
+/* 19 */
 /*!*************************************!*\
   !*** ./~/style-loader/addStyles.js ***!
   \*************************************/
@@ -1052,7 +1071,8 @@
 
 
 /***/ },
-/* 18 */
+/* 20 */,
+/* 21 */
 /*!**********************************************************************!*\
   !*** ./~/gregorian-calendar-format/lib/gregorian-calendar-format.js ***!
   \**********************************************************************/
@@ -1065,30 +1085,31 @@
 	 * @author yiminghe@gmail.com
 	 */
 	
-	var GregorianCalendar = __webpack_require__(/*! gregorian-calendar */ 8);
-	var MAX_VALUE = Number.MAX_VALUE,
+	var GregorianCalendar = __webpack_require__(/*! gregorian-calendar */ 9);
+	var enUsLocale = __webpack_require__(/*! ./locale/en-us */ 30);
+	var MAX_VALUE = Number.MAX_VALUE;
+	/**
+	 * date or time style enum
+	 * @enum {Number} Date.Formatter.Style
+	 */
+	var DateTimeStyle = {
 	  /**
-	   * date or time style enum
-	   * @enum {Number} Date.Formatter.Style
+	   * full style
 	   */
-	  DateTimeStyle = {
-	    /**
-	     * full style
-	     */
-	    FULL: 0,
-	    /**
-	     * long style
-	     */
-	    LONG: 1,
-	    /**
-	     * medium style
-	     */
-	    MEDIUM: 2,
-	    /**
-	     * short style
-	     */
-	    SHORT: 3
-	  };
+	  FULL: 0,
+	  /**
+	   * long style
+	   */
+	  LONG: 1,
+	  /**
+	   * medium style
+	   */
+	  MEDIUM: 2,
+	  /**
+	   * short style
+	   */
+	  SHORT: 3
+	};
 	
 	/*
 	 Letter    Date or Time Component    Presentation    Examples
@@ -1113,11 +1134,8 @@
 	 Z    Time zone    RFC 822 time zone    -0800
 	 */
 	
-	var patternChars = new Array(GregorianCalendar.DAY_OF_WEEK_IN_MONTH + 2).
-	  join('1');
-	
+	var patternChars = new Array(GregorianCalendar.DAY_OF_WEEK_IN_MONTH + 2).join('1');
 	var ERA = 0;
-	
 	var calendarIndexMap = {};
 	
 	patternChars = patternChars.split('');
@@ -1146,8 +1164,8 @@
 	  }
 	}
 	
-	var SUBSTITUTE_REG = /\\?\{([^{}]+)\}/g,
-	  EMPTY = '';
+	var SUBSTITUTE_REG = /\\?\{([^{}]+)\}/g;
+	var EMPTY = '';
 	
 	function substitute(str, o, regexp) {
 	  if (typeof str !== 'string' || !o) {
@@ -1290,17 +1308,16 @@
 	
 	/**
 	 *
-	 * date time formatter for KISSY gregorian date.
+	 * date time formatter for GregorianCalendar
 	 *
 	 *      @example
-	 *      use('date/format,date/gregorian',function(S, DateFormat, GregorianCalendar){
-	     *          var calendar = new GregorianCalendar(2013,9,24);
-	     *          // ' to escape
-	     *          var formatter = new DateFormat("'today is' ''yyyy/MM/dd a''");
-	     *          document.write(formatter.format(calendar));
-	     *      });
 	 *
-	 * @class Date.Formatter
+	 *          var calendar = new GregorianCalendar(2013,9,24);
+	 *          // ' to escape
+	 *          var formatter = new GregorianCalendarFormat("'today is' ''yyyy/MM/dd a''");
+	 *          document.write(formatter.format(calendar));
+	 *
+	 * @class GregorianCalendarFormat
 	 * @param {String} pattern patter string of date formatter
 	 *
 	 * <table border="1">
@@ -1410,16 +1427,12 @@
 	 * </tbody>
 	 * </table>
 	
-	 * @param {Object} locale locale object
-	 * @param {Number} timeZoneOffset time zone offset by minutes
+	 * @param {Object} locale format locale
 	 */
-	function DateTimeFormat(pattern, locale, timeZoneOffset) {
-	  this.locale = locale || GregorianCalendar.defaultLocale;
+	function DateTimeFormat(pattern, locale) {
+	  this.locale = locale || enUsLocale;
+	  this.originalPattern = pattern;
 	  this.pattern = compile(pattern);
-	  if (typeof timeZoneOffset === 'undefined') {
-	    timeZoneOffset = this.locale.timezoneOffset;
-	  }
-	  this.timezoneOffset = timeZoneOffset;
 	}
 	
 	function formatField(field, count, locale, calendar) {
@@ -1496,10 +1509,10 @@
 	}
 	
 	function matchField(dateStr, startIndex, matches) {
-	  var matchedLen = -1,
-	    index = -1,
-	    i,
-	    len = matches.length;
+	  var matchedLen = -1;
+	  var index = -1;
+	  var i;
+	  var len = matches.length;
 	  for (i = 0; i < len; i++) {
 	    var m = matches[i];
 	    var mLen = m.length;
@@ -1525,8 +1538,8 @@
 	}
 	
 	function getLeadingNumberLen(str) {
-	  var i, c,
-	    len = str.length;
+	  var i, c;
+	  var len = str.length;
 	  for (i = 0; i < len; i++) {
 	    c = str.charAt(i);
 	    if (c < '0' || c > '9') {
@@ -1537,21 +1550,22 @@
 	}
 	
 	function matchNumber(dateStr, startIndex, count, obeyCount) {
-	  var str = dateStr, n;
+	  var str = dateStr;
+	  var n;
 	  if (obeyCount) {
 	    if (dateStr.length <= startIndex + count) {
 	      return null;
 	    }
-	    str = dateStr.substring(startIndex, count);
+	    str = dateStr.slice(startIndex, startIndex + count);
 	    if (!str.match(/^\d+$/)) {
-	      return null;
+	      throw new Error('GregorianCalendarFormat parse error, dateStr: ' + dateStr + ', patter: ' + (this.originalPattern));
 	    }
 	  } else {
-	    str = str.substring(startIndex);
+	    str = str.slice(startIndex);
 	  }
 	  n = parseInt(str, 10);
 	  if (isNaN(n)) {
-	    return null;
+	    throw new Error('GregorianCalendarFormat parse error, dateStr: ' + dateStr + ', patter: ' + (this.originalPattern));
 	  }
 	  return {
 	    value: n,
@@ -1559,11 +1573,12 @@
 	  };
 	}
 	
-	function parseField(calendar, dateStr, startIndex, field, count, locale, obeyCount, tmp) {
+	function parseField(calendar, dateStr, startIndex, field, count, obeyCount, tmp) {
 	  var match, year, hour;
 	  if (dateStr.length <= startIndex) {
 	    return startIndex;
 	  }
+	  var locale = this.locale;
 	  switch (field) {
 	    case 'G':
 	      if ((match = matchField(dateStr, startIndex, locale.eras))) {
@@ -1578,7 +1593,7 @@
 	      }
 	      break;
 	    case 'y':
-	      if ((match = matchNumber(dateStr, startIndex, count, obeyCount))) {
+	      if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
 	        year = match.value;
 	        if ('era' in tmp) {
 	          if (tmp.era === 0) {
@@ -1596,7 +1611,7 @@
 	          month = match.value;
 	        }
 	      } else {
-	        if ((match = matchNumber(dateStr, startIndex, count, obeyCount))) {
+	        if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
 	          month = match.value - 1;
 	        }
 	      }
@@ -1605,7 +1620,7 @@
 	      }
 	      break;
 	    case 'k':
-	      if ((match = matchNumber(dateStr, startIndex, count, obeyCount))) {
+	      if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
 	        calendar.setHourOfDay(match.value % 24);
 	      }
 	      break;
@@ -1631,7 +1646,7 @@
 	      }
 	      break;
 	    case 'h':
-	      if ((match = matchNumber(dateStr, startIndex, count, obeyCount))) {
+	      if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
 	        hour = match.value %= 12;
 	        if (tmp.ampm) {
 	          hour += 12;
@@ -1640,7 +1655,7 @@
 	      }
 	      break;
 	    case 'K':
-	      if ((match = matchNumber(dateStr, startIndex, count, obeyCount))) {
+	      if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
 	        hour = match.value;
 	        if (tmp.ampm) {
 	          hour += 12;
@@ -1649,8 +1664,8 @@
 	      }
 	      break;
 	    case 'Z':
-	      var sign = 1,
-	        zoneChar = dateStr.charAt(startIndex);
+	      var sign = 1;
+	      var zoneChar = dateStr.charAt(startIndex);
 	      if (zoneChar === '-') {
 	        sign = -1;
 	        startIndex++;
@@ -1659,10 +1674,10 @@
 	      } else {
 	        break;
 	      }
-	      if ((match = matchNumber(dateStr, startIndex, 2, true))) {
+	      if ((match = matchNumber.call(this, dateStr, startIndex, 2, true))) {
 	        var zoneOffset = match.value * 60;
 	        startIndex = match.startIndex;
-	        if ((match = matchNumber(dateStr, startIndex, 2, true))) {
+	        if ((match = matchNumber.call(this, dateStr, startIndex, 2, true))) {
 	          zoneOffset += match.value;
 	        }
 	        calendar.setTimezoneOffset(zoneOffset);
@@ -1678,7 +1693,7 @@
 	      // case 'F':
 	      // case 'w':
 	      // case 'W'
-	      if ((match = matchNumber(dateStr, startIndex, count, obeyCount))) {
+	      if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
 	        var index = calendarIndexMap[field];
 	        calendar.set(index, match.value);
 	      }
@@ -1692,22 +1707,17 @@
 	mix(DateTimeFormat.prototype, {
 	  /**
 	   * format a GregorianDate instance according to specified pattern
-	   * @param {Date.Gregorian} calendar GregorianDate instance
+	   * @param {GregorianCalendar} calendar GregorianDate instance
 	   * @returns {string} formatted string of GregorianDate instance
 	   */
 	  format: function (calendar) {
-	    if (calendar.isGregorianCalendar) {
-	
-	    } else {
-	      var time = calendar.getTime();
-	      calendar = /**@type {Date.Gregorian}
-	       @ignore*/new GregorianCalendar(this.timezoneOffset, this.locale);
-	      calendar.setTime(time);
+	    if (!calendar.isGregorianCalendar) {
+	      throw new Error('calendar must be type of GregorianCalendar');
 	    }
-	    var i,
-	      ret = [],
-	      pattern = this.pattern,
-	      len = pattern.length;
+	    var i;
+	    var ret = [];
+	    var pattern = this.pattern;
+	    var len = pattern.length;
 	    for (i = 0; i < len; i++) {
 	      var comp = pattern[i];
 	      if (comp.text) {
@@ -1722,21 +1732,20 @@
 	  /**
 	   * parse a formatted string of GregorianDate instance according to specified pattern
 	   * @param {String} dateStr formatted string of GregorianDate
-	   * @returns {Date.Gregorian}
+	   * @returns {GregorianCalendar}
 	   */
-	  parse: function (dateStr) {
-	    var calendar = /**@type {Date.Gregorian}
-	       @ignore*/new GregorianCalendar(this.timezoneOffset, this.locale),
-	      i,
-	      j,
-	      tmp = {},
-	      obeyCount = false,
-	      dateStrLen = dateStr.length,
-	      errorIndex = -1,
-	      startIndex = 0,
-	      oldStartIndex = 0,
-	      pattern = this.pattern,
-	      len = pattern.length;
+	  parse: function (dateStr, calendarLocale) {
+	    var calendar = new GregorianCalendar(calendarLocale);
+	    var i;
+	    var j;
+	    var tmp = {};
+	    var obeyCount = false;
+	    var dateStrLen = dateStr.length;
+	    var errorIndex = -1;
+	    var startIndex = 0;
+	    var oldStartIndex = 0;
+	    var pattern = this.pattern;
+	    var len = pattern.length;
 	
 	    loopPattern: {
 	      for (i = 0; errorIndex < 0 && i < len; i++) {
@@ -1768,12 +1777,11 @@
 	              }
 	            }
 	          }
-	          startIndex = parseField(calendar,
+	          startIndex = parseField.call(this, calendar,
 	            dateStr,
 	            startIndex,
 	            comp.field,
 	            comp.count,
-	            this.locale,
 	            obeyCount,
 	            tmp);
 	          if (startIndex === oldStartIndex) {
@@ -1786,7 +1794,7 @@
 	    if (errorIndex >= 0) {
 	      console.error('error when parsing date');
 	      console.error(dateStr);
-	      console.error(dateStr.substring(0, errorIndex) + '^');
+	      console.error(dateStr.slice(0, errorIndex) + '^');
 	      return undefined;
 	    }
 	    return calendar;
@@ -1801,24 +1809,22 @@
 	   * en-us: M/d/yy h:mm a
 	   * zh-cn: yy-M-d ah:mm
 	   * @param {Object} locale locale object
-	   * @param {Number} timeZoneOffset time zone offset by minutes
-	   * @returns {Date.Gregorian}
+	   * @returns {GregorianCalendar}
 	   * @static
 	   */
-	  getInstance: function (locale, timeZoneOffset) {
-	    return this.getDateTimeInstance(DateTimeStyle.SHORT, DateTimeStyle.SHORT, locale, timeZoneOffset);
+	  getInstance: function (locale) {
+	    return this.getDateTimeInstance(DateTimeStyle.SHORT, DateTimeStyle.SHORT, locale);
 	  },
 	
 	  /**
 	   * get a formatter instance of specified date style.
 	   * @param {Date.Formatter.Style} dateStyle date format style
 	   * @param {Object} locale
-	   * @param {Number} timeZoneOffset time zone offset by minutes
-	   * @returns {Date.Gregorian}
+	   * @returns {GregorianCalendar}
 	   * @static
 	   */
-	  getDateInstance: function (dateStyle, locale, timeZoneOffset) {
-	    return this.getDateTimeInstance(dateStyle, undefined, locale, timeZoneOffset);
+	  getDateInstance: function (dateStyle, locale) {
+	    return this.getDateTimeInstance(dateStyle, undefined, locale);
 	  },
 	
 	  /**
@@ -1826,12 +1832,11 @@
 	   * @param {Date.Formatter.Style} dateStyle date format style
 	   * @param {Date.Formatter.Style} timeStyle time format style
 	   * @param {Object} locale
-	   * @param {Number} timeZoneOffset time zone offset by minutes
-	   * @returns {Date.Gregorian}
+	   * @returns {GregorianCalendar}
 	   * @static
 	   */
-	  getDateTimeInstance: function (dateStyle, timeStyle, locale, timeZoneOffset) {
-	    locale = locale || GregorianCalendar.defaultLocale;
+	  getDateTimeInstance: function (dateStyle, timeStyle, locale) {
+	    locale = locale || enUsLocale;
 	    var datePattern = '';
 	    if (dateStyle !== undefined) {
 	      datePattern = locale.datePatterns[dateStyle];
@@ -1851,28 +1856,29 @@
 	        pattern = timePattern;
 	      }
 	    }
-	    return new DateTimeFormat(pattern, locale, timeZoneOffset);
+	    return new DateTimeFormat(pattern, locale);
 	  },
 	
 	  /**
 	   * get a formatter instance of specified time style.
 	   * @param {Date.Formatter.Style} timeStyle time format style
 	   * @param {Object} locale
-	   * @param {Number} timeZoneOffset time zone offset by minutes
-	   * @returns {Date.Gregorian}
+	   * @returns {GregorianCalendar}
 	   * @static
 	   */
-	  getTimeInstance: function (timeStyle, locale, timeZoneOffset) {
-	    return this.getDateTimeInstance(undefined, timeStyle, locale, timeZoneOffset);
+	  getTimeInstance: function (timeStyle, locale) {
+	    return this.getDateTimeInstance(undefined, timeStyle, locale);
 	  }
 	});
 	
 	module.exports = DateTimeFormat;
 	
 	DateTimeFormat.version = '@VERSION@';
+	
+	// gc_format@163.com
 
 /***/ },
-/* 19 */
+/* 22 */
 /*!********************************************************!*\
   !*** ./~/gregorian-calendar/lib/gregorian-calendar.js ***!
   \********************************************************/
@@ -1884,9 +1890,9 @@
 	 * @author yiminghe@gmail.com
 	 */
 	var toInt = parseInt;
-	var Utils = __webpack_require__(/*! ./utils */ 28);
-	var defaultLocale = __webpack_require__(/*! ./locale/en-us */ 25);
-	var Const = __webpack_require__(/*! ./const */ 29);
+	var Utils = __webpack_require__(/*! ./utils */ 36);
+	var defaultLocale = __webpack_require__(/*! ./locale/en-us */ 37);
+	var Const = __webpack_require__(/*! ./const */ 38);
 	
 	/**
 	 * GregorianCalendar class.
@@ -1894,41 +1900,13 @@
 	 * - no arguments:
 	 *   Constructs a default GregorianCalendar using the current time
 	 *   in the default time zone with the default locale.
-	 * - one argument timezoneOffset:
-	 *   Constructs a GregorianCalendar based on the current time
-	 *   in the given timezoneOffset with the default locale.
 	 * - one argument locale:
 	 *   Constructs a GregorianCalendar
 	 *   based on the current time in the default time zone with the given locale.
-	 * - two arguments
-	 *   Constructs a GregorianCalendar based on the current time in the given time zone with the given locale.
-	 *      - zone - the given time zone.
-	 *      - aLocale - the given locale.
-	 *
-	 * - 3 to 6 arguments:
-	 *   Constructs a GregorianCalendar with the given date and time set for the default time zone with the default locale.
-	 *      - year - the value used to set the YEAR calendar field in the calendar.
-	 *      - month - the value used to set the MONTH calendar field in the calendar. Month value is 0-based. e.g.,
-	 *        0 for January.
-	 *      - dayOfMonth - the value used to set the DAY_OF_MONTH calendar field in the calendar.
-	 *      - hourOfDay - the value used to set the HOUR_OF_DAY calendar field in the calendar.
-	 *      - minute - the value used to set the MINUTE calendar field in the calendar.
-	 *      - second - the value used to set the SECONDS calendar field in the calendar.
-	 *
 	 *
 	 * @class Date.Gregorian
 	 */
-	function GregorianCalendar(timezoneOffset, locale) {
-	
-	  var args = [].slice.call(arguments, 0);
-	
-	  if (typeof timezoneOffset === 'object') {
-	    locale = timezoneOffset;
-	    timezoneOffset = locale.timezoneOffset;
-	  } else if (args.length >= 3) {
-	    timezoneOffset = locale = null;
-	  }
-	
+	function GregorianCalendar(locale) {
 	  locale = locale || defaultLocale;
 	
 	  this.locale = locale;
@@ -1946,10 +1924,8 @@
 	   * @type Number
 	   * @protected
 	   */
-	  if (typeof timezoneOffset !== 'number') {
-	    timezoneOffset = locale.timezoneOffset;
-	  }
-	  this.timezoneOffset = timezoneOffset;
+	
+	  this.timezoneOffset = locale.timezoneOffset;
 	
 	  /**
 	   * The first day of the week
@@ -1967,10 +1943,6 @@
 	  this.minimalDaysInFirstWeek = locale.minimalDaysInFirstWeek;
 	
 	  this.fieldsComputed = false;
-	
-	  if (arguments.length >= 3) {
-	    this.set.apply(this, args);
-	  }
 	}
 	
 	Utils.mix(GregorianCalendar, Const);
@@ -2179,7 +2151,9 @@
 	
 	    var fields = this.fields;
 	    if (field === WEEK_OF_MONTH) {
-	      var cal = new GregorianCalendar(fields[YEAR], fields[MONTH], 1);
+	      var cal = this.clone();
+	      cal.clear();
+	      cal.set(fields[YEAR], fields[MONTH], 1);
 	      return cal.get(WEEK_OF_MONTH);
 	    }
 	
@@ -2207,7 +2181,9 @@
 	        break;
 	
 	      case WEEK_OF_YEAR:
-	        var endOfYear = new GregorianCalendar(fields[YEAR], GregorianCalendar.DECEMBER, 31);
+	        var endOfYear = this.clone();
+	        endOfYear.clear();
+	        endOfYear.set(fields[YEAR], GregorianCalendar.DECEMBER, 31);
 	        value = endOfYear.get(WEEK_OF_YEAR);
 	        if (value === 1) {
 	          value = 52;
@@ -2215,7 +2191,9 @@
 	        break;
 	
 	      case WEEK_OF_MONTH:
-	        var endOfMonth = new GregorianCalendar(fields[YEAR], fields[MONTH], getMonthLength(fields[YEAR], fields[MONTH]));
+	        var endOfMonth = this.clone();
+	        endOfMonth.clear();
+	        endOfMonth.set(fields[YEAR], fields[MONTH], getMonthLength(fields[YEAR], fields[MONTH]));
 	        value = endOfMonth.get(WEEK_OF_MONTH);
 	        break;
 	
@@ -3042,6 +3020,7 @@
 	    }
 	    // Use the 2nd week for calculating the max of WEEK_OF_YEAR
 	    var gc = this.clone();
+	    gc.clear();
 	    gc.setWeekDate(weekYear, 2, this.get(DAY_OF_WEEK));
 	    return gc.getActualMaximum(WEEK_OF_YEAR);
 	  },
@@ -3114,7 +3093,10 @@
 	    if (this.time === undefined) {
 	      this.computeTime();
 	    }
-	    var cal = new GregorianCalendar(this.timezoneOffset, this.locale);
+	    var cal = new GregorianCalendar(this.locale);
+	    cal.setTimezoneOffset(cal.getTimezoneOffset());
+	    cal.setFirstDayOfWeek(cal.getFirstDayOfWeek());
+	    cal.setMinimalDaysInFirstWeek(cal.getMinimalDaysInFirstWeek());
 	    cal.setTime(this.time);
 	    return cal;
 	  },
@@ -3229,7 +3211,7 @@
 
 
 /***/ },
-/* 20 */
+/* 23 */
 /*!*************************************!*\
   !*** ./~/css-loader/cssToString.js ***!
   \*************************************/
@@ -3253,7 +3235,7 @@
 	}
 
 /***/ },
-/* 21 */
+/* 24 */
 /*!***************************!*\
   !*** ./lib/MonthPanel.js ***!
   \***************************/
@@ -3262,11 +3244,11 @@
 	/** @jsx React.DOM */
 	
 	var React = __webpack_require__(/*! react */ 5);
-	var DateTimeFormat = __webpack_require__(/*! gregorian-calendar-format */ 7);
+	var DateTimeFormat = __webpack_require__(/*! gregorian-calendar-format */ 8);
 	var ROW = 3;
 	var COL = 4;
-	var cx = __webpack_require__(/*! rc-util */ 26).classSet;
-	var YearPanel = __webpack_require__(/*! ./YearPanel */ 35);
+	var cx = __webpack_require__(/*! rc-util */ 28).classSet;
+	var YearPanel = __webpack_require__(/*! ./YearPanel */ 39);
 	
 	function goYear(self, direction) {
 	  var next = self.state.value.clone();
@@ -3275,7 +3257,7 @@
 	}
 	
 	var MonthPanel = React.createClass({displayName: "MonthPanel",
-	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 23),
+	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 26),
 	
 	  getInitialState: function () {
 	    return {
@@ -3325,10 +3307,9 @@
 	    var current = value.clone();
 	    var locale = props.locale;
 	    var monthYearFormat = locale.monthYearFormat;
-	    var dateLocale = value.getLocale();
-	    var dateFormatter = new DateTimeFormat(monthYearFormat, dateLocale);
+	    var dateFormatter = new DateTimeFormat(monthYearFormat);
 	    var months = [];
-	    var shortMonths = dateLocale.shortMonths;
+	    var shortMonths = locale.format.shortMonths;
 	    var index = 0;
 	    for (var i = 0; i < ROW; i++) {
 	      months[i] = [];
@@ -3423,7 +3404,7 @@
 
 
 /***/ },
-/* 22 */
+/* 25 */
 /*!*********************!*\
   !*** ./lib/Time.js ***!
   \*********************/
@@ -3436,8 +3417,8 @@
 	 */
 	
 	var React = __webpack_require__(/*! react */ 5);
-	var KeyCode = __webpack_require__(/*! rc-util */ 26).KeyCode;
-	var TimePanel = __webpack_require__(/*! ./TimePanel */ 36);
+	var KeyCode = __webpack_require__(/*! rc-util */ 28).KeyCode;
+	var TimePanel = __webpack_require__(/*! ./TimePanel */ 40);
 	
 	function padding(number) {
 	  if (number < 10) {
@@ -3591,7 +3572,7 @@
 
 
 /***/ },
-/* 23 */
+/* 26 */
 /*!****************************!*\
   !*** ./lib/prefixClsFn.js ***!
   \****************************/
@@ -3607,7 +3588,7 @@
 
 
 /***/ },
-/* 24 */
+/* 27 */
 /*!*****************************!*\
   !*** ./lib/locale/en-us.js ***!
   \*****************************/
@@ -3618,7 +3599,8 @@
 	 * @ignore
 	 * @author yiminghe@gmail.com
 	 */
-	module.exports = {
+	
+	module.exports = ({
 	  today: 'Today',
 	  clear: 'Clear',
 	  hourPanelTitle: 'Select hour',
@@ -3641,72 +3623,38 @@
 	  nextDecade: 'Next decade',
 	  previousCentury: 'Last century',
 	  nextCentury: 'Next century',
-	  veryShortWeekdays: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
-	};
+	  format:  __webpack_require__(/*! gregorian-calendar-format/lib/locale/en-us */ 30)
+	});
 
 
 /***/ },
-/* 25 */
-/*!**************************************************!*\
-  !*** ./~/gregorian-calendar/lib/locale/en-us.js ***!
-  \**************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * en-us locale
-	 * @ignore
-	 * @author yiminghe@gmail.com
-	 */
-	module.exports = {
-	    // in minutes
-	    timezoneOffset: -8 * 60,
-	    firstDayOfWeek: 0,
-	    minimalDaysInFirstWeek: 1,
-	
-	    // DateFormatSymbols
-	    eras: ['BC', 'AD'],
-	    months: ['January', 'February', 'March', 'April', 'May', 'June', 'July',
-	        'August', 'September', 'October', 'November', 'December'],
-	    shortMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
-	        'Oct', 'Nov', 'Dec'],
-	    weekdays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday',
-	        'Saturday'],
-	    shortWeekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-	    ampms: ['AM', 'PM'],
-	    datePatterns: ['EEEE, MMMM d, yyyy', 'MMMM d, yyyy', 'MMM d, yyyy', 'M/d/yy'],
-	    timePatterns: ['h:mm:ss a \'GMT\'Z', 'h:mm:ss a', 'h:mm:ss a', 'h:mm a'],
-	    dateTimePattern: '{date} {time}'
-	};
-
-
-/***/ },
-/* 26 */
+/* 28 */
 /*!****************************!*\
   !*** ./~/rc-util/index.js ***!
   \****************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	  guid: __webpack_require__(/*! ./lib/guid */ 37),
-	  classSet: __webpack_require__(/*! ./lib/classSet */ 38),
-	  joinClasses: __webpack_require__(/*! ./lib/joinClasses */ 39),
-	  KeyCode: __webpack_require__(/*! ./lib/KeyCode */ 40),
-	  PureRenderMixin: __webpack_require__(/*! ./lib/PureRenderMixin */ 41),
-	  shallowEqual: __webpack_require__(/*! ./lib/shallowEqual */ 42),
-	  createChainedFunction: __webpack_require__(/*! ./lib/createChainedFunction */ 43),
-	  cloneWithProps: __webpack_require__(/*! ./lib/cloneWithProps */ 44),
+	  guid: __webpack_require__(/*! ./lib/guid */ 42),
+	  classSet: __webpack_require__(/*! ./lib/classSet */ 43),
+	  joinClasses: __webpack_require__(/*! ./lib/joinClasses */ 44),
+	  KeyCode: __webpack_require__(/*! ./lib/KeyCode */ 45),
+	  PureRenderMixin: __webpack_require__(/*! ./lib/PureRenderMixin */ 46),
+	  shallowEqual: __webpack_require__(/*! ./lib/shallowEqual */ 47),
+	  createChainedFunction: __webpack_require__(/*! ./lib/createChainedFunction */ 48),
+	  cloneWithProps: __webpack_require__(/*! ./lib/cloneWithProps */ 49),
 	  Dom: {
-	    addEventListener: __webpack_require__(/*! ./lib/Dom/addEventListener */ 45),
-	    contains: __webpack_require__(/*! ./lib/Dom/contains */ 46)
+	    addEventListener: __webpack_require__(/*! ./lib/Dom/addEventListener */ 50),
+	    contains: __webpack_require__(/*! ./lib/Dom/contains */ 51)
 	  },
 	  Children: {
-	    toArray: __webpack_require__(/*! ./lib/Children/toArray */ 47)
+	    toArray: __webpack_require__(/*! ./lib/Children/toArray */ 52)
 	  }
 	};
 
 
 /***/ },
-/* 27 */
+/* 29 */
 /*!******************************!*\
   !*** ./~/dom-align/index.js ***!
   \******************************/
@@ -3717,7 +3665,7 @@
 	 * @author yiminghe@gmail.com
 	 */
 	
-	var utils = __webpack_require__(/*! ./lib/utils */ 48);
+	var utils = __webpack_require__(/*! ./lib/utils */ 41);
 	
 	// http://yiminghe.iteye.com/blog/1124720
 	
@@ -4089,7 +4037,41 @@
 
 
 /***/ },
-/* 28 */
+/* 30 */
+/*!*********************************************************!*\
+  !*** ./~/gregorian-calendar-format/lib/locale/en-us.js ***!
+  \*********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * en-us locale
+	 * @ignore
+	 * @author yiminghe@gmail.com
+	 */
+	module.exports = {
+	  eras: ['BC', 'AD'],
+	  months: ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+	    'August', 'September', 'October', 'November', 'December'],
+	  shortMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
+	    'Oct', 'Nov', 'Dec'],
+	  weekdays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday',
+	    'Saturday'],
+	  shortWeekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+	  veryShortWeekdays: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+	  ampms: ['AM', 'PM'],
+	  datePatterns: ['EEEE, MMMM d, yyyy', 'MMMM d, yyyy', 'MMM d, yyyy', 'M/d/yy'],
+	  timePatterns: ['h:mm:ss a \'GMT\'Z', 'h:mm:ss a', 'h:mm:ss a', 'h:mm a'],
+	  dateTimePattern: '{date} {time}'
+	};
+
+
+/***/ },
+/* 31 */,
+/* 32 */,
+/* 33 */,
+/* 34 */,
+/* 35 */,
+/* 36 */
 /*!*******************************************!*\
   !*** ./~/gregorian-calendar/lib/utils.js ***!
   \*******************************************/
@@ -4101,7 +4083,7 @@
 	 * @author yiminghe@gmail.com
 	 */
 	
-	var Const = __webpack_require__(/*! ./const */ 29);
+	var Const = __webpack_require__(/*! ./const */ 38);
 	var floor = Math.floor;
 	var ACCUMULATED_DAYS_IN_MONTH
 	        //   1/1 2/1 3/1 4/1 5/1 6/1 7/1 8/1 9/1 10/1 11/1 12/1
@@ -4223,7 +4205,27 @@
 	};
 
 /***/ },
-/* 29 */
+/* 37 */
+/*!**************************************************!*\
+  !*** ./~/gregorian-calendar/lib/locale/en-us.js ***!
+  \**************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * en-us locale
+	 * @ignore
+	 * @author yiminghe@gmail.com
+	 */
+	module.exports = {
+	  // in minutes
+	  timezoneOffset: -8 * 60,
+	  firstDayOfWeek: 0,
+	  minimalDaysInFirstWeek: 1
+	};
+
+
+/***/ },
+/* 38 */
 /*!*******************************************!*\
   !*** ./~/gregorian-calendar/lib/const.js ***!
   \*******************************************/
@@ -4353,12 +4355,7 @@
 	};
 
 /***/ },
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */
+/* 39 */
 /*!**************************!*\
   !*** ./lib/YearPanel.js ***!
   \**************************/
@@ -4367,11 +4364,11 @@
 	/** @jsx React.DOM */
 	
 	var React = __webpack_require__(/*! react */ 5);
-	var DateTimeFormat = __webpack_require__(/*! gregorian-calendar-format */ 7);
+	var DateTimeFormat = __webpack_require__(/*! gregorian-calendar-format */ 8);
 	var ROW = 3;
 	var COL = 4;
-	var cx = __webpack_require__(/*! rc-util */ 26).classSet;
-	var DecadePanel = __webpack_require__(/*! ./DecadePanel */ 49);
+	var cx = __webpack_require__(/*! rc-util */ 28).classSet;
+	var DecadePanel = __webpack_require__(/*! ./DecadePanel */ 53);
 	
 	function goYear(self, direction) {
 	  var next = self.state.value.clone();
@@ -4380,7 +4377,7 @@
 	}
 	
 	var YearPanel = React.createClass({displayName: "YearPanel",
-	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 23),
+	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 26),
 	
 	  getInitialState: function () {
 	    return {
@@ -4431,8 +4428,7 @@
 	    var current = value.clone();
 	    var locale = this.props.locale;
 	    var yearFormat = locale.yearFormat;
-	    var dateLocale = value.getLocale();
-	    var dateFormatter = new DateTimeFormat(yearFormat, dateLocale);
+	    var dateFormatter = new DateTimeFormat(yearFormat);
 	    var years = [];
 	    var index = 0;
 	    for (var i = 0; i < ROW; i++) {
@@ -4533,7 +4529,7 @@
 
 
 /***/ },
-/* 36 */
+/* 40 */
 /*!**************************!*\
   !*** ./lib/TimePanel.js ***!
   \**************************/
@@ -4542,7 +4538,7 @@
 	/** @jsx React.DOM */
 	
 	var React = __webpack_require__(/*! react */ 5);
-	var cx = __webpack_require__(/*! rc-util */ 26).classSet;
+	var cx = __webpack_require__(/*! rc-util */ 28).classSet;
 	
 	var TimePanel = React.createClass({displayName: "TimePanel",
 	  getInitialState: function () {
@@ -4552,7 +4548,7 @@
 	    };
 	  },
 	
-	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 23),
+	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 26),
 	
 	  getDefaultProps: function () {
 	    return {
@@ -4628,7 +4624,423 @@
 
 
 /***/ },
-/* 37 */
+/* 41 */
+/*!**********************************!*\
+  !*** ./~/dom-align/lib/utils.js ***!
+  \**********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var RE_NUM = /[\-+]?(?:\d*\.|)\d+(?:[eE][\-+]?\d+|)/.source;
+	
+	function getClientPosition(elem) {
+	  var box, x, y;
+	  var doc = elem.ownerDocument;
+	  var body = doc.body;
+	  var docElem = doc && doc.documentElement;
+	  // 根据 GBS 最新数据，A-Grade Browsers 都已支持 getBoundingClientRect 方法，不用再考虑传统的实现方式
+	  box = elem.getBoundingClientRect();
+	
+	  // 注：jQuery 还考虑减去 docElem.clientLeft/clientTop
+	  // 但测试发现，这样反而会导致当 html 和 body 有边距/边框样式时，获取的值不正确
+	  // 此外，ie6 会忽略 html 的 margin 值，幸运地是没有谁会去设置 html 的 margin
+	
+	  x = box.left;
+	  y = box.top;
+	
+	  // In IE, most of the time, 2 extra pixels are added to the top and left
+	  // due to the implicit 2-pixel inset border.  In IE6/7 quirks mode and
+	  // IE6 standards mode, this border can be overridden by setting the
+	  // document element's border to zero -- thus, we cannot rely on the
+	  // offset always being 2 pixels.
+	
+	  // In quirks mode, the offset can be determined by querying the body's
+	  // clientLeft/clientTop, but in standards mode, it is found by querying
+	  // the document element's clientLeft/clientTop.  Since we already called
+	  // getClientBoundingRect we have already forced a reflow, so it is not
+	  // too expensive just to query them all.
+	
+	  // ie 下应该减去窗口的边框吧，毕竟默认 absolute 都是相对窗口定位的
+	  // 窗口边框标准是设 documentElement ,quirks 时设置 body
+	  // 最好禁止在 body 和 html 上边框 ，但 ie < 9 html 默认有 2px ，减去
+	  // 但是非 ie 不可能设置窗口边框，body html 也不是窗口 ,ie 可以通过 html,body 设置
+	  // 标准 ie 下 docElem.clientTop 就是 border-top
+	  // ie7 html 即窗口边框改变不了。永远为 2
+	  // 但标准 firefox/chrome/ie9 下 docElem.clientTop 是窗口边框，即使设了 border-top 也为 0
+	
+	  x -= docElem.clientLeft || body.clientLeft || 0;
+	  y -= docElem.clientTop || body.clientTop || 0;
+	
+	  return {left: x, top: y};
+	}
+	
+	function getScroll(w, top) {
+	  var ret = w['page' + (top ? 'Y' : 'X') + 'Offset'];
+	  var method = 'scroll' + (top ? 'Top' : 'Left');
+	  if (typeof ret !== 'number') {
+	    var d = w.document;
+	    //ie6,7,8 standard mode
+	    ret = d.documentElement[method];
+	    if (typeof ret !== 'number') {
+	      //quirks mode
+	      ret = d.body[method];
+	    }
+	  }
+	  return ret;
+	}
+	
+	function getScrollLeft(w) {
+	  return getScroll(w);
+	}
+	
+	function getScrollTop(w) {
+	  return getScroll(w, true);
+	}
+	
+	function getOffset(el) {
+	  var pos = getClientPosition(el);
+	  var doc = el.ownerDocument;
+	  var w = doc.defaultView || doc.parentWindow;
+	  pos.left += getScrollLeft(w);
+	  pos.top += getScrollTop(w);
+	  return pos;
+	}
+	function _getComputedStyle(elem, name, computedStyle) {
+	  var val = '';
+	  var d = elem.ownerDocument;
+	
+	  // https://github.com/kissyteam/kissy/issues/61
+	  if ((computedStyle = (computedStyle || d.defaultView.getComputedStyle(elem, null)))) {
+	    val = computedStyle.getPropertyValue(name) || computedStyle[name];
+	  }
+	
+	  return val;
+	}
+	
+	var _RE_NUM_NO_PX = new RegExp('^(' + RE_NUM + ')(?!px)[a-z%]+$', 'i');
+	var RE_POS = /^(top|right|bottom|left)$/,
+	  CURRENT_STYLE = 'currentStyle',
+	  RUNTIME_STYLE = 'runtimeStyle',
+	  LEFT = 'left',
+	  PX = 'px';
+	
+	function _getComputedStyleIE(elem, name) {
+	  // currentStyle maybe null
+	  // http://msdn.microsoft.com/en-us/library/ms535231.aspx
+	  var ret = elem[CURRENT_STYLE] && elem[CURRENT_STYLE][name];
+	
+	  // 当 width/height 设置为百分比时，通过 pixelLeft 方式转换的 width/height 值
+	  // 一开始就处理了! CUSTOM_STYLE.height,CUSTOM_STYLE.width ,cssHook 解决@2011-08-19
+	  // 在 ie 下不对，需要直接用 offset 方式
+	  // borderWidth 等值也有问题，但考虑到 borderWidth 设为百分比的概率很小，这里就不考虑了
+	
+	  // From the awesome hack by Dean Edwards
+	  // http://erik.eae.net/archives/2007/07/27/18.54.15/#comment-102291
+	  // If we're not dealing with a regular pixel number
+	  // but a number that has a weird ending, we need to convert it to pixels
+	  // exclude left right for relativity
+	  if (_RE_NUM_NO_PX.test(ret) && !RE_POS.test(name)) {
+	    // Remember the original values
+	    var style = elem.style,
+	      left = style[LEFT],
+	      rsLeft = elem[RUNTIME_STYLE][LEFT];
+	
+	    // prevent flashing of content
+	    elem[RUNTIME_STYLE][LEFT] = elem[CURRENT_STYLE][LEFT];
+	
+	    // Put in the new values to get a computed value out
+	    style[LEFT] = name === 'fontSize' ? '1em' : (ret || 0);
+	    ret = style.pixelLeft + PX;
+	
+	    // Revert the changed values
+	    style[LEFT] = left;
+	
+	    elem[RUNTIME_STYLE][LEFT] = rsLeft;
+	  }
+	  return ret === '' ? 'auto' : ret;
+	}
+	
+	var getComputedStyleX;
+	if (typeof window !== 'undefined') {
+	  getComputedStyleX = window.getComputedStyle ? _getComputedStyle : _getComputedStyleIE;
+	}
+	
+	// 设置 elem 相对 elem.ownerDocument 的坐标
+	function setOffset(elem, offset) {
+	  // set position first, in-case top/left are set even on static elem
+	  if (css(elem, 'position') === 'static') {
+	    elem.style.position = 'relative';
+	  }
+	
+	  var old = getOffset(elem),
+	    ret = {},
+	    current, key;
+	
+	  for (key in offset) {
+	    current = parseFloat(css(elem, key)) || 0;
+	    ret[key] = current + offset[key] - old[key];
+	  }
+	  css(elem, ret);
+	}
+	
+	function each(arr, fn) {
+	  for (var i = 0; i < arr.length; i++) {
+	    fn(arr[i]);
+	  }
+	}
+	
+	function isBorderBoxFn(elem) {
+	  return getComputedStyleX(elem, 'boxSizing') === 'border-box';
+	}
+	
+	var BOX_MODELS = ['margin', 'border', 'padding'],
+	  CONTENT_INDEX = -1,
+	  PADDING_INDEX = 2,
+	  BORDER_INDEX = 1,
+	  MARGIN_INDEX = 0;
+	
+	function swap(elem, options, callback) {
+	  var old = {},
+	    style = elem.style,
+	    name;
+	
+	  // Remember the old values, and insert the new ones
+	  for (name in options) {
+	    old[name] = style[name];
+	    style[name] = options[name];
+	  }
+	
+	  callback.call(elem);
+	
+	  // Revert the old values
+	  for (name in options) {
+	    style[name] = old[name];
+	  }
+	}
+	
+	function getPBMWidth(elem, props, which) {
+	  var value = 0, prop, j, i;
+	  for (j = 0; j < props.length; j++) {
+	    prop = props[j];
+	    if (prop) {
+	      for (i = 0; i < which.length; i++) {
+	        var cssProp;
+	        if (prop === 'border') {
+	          cssProp = prop + which[i] + 'Width';
+	        } else {
+	          cssProp = prop + which[i];
+	        }
+	        value += parseFloat(getComputedStyleX(elem, cssProp)) || 0;
+	      }
+	    }
+	  }
+	  return value;
+	}
+	
+	/**
+	 * A crude way of determining if an object is a window
+	 * @member util
+	 */
+	function isWindow(obj) {
+	  // must use == for ie8
+	  /*jshint eqeqeq:false*/
+	  return obj != null && obj == obj.window;
+	}
+	
+	var domUtils = {};
+	
+	each(['Width', 'Height'], function (name) {
+	  domUtils['doc' + name] = function (refWin) {
+	    var d = refWin.document;
+	    return Math.max(
+	      //firefox chrome documentElement.scrollHeight< body.scrollHeight
+	      //ie standard mode : documentElement.scrollHeight> body.scrollHeight
+	      d.documentElement['scroll' + name],
+	      //quirks : documentElement.scrollHeight 最大等于可视窗口多一点？
+	      d.body['scroll' + name],
+	      domUtils['viewport' + name](d));
+	  };
+	
+	  domUtils['viewport' + name] = function (win) {
+	    // pc browser includes scrollbar in window.innerWidth
+	    var prop = 'client' + name,
+	      doc = win.document,
+	      body = doc.body,
+	      documentElement = doc.documentElement,
+	      documentElementProp = documentElement[prop];
+	    // 标准模式取 documentElement
+	    // backcompat 取 body
+	    return doc.compatMode === 'CSS1Compat' && documentElementProp ||
+	      body && body[prop] || documentElementProp;
+	  };
+	});
+	
+	/*
+	 得到元素的大小信息
+	 @param elem
+	 @param name
+	 @param {String} [extra]  'padding' : (css width) + padding
+	 'border' : (css width) + padding + border
+	 'margin' : (css width) + padding + border + margin
+	 */
+	function getWH(elem, name, extra) {
+	  if (isWindow(elem)) {
+	    return name === 'width' ? domUtils.viewportWidth(elem) : domUtils.viewportHeight(elem);
+	  } else if (elem.nodeType === 9) {
+	    return name === 'width' ? domUtils.docWidth(elem) : domUtils.docHeight(elem);
+	  }
+	  var which = name === 'width' ? ['Left', 'Right'] : ['Top', 'Bottom'],
+	    borderBoxValue = name === 'width' ? elem.offsetWidth : elem.offsetHeight;
+	  var computedStyle = getComputedStyleX(elem);
+	  var isBorderBox = isBorderBoxFn(elem, computedStyle);
+	  var cssBoxValue = 0;
+	  if (borderBoxValue == null || borderBoxValue <= 0) {
+	    borderBoxValue = undefined;
+	    // Fall back to computed then un computed css if necessary
+	    cssBoxValue = getComputedStyleX(elem, name);
+	    if (cssBoxValue == null || (Number(cssBoxValue)) < 0) {
+	      cssBoxValue = elem.style[name] || 0;
+	    }
+	    // Normalize '', auto, and prepare for extra
+	    cssBoxValue = parseFloat(cssBoxValue) || 0;
+	  }
+	  if (extra === undefined) {
+	    extra = isBorderBox ? BORDER_INDEX : CONTENT_INDEX;
+	  }
+	  var borderBoxValueOrIsBorderBox = borderBoxValue !== undefined || isBorderBox;
+	  var val = borderBoxValue || cssBoxValue;
+	  if (extra === CONTENT_INDEX) {
+	    if (borderBoxValueOrIsBorderBox) {
+	      return val - getPBMWidth(elem, ['border', 'padding'],
+	          which, computedStyle);
+	    } else {
+	      return cssBoxValue;
+	    }
+	  } else if (borderBoxValueOrIsBorderBox) {
+	    return val + (extra === BORDER_INDEX ? 0 :
+	        (extra === PADDING_INDEX ?
+	          -getPBMWidth(elem, ['border'], which, computedStyle) :
+	          getPBMWidth(elem, ['margin'], which, computedStyle)));
+	  } else {
+	    return cssBoxValue + getPBMWidth(elem, BOX_MODELS.slice(extra),
+	        which, computedStyle);
+	  }
+	}
+	
+	var cssShow = {position: 'absolute', visibility: 'hidden', display: 'block'};
+	
+	// fix #119 : https://github.com/kissyteam/kissy/issues/119
+	function getWHIgnoreDisplay(elem) {
+	  var val, args = arguments;
+	  // in case elem is window
+	  // elem.offsetWidth === undefined
+	  if (elem.offsetWidth !== 0) {
+	    val = getWH.apply(undefined, args);
+	  } else {
+	    swap(elem, cssShow, function () {
+	      val = getWH.apply(undefined, args);
+	    });
+	  }
+	  return val;
+	}
+	
+	each(['width', 'height'], function (name) {
+	  var first = name.charAt(0).toUpperCase() + name.slice(1);
+	  domUtils['outer' + first] = function (el, includeMargin) {
+	    return el && getWHIgnoreDisplay(el, name, includeMargin ? MARGIN_INDEX : BORDER_INDEX);
+	  };
+	  var which = name === 'width' ? ['Left', 'Right'] : ['Top', 'Bottom'];
+	
+	  domUtils[name] = function (elem, val) {
+	    if (val !== undefined) {
+	      if (elem) {
+	        var computedStyle = getComputedStyleX(elem);
+	        var isBorderBox = isBorderBoxFn(elem);
+	        if (isBorderBox) {
+	          val += getPBMWidth(elem, ['padding', 'border'], which, computedStyle);
+	        }
+	        return css(elem, name, val);
+	      }
+	      return;
+	    }
+	    return elem && getWHIgnoreDisplay(elem, name, CONTENT_INDEX);
+	  };
+	});
+	
+	function css(el, name, value) {
+	  if (typeof name === 'object') {
+	    for (var i in name) {
+	      css(el, i, name[i]);
+	    }
+	    return;
+	  }
+	  if (typeof value !== 'undefined') {
+	    if (typeof value === 'number') {
+	      value = value + 'px';
+	    }
+	    el.style[name] = value;
+	  } else {
+	    return getComputedStyleX(el, name);
+	  }
+	}
+	
+	function mix(to, from) {
+	  for (var i in from) {
+	    to[i] = from[i];
+	  }
+	  return to;
+	}
+	
+	var utils = module.exports = {
+	  getWindow: function (node) {
+	    var doc = node.ownerDocument || node;
+	    return doc.defaultView || doc.parentWindow;
+	  },
+	  offset: function (el, value) {
+	    if (typeof value !== 'undefined') {
+	      setOffset(el, value);
+	    } else {
+	      return getOffset(el);
+	    }
+	  },
+	  isWindow: isWindow,
+	  each: each,
+	  css: css,
+	  clone: function (obj) {
+	    var ret = {};
+	    for (var i in obj) {
+	      ret[i] = obj[i];
+	    }
+	    var overflow = obj.overflow;
+	    if (overflow) {
+	      for (i in obj) {
+	        ret.overflow[i] = obj.overflow[i];
+	      }
+	    }
+	    return ret;
+	  },
+	  mix: mix,
+	  getWindowScrollLeft: function (w) {
+	    return getScrollLeft(w);
+	  },
+	  getWindowScrollTop: function (w) {
+	    return getScrollTop(w);
+	  },
+	  merge: function () {
+	    var ret = {};
+	    for (var i = 0; i < arguments.length; i++) {
+	      utils.mix(ret, arguments[i]);
+	    }
+	    return ret;
+	  },
+	  viewportWidth: 0,
+	  viewportHeight: 0
+	};
+	
+	mix(utils, domUtils);
+
+
+/***/ },
+/* 42 */
 /*!*******************************!*\
   !*** ./~/rc-util/lib/guid.js ***!
   \*******************************/
@@ -4641,7 +5053,7 @@
 
 
 /***/ },
-/* 38 */
+/* 43 */
 /*!***********************************!*\
   !*** ./~/rc-util/lib/classSet.js ***!
   \***********************************/
@@ -4689,7 +5101,7 @@
 
 
 /***/ },
-/* 39 */
+/* 44 */
 /*!**************************************!*\
   !*** ./~/rc-util/lib/joinClasses.js ***!
   \**************************************/
@@ -4738,7 +5150,7 @@
 
 
 /***/ },
-/* 40 */
+/* 45 */
 /*!**********************************!*\
   !*** ./~/rc-util/lib/KeyCode.js ***!
   \**********************************/
@@ -5268,7 +5680,7 @@
 
 
 /***/ },
-/* 41 */
+/* 46 */
 /*!******************************************!*\
   !*** ./~/rc-util/lib/PureRenderMixin.js ***!
   \******************************************/
@@ -5287,7 +5699,7 @@
 	
 	"use strict";
 	
-	var shallowEqual = __webpack_require__(/*! ./shallowEqual */ 42);
+	var shallowEqual = __webpack_require__(/*! ./shallowEqual */ 47);
 	
 	/**
 	 * If your React component's render function is "pure", e.g. it will render the
@@ -5324,7 +5736,7 @@
 
 
 /***/ },
-/* 42 */
+/* 47 */
 /*!***************************************!*\
   !*** ./~/rc-util/lib/shallowEqual.js ***!
   \***************************************/
@@ -5375,7 +5787,7 @@
 
 
 /***/ },
-/* 43 */
+/* 48 */
 /*!************************************************!*\
   !*** ./~/rc-util/lib/createChainedFunction.js ***!
   \************************************************/
@@ -5408,7 +5820,7 @@
 	module.exports = createChainedFunction;
 
 /***/ },
-/* 44 */
+/* 49 */
 /*!*****************************************!*\
   !*** ./~/rc-util/lib/cloneWithProps.js ***!
   \*****************************************/
@@ -5433,8 +5845,8 @@
 	 */
 	
 	var React = __webpack_require__(/*! react */ 5);
-	var joinClasses = __webpack_require__(/*! ./joinClasses */ 39);
-	var assign = __webpack_require__(/*! object-assign */ 50);
+	var joinClasses = __webpack_require__(/*! ./joinClasses */ 44);
+	var assign = __webpack_require__(/*! object-assign */ 54);
 	
 	/**
 	 * Creates a transfer strategy that will merge prop values using the supplied
@@ -5559,7 +5971,7 @@
 
 
 /***/ },
-/* 45 */
+/* 50 */
 /*!***********************************************!*\
   !*** ./~/rc-util/lib/Dom/addEventListener.js ***!
   \***********************************************/
@@ -5585,7 +5997,7 @@
 
 
 /***/ },
-/* 46 */
+/* 51 */
 /*!***************************************!*\
   !*** ./~/rc-util/lib/Dom/contains.js ***!
   \***************************************/
@@ -5604,7 +6016,7 @@
 
 
 /***/ },
-/* 47 */
+/* 52 */
 /*!*******************************************!*\
   !*** ./~/rc-util/lib/Children/toArray.js ***!
   \*******************************************/
@@ -5622,423 +6034,7 @@
 
 
 /***/ },
-/* 48 */
-/*!**********************************!*\
-  !*** ./~/dom-align/lib/utils.js ***!
-  \**********************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	var RE_NUM = /[\-+]?(?:\d*\.|)\d+(?:[eE][\-+]?\d+|)/.source;
-	
-	function getClientPosition(elem) {
-	  var box, x, y;
-	  var doc = elem.ownerDocument;
-	  var body = doc.body;
-	  var docElem = doc && doc.documentElement;
-	  // 根据 GBS 最新数据，A-Grade Browsers 都已支持 getBoundingClientRect 方法，不用再考虑传统的实现方式
-	  box = elem.getBoundingClientRect();
-	
-	  // 注：jQuery 还考虑减去 docElem.clientLeft/clientTop
-	  // 但测试发现，这样反而会导致当 html 和 body 有边距/边框样式时，获取的值不正确
-	  // 此外，ie6 会忽略 html 的 margin 值，幸运地是没有谁会去设置 html 的 margin
-	
-	  x = box.left;
-	  y = box.top;
-	
-	  // In IE, most of the time, 2 extra pixels are added to the top and left
-	  // due to the implicit 2-pixel inset border.  In IE6/7 quirks mode and
-	  // IE6 standards mode, this border can be overridden by setting the
-	  // document element's border to zero -- thus, we cannot rely on the
-	  // offset always being 2 pixels.
-	
-	  // In quirks mode, the offset can be determined by querying the body's
-	  // clientLeft/clientTop, but in standards mode, it is found by querying
-	  // the document element's clientLeft/clientTop.  Since we already called
-	  // getClientBoundingRect we have already forced a reflow, so it is not
-	  // too expensive just to query them all.
-	
-	  // ie 下应该减去窗口的边框吧，毕竟默认 absolute 都是相对窗口定位的
-	  // 窗口边框标准是设 documentElement ,quirks 时设置 body
-	  // 最好禁止在 body 和 html 上边框 ，但 ie < 9 html 默认有 2px ，减去
-	  // 但是非 ie 不可能设置窗口边框，body html 也不是窗口 ,ie 可以通过 html,body 设置
-	  // 标准 ie 下 docElem.clientTop 就是 border-top
-	  // ie7 html 即窗口边框改变不了。永远为 2
-	  // 但标准 firefox/chrome/ie9 下 docElem.clientTop 是窗口边框，即使设了 border-top 也为 0
-	
-	  x -= docElem.clientLeft || body.clientLeft || 0;
-	  y -= docElem.clientTop || body.clientTop || 0;
-	
-	  return {left: x, top: y};
-	}
-	
-	function getScroll(w, top) {
-	  var ret = w['page' + (top ? 'Y' : 'X') + 'Offset'];
-	  var method = 'scroll' + (top ? 'Top' : 'Left');
-	  if (typeof ret !== 'number') {
-	    var d = w.document;
-	    //ie6,7,8 standard mode
-	    ret = d.documentElement[method];
-	    if (typeof ret !== 'number') {
-	      //quirks mode
-	      ret = d.body[method];
-	    }
-	  }
-	  return ret;
-	}
-	
-	function getScrollLeft(w) {
-	  return getScroll(w);
-	}
-	
-	function getScrollTop(w) {
-	  return getScroll(w, true);
-	}
-	
-	function getOffset(el) {
-	  var pos = getClientPosition(el);
-	  var doc = el.ownerDocument;
-	  var w = doc.defaultView || doc.parentWindow;
-	  pos.left += getScrollLeft(w);
-	  pos.top += getScrollTop(w);
-	  return pos;
-	}
-	function _getComputedStyle(elem, name, computedStyle) {
-	  var val = '';
-	  var d = elem.ownerDocument;
-	
-	  // https://github.com/kissyteam/kissy/issues/61
-	  if ((computedStyle = (computedStyle || d.defaultView.getComputedStyle(elem, null)))) {
-	    val = computedStyle.getPropertyValue(name) || computedStyle[name];
-	  }
-	
-	  return val;
-	}
-	
-	var _RE_NUM_NO_PX = new RegExp('^(' + RE_NUM + ')(?!px)[a-z%]+$', 'i');
-	var RE_POS = /^(top|right|bottom|left)$/,
-	  CURRENT_STYLE = 'currentStyle',
-	  RUNTIME_STYLE = 'runtimeStyle',
-	  LEFT = 'left',
-	  PX = 'px';
-	
-	function _getComputedStyleIE(elem, name) {
-	  // currentStyle maybe null
-	  // http://msdn.microsoft.com/en-us/library/ms535231.aspx
-	  var ret = elem[CURRENT_STYLE] && elem[CURRENT_STYLE][name];
-	
-	  // 当 width/height 设置为百分比时，通过 pixelLeft 方式转换的 width/height 值
-	  // 一开始就处理了! CUSTOM_STYLE.height,CUSTOM_STYLE.width ,cssHook 解决@2011-08-19
-	  // 在 ie 下不对，需要直接用 offset 方式
-	  // borderWidth 等值也有问题，但考虑到 borderWidth 设为百分比的概率很小，这里就不考虑了
-	
-	  // From the awesome hack by Dean Edwards
-	  // http://erik.eae.net/archives/2007/07/27/18.54.15/#comment-102291
-	  // If we're not dealing with a regular pixel number
-	  // but a number that has a weird ending, we need to convert it to pixels
-	  // exclude left right for relativity
-	  if (_RE_NUM_NO_PX.test(ret) && !RE_POS.test(name)) {
-	    // Remember the original values
-	    var style = elem.style,
-	      left = style[LEFT],
-	      rsLeft = elem[RUNTIME_STYLE][LEFT];
-	
-	    // prevent flashing of content
-	    elem[RUNTIME_STYLE][LEFT] = elem[CURRENT_STYLE][LEFT];
-	
-	    // Put in the new values to get a computed value out
-	    style[LEFT] = name === 'fontSize' ? '1em' : (ret || 0);
-	    ret = style.pixelLeft + PX;
-	
-	    // Revert the changed values
-	    style[LEFT] = left;
-	
-	    elem[RUNTIME_STYLE][LEFT] = rsLeft;
-	  }
-	  return ret === '' ? 'auto' : ret;
-	}
-	
-	var getComputedStyleX;
-	if (typeof window !== 'undefined') {
-	  getComputedStyleX = window.getComputedStyle ? _getComputedStyle : _getComputedStyleIE;
-	}
-	
-	// 设置 elem 相对 elem.ownerDocument 的坐标
-	function setOffset(elem, offset) {
-	  // set position first, in-case top/left are set even on static elem
-	  if (css(elem, 'position') === 'static') {
-	    elem.style.position = 'relative';
-	  }
-	
-	  var old = getOffset(elem),
-	    ret = {},
-	    current, key;
-	
-	  for (key in offset) {
-	    current = parseFloat(css(elem, key)) || 0;
-	    ret[key] = current + offset[key] - old[key];
-	  }
-	  css(elem, ret);
-	}
-	
-	function each(arr, fn) {
-	  for (var i = 0; i < arr.length; i++) {
-	    fn(arr[i]);
-	  }
-	}
-	
-	function isBorderBoxFn(elem) {
-	  return getComputedStyleX(elem, 'boxSizing') === 'border-box';
-	}
-	
-	var BOX_MODELS = ['margin', 'border', 'padding'],
-	  CONTENT_INDEX = -1,
-	  PADDING_INDEX = 2,
-	  BORDER_INDEX = 1,
-	  MARGIN_INDEX = 0;
-	
-	function swap(elem, options, callback) {
-	  var old = {},
-	    style = elem.style,
-	    name;
-	
-	  // Remember the old values, and insert the new ones
-	  for (name in options) {
-	    old[name] = style[name];
-	    style[name] = options[name];
-	  }
-	
-	  callback.call(elem);
-	
-	  // Revert the old values
-	  for (name in options) {
-	    style[name] = old[name];
-	  }
-	}
-	
-	function getPBMWidth(elem, props, which) {
-	  var value = 0, prop, j, i;
-	  for (j = 0; j < props.length; j++) {
-	    prop = props[j];
-	    if (prop) {
-	      for (i = 0; i < which.length; i++) {
-	        var cssProp;
-	        if (prop === 'border') {
-	          cssProp = prop + which[i] + 'Width';
-	        } else {
-	          cssProp = prop + which[i];
-	        }
-	        value += parseFloat(getComputedStyleX(elem, cssProp)) || 0;
-	      }
-	    }
-	  }
-	  return value;
-	}
-	
-	/**
-	 * A crude way of determining if an object is a window
-	 * @member util
-	 */
-	function isWindow(obj) {
-	  // must use == for ie8
-	  /*jshint eqeqeq:false*/
-	  return obj != null && obj == obj.window;
-	}
-	
-	var domUtils = {};
-	
-	each(['Width', 'Height'], function (name) {
-	  domUtils['doc' + name] = function (refWin) {
-	    var d = refWin.document;
-	    return Math.max(
-	      //firefox chrome documentElement.scrollHeight< body.scrollHeight
-	      //ie standard mode : documentElement.scrollHeight> body.scrollHeight
-	      d.documentElement['scroll' + name],
-	      //quirks : documentElement.scrollHeight 最大等于可视窗口多一点？
-	      d.body['scroll' + name],
-	      domUtils['viewport' + name](d));
-	  };
-	
-	  domUtils['viewport' + name] = function (win) {
-	    // pc browser includes scrollbar in window.innerWidth
-	    var prop = 'client' + name,
-	      doc = win.document,
-	      body = doc.body,
-	      documentElement = doc.documentElement,
-	      documentElementProp = documentElement[prop];
-	    // 标准模式取 documentElement
-	    // backcompat 取 body
-	    return doc.compatMode === 'CSS1Compat' && documentElementProp ||
-	      body && body[prop] || documentElementProp;
-	  };
-	});
-	
-	/*
-	 得到元素的大小信息
-	 @param elem
-	 @param name
-	 @param {String} [extra]  'padding' : (css width) + padding
-	 'border' : (css width) + padding + border
-	 'margin' : (css width) + padding + border + margin
-	 */
-	function getWH(elem, name, extra) {
-	  if (isWindow(elem)) {
-	    return name === 'width' ? domUtils.viewportWidth(elem) : domUtils.viewportHeight(elem);
-	  } else if (elem.nodeType === 9) {
-	    return name === 'width' ? domUtils.docWidth(elem) : domUtils.docHeight(elem);
-	  }
-	  var which = name === 'width' ? ['Left', 'Right'] : ['Top', 'Bottom'],
-	    borderBoxValue = name === 'width' ? elem.offsetWidth : elem.offsetHeight;
-	  var computedStyle = getComputedStyleX(elem);
-	  var isBorderBox = isBorderBoxFn(elem, computedStyle);
-	  var cssBoxValue = 0;
-	  if (borderBoxValue == null || borderBoxValue <= 0) {
-	    borderBoxValue = undefined;
-	    // Fall back to computed then un computed css if necessary
-	    cssBoxValue = getComputedStyleX(elem, name);
-	    if (cssBoxValue == null || (Number(cssBoxValue)) < 0) {
-	      cssBoxValue = elem.style[name] || 0;
-	    }
-	    // Normalize '', auto, and prepare for extra
-	    cssBoxValue = parseFloat(cssBoxValue) || 0;
-	  }
-	  if (extra === undefined) {
-	    extra = isBorderBox ? BORDER_INDEX : CONTENT_INDEX;
-	  }
-	  var borderBoxValueOrIsBorderBox = borderBoxValue !== undefined || isBorderBox;
-	  var val = borderBoxValue || cssBoxValue;
-	  if (extra === CONTENT_INDEX) {
-	    if (borderBoxValueOrIsBorderBox) {
-	      return val - getPBMWidth(elem, ['border', 'padding'],
-	          which, computedStyle);
-	    } else {
-	      return cssBoxValue;
-	    }
-	  } else if (borderBoxValueOrIsBorderBox) {
-	    return val + (extra === BORDER_INDEX ? 0 :
-	        (extra === PADDING_INDEX ?
-	          -getPBMWidth(elem, ['border'], which, computedStyle) :
-	          getPBMWidth(elem, ['margin'], which, computedStyle)));
-	  } else {
-	    return cssBoxValue + getPBMWidth(elem, BOX_MODELS.slice(extra),
-	        which, computedStyle);
-	  }
-	}
-	
-	var cssShow = {position: 'absolute', visibility: 'hidden', display: 'block'};
-	
-	// fix #119 : https://github.com/kissyteam/kissy/issues/119
-	function getWHIgnoreDisplay(elem) {
-	  var val, args = arguments;
-	  // in case elem is window
-	  // elem.offsetWidth === undefined
-	  if (elem.offsetWidth !== 0) {
-	    val = getWH.apply(undefined, args);
-	  } else {
-	    swap(elem, cssShow, function () {
-	      val = getWH.apply(undefined, args);
-	    });
-	  }
-	  return val;
-	}
-	
-	each(['width', 'height'], function (name) {
-	  var first = name.charAt(0).toUpperCase() + name.slice(1);
-	  domUtils['outer' + first] = function (el, includeMargin) {
-	    return el && getWHIgnoreDisplay(el, name, includeMargin ? MARGIN_INDEX : BORDER_INDEX);
-	  };
-	  var which = name === 'width' ? ['Left', 'Right'] : ['Top', 'Bottom'];
-	
-	  domUtils[name] = function (elem, val) {
-	    if (val !== undefined) {
-	      if (elem) {
-	        var computedStyle = getComputedStyleX(elem);
-	        var isBorderBox = isBorderBoxFn(elem);
-	        if (isBorderBox) {
-	          val += getPBMWidth(elem, ['padding', 'border'], which, computedStyle);
-	        }
-	        return css(elem, name, val);
-	      }
-	      return;
-	    }
-	    return elem && getWHIgnoreDisplay(elem, name, CONTENT_INDEX);
-	  };
-	});
-	
-	function css(el, name, value) {
-	  if (typeof name === 'object') {
-	    for (var i in name) {
-	      css(el, i, name[i]);
-	    }
-	    return;
-	  }
-	  if (typeof value !== 'undefined') {
-	    if (typeof value === 'number') {
-	      value = value + 'px';
-	    }
-	    el.style[name] = value;
-	  } else {
-	    return getComputedStyleX(el, name);
-	  }
-	}
-	
-	function mix(to, from) {
-	  for (var i in from) {
-	    to[i] = from[i];
-	  }
-	  return to;
-	}
-	
-	var utils = module.exports = {
-	  getWindow: function (node) {
-	    var doc = node.ownerDocument || node;
-	    return doc.defaultView || doc.parentWindow;
-	  },
-	  offset: function (el, value) {
-	    if (typeof value !== 'undefined') {
-	      setOffset(el, value);
-	    } else {
-	      return getOffset(el);
-	    }
-	  },
-	  isWindow: isWindow,
-	  each: each,
-	  css: css,
-	  clone: function (obj) {
-	    var ret = {};
-	    for (var i in obj) {
-	      ret[i] = obj[i];
-	    }
-	    var overflow = obj.overflow;
-	    if (overflow) {
-	      for (i in obj) {
-	        ret.overflow[i] = obj.overflow[i];
-	      }
-	    }
-	    return ret;
-	  },
-	  mix: mix,
-	  getWindowScrollLeft: function (w) {
-	    return getScrollLeft(w);
-	  },
-	  getWindowScrollTop: function (w) {
-	    return getScrollTop(w);
-	  },
-	  merge: function () {
-	    var ret = {};
-	    for (var i = 0; i < arguments.length; i++) {
-	      utils.mix(ret, arguments[i]);
-	    }
-	    return ret;
-	  },
-	  viewportWidth: 0,
-	  viewportHeight: 0
-	};
-	
-	mix(utils, domUtils);
-
-
-/***/ },
-/* 49 */
+/* 53 */
 /*!****************************!*\
   !*** ./lib/DecadePanel.js ***!
   \****************************/
@@ -6049,7 +6045,7 @@
 	var React = __webpack_require__(/*! react */ 5);
 	var ROW = 3;
 	var COL = 4;
-	var cx = __webpack_require__(/*! rc-util */ 26).classSet;
+	var cx = __webpack_require__(/*! rc-util */ 28).classSet;
 	
 	function goYear(self, direction) {
 	  var next = self.state.value.clone();
@@ -6065,7 +6061,7 @@
 	    };
 	  },
 	
-	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 23),
+	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 26),
 	
 	  getDefaultProps: function () {
 	    return {
@@ -6175,7 +6171,7 @@
 
 
 /***/ },
-/* 50 */
+/* 54 */
 /*!********************************************!*\
   !*** ./~/rc-util/~/object-assign/index.js ***!
   \********************************************/
