@@ -3,7 +3,7 @@ notifications:
   email:
   - yiminghe@gmail.com
 node_js:
-- 0.11
+- 0.12
 before_script:
 - npm start &
 - npm install mocha-phantomjs -g
