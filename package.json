@@ -1,6 +1,6 @@
 {
   "name": "rc-calendar",
-  "version": "1.5.8",
+  "version": "2.0.0",
   "description": "calendar ui component for react",
   "keywords": [
     "react",
@@ -58,16 +58,16 @@
   ],
   "dependencies": {
     "dom-align": "~1.0.1",
-    "gregorian-calendar": "^2.0.0",
-    "gregorian-calendar-format": "^2.0.0",
+    "gregorian-calendar": "3.x",
+    "gregorian-calendar-format": "3.x",
     "rc-util": "^1.0.0"
   },
   "spm": {
     "dependencies": {
       "react": "~0.12.1",
       "rc-util": "^1.0.0",
-      "gregorian-calendar": "^2.0.0",
-      "gregorian-calendar-format": "^2.0.0",
+      "gregorian-calendar": "3.x",
+      "gregorian-calendar-format": "3.x",
       "dom-align": "^1.0.1"
     },
     "buildArgs": "--global react:window.React",

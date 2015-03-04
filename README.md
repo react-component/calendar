@@ -88,6 +88,18 @@ For details to see: [https://github.com/yiminghe/learning-react/tree/master/exam
           <td>additional css class of root dom node</td>
         </tr>
         <tr>
+          <td>value</td>
+          <td>GregorianCalendar</td>
+          <td></td>
+          <td>current value like input's value</td>
+        </tr>
+        <tr>
+          <td>defaultValue</td>
+          <td>GregorianCalendar</td>
+          <td></td>
+          <td>defaultValue like input's defaultValue</td>
+        </tr>
+        <tr>
           <td>orient</td>
           <td>String[]</td>
           <td></td>
@@ -170,9 +182,15 @@ For details to see: [https://github.com/yiminghe/learning-react/tree/master/exam
         </tr>
         <tr>
           <td>value</td>
-          <td>GregorianCalendar/td>
+          <td>GregorianCalendar</td>
           <td></td>
-          <td>current time</td>
+          <td>current value like input's value</td>
+        </tr>
+        <tr>
+          <td>defaultValue</td>
+          <td>GregorianCalendar</td>
+          <td></td>
+          <td>defaultValue like input's defaultValue</td>
         </tr>
         <tr>
           <td>onChange</td>
