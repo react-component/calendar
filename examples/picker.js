@@ -17,10 +17,12 @@ var Test = React.createClass({
   },
 
   handleChange: function (value) {
+    if (!value) return;
     console.log('DatePicker change: ' + (this.props.formatter.format(value)));
   },
 
   handleCalendarSelect: function (value) {
+    if (!value) return;
     console.log('calendar select: ' + (this.props.formatter.format(value)));
     // controlled value
     this.setState({
@@ -55,7 +57,7 @@ var Test = React.createClass({
     var state = this.state;
     var calendar = <Calendar locale={CalendarLocale}
       orient={['bottom', 'left']}
-      showTime={this.state.showTime} onSelect={this.handleCalendarSelect}/>;
+      showTime={this.state.showTime} onClear={this.handleCalendarClear} onSelect={this.handleCalendarSelect} showClear={true}/>;
     return <div className="form-group" style={{width: 400, margin: 20}} data-time={this.state.time}>
       <div className="input-group">
         <span>
