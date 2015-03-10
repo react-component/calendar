@@ -3,6 +3,7 @@ var path = require('path');
 
 module.exports = {
   entry: {
+    'defaultValue':['./examples/defaultValue.js'],
     'simple': ['./examples/simple.js'],
     'disabled': ['./examples/disabled.js'],
     'picker': ['./examples/picker.js'],
