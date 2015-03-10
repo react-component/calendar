@@ -30,7 +30,7 @@
 /******/ 	// "0" means "already loaded"
 /******/ 	// Array means "loading", array contains callbacks
 /******/ 	var installedChunks = {
-/******/ 		4:0
+/******/ 		5:0
 /******/ 	};
 /******/
 /******/ 	// The require function
@@ -75,7 +75,7 @@
 /******/ 			script.type = 'text/javascript';
 /******/ 			script.charset = 'utf-8';
 /******/ 			script.async = true;
-/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"simple","1":"disabled","2":"theme","3":"picker"}[chunkId]||chunkId) + ".js";
+/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"simple","1":"disabled","2":"picker","3":"theme","4":"defaultValue"}[chunkId]||chunkId) + ".js";
 /******/ 			head.appendChild(script);
 /******/ 		}
 /******/ 	};
@@ -96,7 +96,8 @@
 /* 2 */,
 /* 3 */,
 /* 4 */,
-/* 5 */
+/* 5 */,
+/* 6 */
 /*!************************!*\
   !*** external "React" ***!
   \************************/
@@ -105,44 +106,44 @@
 	module.exports = React;
 
 /***/ },
-/* 6 */
+/* 7 */
 /*!******************!*\
   !*** ./index.js ***!
   \******************/
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(/*! ./lib/Calendar */ 17);
-	module.exports.Picker = __webpack_require__(/*! ./lib/Picker */ 18);
+	module.exports = __webpack_require__(/*! ./lib/Calendar */ 18);
+	module.exports.Picker = __webpack_require__(/*! ./lib/Picker */ 19);
 
 
 /***/ },
-/* 7 */,
-/* 8 */
+/* 8 */,
+/* 9 */
 /*!***************************************!*\
   !*** ./~/gregorian-calendar/index.js ***!
   \***************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(/*! ./lib/gregorian-calendar */ 21);
+	module.exports = __webpack_require__(/*! ./lib/gregorian-calendar */ 22);
 
 /***/ },
-/* 9 */,
-/* 10 */
+/* 10 */,
+/* 11 */
 /*!**********************************************!*\
   !*** ./~/gregorian-calendar-format/index.js ***!
   \**********************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(/*! ./lib/gregorian-calendar-format */ 22);
+	module.exports = __webpack_require__(/*! ./lib/gregorian-calendar-format */ 23);
 
 /***/ },
-/* 11 */,
 /* 12 */,
 /* 13 */,
 /* 14 */,
 /* 15 */,
 /* 16 */,
-/* 17 */
+/* 17 */,
+/* 18 */
 /*!*************************!*\
   !*** ./lib/Calendar.js ***!
   \*************************/
@@ -153,14 +154,14 @@
 	/**
 	 * Calendar ui component for React
 	 */
-	var React = __webpack_require__(/*! react */ 5);
+	var React = __webpack_require__(/*! react */ 6);
 	var DATE_ROW_COUNT = 6;
 	var DATE_COL_COUNT = 7;
-	var DateTimeFormat = __webpack_require__(/*! gregorian-calendar-format */ 10);
-	var GregorianCalendar = __webpack_require__(/*! gregorian-calendar */ 8);
-	var KeyCode = __webpack_require__(/*! rc-util */ 28).KeyCode;
-	var MonthPanel = __webpack_require__(/*! ./MonthPanel */ 23);
-	var Time = __webpack_require__(/*! ./Time */ 24);
+	var DateTimeFormat = __webpack_require__(/*! gregorian-calendar-format */ 11);
+	var GregorianCalendar = __webpack_require__(/*! gregorian-calendar */ 9);
+	var KeyCode = __webpack_require__(/*! rc-util */ 29).KeyCode;
+	var MonthPanel = __webpack_require__(/*! ./MonthPanel */ 24);
+	var Time = __webpack_require__(/*! ./Time */ 25);
 	
 	function noop() {
 	}
@@ -248,7 +249,7 @@
 	    onBlur: React.PropTypes.func
 	  },
 	
-	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 25),
+	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 26),
 	
 	  getInitialState: function () {
 	    var value = this.props.value || this.props.defaultValue;
@@ -266,20 +267,26 @@
 	
 	  getDefaultProps: function () {
 	    return {
-	      locale: __webpack_require__(/*! ./locale/en-us */ 26),
+	      locale: __webpack_require__(/*! ./locale/en-us */ 27),
 	      onKeyDown: noop,
 	      className: '',
 	      showToday: true,
 	      onSelect: noop,
 	      onFocus: noop,
-	      onBlur: noop
+	      onBlur: noop,
+	      onClear: noop
 	    };
 	  },
 	
 	  componentWillReceiveProps: function (nextProps) {
-	    if (nextProps.value) {
+	    var value = nextProps.value;
+	    if (value !== undefined) {
+	      if (!value) {
+	        value = this.state.value.clone();
+	        value.setTime(Date.now());
+	      }
 	      this.setState({
-	        value: nextProps.value
+	        value: value
 	      });
 	    }
 	    if (nextProps.orient) {
@@ -344,6 +351,10 @@
 	    this.setState({
 	      value: today
 	    });
+	  },
+	
+	  clear: function () {
+	    this.props.onClear();
 	  },
 	
 	  handleKeyDown: function (e) {
@@ -591,6 +602,16 @@
 	          onClick: this.chooseToday, 
 	          title: this.getTodayTime()}, locale.today));
 	      }
+	      var clearEl;
+	      if (props.showClear) {
+	        clearEl = (React.createElement("a", {className: prefixClsFn("clear-btn"), 
+	          role: "button", 
+	          onClick: this.clear}, locale.clear));
+	      }
+	      var footerBtn;
+	      if (todayEl || clearEl) {
+	        footerBtn = React.createElement("div", {className: prefixClsFn("footer-btn")}, todayEl, " ", clearEl);
+	      }
 	      var timeEl;
 	      if (props.showTime) {
 	        timeEl = (React.createElement(Time, {value: value, rootPrefixCls: prefixCls, prefixClsFn: prefixClsFn, locale: locale, onChange: this.handleSelect}));
@@ -598,7 +619,7 @@
 	      footerEl = (
 	        React.createElement("div", {className: prefixClsFn("footer")}, 
 	        timeEl, 
-	        todayEl
+	        footerBtn
 	        ));
 	    }
 	
@@ -674,7 +695,7 @@
 
 
 /***/ },
-/* 18 */
+/* 19 */
 /*!***********************!*\
   !*** ./lib/Picker.js ***!
   \***********************/
@@ -682,12 +703,12 @@
 
 	/** @jsx React.DOM */
 	
-	var React = __webpack_require__(/*! react */ 5);
-	var DateTimeFormat = __webpack_require__(/*! gregorian-calendar-format */ 10);
-	var cloneWithProps = __webpack_require__(/*! rc-util */ 28).cloneWithProps;
-	var createChainedFunction = __webpack_require__(/*! rc-util */ 28).createChainedFunction;
-	var KeyCode = __webpack_require__(/*! rc-util */ 28).KeyCode;
-	var domAlign = __webpack_require__(/*! dom-align */ 29);
+	var React = __webpack_require__(/*! react */ 6);
+	var DateTimeFormat = __webpack_require__(/*! gregorian-calendar-format */ 11);
+	var cloneWithProps = __webpack_require__(/*! rc-util */ 29).cloneWithProps;
+	var createChainedFunction = __webpack_require__(/*! rc-util */ 29).createChainedFunction;
+	var KeyCode = __webpack_require__(/*! rc-util */ 29).KeyCode;
+	var domAlign = __webpack_require__(/*! dom-align */ 30);
 	var orientMap = {
 	  tl: ['top', 'left'],
 	  tr: ['top', 'right'],
@@ -792,6 +813,19 @@
 	    });
 	  },
 	
+	  handleCalendarClear: function () {
+	    var self = this;
+	    this.setState({
+	      open: false,
+	      value: null
+	    }, function () {
+	      self.refs.input.getDOMNode().focus();
+	    });
+	    if (this.state.value !== null) {
+	      this.props.onChange(null);
+	    }
+	  },
+	
 	  componentDidMount: function () {
 	    this.componentDidUpdate();
 	  },
@@ -839,14 +873,16 @@
 	    var value = state.value;
 	    var calendar = this._cacheCalendar;
 	    if (state.open) {
-	      this._cacheCalendar = calendar = cloneWithProps(props.calendar, {
+	      var calendarProp = props.calendar;
+	      this._cacheCalendar = calendar = cloneWithProps(calendarProp, {
 	        ref: 'calendar',
 	        value: value,
 	        // focused: true,
 	        orient: state.orient,
 	        onBlur: this.handleCalendarBlur,
 	        onKeyDown: this.handleCalendarKeyDown,
-	        onSelect: createChainedFunction(this.handleCalendarSelect, props.calendar.props.onSelect)
+	        onSelect: createChainedFunction(this.handleCalendarSelect, calendarProp.props.onSelect),
+	        onClear: createChainedFunction(this.handleCalendarClear, calendarProp.props.onClear)
 	      });
 	    }
 	    var inputValue = '';
@@ -872,7 +908,7 @@
 
 
 /***/ },
-/* 19 */
+/* 20 */
 /*!*************************************!*\
   !*** ./~/style-loader/addStyles.js ***!
   \*************************************/
@@ -1071,8 +1107,8 @@
 
 
 /***/ },
-/* 20 */,
-/* 21 */
+/* 21 */,
+/* 22 */
 /*!********************************************************!*\
   !*** ./~/gregorian-calendar/lib/gregorian-calendar.js ***!
   \********************************************************/
@@ -1084,9 +1120,9 @@
 	 * @author yiminghe@gmail.com
 	 */
 	var toInt = parseInt;
-	var Utils = __webpack_require__(/*! ./utils */ 31);
-	var defaultLocale = __webpack_require__(/*! ./locale/en-us */ 32);
-	var Const = __webpack_require__(/*! ./const */ 33);
+	var Utils = __webpack_require__(/*! ./utils */ 32);
+	var defaultLocale = __webpack_require__(/*! ./locale/en-us */ 33);
+	var Const = __webpack_require__(/*! ./const */ 34);
 	
 	/**
 	 * GregorianCalendar class.
@@ -2405,7 +2441,7 @@
 
 
 /***/ },
-/* 22 */
+/* 23 */
 /*!**********************************************************************!*\
   !*** ./~/gregorian-calendar-format/lib/gregorian-calendar-format.js ***!
   \**********************************************************************/
@@ -2418,8 +2454,8 @@
 	 * @author yiminghe@gmail.com
 	 */
 	
-	var GregorianCalendar = __webpack_require__(/*! gregorian-calendar */ 8);
-	var enUsLocale = __webpack_require__(/*! ./locale/en-us */ 30);
+	var GregorianCalendar = __webpack_require__(/*! gregorian-calendar */ 9);
+	var enUsLocale = __webpack_require__(/*! ./locale/en-us */ 31);
 	var MAX_VALUE = Number.MAX_VALUE;
 	/**
 	 * date or time style enum
@@ -3211,7 +3247,7 @@
 	// gc_format@163.com
 
 /***/ },
-/* 23 */
+/* 24 */
 /*!***************************!*\
   !*** ./lib/MonthPanel.js ***!
   \***************************/
@@ -3219,12 +3255,12 @@
 
 	/** @jsx React.DOM */
 	
-	var React = __webpack_require__(/*! react */ 5);
-	var DateTimeFormat = __webpack_require__(/*! gregorian-calendar-format */ 10);
+	var React = __webpack_require__(/*! react */ 6);
+	var DateTimeFormat = __webpack_require__(/*! gregorian-calendar-format */ 11);
 	var ROW = 3;
 	var COL = 4;
-	var cx = __webpack_require__(/*! rc-util */ 28).classSet;
-	var YearPanel = __webpack_require__(/*! ./YearPanel */ 39);
+	var cx = __webpack_require__(/*! rc-util */ 29).classSet;
+	var YearPanel = __webpack_require__(/*! ./YearPanel */ 40);
 	
 	function goYear(self, direction) {
 	  var next = self.state.value.clone();
@@ -3233,7 +3269,7 @@
 	}
 	
 	var MonthPanel = React.createClass({displayName: "MonthPanel",
-	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 25),
+	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 26),
 	
 	  getInitialState: function () {
 	    return {
@@ -3380,7 +3416,7 @@
 
 
 /***/ },
-/* 24 */
+/* 25 */
 /*!*********************!*\
   !*** ./lib/Time.js ***!
   \*********************/
@@ -3392,9 +3428,9 @@
 	 * time component for Calendar
 	 */
 	
-	var React = __webpack_require__(/*! react */ 5);
-	var KeyCode = __webpack_require__(/*! rc-util */ 28).KeyCode;
-	var TimePanel = __webpack_require__(/*! ./TimePanel */ 40);
+	var React = __webpack_require__(/*! react */ 6);
+	var KeyCode = __webpack_require__(/*! rc-util */ 29).KeyCode;
+	var TimePanel = __webpack_require__(/*! ./TimePanel */ 41);
 	
 	function padding(number) {
 	  if (number < 10) {
@@ -3527,7 +3563,7 @@
 	        title: locale.secondPanelTitle}, 
 	      commonProps));
 	    }
-	    return (React.createElement("span", null, 
+	    return (React.createElement("div", null, 
 	      React.createElement("input", {className: prefixClsFn("time-input"), title: locale.hourInput, readOnly: true, value: padding(hour), 
 	        onClick: this.onHourClick, 
 	        onKeyDown: this.onHourKeyDown}), 
@@ -3548,7 +3584,7 @@
 
 
 /***/ },
-/* 25 */
+/* 26 */
 /*!****************************!*\
   !*** ./lib/prefixClsFn.js ***!
   \****************************/
@@ -3564,7 +3600,7 @@
 
 
 /***/ },
-/* 26 */
+/* 27 */
 /*!*****************************!*\
   !*** ./lib/locale/en-us.js ***!
   \*****************************/
@@ -3599,12 +3635,12 @@
 	  nextDecade: 'Next decade',
 	  previousCentury: 'Last century',
 	  nextCentury: 'Next century',
-	  format:  __webpack_require__(/*! gregorian-calendar-format/lib/locale/en-us */ 30)
+	  format:  __webpack_require__(/*! gregorian-calendar-format/lib/locale/en-us */ 31)
 	});
 
 
 /***/ },
-/* 27 */
+/* 28 */
 /*!*************************************!*\
   !*** ./~/css-loader/cssToString.js ***!
   \*************************************/
@@ -3628,33 +3664,33 @@
 	}
 
 /***/ },
-/* 28 */
+/* 29 */
 /*!****************************!*\
   !*** ./~/rc-util/index.js ***!
   \****************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	  guid: __webpack_require__(/*! ./lib/guid */ 42),
-	  classSet: __webpack_require__(/*! ./lib/classSet */ 43),
-	  joinClasses: __webpack_require__(/*! ./lib/joinClasses */ 44),
-	  KeyCode: __webpack_require__(/*! ./lib/KeyCode */ 45),
-	  PureRenderMixin: __webpack_require__(/*! ./lib/PureRenderMixin */ 46),
-	  shallowEqual: __webpack_require__(/*! ./lib/shallowEqual */ 47),
-	  createChainedFunction: __webpack_require__(/*! ./lib/createChainedFunction */ 48),
-	  cloneWithProps: __webpack_require__(/*! ./lib/cloneWithProps */ 49),
+	  guid: __webpack_require__(/*! ./lib/guid */ 43),
+	  classSet: __webpack_require__(/*! ./lib/classSet */ 44),
+	  joinClasses: __webpack_require__(/*! ./lib/joinClasses */ 45),
+	  KeyCode: __webpack_require__(/*! ./lib/KeyCode */ 46),
+	  PureRenderMixin: __webpack_require__(/*! ./lib/PureRenderMixin */ 47),
+	  shallowEqual: __webpack_require__(/*! ./lib/shallowEqual */ 48),
+	  createChainedFunction: __webpack_require__(/*! ./lib/createChainedFunction */ 49),
+	  cloneWithProps: __webpack_require__(/*! ./lib/cloneWithProps */ 50),
 	  Dom: {
-	    addEventListener: __webpack_require__(/*! ./lib/Dom/addEventListener */ 50),
-	    contains: __webpack_require__(/*! ./lib/Dom/contains */ 51)
+	    addEventListener: __webpack_require__(/*! ./lib/Dom/addEventListener */ 51),
+	    contains: __webpack_require__(/*! ./lib/Dom/contains */ 52)
 	  },
 	  Children: {
-	    toArray: __webpack_require__(/*! ./lib/Children/toArray */ 52)
+	    toArray: __webpack_require__(/*! ./lib/Children/toArray */ 53)
 	  }
 	};
 
 
 /***/ },
-/* 29 */
+/* 30 */
 /*!******************************!*\
   !*** ./~/dom-align/index.js ***!
   \******************************/
@@ -3665,7 +3701,7 @@
 	 * @author yiminghe@gmail.com
 	 */
 	
-	var utils = __webpack_require__(/*! ./lib/utils */ 41);
+	var utils = __webpack_require__(/*! ./lib/utils */ 42);
 	
 	// http://yiminghe.iteye.com/blog/1124720
 	
@@ -4037,7 +4073,7 @@
 
 
 /***/ },
-/* 30 */
+/* 31 */
 /*!*********************************************************!*\
   !*** ./~/gregorian-calendar-format/lib/locale/en-us.js ***!
   \*********************************************************/
@@ -4066,7 +4102,7 @@
 
 
 /***/ },
-/* 31 */
+/* 32 */
 /*!*******************************************!*\
   !*** ./~/gregorian-calendar/lib/utils.js ***!
   \*******************************************/
@@ -4078,7 +4114,7 @@
 	 * @author yiminghe@gmail.com
 	 */
 	
-	var Const = __webpack_require__(/*! ./const */ 33);
+	var Const = __webpack_require__(/*! ./const */ 34);
 	var floor = Math.floor;
 	var ACCUMULATED_DAYS_IN_MONTH
 	        //   1/1 2/1 3/1 4/1 5/1 6/1 7/1 8/1 9/1 10/1 11/1 12/1
@@ -4200,7 +4236,7 @@
 	};
 
 /***/ },
-/* 32 */
+/* 33 */
 /*!**************************************************!*\
   !*** ./~/gregorian-calendar/lib/locale/en-us.js ***!
   \**************************************************/
@@ -4220,7 +4256,7 @@
 
 
 /***/ },
-/* 33 */
+/* 34 */
 /*!*******************************************!*\
   !*** ./~/gregorian-calendar/lib/const.js ***!
   \*******************************************/
@@ -4350,12 +4386,12 @@
 	};
 
 /***/ },
-/* 34 */,
 /* 35 */,
 /* 36 */,
 /* 37 */,
 /* 38 */,
-/* 39 */
+/* 39 */,
+/* 40 */
 /*!**************************!*\
   !*** ./lib/YearPanel.js ***!
   \**************************/
@@ -4363,12 +4399,12 @@
 
 	/** @jsx React.DOM */
 	
-	var React = __webpack_require__(/*! react */ 5);
-	var DateTimeFormat = __webpack_require__(/*! gregorian-calendar-format */ 10);
+	var React = __webpack_require__(/*! react */ 6);
+	var DateTimeFormat = __webpack_require__(/*! gregorian-calendar-format */ 11);
 	var ROW = 3;
 	var COL = 4;
-	var cx = __webpack_require__(/*! rc-util */ 28).classSet;
-	var DecadePanel = __webpack_require__(/*! ./DecadePanel */ 53);
+	var cx = __webpack_require__(/*! rc-util */ 29).classSet;
+	var DecadePanel = __webpack_require__(/*! ./DecadePanel */ 54);
 	
 	function goYear(self, direction) {
 	  var next = self.state.value.clone();
@@ -4377,7 +4413,7 @@
 	}
 	
 	var YearPanel = React.createClass({displayName: "YearPanel",
-	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 25),
+	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 26),
 	
 	  getInitialState: function () {
 	    return {
@@ -4529,7 +4565,7 @@
 
 
 /***/ },
-/* 40 */
+/* 41 */
 /*!**************************!*\
   !*** ./lib/TimePanel.js ***!
   \**************************/
@@ -4537,8 +4573,8 @@
 
 	/** @jsx React.DOM */
 	
-	var React = __webpack_require__(/*! react */ 5);
-	var cx = __webpack_require__(/*! rc-util */ 28).classSet;
+	var React = __webpack_require__(/*! react */ 6);
+	var cx = __webpack_require__(/*! rc-util */ 29).classSet;
 	
 	var TimePanel = React.createClass({displayName: "TimePanel",
 	  getInitialState: function () {
@@ -4548,7 +4584,7 @@
 	    };
 	  },
 	
-	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 25),
+	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 26),
 	
 	  getDefaultProps: function () {
 	    return {
@@ -4624,7 +4660,7 @@
 
 
 /***/ },
-/* 41 */
+/* 42 */
 /*!**********************************!*\
   !*** ./~/dom-align/lib/utils.js ***!
   \**********************************/
@@ -5040,7 +5076,7 @@
 
 
 /***/ },
-/* 42 */
+/* 43 */
 /*!*******************************!*\
   !*** ./~/rc-util/lib/guid.js ***!
   \*******************************/
@@ -5053,7 +5089,7 @@
 
 
 /***/ },
-/* 43 */
+/* 44 */
 /*!***********************************!*\
   !*** ./~/rc-util/lib/classSet.js ***!
   \***********************************/
@@ -5101,7 +5137,7 @@
 
 
 /***/ },
-/* 44 */
+/* 45 */
 /*!**************************************!*\
   !*** ./~/rc-util/lib/joinClasses.js ***!
   \**************************************/
@@ -5150,7 +5186,7 @@
 
 
 /***/ },
-/* 45 */
+/* 46 */
 /*!**********************************!*\
   !*** ./~/rc-util/lib/KeyCode.js ***!
   \**********************************/
@@ -5680,7 +5716,7 @@
 
 
 /***/ },
-/* 46 */
+/* 47 */
 /*!******************************************!*\
   !*** ./~/rc-util/lib/PureRenderMixin.js ***!
   \******************************************/
@@ -5699,7 +5735,7 @@
 	
 	"use strict";
 	
-	var shallowEqual = __webpack_require__(/*! ./shallowEqual */ 47);
+	var shallowEqual = __webpack_require__(/*! ./shallowEqual */ 48);
 	
 	/**
 	 * If your React component's render function is "pure", e.g. it will render the
@@ -5736,7 +5772,7 @@
 
 
 /***/ },
-/* 47 */
+/* 48 */
 /*!***************************************!*\
   !*** ./~/rc-util/lib/shallowEqual.js ***!
   \***************************************/
@@ -5787,7 +5823,7 @@
 
 
 /***/ },
-/* 48 */
+/* 49 */
 /*!************************************************!*\
   !*** ./~/rc-util/lib/createChainedFunction.js ***!
   \************************************************/
@@ -5820,7 +5856,7 @@
 	module.exports = createChainedFunction;
 
 /***/ },
-/* 49 */
+/* 50 */
 /*!*****************************************!*\
   !*** ./~/rc-util/lib/cloneWithProps.js ***!
   \*****************************************/
@@ -5844,9 +5880,9 @@
 	 *  @see https://github.com/facebook/react/issues/1906
 	 */
 	
-	var React = __webpack_require__(/*! react */ 5);
-	var joinClasses = __webpack_require__(/*! ./joinClasses */ 44);
-	var assign = __webpack_require__(/*! object-assign */ 54);
+	var React = __webpack_require__(/*! react */ 6);
+	var joinClasses = __webpack_require__(/*! ./joinClasses */ 45);
+	var assign = __webpack_require__(/*! object-assign */ 55);
 	
 	/**
 	 * Creates a transfer strategy that will merge prop values using the supplied
@@ -5971,7 +6007,7 @@
 
 
 /***/ },
-/* 50 */
+/* 51 */
 /*!***********************************************!*\
   !*** ./~/rc-util/lib/Dom/addEventListener.js ***!
   \***********************************************/
@@ -5997,7 +6033,7 @@
 
 
 /***/ },
-/* 51 */
+/* 52 */
 /*!***************************************!*\
   !*** ./~/rc-util/lib/Dom/contains.js ***!
   \***************************************/
@@ -6016,13 +6052,13 @@
 
 
 /***/ },
-/* 52 */
+/* 53 */
 /*!*******************************************!*\
   !*** ./~/rc-util/lib/Children/toArray.js ***!
   \*******************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var React = __webpack_require__(/*! react */ 5);
+	var React = __webpack_require__(/*! react */ 6);
 	
 	module.exports = function (children) {
 	  var ret = [];
@@ -6034,7 +6070,7 @@
 
 
 /***/ },
-/* 53 */
+/* 54 */
 /*!****************************!*\
   !*** ./lib/DecadePanel.js ***!
   \****************************/
@@ -6042,10 +6078,10 @@
 
 	/** @jsx React.DOM */
 	
-	var React = __webpack_require__(/*! react */ 5);
+	var React = __webpack_require__(/*! react */ 6);
 	var ROW = 3;
 	var COL = 4;
-	var cx = __webpack_require__(/*! rc-util */ 28).classSet;
+	var cx = __webpack_require__(/*! rc-util */ 29).classSet;
 	
 	function goYear(self, direction) {
 	  var next = self.state.value.clone();
@@ -6061,7 +6097,7 @@
 	    };
 	  },
 	
-	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 25),
+	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 26),
 	
 	  getDefaultProps: function () {
 	    return {
@@ -6171,7 +6207,7 @@
 
 
 /***/ },
-/* 54 */
+/* 55 */
 /*!********************************************!*\
   !*** ./~/rc-util/~/object-assign/index.js ***!
   \********************************************/

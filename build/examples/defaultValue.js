@@ -1,21 +1,18 @@
-webpackJsonp([2],[
+webpackJsonp([4],[
 /* 0 */
-/*!********************!*\
-  !*** multi picker ***!
-  \********************/
+/*!**************************!*\
+  !*** multi defaultValue ***!
+  \**************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(/*! ./examples/picker.js */4);
+	module.exports = __webpack_require__(/*! ./examples/defaultValue.js */1);
 
 
 /***/ },
-/* 1 */,
-/* 2 */,
-/* 3 */,
-/* 4 */
-/*!****************************!*\
-  !*** ./examples/picker.js ***!
-  \****************************/
+/* 1 */
+/*!**********************************!*\
+  !*** ./examples/defaultValue.js ***!
+  \**********************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */
@@ -37,15 +34,14 @@ webpackJsonp([2],[
 	  },
 	
 	  handleChange: function (value) {
-	    console.log('DatePicker change: ' + (value && this.props.formatter.format(value)));
+	    console.log('DatePicker change: ' + (this.props.formatter.format(value)));
 	  },
 	
 	  handleCalendarSelect: function (value) {
-	    console.log('calendar select: ' + (value && this.props.formatter.format(value)));
-	    // controlled value
+	    console.log('calendar select: ' + (this.props.formatter.format(value)));
+	    // uncontrolled value
 	    this.setState({
-	      time: Date.now(),
-	      value: value
+	      time: Date.now()
 	    });
 	  },
 	
@@ -75,8 +71,8 @@ webpackJsonp([2],[
 	    var state = this.state;
 	    var calendar = React.createElement(Calendar, {locale: CalendarLocale, 
 	      orient: ['bottom', 'left'], 
-	      showTime: this.state.showTime, onSelect: this.handleCalendarSelect, onClear: this.handleCalendarSelect.bind(this,null), showClear: true});
-	    return React.createElement("div", {className: "form-group", style: {width: 400, margin: 20}, "data-time": this.state.time}, 
+	      showTime: this.state.showTime, onSelect: this.handleCalendarSelect});
+	    return React.createElement("div", {className: "form-group", style: {width: 400, margin: 20}, "data-time": state.time}, 
 	      React.createElement("div", {className: "input-group"}, 
 	        React.createElement("span", null, 
 	          React.createElement("input", {type: "checkbox", checked: this.state.showTime, onChange: this.handleShowTimeChange}), 
@@ -84,7 +80,7 @@ webpackJsonp([2],[
 	      ), 
 	      React.createElement("div", {className: "input-group"}, 
 	        React.createElement(DatePicker, {ref: "picker", formatter: this.props.formatter, calendar: calendar, 
-	          value: state.value, onChange: this.handleChange}, 
+	          defaultValue: state.value, onChange: this.handleChange}, 
 	          React.createElement("input", {type: "text", className: "form-control", style: {background: 'white', cursor: 'pointer'}})
 	        ), 
 	        React.createElement("span", {className: "input-group-addon", onClick: this.open}, 
@@ -102,6 +98,9 @@ webpackJsonp([2],[
 
 
 /***/ },
+/* 2 */,
+/* 3 */,
+/* 4 */,
 /* 5 */,
 /* 6 */,
 /* 7 */,
@@ -335,4 +334,4 @@ webpackJsonp([2],[
 
 /***/ }
 ]);
-//# sourceMappingURL=picker.js.map
+//# sourceMappingURL=defaultValue.js.map
