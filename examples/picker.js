@@ -54,7 +54,7 @@ var Test = React.createClass({
   render: function () {
     var state = this.state;
     var calendar = <Calendar locale={CalendarLocale}
-      orient={['bottom', 'left']}
+      orient={['top', 'left']}
       showTime={this.state.showTime} onSelect={this.handleCalendarSelect} onClear={this.handleCalendarSelect.bind(this,null)} showClear={true}/>;
     return <div className="form-group" style={{width: 400, margin: 20}} data-time={this.state.time}>
       <div className="input-group">
