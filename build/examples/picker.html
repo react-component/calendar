@@ -238,7 +238,7 @@ require(<span class="hljs-string">'rc-calendar/assets/bootstrap.css'</span>);
   render: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
     <span class="hljs-keyword">var</span> state = <span class="hljs-keyword">this</span>.state;
     <span class="hljs-keyword">var</span> calendar = &lt;Calendar locale={CalendarLocale}
-      orient={[<span class="hljs-string">'bottom'</span>, <span class="hljs-string">'left'</span>]}
+      orient={[<span class="hljs-string">'top'</span>, <span class="hljs-string">'left'</span>]}
       showTime={<span class="hljs-keyword">this</span>.state.showTime} onSelect={<span class="hljs-keyword">this</span>.handleCalendarSelect} onClear={<span class="hljs-keyword">this</span>.handleCalendarSelect.bind(<span class="hljs-keyword">this</span>,<span class="hljs-literal">null</span>)} showClear={<span class="hljs-literal">true</span>}/&gt;;
     <span class="hljs-keyword">return</span> &lt;div className=<span class="hljs-string">"form-group"</span> style={{width: <span class="hljs-number">400</span>, margin: <span class="hljs-number">20</span>}} data-time={<span class="hljs-keyword">this</span>.state.time}&gt;
       &lt;div className=<span class="hljs-string">"input-group"</span>&gt;

@@ -1,4 +1,4 @@
-webpackJsonp([2],[
+webpackJsonp([1],[
 /* 0 */
 /*!********************!*\
   !*** multi picker ***!
@@ -24,9 +24,9 @@ webpackJsonp([2],[
 	var React = __webpack_require__(/*! react */ 6);
 	var Calendar = __webpack_require__(/*! rc-calendar */ 7);
 	var DatePicker = Calendar.Picker;
-	var zhCn = __webpack_require__(/*! gregorian-calendar/lib/locale/zh-cn */ 10); // spm error
-	var DateTimeFormat = __webpack_require__(/*! gregorian-calendar-format */ 11);
-	var GregorianCalendar = __webpack_require__(/*! gregorian-calendar */ 9);
+	var zhCn = __webpack_require__(/*! gregorian-calendar/lib/locale/zh-cn */ 11); // spm error
+	var DateTimeFormat = __webpack_require__(/*! gregorian-calendar-format */ 9);
+	var GregorianCalendar = __webpack_require__(/*! gregorian-calendar */ 10);
 	var CalendarLocale = __webpack_require__(/*! ../lib/locale/zh-cn */ 8);
 	
 	var Test = React.createClass({displayName: "Test",
@@ -74,7 +74,7 @@ webpackJsonp([2],[
 	  render: function () {
 	    var state = this.state;
 	    var calendar = React.createElement(Calendar, {locale: CalendarLocale, 
-	      orient: ['bottom', 'left'], 
+	      orient: ['top', 'left'], 
 	      showTime: this.state.showTime, onSelect: this.handleCalendarSelect, onClear: this.handleCalendarSelect.bind(this,null), showClear: true});
 	    return React.createElement("div", {className: "form-group", style: {width: 400, margin: 20}, "data-time": this.state.time}, 
 	      React.createElement("div", {className: "input-group"}, 
@@ -147,7 +147,8 @@ webpackJsonp([2],[
 
 /***/ },
 /* 9 */,
-/* 10 */
+/* 10 */,
+/* 11 */
 /*!**************************************************!*\
   !*** ./~/gregorian-calendar/lib/locale/zh-cn.js ***!
   \**************************************************/
@@ -167,7 +168,6 @@ webpackJsonp([2],[
 
 
 /***/ },
-/* 11 */,
 /* 12 */
 /*!******************************!*\
   !*** ./assets/bootstrap.css ***!

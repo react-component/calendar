@@ -1,4 +1,4 @@
-webpackJsonp([4],[
+webpackJsonp([3],[
 /* 0 */
 /*!**************************!*\
   !*** multi defaultValue ***!
@@ -21,9 +21,9 @@ webpackJsonp([4],[
 	var React = __webpack_require__(/*! react */ 6);
 	var Calendar = __webpack_require__(/*! rc-calendar */ 7);
 	var DatePicker = Calendar.Picker;
-	var zhCn = __webpack_require__(/*! gregorian-calendar/lib/locale/zh-cn */ 10); // spm error
-	var DateTimeFormat = __webpack_require__(/*! gregorian-calendar-format */ 11);
-	var GregorianCalendar = __webpack_require__(/*! gregorian-calendar */ 9);
+	var zhCn = __webpack_require__(/*! gregorian-calendar/lib/locale/zh-cn */ 11); // spm error
+	var DateTimeFormat = __webpack_require__(/*! gregorian-calendar-format */ 9);
+	var GregorianCalendar = __webpack_require__(/*! gregorian-calendar */ 10);
 	var CalendarLocale = __webpack_require__(/*! ../lib/locale/zh-cn */ 8);
 	
 	var Test = React.createClass({displayName: "Test",
@@ -146,7 +146,8 @@ webpackJsonp([4],[
 
 /***/ },
 /* 9 */,
-/* 10 */
+/* 10 */,
+/* 11 */
 /*!**************************************************!*\
   !*** ./~/gregorian-calendar/lib/locale/zh-cn.js ***!
   \**************************************************/
@@ -166,7 +167,6 @@ webpackJsonp([4],[
 
 
 /***/ },
-/* 11 */,
 /* 12 */
 /*!******************************!*\
   !*** ./assets/bootstrap.css ***!

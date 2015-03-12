@@ -1,4 +1,4 @@
-webpackJsonp([3],{
+webpackJsonp([2],{
 
 /***/ 0:
 /*!*******************!*\
@@ -20,7 +20,7 @@ webpackJsonp([3],{
 	/** @jsx React.DOM */
 	__webpack_require__(/*! rc-calendar/assets/classic.css */ 14);
 	var Calendar = __webpack_require__(/*! rc-calendar */ 7);
-	var GregorianCalendarFormat = __webpack_require__(/*! gregorian-calendar-format */ 11);
+	var GregorianCalendarFormat = __webpack_require__(/*! gregorian-calendar-format */ 9);
 	var React = __webpack_require__(/*! react */ 6);
 	var formatter = new GregorianCalendarFormat('yyyy-MM-dd HH:mm:ss');
 	
