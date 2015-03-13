@@ -75,7 +75,7 @@
 /******/ 			script.type = 'text/javascript';
 /******/ 			script.charset = 'utf-8';
 /******/ 			script.async = true;
-/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"disabled","1":"picker","2":"theme","3":"defaultValue","4":"simple"}[chunkId]||chunkId) + ".js";
+/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"disabled","1":"simple","2":"picker","3":"theme","4":"defaultValue"}[chunkId]||chunkId) + ".js";
 /******/ 			head.appendChild(script);
 /******/ 		}
 /******/ 	};
@@ -119,24 +119,24 @@
 /***/ },
 /* 8 */,
 /* 9 */
-/*!**********************************************!*\
-  !*** ./~/gregorian-calendar-format/index.js ***!
-  \**********************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(/*! ./lib/gregorian-calendar-format */ 22);
-
-/***/ },
-/* 10 */
 /*!***************************************!*\
   !*** ./~/gregorian-calendar/index.js ***!
   \***************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(/*! ./lib/gregorian-calendar */ 23);
+	module.exports = __webpack_require__(/*! ./lib/gregorian-calendar */ 22);
 
 /***/ },
-/* 11 */,
+/* 10 */,
+/* 11 */
+/*!**********************************************!*\
+  !*** ./~/gregorian-calendar-format/index.js ***!
+  \**********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(/*! ./lib/gregorian-calendar-format */ 23);
+
+/***/ },
 /* 12 */,
 /* 13 */,
 /* 14 */,
@@ -157,12 +157,12 @@
 	var React = __webpack_require__(/*! react */ 6);
 	var DATE_ROW_COUNT = 6;
 	var DATE_COL_COUNT = 7;
-	var DateTimeFormat = __webpack_require__(/*! gregorian-calendar-format */ 9);
-	var GregorianCalendar = __webpack_require__(/*! gregorian-calendar */ 10);
+	var DateTimeFormat = __webpack_require__(/*! gregorian-calendar-format */ 11);
+	var GregorianCalendar = __webpack_require__(/*! gregorian-calendar */ 9);
 	var rcUtil = __webpack_require__(/*! rc-util */ 29);
 	var KeyCode = rcUtil.KeyCode;
-	var MonthPanel = __webpack_require__(/*! ./MonthPanel */ 24);
-	var Time = __webpack_require__(/*! ./Time */ 25);
+	var MonthPanel = __webpack_require__(/*! ./MonthPanel */ 25);
+	var Time = __webpack_require__(/*! ./Time */ 26);
 	
 	function noop() {
 	}
@@ -173,40 +173,40 @@
 	    d.getDayOfMonth();
 	}
 	
-	function goStartMonth(self) {
-	  var next = self.state.value.clone();
+	function goStartMonth() {
+	  var next = this.state.value.clone();
 	  next.setDayOfMonth(1);
-	  self.setState({value: next});
+	  this.setState({value: next});
 	}
 	
-	function goEndMonth(self) {
-	  var next = self.state.value.clone();
+	function goEndMonth() {
+	  var next = this.state.value.clone();
 	  next.setDayOfMonth(next.getActualMaximum(GregorianCalendar.MONTH));
-	  self.setState({value: next});
+	  this.setState({value: next});
 	}
 	
-	function goMonth(self, direction) {
-	  var next = self.state.value.clone();
+	function goMonth(direction) {
+	  var next = this.state.value.clone();
 	  next.addMonth(direction);
-	  self.setState({value: next});
+	  this.setState({value: next});
 	}
 	
-	function goYear(self, direction) {
-	  var next = self.state.value.clone();
+	function goYear(direction) {
+	  var next = this.state.value.clone();
 	  next.addYear(direction);
-	  self.setState({value: next});
+	  this.setState({value: next});
 	}
 	
-	function goWeek(self, direction) {
-	  var next = self.state.value.clone();
+	function goWeek(direction) {
+	  var next = this.state.value.clone();
 	  next.addWeekOfYear(direction);
-	  self.setState({value: next});
+	  this.setState({value: next});
 	}
 	
-	function goDay(self, direction) {
-	  var next = self.state.value.clone();
+	function goDay(direction) {
+	  var next = this.state.value.clone();
 	  next.addDayOfMonth(direction);
-	  self.setState({value: next});
+	  this.setState({value: next});
 	}
 	
 	function isSameDay(one, two) {
@@ -214,11 +214,6 @@
 	    one.getMonth() === two.getMonth() &&
 	    one.getDayOfMonth() === two.getDayOfMonth();
 	}
-	//
-	//function isSameMonth(one, two) {
-	//  return one.getYear() === two.getYear() &&
-	//    one.getMonth() === two.getMonth();
-	//}
 	
 	function beforeCurrentMonthYear(current, today) {
 	  if (current.getYear() < today.getYear()) {
@@ -236,52 +231,151 @@
 	    current.getMonth() > today.getMonth();
 	}
 	
-	var Calendar = React.createClass({displayName: "Calendar",
-	  propTypes: {
-	    value: React.PropTypes.object,
-	    defaultValue: React.PropTypes.object,
-	    className: React.PropTypes.string,
-	    orient: React.PropTypes.arrayOf(React.PropTypes.oneOf(['left', 'top', 'right', 'bottom'])),
-	    locale: React.PropTypes.object,
-	    showWeekNumber: React.PropTypes.bool,
-	    showToday: React.PropTypes.bool,
-	    showTime: React.PropTypes.bool,
-	    onSelect: React.PropTypes.func,
-	    onBlur: React.PropTypes.func
-	  },
+	function onFocus() {
+	  if (this._blurTimer) {
+	    clearTimeout(this._blurTimer);
+	    this._blurTimer = null;
+	  } else {
+	    this.props.onFocus();
+	  }
+	}
 	
-	  mixins: [rcUtil.PureRenderMixin],
+	function onBlur() {
+	  if (this._blurTimer) {
+	    clearTimeout(this._blurTimer);
+	  }
+	  this._blurTimer = setTimeout(function() {
+	    this.props.onBlur();
+	  }.bind(this), 100);
+	}
 	
-	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 26),
+	function chooseToday() {
+	  var today = this.state.value.clone();
+	  today.setTime(Date.now());
+	  this.setState({
+	    value: today
+	  });
+	}
 	
-	  getInitialState: function () {
-	    var value = this.props.value || this.props.defaultValue;
+	function handleDayClick(current) {
+	  this.handleSelect(current);
+	}
+	
+	function handleSelect(current, event) {
+	  var props = this.props;
+	  this.setState({
+	    value: current
+	  });
+	  if (!event) {
+	    props.onSelect(current);
+	  }
+	}
+	
+	function clear() {
+	  this.props.onClear();
+	}
+	
+	function onMonthPanelSelect(current) {
+	  this.setState({
+	    value: current,
+	    showMonthPanel: 0
+	  });
+	}
+	
+	function handleKeyDown(e) {
+	  var keyCode = e.keyCode;
+	  // mac
+	  var ctrlKey = e.ctrlKey || e.metaKey;
+	  switch (keyCode) {
+	    case KeyCode.DOWN:
+	      goWeek.call(this, 1);
+	      e.preventDefault();
+	      return true;
+	    case KeyCode.UP:
+	      goWeek.call(this, -1);
+	      e.preventDefault();
+	      return true;
+	    case KeyCode.LEFT:
+	      if (ctrlKey) {
+	        this.previousYear();
+	      } else {
+	        goDay.call(this, -1);
+	      }
+	      e.preventDefault();
+	      return true;
+	    case KeyCode.RIGHT:
+	      if (ctrlKey) {
+	        this.nextYear();
+	      } else {
+	        goDay.call(this, 1);
+	      }
+	      e.preventDefault();
+	      return true;
+	    case KeyCode.HOME:
+	      goStartMonth.call(this);
+	      e.preventDefault();
+	      return true;
+	    case KeyCode.END:
+	      goEndMonth.call(this);
+	      e.preventDefault();
+	      return true;
+	    case KeyCode.PAGE_DOWN:
+	      this.nextMonth();
+	      e.preventDefault();
+	      return true;
+	    case KeyCode.PAGE_UP:
+	      this.previousMonth();
+	      e.preventDefault();
+	      return true;
+	    case KeyCode.ENTER:
+	      this.props.onSelect(this.state.value);
+	      e.preventDefault();
+	      return true;
+	  }
+	  this.props.onKeyDown(e);
+	}
+	
+	function showMonthPanel() {
+	  this.setState({
+	    showMonthPanel: 1
+	  });
+	}
+	
+	var ____Class0=React.Component;for(var ____Class0____Key in ____Class0){if(____Class0.hasOwnProperty(____Class0____Key)){Calendar[____Class0____Key]=____Class0[____Class0____Key];}}var ____SuperProtoOf____Class0=____Class0===null?null:____Class0.prototype;Calendar.prototype=Object.create(____SuperProtoOf____Class0);Calendar.prototype.constructor=Calendar;Calendar.__superConstructor__=____Class0;
+	  function Calendar(props) {"use strict";
+	    ____Class0.call(this,props);
+	    var value = props.value || props.defaultValue;
 	    if (!value) {
 	      value = new GregorianCalendar();
 	      value.setTime(Date.now());
 	    }
-	    this.dateFormatter = new DateTimeFormat(this.props.locale.dateFormat);
-	    return {
-	      orient: this.props.orient,
-	      prefixCls: this.props.prefixCls || 'rc-calendar',
+	    this.dateFormatter = new DateTimeFormat(props.locale.dateFormat);
+	    this.state = {
+	      orient: props.orient,
+	      prefixCls: props.prefixCls || 'rc-calendar',
 	      value: value
 	    };
-	  },
+	    // bind methods
+	    this.onBlur = onBlur.bind(this);
+	    this.onFocus = onFocus.bind(this);
+	    this.prefixClsFn = __webpack_require__(/*! ./prefixClsFn */ 27).bind(this);
+	    this.nextMonth = goMonth.bind(this, 1);
+	    this.previousMonth = goMonth.bind(this, -1);
+	    this.nextYear = goYear.bind(this, 1);
+	    this.previousYear = goYear.bind(this, -1);
+	    this.chooseToday = chooseToday.bind(this);
+	    this.clear = clear.bind(this);
+	    this.handleSelect = handleSelect.bind(this);
+	    this.onMonthPanelSelect = onMonthPanelSelect.bind(this);
+	    this.handleKeyDown = handleKeyDown.bind(this);
+	    this.showMonthPanel = showMonthPanel.bind(this);
+	  }
 	
-	  getDefaultProps: function () {
-	    return {
-	      locale: __webpack_require__(/*! ./locale/en-us */ 27),
-	      onKeyDown: noop,
-	      className: '',
-	      showToday: true,
-	      onSelect: noop,
-	      onFocus: noop,
-	      onBlur: noop,
-	      onClear: noop
-	    };
-	  },
+	  Object.defineProperty(Calendar.prototype,"shouldComponentUpdate",{writable:true,configurable:true,value:function() {"use strict";
+	    return rcUtil.PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
+	  }});
 	
-	  componentWillReceiveProps: function (nextProps) {
+	  Object.defineProperty(Calendar.prototype,"componentWillReceiveProps",{writable:true,configurable:true,value:function(nextProps) {"use strict";
 	    var value = nextProps.value;
 	    if (value !== undefined) {
 	      if (!value) {
@@ -300,136 +394,10 @@
 	    if (nextProps.locale !== this.props.locale) {
 	      this.dateFormatter = new DateTimeFormat(nextProps.locale.dateFormat);
 	    }
-	  },
+	  }});
 	
-	  goMonth: function (direction) {
-	    var next = this.state.value.clone();
-	    next.addMonth(direction);
-	    this.setState({
-	      value: next
-	    });
-	  },
-	
-	  goYear: function (direction) {
-	    var next = this.state.value.clone();
-	    next.addYear(direction);
-	    this.setState({
-	      value: next
-	    });
-	  },
-	
-	  nextMonth: function () {
-	    this.goMonth(1);
-	  },
-	
-	  previousMonth: function () {
-	    this.goMonth(-1);
-	  },
-	
-	  nextYear: function () {
-	    this.goYear(1);
-	  },
-	
-	  previousYear: function () {
-	    this.goYear(-1);
-	  },
-	
-	  handleSelect: function (current, byKeyBoard) {
+	  Object.defineProperty(Calendar.prototype,"renderDates",{writable:true,configurable:true,value:function() {"use strict";
 	    var props = this.props;
-	    this.setState({
-	      value: current
-	    });
-	    if (!byKeyBoard) {
-	      props.onSelect(current);
-	    }
-	  },
-	
-	  handleDayClick: function (current) {
-	    this.handleSelect(current);
-	  },
-	
-	  chooseToday: function () {
-	    var today = this.state.value.clone();
-	    today.setTime(Date.now());
-	    this.setState({
-	      value: today
-	    });
-	  },
-	
-	  clear: function () {
-	    this.props.onClear();
-	  },
-	
-	  handleKeyDown: function (e) {
-	    var self = this;
-	    var keyCode = e.keyCode;
-	    // mac
-	    var ctrlKey = e.ctrlKey || e.metaKey;
-	    switch (keyCode) {
-	      case KeyCode.DOWN:
-	        goWeek(self, 1);
-	        e.preventDefault();
-	        return true;
-	      case KeyCode.UP:
-	        goWeek(self, -1);
-	        e.preventDefault();
-	        return true;
-	      case KeyCode.LEFT:
-	        if (ctrlKey) {
-	          goYear(self, -1);
-	        } else {
-	          goDay(self, -1);
-	        }
-	        e.preventDefault();
-	        return true;
-	      case KeyCode.RIGHT:
-	        if (ctrlKey) {
-	          goYear(self, 1);
-	        } else {
-	          goDay(self, 1);
-	        }
-	        e.preventDefault();
-	        return true;
-	      case KeyCode.HOME:
-	        goStartMonth(self);
-	        e.preventDefault();
-	        return true;
-	      case KeyCode.END:
-	        goEndMonth(self);
-	        e.preventDefault();
-	        return true;
-	      case KeyCode.PAGE_DOWN:
-	        goMonth(self, 1);
-	        e.preventDefault();
-	        return true;
-	      case KeyCode.PAGE_UP:
-	        goMonth(self, -1);
-	        e.preventDefault();
-	        return true;
-	      case KeyCode.ENTER:
-	        self.props.onSelect(self.state.value);
-	        e.preventDefault();
-	        return true;
-	    }
-	    self.props.onKeyDown(e);
-	  },
-	
-	  showMonthPanel: function () {
-	    this.setState({
-	      showMonthPanel: 1
-	    });
-	  },
-	
-	  onMonthPanelSelect: function (current) {
-	    this.setState({
-	      value: current,
-	      showMonthPanel: 0
-	    });
-	  },
-	
-	  renderDates: function () {
-	    var props = this.props;
-	    var self = this;
 	    var i, j, current;
 	    var dateTable = [];
 	    var showWeekNumber = props.showWeekNumber;
@@ -512,7 +480,7 @@
 	        }
 	
 	        dateCells.push(
-	          React.createElement("td", {key: passed, onClick: disabled ? noop : this.handleDayClick.bind(this, current), role: "gridcell", title: dateFormatter.format(current), className: cls}, 
+	          React.createElement("td", {key: passed, onClick: disabled ? noop : handleDayClick.bind(this, current), role: "gridcell", title: dateFormatter.format(current), className: cls}, 
 	        dateHtml
 	          ));
 	
@@ -526,45 +494,24 @@
 	          dateCells
 	        ));
 	    }
-	    self.dateTable = dateTable;
+	    this.dateTable = dateTable;
 	    return tableHtml;
-	  },
+	  }});
 	
-	  getTodayTime: function () {
-	    var self = this;
-	    var value = self.state.value;
+	  Object.defineProperty(Calendar.prototype,"getTodayTime",{writable:true,configurable:true,value:function() {"use strict";
+	    var value = this.state.value;
 	    var today = value.clone();
 	    today.setTime(Date.now());
 	    return this.dateFormatter.format(today);
-	  },
+	  }});
 	
-	  getMonthYear: function () {
-	    var self = this;
-	    var locale = self.props.locale;
-	    var value = self.state.value;
+	  Object.defineProperty(Calendar.prototype,"getMonthYear",{writable:true,configurable:true,value:function() {"use strict";
+	    var locale = this.props.locale;
+	    var value = this.state.value;
 	    return new DateTimeFormat(locale.monthYearFormat).format(value);
-	  },
+	  }});
 	
-	  onFocus: function () {
-	    if (this._blurTimer) {
-	      clearTimeout(this._blurTimer);
-	      this._blurTimer = null;
-	    } else {
-	      this.props.onFocus();
-	    }
-	  },
-	
-	  onBlur: function () {
-	    if (this._blurTimer) {
-	      clearTimeout(this._blurTimer);
-	    }
-	    var self = this;
-	    this._blurTimer = setTimeout(function () {
-	      self.props.onBlur();
-	    }, 100);
-	  },
-	
-	  render: function () {
+	  Object.defineProperty(Calendar.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
 	    // console.log('re render');
 	    var showWeekNumberEl;
 	    var props = this.props;
@@ -589,7 +536,7 @@
 	          React.createElement("span", {className: prefixClsFn("column-header-inner")}, "x")
 	        ));
 	    }
-	    var weekDaysEls = weekDays.map(function (value, xindex) {
+	    var weekDaysEls = weekDays.map(function(value, xindex) {
 	      return (
 	        React.createElement("th", {key: xindex, role: "columnheader", title: value, className: prefixClsFn("column-header")}, 
 	          React.createElement("span", {className: prefixClsFn("column-header-inner")}, 
@@ -638,7 +585,7 @@
 	    }
 	    var orient = state.orient;
 	    if (orient) {
-	      orient.forEach(function (o) {
+	      orient.forEach(function(o)  {
 	        className += ' ' + prefixClsFn('orient-' + o);
 	      });
 	    }
@@ -693,8 +640,33 @@
 	        ), 
 	      monthPanel
 	      ));
-	  }
-	});
+	  }});
+	
+	
+	Calendar.propTypes = {
+	  value: React.PropTypes.object,
+	  defaultValue: React.PropTypes.object,
+	  className: React.PropTypes.string,
+	  orient: React.PropTypes.arrayOf(React.PropTypes.oneOf(['left', 'top', 'right', 'bottom'])),
+	  locale: React.PropTypes.object,
+	  showWeekNumber: React.PropTypes.bool,
+	  showToday: React.PropTypes.bool,
+	  showTime: React.PropTypes.bool,
+	  onSelect: React.PropTypes.func,
+	  onBlur: React.PropTypes.func
+	};
+	
+	Calendar.defaultProps = {
+	  locale: __webpack_require__(/*! ./locale/en-us */ 28),
+	  onKeyDown: noop,
+	  className: '',
+	  showToday: true,
+	  onSelect: noop,
+	  onFocus: noop,
+	  onBlur: noop,
+	  onClear: noop
+	};
+	
 	module.exports = Calendar;
 
 
@@ -708,8 +680,8 @@
 	/** @jsx React.DOM */
 	
 	var React = __webpack_require__(/*! react */ 6);
-	var DateTimeFormat = __webpack_require__(/*! gregorian-calendar-format */ 9);
-	var cloneWithProps = __webpack_require__(/*! rc-util */ 29).cloneWithProps;
+	var DateTimeFormat = __webpack_require__(/*! gregorian-calendar-format */ 11);
+	var rcUtil = __webpack_require__(/*! rc-util */ 29);
 	var KeyCode = __webpack_require__(/*! rc-util */ 29).KeyCode;
 	var domAlign = __webpack_require__(/*! dom-align */ 30);
 	var orientMap = {
@@ -730,74 +702,74 @@
 	  }
 	}
 	
+	function refFn(field, component) {
+	  this[field] = component;
+	}
+	
 	/**
 	 * DatePicker = wrap input using Calendar
 	 */
-	var Picker = React.createClass({displayName: "Picker",
-	  propTypes: {
-	    onChange: React.PropTypes.func
-	  },
-	
-	  getDefaultProps: function () {
-	    return {
-	      prefixCls: 'rc-calendar-picker',
-	      onChange: function () {
-	      },
-	      formatter: new DateTimeFormat('yyyy-MM-dd')
+	var ____Class1=React.Component;for(var ____Class1____Key in ____Class1){if(____Class1.hasOwnProperty(____Class1____Key)){Picker[____Class1____Key]=____Class1[____Class1____Key];}}var ____SuperProtoOf____Class1=____Class1===null?null:____Class1.prototype;Picker.prototype=Object.create(____SuperProtoOf____Class1);Picker.prototype.constructor=Picker;Picker.__superConstructor__=____Class1;
+	  function Picker(props) {"use strict";
+	    ____Class1.call(this,props);
+	    this.state = {
+	      open: props.open,
+	      value: props.value || props.defaultValue
 	    };
-	  },
 	
-	  getInitialState: function () {
-	    return {
-	      open: this.props.open,
-	      value: this.props.value || this.props.defaultValue
-	    };
-	  },
+	    // bind methods
+	    [
+	      'handleInputClick', 'handleCalendarBlur', 'handleCalendarClear', 'handleCalendarKeyDown',
+	      'handleKeyDown', 'handleCalendarSelect'
+	    ].forEach(function(m) {
+	        this[m] = this[m].bind(this);
+	      }.bind(this));
+	    this.saveCalendarRef = refFn.bind(this, 'calendarInstance');
+	    this.saveInputRef = refFn.bind(this, 'inputInstance');
+	  }
 	
-	  componentWillReceiveProps: function (nextProps) {
+	  Object.defineProperty(Picker.prototype,"componentWillReceiveProps",{writable:true,configurable:true,value:function(nextProps) {"use strict";
 	    if (nextProps.value) {
 	      this.setState({
 	        value: nextProps.value
 	      });
 	    }
-	  },
+	  }});
 	
-	  open: function (callback) {
+	  Object.defineProperty(Picker.prototype,"open",{writable:true,configurable:true,value:function(callback) {"use strict";
 	    this.setState({
 	      open: true
 	    }, callback);
-	  },
+	  }});
 	
-	  close: function (callback) {
+	  Object.defineProperty(Picker.prototype,"close",{writable:true,configurable:true,value:function(callback) {"use strict";
 	    this.setState({
 	      open: false
 	    }, callback);
-	  },
+	  }});
 	
-	  handleInputClick: function () {
+	  Object.defineProperty(Picker.prototype,"handleInputClick",{writable:true,configurable:true,value:function() {"use strict";
 	    this.open();
-	  },
+	  }});
 	
-	  handleKeyDown: function (e) {
+	  Object.defineProperty(Picker.prototype,"handleKeyDown",{writable:true,configurable:true,value:function(e) {"use strict";
 	    // down
 	    if (e.keyCode === KeyCode.DOWN) {
 	      e.preventDefault();
 	      this.handleInputClick();
 	    }
-	  },
+	  }});
 	
-	  handleCalendarKeyDown: function (e) {
-	    var self = this;
+	  Object.defineProperty(Picker.prototype,"handleCalendarKeyDown",{writable:true,configurable:true,value:function(e) {"use strict";
 	    if (e.keyCode === KeyCode.ESC) {
 	      e.stopPropagation();
-	      self.close(function () {
-	        self.refs.input.getDOMNode().focus();
-	      });
+	      this.close(function()  {
+	        React.findDOMNode(this.inputInstance).focus();
+	      }.bind(this));
 	    }
-	  },
+	  }});
 	
-	  handleCalendarSelect: function (value) {
-	    var self = this;
+	  Object.defineProperty(Picker.prototype,"handleCalendarSelect",{writable:true,configurable:true,value:function(value) {"use strict";
 	    this.props.calendar.props.onSelect(value);
 	    var currentValue = this.state.value;
 	    if (this.props.calendar.props.showTime) {
@@ -805,47 +777,45 @@
 	        value: value
 	      });
 	    } else {
-	      self.setState({
+	      this.setState({
 	        value: value,
 	        open: false
-	      }, function () {
-	        self.refs.input.getDOMNode().focus();
-	      });
+	      }, function()  {
+	        React.findDOMNode(this.inputInstance).focus();
+	      }.bind(this));
 	    }
 	    if (!currentValue || currentValue.getTime() !== value.getTime()) {
-	      self.props.onChange(value);
+	      this.props.onChange(value);
 	    }
-	  },
+	  }});
 	
-	  handleCalendarBlur: function () {
+	  Object.defineProperty(Picker.prototype,"handleCalendarBlur",{writable:true,configurable:true,value:function() {"use strict";
 	    // if invisible, will not trigger blur
 	    this.setState({
 	      open: false
 	    });
-	  },
+	  }});
 	
-	  handleCalendarClear: function () {
+	  Object.defineProperty(Picker.prototype,"handleCalendarClear",{writable:true,configurable:true,value:function() {"use strict";
 	    this.props.calendar.props.onClear();
-	    var self = this;
 	    this.setState({
 	      open: false,
 	      value: null
-	    }, function () {
-	      self.refs.input.getDOMNode().focus();
-	    });
+	    }, function() {
+	      React.findDOMNode(this.inputInstance).focus();
+	    }.bind(this));
 	    if (this.state.value !== null) {
 	      this.props.onChange(null);
 	    }
-	  },
+	  }});
 	
-	  componentDidMount: function () {
+	  Object.defineProperty(Picker.prototype,"componentDidMount",{writable:true,configurable:true,value:function() {"use strict";
 	    this.componentDidUpdate();
-	  },
+	  }});
 	
-	  componentDidUpdate: function () {
-	    var refs = this.refs;
-	    if (this.state.open && !this._lastOpen) {
-	      var orient = this._cacheCalendar.props.orient;
+	  Object.defineProperty(Picker.prototype,"componentDidUpdate",{writable:true,configurable:true,value:function() {"use strict";
+	    if (this.state.open && !this.$Picker_lastOpen) {
+	      var orient = this.$Picker_cacheCalendar.props.orient;
 	      var points = ['tl', 'bl'];
 	      var offset = [0, 5];
 	      if (orient.indexOf('top') !== -1 && orient.indexOf('left') !== -1) {
@@ -860,7 +830,7 @@
 	        offset = [0, -5];
 	      }
 	
-	      var align = domAlign(refs.calendar.getDOMNode(), refs.input.getDOMNode(), {
+	      var align = domAlign(React.findDOMNode(this.calendarInstance), this.inputInstance.getDOMNode(), {
 	        points: points,
 	        offset: offset,
 	        overflow: {
@@ -870,25 +840,25 @@
 	      });
 	      points = align.points;
 	      var newOrient = orientMap[points[0]];
-	      this.refs.calendar.setState({
+	      this.calendarInstance.setState({
 	        orient: newOrient
 	      });
-	      this.refs.calendar.getDOMNode().focus();
+	      React.findDOMNode(this.calendarInstance).focus();
 	    }
-	    this._lastOpen = this.state.open;
-	  },
+	    this.$Picker_lastOpen = this.state.open;
+	  }});
 	
-	  render: function () {
+	  Object.defineProperty(Picker.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
 	    var props = this.props;
 	    var input = props.children;
 	    var state = this.state;
 	    var value = state.value;
-	    var calendar = this._cacheCalendar;
+	    var calendar = this.$Picker_cacheCalendar;
 	    if (state.open) {
-	      var calendarInstance = this.refs.calendar;
+	      var calendarInstance = this.calendarInstance;
 	      var calendarProp = props.calendar;
-	      this._cacheCalendar = calendar = cloneWithProps(calendarProp, {
-	        ref: 'calendar',
+	      this.$Picker_cacheCalendar = calendar = React.cloneElement(calendarProp, {
+	        ref: rcUtil.createChainedFunction(calendarProp.props.ref, this.saveCalendarRef),
 	        value: value,
 	        // focused: true,
 	        orient: calendarInstance && calendarInstance.state.orient || getImmutableOrient(calendarProp.props.orient) || orientMap.tl,
@@ -902,8 +872,8 @@
 	    if (value) {
 	      inputValue = props.formatter.format(value);
 	    }
-	    input = cloneWithProps(input, {
-	      ref: 'input',
+	    input = React.cloneElement(input, {
+	      ref: rcUtil.createChainedFunction(input.props.ref, this.saveInputRef),
 	      readOnly: true,
 	      onClick: this.handleInputClick,
 	      value: inputValue,
@@ -914,8 +884,19 @@
 	      classes.push(props.prefixCls + '-open');
 	    }
 	    return React.createElement("span", {className: classes.join(' ')}, [input, calendar]);
-	  }
-	});
+	  }});
+	
+	
+	Picker.propTypes = {
+	  onChange: React.PropTypes.func
+	};
+	
+	Picker.defaultProps = {
+	  prefixCls: 'rc-calendar-picker',
+	  onChange:function() {
+	  },
+	  formatter: new DateTimeFormat('yyyy-MM-dd')
+	};
 	
 	module.exports = Picker;
 
@@ -1122,812 +1103,6 @@
 /***/ },
 /* 21 */,
 /* 22 */
-/*!**********************************************************************!*\
-  !*** ./~/gregorian-calendar-format/lib/gregorian-calendar-format.js ***!
-  \**********************************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * @ignore
-	 * DateTimeFormat for
-	 * Inspired by DateTimeFormat from JDK.
-	 * @author yiminghe@gmail.com
-	 */
-	
-	var GregorianCalendar = __webpack_require__(/*! gregorian-calendar */ 10);
-	var enUsLocale = __webpack_require__(/*! ./locale/en-us */ 31);
-	var MAX_VALUE = Number.MAX_VALUE;
-	/**
-	 * date or time style enum
-	 * @enum {Number} Date.Formatter.Style
-	 */
-	var DateTimeStyle = {
-	  /**
-	   * full style
-	   */
-	  FULL: 0,
-	  /**
-	   * long style
-	   */
-	  LONG: 1,
-	  /**
-	   * medium style
-	   */
-	  MEDIUM: 2,
-	  /**
-	   * short style
-	   */
-	  SHORT: 3
-	};
-	
-	/*
-	 Letter    Date or Time Component    Presentation    Examples
-	 G    Era designator    Text    AD
-	 y    Year    Year    1996; 96
-	 M    Month in year    Month    July; Jul; 07
-	 w    Week in year    Number    27
-	 W    Week in month    Number    2
-	 D    Day in year    Number    189
-	 d    Day in month    Number    10
-	 F    Day of week in month    Number    2
-	 E    Day in week    Text    Tuesday; Tue
-	 a    Am/pm marker    Text    PM
-	 H    Hour in day (0-23)    Number    0
-	 k    Hour in day (1-24)    Number    24
-	 K    Hour in am/pm (0-11)    Number    0
-	 h    Hour in am/pm (1-12)    Number    12
-	 m    Minute in hour    Number    30
-	 s    Second in minute    Number    55
-	 S    Millisecond    Number    978
-	 x z    Time zone    General time zone    Pacific Standard Time; PST; GMT-08:00
-	 Z    Time zone    RFC 822 time zone    -0800
-	 */
-	
-	var patternChars = new Array(GregorianCalendar.DAY_OF_WEEK_IN_MONTH + 2).join('1');
-	var ERA = 0;
-	var calendarIndexMap = {};
-	
-	patternChars = patternChars.split('');
-	patternChars[ERA] = 'G';
-	patternChars[GregorianCalendar.YEAR] = 'y';
-	patternChars[GregorianCalendar.MONTH] = 'M';
-	patternChars[GregorianCalendar.DAY_OF_MONTH] = 'd';
-	patternChars[GregorianCalendar.HOUR_OF_DAY] = 'H';
-	patternChars[GregorianCalendar.MINUTES] = 'm';
-	patternChars[GregorianCalendar.SECONDS] = 's';
-	patternChars[GregorianCalendar.MILLISECONDS] = 'S';
-	patternChars[GregorianCalendar.WEEK_OF_YEAR] = 'w';
-	patternChars[GregorianCalendar.WEEK_OF_MONTH] = 'W';
-	patternChars[GregorianCalendar.DAY_OF_YEAR] = 'D';
-	patternChars[GregorianCalendar.DAY_OF_WEEK_IN_MONTH] = 'F';
-	
-	(function () {
-	  for (var index in patternChars) {
-	    calendarIndexMap[patternChars[index]] = index;
-	  }
-	})();
-	
-	function mix(t, s) {
-	  for (var p in s) {
-	    t[p] = s[p];
-	  }
-	}
-	
-	var SUBSTITUTE_REG = /\\?\{([^{}]+)\}/g;
-	var EMPTY = '';
-	
-	function substitute(str, o, regexp) {
-	  if (typeof str !== 'string' || !o) {
-	    return str;
-	  }
-	
-	  return str.replace(regexp || SUBSTITUTE_REG, function (match, name) {
-	    if (match.charAt(0) === '\\') {
-	      return match.slice(1);
-	    }
-	    return (o[name] === undefined) ? EMPTY : o[name];
-	  });
-	}
-	
-	patternChars = patternChars.join('') + 'ahkKZE';
-	
-	function encode(lastField, count, compiledPattern) {
-	  compiledPattern.push({
-	    field: lastField,
-	    count: count
-	  });
-	}
-	
-	function compile(pattern) {
-	  var length = pattern.length;
-	  var inQuote = false;
-	  var compiledPattern = [];
-	  var tmpBuffer = null;
-	  var count = 0;
-	  var lastField = -1;
-	
-	  for (var i = 0; i < length; i++) {
-	    var c = pattern.charAt(i);
-	
-	    if (c === '\'') {
-	      // '' is treated as a single quote regardless of being
-	      // in a quoted section.
-	      if ((i + 1) < length) {
-	        c = pattern.charAt(i + 1);
-	        if (c === '\'') {
-	          i++;
-	          if (count !== 0) {
-	            encode(lastField, count, compiledPattern);
-	            lastField = -1;
-	            count = 0;
-	          }
-	          if (inQuote) {
-	            tmpBuffer += c;
-	          }
-	          continue;
-	        }
-	      }
-	      if (!inQuote) {
-	        if (count !== 0) {
-	          encode(lastField, count, compiledPattern);
-	          lastField = -1;
-	          count = 0;
-	        }
-	        tmpBuffer = '';
-	        inQuote = true;
-	      } else {
-	        compiledPattern.push({
-	          text: tmpBuffer
-	        });
-	        inQuote = false;
-	      }
-	      continue;
-	    }
-	    if (inQuote) {
-	      tmpBuffer += c;
-	      continue;
-	    }
-	    if (!(c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z')) {
-	      if (count !== 0) {
-	        encode(lastField, count, compiledPattern);
-	        lastField = -1;
-	        count = 0;
-	      }
-	      compiledPattern.push({
-	        text: c
-	      });
-	      continue;
-	    }
-	
-	    if (patternChars.indexOf(c) === -1) {
-	      throw new Error('Illegal pattern character "' + c + '"');
-	    }
-	
-	    if (lastField === -1 || lastField === c) {
-	      lastField = c;
-	      count++;
-	      continue;
-	    }
-	    encode(lastField, count, compiledPattern);
-	    lastField = c;
-	    count = 1;
-	  }
-	
-	  if (inQuote) {
-	    throw new Error('Unterminated quote');
-	  }
-	
-	  if (count !== 0) {
-	    encode(lastField, count, compiledPattern);
-	  }
-	
-	  return compiledPattern;
-	}
-	
-	var zeroDigit = '0';
-	
-	// TODO zeroDigit localization??
-	function zeroPaddingNumber(value, minDigits, maxDigits, buffer) {
-	  // Optimization for 1, 2 and 4 digit numbers. This should
-	  // cover most cases of formatting date/time related items.
-	  // Note: This optimization code assumes that maxDigits is
-	  // either 2 or Integer.MAX_VALUE (maxIntCount in format()).
-	  buffer = buffer || [];
-	  maxDigits = maxDigits || MAX_VALUE;
-	  if (value >= 0) {
-	    if (value < 100 && minDigits >= 1 && minDigits <= 2) {
-	      if (value < 10 && minDigits === 2) {
-	        buffer.push(zeroDigit);
-	      }
-	      buffer.push(value);
-	      return buffer.join('');
-	    } else if (value >= 1000 && value < 10000) {
-	      if (minDigits === 4) {
-	        buffer.push(value);
-	        return buffer.join('');
-	      }
-	      if (minDigits === 2 && maxDigits === 2) {
-	        return zeroPaddingNumber(value % 100, 2, 2, buffer);
-	      }
-	    }
-	  }
-	  buffer.push(value + '');
-	  return buffer.join('');
-	}
-	
-	/**
-	 *
-	 * date time formatter for GregorianCalendar
-	 *
-	 *      @example
-	 *
-	 *          var calendar = new GregorianCalendar(2013,9,24);
-	 *          // ' to escape
-	 *          var formatter = new GregorianCalendarFormat("'today is' ''yyyy/MM/dd a''");
-	 *          document.write(formatter.format(calendar));
-	 *
-	 * @class GregorianCalendarFormat
-	 * @param {String} pattern patter string of date formatter
-	 *
-	 * <table border="1">
-	 * <thead valign="bottom">
-	 * <tr><th class="head">Letter</th>
-	 * <th class="head">Date or Time Component</th>
-	 * <th class="head">Presentation</th>
-	 * <th class="head">Examples</th>
-	 * </tr>
-	 * </thead>
-	 * <tbody valign="top">
-	 * <tr><td>G</td>
-	 * <td>Era designator</td>
-	 * <td>Text</td>
-	 * <td>AD</td>
-	 * </tr>
-	 * <tr><td>y</td>
-	 * <td>Year</td>
-	 * <td>Year</td>
-	 * <td>1996; 96</td>
-	 * </tr>
-	 * <tr><td>M</td>
-	 * <td>Month in year</td>
-	 * <td>Month</td>
-	 * <td>July; Jul; 07</td>
-	 * </tr>
-	 * <tr><td>w</td>
-	 * <td>Week in year</td>
-	 * <td>Number</td>
-	 * <td>27</td>
-	 * </tr>
-	 * <tr><td>W</td>
-	 * <td>Week in month</td>
-	 * <td>Number</td>
-	 * <td>2</td>
-	 * </tr>
-	 * <tr><td>D</td>
-	 * <td>Day in year</td>
-	 * <td>Number</td>
-	 * <td>189</td>
-	 * </tr>
-	 * <tr><td>d</td>
-	 * <td>Day in month</td>
-	 * <td>Number</td>
-	 * <td>10</td>
-	 * </tr>
-	 * <tr><td>F</td>
-	 * <td>Day of week in month</td>
-	 * <td>Number</td>
-	 * <td>2</td>
-	 * </tr>
-	 * <tr><td>E</td>
-	 * <td>Day in week</td>
-	 * <td>Text</td>
-	 * <td>Tuesday; Tue</td>
-	 * </tr>
-	 * <tr><td>a</td>
-	 * <td>Am/pm marker</td>
-	 * <td>Text</td>
-	 * <td>PM</td>
-	 * </tr>
-	 * <tr><td>H</td>
-	 *       <td>Hour in day (0-23)</td>
-	 * <td>Number</td>
-	 * <td>0</td>
-	 * </tr>
-	 * <tr><td>k</td>
-	 *       <td>Hour in day (1-24)</td>
-	 * <td>Number</td>
-	 * <td>24</td>
-	 * </tr>
-	 * <tr><td>K</td>
-	 * <td>Hour in am/pm (0-11)</td>
-	 * <td>Number</td>
-	 * <td>0</td>
-	 * </tr>
-	 * <tr><td>h</td>
-	 * <td>Hour in am/pm (1-12)</td>
-	 * <td>Number</td>
-	 * <td>12</td>
-	 * </tr>
-	 * <tr><td>m</td>
-	 * <td>Minute in hour</td>
-	 * <td>Number</td>
-	 * <td>30</td>
-	 * </tr>
-	 * <tr><td>s</td>
-	 * <td>Second in minute</td>
-	 * <td>Number</td>
-	 * <td>55</td>
-	 * </tr>
-	 * <tr><td>S</td>
-	 * <td>Millisecond</td>
-	 * <td>Number</td>
-	 * <td>978</td>
-	 * </tr>
-	 * <tr><td>x/z</td>
-	 * <td>Time zone</td>
-	 * <td>General time zone</td>
-	 * <td>Pacific Standard Time; PST; GMT-08:00</td>
-	 * </tr>
-	 * <tr><td>Z</td>
-	 * <td>Time zone</td>
-	 * <td>RFC 822 time zone</td>
-	 * <td>-0800</td>
-	 * </tr>
-	 * </tbody>
-	 * </table>
-	
-	 * @param {Object} locale format locale
-	 */
-	function DateTimeFormat(pattern, locale) {
-	  this.locale = locale || enUsLocale;
-	  this.originalPattern = pattern;
-	  this.pattern = compile(pattern);
-	}
-	
-	function formatField(field, count, locale, calendar) {
-	  var current,
-	    value;
-	  switch (field) {
-	    case 'G':
-	      value = calendar.getYear() > 0 ? 1 : 0;
-	      current = locale.eras[value];
-	      break;
-	    case 'y':
-	      value = calendar.getYear();
-	      if (value <= 0) {
-	        value = 1 - value;
-	      }
-	      current = (zeroPaddingNumber(value, 2, count !== 2 ? MAX_VALUE : 2));
-	      break;
-	    case 'M':
-	      value = calendar.getMonth();
-	      if (count >= 4) {
-	        current = locale.months[value];
-	      } else if (count === 3) {
-	        current = locale.shortMonths[value];
-	      } else {
-	        current = zeroPaddingNumber(value + 1, count);
-	      }
-	      break;
-	    case 'k':
-	      current = zeroPaddingNumber(calendar.getHourOfDay() || 24,
-	        count);
-	      break;
-	    case 'E':
-	      value = calendar.getDayOfWeek();
-	      current = count >= 4 ?
-	        locale.weekdays[value] :
-	        locale.shortWeekdays[value];
-	      break;
-	    case 'a':
-	      current = locale.ampms[calendar.getHourOfDay() >= 12 ?
-	        1 :
-	        0];
-	      break;
-	    case 'h':
-	      current = zeroPaddingNumber(calendar.
-	        getHourOfDay() % 12 || 12, count);
-	      break;
-	    case 'K':
-	      current = zeroPaddingNumber(calendar.
-	        getHourOfDay() % 12, count);
-	      break;
-	    case 'Z':
-	      var offset = calendar.getTimezoneOffset();
-	      var parts = [offset < 0 ? '-' : '+'];
-	      offset = Math.abs(offset);
-	      parts.push(zeroPaddingNumber(Math.floor(offset / 60) % 100, 2),
-	        zeroPaddingNumber(offset % 60, 2));
-	      current = parts.join('');
-	      break;
-	    default :
-	      // case 'd':
-	      // case 'H':
-	      // case 'm':
-	      // case 's':
-	      // case 'S':
-	      // case 'D':
-	      // case 'F':
-	      // case 'w':
-	      // case 'W':
-	      var index = calendarIndexMap[field];
-	      value = calendar.get(index);
-	      current = zeroPaddingNumber(value, count);
-	  }
-	  return current;
-	}
-	
-	function matchField(dateStr, startIndex, matches) {
-	  var matchedLen = -1;
-	  var index = -1;
-	  var i;
-	  var len = matches.length;
-	  for (i = 0; i < len; i++) {
-	    var m = matches[i];
-	    var mLen = m.length;
-	    if (mLen > matchedLen &&
-	      matchPartString(dateStr, startIndex, m, mLen)) {
-	      matchedLen = mLen;
-	      index = i;
-	    }
-	  }
-	  return index >= 0 ? {
-	    value: index,
-	    startIndex: startIndex + matchedLen
-	  } : null;
-	}
-	
-	function matchPartString(dateStr, startIndex, match, mLen) {
-	  for (var i = 0; i < mLen; i++) {
-	    if (dateStr.charAt(startIndex + i) !== match.charAt(i)) {
-	      return false;
-	    }
-	  }
-	  return true;
-	}
-	
-	function getLeadingNumberLen(str) {
-	  var i, c;
-	  var len = str.length;
-	  for (i = 0; i < len; i++) {
-	    c = str.charAt(i);
-	    if (c < '0' || c > '9') {
-	      break;
-	    }
-	  }
-	  return i;
-	}
-	
-	function matchNumber(dateStr, startIndex, count, obeyCount) {
-	  var str = dateStr;
-	  var n;
-	  if (obeyCount) {
-	    if (dateStr.length <= startIndex + count) {
-	      return null;
-	    }
-	    str = dateStr.slice(startIndex, startIndex + count);
-	    if (!str.match(/^\d+$/)) {
-	      throw new Error('GregorianCalendarFormat parse error, dateStr: ' + dateStr + ', patter: ' + (this.originalPattern));
-	    }
-	  } else {
-	    str = str.slice(startIndex);
-	  }
-	  n = parseInt(str, 10);
-	  if (isNaN(n)) {
-	    throw new Error('GregorianCalendarFormat parse error, dateStr: ' + dateStr + ', patter: ' + (this.originalPattern));
-	  }
-	  return {
-	    value: n,
-	    startIndex: startIndex + getLeadingNumberLen(str)
-	  };
-	}
-	
-	function parseField(calendar, dateStr, startIndex, field, count, obeyCount, tmp) {
-	  var match, year, hour;
-	  if (dateStr.length <= startIndex) {
-	    return startIndex;
-	  }
-	  var locale = this.locale;
-	  switch (field) {
-	    case 'G':
-	      if ((match = matchField(dateStr, startIndex, locale.eras))) {
-	        if (calendar.isSetYear()) {
-	          if (match.value === 0) {
-	            year = calendar.getYear();
-	            calendar.setYear(1 - year);
-	          }
-	        } else {
-	          tmp.era = match.value;
-	        }
-	      }
-	      break;
-	    case 'y':
-	      if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
-	        year = match.value;
-	        if ('era' in tmp) {
-	          if (tmp.era === 0) {
-	            year = 1 - year;
-	          }
-	        }
-	        calendar.setYear(year);
-	      }
-	      break;
-	    case 'M':
-	      var month;
-	      if (count >= 3) {
-	        if ((match = matchField(dateStr, startIndex, locale[count === 3 ?
-	            'shortMonths' : 'months']))) {
-	          month = match.value;
-	        }
-	      } else {
-	        if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
-	          month = match.value - 1;
-	        }
-	      }
-	      if (match) {
-	        calendar.setMonth(month);
-	      }
-	      break;
-	    case 'k':
-	      if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
-	        calendar.setHourOfDay(match.value % 24);
-	      }
-	      break;
-	    case 'E':
-	      if ((match = matchField(dateStr, startIndex, locale[count > 3 ?
-	          'weekdays' :
-	          'shortWeekdays']))) {
-	        calendar.setDayOfWeek(match.value);
-	      }
-	      break;
-	    case 'a':
-	      if ((match = matchField(dateStr, startIndex, locale.ampms))) {
-	        if (calendar.isSetHourOfDay()) {
-	          if (match.value) {
-	            hour = calendar.getHourOfDay();
-	            if (hour < 12) {
-	              calendar.setHourOfDay((hour + 12) % 24);
-	            }
-	          }
-	        } else {
-	          tmp.ampm = match.value;
-	        }
-	      }
-	      break;
-	    case 'h':
-	      if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
-	        hour = match.value %= 12;
-	        if (tmp.ampm) {
-	          hour += 12;
-	        }
-	        calendar.setHourOfDay(hour);
-	      }
-	      break;
-	    case 'K':
-	      if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
-	        hour = match.value;
-	        if (tmp.ampm) {
-	          hour += 12;
-	        }
-	        calendar.setHourOfDay(hour);
-	      }
-	      break;
-	    case 'Z':
-	      var sign = 1;
-	      var zoneChar = dateStr.charAt(startIndex);
-	      if (zoneChar === '-') {
-	        sign = -1;
-	        startIndex++;
-	      } else if (zoneChar === '+') {
-	        startIndex++;
-	      } else {
-	        break;
-	      }
-	      if ((match = matchNumber.call(this, dateStr, startIndex, 2, true))) {
-	        var zoneOffset = match.value * 60;
-	        startIndex = match.startIndex;
-	        if ((match = matchNumber.call(this, dateStr, startIndex, 2, true))) {
-	          zoneOffset += match.value;
-	        }
-	        calendar.setTimezoneOffset(zoneOffset);
-	      }
-	      break;
-	    default :
-	      // case 'd':
-	      // case 'H':
-	      // case 'm':
-	      // case 's':
-	      // case 'S':
-	      // case 'D':
-	      // case 'F':
-	      // case 'w':
-	      // case 'W'
-	      if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
-	        var index = calendarIndexMap[field];
-	        calendar.set(index, match.value);
-	      }
-	  }
-	  if (match) {
-	    startIndex = match.startIndex;
-	  }
-	  return startIndex;
-	}
-	
-	mix(DateTimeFormat.prototype, {
-	  /**
-	   * format a GregorianDate instance according to specified pattern
-	   * @param {GregorianCalendar} calendar GregorianDate instance
-	   * @returns {string} formatted string of GregorianDate instance
-	   */
-	  format: function (calendar) {
-	    if (!calendar.isGregorianCalendar) {
-	      throw new Error('calendar must be type of GregorianCalendar');
-	    }
-	    var i;
-	    var ret = [];
-	    var pattern = this.pattern;
-	    var len = pattern.length;
-	    for (i = 0; i < len; i++) {
-	      var comp = pattern[i];
-	      if (comp.text) {
-	        ret.push(comp.text);
-	      } else if ('field' in comp) {
-	        ret.push(formatField(comp.field, comp.count, this.locale, calendar));
-	      }
-	    }
-	    return ret.join('');
-	  },
-	
-	  /**
-	   * parse a formatted string of GregorianDate instance according to specified pattern
-	   * @param {String} dateStr formatted string of GregorianDate
-	   * @returns {GregorianCalendar}
-	   */
-	  parse: function (dateStr, calendarLocale) {
-	    var calendar = new GregorianCalendar(calendarLocale);
-	    var i;
-	    var j;
-	    var tmp = {};
-	    var obeyCount = false;
-	    var dateStrLen = dateStr.length;
-	    var errorIndex = -1;
-	    var startIndex = 0;
-	    var oldStartIndex = 0;
-	    var pattern = this.pattern;
-	    var len = pattern.length;
-	
-	    loopPattern: {
-	      for (i = 0; errorIndex < 0 && i < len; i++) {
-	        var comp = pattern[i], text, textLen;
-	        oldStartIndex = startIndex;
-	        if ((text = comp.text)) {
-	          textLen = text.length;
-	          if ((textLen + startIndex) > dateStrLen) {
-	            errorIndex = startIndex;
-	          } else {
-	            for (j = 0; j < textLen; j++) {
-	              if (text.charAt(j) !== dateStr.charAt(j + startIndex)) {
-	                errorIndex = startIndex;
-	                break loopPattern;
-	              }
-	            }
-	            startIndex += textLen;
-	          }
-	        } else if ('field' in comp) {
-	          obeyCount = false;
-	          var nextComp = pattern[i + 1];
-	          if (nextComp) {
-	            if ('field' in nextComp) {
-	              obeyCount = true;
-	            } else {
-	              var c = nextComp.text.charAt(0);
-	              if (c >= '0' && c <= '9') {
-	                obeyCount = true;
-	              }
-	            }
-	          }
-	          startIndex = parseField.call(this, calendar,
-	            dateStr,
-	            startIndex,
-	            comp.field,
-	            comp.count,
-	            obeyCount,
-	            tmp);
-	          if (startIndex === oldStartIndex) {
-	            errorIndex = startIndex;
-	          }
-	        }
-	      }
-	    }
-	
-	    if (errorIndex >= 0) {
-	      console.error('error when parsing date');
-	      console.error(dateStr);
-	      console.error(dateStr.slice(0, errorIndex) + '^');
-	      return undefined;
-	    }
-	    return calendar;
-	  }
-	});
-	
-	mix(DateTimeFormat, {
-	  Style: DateTimeStyle,
-	
-	  /**
-	   * get a formatter instance of short style pattern.
-	   * en-us: M/d/yy h:mm a
-	   * zh-cn: yy-M-d ah:mm
-	   * @param {Object} locale locale object
-	   * @returns {GregorianCalendar}
-	   * @static
-	   */
-	  getInstance: function (locale) {
-	    return this.getDateTimeInstance(DateTimeStyle.SHORT, DateTimeStyle.SHORT, locale);
-	  },
-	
-	  /**
-	   * get a formatter instance of specified date style.
-	   * @param {Date.Formatter.Style} dateStyle date format style
-	   * @param {Object} locale
-	   * @returns {GregorianCalendar}
-	   * @static
-	   */
-	  getDateInstance: function (dateStyle, locale) {
-	    return this.getDateTimeInstance(dateStyle, undefined, locale);
-	  },
-	
-	  /**
-	   * get a formatter instance of specified date style and time style.
-	   * @param {Date.Formatter.Style} dateStyle date format style
-	   * @param {Date.Formatter.Style} timeStyle time format style
-	   * @param {Object} locale
-	   * @returns {GregorianCalendar}
-	   * @static
-	   */
-	  getDateTimeInstance: function (dateStyle, timeStyle, locale) {
-	    locale = locale || enUsLocale;
-	    var datePattern = '';
-	    if (dateStyle !== undefined) {
-	      datePattern = locale.datePatterns[dateStyle];
-	    }
-	    var timePattern = '';
-	    if (timeStyle !== undefined) {
-	      timePattern = locale.timePatterns[timeStyle];
-	    }
-	    var pattern = datePattern;
-	    if (timePattern) {
-	      if (datePattern) {
-	        pattern = substitute(locale.dateTimePattern, {
-	          date: datePattern,
-	          time: timePattern
-	        });
-	      } else {
-	        pattern = timePattern;
-	      }
-	    }
-	    return new DateTimeFormat(pattern, locale);
-	  },
-	
-	  /**
-	   * get a formatter instance of specified time style.
-	   * @param {Date.Formatter.Style} timeStyle time format style
-	   * @param {Object} locale
-	   * @returns {GregorianCalendar}
-	   * @static
-	   */
-	  getTimeInstance: function (timeStyle, locale) {
-	    return this.getDateTimeInstance(undefined, timeStyle, locale);
-	  }
-	});
-	
-	module.exports = DateTimeFormat;
-	
-	DateTimeFormat.version = '@VERSION@';
-	
-	// gc_format@163.com
-
-/***/ },
-/* 23 */
 /*!********************************************************!*\
   !*** ./~/gregorian-calendar/lib/gregorian-calendar.js ***!
   \********************************************************/
@@ -1939,9 +1114,9 @@
 	 * @author yiminghe@gmail.com
 	 */
 	var toInt = parseInt;
-	var Utils = __webpack_require__(/*! ./utils */ 32);
-	var defaultLocale = __webpack_require__(/*! ./locale/en-us */ 33);
-	var Const = __webpack_require__(/*! ./const */ 34);
+	var Utils = __webpack_require__(/*! ./utils */ 37);
+	var defaultLocale = __webpack_require__(/*! ./locale/en-us */ 38);
+	var Const = __webpack_require__(/*! ./const */ 39);
 	
 	/**
 	 * GregorianCalendar class.
@@ -3260,7 +2435,837 @@
 
 
 /***/ },
+/* 23 */
+/*!**********************************************************************!*\
+  !*** ./~/gregorian-calendar-format/lib/gregorian-calendar-format.js ***!
+  \**********************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * @ignore
+	 * DateTimeFormat for
+	 * Inspired by DateTimeFormat from JDK.
+	 * @author yiminghe@gmail.com
+	 */
+	
+	var GregorianCalendar = __webpack_require__(/*! gregorian-calendar */ 9);
+	var enUsLocale = __webpack_require__(/*! ./locale/en-us */ 31);
+	var MAX_VALUE = Number.MAX_VALUE;
+	/**
+	 * date or time style enum
+	 * @enum {Number} Date.Formatter.Style
+	 */
+	var DateTimeStyle = {
+	  /**
+	   * full style
+	   */
+	  FULL: 0,
+	  /**
+	   * long style
+	   */
+	  LONG: 1,
+	  /**
+	   * medium style
+	   */
+	  MEDIUM: 2,
+	  /**
+	   * short style
+	   */
+	  SHORT: 3
+	};
+	
+	/*
+	 Letter    Date or Time Component    Presentation    Examples
+	 G    Era designator    Text    AD
+	 y    Year    Year    1996; 96
+	 M    Month in year    Month    July; Jul; 07
+	 w    Week in year    Number    27
+	 W    Week in month    Number    2
+	 D    Day in year    Number    189
+	 d    Day in month    Number    10
+	 F    Day of week in month    Number    2
+	 E    Day in week    Text    Tuesday; Tue
+	 a    Am/pm marker    Text    PM
+	 H    Hour in day (0-23)    Number    0
+	 k    Hour in day (1-24)    Number    24
+	 K    Hour in am/pm (0-11)    Number    0
+	 h    Hour in am/pm (1-12)    Number    12
+	 m    Minute in hour    Number    30
+	 s    Second in minute    Number    55
+	 S    Millisecond    Number    978
+	 x z    Time zone    General time zone    Pacific Standard Time; PST; GMT-08:00
+	 Z    Time zone    RFC 822 time zone    -0800
+	 */
+	
+	var patternChars = new Array(GregorianCalendar.DAY_OF_WEEK_IN_MONTH + 2).join('1');
+	var ERA = 0;
+	var calendarIndexMap = {};
+	
+	patternChars = patternChars.split('');
+	patternChars[ERA] = 'G';
+	patternChars[GregorianCalendar.YEAR] = 'y';
+	patternChars[GregorianCalendar.MONTH] = 'M';
+	patternChars[GregorianCalendar.DAY_OF_MONTH] = 'd';
+	patternChars[GregorianCalendar.HOUR_OF_DAY] = 'H';
+	patternChars[GregorianCalendar.MINUTES] = 'm';
+	patternChars[GregorianCalendar.SECONDS] = 's';
+	patternChars[GregorianCalendar.MILLISECONDS] = 'S';
+	patternChars[GregorianCalendar.WEEK_OF_YEAR] = 'w';
+	patternChars[GregorianCalendar.WEEK_OF_MONTH] = 'W';
+	patternChars[GregorianCalendar.DAY_OF_YEAR] = 'D';
+	patternChars[GregorianCalendar.DAY_OF_WEEK_IN_MONTH] = 'F';
+	
+	(function () {
+	  for (var index in patternChars) {
+	    calendarIndexMap[patternChars[index]] = index;
+	  }
+	})();
+	
+	function mix(t, s) {
+	  for (var p in s) {
+	    t[p] = s[p];
+	  }
+	}
+	
+	var SUBSTITUTE_REG = /\\?\{([^{}]+)\}/g;
+	var EMPTY = '';
+	
+	function substitute(str, o, regexp) {
+	  if (typeof str !== 'string' || !o) {
+	    return str;
+	  }
+	
+	  return str.replace(regexp || SUBSTITUTE_REG, function (match, name) {
+	    if (match.charAt(0) === '\\') {
+	      return match.slice(1);
+	    }
+	    return (o[name] === undefined) ? EMPTY : o[name];
+	  });
+	}
+	
+	patternChars = patternChars.join('') + 'ahkKZE';
+	
+	function encode(lastField, count, compiledPattern) {
+	  compiledPattern.push({
+	    field: lastField,
+	    count: count
+	  });
+	}
+	
+	function compile(pattern) {
+	  var length = pattern.length;
+	  var inQuote = false;
+	  var compiledPattern = [];
+	  var tmpBuffer = null;
+	  var count = 0;
+	  var lastField = -1;
+	
+	  for (var i = 0; i < length; i++) {
+	    var c = pattern.charAt(i);
+	
+	    if (c === '\'') {
+	      // '' is treated as a single quote regardless of being
+	      // in a quoted section.
+	      if ((i + 1) < length) {
+	        c = pattern.charAt(i + 1);
+	        if (c === '\'') {
+	          i++;
+	          if (count !== 0) {
+	            encode(lastField, count, compiledPattern);
+	            lastField = -1;
+	            count = 0;
+	          }
+	          if (inQuote) {
+	            tmpBuffer += c;
+	          }
+	          continue;
+	        }
+	      }
+	      if (!inQuote) {
+	        if (count !== 0) {
+	          encode(lastField, count, compiledPattern);
+	          lastField = -1;
+	          count = 0;
+	        }
+	        tmpBuffer = '';
+	        inQuote = true;
+	      } else {
+	        compiledPattern.push({
+	          text: tmpBuffer
+	        });
+	        inQuote = false;
+	      }
+	      continue;
+	    }
+	    if (inQuote) {
+	      tmpBuffer += c;
+	      continue;
+	    }
+	    if (!(c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z')) {
+	      if (count !== 0) {
+	        encode(lastField, count, compiledPattern);
+	        lastField = -1;
+	        count = 0;
+	      }
+	      compiledPattern.push({
+	        text: c
+	      });
+	      continue;
+	    }
+	
+	    if (patternChars.indexOf(c) === -1) {
+	      throw new Error('Illegal pattern character "' + c + '"');
+	    }
+	
+	    if (lastField === -1 || lastField === c) {
+	      lastField = c;
+	      count++;
+	      continue;
+	    }
+	    encode(lastField, count, compiledPattern);
+	    lastField = c;
+	    count = 1;
+	  }
+	
+	  if (inQuote) {
+	    throw new Error('Unterminated quote');
+	  }
+	
+	  if (count !== 0) {
+	    encode(lastField, count, compiledPattern);
+	  }
+	
+	  return compiledPattern;
+	}
+	
+	var zeroDigit = '0';
+	
+	// TODO zeroDigit localization??
+	function zeroPaddingNumber(value, minDigits, maxDigits, buffer) {
+	  // Optimization for 1, 2 and 4 digit numbers. This should
+	  // cover most cases of formatting date/time related items.
+	  // Note: This optimization code assumes that maxDigits is
+	  // either 2 or Integer.MAX_VALUE (maxIntCount in format()).
+	  buffer = buffer || [];
+	  maxDigits = maxDigits || MAX_VALUE;
+	  if (value >= 0) {
+	    if (value < 100 && minDigits >= 1 && minDigits <= 2) {
+	      if (value < 10 && minDigits === 2) {
+	        buffer.push(zeroDigit);
+	      }
+	      buffer.push(value);
+	      return buffer.join('');
+	    } else if (value >= 1000 && value < 10000) {
+	      if (minDigits === 4) {
+	        buffer.push(value);
+	        return buffer.join('');
+	      }
+	      if (minDigits === 2 && maxDigits === 2) {
+	        return zeroPaddingNumber(value % 100, 2, 2, buffer);
+	      }
+	    }
+	  }
+	  buffer.push(value + '');
+	  return buffer.join('');
+	}
+	
+	/**
+	 *
+	 * date time formatter for GregorianCalendar
+	 *
+	 *      @example
+	 *
+	 *          var calendar = new GregorianCalendar(2013,9,24);
+	 *          // ' to escape
+	 *          var formatter = new GregorianCalendarFormat("'today is' ''yyyy/MM/dd a''");
+	 *          document.write(formatter.format(calendar));
+	 *
+	 * @class GregorianCalendarFormat
+	 * @param {String} pattern patter string of date formatter
+	 *
+	 * <table border="1">
+	 * <thead valign="bottom">
+	 * <tr><th class="head">Letter</th>
+	 * <th class="head">Date or Time Component</th>
+	 * <th class="head">Presentation</th>
+	 * <th class="head">Examples</th>
+	 * </tr>
+	 * </thead>
+	 * <tbody valign="top">
+	 * <tr><td>G</td>
+	 * <td>Era designator</td>
+	 * <td>Text</td>
+	 * <td>AD</td>
+	 * </tr>
+	 * <tr><td>y</td>
+	 * <td>Year</td>
+	 * <td>Year</td>
+	 * <td>1996; 96</td>
+	 * </tr>
+	 * <tr><td>M</td>
+	 * <td>Month in year</td>
+	 * <td>Month</td>
+	 * <td>July; Jul; 07</td>
+	 * </tr>
+	 * <tr><td>w</td>
+	 * <td>Week in year</td>
+	 * <td>Number</td>
+	 * <td>27</td>
+	 * </tr>
+	 * <tr><td>W</td>
+	 * <td>Week in month</td>
+	 * <td>Number</td>
+	 * <td>2</td>
+	 * </tr>
+	 * <tr><td>D</td>
+	 * <td>Day in year</td>
+	 * <td>Number</td>
+	 * <td>189</td>
+	 * </tr>
+	 * <tr><td>d</td>
+	 * <td>Day in month</td>
+	 * <td>Number</td>
+	 * <td>10</td>
+	 * </tr>
+	 * <tr><td>F</td>
+	 * <td>Day of week in month</td>
+	 * <td>Number</td>
+	 * <td>2</td>
+	 * </tr>
+	 * <tr><td>E</td>
+	 * <td>Day in week</td>
+	 * <td>Text</td>
+	 * <td>Tuesday; Tue</td>
+	 * </tr>
+	 * <tr><td>a</td>
+	 * <td>Am/pm marker</td>
+	 * <td>Text</td>
+	 * <td>PM</td>
+	 * </tr>
+	 * <tr><td>H</td>
+	 *       <td>Hour in day (0-23)</td>
+	 * <td>Number</td>
+	 * <td>0</td>
+	 * </tr>
+	 * <tr><td>k</td>
+	 *       <td>Hour in day (1-24)</td>
+	 * <td>Number</td>
+	 * <td>24</td>
+	 * </tr>
+	 * <tr><td>K</td>
+	 * <td>Hour in am/pm (0-11)</td>
+	 * <td>Number</td>
+	 * <td>0</td>
+	 * </tr>
+	 * <tr><td>h</td>
+	 * <td>Hour in am/pm (1-12)</td>
+	 * <td>Number</td>
+	 * <td>12</td>
+	 * </tr>
+	 * <tr><td>m</td>
+	 * <td>Minute in hour</td>
+	 * <td>Number</td>
+	 * <td>30</td>
+	 * </tr>
+	 * <tr><td>s</td>
+	 * <td>Second in minute</td>
+	 * <td>Number</td>
+	 * <td>55</td>
+	 * </tr>
+	 * <tr><td>S</td>
+	 * <td>Millisecond</td>
+	 * <td>Number</td>
+	 * <td>978</td>
+	 * </tr>
+	 * <tr><td>x/z</td>
+	 * <td>Time zone</td>
+	 * <td>General time zone</td>
+	 * <td>Pacific Standard Time; PST; GMT-08:00</td>
+	 * </tr>
+	 * <tr><td>Z</td>
+	 * <td>Time zone</td>
+	 * <td>RFC 822 time zone</td>
+	 * <td>-0800</td>
+	 * </tr>
+	 * </tbody>
+	 * </table>
+	
+	 * @param {Object} locale format locale
+	 */
+	function DateTimeFormat(pattern, locale) {
+	  this.locale = locale || enUsLocale;
+	  this.originalPattern = pattern;
+	  this.pattern = compile(pattern);
+	}
+	
+	function formatField(field, count, locale, calendar) {
+	  var current,
+	    value;
+	  switch (field) {
+	    case 'G':
+	      value = calendar.getYear() > 0 ? 1 : 0;
+	      current = locale.eras[value];
+	      break;
+	    case 'y':
+	      value = calendar.getYear();
+	      if (value <= 0) {
+	        value = 1 - value;
+	      }
+	      current = (zeroPaddingNumber(value, 2, count !== 2 ? MAX_VALUE : 2));
+	      break;
+	    case 'M':
+	      value = calendar.getMonth();
+	      if (count >= 4) {
+	        current = locale.months[value];
+	      } else if (count === 3) {
+	        current = locale.shortMonths[value];
+	      } else {
+	        current = zeroPaddingNumber(value + 1, count);
+	      }
+	      break;
+	    case 'k':
+	      current = zeroPaddingNumber(calendar.getHourOfDay() || 24,
+	        count);
+	      break;
+	    case 'E':
+	      value = calendar.getDayOfWeek();
+	      current = count >= 4 ?
+	        locale.weekdays[value] :
+	        locale.shortWeekdays[value];
+	      break;
+	    case 'a':
+	      current = locale.ampms[calendar.getHourOfDay() >= 12 ?
+	        1 :
+	        0];
+	      break;
+	    case 'h':
+	      current = zeroPaddingNumber(calendar.
+	        getHourOfDay() % 12 || 12, count);
+	      break;
+	    case 'K':
+	      current = zeroPaddingNumber(calendar.
+	        getHourOfDay() % 12, count);
+	      break;
+	    case 'Z':
+	      var offset = calendar.getTimezoneOffset();
+	      var parts = [offset < 0 ? '-' : '+'];
+	      offset = Math.abs(offset);
+	      parts.push(zeroPaddingNumber(Math.floor(offset / 60) % 100, 2),
+	        zeroPaddingNumber(offset % 60, 2));
+	      current = parts.join('');
+	      break;
+	    default :
+	      // case 'd':
+	      // case 'H':
+	      // case 'm':
+	      // case 's':
+	      // case 'S':
+	      // case 'D':
+	      // case 'F':
+	      // case 'w':
+	      // case 'W':
+	      var index = calendarIndexMap[field];
+	      value = calendar.get(index);
+	      current = zeroPaddingNumber(value, count);
+	  }
+	  return current;
+	}
+	
+	function matchField(dateStr, startIndex, matches) {
+	  var matchedLen = -1;
+	  var index = -1;
+	  var i;
+	  var len = matches.length;
+	  for (i = 0; i < len; i++) {
+	    var m = matches[i];
+	    var mLen = m.length;
+	    if (mLen > matchedLen &&
+	      matchPartString(dateStr, startIndex, m, mLen)) {
+	      matchedLen = mLen;
+	      index = i;
+	    }
+	  }
+	  return index >= 0 ? {
+	    value: index,
+	    startIndex: startIndex + matchedLen
+	  } : null;
+	}
+	
+	function matchPartString(dateStr, startIndex, match, mLen) {
+	  for (var i = 0; i < mLen; i++) {
+	    if (dateStr.charAt(startIndex + i) !== match.charAt(i)) {
+	      return false;
+	    }
+	  }
+	  return true;
+	}
+	
+	function getLeadingNumberLen(str) {
+	  var i, c;
+	  var len = str.length;
+	  for (i = 0; i < len; i++) {
+	    c = str.charAt(i);
+	    if (c < '0' || c > '9') {
+	      break;
+	    }
+	  }
+	  return i;
+	}
+	
+	function matchNumber(dateStr, startIndex, count, obeyCount) {
+	  var str = dateStr;
+	  var n;
+	  if (obeyCount) {
+	    if (dateStr.length <= startIndex + count) {
+	      return null;
+	    }
+	    str = dateStr.slice(startIndex, startIndex + count);
+	    if (!str.match(/^\d+$/)) {
+	      throw new Error('GregorianCalendarFormat parse error, dateStr: ' + dateStr + ', patter: ' + (this.originalPattern));
+	    }
+	  } else {
+	    str = str.slice(startIndex);
+	  }
+	  n = parseInt(str, 10);
+	  if (isNaN(n)) {
+	    throw new Error('GregorianCalendarFormat parse error, dateStr: ' + dateStr + ', patter: ' + (this.originalPattern));
+	  }
+	  return {
+	    value: n,
+	    startIndex: startIndex + getLeadingNumberLen(str)
+	  };
+	}
+	
+	function parseField(calendar, dateStr, startIndex, field, count, obeyCount, tmp) {
+	  var match, year, hour;
+	  if (dateStr.length <= startIndex) {
+	    return startIndex;
+	  }
+	  var locale = this.locale;
+	  switch (field) {
+	    case 'G':
+	      if ((match = matchField(dateStr, startIndex, locale.eras))) {
+	        if (calendar.isSetYear()) {
+	          if (match.value === 0) {
+	            year = calendar.getYear();
+	            calendar.setYear(1 - year);
+	          }
+	        } else {
+	          tmp.era = match.value;
+	        }
+	      }
+	      break;
+	    case 'y':
+	      if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
+	        year = match.value;
+	        if ('era' in tmp) {
+	          if (tmp.era === 0) {
+	            year = 1 - year;
+	          }
+	        }
+	        calendar.setYear(year);
+	      }
+	      break;
+	    case 'M':
+	      var month;
+	      if (count >= 3) {
+	        if ((match = matchField(dateStr, startIndex, locale[count === 3 ?
+	            'shortMonths' : 'months']))) {
+	          month = match.value;
+	        }
+	      } else {
+	        if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
+	          month = match.value - 1;
+	        }
+	      }
+	      if (match) {
+	        calendar.setMonth(month);
+	      }
+	      break;
+	    case 'k':
+	      if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
+	        calendar.setHourOfDay(match.value % 24);
+	      }
+	      break;
+	    case 'E':
+	      if ((match = matchField(dateStr, startIndex, locale[count > 3 ?
+	          'weekdays' :
+	          'shortWeekdays']))) {
+	        calendar.setDayOfWeek(match.value);
+	      }
+	      break;
+	    case 'a':
+	      if ((match = matchField(dateStr, startIndex, locale.ampms))) {
+	        if (calendar.isSetHourOfDay()) {
+	          if (match.value) {
+	            hour = calendar.getHourOfDay();
+	            if (hour < 12) {
+	              calendar.setHourOfDay((hour + 12) % 24);
+	            }
+	          }
+	        } else {
+	          tmp.ampm = match.value;
+	        }
+	      }
+	      break;
+	    case 'h':
+	      if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
+	        hour = match.value %= 12;
+	        if (tmp.ampm) {
+	          hour += 12;
+	        }
+	        calendar.setHourOfDay(hour);
+	      }
+	      break;
+	    case 'K':
+	      if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
+	        hour = match.value;
+	        if (tmp.ampm) {
+	          hour += 12;
+	        }
+	        calendar.setHourOfDay(hour);
+	      }
+	      break;
+	    case 'Z':
+	      var sign = 1;
+	      var zoneChar = dateStr.charAt(startIndex);
+	      if (zoneChar === '-') {
+	        sign = -1;
+	        startIndex++;
+	      } else if (zoneChar === '+') {
+	        startIndex++;
+	      } else {
+	        break;
+	      }
+	      if ((match = matchNumber.call(this, dateStr, startIndex, 2, true))) {
+	        var zoneOffset = match.value * 60;
+	        startIndex = match.startIndex;
+	        if ((match = matchNumber.call(this, dateStr, startIndex, 2, true))) {
+	          zoneOffset += match.value;
+	        }
+	        calendar.setTimezoneOffset(zoneOffset);
+	      }
+	      break;
+	    default :
+	      // case 'd':
+	      // case 'H':
+	      // case 'm':
+	      // case 's':
+	      // case 'S':
+	      // case 'D':
+	      // case 'F':
+	      // case 'w':
+	      // case 'W'
+	      if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
+	        var index = calendarIndexMap[field];
+	        calendar.set(index, match.value);
+	      }
+	  }
+	  if (match) {
+	    startIndex = match.startIndex;
+	  }
+	  return startIndex;
+	}
+	
+	mix(DateTimeFormat.prototype, {
+	  /**
+	   * format a GregorianDate instance according to specified pattern
+	   * @param {GregorianCalendar} calendar GregorianDate instance
+	   * @returns {string} formatted string of GregorianDate instance
+	   */
+	  format: function (calendar) {
+	    if (!calendar.isGregorianCalendar) {
+	      throw new Error('calendar must be type of GregorianCalendar');
+	    }
+	    var i;
+	    var ret = [];
+	    var pattern = this.pattern;
+	    var len = pattern.length;
+	    for (i = 0; i < len; i++) {
+	      var comp = pattern[i];
+	      if (comp.text) {
+	        ret.push(comp.text);
+	      } else if ('field' in comp) {
+	        ret.push(formatField(comp.field, comp.count, this.locale, calendar));
+	      }
+	    }
+	    return ret.join('');
+	  },
+	
+	  /**
+	   * parse a formatted string of GregorianDate instance according to specified pattern
+	   * @param {String} dateStr formatted string of GregorianDate
+	   * @returns {GregorianCalendar}
+	   */
+	  parse: function (dateStr, calendarLocale) {
+	    var calendar = new GregorianCalendar(calendarLocale);
+	    var i;
+	    var j;
+	    var tmp = {};
+	    var obeyCount = false;
+	    var dateStrLen = dateStr.length;
+	    var errorIndex = -1;
+	    var startIndex = 0;
+	    var oldStartIndex = 0;
+	    var pattern = this.pattern;
+	    var len = pattern.length;
+	
+	    loopPattern: {
+	      for (i = 0; errorIndex < 0 && i < len; i++) {
+	        var comp = pattern[i], text, textLen;
+	        oldStartIndex = startIndex;
+	        if ((text = comp.text)) {
+	          textLen = text.length;
+	          if ((textLen + startIndex) > dateStrLen) {
+	            errorIndex = startIndex;
+	          } else {
+	            for (j = 0; j < textLen; j++) {
+	              if (text.charAt(j) !== dateStr.charAt(j + startIndex)) {
+	                errorIndex = startIndex;
+	                break loopPattern;
+	              }
+	            }
+	            startIndex += textLen;
+	          }
+	        } else if ('field' in comp) {
+	          obeyCount = false;
+	          var nextComp = pattern[i + 1];
+	          if (nextComp) {
+	            if ('field' in nextComp) {
+	              obeyCount = true;
+	            } else {
+	              var c = nextComp.text.charAt(0);
+	              if (c >= '0' && c <= '9') {
+	                obeyCount = true;
+	              }
+	            }
+	          }
+	          startIndex = parseField.call(this, calendar,
+	            dateStr,
+	            startIndex,
+	            comp.field,
+	            comp.count,
+	            obeyCount,
+	            tmp);
+	          if (startIndex === oldStartIndex) {
+	            errorIndex = startIndex;
+	          }
+	        }
+	      }
+	    }
+	
+	    if (errorIndex >= 0) {
+	      console.error('error when parsing date');
+	      console.error(dateStr);
+	      console.error(dateStr.slice(0, errorIndex) + '^');
+	      return undefined;
+	    }
+	    return calendar;
+	  }
+	});
+	
+	mix(DateTimeFormat, {
+	  Style: DateTimeStyle,
+	
+	  /**
+	   * get a formatter instance of short style pattern.
+	   * en-us: M/d/yy h:mm a
+	   * zh-cn: yy-M-d ah:mm
+	   * @param {Object} locale locale object
+	   * @returns {GregorianCalendar}
+	   * @static
+	   */
+	  getInstance: function (locale) {
+	    return this.getDateTimeInstance(DateTimeStyle.SHORT, DateTimeStyle.SHORT, locale);
+	  },
+	
+	  /**
+	   * get a formatter instance of specified date style.
+	   * @param {Date.Formatter.Style} dateStyle date format style
+	   * @param {Object} locale
+	   * @returns {GregorianCalendar}
+	   * @static
+	   */
+	  getDateInstance: function (dateStyle, locale) {
+	    return this.getDateTimeInstance(dateStyle, undefined, locale);
+	  },
+	
+	  /**
+	   * get a formatter instance of specified date style and time style.
+	   * @param {Date.Formatter.Style} dateStyle date format style
+	   * @param {Date.Formatter.Style} timeStyle time format style
+	   * @param {Object} locale
+	   * @returns {GregorianCalendar}
+	   * @static
+	   */
+	  getDateTimeInstance: function (dateStyle, timeStyle, locale) {
+	    locale = locale || enUsLocale;
+	    var datePattern = '';
+	    if (dateStyle !== undefined) {
+	      datePattern = locale.datePatterns[dateStyle];
+	    }
+	    var timePattern = '';
+	    if (timeStyle !== undefined) {
+	      timePattern = locale.timePatterns[timeStyle];
+	    }
+	    var pattern = datePattern;
+	    if (timePattern) {
+	      if (datePattern) {
+	        pattern = substitute(locale.dateTimePattern, {
+	          date: datePattern,
+	          time: timePattern
+	        });
+	      } else {
+	        pattern = timePattern;
+	      }
+	    }
+	    return new DateTimeFormat(pattern, locale);
+	  },
+	
+	  /**
+	   * get a formatter instance of specified time style.
+	   * @param {Date.Formatter.Style} timeStyle time format style
+	   * @param {Object} locale
+	   * @returns {GregorianCalendar}
+	   * @static
+	   */
+	  getTimeInstance: function (timeStyle, locale) {
+	    return this.getDateTimeInstance(undefined, timeStyle, locale);
+	  }
+	});
+	
+	module.exports = DateTimeFormat;
+	
+	DateTimeFormat.version = '@VERSION@';
+	
+	// gc_format@163.com
+
+/***/ },
 /* 24 */
+/*!*************************************!*\
+  !*** ./~/css-loader/cssToString.js ***!
+  \*************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function() {
+		var list = [];
+		list.toString = function toString() {
+			var result = [];
+			for(var i = 0; i < this.length; i++) {
+				var item = this[i];
+				if(item[2]) {
+					result.push("@media " + item[2] + "{" + item[1] + "}");
+				} else {
+					result.push(item[1]);
+				}
+			}
+			return result.join("");
+		};
+		return list;
+	}
+
+/***/ },
+/* 25 */
 /*!***************************!*\
   !*** ./lib/MonthPanel.js ***!
   \***************************/
@@ -3269,64 +3274,56 @@
 	/** @jsx React.DOM */
 	
 	var React = __webpack_require__(/*! react */ 6);
-	var DateTimeFormat = __webpack_require__(/*! gregorian-calendar-format */ 9);
+	var DateTimeFormat = __webpack_require__(/*! gregorian-calendar-format */ 11);
 	var ROW = 3;
 	var COL = 4;
 	var cx = __webpack_require__(/*! rc-util */ 29).classSet;
 	var YearPanel = __webpack_require__(/*! ./YearPanel */ 40);
 	
-	function goYear(self, direction) {
-	  var next = self.state.value.clone();
+	function goYear(direction) {
+	  var next = this.state.value.clone();
 	  next.addYear(direction);
-	  self.setState({value: next});
+	  this.setState({
+	    value: next
+	  });
 	}
 	
-	var MonthPanel = React.createClass({displayName: "MonthPanel",
-	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 26),
+	function showYearPanel() {
+	  this.setState({
+	    showYearPanel: 1
+	  });
+	}
 	
-	  getInitialState: function () {
-	    return {
+	function chooseMonth(month) {
+	  var next = this.state.value.clone();
+	  next.setMonth(month);
+	  this.props.onSelect(next);
+	}
+	
+	function onYearPanelSelect(current) {
+	  this.setState({
+	    value: current,
+	    showYearPanel: 0
+	  });
+	}
+	
+	var ____Class2=React.Component;for(var ____Class2____Key in ____Class2){if(____Class2.hasOwnProperty(____Class2____Key)){MonthPanel[____Class2____Key]=____Class2[____Class2____Key];}}var ____SuperProtoOf____Class2=____Class2===null?null:____Class2.prototype;MonthPanel.prototype=Object.create(____SuperProtoOf____Class2);MonthPanel.prototype.constructor=MonthPanel;MonthPanel.__superConstructor__=____Class2;
+	  function MonthPanel(props) {"use strict";
+	    ____Class2.call(this,props);
+	    this.state = {
 	      value: this.props.value,
 	      prefixCls: this.props.rootPrefixCls + '-month-panel'
 	
 	    };
-	  },
+	    // bind methods
+	    this.nextYear = goYear.bind(this, 1);
+	    this.previousYear = goYear.bind(this, -1);
+	    this.showYearPanel = showYearPanel.bind(this);
+	    this.onYearPanelSelect = onYearPanelSelect.bind(this);
+	    this.prefixClsFn = __webpack_require__(/*! ./prefixClsFn */ 27).bind(this);
+	  }
 	
-	  getDefaultProps: function () {
-	    return {
-	      onSelect: function () {
-	      }
-	    };
-	  },
-	
-	  nextYear: function () {
-	    goYear(this, 1);
-	  },
-	
-	  previousYear: function () {
-	    goYear(this, -1);
-	  },
-	
-	  chooseMonth: function (month) {
-	    var next = this.state.value.clone();
-	    next.setMonth(month);
-	    this.props.onSelect(next);
-	  },
-	
-	  showYearPanel: function () {
-	    this.setState({
-	      showYearPanel: 1
-	    });
-	  },
-	
-	  onYearPanelSelect: function (current) {
-	    this.setState({
-	      value: current,
-	      showYearPanel: 0
-	    });
-	  },
-	
-	  getMonths: function () {
+	  Object.defineProperty(MonthPanel.prototype,"getMonths",{writable:true,configurable:true,value:function() {"use strict";
 	    var props = this.props;
 	    var value = this.state.value;
 	    var current = value.clone();
@@ -3350,10 +3347,9 @@
 	    }
 	
 	    return months;
-	  },
+	  }});
 	
-	  render: function () {
-	    var self = this;
+	  Object.defineProperty(MonthPanel.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
 	    var props = this.props;
 	    var value = this.state.value;
 	    var locale = props.locale;
@@ -3361,15 +3357,15 @@
 	    var year = value.getYear();
 	    var currentMonth = value.getMonth();
 	    var prefixClsFn = this.prefixClsFn;
-	    var monthsEls = months.map(function (month, index) {
-	      var tds = month.map(function (m) {
+	    var monthsEls = months.map(function(month, index) {
+	      var tds = month.map(function(m) {
 	        var classNameMap = {};
 	        classNameMap[prefixClsFn('cell')] = 1;
 	        classNameMap[prefixClsFn('selected-cell')] = m.value === currentMonth;
 	        return (
 	          React.createElement("td", {role: "gridcell", 
 	            key: m.value, 
-	            onClick: self.chooseMonth.bind(self, m.value), 
+	            onClick: chooseMonth.bind(this, m.value), 
 	            title: m.title, 
 	            className: cx(classNameMap)}, 
 	            React.createElement("a", {
@@ -3377,9 +3373,9 @@
 	            m.content
 	            )
 	          ));
-	      });
+	      }.bind(this));
 	      return (React.createElement("tr", {key: index, role: "row"}, tds));
-	    });
+	    }.bind(this));
 	
 	    var yearPanel;
 	    if (this.state.showYearPanel) {
@@ -3422,14 +3418,19 @@
 	        ), 
 	      yearPanel
 	      ));
+	  }});
+	
+	
+	MonthPanel.defaultProps = {
+	  onSelect:function() {
 	  }
-	});
+	};
 	
 	module.exports = MonthPanel;
 
 
 /***/ },
-/* 25 */
+/* 26 */
 /*!*********************!*\
   !*** ./lib/Time.js ***!
   \*********************/
@@ -3442,6 +3443,7 @@
 	 */
 	
 	var React = __webpack_require__(/*! react */ 6);
+	var rcUtil = __webpack_require__(/*! rc-util */ 29);
 	var KeyCode = __webpack_require__(/*! rc-util */ 29).KeyCode;
 	var TimePanel = __webpack_require__(/*! ./TimePanel */ 41);
 	
@@ -3478,77 +3480,69 @@
 	      e.preventDefault();
 	      handled = 1;
 	    }
-	    if (handled){
+	    if (handled) {
 	      number = loop(number, min, max);
 	      var time = this.props.value.clone();
 	      time[method](number);
-	      this.props.onChange(time,1);
+	      this.props.onChange(time, 1);
 	    }
 	  };
 	}
 	
-	var Time = React.createClass({displayName: "Time",
-	  getInitialState: function () {
-	    return {
+	var ____Class3=React.Component;for(var ____Class3____Key in ____Class3){if(____Class3.hasOwnProperty(____Class3____Key)){Time[____Class3____Key]=____Class3[____Class3____Key];}}var ____SuperProtoOf____Class3=____Class3===null?null:____Class3.prototype;Time.prototype=Object.create(____SuperProtoOf____Class3);Time.prototype.constructor=Time;Time.__superConstructor__=____Class3;
+	  function Time(props) {"use strict";
+	    ____Class3.call(this,props);
+	    this.state = {
 	      showHourPanel: 0,
 	      showMinutePanel: 0,
 	      showSecondPanel: 0
 	    };
-	  },
+	    [
+	      'onHourKeyDown', 'onMinuteKeyDown', 'onSecondKeyDown', 'onHourClick', 'onMinuteClick', 'onSecondClick',
+	      'onSelectPanel'
+	    ].forEach(function(m) {
+	        this[m] = this[m].bind(this);
+	      }.bind(this));
+	  }
 	
-	  onHourKeyDown: keyDownWrap('setHourOfDay', 0, 23),
-	
-	  onMinuteKeyDown: keyDownWrap('setMinutes', 0, 59),
-	
-	  onSecondKeyDown: keyDownWrap('setSeconds', 0, 59),
-	
-	  onSelectPanel: function (value) {
+	  Object.defineProperty(Time.prototype,"onSelectPanel",{writable:true,configurable:true,value:function(value) {"use strict";
 	    this.setState({
 	      showHourPanel: 0,
 	      showMinutePanel: 0,
 	      showSecondPanel: 0
 	    });
 	    this.props.onChange(value);
-	  },
+	  }});
 	
-	  onHourClick: function () {
+	  Object.defineProperty(Time.prototype,"onHourClick",{writable:true,configurable:true,value:function() {"use strict";
 	    this.setState({
 	      showHourPanel: 1,
 	      showMinutePanel: 0,
 	      showSecondPanel: 0
 	    });
-	  },
+	  }});
 	
-	  onMinuteClick: function () {
+	  Object.defineProperty(Time.prototype,"onMinuteClick",{writable:true,configurable:true,value:function() {"use strict";
 	    this.setState({
 	      showHourPanel: 0,
 	      showMinutePanel: 1,
 	      showSecondPanel: 0
 	    });
-	  },
+	  }});
 	
-	  onSecondClick: function () {
+	  Object.defineProperty(Time.prototype,"onSecondClick",{writable:true,configurable:true,value:function() {"use strict";
 	    this.setState({
 	      showHourPanel: 0,
 	      showMinutePanel: 0,
 	      showSecondPanel: 1
 	    });
-	  },
+	  }});
 	
-	  shouldComponentUpdate: function (nextProps, nextState) {
-	    var props = this.props;
-	    var state = this.state;
-	    var value = props.value;
-	    var nextValue = nextProps.value;
-	    return nextState.showHourPanel !== state.showHourPanel ||
-	      nextState.showMinutePanel !== state.showMinutePanel ||
-	      nextState.showSecondPanel !== state.showSecondPanel ||
-	      value.getHourOfDay() !== nextValue.getHourOfDay() ||
-	      value.getMinutes() !== nextValue.getMinutes() ||
-	      value.getSeconds() !== nextValue.getSeconds();
-	  },
+	  Object.defineProperty(Time.prototype,"shouldComponentUpdate",{writable:true,configurable:true,value:function() {"use strict";
+	    return rcUtil.PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
+	  }});
 	
-	  render: function () {
+	  Object.defineProperty(Time.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
 	    var state = this.state;
 	    var props = this.props;
 	    var prefixClsFn = props.prefixClsFn;
@@ -3590,14 +3584,18 @@
 	        onKeyDown: this.onSecondKeyDown}), 
 	    panel
 	    ));
-	  }
-	});
+	  }});
+	
+	
+	Time.prototype.onHourKeyDown = keyDownWrap('setHourOfDay', 0, 23);
+	Time.prototype.onMinuteKeyDown = keyDownWrap('setMinutes', 0, 59);
+	Time.prototype.onSecondKeyDown = keyDownWrap('setSeconds', 0, 59);
 	
 	module.exports = Time;
 
 
 /***/ },
-/* 26 */
+/* 27 */
 /*!****************************!*\
   !*** ./lib/prefixClsFn.js ***!
   \****************************/
@@ -3606,14 +3604,14 @@
 	module.exports = function () {
 	  var prefixCls = this.state.prefixCls;
 	  var args = Array.prototype.slice.call(arguments, 0);
-	  return args.map(function (s) {
+	  return args.map(function(s) {
 	    return prefixCls + '-' + s;
 	  }).join(' ');
 	};
 
 
 /***/ },
-/* 27 */
+/* 28 */
 /*!*****************************!*\
   !*** ./lib/locale/en-us.js ***!
   \*****************************/
@@ -3624,7 +3622,6 @@
 	 * @ignore
 	 * @author yiminghe@gmail.com
 	 */
-	
 	module.exports = ({
 	  today: 'Today',
 	  clear: 'Clear',
@@ -3653,30 +3650,6 @@
 
 
 /***/ },
-/* 28 */
-/*!*************************************!*\
-  !*** ./~/css-loader/cssToString.js ***!
-  \*************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function() {
-		var list = [];
-		list.toString = function toString() {
-			var result = [];
-			for(var i = 0; i < this.length; i++) {
-				var item = this[i];
-				if(item[2]) {
-					result.push("@media " + item[2] + "{" + item[1] + "}");
-				} else {
-					result.push(item[1]);
-				}
-			}
-			return result.join("");
-		};
-		return list;
-	}
-
-/***/ },
 /* 29 */
 /*!****************************!*\
   !*** ./~/rc-util/index.js ***!
@@ -3684,20 +3657,19 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	  guid: __webpack_require__(/*! ./lib/guid */ 43),
-	  classSet: __webpack_require__(/*! ./lib/classSet */ 44),
-	  joinClasses: __webpack_require__(/*! ./lib/joinClasses */ 45),
-	  KeyCode: __webpack_require__(/*! ./lib/KeyCode */ 46),
-	  PureRenderMixin: __webpack_require__(/*! ./lib/PureRenderMixin */ 47),
-	  shallowEqual: __webpack_require__(/*! ./lib/shallowEqual */ 48),
-	  createChainedFunction: __webpack_require__(/*! ./lib/createChainedFunction */ 49),
-	  cloneWithProps: __webpack_require__(/*! ./lib/cloneWithProps */ 50),
+	  guid: __webpack_require__(/*! ./lib/guid */ 42),
+	  classSet: __webpack_require__(/*! ./lib/classSet */ 43),
+	  joinClasses: __webpack_require__(/*! ./lib/joinClasses */ 44),
+	  KeyCode: __webpack_require__(/*! ./lib/KeyCode */ 45),
+	  PureRenderMixin: __webpack_require__(/*! ./lib/PureRenderMixin */ 46),
+	  shallowEqual: __webpack_require__(/*! ./lib/shallowEqual */ 47),
+	  createChainedFunction: __webpack_require__(/*! ./lib/createChainedFunction */ 48),
 	  Dom: {
-	    addEventListener: __webpack_require__(/*! ./lib/Dom/addEventListener */ 51),
-	    contains: __webpack_require__(/*! ./lib/Dom/contains */ 52)
+	    addEventListener: __webpack_require__(/*! ./lib/Dom/addEventListener */ 49),
+	    contains: __webpack_require__(/*! ./lib/Dom/contains */ 50)
 	  },
 	  Children: {
-	    toArray: __webpack_require__(/*! ./lib/Children/toArray */ 53)
+	    toArray: __webpack_require__(/*! ./lib/Children/toArray */ 51)
 	  }
 	};
 
@@ -3714,7 +3686,7 @@
 	 * @author yiminghe@gmail.com
 	 */
 	
-	var utils = __webpack_require__(/*! ./lib/utils */ 42);
+	var utils = __webpack_require__(/*! ./lib/utils */ 52);
 	
 	// http://yiminghe.iteye.com/blog/1124720
 	
@@ -4115,7 +4087,12 @@
 
 
 /***/ },
-/* 32 */
+/* 32 */,
+/* 33 */,
+/* 34 */,
+/* 35 */,
+/* 36 */,
+/* 37 */
 /*!*******************************************!*\
   !*** ./~/gregorian-calendar/lib/utils.js ***!
   \*******************************************/
@@ -4127,7 +4104,7 @@
 	 * @author yiminghe@gmail.com
 	 */
 	
-	var Const = __webpack_require__(/*! ./const */ 34);
+	var Const = __webpack_require__(/*! ./const */ 39);
 	var floor = Math.floor;
 	var ACCUMULATED_DAYS_IN_MONTH
 	        //   1/1 2/1 3/1 4/1 5/1 6/1 7/1 8/1 9/1 10/1 11/1 12/1
@@ -4249,7 +4226,7 @@
 	};
 
 /***/ },
-/* 33 */
+/* 38 */
 /*!**************************************************!*\
   !*** ./~/gregorian-calendar/lib/locale/en-us.js ***!
   \**************************************************/
@@ -4269,7 +4246,7 @@
 
 
 /***/ },
-/* 34 */
+/* 39 */
 /*!*******************************************!*\
   !*** ./~/gregorian-calendar/lib/const.js ***!
   \*******************************************/
@@ -4399,11 +4376,6 @@
 	};
 
 /***/ },
-/* 35 */,
-/* 36 */,
-/* 37 */,
-/* 38 */,
-/* 39 */,
 /* 40 */
 /*!**************************!*\
   !*** ./lib/YearPanel.js ***!
@@ -4413,63 +4385,53 @@
 	/** @jsx React.DOM */
 	
 	var React = __webpack_require__(/*! react */ 6);
-	var DateTimeFormat = __webpack_require__(/*! gregorian-calendar-format */ 9);
+	var DateTimeFormat = __webpack_require__(/*! gregorian-calendar-format */ 11);
 	var ROW = 3;
 	var COL = 4;
 	var cx = __webpack_require__(/*! rc-util */ 29).classSet;
-	var DecadePanel = __webpack_require__(/*! ./DecadePanel */ 54);
+	var DecadePanel = __webpack_require__(/*! ./DecadePanel */ 53);
 	
-	function goYear(self, direction) {
-	  var next = self.state.value.clone();
+	function goYear(direction) {
+	  var next = this.state.value.clone();
 	  next.addYear(direction);
-	  self.setState({value: next});
+	  this.setState({value: next});
 	}
 	
-	var YearPanel = React.createClass({displayName: "YearPanel",
-	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 26),
+	function chooseYear(year) {
+	  var next = this.state.value.clone();
+	  next.setYear(year);
+	  this.props.onSelect(next);
+	}
 	
-	  getInitialState: function () {
-	    return {
-	      value: this.props.value,
-	      prefixCls: this.props.rootPrefixCls + '-year-panel'
+	var ____Class4=React.Component;for(var ____Class4____Key in ____Class4){if(____Class4.hasOwnProperty(____Class4____Key)){YearPanel[____Class4____Key]=____Class4[____Class4____Key];}}var ____SuperProtoOf____Class4=____Class4===null?null:____Class4.prototype;YearPanel.prototype=Object.create(____SuperProtoOf____Class4);YearPanel.prototype.constructor=YearPanel;YearPanel.__superConstructor__=____Class4;
+	  function YearPanel(props) {"use strict";
+	    ____Class4.call(this,props);
+	    this.prefixClsFn = __webpack_require__(/*! ./prefixClsFn */ 27).bind(this);
+	    this.state = {
+	      value: props.value,
+	      prefixCls: props.rootPrefixCls + '-year-panel'
 	    };
-	  },
+	    this.nextDecade = goYear.bind(this, 10);
+	    this.previousDecade = goYear.bind(this, -10);
+	    ['showDecadePanel', 'onDecadePanelSelect'].forEach(function(m) {
+	      this[m] = this[m].bind(this);
+	    }.bind(this));
+	  }
 	
-	  getDefaultProps: function () {
-	    return {
-	      onSelect: function () {
-	      }
-	    };
-	  },
-	
-	  nextDecade: function () {
-	    goYear(this, 10);
-	  },
-	
-	  previousDecade: function () {
-	    goYear(this, -10);
-	  },
-	
-	  chooseYear: function (year) {
-	    var next = this.state.value.clone();
-	    next.setYear(year);
-	    this.props.onSelect(next);
-	  },
-	
-	  showDecadePanel: function () {
+	  Object.defineProperty(YearPanel.prototype,"showDecadePanel",{writable:true,configurable:true,value:function() {"use strict";
 	    this.setState({
 	      showDecadePanel: 1
 	    });
-	  },
+	  }});
 	
-	  onDecadePanelSelect: function (current) {
+	  Object.defineProperty(YearPanel.prototype,"onDecadePanelSelect",{writable:true,configurable:true,value:function(current) {"use strict";
 	    this.setState({
 	      value: current,
 	      showDecadePanel: 0
 	    });
-	  },
+	  }});
 	
-	  getYears: function () {
+	  Object.defineProperty(YearPanel.prototype,"getYears",{writable:true,configurable:true,value:function() {"use strict";
 	    var value = this.state.value;
 	    var currentYear = value.getYear();
 	    var startYear = parseInt(currentYear / 10, 10) * 10;
@@ -4492,10 +4454,9 @@
 	      }
 	    }
 	    return years;
-	  },
+	  }});
 	
-	  render: function () {
-	    var self = this;
+	  Object.defineProperty(YearPanel.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
 	    var props = this.props;
 	    var value = this.state.value;
 	    var locale = props.locale;
@@ -4505,8 +4466,8 @@
 	    var endYear = startYear + 9;
 	    var prefixClsFn = this.prefixClsFn;
 	
-	    var yeasEls = years.map(function (row, index) {
-	      var tds = row.map(function (y) {
+	    var yeasEls = years.map(function(row, index)  {
+	      var tds = row.map(function(y) {
 	        var classNameMap = {};
 	        classNameMap[prefixClsFn('cell')] = 1;
 	        classNameMap[prefixClsFn('selected-cell')] = y.content === currentYear;
@@ -4516,7 +4477,7 @@
 	          React.createElement("td", {role: "gridcell", 
 	            title: y.title, 
 	            key: y.content, 
-	            onClick: self.chooseYear.bind(self, y.content), 
+	            onClick: chooseYear.bind(this, y.content), 
 	            className: cx(classNameMap)
 	          }, 
 	            React.createElement("a", {
@@ -4524,9 +4485,9 @@
 	            y.content
 	            )
 	          ));
-	      });
+	      }.bind(this));
 	      return (React.createElement("tr", {key: index, role: "row"}, tds));
-	    });
+	    }.bind(this));
 	
 	    var decadePanel;
 	    if (this.state.showDecadePanel) {
@@ -4571,8 +4532,13 @@
 	        ), 
 	      decadePanel
 	      ));
+	  }});
+	
+	
+	YearPanel.defaultProps = {
+	  onSelect:function() {
 	  }
-	});
+	};
 	
 	module.exports = YearPanel;
 
@@ -4589,32 +4555,25 @@
 	var React = __webpack_require__(/*! react */ 6);
 	var cx = __webpack_require__(/*! rc-util */ 29).classSet;
 	
-	var TimePanel = React.createClass({displayName: "TimePanel",
-	  getInitialState: function () {
-	    return {
-	      value: this.props.value,
-	      prefixCls: this.props.rootPrefixCls + '-time-panel'
+	function choose(hour, e) {
+	  var next = this.state.value.clone();
+	  var method = this.props.setter;
+	  next[method](hour);
+	  this.props.onSelect(next);
+	  e.preventDefault();
+	}
+	
+	var ____Class5=React.Component;for(var ____Class5____Key in ____Class5){if(____Class5.hasOwnProperty(____Class5____Key)){TimePanel[____Class5____Key]=____Class5[____Class5____Key];}}var ____SuperProtoOf____Class5=____Class5===null?null:____Class5.prototype;TimePanel.prototype=Object.create(____SuperProtoOf____Class5);TimePanel.prototype.constructor=TimePanel;TimePanel.__superConstructor__=____Class5;
+	  function TimePanel(props) {"use strict";
+	    ____Class5.call(this,props);
+	    this.state = {
+	      value: props.value,
+	      prefixCls: props.rootPrefixCls + '-time-panel'
 	    };
-	  },
+	    this.prefixClsFn = __webpack_require__(/*! ./prefixClsFn */ 27).bind(this);
+	  }
 	
-	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 26),
-	
-	  getDefaultProps: function () {
-	    return {
-	      onSelect: function () {
-	      }
-	    };
-	  },
-	
-	  choose: function (hour, e) {
-	    var next = this.state.value.clone();
-	    var method = this.props.setter;
-	    next[method](hour);
-	    this.props.onSelect(next);
-	    e.preventDefault();
-	  },
-	
-	  render: function () {
+	  Object.defineProperty(TimePanel.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
 	    var value = this.state.value;
 	    var props = this.props;
 	    var method = props.getter;
@@ -4631,15 +4590,14 @@
 	      }
 	    }
 	
-	    var self = this;
-	    var hoursEls = data.map(function (row, index) {
-	      var tds = row.map(function (d) {
+	    var hoursEls = data.map(function(row, index) {
+	      var tds = row.map(function(d) {
 	        var classNameMap = {};
 	        classNameMap[prefixClsFn('cell')] = 1;
 	        classNameMap[prefixClsFn('selected-cell')] = d === currentHour;
 	        return (React.createElement("td", {
 	          key: d, 
-	          onClick: self.choose.bind(self, d), 
+	          onClick: choose.bind(this, d), 
 	          role: "gridcell", 
 	          className: cx(classNameMap)}, 
 	          React.createElement("a", {
@@ -4647,9 +4605,9 @@
 	          d
 	          )
 	        ));
-	      });
+	      }.bind(this));
 	      return (React.createElement("tr", {key: index, role: "row"}, tds));
-	    });
+	    }.bind(this));
 	
 	    return (
 	      React.createElement("div", {className: this.state.prefixCls}, 
@@ -4666,430 +4624,19 @@
 	          )
 	        )
 	      ));
+	  }});
+	
+	
+	TimePanel.defaultProps = {
+	  onSelect:function() {
 	  }
-	});
+	};
 	
 	module.exports = TimePanel;
 
 
 /***/ },
 /* 42 */
-/*!**********************************!*\
-  !*** ./~/dom-align/lib/utils.js ***!
-  \**********************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	var RE_NUM = /[\-+]?(?:\d*\.|)\d+(?:[eE][\-+]?\d+|)/.source;
-	
-	function getClientPosition(elem) {
-	  var box, x, y;
-	  var doc = elem.ownerDocument;
-	  var body = doc.body;
-	  var docElem = doc && doc.documentElement;
-	  // 根据 GBS 最新数据，A-Grade Browsers 都已支持 getBoundingClientRect 方法，不用再考虑传统的实现方式
-	  box = elem.getBoundingClientRect();
-	
-	  // 注：jQuery 还考虑减去 docElem.clientLeft/clientTop
-	  // 但测试发现，这样反而会导致当 html 和 body 有边距/边框样式时，获取的值不正确
-	  // 此外，ie6 会忽略 html 的 margin 值，幸运地是没有谁会去设置 html 的 margin
-	
-	  x = box.left;
-	  y = box.top;
-	
-	  // In IE, most of the time, 2 extra pixels are added to the top and left
-	  // due to the implicit 2-pixel inset border.  In IE6/7 quirks mode and
-	  // IE6 standards mode, this border can be overridden by setting the
-	  // document element's border to zero -- thus, we cannot rely on the
-	  // offset always being 2 pixels.
-	
-	  // In quirks mode, the offset can be determined by querying the body's
-	  // clientLeft/clientTop, but in standards mode, it is found by querying
-	  // the document element's clientLeft/clientTop.  Since we already called
-	  // getClientBoundingRect we have already forced a reflow, so it is not
-	  // too expensive just to query them all.
-	
-	  // ie 下应该减去窗口的边框吧，毕竟默认 absolute 都是相对窗口定位的
-	  // 窗口边框标准是设 documentElement ,quirks 时设置 body
-	  // 最好禁止在 body 和 html 上边框 ，但 ie < 9 html 默认有 2px ，减去
-	  // 但是非 ie 不可能设置窗口边框，body html 也不是窗口 ,ie 可以通过 html,body 设置
-	  // 标准 ie 下 docElem.clientTop 就是 border-top
-	  // ie7 html 即窗口边框改变不了。永远为 2
-	  // 但标准 firefox/chrome/ie9 下 docElem.clientTop 是窗口边框，即使设了 border-top 也为 0
-	
-	  x -= docElem.clientLeft || body.clientLeft || 0;
-	  y -= docElem.clientTop || body.clientTop || 0;
-	
-	  return {left: x, top: y};
-	}
-	
-	function getScroll(w, top) {
-	  var ret = w['page' + (top ? 'Y' : 'X') + 'Offset'];
-	  var method = 'scroll' + (top ? 'Top' : 'Left');
-	  if (typeof ret !== 'number') {
-	    var d = w.document;
-	    //ie6,7,8 standard mode
-	    ret = d.documentElement[method];
-	    if (typeof ret !== 'number') {
-	      //quirks mode
-	      ret = d.body[method];
-	    }
-	  }
-	  return ret;
-	}
-	
-	function getScrollLeft(w) {
-	  return getScroll(w);
-	}
-	
-	function getScrollTop(w) {
-	  return getScroll(w, true);
-	}
-	
-	function getOffset(el) {
-	  var pos = getClientPosition(el);
-	  var doc = el.ownerDocument;
-	  var w = doc.defaultView || doc.parentWindow;
-	  pos.left += getScrollLeft(w);
-	  pos.top += getScrollTop(w);
-	  return pos;
-	}
-	function _getComputedStyle(elem, name, computedStyle) {
-	  var val = '';
-	  var d = elem.ownerDocument;
-	
-	  // https://github.com/kissyteam/kissy/issues/61
-	  if ((computedStyle = (computedStyle || d.defaultView.getComputedStyle(elem, null)))) {
-	    val = computedStyle.getPropertyValue(name) || computedStyle[name];
-	  }
-	
-	  return val;
-	}
-	
-	var _RE_NUM_NO_PX = new RegExp('^(' + RE_NUM + ')(?!px)[a-z%]+$', 'i');
-	var RE_POS = /^(top|right|bottom|left)$/,
-	  CURRENT_STYLE = 'currentStyle',
-	  RUNTIME_STYLE = 'runtimeStyle',
-	  LEFT = 'left',
-	  PX = 'px';
-	
-	function _getComputedStyleIE(elem, name) {
-	  // currentStyle maybe null
-	  // http://msdn.microsoft.com/en-us/library/ms535231.aspx
-	  var ret = elem[CURRENT_STYLE] && elem[CURRENT_STYLE][name];
-	
-	  // 当 width/height 设置为百分比时，通过 pixelLeft 方式转换的 width/height 值
-	  // 一开始就处理了! CUSTOM_STYLE.height,CUSTOM_STYLE.width ,cssHook 解决@2011-08-19
-	  // 在 ie 下不对，需要直接用 offset 方式
-	  // borderWidth 等值也有问题，但考虑到 borderWidth 设为百分比的概率很小，这里就不考虑了
-	
-	  // From the awesome hack by Dean Edwards
-	  // http://erik.eae.net/archives/2007/07/27/18.54.15/#comment-102291
-	  // If we're not dealing with a regular pixel number
-	  // but a number that has a weird ending, we need to convert it to pixels
-	  // exclude left right for relativity
-	  if (_RE_NUM_NO_PX.test(ret) && !RE_POS.test(name)) {
-	    // Remember the original values
-	    var style = elem.style,
-	      left = style[LEFT],
-	      rsLeft = elem[RUNTIME_STYLE][LEFT];
-	
-	    // prevent flashing of content
-	    elem[RUNTIME_STYLE][LEFT] = elem[CURRENT_STYLE][LEFT];
-	
-	    // Put in the new values to get a computed value out
-	    style[LEFT] = name === 'fontSize' ? '1em' : (ret || 0);
-	    ret = style.pixelLeft + PX;
-	
-	    // Revert the changed values
-	    style[LEFT] = left;
-	
-	    elem[RUNTIME_STYLE][LEFT] = rsLeft;
-	  }
-	  return ret === '' ? 'auto' : ret;
-	}
-	
-	var getComputedStyleX;
-	if (typeof window !== 'undefined') {
-	  getComputedStyleX = window.getComputedStyle ? _getComputedStyle : _getComputedStyleIE;
-	}
-	
-	// 设置 elem 相对 elem.ownerDocument 的坐标
-	function setOffset(elem, offset) {
-	  // set position first, in-case top/left are set even on static elem
-	  if (css(elem, 'position') === 'static') {
-	    elem.style.position = 'relative';
-	  }
-	
-	  var old = getOffset(elem),
-	    ret = {},
-	    current, key;
-	
-	  for (key in offset) {
-	    current = parseFloat(css(elem, key)) || 0;
-	    ret[key] = current + offset[key] - old[key];
-	  }
-	  css(elem, ret);
-	}
-	
-	function each(arr, fn) {
-	  for (var i = 0; i < arr.length; i++) {
-	    fn(arr[i]);
-	  }
-	}
-	
-	function isBorderBoxFn(elem) {
-	  return getComputedStyleX(elem, 'boxSizing') === 'border-box';
-	}
-	
-	var BOX_MODELS = ['margin', 'border', 'padding'],
-	  CONTENT_INDEX = -1,
-	  PADDING_INDEX = 2,
-	  BORDER_INDEX = 1,
-	  MARGIN_INDEX = 0;
-	
-	function swap(elem, options, callback) {
-	  var old = {},
-	    style = elem.style,
-	    name;
-	
-	  // Remember the old values, and insert the new ones
-	  for (name in options) {
-	    old[name] = style[name];
-	    style[name] = options[name];
-	  }
-	
-	  callback.call(elem);
-	
-	  // Revert the old values
-	  for (name in options) {
-	    style[name] = old[name];
-	  }
-	}
-	
-	function getPBMWidth(elem, props, which) {
-	  var value = 0, prop, j, i;
-	  for (j = 0; j < props.length; j++) {
-	    prop = props[j];
-	    if (prop) {
-	      for (i = 0; i < which.length; i++) {
-	        var cssProp;
-	        if (prop === 'border') {
-	          cssProp = prop + which[i] + 'Width';
-	        } else {
-	          cssProp = prop + which[i];
-	        }
-	        value += parseFloat(getComputedStyleX(elem, cssProp)) || 0;
-	      }
-	    }
-	  }
-	  return value;
-	}
-	
-	/**
-	 * A crude way of determining if an object is a window
-	 * @member util
-	 */
-	function isWindow(obj) {
-	  // must use == for ie8
-	  /*jshint eqeqeq:false*/
-	  return obj != null && obj == obj.window;
-	}
-	
-	var domUtils = {};
-	
-	each(['Width', 'Height'], function (name) {
-	  domUtils['doc' + name] = function (refWin) {
-	    var d = refWin.document;
-	    return Math.max(
-	      //firefox chrome documentElement.scrollHeight< body.scrollHeight
-	      //ie standard mode : documentElement.scrollHeight> body.scrollHeight
-	      d.documentElement['scroll' + name],
-	      //quirks : documentElement.scrollHeight 最大等于可视窗口多一点？
-	      d.body['scroll' + name],
-	      domUtils['viewport' + name](d));
-	  };
-	
-	  domUtils['viewport' + name] = function (win) {
-	    // pc browser includes scrollbar in window.innerWidth
-	    var prop = 'client' + name,
-	      doc = win.document,
-	      body = doc.body,
-	      documentElement = doc.documentElement,
-	      documentElementProp = documentElement[prop];
-	    // 标准模式取 documentElement
-	    // backcompat 取 body
-	    return doc.compatMode === 'CSS1Compat' && documentElementProp ||
-	      body && body[prop] || documentElementProp;
-	  };
-	});
-	
-	/*
-	 得到元素的大小信息
-	 @param elem
-	 @param name
-	 @param {String} [extra]  'padding' : (css width) + padding
-	 'border' : (css width) + padding + border
-	 'margin' : (css width) + padding + border + margin
-	 */
-	function getWH(elem, name, extra) {
-	  if (isWindow(elem)) {
-	    return name === 'width' ? domUtils.viewportWidth(elem) : domUtils.viewportHeight(elem);
-	  } else if (elem.nodeType === 9) {
-	    return name === 'width' ? domUtils.docWidth(elem) : domUtils.docHeight(elem);
-	  }
-	  var which = name === 'width' ? ['Left', 'Right'] : ['Top', 'Bottom'],
-	    borderBoxValue = name === 'width' ? elem.offsetWidth : elem.offsetHeight;
-	  var computedStyle = getComputedStyleX(elem);
-	  var isBorderBox = isBorderBoxFn(elem, computedStyle);
-	  var cssBoxValue = 0;
-	  if (borderBoxValue == null || borderBoxValue <= 0) {
-	    borderBoxValue = undefined;
-	    // Fall back to computed then un computed css if necessary
-	    cssBoxValue = getComputedStyleX(elem, name);
-	    if (cssBoxValue == null || (Number(cssBoxValue)) < 0) {
-	      cssBoxValue = elem.style[name] || 0;
-	    }
-	    // Normalize '', auto, and prepare for extra
-	    cssBoxValue = parseFloat(cssBoxValue) || 0;
-	  }
-	  if (extra === undefined) {
-	    extra = isBorderBox ? BORDER_INDEX : CONTENT_INDEX;
-	  }
-	  var borderBoxValueOrIsBorderBox = borderBoxValue !== undefined || isBorderBox;
-	  var val = borderBoxValue || cssBoxValue;
-	  if (extra === CONTENT_INDEX) {
-	    if (borderBoxValueOrIsBorderBox) {
-	      return val - getPBMWidth(elem, ['border', 'padding'],
-	          which, computedStyle);
-	    } else {
-	      return cssBoxValue;
-	    }
-	  } else if (borderBoxValueOrIsBorderBox) {
-	    return val + (extra === BORDER_INDEX ? 0 :
-	        (extra === PADDING_INDEX ?
-	          -getPBMWidth(elem, ['border'], which, computedStyle) :
-	          getPBMWidth(elem, ['margin'], which, computedStyle)));
-	  } else {
-	    return cssBoxValue + getPBMWidth(elem, BOX_MODELS.slice(extra),
-	        which, computedStyle);
-	  }
-	}
-	
-	var cssShow = {position: 'absolute', visibility: 'hidden', display: 'block'};
-	
-	// fix #119 : https://github.com/kissyteam/kissy/issues/119
-	function getWHIgnoreDisplay(elem) {
-	  var val, args = arguments;
-	  // in case elem is window
-	  // elem.offsetWidth === undefined
-	  if (elem.offsetWidth !== 0) {
-	    val = getWH.apply(undefined, args);
-	  } else {
-	    swap(elem, cssShow, function () {
-	      val = getWH.apply(undefined, args);
-	    });
-	  }
-	  return val;
-	}
-	
-	each(['width', 'height'], function (name) {
-	  var first = name.charAt(0).toUpperCase() + name.slice(1);
-	  domUtils['outer' + first] = function (el, includeMargin) {
-	    return el && getWHIgnoreDisplay(el, name, includeMargin ? MARGIN_INDEX : BORDER_INDEX);
-	  };
-	  var which = name === 'width' ? ['Left', 'Right'] : ['Top', 'Bottom'];
-	
-	  domUtils[name] = function (elem, val) {
-	    if (val !== undefined) {
-	      if (elem) {
-	        var computedStyle = getComputedStyleX(elem);
-	        var isBorderBox = isBorderBoxFn(elem);
-	        if (isBorderBox) {
-	          val += getPBMWidth(elem, ['padding', 'border'], which, computedStyle);
-	        }
-	        return css(elem, name, val);
-	      }
-	      return;
-	    }
-	    return elem && getWHIgnoreDisplay(elem, name, CONTENT_INDEX);
-	  };
-	});
-	
-	function css(el, name, value) {
-	  if (typeof name === 'object') {
-	    for (var i in name) {
-	      css(el, i, name[i]);
-	    }
-	    return;
-	  }
-	  if (typeof value !== 'undefined') {
-	    if (typeof value === 'number') {
-	      value = value + 'px';
-	    }
-	    el.style[name] = value;
-	  } else {
-	    return getComputedStyleX(el, name);
-	  }
-	}
-	
-	function mix(to, from) {
-	  for (var i in from) {
-	    to[i] = from[i];
-	  }
-	  return to;
-	}
-	
-	var utils = module.exports = {
-	  getWindow: function (node) {
-	    var doc = node.ownerDocument || node;
-	    return doc.defaultView || doc.parentWindow;
-	  },
-	  offset: function (el, value) {
-	    if (typeof value !== 'undefined') {
-	      setOffset(el, value);
-	    } else {
-	      return getOffset(el);
-	    }
-	  },
-	  isWindow: isWindow,
-	  each: each,
-	  css: css,
-	  clone: function (obj) {
-	    var ret = {};
-	    for (var i in obj) {
-	      ret[i] = obj[i];
-	    }
-	    var overflow = obj.overflow;
-	    if (overflow) {
-	      for (i in obj) {
-	        ret.overflow[i] = obj.overflow[i];
-	      }
-	    }
-	    return ret;
-	  },
-	  mix: mix,
-	  getWindowScrollLeft: function (w) {
-	    return getScrollLeft(w);
-	  },
-	  getWindowScrollTop: function (w) {
-	    return getScrollTop(w);
-	  },
-	  merge: function () {
-	    var ret = {};
-	    for (var i = 0; i < arguments.length; i++) {
-	      utils.mix(ret, arguments[i]);
-	    }
-	    return ret;
-	  },
-	  viewportWidth: 0,
-	  viewportHeight: 0
-	};
-	
-	mix(utils, domUtils);
-
-
-/***/ },
-/* 43 */
 /*!*******************************!*\
   !*** ./~/rc-util/lib/guid.js ***!
   \*******************************/
@@ -5102,7 +4649,7 @@
 
 
 /***/ },
-/* 44 */
+/* 43 */
 /*!***********************************!*\
   !*** ./~/rc-util/lib/classSet.js ***!
   \***********************************/
@@ -5150,7 +4697,7 @@
 
 
 /***/ },
-/* 45 */
+/* 44 */
 /*!**************************************!*\
   !*** ./~/rc-util/lib/joinClasses.js ***!
   \**************************************/
@@ -5178,7 +4725,8 @@
 	 * @param {...?string} classes
 	 * @return {string}
 	 */
-	function joinClasses(className/*, ... */) {
+	
+	function joinClasses(className /*, ... */ ) {
 	  if (!className) {
 	    className = '';
 	  }
@@ -5199,7 +4747,7 @@
 
 
 /***/ },
-/* 46 */
+/* 45 */
 /*!**********************************!*\
   !*** ./~/rc-util/lib/KeyCode.js ***!
   \**********************************/
@@ -5729,7 +5277,7 @@
 
 
 /***/ },
-/* 47 */
+/* 46 */
 /*!******************************************!*\
   !*** ./~/rc-util/lib/PureRenderMixin.js ***!
   \******************************************/
@@ -5748,7 +5296,7 @@
 	
 	"use strict";
 	
-	var shallowEqual = __webpack_require__(/*! ./shallowEqual */ 48);
+	var shallowEqual = __webpack_require__(/*! ./shallowEqual */ 47);
 	
 	/**
 	 * If your React component's render function is "pure", e.g. it will render the
@@ -5785,7 +5333,7 @@
 
 
 /***/ },
-/* 48 */
+/* 47 */
 /*!***************************************!*\
   !*** ./~/rc-util/lib/shallowEqual.js ***!
   \***************************************/
@@ -5836,7 +5384,7 @@
 
 
 /***/ },
-/* 49 */
+/* 48 */
 /*!************************************************!*\
   !*** ./~/rc-util/lib/createChainedFunction.js ***!
   \************************************************/
@@ -5848,179 +5396,25 @@
 	 * Will only create a new function if needed,
 	 * otherwise will pass back existing functions or null.
 	 *
-	 * @param {function} one
-	 * @param {function} two
 	 * @returns {function|null}
 	 */
-	function createChainedFunction(one, two) {
-	  var hasOne = typeof one === 'function';
-	  var hasTwo = typeof two === 'function';
-	
-	  if (!hasOne && !hasTwo) { return null; }
-	  if (!hasOne) { return two; }
-	  if (!hasTwo) { return one; }
+	function createChainedFunction() {
+	  var args = arguments;
 	
 	  return function chainedFunction() {
-	    one.apply(this, arguments);
-	    two.apply(this, arguments);
+	    for (var i = 0; i < args.length; i++) {
+	      if (args[i] && args[i].apply) {
+	        args[i].apply(this, arguments);
+	      }
+	    }
 	  };
 	}
 	
 	module.exports = createChainedFunction;
 
-/***/ },
-/* 50 */
-/*!*****************************************!*\
-  !*** ./~/rc-util/lib/cloneWithProps.js ***!
-  \*****************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-2014, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This file contains modified versions of:
-	 * https://github.com/facebook/react/blob/v0.12.0/src/utils/cloneWithProps.js
-	 * https://github.com/facebook/react/blob/v0.12.0/src/core/ReactPropTransferer.js
-	 *
-	 * This source code is licensed under the BSD-style license found here:
-	 * https://github.com/facebook/react/blob/v0.12.0/LICENSE
-	 * An additional grant of patent rights can be found here:
-	 * https://github.com/facebook/react/blob/v0.12.0/PATENTS
-	 *
-	 * TODO: This should be replaced as soon as cloneWithProps is available via
-	 *  the core React package or a separate package.
-	 *  @see https://github.com/facebook/react/issues/1906
-	 */
-	
-	var React = __webpack_require__(/*! react */ 6);
-	var joinClasses = __webpack_require__(/*! ./joinClasses */ 45);
-	var assign = __webpack_require__(/*! object-assign */ 55);
-	
-	/**
-	 * Creates a transfer strategy that will merge prop values using the supplied
-	 * `mergeStrategy`. If a prop was previously unset, this just sets it.
-	 *
-	 * @param {function} mergeStrategy
-	 * @return {function}
-	 */
-	function createTransferStrategy(mergeStrategy) {
-	  return function(props, key, value) {
-	    if (!props.hasOwnProperty(key)) {
-	      props[key] = value;
-	    } else {
-	      props[key] = mergeStrategy(props[key], value);
-	    }
-	  };
-	}
-	
-	var transferStrategyMerge = createTransferStrategy(function(a, b) {
-	  // `merge` overrides the first object's (`props[key]` above) keys using the
-	  // second object's (`value`) keys. An object's style's existing `propA` would
-	  // get overridden. Flip the order here.
-	  return assign({}, b, a);
-	});
-	
-	function emptyFunction() {}
-	
-	/**
-	 * Transfer strategies dictate how props are transferred by `transferPropsTo`.
-	 * NOTE: if you add any more exceptions to this list you should be sure to
-	 * update `cloneWithProps()` accordingly.
-	 */
-	var TransferStrategies = {
-	  /**
-	   * Never transfer `children`.
-	   */
-	  children: emptyFunction,
-	  /**
-	   * Transfer the `className` prop by merging them.
-	   */
-	  className: createTransferStrategy(joinClasses),
-	  /**
-	   * Transfer the `style` prop (which is an object) by merging them.
-	   */
-	  style: transferStrategyMerge
-	};
-	
-	/**
-	 * Mutates the first argument by transferring the properties from the second
-	 * argument.
-	 *
-	 * @param {object} props
-	 * @param {object} newProps
-	 * @return {object}
-	 */
-	function transferInto(props, newProps) {
-	  for (var thisKey in newProps) {
-	    if (!newProps.hasOwnProperty(thisKey)) {
-	      continue;
-	    }
-	
-	    var transferStrategy = TransferStrategies[thisKey];
-	
-	    if (transferStrategy && TransferStrategies.hasOwnProperty(thisKey)) {
-	      transferStrategy(props, thisKey, newProps[thisKey]);
-	    } else if (!props.hasOwnProperty(thisKey)) {
-	      props[thisKey] = newProps[thisKey];
-	    }
-	  }
-	  return props;
-	}
-	
-	/**
-	 * Merge two props objects using TransferStrategies.
-	 *
-	 * @param {object} oldProps original props (they take precedence)
-	 * @param {object} newProps new props to merge in
-	 * @return {object} a new object containing both sets of props merged.
-	 */
-	function mergeProps(oldProps, newProps) {
-	  return transferInto(assign({}, oldProps), newProps);
-	}
-	
-	var ReactPropTransferer = {
-	  mergeProps: mergeProps
-	};
-	
-	var CHILDREN_PROP = 'children';
-	
-	/**
-	 * Sometimes you want to change the props of a child passed to you. Usually
-	 * this is to add a CSS class.
-	 *
-	 * @param {object} child child component you'd like to clone
-	 * @param {object} props props you'd like to modify. They will be merged
-	 * as if you used `transferPropsTo()`.
-	 * @return {object} a clone of child with props merged in.
-	 */
-	function cloneWithProps(child, props) {
-	  var newProps = ReactPropTransferer.mergeProps(props, child.props);
-	
-	  // Use `child.props.children` if it is provided.
-	  if (!newProps.hasOwnProperty(CHILDREN_PROP) &&
-	    child.props.hasOwnProperty(CHILDREN_PROP)) {
-	    newProps.children = child.props.children;
-	  }
-	
-	  if (React.version.substr(0, 4) === '0.12') {
-	    var mockLegacyFactory = function() {};
-	    mockLegacyFactory.isReactLegacyFactory = true;
-	    mockLegacyFactory.type = child.type;
-	
-	    return React.createElement(mockLegacyFactory, newProps);
-	  }
-	
-	  // The current API doesn't retain _owner and _context, which is why this
-	  // doesn't use ReactElement.cloneAndReplaceProps.
-	  return React.createElement(child.type, newProps);
-	}
-	
-	module.exports = cloneWithProps;
-
 
 /***/ },
-/* 51 */
+/* 49 */
 /*!***********************************************!*\
   !*** ./~/rc-util/lib/Dom/addEventListener.js ***!
   \***********************************************/
@@ -6046,7 +5440,7 @@
 
 
 /***/ },
-/* 52 */
+/* 50 */
 /*!***************************************!*\
   !*** ./~/rc-util/lib/Dom/contains.js ***!
   \***************************************/
@@ -6065,7 +5459,7 @@
 
 
 /***/ },
-/* 53 */
+/* 51 */
 /*!*******************************************!*\
   !*** ./~/rc-util/lib/Children/toArray.js ***!
   \*******************************************/
@@ -6083,7 +5477,423 @@
 
 
 /***/ },
-/* 54 */
+/* 52 */
+/*!**********************************!*\
+  !*** ./~/dom-align/lib/utils.js ***!
+  \**********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var RE_NUM = /[\-+]?(?:\d*\.|)\d+(?:[eE][\-+]?\d+|)/.source;
+	
+	function getClientPosition(elem) {
+	  var box, x, y;
+	  var doc = elem.ownerDocument;
+	  var body = doc.body;
+	  var docElem = doc && doc.documentElement;
+	  // 根据 GBS 最新数据，A-Grade Browsers 都已支持 getBoundingClientRect 方法，不用再考虑传统的实现方式
+	  box = elem.getBoundingClientRect();
+	
+	  // 注：jQuery 还考虑减去 docElem.clientLeft/clientTop
+	  // 但测试发现，这样反而会导致当 html 和 body 有边距/边框样式时，获取的值不正确
+	  // 此外，ie6 会忽略 html 的 margin 值，幸运地是没有谁会去设置 html 的 margin
+	
+	  x = box.left;
+	  y = box.top;
+	
+	  // In IE, most of the time, 2 extra pixels are added to the top and left
+	  // due to the implicit 2-pixel inset border.  In IE6/7 quirks mode and
+	  // IE6 standards mode, this border can be overridden by setting the
+	  // document element's border to zero -- thus, we cannot rely on the
+	  // offset always being 2 pixels.
+	
+	  // In quirks mode, the offset can be determined by querying the body's
+	  // clientLeft/clientTop, but in standards mode, it is found by querying
+	  // the document element's clientLeft/clientTop.  Since we already called
+	  // getClientBoundingRect we have already forced a reflow, so it is not
+	  // too expensive just to query them all.
+	
+	  // ie 下应该减去窗口的边框吧，毕竟默认 absolute 都是相对窗口定位的
+	  // 窗口边框标准是设 documentElement ,quirks 时设置 body
+	  // 最好禁止在 body 和 html 上边框 ，但 ie < 9 html 默认有 2px ，减去
+	  // 但是非 ie 不可能设置窗口边框，body html 也不是窗口 ,ie 可以通过 html,body 设置
+	  // 标准 ie 下 docElem.clientTop 就是 border-top
+	  // ie7 html 即窗口边框改变不了。永远为 2
+	  // 但标准 firefox/chrome/ie9 下 docElem.clientTop 是窗口边框，即使设了 border-top 也为 0
+	
+	  x -= docElem.clientLeft || body.clientLeft || 0;
+	  y -= docElem.clientTop || body.clientTop || 0;
+	
+	  return {left: x, top: y};
+	}
+	
+	function getScroll(w, top) {
+	  var ret = w['page' + (top ? 'Y' : 'X') + 'Offset'];
+	  var method = 'scroll' + (top ? 'Top' : 'Left');
+	  if (typeof ret !== 'number') {
+	    var d = w.document;
+	    //ie6,7,8 standard mode
+	    ret = d.documentElement[method];
+	    if (typeof ret !== 'number') {
+	      //quirks mode
+	      ret = d.body[method];
+	    }
+	  }
+	  return ret;
+	}
+	
+	function getScrollLeft(w) {
+	  return getScroll(w);
+	}
+	
+	function getScrollTop(w) {
+	  return getScroll(w, true);
+	}
+	
+	function getOffset(el) {
+	  var pos = getClientPosition(el);
+	  var doc = el.ownerDocument;
+	  var w = doc.defaultView || doc.parentWindow;
+	  pos.left += getScrollLeft(w);
+	  pos.top += getScrollTop(w);
+	  return pos;
+	}
+	function _getComputedStyle(elem, name, computedStyle) {
+	  var val = '';
+	  var d = elem.ownerDocument;
+	
+	  // https://github.com/kissyteam/kissy/issues/61
+	  if ((computedStyle = (computedStyle || d.defaultView.getComputedStyle(elem, null)))) {
+	    val = computedStyle.getPropertyValue(name) || computedStyle[name];
+	  }
+	
+	  return val;
+	}
+	
+	var _RE_NUM_NO_PX = new RegExp('^(' + RE_NUM + ')(?!px)[a-z%]+$', 'i');
+	var RE_POS = /^(top|right|bottom|left)$/,
+	  CURRENT_STYLE = 'currentStyle',
+	  RUNTIME_STYLE = 'runtimeStyle',
+	  LEFT = 'left',
+	  PX = 'px';
+	
+	function _getComputedStyleIE(elem, name) {
+	  // currentStyle maybe null
+	  // http://msdn.microsoft.com/en-us/library/ms535231.aspx
+	  var ret = elem[CURRENT_STYLE] && elem[CURRENT_STYLE][name];
+	
+	  // 当 width/height 设置为百分比时，通过 pixelLeft 方式转换的 width/height 值
+	  // 一开始就处理了! CUSTOM_STYLE.height,CUSTOM_STYLE.width ,cssHook 解决@2011-08-19
+	  // 在 ie 下不对，需要直接用 offset 方式
+	  // borderWidth 等值也有问题，但考虑到 borderWidth 设为百分比的概率很小，这里就不考虑了
+	
+	  // From the awesome hack by Dean Edwards
+	  // http://erik.eae.net/archives/2007/07/27/18.54.15/#comment-102291
+	  // If we're not dealing with a regular pixel number
+	  // but a number that has a weird ending, we need to convert it to pixels
+	  // exclude left right for relativity
+	  if (_RE_NUM_NO_PX.test(ret) && !RE_POS.test(name)) {
+	    // Remember the original values
+	    var style = elem.style,
+	      left = style[LEFT],
+	      rsLeft = elem[RUNTIME_STYLE][LEFT];
+	
+	    // prevent flashing of content
+	    elem[RUNTIME_STYLE][LEFT] = elem[CURRENT_STYLE][LEFT];
+	
+	    // Put in the new values to get a computed value out
+	    style[LEFT] = name === 'fontSize' ? '1em' : (ret || 0);
+	    ret = style.pixelLeft + PX;
+	
+	    // Revert the changed values
+	    style[LEFT] = left;
+	
+	    elem[RUNTIME_STYLE][LEFT] = rsLeft;
+	  }
+	  return ret === '' ? 'auto' : ret;
+	}
+	
+	var getComputedStyleX;
+	if (typeof window !== 'undefined') {
+	  getComputedStyleX = window.getComputedStyle ? _getComputedStyle : _getComputedStyleIE;
+	}
+	
+	// 设置 elem 相对 elem.ownerDocument 的坐标
+	function setOffset(elem, offset) {
+	  // set position first, in-case top/left are set even on static elem
+	  if (css(elem, 'position') === 'static') {
+	    elem.style.position = 'relative';
+	  }
+	
+	  var old = getOffset(elem),
+	    ret = {},
+	    current, key;
+	
+	  for (key in offset) {
+	    current = parseFloat(css(elem, key)) || 0;
+	    ret[key] = current + offset[key] - old[key];
+	  }
+	  css(elem, ret);
+	}
+	
+	function each(arr, fn) {
+	  for (var i = 0; i < arr.length; i++) {
+	    fn(arr[i]);
+	  }
+	}
+	
+	function isBorderBoxFn(elem) {
+	  return getComputedStyleX(elem, 'boxSizing') === 'border-box';
+	}
+	
+	var BOX_MODELS = ['margin', 'border', 'padding'],
+	  CONTENT_INDEX = -1,
+	  PADDING_INDEX = 2,
+	  BORDER_INDEX = 1,
+	  MARGIN_INDEX = 0;
+	
+	function swap(elem, options, callback) {
+	  var old = {},
+	    style = elem.style,
+	    name;
+	
+	  // Remember the old values, and insert the new ones
+	  for (name in options) {
+	    old[name] = style[name];
+	    style[name] = options[name];
+	  }
+	
+	  callback.call(elem);
+	
+	  // Revert the old values
+	  for (name in options) {
+	    style[name] = old[name];
+	  }
+	}
+	
+	function getPBMWidth(elem, props, which) {
+	  var value = 0, prop, j, i;
+	  for (j = 0; j < props.length; j++) {
+	    prop = props[j];
+	    if (prop) {
+	      for (i = 0; i < which.length; i++) {
+	        var cssProp;
+	        if (prop === 'border') {
+	          cssProp = prop + which[i] + 'Width';
+	        } else {
+	          cssProp = prop + which[i];
+	        }
+	        value += parseFloat(getComputedStyleX(elem, cssProp)) || 0;
+	      }
+	    }
+	  }
+	  return value;
+	}
+	
+	/**
+	 * A crude way of determining if an object is a window
+	 * @member util
+	 */
+	function isWindow(obj) {
+	  // must use == for ie8
+	  /*jshint eqeqeq:false*/
+	  return obj != null && obj == obj.window;
+	}
+	
+	var domUtils = {};
+	
+	each(['Width', 'Height'], function (name) {
+	  domUtils['doc' + name] = function (refWin) {
+	    var d = refWin.document;
+	    return Math.max(
+	      //firefox chrome documentElement.scrollHeight< body.scrollHeight
+	      //ie standard mode : documentElement.scrollHeight> body.scrollHeight
+	      d.documentElement['scroll' + name],
+	      //quirks : documentElement.scrollHeight 最大等于可视窗口多一点？
+	      d.body['scroll' + name],
+	      domUtils['viewport' + name](d));
+	  };
+	
+	  domUtils['viewport' + name] = function (win) {
+	    // pc browser includes scrollbar in window.innerWidth
+	    var prop = 'client' + name,
+	      doc = win.document,
+	      body = doc.body,
+	      documentElement = doc.documentElement,
+	      documentElementProp = documentElement[prop];
+	    // 标准模式取 documentElement
+	    // backcompat 取 body
+	    return doc.compatMode === 'CSS1Compat' && documentElementProp ||
+	      body && body[prop] || documentElementProp;
+	  };
+	});
+	
+	/*
+	 得到元素的大小信息
+	 @param elem
+	 @param name
+	 @param {String} [extra]  'padding' : (css width) + padding
+	 'border' : (css width) + padding + border
+	 'margin' : (css width) + padding + border + margin
+	 */
+	function getWH(elem, name, extra) {
+	  if (isWindow(elem)) {
+	    return name === 'width' ? domUtils.viewportWidth(elem) : domUtils.viewportHeight(elem);
+	  } else if (elem.nodeType === 9) {
+	    return name === 'width' ? domUtils.docWidth(elem) : domUtils.docHeight(elem);
+	  }
+	  var which = name === 'width' ? ['Left', 'Right'] : ['Top', 'Bottom'],
+	    borderBoxValue = name === 'width' ? elem.offsetWidth : elem.offsetHeight;
+	  var computedStyle = getComputedStyleX(elem);
+	  var isBorderBox = isBorderBoxFn(elem, computedStyle);
+	  var cssBoxValue = 0;
+	  if (borderBoxValue == null || borderBoxValue <= 0) {
+	    borderBoxValue = undefined;
+	    // Fall back to computed then un computed css if necessary
+	    cssBoxValue = getComputedStyleX(elem, name);
+	    if (cssBoxValue == null || (Number(cssBoxValue)) < 0) {
+	      cssBoxValue = elem.style[name] || 0;
+	    }
+	    // Normalize '', auto, and prepare for extra
+	    cssBoxValue = parseFloat(cssBoxValue) || 0;
+	  }
+	  if (extra === undefined) {
+	    extra = isBorderBox ? BORDER_INDEX : CONTENT_INDEX;
+	  }
+	  var borderBoxValueOrIsBorderBox = borderBoxValue !== undefined || isBorderBox;
+	  var val = borderBoxValue || cssBoxValue;
+	  if (extra === CONTENT_INDEX) {
+	    if (borderBoxValueOrIsBorderBox) {
+	      return val - getPBMWidth(elem, ['border', 'padding'],
+	          which, computedStyle);
+	    } else {
+	      return cssBoxValue;
+	    }
+	  } else if (borderBoxValueOrIsBorderBox) {
+	    return val + (extra === BORDER_INDEX ? 0 :
+	        (extra === PADDING_INDEX ?
+	          -getPBMWidth(elem, ['border'], which, computedStyle) :
+	          getPBMWidth(elem, ['margin'], which, computedStyle)));
+	  } else {
+	    return cssBoxValue + getPBMWidth(elem, BOX_MODELS.slice(extra),
+	        which, computedStyle);
+	  }
+	}
+	
+	var cssShow = {position: 'absolute', visibility: 'hidden', display: 'block'};
+	
+	// fix #119 : https://github.com/kissyteam/kissy/issues/119
+	function getWHIgnoreDisplay(elem) {
+	  var val, args = arguments;
+	  // in case elem is window
+	  // elem.offsetWidth === undefined
+	  if (elem.offsetWidth !== 0) {
+	    val = getWH.apply(undefined, args);
+	  } else {
+	    swap(elem, cssShow, function () {
+	      val = getWH.apply(undefined, args);
+	    });
+	  }
+	  return val;
+	}
+	
+	each(['width', 'height'], function (name) {
+	  var first = name.charAt(0).toUpperCase() + name.slice(1);
+	  domUtils['outer' + first] = function (el, includeMargin) {
+	    return el && getWHIgnoreDisplay(el, name, includeMargin ? MARGIN_INDEX : BORDER_INDEX);
+	  };
+	  var which = name === 'width' ? ['Left', 'Right'] : ['Top', 'Bottom'];
+	
+	  domUtils[name] = function (elem, val) {
+	    if (val !== undefined) {
+	      if (elem) {
+	        var computedStyle = getComputedStyleX(elem);
+	        var isBorderBox = isBorderBoxFn(elem);
+	        if (isBorderBox) {
+	          val += getPBMWidth(elem, ['padding', 'border'], which, computedStyle);
+	        }
+	        return css(elem, name, val);
+	      }
+	      return;
+	    }
+	    return elem && getWHIgnoreDisplay(elem, name, CONTENT_INDEX);
+	  };
+	});
+	
+	function css(el, name, value) {
+	  if (typeof name === 'object') {
+	    for (var i in name) {
+	      css(el, i, name[i]);
+	    }
+	    return;
+	  }
+	  if (typeof value !== 'undefined') {
+	    if (typeof value === 'number') {
+	      value = value + 'px';
+	    }
+	    el.style[name] = value;
+	  } else {
+	    return getComputedStyleX(el, name);
+	  }
+	}
+	
+	function mix(to, from) {
+	  for (var i in from) {
+	    to[i] = from[i];
+	  }
+	  return to;
+	}
+	
+	var utils = module.exports = {
+	  getWindow: function (node) {
+	    var doc = node.ownerDocument || node;
+	    return doc.defaultView || doc.parentWindow;
+	  },
+	  offset: function (el, value) {
+	    if (typeof value !== 'undefined') {
+	      setOffset(el, value);
+	    } else {
+	      return getOffset(el);
+	    }
+	  },
+	  isWindow: isWindow,
+	  each: each,
+	  css: css,
+	  clone: function (obj) {
+	    var ret = {};
+	    for (var i in obj) {
+	      ret[i] = obj[i];
+	    }
+	    var overflow = obj.overflow;
+	    if (overflow) {
+	      for (i in obj) {
+	        ret.overflow[i] = obj.overflow[i];
+	      }
+	    }
+	    return ret;
+	  },
+	  mix: mix,
+	  getWindowScrollLeft: function (w) {
+	    return getScrollLeft(w);
+	  },
+	  getWindowScrollTop: function (w) {
+	    return getScrollTop(w);
+	  },
+	  merge: function () {
+	    var ret = {};
+	    for (var i = 0; i < arguments.length; i++) {
+	      utils.mix(ret, arguments[i]);
+	    }
+	    return ret;
+	  },
+	  viewportWidth: 0,
+	  viewportHeight: 0
+	};
+	
+	mix(utils, domUtils);
+
+
+/***/ },
+/* 53 */
 /*!****************************!*\
   !*** ./lib/DecadePanel.js ***!
   \****************************/
@@ -6096,47 +5906,36 @@
 	var COL = 4;
 	var cx = __webpack_require__(/*! rc-util */ 29).classSet;
 	
-	function goYear(self, direction) {
-	  var next = self.state.value.clone();
+	function goYear(direction) {
+	  var next = this.state.value.clone();
 	  next.addYear(direction);
-	  self.setState({value: next});
+	  this.setState({
+	    value: next
+	  });
 	}
 	
-	var DecadePanel = React.createClass({displayName: "DecadePanel",
-	  getInitialState: function () {
-	    return {
-	      value: this.props.value,
-	      prefixCls: this.props.rootPrefixCls + '-decade-panel'
+	function chooseDecade(year, e) {
+	  var next = this.state.value.clone();
+	  next.setYear(year);
+	  this.props.onSelect(next);
+	  e.preventDefault();
+	}
+	
+	var ____Class6=React.Component;for(var ____Class6____Key in ____Class6){if(____Class6.hasOwnProperty(____Class6____Key)){DecadePanel[____Class6____Key]=____Class6[____Class6____Key];}}var ____SuperProtoOf____Class6=____Class6===null?null:____Class6.prototype;DecadePanel.prototype=Object.create(____SuperProtoOf____Class6);DecadePanel.prototype.constructor=DecadePanel;DecadePanel.__superConstructor__=____Class6;
+	  function DecadePanel(props) {"use strict";
+	    ____Class6.call(this,props);
+	    this.state = {
+	      value: props.value,
+	      prefixCls: props.rootPrefixCls + '-decade-panel'
 	    };
-	  },
 	
-	  prefixClsFn: __webpack_require__(/*! ./prefixClsFn */ 26),
+	    // bind methods
+	    this.prefixClsFn = __webpack_require__(/*! ./prefixClsFn */ 27).bind(this);
+	    this.nextCentury = goYear.bind(this, 100);
+	    this.previousCentury = goYear.bind(this, -100);
+	  }
 	
-	  getDefaultProps: function () {
-	    return {
-	      onSelect: function () {
-	      }
-	    };
-	  },
-	
-	  nextCentury: function (e) {
-	    goYear(this, 100);
-	    e.preventDefault();
-	  },
-	
-	  previousCentury: function (e) {
-	    goYear(this, -100);
-	    e.preventDefault();
-	  },
-	
-	  chooseDecade: function (year, e) {
-	    var next = this.state.value.clone();
-	    next.setYear(year);
-	    this.props.onSelect(next);
-	    e.preventDefault();
-	  },
-	
-	  render: function () {
+	  Object.defineProperty(DecadePanel.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
 	    var value = this.state.value;
 	    var locale = this.props.locale;
 	    var currentYear = value.getYear();
@@ -6158,9 +5957,8 @@
 	      }
 	    }
 	
-	    var self = this;
-	    var decadesEls = decades.map(function (row, index) {
-	      var tds = row.map(function (d) {
+	    var decadesEls = decades.map(function(row, index)  {
+	      var tds = row.map(function(d)  {
 	        var startDecade = d.startDecade;
 	        var endDecade = d.endDecade;
 	        var classNameMap = {};
@@ -6170,7 +5968,7 @@
 	        classNameMap[prefixClsFn('next-century-cell')] = endDecade > endYear;
 	        return (React.createElement("td", {
 	          key: startDecade, 
-	          onClick: self.chooseDecade.bind(self, startDecade), 
+	          onClick: chooseDecade.bind(this, startDecade), 
 	          role: "gridcell", 
 	          className: cx(classNameMap)
 	        }, 
@@ -6182,9 +5980,9 @@
 	            React.createElement("br", null), endDecade
 	          )
 	        ));
-	      });
+	      }.bind(this));
 	      return (React.createElement("tr", {key: index, role: "row"}, tds));
-	    });
+	    }.bind(this));
 	
 	    return (
 	      React.createElement("div", {className: this.state.prefixCls}, 
@@ -6213,45 +6011,15 @@
 	          )
 	        )
 	      ));
+	  }});
+	
+	
+	DecadePanel.defaultProps = {
+	  onSelect:function() {
 	  }
-	});
+	};
 	
 	module.exports = DecadePanel;
-
-
-/***/ },
-/* 55 */
-/*!********************************************!*\
-  !*** ./~/rc-util/~/object-assign/index.js ***!
-  \********************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	function ToObject(val) {
-		if (val == null) {
-			throw new TypeError('Object.assign cannot be called with null or undefined');
-		}
-	
-		return Object(val);
-	}
-	
-	module.exports = Object.assign || function (target, source) {
-		var from;
-		var keys;
-		var to = ToObject(target);
-	
-		for (var s = 1; s < arguments.length; s++) {
-			from = arguments[s];
-			keys = Object.keys(Object(from));
-	
-			for (var i = 0; i < keys.length; i++) {
-				to[keys[i]] = from[keys[i]];
-			}
-		}
-	
-		return to;
-	};
 
 
 /***/ }
