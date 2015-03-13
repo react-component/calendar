@@ -29,7 +29,7 @@ describe('Calendar', function () {
       var original = calendar.state.value;
       var expected = original.clone();
       expected.addDayOfMonth(-1);
-      Simulate.keyDown(calendar.getDOMNode(), {
+      Simulate.keyDown(React.findDOMNode(calendar), {
         keyCode: keyCode.LEFT
       });
       setTimeout(function () {
@@ -43,7 +43,7 @@ describe('Calendar', function () {
       var original = calendar.state.value;
       var expected = original.clone();
       expected.addDayOfMonth(1);
-      Simulate.keyDown(calendar.getDOMNode(), {
+      Simulate.keyDown(React.findDOMNode(calendar), {
         keyCode: keyCode.RIGHT
       });
       setTimeout(function () {
@@ -56,7 +56,7 @@ describe('Calendar', function () {
       var original = calendar.state.value;
       var expected = original.clone();
       expected.addDayOfMonth(-7);
-      Simulate.keyDown(calendar.getDOMNode(), {
+      Simulate.keyDown(React.findDOMNode(calendar), {
         keyCode: keyCode.UP
       });
       setTimeout(function () {
@@ -69,7 +69,7 @@ describe('Calendar', function () {
       var original = calendar.state.value;
       var expected = original.clone();
       expected.addDayOfMonth(7);
-      Simulate.keyDown(calendar.getDOMNode(), {
+      Simulate.keyDown(React.findDOMNode(calendar), {
         keyCode: keyCode.DOWN
       });
       setTimeout(function () {
@@ -82,7 +82,7 @@ describe('Calendar', function () {
       var original = calendar.state.value;
       var expected = original.clone();
       expected.addMonth(1);
-      Simulate.keyDown(calendar.getDOMNode(), {
+      Simulate.keyDown(React.findDOMNode(calendar), {
         keyCode: keyCode.PAGE_DOWN
       });
       setTimeout(function () {
@@ -95,7 +95,7 @@ describe('Calendar', function () {
       var original = calendar.state.value;
       var expected = original.clone();
       expected.addMonth(-1);
-      Simulate.keyDown(calendar.getDOMNode(), {
+      Simulate.keyDown(React.findDOMNode(calendar), {
         keyCode: keyCode.PAGE_UP
       });
       setTimeout(function () {
@@ -108,7 +108,7 @@ describe('Calendar', function () {
       var original = calendar.state.value;
       var expected = original.clone();
       expected.addYear(-1);
-      Simulate.keyDown(calendar.getDOMNode(), {
+      Simulate.keyDown(React.findDOMNode(calendar), {
         keyCode: keyCode.LEFT,
         ctrlKey: 1
       });
@@ -123,7 +123,7 @@ describe('Calendar', function () {
       var original = calendar.state.value;
       var expected = original.clone();
       expected.addYear(1);
-      Simulate.keyDown(calendar.getDOMNode(), {
+      Simulate.keyDown(React.findDOMNode(calendar), {
         keyCode: keyCode.RIGHT,
         ctrlKey: 1
       });
@@ -182,16 +182,17 @@ describe('Calendar', function () {
 
   it('onSelect works', function (done) {
     var day;
-    calendar.setProps({
-      onSelect: function (d) {
-        expect(d.getDayOfMonth()).to.be(parseInt(day.props.children), 10);
-        done();
-      }
-    }, function () {
-      calendar = this;
-      day = TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-date')[5];
-      Simulate.click(day);
-    });
+
+    function onSelect(d) {
+      expect(d.getDayOfMonth()).to.be(parseInt(day.props.children), 10);
+      done();
+    }
+
+    calendar = React.render(<Calendar showToday={true}
+      onSelect={onSelect}
+      showWeekNumber={true} showTime={true}/>, container);
+    day = TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-date')[5];
+    Simulate.click(day);
   });
 
   it('month panel shows', function (done) {
