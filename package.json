@@ -25,8 +25,9 @@
     "port": 8001
   },
   "scripts": {
-    "example": "webpack -d && rc-tools run jsx2html",
+    "build": "rc-tools run build",
     "less": "rc-tools run less",
+    "gh-pages": "rc-tools run gh-pages",
     "history": "rc-tools run history",
     "start": "node --harmony node_modules/.bin/rc-server",
     "publish": "spm publish && rc-tools run tag",
@@ -39,17 +40,11 @@
   "devDependencies": {
     "async": "~0.9.0",
     "bootstrap": "~3.3.2",
-    "css-loader": "^0.9.1",
     "expect.js": "~0.3.1",
-    "file-loader": "^0.8.1",
-    "jsx-loader": "^0.12.2",
     "precommit-hook": "^1.0.7",
     "rc-server": "^2.0.0",
-    "rc-tools": "^1.1.0",
-    "react": "^0.13.0",
-    "style-loader": "^0.8.3",
-    "url-loader": "^0.5.5",
-    "webpack": "~1.5.3"
+    "rc-tools": "2.x",
+    "react": "^0.13.0"
   },
   "precommit": [
     "lint",
