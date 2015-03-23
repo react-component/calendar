@@ -237,21 +237,19 @@
 	function chooseToday() {
 	  var today = this.state.value.clone();
 	  today.setTime(Date.now());
-	  this.setState({
-	    value: today
-	  });
+	  this.handleSelect(today);
 	}
 
 	function handleDayClick(current) {
 	  this.handleSelect(current);
 	}
 
-	function handleSelect(current, event) {
+	function handleSelect(current, keyDownEvent) {
 	  var props = this.props;
 	  this.setState({
 	    value: current
 	  });
-	  if (!event) {
+	  if (!keyDownEvent) {
 	    props.onSelect(current);
 	  }
 	}
@@ -812,7 +810,7 @@
 	        offset = [0, -5];
 	      }
 
-	      var align = domAlign(React.findDOMNode(this.calendarInstance), this.inputInstance.getDOMNode(), {
+	      var align = domAlign(React.findDOMNode(this.calendarInstance), React.findDOMNode(this.inputInstance), {
 	        points: points,
 	        offset: offset,
 	        overflow: {
@@ -832,7 +830,23 @@
 
 	  Object.defineProperty(Picker.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
 	    var props = this.props;
+	    // var input = React.Children.only(props.children); bug 0.13.0
+	    /*
+	     children: Object
+	     .0: (...)
+	     get .0: function () {
+	     set .0: function (value) {
+	     _reactDidWarn: false
+	     _reactFragment: Object
+	     __proto__: Object
+	     */
 	    var input = props.children;
+	    if (!React.isValidElement(input)) {
+	      var children = input;
+	      React.Children.forEach(children, function(m) {
+	        input = m;
+	      });
+	    }
 	    var state = this.state;
 	    var value = state.value;
 	    var calendar = this.$Picker_cacheCalendar;
@@ -3448,7 +3462,7 @@
 	      number = loop(number, min, max);
 	      var time = this.props.value.clone();
 	      time[method](number);
-	      this.props.onChange(time, 1);
+	      this.props.onChange(time, e);
 	    }
 	  };
 	}
