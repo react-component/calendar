@@ -46,6 +46,12 @@
     "rc-tools": "2.x",
     "react": "^0.13.0"
   },
+  "browserify": {
+    "transform": [
+      "reactify",
+      "envify"
+    ]
+  },
   "precommit": [
     "lint",
     "less"
