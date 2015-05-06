@@ -18,10 +18,16 @@ before_install:
     phantomjs --version
 
 script:
-- npm run $TEST_TYPE
+- |
+    if [ "$TEST_TYPE" = test ]; then
+      npm test
+    else
+      npm run $TEST_TYPE
+    fi
 
 env:
   matrix:
+  - TEST_TYPE=lint
   - TEST_TYPE=browser-test
   - TEST_TYPE=browser-test-cover
   - TEST_TYPE=saucelabs

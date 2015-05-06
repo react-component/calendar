@@ -26,3 +26,4 @@ spm_modules
 dist
 assets/**/*.css
 build
+.settings/

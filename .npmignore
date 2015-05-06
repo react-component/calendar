@@ -27,3 +27,4 @@ sea-modules
 spm_modules
 .cache
 dist
+.settings/
