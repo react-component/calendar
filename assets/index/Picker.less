@@ -1,0 +1,15 @@
+.@{prefixClass}-picker {
+  position: relative;
+
+  .@{prefixClass} {
+    position: absolute;
+    display: none;
+    left: -9999px;
+    top: -9999px;
+    z-index: 9;
+  }
+}
+
+.@{prefixClass}-picker-open .@{prefixClass} {
+  display: block;
+}
