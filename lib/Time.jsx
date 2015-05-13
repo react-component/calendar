@@ -1,8 +1,3 @@
-/** @jsx React.DOM */
-
-/**
- * time component for Calendar
- */
 
 var React = require('react');
 var rcUtil = require('rc-util');

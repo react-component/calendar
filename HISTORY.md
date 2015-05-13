@@ -1,6 +1,14 @@
 # History
 ----
 
+## 3.3.0 / 2015-05-13
+
+use jsx as extension name
+
+## 3.2.0 / 2015-05-11
+
+add ant-design theme(index.css).
+
 ## 3.1.1 / 2015-04-21
 
 fix ie broken focus

@@ -1,8 +1,4 @@
-/** @jsx React.DOM */
 
-/**
- * Calendar ui component for React
- */
 var React = require('react');
 var DATE_ROW_COUNT = 6;
 var DATE_COL_COUNT = 7;
