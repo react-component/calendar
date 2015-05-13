@@ -42,12 +42,18 @@
     "expect.js": "~0.3.1",
     "precommit-hook": "^1.0.7",
     "rc-server": "^2.0.0",
+    "rc-style": "1.0.x",
     "rc-tools": "2.x",
     "react": "^0.13.0"
   },
   "browserify": {
     "transform": [
-      ["reactify", {"es6": true}],
+      [
+        "reactify",
+        {
+          "es6": true
+        }
+      ],
       "envify"
     ]
   },
