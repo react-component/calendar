@@ -21,7 +21,8 @@ webpackJsonp([6],{
 	var GregorianCalendar = __webpack_require__(11);
 	var CalendarLocale = __webpack_require__(10);
 	
-	var style = ("\n@font-face {\n  font-family: 'iconfont';\n  src: url('//at.alicdn.com/t/font_1429685559_5814753.eot');\n  /* IE9*/\n  src: url('//at.alicdn.com/t/font_1429685559_5814753.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('//at.alicdn.com/t/font_1429685559_5814753.woff') format('woff'), /* chrome、firefox */ url('//at.alicdn.com/t/font_1429685559_5814753.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/ url('//at.alicdn.com/t/font_1429685559_5814753.svg#iconfont') format('svg');\n  /* iOS 4.1- */\n}\n\n.datepicker-input {\n  box-sizing: border-box;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  height: 32px;\n  width: 100%;\n  position: relative;\n  display: inline-block;\n  width: 100%;\n  margin: 0 0;\n  padding: 7px 10px;\n  border-radius: 6px 6px;\n  border: 1px solid #d9d9d9;\n  background-color: #ffffff;\n  color: #666;\n  line-height: 1.5;\n  -webkit-transform: border 0.3s cubic-bezier(0.35, 0, 0.25, 1), background 0.3s cubic-bezier(0.35, 0, 0.25, 1), box-shadow 0.3s cubic-bezier(0.35, 0, 0.25, 1);\n  transform: border 0.3s cubic-bezier(0.35, 0, 0.25, 1), background 0.3s cubic-bezier(0.35, 0, 0.25, 1), box-shadow 0.3s cubic-bezier(0.35, 0, 0.25, 1);\n  font-family: inherit;\n  vertical-align: baseline;\n}\n\n.datepicker-input:focus {\n  border-color: #23c0fa;\n  box-shadow: 0 0 3px #23c0fa;\n}\n\n.datepicker-input:hover {\n  border-color: #23c0fa;\n}\n\n.date-picker-wrap {\n  box-sizing: border-box;\n  position: relative;\n  display: block;\n  line-height: 1.5;\n  margin-bottom: 22px;\n}\n\n.datepicker-icon {\n  position: absolute;\n}\n\n.datepicker-icon:after {\n  position: relative;\n  left: -22px;\n  font-family: \"iconfont\";\n  content: \"\";\n  font-size: 12px;\n  color: #999;\n  top: 3px;\n  margin-right: -22px;\n}\n"
+	var style = ("\n@font-face {\n  font-family: 'iconfont';\n  src: url('//at.alicdn.com/t/font_1429685559_5814753.eot');\n  /* IE9*/\n  src: url('//at.alicdn.com/t/font_1429685559_5814753.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('//at.alicdn.com/t/font_1429685559_5814753.woff') format('woff'), /* chrome、firefox */ url('//at.alicdn.com/t/font_1429685559_5814753.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/ url('//at.alicdn.com/t/font_1429685559_5814753.svg#iconfont') format('svg');\n  /* iOS 4.1- */\n}\n\n.datepicker-input {\n  box-sizing: border-box;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  height: 32px;\n  width: 100%;\n  position: relative;\n  display: inline-block;\n  width: 100%;\n  margin: 0 0;\n  padding: 7px 10px;\n  border-radius: 6px 6px;\n  border: 1px solid #d9d9d9;\n  background-color: #ffffff;\n  color: #666;\n  line-height: 1.5;\n  -webkit-transform: border 0.3s cubic-bezier(0.35, 0, 0.25, 1), background 0.3s cubic-bezier(0.35, 0, 0.25, 1), box-shadow 0.3s cubic-bezier(0.35, 0, 0.25, 1);\n  transform: border 0.3s cubic-bezier(0.35, 0, 0.25, 1), background 0.3s cubic-bezier(0.35, 0, 0.25, 1), box-shadow 0.3s cubic-bezier(0.35, 0, 0.25, 1);\n  font-family: inherit;\n  vertical-align: baseline;\n}\n\n.datepicker-input:focus {\n  border-color: #23c0fa;\n  box-shadow: 0 0 3px #23c0fa;\n}\n\n.datepicker-input:hover {\n  border-color: #23c0fa;\n}\n\n.date-picker-wrap {\n  box-sizing: border-box;\n  position: relative;\n  display: block;\n  line-height: 1.5;\n  margin-bottom: 22px;\n}\n\n.datepicker-icon {\n  position: absolute;\n  -webkit-user-select:none;\n}\n\n.datepicker-icon:after {\n  position: relative;\n  left: -22px;\n  font-family: \"iconfont\";\n  content: \"\";\n  font-size: 12px;\n  color: #999;\n  top: 3px;\n  margin-right: -22px;\n}\n"
+	
 	
 	
 	
@@ -85,12 +86,6 @@ webpackJsonp([6],{
 	);
 	
 	var Test = React.createClass({displayName: "Test",
-	  open: function () {
-	    this.refs.picker.setState({
-	      open: true
-	    });
-	  },
-	
 	  handleChange: function (value) {
 	    console.log('DatePicker change: ' + (value && this.props.formatter.format(value)));
 	  },
@@ -140,11 +135,11 @@ webpackJsonp([6],{
 	          "showTime")
 	      ), 
 	      React.createElement("div", {className: "date-picker-wrap"}, 
-	        React.createElement(DatePicker, {ref: "picker", formatter: this.props.formatter, calendar: calendar, 
+	        React.createElement(DatePicker, {
+	          trigger: React.createElement("span", {className: "datepicker-icon"}), 
+	          formatter: this.props.formatter, calendar: calendar, 
 	          value: state.value, onChange: this.handleChange}, 
 	          React.createElement("input", {type: "text", className: "datepicker-input", style: {background: 'white', cursor: 'pointer'}})
-	        ), 
-	        React.createElement("span", {className: "datepicker-icon", onClick: this.open}
 	        )
 	      )
 	    );

@@ -109,8 +109,8 @@
 /* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(20);
-	module.exports.Picker = __webpack_require__(21);
+	module.exports = __webpack_require__(22);
+	module.exports.Picker = __webpack_require__(23);
 
 
 /***/ },
@@ -134,14 +134,12 @@
 /* 17 */,
 /* 18 */,
 /* 19 */,
-/* 20 */
+/* 20 */,
+/* 21 */,
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/** @jsx React.DOM */
 	
-	/**
-	 * Calendar ui component for React
-	 */
 	var React = __webpack_require__(8);
 	var DATE_ROW_COUNT = 6;
 	var DATE_COL_COUNT = 7;
@@ -657,16 +655,14 @@
 
 
 /***/ },
-/* 21 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/** @jsx React.DOM */
-	
 	var React = __webpack_require__(8);
 	var DateTimeFormat = __webpack_require__(13);
 	var rcUtil = __webpack_require__(33);
 	var KeyCode = __webpack_require__(33).KeyCode;
-	var domAlign = __webpack_require__(34);
+	var domAlign = __webpack_require__(37);
 	var orientMap = {
 	  tl: ['top', 'left'],
 	  tr: ['top', 'right'],
@@ -702,7 +698,8 @@
 	
 	    // bind methods
 	    [
-	      'handleInputClick', 'handleCalendarBlur', 'handleCalendarClear', 'handleCalendarKeyDown',
+	      'handleInputClick', 'handleCalendarBlur', 'handleTriggerClick',
+	      'handleCalendarClear', 'handleCalendarKeyDown',
 	      'handleKeyDown', 'handleCalendarSelect'
 	    ].forEach(function(m)  {
 	        this[m] = this[m].bind(this);
@@ -732,14 +729,24 @@
 	  }});
 	
 	  Object.defineProperty(Picker.prototype,"handleInputClick",{writable:true,configurable:true,value:function() {"use strict";
-	    this.open();
+	    this.toggle();
+	  }});
+	
+	  Object.defineProperty(Picker.prototype,"handleTriggerClick",{writable:true,configurable:true,value:function() {"use strict";
+	    this.toggle();
+	  }});
+	
+	  Object.defineProperty(Picker.prototype,"toggle",{writable:true,configurable:true,value:function(callback) {"use strict";
+	    this.setState({
+	      open: !this.state.open
+	    }, callback);
 	  }});
 	
 	  Object.defineProperty(Picker.prototype,"handleKeyDown",{writable:true,configurable:true,value:function(e) {"use strict";
 	    // down
 	    if (e.keyCode === KeyCode.DOWN) {
 	      e.preventDefault();
-	      this.handleInputClick();
+	      this.open();
 	    }
 	  }});
 	
@@ -882,9 +889,21 @@
 	    if (state.open) {
 	      classes.push(props.prefixCls + '-open');
 	    }
-	    return React.createElement("span", {className: classes.join(' ')}, [input, calendar]);
+	    var trigger = props.trigger;
+	    if (trigger) {
+	      trigger = React.cloneElement(trigger, {
+	        onClick: this.handleTriggerClick,
+	        unselectable: true,
+	        onMouseDown: prevent
+	      });
+	    }
+	    return React.createElement("span", {className: classes.join(' ')}, [input, calendar, trigger]);
 	  }});
 	
+	
+	function prevent(e) {
+	  e.preventDefault();
+	}
 	
 	Picker.propTypes = {
 	  onChange: React.PropTypes.func
@@ -901,8 +920,6 @@
 
 
 /***/ },
-/* 22 */,
-/* 23 */,
 /* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -1109,9 +1126,9 @@
 	 * @author yiminghe@gmail.com
 	 */
 	var toInt = parseInt;
-	var Utils = __webpack_require__(35);
-	var defaultLocale = __webpack_require__(36);
-	var Const = __webpack_require__(37);
+	var Utils = __webpack_require__(34);
+	var defaultLocale = __webpack_require__(35);
+	var Const = __webpack_require__(36);
 	
 	/**
 	 * GregorianCalendar class.
@@ -3257,7 +3274,6 @@
 /* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/** @jsx React.DOM */
 	
 	var React = __webpack_require__(8);
 	var DateTimeFormat = __webpack_require__(13);
@@ -3419,11 +3435,6 @@
 /* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/** @jsx React.DOM */
-	
-	/**
-	 * time component for Calendar
-	 */
 	
 	var React = __webpack_require__(8);
 	var rcUtil = __webpack_require__(33);
@@ -3662,6 +3673,281 @@
 
 /***/ },
 /* 34 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * utils for gregorian date
+	 * @ignore
+	 * @author yiminghe@gmail.com
+	 */
+	
+	var Const = __webpack_require__(36);
+	var floor = Math.floor;
+	var ACCUMULATED_DAYS_IN_MONTH
+	        //   1/1 2/1 3/1 4/1 5/1 6/1 7/1 8/1 9/1 10/1 11/1 12/1
+	        = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334],
+	
+	    ACCUMULATED_DAYS_IN_MONTH_LEAP
+	        //   1/1 2/1   3/1   4/1   5/1   6/1   7/1   8/1   9/1
+	        // 10/1   11/1   12/1
+	        = [0, 31, 59 + 1, 90 + 1, 120 + 1, 151 + 1, 181 + 1,
+	            212 + 1, 243 + 1, 273 + 1, 304 + 1, 334 + 1],
+	
+	    DAYS_OF_YEAR = 365,
+	    DAYS_OF_4YEAR = 365 * 4 + 1,
+	    DAYS_OF_100YEAR = DAYS_OF_4YEAR * 25 - 1,
+	    DAYS_OF_400YEAR = DAYS_OF_100YEAR * 4 + 1;
+	
+	function getDayOfYear(year, month, dayOfMonth) {
+	    return dayOfMonth + (exports.isLeapYear(year) ?
+	        ACCUMULATED_DAYS_IN_MONTH_LEAP[month] :
+	        ACCUMULATED_DAYS_IN_MONTH[month]);
+	}
+	
+	function getDayOfWeekFromFixedDate(fixedDate) {
+	    // The fixed day 1 (January 1, 1 Gregorian) is Monday.
+	    if (fixedDate >= 0) {
+	        return fixedDate % 7;
+	    }
+	    return exports.mod(fixedDate, 7);
+	}
+	
+	function getGregorianYearFromFixedDate(fixedDate) {
+	    var d0;
+	    var d1, d2, d3;//, d4;
+	    var n400, n100, n4, n1;
+	    var year;
+	    d0 = fixedDate - 1;
+	
+	    n400 = floor(d0 / DAYS_OF_400YEAR);
+	    d1 = exports.mod(d0, DAYS_OF_400YEAR);
+	    n100 = floor(d1 / DAYS_OF_100YEAR);
+	    d2 = exports.mod(d1, DAYS_OF_100YEAR);
+	    n4 = floor(d2 / DAYS_OF_4YEAR);
+	    d3 = exports.mod(d2, DAYS_OF_4YEAR);
+	    n1 = floor(d3 / DAYS_OF_YEAR);
+	
+	    year = 400 * n400 + 100 * n100 + 4 * n4 + n1;
+	
+	    // ?
+	    if (!(n100 === 4 || n1 === 4)) {
+	        ++year;
+	    }
+	
+	    return year;
+	}
+	
+	var exports = module.exports = {
+	    each: function (arr, fn) {
+	        for (var i = 0, len = arr.length; i < len; i++) {
+	            if (fn(arr[i], i, arr) === false) {
+	                break;
+	            }
+	        }
+	    },
+	
+	    mix: function (t, s) {
+	        for (var p in s) {
+	            t[p] = s[p];
+	        }
+	    },
+	
+	    isLeapYear: function (year) {
+	        if ((year & 3) !== 0) {
+	            return false;
+	        }
+	        return (year % 100 !== 0) || (year % 400 === 0);
+	    },
+	
+	    mod: function (x, y) {
+	        // 负数时不是镜像关系
+	        return (x - y * floor(x / y));
+	    },
+	
+	    // month: 0 based
+	    getFixedDate: function (year, month, dayOfMonth) {
+	        var prevYear = year - 1;
+	        // 考虑公元前
+	        return DAYS_OF_YEAR * prevYear + floor(prevYear / 4) -
+	            floor(prevYear / 100) + floor(prevYear / 400) +
+	            getDayOfYear(year, month, dayOfMonth);
+	    },
+	
+	    getGregorianDateFromFixedDate: function (fixedDate) {
+	        var year = getGregorianYearFromFixedDate(fixedDate);
+	        var jan1 = exports.getFixedDate(year, Const.JANUARY, 1);
+	        var isLeap = exports.isLeapYear(year);
+	        var ACCUMULATED_DAYS = isLeap ? ACCUMULATED_DAYS_IN_MONTH_LEAP : ACCUMULATED_DAYS_IN_MONTH;
+	        var daysDiff = fixedDate - jan1;
+	        var month, i;
+	
+	        for (i = 0; i < ACCUMULATED_DAYS.length; i++) {
+	            if (ACCUMULATED_DAYS[i] <= daysDiff) {
+	                month = i;
+	            } else {
+	                break;
+	            }
+	        }
+	
+	        var dayOfMonth = fixedDate - jan1 - ACCUMULATED_DAYS[month] + 1;
+	        var dayOfWeek = getDayOfWeekFromFixedDate(fixedDate);
+	
+	        return {
+	            year: year,
+	            month: month,
+	            dayOfMonth: dayOfMonth,
+	            dayOfWeek: dayOfWeek,
+	            isLeap: isLeap
+	        };
+	    }
+	};
+
+/***/ },
+/* 35 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * en-us locale
+	 * @ignore
+	 * @author yiminghe@gmail.com
+	 */
+	module.exports = {
+	  // in minutes
+	  timezoneOffset: -8 * 60,
+	  firstDayOfWeek: 0,
+	  minimalDaysInFirstWeek: 1
+	};
+
+
+/***/ },
+/* 36 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * @ignore
+	 * const for gregorian date
+	 * @author yiminghe@gmail.com
+	 */
+	
+	module.exports = {
+	    /**
+	     * Enum indicating sunday
+	     * @type Number
+	     * @member Date.Gregorian
+	     */
+	    SUNDAY: 0,
+	    /**
+	     * Enum indicating monday
+	     * @type Number
+	     * @member Date.Gregorian
+	     */
+	    MONDAY: 1,
+	    /**
+	     * Enum indicating tuesday
+	     * @type Number
+	     * @member Date.Gregorian
+	     */
+	    TUESDAY: 2,
+	    /**
+	     * Enum indicating wednesday
+	     * @type Number
+	     * @member Date.Gregorian
+	     */
+	    WEDNESDAY: 3,
+	    /**
+	     * Enum indicating thursday
+	     * @type Number
+	     * @member Date.Gregorian
+	     */
+	    THURSDAY: 4,
+	    /**
+	     * Enum indicating friday
+	     * @type Number
+	     * @member Date.Gregorian
+	     */
+	    FRIDAY: 5,
+	    /**
+	     * Enum indicating saturday
+	     * @type Number
+	     * @member Date.Gregorian
+	     */
+	    SATURDAY: 6,
+	    /**
+	     * Enum indicating january
+	     * @type Number
+	     * @member Date.Gregorian
+	     */
+	    JANUARY: 0,
+	    /**
+	     * Enum indicating february
+	     * @type Number
+	     * @member Date.Gregorian
+	     */
+	    FEBRUARY: 1,
+	    /**
+	     * Enum indicating march
+	     * @type Number
+	     * @member Date.Gregorian
+	     */
+	    MARCH: 2,
+	    /**
+	     * Enum indicating april
+	     * @type Number
+	     * @member Date.Gregorian
+	     */
+	    APRIL: 3,
+	    /**
+	     * Enum indicating may
+	     * @type Number
+	     * @member Date.Gregorian
+	     */
+	    MAY: 4,
+	    /**
+	     * Enum indicating june
+	     * @type Number
+	     * @member Date.Gregorian
+	     */
+	    JUNE: 5,
+	    /**
+	     * Enum indicating july
+	     * @type Number
+	     * @member Date.Gregorian
+	     */
+	    JULY: 6,
+	    /**
+	     * Enum indicating august
+	     * @type Number
+	     * @member Date.Gregorian
+	     */
+	    AUGUST: 7,
+	    /**
+	     * Enum indicating september
+	     * @type Number
+	     * @member Date.Gregorian
+	     */
+	    SEPTEMBER: 8,
+	    /**
+	     * Enum indicating october
+	     * @type Number
+	     * @member Date.Gregorian
+	     */
+	    OCTOBER: 9,
+	    /**
+	     * Enum indicating november
+	     * @type Number
+	     * @member Date.Gregorian
+	     */
+	    NOVEMBER: 10,
+	    /**
+	     * Enum indicating december
+	     * @type Number
+	     * @member Date.Gregorian
+	     */
+	    DECEMBER: 11
+	};
+
+/***/ },
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4041,281 +4327,6 @@
 
 
 /***/ },
-/* 35 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * utils for gregorian date
-	 * @ignore
-	 * @author yiminghe@gmail.com
-	 */
-	
-	var Const = __webpack_require__(37);
-	var floor = Math.floor;
-	var ACCUMULATED_DAYS_IN_MONTH
-	        //   1/1 2/1 3/1 4/1 5/1 6/1 7/1 8/1 9/1 10/1 11/1 12/1
-	        = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334],
-	
-	    ACCUMULATED_DAYS_IN_MONTH_LEAP
-	        //   1/1 2/1   3/1   4/1   5/1   6/1   7/1   8/1   9/1
-	        // 10/1   11/1   12/1
-	        = [0, 31, 59 + 1, 90 + 1, 120 + 1, 151 + 1, 181 + 1,
-	            212 + 1, 243 + 1, 273 + 1, 304 + 1, 334 + 1],
-	
-	    DAYS_OF_YEAR = 365,
-	    DAYS_OF_4YEAR = 365 * 4 + 1,
-	    DAYS_OF_100YEAR = DAYS_OF_4YEAR * 25 - 1,
-	    DAYS_OF_400YEAR = DAYS_OF_100YEAR * 4 + 1;
-	
-	function getDayOfYear(year, month, dayOfMonth) {
-	    return dayOfMonth + (exports.isLeapYear(year) ?
-	        ACCUMULATED_DAYS_IN_MONTH_LEAP[month] :
-	        ACCUMULATED_DAYS_IN_MONTH[month]);
-	}
-	
-	function getDayOfWeekFromFixedDate(fixedDate) {
-	    // The fixed day 1 (January 1, 1 Gregorian) is Monday.
-	    if (fixedDate >= 0) {
-	        return fixedDate % 7;
-	    }
-	    return exports.mod(fixedDate, 7);
-	}
-	
-	function getGregorianYearFromFixedDate(fixedDate) {
-	    var d0;
-	    var d1, d2, d3;//, d4;
-	    var n400, n100, n4, n1;
-	    var year;
-	    d0 = fixedDate - 1;
-	
-	    n400 = floor(d0 / DAYS_OF_400YEAR);
-	    d1 = exports.mod(d0, DAYS_OF_400YEAR);
-	    n100 = floor(d1 / DAYS_OF_100YEAR);
-	    d2 = exports.mod(d1, DAYS_OF_100YEAR);
-	    n4 = floor(d2 / DAYS_OF_4YEAR);
-	    d3 = exports.mod(d2, DAYS_OF_4YEAR);
-	    n1 = floor(d3 / DAYS_OF_YEAR);
-	
-	    year = 400 * n400 + 100 * n100 + 4 * n4 + n1;
-	
-	    // ?
-	    if (!(n100 === 4 || n1 === 4)) {
-	        ++year;
-	    }
-	
-	    return year;
-	}
-	
-	var exports = module.exports = {
-	    each: function (arr, fn) {
-	        for (var i = 0, len = arr.length; i < len; i++) {
-	            if (fn(arr[i], i, arr) === false) {
-	                break;
-	            }
-	        }
-	    },
-	
-	    mix: function (t, s) {
-	        for (var p in s) {
-	            t[p] = s[p];
-	        }
-	    },
-	
-	    isLeapYear: function (year) {
-	        if ((year & 3) !== 0) {
-	            return false;
-	        }
-	        return (year % 100 !== 0) || (year % 400 === 0);
-	    },
-	
-	    mod: function (x, y) {
-	        // 负数时不是镜像关系
-	        return (x - y * floor(x / y));
-	    },
-	
-	    // month: 0 based
-	    getFixedDate: function (year, month, dayOfMonth) {
-	        var prevYear = year - 1;
-	        // 考虑公元前
-	        return DAYS_OF_YEAR * prevYear + floor(prevYear / 4) -
-	            floor(prevYear / 100) + floor(prevYear / 400) +
-	            getDayOfYear(year, month, dayOfMonth);
-	    },
-	
-	    getGregorianDateFromFixedDate: function (fixedDate) {
-	        var year = getGregorianYearFromFixedDate(fixedDate);
-	        var jan1 = exports.getFixedDate(year, Const.JANUARY, 1);
-	        var isLeap = exports.isLeapYear(year);
-	        var ACCUMULATED_DAYS = isLeap ? ACCUMULATED_DAYS_IN_MONTH_LEAP : ACCUMULATED_DAYS_IN_MONTH;
-	        var daysDiff = fixedDate - jan1;
-	        var month, i;
-	
-	        for (i = 0; i < ACCUMULATED_DAYS.length; i++) {
-	            if (ACCUMULATED_DAYS[i] <= daysDiff) {
-	                month = i;
-	            } else {
-	                break;
-	            }
-	        }
-	
-	        var dayOfMonth = fixedDate - jan1 - ACCUMULATED_DAYS[month] + 1;
-	        var dayOfWeek = getDayOfWeekFromFixedDate(fixedDate);
-	
-	        return {
-	            year: year,
-	            month: month,
-	            dayOfMonth: dayOfMonth,
-	            dayOfWeek: dayOfWeek,
-	            isLeap: isLeap
-	        };
-	    }
-	};
-
-/***/ },
-/* 36 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * en-us locale
-	 * @ignore
-	 * @author yiminghe@gmail.com
-	 */
-	module.exports = {
-	  // in minutes
-	  timezoneOffset: -8 * 60,
-	  firstDayOfWeek: 0,
-	  minimalDaysInFirstWeek: 1
-	};
-
-
-/***/ },
-/* 37 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * @ignore
-	 * const for gregorian date
-	 * @author yiminghe@gmail.com
-	 */
-	
-	module.exports = {
-	    /**
-	     * Enum indicating sunday
-	     * @type Number
-	     * @member Date.Gregorian
-	     */
-	    SUNDAY: 0,
-	    /**
-	     * Enum indicating monday
-	     * @type Number
-	     * @member Date.Gregorian
-	     */
-	    MONDAY: 1,
-	    /**
-	     * Enum indicating tuesday
-	     * @type Number
-	     * @member Date.Gregorian
-	     */
-	    TUESDAY: 2,
-	    /**
-	     * Enum indicating wednesday
-	     * @type Number
-	     * @member Date.Gregorian
-	     */
-	    WEDNESDAY: 3,
-	    /**
-	     * Enum indicating thursday
-	     * @type Number
-	     * @member Date.Gregorian
-	     */
-	    THURSDAY: 4,
-	    /**
-	     * Enum indicating friday
-	     * @type Number
-	     * @member Date.Gregorian
-	     */
-	    FRIDAY: 5,
-	    /**
-	     * Enum indicating saturday
-	     * @type Number
-	     * @member Date.Gregorian
-	     */
-	    SATURDAY: 6,
-	    /**
-	     * Enum indicating january
-	     * @type Number
-	     * @member Date.Gregorian
-	     */
-	    JANUARY: 0,
-	    /**
-	     * Enum indicating february
-	     * @type Number
-	     * @member Date.Gregorian
-	     */
-	    FEBRUARY: 1,
-	    /**
-	     * Enum indicating march
-	     * @type Number
-	     * @member Date.Gregorian
-	     */
-	    MARCH: 2,
-	    /**
-	     * Enum indicating april
-	     * @type Number
-	     * @member Date.Gregorian
-	     */
-	    APRIL: 3,
-	    /**
-	     * Enum indicating may
-	     * @type Number
-	     * @member Date.Gregorian
-	     */
-	    MAY: 4,
-	    /**
-	     * Enum indicating june
-	     * @type Number
-	     * @member Date.Gregorian
-	     */
-	    JUNE: 5,
-	    /**
-	     * Enum indicating july
-	     * @type Number
-	     * @member Date.Gregorian
-	     */
-	    JULY: 6,
-	    /**
-	     * Enum indicating august
-	     * @type Number
-	     * @member Date.Gregorian
-	     */
-	    AUGUST: 7,
-	    /**
-	     * Enum indicating september
-	     * @type Number
-	     * @member Date.Gregorian
-	     */
-	    SEPTEMBER: 8,
-	    /**
-	     * Enum indicating october
-	     * @type Number
-	     * @member Date.Gregorian
-	     */
-	    OCTOBER: 9,
-	    /**
-	     * Enum indicating november
-	     * @type Number
-	     * @member Date.Gregorian
-	     */
-	    NOVEMBER: 10,
-	    /**
-	     * Enum indicating december
-	     * @type Number
-	     * @member Date.Gregorian
-	     */
-	    DECEMBER: 11
-	};
-
-/***/ },
 /* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -4350,7 +4361,6 @@
 /* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/** @jsx React.DOM */
 	
 	var React = __webpack_require__(8);
 	var DateTimeFormat = __webpack_require__(13);
@@ -4515,7 +4525,6 @@
 /* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/** @jsx React.DOM */
 	
 	var React = __webpack_require__(8);
 	var cx = __webpack_require__(33).classSet;
@@ -5828,7 +5837,6 @@
 /* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/** @jsx React.DOM */
 	
 	var React = __webpack_require__(8);
 	var ROW = 4;
