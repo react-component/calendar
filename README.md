@@ -181,6 +181,12 @@ For details to see: [https://github.com/yiminghe/learning-react/tree/master/exam
           <td>use to format/parse value to/from input</td>
         </tr>
         <tr>
+          <td>trigger</td>
+          <td>React.Element</td>
+          <td></td>
+          <td>additional trigger appended to picker</td>
+        </tr>
+        <tr>
           <td>value</td>
           <td>GregorianCalendar</td>
           <td></td>

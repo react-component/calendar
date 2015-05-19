@@ -1,4 +1,3 @@
-
 var React = require('react');
 var DateTimeFormat = require('gregorian-calendar-format');
 var rcUtil = require('rc-util');
@@ -39,7 +38,8 @@ class Picker extends React.Component {
 
     // bind methods
     [
-      'handleInputClick', 'handleCalendarBlur', 'handleCalendarClear', 'handleCalendarKeyDown',
+      'handleInputClick', 'handleCalendarBlur', 'handleTriggerClick',
+      'handleCalendarClear', 'handleCalendarKeyDown',
       'handleKeyDown', 'handleCalendarSelect'
     ].forEach(m => {
         this[m] = this[m].bind(this);
@@ -69,14 +69,24 @@ class Picker extends React.Component {
   }
 
   handleInputClick() {
-    this.open();
+    this.toggle();
+  }
+
+  handleTriggerClick() {
+    this.toggle();
+  }
+
+  toggle(callback) {
+    this.setState({
+      open: !this.state.open
+    }, callback);
   }
 
   handleKeyDown(e) {
     // down
     if (e.keyCode === KeyCode.DOWN) {
       e.preventDefault();
-      this.handleInputClick();
+      this.open();
     }
   }
 
@@ -219,8 +229,20 @@ class Picker extends React.Component {
     if (state.open) {
       classes.push(props.prefixCls + '-open');
     }
-    return <span className={classes.join(' ')}>{[input, calendar]}</span>;
+    var trigger = props.trigger;
+    if (trigger) {
+      trigger = React.cloneElement(trigger, {
+        onClick: this.handleTriggerClick,
+        unselectable: true,
+        onMouseDown: prevent
+      });
+    }
+    return <span className={classes.join(' ')}>{[input, calendar, trigger]}</span>;
   }
+}
+
+function prevent(e) {
+  e.preventDefault();
 }
 
 Picker.propTypes = {

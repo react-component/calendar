@@ -57,6 +57,7 @@ var style = `
 
 .datepicker-icon {
   position: absolute;
+  -webkit-user-select:none;
 }
 
 .datepicker-icon:after {
@@ -72,12 +73,6 @@ var style = `
 `;
 
 var Test = React.createClass({
-  open: function () {
-    this.refs.picker.setState({
-      open: true
-    });
-  },
-
   handleChange: function (value) {
     console.log('DatePicker change: ' + (value && this.props.formatter.format(value)));
   },
@@ -127,12 +122,12 @@ var Test = React.createClass({
           showTime</span>
       </div>
       <div className="date-picker-wrap">
-        <DatePicker ref='picker' formatter={this.props.formatter} calendar={calendar}
+        <DatePicker
+          trigger={<span className="datepicker-icon" />}
+          formatter={this.props.formatter} calendar={calendar}
           value={state.value} onChange={this.handleChange}>
           <input type="text" className="datepicker-input" style={{background: 'white', cursor: 'pointer'}}/>
         </DatePicker>
-        <span className="datepicker-icon" onClick={this.open}>
-        </span>
       </div>
     </div>;
   }

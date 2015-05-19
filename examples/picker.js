@@ -10,10 +10,8 @@ var GregorianCalendar = require('gregorian-calendar');
 var CalendarLocale = require('../lib/locale/zh-cn');
 
 var Test = React.createClass({
-  open: function () {
-    this.refs.picker.setState({
-      open: true
-    });
+  toggle: function () {
+    this.refs.picker.toggle();
   },
 
   handleChange: function (value) {
@@ -55,7 +53,7 @@ var Test = React.createClass({
     var state = this.state;
     var calendar = <Calendar locale={CalendarLocale}
       orient={['top', 'left']}
-      showTime={this.state.showTime} onSelect={this.handleCalendarSelect} onClear={this.handleCalendarSelect.bind(this,null)} showClear={true}/>;
+      showTime={this.state.showTime} onSelect={this.handleCalendarSelect} onClear={this.handleCalendarSelect.bind(this, null)} showClear={true}/>;
     return <div className="form-group" style={{width: 400, margin: 20}} data-time={this.state.time}>
       <div className="input-group">
         <span>
@@ -67,13 +65,21 @@ var Test = React.createClass({
           value={state.value} onChange={this.handleChange}>
           <input type="text" className="form-control" style={{background: 'white', cursor: 'pointer'}}/>
         </DatePicker>
-        <span className="input-group-addon" onClick={this.open}>
+        <span className="input-group-addon"
+          style={{'-webkit-user-select': 'none'}}
+          onMouseDown={prevent}
+          unselectable="unselectable"
+          onClick={this.toggle}>
           <span className="glyphicon glyphicon-calendar"></span>
         </span>
       </div>
     </div>;
   }
 });
+
+function prevent(e) {
+  e.preventDefault();
+}
 
 React.render(<div>
   <h1>zh-cn</h1>

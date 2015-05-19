@@ -1,6 +1,10 @@
 # History
 ----
 
+## 3.4.0 / 2015-05-19
+
+`new` [#21](https://github.com/react-component/calendar/issues/21) add trigger prop for DatePicker
+
 ## 3.3.0 / 2015-05-13
 
 use jsx as extension name
