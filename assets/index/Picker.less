@@ -1,12 +1,69 @@
 .@{prefixClass}-picker {
   position: relative;
 
+  @font-face {
+    font-family: 'iconfont';
+    src: url('//at.alicdn.com/t/font_1429685559_5814753.eot');
+    /* IE9*/
+    src: url('//at.alicdn.com/t/font_1429685559_5814753.eot?#iefix') format('embedded-opentype'),
+      /* IE6-IE8 */ url('//at.alicdn.com/t/font_1429685559_5814753.woff') format('woff'),
+      /* chrome、firefox */ url('//at.alicdn.com/t/font_1429685559_5814753.ttf') format('truetype'),
+      /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/ url('//at.alicdn.com/t/font_1429685559_5814753.svg#iconfont') format('svg');
+    /* iOS 4.1- */
+  }
+
   .@{prefixClass} {
     position: absolute;
     display: none;
     left: -9999px;
     top: -9999px;
     z-index: 9;
+  }
+
+  &-input {
+    cursor: pointer;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    height: 32px;
+    width: 100%;
+    position: relative;
+    display: inline-block;
+    margin: 0 0;
+    padding: 7px 10px;
+    border-radius: 6px 6px;
+    border: 1px solid #d9d9d9;
+    background-color: #ffffff;
+    color: #666;
+    line-height: 1.5;
+    transform: border 0.3s cubic-bezier(0.35, 0, 0.25, 1), background 0.3s cubic-bezier(0.35, 0, 0.25, 1), box-shadow 0.3s cubic-bezier(0.35, 0, 0.25, 1);
+    font-family: inherit;
+    vertical-align: baseline;
+
+    &:focus {
+      border-color: #23c0fa;
+      box-shadow: 0 0 3px #23c0fa;
+    }
+
+    &:hover {
+      border-color: #23c0fa;
+    }
+  }
+
+  &-icon {
+    position: absolute;
+    -webkit-user-select: none;
+    user-select: none;
+
+    &:after {
+      position: relative;
+      left: -22px;
+      font-family: "iconfont";
+      content: "";
+      font-size: 12px;
+      color: #999;
+      top: 3px;
+      margin-right: -22px;
+    }
   }
 }
 
