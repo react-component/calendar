@@ -248,7 +248,7 @@ require(<span class="hljs-string">'rc-calendar/assets/bootstrap.css'</span>);
       &lt;div className=<span class="hljs-string">"input-group"</span>&gt;
         &lt;DatePicker ref=<span class="hljs-string">'picker'</span> formatter={<span class="hljs-keyword">this</span>.props.formatter} calendar={calendar}
           value={state.value} onChange={<span class="hljs-keyword">this</span>.handleChange}&gt;
-          &lt;input type=<span class="hljs-string">"text"</span> className=<span class="hljs-string">"form-control"</span> style={{background: <span class="hljs-string">'white'</span>, cursor: <span class="hljs-string">'pointer'</span>}}/&gt;
+          &lt;input className=<span class="hljs-string">"form-control rc-calendar-picker-input"</span>/&gt;
         &lt;/DatePicker&gt;
         &lt;span className=<span class="hljs-string">"input-group-addon"</span>
           style={{<span class="hljs-string">'-webkit-user-select'</span>: <span class="hljs-string">'none'</span>}}
