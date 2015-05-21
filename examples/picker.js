@@ -63,7 +63,7 @@ var Test = React.createClass({
       <div className="input-group">
         <DatePicker ref='picker' formatter={this.props.formatter} calendar={calendar}
           value={state.value} onChange={this.handleChange}>
-          <input type="text" className="form-control" style={{background: 'white', cursor: 'pointer'}}/>
+          <input className="form-control rc-calendar-picker-input"/>
         </DatePicker>
         <span className="input-group-addon"
           style={{'-webkit-user-select': 'none'}}
