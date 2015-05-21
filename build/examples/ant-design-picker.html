@@ -193,69 +193,6 @@ require(<span class="hljs-string">'rc-calendar/assets/index.css'</span>);
 <span class="hljs-keyword">var</span> GregorianCalendar = require(<span class="hljs-string">'gregorian-calendar'</span>);
 <span class="hljs-keyword">var</span> CalendarLocale = require(<span class="hljs-string">'../lib/locale/zh-cn'</span>);
 
-<span class="hljs-keyword">var</span> style = `
-@font-face {
-  font-family: <span class="hljs-string">'iconfont'</span>;
-  src: url(<span class="hljs-string">'//at.alicdn.com/t/font_1429685559_5814753.eot'</span>);
-  <span class="hljs-comment">/* IE9*/</span>
-  src: url(<span class="hljs-string">'//at.alicdn.com/t/font_1429685559_5814753.eot?#iefix'</span>) format(<span class="hljs-string">'embedded-opentype'</span>), <span class="hljs-comment">/* IE6-IE8 */</span> url(<span class="hljs-string">'//at.alicdn.com/t/font_1429685559_5814753.woff'</span>) format(<span class="hljs-string">'woff'</span>), <span class="hljs-comment">/* chrome、firefox */</span> url(<span class="hljs-string">'//at.alicdn.com/t/font_1429685559_5814753.ttf'</span>) format(<span class="hljs-string">'truetype'</span>), <span class="hljs-comment">/* chrome、firefox、opera、Safari, Android, iOS 4.2+*/</span> url(<span class="hljs-string">'//at.alicdn.com/t/font_1429685559_5814753.svg#iconfont'</span>) format(<span class="hljs-string">'svg'</span>);
-  <span class="hljs-comment">/* iOS 4.1- */</span>
-}
-
-.datepicker-input {
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: rgba(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
-  height: <span class="hljs-number">32</span>px;
-  width: <span class="hljs-number">100</span>%;
-  position: relative;
-  display: <span class="hljs-keyword">inline</span>-block;
-  width: <span class="hljs-number">100</span>%;
-  margin: <span class="hljs-number">0</span> <span class="hljs-number">0</span>;
-  padding: <span class="hljs-number">7</span>px <span class="hljs-number">10</span>px;
-  border-radius: <span class="hljs-number">6</span>px <span class="hljs-number">6</span>px;
-  border: <span class="hljs-number">1</span>px solid <span class="hljs-preprocessor">#d9d9d9;</span>
-  background-color: <span class="hljs-preprocessor">#ffffff;</span>
-  color: <span class="hljs-preprocessor">#666;</span>
-  line-height: <span class="hljs-number">1.5</span>;
-  -webkit-transform: border <span class="hljs-number">0.3</span>s cubic-bezier(<span class="hljs-number">0.35</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.25</span>, <span class="hljs-number">1</span>), background <span class="hljs-number">0.3</span>s cubic-bezier(<span class="hljs-number">0.35</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.25</span>, <span class="hljs-number">1</span>), box-shadow <span class="hljs-number">0.3</span>s cubic-bezier(<span class="hljs-number">0.35</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.25</span>, <span class="hljs-number">1</span>);
-  transform: border <span class="hljs-number">0.3</span>s cubic-bezier(<span class="hljs-number">0.35</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.25</span>, <span class="hljs-number">1</span>), background <span class="hljs-number">0.3</span>s cubic-bezier(<span class="hljs-number">0.35</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.25</span>, <span class="hljs-number">1</span>), box-shadow <span class="hljs-number">0.3</span>s cubic-bezier(<span class="hljs-number">0.35</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.25</span>, <span class="hljs-number">1</span>);
-  font-family: inherit;
-  vertical-align: baseline;
-}
-
-.datepicker-input:focus {
-  border-color: <span class="hljs-preprocessor">#23c0fa;</span>
-  box-shadow: <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">3</span>px <span class="hljs-preprocessor">#23c0fa;</span>
-}
-
-.datepicker-input:hover {
-  border-color: <span class="hljs-preprocessor">#23c0fa;</span>
-}
-
-.date-picker-wrap {
-  box-sizing: border-box;
-  position: relative;
-  display: block;
-  line-height: <span class="hljs-number">1.5</span>;
-  margin-bottom: <span class="hljs-number">22</span>px;
-}
-
-.datepicker-icon {
-  position: absolute;
-  -webkit-user-select:none;
-}
-
-.datepicker-icon:after {
-  position: relative;
-  left: -<span class="hljs-number">22</span>px;
-  font-family: <span class="hljs-string">"iconfont"</span>;
-  content: <span class="hljs-string">""</span>;
-  font-size: <span class="hljs-number">12</span>px;
-  color: <span class="hljs-preprocessor">#999;</span>
-  top: <span class="hljs-number">3</span>px;
-  margin-right: -<span class="hljs-number">22</span>px;
-}
-`;
 
 <span class="hljs-keyword">var</span> Test = React.createClass({
   handleChange: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(value)</span> </span>{
@@ -299,19 +236,23 @@ require(<span class="hljs-string">'rc-calendar/assets/index.css'</span>);
       orient={[<span class="hljs-string">'top'</span>, <span class="hljs-string">'left'</span>]}
       showTime={<span class="hljs-keyword">this</span>.state.showTime} onSelect={<span class="hljs-keyword">this</span>.handleCalendarSelect} onClear={<span class="hljs-keyword">this</span>.handleCalendarSelect.bind(<span class="hljs-keyword">this</span>, <span class="hljs-literal">null</span>)} showClear={<span class="hljs-literal">true</span>}/&gt;;
     <span class="hljs-keyword">return</span> &lt;div style={{width: <span class="hljs-number">236</span>, margin: <span class="hljs-number">20</span>}} data-time={<span class="hljs-keyword">this</span>.state.time}&gt;
-      &lt;style dangerouslySetInnerHTML={{__html: style}}&gt;
-      &lt;/style&gt;
       &lt;div&gt;
         &lt;span&gt;
           &lt;input type=<span class="hljs-string">'checkbox'</span> checked={<span class="hljs-keyword">this</span>.state.showTime} onChange={<span class="hljs-keyword">this</span>.handleShowTimeChange} /&gt;
           showTime&lt;/span&gt;
       &lt;/div&gt;
-      &lt;div className=<span class="hljs-string">"date-picker-wrap"</span>&gt;
+      &lt;div style={{
+        <span class="hljs-string">'boxSizing'</span>: <span class="hljs-string">'border-box'</span>,
+        <span class="hljs-string">'position'</span>: <span class="hljs-string">'relative'</span>,
+        <span class="hljs-string">'display'</span>: <span class="hljs-string">'block'</span>,
+        <span class="hljs-string">'lineHeight'</span>: <span class="hljs-number">1.5</span>,
+        marginBottom: <span class="hljs-number">22</span>
+      }}&gt;
         &lt;DatePicker
-          trigger={&lt;span className=<span class="hljs-string">"datepicker-icon"</span> /&gt;}
+          trigger={&lt;span className=<span class="hljs-string">"rc-calendar-picker-icon"</span> /&gt;}
           formatter={<span class="hljs-keyword">this</span>.props.formatter} calendar={calendar}
           value={state.value} onChange={<span class="hljs-keyword">this</span>.handleChange}&gt;
-          &lt;input type=<span class="hljs-string">"text"</span> className=<span class="hljs-string">"datepicker-input"</span> style={{background: <span class="hljs-string">'white'</span>, cursor: <span class="hljs-string">'pointer'</span>}}/&gt;
+          &lt;input className=<span class="hljs-string">"rc-calendar-picker-input"</span>/&gt;
         &lt;/DatePicker&gt;
       &lt;/div&gt;
     &lt;/div&gt;;
