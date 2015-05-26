@@ -27,4 +27,4 @@ dist
 assets/**/*.css
 build
 .settings/
-lib/
+lib
