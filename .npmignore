@@ -1,7 +1,5 @@
-bower_components/
-*.cfg
-node_modules/
 build/
+*.cfg
 nohup.out
 *.iml
 .idea/
@@ -22,9 +20,10 @@ Thumbs.db
 out/
 .build
 node_modules
-_site
-sea-modules
-spm_modules
 .cache
-dist
-.settings/
+examples
+tests
+src
+index.js
+.*
+assets/**/*.less
