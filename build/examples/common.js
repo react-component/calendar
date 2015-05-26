@@ -96,831 +96,28 @@
 /* 1 */,
 /* 2 */,
 /* 3 */,
-/* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */,
-/* 8 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = React;
+	module.exports = function() {
+		var list = [];
+		list.toString = function toString() {
+			var result = [];
+			for(var i = 0; i < this.length; i++) {
+				var item = this[i];
+				if(item[2]) {
+					result.push("@media " + item[2] + "{" + item[1] + "}");
+				} else {
+					result.push(item[1]);
+				}
+			}
+			return result.join("");
+		};
+		return list;
+	}
 
 /***/ },
-/* 9 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(20);
-	module.exports.Picker = __webpack_require__(21);
-
-
-/***/ },
-/* 10 */,
-/* 11 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(26);
-
-/***/ },
-/* 12 */,
-/* 13 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(27);
-
-/***/ },
-/* 14 */,
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */,
-/* 19 */,
-/* 20 */
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	var React = __webpack_require__(8);
-	var DATE_ROW_COUNT = 6;
-	var DATE_COL_COUNT = 7;
-	var DateTimeFormat = __webpack_require__(13);
-	var GregorianCalendar = __webpack_require__(11);
-	var rcUtil = __webpack_require__(33);
-	var KeyCode = rcUtil.KeyCode;
-	var MonthPanel = __webpack_require__(29);
-	var Time = __webpack_require__(30);
-	
-	function noop() {
-	}
-	
-	function getIdFromDate(d) {
-	  return 'rc-calendar-' + d.getYear() +
-	    '-' + d.getMonth() + '-' +
-	    d.getDayOfMonth();
-	}
-	
-	function goStartMonth() {
-	  var next = this.state.value.clone();
-	  next.setDayOfMonth(1);
-	  this.setState({value: next});
-	}
-	
-	function goEndMonth() {
-	  var next = this.state.value.clone();
-	  next.setDayOfMonth(next.getActualMaximum(GregorianCalendar.MONTH));
-	  this.setState({value: next});
-	}
-	
-	function goMonth(direction) {
-	  var next = this.state.value.clone();
-	  next.addMonth(direction);
-	  this.setState({value: next});
-	}
-	
-	function goYear(direction) {
-	  var next = this.state.value.clone();
-	  next.addYear(direction);
-	  this.setState({value: next});
-	}
-	
-	function goWeek(direction) {
-	  var next = this.state.value.clone();
-	  next.addWeekOfYear(direction);
-	  this.setState({value: next});
-	}
-	
-	function goDay(direction) {
-	  var next = this.state.value.clone();
-	  next.addDayOfMonth(direction);
-	  this.setState({value: next});
-	}
-	
-	function isSameDay(one, two) {
-	  return one.getYear() === two.getYear() &&
-	    one.getMonth() === two.getMonth() &&
-	    one.getDayOfMonth() === two.getDayOfMonth();
-	}
-	
-	function beforeCurrentMonthYear(current, today) {
-	  if (current.getYear() < today.getYear()) {
-	    return 1;
-	  }
-	  return current.getYear() === today.getYear() &&
-	    current.getMonth() < today.getMonth();
-	}
-	
-	function afterCurrentMonthYear(current, today) {
-	  if (current.getYear() > today.getYear()) {
-	    return 1;
-	  }
-	  return current.getYear() === today.getYear() &&
-	    current.getMonth() > today.getMonth();
-	}
-	
-	function onFocus() {
-	  if (this._blurTimer) {
-	    clearTimeout(this._blurTimer);
-	    this._blurTimer = null;
-	  } else {
-	    this.props.onFocus();
-	  }
-	}
-	
-	function onBlur() {
-	  if (this._blurTimer) {
-	    clearTimeout(this._blurTimer);
-	  }
-	  this._blurTimer = setTimeout(function() {
-	    this.props.onBlur();
-	  }.bind(this), 100);
-	}
-	
-	function chooseToday() {
-	  var today = this.state.value.clone();
-	  today.setTime(Date.now());
-	  this.handleSelect(today);
-	}
-	
-	function handleDayClick(current) {
-	  this.handleSelect(current);
-	}
-	
-	function handleSelect(current, keyDownEvent) {
-	  var props = this.props;
-	  this.setState({
-	    value: current
-	  });
-	  if (!keyDownEvent) {
-	    props.onSelect(current);
-	  }
-	}
-	
-	function clear() {
-	  this.props.onClear();
-	}
-	
-	function onMonthPanelSelect(current) {
-	  this.setState({
-	    value: current,
-	    showMonthPanel: 0
-	  });
-	}
-	
-	function handleKeyDown(e) {
-	  var keyCode = e.keyCode;
-	  // mac
-	  var ctrlKey = e.ctrlKey || e.metaKey;
-	  switch (keyCode) {
-	    case KeyCode.DOWN:
-	      goWeek.call(this, 1);
-	      e.preventDefault();
-	      return true;
-	    case KeyCode.UP:
-	      goWeek.call(this, -1);
-	      e.preventDefault();
-	      return true;
-	    case KeyCode.LEFT:
-	      if (ctrlKey) {
-	        this.previousYear();
-	      } else {
-	        goDay.call(this, -1);
-	      }
-	      e.preventDefault();
-	      return true;
-	    case KeyCode.RIGHT:
-	      if (ctrlKey) {
-	        this.nextYear();
-	      } else {
-	        goDay.call(this, 1);
-	      }
-	      e.preventDefault();
-	      return true;
-	    case KeyCode.HOME:
-	      goStartMonth.call(this);
-	      e.preventDefault();
-	      return true;
-	    case KeyCode.END:
-	      goEndMonth.call(this);
-	      e.preventDefault();
-	      return true;
-	    case KeyCode.PAGE_DOWN:
-	      this.nextMonth();
-	      e.preventDefault();
-	      return true;
-	    case KeyCode.PAGE_UP:
-	      this.previousMonth();
-	      e.preventDefault();
-	      return true;
-	    case KeyCode.ENTER:
-	      this.props.onSelect(this.state.value);
-	      e.preventDefault();
-	      return true;
-	  }
-	  this.props.onKeyDown(e);
-	}
-	
-	function showMonthPanel() {
-	  this.setState({
-	    showMonthPanel: 1
-	  });
-	}
-	
-	var ____Class0=React.Component;for(var ____Class0____Key in ____Class0){if(____Class0.hasOwnProperty(____Class0____Key)){Calendar[____Class0____Key]=____Class0[____Class0____Key];}}var ____SuperProtoOf____Class0=____Class0===null?null:____Class0.prototype;Calendar.prototype=Object.create(____SuperProtoOf____Class0);Calendar.prototype.constructor=Calendar;Calendar.__superConstructor__=____Class0;
-	  function Calendar(props) {"use strict";
-	    ____Class0.call(this,props);
-	    var value = props.value || props.defaultValue;
-	    if (!value) {
-	      value = new GregorianCalendar();
-	      value.setTime(Date.now());
-	    }
-	    this.dateFormatter = new DateTimeFormat(props.locale.dateFormat);
-	    this.state = {
-	      orient: props.orient,
-	      prefixCls: props.prefixCls || 'rc-calendar',
-	      value: value
-	    };
-	    // bind methods
-	    this.onBlur = onBlur.bind(this);
-	    this.onFocus = onFocus.bind(this);
-	    this.prefixClsFn = __webpack_require__(31).bind(this);
-	    this.nextMonth = goMonth.bind(this, 1);
-	    this.previousMonth = goMonth.bind(this, -1);
-	    this.nextYear = goYear.bind(this, 1);
-	    this.previousYear = goYear.bind(this, -1);
-	    this.chooseToday = chooseToday.bind(this);
-	    this.clear = clear.bind(this);
-	    this.handleSelect = handleSelect.bind(this);
-	    this.onMonthPanelSelect = onMonthPanelSelect.bind(this);
-	    this.handleKeyDown = handleKeyDown.bind(this);
-	    this.showMonthPanel = showMonthPanel.bind(this);
-	  }
-	
-	  Object.defineProperty(Calendar.prototype,"shouldComponentUpdate",{writable:true,configurable:true,value:function() {"use strict";
-	    return rcUtil.PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
-	  }});
-	
-	  Object.defineProperty(Calendar.prototype,"componentWillReceiveProps",{writable:true,configurable:true,value:function(nextProps) {"use strict";
-	    var value = nextProps.value;
-	    if (value !== undefined) {
-	      if (!value) {
-	        value = this.state.value.clone();
-	        value.setTime(Date.now());
-	      }
-	      this.setState({
-	        value: value
-	      });
-	    }
-	    if (nextProps.orient) {
-	      this.setState({
-	        orient: nextProps.orient
-	      });
-	    }
-	    if (nextProps.locale !== this.props.locale) {
-	      this.dateFormatter = new DateTimeFormat(nextProps.locale.dateFormat);
-	    }
-	  }});
-	
-	  Object.defineProperty(Calendar.prototype,"renderDates",{writable:true,configurable:true,value:function() {"use strict";
-	    var props = this.props;
-	    var i, j, current;
-	    var dateTable = [];
-	    var showWeekNumber = props.showWeekNumber;
-	    var value = this.state.value;
-	    var today = value.clone();
-	    var prefixClsFn = this.prefixClsFn;
-	    var cellClass = prefixClsFn('cell');
-	    var weekNumberCellClass = prefixClsFn('week-number-cell');
-	    var dateClass = prefixClsFn('date');
-	    var dateRender = props.dateRender;
-	    var disabledDate = props.disabledDate;
-	    var dateFormatter = this.dateFormatter;
-	    var todayClass = prefixClsFn('today');
-	    var selectedClass = prefixClsFn('selected-day');
-	    var lastMonthDayClass = prefixClsFn('last-month-cell');
-	    var nextMonthDayClass = prefixClsFn('next-month-btn-day');
-	    var disabledClass = prefixClsFn('disabled-cell');
-	    today.setTime(Date.now());
-	    var month1 = value.clone();
-	    month1.set(value.getYear(), value.getMonth(), 1);
-	    var day = month1.getDayOfWeek();
-	    var lastMonthDiffDay = (day + 7 - value.getFirstDayOfWeek()) % 7;
-	    // calculate last month
-	    var lastMonth1 = month1.clone();
-	    lastMonth1.addDayOfMonth(0 - lastMonthDiffDay);
-	    var passed = 0;
-	    for (i = 0; i < DATE_ROW_COUNT; i++) {
-	      for (j = 0; j < DATE_COL_COUNT; j++) {
-	        current = lastMonth1;
-	        if (passed) {
-	          current = current.clone();
-	          current.addDayOfMonth(passed);
-	        }
-	        dateTable.push(current);
-	        passed++;
-	      }
-	    }
-	    var tableHtml = [];
-	    passed = 0;
-	    for (i = 0; i < DATE_ROW_COUNT; i++) {
-	      var weekNumberCell;
-	      var dateCells = [];
-	      if (showWeekNumber) {
-	        weekNumberCell = (React.createElement("td", {key: dateTable[passed].getWeekOfYear(), role: "gridcell", className: weekNumberCellClass}, dateTable[passed].getWeekOfYear()));
-	      }
-	      for (j = 0; j < DATE_COL_COUNT; j++) {
-	        current = dateTable[passed];
-	        var cls = cellClass;
-	        var disabled = false;
-	        var selected = false;
-	
-	        if (isSameDay(current, today)) {
-	          cls += ' ' + todayClass;
-	        }
-	        if (isSameDay(current, value)) {
-	          cls += ' ' + selectedClass;
-	          selected = true;
-	        }
-	        if (beforeCurrentMonthYear(current, value)) {
-	          cls += ' ' + lastMonthDayClass;
-	        }
-	        if (afterCurrentMonthYear(current, value)) {
-	          cls += ' ' + nextMonthDayClass;
-	        }
-	        if (disabledDate && disabledDate(current, value)) {
-	          cls += ' ' + disabledClass;
-	          disabled = true;
-	        }
-	
-	        var dateHtml;
-	        if (!(dateRender && (dateHtml = dateRender(current, value)))) {
-	          dateHtml = (
-	            React.createElement("span", {
-	              key: getIdFromDate(current), 
-	              className: dateClass, 
-	              "aria-selected": selected, 
-	              "aria-disabled": disabled}, 
-	              current.getDayOfMonth()
-	            ));
-	        }
-	
-	        dateCells.push(
-	          React.createElement("td", {key: passed, onClick: disabled ? noop : handleDayClick.bind(this, current), role: "gridcell", title: dateFormatter.format(current), className: cls}, 
-	        dateHtml
-	          ));
-	
-	        passed++;
-	      }
-	      tableHtml.push(
-	        React.createElement("tr", {
-	          key: i, 
-	          role: "row"}, 
-	          weekNumberCell, 
-	          dateCells
-	        ));
-	    }
-	    this.dateTable = dateTable;
-	    return tableHtml;
-	  }});
-	
-	  Object.defineProperty(Calendar.prototype,"getTodayTime",{writable:true,configurable:true,value:function() {"use strict";
-	    var value = this.state.value;
-	    var today = value.clone();
-	    today.setTime(Date.now());
-	    return this.dateFormatter.format(today);
-	  }});
-	
-	  Object.defineProperty(Calendar.prototype,"getMonthYear",{writable:true,configurable:true,value:function() {"use strict";
-	    var locale = this.props.locale;
-	    var value = this.state.value;
-	    return new DateTimeFormat(locale.monthYearFormat).format(value);
-	  }});
-	
-	  Object.defineProperty(Calendar.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
-	    // console.log('re render');
-	    var showWeekNumberEl;
-	    var props = this.props;
-	    var locale = props.locale;
-	    var state = this.state;
-	    var value = state.value;
-	    var veryShortWeekdays = [];
-	    var weekDays = [];
-	    var firstDayOfWeek = value.getFirstDayOfWeek();
-	    var prefixCls = state.prefixCls;
-	    var prefixClsFn = this.prefixClsFn;
-	
-	    for (var i = 0; i < DATE_COL_COUNT; i++) {
-	      var index = (firstDayOfWeek + i) % DATE_COL_COUNT;
-	      veryShortWeekdays[i] = locale.format.veryShortWeekdays[index];
-	      weekDays[i] = locale.format.weekdays[index];
-	    }
-	
-	    if (props.showWeekNumber) {
-	      showWeekNumberEl = (
-	        React.createElement("th", {role: "columnheader", className: prefixClsFn("column-header", "week-number-header")}, 
-	          React.createElement("span", {className: prefixClsFn("column-header-inner")}, "x")
-	        ));
-	    }
-	    var weekDaysEls = weekDays.map(function(value, xindex) {
-	      return (
-	        React.createElement("th", {key: xindex, role: "columnheader", title: value, className: prefixClsFn("column-header")}, 
-	          React.createElement("span", {className: prefixClsFn("column-header-inner")}, 
-	          veryShortWeekdays[xindex]
-	          )
-	        ));
-	    });
-	    var footerEl;
-	    if (props.showToday || props.showTime) {
-	      var todayEl;
-	      if (props.showToday) {
-	        todayEl = (React.createElement("a", {className: prefixClsFn("today-btn"), 
-	          role: "button", 
-	          onClick: this.chooseToday, 
-	          title: this.getTodayTime()}, locale.today));
-	      }
-	      var clearEl;
-	      if (props.showClear) {
-	        clearEl = (React.createElement("a", {className: prefixClsFn("clear-btn"), 
-	          role: "button", 
-	          onClick: this.clear}, locale.clear));
-	      }
-	      var footerBtn;
-	      if (todayEl || clearEl) {
-	        footerBtn = React.createElement("div", {className: prefixClsFn("footer-btn")}, todayEl, " ", clearEl);
-	      }
-	      var timeEl;
-	      if (props.showTime) {
-	        timeEl = (React.createElement(Time, {value: value, rootPrefixCls: prefixCls, prefixClsFn: prefixClsFn, locale: locale, onChange: this.handleSelect}));
-	      }
-	      footerEl = (
-	        React.createElement("div", {className: prefixClsFn("footer")}, 
-	        timeEl, 
-	        footerBtn
-	        ));
-	    }
-	
-	    var monthPanel;
-	    if (state.showMonthPanel) {
-	      monthPanel = React.createElement(MonthPanel, {locale: locale, value: value, rootPrefixCls: state.prefixCls, onSelect: this.onMonthPanelSelect});
-	    }
-	
-	    var className = prefixCls;
-	    if (props.className) {
-	      className += ' ' + props.className;
-	    }
-	    var orient = state.orient;
-	    if (orient) {
-	      orient.forEach(function(o)  {
-	        className += ' ' + prefixClsFn('orient-' + o);
-	      });
-	    }
-	    return (
-	      React.createElement("div", {className: className, tabIndex: "0", onFocus: this.onFocus, onBlur: this.onBlur, onKeyDown: this.handleKeyDown}, 
-	        React.createElement("div", {style: {outline: 'none'}}, 
-	          React.createElement("div", {className: prefixClsFn("header")}, 
-	            React.createElement("a", {className: prefixClsFn("prev-year-btn"), 
-	              role: "button", 
-	              onClick: this.previousYear, 
-	              title: locale.previousYear}, 
-	              "«"
-	            ), 
-	            React.createElement("a", {className: prefixClsFn("prev-month-btn"), 
-	              role: "button", 
-	              onClick: this.previousMonth, 
-	              title: locale.previousMonth}, 
-	              "‹"
-	            ), 
-	            React.createElement("a", {className: prefixClsFn("month-select"), 
-	              role: "button", 
-	              onClick: this.showMonthPanel, 
-	              title: locale.monthSelect}, 
-	              React.createElement("span", {className: prefixClsFn("month-select-content")}, this.getMonthYear()), 
-	              React.createElement("span", {className: prefixClsFn("month-select-arrow")}, "x")
-	            ), 
-	            React.createElement("a", {className: prefixClsFn("next-month-btn"), 
-	              onClick: this.nextMonth, 
-	              title: locale.nextMonth}, 
-	              "›"
-	            ), 
-	            React.createElement("a", {className: prefixClsFn("next-year-btn"), 
-	              onClick: this.nextYear, 
-	              title: locale.nextYear}, 
-	              "»"
-	            )
-	          ), 
-	          React.createElement("div", {className: prefixClsFn("calendar-body")}, 
-	            React.createElement("table", {className: prefixClsFn("table"), cellSpacing: "0", role: "grid"}, 
-	              React.createElement("thead", null, 
-	                React.createElement("tr", {role: "row"}, 
-	              showWeekNumberEl, 
-	              weekDaysEls
-	                )
-	              ), 
-	              React.createElement("tbody", {className: prefixClsFn("tbody")}, 
-	            this.renderDates()
-	              )
-	            )
-	          ), 
-	        footerEl
-	        ), 
-	      monthPanel
-	      ));
-	  }});
-	
-	
-	Calendar.propTypes = {
-	  value: React.PropTypes.object,
-	  defaultValue: React.PropTypes.object,
-	  className: React.PropTypes.string,
-	  orient: React.PropTypes.arrayOf(React.PropTypes.oneOf(['left', 'top', 'right', 'bottom'])),
-	  locale: React.PropTypes.object,
-	  showWeekNumber: React.PropTypes.bool,
-	  showToday: React.PropTypes.bool,
-	  showTime: React.PropTypes.bool,
-	  onSelect: React.PropTypes.func,
-	  onBlur: React.PropTypes.func
-	};
-	
-	Calendar.defaultProps = {
-	  locale: __webpack_require__(32),
-	  onKeyDown: noop,
-	  className: '',
-	  showToday: true,
-	  onSelect: noop,
-	  onFocus: noop,
-	  onBlur: noop,
-	  onClear: noop
-	};
-	
-	module.exports = Calendar;
-
-
-/***/ },
-/* 21 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(8);
-	var DateTimeFormat = __webpack_require__(13);
-	var rcUtil = __webpack_require__(33);
-	var KeyCode = __webpack_require__(33).KeyCode;
-	var domAlign = __webpack_require__(34);
-	var orientMap = {
-	  tl: ['top', 'left'],
-	  tr: ['top', 'right'],
-	  bl: ['bottom', 'left'],
-	  br: ['bottom', 'right']
-	};
-	
-	function getImmutableOrient(orient) {
-	  if (orient) {
-	    for (var i in orientMap) {
-	      var original = orientMap[i];
-	      if (original[0] === orient[0] && original[1] === orient[1]) {
-	        return original;
-	      }
-	    }
-	  }
-	}
-	
-	function refFn(field, component) {
-	  this[field] = component;
-	}
-	
-	/**
-	 * DatePicker = wrap input using Calendar
-	 */
-	var ____Class1=React.Component;for(var ____Class1____Key in ____Class1){if(____Class1.hasOwnProperty(____Class1____Key)){Picker[____Class1____Key]=____Class1[____Class1____Key];}}var ____SuperProtoOf____Class1=____Class1===null?null:____Class1.prototype;Picker.prototype=Object.create(____SuperProtoOf____Class1);Picker.prototype.constructor=Picker;Picker.__superConstructor__=____Class1;
-	  function Picker(props) {"use strict";
-	    ____Class1.call(this,props);
-	    this.state = {
-	      open: props.open,
-	      value: props.value || props.defaultValue
-	    };
-	
-	    // bind methods
-	    [
-	      'handleInputClick', 'handleCalendarBlur', 'handleTriggerClick',
-	      'handleCalendarClear', 'handleCalendarKeyDown',
-	      'handleKeyDown', 'handleCalendarSelect'
-	    ].forEach(function(m)  {
-	        this[m] = this[m].bind(this);
-	      }.bind(this));
-	    this.saveCalendarRef = refFn.bind(this, 'calendarInstance');
-	    this.saveInputRef = refFn.bind(this, 'inputInstance');
-	  }
-	
-	  Object.defineProperty(Picker.prototype,"componentWillReceiveProps",{writable:true,configurable:true,value:function(nextProps) {"use strict";
-	    if (nextProps.value) {
-	      this.setState({
-	        value: nextProps.value
-	      });
-	    }
-	  }});
-	
-	  Object.defineProperty(Picker.prototype,"open",{writable:true,configurable:true,value:function(callback) {"use strict";
-	    this.setState({
-	      open: true
-	    }, callback);
-	  }});
-	
-	  Object.defineProperty(Picker.prototype,"close",{writable:true,configurable:true,value:function(callback) {"use strict";
-	    this.setState({
-	      open: false
-	    }, callback);
-	  }});
-	
-	  Object.defineProperty(Picker.prototype,"handleInputClick",{writable:true,configurable:true,value:function() {"use strict";
-	    this.toggle();
-	  }});
-	
-	  Object.defineProperty(Picker.prototype,"handleTriggerClick",{writable:true,configurable:true,value:function() {"use strict";
-	    this.toggle();
-	  }});
-	
-	  Object.defineProperty(Picker.prototype,"toggle",{writable:true,configurable:true,value:function(callback) {"use strict";
-	    this.setState({
-	      open: !this.state.open
-	    }, callback);
-	  }});
-	
-	  Object.defineProperty(Picker.prototype,"handleKeyDown",{writable:true,configurable:true,value:function(e) {"use strict";
-	    // down
-	    if (e.keyCode === KeyCode.DOWN) {
-	      e.preventDefault();
-	      this.open();
-	    }
-	  }});
-	
-	  Object.defineProperty(Picker.prototype,"handleCalendarKeyDown",{writable:true,configurable:true,value:function(e) {"use strict";
-	    if (e.keyCode === KeyCode.ESC) {
-	      e.stopPropagation();
-	      this.close(function()  {
-	        React.findDOMNode(this.inputInstance).focus();
-	      }.bind(this));
-	    }
-	  }});
-	
-	  Object.defineProperty(Picker.prototype,"handleCalendarSelect",{writable:true,configurable:true,value:function(value) {"use strict";
-	    this.props.calendar.props.onSelect(value);
-	    var currentValue = this.state.value;
-	    if (this.props.calendar.props.showTime) {
-	      this.setState({
-	        value: value
-	      });
-	    } else {
-	      this.setState({
-	        value: value,
-	        open: false
-	      }, function()  {
-	        React.findDOMNode(this.inputInstance).focus();
-	      }.bind(this));
-	    }
-	    if (!currentValue || currentValue.getTime() !== value.getTime()) {
-	      this.props.onChange(value);
-	    }
-	  }});
-	
-	  Object.defineProperty(Picker.prototype,"handleCalendarBlur",{writable:true,configurable:true,value:function() {"use strict";
-	    // if invisible, will not trigger blur
-	    this.setState({
-	      open: false
-	    });
-	  }});
-	
-	  Object.defineProperty(Picker.prototype,"handleCalendarClear",{writable:true,configurable:true,value:function() {"use strict";
-	    this.props.calendar.props.onClear();
-	    this.setState({
-	      open: false,
-	      value: null
-	    }, function() {
-	      React.findDOMNode(this.inputInstance).focus();
-	    }.bind(this));
-	    if (this.state.value !== null) {
-	      this.props.onChange(null);
-	    }
-	  }});
-	
-	  Object.defineProperty(Picker.prototype,"componentDidMount",{writable:true,configurable:true,value:function() {"use strict";
-	    this.componentDidUpdate();
-	  }});
-	
-	  Object.defineProperty(Picker.prototype,"componentDidUpdate",{writable:true,configurable:true,value:function() {"use strict";
-	    if (this.state.open && !this.$Picker_lastOpen) {
-	      var orient = this.$Picker_cacheCalendar.props.orient;
-	      var points = ['tl', 'bl'];
-	      var offset = [0, 5];
-	      if (orient.indexOf('top') !== -1 && orient.indexOf('left') !== -1) {
-	        points = ['tl', 'bl'];
-	      } else if (orient.indexOf('top') !== -1 && orient.indexOf('right') !== -1) {
-	        points = ['tr', 'br'];
-	      } else if (orient.indexOf('bottom') !== -1 && orient.indexOf('left') !== -1) {
-	        points = ['bl', 'tl'];
-	        offset = [0, -5];
-	      } else if (orient.indexOf('bottom') !== -1 && orient.indexOf('right') !== -1) {
-	        points = ['br', 'tr'];
-	        offset = [0, -5];
-	      }
-	
-	      var align = domAlign(React.findDOMNode(this.calendarInstance), React.findDOMNode(this.inputInstance), {
-	        points: points,
-	        offset: offset,
-	        overflow: {
-	          adjustX: 1,
-	          adjustY: 1
-	        }
-	      });
-	      points = align.points;
-	      var newOrient = orientMap[points[0]];
-	      this.calendarInstance.setState({
-	        orient: newOrient
-	      });
-	      React.findDOMNode(this.calendarInstance).focus();
-	    }
-	    this.$Picker_lastOpen = this.state.open;
-	  }});
-	
-	  Object.defineProperty(Picker.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
-	    var props = this.props;
-	    // var input = React.Children.only(props.children); bug 0.13.0
-	    /*
-	     children: Object
-	     .0: (...)
-	     get .0: function () {
-	     set .0: function (value) {
-	     _reactDidWarn: false
-	     _reactFragment: Object
-	     __proto__: Object
-	     */
-	    var input = props.children;
-	    if (!React.isValidElement(input)) {
-	      var children = input;
-	      React.Children.forEach(children, function(m)  {
-	        input = m;
-	      });
-	    }
-	    var state = this.state;
-	    var value = state.value;
-	    var calendar = this.$Picker_cacheCalendar;
-	    if (state.open) {
-	      var calendarInstance = this.calendarInstance;
-	      var calendarProp = props.calendar;
-	      this.$Picker_cacheCalendar = calendar = React.cloneElement(calendarProp, {
-	        ref: rcUtil.createChainedFunction(calendarProp.props.ref, this.saveCalendarRef),
-	        value: value,
-	        // focused: true,
-	        orient: calendarInstance && calendarInstance.state.orient || getImmutableOrient(calendarProp.props.orient) || orientMap.tl,
-	        onBlur: this.handleCalendarBlur,
-	        onKeyDown: this.handleCalendarKeyDown,
-	        onSelect: this.handleCalendarSelect,
-	        onClear: this.handleCalendarClear
-	      });
-	    }
-	    var inputValue = '';
-	    if (value) {
-	      inputValue = props.formatter.format(value);
-	    }
-	    input = React.cloneElement(input, {
-	      ref: rcUtil.createChainedFunction(input.props.ref, this.saveInputRef),
-	      readOnly: true,
-	      onClick: this.handleInputClick,
-	      value: inputValue,
-	      onKeyDown: this.handleKeyDown
-	    });
-	    var classes = [props.prefixCls];
-	    if (state.open) {
-	      classes.push(props.prefixCls + '-open');
-	    }
-	    var trigger = props.trigger;
-	    if (trigger) {
-	      trigger = React.cloneElement(trigger, {
-	        onClick: this.handleTriggerClick,
-	        unselectable: true,
-	        onMouseDown: prevent
-	      });
-	    }
-	    return React.createElement("span", {className: classes.join(' ')}, [input, calendar, trigger]);
-	  }});
-	
-	
-	function prevent(e) {
-	  e.preventDefault();
-	}
-	
-	Picker.propTypes = {
-	  onChange: React.PropTypes.func
-	};
-	
-	Picker.defaultProps = {
-	  prefixCls: 'rc-calendar-picker',
-	  onChange:function() {
-	  },
-	  formatter: new DateTimeFormat('yyyy-MM-dd')
-	};
-	
-	module.exports = Picker;
-
-
-/***/ },
-/* 22 */,
-/* 23 */,
-/* 24 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -1116,8 +313,1533 @@
 
 
 /***/ },
-/* 25 */,
-/* 26 */
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports = __webpack_require__(7);
+	module.exports.Picker = __webpack_require__(35);
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = (function () {
+	  function defineProperties(target, props) {
+	    for (var i = 0; i < props.length; i++) {
+	      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ('value' in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+	    }
+	  }return function (Constructor, protoProps, staticProps) {
+	    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+	  };
+	})();
+	
+	var _get = function get(_x, _x2, _x3) {
+	  var _again = true;_function: while (_again) {
+	    var object = _x,
+	        property = _x2,
+	        receiver = _x3;desc = parent = getter = undefined;_again = false;var desc = Object.getOwnPropertyDescriptor(object, property);if (desc === undefined) {
+	      var parent = Object.getPrototypeOf(object);if (parent === null) {
+	        return undefined;
+	      } else {
+	        _x = parent;_x2 = property;_x3 = receiver;_again = true;continue _function;
+	      }
+	    } else if ('value' in desc) {
+	      return desc.value;
+	    } else {
+	      var getter = desc.get;if (getter === undefined) {
+	        return undefined;
+	      }return getter.call(receiver);
+	    }
+	  }
+	};
+	
+	function _classCallCheck(instance, Constructor) {
+	  if (!(instance instanceof Constructor)) {
+	    throw new TypeError('Cannot call a class as a function');
+	  }
+	}
+	
+	function _inherits(subClass, superClass) {
+	  if (typeof superClass !== 'function' && superClass !== null) {
+	    throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
+	}
+	
+	var React = __webpack_require__(9);
+	var DATE_ROW_COUNT = 6;
+	var DATE_COL_COUNT = 7;
+	var DateTimeFormat = __webpack_require__(10);
+	var GregorianCalendar = __webpack_require__(12);
+	var rcUtil = __webpack_require__(18);
+	var KeyCode = rcUtil.KeyCode;
+	var MonthPanel = __webpack_require__(8);
+	var Time = __webpack_require__(32);
+	
+	function noop() {}
+	
+	function getIdFromDate(d) {
+	  return 'rc-calendar-' + d.getYear() + '-' + d.getMonth() + '-' + d.getDayOfMonth();
+	}
+	
+	function goStartMonth() {
+	  var next = this.state.value.clone();
+	  next.setDayOfMonth(1);
+	  this.setState({ value: next });
+	}
+	
+	function goEndMonth() {
+	  var next = this.state.value.clone();
+	  next.setDayOfMonth(next.getActualMaximum(GregorianCalendar.MONTH));
+	  this.setState({ value: next });
+	}
+	
+	function goMonth(direction) {
+	  var next = this.state.value.clone();
+	  next.addMonth(direction);
+	  this.setState({ value: next });
+	}
+	
+	function goYear(direction) {
+	  var next = this.state.value.clone();
+	  next.addYear(direction);
+	  this.setState({ value: next });
+	}
+	
+	function goWeek(direction) {
+	  var next = this.state.value.clone();
+	  next.addWeekOfYear(direction);
+	  this.setState({ value: next });
+	}
+	
+	function goDay(direction) {
+	  var next = this.state.value.clone();
+	  next.addDayOfMonth(direction);
+	  this.setState({ value: next });
+	}
+	
+	function isSameDay(one, two) {
+	  return one.getYear() === two.getYear() && one.getMonth() === two.getMonth() && one.getDayOfMonth() === two.getDayOfMonth();
+	}
+	
+	function beforeCurrentMonthYear(current, today) {
+	  if (current.getYear() < today.getYear()) {
+	    return 1;
+	  }
+	  return current.getYear() === today.getYear() && current.getMonth() < today.getMonth();
+	}
+	
+	function afterCurrentMonthYear(current, today) {
+	  if (current.getYear() > today.getYear()) {
+	    return 1;
+	  }
+	  return current.getYear() === today.getYear() && current.getMonth() > today.getMonth();
+	}
+	
+	function onFocus() {
+	  if (this._blurTimer) {
+	    clearTimeout(this._blurTimer);
+	    this._blurTimer = null;
+	  } else {
+	    this.props.onFocus();
+	  }
+	}
+	
+	function onBlur() {
+	  var _this = this;
+	
+	  if (this._blurTimer) {
+	    clearTimeout(this._blurTimer);
+	  }
+	  this._blurTimer = setTimeout(function () {
+	    _this.props.onBlur();
+	  }, 100);
+	}
+	
+	function chooseToday() {
+	  var today = this.state.value.clone();
+	  today.setTime(Date.now());
+	  this.handleSelect(today);
+	}
+	
+	function handleDayClick(current) {
+	  this.handleSelect(current);
+	}
+	
+	function handleSelect(current, keyDownEvent) {
+	  var props = this.props;
+	  this.setState({
+	    value: current
+	  });
+	  if (!keyDownEvent) {
+	    props.onSelect(current);
+	  }
+	}
+	
+	function clear() {
+	  this.props.onClear();
+	}
+	
+	function onMonthPanelSelect(current) {
+	  this.setState({
+	    value: current,
+	    showMonthPanel: 0
+	  });
+	}
+	
+	function handleKeyDown(e) {
+	  var keyCode = e.keyCode;
+	  // mac
+	  var ctrlKey = e.ctrlKey || e.metaKey;
+	  switch (keyCode) {
+	    case KeyCode.DOWN:
+	      goWeek.call(this, 1);
+	      e.preventDefault();
+	      return true;
+	    case KeyCode.UP:
+	      goWeek.call(this, -1);
+	      e.preventDefault();
+	      return true;
+	    case KeyCode.LEFT:
+	      if (ctrlKey) {
+	        this.previousYear();
+	      } else {
+	        goDay.call(this, -1);
+	      }
+	      e.preventDefault();
+	      return true;
+	    case KeyCode.RIGHT:
+	      if (ctrlKey) {
+	        this.nextYear();
+	      } else {
+	        goDay.call(this, 1);
+	      }
+	      e.preventDefault();
+	      return true;
+	    case KeyCode.HOME:
+	      goStartMonth.call(this);
+	      e.preventDefault();
+	      return true;
+	    case KeyCode.END:
+	      goEndMonth.call(this);
+	      e.preventDefault();
+	      return true;
+	    case KeyCode.PAGE_DOWN:
+	      this.nextMonth();
+	      e.preventDefault();
+	      return true;
+	    case KeyCode.PAGE_UP:
+	      this.previousMonth();
+	      e.preventDefault();
+	      return true;
+	    case KeyCode.ENTER:
+	      this.props.onSelect(this.state.value);
+	      e.preventDefault();
+	      return true;
+	    default:
+	      this.props.onKeyDown(e);
+	      return true;
+	  }
+	}
+	
+	function showMonthPanel() {
+	  this.setState({
+	    showMonthPanel: 1
+	  });
+	}
+	
+	var Calendar = (function (_React$Component) {
+	  function Calendar(props) {
+	    _classCallCheck(this, Calendar);
+	
+	    _get(Object.getPrototypeOf(Calendar.prototype), 'constructor', this).call(this, props);
+	    var value = props.value || props.defaultValue;
+	    if (!value) {
+	      value = new GregorianCalendar();
+	      value.setTime(Date.now());
+	    }
+	    this.dateFormatter = new DateTimeFormat(props.locale.dateFormat);
+	    this.state = {
+	      orient: props.orient,
+	      prefixCls: props.prefixCls || 'rc-calendar',
+	      value: value
+	    };
+	    // bind methods
+	    this.onBlur = onBlur.bind(this);
+	    this.onFocus = onFocus.bind(this);
+	    this.prefixClsFn = __webpack_require__(31).bind(this);
+	    this.nextMonth = goMonth.bind(this, 1);
+	    this.previousMonth = goMonth.bind(this, -1);
+	    this.nextYear = goYear.bind(this, 1);
+	    this.previousYear = goYear.bind(this, -1);
+	    this.chooseToday = chooseToday.bind(this);
+	    this.clear = clear.bind(this);
+	    this.handleSelect = handleSelect.bind(this);
+	    this.onMonthPanelSelect = onMonthPanelSelect.bind(this);
+	    this.handleKeyDown = handleKeyDown.bind(this);
+	    this.showMonthPanel = showMonthPanel.bind(this);
+	  }
+	
+	  _inherits(Calendar, _React$Component);
+	
+	  _createClass(Calendar, [{
+	    key: 'shouldComponentUpdate',
+	    value: function shouldComponentUpdate() {
+	      return rcUtil.PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
+	    }
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      var value = nextProps.value;
+	      if (value !== undefined) {
+	        if (!value) {
+	          value = this.state.value.clone();
+	          value.setTime(Date.now());
+	        }
+	        this.setState({
+	          value: value
+	        });
+	      }
+	      if (nextProps.orient) {
+	        this.setState({
+	          orient: nextProps.orient
+	        });
+	      }
+	      if (nextProps.locale !== this.props.locale) {
+	        this.dateFormatter = new DateTimeFormat(nextProps.locale.dateFormat);
+	      }
+	    }
+	  }, {
+	    key: 'renderDates',
+	    value: function renderDates() {
+	      var props = this.props;
+	      var i, j, current;
+	      var dateTable = [];
+	      var showWeekNumber = props.showWeekNumber;
+	      var value = this.state.value;
+	      var today = value.clone();
+	      var prefixClsFn = this.prefixClsFn;
+	      var cellClass = prefixClsFn('cell');
+	      var weekNumberCellClass = prefixClsFn('week-number-cell');
+	      var dateClass = prefixClsFn('date');
+	      var dateRender = props.dateRender;
+	      var disabledDate = props.disabledDate;
+	      var dateFormatter = this.dateFormatter;
+	      var todayClass = prefixClsFn('today');
+	      var selectedClass = prefixClsFn('selected-day');
+	      var lastMonthDayClass = prefixClsFn('last-month-cell');
+	      var nextMonthDayClass = prefixClsFn('next-month-btn-day');
+	      var disabledClass = prefixClsFn('disabled-cell');
+	      today.setTime(Date.now());
+	      var month1 = value.clone();
+	      month1.set(value.getYear(), value.getMonth(), 1);
+	      var day = month1.getDayOfWeek();
+	      var lastMonthDiffDay = (day + 7 - value.getFirstDayOfWeek()) % 7;
+	      // calculate last month
+	      var lastMonth1 = month1.clone();
+	      lastMonth1.addDayOfMonth(0 - lastMonthDiffDay);
+	      var passed = 0;
+	      for (i = 0; i < DATE_ROW_COUNT; i++) {
+	        for (j = 0; j < DATE_COL_COUNT; j++) {
+	          current = lastMonth1;
+	          if (passed) {
+	            current = current.clone();
+	            current.addDayOfMonth(passed);
+	          }
+	          dateTable.push(current);
+	          passed++;
+	        }
+	      }
+	      var tableHtml = [];
+	      passed = 0;
+	      for (i = 0; i < DATE_ROW_COUNT; i++) {
+	        var weekNumberCell;
+	        var dateCells = [];
+	        if (showWeekNumber) {
+	          weekNumberCell = React.createElement('td', { key: dateTable[passed].getWeekOfYear(), role: 'gridcell', className: weekNumberCellClass }, dateTable[passed].getWeekOfYear());
+	        }
+	        for (j = 0; j < DATE_COL_COUNT; j++) {
+	          current = dateTable[passed];
+	          var cls = cellClass;
+	          var disabled = false;
+	          var selected = false;
+	
+	          if (isSameDay(current, today)) {
+	            cls += ' ' + todayClass;
+	          }
+	          if (isSameDay(current, value)) {
+	            cls += ' ' + selectedClass;
+	            selected = true;
+	          }
+	          if (beforeCurrentMonthYear(current, value)) {
+	            cls += ' ' + lastMonthDayClass;
+	          }
+	          if (afterCurrentMonthYear(current, value)) {
+	            cls += ' ' + nextMonthDayClass;
+	          }
+	          if (disabledDate && disabledDate(current, value)) {
+	            cls += ' ' + disabledClass;
+	            disabled = true;
+	          }
+	
+	          var dateHtml;
+	          if (!(dateRender && (dateHtml = dateRender(current, value)))) {
+	            dateHtml = React.createElement('span', {
+	              key: getIdFromDate(current),
+	              className: dateClass,
+	              'aria-selected': selected,
+	              'aria-disabled': disabled }, current.getDayOfMonth());
+	          }
+	
+	          dateCells.push(React.createElement('td', { key: passed, onClick: disabled ? noop : handleDayClick.bind(this, current), role: 'gridcell', title: dateFormatter.format(current), className: cls }, dateHtml));
+	
+	          passed++;
+	        }
+	        tableHtml.push(React.createElement('tr', {
+	          key: i,
+	          role: 'row' }, weekNumberCell, dateCells));
+	      }
+	      this.dateTable = dateTable;
+	      return tableHtml;
+	    }
+	  }, {
+	    key: 'getTodayTime',
+	    value: function getTodayTime() {
+	      var value = this.state.value;
+	      var today = value.clone();
+	      today.setTime(Date.now());
+	      return this.dateFormatter.format(today);
+	    }
+	  }, {
+	    key: 'getMonthYear',
+	    value: function getMonthYear() {
+	      var locale = this.props.locale;
+	      var value = this.state.value;
+	      return new DateTimeFormat(locale.monthYearFormat).format(value);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      // console.log('re render');
+	      var showWeekNumberEl;
+	      var props = this.props;
+	      var locale = props.locale;
+	      var state = this.state;
+	      var value = state.value;
+	      var veryShortWeekdays = [];
+	      var weekDays = [];
+	      var firstDayOfWeek = value.getFirstDayOfWeek();
+	      var prefixCls = state.prefixCls;
+	      var prefixClsFn = this.prefixClsFn;
+	
+	      for (var i = 0; i < DATE_COL_COUNT; i++) {
+	        var index = (firstDayOfWeek + i) % DATE_COL_COUNT;
+	        veryShortWeekdays[i] = locale.format.veryShortWeekdays[index];
+	        weekDays[i] = locale.format.weekdays[index];
+	      }
+	
+	      if (props.showWeekNumber) {
+	        showWeekNumberEl = React.createElement('th', { role: 'columnheader', className: prefixClsFn('column-header', 'week-number-header') }, React.createElement('span', { className: prefixClsFn('column-header-inner') }, 'x'));
+	      }
+	      var weekDaysEls = weekDays.map(function (day, xindex) {
+	        return React.createElement('th', { key: xindex, role: 'columnheader', title: day, className: prefixClsFn('column-header') }, React.createElement('span', { className: prefixClsFn('column-header-inner') }, veryShortWeekdays[xindex]));
+	      });
+	      var footerEl;
+	      if (props.showToday || props.showTime) {
+	        var todayEl;
+	        if (props.showToday) {
+	          todayEl = React.createElement('a', { className: prefixClsFn('today-btn'),
+	            role: 'button',
+	            onClick: this.chooseToday,
+	            title: this.getTodayTime() }, locale.today);
+	        }
+	        var clearEl;
+	        if (props.showClear) {
+	          clearEl = React.createElement('a', { className: prefixClsFn('clear-btn'),
+	            role: 'button',
+	            onClick: this.clear }, locale.clear);
+	        }
+	        var footerBtn;
+	        if (todayEl || clearEl) {
+	          footerBtn = React.createElement('div', { className: prefixClsFn('footer-btn') }, todayEl, ' ', clearEl);
+	        }
+	        var timeEl;
+	        if (props.showTime) {
+	          timeEl = React.createElement(Time, { value: value, rootPrefixCls: prefixCls, prefixClsFn: prefixClsFn, locale: locale, onChange: this.handleSelect });
+	        }
+	        footerEl = React.createElement('div', { className: prefixClsFn('footer') }, timeEl, footerBtn);
+	      }
+	
+	      var monthPanel;
+	      if (state.showMonthPanel) {
+	        monthPanel = React.createElement(MonthPanel, { locale: locale, value: value, rootPrefixCls: state.prefixCls, onSelect: this.onMonthPanelSelect });
+	      }
+	
+	      var className = prefixCls;
+	      if (props.className) {
+	        className += ' ' + props.className;
+	      }
+	      var orient = state.orient;
+	      if (orient) {
+	        orient.forEach(function (o) {
+	          className += ' ' + prefixClsFn('orient-' + o);
+	        });
+	      }
+	      return React.createElement('div', { className: className, tabIndex: '0', onFocus: this.onFocus, onBlur: this.onBlur, onKeyDown: this.handleKeyDown }, React.createElement('div', { style: { outline: 'none' } }, React.createElement('div', { className: prefixClsFn('header') }, React.createElement('a', { className: prefixClsFn('prev-year-btn'),
+	        role: 'button',
+	        onClick: this.previousYear,
+	        title: locale.previousYear }, '«'), React.createElement('a', { className: prefixClsFn('prev-month-btn'),
+	        role: 'button',
+	        onClick: this.previousMonth,
+	        title: locale.previousMonth }, '‹'), React.createElement('a', { className: prefixClsFn('month-select'),
+	        role: 'button',
+	        onClick: this.showMonthPanel,
+	        title: locale.monthSelect }, React.createElement('span', { className: prefixClsFn('month-select-content') }, this.getMonthYear()), React.createElement('span', { className: prefixClsFn('month-select-arrow') }, 'x')), React.createElement('a', { className: prefixClsFn('next-month-btn'),
+	        onClick: this.nextMonth,
+	        title: locale.nextMonth }, '›'), React.createElement('a', { className: prefixClsFn('next-year-btn'),
+	        onClick: this.nextYear,
+	        title: locale.nextYear }, '»')), React.createElement('div', { className: prefixClsFn('calendar-body') }, React.createElement('table', { className: prefixClsFn('table'), cellSpacing: '0', role: 'grid' }, React.createElement('thead', null, React.createElement('tr', { role: 'row' }, showWeekNumberEl, weekDaysEls)), React.createElement('tbody', { className: prefixClsFn('tbody') }, this.renderDates()))), footerEl), monthPanel);
+	    }
+	  }]);
+	
+	  return Calendar;
+	})(React.Component);
+	
+	Calendar.propTypes = {
+	  value: React.PropTypes.object,
+	  defaultValue: React.PropTypes.object,
+	  className: React.PropTypes.string,
+	  orient: React.PropTypes.arrayOf(React.PropTypes.oneOf(['left', 'top', 'right', 'bottom'])),
+	  locale: React.PropTypes.object,
+	  showWeekNumber: React.PropTypes.bool,
+	  showToday: React.PropTypes.bool,
+	  showTime: React.PropTypes.bool,
+	  onSelect: React.PropTypes.func,
+	  onBlur: React.PropTypes.func
+	};
+	
+	Calendar.defaultProps = {
+	  locale: __webpack_require__(34),
+	  onKeyDown: noop,
+	  className: '',
+	  showToday: true,
+	  onSelect: noop,
+	  onFocus: noop,
+	  onBlur: noop,
+	  onClear: noop
+	};
+	
+	module.exports = Calendar;
+
+/***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = (function () {
+	  function defineProperties(target, props) {
+	    for (var i = 0; i < props.length; i++) {
+	      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ('value' in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+	    }
+	  }return function (Constructor, protoProps, staticProps) {
+	    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+	  };
+	})();
+	
+	var _get = function get(_x, _x2, _x3) {
+	  var _again = true;_function: while (_again) {
+	    var object = _x,
+	        property = _x2,
+	        receiver = _x3;desc = parent = getter = undefined;_again = false;var desc = Object.getOwnPropertyDescriptor(object, property);if (desc === undefined) {
+	      var parent = Object.getPrototypeOf(object);if (parent === null) {
+	        return undefined;
+	      } else {
+	        _x = parent;_x2 = property;_x3 = receiver;_again = true;continue _function;
+	      }
+	    } else if ('value' in desc) {
+	      return desc.value;
+	    } else {
+	      var getter = desc.get;if (getter === undefined) {
+	        return undefined;
+	      }return getter.call(receiver);
+	    }
+	  }
+	};
+	
+	function _classCallCheck(instance, Constructor) {
+	  if (!(instance instanceof Constructor)) {
+	    throw new TypeError('Cannot call a class as a function');
+	  }
+	}
+	
+	function _inherits(subClass, superClass) {
+	  if (typeof superClass !== 'function' && superClass !== null) {
+	    throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
+	}
+	
+	var React = __webpack_require__(9);
+	var DateTimeFormat = __webpack_require__(10);
+	var ROW = 3;
+	var COL = 4;
+	var cx = __webpack_require__(18).classSet;
+	var YearPanel = __webpack_require__(29);
+	
+	function goYear(direction) {
+	  var next = this.state.value.clone();
+	  next.addYear(direction);
+	  this.setState({
+	    value: next
+	  });
+	}
+	
+	function showYearPanel() {
+	  this.setState({
+	    showYearPanel: 1
+	  });
+	}
+	
+	function chooseMonth(month) {
+	  var next = this.state.value.clone();
+	  next.setMonth(month);
+	  this.props.onSelect(next);
+	}
+	
+	function onYearPanelSelect(current) {
+	  this.setState({
+	    value: current,
+	    showYearPanel: 0
+	  });
+	}
+	
+	var MonthPanel = (function (_React$Component) {
+	  function MonthPanel(props) {
+	    _classCallCheck(this, MonthPanel);
+	
+	    _get(Object.getPrototypeOf(MonthPanel.prototype), 'constructor', this).call(this, props);
+	    this.state = {
+	      value: this.props.value,
+	      prefixCls: this.props.rootPrefixCls + '-month-panel'
+	
+	    };
+	    // bind methods
+	    this.nextYear = goYear.bind(this, 1);
+	    this.previousYear = goYear.bind(this, -1);
+	    this.showYearPanel = showYearPanel.bind(this);
+	    this.onYearPanelSelect = onYearPanelSelect.bind(this);
+	    this.prefixClsFn = __webpack_require__(31).bind(this);
+	  }
+	
+	  _inherits(MonthPanel, _React$Component);
+	
+	  _createClass(MonthPanel, [{
+	    key: 'getMonths',
+	    value: function getMonths() {
+	      var props = this.props;
+	      var value = this.state.value;
+	      var current = value.clone();
+	      var locale = props.locale;
+	      var monthYearFormat = locale.monthYearFormat;
+	      var dateFormatter = new DateTimeFormat(monthYearFormat);
+	      var months = [];
+	      var shortMonths = locale.format.shortMonths;
+	      var index = 0;
+	      for (var i = 0; i < ROW; i++) {
+	        months[i] = [];
+	        for (var j = 0; j < COL; j++) {
+	          current.setMonth(index);
+	          months[i][j] = {
+	            value: index,
+	            content: shortMonths[index],
+	            title: dateFormatter.format(current)
+	          };
+	          index++;
+	        }
+	      }
+	
+	      return months;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this = this;
+	
+	      var props = this.props;
+	      var value = this.state.value;
+	      var locale = props.locale;
+	      var months = this.getMonths();
+	      var year = value.getYear();
+	      var currentMonth = value.getMonth();
+	      var prefixClsFn = this.prefixClsFn;
+	      var monthsEls = months.map(function (month, index) {
+	        var tds = month.map(function (m) {
+	          var classNameMap = {};
+	          classNameMap[prefixClsFn('cell')] = 1;
+	          classNameMap[prefixClsFn('selected-cell')] = m.value === currentMonth;
+	          return React.createElement('td', { role: 'gridcell',
+	            key: m.value,
+	            onClick: chooseMonth.bind(_this, m.value),
+	            title: m.title,
+	            className: cx(classNameMap) }, React.createElement('a', {
+	            className: prefixClsFn('month') }, m.content));
+	        });
+	        return React.createElement('tr', { key: index, role: 'row' }, tds);
+	      });
+	
+	      var yearPanel;
+	      if (this.state.showYearPanel) {
+	        yearPanel = React.createElement(YearPanel, { locale: locale, value: value, rootPrefixCls: props.rootPrefixCls, onSelect: this.onYearPanelSelect });
+	      }
+	
+	      return React.createElement('div', { className: this.state.prefixCls }, React.createElement('div', null, React.createElement('div', { className: prefixClsFn('header') }, React.createElement('a', { className: prefixClsFn('prev-year-btn'),
+	        role: 'button',
+	        onClick: this.previousYear,
+	        title: locale.previousYear }, '«'), React.createElement('a', { className: prefixClsFn('year-select'),
+	        role: 'button',
+	        onClick: this.showYearPanel,
+	        title: locale.yearSelect }, React.createElement('span', { className: prefixClsFn('year-select-content') }, year), React.createElement('span', { className: prefixClsFn('year-select-arrow') }, 'x')), React.createElement('a', { className: prefixClsFn('next-year-btn'),
+	        role: 'button',
+	        onClick: this.nextYear,
+	        title: locale.nextYear }, '»')), React.createElement('div', { className: prefixClsFn('body') }, React.createElement('table', { className: prefixClsFn('table'), cellSpacing: '0', role: 'grid' }, React.createElement('tbody', { className: prefixClsFn('tbody') }, monthsEls)))), yearPanel);
+	    }
+	  }]);
+	
+	  return MonthPanel;
+	})(React.Component);
+	
+	MonthPanel.defaultProps = {
+	  onSelect: function onSelect() {}
+	};
+	
+	module.exports = MonthPanel;
+
+/***/ },
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = React;
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(11);
+
+/***/ },
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * @ignore
+	 * DateTimeFormat for
+	 * Inspired by DateTimeFormat from JDK.
+	 * @author yiminghe@gmail.com
+	 */
+	
+	var GregorianCalendar = __webpack_require__(12);
+	var enUsLocale = __webpack_require__(17);
+	var MAX_VALUE = Number.MAX_VALUE;
+	/**
+	 * date or time style enum
+	 * @enum {Number} Date.Formatter.Style
+	 */
+	var DateTimeStyle = {
+	  /**
+	   * full style
+	   */
+	  FULL: 0,
+	  /**
+	   * long style
+	   */
+	  LONG: 1,
+	  /**
+	   * medium style
+	   */
+	  MEDIUM: 2,
+	  /**
+	   * short style
+	   */
+	  SHORT: 3
+	};
+	
+	/*
+	 Letter    Date or Time Component    Presentation    Examples
+	 G    Era designator    Text    AD
+	 y    Year    Year    1996; 96
+	 M    Month in year    Month    July; Jul; 07
+	 w    Week in year    Number    27
+	 W    Week in month    Number    2
+	 D    Day in year    Number    189
+	 d    Day in month    Number    10
+	 F    Day of week in month    Number    2
+	 E    Day in week    Text    Tuesday; Tue
+	 a    Am/pm marker    Text    PM
+	 H    Hour in day (0-23)    Number    0
+	 k    Hour in day (1-24)    Number    24
+	 K    Hour in am/pm (0-11)    Number    0
+	 h    Hour in am/pm (1-12)    Number    12
+	 m    Minute in hour    Number    30
+	 s    Second in minute    Number    55
+	 S    Millisecond    Number    978
+	 x z    Time zone    General time zone    Pacific Standard Time; PST; GMT-08:00
+	 Z    Time zone    RFC 822 time zone    -0800
+	 */
+	
+	var patternChars = new Array(GregorianCalendar.DAY_OF_WEEK_IN_MONTH + 2).join('1');
+	var ERA = 0;
+	var calendarIndexMap = {};
+	
+	patternChars = patternChars.split('');
+	patternChars[ERA] = 'G';
+	patternChars[GregorianCalendar.YEAR] = 'y';
+	patternChars[GregorianCalendar.MONTH] = 'M';
+	patternChars[GregorianCalendar.DAY_OF_MONTH] = 'd';
+	patternChars[GregorianCalendar.HOUR_OF_DAY] = 'H';
+	patternChars[GregorianCalendar.MINUTES] = 'm';
+	patternChars[GregorianCalendar.SECONDS] = 's';
+	patternChars[GregorianCalendar.MILLISECONDS] = 'S';
+	patternChars[GregorianCalendar.WEEK_OF_YEAR] = 'w';
+	patternChars[GregorianCalendar.WEEK_OF_MONTH] = 'W';
+	patternChars[GregorianCalendar.DAY_OF_YEAR] = 'D';
+	patternChars[GregorianCalendar.DAY_OF_WEEK_IN_MONTH] = 'F';
+	
+	(function () {
+	  for (var index in patternChars) {
+	    calendarIndexMap[patternChars[index]] = index;
+	  }
+	})();
+	
+	function mix(t, s) {
+	  for (var p in s) {
+	    t[p] = s[p];
+	  }
+	}
+	
+	var SUBSTITUTE_REG = /\\?\{([^{}]+)\}/g;
+	var EMPTY = '';
+	
+	function substitute(str, o, regexp) {
+	  if (typeof str !== 'string' || !o) {
+	    return str;
+	  }
+	
+	  return str.replace(regexp || SUBSTITUTE_REG, function (match, name) {
+	    if (match.charAt(0) === '\\') {
+	      return match.slice(1);
+	    }
+	    return (o[name] === undefined) ? EMPTY : o[name];
+	  });
+	}
+	
+	patternChars = patternChars.join('') + 'ahkKZE';
+	
+	function encode(lastField, count, compiledPattern) {
+	  compiledPattern.push({
+	    field: lastField,
+	    count: count
+	  });
+	}
+	
+	function compile(pattern) {
+	  var length = pattern.length;
+	  var inQuote = false;
+	  var compiledPattern = [];
+	  var tmpBuffer = null;
+	  var count = 0;
+	  var lastField = -1;
+	
+	  for (var i = 0; i < length; i++) {
+	    var c = pattern.charAt(i);
+	
+	    if (c === '\'') {
+	      // '' is treated as a single quote regardless of being
+	      // in a quoted section.
+	      if ((i + 1) < length) {
+	        c = pattern.charAt(i + 1);
+	        if (c === '\'') {
+	          i++;
+	          if (count !== 0) {
+	            encode(lastField, count, compiledPattern);
+	            lastField = -1;
+	            count = 0;
+	          }
+	          if (inQuote) {
+	            tmpBuffer += c;
+	          }
+	          continue;
+	        }
+	      }
+	      if (!inQuote) {
+	        if (count !== 0) {
+	          encode(lastField, count, compiledPattern);
+	          lastField = -1;
+	          count = 0;
+	        }
+	        tmpBuffer = '';
+	        inQuote = true;
+	      } else {
+	        compiledPattern.push({
+	          text: tmpBuffer
+	        });
+	        inQuote = false;
+	      }
+	      continue;
+	    }
+	    if (inQuote) {
+	      tmpBuffer += c;
+	      continue;
+	    }
+	    if (!(c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z')) {
+	      if (count !== 0) {
+	        encode(lastField, count, compiledPattern);
+	        lastField = -1;
+	        count = 0;
+	      }
+	      compiledPattern.push({
+	        text: c
+	      });
+	      continue;
+	    }
+	
+	    if (patternChars.indexOf(c) === -1) {
+	      throw new Error('Illegal pattern character "' + c + '"');
+	    }
+	
+	    if (lastField === -1 || lastField === c) {
+	      lastField = c;
+	      count++;
+	      continue;
+	    }
+	    encode(lastField, count, compiledPattern);
+	    lastField = c;
+	    count = 1;
+	  }
+	
+	  if (inQuote) {
+	    throw new Error('Unterminated quote');
+	  }
+	
+	  if (count !== 0) {
+	    encode(lastField, count, compiledPattern);
+	  }
+	
+	  return compiledPattern;
+	}
+	
+	var zeroDigit = '0';
+	
+	// TODO zeroDigit localization??
+	function zeroPaddingNumber(value, minDigits, maxDigits, buffer) {
+	  // Optimization for 1, 2 and 4 digit numbers. This should
+	  // cover most cases of formatting date/time related items.
+	  // Note: This optimization code assumes that maxDigits is
+	  // either 2 or Integer.MAX_VALUE (maxIntCount in format()).
+	  buffer = buffer || [];
+	  maxDigits = maxDigits || MAX_VALUE;
+	  if (value >= 0) {
+	    if (value < 100 && minDigits >= 1 && minDigits <= 2) {
+	      if (value < 10 && minDigits === 2) {
+	        buffer.push(zeroDigit);
+	      }
+	      buffer.push(value);
+	      return buffer.join('');
+	    } else if (value >= 1000 && value < 10000) {
+	      if (minDigits === 4) {
+	        buffer.push(value);
+	        return buffer.join('');
+	      }
+	      if (minDigits === 2 && maxDigits === 2) {
+	        return zeroPaddingNumber(value % 100, 2, 2, buffer);
+	      }
+	    }
+	  }
+	  buffer.push(value + '');
+	  return buffer.join('');
+	}
+	
+	/**
+	 *
+	 * date time formatter for GregorianCalendar
+	 *
+	 *      @example
+	 *
+	 *          var calendar = new GregorianCalendar(2013,9,24);
+	 *          // ' to escape
+	 *          var formatter = new GregorianCalendarFormat("'today is' ''yyyy/MM/dd a''");
+	 *          document.write(formatter.format(calendar));
+	 *
+	 * @class GregorianCalendarFormat
+	 * @param {String} pattern patter string of date formatter
+	 *
+	 * <table border="1">
+	 * <thead valign="bottom">
+	 * <tr><th class="head">Letter</th>
+	 * <th class="head">Date or Time Component</th>
+	 * <th class="head">Presentation</th>
+	 * <th class="head">Examples</th>
+	 * </tr>
+	 * </thead>
+	 * <tbody valign="top">
+	 * <tr><td>G</td>
+	 * <td>Era designator</td>
+	 * <td>Text</td>
+	 * <td>AD</td>
+	 * </tr>
+	 * <tr><td>y</td>
+	 * <td>Year</td>
+	 * <td>Year</td>
+	 * <td>1996; 96</td>
+	 * </tr>
+	 * <tr><td>M</td>
+	 * <td>Month in year</td>
+	 * <td>Month</td>
+	 * <td>July; Jul; 07</td>
+	 * </tr>
+	 * <tr><td>w</td>
+	 * <td>Week in year</td>
+	 * <td>Number</td>
+	 * <td>27</td>
+	 * </tr>
+	 * <tr><td>W</td>
+	 * <td>Week in month</td>
+	 * <td>Number</td>
+	 * <td>2</td>
+	 * </tr>
+	 * <tr><td>D</td>
+	 * <td>Day in year</td>
+	 * <td>Number</td>
+	 * <td>189</td>
+	 * </tr>
+	 * <tr><td>d</td>
+	 * <td>Day in month</td>
+	 * <td>Number</td>
+	 * <td>10</td>
+	 * </tr>
+	 * <tr><td>F</td>
+	 * <td>Day of week in month</td>
+	 * <td>Number</td>
+	 * <td>2</td>
+	 * </tr>
+	 * <tr><td>E</td>
+	 * <td>Day in week</td>
+	 * <td>Text</td>
+	 * <td>Tuesday; Tue</td>
+	 * </tr>
+	 * <tr><td>a</td>
+	 * <td>Am/pm marker</td>
+	 * <td>Text</td>
+	 * <td>PM</td>
+	 * </tr>
+	 * <tr><td>H</td>
+	 *       <td>Hour in day (0-23)</td>
+	 * <td>Number</td>
+	 * <td>0</td>
+	 * </tr>
+	 * <tr><td>k</td>
+	 *       <td>Hour in day (1-24)</td>
+	 * <td>Number</td>
+	 * <td>24</td>
+	 * </tr>
+	 * <tr><td>K</td>
+	 * <td>Hour in am/pm (0-11)</td>
+	 * <td>Number</td>
+	 * <td>0</td>
+	 * </tr>
+	 * <tr><td>h</td>
+	 * <td>Hour in am/pm (1-12)</td>
+	 * <td>Number</td>
+	 * <td>12</td>
+	 * </tr>
+	 * <tr><td>m</td>
+	 * <td>Minute in hour</td>
+	 * <td>Number</td>
+	 * <td>30</td>
+	 * </tr>
+	 * <tr><td>s</td>
+	 * <td>Second in minute</td>
+	 * <td>Number</td>
+	 * <td>55</td>
+	 * </tr>
+	 * <tr><td>S</td>
+	 * <td>Millisecond</td>
+	 * <td>Number</td>
+	 * <td>978</td>
+	 * </tr>
+	 * <tr><td>x/z</td>
+	 * <td>Time zone</td>
+	 * <td>General time zone</td>
+	 * <td>Pacific Standard Time; PST; GMT-08:00</td>
+	 * </tr>
+	 * <tr><td>Z</td>
+	 * <td>Time zone</td>
+	 * <td>RFC 822 time zone</td>
+	 * <td>-0800</td>
+	 * </tr>
+	 * </tbody>
+	 * </table>
+	
+	 * @param {Object} locale format locale
+	 */
+	function DateTimeFormat(pattern, locale) {
+	  this.locale = locale || enUsLocale;
+	  this.originalPattern = pattern;
+	  this.pattern = compile(pattern);
+	}
+	
+	function formatField(field, count, locale, calendar) {
+	  var current,
+	    value;
+	  switch (field) {
+	    case 'G':
+	      value = calendar.getYear() > 0 ? 1 : 0;
+	      current = locale.eras[value];
+	      break;
+	    case 'y':
+	      value = calendar.getYear();
+	      if (value <= 0) {
+	        value = 1 - value;
+	      }
+	      current = (zeroPaddingNumber(value, 2, count !== 2 ? MAX_VALUE : 2));
+	      break;
+	    case 'M':
+	      value = calendar.getMonth();
+	      if (count >= 4) {
+	        current = locale.months[value];
+	      } else if (count === 3) {
+	        current = locale.shortMonths[value];
+	      } else {
+	        current = zeroPaddingNumber(value + 1, count);
+	      }
+	      break;
+	    case 'k':
+	      current = zeroPaddingNumber(calendar.getHourOfDay() || 24,
+	        count);
+	      break;
+	    case 'E':
+	      value = calendar.getDayOfWeek();
+	      current = count >= 4 ?
+	        locale.weekdays[value] :
+	        locale.shortWeekdays[value];
+	      break;
+	    case 'a':
+	      current = locale.ampms[calendar.getHourOfDay() >= 12 ?
+	        1 :
+	        0];
+	      break;
+	    case 'h':
+	      current = zeroPaddingNumber(calendar.
+	        getHourOfDay() % 12 || 12, count);
+	      break;
+	    case 'K':
+	      current = zeroPaddingNumber(calendar.
+	        getHourOfDay() % 12, count);
+	      break;
+	    case 'Z':
+	      var offset = calendar.getTimezoneOffset();
+	      var parts = [offset < 0 ? '-' : '+'];
+	      offset = Math.abs(offset);
+	      parts.push(zeroPaddingNumber(Math.floor(offset / 60) % 100, 2),
+	        zeroPaddingNumber(offset % 60, 2));
+	      current = parts.join('');
+	      break;
+	    default :
+	      // case 'd':
+	      // case 'H':
+	      // case 'm':
+	      // case 's':
+	      // case 'S':
+	      // case 'D':
+	      // case 'F':
+	      // case 'w':
+	      // case 'W':
+	      var index = calendarIndexMap[field];
+	      value = calendar.get(index);
+	      current = zeroPaddingNumber(value, count);
+	  }
+	  return current;
+	}
+	
+	function matchField(dateStr, startIndex, matches) {
+	  var matchedLen = -1;
+	  var index = -1;
+	  var i;
+	  var len = matches.length;
+	  for (i = 0; i < len; i++) {
+	    var m = matches[i];
+	    var mLen = m.length;
+	    if (mLen > matchedLen &&
+	      matchPartString(dateStr, startIndex, m, mLen)) {
+	      matchedLen = mLen;
+	      index = i;
+	    }
+	  }
+	  return index >= 0 ? {
+	    value: index,
+	    startIndex: startIndex + matchedLen
+	  } : null;
+	}
+	
+	function matchPartString(dateStr, startIndex, match, mLen) {
+	  for (var i = 0; i < mLen; i++) {
+	    if (dateStr.charAt(startIndex + i) !== match.charAt(i)) {
+	      return false;
+	    }
+	  }
+	  return true;
+	}
+	
+	function getLeadingNumberLen(str) {
+	  var i, c;
+	  var len = str.length;
+	  for (i = 0; i < len; i++) {
+	    c = str.charAt(i);
+	    if (c < '0' || c > '9') {
+	      break;
+	    }
+	  }
+	  return i;
+	}
+	
+	function matchNumber(dateStr, startIndex, count, obeyCount) {
+	  var str = dateStr;
+	  var n;
+	  if (obeyCount) {
+	    if (dateStr.length <= startIndex + count) {
+	      return null;
+	    }
+	    str = dateStr.slice(startIndex, startIndex + count);
+	    if (!str.match(/^\d+$/)) {
+	      throw new Error('GregorianCalendarFormat parse error, dateStr: ' + dateStr + ', patter: ' + (this.originalPattern));
+	    }
+	  } else {
+	    str = str.slice(startIndex);
+	  }
+	  n = parseInt(str, 10);
+	  if (isNaN(n)) {
+	    throw new Error('GregorianCalendarFormat parse error, dateStr: ' + dateStr + ', patter: ' + (this.originalPattern));
+	  }
+	  return {
+	    value: n,
+	    startIndex: startIndex + getLeadingNumberLen(str)
+	  };
+	}
+	
+	function parseField(calendar, dateStr, startIndex, field, count, obeyCount, tmp) {
+	  var match, year, hour;
+	  if (dateStr.length <= startIndex) {
+	    return startIndex;
+	  }
+	  var locale = this.locale;
+	  switch (field) {
+	    case 'G':
+	      if ((match = matchField(dateStr, startIndex, locale.eras))) {
+	        if (calendar.isSetYear()) {
+	          if (match.value === 0) {
+	            year = calendar.getYear();
+	            calendar.setYear(1 - year);
+	          }
+	        } else {
+	          tmp.era = match.value;
+	        }
+	      }
+	      break;
+	    case 'y':
+	      if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
+	        year = match.value;
+	        if ('era' in tmp) {
+	          if (tmp.era === 0) {
+	            year = 1 - year;
+	          }
+	        }
+	        calendar.setYear(year);
+	      }
+	      break;
+	    case 'M':
+	      var month;
+	      if (count >= 3) {
+	        if ((match = matchField(dateStr, startIndex, locale[count === 3 ?
+	            'shortMonths' : 'months']))) {
+	          month = match.value;
+	        }
+	      } else {
+	        if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
+	          month = match.value - 1;
+	        }
+	      }
+	      if (match) {
+	        calendar.setMonth(month);
+	      }
+	      break;
+	    case 'k':
+	      if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
+	        calendar.setHourOfDay(match.value % 24);
+	      }
+	      break;
+	    case 'E':
+	      if ((match = matchField(dateStr, startIndex, locale[count > 3 ?
+	          'weekdays' :
+	          'shortWeekdays']))) {
+	        calendar.setDayOfWeek(match.value);
+	      }
+	      break;
+	    case 'a':
+	      if ((match = matchField(dateStr, startIndex, locale.ampms))) {
+	        if (calendar.isSetHourOfDay()) {
+	          if (match.value) {
+	            hour = calendar.getHourOfDay();
+	            if (hour < 12) {
+	              calendar.setHourOfDay((hour + 12) % 24);
+	            }
+	          }
+	        } else {
+	          tmp.ampm = match.value;
+	        }
+	      }
+	      break;
+	    case 'h':
+	      if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
+	        hour = match.value %= 12;
+	        if (tmp.ampm) {
+	          hour += 12;
+	        }
+	        calendar.setHourOfDay(hour);
+	      }
+	      break;
+	    case 'K':
+	      if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
+	        hour = match.value;
+	        if (tmp.ampm) {
+	          hour += 12;
+	        }
+	        calendar.setHourOfDay(hour);
+	      }
+	      break;
+	    case 'Z':
+	      var sign = 1;
+	      var zoneChar = dateStr.charAt(startIndex);
+	      if (zoneChar === '-') {
+	        sign = -1;
+	        startIndex++;
+	      } else if (zoneChar === '+') {
+	        startIndex++;
+	      } else {
+	        break;
+	      }
+	      if ((match = matchNumber.call(this, dateStr, startIndex, 2, true))) {
+	        var zoneOffset = match.value * 60;
+	        startIndex = match.startIndex;
+	        if ((match = matchNumber.call(this, dateStr, startIndex, 2, true))) {
+	          zoneOffset += match.value;
+	        }
+	        calendar.setTimezoneOffset(zoneOffset);
+	      }
+	      break;
+	    default :
+	      // case 'd':
+	      // case 'H':
+	      // case 'm':
+	      // case 's':
+	      // case 'S':
+	      // case 'D':
+	      // case 'F':
+	      // case 'w':
+	      // case 'W'
+	      if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
+	        var index = calendarIndexMap[field];
+	        calendar.set(index, match.value);
+	      }
+	  }
+	  if (match) {
+	    startIndex = match.startIndex;
+	  }
+	  return startIndex;
+	}
+	
+	mix(DateTimeFormat.prototype, {
+	  /**
+	   * format a GregorianDate instance according to specified pattern
+	   * @param {GregorianCalendar} calendar GregorianDate instance
+	   * @returns {string} formatted string of GregorianDate instance
+	   */
+	  format: function (calendar) {
+	    if (!calendar.isGregorianCalendar) {
+	      throw new Error('calendar must be type of GregorianCalendar');
+	    }
+	    var i;
+	    var ret = [];
+	    var pattern = this.pattern;
+	    var len = pattern.length;
+	    for (i = 0; i < len; i++) {
+	      var comp = pattern[i];
+	      if (comp.text) {
+	        ret.push(comp.text);
+	      } else if ('field' in comp) {
+	        ret.push(formatField(comp.field, comp.count, this.locale, calendar));
+	      }
+	    }
+	    return ret.join('');
+	  },
+	
+	  /**
+	   * parse a formatted string of GregorianDate instance according to specified pattern
+	   * @param {String} dateStr formatted string of GregorianDate
+	   * @returns {GregorianCalendar}
+	   */
+	  parse: function (dateStr, calendarLocale) {
+	    var calendar = new GregorianCalendar(calendarLocale);
+	    var i;
+	    var j;
+	    var tmp = {};
+	    var obeyCount = false;
+	    var dateStrLen = dateStr.length;
+	    var errorIndex = -1;
+	    var startIndex = 0;
+	    var oldStartIndex = 0;
+	    var pattern = this.pattern;
+	    var len = pattern.length;
+	
+	    loopPattern: {
+	      for (i = 0; errorIndex < 0 && i < len; i++) {
+	        var comp = pattern[i], text, textLen;
+	        oldStartIndex = startIndex;
+	        if ((text = comp.text)) {
+	          textLen = text.length;
+	          if ((textLen + startIndex) > dateStrLen) {
+	            errorIndex = startIndex;
+	          } else {
+	            for (j = 0; j < textLen; j++) {
+	              if (text.charAt(j) !== dateStr.charAt(j + startIndex)) {
+	                errorIndex = startIndex;
+	                break loopPattern;
+	              }
+	            }
+	            startIndex += textLen;
+	          }
+	        } else if ('field' in comp) {
+	          obeyCount = false;
+	          var nextComp = pattern[i + 1];
+	          if (nextComp) {
+	            if ('field' in nextComp) {
+	              obeyCount = true;
+	            } else {
+	              var c = nextComp.text.charAt(0);
+	              if (c >= '0' && c <= '9') {
+	                obeyCount = true;
+	              }
+	            }
+	          }
+	          startIndex = parseField.call(this, calendar,
+	            dateStr,
+	            startIndex,
+	            comp.field,
+	            comp.count,
+	            obeyCount,
+	            tmp);
+	          if (startIndex === oldStartIndex) {
+	            errorIndex = startIndex;
+	          }
+	        }
+	      }
+	    }
+	
+	    if (errorIndex >= 0) {
+	      console.error('error when parsing date');
+	      console.error(dateStr);
+	      console.error(dateStr.slice(0, errorIndex) + '^');
+	      return undefined;
+	    }
+	    return calendar;
+	  }
+	});
+	
+	mix(DateTimeFormat, {
+	  Style: DateTimeStyle,
+	
+	  /**
+	   * get a formatter instance of short style pattern.
+	   * en-us: M/d/yy h:mm a
+	   * zh-cn: yy-M-d ah:mm
+	   * @param {Object} locale locale object
+	   * @returns {GregorianCalendar}
+	   * @static
+	   */
+	  getInstance: function (locale) {
+	    return this.getDateTimeInstance(DateTimeStyle.SHORT, DateTimeStyle.SHORT, locale);
+	  },
+	
+	  /**
+	   * get a formatter instance of specified date style.
+	   * @param {Date.Formatter.Style} dateStyle date format style
+	   * @param {Object} locale
+	   * @returns {GregorianCalendar}
+	   * @static
+	   */
+	  getDateInstance: function (dateStyle, locale) {
+	    return this.getDateTimeInstance(dateStyle, undefined, locale);
+	  },
+	
+	  /**
+	   * get a formatter instance of specified date style and time style.
+	   * @param {Date.Formatter.Style} dateStyle date format style
+	   * @param {Date.Formatter.Style} timeStyle time format style
+	   * @param {Object} locale
+	   * @returns {GregorianCalendar}
+	   * @static
+	   */
+	  getDateTimeInstance: function (dateStyle, timeStyle, locale) {
+	    locale = locale || enUsLocale;
+	    var datePattern = '';
+	    if (dateStyle !== undefined) {
+	      datePattern = locale.datePatterns[dateStyle];
+	    }
+	    var timePattern = '';
+	    if (timeStyle !== undefined) {
+	      timePattern = locale.timePatterns[timeStyle];
+	    }
+	    var pattern = datePattern;
+	    if (timePattern) {
+	      if (datePattern) {
+	        pattern = substitute(locale.dateTimePattern, {
+	          date: datePattern,
+	          time: timePattern
+	        });
+	      } else {
+	        pattern = timePattern;
+	      }
+	    }
+	    return new DateTimeFormat(pattern, locale);
+	  },
+	
+	  /**
+	   * get a formatter instance of specified time style.
+	   * @param {Date.Formatter.Style} timeStyle time format style
+	   * @param {Object} locale
+	   * @returns {GregorianCalendar}
+	   * @static
+	   */
+	  getTimeInstance: function (timeStyle, locale) {
+	    return this.getDateTimeInstance(undefined, timeStyle, locale);
+	  }
+	});
+	
+	module.exports = DateTimeFormat;
+	
+	DateTimeFormat.version = '@VERSION@';
+	
+	// gc_format@163.com
+
+/***/ },
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(13);
+
+/***/ },
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1126,9 +1848,9 @@
 	 * @author yiminghe@gmail.com
 	 */
 	var toInt = parseInt;
-	var Utils = __webpack_require__(35);
-	var defaultLocale = __webpack_require__(36);
-	var Const = __webpack_require__(37);
+	var Utils = __webpack_require__(14);
+	var defaultLocale = __webpack_require__(16);
+	var Const = __webpack_require__(15);
 	
 	/**
 	 * GregorianCalendar class.
@@ -2447,1612 +3169,7 @@
 
 
 /***/ },
-/* 27 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * @ignore
-	 * DateTimeFormat for
-	 * Inspired by DateTimeFormat from JDK.
-	 * @author yiminghe@gmail.com
-	 */
-	
-	var GregorianCalendar = __webpack_require__(11);
-	var enUsLocale = __webpack_require__(38);
-	var MAX_VALUE = Number.MAX_VALUE;
-	/**
-	 * date or time style enum
-	 * @enum {Number} Date.Formatter.Style
-	 */
-	var DateTimeStyle = {
-	  /**
-	   * full style
-	   */
-	  FULL: 0,
-	  /**
-	   * long style
-	   */
-	  LONG: 1,
-	  /**
-	   * medium style
-	   */
-	  MEDIUM: 2,
-	  /**
-	   * short style
-	   */
-	  SHORT: 3
-	};
-	
-	/*
-	 Letter    Date or Time Component    Presentation    Examples
-	 G    Era designator    Text    AD
-	 y    Year    Year    1996; 96
-	 M    Month in year    Month    July; Jul; 07
-	 w    Week in year    Number    27
-	 W    Week in month    Number    2
-	 D    Day in year    Number    189
-	 d    Day in month    Number    10
-	 F    Day of week in month    Number    2
-	 E    Day in week    Text    Tuesday; Tue
-	 a    Am/pm marker    Text    PM
-	 H    Hour in day (0-23)    Number    0
-	 k    Hour in day (1-24)    Number    24
-	 K    Hour in am/pm (0-11)    Number    0
-	 h    Hour in am/pm (1-12)    Number    12
-	 m    Minute in hour    Number    30
-	 s    Second in minute    Number    55
-	 S    Millisecond    Number    978
-	 x z    Time zone    General time zone    Pacific Standard Time; PST; GMT-08:00
-	 Z    Time zone    RFC 822 time zone    -0800
-	 */
-	
-	var patternChars = new Array(GregorianCalendar.DAY_OF_WEEK_IN_MONTH + 2).join('1');
-	var ERA = 0;
-	var calendarIndexMap = {};
-	
-	patternChars = patternChars.split('');
-	patternChars[ERA] = 'G';
-	patternChars[GregorianCalendar.YEAR] = 'y';
-	patternChars[GregorianCalendar.MONTH] = 'M';
-	patternChars[GregorianCalendar.DAY_OF_MONTH] = 'd';
-	patternChars[GregorianCalendar.HOUR_OF_DAY] = 'H';
-	patternChars[GregorianCalendar.MINUTES] = 'm';
-	patternChars[GregorianCalendar.SECONDS] = 's';
-	patternChars[GregorianCalendar.MILLISECONDS] = 'S';
-	patternChars[GregorianCalendar.WEEK_OF_YEAR] = 'w';
-	patternChars[GregorianCalendar.WEEK_OF_MONTH] = 'W';
-	patternChars[GregorianCalendar.DAY_OF_YEAR] = 'D';
-	patternChars[GregorianCalendar.DAY_OF_WEEK_IN_MONTH] = 'F';
-	
-	(function () {
-	  for (var index in patternChars) {
-	    calendarIndexMap[patternChars[index]] = index;
-	  }
-	})();
-	
-	function mix(t, s) {
-	  for (var p in s) {
-	    t[p] = s[p];
-	  }
-	}
-	
-	var SUBSTITUTE_REG = /\\?\{([^{}]+)\}/g;
-	var EMPTY = '';
-	
-	function substitute(str, o, regexp) {
-	  if (typeof str !== 'string' || !o) {
-	    return str;
-	  }
-	
-	  return str.replace(regexp || SUBSTITUTE_REG, function (match, name) {
-	    if (match.charAt(0) === '\\') {
-	      return match.slice(1);
-	    }
-	    return (o[name] === undefined) ? EMPTY : o[name];
-	  });
-	}
-	
-	patternChars = patternChars.join('') + 'ahkKZE';
-	
-	function encode(lastField, count, compiledPattern) {
-	  compiledPattern.push({
-	    field: lastField,
-	    count: count
-	  });
-	}
-	
-	function compile(pattern) {
-	  var length = pattern.length;
-	  var inQuote = false;
-	  var compiledPattern = [];
-	  var tmpBuffer = null;
-	  var count = 0;
-	  var lastField = -1;
-	
-	  for (var i = 0; i < length; i++) {
-	    var c = pattern.charAt(i);
-	
-	    if (c === '\'') {
-	      // '' is treated as a single quote regardless of being
-	      // in a quoted section.
-	      if ((i + 1) < length) {
-	        c = pattern.charAt(i + 1);
-	        if (c === '\'') {
-	          i++;
-	          if (count !== 0) {
-	            encode(lastField, count, compiledPattern);
-	            lastField = -1;
-	            count = 0;
-	          }
-	          if (inQuote) {
-	            tmpBuffer += c;
-	          }
-	          continue;
-	        }
-	      }
-	      if (!inQuote) {
-	        if (count !== 0) {
-	          encode(lastField, count, compiledPattern);
-	          lastField = -1;
-	          count = 0;
-	        }
-	        tmpBuffer = '';
-	        inQuote = true;
-	      } else {
-	        compiledPattern.push({
-	          text: tmpBuffer
-	        });
-	        inQuote = false;
-	      }
-	      continue;
-	    }
-	    if (inQuote) {
-	      tmpBuffer += c;
-	      continue;
-	    }
-	    if (!(c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z')) {
-	      if (count !== 0) {
-	        encode(lastField, count, compiledPattern);
-	        lastField = -1;
-	        count = 0;
-	      }
-	      compiledPattern.push({
-	        text: c
-	      });
-	      continue;
-	    }
-	
-	    if (patternChars.indexOf(c) === -1) {
-	      throw new Error('Illegal pattern character "' + c + '"');
-	    }
-	
-	    if (lastField === -1 || lastField === c) {
-	      lastField = c;
-	      count++;
-	      continue;
-	    }
-	    encode(lastField, count, compiledPattern);
-	    lastField = c;
-	    count = 1;
-	  }
-	
-	  if (inQuote) {
-	    throw new Error('Unterminated quote');
-	  }
-	
-	  if (count !== 0) {
-	    encode(lastField, count, compiledPattern);
-	  }
-	
-	  return compiledPattern;
-	}
-	
-	var zeroDigit = '0';
-	
-	// TODO zeroDigit localization??
-	function zeroPaddingNumber(value, minDigits, maxDigits, buffer) {
-	  // Optimization for 1, 2 and 4 digit numbers. This should
-	  // cover most cases of formatting date/time related items.
-	  // Note: This optimization code assumes that maxDigits is
-	  // either 2 or Integer.MAX_VALUE (maxIntCount in format()).
-	  buffer = buffer || [];
-	  maxDigits = maxDigits || MAX_VALUE;
-	  if (value >= 0) {
-	    if (value < 100 && minDigits >= 1 && minDigits <= 2) {
-	      if (value < 10 && minDigits === 2) {
-	        buffer.push(zeroDigit);
-	      }
-	      buffer.push(value);
-	      return buffer.join('');
-	    } else if (value >= 1000 && value < 10000) {
-	      if (minDigits === 4) {
-	        buffer.push(value);
-	        return buffer.join('');
-	      }
-	      if (minDigits === 2 && maxDigits === 2) {
-	        return zeroPaddingNumber(value % 100, 2, 2, buffer);
-	      }
-	    }
-	  }
-	  buffer.push(value + '');
-	  return buffer.join('');
-	}
-	
-	/**
-	 *
-	 * date time formatter for GregorianCalendar
-	 *
-	 *      @example
-	 *
-	 *          var calendar = new GregorianCalendar(2013,9,24);
-	 *          // ' to escape
-	 *          var formatter = new GregorianCalendarFormat("'today is' ''yyyy/MM/dd a''");
-	 *          document.write(formatter.format(calendar));
-	 *
-	 * @class GregorianCalendarFormat
-	 * @param {String} pattern patter string of date formatter
-	 *
-	 * <table border="1">
-	 * <thead valign="bottom">
-	 * <tr><th class="head">Letter</th>
-	 * <th class="head">Date or Time Component</th>
-	 * <th class="head">Presentation</th>
-	 * <th class="head">Examples</th>
-	 * </tr>
-	 * </thead>
-	 * <tbody valign="top">
-	 * <tr><td>G</td>
-	 * <td>Era designator</td>
-	 * <td>Text</td>
-	 * <td>AD</td>
-	 * </tr>
-	 * <tr><td>y</td>
-	 * <td>Year</td>
-	 * <td>Year</td>
-	 * <td>1996; 96</td>
-	 * </tr>
-	 * <tr><td>M</td>
-	 * <td>Month in year</td>
-	 * <td>Month</td>
-	 * <td>July; Jul; 07</td>
-	 * </tr>
-	 * <tr><td>w</td>
-	 * <td>Week in year</td>
-	 * <td>Number</td>
-	 * <td>27</td>
-	 * </tr>
-	 * <tr><td>W</td>
-	 * <td>Week in month</td>
-	 * <td>Number</td>
-	 * <td>2</td>
-	 * </tr>
-	 * <tr><td>D</td>
-	 * <td>Day in year</td>
-	 * <td>Number</td>
-	 * <td>189</td>
-	 * </tr>
-	 * <tr><td>d</td>
-	 * <td>Day in month</td>
-	 * <td>Number</td>
-	 * <td>10</td>
-	 * </tr>
-	 * <tr><td>F</td>
-	 * <td>Day of week in month</td>
-	 * <td>Number</td>
-	 * <td>2</td>
-	 * </tr>
-	 * <tr><td>E</td>
-	 * <td>Day in week</td>
-	 * <td>Text</td>
-	 * <td>Tuesday; Tue</td>
-	 * </tr>
-	 * <tr><td>a</td>
-	 * <td>Am/pm marker</td>
-	 * <td>Text</td>
-	 * <td>PM</td>
-	 * </tr>
-	 * <tr><td>H</td>
-	 *       <td>Hour in day (0-23)</td>
-	 * <td>Number</td>
-	 * <td>0</td>
-	 * </tr>
-	 * <tr><td>k</td>
-	 *       <td>Hour in day (1-24)</td>
-	 * <td>Number</td>
-	 * <td>24</td>
-	 * </tr>
-	 * <tr><td>K</td>
-	 * <td>Hour in am/pm (0-11)</td>
-	 * <td>Number</td>
-	 * <td>0</td>
-	 * </tr>
-	 * <tr><td>h</td>
-	 * <td>Hour in am/pm (1-12)</td>
-	 * <td>Number</td>
-	 * <td>12</td>
-	 * </tr>
-	 * <tr><td>m</td>
-	 * <td>Minute in hour</td>
-	 * <td>Number</td>
-	 * <td>30</td>
-	 * </tr>
-	 * <tr><td>s</td>
-	 * <td>Second in minute</td>
-	 * <td>Number</td>
-	 * <td>55</td>
-	 * </tr>
-	 * <tr><td>S</td>
-	 * <td>Millisecond</td>
-	 * <td>Number</td>
-	 * <td>978</td>
-	 * </tr>
-	 * <tr><td>x/z</td>
-	 * <td>Time zone</td>
-	 * <td>General time zone</td>
-	 * <td>Pacific Standard Time; PST; GMT-08:00</td>
-	 * </tr>
-	 * <tr><td>Z</td>
-	 * <td>Time zone</td>
-	 * <td>RFC 822 time zone</td>
-	 * <td>-0800</td>
-	 * </tr>
-	 * </tbody>
-	 * </table>
-	
-	 * @param {Object} locale format locale
-	 */
-	function DateTimeFormat(pattern, locale) {
-	  this.locale = locale || enUsLocale;
-	  this.originalPattern = pattern;
-	  this.pattern = compile(pattern);
-	}
-	
-	function formatField(field, count, locale, calendar) {
-	  var current,
-	    value;
-	  switch (field) {
-	    case 'G':
-	      value = calendar.getYear() > 0 ? 1 : 0;
-	      current = locale.eras[value];
-	      break;
-	    case 'y':
-	      value = calendar.getYear();
-	      if (value <= 0) {
-	        value = 1 - value;
-	      }
-	      current = (zeroPaddingNumber(value, 2, count !== 2 ? MAX_VALUE : 2));
-	      break;
-	    case 'M':
-	      value = calendar.getMonth();
-	      if (count >= 4) {
-	        current = locale.months[value];
-	      } else if (count === 3) {
-	        current = locale.shortMonths[value];
-	      } else {
-	        current = zeroPaddingNumber(value + 1, count);
-	      }
-	      break;
-	    case 'k':
-	      current = zeroPaddingNumber(calendar.getHourOfDay() || 24,
-	        count);
-	      break;
-	    case 'E':
-	      value = calendar.getDayOfWeek();
-	      current = count >= 4 ?
-	        locale.weekdays[value] :
-	        locale.shortWeekdays[value];
-	      break;
-	    case 'a':
-	      current = locale.ampms[calendar.getHourOfDay() >= 12 ?
-	        1 :
-	        0];
-	      break;
-	    case 'h':
-	      current = zeroPaddingNumber(calendar.
-	        getHourOfDay() % 12 || 12, count);
-	      break;
-	    case 'K':
-	      current = zeroPaddingNumber(calendar.
-	        getHourOfDay() % 12, count);
-	      break;
-	    case 'Z':
-	      var offset = calendar.getTimezoneOffset();
-	      var parts = [offset < 0 ? '-' : '+'];
-	      offset = Math.abs(offset);
-	      parts.push(zeroPaddingNumber(Math.floor(offset / 60) % 100, 2),
-	        zeroPaddingNumber(offset % 60, 2));
-	      current = parts.join('');
-	      break;
-	    default :
-	      // case 'd':
-	      // case 'H':
-	      // case 'm':
-	      // case 's':
-	      // case 'S':
-	      // case 'D':
-	      // case 'F':
-	      // case 'w':
-	      // case 'W':
-	      var index = calendarIndexMap[field];
-	      value = calendar.get(index);
-	      current = zeroPaddingNumber(value, count);
-	  }
-	  return current;
-	}
-	
-	function matchField(dateStr, startIndex, matches) {
-	  var matchedLen = -1;
-	  var index = -1;
-	  var i;
-	  var len = matches.length;
-	  for (i = 0; i < len; i++) {
-	    var m = matches[i];
-	    var mLen = m.length;
-	    if (mLen > matchedLen &&
-	      matchPartString(dateStr, startIndex, m, mLen)) {
-	      matchedLen = mLen;
-	      index = i;
-	    }
-	  }
-	  return index >= 0 ? {
-	    value: index,
-	    startIndex: startIndex + matchedLen
-	  } : null;
-	}
-	
-	function matchPartString(dateStr, startIndex, match, mLen) {
-	  for (var i = 0; i < mLen; i++) {
-	    if (dateStr.charAt(startIndex + i) !== match.charAt(i)) {
-	      return false;
-	    }
-	  }
-	  return true;
-	}
-	
-	function getLeadingNumberLen(str) {
-	  var i, c;
-	  var len = str.length;
-	  for (i = 0; i < len; i++) {
-	    c = str.charAt(i);
-	    if (c < '0' || c > '9') {
-	      break;
-	    }
-	  }
-	  return i;
-	}
-	
-	function matchNumber(dateStr, startIndex, count, obeyCount) {
-	  var str = dateStr;
-	  var n;
-	  if (obeyCount) {
-	    if (dateStr.length <= startIndex + count) {
-	      return null;
-	    }
-	    str = dateStr.slice(startIndex, startIndex + count);
-	    if (!str.match(/^\d+$/)) {
-	      throw new Error('GregorianCalendarFormat parse error, dateStr: ' + dateStr + ', patter: ' + (this.originalPattern));
-	    }
-	  } else {
-	    str = str.slice(startIndex);
-	  }
-	  n = parseInt(str, 10);
-	  if (isNaN(n)) {
-	    throw new Error('GregorianCalendarFormat parse error, dateStr: ' + dateStr + ', patter: ' + (this.originalPattern));
-	  }
-	  return {
-	    value: n,
-	    startIndex: startIndex + getLeadingNumberLen(str)
-	  };
-	}
-	
-	function parseField(calendar, dateStr, startIndex, field, count, obeyCount, tmp) {
-	  var match, year, hour;
-	  if (dateStr.length <= startIndex) {
-	    return startIndex;
-	  }
-	  var locale = this.locale;
-	  switch (field) {
-	    case 'G':
-	      if ((match = matchField(dateStr, startIndex, locale.eras))) {
-	        if (calendar.isSetYear()) {
-	          if (match.value === 0) {
-	            year = calendar.getYear();
-	            calendar.setYear(1 - year);
-	          }
-	        } else {
-	          tmp.era = match.value;
-	        }
-	      }
-	      break;
-	    case 'y':
-	      if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
-	        year = match.value;
-	        if ('era' in tmp) {
-	          if (tmp.era === 0) {
-	            year = 1 - year;
-	          }
-	        }
-	        calendar.setYear(year);
-	      }
-	      break;
-	    case 'M':
-	      var month;
-	      if (count >= 3) {
-	        if ((match = matchField(dateStr, startIndex, locale[count === 3 ?
-	            'shortMonths' : 'months']))) {
-	          month = match.value;
-	        }
-	      } else {
-	        if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
-	          month = match.value - 1;
-	        }
-	      }
-	      if (match) {
-	        calendar.setMonth(month);
-	      }
-	      break;
-	    case 'k':
-	      if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
-	        calendar.setHourOfDay(match.value % 24);
-	      }
-	      break;
-	    case 'E':
-	      if ((match = matchField(dateStr, startIndex, locale[count > 3 ?
-	          'weekdays' :
-	          'shortWeekdays']))) {
-	        calendar.setDayOfWeek(match.value);
-	      }
-	      break;
-	    case 'a':
-	      if ((match = matchField(dateStr, startIndex, locale.ampms))) {
-	        if (calendar.isSetHourOfDay()) {
-	          if (match.value) {
-	            hour = calendar.getHourOfDay();
-	            if (hour < 12) {
-	              calendar.setHourOfDay((hour + 12) % 24);
-	            }
-	          }
-	        } else {
-	          tmp.ampm = match.value;
-	        }
-	      }
-	      break;
-	    case 'h':
-	      if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
-	        hour = match.value %= 12;
-	        if (tmp.ampm) {
-	          hour += 12;
-	        }
-	        calendar.setHourOfDay(hour);
-	      }
-	      break;
-	    case 'K':
-	      if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
-	        hour = match.value;
-	        if (tmp.ampm) {
-	          hour += 12;
-	        }
-	        calendar.setHourOfDay(hour);
-	      }
-	      break;
-	    case 'Z':
-	      var sign = 1;
-	      var zoneChar = dateStr.charAt(startIndex);
-	      if (zoneChar === '-') {
-	        sign = -1;
-	        startIndex++;
-	      } else if (zoneChar === '+') {
-	        startIndex++;
-	      } else {
-	        break;
-	      }
-	      if ((match = matchNumber.call(this, dateStr, startIndex, 2, true))) {
-	        var zoneOffset = match.value * 60;
-	        startIndex = match.startIndex;
-	        if ((match = matchNumber.call(this, dateStr, startIndex, 2, true))) {
-	          zoneOffset += match.value;
-	        }
-	        calendar.setTimezoneOffset(zoneOffset);
-	      }
-	      break;
-	    default :
-	      // case 'd':
-	      // case 'H':
-	      // case 'm':
-	      // case 's':
-	      // case 'S':
-	      // case 'D':
-	      // case 'F':
-	      // case 'w':
-	      // case 'W'
-	      if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
-	        var index = calendarIndexMap[field];
-	        calendar.set(index, match.value);
-	      }
-	  }
-	  if (match) {
-	    startIndex = match.startIndex;
-	  }
-	  return startIndex;
-	}
-	
-	mix(DateTimeFormat.prototype, {
-	  /**
-	   * format a GregorianDate instance according to specified pattern
-	   * @param {GregorianCalendar} calendar GregorianDate instance
-	   * @returns {string} formatted string of GregorianDate instance
-	   */
-	  format: function (calendar) {
-	    if (!calendar.isGregorianCalendar) {
-	      throw new Error('calendar must be type of GregorianCalendar');
-	    }
-	    var i;
-	    var ret = [];
-	    var pattern = this.pattern;
-	    var len = pattern.length;
-	    for (i = 0; i < len; i++) {
-	      var comp = pattern[i];
-	      if (comp.text) {
-	        ret.push(comp.text);
-	      } else if ('field' in comp) {
-	        ret.push(formatField(comp.field, comp.count, this.locale, calendar));
-	      }
-	    }
-	    return ret.join('');
-	  },
-	
-	  /**
-	   * parse a formatted string of GregorianDate instance according to specified pattern
-	   * @param {String} dateStr formatted string of GregorianDate
-	   * @returns {GregorianCalendar}
-	   */
-	  parse: function (dateStr, calendarLocale) {
-	    var calendar = new GregorianCalendar(calendarLocale);
-	    var i;
-	    var j;
-	    var tmp = {};
-	    var obeyCount = false;
-	    var dateStrLen = dateStr.length;
-	    var errorIndex = -1;
-	    var startIndex = 0;
-	    var oldStartIndex = 0;
-	    var pattern = this.pattern;
-	    var len = pattern.length;
-	
-	    loopPattern: {
-	      for (i = 0; errorIndex < 0 && i < len; i++) {
-	        var comp = pattern[i], text, textLen;
-	        oldStartIndex = startIndex;
-	        if ((text = comp.text)) {
-	          textLen = text.length;
-	          if ((textLen + startIndex) > dateStrLen) {
-	            errorIndex = startIndex;
-	          } else {
-	            for (j = 0; j < textLen; j++) {
-	              if (text.charAt(j) !== dateStr.charAt(j + startIndex)) {
-	                errorIndex = startIndex;
-	                break loopPattern;
-	              }
-	            }
-	            startIndex += textLen;
-	          }
-	        } else if ('field' in comp) {
-	          obeyCount = false;
-	          var nextComp = pattern[i + 1];
-	          if (nextComp) {
-	            if ('field' in nextComp) {
-	              obeyCount = true;
-	            } else {
-	              var c = nextComp.text.charAt(0);
-	              if (c >= '0' && c <= '9') {
-	                obeyCount = true;
-	              }
-	            }
-	          }
-	          startIndex = parseField.call(this, calendar,
-	            dateStr,
-	            startIndex,
-	            comp.field,
-	            comp.count,
-	            obeyCount,
-	            tmp);
-	          if (startIndex === oldStartIndex) {
-	            errorIndex = startIndex;
-	          }
-	        }
-	      }
-	    }
-	
-	    if (errorIndex >= 0) {
-	      console.error('error when parsing date');
-	      console.error(dateStr);
-	      console.error(dateStr.slice(0, errorIndex) + '^');
-	      return undefined;
-	    }
-	    return calendar;
-	  }
-	});
-	
-	mix(DateTimeFormat, {
-	  Style: DateTimeStyle,
-	
-	  /**
-	   * get a formatter instance of short style pattern.
-	   * en-us: M/d/yy h:mm a
-	   * zh-cn: yy-M-d ah:mm
-	   * @param {Object} locale locale object
-	   * @returns {GregorianCalendar}
-	   * @static
-	   */
-	  getInstance: function (locale) {
-	    return this.getDateTimeInstance(DateTimeStyle.SHORT, DateTimeStyle.SHORT, locale);
-	  },
-	
-	  /**
-	   * get a formatter instance of specified date style.
-	   * @param {Date.Formatter.Style} dateStyle date format style
-	   * @param {Object} locale
-	   * @returns {GregorianCalendar}
-	   * @static
-	   */
-	  getDateInstance: function (dateStyle, locale) {
-	    return this.getDateTimeInstance(dateStyle, undefined, locale);
-	  },
-	
-	  /**
-	   * get a formatter instance of specified date style and time style.
-	   * @param {Date.Formatter.Style} dateStyle date format style
-	   * @param {Date.Formatter.Style} timeStyle time format style
-	   * @param {Object} locale
-	   * @returns {GregorianCalendar}
-	   * @static
-	   */
-	  getDateTimeInstance: function (dateStyle, timeStyle, locale) {
-	    locale = locale || enUsLocale;
-	    var datePattern = '';
-	    if (dateStyle !== undefined) {
-	      datePattern = locale.datePatterns[dateStyle];
-	    }
-	    var timePattern = '';
-	    if (timeStyle !== undefined) {
-	      timePattern = locale.timePatterns[timeStyle];
-	    }
-	    var pattern = datePattern;
-	    if (timePattern) {
-	      if (datePattern) {
-	        pattern = substitute(locale.dateTimePattern, {
-	          date: datePattern,
-	          time: timePattern
-	        });
-	      } else {
-	        pattern = timePattern;
-	      }
-	    }
-	    return new DateTimeFormat(pattern, locale);
-	  },
-	
-	  /**
-	   * get a formatter instance of specified time style.
-	   * @param {Date.Formatter.Style} timeStyle time format style
-	   * @param {Object} locale
-	   * @returns {GregorianCalendar}
-	   * @static
-	   */
-	  getTimeInstance: function (timeStyle, locale) {
-	    return this.getDateTimeInstance(undefined, timeStyle, locale);
-	  }
-	});
-	
-	module.exports = DateTimeFormat;
-	
-	DateTimeFormat.version = '@VERSION@';
-	
-	// gc_format@163.com
-
-/***/ },
-/* 28 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function() {
-		var list = [];
-		list.toString = function toString() {
-			var result = [];
-			for(var i = 0; i < this.length; i++) {
-				var item = this[i];
-				if(item[2]) {
-					result.push("@media " + item[2] + "{" + item[1] + "}");
-				} else {
-					result.push(item[1]);
-				}
-			}
-			return result.join("");
-		};
-		return list;
-	}
-
-/***/ },
-/* 29 */
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	var React = __webpack_require__(8);
-	var DateTimeFormat = __webpack_require__(13);
-	var ROW = 3;
-	var COL = 4;
-	var cx = __webpack_require__(33).classSet;
-	var YearPanel = __webpack_require__(39);
-	
-	function goYear(direction) {
-	  var next = this.state.value.clone();
-	  next.addYear(direction);
-	  this.setState({
-	    value: next
-	  });
-	}
-	
-	function showYearPanel() {
-	  this.setState({
-	    showYearPanel: 1
-	  });
-	}
-	
-	function chooseMonth(month) {
-	  var next = this.state.value.clone();
-	  next.setMonth(month);
-	  this.props.onSelect(next);
-	}
-	
-	function onYearPanelSelect(current) {
-	  this.setState({
-	    value: current,
-	    showYearPanel: 0
-	  });
-	}
-	
-	var ____Class2=React.Component;for(var ____Class2____Key in ____Class2){if(____Class2.hasOwnProperty(____Class2____Key)){MonthPanel[____Class2____Key]=____Class2[____Class2____Key];}}var ____SuperProtoOf____Class2=____Class2===null?null:____Class2.prototype;MonthPanel.prototype=Object.create(____SuperProtoOf____Class2);MonthPanel.prototype.constructor=MonthPanel;MonthPanel.__superConstructor__=____Class2;
-	  function MonthPanel(props) {"use strict";
-	    ____Class2.call(this,props);
-	    this.state = {
-	      value: this.props.value,
-	      prefixCls: this.props.rootPrefixCls + '-month-panel'
-	
-	    };
-	    // bind methods
-	    this.nextYear = goYear.bind(this, 1);
-	    this.previousYear = goYear.bind(this, -1);
-	    this.showYearPanel = showYearPanel.bind(this);
-	    this.onYearPanelSelect = onYearPanelSelect.bind(this);
-	    this.prefixClsFn = __webpack_require__(31).bind(this);
-	  }
-	
-	  Object.defineProperty(MonthPanel.prototype,"getMonths",{writable:true,configurable:true,value:function() {"use strict";
-	    var props = this.props;
-	    var value = this.state.value;
-	    var current = value.clone();
-	    var locale = props.locale;
-	    var monthYearFormat = locale.monthYearFormat;
-	    var dateFormatter = new DateTimeFormat(monthYearFormat);
-	    var months = [];
-	    var shortMonths = locale.format.shortMonths;
-	    var index = 0;
-	    for (var i = 0; i < ROW; i++) {
-	      months[i] = [];
-	      for (var j = 0; j < COL; j++) {
-	        current.setMonth(index);
-	        months[i][j] = {
-	          value: index,
-	          content: shortMonths[index],
-	          title: dateFormatter.format(current)
-	        };
-	        index++;
-	      }
-	    }
-	
-	    return months;
-	  }});
-	
-	  Object.defineProperty(MonthPanel.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
-	    var props = this.props;
-	    var value = this.state.value;
-	    var locale = props.locale;
-	    var months = this.getMonths();
-	    var year = value.getYear();
-	    var currentMonth = value.getMonth();
-	    var prefixClsFn = this.prefixClsFn;
-	    var monthsEls = months.map(function(month, index) {
-	      var tds = month.map(function(m)  {
-	        var classNameMap = {};
-	        classNameMap[prefixClsFn('cell')] = 1;
-	        classNameMap[prefixClsFn('selected-cell')] = m.value === currentMonth;
-	        return (
-	          React.createElement("td", {role: "gridcell", 
-	            key: m.value, 
-	            onClick: chooseMonth.bind(this, m.value), 
-	            title: m.title, 
-	            className: cx(classNameMap)}, 
-	            React.createElement("a", {
-	              className: prefixClsFn('month')}, 
-	            m.content
-	            )
-	          ));
-	      }.bind(this));
-	      return (React.createElement("tr", {key: index, role: "row"}, tds));
-	    }.bind(this));
-	
-	    var yearPanel;
-	    if (this.state.showYearPanel) {
-	      yearPanel = React.createElement(YearPanel, {locale: locale, value: value, rootPrefixCls: props.rootPrefixCls, onSelect: this.onYearPanelSelect});
-	    }
-	
-	    return (
-	      React.createElement("div", {className: this.state.prefixCls}, 
-	        React.createElement("div", null, 
-	          React.createElement("div", {className: prefixClsFn('header')}, 
-	            React.createElement("a", {className: prefixClsFn('prev-year-btn'), 
-	              role: "button", 
-	              onClick: this.previousYear, 
-	              title: locale.previousYear}, 
-	              "«"
-	            ), 
-	
-	            React.createElement("a", {className: prefixClsFn('year-select'), 
-	              role: "button", 
-	              onClick: this.showYearPanel, 
-	              title: locale.yearSelect}, 
-	              React.createElement("span", {className: prefixClsFn('year-select-content')}, year), 
-	              React.createElement("span", {className: prefixClsFn('year-select-arrow')}, "x")
-	            ), 
-	
-	            React.createElement("a", {className: prefixClsFn('next-year-btn'), 
-	              role: "button", 
-	              onClick: this.nextYear, 
-	              title: locale.nextYear}, 
-	              "»"
-	            )
-	          ), 
-	          React.createElement("div", {className: prefixClsFn('body')}, 
-	            React.createElement("table", {className: prefixClsFn('table'), cellSpacing: "0", role: "grid"}, 
-	              React.createElement("tbody", {className: prefixClsFn('tbody')}, 
-	              monthsEls
-	              )
-	            )
-	          )
-	        ), 
-	      yearPanel
-	      ));
-	  }});
-	
-	
-	MonthPanel.defaultProps = {
-	  onSelect:function() {
-	  }
-	};
-	
-	module.exports = MonthPanel;
-
-
-/***/ },
-/* 30 */
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	var React = __webpack_require__(8);
-	var rcUtil = __webpack_require__(33);
-	var KeyCode = rcUtil.KeyCode;
-	var TimePanel = __webpack_require__(40);
-	var setHourOfDay = 'setHourOfDay';
-	var setMinutes = 'setMinutes';
-	var setSeconds = 'setSeconds';
-	
-	function padding(number) {
-	  if (number < 10) {
-	    number = '0' + number;
-	  }
-	  return number;
-	}
-	
-	function loop(value, min, max) {
-	  if (value === min - 1) {
-	    value = max;
-	  } else if (value === max + 1) {
-	    value = min;
-	  }
-	  return value;
-	}
-	
-	function keyDownWrap(method, min, max) {
-	  return function (e) {
-	    var value = e.target.value;
-	    var number = parseInt(value, 10);
-	    var keyCode = e.keyCode;
-	    var handled;
-	    if (keyCode === KeyCode.DOWN) {
-	      number++;
-	      e.stopPropagation();
-	      e.preventDefault();
-	      handled = 1;
-	    } else if (keyCode === KeyCode.UP) {
-	      number--;
-	      e.stopPropagation();
-	      e.preventDefault();
-	      handled = 1;
-	    }
-	    if (handled) {
-	      number = loop(number, min, max);
-	      var time = this.props.value.clone();
-	      time[method](number);
-	      this.props.onChange(time, e);
-	    }
-	  };
-	}
-	
-	var ____Class3=React.Component;for(var ____Class3____Key in ____Class3){if(____Class3.hasOwnProperty(____Class3____Key)){Time[____Class3____Key]=____Class3[____Class3____Key];}}var ____SuperProtoOf____Class3=____Class3===null?null:____Class3.prototype;Time.prototype=Object.create(____SuperProtoOf____Class3);Time.prototype.constructor=Time;Time.__superConstructor__=____Class3;
-	  function Time(props) {"use strict";
-	    ____Class3.call(this,props);
-	    this.state = {
-	      showHourPanel: 0,
-	      showMinutePanel: 0,
-	      showSecondPanel: 0
-	    };
-	    [
-	      'onHourKeyDown', 'onMinuteKeyDown', 'onSecondKeyDown', 'onHourClick', 'onMinuteClick', 'onSecondClick',
-	      'onSelectPanel'
-	    ].forEach(function(m)  {
-	        this[m] = this[m].bind(this);
-	      }.bind(this));
-	  }
-	
-	  Object.defineProperty(Time.prototype,"onSelectPanel",{writable:true,configurable:true,value:function(value, setter) {"use strict";
-	    this.setState({
-	      showHourPanel: 0,
-	      showMinutePanel: 0,
-	      showSecondPanel: 0
-	    }, function() {
-	      // ie9 has broken focus
-	      React.findDOMNode(this.refs[setter]).focus();
-	    }.bind(this));
-	    this.props.onChange(value);
-	  }});
-	
-	  Object.defineProperty(Time.prototype,"onHourClick",{writable:true,configurable:true,value:function() {"use strict";
-	    this.setState({
-	      showHourPanel: 1,
-	      showMinutePanel: 0,
-	      showSecondPanel: 0
-	    });
-	  }});
-	
-	  Object.defineProperty(Time.prototype,"onMinuteClick",{writable:true,configurable:true,value:function() {"use strict";
-	    this.setState({
-	      showHourPanel: 0,
-	      showMinutePanel: 1,
-	      showSecondPanel: 0
-	    });
-	  }});
-	
-	  Object.defineProperty(Time.prototype,"onSecondClick",{writable:true,configurable:true,value:function() {"use strict";
-	    this.setState({
-	      showHourPanel: 0,
-	      showMinutePanel: 0,
-	      showSecondPanel: 1
-	    });
-	  }});
-	
-	  Object.defineProperty(Time.prototype,"shouldComponentUpdate",{writable:true,configurable:true,value:function() {"use strict";
-	    return rcUtil.PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
-	  }});
-	
-	  Object.defineProperty(Time.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
-	    var state = this.state;
-	    var props = this.props;
-	    var prefixClsFn = props.prefixClsFn;
-	    var value = props.value;
-	    var locale = props.locale;
-	    var hour = value.getHourOfDay();
-	    var minute = value.getMinutes();
-	    var second = value.getSeconds();
-	    var panel;
-	    var commonProps = {
-	      value: value,
-	      onSelect: this.onSelectPanel,
-	      rootPrefixCls: props.rootPrefixCls
-	    };
-	    if (state.showHourPanel) {
-	      panel = React.createElement(TimePanel, React.__spread({rowCount: 6, colCount: 4, getter: "getHourOfDay", setter: setHourOfDay, 
-	        title: locale.hourPanelTitle}, 
-	      commonProps));
-	    } else if (state.showMinutePanel) {
-	      panel = React.createElement(TimePanel, React.__spread({rowCount: 6, colCount: 10, getter: "getMinutes", setter: setMinutes, 
-	        title: locale.minutePanelTitle}, 
-	      commonProps));
-	    } else if (state.showSecondPanel) {
-	      panel = React.createElement(TimePanel, React.__spread({rowCount: 6, colCount: 10, getter: "getSeconds", setter: setSeconds, 
-	        title: locale.secondPanelTitle}, 
-	      commonProps));
-	    }
-	    return (React.createElement("div", null, 
-	      React.createElement("input", {className: prefixClsFn("time-input"), title: locale.hourInput, 
-	        ref: setHourOfDay, 
-	        readOnly: true, value: padding(hour), 
-	        onClick: this.onHourClick, 
-	        onKeyDown: this.onHourKeyDown}), 
-	      React.createElement("span", null, " : "), 
-	      React.createElement("input", {className: prefixClsFn("time-input"), title: locale.minuteInput, 
-	        ref: setMinutes, 
-	        readOnly: true, value: padding(minute), 
-	        onClick: this.onMinuteClick, 
-	        onKeyDown: this.onMinuteKeyDown}), 
-	      React.createElement("span", null, " : "), 
-	      React.createElement("input", {className: prefixClsFn("time-input"), title: locale.secondInput, 
-	        ref: setSeconds, 
-	        readOnly: true, value: padding(second), 
-	        onClick: this.onSecondClick, 
-	        onKeyDown: this.onSecondKeyDown}), 
-	    panel
-	    ));
-	  }});
-	
-	
-	Time.prototype.onHourKeyDown = keyDownWrap('setHourOfDay', 0, 23);
-	Time.prototype.onMinuteKeyDown = keyDownWrap('setMinutes', 0, 59);
-	Time.prototype.onSecondKeyDown = keyDownWrap('setSeconds', 0, 59);
-	
-	module.exports = Time;
-
-
-/***/ },
-/* 31 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = function () {
-	  var prefixCls = this.state.prefixCls;
-	  var args = Array.prototype.slice.call(arguments, 0);
-	  return args.map(function(s)  {
-	    return prefixCls + '-' + s;
-	  }).join(' ');
-	};
-
-
-/***/ },
-/* 32 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * i18n resources for date-picker
-	 * @ignore
-	 * @author yiminghe@gmail.com
-	 */
-	module.exports = ({
-	  today: 'Today',
-	  clear: 'Clear',
-	  hourPanelTitle: 'Select hour',
-	  minutePanelTitle: 'Select minute',
-	  secondPanelTitle: 'Select second',
-	  monthSelect: 'Choose a month',
-	  yearSelect: 'Choose a year',
-	  decadeSelect: 'Choose a decade',
-	  yearFormat: 'yyyy',
-	  dateFormat: 'M/d/yyyy',
-	  monthYearFormat: 'MMMM yyyy',
-	  previousMonth: 'Previous month (PageUp)',
-	  nextMonth: 'Next month (PageDown)',
-	  hourInput: 'Last hour(Up), Next hour(Down)',
-	  minuteInput: 'Last minute(Up), Next minute(Down)',
-	  secondInput: 'Last second(Up), Next second(Down)',
-	  previousYear: 'Last year (Control + left)',
-	  nextYear: 'Next year (Control + right)',
-	  previousDecade: 'Last decade',
-	  nextDecade: 'Next decade',
-	  previousCentury: 'Last century',
-	  nextCentury: 'Next century',
-	  format:  __webpack_require__(38)
-	});
-
-
-/***/ },
-/* 33 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = {
-	  guid: __webpack_require__(46),
-	  classSet: __webpack_require__(47),
-	  joinClasses: __webpack_require__(48),
-	  KeyCode: __webpack_require__(49),
-	  PureRenderMixin: __webpack_require__(50),
-	  shallowEqual: __webpack_require__(51),
-	  createChainedFunction: __webpack_require__(52),
-	  Dom: {
-	    addEventListener: __webpack_require__(53),
-	    contains: __webpack_require__(54)
-	  },
-	  Children: {
-	    toArray: __webpack_require__(55)
-	  }
-	};
-
-
-/***/ },
-/* 34 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * align dom node flexibly
-	 * @author yiminghe@gmail.com
-	 */
-	
-	var utils = __webpack_require__(56);
-	
-	// http://yiminghe.iteye.com/blog/1124720
-	
-	/**
-	 * 得到会导致元素显示不全的祖先元素
-	 */
-	
-	function getOffsetParent(element) {
-	  // ie 这个也不是完全可行
-	  /*
-	   <div style="width: 50px;height: 100px;overflow: hidden">
-	   <div style="width: 50px;height: 100px;position: relative;" id="d6">
-	   元素 6 高 100px 宽 50px<br/>
-	   </div>
-	   </div>
-	   */
-	  // element.offsetParent does the right thing in ie7 and below. Return parent with layout!
-	  //  In other browsers it only includes elements with position absolute, relative or
-	  // fixed, not elements with overflow set to auto or scroll.
-	  //        if (UA.ie && ieMode < 8) {
-	  //            return element.offsetParent;
-	  //        }
-	  // 统一的 offsetParent 方法
-	  var doc = element.ownerDocument,
-	    body = doc.body,
-	    parent,
-	    positionStyle = utils.css(element, 'position'),
-	    skipStatic = positionStyle === 'fixed' || positionStyle === 'absolute';
-	
-	  if (!skipStatic) {
-	    return element.nodeName.toLowerCase() === 'html' ? null : element.parentNode;
-	  }
-	
-	  for (parent = element.parentNode; parent && parent !== body; parent = parent.parentNode) {
-	    positionStyle = utils.css(parent, 'position');
-	    if (positionStyle !== 'static') {
-	      return parent;
-	    }
-	  }
-	  return null;
-	}
-	
-	/**
-	 * 获得元素的显示部分的区域
-	 */
-	
-	function getVisibleRectForElement(element) {
-	  var visibleRect = {
-	      left: 0,
-	      right: Infinity,
-	      top: 0,
-	      bottom: Infinity
-	    },
-	    el,
-	    scrollX,
-	    scrollY,
-	    winSize,
-	    doc = element.ownerDocument,
-	    win = doc.defaultView || doc.parentWindow,
-	    body = doc.body,
-	    documentElement = doc.documentElement;
-	
-	  // Determine the size of the visible rect by climbing the dom accounting for
-	  // all scrollable containers.
-	  for (el = element;
-	       (el = getOffsetParent(el));) {
-	    // clientWidth is zero for inline block elements in ie.
-	    if ((navigator.userAgent.indexOf('MSIE') === -1 || el.clientWidth !== 0) &&
-	        // body may have overflow set on it, yet we still get the entire
-	        // viewport. In some browsers, el.offsetParent may be
-	        // document.documentElement, so check for that too.
-	      (el !== body &&
-	      el !== documentElement &&
-	      utils.css(el, 'overflow') !== 'visible')) {
-	      var pos = utils.offset(el);
-	      // add border
-	      pos.left += el.clientLeft;
-	      pos.top += el.clientTop;
-	
-	      visibleRect.top = Math.max(visibleRect.top, pos.top);
-	      visibleRect.right = Math.min(visibleRect.right,
-	        // consider area without scrollBar
-	        pos.left + el.clientWidth);
-	      visibleRect.bottom = Math.min(visibleRect.bottom,
-	        pos.top + el.clientHeight);
-	      visibleRect.left = Math.max(visibleRect.left, pos.left);
-	    }
-	  }
-	
-	  // Clip by window's viewport.
-	  scrollX = utils.getWindowScrollLeft(win);
-	  scrollY = utils.getWindowScrollTop(win);
-	  visibleRect.left = Math.max(visibleRect.left, scrollX);
-	  visibleRect.top = Math.max(visibleRect.top, scrollY);
-	  winSize = {
-	    width: utils.viewportWidth(win),
-	    height: utils.viewportHeight(win)
-	  };
-	  visibleRect.right = Math.min(visibleRect.right, scrollX + winSize.width);
-	  visibleRect.bottom = Math.min(visibleRect.bottom, scrollY + winSize.height);
-	  return visibleRect.top >= 0 && visibleRect.left >= 0 &&
-	  visibleRect.bottom > visibleRect.top &&
-	  visibleRect.right > visibleRect.left ?
-	    visibleRect : null;
-	}
-	
-	function getElFuturePos(elRegion, refNodeRegion, points, offset) {
-	  var xy,
-	    diff,
-	    p1,
-	    p2;
-	
-	  xy = {
-	    left: elRegion.left,
-	    top: elRegion.top
-	  };
-	
-	  p1 = getAlignOffset(refNodeRegion, points[1]);
-	  p2 = getAlignOffset(elRegion, points[0]);
-	
-	  diff = [p2.left - p1.left, p2.top - p1.top];
-	
-	  return {
-	    left: xy.left - diff[0] + (+offset[0]),
-	    top: xy.top - diff[1] + (+offset[1])
-	  };
-	}
-	
-	function isFailX(elFuturePos, elRegion, visibleRect) {
-	  return elFuturePos.left < visibleRect.left ||
-	    elFuturePos.left + elRegion.width > visibleRect.right;
-	}
-	
-	function isFailY(elFuturePos, elRegion, visibleRect) {
-	  return elFuturePos.top < visibleRect.top ||
-	    elFuturePos.top + elRegion.height > visibleRect.bottom;
-	}
-	
-	function adjustForViewport(elFuturePos, elRegion, visibleRect, overflow) {
-	  var pos = utils.clone(elFuturePos),
-	    size = {
-	      width: elRegion.width,
-	      height: elRegion.height
-	    };
-	
-	  if (overflow.adjustX && pos.left < visibleRect.left) {
-	    pos.left = visibleRect.left;
-	  }
-	
-	  // Left edge inside and right edge outside viewport, try to resize it.
-	  if (overflow.resizeWidth &&
-	    pos.left >= visibleRect.left &&
-	    pos.left + size.width > visibleRect.right) {
-	    size.width -= (pos.left + size.width) - visibleRect.right;
-	  }
-	
-	  // Right edge outside viewport, try to move it.
-	  if (overflow.adjustX && pos.left + size.width > visibleRect.right) {
-	    // 保证左边界和可视区域左边界对齐
-	    pos.left = Math.max(visibleRect.right - size.width, visibleRect.left);
-	  }
-	
-	  // Top edge outside viewport, try to move it.
-	  if (overflow.adjustY && pos.top < visibleRect.top) {
-	    pos.top = visibleRect.top;
-	  }
-	
-	  // Top edge inside and bottom edge outside viewport, try to resize it.
-	  if (overflow.resizeHeight &&
-	    pos.top >= visibleRect.top &&
-	    pos.top + size.height > visibleRect.bottom) {
-	    size.height -= (pos.top + size.height) - visibleRect.bottom;
-	  }
-	
-	  // Bottom edge outside viewport, try to move it.
-	  if (overflow.adjustY && pos.top + size.height > visibleRect.bottom) {
-	    // 保证上边界和可视区域上边界对齐
-	    pos.top = Math.max(visibleRect.bottom - size.height, visibleRect.top);
-	  }
-	
-	  return utils.mix(pos, size);
-	}
-	
-	function flip(points, reg, map) {
-	  var ret = [];
-	  utils.each(points, function (p) {
-	    ret.push(p.replace(reg, function (m) {
-	      return map[m];
-	    }));
-	  });
-	  return ret;
-	}
-	
-	function flipOffset(offset, index) {
-	  offset[index] = -offset[index];
-	  return offset;
-	}
-	
-	domAlign.__getOffsetParent = getOffsetParent;
-	
-	domAlign.__getVisibleRectForElement = getVisibleRectForElement;
-	
-	function getRegion(node) {
-	  var offset, w, h;
-	  if (!utils.isWindow(node)) {
-	    offset = utils.offset(node);
-	    w = utils.outerWidth(node);
-	    h = utils.outerHeight(node);
-	  } else {
-	    var win = utils.getWindow(node);
-	    offset = {
-	      left: utils.getWindowScrollLeft(win),
-	      top: utils.getWindowScrollTop(win)
-	    };
-	    w = utils.viewportWidth(win);
-	    h = utils.viewportHeight(win);
-	  }
-	  offset.width = w;
-	  offset.height = h;
-	  return offset;
-	}
-	
-	/**
-	 * 获取 node 上的 align 对齐点 相对于页面的坐标
-	 */
-	
-	function getAlignOffset(region, align) {
-	  var V = align.charAt(0),
-	    H = align.charAt(1),
-	    w = region.width,
-	    h = region.height,
-	    x, y;
-	
-	  x = region.left;
-	  y = region.top;
-	
-	  if (V === 'c') {
-	    y += h / 2;
-	  } else if (V === 'b') {
-	    y += h;
-	  }
-	
-	  if (H === 'c') {
-	    x += w / 2;
-	  } else if (H === 'r') {
-	    x += w;
-	  }
-	
-	  return {
-	    left: x,
-	    top: y
-	  };
-	}
-	
-	/*
-	 * align node
-	 * @param {Element} node current dom node
-	 * @param {Object} align align config
-	 *
-	 *    @example
-	 *    {
-	 *      node: null,         // 参考元素, falsy 或 window 为可视区域, 'trigger' 为触发元素, 其他为指定元素
-	 *      points: ['cc','cc'], // ['tr', 'tl'] 表示 overlay 的 tr 与参考节点的 tl 对齐
-	 *      offset: [0, 0]      // 有效值为 [n, m]
-	 *    }
-	 */
-	function domAlign(el, refNode, align) {
-	  var points = align.points;
-	  var offset = align.offset;
-	  var overflow = align.overflow;
-	  offset = offset && [].concat(offset) || [0, 0];
-	  overflow = overflow || {};
-	  var newOverflowCfg = {};
-	
-	  var fail = 0;
-	  // 当前节点可以被放置的显示区域
-	  var visibleRect = getVisibleRectForElement(el);
-	  // 当前节点所占的区域, left/top/width/height
-	  var elRegion = getRegion(el);
-	  // 参照节点所占的区域, left/top/width/height
-	  var refNodeRegion = getRegion(refNode);
-	  // 当前节点将要被放置的位置
-	  var elFuturePos = getElFuturePos(elRegion, refNodeRegion, points, offset);
-	  // 当前节点将要所处的区域
-	  var newElRegion = utils.merge(elRegion, elFuturePos);
-	
-	  // 如果可视区域不能完全放置当前节点时允许调整
-	  if (visibleRect && (overflow.adjustX || overflow.adjustY)) {
-	    if (overflow.adjustX) {
-	      // 如果横向不能放下
-	      if (isFailX(elFuturePos, elRegion, visibleRect)) {
-	        fail = 1;
-	        // 对齐位置反下
-	        points = flip(points, /[lr]/ig, {
-	          l: 'r',
-	          r: 'l'
-	        });
-	        // 偏移量也反下
-	        offset = flipOffset(offset, 0);
-	      }
-	    }
-	
-	    if (overflow.adjustY) {
-	      // 如果纵向不能放下
-	      if (isFailY(elFuturePos, elRegion, visibleRect)) {
-	        fail = 1;
-	        // 对齐位置反下
-	        points = flip(points, /[tb]/ig, {
-	          t: 'b',
-	          b: 't'
-	        });
-	        // 偏移量也反下
-	        offset = flipOffset(offset, 1);
-	      }
-	    }
-	
-	    // 如果失败，重新计算当前节点将要被放置的位置
-	    if (fail) {
-	      elFuturePos = getElFuturePos(elRegion, refNodeRegion, points, offset);
-	      utils.mix(newElRegion, elFuturePos);
-	    }
-	
-	    // 检查反下后的位置是否可以放下了
-	    // 如果仍然放不下只有指定了可以调整当前方向才调整
-	    newOverflowCfg.adjustX = overflow.adjustX &&
-	    isFailX(elFuturePos, elRegion, visibleRect);
-	
-	    newOverflowCfg.adjustY = overflow.adjustY &&
-	    isFailY(elFuturePos, elRegion, visibleRect);
-	
-	    // 确实要调整，甚至可能会调整高度宽度
-	    if (newOverflowCfg.adjustX || newOverflowCfg.adjustY) {
-	      newElRegion = adjustForViewport(elFuturePos, elRegion,
-	        visibleRect, newOverflowCfg);
-	    }
-	  }
-	
-	  // https://github.com/kissyteam/kissy/issues/190
-	  // http://localhost:8888/kissy/src/overlay/demo/other/relative_align/align.html
-	  // 相对于屏幕位置没变，而 left/top 变了
-	  // 例如 <div 'relative'><el absolute></div>
-	  utils.offset(el, {left: newElRegion.left, top: newElRegion.top});
-	
-	  // need judge to in case set fixed with in css on height auto element
-	  if (newElRegion.width !== elRegion.width) {
-	    utils.css(el, 'width', el.width() + newElRegion.width - elRegion.width);
-	  }
-	
-	  if (newElRegion.height !== elRegion.height) {
-	    utils.css(el, 'height', el.height() + newElRegion.height - elRegion.height);
-	  }
-	
-	  return {
-	    points: points,
-	    offset: offset,
-	    overflow: newOverflowCfg
-	  };
-	}
-	
-	module.exports = domAlign;
-	/**
-	 *  2012-04-26 yiminghe@gmail.com
-	 *   - 优化智能对齐算法
-	 *   - 慎用 resizeXX
-	 *
-	 *  2011-07-13 yiminghe@gmail.com note:
-	 *   - 增加智能对齐，以及大小调整选项
-	 **/
-
-
-/***/ },
-/* 35 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4061,7 +3178,7 @@
 	 * @author yiminghe@gmail.com
 	 */
 	
-	var Const = __webpack_require__(37);
+	var Const = __webpack_require__(15);
 	var floor = Math.floor;
 	var ACCUMULATED_DAYS_IN_MONTH
 	        //   1/1 2/1 3/1 4/1 5/1 6/1 7/1 8/1 9/1 10/1 11/1 12/1
@@ -4183,24 +3300,7 @@
 	};
 
 /***/ },
-/* 36 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * en-us locale
-	 * @ignore
-	 * @author yiminghe@gmail.com
-	 */
-	module.exports = {
-	  // in minutes
-	  timezoneOffset: -8 * 60,
-	  firstDayOfWeek: 0,
-	  minimalDaysInFirstWeek: 1
-	};
-
-
-/***/ },
-/* 37 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4327,7 +3427,24 @@
 	};
 
 /***/ },
-/* 38 */
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * en-us locale
+	 * @ignore
+	 * @author yiminghe@gmail.com
+	 */
+	module.exports = {
+	  // in minutes
+	  timezoneOffset: -8 * 60,
+	  firstDayOfWeek: 0,
+	  minimalDaysInFirstWeek: 1
+	};
+
+
+/***/ },
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4353,264 +3470,77 @@
 
 
 /***/ },
-/* 39 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
-	var React = __webpack_require__(8);
-	var DateTimeFormat = __webpack_require__(13);
-	var ROW = 3;
-	var COL = 4;
-	var cx = __webpack_require__(33).classSet;
-	var DecadePanel = __webpack_require__(57);
-	
-	function goYear(direction) {
-	  var next = this.state.value.clone();
-	  next.addYear(direction);
-	  this.setState({value: next});
-	}
-	
-	function chooseYear(year) {
-	  var next = this.state.value.clone();
-	  next.setYear(year);
-	  this.props.onSelect(next);
-	}
-	
-	var ____Class4=React.Component;for(var ____Class4____Key in ____Class4){if(____Class4.hasOwnProperty(____Class4____Key)){YearPanel[____Class4____Key]=____Class4[____Class4____Key];}}var ____SuperProtoOf____Class4=____Class4===null?null:____Class4.prototype;YearPanel.prototype=Object.create(____SuperProtoOf____Class4);YearPanel.prototype.constructor=YearPanel;YearPanel.__superConstructor__=____Class4;
-	  function YearPanel(props) {"use strict";
-	    ____Class4.call(this,props);
-	    this.prefixClsFn = __webpack_require__(31).bind(this);
-	    this.state = {
-	      value: props.value,
-	      prefixCls: props.rootPrefixCls + '-year-panel'
-	    };
-	    this.nextDecade = goYear.bind(this, 10);
-	    this.previousDecade = goYear.bind(this, -10);
-	    ['showDecadePanel', 'onDecadePanelSelect'].forEach(function(m)  {
-	      this[m] = this[m].bind(this);
-	    }.bind(this));
-	  }
-	
-	  Object.defineProperty(YearPanel.prototype,"showDecadePanel",{writable:true,configurable:true,value:function() {"use strict";
-	    this.setState({
-	      showDecadePanel: 1
-	    });
-	  }});
-	
-	  Object.defineProperty(YearPanel.prototype,"onDecadePanelSelect",{writable:true,configurable:true,value:function(current) {"use strict";
-	    this.setState({
-	      value: current,
-	      showDecadePanel: 0
-	    });
-	  }});
-	
-	  Object.defineProperty(YearPanel.prototype,"getYears",{writable:true,configurable:true,value:function() {"use strict";
-	    var value = this.state.value;
-	    var currentYear = value.getYear();
-	    var startYear = parseInt(currentYear / 10, 10) * 10;
-	    var preYear = startYear - 1;
-	    var current = value.clone();
-	    var locale = this.props.locale;
-	    var yearFormat = locale.yearFormat;
-	    var dateFormatter = new DateTimeFormat(yearFormat);
-	    var years = [];
-	    var index = 0;
-	    for (var i = 0; i < ROW; i++) {
-	      years[i] = [];
-	      for (var j = 0; j < COL; j++) {
-	        current.setYear(preYear + index);
-	        years[i][j] = {
-	          content: preYear + index,
-	          title: dateFormatter.format(current)
-	        };
-	        index++;
-	      }
-	    }
-	    return years;
-	  }});
-	
-	  Object.defineProperty(YearPanel.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
-	    var props = this.props;
-	    var value = this.state.value;
-	    var locale = props.locale;
-	    var years = this.getYears();
-	    var currentYear = value.getYear();
-	    var startYear = parseInt(currentYear / 10, 10) * 10;
-	    var endYear = startYear + 9;
-	    var prefixClsFn = this.prefixClsFn;
-	
-	    var yeasEls = years.map(function(row, index)  {
-	      var tds = row.map(function(y)  {
-	        var classNameMap = {};
-	        classNameMap[prefixClsFn('cell')] = 1;
-	        classNameMap[prefixClsFn('selected-cell')] = y.content === currentYear;
-	        classNameMap[prefixClsFn('last-decade-cell')] = y.content < startYear;
-	        classNameMap[prefixClsFn('next-decade-cell')] = y.content > endYear;
-	        return (
-	          React.createElement("td", {role: "gridcell", 
-	            title: y.title, 
-	            key: y.content, 
-	            onClick: chooseYear.bind(this, y.content), 
-	            className: cx(classNameMap)
-	          }, 
-	            React.createElement("a", {
-	              className: prefixClsFn('year')}, 
-	            y.content
-	            )
-	          ));
-	      }.bind(this));
-	      return (React.createElement("tr", {key: index, role: "row"}, tds));
-	    }.bind(this));
-	
-	    var decadePanel;
-	    if (this.state.showDecadePanel) {
-	      decadePanel = React.createElement(DecadePanel, {locale: locale, value: value, rootPrefixCls: props.rootPrefixCls, onSelect: this.onDecadePanelSelect});
-	    }
-	
-	    return (
-	      React.createElement("div", {className: this.state.prefixCls}, 
-	        React.createElement("div", null, 
-	          React.createElement("div", {className: prefixClsFn('header')}, 
-	            React.createElement("a", {className: prefixClsFn('prev-decade-btn'), 
-	              role: "button", 
-	              onClick: this.previousDecade, 
-	              title: locale.previousDecade}, 
-	              "«"
-	            ), 
-	
-	            React.createElement("a", {className: prefixClsFn('decade-select'), 
-	              role: "button", 
-	              onClick: this.showDecadePanel, 
-	              title: locale.decadeSelect}, 
-	              React.createElement("span", {className: prefixClsFn('decade-select-content')}, 
-	                startYear, "-", endYear
-	              ), 
-	              React.createElement("span", {className: prefixClsFn('decade-select-arrow')}, "x")
-	            ), 
-	
-	            React.createElement("a", {className: prefixClsFn('next-decade-btn'), 
-	              role: "button", 
-	              onClick: this.nextDecade, 
-	              title: locale.nextDecade}, 
-	              "»"
-	            )
-	          ), 
-	          React.createElement("div", {className: prefixClsFn('body')}, 
-	            React.createElement("table", {className: prefixClsFn('table'), cellSpacing: "0", role: "grid"}, 
-	              React.createElement("tbody", {className: prefixClsFn('tbody')}, 
-	              yeasEls
-	              )
-	            )
-	          )
-	        ), 
-	      decadePanel
-	      ));
-	  }});
-	
-	
-	YearPanel.defaultProps = {
-	  onSelect:function() {
+	module.exports = {
+	  guid: __webpack_require__(20),
+	  classSet: __webpack_require__(21),
+	  joinClasses: __webpack_require__(22),
+	  KeyCode: __webpack_require__(23),
+	  PureRenderMixin: __webpack_require__(24),
+	  shallowEqual: __webpack_require__(19),
+	  createChainedFunction: __webpack_require__(25),
+	  Dom: {
+	    addEventListener: __webpack_require__(26),
+	    contains: __webpack_require__(27)
+	  },
+	  Children: {
+	    toArray: __webpack_require__(28)
 	  }
 	};
-	
-	module.exports = YearPanel;
 
 
 /***/ },
-/* 40 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/**
+	 * Copyright 2013-2014, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule shallowEqual
+	 */
 	
-	var React = __webpack_require__(8);
-	var cx = __webpack_require__(33).classSet;
+	"use strict";
 	
-	function choose(hour, e) {
-	  var next = this.state.value.clone();
-	  var method = this.props.setter;
-	  next[method](hour);
-	  this.props.onSelect(next,method);
-	  e.preventDefault();
+	/**
+	 * Performs equality by iterating through keys on an object and returning
+	 * false when any key has values which are not strictly equal between
+	 * objA and objB. Returns true when the values of all keys are strictly equal.
+	 *
+	 * @return {boolean}
+	 */
+	function shallowEqual(objA, objB) {
+	  if (objA === objB) {
+	    return true;
+	  }
+	  var key;
+	  // Test for A's keys different from B.
+	  for (key in objA) {
+	    if (objA.hasOwnProperty(key) &&
+	        (!objB.hasOwnProperty(key) || objA[key] !== objB[key])) {
+	      return false;
+	    }
+	  }
+	  // Test for B's keys missing from A.
+	  for (key in objB) {
+	    if (objB.hasOwnProperty(key) && !objA.hasOwnProperty(key)) {
+	      return false;
+	    }
+	  }
+	  return true;
 	}
 	
-	var ____Class5=React.Component;for(var ____Class5____Key in ____Class5){if(____Class5.hasOwnProperty(____Class5____Key)){TimePanel[____Class5____Key]=____Class5[____Class5____Key];}}var ____SuperProtoOf____Class5=____Class5===null?null:____Class5.prototype;TimePanel.prototype=Object.create(____SuperProtoOf____Class5);TimePanel.prototype.constructor=TimePanel;TimePanel.__superConstructor__=____Class5;
-	  function TimePanel(props) {"use strict";
-	    ____Class5.call(this,props);
-	    this.state = {
-	      value: props.value,
-	      prefixCls: props.rootPrefixCls + '-time-panel'
-	    };
-	    this.prefixClsFn = __webpack_require__(31).bind(this);
-	  }
-	
-	  Object.defineProperty(TimePanel.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
-	    var value = this.state.value;
-	    var props = this.props;
-	    var method = props.getter;
-	    var currentHour = value[method]();
-	    var data = [];
-	    var prefixClsFn = this.prefixClsFn;
-	    var ROW = props.rowCount;
-	    var COL = props.colCount;
-	
-	    for (var i = 0; i < ROW; i++) {
-	      data[i] = [];
-	      for (var j = 0; j < COL; j++) {
-	        data[i][j] = i * COL + j;
-	      }
-	    }
-	
-	    var hoursEls = data.map(function(row, index) {
-	      var tds = row.map(function(d)  {
-	        var classNameMap = {};
-	        classNameMap[prefixClsFn('cell')] = 1;
-	        classNameMap[prefixClsFn('selected-cell')] = d === currentHour;
-	        return (React.createElement("td", {
-	          key: d, 
-	          onClick: choose.bind(this, d), 
-	          role: "gridcell", 
-	          className: cx(classNameMap)}, 
-	          React.createElement("a", {
-	            className: prefixClsFn('time')}, 
-	          d
-	          )
-	        ));
-	      }.bind(this));
-	      return (React.createElement("tr", {key: index, role: "row"}, tds));
-	    }.bind(this));
-	
-	    return (
-	      React.createElement("div", {className: this.state.prefixCls}, 
-	        React.createElement("div", {className: prefixClsFn('header')}, 
-	          React.createElement("div", {className: prefixClsFn('title')}, 
-	                props.title
-	          )
-	        ), 
-	        React.createElement("div", {className: prefixClsFn('body')}, 
-	          React.createElement("table", {className: prefixClsFn('table'), cellSpacing: "0", role: "grid"}, 
-	            React.createElement("tbody", {className: prefixClsFn('tbody')}, 
-	            hoursEls
-	            )
-	          )
-	        )
-	      ));
-	  }});
-	
-	
-	TimePanel.defaultProps = {
-	  onSelect:function() {
-	  }
-	};
-	
-	module.exports = TimePanel;
+	module.exports = shallowEqual;
 
 
 /***/ },
-/* 41 */,
-/* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */,
-/* 46 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var seed = 0;
@@ -4620,7 +3550,7 @@
 
 
 /***/ },
-/* 47 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4665,7 +3595,7 @@
 
 
 /***/ },
-/* 48 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -4712,7 +3642,7 @@
 
 
 /***/ },
-/* 49 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5239,7 +4169,7 @@
 
 
 /***/ },
-/* 50 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5255,7 +4185,7 @@
 	
 	"use strict";
 	
-	var shallowEqual = __webpack_require__(51);
+	var shallowEqual = __webpack_require__(19);
 	
 	/**
 	 * If your React component's render function is "pure", e.g. it will render the
@@ -5292,55 +4222,7 @@
 
 
 /***/ },
-/* 51 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-2014, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule shallowEqual
-	 */
-	
-	"use strict";
-	
-	/**
-	 * Performs equality by iterating through keys on an object and returning
-	 * false when any key has values which are not strictly equal between
-	 * objA and objB. Returns true when the values of all keys are strictly equal.
-	 *
-	 * @return {boolean}
-	 */
-	function shallowEqual(objA, objB) {
-	  if (objA === objB) {
-	    return true;
-	  }
-	  var key;
-	  // Test for A's keys different from B.
-	  for (key in objA) {
-	    if (objA.hasOwnProperty(key) &&
-	        (!objB.hasOwnProperty(key) || objA[key] !== objB[key])) {
-	      return false;
-	    }
-	  }
-	  // Test for B's keys missing from A.
-	  for (key in objB) {
-	    if (objB.hasOwnProperty(key) && !objA.hasOwnProperty(key)) {
-	      return false;
-	    }
-	  }
-	  return true;
-	}
-	
-	module.exports = shallowEqual;
-
-
-/***/ },
-/* 52 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5367,7 +4249,7 @@
 
 
 /***/ },
-/* 53 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function (target, eventType, callback) {
@@ -5390,7 +4272,7 @@
 
 
 /***/ },
-/* 54 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function (root, node) {
@@ -5406,10 +4288,10 @@
 
 
 /***/ },
-/* 55 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var React = __webpack_require__(8);
+	var React = __webpack_require__(9);
 	
 	module.exports = function (children) {
 	  var ret = [];
@@ -5421,7 +4303,1465 @@
 
 
 /***/ },
-/* 56 */
+/* 29 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = (function () {
+	  function defineProperties(target, props) {
+	    for (var i = 0; i < props.length; i++) {
+	      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ('value' in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+	    }
+	  }return function (Constructor, protoProps, staticProps) {
+	    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+	  };
+	})();
+	
+	var _get = function get(_x, _x2, _x3) {
+	  var _again = true;_function: while (_again) {
+	    var object = _x,
+	        property = _x2,
+	        receiver = _x3;desc = parent = getter = undefined;_again = false;var desc = Object.getOwnPropertyDescriptor(object, property);if (desc === undefined) {
+	      var parent = Object.getPrototypeOf(object);if (parent === null) {
+	        return undefined;
+	      } else {
+	        _x = parent;_x2 = property;_x3 = receiver;_again = true;continue _function;
+	      }
+	    } else if ('value' in desc) {
+	      return desc.value;
+	    } else {
+	      var getter = desc.get;if (getter === undefined) {
+	        return undefined;
+	      }return getter.call(receiver);
+	    }
+	  }
+	};
+	
+	function _classCallCheck(instance, Constructor) {
+	  if (!(instance instanceof Constructor)) {
+	    throw new TypeError('Cannot call a class as a function');
+	  }
+	}
+	
+	function _inherits(subClass, superClass) {
+	  if (typeof superClass !== 'function' && superClass !== null) {
+	    throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
+	}
+	
+	var React = __webpack_require__(9);
+	var DateTimeFormat = __webpack_require__(10);
+	var ROW = 3;
+	var COL = 4;
+	var cx = __webpack_require__(18).classSet;
+	var DecadePanel = __webpack_require__(30);
+	
+	function goYear(direction) {
+	  var next = this.state.value.clone();
+	  next.addYear(direction);
+	  this.setState({ value: next });
+	}
+	
+	function chooseYear(year) {
+	  var next = this.state.value.clone();
+	  next.setYear(year);
+	  this.props.onSelect(next);
+	}
+	
+	var YearPanel = (function (_React$Component) {
+	  function YearPanel(props) {
+	    var _this = this;
+	
+	    _classCallCheck(this, YearPanel);
+	
+	    _get(Object.getPrototypeOf(YearPanel.prototype), 'constructor', this).call(this, props);
+	    this.prefixClsFn = __webpack_require__(31).bind(this);
+	    this.state = {
+	      value: props.value,
+	      prefixCls: props.rootPrefixCls + '-year-panel'
+	    };
+	    this.nextDecade = goYear.bind(this, 10);
+	    this.previousDecade = goYear.bind(this, -10);
+	    ['showDecadePanel', 'onDecadePanelSelect'].forEach(function (m) {
+	      _this[m] = _this[m].bind(_this);
+	    });
+	  }
+	
+	  _inherits(YearPanel, _React$Component);
+	
+	  _createClass(YearPanel, [{
+	    key: 'showDecadePanel',
+	    value: function showDecadePanel() {
+	      this.setState({
+	        showDecadePanel: 1
+	      });
+	    }
+	  }, {
+	    key: 'onDecadePanelSelect',
+	    value: function onDecadePanelSelect(current) {
+	      this.setState({
+	        value: current,
+	        showDecadePanel: 0
+	      });
+	    }
+	  }, {
+	    key: 'getYears',
+	    value: function getYears() {
+	      var value = this.state.value;
+	      var currentYear = value.getYear();
+	      var startYear = parseInt(currentYear / 10, 10) * 10;
+	      var preYear = startYear - 1;
+	      var current = value.clone();
+	      var locale = this.props.locale;
+	      var yearFormat = locale.yearFormat;
+	      var dateFormatter = new DateTimeFormat(yearFormat);
+	      var years = [];
+	      var index = 0;
+	      for (var i = 0; i < ROW; i++) {
+	        years[i] = [];
+	        for (var j = 0; j < COL; j++) {
+	          current.setYear(preYear + index);
+	          years[i][j] = {
+	            content: preYear + index,
+	            title: dateFormatter.format(current)
+	          };
+	          index++;
+	        }
+	      }
+	      return years;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+	
+	      var props = this.props;
+	      var value = this.state.value;
+	      var locale = props.locale;
+	      var years = this.getYears();
+	      var currentYear = value.getYear();
+	      var startYear = parseInt(currentYear / 10, 10) * 10;
+	      var endYear = startYear + 9;
+	      var prefixClsFn = this.prefixClsFn;
+	
+	      var yeasEls = years.map(function (row, index) {
+	        var tds = row.map(function (y) {
+	          var classNameMap = {};
+	          classNameMap[prefixClsFn('cell')] = 1;
+	          classNameMap[prefixClsFn('selected-cell')] = y.content === currentYear;
+	          classNameMap[prefixClsFn('last-decade-cell')] = y.content < startYear;
+	          classNameMap[prefixClsFn('next-decade-cell')] = y.content > endYear;
+	          return React.createElement('td', { role: 'gridcell',
+	            title: y.title,
+	            key: y.content,
+	            onClick: chooseYear.bind(_this2, y.content),
+	            className: cx(classNameMap)
+	          }, React.createElement('a', {
+	            className: prefixClsFn('year') }, y.content));
+	        });
+	        return React.createElement('tr', { key: index, role: 'row' }, tds);
+	      });
+	
+	      var decadePanel;
+	      if (this.state.showDecadePanel) {
+	        decadePanel = React.createElement(DecadePanel, { locale: locale, value: value, rootPrefixCls: props.rootPrefixCls, onSelect: this.onDecadePanelSelect });
+	      }
+	
+	      return React.createElement('div', { className: this.state.prefixCls }, React.createElement('div', null, React.createElement('div', { className: prefixClsFn('header') }, React.createElement('a', { className: prefixClsFn('prev-decade-btn'),
+	        role: 'button',
+	        onClick: this.previousDecade,
+	        title: locale.previousDecade }, '«'), React.createElement('a', { className: prefixClsFn('decade-select'),
+	        role: 'button',
+	        onClick: this.showDecadePanel,
+	        title: locale.decadeSelect }, React.createElement('span', { className: prefixClsFn('decade-select-content') }, startYear, '-', endYear), React.createElement('span', { className: prefixClsFn('decade-select-arrow') }, 'x')), React.createElement('a', { className: prefixClsFn('next-decade-btn'),
+	        role: 'button',
+	        onClick: this.nextDecade,
+	        title: locale.nextDecade }, '»')), React.createElement('div', { className: prefixClsFn('body') }, React.createElement('table', { className: prefixClsFn('table'), cellSpacing: '0', role: 'grid' }, React.createElement('tbody', { className: prefixClsFn('tbody') }, yeasEls)))), decadePanel);
+	    }
+	  }]);
+	
+	  return YearPanel;
+	})(React.Component);
+	
+	YearPanel.defaultProps = {
+	  onSelect: function onSelect() {}
+	};
+	
+	module.exports = YearPanel;
+
+/***/ },
+/* 30 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = (function () {
+	  function defineProperties(target, props) {
+	    for (var i = 0; i < props.length; i++) {
+	      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ('value' in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+	    }
+	  }return function (Constructor, protoProps, staticProps) {
+	    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+	  };
+	})();
+	
+	var _get = function get(_x, _x2, _x3) {
+	  var _again = true;_function: while (_again) {
+	    var object = _x,
+	        property = _x2,
+	        receiver = _x3;desc = parent = getter = undefined;_again = false;var desc = Object.getOwnPropertyDescriptor(object, property);if (desc === undefined) {
+	      var parent = Object.getPrototypeOf(object);if (parent === null) {
+	        return undefined;
+	      } else {
+	        _x = parent;_x2 = property;_x3 = receiver;_again = true;continue _function;
+	      }
+	    } else if ('value' in desc) {
+	      return desc.value;
+	    } else {
+	      var getter = desc.get;if (getter === undefined) {
+	        return undefined;
+	      }return getter.call(receiver);
+	    }
+	  }
+	};
+	
+	function _classCallCheck(instance, Constructor) {
+	  if (!(instance instanceof Constructor)) {
+	    throw new TypeError('Cannot call a class as a function');
+	  }
+	}
+	
+	function _inherits(subClass, superClass) {
+	  if (typeof superClass !== 'function' && superClass !== null) {
+	    throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
+	}
+	
+	var React = __webpack_require__(9);
+	var ROW = 4;
+	var COL = 3;
+	var cx = __webpack_require__(18).classSet;
+	
+	function goYear(direction) {
+	  var next = this.state.value.clone();
+	  next.addYear(direction);
+	  this.setState({
+	    value: next
+	  });
+	}
+	
+	function chooseDecade(year, e) {
+	  var next = this.state.value.clone();
+	  next.setYear(year);
+	  this.props.onSelect(next);
+	  e.preventDefault();
+	}
+	
+	var DecadePanel = (function (_React$Component) {
+	  function DecadePanel(props) {
+	    _classCallCheck(this, DecadePanel);
+	
+	    _get(Object.getPrototypeOf(DecadePanel.prototype), 'constructor', this).call(this, props);
+	    this.state = {
+	      value: props.value,
+	      prefixCls: props.rootPrefixCls + '-decade-panel'
+	    };
+	
+	    // bind methods
+	    this.prefixClsFn = __webpack_require__(31).bind(this);
+	    this.nextCentury = goYear.bind(this, 100);
+	    this.previousCentury = goYear.bind(this, -100);
+	  }
+	
+	  _inherits(DecadePanel, _React$Component);
+	
+	  _createClass(DecadePanel, [{
+	    key: 'render',
+	    value: function render() {
+	      var _this = this;
+	
+	      var value = this.state.value;
+	      var locale = this.props.locale;
+	      var currentYear = value.getYear();
+	      var startYear = parseInt(currentYear / 100, 10) * 100;
+	      var preYear = startYear - 10;
+	      var endYear = startYear + 99;
+	      var decades = [];
+	      var index = 0;
+	      var prefixClsFn = this.prefixClsFn;
+	
+	      for (var i = 0; i < ROW; i++) {
+	        decades[i] = [];
+	        for (var j = 0; j < COL; j++) {
+	          decades[i][j] = {
+	            startDecade: preYear + index * 10,
+	            endDecade: preYear + index * 10 + 9
+	          };
+	          index++;
+	        }
+	      }
+	
+	      var decadesEls = decades.map(function (row, decadeIndex) {
+	        var tds = row.map(function (d) {
+	          var startDecade = d.startDecade;
+	          var endDecade = d.endDecade;
+	          var classNameMap = {};
+	          classNameMap[prefixClsFn('cell')] = 1;
+	          classNameMap[prefixClsFn('selected-cell')] = startDecade <= currentYear && currentYear <= endDecade;
+	          classNameMap[prefixClsFn('last-century-cell')] = startDecade < startYear;
+	          classNameMap[prefixClsFn('next-century-cell')] = endDecade > endYear;
+	          return React.createElement('td', {
+	            key: startDecade,
+	            onClick: chooseDecade.bind(_this, startDecade),
+	            role: 'gridcell',
+	            className: cx(classNameMap)
+	          }, React.createElement('a', {
+	            className: prefixClsFn('decade') }, startDecade, ' - ', endDecade));
+	        });
+	        return React.createElement('tr', { key: decadeIndex, role: 'row' }, tds);
+	      });
+	
+	      return React.createElement('div', { className: this.state.prefixCls }, React.createElement('div', { className: prefixClsFn('header') }, React.createElement('a', { className: prefixClsFn('prev-century-btn'),
+	        role: 'button',
+	        onClick: this.previousCentury,
+	        title: locale.previousCentury }, '«'), React.createElement('div', { className: prefixClsFn('century') }, startYear, '-', endYear), React.createElement('a', { className: prefixClsFn('next-century-btn'),
+	        role: 'button',
+	        onClick: this.nextCentury,
+	        title: locale.nextCentury }, '»')), React.createElement('div', { className: prefixClsFn('body') }, React.createElement('table', { className: prefixClsFn('table'), cellSpacing: '0', role: 'grid' }, React.createElement('tbody', { className: prefixClsFn('tbody') }, decadesEls))));
+	    }
+	  }]);
+	
+	  return DecadePanel;
+	})(React.Component);
+	
+	DecadePanel.defaultProps = {
+	  onSelect: function onSelect() {}
+	};
+	
+	module.exports = DecadePanel;
+
+/***/ },
+/* 31 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports = function () {
+	  var prefixCls = this.state.prefixCls;
+	  var args = Array.prototype.slice.call(arguments, 0);
+	  return args.map(function (s) {
+	    return prefixCls + '-' + s;
+	  }).join(' ');
+	};
+
+/***/ },
+/* 32 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _extends = Object.assign || function (target) {
+	  for (var i = 1; i < arguments.length; i++) {
+	    var source = arguments[i];for (var key in source) {
+	      if (Object.prototype.hasOwnProperty.call(source, key)) {
+	        target[key] = source[key];
+	      }
+	    }
+	  }return target;
+	};
+	
+	var _createClass = (function () {
+	  function defineProperties(target, props) {
+	    for (var i = 0; i < props.length; i++) {
+	      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ('value' in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+	    }
+	  }return function (Constructor, protoProps, staticProps) {
+	    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+	  };
+	})();
+	
+	var _get = function get(_x, _x2, _x3) {
+	  var _again = true;_function: while (_again) {
+	    var object = _x,
+	        property = _x2,
+	        receiver = _x3;desc = parent = getter = undefined;_again = false;var desc = Object.getOwnPropertyDescriptor(object, property);if (desc === undefined) {
+	      var parent = Object.getPrototypeOf(object);if (parent === null) {
+	        return undefined;
+	      } else {
+	        _x = parent;_x2 = property;_x3 = receiver;_again = true;continue _function;
+	      }
+	    } else if ('value' in desc) {
+	      return desc.value;
+	    } else {
+	      var getter = desc.get;if (getter === undefined) {
+	        return undefined;
+	      }return getter.call(receiver);
+	    }
+	  }
+	};
+	
+	function _classCallCheck(instance, Constructor) {
+	  if (!(instance instanceof Constructor)) {
+	    throw new TypeError('Cannot call a class as a function');
+	  }
+	}
+	
+	function _inherits(subClass, superClass) {
+	  if (typeof superClass !== 'function' && superClass !== null) {
+	    throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
+	}
+	
+	var React = __webpack_require__(9);
+	var rcUtil = __webpack_require__(18);
+	var KeyCode = rcUtil.KeyCode;
+	var TimePanel = __webpack_require__(33);
+	var setHourOfDay = 'setHourOfDay';
+	var setMinutes = 'setMinutes';
+	var setSeconds = 'setSeconds';
+	
+	function padding(number) {
+	  if (number < 10) {
+	    number = '0' + number;
+	  }
+	  return number;
+	}
+	
+	function loop(value, min, max) {
+	  if (value === min - 1) {
+	    value = max;
+	  } else if (value === max + 1) {
+	    value = min;
+	  }
+	  return value;
+	}
+	
+	function keyDownWrap(method, min, max) {
+	  return function (e) {
+	    var value = e.target.value;
+	    var number = parseInt(value, 10);
+	    var keyCode = e.keyCode;
+	    var handled;
+	    if (keyCode === KeyCode.DOWN) {
+	      number++;
+	      e.stopPropagation();
+	      e.preventDefault();
+	      handled = 1;
+	    } else if (keyCode === KeyCode.UP) {
+	      number--;
+	      e.stopPropagation();
+	      e.preventDefault();
+	      handled = 1;
+	    }
+	    if (handled) {
+	      number = loop(number, min, max);
+	      var time = this.props.value.clone();
+	      time[method](number);
+	      this.props.onChange(time, e);
+	    }
+	  };
+	}
+	
+	var Time = (function (_React$Component) {
+	  function Time(props) {
+	    var _this = this;
+	
+	    _classCallCheck(this, Time);
+	
+	    _get(Object.getPrototypeOf(Time.prototype), 'constructor', this).call(this, props);
+	    this.state = {
+	      showHourPanel: 0,
+	      showMinutePanel: 0,
+	      showSecondPanel: 0
+	    };
+	    var events = ['onHourKeyDown', 'onMinuteKeyDown', 'onSecondKeyDown', 'onHourClick', 'onMinuteClick', 'onSecondClick', 'onSelectPanel'];
+	    events.forEach(function (m) {
+	      _this[m] = _this[m].bind(_this);
+	    });
+	  }
+	
+	  _inherits(Time, _React$Component);
+	
+	  _createClass(Time, [{
+	    key: 'onSelectPanel',
+	    value: function onSelectPanel(value, setter) {
+	      var _this2 = this;
+	
+	      this.setState({
+	        showHourPanel: 0,
+	        showMinutePanel: 0,
+	        showSecondPanel: 0
+	      }, function () {
+	        // ie9 has broken focus
+	        React.findDOMNode(_this2.refs[setter]).focus();
+	      });
+	      this.props.onChange(value);
+	    }
+	  }, {
+	    key: 'onHourClick',
+	    value: function onHourClick() {
+	      this.setState({
+	        showHourPanel: 1,
+	        showMinutePanel: 0,
+	        showSecondPanel: 0
+	      });
+	    }
+	  }, {
+	    key: 'onMinuteClick',
+	    value: function onMinuteClick() {
+	      this.setState({
+	        showHourPanel: 0,
+	        showMinutePanel: 1,
+	        showSecondPanel: 0
+	      });
+	    }
+	  }, {
+	    key: 'onSecondClick',
+	    value: function onSecondClick() {
+	      this.setState({
+	        showHourPanel: 0,
+	        showMinutePanel: 0,
+	        showSecondPanel: 1
+	      });
+	    }
+	  }, {
+	    key: 'shouldComponentUpdate',
+	    value: function shouldComponentUpdate() {
+	      return rcUtil.PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var state = this.state;
+	      var props = this.props;
+	      var prefixClsFn = props.prefixClsFn;
+	      var value = props.value;
+	      var locale = props.locale;
+	      var hour = value.getHourOfDay();
+	      var minute = value.getMinutes();
+	      var second = value.getSeconds();
+	      var panel;
+	      var commonProps = {
+	        value: value,
+	        onSelect: this.onSelectPanel,
+	        rootPrefixCls: props.rootPrefixCls
+	      };
+	      if (state.showHourPanel) {
+	        panel = React.createElement(TimePanel, _extends({ rowCount: 6, colCount: 4, getter: 'getHourOfDay', setter: setHourOfDay,
+	          title: locale.hourPanelTitle
+	        }, commonProps));
+	      } else if (state.showMinutePanel) {
+	        panel = React.createElement(TimePanel, _extends({ rowCount: 6, colCount: 10, getter: 'getMinutes', setter: setMinutes,
+	          title: locale.minutePanelTitle
+	        }, commonProps));
+	      } else if (state.showSecondPanel) {
+	        panel = React.createElement(TimePanel, _extends({ rowCount: 6, colCount: 10, getter: 'getSeconds', setter: setSeconds,
+	          title: locale.secondPanelTitle
+	        }, commonProps));
+	      }
+	      return React.createElement('div', null, React.createElement('input', { className: prefixClsFn('time-input'), title: locale.hourInput,
+	        ref: setHourOfDay,
+	        readOnly: true, value: padding(hour),
+	        onClick: this.onHourClick,
+	        onKeyDown: this.onHourKeyDown }), React.createElement('span', null, ' : '), React.createElement('input', { className: prefixClsFn('time-input'), title: locale.minuteInput,
+	        ref: setMinutes,
+	        readOnly: true, value: padding(minute),
+	        onClick: this.onMinuteClick,
+	        onKeyDown: this.onMinuteKeyDown }), React.createElement('span', null, ' : '), React.createElement('input', { className: prefixClsFn('time-input'), title: locale.secondInput,
+	        ref: setSeconds,
+	        readOnly: true, value: padding(second),
+	        onClick: this.onSecondClick,
+	        onKeyDown: this.onSecondKeyDown }), panel);
+	    }
+	  }]);
+	
+	  return Time;
+	})(React.Component);
+	
+	Time.prototype.onHourKeyDown = keyDownWrap('setHourOfDay', 0, 23);
+	Time.prototype.onMinuteKeyDown = keyDownWrap('setMinutes', 0, 59);
+	Time.prototype.onSecondKeyDown = keyDownWrap('setSeconds', 0, 59);
+	
+	module.exports = Time;
+
+/***/ },
+/* 33 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = (function () {
+	  function defineProperties(target, props) {
+	    for (var i = 0; i < props.length; i++) {
+	      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ('value' in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+	    }
+	  }return function (Constructor, protoProps, staticProps) {
+	    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+	  };
+	})();
+	
+	var _get = function get(_x, _x2, _x3) {
+	  var _again = true;_function: while (_again) {
+	    var object = _x,
+	        property = _x2,
+	        receiver = _x3;desc = parent = getter = undefined;_again = false;var desc = Object.getOwnPropertyDescriptor(object, property);if (desc === undefined) {
+	      var parent = Object.getPrototypeOf(object);if (parent === null) {
+	        return undefined;
+	      } else {
+	        _x = parent;_x2 = property;_x3 = receiver;_again = true;continue _function;
+	      }
+	    } else if ('value' in desc) {
+	      return desc.value;
+	    } else {
+	      var getter = desc.get;if (getter === undefined) {
+	        return undefined;
+	      }return getter.call(receiver);
+	    }
+	  }
+	};
+	
+	function _classCallCheck(instance, Constructor) {
+	  if (!(instance instanceof Constructor)) {
+	    throw new TypeError('Cannot call a class as a function');
+	  }
+	}
+	
+	function _inherits(subClass, superClass) {
+	  if (typeof superClass !== 'function' && superClass !== null) {
+	    throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
+	}
+	
+	var React = __webpack_require__(9);
+	var cx = __webpack_require__(18).classSet;
+	
+	function choose(hour, e) {
+	  var next = this.state.value.clone();
+	  var method = this.props.setter;
+	  next[method](hour);
+	  this.props.onSelect(next, method);
+	  e.preventDefault();
+	}
+	
+	var TimePanel = (function (_React$Component) {
+	  function TimePanel(props) {
+	    _classCallCheck(this, TimePanel);
+	
+	    _get(Object.getPrototypeOf(TimePanel.prototype), 'constructor', this).call(this, props);
+	    this.state = {
+	      value: props.value,
+	      prefixCls: props.rootPrefixCls + '-time-panel'
+	    };
+	    this.prefixClsFn = __webpack_require__(31).bind(this);
+	  }
+	
+	  _inherits(TimePanel, _React$Component);
+	
+	  _createClass(TimePanel, [{
+	    key: 'render',
+	    value: function render() {
+	      var _this = this;
+	
+	      var value = this.state.value;
+	      var props = this.props;
+	      var method = props.getter;
+	      var currentHour = value[method]();
+	      var data = [];
+	      var prefixClsFn = this.prefixClsFn;
+	      var ROW = props.rowCount;
+	      var COL = props.colCount;
+	
+	      for (var i = 0; i < ROW; i++) {
+	        data[i] = [];
+	        for (var j = 0; j < COL; j++) {
+	          data[i][j] = i * COL + j;
+	        }
+	      }
+	
+	      var hoursEls = data.map(function (row, index) {
+	        var tds = row.map(function (d) {
+	          var classNameMap = {};
+	          classNameMap[prefixClsFn('cell')] = 1;
+	          classNameMap[prefixClsFn('selected-cell')] = d === currentHour;
+	          return React.createElement('td', {
+	            key: d,
+	            onClick: choose.bind(_this, d),
+	            role: 'gridcell',
+	            className: cx(classNameMap) }, React.createElement('a', {
+	            className: prefixClsFn('time') }, d));
+	        });
+	        return React.createElement('tr', { key: index, role: 'row' }, tds);
+	      });
+	
+	      return React.createElement('div', { className: this.state.prefixCls }, React.createElement('div', { className: prefixClsFn('header') }, React.createElement('div', { className: prefixClsFn('title') }, props.title)), React.createElement('div', { className: prefixClsFn('body') }, React.createElement('table', { className: prefixClsFn('table'), cellSpacing: '0', role: 'grid' }, React.createElement('tbody', { className: prefixClsFn('tbody') }, hoursEls))));
+	    }
+	  }]);
+	
+	  return TimePanel;
+	})(React.Component);
+	
+	TimePanel.defaultProps = {
+	  onSelect: function onSelect() {}
+	};
+	
+	module.exports = TimePanel;
+
+/***/ },
+/* 34 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports = {
+	  today: 'Today',
+	  clear: 'Clear',
+	  hourPanelTitle: 'Select hour',
+	  minutePanelTitle: 'Select minute',
+	  secondPanelTitle: 'Select second',
+	  monthSelect: 'Choose a month',
+	  yearSelect: 'Choose a year',
+	  decadeSelect: 'Choose a decade',
+	  yearFormat: 'yyyy',
+	  dateFormat: 'M/d/yyyy',
+	  monthYearFormat: 'MMMM yyyy',
+	  previousMonth: 'Previous month (PageUp)',
+	  nextMonth: 'Next month (PageDown)',
+	  hourInput: 'Last hour(Up), Next hour(Down)',
+	  minuteInput: 'Last minute(Up), Next minute(Down)',
+	  secondInput: 'Last second(Up), Next second(Down)',
+	  previousYear: 'Last year (Control + left)',
+	  nextYear: 'Next year (Control + right)',
+	  previousDecade: 'Last decade',
+	  nextDecade: 'Next decade',
+	  previousCentury: 'Last century',
+	  nextCentury: 'Next century',
+	  format: __webpack_require__(17)
+	};
+
+/***/ },
+/* 35 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = (function () {
+	  function defineProperties(target, props) {
+	    for (var i = 0; i < props.length; i++) {
+	      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ('value' in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+	    }
+	  }return function (Constructor, protoProps, staticProps) {
+	    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+	  };
+	})();
+	
+	var _get = function get(_x, _x2, _x3) {
+	  var _again = true;_function: while (_again) {
+	    var object = _x,
+	        property = _x2,
+	        receiver = _x3;desc = parent = getter = undefined;_again = false;var desc = Object.getOwnPropertyDescriptor(object, property);if (desc === undefined) {
+	      var parent = Object.getPrototypeOf(object);if (parent === null) {
+	        return undefined;
+	      } else {
+	        _x = parent;_x2 = property;_x3 = receiver;_again = true;continue _function;
+	      }
+	    } else if ('value' in desc) {
+	      return desc.value;
+	    } else {
+	      var getter = desc.get;if (getter === undefined) {
+	        return undefined;
+	      }return getter.call(receiver);
+	    }
+	  }
+	};
+	
+	function _classCallCheck(instance, Constructor) {
+	  if (!(instance instanceof Constructor)) {
+	    throw new TypeError('Cannot call a class as a function');
+	  }
+	}
+	
+	function _inherits(subClass, superClass) {
+	  if (typeof superClass !== 'function' && superClass !== null) {
+	    throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
+	}
+	
+	var React = __webpack_require__(9);
+	var DateTimeFormat = __webpack_require__(10);
+	var rcUtil = __webpack_require__(18);
+	var KeyCode = __webpack_require__(18).KeyCode;
+	var domAlign = __webpack_require__(36);
+	var orientMap = {
+	  tl: ['top', 'left'],
+	  tr: ['top', 'right'],
+	  bl: ['bottom', 'left'],
+	  br: ['bottom', 'right']
+	};
+	
+	function getImmutableOrient(orient) {
+	  if (orient) {
+	    for (var i in orientMap) {
+	      var original = orientMap[i];
+	      if (original[0] === orient[0] && original[1] === orient[1]) {
+	        return original;
+	      }
+	    }
+	  }
+	}
+	
+	function refFn(field, component) {
+	  this[field] = component;
+	}
+	
+	/**
+	 * DatePicker = wrap input using Calendar
+	 */
+	
+	var Picker = (function (_React$Component) {
+	  function Picker(props) {
+	    var _this = this;
+	
+	    _classCallCheck(this, Picker);
+	
+	    _get(Object.getPrototypeOf(Picker.prototype), 'constructor', this).call(this, props);
+	    this.state = {
+	      open: props.open,
+	      value: props.value || props.defaultValue
+	    };
+	    var events = ['handleInputClick', 'handleCalendarBlur', 'handleTriggerClick', 'handleCalendarClear', 'handleCalendarKeyDown', 'handleKeyDown', 'handleCalendarSelect'];
+	    // bind methods
+	    events.forEach(function (m) {
+	      _this[m] = _this[m].bind(_this);
+	    });
+	    this.saveCalendarRef = refFn.bind(this, 'calendarInstance');
+	    this.saveInputRef = refFn.bind(this, 'inputInstance');
+	  }
+	
+	  _inherits(Picker, _React$Component);
+	
+	  _createClass(Picker, [{
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      if (nextProps.value) {
+	        this.setState({
+	          value: nextProps.value
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'open',
+	    value: function open(callback) {
+	      this.setState({
+	        open: true
+	      }, callback);
+	    }
+	  }, {
+	    key: 'close',
+	    value: function close(callback) {
+	      this.setState({
+	        open: false
+	      }, callback);
+	    }
+	  }, {
+	    key: 'handleInputClick',
+	    value: function handleInputClick() {
+	      this.toggle();
+	    }
+	  }, {
+	    key: 'handleTriggerClick',
+	    value: function handleTriggerClick() {
+	      this.toggle();
+	    }
+	  }, {
+	    key: 'toggle',
+	    value: function toggle(callback) {
+	      this.setState({
+	        open: !this.state.open
+	      }, callback);
+	    }
+	  }, {
+	    key: 'handleKeyDown',
+	    value: function handleKeyDown(e) {
+	      // down
+	      if (e.keyCode === KeyCode.DOWN) {
+	        e.preventDefault();
+	        this.open();
+	      }
+	    }
+	  }, {
+	    key: 'handleCalendarKeyDown',
+	    value: function handleCalendarKeyDown(e) {
+	      var _this2 = this;
+	
+	      if (e.keyCode === KeyCode.ESC) {
+	        e.stopPropagation();
+	        this.close(function () {
+	          React.findDOMNode(_this2.inputInstance).focus();
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'handleCalendarSelect',
+	    value: function handleCalendarSelect(value) {
+	      var _this3 = this;
+	
+	      this.props.calendar.props.onSelect(value);
+	      var currentValue = this.state.value;
+	      if (this.props.calendar.props.showTime) {
+	        this.setState({
+	          value: value
+	        });
+	      } else {
+	        this.setState({
+	          value: value,
+	          open: false
+	        }, function () {
+	          React.findDOMNode(_this3.inputInstance).focus();
+	        });
+	      }
+	      if (!currentValue || currentValue.getTime() !== value.getTime()) {
+	        this.props.onChange(value);
+	      }
+	    }
+	  }, {
+	    key: 'handleCalendarBlur',
+	    value: function handleCalendarBlur() {
+	      // if invisible, will not trigger blur
+	      this.setState({
+	        open: false
+	      });
+	    }
+	  }, {
+	    key: 'handleCalendarClear',
+	    value: function handleCalendarClear() {
+	      var _this4 = this;
+	
+	      this.props.calendar.props.onClear();
+	      this.setState({
+	        open: false,
+	        value: null
+	      }, function () {
+	        React.findDOMNode(_this4.inputInstance).focus();
+	      });
+	      if (this.state.value !== null) {
+	        this.props.onChange(null);
+	      }
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.componentDidUpdate();
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      if (this.state.open && !this._lastOpen) {
+	        var orient = this._cacheCalendar.props.orient;
+	        var points = ['tl', 'bl'];
+	        var offset = [0, 5];
+	        if (orient.indexOf('top') !== -1 && orient.indexOf('left') !== -1) {
+	          points = ['tl', 'bl'];
+	        } else if (orient.indexOf('top') !== -1 && orient.indexOf('right') !== -1) {
+	          points = ['tr', 'br'];
+	        } else if (orient.indexOf('bottom') !== -1 && orient.indexOf('left') !== -1) {
+	          points = ['bl', 'tl'];
+	          offset = [0, -5];
+	        } else if (orient.indexOf('bottom') !== -1 && orient.indexOf('right') !== -1) {
+	          points = ['br', 'tr'];
+	          offset = [0, -5];
+	        }
+	
+	        var align = domAlign(React.findDOMNode(this.calendarInstance), React.findDOMNode(this.inputInstance), {
+	          points: points,
+	          offset: offset,
+	          overflow: {
+	            adjustX: 1,
+	            adjustY: 1
+	          }
+	        });
+	        points = align.points;
+	        var newOrient = orientMap[points[0]];
+	        this.calendarInstance.setState({
+	          orient: newOrient
+	        });
+	        React.findDOMNode(this.calendarInstance).focus();
+	      }
+	      this._lastOpen = this.state.open;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var props = this.props;
+	      // var input = React.Children.only(props.children); bug 0.13.0
+	      /*
+	       children: Object
+	       .0: (...)
+	       get .0: function () {
+	       set .0: function (value) {
+	       _reactDidWarn: false
+	       _reactFragment: Object
+	       __proto__: Object
+	       */
+	      var input = props.children;
+	      if (!React.isValidElement(input)) {
+	        var children = input;
+	        React.Children.forEach(children, function (m) {
+	          input = m;
+	        });
+	      }
+	      var state = this.state;
+	      var value = state.value;
+	      var calendar = this._cacheCalendar;
+	      if (state.open) {
+	        var calendarInstance = this.calendarInstance;
+	        var calendarProp = props.calendar;
+	        this._cacheCalendar = calendar = React.cloneElement(calendarProp, {
+	          ref: rcUtil.createChainedFunction(calendarProp.props.ref, this.saveCalendarRef),
+	          value: value,
+	          // focused: true,
+	          orient: calendarInstance && calendarInstance.state.orient || getImmutableOrient(calendarProp.props.orient) || orientMap.tl,
+	          onBlur: this.handleCalendarBlur,
+	          onKeyDown: this.handleCalendarKeyDown,
+	          onSelect: this.handleCalendarSelect,
+	          onClear: this.handleCalendarClear
+	        });
+	      }
+	      var inputValue = '';
+	      if (value) {
+	        inputValue = props.formatter.format(value);
+	      }
+	      input = React.cloneElement(input, {
+	        ref: rcUtil.createChainedFunction(input.props.ref, this.saveInputRef),
+	        readOnly: true,
+	        onClick: this.handleInputClick,
+	        value: inputValue,
+	        onKeyDown: this.handleKeyDown
+	      });
+	      var classes = [props.prefixCls];
+	      if (state.open) {
+	        classes.push(props.prefixCls + '-open');
+	      }
+	      var trigger = props.trigger;
+	      if (trigger) {
+	        trigger = React.cloneElement(trigger, {
+	          onClick: this.handleTriggerClick,
+	          unselectable: true,
+	          onMouseDown: prevent
+	        });
+	      }
+	      return React.createElement('span', { className: classes.join(' ') }, [input, calendar, trigger]);
+	    }
+	  }]);
+	
+	  return Picker;
+	})(React.Component);
+	
+	function prevent(e) {
+	  e.preventDefault();
+	}
+	
+	Picker.propTypes = {
+	  onChange: React.PropTypes.func
+	};
+	
+	Picker.defaultProps = {
+	  prefixCls: 'rc-calendar-picker',
+	  onChange: function onChange() {},
+	  formatter: new DateTimeFormat('yyyy-MM-dd')
+	};
+	
+	module.exports = Picker;
+
+/***/ },
+/* 36 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(37);
+
+
+/***/ },
+/* 37 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * align dom node flexibly
+	 * @author yiminghe@gmail.com
+	 */
+	
+	var utils = __webpack_require__(38);
+	
+	// http://yiminghe.iteye.com/blog/1124720
+	
+	/**
+	 * 得到会导致元素显示不全的祖先元素
+	 */
+	
+	function getOffsetParent(element) {
+	  // ie 这个也不是完全可行
+	  /*
+	   <div style="width: 50px;height: 100px;overflow: hidden">
+	   <div style="width: 50px;height: 100px;position: relative;" id="d6">
+	   元素 6 高 100px 宽 50px<br/>
+	   </div>
+	   </div>
+	   */
+	  // element.offsetParent does the right thing in ie7 and below. Return parent with layout!
+	  //  In other browsers it only includes elements with position absolute, relative or
+	  // fixed, not elements with overflow set to auto or scroll.
+	  //        if (UA.ie && ieMode < 8) {
+	  //            return element.offsetParent;
+	  //        }
+	  // 统一的 offsetParent 方法
+	  var doc = element.ownerDocument,
+	    body = doc.body,
+	    parent,
+	    positionStyle = utils.css(element, 'position'),
+	    skipStatic = positionStyle === 'fixed' || positionStyle === 'absolute';
+	
+	  if (!skipStatic) {
+	    return element.nodeName.toLowerCase() === 'html' ? null : element.parentNode;
+	  }
+	
+	  for (parent = element.parentNode; parent && parent !== body; parent = parent.parentNode) {
+	    positionStyle = utils.css(parent, 'position');
+	    if (positionStyle !== 'static') {
+	      return parent;
+	    }
+	  }
+	  return null;
+	}
+	
+	/**
+	 * 获得元素的显示部分的区域
+	 */
+	
+	function getVisibleRectForElement(element) {
+	  var visibleRect = {
+	      left: 0,
+	      right: Infinity,
+	      top: 0,
+	      bottom: Infinity
+	    },
+	    el,
+	    scrollX,
+	    scrollY,
+	    winSize,
+	    doc = element.ownerDocument,
+	    win = doc.defaultView || doc.parentWindow,
+	    body = doc.body,
+	    documentElement = doc.documentElement;
+	
+	  // Determine the size of the visible rect by climbing the dom accounting for
+	  // all scrollable containers.
+	  for (el = element;
+	       (el = getOffsetParent(el));) {
+	    // clientWidth is zero for inline block elements in ie.
+	    if ((navigator.userAgent.indexOf('MSIE') === -1 || el.clientWidth !== 0) &&
+	        // body may have overflow set on it, yet we still get the entire
+	        // viewport. In some browsers, el.offsetParent may be
+	        // document.documentElement, so check for that too.
+	      (el !== body &&
+	      el !== documentElement &&
+	      utils.css(el, 'overflow') !== 'visible')) {
+	      var pos = utils.offset(el);
+	      // add border
+	      pos.left += el.clientLeft;
+	      pos.top += el.clientTop;
+	
+	      visibleRect.top = Math.max(visibleRect.top, pos.top);
+	      visibleRect.right = Math.min(visibleRect.right,
+	        // consider area without scrollBar
+	        pos.left + el.clientWidth);
+	      visibleRect.bottom = Math.min(visibleRect.bottom,
+	        pos.top + el.clientHeight);
+	      visibleRect.left = Math.max(visibleRect.left, pos.left);
+	    }
+	  }
+	
+	  // Clip by window's viewport.
+	  scrollX = utils.getWindowScrollLeft(win);
+	  scrollY = utils.getWindowScrollTop(win);
+	  visibleRect.left = Math.max(visibleRect.left, scrollX);
+	  visibleRect.top = Math.max(visibleRect.top, scrollY);
+	  winSize = {
+	    width: utils.viewportWidth(win),
+	    height: utils.viewportHeight(win)
+	  };
+	  visibleRect.right = Math.min(visibleRect.right, scrollX + winSize.width);
+	  visibleRect.bottom = Math.min(visibleRect.bottom, scrollY + winSize.height);
+	  return visibleRect.top >= 0 && visibleRect.left >= 0 &&
+	  visibleRect.bottom > visibleRect.top &&
+	  visibleRect.right > visibleRect.left ?
+	    visibleRect : null;
+	}
+	
+	function getElFuturePos(elRegion, refNodeRegion, points, offset) {
+	  var xy,
+	    diff,
+	    p1,
+	    p2;
+	
+	  xy = {
+	    left: elRegion.left,
+	    top: elRegion.top
+	  };
+	
+	  p1 = getAlignOffset(refNodeRegion, points[1]);
+	  p2 = getAlignOffset(elRegion, points[0]);
+	
+	  diff = [p2.left - p1.left, p2.top - p1.top];
+	
+	  return {
+	    left: xy.left - diff[0] + (+offset[0]),
+	    top: xy.top - diff[1] + (+offset[1])
+	  };
+	}
+	
+	function isFailX(elFuturePos, elRegion, visibleRect) {
+	  return elFuturePos.left < visibleRect.left ||
+	    elFuturePos.left + elRegion.width > visibleRect.right;
+	}
+	
+	function isFailY(elFuturePos, elRegion, visibleRect) {
+	  return elFuturePos.top < visibleRect.top ||
+	    elFuturePos.top + elRegion.height > visibleRect.bottom;
+	}
+	
+	function adjustForViewport(elFuturePos, elRegion, visibleRect, overflow) {
+	  var pos = utils.clone(elFuturePos),
+	    size = {
+	      width: elRegion.width,
+	      height: elRegion.height
+	    };
+	
+	  if (overflow.adjustX && pos.left < visibleRect.left) {
+	    pos.left = visibleRect.left;
+	  }
+	
+	  // Left edge inside and right edge outside viewport, try to resize it.
+	  if (overflow.resizeWidth &&
+	    pos.left >= visibleRect.left &&
+	    pos.left + size.width > visibleRect.right) {
+	    size.width -= (pos.left + size.width) - visibleRect.right;
+	  }
+	
+	  // Right edge outside viewport, try to move it.
+	  if (overflow.adjustX && pos.left + size.width > visibleRect.right) {
+	    // 保证左边界和可视区域左边界对齐
+	    pos.left = Math.max(visibleRect.right - size.width, visibleRect.left);
+	  }
+	
+	  // Top edge outside viewport, try to move it.
+	  if (overflow.adjustY && pos.top < visibleRect.top) {
+	    pos.top = visibleRect.top;
+	  }
+	
+	  // Top edge inside and bottom edge outside viewport, try to resize it.
+	  if (overflow.resizeHeight &&
+	    pos.top >= visibleRect.top &&
+	    pos.top + size.height > visibleRect.bottom) {
+	    size.height -= (pos.top + size.height) - visibleRect.bottom;
+	  }
+	
+	  // Bottom edge outside viewport, try to move it.
+	  if (overflow.adjustY && pos.top + size.height > visibleRect.bottom) {
+	    // 保证上边界和可视区域上边界对齐
+	    pos.top = Math.max(visibleRect.bottom - size.height, visibleRect.top);
+	  }
+	
+	  return utils.mix(pos, size);
+	}
+	
+	function flip(points, reg, map) {
+	  var ret = [];
+	  utils.each(points, function (p) {
+	    ret.push(p.replace(reg, function (m) {
+	      return map[m];
+	    }));
+	  });
+	  return ret;
+	}
+	
+	function flipOffset(offset, index) {
+	  offset[index] = -offset[index];
+	  return offset;
+	}
+	
+	domAlign.__getOffsetParent = getOffsetParent;
+	
+	domAlign.__getVisibleRectForElement = getVisibleRectForElement;
+	
+	function getRegion(node) {
+	  var offset, w, h;
+	  if (!utils.isWindow(node) && node.nodeType !== 9) {
+	    offset = utils.offset(node);
+	    w = utils.outerWidth(node);
+	    h = utils.outerHeight(node);
+	  } else {
+	    var win = utils.getWindow(node);
+	    offset = {
+	      left: utils.getWindowScrollLeft(win),
+	      top: utils.getWindowScrollTop(win)
+	    };
+	    w = utils.viewportWidth(win);
+	    h = utils.viewportHeight(win);
+	  }
+	  offset.width = w;
+	  offset.height = h;
+	  return offset;
+	}
+	
+	/**
+	 * 获取 node 上的 align 对齐点 相对于页面的坐标
+	 */
+	
+	function getAlignOffset(region, align) {
+	  var V = align.charAt(0),
+	    H = align.charAt(1),
+	    w = region.width,
+	    h = region.height,
+	    x, y;
+	
+	  x = region.left;
+	  y = region.top;
+	
+	  if (V === 'c') {
+	    y += h / 2;
+	  } else if (V === 'b') {
+	    y += h;
+	  }
+	
+	  if (H === 'c') {
+	    x += w / 2;
+	  } else if (H === 'r') {
+	    x += w;
+	  }
+	
+	  return {
+	    left: x,
+	    top: y
+	  };
+	}
+	
+	/*
+	 * align node
+	 * @param {Element} node current dom node
+	 * @param {Object} align align config
+	 *
+	 *    @example
+	 *    {
+	 *      node: null,         // 参考元素, falsy 或 window 为可视区域, 'trigger' 为触发元素, 其他为指定元素
+	 *      points: ['cc','cc'], // ['tr', 'tl'] 表示 overlay 的 tr 与参考节点的 tl 对齐
+	 *      offset: [0, 0]      // 有效值为 [n, m]
+	 *    }
+	 */
+	function domAlign(el, refNode, align) {
+	  var points = align.points;
+	  var offset = align.offset;
+	  var overflow = align.overflow;
+	  offset = offset && [].concat(offset) || [0, 0];
+	  overflow = overflow || {};
+	  var newOverflowCfg = {};
+	
+	  var fail = 0;
+	  // 当前节点可以被放置的显示区域
+	  var visibleRect = getVisibleRectForElement(el);
+	  // 当前节点所占的区域, left/top/width/height
+	  var elRegion = getRegion(el);
+	  // 参照节点所占的区域, left/top/width/height
+	  var refNodeRegion = getRegion(refNode);
+	  // 当前节点将要被放置的位置
+	  var elFuturePos = getElFuturePos(elRegion, refNodeRegion, points, offset);
+	  // 当前节点将要所处的区域
+	  var newElRegion = utils.merge(elRegion, elFuturePos);
+	
+	  // 如果可视区域不能完全放置当前节点时允许调整
+	  if (visibleRect && (overflow.adjustX || overflow.adjustY)) {
+	    if (overflow.adjustX) {
+	      // 如果横向不能放下
+	      if (isFailX(elFuturePos, elRegion, visibleRect)) {
+	        fail = 1;
+	        // 对齐位置反下
+	        points = flip(points, /[lr]/ig, {
+	          l: 'r',
+	          r: 'l'
+	        });
+	        // 偏移量也反下
+	        offset = flipOffset(offset, 0);
+	      }
+	    }
+	
+	    if (overflow.adjustY) {
+	      // 如果纵向不能放下
+	      if (isFailY(elFuturePos, elRegion, visibleRect)) {
+	        fail = 1;
+	        // 对齐位置反下
+	        points = flip(points, /[tb]/ig, {
+	          t: 'b',
+	          b: 't'
+	        });
+	        // 偏移量也反下
+	        offset = flipOffset(offset, 1);
+	      }
+	    }
+	
+	    // 如果失败，重新计算当前节点将要被放置的位置
+	    if (fail) {
+	      elFuturePos = getElFuturePos(elRegion, refNodeRegion, points, offset);
+	      utils.mix(newElRegion, elFuturePos);
+	    }
+	
+	    // 检查反下后的位置是否可以放下了
+	    // 如果仍然放不下只有指定了可以调整当前方向才调整
+	    newOverflowCfg.adjustX = overflow.adjustX &&
+	    isFailX(elFuturePos, elRegion, visibleRect);
+	
+	    newOverflowCfg.adjustY = overflow.adjustY &&
+	    isFailY(elFuturePos, elRegion, visibleRect);
+	
+	    // 确实要调整，甚至可能会调整高度宽度
+	    if (newOverflowCfg.adjustX || newOverflowCfg.adjustY) {
+	      newElRegion = adjustForViewport(elFuturePos, elRegion,
+	        visibleRect, newOverflowCfg);
+	    }
+	  }
+	
+	  // https://github.com/kissyteam/kissy/issues/190
+	  // http://localhost:8888/kissy/src/overlay/demo/other/relative_align/align.html
+	  // 相对于屏幕位置没变，而 left/top 变了
+	  // 例如 <div 'relative'><el absolute></div>
+	  utils.offset(el, {left: newElRegion.left, top: newElRegion.top});
+	
+	  // need judge to in case set fixed with in css on height auto element
+	  if (newElRegion.width !== elRegion.width) {
+	    utils.css(el, 'width', el.width() + newElRegion.width - elRegion.width);
+	  }
+	
+	  if (newElRegion.height !== elRegion.height) {
+	    utils.css(el, 'height', el.height() + newElRegion.height - elRegion.height);
+	  }
+	
+	  return {
+	    points: points,
+	    offset: offset,
+	    overflow: newOverflowCfg
+	  };
+	}
+	
+	module.exports = domAlign;
+	/**
+	 *  2012-04-26 yiminghe@gmail.com
+	 *   - 优化智能对齐算法
+	 *   - 慎用 resizeXX
+	 *
+	 *  2011-07-13 yiminghe@gmail.com note:
+	 *   - 增加智能对齐，以及大小调整选项
+	 **/
+
+
+/***/ },
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var RE_NUM = /[\-+]?(?:\d*\.|)\d+(?:[eE][\-+]?\d+|)/.source;
@@ -5786,6 +6126,9 @@
 	
 	var utils = module.exports = {
 	  getWindow: function (node) {
+	    if (node && node.document && node.setTimeout) {
+	      return node;
+	    }
 	    var doc = node.ownerDocument || node;
 	    return doc.defaultView || doc.parentWindow;
 	  },
@@ -5831,129 +6174,6 @@
 	};
 	
 	mix(utils, domUtils);
-
-
-/***/ },
-/* 57 */
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	var React = __webpack_require__(8);
-	var ROW = 4;
-	var COL = 3;
-	var cx = __webpack_require__(33).classSet;
-	
-	function goYear(direction) {
-	  var next = this.state.value.clone();
-	  next.addYear(direction);
-	  this.setState({
-	    value: next
-	  });
-	}
-	
-	function chooseDecade(year, e) {
-	  var next = this.state.value.clone();
-	  next.setYear(year);
-	  this.props.onSelect(next);
-	  e.preventDefault();
-	}
-	
-	var ____Class6=React.Component;for(var ____Class6____Key in ____Class6){if(____Class6.hasOwnProperty(____Class6____Key)){DecadePanel[____Class6____Key]=____Class6[____Class6____Key];}}var ____SuperProtoOf____Class6=____Class6===null?null:____Class6.prototype;DecadePanel.prototype=Object.create(____SuperProtoOf____Class6);DecadePanel.prototype.constructor=DecadePanel;DecadePanel.__superConstructor__=____Class6;
-	  function DecadePanel(props) {"use strict";
-	    ____Class6.call(this,props);
-	    this.state = {
-	      value: props.value,
-	      prefixCls: props.rootPrefixCls + '-decade-panel'
-	    };
-	
-	    // bind methods
-	    this.prefixClsFn = __webpack_require__(31).bind(this);
-	    this.nextCentury = goYear.bind(this, 100);
-	    this.previousCentury = goYear.bind(this, -100);
-	  }
-	
-	  Object.defineProperty(DecadePanel.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
-	    var value = this.state.value;
-	    var locale = this.props.locale;
-	    var currentYear = value.getYear();
-	    var startYear = parseInt(currentYear / 100, 10) * 100;
-	    var preYear = startYear - 10;
-	    var endYear = startYear + 99;
-	    var decades = [];
-	    var index = 0;
-	    var prefixClsFn = this.prefixClsFn;
-	
-	    for (var i = 0; i < ROW; i++) {
-	      decades[i] = [];
-	      for (var j = 0; j < COL; j++) {
-	        decades[i][j] = {
-	          startDecade: preYear + index * 10,
-	          endDecade: preYear + index * 10 + 9
-	        };
-	        index++;
-	      }
-	    }
-	
-	    var decadesEls = decades.map(function(row, index)  {
-	      var tds = row.map(function(d)  {
-	        var startDecade = d.startDecade;
-	        var endDecade = d.endDecade;
-	        var classNameMap = {};
-	        classNameMap[prefixClsFn('cell')] = 1;
-	        classNameMap[prefixClsFn('selected-cell')] = startDecade <= currentYear && currentYear <= endDecade;
-	        classNameMap[prefixClsFn('last-century-cell')] = startDecade < startYear;
-	        classNameMap[prefixClsFn('next-century-cell')] = endDecade > endYear;
-	        return (React.createElement("td", {
-	          key: startDecade, 
-	          onClick: chooseDecade.bind(this, startDecade), 
-	          role: "gridcell", 
-	          className: cx(classNameMap)
-	        }, 
-	          React.createElement("a", {
-	            className: prefixClsFn('decade')}, 
-	             startDecade, " - ", endDecade
-	          )
-	        ));
-	      }.bind(this));
-	      return (React.createElement("tr", {key: index, role: "row"}, tds));
-	    }.bind(this));
-	
-	    return (
-	      React.createElement("div", {className: this.state.prefixCls}, 
-	        React.createElement("div", {className: prefixClsFn('header')}, 
-	          React.createElement("a", {className: prefixClsFn('prev-century-btn'), 
-	            role: "button", 
-	            onClick: this.previousCentury, 
-	            title: locale.previousCentury}, 
-	            "«"
-	          ), 
-	          React.createElement("div", {className: prefixClsFn('century')}, 
-	                startYear, "-", endYear
-	          ), 
-	          React.createElement("a", {className: prefixClsFn('next-century-btn'), 
-	            role: "button", 
-	            onClick: this.nextCentury, 
-	            title: locale.nextCentury}, 
-	            "»"
-	          )
-	        ), 
-	        React.createElement("div", {className: prefixClsFn('body')}, 
-	          React.createElement("table", {className: prefixClsFn('table'), cellSpacing: "0", role: "grid"}, 
-	            React.createElement("tbody", {className: prefixClsFn('tbody')}, 
-	            decadesEls
-	            )
-	          )
-	        )
-	      ));
-	  }});
-	
-	
-	DecadePanel.defaultProps = {
-	  onSelect:function() {
-	  }
-	};
-	
-	module.exports = DecadePanel;
 
 
 /***/ }

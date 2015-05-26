@@ -183,14 +183,14 @@
 <script src="theme.js?nowrap"></script>
 <div class="highlight">
 <pre>
-<span class="hljs-comment">/** @jsx React.DOM */</span>
-<span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-calendar/assets/classic.css'</span>);
-<span class="hljs-keyword">var</span> Calendar = <span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-calendar'</span>);
-<span class="hljs-keyword">var</span> GregorianCalendarFormat = <span class="hljs-built_in">require</span>(<span class="hljs-string">'gregorian-calendar-format'</span>);
-<span class="hljs-keyword">var</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react'</span>);
-<span class="hljs-keyword">var</span> formatter = <span class="hljs-keyword">new</span> GregorianCalendarFormat(<span class="hljs-string">'yyyy-MM-dd HH:mm:ss'</span>);
 
-<span class="hljs-keyword">function</span> onSelect(value) {
+<span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-calendar/assets/classic.css'</span>);
+<span class="hljs-reserved">var</span> Calendar = <span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-calendar'</span>);
+<span class="hljs-reserved">var</span> GregorianCalendarFormat = <span class="hljs-built_in">require</span>(<span class="hljs-string">'gregorian-calendar-format'</span>);
+<span class="hljs-reserved">var</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react'</span>);
+<span class="hljs-reserved">var</span> formatter = <span class="hljs-keyword">new</span> GregorianCalendarFormat(<span class="hljs-string">'yyyy-MM-dd HH:mm:ss'</span>);
+
+<span class="hljs-reserved">function</span> onSelect(value) {
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onSelect'</span>);
   <span class="hljs-built_in">console</span>.log(formatter.format(value))
 }
