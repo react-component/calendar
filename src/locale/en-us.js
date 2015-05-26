@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+module.exports = ({
   today: 'Today',
   clear: 'Clear',
   hourPanelTitle: 'Select hour',
@@ -23,5 +23,5 @@ module.exports = {
   nextDecade: 'Next decade',
   previousCentury: 'Last century',
   nextCentury: 'Next century',
-  format: require('gregorian-calendar-format/lib/locale/en-us')
-};
+  format:  require('gregorian-calendar-format/lib/locale/en-us')
+});

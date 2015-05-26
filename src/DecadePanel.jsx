@@ -1,3 +1,4 @@
+'use strict';
 
 var React = require('react');
 var ROW = 4;
@@ -55,7 +56,7 @@ class DecadePanel extends React.Component {
       }
     }
 
-    var decadesEls = decades.map((row, index) => {
+    var decadesEls = decades.map((row, decadeIndex) => {
       var tds = row.map(d => {
         var startDecade = d.startDecade;
         var endDecade = d.endDecade;
@@ -76,7 +77,7 @@ class DecadePanel extends React.Component {
           </a>
         </td>);
       });
-      return (<tr key={index} role="row">{tds}</tr>);
+      return (<tr key={decadeIndex} role="row">{tds}</tr>);
     });
 
     return (

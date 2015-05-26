@@ -1,3 +1,4 @@
+'use strict';
 
 var React = require('react');
 var DATE_ROW_COUNT = 6;
@@ -174,8 +175,10 @@ function handleKeyDown(e) {
       this.props.onSelect(this.state.value);
       e.preventDefault();
       return true;
+    default:
+      this.props.onKeyDown(e);
+      return true;
   }
-  this.props.onKeyDown(e);
 }
 
 function showMonthPanel() {
@@ -284,7 +287,9 @@ class Calendar extends React.Component {
       var weekNumberCell;
       var dateCells = [];
       if (showWeekNumber) {
-        weekNumberCell = (<td key={dateTable[passed].getWeekOfYear()} role="gridcell" className = {weekNumberCellClass}>{dateTable[passed].getWeekOfYear()}</td>);
+        weekNumberCell = (
+          <td key={dateTable[passed].getWeekOfYear()} role="gridcell" className = {weekNumberCellClass}>{dateTable[passed].getWeekOfYear()}</td>
+        );
       }
       for (j = 0; j < DATE_COL_COUNT; j++) {
         current = dateTable[passed];
@@ -333,7 +338,7 @@ class Calendar extends React.Component {
         <tr
           key={i}
           role="row">
-          {weekNumberCell} 
+          {weekNumberCell}
           {dateCells}
         </tr>);
     }
@@ -375,14 +380,14 @@ class Calendar extends React.Component {
 
     if (props.showWeekNumber) {
       showWeekNumberEl = (
-        <th role="columnheader" className = {prefixClsFn("column-header", "week-number-header")}>
-          <span className ={prefixClsFn("column-header-inner")}>x</span>
+        <th role="columnheader" className = {prefixClsFn('column-header', 'week-number-header')}>
+          <span className ={prefixClsFn('column-header-inner')}>x</span>
         </th>);
     }
-    var weekDaysEls = weekDays.map((value, xindex)=> {
+    var weekDaysEls = weekDays.map((day, xindex)=> {
       return (
-        <th key={xindex} role="columnheader" title={value} className ={prefixClsFn("column-header")}>
-          <span className = {prefixClsFn("column-header-inner")}>
+        <th key={xindex} role="columnheader" title={day} className ={prefixClsFn('column-header')}>
+          <span className = {prefixClsFn('column-header-inner')}>
           {veryShortWeekdays[xindex]}
           </span>
         </th>);
@@ -391,27 +396,27 @@ class Calendar extends React.Component {
     if (props.showToday || props.showTime) {
       var todayEl;
       if (props.showToday) {
-        todayEl = (<a className = {prefixClsFn("today-btn")}
+        todayEl = (<a className = {prefixClsFn('today-btn')}
           role="button"
           onClick={this.chooseToday}
           title={this.getTodayTime()}>{locale.today}</a>);
       }
       var clearEl;
       if (props.showClear) {
-        clearEl = (<a className = {prefixClsFn("clear-btn")}
+        clearEl = (<a className = {prefixClsFn('clear-btn')}
           role="button"
           onClick={this.clear}>{locale.clear}</a>);
       }
       var footerBtn;
       if (todayEl || clearEl) {
-        footerBtn = <div className={prefixClsFn("footer-btn")}>{todayEl} {clearEl}</div>;
+        footerBtn = <div className={prefixClsFn('footer-btn')}>{todayEl} {clearEl}</div>;
       }
       var timeEl;
       if (props.showTime) {
         timeEl = (<Time value={value} rootPrefixCls={prefixCls} prefixClsFn={prefixClsFn} locale={locale} onChange={this.handleSelect}/>);
       }
       footerEl = (
-        <div className = {prefixClsFn("footer")}>
+        <div className = {prefixClsFn('footer')}>
         {timeEl}
         {footerBtn}
         </div>);
@@ -435,46 +440,46 @@ class Calendar extends React.Component {
     return (
       <div className = {className} tabIndex="0" onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.handleKeyDown}>
         <div style={{outline: 'none'}}>
-          <div className = {prefixClsFn("header")}>
-            <a className ={prefixClsFn("prev-year-btn")}
+          <div className = {prefixClsFn('header')}>
+            <a className ={prefixClsFn('prev-year-btn')}
               role="button"
               onClick={this.previousYear}
               title={locale.previousYear}>
               «
             </a>
-            <a className = {prefixClsFn("prev-month-btn")}
+            <a className = {prefixClsFn('prev-month-btn')}
               role="button"
               onClick={this.previousMonth}
               title={locale.previousMonth}>
               ‹
             </a>
-            <a className = {prefixClsFn("month-select")}
+            <a className = {prefixClsFn('month-select')}
               role="button"
               onClick={this.showMonthPanel}
               title={locale.monthSelect}>
-              <span className = {prefixClsFn("month-select-content")}>{this.getMonthYear()}</span>
-              <span className = {prefixClsFn("month-select-arrow")}>x</span>
+              <span className = {prefixClsFn('month-select-content')}>{this.getMonthYear()}</span>
+              <span className = {prefixClsFn('month-select-arrow')}>x</span>
             </a>
-            <a className = {prefixClsFn("next-month-btn")}
+            <a className = {prefixClsFn('next-month-btn')}
               onClick={this.nextMonth}
               title={locale.nextMonth}>
               ›
             </a>
-            <a className = {prefixClsFn("next-year-btn")}
+            <a className = {prefixClsFn('next-year-btn')}
               onClick={this.nextYear}
               title={locale.nextYear}>
               »
             </a>
           </div>
-          <div className = {prefixClsFn("calendar-body")}>
-            <table className = {prefixClsFn("table")} cellSpacing="0" role="grid">
+          <div className = {prefixClsFn('calendar-body')}>
+            <table className = {prefixClsFn('table')} cellSpacing="0" role="grid">
               <thead>
                 <tr role="row">
               {showWeekNumberEl}
               {weekDaysEls}
                 </tr>
               </thead>
-              <tbody className = {prefixClsFn("tbody")}>
+              <tbody className = {prefixClsFn('tbody')}>
             {this.renderDates()}
               </tbody>
             </table>

@@ -1,3 +1,5 @@
+'use strict';
+
 var React = require('react');
 var DateTimeFormat = require('gregorian-calendar-format');
 var rcUtil = require('rc-util');
@@ -35,15 +37,15 @@ class Picker extends React.Component {
       open: props.open,
       value: props.value || props.defaultValue
     };
-
-    // bind methods
-    [
+    var events = [
       'handleInputClick', 'handleCalendarBlur', 'handleTriggerClick',
       'handleCalendarClear', 'handleCalendarKeyDown',
       'handleKeyDown', 'handleCalendarSelect'
-    ].forEach(m => {
-        this[m] = this[m].bind(this);
-      });
+    ];
+    // bind methods
+    events.forEach(m => {
+      this[m] = this[m].bind(this);
+    });
     this.saveCalendarRef = refFn.bind(this, 'calendarInstance');
     this.saveInputRef = refFn.bind(this, 'inputInstance');
   }

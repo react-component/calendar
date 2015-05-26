@@ -1,3 +1,4 @@
+'use strict';
 
 var React = require('react');
 var cx = require('rc-util').classSet;
@@ -6,7 +7,7 @@ function choose(hour, e) {
   var next = this.state.value.clone();
   var method = this.props.setter;
   next[method](hour);
-  this.props.onSelect(next,method);
+  this.props.onSelect(next, method);
   e.preventDefault();
 }
 

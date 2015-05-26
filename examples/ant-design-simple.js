@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 require('rc-calendar/assets/index.css');
 
 var Calendar = require('rc-calendar');
@@ -7,7 +7,7 @@ var React = require('react');
 var formatter = new GregorianCalendarFormat('yyyy-MM-dd HH:mm:ss');
 var GregorianCalendar = require('gregorian-calendar');
 var zhCn = require('gregorian-calendar/lib/locale/zh-cn');
-var CalendarLocale = require('../lib/locale/zh-cn');
+var CalendarLocale = require('rc-calendar/src/locale/zh-cn');
 
 var value = new GregorianCalendar(zhCn);
 value.setTime(Date.now());

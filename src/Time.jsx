@@ -1,3 +1,4 @@
+'use strict';
 
 var React = require('react');
 var rcUtil = require('rc-util');
@@ -57,12 +58,13 @@ class Time extends React.Component {
       showMinutePanel: 0,
       showSecondPanel: 0
     };
-    [
+    var events = [
       'onHourKeyDown', 'onMinuteKeyDown', 'onSecondKeyDown', 'onHourClick', 'onMinuteClick', 'onSecondClick',
       'onSelectPanel'
-    ].forEach(m => {
-        this[m] = this[m].bind(this);
-      });
+    ];
+    events.forEach(m => {
+      this[m] = this[m].bind(this);
+    });
   }
 
   onSelectPanel(value, setter) {
@@ -134,19 +136,19 @@ class Time extends React.Component {
       {...commonProps}/>;
     }
     return (<div>
-      <input className = {prefixClsFn("time-input")} title={locale.hourInput}
+      <input className = {prefixClsFn('time-input')} title={locale.hourInput}
         ref={setHourOfDay}
         readOnly value={padding(hour)}
         onClick={this.onHourClick}
         onKeyDown={this.onHourKeyDown}/>
       <span> : </span>
-      <input className = {prefixClsFn("time-input")} title={locale.minuteInput}
+      <input className = {prefixClsFn('time-input')} title={locale.minuteInput}
         ref={setMinutes}
         readOnly value={padding(minute)}
         onClick={this.onMinuteClick}
         onKeyDown = {this.onMinuteKeyDown}/>
       <span> : </span>
-      <input className = {prefixClsFn("time-input")} title={locale.secondInput}
+      <input className = {prefixClsFn('time-input')} title={locale.secondInput}
         ref={setSeconds}
         readOnly value={padding(second)}
         onClick={this.onSecondClick}

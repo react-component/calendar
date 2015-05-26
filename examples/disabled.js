@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 require('rc-calendar/assets/bootstrap.css');
 var Calendar = require('rc-calendar');
 var GregorianCalendarFormat = require('gregorian-calendar-format');

@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 require('bootstrap/dist/css/bootstrap.css');
 require('rc-calendar/assets/bootstrap.css');
 var React = require('react');
@@ -7,7 +7,7 @@ var DatePicker = Calendar.Picker;
 var zhCn = require('gregorian-calendar/lib/locale/zh-cn'); // spm error
 var DateTimeFormat = require('gregorian-calendar-format');
 var GregorianCalendar = require('gregorian-calendar');
-var CalendarLocale = require('../lib/locale/zh-cn');
+var CalendarLocale = require('rc-calendar/src/locale/zh-cn');
 
 var Test = React.createClass({
   toggle: function () {

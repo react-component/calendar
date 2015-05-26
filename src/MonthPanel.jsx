@@ -1,3 +1,4 @@
+'use strict';
 
 var React = require('react');
 var DateTimeFormat = require('gregorian-calendar-format');

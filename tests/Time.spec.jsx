@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 
 var keyCode = require('rc-util').KeyCode;
 var expect = require('expect.js');
