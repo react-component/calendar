@@ -88,6 +88,12 @@ For details to see: [https://github.com/yiminghe/learning-react/tree/master/exam
           <td>additional css class of root dom node</td>
         </tr>
         <tr>
+          <td>style</td>
+          <td>Object</td>
+          <td></td>
+          <td>additional style of root dom node</td>
+        </tr>
+        <tr>
           <td>value</td>
           <td>GregorianCalendar</td>
           <td></td>
@@ -173,6 +179,12 @@ For details to see: [https://github.com/yiminghe/learning-react/tree/master/exam
           <td>Calendar React Element</td>
           <td></td>
           <td></td>
+        </tr>
+        <tr>
+          <td>renderCalendarToBody</td>
+          <td>Boolean</td>
+          <td>false</td>
+          <td>whether render picker's calendar to document.body</td>
         </tr>
         <tr>
           <td>formatter</td>

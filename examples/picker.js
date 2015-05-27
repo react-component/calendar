@@ -61,7 +61,8 @@ var Test = React.createClass({
           showTime</span>
       </div>
       <div className="input-group">
-        <DatePicker ref='picker' formatter={this.props.formatter} calendar={calendar}
+        <DatePicker ref='picker'
+          formatter={this.props.formatter} calendar={calendar}
           value={state.value} onChange={this.handleChange}>
           <input className="form-control rc-calendar-picker-input"/>
         </DatePicker>

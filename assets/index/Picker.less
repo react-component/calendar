@@ -1,6 +1,6 @@
-.@{prefixClass}-picker {
-  position: relative;
+@import "../common/Picker";
 
+.@{prefixClass}-picker {
   @font-face {
     font-family: 'iconfont';
     src: url('//at.alicdn.com/t/font_1429685559_5814753.eot');
@@ -12,17 +12,9 @@
     /* iOS 4.1- */
   }
 
-  .@{prefixClass} {
-    position: absolute;
-    display: none;
-    left: -9999px;
-    top: -9999px;
-    z-index: 9;
-  }
-
   &-input {
-    cursor: pointer;
     box-sizing: border-box;
+    cursor: pointer;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     height: 32px;
     width: 100%;
@@ -65,8 +57,4 @@
       margin-right: -22px;
     }
   }
-}
-
-.@{prefixClass}-picker-open .@{prefixClass} {
-  display: block;
 }

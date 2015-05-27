@@ -438,7 +438,7 @@ class Calendar extends React.Component {
       });
     }
     return (
-      <div className = {className} tabIndex="0" onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.handleKeyDown}>
+      <div className = {className} style={this.props.style} tabIndex="0" onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.handleKeyDown}>
         <div style={{outline: 'none'}}>
           <div className = {prefixClsFn('header')}>
             <a className ={prefixClsFn('prev-year-btn')}
@@ -498,6 +498,7 @@ Calendar.propTypes = {
   orient: React.PropTypes.arrayOf(React.PropTypes.oneOf(['left', 'top', 'right', 'bottom'])),
   locale: React.PropTypes.object,
   showWeekNumber: React.PropTypes.bool,
+  style: React.PropTypes.object,
   showToday: React.PropTypes.bool,
   showTime: React.PropTypes.bool,
   onSelect: React.PropTypes.func,
@@ -506,6 +507,7 @@ Calendar.propTypes = {
 
 Calendar.defaultProps = {
   locale: require('./locale/en-us'),
+  style: {},
   onKeyDown: noop,
   className: '',
   showToday: true,
