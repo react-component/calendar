@@ -1,10 +1,116 @@
-webpackJsonp([3],{
+webpackJsonp([2],{
 
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(46);
+	module.exports = __webpack_require__(40);
 
+
+/***/ },
+
+/***/ 40:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	__webpack_require__(41);
+	var React = __webpack_require__(9);
+	var Calendar = __webpack_require__(6);
+	var DatePicker = Calendar.Picker;
+	var zhCn = __webpack_require__(43);
+	var DateTimeFormat = __webpack_require__(10);
+	var GregorianCalendar = __webpack_require__(12);
+	var CalendarLocale = __webpack_require__(44);
+	var value = new GregorianCalendar(zhCn);
+	value.setTime(Date.now());
+	
+	var Test = React.createClass({
+	  displayName: 'Test',
+	
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      formatter: new DateTimeFormat('yyyy-MM-dd HH:mm:ss')
+	    };
+	  },
+	
+	  getInitialState: function getInitialState() {
+	    return {};
+	  },
+	
+	  destroy: function destroy() {
+	    this.setState({
+	      destroyed: 1
+	    });
+	  },
+	
+	  render: function render() {
+	    if (this.state.destroyed) {
+	      return null;
+	    }
+	    return React.createElement(
+	      'div',
+	      { style: { width: 236, margin: 20 } },
+	      React.createElement(
+	        'div',
+	        { style: {
+	            'position': 'relative',
+	            zIndex: 10,
+	            marginBottom: 22
+	          } },
+	        React.createElement(
+	          DatePicker,
+	          {
+	            renderCalendarToBody: true,
+	            trigger: React.createElement('span', { className: 'rc-calendar-picker-icon' }),
+	            formatter: this.props.formatter, calendar: React.createElement(Calendar, {
+	              style: { zIndex: 1000 },
+	              locale: CalendarLocale }),
+	            defaultValue: value },
+	          React.createElement('input', { className: 'rc-calendar-picker-input' })
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { style: {
+	            'position': 'relative',
+	            zIndex: 100,
+	            marginBottom: 22
+	          } },
+	        React.createElement(
+	          DatePicker,
+	          {
+	            renderCalendarToBody: true,
+	            trigger: React.createElement('span', { className: 'rc-calendar-picker-icon' }),
+	            formatter: this.props.formatter, calendar: React.createElement(Calendar, {
+	              style: { zIndex: 1000 },
+	              locale: CalendarLocale }),
+	            defaultValue: value },
+	          React.createElement('input', { className: 'rc-calendar-picker-input' })
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        null,
+	        React.createElement(
+	          'button',
+	          { onClick: this.destroy },
+	          'destroy'
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	React.render(React.createElement(
+	  'div',
+	  null,
+	  React.createElement(
+	    'h1',
+	    null,
+	    'zh-cn'
+	  ),
+	  React.createElement(Test, null)
+	), document.getElementById('__react-content'));
 
 /***/ },
 
@@ -118,55 +224,7 @@ webpackJsonp([3],{
 	};
 
 
-/***/ },
-
-/***/ 46:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	__webpack_require__(41);
-	
-	var Calendar = __webpack_require__(6);
-	var GregorianCalendarFormat = __webpack_require__(10);
-	var React = __webpack_require__(9);
-	var formatter = new GregorianCalendarFormat('yyyy-MM-dd HH:mm:ss');
-	var GregorianCalendar = __webpack_require__(12);
-	var zhCn = __webpack_require__(43);
-	var CalendarLocale = __webpack_require__(44);
-	
-	var value = new GregorianCalendar(zhCn);
-	value.setTime(Date.now());
-	
-	function disabledDate(current, value) {
-	  var date = new Date();
-	  date.setHours(0);
-	  date.setMinutes(0);
-	  date.setSeconds(0);
-	  return current.getTime() < date.getTime(); //can not select days before today
-	}
-	
-	function onSelect(value) {
-	  console.log('onSelect');
-	  console.log(formatter.format(value));
-	}
-	
-	React.render(React.createElement(
-	  'div',
-	  null,
-	  React.createElement(
-	    'h2',
-	    null,
-	    'calendar (zh-cn)'
-	  ),
-	  React.createElement(Calendar, { showWeekNumber: false,
-	    locale: CalendarLocale,
-	    value: value,
-	    disabledDate: disabledDate,
-	    onSelect: onSelect, showTime: true })
-	), document.getElementById('__react-content'));
-
 /***/ }
 
 });
-//# sourceMappingURL=ant-design-simple.js.map
+//# sourceMappingURL=renderCalendarToBody.js.map

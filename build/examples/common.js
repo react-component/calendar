@@ -30,7 +30,7 @@
 /******/ 	// "0" means "already loaded"
 /******/ 	// Array means "loading", array contains callbacks
 /******/ 	var installedChunks = {
-/******/ 		7:0
+/******/ 		8:0
 /******/ 	};
 /******/
 /******/ 	// The require function
@@ -76,7 +76,7 @@
 /******/ 			script.charset = 'utf-8';
 /******/ 			script.async = true;
 /******/
-/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"ant-design-simple","1":"disabled","2":"simple","3":"picker","4":"theme","5":"defaultValue","6":"ant-design-picker"}[chunkId]||chunkId) + ".js";
+/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"disabled","1":"simple","2":"renderCalendarToBody","3":"ant-design-simple","4":"defaultValue","5":"ant-design-picker","6":"theme","7":"picker"}[chunkId]||chunkId) + ".js";
 /******/ 			head.appendChild(script);
 /******/ 		}
 /******/ 	};
@@ -788,7 +788,7 @@
 	          className += ' ' + prefixClsFn('orient-' + o);
 	        });
 	      }
-	      return React.createElement('div', { className: className, tabIndex: '0', onFocus: this.onFocus, onBlur: this.onBlur, onKeyDown: this.handleKeyDown }, React.createElement('div', { style: { outline: 'none' } }, React.createElement('div', { className: prefixClsFn('header') }, React.createElement('a', { className: prefixClsFn('prev-year-btn'),
+	      return React.createElement('div', { className: className, style: this.props.style, tabIndex: '0', onFocus: this.onFocus, onBlur: this.onBlur, onKeyDown: this.handleKeyDown }, React.createElement('div', { style: { outline: 'none' } }, React.createElement('div', { className: prefixClsFn('header') }, React.createElement('a', { className: prefixClsFn('prev-year-btn'),
 	        role: 'button',
 	        onClick: this.previousYear,
 	        title: locale.previousYear }, '«'), React.createElement('a', { className: prefixClsFn('prev-month-btn'),
@@ -815,6 +815,7 @@
 	  orient: React.PropTypes.arrayOf(React.PropTypes.oneOf(['left', 'top', 'right', 'bottom'])),
 	  locale: React.PropTypes.object,
 	  showWeekNumber: React.PropTypes.bool,
+	  style: React.PropTypes.object,
 	  showToday: React.PropTypes.bool,
 	  showTime: React.PropTypes.bool,
 	  onSelect: React.PropTypes.func,
@@ -823,6 +824,7 @@
 	
 	Calendar.defaultProps = {
 	  locale: __webpack_require__(34),
+	  style: {},
 	  onKeyDown: noop,
 	  className: '',
 	  showToday: true,
@@ -5114,6 +5116,13 @@
 	  this[field] = component;
 	}
 	
+	function getContainerClassName(prefixCls, open) {
+	  var ret = [prefixCls + '-container'];
+	  if (open) {
+	    ret.push(prefixCls + '-container-open');
+	  }
+	  return ret.join(' ');
+	}
 	/**
 	 * DatePicker = wrap input using Calendar
 	 */
@@ -5148,6 +5157,83 @@
 	          value: nextProps.value
 	        });
 	      }
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      if (this.calendarContainer) {
+	        React.unmountComponentAtNode(this.calendarContainer);
+	        this.calendarContainer.parentNode.removeChild(this.calendarContainer);
+	        this.calendarContainer = null;
+	      }
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.componentDidUpdate();
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate(prevProps, prevState) {
+	      var _this2 = this;
+	
+	      prevState = prevState || {};
+	      var prefixCls = this.props.prefixCls;
+	      if (this.props.renderCalendarToBody && !this.state.open && prevState.open) {
+	        this.getCalendarContainer().className = getContainerClassName(prefixCls);
+	      }
+	      if (this.state.open && !prevState.open) {
+	        if (this.props.renderCalendarToBody) {
+	          this.getCalendarContainer().className = getContainerClassName(prefixCls, true);
+	          React.render(this.getCalendarElement(), this.getCalendarContainer(), function () {
+	            _this2.alignCalendar();
+	          });
+	        } else {
+	          this.alignCalendar();
+	        }
+	      }
+	    }
+	  }, {
+	    key: 'getCalendarContainer',
+	    value: function getCalendarContainer() {
+	      if (!this.calendarContainer) {
+	        this.calendarContainer = document.createElement('div');
+	        document.body.appendChild(this.calendarContainer);
+	      }
+	      return this.calendarContainer;
+	    }
+	  }, {
+	    key: 'alignCalendar',
+	    value: function alignCalendar() {
+	      var orient = this.calendarElement.props.orient;
+	      var points = ['tl', 'bl'];
+	      var offset = [0, 5];
+	      if (orient.indexOf('top') !== -1 && orient.indexOf('left') !== -1) {
+	        points = ['tl', 'bl'];
+	      } else if (orient.indexOf('top') !== -1 && orient.indexOf('right') !== -1) {
+	        points = ['tr', 'br'];
+	      } else if (orient.indexOf('bottom') !== -1 && orient.indexOf('left') !== -1) {
+	        points = ['bl', 'tl'];
+	        offset = [0, -5];
+	      } else if (orient.indexOf('bottom') !== -1 && orient.indexOf('right') !== -1) {
+	        points = ['br', 'tr'];
+	        offset = [0, -5];
+	      }
+	
+	      var align = domAlign(React.findDOMNode(this.calendarInstance), React.findDOMNode(this.inputInstance), {
+	        points: points,
+	        offset: offset,
+	        overflow: {
+	          adjustX: 1,
+	          adjustY: 1
+	        }
+	      });
+	      points = align.points;
+	      var newOrient = orientMap[points[0]];
+	      this.calendarInstance.setState({
+	        orient: newOrient
+	      });
+	      React.findDOMNode(this.calendarInstance).focus();
 	    }
 	  }, {
 	    key: 'open',
@@ -5192,19 +5278,19 @@
 	  }, {
 	    key: 'handleCalendarKeyDown',
 	    value: function handleCalendarKeyDown(e) {
-	      var _this2 = this;
+	      var _this3 = this;
 	
 	      if (e.keyCode === KeyCode.ESC) {
 	        e.stopPropagation();
 	        this.close(function () {
-	          React.findDOMNode(_this2.inputInstance).focus();
+	          React.findDOMNode(_this3.inputInstance).focus();
 	        });
 	      }
 	    }
 	  }, {
 	    key: 'handleCalendarSelect',
 	    value: function handleCalendarSelect(value) {
-	      var _this3 = this;
+	      var _this4 = this;
 	
 	      this.props.calendar.props.onSelect(value);
 	      var currentValue = this.state.value;
@@ -5217,7 +5303,7 @@
 	          value: value,
 	          open: false
 	        }, function () {
-	          React.findDOMNode(_this3.inputInstance).focus();
+	          React.findDOMNode(_this4.inputInstance).focus();
 	        });
 	      }
 	      if (!currentValue || currentValue.getTime() !== value.getTime()) {
@@ -5235,64 +5321,42 @@
 	  }, {
 	    key: 'handleCalendarClear',
 	    value: function handleCalendarClear() {
-	      var _this4 = this;
+	      var _this5 = this;
 	
 	      this.props.calendar.props.onClear();
 	      this.setState({
 	        open: false,
 	        value: null
 	      }, function () {
-	        React.findDOMNode(_this4.inputInstance).focus();
+	        React.findDOMNode(_this5.inputInstance).focus();
 	      });
 	      if (this.state.value !== null) {
 	        this.props.onChange(null);
 	      }
 	    }
 	  }, {
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      this.componentDidUpdate();
-	    }
-	  }, {
-	    key: 'componentDidUpdate',
-	    value: function componentDidUpdate() {
-	      if (this.state.open && !this._lastOpen) {
-	        var orient = this._cacheCalendar.props.orient;
-	        var points = ['tl', 'bl'];
-	        var offset = [0, 5];
-	        if (orient.indexOf('top') !== -1 && orient.indexOf('left') !== -1) {
-	          points = ['tl', 'bl'];
-	        } else if (orient.indexOf('top') !== -1 && orient.indexOf('right') !== -1) {
-	          points = ['tr', 'br'];
-	        } else if (orient.indexOf('bottom') !== -1 && orient.indexOf('left') !== -1) {
-	          points = ['bl', 'tl'];
-	          offset = [0, -5];
-	        } else if (orient.indexOf('bottom') !== -1 && orient.indexOf('right') !== -1) {
-	          points = ['br', 'tr'];
-	          offset = [0, -5];
-	        }
-	
-	        var align = domAlign(React.findDOMNode(this.calendarInstance), React.findDOMNode(this.inputInstance), {
-	          points: points,
-	          offset: offset,
-	          overflow: {
-	            adjustX: 1,
-	            adjustY: 1
-	          }
-	        });
-	        points = align.points;
-	        var newOrient = orientMap[points[0]];
-	        this.calendarInstance.setState({
-	          orient: newOrient
-	        });
-	        React.findDOMNode(this.calendarInstance).focus();
-	      }
-	      this._lastOpen = this.state.open;
+	    key: 'getCalendarElement',
+	    value: function getCalendarElement() {
+	      var props = this.props;
+	      var calendarInstance = this.calendarInstance;
+	      var calendarProp = props.calendar;
+	      this.calendarElement = React.cloneElement(calendarProp, {
+	        ref: rcUtil.createChainedFunction(calendarProp.props.ref, this.saveCalendarRef),
+	        value: this.state.value,
+	        // focused: true,
+	        orient: calendarInstance && calendarInstance.state.orient || getImmutableOrient(calendarProp.props.orient) || orientMap.tl,
+	        onBlur: this.handleCalendarBlur,
+	        onKeyDown: this.handleCalendarKeyDown,
+	        onSelect: this.handleCalendarSelect,
+	        onClear: this.handleCalendarClear
+	      });
+	      return this.calendarElement;
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var props = this.props;
+	      var renderCalendarToBody = props.renderCalendarToBody;
 	      // var input = React.Children.only(props.children); bug 0.13.0
 	      /*
 	       children: Object
@@ -5312,20 +5376,9 @@
 	      }
 	      var state = this.state;
 	      var value = state.value;
-	      var calendar = this._cacheCalendar;
-	      if (state.open) {
-	        var calendarInstance = this.calendarInstance;
-	        var calendarProp = props.calendar;
-	        this._cacheCalendar = calendar = React.cloneElement(calendarProp, {
-	          ref: rcUtil.createChainedFunction(calendarProp.props.ref, this.saveCalendarRef),
-	          value: value,
-	          // focused: true,
-	          orient: calendarInstance && calendarInstance.state.orient || getImmutableOrient(calendarProp.props.orient) || orientMap.tl,
-	          onBlur: this.handleCalendarBlur,
-	          onKeyDown: this.handleCalendarKeyDown,
-	          onSelect: this.handleCalendarSelect,
-	          onClear: this.handleCalendarClear
-	        });
+	      var calendar;
+	      if (!renderCalendarToBody) {
+	        calendar = state.open ? this.getCalendarElement() : this.calendarElement;
 	      }
 	      var inputValue = '';
 	      if (value) {
@@ -5362,11 +5415,13 @@
 	}
 	
 	Picker.propTypes = {
-	  onChange: React.PropTypes.func
+	  onChange: React.PropTypes.func,
+	  renderCalendarToBody: React.PropTypes.bool
 	};
 	
 	Picker.defaultProps = {
 	  prefixCls: 'rc-calendar-picker',
+	  renderCalendarToBody: false,
 	  onChange: function onChange() {},
 	  formatter: new DateTimeFormat('yyyy-MM-dd')
 	};

@@ -246,7 +246,8 @@ require(<span class="hljs-string">'rc-calendar/assets/bootstrap.css'</span>);
           showTime&lt;/span&gt;
       &lt;/div&gt;
       &lt;div className=<span class="hljs-string">"input-group"</span>&gt;
-        &lt;DatePicker ref=<span class="hljs-string">'picker'</span> formatter={<span class="hljs-keyword">this</span>.props.formatter} calendar={calendar}
+        &lt;DatePicker ref=<span class="hljs-string">'picker'</span>
+          formatter={<span class="hljs-keyword">this</span>.props.formatter} calendar={calendar}
           value={state.value} onChange={<span class="hljs-keyword">this</span>.handleChange}&gt;
           &lt;input className=<span class="hljs-string">"form-control rc-calendar-picker-input"</span>/&gt;
         &lt;/DatePicker&gt;
