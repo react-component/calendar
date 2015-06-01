@@ -229,7 +229,7 @@ describe('Calendar', function () {
       Simulate.click(m);
       setTimeout(done, 10);
     }, function (done) {
-      expect(calendar.state.value.getYear()).to.be(text);
+      expect(calendar.state.value.getYear()+'').to.be(text);
       done();
     }], done);
   });

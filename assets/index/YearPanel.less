@@ -104,7 +104,19 @@
 }
 
 .@{prefixClass}-year-panel-last-decade-cell, .@{prefixClass}-year-panel-next-decade-cell {
+  .@{prefixClass}-year-panel-year{
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .@{prefixClass}-year-panel-year:before {
+    content: "\e651";
+    font-family: "iconfont" !important;
+  }
+}
+
+.@{prefixClass}-year-panel-last-decade-cell {
   .@{prefixClass}-year-panel-year {
-    color: #bbb;
+    transform: rotate(180deg);
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
   }
 }

@@ -261,6 +261,8 @@ class Calendar extends React.Component {
     var lastMonthDayClass = prefixClsFn('last-month-cell');
     var nextMonthDayClass = prefixClsFn('next-month-btn-day');
     var disabledClass = prefixClsFn('disabled-cell');
+    var firstDisableClass = prefixClsFn('disabled-cell-first-of-row');
+    var lastDisableClass = prefixClsFn('disabled-cell-last-of-row');
     today.setTime(Date.now());
     var month1 = value.clone();
     month1.set(value.getYear(), value.getMonth(), 1);
@@ -292,7 +294,15 @@ class Calendar extends React.Component {
         );
       }
       for (j = 0; j < DATE_COL_COUNT; j++) {
+        var next = null;
+        var last = null;
         current = dateTable[passed];
+        if (j < DATE_COL_COUNT - 1) {
+          next = dateTable[passed + 1];
+        }
+        if (j > 0) {
+          last = dateTable[passed - 1];
+        }
         var cls = cellClass;
         var disabled = false;
         var selected = false;
@@ -310,9 +320,20 @@ class Calendar extends React.Component {
         if (afterCurrentMonthYear(current, value)) {
           cls += ' ' + nextMonthDayClass;
         }
-        if (disabledDate && disabledDate(current, value)) {
-          cls += ' ' + disabledClass;
-          disabled = true;
+        if (disabledDate) {
+          if (disabledDate(current, value)) {
+            cls += ' ' + disabledClass;
+            disabled = true;
+
+
+            if (!last || !disabledDate(last, value)) {
+              cls += ' ' + firstDisableClass;
+            }
+
+            if (!next || !disabledDate(next, value)) {
+              cls += ' ' + lastDisableClass;
+            }
+          }
         }
 
         var dateHtml;

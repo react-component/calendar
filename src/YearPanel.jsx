@@ -1,9 +1,8 @@
 'use strict';
 
 var React = require('react');
-var DateTimeFormat = require('gregorian-calendar-format');
-var ROW = 3;
-var COL = 4;
+var ROW = 4;
+var COL = 3;
 var cx = require('rc-util').classSet;
 var DecadePanel = require('./DecadePanel');
 
@@ -51,20 +50,27 @@ class YearPanel extends React.Component {
     var value = this.state.value;
     var currentYear = value.getYear();
     var startYear = parseInt(currentYear / 10, 10) * 10;
-    var preYear = startYear - 1;
-    var current = value.clone();
-    var locale = this.props.locale;
-    var yearFormat = locale.yearFormat;
-    var dateFormatter = new DateTimeFormat(yearFormat);
+    var previousYear = startYear - 1;
+    var endYear = startYear + 9;
     var years = [];
     var index = 0;
     for (var i = 0; i < ROW; i++) {
       years[i] = [];
       for (var j = 0; j < COL; j++) {
-        current.setYear(preYear + index);
+        var year = previousYear + index;
+        var content;
+        if (year < startYear) {
+          content = '';
+        } else if (year > endYear) {
+          content = '';
+        } else {
+
+          content = year + '';
+        }
         years[i][j] = {
-          content: preYear + index,
-          title: dateFormatter.format(current)
+          content: content,
+          year: year,
+          title: content
         };
         index++;
       }
@@ -86,14 +92,22 @@ class YearPanel extends React.Component {
       var tds = row.map(y => {
         var classNameMap = {};
         classNameMap[prefixClsFn('cell')] = 1;
-        classNameMap[prefixClsFn('selected-cell')] = y.content === currentYear;
-        classNameMap[prefixClsFn('last-decade-cell')] = y.content < startYear;
-        classNameMap[prefixClsFn('next-decade-cell')] = y.content > endYear;
+        classNameMap[prefixClsFn('selected-cell')] = y.year === currentYear;
+        classNameMap[prefixClsFn('last-decade-cell')] = y.year < startYear;
+        classNameMap[prefixClsFn('next-decade-cell')] = y.year > endYear;
+        var clickHandler;
+        if (y.year < startYear) {
+          clickHandler = this.previousDecade;
+        } else if (y.year > endYear) {
+          clickHandler = this.nextDecade;
+        } else {
+          clickHandler = chooseYear.bind(this, y.year);
+        }
         return (
           <td role="gridcell"
             title={y.title}
             key={y.content}
-            onClick={chooseYear.bind(this, y.content)}
+            onClick={clickHandler}
             className = {cx(classNameMap)}
           >
             <a

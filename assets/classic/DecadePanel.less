@@ -66,6 +66,7 @@
   table-layout: fixed;
   width: 100%;
   border-collapse: separate;
+  height:210px;
 }
 
 .classic-calendar-decade-panel-cell {
@@ -93,7 +94,19 @@
   border-color: #4187e7;
 }
 
-.classic-calendar-decade-panel-last-century-cell .classic-calendar-decade-panel-decade,
-.classic-calendar-decade-panel-next-century-cell .classic-calendar-decade-panel-decade {
-  color: #bfbfbf;
+.@{prefixClass}-decade-panel-last-century-cell, .@{prefixClass}-decade-panel-next-century-cell {
+  .@{prefixClass}-decade-panel-decade{
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .@{prefixClass}-decade-panel-decade:before {
+    content: ">";
+  }
+}
+
+.@{prefixClass}-decade-panel-last-century-cell {
+  .@{prefixClass}-decade-panel-decade {
+    transform: rotate(180deg);
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  }
 }

@@ -1,6 +1,10 @@
 # History
 ----
 
+## 3.7.0 / 2015-06-01
+
+`improved` move nextDecade and prevDecade button to YearPanel body, optimize disable style for ant-design
+
 ## 3.5.0 / 2015-05-26
 
 `new` publish transformed es5 code to npm

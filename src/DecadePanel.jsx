@@ -48,9 +48,11 @@ class DecadePanel extends React.Component {
     for (var i = 0; i < ROW; i++) {
       decades[i] = [];
       for (var j = 0; j < COL; j++) {
+        var startDecade = preYear + index * 10;
+        var endDecade = preYear + index * 10 + 9;
         decades[i][j] = {
-          startDecade: preYear + index * 10,
-          endDecade: preYear + index * 10 + 9
+          startDecade: startDecade,
+          endDecade: endDecade
         };
         index++;
       }
@@ -58,22 +60,34 @@ class DecadePanel extends React.Component {
 
     var decadesEls = decades.map((row, decadeIndex) => {
       var tds = row.map(d => {
-        var startDecade = d.startDecade;
-        var endDecade = d.endDecade;
+        var dStartDecade = d.startDecade;
+        var dEndDecade = d.endDecade;
         var classNameMap = {};
         classNameMap[prefixClsFn('cell')] = 1;
-        classNameMap[prefixClsFn('selected-cell')] = startDecade <= currentYear && currentYear <= endDecade;
-        classNameMap[prefixClsFn('last-century-cell')] = startDecade < startYear;
-        classNameMap[prefixClsFn('next-century-cell')] = endDecade > endYear;
+        classNameMap[prefixClsFn('selected-cell')] = dStartDecade <= currentYear && currentYear <= dEndDecade;
+        var isLast = dStartDecade < startYear;
+        var isNext = dEndDecade > endYear;
+        classNameMap[prefixClsFn('last-century-cell')] = isLast;
+        classNameMap[prefixClsFn('next-century-cell')] = isNext;
+        var content;
+        var clickHandler;
+        if (isLast) {
+          clickHandler = this.previousCentury;
+        } else if (isNext) {
+          clickHandler = this.nextCentury;
+        } else {
+          content = dStartDecade + '-' + dEndDecade;
+          clickHandler = chooseDecade.bind(this, dStartDecade);
+        }
         return (<td
-          key={startDecade}
-          onClick={chooseDecade.bind(this, startDecade)}
+          key={dStartDecade}
+          onClick={clickHandler}
           role="gridcell"
           className = {cx(classNameMap)}
         >
           <a
             className={prefixClsFn('decade')}>
-             {startDecade} - {endDecade}
+             {content}
           </a>
         </td>);
       });

@@ -2,8 +2,8 @@
 
 var React = require('react');
 var DateTimeFormat = require('gregorian-calendar-format');
-var ROW = 3;
-var COL = 4;
+var ROW = 4;
+var COL = 3;
 var cx = require('rc-util').classSet;
 var YearPanel = require('./YearPanel');
 
