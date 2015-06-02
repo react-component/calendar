@@ -2,9 +2,8 @@
   position: relative;
   outline: none;
   font-family: Arial, "Hiragino Sans GB", "Microsoft Yahei", "Microsoft Sans Serif", "WenQuanYi Micro Hei", sans-serif;
-  width: 250px;
+  width: 253px;
   border: 1px solid #ccc;
-  border-radius: 4px;
   list-style: none;
   font-size: 12px;
   text-align: left;
@@ -14,6 +13,14 @@
   background-clip: padding-box;
   border: 1px solid #ccc;
   line-height: 1.5;
+
+  &-week-number {
+    width: 286px;
+
+    &-cell {
+      text-align: center;
+    }
+  }
 
   &-header {
     padding: 0 10px;
@@ -96,6 +103,7 @@
   &-column-header {
     line-height: 18px;
     padding: 6px 0;
+    width: 33px;
     text-align: center;
     .@{prefixClass}-column-header-inner {
       display: block;

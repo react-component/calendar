@@ -381,7 +381,6 @@ class Calendar extends React.Component {
   }
 
   render() {
-    // console.log('re render');
     var showWeekNumberEl;
     var props = this.props;
     var locale = props.locale;
@@ -405,6 +404,7 @@ class Calendar extends React.Component {
           <span className ={prefixClsFn('column-header-inner')}>x</span>
         </th>);
     }
+
     var weekDaysEls = weekDays.map((day, xindex)=> {
       return (
         <th key={xindex} role="columnheader" title={day} className ={prefixClsFn('column-header')}>
@@ -413,6 +413,7 @@ class Calendar extends React.Component {
           </span>
         </th>);
     });
+
     var footerEl;
     if (props.showToday || props.showTime) {
       var todayEl;
@@ -452,6 +453,9 @@ class Calendar extends React.Component {
     if (props.className) {
       className += ' ' + props.className;
     }
+    if (props.showWeekNumber) {
+      className += ' ' + prefixClsFn('week-number');
+    }
     var orient = state.orient;
     if (orient) {
       orient.forEach(o => {
@@ -459,7 +463,9 @@ class Calendar extends React.Component {
       });
     }
     return (
-      <div className = {className} style={this.props.style} tabIndex="0" onFocus={this.onFocus} onBlur={this.onBlur} onKeyDown={this.handleKeyDown}>
+      <div className={className} style={this.props.style}
+        tabIndex="0" onFocus={this.onFocus}
+        onBlur={this.onBlur} onKeyDown={this.handleKeyDown}>
         <div style={{outline: 'none'}}>
           <div className = {prefixClsFn('header')}>
             <a className ={prefixClsFn('prev-year-btn')}
