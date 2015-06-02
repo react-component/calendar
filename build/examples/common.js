@@ -76,7 +76,7 @@
 /******/ 			script.charset = 'utf-8';
 /******/ 			script.async = true;
 /******/
-/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"ant-design-simple","1":"renderCalendarToBody","2":"disabled","3":"simple","4":"picker","5":"theme","6":"defaultValue","7":"ant-design-picker"}[chunkId]||chunkId) + ".js";
+/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"ant-design-simple","1":"renderCalendarToBody","2":"simple","3":"disabled","4":"defaultValue","5":"theme","6":"picker","7":"ant-design-picker"}[chunkId]||chunkId) + ".js";
 /******/ 			head.appendChild(script);
 /******/ 		}
 /******/ 	};
@@ -743,7 +743,6 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      // console.log('re render');
 	      var showWeekNumberEl;
 	      var props = this.props;
 	      var locale = props.locale;
@@ -764,9 +763,11 @@
 	      if (props.showWeekNumber) {
 	        showWeekNumberEl = React.createElement('th', { role: 'columnheader', className: prefixClsFn('column-header', 'week-number-header') }, React.createElement('span', { className: prefixClsFn('column-header-inner') }, 'x'));
 	      }
+	
 	      var weekDaysEls = weekDays.map(function (day, xindex) {
 	        return React.createElement('th', { key: xindex, role: 'columnheader', title: day, className: prefixClsFn('column-header') }, React.createElement('span', { className: prefixClsFn('column-header-inner') }, veryShortWeekdays[xindex]));
 	      });
+	
 	      var footerEl;
 	      if (props.showToday || props.showTime) {
 	        var todayEl;
@@ -802,13 +803,18 @@
 	      if (props.className) {
 	        className += ' ' + props.className;
 	      }
+	      if (props.showWeekNumber) {
+	        className += ' ' + prefixClsFn('week-number');
+	      }
 	      var orient = state.orient;
 	      if (orient) {
 	        orient.forEach(function (o) {
 	          className += ' ' + prefixClsFn('orient-' + o);
 	        });
 	      }
-	      return React.createElement('div', { className: className, style: this.props.style, tabIndex: '0', onFocus: this.onFocus, onBlur: this.onBlur, onKeyDown: this.handleKeyDown }, React.createElement('div', { style: { outline: 'none' } }, React.createElement('div', { className: prefixClsFn('header') }, React.createElement('a', { className: prefixClsFn('prev-year-btn'),
+	      return React.createElement('div', { className: className, style: this.props.style,
+	        tabIndex: '0', onFocus: this.onFocus,
+	        onBlur: this.onBlur, onKeyDown: this.handleKeyDown }, React.createElement('div', { style: { outline: 'none' } }, React.createElement('div', { className: prefixClsFn('header') }, React.createElement('a', { className: prefixClsFn('prev-year-btn'),
 	        role: 'button',
 	        onClick: this.previousYear,
 	        title: locale.previousYear }, '«'), React.createElement('a', { className: prefixClsFn('prev-month-btn'),
