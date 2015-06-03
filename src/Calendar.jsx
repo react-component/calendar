@@ -251,6 +251,7 @@ class Calendar extends React.Component {
               dateFormatter={this.dateFormatter}/>
           </div>
           <CalendarFooter locale={locale}
+            showClear={props.showClear}
             prefixClsFn={prefixClsFn}
             showToday={props.showToday}
             showTime={props.showTime}
