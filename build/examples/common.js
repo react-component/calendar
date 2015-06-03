@@ -76,7 +76,7 @@
 /******/ 			script.charset = 'utf-8';
 /******/ 			script.async = true;
 /******/
-/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"ant-design-simple","1":"renderCalendarToBody","2":"disabled","3":"simple","4":"picker","5":"theme","6":"defaultValue","7":"ant-design-picker"}[chunkId]||chunkId) + ".js";
+/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"ant-design-simple","1":"renderCalendarToBody","2":"disabled","3":"simple","4":"defaultValue","5":"theme","6":"picker","7":"ant-design-picker"}[chunkId]||chunkId) + ".js";
 /******/ 			head.appendChild(script);
 /******/ 		}
 /******/ 	};
@@ -528,6 +528,13 @@
 	  return value;
 	}
 	
+	function getNowByCurrentStateValue(value) {
+	  value = value || getNow();
+	  value = value.clone();
+	  value.setTime(Date.now());
+	  return value;
+	}
+	
 	var Calendar = (function (_React$Component) {
 	  function Calendar(props) {
 	    _classCallCheck(this, Calendar);
@@ -567,7 +574,7 @@
 	    value: function componentWillReceiveProps(nextProps) {
 	      var value = nextProps.value;
 	      if (value !== undefined) {
-	        value = value || nextProps.defaultValue || getNow();
+	        value = value || nextProps.defaultValue || getNowByCurrentStateValue(this.state.value);
 	        this.setState({
 	          value: value
 	        });
