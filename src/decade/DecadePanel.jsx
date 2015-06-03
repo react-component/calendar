@@ -4,6 +4,7 @@ var React = require('react');
 var ROW = 4;
 var COL = 3;
 var cx = require('rc-util').classSet;
+var staticPrefixClsFn = require('../util/prefixClsFn');
 
 function goYear(direction) {
   var next = this.state.value.clone();
@@ -29,7 +30,7 @@ class DecadePanel extends React.Component {
     };
 
     // bind methods
-    this.prefixClsFn = require('./prefixClsFn').bind(this);
+    this.prefixClsFn = staticPrefixClsFn.bind(this);
     this.nextCentury = goYear.bind(this, 100);
     this.previousCentury = goYear.bind(this, -100);
   }

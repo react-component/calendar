@@ -2,6 +2,7 @@
 
 var React = require('react');
 var cx = require('rc-util').classSet;
+var staticPrefixClsFn = require('../util/prefixClsFn');
 
 function choose(hour, e) {
   var next = this.state.value.clone();
@@ -18,7 +19,7 @@ class TimePanel extends React.Component {
       value: props.value,
       prefixCls: props.rootPrefixCls + '-time-panel'
     };
-    this.prefixClsFn = require('./prefixClsFn').bind(this);
+    this.prefixClsFn = staticPrefixClsFn.bind(this);
   }
 
   render() {

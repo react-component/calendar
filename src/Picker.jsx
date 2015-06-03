@@ -3,7 +3,7 @@
 var React = require('react');
 var DateTimeFormat = require('gregorian-calendar-format');
 var rcUtil = require('rc-util');
-var KeyCode = require('rc-util').KeyCode;
+var KeyCode = rcUtil.KeyCode;
 var domAlign = require('dom-align');
 var orientMap = {
   tl: ['top', 'left'],

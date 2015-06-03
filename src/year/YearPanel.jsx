@@ -4,7 +4,8 @@ var React = require('react');
 var ROW = 4;
 var COL = 3;
 var cx = require('rc-util').classSet;
-var DecadePanel = require('./DecadePanel');
+var DecadePanel = require('../decade/DecadePanel');
+var staticPrefixClsFn = require('../util/prefixClsFn');
 
 function goYear(direction) {
   var next = this.state.value.clone();
@@ -21,7 +22,7 @@ function chooseYear(year) {
 class YearPanel extends React.Component {
   constructor(props) {
     super(props);
-    this.prefixClsFn = require('./prefixClsFn').bind(this);
+    this.prefixClsFn = staticPrefixClsFn.bind(this);
     this.state = {
       value: props.value,
       prefixCls: props.rootPrefixCls + '-year-panel'

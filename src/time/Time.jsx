@@ -120,7 +120,7 @@ class Time extends React.Component {
     var commonProps = {
       value: value,
       onSelect: this.onSelectPanel,
-      rootPrefixCls: props.rootPrefixCls
+      rootPrefixCls: prefixClsFn()
     };
     if (state.showHourPanel) {
       panel = <TimePanel rowCount={6} colCount={4} getter="getHourOfDay" setter={setHourOfDay}
