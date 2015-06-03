@@ -76,7 +76,7 @@
 /******/ 			script.charset = 'utf-8';
 /******/ 			script.async = true;
 /******/
-/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"ant-design-simple","1":"renderCalendarToBody","2":"simple","3":"picker","4":"disabled","5":"theme","6":"defaultValue","7":"ant-design-picker"}[chunkId]||chunkId) + ".js";
+/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"ant-design-simple","1":"renderCalendarToBody","2":"disabled","3":"simple","4":"picker","5":"theme","6":"defaultValue","7":"ant-design-picker"}[chunkId]||chunkId) + ".js";
 /******/ 			head.appendChild(script);
 /******/ 		}
 /******/ 	};
@@ -522,16 +522,18 @@
 	  }
 	}
 	
+	function getNow() {
+	  var value = new GregorianCalendar();
+	  value.setTime(Date.now());
+	  return value;
+	}
+	
 	var Calendar = (function (_React$Component) {
 	  function Calendar(props) {
 	    _classCallCheck(this, Calendar);
 	
 	    _get(Object.getPrototypeOf(Calendar.prototype), 'constructor', this).call(this, props);
-	    var value = props.value || props.defaultValue;
-	    if (!value) {
-	      value = new GregorianCalendar();
-	      value.setTime(Date.now());
-	    }
+	    var value = props.value || props.defaultValue || getNow();
 	    this.dateFormatter = new DateTimeFormat(props.locale.dateFormat);
 	    this.state = {
 	      orient: props.orient,
@@ -565,10 +567,7 @@
 	    value: function componentWillReceiveProps(nextProps) {
 	      var value = nextProps.value;
 	      if (value !== undefined) {
-	        if (!value) {
-	          value = this.state.value.clone();
-	          value.setTime(Date.now());
-	        }
+	        value = value || nextProps.defaultValue || getNow();
 	        this.setState({
 	          value: value
 	        });
@@ -5574,9 +5573,12 @@
 	  _createClass(Picker, [{
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(nextProps) {
-	      if (nextProps.value) {
+	      var value = nextProps.value;
+	      if (value !== undefined) {
+	        // null special meaning
+	        value = value || nextProps.defaultValue || null;
 	        this.setState({
-	          value: nextProps.value
+	          value: value
 	        });
 	      }
 	    }

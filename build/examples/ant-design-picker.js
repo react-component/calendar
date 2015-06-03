@@ -136,6 +136,10 @@ webpackJsonp([7],{
 	var now = new GregorianCalendar(zhCn);
 	now.setTime(Date.now());
 	
+	var defaultCalendarValue = new GregorianCalendar(zhCn);
+	defaultCalendarValue.setTime(Date.now());
+	defaultCalendarValue.addMonth(-1);
+	
 	var Test = React.createClass({
 	  displayName: 'Test',
 	
@@ -176,7 +180,9 @@ webpackJsonp([7],{
 	    var state = this.state;
 	    var calendar = React.createElement(Calendar, { locale: CalendarLocale,
 	      orient: ['top', 'left'],
-	      showTime: this.state.showTime, onSelect: this.handleCalendarSelect, onClear: this.handleCalendarSelect.bind(this, null), showClear: true });
+	      defaultValue: defaultCalendarValue,
+	      showTime: this.state.showTime, onSelect: this.handleCalendarSelect,
+	      onClear: this.handleCalendarSelect.bind(this, null), showClear: true });
 	    return React.createElement(
 	      'div',
 	      { style: { width: 236, margin: 20 }, 'data-time': this.state.time },
