@@ -149,14 +149,16 @@ function handleKeyDown(e) {
   }
 }
 
+function getNow() {
+  var value = new GregorianCalendar();
+  value.setTime(Date.now());
+  return value;
+}
+
 class Calendar extends React.Component {
   constructor(props) {
     super(props);
-    var value = props.value || props.defaultValue;
-    if (!value) {
-      value = new GregorianCalendar();
-      value.setTime(Date.now());
-    }
+    var value = props.value || props.defaultValue || getNow();
     this.dateFormatter = new DateTimeFormat(props.locale.dateFormat);
     this.state = {
       orient: props.orient,
@@ -185,10 +187,7 @@ class Calendar extends React.Component {
   componentWillReceiveProps(nextProps) {
     var value = nextProps.value;
     if (value !== undefined) {
-      if (!value) {
-        value = this.state.value.clone();
-        value.setTime(Date.now());
-      }
+      value = value || nextProps.defaultValue || getNow();
       this.setState({
         value: value
       });

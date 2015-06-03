@@ -1,6 +1,10 @@
 # History
 ----
 
+## 3.8.0 / 2015-06-03
+
+`improved` refactor by split components
+
 ## 3.7.0 / 2015-06-01
 
 `improved` move nextDecade and prevDecade button to YearPanel body, optimize disable style for ant-design

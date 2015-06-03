@@ -6,7 +6,12 @@ var zhCn = require('gregorian-calendar/lib/locale/zh-cn'); // spm error
 var DateTimeFormat = require('gregorian-calendar-format');
 var GregorianCalendar = require('gregorian-calendar');
 var CalendarLocale = require('rc-calendar/src/locale/zh-cn');
+var now = new GregorianCalendar(zhCn);
+now.setTime(Date.now());
 
+var defaultCalendarValue = new GregorianCalendar(zhCn);
+defaultCalendarValue.setTime(Date.now());
+defaultCalendarValue.addMonth(-1);
 
 var Test = React.createClass({
   handleChange: function (value) {
@@ -29,12 +34,10 @@ var Test = React.createClass({
   },
 
   getInitialState: function () {
-    var value = new GregorianCalendar(zhCn);
-    value.setTime(Date.now());
     return {
       time: Date.now(),
       showTime: true,
-      value: value
+      value: this.props.defaultValue
     };
   },
 
@@ -48,7 +51,9 @@ var Test = React.createClass({
     var state = this.state;
     var calendar = <Calendar locale={CalendarLocale}
       orient={['top', 'left']}
-      showTime={this.state.showTime} onSelect={this.handleCalendarSelect} onClear={this.handleCalendarSelect.bind(this, null)} showClear={true}/>;
+      defaultValue={defaultCalendarValue}
+      showTime={this.state.showTime} onSelect={this.handleCalendarSelect}
+      onClear={this.handleCalendarSelect.bind(this, null)} showClear={true}/>;
     return <div style={{width: 236, margin: 20}} data-time={this.state.time}>
       <div>
         <span>
@@ -66,7 +71,7 @@ var Test = React.createClass({
           trigger={<span className="rc-calendar-picker-icon" />}
           formatter={this.props.formatter} calendar={calendar}
           value={state.value} onChange={this.handleChange}>
-          <input className="rc-calendar-picker-input"/>
+          <input className="rc-calendar-picker-input" placeholder="请选择日期"/>
         </DatePicker>
       </div>
     </div>;
@@ -75,5 +80,6 @@ var Test = React.createClass({
 
 React.render(<div>
   <h1>zh-cn</h1>
-  <Test />
+  <Test defaultValue={now}/>
+  <Test/>
 </div>, document.getElementById('__react-content'));
