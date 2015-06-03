@@ -76,7 +76,7 @@
 /******/ 			script.charset = 'utf-8';
 /******/ 			script.async = true;
 /******/
-/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"ant-design-simple","1":"renderCalendarToBody","2":"disabled","3":"simple","4":"defaultValue","5":"theme","6":"picker","7":"ant-design-picker"}[chunkId]||chunkId) + ".js";
+/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"ant-design-simple","1":"renderCalendarToBody","2":"simple","3":"picker","4":"disabled","5":"theme","6":"defaultValue","7":"ant-design-picker"}[chunkId]||chunkId) + ".js";
 /******/ 			head.appendChild(script);
 /******/ 		}
 /******/ 	};
@@ -624,6 +624,7 @@
 	        disabledDate: props.disabledDate,
 	        showWeekNumber: props.showWeekNumber,
 	        dateFormatter: this.dateFormatter })), React.createElement(CalendarFooter, { locale: locale,
+	        showClear: props.showClear,
 	        prefixClsFn: prefixClsFn,
 	        showToday: props.showToday,
 	        showTime: props.showTime,

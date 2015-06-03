@@ -191,7 +191,8 @@ require(<span class="hljs-string">'rc-calendar/assets/index.css'</span>);
 <span class="hljs-keyword">var</span> DateTimeFormat = require(<span class="hljs-string">'gregorian-calendar-format'</span>);
 <span class="hljs-keyword">var</span> GregorianCalendar = require(<span class="hljs-string">'gregorian-calendar'</span>);
 <span class="hljs-keyword">var</span> CalendarLocale = require(<span class="hljs-string">'rc-calendar/lib/locale/zh-cn'</span>);
-
+<span class="hljs-keyword">var</span> now = <span class="hljs-keyword">new</span> GregorianCalendar(zhCn);
+now.setTime(Date.now());
 
 <span class="hljs-keyword">var</span> Test = React.createClass({
   handleChange: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(value)</span> </span>{
@@ -214,12 +215,10 @@ require(<span class="hljs-string">'rc-calendar/assets/index.css'</span>);
   },
 
   getInitialState: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
-    <span class="hljs-keyword">var</span> value = <span class="hljs-keyword">new</span> GregorianCalendar(zhCn);
-    value.setTime(Date.now());
     <span class="hljs-keyword">return</span> {
       time: Date.now(),
       showTime: <span class="hljs-literal">true</span>,
-      value: value
+      value: <span class="hljs-keyword">this</span>.props.defaultValue
     };
   },
 
@@ -251,7 +250,7 @@ require(<span class="hljs-string">'rc-calendar/assets/index.css'</span>);
           trigger={&lt;span className=<span class="hljs-string">"rc-calendar-picker-icon"</span> /&gt;}
           formatter={<span class="hljs-keyword">this</span>.props.formatter} calendar={calendar}
           value={state.value} onChange={<span class="hljs-keyword">this</span>.handleChange}&gt;
-          &lt;input className=<span class="hljs-string">"rc-calendar-picker-input"</span>/&gt;
+          &lt;input className=<span class="hljs-string">"rc-calendar-picker-input"</span> placeholder=<span class="hljs-string">"请选择日期"</span>/&gt;
         &lt;/DatePicker&gt;
       &lt;/div&gt;
     &lt;/div&gt;;
@@ -260,6 +259,7 @@ require(<span class="hljs-string">'rc-calendar/assets/index.css'</span>);
 
 React.render(&lt;div&gt;
   &lt;h1&gt;zh-cn&lt;/h1&gt;
+  &lt;Test defaultValue={now}/&gt;
   &lt;Test /&gt;
 &lt;/div&gt;, document.getElementById(<span class="hljs-string">'__react-content'</span>));
 
