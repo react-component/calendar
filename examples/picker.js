@@ -64,7 +64,9 @@ var Test = React.createClass({
         <DatePicker ref='picker'
           formatter={this.props.formatter} calendar={calendar}
           value={state.value} onChange={this.handleChange}>
-          <input className="form-control rc-calendar-picker-input"/>
+          <input
+            placeholder="please select date"
+            className="form-control rc-calendar-picker-input"/>
         </DatePicker>
         <span className="input-group-addon"
           style={{'-webkit-user-select': 'none'}}

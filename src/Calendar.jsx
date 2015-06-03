@@ -155,6 +155,13 @@ function getNow() {
   return value;
 }
 
+function getNowByCurrentStateValue(value) {
+  value = value || getNow();
+  value = value.clone();
+  value.setTime(Date.now());
+  return value;
+}
+
 class Calendar extends React.Component {
   constructor(props) {
     super(props);
@@ -187,7 +194,7 @@ class Calendar extends React.Component {
   componentWillReceiveProps(nextProps) {
     var value = nextProps.value;
     if (value !== undefined) {
-      value = value || nextProps.defaultValue || getNow();
+      value = value || nextProps.defaultValue || getNowByCurrentStateValue(this.state.value);
       this.setState({
         value: value
       });
