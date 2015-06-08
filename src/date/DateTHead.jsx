@@ -39,7 +39,7 @@ class DateTHead extends React.Component {
               {showWeekNumberEl}
               {weekDaysEls}
       </tr>
-    </thead>
+    </thead>;
   }
 }
 

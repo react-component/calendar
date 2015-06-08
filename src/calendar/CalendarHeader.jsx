@@ -1,3 +1,5 @@
+'use strict';
+
 var React = require('react');
 var MonthPanel = require('../month/MonthPanel');
 var DateTimeFormat = require('gregorian-calendar-format');
@@ -24,7 +26,6 @@ class CalendarHeader extends React.Component {
   }
 
   getMonthYear() {
-    var locale = this.props.locale;
     var value = this.props.value;
     return this.formatter.format(value);
   }
@@ -78,7 +79,7 @@ class CalendarHeader extends React.Component {
         »
       </a>
       {monthPanel}
-    </div>
+    </div>;
   }
 }
 
