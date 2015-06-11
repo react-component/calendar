@@ -1,6 +1,10 @@
 # History
 ----
 
+## 3.9.0 / 2015-06-11
+
+`improved` fix by #33 #34 #35
+
 ## 3.8.0 / 2015-06-03
 
 `improved` refactor by split components

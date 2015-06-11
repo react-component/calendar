@@ -135,26 +135,32 @@ class Time extends React.Component {
         title={locale.secondPanelTitle}
       {...commonProps}/>;
     }
-    return (<div>
-      <input className = {prefixClsFn('time-input')} title={locale.hourInput}
+    return (<span className={prefixClsFn('time')}>
+      <input className = {prefixClsFn('time-input')}
+        title={locale.hourInput}
         ref={setHourOfDay}
-        readOnly value={padding(hour)}
+        readOnly
+        value={padding(hour)}
         onClick={this.onHourClick}
         onKeyDown={this.onHourKeyDown}/>
       <span> : </span>
-      <input className = {prefixClsFn('time-input')} title={locale.minuteInput}
+      <input className = {prefixClsFn('time-input')}
+        title={locale.minuteInput}
         ref={setMinutes}
-        readOnly value={padding(minute)}
+        readOnly
+        value={padding(minute)}
         onClick={this.onMinuteClick}
         onKeyDown = {this.onMinuteKeyDown}/>
       <span> : </span>
-      <input className = {prefixClsFn('time-input')} title={locale.secondInput}
+      <input className = {prefixClsFn('time-input')}
+        title={locale.secondInput}
         ref={setSeconds}
-        readOnly value={padding(second)}
+        readOnly
+        value={padding(second)}
         onClick={this.onSecondClick}
         onKeyDown = {this.onSecondKeyDown}/>
     {panel}
-    </div>);
+    </span>);
   }
 }
 

@@ -3,51 +3,86 @@
 var React = require('react');
 var MonthPanel = require('../month/MonthPanel');
 var DateTimeFormat = require('gregorian-calendar-format');
+var YearPanel = require('../year/YearPanel');
 
 class CalendarHeader extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.formatter = new DateTimeFormat(props.locale.monthYearFormat);
+    this.yearFormatter = new DateTimeFormat(props.locale.yearFormat);
+    this.monthFormatter = new DateTimeFormat(props.locale.monthFormat);
     this.showMonthPanel = this.showMonthPanel.bind(this);
-    this.onMonthPanelSelect = this.onMonthPanelSelect.bind(this);
+    this.showYearPanel = this.showYearPanel.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.locale !== this.props.locale) {
-      this.formatter = new DateTimeFormat(nextProps.locale.monthYearFormat);
+    var locale = this.props.locale;
+    if (nextProps.locale !== locale) {
+      this.yearFormatter = new DateTimeFormat(locale.yearFormat);
+      this.monthFormatter = new DateTimeFormat(locale.monthFormat);
     }
   }
 
   showMonthPanel() {
     this.setState({
-      showMonthPanel: 1
+      showMonthPanel: 1,
+      showYearPanel: 0
     });
   }
 
-  getMonthYear() {
-    var value = this.props.value;
-    return this.formatter.format(value);
-  }
-
-  onMonthPanelSelect(value) {
+  showYearPanel() {
     this.setState({
-      showMonthPanel: 0
+      showMonthPanel: 0,
+      showYearPanel: 1
     });
-    this.props.onMonthPanelSelect(value);
+  }
+
+  getMonthYearElement() {
+    var props = this.props;
+    var prefixClsFn = props.prefixClsFn;
+    var locale = props.locale;
+    var value = this.props.value;
+    var monthBeforeYear = locale.monthBeforeYear;
+    var selectClassName = prefixClsFn(monthBeforeYear ? 'my-select' : 'ym-select');
+    var year = <a className = {prefixClsFn('year-select')}
+      role="button"
+      onClick={this.showYearPanel}
+      title={locale.monthSelect}>{this.yearFormatter.format(value)}</a>;
+    var month = <a className ={prefixClsFn('month-select')}
+      role="button"
+      onClick={this.showMonthPanel}
+      title={locale.monthSelect}>{this.monthFormatter.format(value)}</a>;
+    var my = [];
+    if (monthBeforeYear) {
+      my = [month, year];
+    } else {
+      my = [year, month];
+    }
+    return <span className={selectClassName}>
+    {my}
+    </span>;
+  }
+
+  handleSelect(value) {
+    this.setState({
+      showMonthPanel: 0,
+      showYearPanel: 0
+    });
+    this.props.onValueChange(value);
   }
 
   render() {
     var props = this.props;
+    var state = this.state;
     var prefixClsFn = props.prefixClsFn;
     var locale = props.locale;
     var value = props.value;
-    var monthPanel;
-
-    if (this.state.showMonthPanel) {
-      monthPanel = <MonthPanel locale={locale} value={value} rootPrefixCls={prefixClsFn()} onSelect={this.onMonthPanelSelect}/>;
+    var PanelClass = state.showMonthPanel ? MonthPanel : state.showYearPanel ? YearPanel : null;
+    var panel;
+    if (PanelClass) {
+      panel = <PanelClass locale={locale} value={value} rootPrefixCls={prefixClsFn()} onSelect={this.handleSelect}/>;
     }
-
     return <div className = {prefixClsFn('header')}>
       <a className ={prefixClsFn('prev-year-btn')}
         role="button"
@@ -61,13 +96,7 @@ class CalendarHeader extends React.Component {
         title={locale.previousMonth}>
         ‹
       </a>
-      <a className = {prefixClsFn('month-select')}
-        role="button"
-        onClick={this.showMonthPanel}
-        title={locale.monthSelect}>
-        <span className = {prefixClsFn('month-select-content')}>{this.getMonthYear()}</span>
-        <span className = {prefixClsFn('month-select-arrow')}>x</span>
-      </a>
+      {this.getMonthYearElement()}
       <a className = {prefixClsFn('next-month-btn')}
         onClick={props.nextMonth}
         title={locale.nextMonth}>
@@ -78,7 +107,7 @@ class CalendarHeader extends React.Component {
         title={locale.nextYear}>
         »
       </a>
-      {monthPanel}
+      {panel}
     </div>;
   }
 }

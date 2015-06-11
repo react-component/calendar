@@ -15,5 +15,7 @@ React.render(
     <h2>calendar (en-us, U.S.A.  California  San Francisco)</h2>
     <Calendar showWeekNumber={true}
       showTime={true}
+      showOk={0}
+      showClear={0}
       onSelect={onSelect} prefixCls="classic-calendar"/>
   </div>, document.getElementById('__react-content'));

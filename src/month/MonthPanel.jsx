@@ -1,7 +1,6 @@
 'use strict';
 
 var React = require('react');
-var DateTimeFormat = require('gregorian-calendar-format');
 var ROW = 4;
 var COL = 3;
 var cx = require('rc-util').classSet;
@@ -56,8 +55,6 @@ class MonthPanel extends React.Component {
     var value = this.state.value;
     var current = value.clone();
     var locale = props.locale;
-    var monthYearFormat = locale.monthYearFormat;
-    var dateFormatter = new DateTimeFormat(monthYearFormat);
     var months = [];
     var shortMonths = locale.format.shortMonths;
     var index = 0;
@@ -68,7 +65,7 @@ class MonthPanel extends React.Component {
         months[i][j] = {
           value: index,
           content: shortMonths[index],
-          title: dateFormatter.format(current)
+          title:shortMonths[index]
         };
         index++;
       }

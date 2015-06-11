@@ -15,6 +15,9 @@ React.render(
   <div>
     <h2>calendar (en-us, U.S.A.  California  San Francisco)</h2>
     <Calendar showWeekNumber={true}
-      onSelect={onSelect} showTime={true}/>
+      showOk={0}
+      showClear={0}
+      onSelect={onSelect}
+      showTime={true}/>
   </div>, document.getElementById('__react-content'));
 

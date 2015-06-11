@@ -49,106 +49,6 @@ function goDay(direction) {
   this.setState({value: next});
 }
 
-function onFocus() {
-  if (this._blurTimer) {
-    clearTimeout(this._blurTimer);
-    this._blurTimer = null;
-  } else {
-    this.props.onFocus();
-  }
-}
-
-function onBlur() {
-  if (this._blurTimer) {
-    clearTimeout(this._blurTimer);
-  }
-  this._blurTimer = setTimeout(()=> {
-    this.props.onBlur();
-  }, 100);
-}
-
-function chooseToday() {
-  var today = this.state.value.clone();
-  today.setTime(Date.now());
-  this.handleSelect(today);
-}
-
-
-function handleSelect(current, keyDownEvent) {
-  var props = this.props;
-  this.setState({
-    value: current
-  });
-  if (!keyDownEvent) {
-    props.onSelect(current);
-  }
-}
-
-function clear() {
-  this.props.onClear();
-}
-
-function onMonthPanelSelect(current) {
-  this.setState({
-    value: current
-  });
-}
-
-function handleKeyDown(e) {
-  var keyCode = e.keyCode;
-  // mac
-  var ctrlKey = e.ctrlKey || e.metaKey;
-  switch (keyCode) {
-    case KeyCode.DOWN:
-      goWeek.call(this, 1);
-      e.preventDefault();
-      return true;
-    case KeyCode.UP:
-      goWeek.call(this, -1);
-      e.preventDefault();
-      return true;
-    case KeyCode.LEFT:
-      if (ctrlKey) {
-        this.previousYear();
-      } else {
-        goDay.call(this, -1);
-      }
-      e.preventDefault();
-      return true;
-    case KeyCode.RIGHT:
-      if (ctrlKey) {
-        this.nextYear();
-      } else {
-        goDay.call(this, 1);
-      }
-      e.preventDefault();
-      return true;
-    case KeyCode.HOME:
-      goStartMonth.call(this);
-      e.preventDefault();
-      return true;
-    case KeyCode.END:
-      goEndMonth.call(this);
-      e.preventDefault();
-      return true;
-    case KeyCode.PAGE_DOWN:
-      this.nextMonth();
-      e.preventDefault();
-      return true;
-    case KeyCode.PAGE_UP:
-      this.previousMonth();
-      e.preventDefault();
-      return true;
-    case KeyCode.ENTER:
-      this.props.onSelect(this.state.value);
-      e.preventDefault();
-      return true;
-    default:
-      this.props.onKeyDown(e);
-      return true;
-  }
-}
-
 function getNow() {
   var value = new GregorianCalendar();
   value.setTime(Date.now());
@@ -173,18 +73,121 @@ class Calendar extends React.Component {
       value: value
     };
     // bind methods
-    this.onBlur = onBlur.bind(this);
-    this.onFocus = onFocus.bind(this);
-    this.prefixClsFn = staticPrefixClsFn.bind(this);
     this.nextMonth = goMonth.bind(this, 1);
     this.previousMonth = goMonth.bind(this, -1);
     this.nextYear = goYear.bind(this, 1);
     this.previousYear = goYear.bind(this, -1);
-    this.chooseToday = chooseToday.bind(this);
-    this.clear = clear.bind(this);
-    this.handleSelect = handleSelect.bind(this);
-    this.onMonthPanelSelect = onMonthPanelSelect.bind(this);
-    this.handleKeyDown = handleKeyDown.bind(this);
+
+    ['handleBlur', 'handleFocus', 'prefixClsFn', 'chooseToday', 'handleClear', 'handleSelect', 'setValue', 'handleKeyDown', 'handleOk'].forEach((m) => {
+      this[m] = this[m].bind(this);
+    });
+  }
+
+  handleOk() {
+    this.props.onOk(this.state.value);
+  }
+
+  setValue(current) {
+    this.setState({
+      value: current
+    });
+  }
+
+  chooseToday() {
+    var today = this.state.value.clone();
+    today.setTime(Date.now());
+    this.handleSelect(today);
+  }
+
+  handleSelect(current, keyDownEvent) {
+    var props = this.props;
+    this.setState({
+      value: current
+    });
+    if (!keyDownEvent) {
+      props.onSelect(current);
+    }
+  }
+
+  handleKeyDown(e) {
+    var keyCode = e.keyCode;
+    // mac
+    var ctrlKey = e.ctrlKey || e.metaKey;
+    switch (keyCode) {
+      case KeyCode.DOWN:
+        goWeek.call(this, 1);
+        e.preventDefault();
+        return true;
+      case KeyCode.UP:
+        goWeek.call(this, -1);
+        e.preventDefault();
+        return true;
+      case KeyCode.LEFT:
+        if (ctrlKey) {
+          this.previousYear();
+        } else {
+          goDay.call(this, -1);
+        }
+        e.preventDefault();
+        return true;
+      case KeyCode.RIGHT:
+        if (ctrlKey) {
+          this.nextYear();
+        } else {
+          goDay.call(this, 1);
+        }
+        e.preventDefault();
+        return true;
+      case KeyCode.HOME:
+        goStartMonth.call(this);
+        e.preventDefault();
+        return true;
+      case KeyCode.END:
+        goEndMonth.call(this);
+        e.preventDefault();
+        return true;
+      case KeyCode.PAGE_DOWN:
+        this.nextMonth();
+        e.preventDefault();
+        return true;
+      case KeyCode.PAGE_UP:
+        this.previousMonth();
+        e.preventDefault();
+        return true;
+      case KeyCode.ENTER:
+        this.props.onSelect(this.state.value);
+        e.preventDefault();
+        return true;
+      default:
+        this.props.onKeyDown(e);
+        return true;
+    }
+  }
+
+  handleClear() {
+    this.props.onClear();
+  }
+
+  prefixClsFn() {
+    return staticPrefixClsFn.apply(this, arguments);
+  }
+
+  handleFocus() {
+    if (this._blurTimer) {
+      clearTimeout(this._blurTimer);
+      this._blurTimer = null;
+    } else {
+      this.props.onFocus();
+    }
+  }
+
+  handleBlur() {
+    if (this._blurTimer) {
+      clearTimeout(this._blurTimer);
+    }
+    this._blurTimer = setTimeout(()=> {
+      this.props.onBlur();
+    }, 100);
   }
 
   shouldComponentUpdate() {
@@ -234,11 +237,12 @@ class Calendar extends React.Component {
 
     return (
       <div className={rcUtil.classSet(className)} style={this.props.style}
-        tabIndex="0" onFocus={this.onFocus}
-        onBlur={this.onBlur} onKeyDown={this.handleKeyDown}>
+        tabIndex="0" onFocus={this.handleFocus}
+        onBlur={this.handleBlur} onKeyDown={this.handleKeyDown}>
         <div style={{outline: 'none'}}>
-          <CalendarHeader locale={locale}
-            onMonthPanelSelect={this.onMonthPanelSelect}
+          <CalendarHeader
+            locale={locale}
+            onValueChange={this.setValue}
             previousYear={this.previousYear}
             previousMonth={this.previousMonth}
             nextMonth={this.nextMonth}
@@ -256,16 +260,19 @@ class Calendar extends React.Component {
               showWeekNumber={props.showWeekNumber}
               dateFormatter={this.dateFormatter}/>
           </div>
-          <CalendarFooter locale={locale}
+          <CalendarFooter
+            locale={locale}
             showClear={props.showClear}
+            showOk={props.showOk}
             prefixClsFn={prefixClsFn}
             showToday={props.showToday}
             showTime={props.showTime}
             value={value}
             dateFormatter={this.dateFormatter}
-            clear={this.clear}
-            handleSelect={this.handleSelect}
-            chooseToday={this.chooseToday}
+            onClear={this.handleClear}
+            onOk={this.handleOk}
+            onSelect={this.handleSelect}
+            onToday={this.chooseToday}
           />
         </div>
       </div>);
@@ -296,7 +303,8 @@ Calendar.defaultProps = {
   onSelect: noop,
   onFocus: noop,
   onBlur: noop,
-  onClear: noop
+  onClear: noop,
+  onOk: noop
 };
 
 module.exports = Calendar;
