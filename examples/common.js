@@ -76,7 +76,7 @@
 /******/ 			script.charset = 'utf-8';
 /******/ 			script.async = true;
 /******/
-/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"ant-design-simple","1":"renderCalendarToBody","2":"disabled","3":"simple","4":"defaultValue","5":"theme","6":"picker","7":"ant-design-picker"}[chunkId]||chunkId) + ".js";
+/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"ant-design-simple","1":"renderCalendarToBody","2":"disabled","3":"simple","4":"picker","5":"theme","6":"defaultValue","7":"ant-design-picker"}[chunkId]||chunkId) + ".js";
 /******/ 			head.appendChild(script);
 /******/ 		}
 /******/ 	};
@@ -421,107 +421,6 @@
 	  this.setState({ value: next });
 	}
 	
-	function onFocus() {
-	  if (this._blurTimer) {
-	    clearTimeout(this._blurTimer);
-	    this._blurTimer = null;
-	  } else {
-	    this.props.onFocus();
-	  }
-	}
-	
-	function onBlur() {
-	  var _this = this;
-	
-	  if (this._blurTimer) {
-	    clearTimeout(this._blurTimer);
-	  }
-	  this._blurTimer = setTimeout(function () {
-	    _this.props.onBlur();
-	  }, 100);
-	}
-	
-	function chooseToday() {
-	  var today = this.state.value.clone();
-	  today.setTime(Date.now());
-	  this.handleSelect(today);
-	}
-	
-	function handleSelect(current, keyDownEvent) {
-	  var props = this.props;
-	  this.setState({
-	    value: current
-	  });
-	  if (!keyDownEvent) {
-	    props.onSelect(current);
-	  }
-	}
-	
-	function clear() {
-	  this.props.onClear();
-	}
-	
-	function onMonthPanelSelect(current) {
-	  this.setState({
-	    value: current
-	  });
-	}
-	
-	function handleKeyDown(e) {
-	  var keyCode = e.keyCode;
-	  // mac
-	  var ctrlKey = e.ctrlKey || e.metaKey;
-	  switch (keyCode) {
-	    case KeyCode.DOWN:
-	      goWeek.call(this, 1);
-	      e.preventDefault();
-	      return true;
-	    case KeyCode.UP:
-	      goWeek.call(this, -1);
-	      e.preventDefault();
-	      return true;
-	    case KeyCode.LEFT:
-	      if (ctrlKey) {
-	        this.previousYear();
-	      } else {
-	        goDay.call(this, -1);
-	      }
-	      e.preventDefault();
-	      return true;
-	    case KeyCode.RIGHT:
-	      if (ctrlKey) {
-	        this.nextYear();
-	      } else {
-	        goDay.call(this, 1);
-	      }
-	      e.preventDefault();
-	      return true;
-	    case KeyCode.HOME:
-	      goStartMonth.call(this);
-	      e.preventDefault();
-	      return true;
-	    case KeyCode.END:
-	      goEndMonth.call(this);
-	      e.preventDefault();
-	      return true;
-	    case KeyCode.PAGE_DOWN:
-	      this.nextMonth();
-	      e.preventDefault();
-	      return true;
-	    case KeyCode.PAGE_UP:
-	      this.previousMonth();
-	      e.preventDefault();
-	      return true;
-	    case KeyCode.ENTER:
-	      this.props.onSelect(this.state.value);
-	      e.preventDefault();
-	      return true;
-	    default:
-	      this.props.onKeyDown(e);
-	      return true;
-	  }
-	}
-	
 	function getNow() {
 	  var value = new GregorianCalendar();
 	  value.setTime(Date.now());
@@ -537,6 +436,8 @@
 	
 	var Calendar = (function (_React$Component) {
 	  function Calendar(props) {
+	    var _this = this;
+	
 	    _classCallCheck(this, Calendar);
 	
 	    _get(Object.getPrototypeOf(Calendar.prototype), 'constructor', this).call(this, props);
@@ -548,23 +449,137 @@
 	      value: value
 	    };
 	    // bind methods
-	    this.onBlur = onBlur.bind(this);
-	    this.onFocus = onFocus.bind(this);
-	    this.prefixClsFn = staticPrefixClsFn.bind(this);
 	    this.nextMonth = goMonth.bind(this, 1);
 	    this.previousMonth = goMonth.bind(this, -1);
 	    this.nextYear = goYear.bind(this, 1);
 	    this.previousYear = goYear.bind(this, -1);
-	    this.chooseToday = chooseToday.bind(this);
-	    this.clear = clear.bind(this);
-	    this.handleSelect = handleSelect.bind(this);
-	    this.onMonthPanelSelect = onMonthPanelSelect.bind(this);
-	    this.handleKeyDown = handleKeyDown.bind(this);
+	
+	    ['handleBlur', 'handleFocus', 'prefixClsFn', 'chooseToday', 'handleClear', 'handleSelect', 'setValue', 'handleKeyDown', 'handleOk'].forEach(function (m) {
+	      _this[m] = _this[m].bind(_this);
+	    });
 	  }
 	
 	  _inherits(Calendar, _React$Component);
 	
 	  _createClass(Calendar, [{
+	    key: 'handleOk',
+	    value: function handleOk() {
+	      this.props.onOk(this.state.value);
+	    }
+	  }, {
+	    key: 'setValue',
+	    value: function setValue(current) {
+	      this.setState({
+	        value: current
+	      });
+	    }
+	  }, {
+	    key: 'chooseToday',
+	    value: function chooseToday() {
+	      var today = this.state.value.clone();
+	      today.setTime(Date.now());
+	      this.handleSelect(today);
+	    }
+	  }, {
+	    key: 'handleSelect',
+	    value: function handleSelect(current, keyDownEvent) {
+	      var props = this.props;
+	      this.setState({
+	        value: current
+	      });
+	      if (!keyDownEvent) {
+	        props.onSelect(current);
+	      }
+	    }
+	  }, {
+	    key: 'handleKeyDown',
+	    value: function handleKeyDown(e) {
+	      var keyCode = e.keyCode;
+	      // mac
+	      var ctrlKey = e.ctrlKey || e.metaKey;
+	      switch (keyCode) {
+	        case KeyCode.DOWN:
+	          goWeek.call(this, 1);
+	          e.preventDefault();
+	          return true;
+	        case KeyCode.UP:
+	          goWeek.call(this, -1);
+	          e.preventDefault();
+	          return true;
+	        case KeyCode.LEFT:
+	          if (ctrlKey) {
+	            this.previousYear();
+	          } else {
+	            goDay.call(this, -1);
+	          }
+	          e.preventDefault();
+	          return true;
+	        case KeyCode.RIGHT:
+	          if (ctrlKey) {
+	            this.nextYear();
+	          } else {
+	            goDay.call(this, 1);
+	          }
+	          e.preventDefault();
+	          return true;
+	        case KeyCode.HOME:
+	          goStartMonth.call(this);
+	          e.preventDefault();
+	          return true;
+	        case KeyCode.END:
+	          goEndMonth.call(this);
+	          e.preventDefault();
+	          return true;
+	        case KeyCode.PAGE_DOWN:
+	          this.nextMonth();
+	          e.preventDefault();
+	          return true;
+	        case KeyCode.PAGE_UP:
+	          this.previousMonth();
+	          e.preventDefault();
+	          return true;
+	        case KeyCode.ENTER:
+	          this.props.onSelect(this.state.value);
+	          e.preventDefault();
+	          return true;
+	        default:
+	          this.props.onKeyDown(e);
+	          return true;
+	      }
+	    }
+	  }, {
+	    key: 'handleClear',
+	    value: function handleClear() {
+	      this.props.onClear();
+	    }
+	  }, {
+	    key: 'prefixClsFn',
+	    value: function prefixClsFn() {
+	      return staticPrefixClsFn.apply(this, arguments);
+	    }
+	  }, {
+	    key: 'handleFocus',
+	    value: function handleFocus() {
+	      if (this._blurTimer) {
+	        clearTimeout(this._blurTimer);
+	        this._blurTimer = null;
+	      } else {
+	        this.props.onFocus();
+	      }
+	    }
+	  }, {
+	    key: 'handleBlur',
+	    value: function handleBlur() {
+	      var _this2 = this;
+	
+	      if (this._blurTimer) {
+	        clearTimeout(this._blurTimer);
+	      }
+	      this._blurTimer = setTimeout(function () {
+	        _this2.props.onBlur();
+	      }, 100);
+	    }
+	  }, {
 	    key: 'shouldComponentUpdate',
 	    value: function shouldComponentUpdate() {
 	      return rcUtil.PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
@@ -613,9 +628,10 @@
 	      }
 	
 	      return React.createElement('div', { className: rcUtil.classSet(className), style: this.props.style,
-	        tabIndex: '0', onFocus: this.onFocus,
-	        onBlur: this.onBlur, onKeyDown: this.handleKeyDown }, React.createElement('div', { style: { outline: 'none' } }, React.createElement(CalendarHeader, { locale: locale,
-	        onMonthPanelSelect: this.onMonthPanelSelect,
+	        tabIndex: '0', onFocus: this.handleFocus,
+	        onBlur: this.handleBlur, onKeyDown: this.handleKeyDown }, React.createElement('div', { style: { outline: 'none' } }, React.createElement(CalendarHeader, {
+	        locale: locale,
+	        onValueChange: this.setValue,
 	        previousYear: this.previousYear,
 	        previousMonth: this.previousMonth,
 	        nextMonth: this.nextMonth,
@@ -629,16 +645,19 @@
 	        onSelect: this.handleSelect,
 	        disabledDate: props.disabledDate,
 	        showWeekNumber: props.showWeekNumber,
-	        dateFormatter: this.dateFormatter })), React.createElement(CalendarFooter, { locale: locale,
+	        dateFormatter: this.dateFormatter })), React.createElement(CalendarFooter, {
+	        locale: locale,
 	        showClear: props.showClear,
+	        showOk: props.showOk,
 	        prefixClsFn: prefixClsFn,
 	        showToday: props.showToday,
 	        showTime: props.showTime,
 	        value: value,
 	        dateFormatter: this.dateFormatter,
-	        clear: this.clear,
-	        handleSelect: this.handleSelect,
-	        chooseToday: this.chooseToday
+	        onClear: this.handleClear,
+	        onOk: this.handleOk,
+	        onSelect: this.handleSelect,
+	        onToday: this.chooseToday
 	      })));
 	    }
 	  }]);
@@ -670,7 +689,8 @@
 	  onSelect: noop,
 	  onFocus: noop,
 	  onBlur: noop,
-	  onClear: noop
+	  onClear: noop,
+	  onOk: noop
 	};
 	
 	module.exports = Calendar;
@@ -4344,6 +4364,7 @@
 	var React = __webpack_require__(8);
 	var MonthPanel = __webpack_require__(33);
 	var DateTimeFormat = __webpack_require__(9);
+	var YearPanel = __webpack_require__(34);
 	
 	var CalendarHeader = (function (_React$Component) {
 	  function CalendarHeader(props) {
@@ -4351,9 +4372,11 @@
 	
 	    _get(Object.getPrototypeOf(CalendarHeader.prototype), 'constructor', this).call(this, props);
 	    this.state = {};
-	    this.formatter = new DateTimeFormat(props.locale.monthYearFormat);
+	    this.yearFormatter = new DateTimeFormat(props.locale.yearFormat);
+	    this.monthFormatter = new DateTimeFormat(props.locale.monthFormat);
 	    this.showMonthPanel = this.showMonthPanel.bind(this);
-	    this.onMonthPanelSelect = this.onMonthPanelSelect.bind(this);
+	    this.showYearPanel = this.showYearPanel.bind(this);
+	    this.handleSelect = this.handleSelect.bind(this);
 	  }
 	
 	  _inherits(CalendarHeader, _React$Component);
@@ -4361,59 +4384,86 @@
 	  _createClass(CalendarHeader, [{
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(nextProps) {
-	      if (nextProps.locale !== this.props.locale) {
-	        this.formatter = new DateTimeFormat(nextProps.locale.monthYearFormat);
+	      var locale = this.props.locale;
+	      if (nextProps.locale !== locale) {
+	        this.yearFormatter = new DateTimeFormat(locale.yearFormat);
+	        this.monthFormatter = new DateTimeFormat(locale.monthFormat);
 	      }
 	    }
 	  }, {
 	    key: 'showMonthPanel',
 	    value: function showMonthPanel() {
 	      this.setState({
-	        showMonthPanel: 1
+	        showMonthPanel: 1,
+	        showYearPanel: 0
 	      });
 	    }
 	  }, {
-	    key: 'getMonthYear',
-	    value: function getMonthYear() {
-	      var locale = this.props.locale;
-	      var value = this.props.value;
-	      return this.formatter.format(value);
-	    }
-	  }, {
-	    key: 'onMonthPanelSelect',
-	    value: function onMonthPanelSelect(value) {
+	    key: 'showYearPanel',
+	    value: function showYearPanel() {
 	      this.setState({
-	        showMonthPanel: 0
+	        showMonthPanel: 0,
+	        showYearPanel: 1
 	      });
-	      this.props.onMonthPanelSelect(value);
+	    }
+	  }, {
+	    key: 'getMonthYearElement',
+	    value: function getMonthYearElement() {
+	      var props = this.props;
+	      var prefixClsFn = props.prefixClsFn;
+	      var locale = props.locale;
+	      var value = this.props.value;
+	      var monthBeforeYear = locale.monthBeforeYear;
+	      var selectClassName = prefixClsFn(monthBeforeYear ? 'my-select' : 'ym-select');
+	      var year = React.createElement('a', { className: prefixClsFn('year-select'),
+	        role: 'button',
+	        onClick: this.showYearPanel,
+	        title: locale.monthSelect }, this.yearFormatter.format(value));
+	      var month = React.createElement('a', { className: prefixClsFn('month-select'),
+	        role: 'button',
+	        onClick: this.showMonthPanel,
+	        title: locale.monthSelect }, this.monthFormatter.format(value));
+	      var my = [];
+	      if (monthBeforeYear) {
+	        my = [month, year];
+	      } else {
+	        my = [year, month];
+	      }
+	      return React.createElement('span', { className: selectClassName }, my);
+	    }
+	  }, {
+	    key: 'handleSelect',
+	    value: function handleSelect(value) {
+	      this.setState({
+	        showMonthPanel: 0,
+	        showYearPanel: 0
+	      });
+	      this.props.onValueChange(value);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var props = this.props;
+	      var state = this.state;
 	      var prefixClsFn = props.prefixClsFn;
 	      var locale = props.locale;
 	      var value = props.value;
-	      var monthPanel;
-	
-	      if (this.state.showMonthPanel) {
-	        monthPanel = React.createElement(MonthPanel, { locale: locale, value: value, rootPrefixCls: prefixClsFn(), onSelect: this.onMonthPanelSelect });
+	      var PanelClass = state.showMonthPanel ? MonthPanel : state.showYearPanel ? YearPanel : null;
+	      var panel;
+	      if (PanelClass) {
+	        panel = React.createElement(PanelClass, { locale: locale, value: value, rootPrefixCls: prefixClsFn(), onSelect: this.handleSelect });
 	      }
-	
 	      return React.createElement('div', { className: prefixClsFn('header') }, React.createElement('a', { className: prefixClsFn('prev-year-btn'),
 	        role: 'button',
 	        onClick: props.previousYear,
 	        title: locale.previousYear }, '«'), React.createElement('a', { className: prefixClsFn('prev-month-btn'),
 	        role: 'button',
 	        onClick: props.previousMonth,
-	        title: locale.previousMonth }, '‹'), React.createElement('a', { className: prefixClsFn('month-select'),
-	        role: 'button',
-	        onClick: this.showMonthPanel,
-	        title: locale.monthSelect }, React.createElement('span', { className: prefixClsFn('month-select-content') }, this.getMonthYear()), React.createElement('span', { className: prefixClsFn('month-select-arrow') }, 'x')), React.createElement('a', { className: prefixClsFn('next-month-btn'),
+	        title: locale.previousMonth }, '‹'), this.getMonthYearElement(), React.createElement('a', { className: prefixClsFn('next-month-btn'),
 	        onClick: props.nextMonth,
 	        title: locale.nextMonth }, '›'), React.createElement('a', { className: prefixClsFn('next-year-btn'),
 	        onClick: props.nextYear,
-	        title: locale.nextYear }, '»'), monthPanel);
+	        title: locale.nextYear }, '»'), panel);
 	    }
 	  }]);
 	
@@ -4471,7 +4521,6 @@
 	}
 	
 	var React = __webpack_require__(8);
-	var DateTimeFormat = __webpack_require__(9);
 	var ROW = 4;
 	var COL = 3;
 	var cx = __webpack_require__(17).classSet;
@@ -4532,8 +4581,6 @@
 	      var value = this.state.value;
 	      var current = value.clone();
 	      var locale = props.locale;
-	      var monthYearFormat = locale.monthYearFormat;
-	      var dateFormatter = new DateTimeFormat(monthYearFormat);
 	      var months = [];
 	      var shortMonths = locale.format.shortMonths;
 	      var index = 0;
@@ -4544,7 +4591,7 @@
 	          months[i][j] = {
 	            value: index,
 	            content: shortMonths[index],
-	            title: dateFormatter.format(current)
+	            title: shortMonths[index]
 	          };
 	          index++;
 	        }
@@ -5049,28 +5096,38 @@
 	      var value = props.value;
 	      var locale = props.locale;
 	      var prefixClsFn = props.prefixClsFn;
-	      var footerEl;
+	      var footerEl = null;
 	      if (props.showToday || props.showTime) {
-	        var todayEl;
+	        var nowEl;
+	        var localeNow = locale.today;
+	        if (props.showTime) {
+	          localeNow = locale.now || locale.today;
+	        }
 	        if (props.showToday) {
-	          todayEl = React.createElement('a', { className: prefixClsFn('today-btn'),
+	          nowEl = React.createElement('a', { className: prefixClsFn('today-btn'),
 	            role: 'button',
-	            onClick: props.chooseToday,
-	            title: this.getTodayTime() }, locale.today);
+	            onClick: props.onToday,
+	            title: this.getTodayTime() }, localeNow);
 	        }
 	        var clearEl;
 	        if (props.showClear) {
 	          clearEl = React.createElement('a', { className: prefixClsFn('clear-btn'),
 	            role: 'button',
-	            onClick: props.clear }, locale.clear);
+	            onClick: props.onClear }, locale.clear);
+	        }
+	        var okBtn;
+	        if (props.showOk) {
+	          okBtn = React.createElement('a', { className: prefixClsFn('ok-btn'),
+	            role: 'button',
+	            onClick: props.onOk }, locale.ok);
 	        }
 	        var footerBtn;
-	        if (todayEl || clearEl) {
-	          footerBtn = React.createElement('div', { className: prefixClsFn('footer-btn') }, todayEl, ' ', clearEl);
+	        if (nowEl || clearEl) {
+	          footerBtn = React.createElement('span', { className: prefixClsFn('footer-btn') }, [nowEl, okBtn, clearEl]);
 	        }
 	        var timeEl;
 	        if (props.showTime) {
-	          timeEl = React.createElement(Time, { value: value, prefixClsFn: prefixClsFn, locale: locale, onChange: props.handleSelect });
+	          timeEl = React.createElement(Time, { value: value, prefixClsFn: prefixClsFn, locale: locale, onChange: props.onSelect });
 	        }
 	        footerEl = React.createElement('div', { className: prefixClsFn('footer') }, timeEl, footerBtn);
 	      }
@@ -5289,17 +5346,23 @@
 	          title: locale.secondPanelTitle
 	        }, commonProps));
 	      }
-	      return React.createElement('div', null, React.createElement('input', { className: prefixClsFn('time-input'), title: locale.hourInput,
+	      return React.createElement('span', { className: prefixClsFn('time') }, React.createElement('input', { className: prefixClsFn('time-input'),
+	        title: locale.hourInput,
 	        ref: setHourOfDay,
-	        readOnly: true, value: padding(hour),
+	        readOnly: true,
+	        value: padding(hour),
 	        onClick: this.onHourClick,
-	        onKeyDown: this.onHourKeyDown }), React.createElement('span', null, ' : '), React.createElement('input', { className: prefixClsFn('time-input'), title: locale.minuteInput,
+	        onKeyDown: this.onHourKeyDown }), React.createElement('span', null, ' : '), React.createElement('input', { className: prefixClsFn('time-input'),
+	        title: locale.minuteInput,
 	        ref: setMinutes,
-	        readOnly: true, value: padding(minute),
+	        readOnly: true,
+	        value: padding(minute),
 	        onClick: this.onMinuteClick,
-	        onKeyDown: this.onMinuteKeyDown }), React.createElement('span', null, ' : '), React.createElement('input', { className: prefixClsFn('time-input'), title: locale.secondInput,
+	        onKeyDown: this.onMinuteKeyDown }), React.createElement('span', null, ' : '), React.createElement('input', { className: prefixClsFn('time-input'),
+	        title: locale.secondInput,
 	        ref: setSeconds,
-	        readOnly: true, value: padding(second),
+	        readOnly: true,
+	        value: padding(second),
 	        onClick: this.onSecondClick,
 	        onKeyDown: this.onSecondKeyDown }), panel);
 	    }
@@ -5445,6 +5508,8 @@
 	
 	module.exports = {
 	  today: 'Today',
+	  now: 'Now',
+	  ok: 'Ok',
 	  clear: 'Clear',
 	  hourPanelTitle: 'Select hour',
 	  minutePanelTitle: 'Select minute',
@@ -5454,7 +5519,8 @@
 	  decadeSelect: 'Choose a decade',
 	  yearFormat: 'yyyy',
 	  dateFormat: 'M/d/yyyy',
-	  monthYearFormat: 'MMMM yyyy',
+	  monthFormat: 'MMMM',
+	  monthBeforeYear: true,
 	  previousMonth: 'Previous month (PageUp)',
 	  nextMonth: 'Next month (PageDown)',
 	  hourInput: 'Last hour(Up), Next hour(Down)',
@@ -5528,6 +5594,7 @@
 	  bl: ['bottom', 'left'],
 	  br: ['bottom', 'right']
 	};
+	var createChainedFunction = rcUtil.createChainedFunction;
 	
 	function getImmutableOrient(orient) {
 	  if (orient) {
@@ -5566,7 +5633,7 @@
 	      open: props.open,
 	      value: props.value || props.defaultValue
 	    };
-	    var events = ['handleInputClick', 'handleCalendarBlur', 'handleTriggerClick', 'handleCalendarClear', 'handleCalendarKeyDown', 'handleKeyDown', 'handleCalendarSelect'];
+	    var events = ['handleInputClick', 'handleCalendarBlur', 'handleTriggerClick', 'handleCalendarClear', 'handleCalendarKeyDown', 'handleCalendarOk', 'handleKeyDown', 'handleCalendarSelect', 'focusInput'];
 	    // bind methods
 	    events.forEach(function (m) {
 	      _this[m] = _this[m].bind(_this);
@@ -5681,6 +5748,11 @@
 	      }, callback);
 	    }
 	  }, {
+	    key: 'focusInput',
+	    value: function focusInput() {
+	      React.findDOMNode(this.inputInstance).focus();
+	    }
+	  }, {
 	    key: 'handleInputClick',
 	    value: function handleInputClick() {
 	      this.toggle();
@@ -5709,21 +5781,14 @@
 	  }, {
 	    key: 'handleCalendarKeyDown',
 	    value: function handleCalendarKeyDown(e) {
-	      var _this3 = this;
-	
 	      if (e.keyCode === KeyCode.ESC) {
 	        e.stopPropagation();
-	        this.close(function () {
-	          React.findDOMNode(_this3.inputInstance).focus();
-	        });
+	        this.close(this.focusInput);
 	      }
 	    }
 	  }, {
 	    key: 'handleCalendarSelect',
 	    value: function handleCalendarSelect(value) {
-	      var _this4 = this;
-	
-	      this.props.calendar.props.onSelect(value);
 	      var currentValue = this.state.value;
 	      if (this.props.calendar.props.showTime) {
 	        this.setState({
@@ -5733,9 +5798,7 @@
 	        this.setState({
 	          value: value,
 	          open: false
-	        }, function () {
-	          React.findDOMNode(_this4.inputInstance).focus();
-	        });
+	        }, this.focusInput);
 	      }
 	      if (!currentValue || currentValue.getTime() !== value.getTime()) {
 	        this.props.onChange(value);
@@ -5750,17 +5813,19 @@
 	      });
 	    }
 	  }, {
+	    key: 'handleCalendarOk',
+	    value: function handleCalendarOk() {
+	      this.setState({
+	        open: false
+	      }, this.focusInput);
+	    }
+	  }, {
 	    key: 'handleCalendarClear',
 	    value: function handleCalendarClear() {
-	      var _this5 = this;
-	
-	      this.props.calendar.props.onClear();
 	      this.setState({
 	        open: false,
 	        value: null
-	      }, function () {
-	        React.findDOMNode(_this5.inputInstance).focus();
-	      });
+	      }, this.focusInput);
 	      if (this.state.value !== null) {
 	        this.props.onChange(null);
 	      }
@@ -5778,8 +5843,9 @@
 	        orient: calendarInstance && calendarInstance.state.orient || getImmutableOrient(calendarProp.props.orient) || orientMap.tl,
 	        onBlur: this.handleCalendarBlur,
 	        onKeyDown: this.handleCalendarKeyDown,
-	        onSelect: this.handleCalendarSelect,
-	        onClear: this.handleCalendarClear
+	        onOk: createChainedFunction(calendarProp.props.onOk, this.handleCalendarOk),
+	        onSelect: createChainedFunction(calendarProp.props.onSelect, this.handleCalendarSelect),
+	        onClear: createChainedFunction(calendarProp.props.onClear, this.handleCalendarClear)
 	      });
 	      return this.calendarElement;
 	    }
@@ -5863,21 +5929,49 @@
 /* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(43);
-
-
-/***/ },
-/* 43 */
-/***/ function(module, exports, __webpack_require__) {
-
 	/**
 	 * align dom node flexibly
 	 * @author yiminghe@gmail.com
 	 */
 	
-	var utils = __webpack_require__(44);
+	'use strict';
+	
+	var utils = __webpack_require__(43);
 	
 	// http://yiminghe.iteye.com/blog/1124720
+	
+	/**
+	 * 获取 node 上的 align 对齐点 相对于页面的坐标
+	 */
+	
+	function getAlignOffset(region, align) {
+	  var V = align.charAt(0),
+	      H = align.charAt(1),
+	      w = region.width,
+	      h = region.height,
+	      x,
+	      y;
+	
+	  x = region.left;
+	  y = region.top;
+	
+	  if (V === 'c') {
+	    y += h / 2;
+	  } else if (V === 'b') {
+	    y += h;
+	  }
+	
+	  if (H === 'c') {
+	    x += w / 2;
+	  } else if (H === 'r') {
+	    x += w;
+	  }
+	
+	  return {
+	    left: x,
+	    top: y
+	  };
+	}
 	
 	/**
 	 * 得到会导致元素显示不全的祖先元素
@@ -5900,10 +5994,10 @@
 	  //        }
 	  // 统一的 offsetParent 方法
 	  var doc = element.ownerDocument,
-	    body = doc.body,
-	    parent,
-	    positionStyle = utils.css(element, 'position'),
-	    skipStatic = positionStyle === 'fixed' || positionStyle === 'absolute';
+	      body = doc.body,
+	      parent,
+	      positionStyle = utils.css(element, 'position'),
+	      skipStatic = positionStyle === 'fixed' || positionStyle === 'absolute';
 	
 	  if (!skipStatic) {
 	    return element.nodeName.toLowerCase() === 'html' ? null : element.parentNode;
@@ -5924,45 +6018,39 @@
 	
 	function getVisibleRectForElement(element) {
 	  var visibleRect = {
-	      left: 0,
-	      right: Infinity,
-	      top: 0,
-	      bottom: Infinity
-	    },
-	    el,
-	    scrollX,
-	    scrollY,
-	    winSize,
-	    doc = element.ownerDocument,
-	    win = doc.defaultView || doc.parentWindow,
-	    body = doc.body,
-	    documentElement = doc.documentElement;
+	    left: 0,
+	    right: Infinity,
+	    top: 0,
+	    bottom: Infinity
+	  },
+	      el = element,
+	      scrollX,
+	      scrollY,
+	      winSize,
+	      doc = element.ownerDocument,
+	      win = doc.defaultView || doc.parentWindow,
+	      body = doc.body,
+	      documentElement = doc.documentElement;
 	
 	  // Determine the size of the visible rect by climbing the dom accounting for
 	  // all scrollable containers.
-	  for (el = element;
-	       (el = getOffsetParent(el));) {
+	  while (el) {
 	    // clientWidth is zero for inline block elements in ie.
-	    if ((navigator.userAgent.indexOf('MSIE') === -1 || el.clientWidth !== 0) &&
-	        // body may have overflow set on it, yet we still get the entire
-	        // viewport. In some browsers, el.offsetParent may be
-	        // document.documentElement, so check for that too.
-	      (el !== body &&
-	      el !== documentElement &&
-	      utils.css(el, 'overflow') !== 'visible')) {
+	    if ((navigator.userAgent.indexOf('MSIE') === -1 || el.clientWidth !== 0) && (el !== body && el !== documentElement && utils.css(el, 'overflow') !== 'visible')) {
 	      var pos = utils.offset(el);
 	      // add border
 	      pos.left += el.clientLeft;
 	      pos.top += el.clientTop;
-	
 	      visibleRect.top = Math.max(visibleRect.top, pos.top);
 	      visibleRect.right = Math.min(visibleRect.right,
-	        // consider area without scrollBar
-	        pos.left + el.clientWidth);
-	      visibleRect.bottom = Math.min(visibleRect.bottom,
-	        pos.top + el.clientHeight);
+	      // consider area without scrollBar
+	      pos.left + el.clientWidth);
+	      visibleRect.bottom = Math.min(visibleRect.bottom, pos.top + el.clientHeight);
 	      visibleRect.left = Math.max(visibleRect.left, pos.left);
+	    } else if (el === body || el === documentElement) {
+	      break;
 	    }
+	    el = getOffsetParent(el);
 	  }
 	
 	  // Clip by window's viewport.
@@ -5976,17 +6064,11 @@
 	  };
 	  visibleRect.right = Math.min(visibleRect.right, scrollX + winSize.width);
 	  visibleRect.bottom = Math.min(visibleRect.bottom, scrollY + winSize.height);
-	  return visibleRect.top >= 0 && visibleRect.left >= 0 &&
-	  visibleRect.bottom > visibleRect.top &&
-	  visibleRect.right > visibleRect.left ?
-	    visibleRect : null;
+	  return visibleRect.top >= 0 && visibleRect.left >= 0 && visibleRect.bottom > visibleRect.top && visibleRect.right > visibleRect.left ? visibleRect : null;
 	}
 	
 	function getElFuturePos(elRegion, refNodeRegion, points, offset) {
-	  var xy,
-	    diff,
-	    p1,
-	    p2;
+	  var xy, diff, p1, p2;
 	
 	  xy = {
 	    left: elRegion.left,
@@ -5999,37 +6081,33 @@
 	  diff = [p2.left - p1.left, p2.top - p1.top];
 	
 	  return {
-	    left: xy.left - diff[0] + (+offset[0]),
-	    top: xy.top - diff[1] + (+offset[1])
+	    left: xy.left - diff[0] + +offset[0],
+	    top: xy.top - diff[1] + +offset[1]
 	  };
 	}
 	
 	function isFailX(elFuturePos, elRegion, visibleRect) {
-	  return elFuturePos.left < visibleRect.left ||
-	    elFuturePos.left + elRegion.width > visibleRect.right;
+	  return elFuturePos.left < visibleRect.left || elFuturePos.left + elRegion.width > visibleRect.right;
 	}
 	
 	function isFailY(elFuturePos, elRegion, visibleRect) {
-	  return elFuturePos.top < visibleRect.top ||
-	    elFuturePos.top + elRegion.height > visibleRect.bottom;
+	  return elFuturePos.top < visibleRect.top || elFuturePos.top + elRegion.height > visibleRect.bottom;
 	}
 	
 	function adjustForViewport(elFuturePos, elRegion, visibleRect, overflow) {
 	  var pos = utils.clone(elFuturePos),
-	    size = {
-	      width: elRegion.width,
-	      height: elRegion.height
-	    };
+	      size = {
+	    width: elRegion.width,
+	    height: elRegion.height
+	  };
 	
 	  if (overflow.adjustX && pos.left < visibleRect.left) {
 	    pos.left = visibleRect.left;
 	  }
 	
 	  // Left edge inside and right edge outside viewport, try to resize it.
-	  if (overflow.resizeWidth &&
-	    pos.left >= visibleRect.left &&
-	    pos.left + size.width > visibleRect.right) {
-	    size.width -= (pos.left + size.width) - visibleRect.right;
+	  if (overflow.resizeWidth && pos.left >= visibleRect.left && pos.left + size.width > visibleRect.right) {
+	    size.width -= pos.left + size.width - visibleRect.right;
 	  }
 	
 	  // Right edge outside viewport, try to move it.
@@ -6044,10 +6122,8 @@
 	  }
 	
 	  // Top edge inside and bottom edge outside viewport, try to resize it.
-	  if (overflow.resizeHeight &&
-	    pos.top >= visibleRect.top &&
-	    pos.top + size.height > visibleRect.bottom) {
-	    size.height -= (pos.top + size.height) - visibleRect.bottom;
+	  if (overflow.resizeHeight && pos.top >= visibleRect.top && pos.top + size.height > visibleRect.bottom) {
+	    size.height -= pos.top + size.height - visibleRect.bottom;
 	  }
 	
 	  // Bottom edge outside viewport, try to move it.
@@ -6074,10 +6150,6 @@
 	  return offset;
 	}
 	
-	domAlign.__getOffsetParent = getOffsetParent;
-	
-	domAlign.__getVisibleRectForElement = getVisibleRectForElement;
-	
 	function getRegion(node) {
 	  var offset, w, h;
 	  if (!utils.isWindow(node) && node.nodeType !== 9) {
@@ -6096,38 +6168,6 @@
 	  offset.width = w;
 	  offset.height = h;
 	  return offset;
-	}
-	
-	/**
-	 * 获取 node 上的 align 对齐点 相对于页面的坐标
-	 */
-	
-	function getAlignOffset(region, align) {
-	  var V = align.charAt(0),
-	    H = align.charAt(1),
-	    w = region.width,
-	    h = region.height,
-	    x, y;
-	
-	  x = region.left;
-	  y = region.top;
-	
-	  if (V === 'c') {
-	    y += h / 2;
-	  } else if (V === 'b') {
-	    y += h;
-	  }
-	
-	  if (H === 'c') {
-	    x += w / 2;
-	  } else if (H === 'r') {
-	    x += w;
-	  }
-	
-	  return {
-	    left: x,
-	    top: y
-	  };
 	}
 	
 	/*
@@ -6200,16 +6240,13 @@
 	
 	    // 检查反下后的位置是否可以放下了
 	    // 如果仍然放不下只有指定了可以调整当前方向才调整
-	    newOverflowCfg.adjustX = overflow.adjustX &&
-	    isFailX(elFuturePos, elRegion, visibleRect);
+	    newOverflowCfg.adjustX = overflow.adjustX && isFailX(elFuturePos, elRegion, visibleRect);
 	
-	    newOverflowCfg.adjustY = overflow.adjustY &&
-	    isFailY(elFuturePos, elRegion, visibleRect);
+	    newOverflowCfg.adjustY = overflow.adjustY && isFailY(elFuturePos, elRegion, visibleRect);
 	
 	    // 确实要调整，甚至可能会调整高度宽度
 	    if (newOverflowCfg.adjustX || newOverflowCfg.adjustY) {
-	      newElRegion = adjustForViewport(elFuturePos, elRegion,
-	        visibleRect, newOverflowCfg);
+	      newElRegion = adjustForViewport(elFuturePos, elRegion, visibleRect, newOverflowCfg);
 	    }
 	  }
 	
@@ -6217,7 +6254,7 @@
 	  // http://localhost:8888/kissy/src/overlay/demo/other/relative_align/align.html
 	  // 相对于屏幕位置没变，而 left/top 变了
 	  // 例如 <div 'relative'><el absolute></div>
-	  utils.offset(el, {left: newElRegion.left, top: newElRegion.top});
+	  utils.offset(el, { left: newElRegion.left, top: newElRegion.top });
 	
 	  // need judge to in case set fixed with in css on height auto element
 	  if (newElRegion.width !== elRegion.width) {
@@ -6235,6 +6272,10 @@
 	  };
 	}
 	
+	domAlign.__getOffsetParent = getOffsetParent;
+	
+	domAlign.__getVisibleRectForElement = getVisibleRectForElement;
+	
 	module.exports = domAlign;
 	/**
 	 *  2012-04-26 yiminghe@gmail.com
@@ -6244,13 +6285,41 @@
 	 *  2011-07-13 yiminghe@gmail.com note:
 	 *   - 增加智能对齐，以及大小调整选项
 	 **/
-
+	
+	// body may have overflow set on it, yet we still get the entire
+	// viewport. In some browsers, el.offsetParent may be
+	// document.documentElement, so check for that too.
 
 /***/ },
-/* 44 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
 	var RE_NUM = /[\-+]?(?:\d*\.|)\d+(?:[eE][\-+]?\d+|)/.source;
+	
+	var getComputedStyleX;
+	if (typeof window !== 'undefined') {
+	  getComputedStyleX = window.getComputedStyle ? _getComputedStyle : _getComputedStyleIE;
+	}
+	
+	function css(el, name, value) {
+	  if (typeof name === 'object') {
+	    for (var i in name) {
+	      css(el, i, name[i]);
+	    }
+	    return undefined;
+	  }
+	  if (typeof value !== 'undefined') {
+	    if (typeof value === 'number') {
+	      value = value + 'px';
+	    }
+	    el.style[name] = value;
+	    return undefined;
+	  } else {
+	    return getComputedStyleX(el, name);
+	  }
+	}
 	
 	function getClientPosition(elem) {
 	  var box, x, y;
@@ -6290,7 +6359,7 @@
 	  x -= docElem.clientLeft || body.clientLeft || 0;
 	  y -= docElem.clientTop || body.clientTop || 0;
 	
-	  return {left: x, top: y};
+	  return { left: x, top: y };
 	}
 	
 	function getScroll(w, top) {
@@ -6329,7 +6398,7 @@
 	  var d = elem.ownerDocument;
 	
 	  // https://github.com/kissyteam/kissy/issues/61
-	  if ((computedStyle = (computedStyle || d.defaultView.getComputedStyle(elem, null)))) {
+	  if (computedStyle = computedStyle || d.defaultView.getComputedStyle(elem, null)) {
 	    val = computedStyle.getPropertyValue(name) || computedStyle[name];
 	  }
 	
@@ -6338,10 +6407,10 @@
 	
 	var _RE_NUM_NO_PX = new RegExp('^(' + RE_NUM + ')(?!px)[a-z%]+$', 'i');
 	var RE_POS = /^(top|right|bottom|left)$/,
-	  CURRENT_STYLE = 'currentStyle',
-	  RUNTIME_STYLE = 'runtimeStyle',
-	  LEFT = 'left',
-	  PX = 'px';
+	    CURRENT_STYLE = 'currentStyle',
+	    RUNTIME_STYLE = 'runtimeStyle',
+	    LEFT = 'left',
+	    PX = 'px';
 	
 	function _getComputedStyleIE(elem, name) {
 	  // currentStyle maybe null
@@ -6361,14 +6430,14 @@
 	  if (_RE_NUM_NO_PX.test(ret) && !RE_POS.test(name)) {
 	    // Remember the original values
 	    var style = elem.style,
-	      left = style[LEFT],
-	      rsLeft = elem[RUNTIME_STYLE][LEFT];
+	        left = style[LEFT],
+	        rsLeft = elem[RUNTIME_STYLE][LEFT];
 	
 	    // prevent flashing of content
 	    elem[RUNTIME_STYLE][LEFT] = elem[CURRENT_STYLE][LEFT];
 	
 	    // Put in the new values to get a computed value out
-	    style[LEFT] = name === 'fontSize' ? '1em' : (ret || 0);
+	    style[LEFT] = name === 'fontSize' ? '1em' : ret || 0;
 	    ret = style.pixelLeft + PX;
 	
 	    // Revert the changed values
@@ -6379,11 +6448,6 @@
 	  return ret === '' ? 'auto' : ret;
 	}
 	
-	var getComputedStyleX;
-	if (typeof window !== 'undefined') {
-	  getComputedStyleX = window.getComputedStyle ? _getComputedStyle : _getComputedStyleIE;
-	}
-	
 	// 设置 elem 相对 elem.ownerDocument 的坐标
 	function setOffset(elem, offset) {
 	  // set position first, in-case top/left are set even on static elem
@@ -6392,8 +6456,9 @@
 	  }
 	
 	  var old = getOffset(elem),
-	    ret = {},
-	    current, key;
+	      ret = {},
+	      current,
+	      key;
 	
 	  for (key in offset) {
 	    current = parseFloat(css(elem, key)) || 0;
@@ -6413,15 +6478,15 @@
 	}
 	
 	var BOX_MODELS = ['margin', 'border', 'padding'],
-	  CONTENT_INDEX = -1,
-	  PADDING_INDEX = 2,
-	  BORDER_INDEX = 1,
-	  MARGIN_INDEX = 0;
+	    CONTENT_INDEX = -1,
+	    PADDING_INDEX = 2,
+	    BORDER_INDEX = 1,
+	    MARGIN_INDEX = 0;
 	
 	function swap(elem, options, callback) {
 	  var old = {},
-	    style = elem.style,
-	    name;
+	      style = elem.style,
+	      name;
 	
 	  // Remember the old values, and insert the new ones
 	  for (name in options) {
@@ -6438,7 +6503,10 @@
 	}
 	
 	function getPBMWidth(elem, props, which) {
-	  var value = 0, prop, j, i;
+	  var value = 0,
+	      prop,
+	      j,
+	      i;
 	  for (j = 0; j < props.length; j++) {
 	    prop = props[j];
 	    if (prop) {
@@ -6462,7 +6530,7 @@
 	 */
 	function isWindow(obj) {
 	  // must use == for ie8
-	  /*jshint eqeqeq:false*/
+	  /*eslint eqeqeq:0*/
 	  return obj != null && obj == obj.window;
 	}
 	
@@ -6472,25 +6540,23 @@
 	  domUtils['doc' + name] = function (refWin) {
 	    var d = refWin.document;
 	    return Math.max(
-	      //firefox chrome documentElement.scrollHeight< body.scrollHeight
-	      //ie standard mode : documentElement.scrollHeight> body.scrollHeight
-	      d.documentElement['scroll' + name],
-	      //quirks : documentElement.scrollHeight 最大等于可视窗口多一点？
-	      d.body['scroll' + name],
-	      domUtils['viewport' + name](d));
+	    //firefox chrome documentElement.scrollHeight< body.scrollHeight
+	    //ie standard mode : documentElement.scrollHeight> body.scrollHeight
+	    d.documentElement['scroll' + name],
+	    //quirks : documentElement.scrollHeight 最大等于可视窗口多一点？
+	    d.body['scroll' + name], domUtils['viewport' + name](d));
 	  };
 	
 	  domUtils['viewport' + name] = function (win) {
 	    // pc browser includes scrollbar in window.innerWidth
 	    var prop = 'client' + name,
-	      doc = win.document,
-	      body = doc.body,
-	      documentElement = doc.documentElement,
-	      documentElementProp = documentElement[prop];
+	        doc = win.document,
+	        body = doc.body,
+	        documentElement = doc.documentElement,
+	        documentElementProp = documentElement[prop];
 	    // 标准模式取 documentElement
 	    // backcompat 取 body
-	    return doc.compatMode === 'CSS1Compat' && documentElementProp ||
-	      body && body[prop] || documentElementProp;
+	    return doc.compatMode === 'CSS1Compat' && documentElementProp || body && body[prop] || documentElementProp;
 	  };
 	});
 	
@@ -6509,7 +6575,7 @@
 	    return name === 'width' ? domUtils.docWidth(elem) : domUtils.docHeight(elem);
 	  }
 	  var which = name === 'width' ? ['Left', 'Right'] : ['Top', 'Bottom'],
-	    borderBoxValue = name === 'width' ? elem.offsetWidth : elem.offsetHeight;
+	      borderBoxValue = name === 'width' ? elem.offsetWidth : elem.offsetHeight;
 	  var computedStyle = getComputedStyleX(elem);
 	  var isBorderBox = isBorderBoxFn(elem, computedStyle);
 	  var cssBoxValue = 0;
@@ -6517,7 +6583,7 @@
 	    borderBoxValue = undefined;
 	    // Fall back to computed then un computed css if necessary
 	    cssBoxValue = getComputedStyleX(elem, name);
-	    if (cssBoxValue == null || (Number(cssBoxValue)) < 0) {
+	    if (cssBoxValue == null || Number(cssBoxValue) < 0) {
 	      cssBoxValue = elem.style[name] || 0;
 	    }
 	    // Normalize '', auto, and prepare for extra
@@ -6530,27 +6596,23 @@
 	  var val = borderBoxValue || cssBoxValue;
 	  if (extra === CONTENT_INDEX) {
 	    if (borderBoxValueOrIsBorderBox) {
-	      return val - getPBMWidth(elem, ['border', 'padding'],
-	          which, computedStyle);
+	      return val - getPBMWidth(elem, ['border', 'padding'], which, computedStyle);
 	    } else {
 	      return cssBoxValue;
 	    }
 	  } else if (borderBoxValueOrIsBorderBox) {
-	    return val + (extra === BORDER_INDEX ? 0 :
-	        (extra === PADDING_INDEX ?
-	          -getPBMWidth(elem, ['border'], which, computedStyle) :
-	          getPBMWidth(elem, ['margin'], which, computedStyle)));
+	    return val + (extra === BORDER_INDEX ? 0 : extra === PADDING_INDEX ? -getPBMWidth(elem, ['border'], which, computedStyle) : getPBMWidth(elem, ['margin'], which, computedStyle));
 	  } else {
-	    return cssBoxValue + getPBMWidth(elem, BOX_MODELS.slice(extra),
-	        which, computedStyle);
+	    return cssBoxValue + getPBMWidth(elem, BOX_MODELS.slice(extra), which, computedStyle);
 	  }
 	}
 	
-	var cssShow = {position: 'absolute', visibility: 'hidden', display: 'block'};
+	var cssShow = { position: 'absolute', visibility: 'hidden', display: 'block' };
 	
 	// fix #119 : https://github.com/kissyteam/kissy/issues/119
 	function getWHIgnoreDisplay(elem) {
-	  var val, args = arguments;
+	  var val,
+	      args = arguments;
 	  // in case elem is window
 	  // elem.offsetWidth === undefined
 	  if (elem.offsetWidth !== 0) {
@@ -6580,28 +6642,11 @@
 	        }
 	        return css(elem, name, val);
 	      }
-	      return;
+	      return undefined;
 	    }
 	    return elem && getWHIgnoreDisplay(elem, name, CONTENT_INDEX);
 	  };
 	});
-	
-	function css(el, name, value) {
-	  if (typeof name === 'object') {
-	    for (var i in name) {
-	      css(el, i, name[i]);
-	    }
-	    return;
-	  }
-	  if (typeof value !== 'undefined') {
-	    if (typeof value === 'number') {
-	      value = value + 'px';
-	    }
-	    el.style[name] = value;
-	  } else {
-	    return getComputedStyleX(el, name);
-	  }
-	}
 	
 	function mix(to, from) {
 	  for (var i in from) {
@@ -6611,14 +6656,14 @@
 	}
 	
 	var utils = module.exports = {
-	  getWindow: function (node) {
+	  getWindow: function getWindow(node) {
 	    if (node && node.document && node.setTimeout) {
 	      return node;
 	    }
 	    var doc = node.ownerDocument || node;
 	    return doc.defaultView || doc.parentWindow;
 	  },
-	  offset: function (el, value) {
+	  offset: function offset(el, value) {
 	    if (typeof value !== 'undefined') {
 	      setOffset(el, value);
 	    } else {
@@ -6628,9 +6673,10 @@
 	  isWindow: isWindow,
 	  each: each,
 	  css: css,
-	  clone: function (obj) {
+	  clone: function clone(obj) {
+	    var i;
 	    var ret = {};
-	    for (var i in obj) {
+	    for (i in obj) {
 	      ret[i] = obj[i];
 	    }
 	    var overflow = obj.overflow;
@@ -6642,13 +6688,13 @@
 	    return ret;
 	  },
 	  mix: mix,
-	  getWindowScrollLeft: function (w) {
+	  getWindowScrollLeft: function getWindowScrollLeft(w) {
 	    return getScrollLeft(w);
 	  },
-	  getWindowScrollTop: function (w) {
+	  getWindowScrollTop: function getWindowScrollTop(w) {
 	    return getScrollTop(w);
 	  },
-	  merge: function () {
+	  merge: function merge() {
 	    var ret = {};
 	    for (var i = 0; i < arguments.length; i++) {
 	      utils.mix(ret, arguments[i]);
@@ -6660,7 +6706,6 @@
 	};
 	
 	mix(utils, domUtils);
-
 
 /***/ }
 /******/ ]);
