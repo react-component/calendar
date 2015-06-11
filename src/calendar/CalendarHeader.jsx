@@ -4,6 +4,7 @@ var React = require('react');
 var MonthPanel = require('../month/MonthPanel');
 var DateTimeFormat = require('gregorian-calendar-format');
 var YearPanel = require('../year/YearPanel');
+var toFragment = require('rc-util').Children.mapSelf;
 
 class CalendarHeader extends React.Component {
   constructor(props) {
@@ -60,7 +61,7 @@ class CalendarHeader extends React.Component {
       my = [year, month];
     }
     return <span className={selectClassName}>
-    {my}
+    {toFragment(my)}
     </span>;
   }
 

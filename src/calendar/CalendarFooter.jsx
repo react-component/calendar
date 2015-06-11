@@ -2,6 +2,7 @@
 
 var React = require('react');
 var Time = require('../time/Time');
+var toFragment = require('rc-util').Children.mapSelf;
 
 class CalendarFooter extends React.Component {
   getTodayTime() {
@@ -43,7 +44,7 @@ class CalendarFooter extends React.Component {
       }
       var footerBtn;
       if (nowEl || clearEl) {
-        footerBtn = <span className={prefixClsFn('footer-btn')}>{[nowEl, okBtn, clearEl]}</span>;
+        footerBtn = <span className={prefixClsFn('footer-btn')}>{toFragment([nowEl, okBtn, clearEl])}</span>;
       }
       var timeEl;
       if (props.showTime) {

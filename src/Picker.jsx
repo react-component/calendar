@@ -3,6 +3,7 @@
 var React = require('react');
 var DateTimeFormat = require('gregorian-calendar-format');
 var rcUtil = require('rc-util');
+var toFragment = rcUtil.Children.mapSelf;
 var KeyCode = rcUtil.KeyCode;
 var domAlign = require('dom-align');
 var orientMap = {
@@ -291,7 +292,7 @@ class Picker extends React.Component {
         onMouseDown: prevent
       });
     }
-    return <span className={classes.join(' ')}>{[input, calendar, trigger]}</span>;
+    return <span className={classes.join(' ')}>{toFragment([input, calendar, trigger])}</span>;
   }
 }
 

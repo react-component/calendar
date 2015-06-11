@@ -117,11 +117,11 @@ class Calendar extends React.Component {
       case KeyCode.DOWN:
         goWeek.call(this, 1);
         e.preventDefault();
-        return true;
+        return 1;
       case KeyCode.UP:
         goWeek.call(this, -1);
         e.preventDefault();
-        return true;
+        return 1;
       case KeyCode.LEFT:
         if (ctrlKey) {
           this.previousYear();
@@ -129,7 +129,7 @@ class Calendar extends React.Component {
           goDay.call(this, -1);
         }
         e.preventDefault();
-        return true;
+        return 1;
       case KeyCode.RIGHT:
         if (ctrlKey) {
           this.nextYear();
@@ -137,30 +137,30 @@ class Calendar extends React.Component {
           goDay.call(this, 1);
         }
         e.preventDefault();
-        return true;
+        return 1;
       case KeyCode.HOME:
         goStartMonth.call(this);
         e.preventDefault();
-        return true;
+        return 1;
       case KeyCode.END:
         goEndMonth.call(this);
         e.preventDefault();
-        return true;
+        return 1;
       case KeyCode.PAGE_DOWN:
         this.nextMonth();
         e.preventDefault();
-        return true;
+        return 1;
       case KeyCode.PAGE_UP:
         this.previousMonth();
         e.preventDefault();
-        return true;
+        return 1;
       case KeyCode.ENTER:
         this.props.onSelect(this.state.value);
         e.preventDefault();
-        return true;
+        return 1;
       default:
         this.props.onKeyDown(e);
-        return true;
+        return 1;
     }
   }
 
