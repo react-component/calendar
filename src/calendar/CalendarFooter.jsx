@@ -18,26 +18,36 @@ class CalendarFooter extends React.Component {
     var prefixClsFn = props.prefixClsFn;
     var footerEl = null;
     if (props.showToday || props.showTime) {
-      var todayEl;
+      var nowEl;
+      var localeNow = locale.today;
+      if (props.showTime) {
+        localeNow = locale.now || locale.today;
+      }
       if (props.showToday) {
-        todayEl = (<a className = {prefixClsFn('today-btn')}
+        nowEl = (<a className={prefixClsFn('today-btn')}
           role="button"
-          onClick={props.chooseToday}
-          title={this.getTodayTime()}>{locale.today}</a>);
+          onClick={props.onToday}
+          title={this.getTodayTime()}>{localeNow}</a>);
       }
       var clearEl;
       if (props.showClear) {
-        clearEl = (<a className = {prefixClsFn('clear-btn')}
+        clearEl = (<a className={prefixClsFn('clear-btn')}
           role="button"
-          onClick={props.clear}>{locale.clear}</a>);
+          onClick={props.onClear}>{locale.clear}</a>);
+      }
+      var okBtn;
+      if (props.showOk) {
+        okBtn = (<a className = {prefixClsFn('ok-btn')}
+          role="button"
+          onClick={props.onOk}>{locale.ok}</a>);
       }
       var footerBtn;
-      if (todayEl || clearEl) {
-        footerBtn = <div className={prefixClsFn('footer-btn')}>{todayEl} {clearEl}</div>;
+      if (nowEl || clearEl) {
+        footerBtn = <span className={prefixClsFn('footer-btn')}>{[nowEl, okBtn, clearEl]}</span>;
       }
       var timeEl;
       if (props.showTime) {
-        timeEl = (<Time value={value} prefixClsFn={prefixClsFn} locale={locale} onChange={props.handleSelect}/>);
+        timeEl = (<Time value={value} prefixClsFn={prefixClsFn} locale={locale} onChange={props.onSelect}/>);
       }
       footerEl = (
         <div className = {prefixClsFn('footer')}>

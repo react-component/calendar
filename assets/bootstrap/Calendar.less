@@ -103,12 +103,29 @@
   font-weight: bold;
   box-sizing: border-box;
   display: inline-block;
-  padding: 4px 5px;
+  padding: 0 5px;
   text-align: center;
   width: 30px;
   height: 30px;
-  line-height: 22px;
+  line-height: 30px;
   border-radius: 4px;
+}
+
+.rc-calendar {
+  &-year-select, &-month-select {
+    font-weight: bold;
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 0 5px;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 4px;
+
+    &:hover {
+      cursor: pointer;
+      background: #eeeeee;
+    }
+  }
 }
 
 .rc-calendar-header > a:hover {
@@ -120,11 +137,11 @@
 .rc-calendar-prev-year-btn,
 .rc-calendar-next-year-btn {
   position: absolute;
-  top: 0;
+  top: 4px;
 }
 
 .rc-calendar-next-year-btn {
-  right: 0;
+  right: 4px;
 }
 
 .rc-calendar-header .rc-calendar-prev-month-btn {
@@ -133,7 +150,7 @@
 }
 
 .rc-calendar-prev-year-btn {
-  left: 0;
+  left: 4px;
 }
 
 .rc-calendar-prev-year-btn:hover {
@@ -142,14 +159,6 @@
 .rc-calendar-header .rc-calendar-next-month-btn {
   position: absolute;
   right: 25px;
-}
-
-.rc-calendar-header .rc-calendar-month-select {
-  width: 140px;
-}
-
-.rc-calendar-month-select-arrow {
-  display: none;
 }
 
 .rc-calendar-week-number-cell {
@@ -232,7 +241,11 @@
   text-align: center;
 }
 
-.rc-calendar-today-btn, .rc-calendar-clear-btn{
+.rc-calendar-footer-btn {
+  display: block;
+}
+
+.rc-calendar-today-btn, .rc-calendar-clear-btn, .rc-calendar-ok-btn{
   font-weight: bold;
   box-sizing: border-box;
   display: inline-block;
@@ -243,10 +256,10 @@
   line-height: 22px;
   border-radius: 4px;
   margin-left: 5px;
-}
 
-.rc-calendar-today-btn:hover,.rc-calendar-clear-btn:hover {
-  background: #eeeeee;
+  &:hover{
+    background: #eeeeee;
+  }
 }
 
 .rc-calendar-footer-btn {

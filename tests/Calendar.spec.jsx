@@ -1,4 +1,3 @@
-
 var keyCode = require('rc-util').KeyCode;
 var expect = require('expect.js');
 var Calendar = require('../index');
@@ -16,16 +15,16 @@ describe('Calendar', function () {
     React.unmountComponentAtNode(container);
   });
 
-  describe('render',function(){
-    describe('render',function(){
-      it('render showToday false',function(){
+  describe('render', function () {
+    describe('render', function () {
+      it('render showToday false', function () {
         calendar = React.render(<Calendar showToday={false}/>, container);
         expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-today-btn').length).to.be(0);
       });
     });
   });
 
-  describe('after render',function(){
+  describe('after render', function () {
     beforeEach(function (done) {
       React.render(<Calendar showToday={true} showWeekNumber={true} showTime={true}/>, container, function () {
         calendar = this;
@@ -219,6 +218,23 @@ describe('Calendar', function () {
       }], done);
     });
 
+    it('top year panel shows', function (done) {
+      var text;
+      expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-year-panel').length).to.be(0);
+      Simulate.click(TestUtils.findRenderedDOMComponentWithClass(calendar, 'rc-calendar-year-select'));
+      async.series([function (next) {
+        expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-year-panel').length).to.be(1);
+        expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-year-panel-year').length).to.be(12);
+        var year = TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-year-panel-year')[9];
+        text = year.props.children;
+        Simulate.click(year);
+        setTimeout(next, 10);
+      }, function (next) {
+        expect(calendar.state.value.getYear() + '').to.be(text);
+        next();
+      }], done);
+    });
+
     it('year panel works', function (done) {
       var text;
       async.series([function (done) {
@@ -239,7 +255,7 @@ describe('Calendar', function () {
         Simulate.click(m);
         setTimeout(done, 10);
       }, function (done) {
-        expect(calendar.state.value.getYear()+'').to.be(text);
+        expect(calendar.state.value.getYear() + '').to.be(text);
         done();
       }], done);
     });

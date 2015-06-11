@@ -34,7 +34,8 @@
     > a {
       font-weight: bold;
       display: inline-block;
-      padding: 4px 5px;
+      padding: 0px 5px;
+      line-height: 34px;
       text-align: center;
       width: 30px;
 
@@ -53,13 +54,19 @@
       position: absolute;
       right: 25px;
     }
+  }
 
-    .@{prefixClass}-month-select {
-      width: 140px;
-    }
+  &-year-select, &-month-select {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+    color: #666;
+    padding: 0 8px;
+    line-height: 34px;
 
-    .@{prefixClass}-month-select-arrow {
-      display: none;
+    &:hover {
+      cursor: pointer;
+      color: #23c0fa;
     }
   }
 
@@ -178,7 +185,8 @@
   }
 
   &-footer {
-    padding: 3px 0;
+    border-top: 1px solid #ccc;
+    padding: 10px 0;
     text-align: center;
   }
 
@@ -186,7 +194,7 @@
     margin-top: 2px;
   }
 
-  .@{prefixClass}-today-btn, .@{prefixClass}-clear-btn {
+  &-today-btn, &-clear-btn, &-ok-btn {
     display: inline-block;
     padding: 4px 5px;
     text-align: center;
@@ -196,5 +204,9 @@
       cursor: pointer;
       color: #23c0fa;
     }
+  }
+
+  &-today-btn {
+    padding-left: 10px;
   }
 }

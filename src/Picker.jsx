@@ -11,6 +11,7 @@ var orientMap = {
   bl: ['bottom', 'left'],
   br: ['bottom', 'right']
 };
+var createChainedFunction = rcUtil.createChainedFunction;
 
 function getImmutableOrient(orient) {
   if (orient) {
@@ -46,8 +47,8 @@ class Picker extends React.Component {
     };
     var events = [
       'handleInputClick', 'handleCalendarBlur', 'handleTriggerClick',
-      'handleCalendarClear', 'handleCalendarKeyDown',
-      'handleKeyDown', 'handleCalendarSelect'
+      'handleCalendarClear', 'handleCalendarKeyDown', 'handleCalendarOk',
+      'handleKeyDown', 'handleCalendarSelect', 'focusInput'
     ];
     // bind methods
     events.forEach(m => {
@@ -150,6 +151,10 @@ class Picker extends React.Component {
     }, callback);
   }
 
+  focusInput() {
+    React.findDOMNode(this.inputInstance).focus();
+  }
+
   handleInputClick() {
     this.toggle();
   }
@@ -175,14 +180,11 @@ class Picker extends React.Component {
   handleCalendarKeyDown(e) {
     if (e.keyCode === KeyCode.ESC) {
       e.stopPropagation();
-      this.close(() => {
-        React.findDOMNode(this.inputInstance).focus();
-      });
+      this.close(this.focusInput);
     }
   }
 
   handleCalendarSelect(value) {
-    this.props.calendar.props.onSelect(value);
     var currentValue = this.state.value;
     if (this.props.calendar.props.showTime) {
       this.setState({
@@ -192,9 +194,7 @@ class Picker extends React.Component {
       this.setState({
         value: value,
         open: false
-      }, () => {
-        React.findDOMNode(this.inputInstance).focus();
-      });
+      }, this.focusInput);
     }
     if (!currentValue || currentValue.getTime() !== value.getTime()) {
       this.props.onChange(value);
@@ -208,14 +208,17 @@ class Picker extends React.Component {
     });
   }
 
+  handleCalendarOk() {
+    this.setState({
+      open: false
+    }, this.focusInput);
+  }
+
   handleCalendarClear() {
-    this.props.calendar.props.onClear();
     this.setState({
       open: false,
       value: null
-    }, ()=> {
-      React.findDOMNode(this.inputInstance).focus();
-    });
+    }, this.focusInput);
     if (this.state.value !== null) {
       this.props.onChange(null);
     }
@@ -232,8 +235,9 @@ class Picker extends React.Component {
       orient: calendarInstance && calendarInstance.state.orient || getImmutableOrient(calendarProp.props.orient) || orientMap.tl,
       onBlur: this.handleCalendarBlur,
       onKeyDown: this.handleCalendarKeyDown,
-      onSelect: this.handleCalendarSelect,
-      onClear: this.handleCalendarClear
+      onOk: createChainedFunction(calendarProp.props.onOk, this.handleCalendarOk),
+      onSelect: createChainedFunction(calendarProp.props.onSelect, this.handleCalendarSelect),
+      onClear: createChainedFunction(calendarProp.props.onClear, this.handleCalendarClear)
     });
     return this.calendarElement;
   }

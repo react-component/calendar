@@ -232,7 +232,7 @@ http://localhost:8001/examples/
 
 online example:
 
-http://react-component.github.io/calendar/build/examples/index.html
+http://react-component.github.io/calendar/examples/index.html
 
 ## Test Case
 

@@ -27,6 +27,15 @@ var Test = React.createClass({
     });
   },
 
+  handleCalendarOk: function (value) {
+    console.log('calendar ok: ' + (value && this.props.formatter.format(value)));
+    // controlled value
+    this.setState({
+      time: Date.now(),
+      value: value
+    });
+  },
+
   getDefaultProps: function () {
     return {
       formatter: new DateTimeFormat('yyyy-MM-dd HH:mm:ss')
@@ -52,7 +61,10 @@ var Test = React.createClass({
     var calendar = <Calendar locale={CalendarLocale}
       orient={['top', 'left']}
       defaultValue={defaultCalendarValue}
-      showTime={this.state.showTime} onSelect={this.handleCalendarSelect}
+      showTime={this.state.showTime}
+      showOk={true}
+      onOk={this.handleCalendarOk}
+      onSelect={this.handleCalendarSelect}
       onClear={this.handleCalendarSelect.bind(this, null)} showClear={true}/>;
     return <div style={{width: 236, margin: 20}} data-time={this.state.time}>
       <div>

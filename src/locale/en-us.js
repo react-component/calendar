@@ -2,6 +2,8 @@
 
 module.exports = ({
   today: 'Today',
+  now: 'Now',
+  ok:'Ok',
   clear: 'Clear',
   hourPanelTitle: 'Select hour',
   minutePanelTitle: 'Select minute',
@@ -11,7 +13,8 @@ module.exports = ({
   decadeSelect: 'Choose a decade',
   yearFormat: 'yyyy',
   dateFormat: 'M/d/yyyy',
-  monthYearFormat: 'MMMM yyyy',
+  monthFormat:'MMMM',
+  monthBeforeYear:true,
   previousMonth: 'Previous month (PageUp)',
   nextMonth: 'Next month (PageDown)',
   hourInput: 'Last hour(Up), Next hour(Down)',

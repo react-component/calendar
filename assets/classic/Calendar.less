@@ -100,33 +100,22 @@
   background-position: 0 -140px;
 }
 
-.classic-calendar .classic-calendar-month-select {
-  color: #ffffff;
-  line-height: 26px;
-  border: 1px solid transparent;
-}
+.classic-calendar {
+  &-year-select, &-month-select {
+    color: #ffffff;
+    line-height: 26px;
+    border: 1px solid transparent;
+    text-decoration: none;
+    padding: 0 4px;
 
-.classic-calendar .classic-calendar-month-select-arrow {
-  width: 0;
-  height: 0;
-  overflow: hidden;
-  font-size: 0;
-  vertical-align: middle;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 4px solid #ffffff;
-  border-bottom-width: 0px;
-}
-
-.classic-calendar-month-select:hover .classic-calendar-month-select-arrow {
-  border-top-color: #f0ff00;
-}
-
-.classic-calendar-month-select:hover {
-  color: #f0ff00;
-  border: 1px solid #8cc6ff;
-  background: url('//gtms04.alicdn.com/tps/i4/TB1.L9bFVXXXXbAXpXXDM4qIXXX-19-300.png');
-  background-position: 0 -268px;
+    &:hover {
+      cursor: pointer;
+      color: #f0ff00;
+      border: 1px solid #8cc6ff;
+      background: url('//gtms04.alicdn.com/tps/i4/TB1.L9bFVXXXXbAXpXXDM4qIXXX-19-300.png');
+      background-position: 0 -268px;
+    }
+  }
 }
 
 .classic-calendar-week-number-cell {
@@ -212,7 +201,7 @@
   text-align: center;
 }
 
-.classic-calendar-today-btn, .classic-calendar-clear-btn {
+.classic-calendar-today-btn, .classic-calendar-clear-btn, .classic-calendar-ok-btn {
   line-height: 16px;
   height: 16px;
   margin: 0 3px 0 2px;
@@ -225,14 +214,15 @@
   border-color: #3375cf;
   display: inline-block;
   margin-left: 5px;
-}
 
-.classic-calendar-today-btn:hover, .classic-calendar-clear-btn:hover {
-  color: #ffffff;
+  &:hover {
+    color: #ffffff;
+  }
 }
 
 .classic-calendar-footer-btn {
   margin-top: 2px;
+  display: block;
 }
 
 
