@@ -319,7 +319,7 @@
 	'use strict';
 	
 	module.exports = __webpack_require__(7);
-	module.exports.Picker = __webpack_require__(41);
+	module.exports.Picker = __webpack_require__(42);
 
 /***/ },
 /* 7 */
@@ -378,10 +378,10 @@
 	var GregorianCalendar = __webpack_require__(11);
 	var rcUtil = __webpack_require__(17);
 	var KeyCode = rcUtil.KeyCode;
-	var DateTable = __webpack_require__(28);
-	var CalendarHeader = __webpack_require__(32);
-	var CalendarFooter = __webpack_require__(37);
-	var staticPrefixClsFn = __webpack_require__(36);
+	var DateTable = __webpack_require__(29);
+	var CalendarHeader = __webpack_require__(33);
+	var CalendarFooter = __webpack_require__(38);
+	var staticPrefixClsFn = __webpack_require__(37);
 	
 	function noop() {}
 	
@@ -501,11 +501,11 @@
 	        case KeyCode.DOWN:
 	          goWeek.call(this, 1);
 	          e.preventDefault();
-	          return true;
+	          return 1;
 	        case KeyCode.UP:
 	          goWeek.call(this, -1);
 	          e.preventDefault();
-	          return true;
+	          return 1;
 	        case KeyCode.LEFT:
 	          if (ctrlKey) {
 	            this.previousYear();
@@ -513,7 +513,7 @@
 	            goDay.call(this, -1);
 	          }
 	          e.preventDefault();
-	          return true;
+	          return 1;
 	        case KeyCode.RIGHT:
 	          if (ctrlKey) {
 	            this.nextYear();
@@ -521,30 +521,30 @@
 	            goDay.call(this, 1);
 	          }
 	          e.preventDefault();
-	          return true;
+	          return 1;
 	        case KeyCode.HOME:
 	          goStartMonth.call(this);
 	          e.preventDefault();
-	          return true;
+	          return 1;
 	        case KeyCode.END:
 	          goEndMonth.call(this);
 	          e.preventDefault();
-	          return true;
+	          return 1;
 	        case KeyCode.PAGE_DOWN:
 	          this.nextMonth();
 	          e.preventDefault();
-	          return true;
+	          return 1;
 	        case KeyCode.PAGE_UP:
 	          this.previousMonth();
 	          e.preventDefault();
-	          return true;
+	          return 1;
 	        case KeyCode.ENTER:
 	          this.props.onSelect(this.state.value);
 	          e.preventDefault();
-	          return true;
+	          return 1;
 	        default:
 	          this.props.onKeyDown(e);
-	          return true;
+	          return 1;
 	      }
 	    }
 	  }, {
@@ -680,7 +680,7 @@
 	};
 	
 	Calendar.defaultProps = {
-	  locale: __webpack_require__(40),
+	  locale: __webpack_require__(41),
 	  style: {},
 	  prefixCls: 'rc-calendar',
 	  onKeyDown: noop,
@@ -3152,73 +3152,26 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	  guid: __webpack_require__(19),
-	  classSet: __webpack_require__(20),
-	  joinClasses: __webpack_require__(21),
-	  KeyCode: __webpack_require__(22),
-	  PureRenderMixin: __webpack_require__(23),
-	  shallowEqual: __webpack_require__(18),
+	  guid: __webpack_require__(18),
+	  classSet: __webpack_require__(19),
+	  joinClasses: __webpack_require__(20),
+	  KeyCode: __webpack_require__(21),
+	  PureRenderMixin: __webpack_require__(22),
+	  shallowEqual: __webpack_require__(23),
 	  createChainedFunction: __webpack_require__(24),
 	  Dom: {
 	    addEventListener: __webpack_require__(25),
 	    contains: __webpack_require__(26)
 	  },
 	  Children: {
-	    toArray: __webpack_require__(27)
+	    toArray: __webpack_require__(27),
+	    mapSelf: __webpack_require__(28)
 	  }
 	};
 
 
 /***/ },
 /* 18 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-2014, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule shallowEqual
-	 */
-	
-	"use strict";
-	
-	/**
-	 * Performs equality by iterating through keys on an object and returning
-	 * false when any key has values which are not strictly equal between
-	 * objA and objB. Returns true when the values of all keys are strictly equal.
-	 *
-	 * @return {boolean}
-	 */
-	function shallowEqual(objA, objB) {
-	  if (objA === objB) {
-	    return true;
-	  }
-	  var key;
-	  // Test for A's keys different from B.
-	  for (key in objA) {
-	    if (objA.hasOwnProperty(key) &&
-	        (!objB.hasOwnProperty(key) || objA[key] !== objB[key])) {
-	      return false;
-	    }
-	  }
-	  // Test for B's keys missing from A.
-	  for (key in objB) {
-	    if (objB.hasOwnProperty(key) && !objA.hasOwnProperty(key)) {
-	      return false;
-	    }
-	  }
-	  return true;
-	}
-	
-	module.exports = shallowEqual;
-
-
-/***/ },
-/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var seed = 0;
@@ -3228,7 +3181,7 @@
 
 
 /***/ },
-/* 20 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3273,7 +3226,7 @@
 
 
 /***/ },
-/* 21 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3320,7 +3273,7 @@
 
 
 /***/ },
-/* 22 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3847,7 +3800,7 @@
 
 
 /***/ },
-/* 23 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3863,7 +3816,7 @@
 	
 	"use strict";
 	
-	var shallowEqual = __webpack_require__(18);
+	var shallowEqual = __webpack_require__(23);
 	
 	/**
 	 * If your React component's render function is "pure", e.g. it will render the
@@ -3897,6 +3850,54 @@
 	};
 	
 	module.exports = ReactComponentWithPureRenderMixin;
+
+
+/***/ },
+/* 23 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-2014, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule shallowEqual
+	 */
+	
+	"use strict";
+	
+	/**
+	 * Performs equality by iterating through keys on an object and returning
+	 * false when any key has values which are not strictly equal between
+	 * objA and objB. Returns true when the values of all keys are strictly equal.
+	 *
+	 * @return {boolean}
+	 */
+	function shallowEqual(objA, objB) {
+	  if (objA === objB) {
+	    return true;
+	  }
+	  var key;
+	  // Test for A's keys different from B.
+	  for (key in objA) {
+	    if (objA.hasOwnProperty(key) &&
+	        (!objB.hasOwnProperty(key) || objA[key] !== objB[key])) {
+	      return false;
+	    }
+	  }
+	  // Test for B's keys missing from A.
+	  for (key in objB) {
+	    if (objB.hasOwnProperty(key) && !objA.hasOwnProperty(key)) {
+	      return false;
+	    }
+	  }
+	  return true;
+	}
+	
+	module.exports = shallowEqual;
 
 
 /***/ },
@@ -3984,58 +3985,17 @@
 /* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-	
-	var _createClass = (function () {
-	  function defineProperties(target, props) {
-	    for (var i = 0; i < props.length; i++) {
-	      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ('value' in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-	    }
-	  }return function (Constructor, protoProps, staticProps) {
-	    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-	  };
-	})();
-	
-	function _classCallCheck(instance, Constructor) {
-	  if (!(instance instanceof Constructor)) {
-	    throw new TypeError('Cannot call a class as a function');
-	  }
-	}
-	
-	function _inherits(subClass, superClass) {
-	  if (typeof superClass !== 'function' && superClass !== null) {
-	    throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
-	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
-	}
-	
 	var React = __webpack_require__(8);
-	var DateTHead = __webpack_require__(29);
-	var DateTBody = __webpack_require__(31);
 	
-	var DateTable = (function (_React$Component) {
-	  function DateTable() {
-	    _classCallCheck(this, DateTable);
+	function mirror(o) {
+	  return o;
+	}
 	
-	    if (_React$Component != null) {
-	      _React$Component.apply(this, arguments);
-	    }
-	  }
-	
-	  _inherits(DateTable, _React$Component);
-	
-	  _createClass(DateTable, [{
-	    key: 'render',
-	    value: function render() {
-	      var props = this.props;
-	      var prefixClsFn = props.prefixClsFn;
-	      return React.createElement('table', { className: prefixClsFn('table'), cellSpacing: '0', role: 'grid' }, React.createElement(DateTHead, props), React.createElement(DateTBody, props));
-	    }
-	  }]);
-	
-	  return DateTable;
-	})(React.Component);
-	
-	module.exports = DateTable;
+	module.exports = function (children) {
+	  // return ReactFragment
+	  return React.Children.map(children, mirror);
+	};
+
 
 /***/ },
 /* 29 */
@@ -4066,7 +4026,64 @@
 	}
 	
 	var React = __webpack_require__(8);
-	var DateConstants = __webpack_require__(30);
+	var DateTHead = __webpack_require__(30);
+	var DateTBody = __webpack_require__(32);
+	
+	var DateTable = (function (_React$Component) {
+	  function DateTable() {
+	    _classCallCheck(this, DateTable);
+	
+	    if (_React$Component != null) {
+	      _React$Component.apply(this, arguments);
+	    }
+	  }
+	
+	  _inherits(DateTable, _React$Component);
+	
+	  _createClass(DateTable, [{
+	    key: 'render',
+	    value: function render() {
+	      var props = this.props;
+	      var prefixClsFn = props.prefixClsFn;
+	      return React.createElement('table', { className: prefixClsFn('table'), cellSpacing: '0', role: 'grid' }, React.createElement(DateTHead, props), React.createElement(DateTBody, props));
+	    }
+	  }]);
+	
+	  return DateTable;
+	})(React.Component);
+	
+	module.exports = DateTable;
+
+/***/ },
+/* 30 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = (function () {
+	  function defineProperties(target, props) {
+	    for (var i = 0; i < props.length; i++) {
+	      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ('value' in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+	    }
+	  }return function (Constructor, protoProps, staticProps) {
+	    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+	  };
+	})();
+	
+	function _classCallCheck(instance, Constructor) {
+	  if (!(instance instanceof Constructor)) {
+	    throw new TypeError('Cannot call a class as a function');
+	  }
+	}
+	
+	function _inherits(subClass, superClass) {
+	  if (typeof superClass !== 'function' && superClass !== null) {
+	    throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
+	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
+	}
+	
+	var React = __webpack_require__(8);
+	var DateConstants = __webpack_require__(31);
 	
 	var DateTHead = (function (_React$Component) {
 	  function DateTHead() {
@@ -4113,7 +4130,7 @@
 	module.exports = DateTHead;
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4124,7 +4141,7 @@
 	};
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4152,7 +4169,7 @@
 	}
 	
 	var React = __webpack_require__(8);
-	var DateConstants = __webpack_require__(30);
+	var DateConstants = __webpack_require__(31);
 	
 	function isSameDay(one, two) {
 	  return one.getYear() === two.getYear() && one.getMonth() === two.getMonth() && one.getDayOfMonth() === two.getDayOfMonth();
@@ -4314,7 +4331,7 @@
 	module.exports = DateTBody;
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4362,9 +4379,10 @@
 	}
 	
 	var React = __webpack_require__(8);
-	var MonthPanel = __webpack_require__(33);
+	var MonthPanel = __webpack_require__(34);
 	var DateTimeFormat = __webpack_require__(9);
-	var YearPanel = __webpack_require__(34);
+	var YearPanel = __webpack_require__(35);
+	var toFragment = __webpack_require__(17).Children.mapSelf;
 	
 	var CalendarHeader = (function (_React$Component) {
 	  function CalendarHeader(props) {
@@ -4429,7 +4447,7 @@
 	      } else {
 	        my = [year, month];
 	      }
-	      return React.createElement('span', { className: selectClassName }, my);
+	      return React.createElement('span', { className: selectClassName }, toFragment(my));
 	    }
 	  }, {
 	    key: 'handleSelect',
@@ -4473,7 +4491,7 @@
 	module.exports = CalendarHeader;
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4524,8 +4542,8 @@
 	var ROW = 4;
 	var COL = 3;
 	var cx = __webpack_require__(17).classSet;
-	var YearPanel = __webpack_require__(34);
-	var staticPrefixClsFn = __webpack_require__(36);
+	var YearPanel = __webpack_require__(35);
+	var staticPrefixClsFn = __webpack_require__(37);
 	
 	function goYear(direction) {
 	  var next = this.state.value.clone();
@@ -4654,7 +4672,7 @@
 	module.exports = MonthPanel;
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4705,8 +4723,8 @@
 	var ROW = 4;
 	var COL = 3;
 	var cx = __webpack_require__(17).classSet;
-	var DecadePanel = __webpack_require__(35);
-	var staticPrefixClsFn = __webpack_require__(36);
+	var DecadePanel = __webpack_require__(36);
+	var staticPrefixClsFn = __webpack_require__(37);
 	
 	function goYear(direction) {
 	  var next = this.state.value.clone();
@@ -4857,7 +4875,7 @@
 	module.exports = YearPanel;
 
 /***/ },
-/* 35 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4908,7 +4926,7 @@
 	var ROW = 4;
 	var COL = 3;
 	var cx = __webpack_require__(17).classSet;
-	var staticPrefixClsFn = __webpack_require__(36);
+	var staticPrefixClsFn = __webpack_require__(37);
 	
 	function goYear(direction) {
 	  var next = this.state.value.clone();
@@ -5023,7 +5041,7 @@
 	module.exports = DecadePanel;
 
 /***/ },
-/* 36 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5040,7 +5058,7 @@
 	};
 
 /***/ },
-/* 37 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5068,7 +5086,8 @@
 	}
 	
 	var React = __webpack_require__(8);
-	var Time = __webpack_require__(38);
+	var Time = __webpack_require__(39);
+	var toFragment = __webpack_require__(17).Children.mapSelf;
 	
 	var CalendarFooter = (function (_React$Component) {
 	  function CalendarFooter() {
@@ -5123,7 +5142,7 @@
 	        }
 	        var footerBtn;
 	        if (nowEl || clearEl) {
-	          footerBtn = React.createElement('span', { className: prefixClsFn('footer-btn') }, [nowEl, okBtn, clearEl]);
+	          footerBtn = React.createElement('span', { className: prefixClsFn('footer-btn') }, toFragment([nowEl, okBtn, clearEl]));
 	        }
 	        var timeEl;
 	        if (props.showTime) {
@@ -5142,7 +5161,7 @@
 	module.exports = CalendarFooter;
 
 /***/ },
-/* 38 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5202,7 +5221,7 @@
 	var React = __webpack_require__(8);
 	var rcUtil = __webpack_require__(17);
 	var KeyCode = rcUtil.KeyCode;
-	var TimePanel = __webpack_require__(39);
+	var TimePanel = __webpack_require__(40);
 	var setHourOfDay = 'setHourOfDay';
 	var setMinutes = 'setMinutes';
 	var setSeconds = 'setSeconds';
@@ -5378,7 +5397,7 @@
 	module.exports = Time;
 
 /***/ },
-/* 39 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5427,7 +5446,7 @@
 	
 	var React = __webpack_require__(8);
 	var cx = __webpack_require__(17).classSet;
-	var staticPrefixClsFn = __webpack_require__(36);
+	var staticPrefixClsFn = __webpack_require__(37);
 	
 	function choose(hour, e) {
 	  var next = this.state.value.clone();
@@ -5501,7 +5520,7 @@
 	module.exports = TimePanel;
 
 /***/ },
-/* 40 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5536,7 +5555,7 @@
 	};
 
 /***/ },
-/* 41 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5586,8 +5605,9 @@
 	var React = __webpack_require__(8);
 	var DateTimeFormat = __webpack_require__(9);
 	var rcUtil = __webpack_require__(17);
+	var toFragment = rcUtil.Children.mapSelf;
 	var KeyCode = rcUtil.KeyCode;
-	var domAlign = __webpack_require__(42);
+	var domAlign = __webpack_require__(43);
 	var orientMap = {
 	  tl: ['top', 'left'],
 	  tr: ['top', 'right'],
@@ -5900,7 +5920,7 @@
 	          onMouseDown: prevent
 	        });
 	      }
-	      return React.createElement('span', { className: classes.join(' ') }, [input, calendar, trigger]);
+	      return React.createElement('span', { className: classes.join(' ') }, toFragment([input, calendar, trigger]));
 	    }
 	  }]);
 	
@@ -5926,7 +5946,7 @@
 	module.exports = Picker;
 
 /***/ },
-/* 42 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5936,7 +5956,7 @@
 	
 	'use strict';
 	
-	var utils = __webpack_require__(43);
+	var utils = __webpack_require__(44);
 	
 	// http://yiminghe.iteye.com/blog/1124720
 	
@@ -6291,7 +6311,7 @@
 	// document.documentElement, so check for that too.
 
 /***/ },
-/* 43 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

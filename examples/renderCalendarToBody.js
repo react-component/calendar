@@ -3,7 +3,7 @@ webpackJsonp([1],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(47);
+	module.exports = __webpack_require__(48);
 
 
 /***/ },
@@ -40,7 +40,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 44:
+/***/ 45:
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -58,7 +58,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 45:
+/***/ 46:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88,12 +88,12 @@ webpackJsonp([1],{
 	  nextDecade: '下一年代',
 	  previousCentury: '上一世纪',
 	  nextCentury: '下一世纪',
-	  format: __webpack_require__(46)
+	  format: __webpack_require__(47)
 	};
 
 /***/ },
 
-/***/ 46:
+/***/ 47:
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -122,7 +122,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 47:
+/***/ 48:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -131,10 +131,10 @@ webpackJsonp([1],{
 	var React = __webpack_require__(8);
 	var Calendar = __webpack_require__(6);
 	var DatePicker = Calendar.Picker;
-	var zhCn = __webpack_require__(44);
+	var zhCn = __webpack_require__(45);
 	var DateTimeFormat = __webpack_require__(9);
 	var GregorianCalendar = __webpack_require__(11);
-	var CalendarLocale = __webpack_require__(45);
+	var CalendarLocale = __webpack_require__(46);
 	var value = new GregorianCalendar(zhCn);
 	value.setTime(Date.now());
 	
