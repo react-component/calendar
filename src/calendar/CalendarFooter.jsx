@@ -16,7 +16,7 @@ class CalendarFooter extends React.Component {
     var value = props.value;
     var locale = props.locale;
     var prefixClsFn = props.prefixClsFn;
-    var footerEl;
+    var footerEl = null;
     if (props.showToday || props.showTime) {
       var todayEl;
       if (props.showToday) {
