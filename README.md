@@ -65,7 +65,20 @@ var React = require('react');
 React.render(<Calendar />, container);
 ```
 
-For details to see: [https://github.com/yiminghe/learning-react/tree/master/example/rc-calendar](https://github.com/yiminghe/learning-react/tree/master/example/rc-calendar)
+## Development
+
+```
+npm install
+npm start
+```
+
+## Example
+
+http://localhost:8001/examples/
+
+online example:
+
+http://react-component.github.io/calendar/examples/index.html
 
 ## API
 
@@ -95,7 +108,7 @@ For details to see: [https://github.com/yiminghe/learning-react/tree/master/exam
         </tr>
         <tr>
           <td>value</td>
-          <td>GregorianCalendar</td>
+          <td>[GregorianCalendar](https://github.com/yiminghe/gregorian-calendar)</td>
           <td></td>
           <td>current value like input's value</td>
         </tr>
@@ -114,7 +127,7 @@ For details to see: [https://github.com/yiminghe/learning-react/tree/master/exam
         <tr>
           <td>locale</td>
           <td>Object</td>
-          <td>require('rc-calendar/lib/locale/en-use')</td>
+          <td>require('rc-calendar/lib/locale/en-us')</td>
           <td>calendar locale</td>
         </tr>
         <tr>
@@ -188,7 +201,7 @@ For details to see: [https://github.com/yiminghe/learning-react/tree/master/exam
         </tr>
         <tr>
           <td>formatter</td>
-          <td>GregorianCalendarFormatter</td>
+          <td>[GregorianCalendarFormatter](https://github.com/yiminghe/gregorian-calendar-format)</td>
           <td></td>
           <td>use to format/parse value to/from input</td>
         </tr>
@@ -219,20 +232,6 @@ For details to see: [https://github.com/yiminghe/learning-react/tree/master/exam
     </tbody>
 </table>
 
-## Development
-
-```
-npm install
-npm start
-```
-
-## Example
-
-http://localhost:8001/examples/
-
-online example:
-
-http://react-component.github.io/calendar/examples/index.html
 
 ## Test Case
 
