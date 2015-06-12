@@ -108,7 +108,7 @@ http://react-component.github.io/calendar/examples/index.html
         </tr>
         <tr>
           <td>value</td>
-          <td>[GregorianCalendar](https://github.com/yiminghe/gregorian-calendar)</td>
+          <td> [GregorianCalendar](https://github.com/yiminghe/gregorian-calendar) </td>
           <td></td>
           <td>current value like input's value</td>
         </tr>
@@ -201,7 +201,7 @@ http://react-component.github.io/calendar/examples/index.html
         </tr>
         <tr>
           <td>formatter</td>
-          <td>[GregorianCalendarFormatter](https://github.com/yiminghe/gregorian-calendar-format)</td>
+          <td> [GregorianCalendarFormatter](https://github.com/yiminghe/gregorian-calendar-format) </td>
           <td></td>
           <td>use to format/parse value to/from input</td>
         </tr>
