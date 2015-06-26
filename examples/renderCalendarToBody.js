@@ -70,7 +70,7 @@ var Test = React.createClass({
 });
 
 React.render(<div>
-  <h1>zh-cn</h1>
+  <h2>zh-cn</h2>
   <Test />
 </div>, document.getElementById('__react-content'));
 
