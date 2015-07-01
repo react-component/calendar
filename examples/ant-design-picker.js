@@ -80,6 +80,7 @@ var Test = React.createClass({
         marginBottom: 22
       }}>
         <DatePicker
+          animation="slide-up"
           trigger={<span className="rc-calendar-picker-icon" />}
           formatter={this.props.formatter} calendar={calendar}
           value={state.value} onChange={this.handleChange}>

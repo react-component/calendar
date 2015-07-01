@@ -194,6 +194,18 @@ http://react-component.github.io/calendar/examples/index.html
           <td></td>
         </tr>
         <tr>
+          <td>animation</td>
+          <td>String</td>
+          <td></td>
+          <td>index.css support 'slide-up'</td>
+        </tr>
+        <tr>
+          <td>transitionName</td>
+          <td>String</td>
+          <td></td>
+          <td>css class for animation</td>
+        </tr>
+        <tr>
           <td>renderCalendarToBody</td>
           <td>Boolean</td>
           <td>false</td>

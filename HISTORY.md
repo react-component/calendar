@@ -1,5 +1,8 @@
 # History
 ----
+## 3.10.0 / 2015-07-01
+
+`new` support picker animation [#39](https://github.com/react-component/calendar/issues/39)
 
 ## 3.9.0 / 2015-06-11
 

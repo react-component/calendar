@@ -1,6 +1,6 @@
 {
   "name": "rc-calendar",
-  "version": "3.9.1",
+  "version": "3.10.0",
   "description": "calendar ui component for react",
   "keywords": [
     "react",
@@ -51,6 +51,7 @@
     "precommit"
   ],
   "dependencies": {
+    "css-animation": "~1.0.3",
     "dom-align": "^1.0.1",
     "gregorian-calendar": "3.x",
     "gregorian-calendar-format": "3.x",

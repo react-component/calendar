@@ -13,6 +13,7 @@ var orientMap = {
   br: ['bottom', 'right']
 };
 var createChainedFunction = rcUtil.createChainedFunction;
+var cssAnimate = require('css-animation');
 
 function getImmutableOrient(orient) {
   if (orient) {
@@ -84,18 +85,42 @@ class Picker extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     prevState = prevState || {};
-    var prefixCls = this.props.prefixCls;
-    if (this.props.renderCalendarToBody && !this.state.open && prevState.open) {
+    var props = this.props;
+    var state = this.state;
+    var prefixCls = props.prefixCls;
+    if (props.renderCalendarToBody && !state.open && prevState.open) {
       this.getCalendarContainer().className = getContainerClassName(prefixCls);
     }
-    if (this.state.open && !prevState.open) {
-      if (this.props.renderCalendarToBody) {
+    if (state.open && !prevState.open) {
+      if (props.renderCalendarToBody) {
         this.getCalendarContainer().className = getContainerClassName(prefixCls, true);
         React.render(this.getCalendarElement(), this.getCalendarContainer(), ()=> {
           this.alignCalendar();
         });
       } else {
         this.alignCalendar();
+      }
+    }
+    this.animate(prevState, state);
+  }
+
+  getTransitionName() {
+    var props = this.props;
+    var transitionName = props.transitionName;
+    if (!transitionName && props.animation) {
+      transitionName = `${props.prefixCls}-${props.animation}`;
+    }
+    return transitionName;
+  }
+
+  animate(prevState, state) {
+    var transitionName = this.getTransitionName();
+    if (transitionName) {
+      var calendarDomNode = React.findDOMNode(this.calendarInstance);
+      if (prevState.open && !state.open) {
+        cssAnimate(calendarDomNode, `${transitionName}-leave`);
+      } else if (state.open && !prevState.open) {
+        cssAnimate(calendarDomNode, `${transitionName}-enter`);
       }
     }
   }
