@@ -148,13 +148,13 @@ class Picker extends React.Component {
       points = ['br', 'tr'];
       offset = [0, -5];
     }
-
+    var adjustOrientOnCalendarOverflow = this.props.adjustOrientOnCalendarOverflow;
     var align = domAlign(React.findDOMNode(this.calendarInstance), React.findDOMNode(this.inputInstance), {
       points: points,
       offset: offset,
       overflow: {
-        adjustX: 1,
-        adjustY: 1
+        adjustX: adjustOrientOnCalendarOverflow,
+        adjustY: adjustOrientOnCalendarOverflow
       }
     });
     points = align.points;
@@ -327,11 +327,13 @@ function prevent(e) {
 
 Picker.propTypes = {
   onChange: React.PropTypes.func,
-  renderCalendarToBody: React.PropTypes.bool
+  renderCalendarToBody: React.PropTypes.bool,
+  adjustOrientOnCalendarOverflow: React.PropTypes.bool
 };
 
 Picker.defaultProps = {
   prefixCls: 'rc-calendar-picker',
+  adjustOrientOnCalendarOverflow: true,
   renderCalendarToBody: false,
   onChange() {
   },

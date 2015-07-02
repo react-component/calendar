@@ -194,6 +194,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td></td>
         </tr>
         <tr>
+          <td>adjustOrientOnCalendarOverflow</td>
+          <td>Boolean</td>
+          <td>true</td>
+          <td>whether adjust calendar orient if there is not enough space to show. better false if animation is 'slide-up'</td>
+        </tr>
+        <tr>
           <td>animation</td>
           <td>String</td>
           <td></td>

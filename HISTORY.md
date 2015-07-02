@@ -1,5 +1,10 @@
 # History
 ----
+
+## 3.10.1 / 2015-07-02
+
+add adjustOrientOnCalendarOverflow prop for picker
+
 ## 3.10.0 / 2015-07-01
 
 `new` support picker animation [#39](https://github.com/react-component/calendar/issues/39)
