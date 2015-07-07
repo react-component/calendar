@@ -3,6 +3,7 @@
 <html>
 <head>
   <title>rc-calendar-renderCalendarToBody</title>
+  <meta http-equiv=Content-Type content="text/html;charset=utf-8">
   <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" type="text/css" rel="stylesheet"/>
   <style>
       .hljs {
@@ -179,20 +180,19 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
 </head>
 <body>
-<h1>rc-calendar@3.9.1</h1>
+<h1>rc-calendar@3.10.1</h1>
 <div id="__react-content"></div>
 <script src="common.js?nowrap"></script>
 <script src="renderCalendarToBody.js?nowrap"></script>
 <div class="highlight">
 <pre>
-<span class="xml">require('rc-calendar/assets/index.css');
-var React = require('react');
-var Calendar = require('rc-calendar');
-var DatePicker = Calendar.Picker;
-var zhCn = require('gregorian-calendar/lib/locale/zh-cn');
-var DateTimeFormat = require('gregorian-calendar-format');
-var GregorianCalendar = require('gregorian-calendar');
-var CalendarLocale = require('rc-calendar/lib/locale/zh-cn');
+<span class="xml">import 'rc-calendar/assets/index.css';
+import React from 'react';
+import Calendar, {Picker as DatePicker} from 'rc-calendar';
+import zhCn from 'gregorian-calendar/lib/locale/zh-cn';
+import DateTimeFormat from 'gregorian-calendar-format';
+import GregorianCalendar from 'gregorian-calendar';
+import CalendarLocale from 'rc-calendar/lib/locale/zh-cn';
 var value = new GregorianCalendar(zhCn);
 value.setTime(Date.now());
 

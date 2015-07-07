@@ -324,14 +324,35 @@
 
 	'use strict';
 	
-	module.exports = __webpack_require__(8);
-	module.exports.Picker = __webpack_require__(42);
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { 'default': obj };
+	}
+	
+	var _Calendar = __webpack_require__(8);
+	
+	var _Calendar2 = _interopRequireDefault(_Calendar);
+	
+	var _Picker = __webpack_require__(42);
+	
+	var _Picker2 = _interopRequireDefault(_Picker);
+	
+	_Calendar2['default'].Picker = _Picker2['default'];
+	exports['default'] = _Calendar2['default'];
+	module.exports = exports['default'];
 
 /***/ },
 /* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
 	
 	var _createClass = (function () {
 	  function defineProperties(target, props) {
@@ -363,6 +384,10 @@
 	  }
 	};
 	
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { 'default': obj };
+	}
+	
 	function _defineProperty(obj, key, value) {
 	  if (key in obj) {
 	    Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
@@ -383,15 +408,41 @@
 	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
 	}
 	
-	var React = __webpack_require__(6);
-	var DateTimeFormat = __webpack_require__(9);
-	var GregorianCalendar = __webpack_require__(11);
-	var rcUtil = __webpack_require__(17);
-	var KeyCode = rcUtil.KeyCode;
-	var DateTable = __webpack_require__(29);
-	var CalendarHeader = __webpack_require__(33);
-	var CalendarFooter = __webpack_require__(38);
-	var staticPrefixClsFn = __webpack_require__(37);
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _gregorianCalendarFormat = __webpack_require__(9);
+	
+	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
+	
+	var _gregorianCalendar = __webpack_require__(11);
+	
+	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
+	
+	var _rcUtil = __webpack_require__(17);
+	
+	var _rcUtil2 = _interopRequireDefault(_rcUtil);
+	
+	var _dateDateTable = __webpack_require__(29);
+	
+	var _dateDateTable2 = _interopRequireDefault(_dateDateTable);
+	
+	var _calendarCalendarHeader = __webpack_require__(33);
+	
+	var _calendarCalendarHeader2 = _interopRequireDefault(_calendarCalendarHeader);
+	
+	var _calendarCalendarFooter = __webpack_require__(38);
+	
+	var _calendarCalendarFooter2 = _interopRequireDefault(_calendarCalendarFooter);
+	
+	var _utilPrefixClsFn = __webpack_require__(37);
+	
+	var _utilPrefixClsFn2 = _interopRequireDefault(_utilPrefixClsFn);
+	
+	var _localeEnUs = __webpack_require__(41);
+	
+	var _localeEnUs2 = _interopRequireDefault(_localeEnUs);
 	
 	function noop() {}
 	
@@ -403,7 +454,7 @@
 	
 	function goEndMonth() {
 	  var next = this.state.value.clone();
-	  next.setDayOfMonth(next.getActualMaximum(GregorianCalendar.MONTH));
+	  next.setDayOfMonth(next.getActualMaximum(_gregorianCalendar2['default'].MONTH));
 	  this.setState({ value: next });
 	}
 	
@@ -432,7 +483,7 @@
 	}
 	
 	function getNow() {
-	  var value = new GregorianCalendar();
+	  var value = new _gregorianCalendar2['default']();
 	  value.setTime(Date.now());
 	  return value;
 	}
@@ -452,7 +503,7 @@
 	
 	    _get(Object.getPrototypeOf(Calendar.prototype), 'constructor', this).call(this, props);
 	    var value = props.value || props.defaultValue || getNow();
-	    this.dateFormatter = new DateTimeFormat(props.locale.dateFormat);
+	    this.dateFormatter = new _gregorianCalendarFormat2['default'](props.locale.dateFormat);
 	    this.state = {
 	      orient: props.orient,
 	      prefixCls: props.prefixCls,
@@ -508,15 +559,15 @@
 	      // mac
 	      var ctrlKey = e.ctrlKey || e.metaKey;
 	      switch (keyCode) {
-	        case KeyCode.DOWN:
+	        case _rcUtil.KeyCode.DOWN:
 	          goWeek.call(this, 1);
 	          e.preventDefault();
 	          return 1;
-	        case KeyCode.UP:
+	        case _rcUtil.KeyCode.UP:
 	          goWeek.call(this, -1);
 	          e.preventDefault();
 	          return 1;
-	        case KeyCode.LEFT:
+	        case _rcUtil.KeyCode.LEFT:
 	          if (ctrlKey) {
 	            this.previousYear();
 	          } else {
@@ -524,7 +575,7 @@
 	          }
 	          e.preventDefault();
 	          return 1;
-	        case KeyCode.RIGHT:
+	        case _rcUtil.KeyCode.RIGHT:
 	          if (ctrlKey) {
 	            this.nextYear();
 	          } else {
@@ -532,23 +583,23 @@
 	          }
 	          e.preventDefault();
 	          return 1;
-	        case KeyCode.HOME:
+	        case _rcUtil.KeyCode.HOME:
 	          goStartMonth.call(this);
 	          e.preventDefault();
 	          return 1;
-	        case KeyCode.END:
+	        case _rcUtil.KeyCode.END:
 	          goEndMonth.call(this);
 	          e.preventDefault();
 	          return 1;
-	        case KeyCode.PAGE_DOWN:
+	        case _rcUtil.KeyCode.PAGE_DOWN:
 	          this.nextMonth();
 	          e.preventDefault();
 	          return 1;
-	        case KeyCode.PAGE_UP:
+	        case _rcUtil.KeyCode.PAGE_UP:
 	          this.previousMonth();
 	          e.preventDefault();
 	          return 1;
-	        case KeyCode.ENTER:
+	        case _rcUtil.KeyCode.ENTER:
 	          this.props.onSelect(this.state.value);
 	          e.preventDefault();
 	          return 1;
@@ -565,7 +616,7 @@
 	  }, {
 	    key: 'prefixClsFn',
 	    value: function prefixClsFn() {
-	      return staticPrefixClsFn.apply(this, arguments);
+	      return _utilPrefixClsFn2['default'].apply(this, arguments);
 	    }
 	  }, {
 	    key: 'handleFocus',
@@ -592,7 +643,7 @@
 	  }, {
 	    key: 'shouldComponentUpdate',
 	    value: function shouldComponentUpdate() {
-	      return rcUtil.PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
+	      return _rcUtil2['default'].PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
 	    }
 	  }, {
 	    key: 'componentWillReceiveProps',
@@ -610,7 +661,7 @@
 	        });
 	      }
 	      if (nextProps.locale !== this.props.locale) {
-	        this.dateFormatter = new DateTimeFormat(nextProps.locale.dateFormat);
+	        this.dateFormatter = new _gregorianCalendarFormat2['default'](nextProps.locale.dateFormat);
 	      }
 	    }
 	  }, {
@@ -637,9 +688,9 @@
 	        });
 	      }
 	
-	      return React.createElement('div', { className: rcUtil.classSet(className), style: this.props.style,
+	      return _react2['default'].createElement('div', { className: _rcUtil2['default'].classSet(className), style: this.props.style,
 	        tabIndex: '0', onFocus: this.handleFocus,
-	        onBlur: this.handleBlur, onKeyDown: this.handleKeyDown }, React.createElement('div', { style: { outline: 'none' } }, React.createElement(CalendarHeader, {
+	        onBlur: this.handleBlur, onKeyDown: this.handleKeyDown }, _react2['default'].createElement('div', { style: { outline: 'none' } }, _react2['default'].createElement(_calendarCalendarHeader2['default'], {
 	        locale: locale,
 	        onValueChange: this.setValue,
 	        previousYear: this.previousYear,
@@ -647,7 +698,7 @@
 	        nextMonth: this.nextMonth,
 	        nextYear: this.nextYear,
 	        value: value,
-	        prefixClsFn: prefixClsFn }), React.createElement('div', { className: prefixClsFn('calendar-body') }, React.createElement(DateTable, {
+	        prefixClsFn: prefixClsFn }), _react2['default'].createElement('div', { className: prefixClsFn('calendar-body') }, _react2['default'].createElement(_dateDateTable2['default'], {
 	        locale: locale,
 	        value: value,
 	        prefixClsFn: prefixClsFn,
@@ -655,7 +706,7 @@
 	        onSelect: this.handleSelect,
 	        disabledDate: props.disabledDate,
 	        showWeekNumber: props.showWeekNumber,
-	        dateFormatter: this.dateFormatter })), React.createElement(CalendarFooter, {
+	        dateFormatter: this.dateFormatter })), _react2['default'].createElement(_calendarCalendarFooter2['default'], {
 	        locale: locale,
 	        showClear: props.showClear,
 	        showOk: props.showOk,
@@ -673,24 +724,26 @@
 	  }]);
 	
 	  return Calendar;
-	})(React.Component);
+	})(_react2['default'].Component);
+	
+	exports['default'] = Calendar;
 	
 	Calendar.propTypes = {
-	  value: React.PropTypes.object,
-	  defaultValue: React.PropTypes.object,
-	  className: React.PropTypes.string,
-	  orient: React.PropTypes.arrayOf(React.PropTypes.oneOf(['left', 'top', 'right', 'bottom'])),
-	  locale: React.PropTypes.object,
-	  showWeekNumber: React.PropTypes.bool,
-	  style: React.PropTypes.object,
-	  showToday: React.PropTypes.bool,
-	  showTime: React.PropTypes.bool,
-	  onSelect: React.PropTypes.func,
-	  onBlur: React.PropTypes.func
+	  value: _react2['default'].PropTypes.object,
+	  defaultValue: _react2['default'].PropTypes.object,
+	  className: _react2['default'].PropTypes.string,
+	  orient: _react2['default'].PropTypes.arrayOf(_react2['default'].PropTypes.oneOf(['left', 'top', 'right', 'bottom'])),
+	  locale: _react2['default'].PropTypes.object,
+	  showWeekNumber: _react2['default'].PropTypes.bool,
+	  style: _react2['default'].PropTypes.object,
+	  showToday: _react2['default'].PropTypes.bool,
+	  showTime: _react2['default'].PropTypes.bool,
+	  onSelect: _react2['default'].PropTypes.func,
+	  onBlur: _react2['default'].PropTypes.func
 	};
 	
 	Calendar.defaultProps = {
-	  locale: __webpack_require__(41),
+	  locale: _localeEnUs2['default'],
 	  style: {},
 	  prefixCls: 'rc-calendar',
 	  onKeyDown: noop,
@@ -702,8 +755,7 @@
 	  onClear: noop,
 	  onOk: noop
 	};
-	
-	module.exports = Calendar;
+	module.exports = exports['default'];
 
 /***/ },
 /* 9 */
@@ -4007,6 +4059,10 @@
 
 	'use strict';
 	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
 	var _createClass = (function () {
 	  function defineProperties(target, props) {
 	    for (var i = 0; i < props.length; i++) {
@@ -4037,6 +4093,10 @@
 	  }
 	};
 	
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { 'default': obj };
+	}
+	
 	function _classCallCheck(instance, Constructor) {
 	  if (!(instance instanceof Constructor)) {
 	    throw new TypeError('Cannot call a class as a function');
@@ -4049,9 +4109,17 @@
 	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
 	}
 	
-	var React = __webpack_require__(6);
-	var DateTHead = __webpack_require__(30);
-	var DateTBody = __webpack_require__(32);
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _DateTHead = __webpack_require__(30);
+	
+	var _DateTHead2 = _interopRequireDefault(_DateTHead);
+	
+	var _DateTBody = __webpack_require__(32);
+	
+	var _DateTBody2 = _interopRequireDefault(_DateTBody);
 	
 	var DateTable = (function (_React$Component) {
 	  function DateTable() {
@@ -4067,20 +4135,25 @@
 	    value: function render() {
 	      var props = this.props;
 	      var prefixClsFn = props.prefixClsFn;
-	      return React.createElement('table', { className: prefixClsFn('table'), cellSpacing: '0', role: 'grid' }, React.createElement(DateTHead, props), React.createElement(DateTBody, props));
+	      return _react2['default'].createElement('table', { className: prefixClsFn('table'), cellSpacing: '0', role: 'grid' }, _react2['default'].createElement(_DateTHead2['default'], props), _react2['default'].createElement(_DateTBody2['default'], props));
 	    }
 	  }]);
 	
 	  return DateTable;
-	})(React.Component);
+	})(_react2['default'].Component);
 	
-	module.exports = DateTable;
+	exports['default'] = DateTable;
+	module.exports = exports['default'];
 
 /***/ },
 /* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
 	
 	var _createClass = (function () {
 	  function defineProperties(target, props) {
@@ -4112,6 +4185,10 @@
 	  }
 	};
 	
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { 'default': obj };
+	}
+	
 	function _classCallCheck(instance, Constructor) {
 	  if (!(instance instanceof Constructor)) {
 	    throw new TypeError('Cannot call a class as a function');
@@ -4124,8 +4201,13 @@
 	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
 	}
 	
-	var React = __webpack_require__(6);
-	var DateConstants = __webpack_require__(31);
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _DateConstants = __webpack_require__(31);
+	
+	var _DateConstants2 = _interopRequireDefault(_DateConstants);
 	
 	var DateTHead = (function (_React$Component) {
 	  function DateTHead() {
@@ -4148,26 +4230,27 @@
 	      var firstDayOfWeek = value.getFirstDayOfWeek();
 	      var showWeekNumberEl;
 	
-	      for (var i = 0; i < DateConstants.DATE_COL_COUNT; i++) {
-	        var index = (firstDayOfWeek + i) % DateConstants.DATE_COL_COUNT;
+	      for (var i = 0; i < _DateConstants2['default'].DATE_COL_COUNT; i++) {
+	        var index = (firstDayOfWeek + i) % _DateConstants2['default'].DATE_COL_COUNT;
 	        veryShortWeekdays[i] = locale.format.veryShortWeekdays[index];
 	        weekDays[i] = locale.format.weekdays[index];
 	      }
 	
 	      if (props.showWeekNumber) {
-	        showWeekNumberEl = React.createElement('th', { role: 'columnheader', className: prefixClsFn('column-header', 'week-number-header') }, React.createElement('span', { className: prefixClsFn('column-header-inner') }, 'x'));
+	        showWeekNumberEl = _react2['default'].createElement('th', { role: 'columnheader', className: prefixClsFn('column-header', 'week-number-header') }, _react2['default'].createElement('span', { className: prefixClsFn('column-header-inner') }, 'x'));
 	      }
 	      var weekDaysEls = weekDays.map(function (day, xindex) {
-	        return React.createElement('th', { key: xindex, role: 'columnheader', title: day, className: prefixClsFn('column-header') }, React.createElement('span', { className: prefixClsFn('column-header-inner') }, veryShortWeekdays[xindex]));
+	        return _react2['default'].createElement('th', { key: xindex, role: 'columnheader', title: day, className: prefixClsFn('column-header') }, _react2['default'].createElement('span', { className: prefixClsFn('column-header-inner') }, veryShortWeekdays[xindex]));
 	      });
-	      return React.createElement('thead', null, React.createElement('tr', { role: 'row' }, showWeekNumberEl, weekDaysEls));
+	      return _react2['default'].createElement('thead', null, _react2['default'].createElement('tr', { role: 'row' }, showWeekNumberEl, weekDaysEls));
 	    }
 	  }]);
 	
 	  return DateTHead;
-	})(React.Component);
+	})(_react2['default'].Component);
 	
-	module.exports = DateTHead;
+	exports['default'] = DateTHead;
+	module.exports = exports['default'];
 
 /***/ },
 /* 31 */
@@ -4175,16 +4258,24 @@
 
 	'use strict';
 	
-	module.exports = {
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	exports['default'] = {
 	  DATE_ROW_COUNT: 6,
 	  DATE_COL_COUNT: 7
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
 	
 	var _createClass = (function () {
 	  function defineProperties(target, props) {
@@ -4216,6 +4307,10 @@
 	  }
 	};
 	
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { 'default': obj };
+	}
+	
 	function _classCallCheck(instance, Constructor) {
 	  if (!(instance instanceof Constructor)) {
 	    throw new TypeError('Cannot call a class as a function');
@@ -4228,8 +4323,13 @@
 	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
 	}
 	
-	var React = __webpack_require__(6);
-	var DateConstants = __webpack_require__(31);
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _DateConstants = __webpack_require__(31);
+	
+	var _DateConstants2 = _interopRequireDefault(_DateConstants);
 	
 	function isSameDay(one, two) {
 	  return one.getYear() === two.getYear() && one.getMonth() === two.getMonth() && one.getDayOfMonth() === two.getDayOfMonth();
@@ -4300,8 +4400,8 @@
 	      var lastMonth1 = month1.clone();
 	      lastMonth1.addDayOfMonth(0 - lastMonthDiffDay);
 	      var passed = 0;
-	      for (i = 0; i < DateConstants.DATE_ROW_COUNT; i++) {
-	        for (j = 0; j < DateConstants.DATE_COL_COUNT; j++) {
+	      for (i = 0; i < _DateConstants2['default'].DATE_ROW_COUNT; i++) {
+	        for (j = 0; j < _DateConstants2['default'].DATE_COL_COUNT; j++) {
 	          current = lastMonth1;
 	          if (passed) {
 	            current = current.clone();
@@ -4313,17 +4413,17 @@
 	      }
 	      var tableHtml = [];
 	      passed = 0;
-	      for (i = 0; i < DateConstants.DATE_ROW_COUNT; i++) {
+	      for (i = 0; i < _DateConstants2['default'].DATE_ROW_COUNT; i++) {
 	        var weekNumberCell;
 	        var dateCells = [];
 	        if (showWeekNumber) {
-	          weekNumberCell = React.createElement('td', { key: dateTable[passed].getWeekOfYear(), role: 'gridcell', className: weekNumberCellClass }, dateTable[passed].getWeekOfYear());
+	          weekNumberCell = _react2['default'].createElement('td', { key: dateTable[passed].getWeekOfYear(), role: 'gridcell', className: weekNumberCellClass }, dateTable[passed].getWeekOfYear());
 	        }
-	        for (j = 0; j < DateConstants.DATE_COL_COUNT; j++) {
+	        for (j = 0; j < _DateConstants2['default'].DATE_COL_COUNT; j++) {
 	          var next = null;
 	          var last = null;
 	          current = dateTable[passed];
-	          if (j < DateConstants.DATE_COL_COUNT - 1) {
+	          if (j < _DateConstants2['default'].DATE_COL_COUNT - 1) {
 	            next = dateTable[passed + 1];
 	          }
 	          if (j > 0) {
@@ -4363,36 +4463,41 @@
 	
 	          var dateHtml;
 	          if (!(dateRender && (dateHtml = dateRender(current, value)))) {
-	            dateHtml = React.createElement('span', {
+	            dateHtml = _react2['default'].createElement('span', {
 	              key: getIdFromDate(current),
 	              className: dateClass,
 	              'aria-selected': selected,
 	              'aria-disabled': disabled }, current.getDayOfMonth());
 	          }
 	
-	          dateCells.push(React.createElement('td', { key: passed, onClick: disabled ? noop : handleDayClick.bind(this, current), role: 'gridcell',
+	          dateCells.push(_react2['default'].createElement('td', { key: passed, onClick: disabled ? noop : handleDayClick.bind(this, current), role: 'gridcell',
 	            title: dateFormatter.format(current), className: cls }, dateHtml));
 	
 	          passed++;
 	        }
-	        tableHtml.push(React.createElement('tr', {
+	        tableHtml.push(_react2['default'].createElement('tr', {
 	          key: i,
 	          role: 'row' }, weekNumberCell, dateCells));
 	      }
-	      return React.createElement('tbody', { className: prefixClsFn('tbody') }, tableHtml);
+	      return _react2['default'].createElement('tbody', { className: prefixClsFn('tbody') }, tableHtml);
 	    }
 	  }]);
 	
 	  return DateTBody;
-	})(React.Component);
+	})(_react2['default'].Component);
 	
-	module.exports = DateTBody;
+	exports['default'] = DateTBody;
+	module.exports = exports['default'];
 
 /***/ },
 /* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
 	
 	var _createClass = (function () {
 	  function defineProperties(target, props) {
@@ -4424,6 +4529,10 @@
 	  }
 	};
 	
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { 'default': obj };
+	}
+	
 	function _classCallCheck(instance, Constructor) {
 	  if (!(instance instanceof Constructor)) {
 	    throw new TypeError('Cannot call a class as a function');
@@ -4436,11 +4545,27 @@
 	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
 	}
 	
-	var React = __webpack_require__(6);
-	var MonthPanel = __webpack_require__(34);
-	var DateTimeFormat = __webpack_require__(9);
-	var YearPanel = __webpack_require__(35);
-	var toFragment = __webpack_require__(17).Children.mapSelf;
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _monthMonthPanel = __webpack_require__(34);
+	
+	var _monthMonthPanel2 = _interopRequireDefault(_monthMonthPanel);
+	
+	var _gregorianCalendarFormat = __webpack_require__(9);
+	
+	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
+	
+	var _yearYearPanel = __webpack_require__(35);
+	
+	var _yearYearPanel2 = _interopRequireDefault(_yearYearPanel);
+	
+	var _rcUtil = __webpack_require__(17);
+	
+	var _rcUtil2 = _interopRequireDefault(_rcUtil);
+	
+	var toFragment = _rcUtil2['default'].Children.mapSelf;
 	
 	var CalendarHeader = (function (_React$Component) {
 	  function CalendarHeader(props) {
@@ -4448,8 +4573,8 @@
 	
 	    _get(Object.getPrototypeOf(CalendarHeader.prototype), 'constructor', this).call(this, props);
 	    this.state = {};
-	    this.yearFormatter = new DateTimeFormat(props.locale.yearFormat);
-	    this.monthFormatter = new DateTimeFormat(props.locale.monthFormat);
+	    this.yearFormatter = new _gregorianCalendarFormat2['default'](props.locale.yearFormat);
+	    this.monthFormatter = new _gregorianCalendarFormat2['default'](props.locale.monthFormat);
 	    this.showMonthPanel = this.showMonthPanel.bind(this);
 	    this.showYearPanel = this.showYearPanel.bind(this);
 	    this.handleSelect = this.handleSelect.bind(this);
@@ -4462,8 +4587,8 @@
 	    value: function componentWillReceiveProps(nextProps) {
 	      var locale = this.props.locale;
 	      if (nextProps.locale !== locale) {
-	        this.yearFormatter = new DateTimeFormat(locale.yearFormat);
-	        this.monthFormatter = new DateTimeFormat(locale.monthFormat);
+	        this.yearFormatter = new _gregorianCalendarFormat2['default'](locale.yearFormat);
+	        this.monthFormatter = new _gregorianCalendarFormat2['default'](locale.monthFormat);
 	      }
 	    }
 	  }, {
@@ -4491,11 +4616,11 @@
 	      var value = this.props.value;
 	      var monthBeforeYear = locale.monthBeforeYear;
 	      var selectClassName = prefixClsFn(monthBeforeYear ? 'my-select' : 'ym-select');
-	      var year = React.createElement('a', { className: prefixClsFn('year-select'),
+	      var year = _react2['default'].createElement('a', { className: prefixClsFn('year-select'),
 	        role: 'button',
 	        onClick: this.showYearPanel,
 	        title: locale.monthSelect }, this.yearFormatter.format(value));
-	      var month = React.createElement('a', { className: prefixClsFn('month-select'),
+	      var month = _react2['default'].createElement('a', { className: prefixClsFn('month-select'),
 	        role: 'button',
 	        onClick: this.showMonthPanel,
 	        title: locale.monthSelect }, this.monthFormatter.format(value));
@@ -4505,7 +4630,7 @@
 	      } else {
 	        my = [year, month];
 	      }
-	      return React.createElement('span', { className: selectClassName }, toFragment(my));
+	      return _react2['default'].createElement('span', { className: selectClassName }, toFragment(my));
 	    }
 	  }, {
 	    key: 'handleSelect',
@@ -4524,35 +4649,40 @@
 	      var prefixClsFn = props.prefixClsFn;
 	      var locale = props.locale;
 	      var value = props.value;
-	      var PanelClass = state.showMonthPanel ? MonthPanel : state.showYearPanel ? YearPanel : null;
+	      var PanelClass = state.showMonthPanel ? _monthMonthPanel2['default'] : state.showYearPanel ? _yearYearPanel2['default'] : null;
 	      var panel;
 	      if (PanelClass) {
-	        panel = React.createElement(PanelClass, { locale: locale, value: value, rootPrefixCls: prefixClsFn(), onSelect: this.handleSelect });
+	        panel = _react2['default'].createElement(PanelClass, { locale: locale, value: value, rootPrefixCls: prefixClsFn(), onSelect: this.handleSelect });
 	      }
-	      return React.createElement('div', { className: prefixClsFn('header') }, React.createElement('a', { className: prefixClsFn('prev-year-btn'),
+	      return _react2['default'].createElement('div', { className: prefixClsFn('header') }, _react2['default'].createElement('a', { className: prefixClsFn('prev-year-btn'),
 	        role: 'button',
 	        onClick: props.previousYear,
-	        title: locale.previousYear }, '«'), React.createElement('a', { className: prefixClsFn('prev-month-btn'),
+	        title: locale.previousYear }, '«'), _react2['default'].createElement('a', { className: prefixClsFn('prev-month-btn'),
 	        role: 'button',
 	        onClick: props.previousMonth,
-	        title: locale.previousMonth }, '‹'), this.getMonthYearElement(), React.createElement('a', { className: prefixClsFn('next-month-btn'),
+	        title: locale.previousMonth }, '‹'), this.getMonthYearElement(), _react2['default'].createElement('a', { className: prefixClsFn('next-month-btn'),
 	        onClick: props.nextMonth,
-	        title: locale.nextMonth }, '›'), React.createElement('a', { className: prefixClsFn('next-year-btn'),
+	        title: locale.nextMonth }, '›'), _react2['default'].createElement('a', { className: prefixClsFn('next-year-btn'),
 	        onClick: props.nextYear,
 	        title: locale.nextYear }, '»'), panel);
 	    }
 	  }]);
 	
 	  return CalendarHeader;
-	})(React.Component);
+	})(_react2['default'].Component);
 	
-	module.exports = CalendarHeader;
+	exports['default'] = CalendarHeader;
+	module.exports = exports['default'];
 
 /***/ },
 /* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
 	
 	var _createClass = (function () {
 	  function defineProperties(target, props) {
@@ -4584,6 +4714,10 @@
 	  }
 	};
 	
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { 'default': obj };
+	}
+	
 	function _classCallCheck(instance, Constructor) {
 	  if (!(instance instanceof Constructor)) {
 	    throw new TypeError('Cannot call a class as a function');
@@ -4596,12 +4730,26 @@
 	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
 	}
 	
-	var React = __webpack_require__(6);
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _rcUtil = __webpack_require__(17);
+	
+	var _rcUtil2 = _interopRequireDefault(_rcUtil);
+	
+	var _yearYearPanel = __webpack_require__(35);
+	
+	var _yearYearPanel2 = _interopRequireDefault(_yearYearPanel);
+	
+	var _utilPrefixClsFn = __webpack_require__(37);
+	
+	var _utilPrefixClsFn2 = _interopRequireDefault(_utilPrefixClsFn);
+	
 	var ROW = 4;
 	var COL = 3;
-	var cx = __webpack_require__(17).classSet;
-	var YearPanel = __webpack_require__(35);
-	var staticPrefixClsFn = __webpack_require__(37);
+	
+	var cx = _rcUtil2['default'].classSet;
 	
 	function goYear(direction) {
 	  var next = this.state.value.clone();
@@ -4645,7 +4793,7 @@
 	    this.previousYear = goYear.bind(this, -1);
 	    this.showYearPanel = showYearPanel.bind(this);
 	    this.onYearPanelSelect = onYearPanelSelect.bind(this);
-	    this.prefixClsFn = staticPrefixClsFn.bind(this);
+	    this.prefixClsFn = _utilPrefixClsFn2['default'].bind(this);
 	  }
 	
 	  _inherits(MonthPanel, _React$Component);
@@ -4692,48 +4840,53 @@
 	          var classNameMap = {};
 	          classNameMap[prefixClsFn('cell')] = 1;
 	          classNameMap[prefixClsFn('selected-cell')] = m.value === currentMonth;
-	          return React.createElement('td', { role: 'gridcell',
+	          return _react2['default'].createElement('td', { role: 'gridcell',
 	            key: m.value,
 	            onClick: chooseMonth.bind(_this, m.value),
 	            title: m.title,
-	            className: cx(classNameMap) }, React.createElement('a', {
+	            className: cx(classNameMap) }, _react2['default'].createElement('a', {
 	            className: prefixClsFn('month') }, m.content));
 	        });
-	        return React.createElement('tr', { key: index, role: 'row' }, tds);
+	        return _react2['default'].createElement('tr', { key: index, role: 'row' }, tds);
 	      });
 	
 	      var yearPanel;
 	      if (this.state.showYearPanel) {
-	        yearPanel = React.createElement(YearPanel, { locale: locale, value: value, rootPrefixCls: props.rootPrefixCls, onSelect: this.onYearPanelSelect });
+	        yearPanel = _react2['default'].createElement(_yearYearPanel2['default'], { locale: locale, value: value, rootPrefixCls: props.rootPrefixCls, onSelect: this.onYearPanelSelect });
 	      }
 	
-	      return React.createElement('div', { className: this.state.prefixCls }, React.createElement('div', null, React.createElement('div', { className: prefixClsFn('header') }, React.createElement('a', { className: prefixClsFn('prev-year-btn'),
+	      return _react2['default'].createElement('div', { className: this.state.prefixCls }, _react2['default'].createElement('div', null, _react2['default'].createElement('div', { className: prefixClsFn('header') }, _react2['default'].createElement('a', { className: prefixClsFn('prev-year-btn'),
 	        role: 'button',
 	        onClick: this.previousYear,
-	        title: locale.previousYear }, '«'), React.createElement('a', { className: prefixClsFn('year-select'),
+	        title: locale.previousYear }, '«'), _react2['default'].createElement('a', { className: prefixClsFn('year-select'),
 	        role: 'button',
 	        onClick: this.showYearPanel,
-	        title: locale.yearSelect }, React.createElement('span', { className: prefixClsFn('year-select-content') }, year), React.createElement('span', { className: prefixClsFn('year-select-arrow') }, 'x')), React.createElement('a', { className: prefixClsFn('next-year-btn'),
+	        title: locale.yearSelect }, _react2['default'].createElement('span', { className: prefixClsFn('year-select-content') }, year), _react2['default'].createElement('span', { className: prefixClsFn('year-select-arrow') }, 'x')), _react2['default'].createElement('a', { className: prefixClsFn('next-year-btn'),
 	        role: 'button',
 	        onClick: this.nextYear,
-	        title: locale.nextYear }, '»')), React.createElement('div', { className: prefixClsFn('body') }, React.createElement('table', { className: prefixClsFn('table'), cellSpacing: '0', role: 'grid' }, React.createElement('tbody', { className: prefixClsFn('tbody') }, monthsEls)))), yearPanel);
+	        title: locale.nextYear }, '»')), _react2['default'].createElement('div', { className: prefixClsFn('body') }, _react2['default'].createElement('table', { className: prefixClsFn('table'), cellSpacing: '0', role: 'grid' }, _react2['default'].createElement('tbody', { className: prefixClsFn('tbody') }, monthsEls)))), yearPanel);
 	    }
 	  }]);
 	
 	  return MonthPanel;
-	})(React.Component);
+	})(_react2['default'].Component);
+	
+	exports['default'] = MonthPanel;
 	
 	MonthPanel.defaultProps = {
 	  onSelect: function onSelect() {}
 	};
-	
-	module.exports = MonthPanel;
+	module.exports = exports['default'];
 
 /***/ },
 /* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
 	
 	var _createClass = (function () {
 	  function defineProperties(target, props) {
@@ -4765,6 +4918,10 @@
 	  }
 	};
 	
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { 'default': obj };
+	}
+	
 	function _classCallCheck(instance, Constructor) {
 	  if (!(instance instanceof Constructor)) {
 	    throw new TypeError('Cannot call a class as a function');
@@ -4777,12 +4934,22 @@
 	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
 	}
 	
-	var React = __webpack_require__(6);
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _rcUtil = __webpack_require__(17);
+	
+	var _decadeDecadePanel = __webpack_require__(36);
+	
+	var _decadeDecadePanel2 = _interopRequireDefault(_decadeDecadePanel);
+	
+	var _utilPrefixClsFn = __webpack_require__(37);
+	
+	var _utilPrefixClsFn2 = _interopRequireDefault(_utilPrefixClsFn);
+	
 	var ROW = 4;
 	var COL = 3;
-	var cx = __webpack_require__(17).classSet;
-	var DecadePanel = __webpack_require__(36);
-	var staticPrefixClsFn = __webpack_require__(37);
 	
 	function goYear(direction) {
 	  var next = this.state.value.clone();
@@ -4803,7 +4970,7 @@
 	    _classCallCheck(this, YearPanel);
 	
 	    _get(Object.getPrototypeOf(YearPanel.prototype), 'constructor', this).call(this, props);
-	    this.prefixClsFn = staticPrefixClsFn.bind(this);
+	    this.prefixClsFn = _utilPrefixClsFn2['default'].bind(this);
 	    this.state = {
 	      value: props.value,
 	      prefixCls: props.rootPrefixCls + '-year-panel'
@@ -4894,49 +5061,54 @@
 	          } else {
 	            clickHandler = chooseYear.bind(_this2, y.year);
 	          }
-	          return React.createElement('td', { role: 'gridcell',
+	          return _react2['default'].createElement('td', { role: 'gridcell',
 	            title: y.title,
 	            key: y.content,
 	            onClick: clickHandler,
-	            className: cx(classNameMap)
-	          }, React.createElement('a', {
+	            className: (0, _rcUtil.classSet)(classNameMap)
+	          }, _react2['default'].createElement('a', {
 	            className: prefixClsFn('year') }, y.content));
 	        });
-	        return React.createElement('tr', { key: index, role: 'row' }, tds);
+	        return _react2['default'].createElement('tr', { key: index, role: 'row' }, tds);
 	      });
 	
 	      var decadePanel;
 	      if (this.state.showDecadePanel) {
-	        decadePanel = React.createElement(DecadePanel, { locale: locale, value: value, rootPrefixCls: props.rootPrefixCls, onSelect: this.onDecadePanelSelect });
+	        decadePanel = _react2['default'].createElement(_decadeDecadePanel2['default'], { locale: locale, value: value, rootPrefixCls: props.rootPrefixCls, onSelect: this.onDecadePanelSelect });
 	      }
 	
-	      return React.createElement('div', { className: this.state.prefixCls }, React.createElement('div', null, React.createElement('div', { className: prefixClsFn('header') }, React.createElement('a', { className: prefixClsFn('prev-decade-btn'),
+	      return _react2['default'].createElement('div', { className: this.state.prefixCls }, _react2['default'].createElement('div', null, _react2['default'].createElement('div', { className: prefixClsFn('header') }, _react2['default'].createElement('a', { className: prefixClsFn('prev-decade-btn'),
 	        role: 'button',
 	        onClick: this.previousDecade,
-	        title: locale.previousDecade }, '«'), React.createElement('a', { className: prefixClsFn('decade-select'),
+	        title: locale.previousDecade }, '«'), _react2['default'].createElement('a', { className: prefixClsFn('decade-select'),
 	        role: 'button',
 	        onClick: this.showDecadePanel,
-	        title: locale.decadeSelect }, React.createElement('span', { className: prefixClsFn('decade-select-content') }, startYear, '-', endYear), React.createElement('span', { className: prefixClsFn('decade-select-arrow') }, 'x')), React.createElement('a', { className: prefixClsFn('next-decade-btn'),
+	        title: locale.decadeSelect }, _react2['default'].createElement('span', { className: prefixClsFn('decade-select-content') }, startYear, '-', endYear), _react2['default'].createElement('span', { className: prefixClsFn('decade-select-arrow') }, 'x')), _react2['default'].createElement('a', { className: prefixClsFn('next-decade-btn'),
 	        role: 'button',
 	        onClick: this.nextDecade,
-	        title: locale.nextDecade }, '»')), React.createElement('div', { className: prefixClsFn('body') }, React.createElement('table', { className: prefixClsFn('table'), cellSpacing: '0', role: 'grid' }, React.createElement('tbody', { className: prefixClsFn('tbody') }, yeasEls)))), decadePanel);
+	        title: locale.nextDecade }, '»')), _react2['default'].createElement('div', { className: prefixClsFn('body') }, _react2['default'].createElement('table', { className: prefixClsFn('table'), cellSpacing: '0', role: 'grid' }, _react2['default'].createElement('tbody', { className: prefixClsFn('tbody') }, yeasEls)))), decadePanel);
 	    }
 	  }]);
 	
 	  return YearPanel;
-	})(React.Component);
+	})(_react2['default'].Component);
+	
+	exports['default'] = YearPanel;
 	
 	YearPanel.defaultProps = {
 	  onSelect: function onSelect() {}
 	};
-	
-	module.exports = YearPanel;
+	module.exports = exports['default'];
 
 /***/ },
 /* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
 	
 	var _createClass = (function () {
 	  function defineProperties(target, props) {
@@ -4968,6 +5140,10 @@
 	  }
 	};
 	
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { 'default': obj };
+	}
+	
 	function _classCallCheck(instance, Constructor) {
 	  if (!(instance instanceof Constructor)) {
 	    throw new TypeError('Cannot call a class as a function');
@@ -4980,11 +5156,22 @@
 	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
 	}
 	
-	var React = __webpack_require__(6);
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _rcUtil = __webpack_require__(17);
+	
+	var _rcUtil2 = _interopRequireDefault(_rcUtil);
+	
+	var _utilPrefixClsFn = __webpack_require__(37);
+	
+	var _utilPrefixClsFn2 = _interopRequireDefault(_utilPrefixClsFn);
+	
 	var ROW = 4;
 	var COL = 3;
-	var cx = __webpack_require__(17).classSet;
-	var staticPrefixClsFn = __webpack_require__(37);
+	
+	var cx = _rcUtil2['default'].classSet;
 	
 	function goYear(direction) {
 	  var next = this.state.value.clone();
@@ -5012,7 +5199,7 @@
 	    };
 	
 	    // bind methods
-	    this.prefixClsFn = staticPrefixClsFn.bind(this);
+	    this.prefixClsFn = _utilPrefixClsFn2['default'].bind(this);
 	    this.nextCentury = goYear.bind(this, 100);
 	    this.previousCentury = goYear.bind(this, -100);
 	  }
@@ -5068,35 +5255,36 @@
 	            content = dStartDecade + '-' + dEndDecade;
 	            clickHandler = chooseDecade.bind(_this, dStartDecade);
 	          }
-	          return React.createElement('td', {
+	          return _react2['default'].createElement('td', {
 	            key: dStartDecade,
 	            onClick: clickHandler,
 	            role: 'gridcell',
 	            className: cx(classNameMap)
-	          }, React.createElement('a', {
+	          }, _react2['default'].createElement('a', {
 	            className: prefixClsFn('decade') }, content));
 	        });
-	        return React.createElement('tr', { key: decadeIndex, role: 'row' }, tds);
+	        return _react2['default'].createElement('tr', { key: decadeIndex, role: 'row' }, tds);
 	      });
 	
-	      return React.createElement('div', { className: this.state.prefixCls }, React.createElement('div', { className: prefixClsFn('header') }, React.createElement('a', { className: prefixClsFn('prev-century-btn'),
+	      return _react2['default'].createElement('div', { className: this.state.prefixCls }, _react2['default'].createElement('div', { className: prefixClsFn('header') }, _react2['default'].createElement('a', { className: prefixClsFn('prev-century-btn'),
 	        role: 'button',
 	        onClick: this.previousCentury,
-	        title: locale.previousCentury }, '«'), React.createElement('div', { className: prefixClsFn('century') }, startYear, '-', endYear), React.createElement('a', { className: prefixClsFn('next-century-btn'),
+	        title: locale.previousCentury }, '«'), _react2['default'].createElement('div', { className: prefixClsFn('century') }, startYear, '-', endYear), _react2['default'].createElement('a', { className: prefixClsFn('next-century-btn'),
 	        role: 'button',
 	        onClick: this.nextCentury,
-	        title: locale.nextCentury }, '»')), React.createElement('div', { className: prefixClsFn('body') }, React.createElement('table', { className: prefixClsFn('table'), cellSpacing: '0', role: 'grid' }, React.createElement('tbody', { className: prefixClsFn('tbody') }, decadesEls))));
+	        title: locale.nextCentury }, '»')), _react2['default'].createElement('div', { className: prefixClsFn('body') }, _react2['default'].createElement('table', { className: prefixClsFn('table'), cellSpacing: '0', role: 'grid' }, _react2['default'].createElement('tbody', { className: prefixClsFn('tbody') }, decadesEls))));
 	    }
 	  }]);
 	
 	  return DecadePanel;
-	})(React.Component);
+	})(_react2['default'].Component);
+	
+	exports['default'] = DecadePanel;
 	
 	DecadePanel.defaultProps = {
 	  onSelect: function onSelect() {}
 	};
-	
-	module.exports = DecadePanel;
+	module.exports = exports['default'];
 
 /***/ },
 /* 37 */
@@ -5104,7 +5292,12 @@
 
 	'use strict';
 	
-	module.exports = function () {
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	exports['default'] = prefixClsFn;
+	
+	function prefixClsFn() {
 	  var prefixCls = this.state.prefixCls;
 	  if (arguments.length === 0) {
 	    return prefixCls;
@@ -5113,13 +5306,19 @@
 	  return args.map(function (s) {
 	    return prefixCls + '-' + s;
 	  }).join(' ');
-	};
+	}
+	
+	module.exports = exports['default'];
 
 /***/ },
 /* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
 	
 	var _createClass = (function () {
 	  function defineProperties(target, props) {
@@ -5151,6 +5350,10 @@
 	  }
 	};
 	
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { 'default': obj };
+	}
+	
 	function _classCallCheck(instance, Constructor) {
 	  if (!(instance instanceof Constructor)) {
 	    throw new TypeError('Cannot call a class as a function');
@@ -5163,9 +5366,19 @@
 	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
 	}
 	
-	var React = __webpack_require__(6);
-	var Time = __webpack_require__(39);
-	var toFragment = __webpack_require__(17).Children.mapSelf;
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _timeTime = __webpack_require__(39);
+	
+	var _timeTime2 = _interopRequireDefault(_timeTime);
+	
+	var _rcUtil = __webpack_require__(17);
+	
+	var _rcUtil2 = _interopRequireDefault(_rcUtil);
+	
+	var toFragment = _rcUtil2['default'].Children.mapSelf;
 	
 	var CalendarFooter = (function (_React$Component) {
 	  function CalendarFooter() {
@@ -5199,32 +5412,32 @@
 	          localeNow = locale.now || locale.today;
 	        }
 	        if (props.showToday) {
-	          nowEl = React.createElement('a', { className: prefixClsFn('today-btn'),
+	          nowEl = _react2['default'].createElement('a', { className: prefixClsFn('today-btn'),
 	            role: 'button',
 	            onClick: props.onToday,
 	            title: this.getTodayTime() }, localeNow);
 	        }
 	        var clearEl;
 	        if (props.showClear) {
-	          clearEl = React.createElement('a', { className: prefixClsFn('clear-btn'),
+	          clearEl = _react2['default'].createElement('a', { className: prefixClsFn('clear-btn'),
 	            role: 'button',
 	            onClick: props.onClear }, locale.clear);
 	        }
 	        var okBtn;
 	        if (props.showOk) {
-	          okBtn = React.createElement('a', { className: prefixClsFn('ok-btn'),
+	          okBtn = _react2['default'].createElement('a', { className: prefixClsFn('ok-btn'),
 	            role: 'button',
 	            onClick: props.onOk }, locale.ok);
 	        }
 	        var footerBtn;
 	        if (nowEl || clearEl) {
-	          footerBtn = React.createElement('span', { className: prefixClsFn('footer-btn') }, toFragment([nowEl, okBtn, clearEl]));
+	          footerBtn = _react2['default'].createElement('span', { className: prefixClsFn('footer-btn') }, toFragment([nowEl, okBtn, clearEl]));
 	        }
 	        var timeEl;
 	        if (props.showTime) {
-	          timeEl = React.createElement(Time, { value: value, prefixClsFn: prefixClsFn, locale: locale, onChange: props.onSelect });
+	          timeEl = _react2['default'].createElement(_timeTime2['default'], { value: value, prefixClsFn: prefixClsFn, locale: locale, onChange: props.onSelect });
 	        }
-	        footerEl = React.createElement('div', { className: prefixClsFn('footer') }, timeEl, footerBtn);
+	        footerEl = _react2['default'].createElement('div', { className: prefixClsFn('footer') }, timeEl, footerBtn);
 	      }
 	
 	      return footerEl;
@@ -5232,15 +5445,20 @@
 	  }]);
 	
 	  return CalendarFooter;
-	})(React.Component);
+	})(_react2['default'].Component);
 	
-	module.exports = CalendarFooter;
+	exports['default'] = CalendarFooter;
+	module.exports = exports['default'];
 
 /***/ },
 /* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
 	
 	var _extends = Object.assign || function (target) {
 	  for (var i = 1; i < arguments.length; i++) {
@@ -5282,6 +5500,10 @@
 	  }
 	};
 	
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { 'default': obj };
+	}
+	
 	function _classCallCheck(instance, Constructor) {
 	  if (!(instance instanceof Constructor)) {
 	    throw new TypeError('Cannot call a class as a function');
@@ -5294,10 +5516,18 @@
 	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
 	}
 	
-	var React = __webpack_require__(6);
-	var rcUtil = __webpack_require__(17);
-	var KeyCode = rcUtil.KeyCode;
-	var TimePanel = __webpack_require__(40);
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _rcUtil = __webpack_require__(17);
+	
+	var _rcUtil2 = _interopRequireDefault(_rcUtil);
+	
+	var _TimePanel = __webpack_require__(40);
+	
+	var _TimePanel2 = _interopRequireDefault(_TimePanel);
+	
 	var setHourOfDay = 'setHourOfDay';
 	var setMinutes = 'setMinutes';
 	var setSeconds = 'setSeconds';
@@ -5324,12 +5554,12 @@
 	    var number = parseInt(value, 10);
 	    var keyCode = e.keyCode;
 	    var handled;
-	    if (keyCode === KeyCode.DOWN) {
+	    if (keyCode === _rcUtil.KeyCode.DOWN) {
 	      number++;
 	      e.stopPropagation();
 	      e.preventDefault();
 	      handled = 1;
-	    } else if (keyCode === KeyCode.UP) {
+	    } else if (keyCode === _rcUtil.KeyCode.UP) {
 	      number--;
 	      e.stopPropagation();
 	      e.preventDefault();
@@ -5375,7 +5605,7 @@
 	        showSecondPanel: 0
 	      }, function () {
 	        // ie9 has broken focus
-	        React.findDOMNode(_this2.refs[setter]).focus();
+	        _react2['default'].findDOMNode(_this2.refs[setter]).focus();
 	      });
 	      this.props.onChange(value);
 	    }
@@ -5409,7 +5639,7 @@
 	  }, {
 	    key: 'shouldComponentUpdate',
 	    value: function shouldComponentUpdate() {
-	      return rcUtil.PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
+	      return _rcUtil2['default'].PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
 	    }
 	  }, {
 	    key: 'render',
@@ -5429,31 +5659,31 @@
 	        rootPrefixCls: prefixClsFn()
 	      };
 	      if (state.showHourPanel) {
-	        panel = React.createElement(TimePanel, _extends({ rowCount: 6, colCount: 4, getter: 'getHourOfDay', setter: setHourOfDay,
+	        panel = _react2['default'].createElement(_TimePanel2['default'], _extends({ rowCount: 6, colCount: 4, getter: 'getHourOfDay', setter: setHourOfDay,
 	          title: locale.hourPanelTitle
 	        }, commonProps));
 	      } else if (state.showMinutePanel) {
-	        panel = React.createElement(TimePanel, _extends({ rowCount: 6, colCount: 10, getter: 'getMinutes', setter: setMinutes,
+	        panel = _react2['default'].createElement(_TimePanel2['default'], _extends({ rowCount: 6, colCount: 10, getter: 'getMinutes', setter: setMinutes,
 	          title: locale.minutePanelTitle
 	        }, commonProps));
 	      } else if (state.showSecondPanel) {
-	        panel = React.createElement(TimePanel, _extends({ rowCount: 6, colCount: 10, getter: 'getSeconds', setter: setSeconds,
+	        panel = _react2['default'].createElement(_TimePanel2['default'], _extends({ rowCount: 6, colCount: 10, getter: 'getSeconds', setter: setSeconds,
 	          title: locale.secondPanelTitle
 	        }, commonProps));
 	      }
-	      return React.createElement('span', { className: prefixClsFn('time') }, React.createElement('input', { className: prefixClsFn('time-input'),
+	      return _react2['default'].createElement('span', { className: prefixClsFn('time') }, _react2['default'].createElement('input', { className: prefixClsFn('time-input'),
 	        title: locale.hourInput,
 	        ref: setHourOfDay,
 	        readOnly: true,
 	        value: padding(hour),
 	        onClick: this.onHourClick,
-	        onKeyDown: this.onHourKeyDown }), React.createElement('span', null, ' : '), React.createElement('input', { className: prefixClsFn('time-input'),
+	        onKeyDown: this.onHourKeyDown }), _react2['default'].createElement('span', null, ' : '), _react2['default'].createElement('input', { className: prefixClsFn('time-input'),
 	        title: locale.minuteInput,
 	        ref: setMinutes,
 	        readOnly: true,
 	        value: padding(minute),
 	        onClick: this.onMinuteClick,
-	        onKeyDown: this.onMinuteKeyDown }), React.createElement('span', null, ' : '), React.createElement('input', { className: prefixClsFn('time-input'),
+	        onKeyDown: this.onMinuteKeyDown }), _react2['default'].createElement('span', null, ' : '), _react2['default'].createElement('input', { className: prefixClsFn('time-input'),
 	        title: locale.secondInput,
 	        ref: setSeconds,
 	        readOnly: true,
@@ -5464,19 +5694,24 @@
 	  }]);
 	
 	  return Time;
-	})(React.Component);
+	})(_react2['default'].Component);
+	
+	exports['default'] = Time;
 	
 	Time.prototype.onHourKeyDown = keyDownWrap('setHourOfDay', 0, 23);
 	Time.prototype.onMinuteKeyDown = keyDownWrap('setMinutes', 0, 59);
 	Time.prototype.onSecondKeyDown = keyDownWrap('setSeconds', 0, 59);
-	
-	module.exports = Time;
+	module.exports = exports['default'];
 
 /***/ },
 /* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
 	
 	var _createClass = (function () {
 	  function defineProperties(target, props) {
@@ -5508,6 +5743,10 @@
 	  }
 	};
 	
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { 'default': obj };
+	}
+	
 	function _classCallCheck(instance, Constructor) {
 	  if (!(instance instanceof Constructor)) {
 	    throw new TypeError('Cannot call a class as a function');
@@ -5520,9 +5759,15 @@
 	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
 	}
 	
-	var React = __webpack_require__(6);
-	var cx = __webpack_require__(17).classSet;
-	var staticPrefixClsFn = __webpack_require__(37);
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _rcUtil = __webpack_require__(17);
+	
+	var _utilPrefixClsFn = __webpack_require__(37);
+	
+	var _utilPrefixClsFn2 = _interopRequireDefault(_utilPrefixClsFn);
 	
 	function choose(hour, e) {
 	  var next = this.state.value.clone();
@@ -5541,7 +5786,7 @@
 	      value: props.value,
 	      prefixCls: props.rootPrefixCls + '-time-panel'
 	    };
-	    this.prefixClsFn = staticPrefixClsFn.bind(this);
+	    this.prefixClsFn = _utilPrefixClsFn2['default'].bind(this);
 	  }
 	
 	  _inherits(TimePanel, _React$Component);
@@ -5572,28 +5817,29 @@
 	          var classNameMap = {};
 	          classNameMap[prefixClsFn('cell')] = 1;
 	          classNameMap[prefixClsFn('selected-cell')] = d === currentHour;
-	          return React.createElement('td', {
+	          return _react2['default'].createElement('td', {
 	            key: d,
 	            onClick: choose.bind(_this, d),
 	            role: 'gridcell',
-	            className: cx(classNameMap) }, React.createElement('a', {
+	            className: (0, _rcUtil.classSet)(classNameMap) }, _react2['default'].createElement('a', {
 	            className: prefixClsFn('time') }, d));
 	        });
-	        return React.createElement('tr', { key: index, role: 'row' }, tds);
+	        return _react2['default'].createElement('tr', { key: index, role: 'row' }, tds);
 	      });
 	
-	      return React.createElement('div', { className: this.state.prefixCls }, React.createElement('div', { className: prefixClsFn('header') }, React.createElement('div', { className: prefixClsFn('title') }, props.title)), React.createElement('div', { className: prefixClsFn('body') }, React.createElement('table', { className: prefixClsFn('table'), cellSpacing: '0', role: 'grid' }, React.createElement('tbody', { className: prefixClsFn('tbody') }, hoursEls))));
+	      return _react2['default'].createElement('div', { className: this.state.prefixCls }, _react2['default'].createElement('div', { className: prefixClsFn('header') }, _react2['default'].createElement('div', { className: prefixClsFn('title') }, props.title)), _react2['default'].createElement('div', { className: prefixClsFn('body') }, _react2['default'].createElement('table', { className: prefixClsFn('table'), cellSpacing: '0', role: 'grid' }, _react2['default'].createElement('tbody', { className: prefixClsFn('tbody') }, hoursEls))));
 	    }
 	  }]);
 	
 	  return TimePanel;
-	})(React.Component);
+	})(_react2['default'].Component);
+	
+	exports['default'] = TimePanel;
 	
 	TimePanel.defaultProps = {
 	  onSelect: function onSelect() {}
 	};
-	
-	module.exports = TimePanel;
+	module.exports = exports['default'];
 
 /***/ },
 /* 41 */
@@ -5601,7 +5847,19 @@
 
 	'use strict';
 	
-	module.exports = {
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { 'default': obj };
+	}
+	
+	var _gregorianCalendarFormatLibLocaleEnUs = __webpack_require__(16);
+	
+	var _gregorianCalendarFormatLibLocaleEnUs2 = _interopRequireDefault(_gregorianCalendarFormatLibLocaleEnUs);
+	
+	exports['default'] = {
 	  today: 'Today',
 	  now: 'Now',
 	  ok: 'Ok',
@@ -5627,14 +5885,19 @@
 	  nextDecade: 'Next decade',
 	  previousCentury: 'Last century',
 	  nextCentury: 'Next century',
-	  format: __webpack_require__(16)
+	  format: _gregorianCalendarFormatLibLocaleEnUs2['default']
 	};
+	module.exports = exports['default'];
 
 /***/ },
 /* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
 	
 	var _createClass = (function () {
 	  function defineProperties(target, props) {
@@ -5666,6 +5929,10 @@
 	  }
 	};
 	
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { 'default': obj };
+	}
+	
 	function _classCallCheck(instance, Constructor) {
 	  if (!(instance instanceof Constructor)) {
 	    throw new TypeError('Cannot call a class as a function');
@@ -5678,19 +5945,34 @@
 	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
 	}
 	
-	var React = __webpack_require__(6);
-	var DateTimeFormat = __webpack_require__(9);
-	var rcUtil = __webpack_require__(17);
-	var toFragment = rcUtil.Children.mapSelf;
-	var KeyCode = rcUtil.KeyCode;
-	var domAlign = __webpack_require__(43);
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _gregorianCalendarFormat = __webpack_require__(9);
+	
+	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
+	
+	var _rcUtil = __webpack_require__(17);
+	
+	var _rcUtil2 = _interopRequireDefault(_rcUtil);
+	
+	var _domAlign = __webpack_require__(43);
+	
+	var _domAlign2 = _interopRequireDefault(_domAlign);
+	
+	var _cssAnimation = __webpack_require__(45);
+	
+	var _cssAnimation2 = _interopRequireDefault(_cssAnimation);
+	
+	var toFragment = _rcUtil2['default'].Children.mapSelf;
+	
 	var orientMap = {
 	  tl: ['top', 'left'],
 	  tr: ['top', 'right'],
 	  bl: ['bottom', 'left'],
 	  br: ['bottom', 'right']
 	};
-	var createChainedFunction = rcUtil.createChainedFunction;
 	
 	function getImmutableOrient(orient) {
 	  if (orient) {
@@ -5701,6 +5983,10 @@
 	      }
 	    }
 	  }
+	}
+	
+	function prevent(e) {
+	  e.preventDefault();
 	}
 	
 	function refFn(field, component) {
@@ -5756,7 +6042,7 @@
 	    key: 'componentWillUnmount',
 	    value: function componentWillUnmount() {
 	      if (this.calendarContainer) {
-	        React.unmountComponentAtNode(this.calendarContainer);
+	        _react2['default'].unmountComponentAtNode(this.calendarContainer);
 	        this.calendarContainer.parentNode.removeChild(this.calendarContainer);
 	        this.calendarContainer = null;
 	      }
@@ -5772,18 +6058,44 @@
 	      var _this2 = this;
 	
 	      prevState = prevState || {};
-	      var prefixCls = this.props.prefixCls;
-	      if (this.props.renderCalendarToBody && !this.state.open && prevState.open) {
+	      var props = this.props;
+	      var state = this.state;
+	      var prefixCls = props.prefixCls;
+	      if (props.renderCalendarToBody && !state.open && prevState.open) {
 	        this.getCalendarContainer().className = getContainerClassName(prefixCls);
 	      }
-	      if (this.state.open && !prevState.open) {
-	        if (this.props.renderCalendarToBody) {
+	      if (state.open && !prevState.open) {
+	        if (props.renderCalendarToBody) {
 	          this.getCalendarContainer().className = getContainerClassName(prefixCls, true);
-	          React.render(this.getCalendarElement(), this.getCalendarContainer(), function () {
+	          _react2['default'].render(this.getCalendarElement(), this.getCalendarContainer(), function () {
 	            _this2.alignCalendar();
 	          });
 	        } else {
 	          this.alignCalendar();
+	        }
+	      }
+	      this.animate(prevState, state);
+	    }
+	  }, {
+	    key: 'getTransitionName',
+	    value: function getTransitionName() {
+	      var props = this.props;
+	      var transitionName = props.transitionName;
+	      if (!transitionName && props.animation) {
+	        transitionName = props.prefixCls + '-' + props.animation;
+	      }
+	      return transitionName;
+	    }
+	  }, {
+	    key: 'animate',
+	    value: function animate(prevState, state) {
+	      var transitionName = this.getTransitionName();
+	      if (transitionName) {
+	        var calendarDomNode = _react2['default'].findDOMNode(this.calendarInstance);
+	        if (prevState.open && !state.open) {
+	          (0, _cssAnimation2['default'])(calendarDomNode, transitionName + '-leave');
+	        } else if (state.open && !prevState.open) {
+	          (0, _cssAnimation2['default'])(calendarDomNode, transitionName + '-enter');
 	        }
 	      }
 	    }
@@ -5813,13 +6125,13 @@
 	        points = ['br', 'tr'];
 	        offset = [0, -5];
 	      }
-	
-	      var align = domAlign(React.findDOMNode(this.calendarInstance), React.findDOMNode(this.inputInstance), {
+	      var adjustOrientOnCalendarOverflow = this.props.adjustOrientOnCalendarOverflow;
+	      var align = (0, _domAlign2['default'])(_react2['default'].findDOMNode(this.calendarInstance), _react2['default'].findDOMNode(this.inputInstance), {
 	        points: points,
 	        offset: offset,
 	        overflow: {
-	          adjustX: 1,
-	          adjustY: 1
+	          adjustX: adjustOrientOnCalendarOverflow,
+	          adjustY: adjustOrientOnCalendarOverflow
 	        }
 	      });
 	      points = align.points;
@@ -5827,7 +6139,7 @@
 	      this.calendarInstance.setState({
 	        orient: newOrient
 	      });
-	      React.findDOMNode(this.calendarInstance).focus();
+	      _react2['default'].findDOMNode(this.calendarInstance).focus();
 	    }
 	  }, {
 	    key: 'open',
@@ -5846,7 +6158,7 @@
 	  }, {
 	    key: 'focusInput',
 	    value: function focusInput() {
-	      React.findDOMNode(this.inputInstance).focus();
+	      _react2['default'].findDOMNode(this.inputInstance).focus();
 	    }
 	  }, {
 	    key: 'handleInputClick',
@@ -5869,7 +6181,7 @@
 	    key: 'handleKeyDown',
 	    value: function handleKeyDown(e) {
 	      // down
-	      if (e.keyCode === KeyCode.DOWN) {
+	      if (e.keyCode === _rcUtil.KeyCode.DOWN) {
 	        e.preventDefault();
 	        this.open();
 	      }
@@ -5877,7 +6189,7 @@
 	  }, {
 	    key: 'handleCalendarKeyDown',
 	    value: function handleCalendarKeyDown(e) {
-	      if (e.keyCode === KeyCode.ESC) {
+	      if (e.keyCode === _rcUtil.KeyCode.ESC) {
 	        e.stopPropagation();
 	        this.close(this.focusInput);
 	      }
@@ -5932,16 +6244,16 @@
 	      var props = this.props;
 	      var calendarInstance = this.calendarInstance;
 	      var calendarProp = props.calendar;
-	      this.calendarElement = React.cloneElement(calendarProp, {
-	        ref: rcUtil.createChainedFunction(calendarProp.props.ref, this.saveCalendarRef),
+	      this.calendarElement = _react2['default'].cloneElement(calendarProp, {
+	        ref: _rcUtil2['default'].createChainedFunction(calendarProp.props.ref, this.saveCalendarRef),
 	        value: this.state.value,
 	        // focused: true,
 	        orient: calendarInstance && calendarInstance.state.orient || getImmutableOrient(calendarProp.props.orient) || orientMap.tl,
 	        onBlur: this.handleCalendarBlur,
 	        onKeyDown: this.handleCalendarKeyDown,
-	        onOk: createChainedFunction(calendarProp.props.onOk, this.handleCalendarOk),
-	        onSelect: createChainedFunction(calendarProp.props.onSelect, this.handleCalendarSelect),
-	        onClear: createChainedFunction(calendarProp.props.onClear, this.handleCalendarClear)
+	        onOk: (0, _rcUtil.createChainedFunction)(calendarProp.props.onOk, this.handleCalendarOk),
+	        onSelect: (0, _rcUtil.createChainedFunction)(calendarProp.props.onSelect, this.handleCalendarSelect),
+	        onClear: (0, _rcUtil.createChainedFunction)(calendarProp.props.onClear, this.handleCalendarClear)
 	      });
 	      return this.calendarElement;
 	    }
@@ -5961,9 +6273,9 @@
 	       __proto__: Object
 	       */
 	      var input = props.children;
-	      if (!React.isValidElement(input)) {
+	      if (!_react2['default'].isValidElement(input)) {
 	        var children = input;
-	        React.Children.forEach(children, function (m) {
+	        _react2['default'].Children.forEach(children, function (m) {
 	          input = m;
 	        });
 	      }
@@ -5977,8 +6289,8 @@
 	      if (value) {
 	        inputValue = props.formatter.format(value);
 	      }
-	      input = React.cloneElement(input, {
-	        ref: rcUtil.createChainedFunction(input.props.ref, this.saveInputRef),
+	      input = _react2['default'].cloneElement(input, {
+	        ref: _rcUtil2['default'].createChainedFunction(input.props.ref, this.saveInputRef),
 	        readOnly: true,
 	        onClick: this.handleInputClick,
 	        value: inputValue,
@@ -5990,36 +6302,35 @@
 	      }
 	      var trigger = props.trigger;
 	      if (trigger) {
-	        trigger = React.cloneElement(trigger, {
+	        trigger = _react2['default'].cloneElement(trigger, {
 	          onClick: this.handleTriggerClick,
 	          unselectable: true,
 	          onMouseDown: prevent
 	        });
 	      }
-	      return React.createElement('span', { className: classes.join(' ') }, toFragment([input, calendar, trigger]));
+	      return _react2['default'].createElement('span', { className: classes.join(' ') }, toFragment([input, calendar, trigger]));
 	    }
 	  }]);
 	
 	  return Picker;
-	})(React.Component);
+	})(_react2['default'].Component);
 	
-	function prevent(e) {
-	  e.preventDefault();
-	}
+	exports['default'] = Picker;
 	
 	Picker.propTypes = {
-	  onChange: React.PropTypes.func,
-	  renderCalendarToBody: React.PropTypes.bool
+	  onChange: _react2['default'].PropTypes.func,
+	  renderCalendarToBody: _react2['default'].PropTypes.bool,
+	  adjustOrientOnCalendarOverflow: _react2['default'].PropTypes.bool
 	};
 	
 	Picker.defaultProps = {
 	  prefixCls: 'rc-calendar-picker',
+	  adjustOrientOnCalendarOverflow: true,
 	  renderCalendarToBody: false,
 	  onChange: function onChange() {},
-	  formatter: new DateTimeFormat('yyyy-MM-dd')
+	  formatter: new _gregorianCalendarFormat2['default']('yyyy-MM-dd')
 	};
-	
-	module.exports = Picker;
+	module.exports = exports['default'];
 
 /***/ },
 /* 43 */
@@ -6802,6 +7113,174 @@
 	};
 	
 	mix(utils, domUtils);
+
+/***/ },
+/* 45 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var Event = __webpack_require__(46);
+	var Css = __webpack_require__(47);
+	
+	module.exports = function (node, transitionName, callback) {
+	  var className = transitionName;
+	  var activeClassName = className + '-active';
+	
+	  if (node.rcEndListener) {
+	    node.rcEndListener();
+	  }
+	
+	  node.rcEndListener = function (e) {
+	    if (e && e.target !== node) {
+	      return;
+	    }
+	
+	    if (node.rcAnimTimeout) {
+	      clearTimeout(node.rcAnimTimeout);
+	      node.rcAnimTimeout = null;
+	    }
+	
+	    Css.removeClass(node, className);
+	    Css.removeClass(node, activeClassName);
+	
+	    Event.removeEndEventListener(node, node.rcEndListener);
+	    node.rcEndListener = null;
+	
+	    // Usually this optional callback is used for informing an owner of
+	    // a leave animation and telling it to remove the child.
+	    if (callback) {
+	      callback();
+	    }
+	  };
+	
+	  Event.addEndEventListener(node, node.rcEndListener);
+	
+	  Css.addClass(node, className);
+	
+	  node.rcAnimTimeout = setTimeout(function () {
+	    Css.addClass(node, activeClassName);
+	    node.rcAnimTimeout = null;
+	  }, 0);
+	};
+
+/***/ },
+/* 46 */
+/***/ function(module, exports) {
+
+	
+	'use strict';
+	
+	var EVENT_NAME_MAP = {
+	  transitionend: {
+	    transition: 'transitionend',
+	    WebkitTransition: 'webkitTransitionEnd',
+	    MozTransition: 'mozTransitionEnd',
+	    OTransition: 'oTransitionEnd',
+	    msTransition: 'MSTransitionEnd'
+	  },
+	
+	  animationend: {
+	    animation: 'animationend',
+	    WebkitAnimation: 'webkitAnimationEnd',
+	    MozAnimation: 'mozAnimationEnd',
+	    OAnimation: 'oAnimationEnd',
+	    msAnimation: 'MSAnimationEnd'
+	  }
+	};
+	
+	var endEvents = [];
+	
+	function detectEvents() {
+	  var testEl = document.createElement('div');
+	  var style = testEl.style;
+	
+	  if (!('AnimationEvent' in window)) {
+	    delete EVENT_NAME_MAP.animationend.animation;
+	  }
+	
+	  if (!('TransitionEvent' in window)) {
+	    delete EVENT_NAME_MAP.transitionend.transition;
+	  }
+	
+	  for (var baseEventName in EVENT_NAME_MAP) {
+	    var baseEvents = EVENT_NAME_MAP[baseEventName];
+	    for (var styleName in baseEvents) {
+	      if (styleName in style) {
+	        endEvents.push(baseEvents[styleName]);
+	        break;
+	      }
+	    }
+	  }
+	}
+	
+	if (typeof window !== 'undefined') {
+	  detectEvents();
+	}
+	
+	function addEventListener(node, eventName, eventListener) {
+	  node.addEventListener(eventName, eventListener, false);
+	}
+	
+	function removeEventListener(node, eventName, eventListener) {
+	  node.removeEventListener(eventName, eventListener, false);
+	}
+	
+	var TransitionEvents = {
+	  addEndEventListener: function addEndEventListener(node, eventListener) {
+	    if (endEvents.length === 0) {
+	      window.setTimeout(eventListener, 0);
+	      return;
+	    }
+	    endEvents.forEach(function (endEvent) {
+	      addEventListener(node, endEvent, eventListener);
+	    });
+	  },
+	
+	  endEvents: endEvents,
+	
+	  removeEndEventListener: function removeEndEventListener(node, eventListener) {
+	    if (endEvents.length === 0) {
+	      return;
+	    }
+	    endEvents.forEach(function (endEvent) {
+	      removeEventListener(node, endEvent, eventListener);
+	    });
+	  }
+	};
+	
+	module.exports = TransitionEvents;
+
+/***/ },
+/* 47 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	var SPACE = ' ';
+	var RE_CLASS = /[\n\t\r]/g;
+	
+	var norm = function norm(elemClass) {
+	  return (SPACE + elemClass + SPACE).replace(RE_CLASS, SPACE);
+	};
+	
+	module.exports = {
+	  addClass: function addClass(elem, className) {
+	    elem.className += ' ' + className;
+	  },
+	
+	  removeClass: function removeClass(elem, needle) {
+	    var elemClass = elem.className.trim();
+	    var className = norm(elemClass);
+	    needle = needle.trim();
+	    needle = SPACE + needle + SPACE;
+	    // 一个 cls 有可能多次出现：'link link2 link link3 link'
+	    while (className.indexOf(needle) >= 0) {
+	      className = className.replace(needle, SPACE);
+	    }
+	    elem.className = className.trim();
+	  }
+	};
 
 /***/ }
 /******/ ]);

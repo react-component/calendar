@@ -3,6 +3,7 @@
 <html>
 <head>
   <title>rc-calendar-ant-design-simple</title>
+  <meta http-equiv=Content-Type content="text/html;charset=utf-8">
   <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" type="text/css" rel="stylesheet"/>
   <style>
       .hljs {
@@ -179,50 +180,50 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
 </head>
 <body>
-<h1>rc-calendar@3.9.1</h1>
+<h1>rc-calendar@3.10.1</h1>
 <div id="__react-content"></div>
 <script src="common.js?nowrap"></script>
 <script src="ant-design-simple.js?nowrap"></script>
 <div class="highlight">
 <pre>
 
-<span class="hljs-keyword">require</span>(<span class="hljs-string">'rc-calendar/assets/index.css'</span>);
+<span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-calendar/assets/index.css'</span>);
 
-<span class="hljs-built_in">var</span> Calendar <span class="hljs-subst">=</span> <span class="hljs-keyword">require</span>(<span class="hljs-string">'rc-calendar'</span>);
-<span class="hljs-built_in">var</span> GregorianCalendarFormat <span class="hljs-subst">=</span> <span class="hljs-keyword">require</span>(<span class="hljs-string">'gregorian-calendar-format'</span>);
-<span class="hljs-built_in">var</span> React <span class="hljs-subst">=</span> <span class="hljs-keyword">require</span>(<span class="hljs-string">'react'</span>);
-<span class="hljs-built_in">var</span> formatter <span class="hljs-subst">=</span> <span class="hljs-literal">new</span> GregorianCalendarFormat(<span class="hljs-string">'yyyy-MM-dd HH:mm:ss'</span>);
-<span class="hljs-built_in">var</span> GregorianCalendar <span class="hljs-subst">=</span> <span class="hljs-keyword">require</span>(<span class="hljs-string">'gregorian-calendar'</span>);
-<span class="hljs-built_in">var</span> zhCn <span class="hljs-subst">=</span> <span class="hljs-keyword">require</span>(<span class="hljs-string">'gregorian-calendar/lib/locale/zh-cn'</span>);
-<span class="hljs-built_in">var</span> CalendarLocale <span class="hljs-subst">=</span> <span class="hljs-keyword">require</span>(<span class="hljs-string">'rc-calendar/lib/locale/zh-cn'</span>);
+<span class="hljs-keyword">import</span> Calendar <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-calendar'</span>;
+<span class="hljs-keyword">import</span> GregorianCalendarFormat <span class="hljs-keyword">from</span> <span class="hljs-string">'gregorian-calendar-format'</span>;
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">var</span> formatter = <span class="hljs-keyword">new</span> GregorianCalendarFormat(<span class="hljs-string">'yyyy-MM-dd HH:mm:ss'</span>);
+<span class="hljs-keyword">import</span> GregorianCalendar <span class="hljs-keyword">from</span> <span class="hljs-string">'gregorian-calendar'</span>;
+<span class="hljs-keyword">import</span> zhCn <span class="hljs-keyword">from</span> <span class="hljs-string">'gregorian-calendar/lib/locale/zh-cn'</span>;
+<span class="hljs-keyword">import</span> CalendarLocale <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-calendar/lib/locale/zh-cn'</span>;
 
-<span class="hljs-built_in">var</span> value <span class="hljs-subst">=</span> <span class="hljs-literal">new</span> GregorianCalendar(zhCn);
-value<span class="hljs-built_in">.</span>setTime(<span class="hljs-built_in">Date</span><span class="hljs-built_in">.</span>now());
+<span class="hljs-keyword">var</span> value = <span class="hljs-keyword">new</span> GregorianCalendar(zhCn);
+value.setTime(<span class="hljs-built_in">Date</span>.now());
 
-function disabledDate(current,value){
-  <span class="hljs-built_in">var</span> <span class="hljs-built_in">date</span> <span class="hljs-subst">=</span> <span class="hljs-literal">new</span> <span class="hljs-built_in">Date</span>();
-  <span class="hljs-built_in">date</span><span class="hljs-built_in">.</span>setHours(<span class="hljs-number">0</span>);
-  <span class="hljs-built_in">date</span><span class="hljs-built_in">.</span>setMinutes(<span class="hljs-number">0</span>);
-  <span class="hljs-built_in">date</span><span class="hljs-built_in">.</span>setSeconds(<span class="hljs-number">0</span>);
-  <span class="hljs-keyword">return</span> current<span class="hljs-built_in">.</span>getTime() <span class="hljs-subst">&lt;</span> <span class="hljs-built_in">date</span><span class="hljs-built_in">.</span>getTime();  <span class="hljs-comment">//can not select days before today</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">disabledDate</span>(<span class="hljs-params">current,value</span>)</span>{
+  <span class="hljs-keyword">var</span> date = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();
+  date.setHours(<span class="hljs-number">0</span>);
+  date.setMinutes(<span class="hljs-number">0</span>);
+  date.setSeconds(<span class="hljs-number">0</span>);
+  <span class="hljs-keyword">return</span> current.getTime() &lt; date.getTime();  <span class="hljs-comment">//can not select days before today</span>
 }
 
-function onSelect(value) {
-  console<span class="hljs-built_in">.</span><span class="hljs-keyword">log</span>(<span class="hljs-string">'onSelect'</span>);
-  console<span class="hljs-built_in">.</span><span class="hljs-keyword">log</span>(formatter<span class="hljs-built_in">.</span>format(value))
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onSelect</span>(<span class="hljs-params">value</span>) </span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onSelect'</span>);
+  <span class="hljs-built_in">console</span>.log(formatter.format(value))
 }
 
-React<span class="hljs-built_in">.</span>render(
-  <span class="hljs-subst">&lt;</span>div<span class="hljs-subst">&gt;</span>
-    <span class="hljs-subst">&lt;</span>h2<span class="hljs-subst">&gt;</span>calendar (zh<span class="hljs-attribute">-cn</span>)<span class="hljs-subst">&lt;</span>/h2<span class="hljs-subst">&gt;</span>
-    <span class="hljs-subst">&lt;</span>Calendar showWeekNumber<span class="hljs-subst">=</span>{<span class="hljs-literal">false</span>}
-      <span class="hljs-built_in">locale</span><span class="hljs-subst">=</span>{CalendarLocale}
-      value<span class="hljs-subst">=</span>{value}
-      disabledDate<span class="hljs-subst">=</span>{disabledDate}
-      onSelect<span class="hljs-subst">=</span>{onSelect} showTime<span class="hljs-subst">=</span>{<span class="hljs-literal">true</span>}<span class="hljs-subst">/</span><span class="hljs-subst">&gt;</span>
-  <span class="hljs-subst">&lt;</span>/div<span class="hljs-subst">&gt;</span>, document<span class="hljs-built_in">.</span>getElementById(<span class="hljs-string">'__react-content'</span>));
+React.render(
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">h2</span>&gt;</span>calendar (zh-cn)<span class="hljs-tag">&lt;/<span class="hljs-title">h2</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">Calendar</span> <span class="hljs-attribute">showWeekNumber</span>=<span class="hljs-value">{false}</span>
+      <span class="hljs-attribute">locale</span>=<span class="hljs-value">{CalendarLocale}</span>
+      <span class="hljs-attribute">value</span>=<span class="hljs-value">{value}</span>
+      <span class="hljs-attribute">disabledDate</span>=<span class="hljs-value">{disabledDate}</span>
+      <span class="hljs-attribute">onSelect</span>=<span class="hljs-value">{onSelect}</span> <span class="hljs-attribute">showTime</span>=<span class="hljs-value">{true}</span>/&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>, document.getElementById('__react-content'));
 
-
+</span>
 </pre>
 </div>
 </body>

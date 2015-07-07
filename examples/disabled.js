@@ -3,18 +3,18 @@ webpackJsonp([3],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(59);
+	module.exports = __webpack_require__(62);
 
 
 /***/ },
 
-/***/ 57:
+/***/ 60:
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(58);
+	var content = __webpack_require__(61);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(5)(content, {});
@@ -32,7 +32,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 58:
+/***/ 61:
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(4)();
@@ -40,16 +40,28 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 59:
+/***/ 62:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	__webpack_require__(57);
-	var Calendar = __webpack_require__(7);
-	var GregorianCalendarFormat = __webpack_require__(9);
-	var React = __webpack_require__(6);
-	var formatter = new GregorianCalendarFormat('yyyy-MM-dd HH:mm:ss');
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	__webpack_require__(60);
+	
+	var _rcCalendar = __webpack_require__(7);
+	
+	var _rcCalendar2 = _interopRequireDefault(_rcCalendar);
+	
+	var _gregorianCalendarFormat = __webpack_require__(9);
+	
+	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
+	
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var formatter = new _gregorianCalendarFormat2['default']('yyyy-MM-dd HH:mm:ss');
 	
 	function onSelect(value) {
 	  console.log('onSelect');
@@ -64,15 +76,15 @@ webpackJsonp([3],{
 	  return current.getTime() < date.getTime(); //can not select days before today
 	}
 	
-	React.render(React.createElement(
+	_react2['default'].render(_react2['default'].createElement(
 	  'div',
 	  null,
-	  React.createElement(
+	  _react2['default'].createElement(
 	    'h2',
 	    null,
 	    'calendar (en-us, U.S.A.  California  San Francisco)'
 	  ),
-	  React.createElement(Calendar, { showWeekNumber: true,
+	  _react2['default'].createElement(_rcCalendar2['default'], { showWeekNumber: true,
 	    disabledDate: disabledDate,
 	    onSelect: onSelect })
 	), document.getElementById('__react-content'));

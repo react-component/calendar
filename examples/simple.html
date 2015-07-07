@@ -3,6 +3,7 @@
 <html>
 <head>
   <title>rc-calendar-simple</title>
+  <meta http-equiv=Content-Type content="text/html;charset=utf-8">
   <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" type="text/css" rel="stylesheet"/>
   <style>
       .hljs {
@@ -179,36 +180,35 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
 </head>
 <body>
-<h1>rc-calendar@3.9.1</h1>
+<h1>rc-calendar@3.10.1</h1>
 <div id="__react-content"></div>
 <script src="common.js?nowrap"></script>
 <script src="simple.js?nowrap"></script>
 <div class="highlight">
 <pre>
 
-<span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-calendar/assets/bootstrap.css'</span>);
+<span class="hljs-keyword">import</span> <span class="hljs-string">'rc-calendar/assets/bootstrap.css'</span>;
+<span class="hljs-keyword">import</span> Calendar <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-calendar'</span>;
+<span class="hljs-keyword">import</span> GregorianCalendarFormat <span class="hljs-keyword">from</span> <span class="hljs-string">'gregorian-calendar-format'</span>;
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">var</span> formatter = <span class="hljs-keyword">new</span> GregorianCalendarFormat(<span class="hljs-string">'yyyy-MM-dd HH:mm:ss'</span>);
 
-<span class="hljs-reserved">var</span> Calendar = <span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-calendar'</span>);
-<span class="hljs-reserved">var</span> GregorianCalendarFormat = <span class="hljs-built_in">require</span>(<span class="hljs-string">'gregorian-calendar-format'</span>);
-<span class="hljs-reserved">var</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react'</span>);
-<span class="hljs-reserved">var</span> formatter = <span class="hljs-keyword">new</span> GregorianCalendarFormat(<span class="hljs-string">'yyyy-MM-dd HH:mm:ss'</span>);
-
-<span class="hljs-reserved">function</span> onSelect(value) {
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onSelect</span>(<span class="hljs-params">value</span>) </span>{
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onSelect'</span>);
   <span class="hljs-built_in">console</span>.log(formatter.format(value))
 }
 
 React.render(
-  &lt;div&gt;
-    &lt;h2&gt;calendar (en-us, U.S.A.  California  San Francisco)&lt;/h2&gt;
-    &lt;Calendar showWeekNumber={<span class="hljs-literal">true</span>}
-      showOk={<span class="hljs-number">0</span>}
-      showClear={<span class="hljs-number">0</span>}
-      onSelect={onSelect}
-      showTime={<span class="hljs-literal">true</span>}/&gt;
-  &lt;/div&gt;, <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'__react-content'</span>));
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">h2</span>&gt;</span>calendar (en-us, U.S.A.  California  San Francisco)<span class="hljs-tag">&lt;/<span class="hljs-title">h2</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">Calendar</span> <span class="hljs-attribute">showWeekNumber</span>=<span class="hljs-value">{true}</span>
+      <span class="hljs-attribute">showOk</span>=<span class="hljs-value">{0}</span>
+      <span class="hljs-attribute">showClear</span>=<span class="hljs-value">{0}</span>
+      <span class="hljs-attribute">onSelect</span>=<span class="hljs-value">{onSelect}</span>
+      <span class="hljs-attribute">showTime</span>=<span class="hljs-value">{true}</span>/&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>, document.getElementById('__react-content'));
 
-
+</span>
 </pre>
 </div>
 </body>
