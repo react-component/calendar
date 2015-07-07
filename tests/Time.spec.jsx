@@ -1,11 +1,10 @@
-
-var keyCode = require('rc-util').KeyCode;
-var expect = require('expect.js');
-var Calendar = require('../index');
-var React = require('react/addons');
+import {KeyCode as keyCode} from 'rc-util';
+import expect from 'expect.js';
+import Calendar from '../index';
+import React from 'react/addons';
 var TestUtils = React.addons.TestUtils;
 var Simulate = TestUtils.Simulate;
-var async = require('async');
+import async from 'async';
 
 describe('Time', function () {
   var calendar;

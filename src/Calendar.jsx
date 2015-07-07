@@ -1,14 +1,14 @@
 'use strict';
 
-var React = require('react');
-var DateTimeFormat = require('gregorian-calendar-format');
-var GregorianCalendar = require('gregorian-calendar');
-var rcUtil = require('rc-util');
-var KeyCode = rcUtil.KeyCode;
-var DateTable = require('./date/DateTable');
-var CalendarHeader = require('./calendar/CalendarHeader');
-var CalendarFooter = require('./calendar/CalendarFooter');
-var staticPrefixClsFn = require('./util/prefixClsFn');
+import React from 'react';
+import DateTimeFormat from 'gregorian-calendar-format';
+import GregorianCalendar from 'gregorian-calendar';
+import rcUtil, {KeyCode} from 'rc-util';
+import DateTable from './date/DateTable';
+import CalendarHeader from './calendar/CalendarHeader';
+import CalendarFooter from './calendar/CalendarFooter';
+import staticPrefixClsFn from './util/prefixClsFn';
+import enUs from './locale/en-us';
 
 function noop() {
 }
@@ -62,6 +62,7 @@ function getNowByCurrentStateValue(value) {
   return value;
 }
 
+export default
 class Calendar extends React.Component {
   constructor(props) {
     super(props);
@@ -294,7 +295,7 @@ Calendar.propTypes = {
 };
 
 Calendar.defaultProps = {
-  locale: require('./locale/en-us'),
+  locale: enUs,
   style: {},
   prefixCls: 'rc-calendar',
   onKeyDown: noop,
@@ -306,5 +307,3 @@ Calendar.defaultProps = {
   onClear: noop,
   onOk: noop
 };
-
-module.exports = Calendar;

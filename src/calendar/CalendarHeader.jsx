@@ -1,11 +1,14 @@
 'use strict';
 
-var React = require('react');
-var MonthPanel = require('../month/MonthPanel');
-var DateTimeFormat = require('gregorian-calendar-format');
-var YearPanel = require('../year/YearPanel');
-var toFragment = require('rc-util').Children.mapSelf;
 
+import React from 'react';
+import MonthPanel from '../month/MonthPanel';
+import DateTimeFormat from 'gregorian-calendar-format';
+import YearPanel from '../year/YearPanel';
+import rcUtil from 'rc-util';
+var toFragment = rcUtil.Children.mapSelf;
+
+export default
 class CalendarHeader extends React.Component {
   constructor(props) {
     super(props);
@@ -112,5 +115,3 @@ class CalendarHeader extends React.Component {
     </div>;
   }
 }
-
-module.exports = CalendarHeader;

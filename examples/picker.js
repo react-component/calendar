@@ -1,13 +1,12 @@
 
-require('bootstrap/dist/css/bootstrap.css');
-require('rc-calendar/assets/bootstrap.css');
-var React = require('react');
-var Calendar = require('rc-calendar');
-var DatePicker = Calendar.Picker;
-var zhCn = require('gregorian-calendar/lib/locale/zh-cn'); // spm error
-var DateTimeFormat = require('gregorian-calendar-format');
-var GregorianCalendar = require('gregorian-calendar');
-var CalendarLocale = require('rc-calendar/src/locale/zh-cn');
+import 'bootstrap/dist/css/bootstrap.css';
+import 'rc-calendar/assets/bootstrap.css';
+import React from 'react';
+import Calendar, {Picker as DatePicker} from 'rc-calendar';
+import zhCn from 'gregorian-calendar/lib/locale/zh-cn'; // spm error
+import DateTimeFormat from 'gregorian-calendar-format';
+import GregorianCalendar from 'gregorian-calendar';
+import CalendarLocale from 'rc-calendar/src/locale/zh-cn';
 
 var Test = React.createClass({
   toggle: function () {

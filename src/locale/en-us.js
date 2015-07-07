@@ -1,6 +1,8 @@
 'use strict';
 
-module.exports = ({
+import enUs from 'gregorian-calendar-format/lib/locale/en-us';
+
+export default {
   today: 'Today',
   now: 'Now',
   ok:'Ok',
@@ -26,5 +28,5 @@ module.exports = ({
   nextDecade: 'Next decade',
   previousCentury: 'Last century',
   nextCentury: 'Next century',
-  format:  require('gregorian-calendar-format/lib/locale/en-us')
-});
+  format: enUs
+};

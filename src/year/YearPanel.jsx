@@ -1,11 +1,11 @@
 'use strict';
 
-var React = require('react');
+import React from 'react';
 var ROW = 4;
 var COL = 3;
-var cx = require('rc-util').classSet;
-var DecadePanel = require('../decade/DecadePanel');
-var staticPrefixClsFn = require('../util/prefixClsFn');
+import {classSet as cx} from 'rc-util';
+import DecadePanel from '../decade/DecadePanel';
+import staticPrefixClsFn from '../util/prefixClsFn';
 
 function goYear(direction) {
   var next = this.state.value.clone();
@@ -19,6 +19,7 @@ function chooseYear(year) {
   this.props.onSelect(next);
 }
 
+export default
 class YearPanel extends React.Component {
   constructor(props) {
     super(props);
@@ -170,5 +171,3 @@ YearPanel.defaultProps = {
   onSelect() {
   }
 };
-
-module.exports = YearPanel;

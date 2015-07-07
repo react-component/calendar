@@ -1,8 +1,8 @@
 
-require('rc-calendar/assets/bootstrap.css');
-var Calendar = require('rc-calendar');
-var GregorianCalendarFormat = require('gregorian-calendar-format');
-var React = require('react');
+import 'rc-calendar/assets/bootstrap.css';
+import Calendar from 'rc-calendar';
+import GregorianCalendarFormat from 'gregorian-calendar-format';
+import React from 'react';
 var formatter = new GregorianCalendarFormat('yyyy-MM-dd HH:mm:ss');
 
 function onSelect(value) {

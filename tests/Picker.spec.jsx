@@ -1,16 +1,15 @@
-var keyCode = require('rc-util').KeyCode;
-var expect = require('expect.js');
-var Calendar = require('../index');
-var DatePicker = Calendar.Picker;
-var React = require('react/addons');
+import {KeyCode as keyCode} from 'rc-util';
+import expect from 'expect.js';
+import Calendar,{Picker as DatePicker} from '../index';
+import React from 'react/addons';
 var TestUtils = React.addons.TestUtils;
 var Simulate = TestUtils.Simulate;
-var async = require('async');
-var DateTimeFormat = require('gregorian-calendar-format');
+import async from 'async';
+import DateTimeFormat from 'gregorian-calendar-format';
 var formatter = new DateTimeFormat('yyyy-MM-dd');
-var GregorianCalendar = require('gregorian-calendar');
-var zhCn = require('gregorian-calendar/lib/locale/zh-cn');
-var CalendarLocale = require('../src/locale/zh-cn');
+import GregorianCalendar from 'gregorian-calendar';
+import zhCn from 'gregorian-calendar/lib/locale/zh-cn';
+import CalendarLocale from '../src/locale/zh-cn';
 var value = new GregorianCalendar(zhCn);
 value.set(2015, 5, 1);
 

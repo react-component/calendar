@@ -1,10 +1,11 @@
 'use strict';
 
-var React = require('react');
+import React from 'react';
 var ROW = 4;
 var COL = 3;
-var cx = require('rc-util').classSet;
-var staticPrefixClsFn = require('../util/prefixClsFn');
+import rcUtil from 'rc-util';
+var cx = rcUtil.classSet;
+import staticPrefixClsFn from '../util/prefixClsFn';
 
 function goYear(direction) {
   var next = this.state.value.clone();
@@ -21,6 +22,7 @@ function chooseDecade(year, e) {
   e.preventDefault();
 }
 
+export default
 class DecadePanel extends React.Component {
   constructor(props) {
     super(props);
@@ -129,5 +131,3 @@ DecadePanel.defaultProps = {
   onSelect() {
   }
 };
-
-module.exports = DecadePanel;

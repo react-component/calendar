@@ -1,4 +1,4 @@
-require('/assets/bootstrap.css');
-require('./Calendar.spec');
-require('./Time.spec');
-require('./Picker.spec');
+import '/assets/bootstrap.css';
+import './Calendar.spec';
+import './Time.spec';
+import './Picker.spec';

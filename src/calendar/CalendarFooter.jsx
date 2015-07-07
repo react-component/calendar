@@ -1,9 +1,11 @@
 'use strict';
 
-var React = require('react');
-var Time = require('../time/Time');
-var toFragment = require('rc-util').Children.mapSelf;
+import React from 'react';
+import Time from '../time/Time';
+import rcUtil from 'rc-util';
+var toFragment = rcUtil.Children.mapSelf;
 
+export default
 class CalendarFooter extends React.Component {
   getTodayTime() {
     var value = this.props.value;
@@ -60,5 +62,3 @@ class CalendarFooter extends React.Component {
     return footerEl;
   }
 }
-
-module.exports = CalendarFooter;

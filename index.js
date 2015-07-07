@@ -1,1 +1,2 @@
-module.exports = require('./src/');
+import Calendar from './src/';
+export default Calendar;

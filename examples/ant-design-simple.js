@@ -1,13 +1,13 @@
 
 require('rc-calendar/assets/index.css');
 
-var Calendar = require('rc-calendar');
-var GregorianCalendarFormat = require('gregorian-calendar-format');
-var React = require('react');
+import Calendar from 'rc-calendar';
+import GregorianCalendarFormat from 'gregorian-calendar-format';
+import React from 'react';
 var formatter = new GregorianCalendarFormat('yyyy-MM-dd HH:mm:ss');
-var GregorianCalendar = require('gregorian-calendar');
-var zhCn = require('gregorian-calendar/lib/locale/zh-cn');
-var CalendarLocale = require('rc-calendar/src/locale/zh-cn');
+import GregorianCalendar from 'gregorian-calendar';
+import zhCn from 'gregorian-calendar/lib/locale/zh-cn';
+import CalendarLocale from 'rc-calendar/src/locale/zh-cn';
 
 var value = new GregorianCalendar(zhCn);
 value.setTime(Date.now());

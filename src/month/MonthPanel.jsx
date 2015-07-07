@@ -1,11 +1,12 @@
 'use strict';
 
-var React = require('react');
+import React from 'react';
 var ROW = 4;
 var COL = 3;
-var cx = require('rc-util').classSet;
-var YearPanel = require('../year/YearPanel');
-var staticPrefixClsFn = require('../util/prefixClsFn');
+import rcUtil from 'rc-util';
+var cx = rcUtil.classSet;
+import YearPanel from '../year/YearPanel';
+import staticPrefixClsFn from '../util/prefixClsFn';
 
 function goYear(direction) {
   var next = this.state.value.clone();
@@ -34,6 +35,7 @@ function onYearPanelSelect(current) {
   });
 }
 
+export default
 class MonthPanel extends React.Component {
   constructor(props) {
     super(props);
@@ -65,7 +67,7 @@ class MonthPanel extends React.Component {
         months[i][j] = {
           value: index,
           content: shortMonths[index],
-          title:shortMonths[index]
+          title: shortMonths[index]
         };
         index++;
       }
@@ -150,5 +152,3 @@ MonthPanel.defaultProps = {
   onSelect() {
   }
 };
-
-module.exports = MonthPanel;

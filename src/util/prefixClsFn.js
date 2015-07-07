@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function () {
+export default function prefixClsFn() {
   var prefixCls = this.state.prefixCls;
   if (arguments.length === 0) {
     return prefixCls;
@@ -9,4 +9,4 @@ module.exports = function () {
   return args.map(s => {
     return prefixCls + '-' + s;
   }).join(' ');
-};
+}

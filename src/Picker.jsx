@@ -1,19 +1,17 @@
 'use strict';
 
-var React = require('react');
-var DateTimeFormat = require('gregorian-calendar-format');
-var rcUtil = require('rc-util');
+import React from 'react';
+import DateTimeFormat from 'gregorian-calendar-format';
+import rcUtil, {createChainedFunction, KeyCode} from 'rc-util';
 var toFragment = rcUtil.Children.mapSelf;
-var KeyCode = rcUtil.KeyCode;
-var domAlign = require('dom-align');
+import domAlign from 'dom-align';
 var orientMap = {
   tl: ['top', 'left'],
   tr: ['top', 'right'],
   bl: ['bottom', 'left'],
   br: ['bottom', 'right']
 };
-var createChainedFunction = rcUtil.createChainedFunction;
-var cssAnimate = require('css-animation');
+import cssAnimate from 'css-animation';
 
 function getImmutableOrient(orient) {
   if (orient) {
@@ -24,6 +22,10 @@ function getImmutableOrient(orient) {
       }
     }
   }
+}
+
+function prevent(e) {
+  e.preventDefault();
 }
 
 function refFn(field, component) {
@@ -40,6 +42,7 @@ function getContainerClassName(prefixCls, open) {
 /**
  * DatePicker = wrap input using Calendar
  */
+export default
 class Picker extends React.Component {
   constructor(props) {
     super(props);
@@ -321,10 +324,6 @@ class Picker extends React.Component {
   }
 }
 
-function prevent(e) {
-  e.preventDefault();
-}
-
 Picker.propTypes = {
   onChange: React.PropTypes.func,
   renderCalendarToBody: React.PropTypes.bool,
@@ -339,5 +338,3 @@ Picker.defaultProps = {
   },
   formatter: new DateTimeFormat('yyyy-MM-dd')
 };
-
-module.exports = Picker;

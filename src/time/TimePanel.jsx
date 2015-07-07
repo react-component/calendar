@@ -1,8 +1,8 @@
 'use strict';
 
-var React = require('react');
-var cx = require('rc-util').classSet;
-var staticPrefixClsFn = require('../util/prefixClsFn');
+import React from 'react';
+import {classSet as cx} from 'rc-util';
+import staticPrefixClsFn from '../util/prefixClsFn';
 
 function choose(hour, e) {
   var next = this.state.value.clone();
@@ -12,6 +12,7 @@ function choose(hour, e) {
   e.preventDefault();
 }
 
+export default
 class TimePanel extends React.Component {
   constructor(props) {
     super(props);
@@ -80,5 +81,3 @@ TimePanel.defaultProps = {
   onSelect() {
   }
 };
-
-module.exports = TimePanel;

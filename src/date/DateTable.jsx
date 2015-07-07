@@ -1,9 +1,10 @@
 'use strict';
 
-var React = require('react');
-var DateTHead = require('./DateTHead');
-var DateTBody = require('./DateTBody');
+import React from 'react';
+import DateTHead from './DateTHead';
+import DateTBody from './DateTBody';
 
+export default
 class DateTable extends React.Component {
   render() {
     var props = this.props;
@@ -14,5 +15,3 @@ class DateTable extends React.Component {
     </table>);
   }
 }
-
-module.exports = DateTable;

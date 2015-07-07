@@ -1,6 +1,8 @@
 'use strict';
 
-module.exports = ({
+import zhCn from 'gregorian-calendar-format/lib/locale/zh-cn';
+
+export default {
   today: '今天',
   now: '此刻',
   ok: '确定',
@@ -17,7 +19,7 @@ module.exports = ({
   minutePanelTitle: '选择分钟',
   secondPanelTitle: '选择秒',
   yearFormat: 'yyyy\'年\'',
-  monthFormat:'M\'月\'',
+  monthFormat: 'M\'月\'',
   dateFormat: 'yyyy\'年\'M\'月\'d\'日\'',
   previousYear: '上一年 (Control键加左方向键)',
   nextYear: '下一年 (Control键加右方向键)',
@@ -25,5 +27,5 @@ module.exports = ({
   nextDecade: '下一年代',
   previousCentury: '上一世纪',
   nextCentury: '下一世纪',
-  format: require('gregorian-calendar-format/lib/locale/zh-cn')
-});
+  format: zhCn
+};

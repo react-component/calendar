@@ -1,9 +1,8 @@
 'use strict';
 
-var React = require('react');
-var rcUtil = require('rc-util');
-var KeyCode = rcUtil.KeyCode;
-var TimePanel = require('./TimePanel');
+import React from 'react';
+import rcUtil, {KeyCode} from 'rc-util';
+import TimePanel from './TimePanel';
 var setHourOfDay = 'setHourOfDay';
 var setMinutes = 'setMinutes';
 var setSeconds = 'setSeconds';
@@ -50,6 +49,7 @@ function keyDownWrap(method, min, max) {
   };
 }
 
+export default
 class Time extends React.Component {
   constructor(props) {
     super(props);
@@ -167,5 +167,3 @@ class Time extends React.Component {
 Time.prototype.onHourKeyDown = keyDownWrap('setHourOfDay', 0, 23);
 Time.prototype.onMinuteKeyDown = keyDownWrap('setMinutes', 0, 59);
 Time.prototype.onSecondKeyDown = keyDownWrap('setSeconds', 0, 59);
-
-module.exports = Time;

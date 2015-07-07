@@ -1,7 +1,7 @@
 'use strict';
 
-var React = require('react');
-var DateConstants = require('./DateConstants');
+import React from 'react';
+import DateConstants from './DateConstants';
 
 function isSameDay(one, two) {
   return one.getYear() === two.getYear() &&
@@ -38,6 +38,7 @@ function handleDayClick(current) {
   this.props.onSelect(current);
 }
 
+export default
 class DateTBody extends React.Component {
   render() {
     var props = this.props;
@@ -166,5 +167,3 @@ class DateTBody extends React.Component {
     </tbody>);
   }
 }
-
-module.exports = DateTBody;

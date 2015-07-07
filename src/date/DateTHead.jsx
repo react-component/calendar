@@ -1,8 +1,9 @@
 'use strict';
 
-var React = require('react');
-var DateConstants = require('./DateConstants');
+import React from 'react';
+import DateConstants from './DateConstants';
 
+export default
 class DateTHead extends React.Component {
   render() {
     var props = this.props;
@@ -42,5 +43,3 @@ class DateTHead extends React.Component {
     </thead>;
   }
 }
-
-module.exports = DateTHead;
