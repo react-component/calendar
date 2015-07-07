@@ -60,8 +60,8 @@ calendar ui component for react, port from https://github.com/modulex/date-picke
 ## Usage
 
 ```js
-var Calendar = require('rc-calendar');
-var React = require('react');
+import Calendar from 'rc-calendar';
+import React from 'react';
 React.render(<Calendar />, container);
 ```
 
@@ -127,7 +127,7 @@ http://react-component.github.io/calendar/examples/index.html
         <tr>
           <td>locale</td>
           <td>Object</td>
-          <td>require('rc-calendar/lib/locale/en-us')</td>
+          <td>import from 'rc-calendar/lib/locale/en-us'</td>
           <td>calendar locale</td>
         </tr>
         <tr>
