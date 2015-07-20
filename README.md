@@ -95,6 +95,12 @@ http://react-component.github.io/calendar/examples/index.html
     </thead>
     <tbody>
         <tr>
+          <td>prefixCls</td>
+          <td>String</td>
+          <td></td>
+          <td>prefixCls of this component</td>
+        </tr>
+        <tr>
           <td>className</td>
           <td>String</td>
           <td></td>
@@ -188,10 +194,22 @@ http://react-component.github.io/calendar/examples/index.html
     </thead>
     <tbody>
         <tr>
+          <td>prefixCls</td>
+          <td>String</td>
+          <td></td>
+          <td>prefixCls of this component</td>
+        </tr>
+        <tr>
           <td>calendar</td>
           <td>Calendar React Element</td>
           <td></td>
           <td></td>
+        </tr>
+        <tr>
+          <td>disabled</td>
+          <td>Boolean</td>
+          <td></td>
+          <td>whether picker is disabled</td>
         </tr>
         <tr>
           <td>adjustOrientOnCalendarOverflow</td>

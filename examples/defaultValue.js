@@ -8,17 +8,17 @@ import GregorianCalendar from 'gregorian-calendar';
 import CalendarLocale from 'rc-calendar/src/locale/zh-cn';
 
 var Test = React.createClass({
-  open: function () {
+  open() {
     this.refs.picker.setState({
       open: true
     });
   },
 
-  handleChange: function (value) {
+  handleChange(value) {
     console.log('DatePicker change: ' + (this.props.formatter.format(value)));
   },
 
-  handleCalendarSelect: function (value) {
+  handleCalendarSelect(value) {
     console.log('calendar select: ' + (this.props.formatter.format(value)));
     // uncontrolled value
     this.setState({
@@ -26,13 +26,13 @@ var Test = React.createClass({
     });
   },
 
-  getDefaultProps: function () {
+  getDefaultProps() {
     return {
       formatter: new DateTimeFormat('yyyy-MM-dd HH:mm:ss')
     }
   },
 
-  getInitialState: function () {
+  getInitialState() {
     var value = new GregorianCalendar(zhCn);
     value.setTime(Date.now());
     return {
@@ -42,13 +42,13 @@ var Test = React.createClass({
     };
   },
 
-  handleShowTimeChange: function (e) {
+  handleShowTimeChange(e) {
     this.setState({
       showTime: e.target.checked
     });
   },
 
-  render: function () {
+  render() {
     var state = this.state;
     var calendar = <Calendar locale={CalendarLocale}
       orient={['bottom', 'left']}

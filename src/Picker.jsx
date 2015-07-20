@@ -2,7 +2,7 @@
 
 import React from 'react';
 import DateTimeFormat from 'gregorian-calendar-format';
-import rcUtil, {createChainedFunction, KeyCode} from 'rc-util';
+import rcUtil, {createChainedFunction, KeyCode, classSet} from 'rc-util';
 var toFragment = rcUtil.Children.mapSelf;
 import domAlign from 'dom-align';
 var orientMap = {
@@ -22,6 +22,9 @@ function getImmutableOrient(orient) {
       }
     }
   }
+}
+
+function noop() {
 }
 
 function prevent(e) {
@@ -273,24 +276,10 @@ class Picker extends React.Component {
 
   render() {
     var props = this.props;
+    var disabled = props.disabled;
+    var prefixCls = props.prefixCls;
     var renderCalendarToBody = props.renderCalendarToBody;
-    // var input = React.Children.only(props.children); bug 0.13.0
-    /*
-     children: Object
-     .0: (...)
-     get .0: function () {
-     set .0: function (value) {
-     _reactDidWarn: false
-     _reactFragment: Object
-     __proto__: Object
-     */
     var input = props.children;
-    if (!React.isValidElement(input)) {
-      var children = input;
-      React.Children.forEach(children, m => {
-        input = m;
-      });
-    }
     var state = this.state;
     var value = state.value;
     var calendar;
@@ -304,23 +293,25 @@ class Picker extends React.Component {
     input = React.cloneElement(input, {
       ref: rcUtil.createChainedFunction(input.props.ref, this.saveInputRef),
       readOnly: true,
-      onClick: this.handleInputClick,
+      disabled: disabled,
+      onClick: disabled ? noop : this.handleInputClick,
       value: inputValue,
-      onKeyDown: this.handleKeyDown
+      onKeyDown: disabled ? noop : this.handleKeyDown
     });
-    var classes = [props.prefixCls];
-    if (state.open) {
-      classes.push(props.prefixCls + '-open');
-    }
+    var classes = {
+      [prefixCls]: 1,
+      [`${prefixCls}-open`]: state.open,
+      [`${prefixCls}-disabled`]: disabled
+    };
     var trigger = props.trigger;
     if (trigger) {
       trigger = React.cloneElement(trigger, {
-        onClick: this.handleTriggerClick,
+        onClick: disabled ? noop : this.handleTriggerClick,
         unselectable: true,
         onMouseDown: prevent
       });
     }
-    return <span className={classes.join(' ')}>{toFragment([input, calendar, trigger])}</span>;
+    return <span className={classSet(classes)}>{toFragment([input, calendar, trigger])}</span>;
   }
 }
 

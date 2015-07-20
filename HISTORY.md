@@ -1,6 +1,10 @@
 # History
 ----
 
+## 3.11.0 / 2015-07-20
+
+support disabled prop for picker
+
 ## 3.10.1 / 2015-07-02
 
 add adjustOrientOnCalendarOverflow prop for picker
