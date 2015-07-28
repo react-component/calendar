@@ -381,7 +381,7 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var _react = __webpack_require__(6);
 	
@@ -666,7 +666,7 @@
 	      return _react2['default'].createElement(
 	        'div',
 	        { className: _rcUtil2['default'].classSet(className), style: this.props.style,
-	          tabIndex: '0', onFocus: this.handleFocus,
+	          tabIndex: "0", onFocus: this.handleFocus,
 	          onBlur: this.handleBlur, onKeyDown: this.handleKeyDown },
 	        _react2['default'].createElement(
 	          'div',
@@ -4060,7 +4060,7 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var _react = __webpack_require__(6);
 	
@@ -4090,7 +4090,7 @@
 	      var prefixClsFn = props.prefixClsFn;
 	      return _react2['default'].createElement(
 	        'table',
-	        { className: prefixClsFn('table'), cellSpacing: '0', role: 'grid' },
+	        { className: prefixClsFn('table'), cellSpacing: "0", role: "grid" },
 	        _react2['default'].createElement(_DateTHead2['default'], props),
 	        _react2['default'].createElement(_DateTBody2['default'], props)
 	      );
@@ -4121,7 +4121,7 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var _react = __webpack_require__(6);
 	
@@ -4161,7 +4161,7 @@
 	      if (props.showWeekNumber) {
 	        showWeekNumberEl = _react2['default'].createElement(
 	          'th',
-	          { role: 'columnheader', className: prefixClsFn('column-header', 'week-number-header') },
+	          { role: "columnheader", className: prefixClsFn('column-header', 'week-number-header') },
 	          _react2['default'].createElement(
 	            'span',
 	            { className: prefixClsFn('column-header-inner') },
@@ -4172,7 +4172,7 @@
 	      var weekDaysEls = weekDays.map(function (day, xindex) {
 	        return _react2['default'].createElement(
 	          'th',
-	          { key: xindex, role: 'columnheader', title: day, className: prefixClsFn('column-header') },
+	          { key: xindex, role: "columnheader", title: day, className: prefixClsFn('column-header') },
 	          _react2['default'].createElement(
 	            'span',
 	            { className: prefixClsFn('column-header-inner') },
@@ -4185,7 +4185,7 @@
 	        null,
 	        _react2['default'].createElement(
 	          'tr',
-	          { role: 'row' },
+	          { role: "row" },
 	          showWeekNumberEl,
 	          weekDaysEls
 	        )
@@ -4232,7 +4232,7 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var _react = __webpack_require__(6);
 	
@@ -4330,7 +4330,7 @@
 	        if (showWeekNumber) {
 	          weekNumberCell = _react2['default'].createElement(
 	            'td',
-	            { key: dateTable[passed].getWeekOfYear(), role: 'gridcell', className: weekNumberCellClass },
+	            { key: dateTable[passed].getWeekOfYear(), role: "gridcell", className: weekNumberCellClass },
 	            dateTable[passed].getWeekOfYear()
 	          );
 	        }
@@ -4391,7 +4391,7 @@
 	
 	          dateCells.push(_react2['default'].createElement(
 	            'td',
-	            { key: passed, onClick: disabled ? noop : handleDayClick.bind(this, current), role: 'gridcell',
+	            { key: passed, onClick: disabled ? noop : handleDayClick.bind(this, current), role: "gridcell",
 	              title: dateFormatter.format(current), className: cls },
 	            dateHtml
 	          ));
@@ -4402,7 +4402,7 @@
 	          'tr',
 	          {
 	            key: i,
-	            role: 'row' },
+	            role: "row" },
 	          weekNumberCell,
 	          dateCells
 	        ));
@@ -4439,7 +4439,7 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var _react = __webpack_require__(6);
 	
@@ -4515,7 +4515,7 @@
 	      var year = _react2['default'].createElement(
 	        'a',
 	        { className: prefixClsFn('year-select'),
-	          role: 'button',
+	          role: "button",
 	          onClick: this.showYearPanel,
 	          title: locale.monthSelect },
 	        this.yearFormatter.format(value)
@@ -4523,7 +4523,7 @@
 	      var month = _react2['default'].createElement(
 	        'a',
 	        { className: prefixClsFn('month-select'),
-	          role: 'button',
+	          role: "button",
 	          onClick: this.showMonthPanel,
 	          title: locale.monthSelect },
 	        this.monthFormatter.format(value)
@@ -4568,7 +4568,7 @@
 	        _react2['default'].createElement(
 	          'a',
 	          { className: prefixClsFn('prev-year-btn'),
-	            role: 'button',
+	            role: "button",
 	            onClick: props.previousYear,
 	            title: locale.previousYear },
 	          '«'
@@ -4576,7 +4576,7 @@
 	        _react2['default'].createElement(
 	          'a',
 	          { className: prefixClsFn('prev-month-btn'),
-	            role: 'button',
+	            role: "button",
 	            onClick: props.previousMonth,
 	            title: locale.previousMonth },
 	          '‹'
@@ -4625,7 +4625,7 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var _react = __webpack_require__(6);
 	
@@ -4739,7 +4739,7 @@
 	          classNameMap[prefixClsFn('selected-cell')] = m.value === currentMonth;
 	          return _react2['default'].createElement(
 	            'td',
-	            { role: 'gridcell',
+	            { role: "gridcell",
 	              key: m.value,
 	              onClick: chooseMonth.bind(_this, m.value),
 	              title: m.title,
@@ -4754,7 +4754,7 @@
 	        });
 	        return _react2['default'].createElement(
 	          'tr',
-	          { key: index, role: 'row' },
+	          { key: index, role: "row" },
 	          tds
 	        );
 	      });
@@ -4776,7 +4776,7 @@
 	            _react2['default'].createElement(
 	              'a',
 	              { className: prefixClsFn('prev-year-btn'),
-	                role: 'button',
+	                role: "button",
 	                onClick: this.previousYear,
 	                title: locale.previousYear },
 	              '«'
@@ -4784,7 +4784,7 @@
 	            _react2['default'].createElement(
 	              'a',
 	              { className: prefixClsFn('year-select'),
-	                role: 'button',
+	                role: "button",
 	                onClick: this.showYearPanel,
 	                title: locale.yearSelect },
 	              _react2['default'].createElement(
@@ -4801,7 +4801,7 @@
 	            _react2['default'].createElement(
 	              'a',
 	              { className: prefixClsFn('next-year-btn'),
-	                role: 'button',
+	                role: "button",
 	                onClick: this.nextYear,
 	                title: locale.nextYear },
 	              '»'
@@ -4812,7 +4812,7 @@
 	            { className: prefixClsFn('body') },
 	            _react2['default'].createElement(
 	              'table',
-	              { className: prefixClsFn('table'), cellSpacing: '0', role: 'grid' },
+	              { className: prefixClsFn('table'), cellSpacing: "0", role: "grid" },
 	              _react2['default'].createElement(
 	                'tbody',
 	                { className: prefixClsFn('tbody') },
@@ -4854,7 +4854,7 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var _react = __webpack_require__(6);
 	
@@ -4985,7 +4985,7 @@
 	          }
 	          return _react2['default'].createElement(
 	            'td',
-	            { role: 'gridcell',
+	            { role: "gridcell",
 	              title: y.title,
 	              key: y.content,
 	              onClick: clickHandler,
@@ -5001,7 +5001,7 @@
 	        });
 	        return _react2['default'].createElement(
 	          'tr',
-	          { key: index, role: 'row' },
+	          { key: index, role: "row" },
 	          tds
 	        );
 	      });
@@ -5023,7 +5023,7 @@
 	            _react2['default'].createElement(
 	              'a',
 	              { className: prefixClsFn('prev-decade-btn'),
-	                role: 'button',
+	                role: "button",
 	                onClick: this.previousDecade,
 	                title: locale.previousDecade },
 	              '«'
@@ -5031,7 +5031,7 @@
 	            _react2['default'].createElement(
 	              'a',
 	              { className: prefixClsFn('decade-select'),
-	                role: 'button',
+	                role: "button",
 	                onClick: this.showDecadePanel,
 	                title: locale.decadeSelect },
 	              _react2['default'].createElement(
@@ -5050,7 +5050,7 @@
 	            _react2['default'].createElement(
 	              'a',
 	              { className: prefixClsFn('next-decade-btn'),
-	                role: 'button',
+	                role: "button",
 	                onClick: this.nextDecade,
 	                title: locale.nextDecade },
 	              '»'
@@ -5061,7 +5061,7 @@
 	            { className: prefixClsFn('body') },
 	            _react2['default'].createElement(
 	              'table',
-	              { className: prefixClsFn('table'), cellSpacing: '0', role: 'grid' },
+	              { className: prefixClsFn('table'), cellSpacing: "0", role: "grid" },
 	              _react2['default'].createElement(
 	                'tbody',
 	                { className: prefixClsFn('tbody') },
@@ -5103,7 +5103,7 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var _react = __webpack_require__(6);
 	
@@ -5209,7 +5209,7 @@
 	            {
 	              key: dStartDecade,
 	              onClick: clickHandler,
-	              role: 'gridcell',
+	              role: "gridcell",
 	              className: cx(classNameMap)
 	            },
 	            _react2['default'].createElement(
@@ -5222,7 +5222,7 @@
 	        });
 	        return _react2['default'].createElement(
 	          'tr',
-	          { key: decadeIndex, role: 'row' },
+	          { key: decadeIndex, role: "row" },
 	          tds
 	        );
 	      });
@@ -5236,7 +5236,7 @@
 	          _react2['default'].createElement(
 	            'a',
 	            { className: prefixClsFn('prev-century-btn'),
-	              role: 'button',
+	              role: "button",
 	              onClick: this.previousCentury,
 	              title: locale.previousCentury },
 	            '«'
@@ -5251,7 +5251,7 @@
 	          _react2['default'].createElement(
 	            'a',
 	            { className: prefixClsFn('next-century-btn'),
-	              role: 'button',
+	              role: "button",
 	              onClick: this.nextCentury,
 	              title: locale.nextCentury },
 	            '»'
@@ -5262,7 +5262,7 @@
 	          { className: prefixClsFn('body') },
 	          _react2['default'].createElement(
 	            'table',
-	            { className: prefixClsFn('table'), cellSpacing: '0', role: 'grid' },
+	            { className: prefixClsFn('table'), cellSpacing: "0", role: "grid" },
 	            _react2['default'].createElement(
 	              'tbody',
 	              { className: prefixClsFn('tbody') },
@@ -5326,7 +5326,7 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var _react = __webpack_require__(6);
 	
@@ -5377,7 +5377,7 @@
 	          nowEl = _react2['default'].createElement(
 	            'a',
 	            { className: prefixClsFn('today-btn'),
-	              role: 'button',
+	              role: "button",
 	              onClick: props.onToday,
 	              title: this.getTodayTime() },
 	            localeNow
@@ -5388,7 +5388,7 @@
 	          clearEl = _react2['default'].createElement(
 	            'a',
 	            { className: prefixClsFn('clear-btn'),
-	              role: 'button',
+	              role: "button",
 	              onClick: props.onClear },
 	            locale.clear
 	          );
@@ -5398,7 +5398,7 @@
 	          okBtn = _react2['default'].createElement(
 	            'a',
 	            { className: prefixClsFn('ok-btn'),
-	              role: 'button',
+	              role: "button",
 	              onClick: props.onOk },
 	            locale.ok
 	          );
@@ -5453,7 +5453,7 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var _react = __webpack_require__(6);
 	
@@ -5598,15 +5598,15 @@
 	        rootPrefixCls: prefixClsFn()
 	      };
 	      if (state.showHourPanel) {
-	        panel = _react2['default'].createElement(_TimePanel2['default'], _extends({ rowCount: 6, colCount: 4, getter: 'getHourOfDay', setter: setHourOfDay,
+	        panel = _react2['default'].createElement(_TimePanel2['default'], _extends({ rowCount: 6, colCount: 4, getter: "getHourOfDay", setter: setHourOfDay,
 	          title: locale.hourPanelTitle
 	        }, commonProps));
 	      } else if (state.showMinutePanel) {
-	        panel = _react2['default'].createElement(_TimePanel2['default'], _extends({ rowCount: 6, colCount: 10, getter: 'getMinutes', setter: setMinutes,
+	        panel = _react2['default'].createElement(_TimePanel2['default'], _extends({ rowCount: 6, colCount: 10, getter: "getMinutes", setter: setMinutes,
 	          title: locale.minutePanelTitle
 	        }, commonProps));
 	      } else if (state.showSecondPanel) {
-	        panel = _react2['default'].createElement(_TimePanel2['default'], _extends({ rowCount: 6, colCount: 10, getter: 'getSeconds', setter: setSeconds,
+	        panel = _react2['default'].createElement(_TimePanel2['default'], _extends({ rowCount: 6, colCount: 10, getter: "getSeconds", setter: setSeconds,
 	          title: locale.secondPanelTitle
 	        }, commonProps));
 	      }
@@ -5685,7 +5685,7 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var _react = __webpack_require__(6);
 	
@@ -5750,7 +5750,7 @@
 	            {
 	              key: d,
 	              onClick: choose.bind(_this, d),
-	              role: 'gridcell',
+	              role: "gridcell",
 	              className: (0, _rcUtil.classSet)(classNameMap) },
 	            _react2['default'].createElement(
 	              'a',
@@ -5762,7 +5762,7 @@
 	        });
 	        return _react2['default'].createElement(
 	          'tr',
-	          { key: index, role: 'row' },
+	          { key: index, role: "row" },
 	          tds
 	        );
 	      });
@@ -5784,7 +5784,7 @@
 	          { className: prefixClsFn('body') },
 	          _react2['default'].createElement(
 	            'table',
-	            { className: prefixClsFn('table'), cellSpacing: '0', role: 'grid' },
+	            { className: prefixClsFn('table'), cellSpacing: "0", role: "grid" },
 	            _react2['default'].createElement(
 	              'tbody',
 	              { className: prefixClsFn('tbody') },
@@ -5872,7 +5872,7 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var _react = __webpack_require__(6);
 	

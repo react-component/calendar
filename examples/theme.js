@@ -48,7 +48,7 @@ webpackJsonp([7],{
 	    showTime: true,
 	    showOk: 0,
 	    showClear: 0,
-	    onSelect: onSelect, prefixCls: 'classic-calendar' })
+	    onSelect: onSelect, prefixCls: "classic-calendar" })
 	), document.getElementById('__react-content'));
 
 /***/ },

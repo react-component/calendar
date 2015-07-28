@@ -122,9 +122,9 @@ webpackJsonp([2],{
 	
 	var _gregorianCalendarLibLocaleZhCn = __webpack_require__(49);
 	
-	var _gregorianCalendarLibLocaleZhCn2 = _interopRequireDefault(_gregorianCalendarLibLocaleZhCn);
-	
 	// spm error
+	
+	var _gregorianCalendarLibLocaleZhCn2 = _interopRequireDefault(_gregorianCalendarLibLocaleZhCn);
 	
 	var _gregorianCalendarFormat = __webpack_require__(10);
 	
@@ -188,10 +188,10 @@ webpackJsonp([2],{
 	      showTime: this.state.showTime, onSelect: this.handleCalendarSelect });
 	    return _react2['default'].createElement(
 	      'div',
-	      { className: 'form-group', style: { width: 400, margin: 20 }, 'data-time': state.time },
+	      { className: "form-group", style: { width: 400, margin: 20 }, 'data-time': state.time },
 	      _react2['default'].createElement(
 	        'div',
-	        { className: 'input-group' },
+	        { className: "input-group" },
 	        _react2['default'].createElement(
 	          'span',
 	          null,
@@ -201,17 +201,17 @@ webpackJsonp([2],{
 	      ),
 	      _react2['default'].createElement(
 	        'div',
-	        { className: 'input-group' },
+	        { className: "input-group" },
 	        _react2['default'].createElement(
 	          _rcCalendar.Picker,
 	          { ref: 'picker', formatter: this.props.formatter, calendar: calendar,
 	            defaultValue: state.value, onChange: this.handleChange },
-	          _react2['default'].createElement('input', { type: 'text', className: 'form-control', style: { background: 'white', cursor: 'pointer' } })
+	          _react2['default'].createElement('input', { type: "text", className: "form-control", style: { background: 'white', cursor: 'pointer' } })
 	        ),
 	        _react2['default'].createElement(
 	          'span',
-	          { className: 'input-group-addon', onClick: this.open },
-	          _react2['default'].createElement('span', { className: 'glyphicon glyphicon-calendar' })
+	          { className: "input-group-addon", onClick: this.open },
+	          _react2['default'].createElement('span', { className: "glyphicon glyphicon-calendar" })
 	        )
 	      )
 	    );

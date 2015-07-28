@@ -27,9 +27,9 @@ webpackJsonp([0],{
 	
 	var _gregorianCalendarLibLocaleZhCn = __webpack_require__(49);
 	
-	var _gregorianCalendarLibLocaleZhCn2 = _interopRequireDefault(_gregorianCalendarLibLocaleZhCn);
-	
 	// spm error
+	
+	var _gregorianCalendarLibLocaleZhCn2 = _interopRequireDefault(_gregorianCalendarLibLocaleZhCn);
 	
 	var _gregorianCalendarFormat = __webpack_require__(10);
 	
@@ -145,12 +145,12 @@ webpackJsonp([0],{
 	          _rcCalendar.Picker,
 	          {
 	            adjustOrientOnCalendarOverflow: false,
-	            animation: 'slide-up',
+	            animation: "slide-up",
 	            disabled: state.disabled,
-	            trigger: _react2['default'].createElement('span', { className: 'rc-calendar-picker-icon' }),
+	            trigger: _react2['default'].createElement('span', { className: "rc-calendar-picker-icon" }),
 	            formatter: this.props.formatter, calendar: calendar,
 	            value: state.value, onChange: this.handleChange },
-	          _react2['default'].createElement('input', { className: 'rc-calendar-picker-input', disabled: state.disabled, placeholder: '请选择日期' })
+	          _react2['default'].createElement('input', { className: "rc-calendar-picker-input", disabled: state.disabled, placeholder: "请选择日期" })
 	        )
 	      )
 	    );

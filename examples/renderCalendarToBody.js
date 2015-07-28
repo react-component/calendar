@@ -206,12 +206,12 @@ webpackJsonp([5],{
 	          _rcCalendar.Picker,
 	          {
 	            renderCalendarToBody: true,
-	            trigger: _react2['default'].createElement('span', { className: 'rc-calendar-picker-icon' }),
+	            trigger: _react2['default'].createElement('span', { className: "rc-calendar-picker-icon" }),
 	            formatter: this.props.formatter, calendar: _react2['default'].createElement(_rcCalendar2['default'], {
 	              style: { zIndex: 1000 },
 	              locale: _rcCalendarSrcLocaleZhCn2['default'] }),
 	            defaultValue: value },
-	          _react2['default'].createElement('input', { className: 'rc-calendar-picker-input' })
+	          _react2['default'].createElement('input', { className: "rc-calendar-picker-input" })
 	        )
 	      ),
 	      _react2['default'].createElement(
@@ -225,12 +225,12 @@ webpackJsonp([5],{
 	          _rcCalendar.Picker,
 	          {
 	            renderCalendarToBody: true,
-	            trigger: _react2['default'].createElement('span', { className: 'rc-calendar-picker-icon' }),
+	            trigger: _react2['default'].createElement('span', { className: "rc-calendar-picker-icon" }),
 	            formatter: this.props.formatter, calendar: _react2['default'].createElement(_rcCalendar2['default'], {
 	              style: { zIndex: 1000 },
 	              locale: _rcCalendarSrcLocaleZhCn2['default'] }),
 	            defaultValue: value },
-	          _react2['default'].createElement('input', { className: 'rc-calendar-picker-input' })
+	          _react2['default'].createElement('input', { className: "rc-calendar-picker-input" })
 	        )
 	      ),
 	      _react2['default'].createElement(

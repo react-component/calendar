@@ -221,9 +221,9 @@ webpackJsonp([4],{
 	
 	var _gregorianCalendarLibLocaleZhCn = __webpack_require__(49);
 	
-	var _gregorianCalendarLibLocaleZhCn2 = _interopRequireDefault(_gregorianCalendarLibLocaleZhCn);
-	
 	// spm error
+	
+	var _gregorianCalendarLibLocaleZhCn2 = _interopRequireDefault(_gregorianCalendarLibLocaleZhCn);
 	
 	var _gregorianCalendarFormat = __webpack_require__(10);
 	
@@ -286,10 +286,10 @@ webpackJsonp([4],{
 	      showTime: this.state.showTime, onSelect: this.handleCalendarSelect, onClear: this.handleCalendarSelect.bind(this, null), showClear: true });
 	    return _react2['default'].createElement(
 	      'div',
-	      { className: 'form-group', style: { width: 400, margin: 20 }, 'data-time': this.state.time },
+	      { className: "form-group", style: { width: 400, margin: 20 }, 'data-time': this.state.time },
 	      _react2['default'].createElement(
 	        'div',
-	        { className: 'input-group' },
+	        { className: "input-group" },
 	        _react2['default'].createElement(
 	          'span',
 	          null,
@@ -299,24 +299,24 @@ webpackJsonp([4],{
 	      ),
 	      _react2['default'].createElement(
 	        'div',
-	        { className: 'input-group' },
+	        { className: "input-group" },
 	        _react2['default'].createElement(
 	          _rcCalendar.Picker,
 	          { ref: 'picker',
 	            formatter: this.props.formatter, calendar: calendar,
 	            value: state.value, onChange: this.handleChange },
 	          _react2['default'].createElement('input', {
-	            placeholder: 'please select date',
-	            className: 'form-control rc-calendar-picker-input' })
+	            placeholder: "please select date",
+	            className: "form-control rc-calendar-picker-input" })
 	        ),
 	        _react2['default'].createElement(
 	          'span',
-	          { className: 'input-group-addon',
+	          { className: "input-group-addon",
 	            style: { '-webkit-user-select': 'none' },
 	            onMouseDown: prevent,
-	            unselectable: 'unselectable',
+	            unselectable: "unselectable",
 	            onClick: this.toggle },
-	          _react2['default'].createElement('span', { className: 'glyphicon glyphicon-calendar' })
+	          _react2['default'].createElement('span', { className: "glyphicon glyphicon-calendar" })
 	        )
 	      )
 	    );
