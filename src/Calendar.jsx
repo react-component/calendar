@@ -7,7 +7,6 @@ import rcUtil, {KeyCode} from 'rc-util';
 import DateTable from './date/DateTable';
 import CalendarHeader from './calendar/CalendarHeader';
 import CalendarFooter from './calendar/CalendarFooter';
-import staticPrefixClsFn from './util/prefixClsFn';
 import enUs from './locale/en-us';
 
 function noop() {
@@ -79,7 +78,7 @@ class Calendar extends React.Component {
     this.nextYear = goYear.bind(this, 1);
     this.previousYear = goYear.bind(this, -1);
 
-    ['handleBlur', 'handleFocus', 'prefixClsFn', 'chooseToday', 'handleClear', 'handleSelect', 'setValue', 'handleKeyDown', 'handleOk'].forEach((m) => {
+    ['handleBlur', 'handleFocus', 'chooseToday', 'handleClear', 'handleSelect', 'setValue', 'handleKeyDown', 'handleOk'].forEach((m) => {
       this[m] = this[m].bind(this);
     });
   }
@@ -169,10 +168,6 @@ class Calendar extends React.Component {
     this.props.onClear();
   }
 
-  prefixClsFn() {
-    return staticPrefixClsFn.apply(this, arguments);
-  }
-
   handleFocus() {
     if (this._blurTimer) {
       clearTimeout(this._blurTimer);
@@ -218,11 +213,12 @@ class Calendar extends React.Component {
     var locale = props.locale;
     var state = this.state;
     var value = state.value;
-    var prefixClsFn = this.prefixClsFn;
+    var prefixCls = props.prefixCls;
 
     var className = {
-      [prefixClsFn()]: 1,
-      [prefixClsFn('week-number')]: props.showWeekNumber
+      [prefixCls]: 1,
+      [`${prefixCls}-week-number`]: props.showWeekNumber,
+      [`${prefixCls}-hidden`]: !props.visible
     };
 
     if (props.className) {
@@ -232,14 +228,14 @@ class Calendar extends React.Component {
     var orient = state.orient;
     if (orient) {
       orient.forEach(o => {
-        className [prefixClsFn('orient-' + o)] = 1;
+        className [`${prefixCls}-orient-${o}`] = 1;
       });
     }
 
     return (
       <div className={rcUtil.classSet(className)} style={this.props.style}
-        tabIndex="0" onFocus={this.handleFocus}
-        onBlur={this.handleBlur} onKeyDown={this.handleKeyDown}>
+           tabIndex="0" onFocus={this.handleFocus}
+           onBlur={this.handleBlur} onKeyDown={this.handleKeyDown}>
         <div style={{outline: 'none'}}>
           <CalendarHeader
             locale={locale}
@@ -249,12 +245,13 @@ class Calendar extends React.Component {
             nextMonth={this.nextMonth}
             nextYear={this.nextYear}
             value={value}
-            prefixClsFn={prefixClsFn}/>
-          <div className = {prefixClsFn('calendar-body')}>
+            prefixCls={prefixCls}/>
+
+          <div className={`${prefixCls}-calendar-body`}>
             <DateTable
               locale={locale}
               value={value}
-              prefixClsFn={prefixClsFn}
+              prefixCls={prefixCls}
               dateRender={props.dateRender}
               onSelect={this.handleSelect}
               disabledDate={props.disabledDate}
@@ -265,7 +262,7 @@ class Calendar extends React.Component {
             locale={locale}
             showClear={props.showClear}
             showOk={props.showOk}
-            prefixClsFn={prefixClsFn}
+            prefixCls={prefixCls}
             showToday={props.showToday}
             showTime={props.showTime}
             value={value}
@@ -274,7 +271,7 @@ class Calendar extends React.Component {
             onOk={this.handleOk}
             onSelect={this.handleSelect}
             onToday={this.chooseToday}
-          />
+            />
         </div>
       </div>);
   }
@@ -289,6 +286,7 @@ Calendar.propTypes = {
   showWeekNumber: React.PropTypes.bool,
   style: React.PropTypes.object,
   showToday: React.PropTypes.bool,
+  visible: React.PropTypes.bool,
   showTime: React.PropTypes.bool,
   onSelect: React.PropTypes.func,
   onBlur: React.PropTypes.func
@@ -297,6 +295,7 @@ Calendar.propTypes = {
 Calendar.defaultProps = {
   locale: enUs,
   style: {},
+  visible: true,
   prefixCls: 'rc-calendar',
   onKeyDown: noop,
   className: '',

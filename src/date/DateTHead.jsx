@@ -9,7 +9,7 @@ class DateTHead extends React.Component {
     var props = this.props;
     var value = props.value;
     var locale = props.locale;
-    var prefixClsFn = props.prefixClsFn;
+    var prefixCls = props.prefixCls;
     var veryShortWeekdays = [];
     var weekDays = [];
     var firstDayOfWeek = value.getFirstDayOfWeek();
@@ -23,14 +23,14 @@ class DateTHead extends React.Component {
 
     if (props.showWeekNumber) {
       showWeekNumberEl = (
-        <th role="columnheader" className = {prefixClsFn('column-header', 'week-number-header')}>
-          <span className ={prefixClsFn('column-header-inner')}>x</span>
+        <th role="columnheader" className = {`${prefixCls}-column-header ${prefixCls}-week-number-header`}>
+          <span className ={`${prefixCls}-column-header-inner`}>x</span>
         </th>);
     }
     var weekDaysEls = weekDays.map((day, xindex)=> {
       return (
-        <th key={xindex} role="columnheader" title={day} className ={prefixClsFn('column-header')}>
-          <span className = {prefixClsFn('column-header-inner')}>
+        <th key={xindex} role="columnheader" title={day} className ={`${prefixCls}-column-header`}>
+          <span className = {`${prefixCls}-column-header-inner`}>
           {veryShortWeekdays[xindex]}
           </span>
         </th>);

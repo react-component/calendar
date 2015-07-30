@@ -37,6 +37,7 @@ var Test = React.createClass({
       }}>
         <DatePicker
           renderCalendarToBody={true}
+          animation="slide-up"
           trigger={<span className="rc-calendar-picker-icon" />}
           formatter={this.props.formatter} calendar={<Calendar
           style={{zIndex: 1000}}

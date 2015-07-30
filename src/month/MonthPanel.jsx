@@ -6,7 +6,6 @@ var COL = 3;
 import rcUtil from 'rc-util';
 var cx = rcUtil.classSet;
 import YearPanel from '../year/YearPanel';
-import staticPrefixClsFn from '../util/prefixClsFn';
 
 function goYear(direction) {
   var next = this.state.value.clone();
@@ -40,16 +39,14 @@ class MonthPanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: this.props.value,
-      prefixCls: this.props.rootPrefixCls + '-month-panel'
-
+      value: props.value
     };
     // bind methods
     this.nextYear = goYear.bind(this, 1);
     this.previousYear = goYear.bind(this, -1);
     this.showYearPanel = showYearPanel.bind(this);
     this.onYearPanelSelect = onYearPanelSelect.bind(this);
-    this.prefixClsFn = staticPrefixClsFn.bind(this);
+    this.prefixCls = props.rootPrefixCls + '-month-panel';
   }
 
   getMonths() {
@@ -83,12 +80,12 @@ class MonthPanel extends React.Component {
     var months = this.getMonths();
     var year = value.getYear();
     var currentMonth = value.getMonth();
-    var prefixClsFn = this.prefixClsFn;
+    var prefixCls = this.prefixCls;
     var monthsEls = months.map((month, index)=> {
       var tds = month.map(m => {
         var classNameMap = {};
-        classNameMap[prefixClsFn('cell')] = 1;
-        classNameMap[prefixClsFn('selected-cell')] = m.value === currentMonth;
+        classNameMap[`${prefixCls}-cell`] = 1;
+        classNameMap[`${prefixCls}-selected-cell`] = m.value === currentMonth;
         return (
           <td role="gridcell"
             key={m.value}
@@ -96,7 +93,7 @@ class MonthPanel extends React.Component {
             title={m.title}
             className = {cx(classNameMap)}>
             <a
-              className = {prefixClsFn('month')}>
+              className = {`${prefixCls}-month`}>
             {m.content}
             </a>
           </td>);
@@ -110,34 +107,34 @@ class MonthPanel extends React.Component {
     }
 
     return (
-      <div className= {this.state.prefixCls}>
+      <div className= {this.prefixCls}>
         <div>
-          <div className = {prefixClsFn('header')}>
-            <a className = {prefixClsFn('prev-year-btn')}
+          <div className = {`${prefixCls}-header`}>
+            <a className = {`${prefixCls}-prev-year-btn`}
               role="button"
               onClick={this.previousYear}
               title={locale.previousYear}>
               «
             </a>
 
-            <a className = {prefixClsFn('year-select')}
+            <a className = {`${prefixCls}-year-select`}
               role="button"
               onClick={this.showYearPanel}
               title={locale.yearSelect}>
-              <span className = {prefixClsFn('year-select-content')}>{year}</span>
-              <span className = {prefixClsFn('year-select-arrow')}>x</span>
+              <span className = {`${prefixCls}-year-select-content`}>{year}</span>
+              <span className = {`${prefixCls}-year-select-arrow`}>x</span>
             </a>
 
-            <a className = {prefixClsFn('next-year-btn')}
+            <a className = {`${prefixCls}-next-year-btn`}
               role="button"
               onClick={this.nextYear}
               title={locale.nextYear}>
               »
             </a>
           </div>
-          <div className = {prefixClsFn('body')}>
-            <table className = {prefixClsFn('table')} cellSpacing="0" role="grid">
-              <tbody className = {prefixClsFn('tbody')}>
+          <div className = {`${prefixCls}-body`}>
+            <table className = {`${prefixCls}-table`} cellSpacing="0" role="grid">
+              <tbody className = {`${prefixCls}-tbody`}>
               {monthsEls}
               </tbody>
             </table>

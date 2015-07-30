@@ -18,7 +18,7 @@ class CalendarFooter extends React.Component {
     var props = this.props;
     var value = props.value;
     var locale = props.locale;
-    var prefixClsFn = props.prefixClsFn;
+    var prefixCls = props.prefixCls;
     var footerEl = null;
     if (props.showToday || props.showTime) {
       var nowEl;
@@ -27,33 +27,33 @@ class CalendarFooter extends React.Component {
         localeNow = locale.now || locale.today;
       }
       if (props.showToday) {
-        nowEl = (<a className={prefixClsFn('today-btn')}
+        nowEl = (<a className={`${prefixCls}-today-btn`}
           role="button"
           onClick={props.onToday}
           title={this.getTodayTime()}>{localeNow}</a>);
       }
       var clearEl;
       if (props.showClear) {
-        clearEl = (<a className={prefixClsFn('clear-btn')}
+        clearEl = (<a className={`${prefixCls}-clear-btn`}
           role="button"
           onClick={props.onClear}>{locale.clear}</a>);
       }
       var okBtn;
       if (props.showOk) {
-        okBtn = (<a className = {prefixClsFn('ok-btn')}
+        okBtn = (<a className = {`${prefixCls}-ok-btn`}
           role="button"
           onClick={props.onOk}>{locale.ok}</a>);
       }
       var footerBtn;
       if (nowEl || clearEl) {
-        footerBtn = <span className={prefixClsFn('footer-btn')}>{toFragment([nowEl, okBtn, clearEl])}</span>;
+        footerBtn = <span className={`${prefixCls}-footer-btn`}>{toFragment([nowEl, okBtn, clearEl])}</span>;
       }
       var timeEl;
       if (props.showTime) {
-        timeEl = (<Time value={value} prefixClsFn={prefixClsFn} locale={locale} onChange={props.onSelect}/>);
+        timeEl = (<Time value={value} prefixCls={prefixCls} locale={locale} onChange={props.onSelect}/>);
       }
       footerEl = (
-        <div className = {prefixClsFn('footer')}>
+        <div className = {`${prefixCls}-footer`}>
         {timeEl}
         {footerBtn}
         </div>);

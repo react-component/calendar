@@ -5,7 +5,6 @@ var ROW = 4;
 var COL = 3;
 import rcUtil from 'rc-util';
 var cx = rcUtil.classSet;
-import staticPrefixClsFn from '../util/prefixClsFn';
 
 function goYear(direction) {
   var next = this.state.value.clone();
@@ -27,12 +26,11 @@ class DecadePanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: props.value,
-      prefixCls: props.rootPrefixCls + '-decade-panel'
+      value: props.value
     };
 
     // bind methods
-    this.prefixClsFn = staticPrefixClsFn.bind(this);
+    this.prefixCls = props.rootPrefixCls + '-decade-panel';
     this.nextCentury = goYear.bind(this, 100);
     this.previousCentury = goYear.bind(this, -100);
   }
@@ -46,7 +44,7 @@ class DecadePanel extends React.Component {
     var endYear = startYear + 99;
     var decades = [];
     var index = 0;
-    var prefixClsFn = this.prefixClsFn;
+    var prefixCls = this.prefixCls;
 
     for (var i = 0; i < ROW; i++) {
       decades[i] = [];
@@ -66,12 +64,12 @@ class DecadePanel extends React.Component {
         var dStartDecade = d.startDecade;
         var dEndDecade = d.endDecade;
         var classNameMap = {};
-        classNameMap[prefixClsFn('cell')] = 1;
-        classNameMap[prefixClsFn('selected-cell')] = dStartDecade <= currentYear && currentYear <= dEndDecade;
+        classNameMap[`${prefixCls}-cell`] = 1;
+        classNameMap[`${prefixCls}-selected-cell`] = dStartDecade <= currentYear && currentYear <= dEndDecade;
         var isLast = dStartDecade < startYear;
         var isNext = dEndDecade > endYear;
-        classNameMap[prefixClsFn('last-century-cell')] = isLast;
-        classNameMap[prefixClsFn('next-century-cell')] = isNext;
+        classNameMap[`${prefixCls}-last-century-cell`] = isLast;
+        classNameMap[`${prefixCls}-next-century-cell`] = isNext;
         var content;
         var clickHandler;
         if (isLast) {
@@ -89,7 +87,7 @@ class DecadePanel extends React.Component {
           className = {cx(classNameMap)}
         >
           <a
-            className={prefixClsFn('decade')}>
+            className={`${prefixCls}-decade`}>
              {content}
           </a>
         </td>);
@@ -98,27 +96,27 @@ class DecadePanel extends React.Component {
     });
 
     return (
-      <div className={this.state.prefixCls}>
-        <div className = {prefixClsFn('header')}>
-          <a className = {prefixClsFn('prev-century-btn')}
+      <div className={this.prefixCls}>
+        <div className = {`${prefixCls}-header`}>
+          <a className = {`${prefixCls}-prev-century-btn`}
             role="button"
             onClick={this.previousCentury}
             title={locale.previousCentury}>
             «
           </a>
-          <div className = {prefixClsFn('century')}>
+          <div className = {`${prefixCls}-century`}>
                 {startYear}-{endYear}
           </div>
-          <a className = {prefixClsFn('next-century-btn')}
+          <a className = {`${prefixCls}-next-century-btn`}
             role="button"
             onClick={this.nextCentury}
             title={locale.nextCentury}>
             »
           </a>
         </div>
-        <div className =  {prefixClsFn('body')}>
-          <table className = {prefixClsFn('table')} cellSpacing="0" role="grid">
-            <tbody className = {prefixClsFn('tbody')}>
+        <div className =  {`${prefixCls}-body`}>
+          <table className = {`${prefixCls}-table`} cellSpacing="0" role="grid">
+            <tbody className = {`${prefixCls}-tbody`}>
             {decadesEls}
             </tbody>
           </table>

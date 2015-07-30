@@ -1,6 +1,10 @@
 # History
 ----
 
+## 3.12.0 / 2015-07-30
+
+use rc-animate & rc-align (css change)
+
 ## 3.11.0 / 2015-07-20
 
 support disabled prop for picker

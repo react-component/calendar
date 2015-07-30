@@ -44,16 +44,16 @@ class CalendarHeader extends React.Component {
 
   getMonthYearElement() {
     var props = this.props;
-    var prefixClsFn = props.prefixClsFn;
+    var prefixCls = props.prefixCls;
     var locale = props.locale;
     var value = this.props.value;
     var monthBeforeYear = locale.monthBeforeYear;
-    var selectClassName = prefixClsFn(monthBeforeYear ? 'my-select' : 'ym-select');
-    var year = <a className = {prefixClsFn('year-select')}
+    var selectClassName = `${prefixCls}-${monthBeforeYear ? 'my-select' : 'ym-select'}`;
+    var year = <a className = {`${prefixCls}-year-select`}
       role="button"
       onClick={this.showYearPanel}
       title={locale.monthSelect}>{this.yearFormatter.format(value)}</a>;
-    var month = <a className ={prefixClsFn('month-select')}
+    var month = <a className ={`${prefixCls}-month-select`}
       role="button"
       onClick={this.showMonthPanel}
       title={locale.monthSelect}>{this.monthFormatter.format(value)}</a>;
@@ -79,34 +79,34 @@ class CalendarHeader extends React.Component {
   render() {
     var props = this.props;
     var state = this.state;
-    var prefixClsFn = props.prefixClsFn;
+    var prefixCls = props.prefixCls;
     var locale = props.locale;
     var value = props.value;
     var PanelClass = state.showMonthPanel ? MonthPanel : state.showYearPanel ? YearPanel : null;
     var panel;
     if (PanelClass) {
-      panel = <PanelClass locale={locale} value={value} rootPrefixCls={prefixClsFn()} onSelect={this.handleSelect}/>;
+      panel = <PanelClass locale={locale} value={value} rootPrefixCls={prefixCls} onSelect={this.handleSelect}/>;
     }
-    return <div className = {prefixClsFn('header')}>
-      <a className ={prefixClsFn('prev-year-btn')}
+    return <div className = {`${prefixCls}-header`}>
+      <a className ={`${prefixCls}-prev-year-btn`}
         role="button"
         onClick={props.previousYear}
         title={locale.previousYear}>
         «
       </a>
-      <a className = {prefixClsFn('prev-month-btn')}
+      <a className = {`${prefixCls}-prev-month-btn`}
         role="button"
         onClick={props.previousMonth}
         title={locale.previousMonth}>
         ‹
       </a>
       {this.getMonthYearElement()}
-      <a className = {prefixClsFn('next-month-btn')}
+      <a className = {`${prefixCls}-next-month-btn`}
         onClick={props.nextMonth}
         title={locale.nextMonth}>
         ›
       </a>
-      <a className = {prefixClsFn('next-year-btn')}
+      <a className = {`${prefixCls}-next-year-btn`}
         onClick={props.nextYear}
         title={locale.nextYear}>
         »

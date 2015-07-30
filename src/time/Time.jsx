@@ -110,7 +110,7 @@ class Time extends React.Component {
   render() {
     var state = this.state;
     var props = this.props;
-    var prefixClsFn = props.prefixClsFn;
+    var prefixCls = props.prefixCls;
     var value = props.value;
     var locale = props.locale;
     var hour = value.getHourOfDay();
@@ -120,7 +120,7 @@ class Time extends React.Component {
     var commonProps = {
       value: value,
       onSelect: this.onSelectPanel,
-      rootPrefixCls: prefixClsFn()
+      rootPrefixCls: prefixCls
     };
     if (state.showHourPanel) {
       panel = <TimePanel rowCount={6} colCount={4} getter="getHourOfDay" setter={setHourOfDay}
@@ -135,17 +135,17 @@ class Time extends React.Component {
         title={locale.secondPanelTitle}
       {...commonProps}/>;
     }
-    return (<span className={prefixClsFn('time')}>
-      <input className = {prefixClsFn('time-input')}
+    return (<span className={`${prefixCls}-time`}>
+      <input className = {`${prefixCls}-time-input`}
         title={locale.hourInput}
         ref={setHourOfDay}
         readOnly
         value={padding(hour)}
         onClick={this.onHourClick}
         onKeyDown={this.onHourKeyDown}/>
-      <span className={prefixClsFn('time-minute')}>
+      <span className={`${prefixCls}-time-minute`}>
         <span> : </span>
-        <input className = {prefixClsFn('time-input')}
+        <input className = {`${prefixCls}-time-input`}
           title={locale.minuteInput}
           ref={setMinutes}
           readOnly
@@ -153,9 +153,9 @@ class Time extends React.Component {
           onClick={this.onMinuteClick}
           onKeyDown = {this.onMinuteKeyDown}/>
       </span>
-      <span className={prefixClsFn('time-second')}>
+      <span className={`${prefixCls}-time-second`}>
         <span> : </span>
-        <input className = {prefixClsFn('time-input')}
+        <input className = {`${prefixCls}-time-input`}
           title={locale.secondInput}
           ref={setSeconds}
           readOnly

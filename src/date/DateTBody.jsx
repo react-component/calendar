@@ -47,20 +47,20 @@ class DateTBody extends React.Component {
     var showWeekNumber = props.showWeekNumber;
     var value = props.value;
     var today = value.clone();
-    var prefixClsFn = props.prefixClsFn;
-    var cellClass = prefixClsFn('cell');
-    var weekNumberCellClass = prefixClsFn('week-number-cell');
-    var dateClass = prefixClsFn('date');
+    var prefixCls = props.prefixCls;
+    var cellClass = prefixCls + '-cell';
+    var weekNumberCellClass = prefixCls + ('-week-number-cell');
+    var dateClass = prefixCls + ('-date');
     var dateRender = props.dateRender;
     var disabledDate = props.disabledDate;
     var dateFormatter = this.props.dateFormatter;
-    var todayClass = prefixClsFn('today');
-    var selectedClass = prefixClsFn('selected-day');
-    var lastMonthDayClass = prefixClsFn('last-month-cell');
-    var nextMonthDayClass = prefixClsFn('next-month-btn-day');
-    var disabledClass = prefixClsFn('disabled-cell');
-    var firstDisableClass = prefixClsFn('disabled-cell-first-of-row');
-    var lastDisableClass = prefixClsFn('disabled-cell-last-of-row');
+    var todayClass = prefixCls + ('-today');
+    var selectedClass = prefixCls + ('-selected-day');
+    var lastMonthDayClass = prefixCls + ('-last-month-cell');
+    var nextMonthDayClass = prefixCls + ('-next-month-btn-day');
+    var disabledClass = prefixCls + ('-disabled-cell');
+    var firstDisableClass = prefixCls + ('-disabled-cell-first-of-row');
+    var lastDisableClass = prefixCls + ('-disabled-cell-last-of-row');
     today.setTime(Date.now());
     var month1 = value.clone();
     month1.set(value.getYear(), value.getMonth(), 1);
@@ -88,7 +88,8 @@ class DateTBody extends React.Component {
       var dateCells = [];
       if (showWeekNumber) {
         weekNumberCell = (
-          <td key={dateTable[passed].getWeekOfYear()} role="gridcell" className = {weekNumberCellClass}>{dateTable[passed].getWeekOfYear()}</td>
+          <td key={dateTable[passed].getWeekOfYear()} role="gridcell"
+              className={weekNumberCellClass}>{dateTable[passed].getWeekOfYear()}</td>
         );
       }
       for (j = 0; j < DateConstants.DATE_COL_COUNT; j++) {
@@ -139,7 +140,7 @@ class DateTBody extends React.Component {
           dateHtml = (
             <span
               key={getIdFromDate(current)}
-              className = {dateClass}
+              className={dateClass}
               aria-selected={selected}
               aria-disabled={disabled}>
               {current.getDayOfMonth()}
@@ -147,9 +148,9 @@ class DateTBody extends React.Component {
         }
 
         dateCells.push(
-          <td key={passed}  onClick={disabled ? noop : handleDayClick.bind(this, current)} role="gridcell"
-            title={dateFormatter.format(current)} className = {cls}>
-        {dateHtml}
+          <td key={passed} onClick={disabled ? noop : handleDayClick.bind(this, current)} role="gridcell"
+              title={dateFormatter.format(current)} className={cls}>
+            {dateHtml}
           </td>);
 
         passed++;
@@ -162,8 +163,8 @@ class DateTBody extends React.Component {
           {dateCells}
         </tr>);
     }
-    return (<tbody className = {prefixClsFn('tbody')}>
-      {tableHtml}
+    return (<tbody className={prefixCls + ('tbody')}>
+    {tableHtml}
     </tbody>);
   }
 }

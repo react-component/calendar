@@ -2,7 +2,6 @@
 
 import React from 'react';
 import {classSet as cx} from 'rc-util';
-import staticPrefixClsFn from '../util/prefixClsFn';
 
 function choose(hour, e) {
   var next = this.state.value.clone();
@@ -17,10 +16,9 @@ class TimePanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: props.value,
-      prefixCls: props.rootPrefixCls + '-time-panel'
+      value: props.value
     };
-    this.prefixClsFn = staticPrefixClsFn.bind(this);
+    this.prefixCls = props.rootPrefixCls + '-time-panel';
   }
 
   render() {
@@ -29,7 +27,7 @@ class TimePanel extends React.Component {
     var method = props.getter;
     var currentHour = value[method]();
     var data = [];
-    var prefixClsFn = this.prefixClsFn;
+    var prefixCls = this.prefixCls;
     var ROW = props.rowCount;
     var COL = props.colCount;
 
@@ -42,16 +40,17 @@ class TimePanel extends React.Component {
 
     var hoursEls = data.map((row, index)=> {
       var tds = row.map(d => {
-        var classNameMap = {};
-        classNameMap[prefixClsFn('cell')] = 1;
-        classNameMap[prefixClsFn('selected-cell')] = d === currentHour;
+        var classNameMap = {
+          [`${prefixCls}-cell`]:1,
+          [`${prefixCls}-selected-cell`]:d === currentHour
+        };
         return (<td
           key={d}
           onClick={choose.bind(this, d)}
           role="gridcell"
           className = {cx(classNameMap)} >
           <a
-            className={prefixClsFn('time')}>
+            className={`${prefixCls}-time`}>
           {d}
           </a>
         </td>);
@@ -60,15 +59,15 @@ class TimePanel extends React.Component {
     });
 
     return (
-      <div className={this.state.prefixCls}>
-        <div className = {prefixClsFn('header')}>
-          <div className = {prefixClsFn('title')}>
+      <div className={prefixCls}>
+        <div className = {`${prefixCls}-header`}>
+          <div className = {`${prefixCls}-title`}>
                 {props.title}
           </div>
         </div>
-        <div className =  {prefixClsFn('body')}>
-          <table className = {prefixClsFn('table')} cellSpacing="0" role="grid">
-            <tbody className = {prefixClsFn('tbody')}>
+        <div className =  {`${prefixCls}-body`}>
+          <table className = {`${prefixCls}-table`} cellSpacing="0" role="grid">
+            <tbody className = {`${prefixCls}-tbody`}>
             {hoursEls}
             </tbody>
           </table>

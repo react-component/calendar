@@ -68,7 +68,7 @@ var Test = React.createClass({
             className="form-control rc-calendar-picker-input"/>
         </DatePicker>
         <span className="input-group-addon"
-          style={{'-webkit-user-select': 'none'}}
+          style={{'WebkitUserSelect': 'none'}}
           onMouseDown={prevent}
           unselectable="unselectable"
           onClick={this.toggle}>
