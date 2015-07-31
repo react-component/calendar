@@ -1,6 +1,6 @@
 
 import 'bootstrap/dist/css/bootstrap.css';
-import 'rc-calendar/assets/bootstrap.css';
+import 'rc-calendar/assets/bootstrap.less';
 import React from 'react';
 import Calendar, {Picker as DatePicker} from 'rc-calendar';
 import zhCn from 'gregorian-calendar/lib/locale/zh-cn'; // spm error

@@ -11,6 +11,10 @@
     "ui",
     "component"
   ],
+  "files": [
+    "lib",
+    "assets/*.css"
+  ],
   "main": "lib/index",
   "homepage": "http://github.com/react-component/calendar",
   "author": "yiminghe@gmail.com",

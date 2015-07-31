@@ -1,4 +1,4 @@
-import 'rc-calendar/assets/index.css';
+import 'rc-calendar/assets/index.less';
 import React from 'react';
 import Calendar,{Picker as DatePicker} from 'rc-calendar';
 import zhCn from 'gregorian-calendar/lib/locale/zh-cn'; // spm error

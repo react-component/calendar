@@ -1,5 +1,5 @@
 
-import 'rc-calendar/assets/bootstrap.css';
+import 'rc-calendar/assets/bootstrap.less';
 import Calendar from 'rc-calendar';
 import GregorianCalendarFormat from 'gregorian-calendar-format';
 import React from 'react';

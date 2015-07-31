@@ -1,5 +1,5 @@
 
-require('rc-calendar/assets/index.css');
+import 'rc-calendar/assets/index.less';
 
 import Calendar from 'rc-calendar';
 import GregorianCalendarFormat from 'gregorian-calendar-format';

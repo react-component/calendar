@@ -1,4 +1,4 @@
-import 'rc-calendar/assets/classic.css';
+import 'rc-calendar/assets/classic.less';
 import Calendar from 'rc-calendar';
 import GregorianCalendarFormat from 'gregorian-calendar-format';
 import React from 'react';

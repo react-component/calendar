@@ -21,6 +21,6 @@ Thumbs.db
 node_modules
 .cache
 dist
-assets/**/*.css
+*.css
 build
 lib
