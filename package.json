@@ -38,6 +38,7 @@
     "start": "node --harmony node_modules/.bin/rc-server",
     "publish": "rc-tools run tag",
     "lint": "rc-tools run lint",
+    "karma": "rc-tools run karma",
     "saucelabs": "node --harmony node_modules/.bin/rc-tools run saucelabs",
     "browser-test": "node --harmony node_modules/.bin/rc-tools run browser-test",
     "browser-test-cover": "node --harmony node_modules/.bin/rc-tools run browser-test-cover"
