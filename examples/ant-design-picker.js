@@ -45,7 +45,7 @@ var Test = React.createClass({
     return {
       time: Date.now(),
       showTime: true,
-      disabled:false,
+      disabled: false,
       value: this.props.defaultValue
     };
   },
@@ -58,28 +58,28 @@ var Test = React.createClass({
 
   toggleDisabled(){
     this.setState({
-      disabled:!this.state.disabled
+      disabled: !this.state.disabled
     });
   },
 
   render() {
     var state = this.state;
     var calendar = <Calendar locale={CalendarLocale}
-      orient={['top', 'left']}
-      defaultValue={defaultCalendarValue}
-      showTime={this.state.showTime}
-      showOk={true}
-      onOk={this.handleCalendarOk}
-      onSelect={this.handleCalendarSelect}
-      onClear={this.handleCalendarSelect.bind(this, null)} showClear={true}/>;
-    return <div style={{width: 236, margin: 20}} data-time={this.state.time}>
+                             orient={['top', 'left']}
+                             defaultValue={defaultCalendarValue}
+                             showTime={this.state.showTime}
+                             showOk={true}
+                             onOk={this.handleCalendarOk}
+                             onSelect={this.handleCalendarSelect}
+                             onClear={this.handleCalendarSelect.bind(this, null)} showClear={true}/>;
+    return <div style={{width: 240, margin: 20}} data-time={this.state.time}>
       <div style={{marginBottom:10}}>
         <span>
-          <input type='checkbox' checked={this.state.showTime} onChange={this.handleShowTimeChange} />
+          <input type='checkbox' checked={this.state.showTime} onChange={this.handleShowTimeChange}/>
           showTime
         </span>
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <label><input checked={state.disabled} onChange={this.toggleDisabled} type='checkbox' /> disabled </label>
+        <label><input checked={state.disabled} onChange={this.toggleDisabled} type='checkbox'/> disabled </label>
       </div>
       <div style={{
         'boxSizing': 'border-box',
@@ -89,21 +89,28 @@ var Test = React.createClass({
         marginBottom: 22
       }}>
         <DatePicker
-          adjustOrientOnCalendarOverflow={false}
+          adjustOrientOnCalendarOverflow={true}
           animation="slide-up"
           disabled={state.disabled}
           trigger={<span className="rc-calendar-picker-icon" />}
           formatter={this.props.formatter} calendar={calendar}
           value={state.value} onChange={this.handleChange}>
-          <input className="rc-calendar-picker-input" disabled={state.disabled} placeholder="请选择日期"/>
+          <input className="rc-calendar-picker-input" style={{width:200}} disabled={state.disabled} placeholder="请选择日期"/>
         </DatePicker>
       </div>
     </div>;
   }
 });
 
-React.render(<div>
+React.render(<div style={{zIndex:1000,position:'relative'}}>
   <h2>zh-cn</h2>
-  <Test defaultValue={now}/>
-  <Test/>
+  <div style={{marginTop:200,width:600}}>
+    <div style={{float:'left',width:300}}>
+    <Test defaultValue={now}/>
+      </div>
+    <div style={{float:'right',width:300}}>
+    <Test/>
+      </div>
+    <div style={{clear:'both'}}></div>
+  </div>
 </div>, document.getElementById('__react-content'));

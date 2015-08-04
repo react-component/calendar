@@ -71,7 +71,6 @@ class Calendar extends React.Component {
     this.dateFormatter = new DateTimeFormat(props.locale.dateFormat);
     this.state = {
       orient: props.orient,
-      prefixCls: props.prefixCls,
       value: value,
     };
     // bind methods
@@ -274,6 +273,23 @@ class Calendar extends React.Component {
       value: current,
     });
   }
+
+  setOrient(orient) {
+    // FIXME: hack to prevent breaking rc-animate
+    if (this.state.orient === orient) {
+      return;
+    }
+    this.state.orient = orient;
+    const prefixCls = this.props.prefixCls;
+    const root = React.findDOMNode(this);
+    let className = root.className.replace(new RegExp(`${prefixCls}-orient-\\w+`, 'g'), '');
+    if (orient) {
+      orient.forEach(o => {
+        className += ` ${prefixCls}-orient-${o}`;
+      });
+    }
+    root.className = className;
+  }
 }
 
 Calendar.propTypes = {
@@ -289,6 +305,7 @@ Calendar.propTypes = {
   showTime: React.PropTypes.bool,
   onSelect: React.PropTypes.func,
   onOk: React.PropTypes.func,
+  prefixCls: React.PropTypes.string,
   onKeyDown: React.PropTypes.func,
   onClear: React.PropTypes.func,
   onFocus: React.PropTypes.func,

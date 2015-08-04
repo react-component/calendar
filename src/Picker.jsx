@@ -92,13 +92,11 @@ class Picker extends React.Component {
   onCalendarAlign(node, align) {
     const points = align.points;
     const newOrient = orientMap[points[0]];
-    this.calendarInstance.setState({
-      orient: newOrient,
-    });
+    this.calendarInstance.setOrient(newOrient);
   }
 
   onInputClick() {
-    this.open();
+    this.toggle();
   }
 
   onTriggerClick() {
@@ -134,6 +132,9 @@ class Picker extends React.Component {
   }
 
   onCalendarBlur() {
+    if (document.activeElement === this.getInputDOMNode()) {
+      return;
+    }
     // if invisible, will not trigger blur
     // do not set if already false, avoid ruin animate
     this.close();
@@ -190,12 +191,22 @@ class Picker extends React.Component {
       points = ['br', 'tr'];
       offset = [0, -5];
     }
+    let adjustX;
+    let adjustY;
+    if (adjustOrientOnCalendarOverflow === true) {
+      adjustX = adjustY = true;
+    } else if (!adjustOrientOnCalendarOverflow) {
+      adjustX = adjustY = false;
+    } else {
+      adjustX = adjustOrientOnCalendarOverflow.x;
+      adjustY = adjustOrientOnCalendarOverflow.y;
+    }
     return {
       points: points,
       offset: offset,
       overflow: {
-        adjustX: adjustOrientOnCalendarOverflow,
-        adjustY: adjustOrientOnCalendarOverflow,
+        adjustX: adjustX,
+        adjustY: adjustY,
       },
     };
   }
@@ -203,9 +214,12 @@ class Picker extends React.Component {
   getCalendarElement() {
     const props = this.props;
     const state = this.state;
-    const calendarInstance = this.calendarInstance;
     const calendarProp = props.calendar;
-    const orient = calendarInstance && calendarInstance.state.orient || getImmutableOrient(calendarProp.props.orient) || orientMap.tl;
+    let orient;
+    // re align when open
+    if (state.open) {
+      orient = getImmutableOrient(calendarProp.props.orient) || orientMap.tl;
+    }
     const calendarElement = React.cloneElement(calendarProp, {
       ref: createChainedFunction(calendarProp.props.ref, this.saveCalendarRef),
       value: state.value,
@@ -228,7 +242,7 @@ class Picker extends React.Component {
              onAlign={this.onCalendarAlign}
              calendarOpen={state.open}
              disabled={!state.open}
-             align={this.getAlign(orient)}>
+             align={orient && this.getAlign(orient)}>
         {calendarElement}
       </Align>
     </Animate>);
@@ -253,8 +267,8 @@ class Picker extends React.Component {
     }
     input = React.cloneElement(input, {
       ref: createChainedFunction(input.props.ref, this.saveInputRef),
-      readOnly: true,
       disabled: disabled,
+      onChange: noop,
       onClick: disabled ? noop : this.onInputClick,
       value: inputValue,
       onKeyDown: disabled ? noop : this.onKeyDown,
@@ -315,7 +329,7 @@ Picker.propTypes = {
   calendar: React.PropTypes.element,
   prefixCls: React.PropTypes.string,
   renderCalendarToBody: React.PropTypes.bool,
-  adjustOrientOnCalendarOverflow: React.PropTypes.bool,
+  adjustOrientOnCalendarOverflow: React.PropTypes.oneOfType([React.PropTypes.bool, React.PropTypes.object]),
 };
 
 Picker.defaultProps = {
