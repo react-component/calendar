@@ -1,5 +1,3 @@
-'use strict';
-
 import React from 'react';
 import DateConstants from './DateConstants';
 
@@ -41,35 +39,37 @@ function handleDayClick(current) {
 export default
 class DateTBody extends React.Component {
   render() {
-    var props = this.props;
-    var i, j, current;
-    var dateTable = [];
-    var showWeekNumber = props.showWeekNumber;
-    var value = props.value;
-    var today = value.clone();
-    var prefixCls = props.prefixCls;
-    var cellClass = prefixCls + '-cell';
-    var weekNumberCellClass = prefixCls + ('-week-number-cell');
-    var dateClass = prefixCls + ('-date');
-    var dateRender = props.dateRender;
-    var disabledDate = props.disabledDate;
-    var dateFormatter = this.props.dateFormatter;
-    var todayClass = prefixCls + ('-today');
-    var selectedClass = prefixCls + ('-selected-day');
-    var lastMonthDayClass = prefixCls + ('-last-month-cell');
-    var nextMonthDayClass = prefixCls + ('-next-month-btn-day');
-    var disabledClass = prefixCls + ('-disabled-cell');
-    var firstDisableClass = prefixCls + ('-disabled-cell-first-of-row');
-    var lastDisableClass = prefixCls + ('-disabled-cell-last-of-row');
+    const props = this.props;
+    let i;
+    let j;
+    let current;
+    const dateTable = [];
+    const showWeekNumber = props.showWeekNumber;
+    const value = props.value;
+    const today = value.clone();
+    const prefixCls = props.prefixCls;
+    const cellClass = prefixCls + '-cell';
+    const weekNumberCellClass = prefixCls + ('-week-number-cell');
+    const dateClass = prefixCls + ('-date');
+    const dateRender = props.dateRender;
+    const disabledDate = props.disabledDate;
+    const dateFormatter = this.props.dateFormatter;
+    const todayClass = prefixCls + ('-today');
+    const selectedClass = prefixCls + ('-selected-day');
+    const lastMonthDayClass = prefixCls + ('-last-month-cell');
+    const nextMonthDayClass = prefixCls + ('-next-month-btn-day');
+    const disabledClass = prefixCls + ('-disabled-cell');
+    const firstDisableClass = prefixCls + ('-disabled-cell-first-of-row');
+    const lastDisableClass = prefixCls + ('-disabled-cell-last-of-row');
     today.setTime(Date.now());
-    var month1 = value.clone();
+    const month1 = value.clone();
     month1.set(value.getYear(), value.getMonth(), 1);
-    var day = month1.getDayOfWeek();
-    var lastMonthDiffDay = (day + 7 - value.getFirstDayOfWeek()) % 7;
+    const day = month1.getDayOfWeek();
+    const lastMonthDiffDay = (day + 7 - value.getFirstDayOfWeek()) % 7;
     // calculate last month
-    var lastMonth1 = month1.clone();
+    const lastMonth1 = month1.clone();
     lastMonth1.addDayOfMonth(0 - lastMonthDiffDay);
-    var passed = 0;
+    let passed = 0;
     for (i = 0; i < DateConstants.DATE_ROW_COUNT; i++) {
       for (j = 0; j < DateConstants.DATE_COL_COUNT; j++) {
         current = lastMonth1;
@@ -81,11 +81,11 @@ class DateTBody extends React.Component {
         passed++;
       }
     }
-    var tableHtml = [];
+    const tableHtml = [];
     passed = 0;
     for (i = 0; i < DateConstants.DATE_ROW_COUNT; i++) {
-      var weekNumberCell;
-      var dateCells = [];
+      let weekNumberCell;
+      const dateCells = [];
       if (showWeekNumber) {
         weekNumberCell = (
           <td key={dateTable[passed].getWeekOfYear()} role="gridcell"
@@ -93,8 +93,8 @@ class DateTBody extends React.Component {
         );
       }
       for (j = 0; j < DateConstants.DATE_COL_COUNT; j++) {
-        var next = null;
-        var last = null;
+        let next = null;
+        let last = null;
         current = dateTable[passed];
         if (j < DateConstants.DATE_COL_COUNT - 1) {
           next = dateTable[passed + 1];
@@ -102,9 +102,9 @@ class DateTBody extends React.Component {
         if (j > 0) {
           last = dateTable[passed - 1];
         }
-        var cls = cellClass;
-        var disabled = false;
-        var selected = false;
+        let cls = cellClass;
+        let disabled = false;
+        let selected = false;
 
         if (isSameDay(current, today)) {
           cls += ' ' + todayClass;
@@ -135,8 +135,10 @@ class DateTBody extends React.Component {
           }
         }
 
-        var dateHtml;
-        if (!(dateRender && (dateHtml = dateRender(current, value)))) {
+        let dateHtml;
+        if (dateRender) {
+          dateHtml = dateRender(current, value);
+        } else {
           dateHtml = (
             <span
               key={getIdFromDate(current)}
@@ -168,3 +170,7 @@ class DateTBody extends React.Component {
     </tbody>);
   }
 }
+
+DateTBody.propTypes = {
+  dateFormatter: React.PropTypes.object,
+};

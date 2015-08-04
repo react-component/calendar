@@ -1,11 +1,9 @@
-'use strict';
-
 import enUs from 'gregorian-calendar-format/lib/locale/en-us';
 
 export default {
   today: 'Today',
   now: 'Now',
-  ok:'Ok',
+  ok: 'Ok',
   clear: 'Clear',
   hourPanelTitle: 'Select hour',
   minutePanelTitle: 'Select minute',
@@ -15,8 +13,8 @@ export default {
   decadeSelect: 'Choose a decade',
   yearFormat: 'yyyy',
   dateFormat: 'M/d/yyyy',
-  monthFormat:'MMMM',
-  monthBeforeYear:true,
+  monthFormat: 'MMMM',
+  monthBeforeYear: true,
   previousMonth: 'Previous month (PageUp)',
   nextMonth: 'Next month (PageDown)',
   hourInput: 'Last hour(Up), Next hour(Down)',
@@ -28,5 +26,5 @@ export default {
   nextDecade: 'Next decade',
   previousCentury: 'Last century',
   nextCentury: 'Next century',
-  format: enUs
+  format: enUs,
 };

@@ -1,5 +1,3 @@
-'use strict';
-
 import zhCn from 'gregorian-calendar-format/lib/locale/zh-cn';
 
 export default {
@@ -27,5 +25,5 @@ export default {
   nextDecade: '下一年代',
   previousCentury: '上一世纪',
   nextCentury: '下一世纪',
-  format: zhCn
+  format: zhCn,
 };

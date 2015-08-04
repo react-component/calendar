@@ -1,4 +1,3 @@
-'use strict';
 
 import React from 'react';
 import DateConstants from './DateConstants';
@@ -6,17 +5,17 @@ import DateConstants from './DateConstants';
 export default
 class DateTHead extends React.Component {
   render() {
-    var props = this.props;
-    var value = props.value;
-    var locale = props.locale;
-    var prefixCls = props.prefixCls;
-    var veryShortWeekdays = [];
-    var weekDays = [];
-    var firstDayOfWeek = value.getFirstDayOfWeek();
-    var showWeekNumberEl;
+    const props = this.props;
+    const value = props.value;
+    const locale = props.locale;
+    const prefixCls = props.prefixCls;
+    const veryShortWeekdays = [];
+    const weekDays = [];
+    const firstDayOfWeek = value.getFirstDayOfWeek();
+    let showWeekNumberEl;
 
-    for (var i = 0; i < DateConstants.DATE_COL_COUNT; i++) {
-      var index = (firstDayOfWeek + i) % DateConstants.DATE_COL_COUNT;
+    for (let i = 0; i < DateConstants.DATE_COL_COUNT; i++) {
+      const index = (firstDayOfWeek + i) % DateConstants.DATE_COL_COUNT;
       veryShortWeekdays[i] = locale.format.veryShortWeekdays[index];
       weekDays[i] = locale.format.weekdays[index];
     }
@@ -27,7 +26,7 @@ class DateTHead extends React.Component {
           <span className ={`${prefixCls}-column-header-inner`}>x</span>
         </th>);
     }
-    var weekDaysEls = weekDays.map((day, xindex)=> {
+    const weekDaysEls = weekDays.map((day, xindex)=> {
       return (
         <th key={xindex} role="columnheader" title={day} className ={`${prefixCls}-column-header`}>
           <span className = {`${prefixCls}-column-header-inner`}>
@@ -35,11 +34,11 @@ class DateTHead extends React.Component {
           </span>
         </th>);
     });
-    return <thead>
+    return (<thead>
       <tr role="row">
               {showWeekNumberEl}
               {weekDaysEls}
       </tr>
-    </thead>;
+    </thead>);
   }
 }

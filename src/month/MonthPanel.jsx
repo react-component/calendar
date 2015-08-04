@@ -1,28 +1,25 @@
-'use strict';
-
 import React from 'react';
-var ROW = 4;
-var COL = 3;
-import rcUtil from 'rc-util';
-var cx = rcUtil.classSet;
+import {classSet as cx} from 'rc-util';
 import YearPanel from '../year/YearPanel';
+const ROW = 4;
+const COL = 3;
 
 function goYear(direction) {
-  var next = this.state.value.clone();
+  const next = this.state.value.clone();
   next.addYear(direction);
   this.setState({
-    value: next
+    value: next,
   });
 }
 
 function showYearPanel() {
   this.setState({
-    showYearPanel: 1
+    showYearPanel: 1,
   });
 }
 
 function chooseMonth(month) {
-  var next = this.state.value.clone();
+  const next = this.state.value.clone();
   next.setMonth(month);
   this.props.onSelect(next);
 }
@@ -30,7 +27,7 @@ function chooseMonth(month) {
 function onYearPanelSelect(current) {
   this.setState({
     value: current,
-    showYearPanel: 0
+    showYearPanel: 0,
   });
 }
 
@@ -39,7 +36,7 @@ class MonthPanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: props.value
+      value: props.value,
     };
     // bind methods
     this.nextYear = goYear.bind(this, 1);
@@ -50,21 +47,21 @@ class MonthPanel extends React.Component {
   }
 
   getMonths() {
-    var props = this.props;
-    var value = this.state.value;
-    var current = value.clone();
-    var locale = props.locale;
-    var months = [];
-    var shortMonths = locale.format.shortMonths;
-    var index = 0;
-    for (var i = 0; i < ROW; i++) {
+    const props = this.props;
+    const value = this.state.value;
+    const current = value.clone();
+    const locale = props.locale;
+    const months = [];
+    const shortMonths = locale.format.shortMonths;
+    let index = 0;
+    for (let i = 0; i < ROW; i++) {
       months[i] = [];
-      for (var j = 0; j < COL; j++) {
+      for (let j = 0; j < COL; j++) {
         current.setMonth(index);
         months[i][j] = {
           value: index,
           content: shortMonths[index],
-          title: shortMonths[index]
+          title: shortMonths[index],
         };
         index++;
       }
@@ -74,78 +71,80 @@ class MonthPanel extends React.Component {
   }
 
   render() {
-    var props = this.props;
-    var value = this.state.value;
-    var locale = props.locale;
-    var months = this.getMonths();
-    var year = value.getYear();
-    var currentMonth = value.getMonth();
-    var prefixCls = this.prefixCls;
-    var monthsEls = months.map((month, index)=> {
-      var tds = month.map(m => {
-        var classNameMap = {};
-        classNameMap[`${prefixCls}-cell`] = 1;
-        classNameMap[`${prefixCls}-selected-cell`] = m.value === currentMonth;
+    const props = this.props;
+    const value = this.state.value;
+    const locale = props.locale;
+    const months = this.getMonths();
+    const year = value.getYear();
+    const currentMonth = value.getMonth();
+    const prefixCls = this.prefixCls;
+    const monthsEls = months.map((month, index)=> {
+      const tds = month.map(m => {
+        const classNameMap = {
+          [`${prefixCls}-cell`]: 1,
+          [`${prefixCls}-selected-cell`]: m.value === currentMonth,
+        };
         return (
           <td role="gridcell"
-            key={m.value}
-            onClick={chooseMonth.bind(this, m.value)}
-            title={m.title}
-            className = {cx(classNameMap)}>
+              key={m.value}
+              onClick={chooseMonth.bind(this, m.value)}
+              title={m.title}
+              className={cx(classNameMap)}>
             <a
-              className = {`${prefixCls}-month`}>
-            {m.content}
+              className={`${prefixCls}-month`}>
+              {m.content}
             </a>
           </td>);
       });
       return (<tr key={index} role="row">{tds}</tr>);
     });
 
-    var yearPanel;
+    let yearPanel;
     if (this.state.showYearPanel) {
-      yearPanel = <YearPanel locale={locale} value={value} rootPrefixCls={props.rootPrefixCls} onSelect={this.onYearPanelSelect}/>;
+      yearPanel = (<YearPanel locale={locale} value={value} rootPrefixCls={props.rootPrefixCls}
+                             onSelect={this.onYearPanelSelect}/>);
     }
 
     return (
-      <div className= {this.prefixCls}>
+      <div className={this.prefixCls}>
         <div>
-          <div className = {`${prefixCls}-header`}>
-            <a className = {`${prefixCls}-prev-year-btn`}
-              role="button"
-              onClick={this.previousYear}
-              title={locale.previousYear}>
+          <div className={`${prefixCls}-header`}>
+            <a className={`${prefixCls}-prev-year-btn`}
+               role="button"
+               onClick={this.previousYear}
+               title={locale.previousYear}>
               «
             </a>
 
-            <a className = {`${prefixCls}-year-select`}
-              role="button"
-              onClick={this.showYearPanel}
-              title={locale.yearSelect}>
-              <span className = {`${prefixCls}-year-select-content`}>{year}</span>
-              <span className = {`${prefixCls}-year-select-arrow`}>x</span>
+            <a className={`${prefixCls}-year-select`}
+               role="button"
+               onClick={this.showYearPanel}
+               title={locale.yearSelect}>
+              <span className={`${prefixCls}-year-select-content`}>{year}</span>
+              <span className={`${prefixCls}-year-select-arrow`}>x</span>
             </a>
 
-            <a className = {`${prefixCls}-next-year-btn`}
-              role="button"
-              onClick={this.nextYear}
-              title={locale.nextYear}>
+            <a className={`${prefixCls}-next-year-btn`}
+               role="button"
+               onClick={this.nextYear}
+               title={locale.nextYear}>
               »
             </a>
           </div>
-          <div className = {`${prefixCls}-body`}>
-            <table className = {`${prefixCls}-table`} cellSpacing="0" role="grid">
-              <tbody className = {`${prefixCls}-tbody`}>
+          <div className={`${prefixCls}-body`}>
+            <table className={`${prefixCls}-table`} cellSpacing="0" role="grid">
+              <tbody className={`${prefixCls}-tbody`}>
               {monthsEls}
               </tbody>
             </table>
           </div>
         </div>
-      {yearPanel}
+        {yearPanel}
       </div>);
   }
 }
 
 MonthPanel.defaultProps = {
   onSelect() {
-  }
+  },
 };

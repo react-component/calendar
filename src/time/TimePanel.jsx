@@ -1,11 +1,9 @@
-'use strict';
-
 import React from 'react';
 import {classSet as cx} from 'rc-util';
 
 function choose(hour, e) {
-  var next = this.state.value.clone();
-  var method = this.props.setter;
+  const next = this.state.value.clone();
+  const method = this.props.setter;
   next[method](hour);
   this.props.onSelect(next, method);
   e.preventDefault();
@@ -16,42 +14,42 @@ class TimePanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: props.value
+      value: props.value,
     };
     this.prefixCls = props.rootPrefixCls + '-time-panel';
   }
 
   render() {
-    var value = this.state.value;
-    var props = this.props;
-    var method = props.getter;
-    var currentHour = value[method]();
-    var data = [];
-    var prefixCls = this.prefixCls;
-    var ROW = props.rowCount;
-    var COL = props.colCount;
+    const value = this.state.value;
+    const props = this.props;
+    const method = props.getter;
+    const currentHour = value[method]();
+    const data = [];
+    const prefixCls = this.prefixCls;
+    const ROW = props.rowCount;
+    const COL = props.colCount;
 
-    for (var i = 0; i < ROW; i++) {
+    for (let i = 0; i < ROW; i++) {
       data[i] = [];
-      for (var j = 0; j < COL; j++) {
+      for (let j = 0; j < COL; j++) {
         data[i][j] = i * COL + j;
       }
     }
 
-    var hoursEls = data.map((row, index)=> {
-      var tds = row.map(d => {
-        var classNameMap = {
-          [`${prefixCls}-cell`]:1,
-          [`${prefixCls}-selected-cell`]:d === currentHour
+    const hoursEls = data.map((row, index)=> {
+      const tds = row.map(d => {
+        const classNameMap = {
+          [`${prefixCls}-cell`]: 1,
+          [`${prefixCls}-selected-cell`]: d === currentHour,
         };
         return (<td
           key={d}
           onClick={choose.bind(this, d)}
           role="gridcell"
-          className = {cx(classNameMap)} >
+          className={cx(classNameMap)}>
           <a
             className={`${prefixCls}-time`}>
-          {d}
+            {d}
           </a>
         </td>);
       });
@@ -60,14 +58,14 @@ class TimePanel extends React.Component {
 
     return (
       <div className={prefixCls}>
-        <div className = {`${prefixCls}-header`}>
-          <div className = {`${prefixCls}-title`}>
-                {props.title}
+        <div className={`${prefixCls}-header`}>
+          <div className={`${prefixCls}-title`}>
+            {props.title}
           </div>
         </div>
-        <div className =  {`${prefixCls}-body`}>
-          <table className = {`${prefixCls}-table`} cellSpacing="0" role="grid">
-            <tbody className = {`${prefixCls}-tbody`}>
+        <div className={`${prefixCls}-body`}>
+          <table className={`${prefixCls}-table`} cellSpacing="0" role="grid">
+            <tbody className={`${prefixCls}-tbody`}>
             {hoursEls}
             </tbody>
           </table>
@@ -78,5 +76,5 @@ class TimePanel extends React.Component {
 
 TimePanel.defaultProps = {
   onSelect() {
-  }
+  },
 };

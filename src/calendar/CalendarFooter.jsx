@@ -1,28 +1,27 @@
-'use strict';
 
 import React from 'react';
 import Time from '../time/Time';
 import rcUtil from 'rc-util';
-var toFragment = rcUtil.Children.mapSelf;
+const toFragment = rcUtil.Children.mapSelf;
 
 export default
 class CalendarFooter extends React.Component {
   getTodayTime() {
-    var value = this.props.value;
-    var today = value.clone();
+    const value = this.props.value;
+    const today = value.clone();
     today.setTime(Date.now());
     return this.props.dateFormatter.format(today);
   }
 
   render() {
-    var props = this.props;
-    var value = props.value;
-    var locale = props.locale;
-    var prefixCls = props.prefixCls;
-    var footerEl = null;
+    const props = this.props;
+    const value = props.value;
+    const locale = props.locale;
+    const prefixCls = props.prefixCls;
+    let footerEl = null;
     if (props.showToday || props.showTime) {
-      var nowEl;
-      var localeNow = locale.today;
+      let nowEl;
+      let localeNow = locale.today;
       if (props.showTime) {
         localeNow = locale.now || locale.today;
       }
@@ -32,23 +31,23 @@ class CalendarFooter extends React.Component {
           onClick={props.onToday}
           title={this.getTodayTime()}>{localeNow}</a>);
       }
-      var clearEl;
+      let clearEl;
       if (props.showClear) {
         clearEl = (<a className={`${prefixCls}-clear-btn`}
           role="button"
           onClick={props.onClear}>{locale.clear}</a>);
       }
-      var okBtn;
+      let okBtn;
       if (props.showOk) {
         okBtn = (<a className = {`${prefixCls}-ok-btn`}
           role="button"
           onClick={props.onOk}>{locale.ok}</a>);
       }
-      var footerBtn;
+      let footerBtn;
       if (nowEl || clearEl) {
         footerBtn = <span className={`${prefixCls}-footer-btn`}>{toFragment([nowEl, okBtn, clearEl])}</span>;
       }
-      var timeEl;
+      let timeEl;
       if (props.showTime) {
         timeEl = (<Time value={value} prefixCls={prefixCls} locale={locale} onChange={props.onSelect}/>);
       }
