@@ -70,14 +70,9 @@ class Picker extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState = {}) {
-    const props = this.props;
-    if (this.haveOpened && props.renderCalendarToBody) {
-      React.render(this.getCalendarElement(), this.getCalendarContainer(), () => {
-        this.focusCalendarOnOpen(prevState);
-      });
-    } else {
-      this.focusCalendarOnOpen(prevState);
+  componentDidUpdate() {
+    if (this.haveOpened && this.props.renderCalendarToBody) {
+      React.render(this.getCalendarElement(), this.getCalendarContainer());
     }
   }
 
@@ -93,6 +88,8 @@ class Picker extends React.Component {
     const points = align.points;
     const newOrient = orientMap[points[0]];
     this.calendarInstance.setOrient(newOrient);
+    // focus after align
+    React.findDOMNode(this.calendarInstance).focus();
   }
 
   onInputClick() {
@@ -291,12 +288,6 @@ class Picker extends React.Component {
 
   focusInput() {
     this.getInputDOMNode().focus();
-  }
-
-  focusCalendarOnOpen(prevState) {
-    if (!prevState.open && this.state.open) {
-      React.findDOMNode(this.calendarInstance).focus();
-    }
   }
 
   setOpen(open, callback) {
