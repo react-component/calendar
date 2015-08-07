@@ -283,7 +283,7 @@ class Picker extends React.Component {
         onClick: disabled ? noop : this.onTriggerClick,
       });
     }
-    return <span className={classSet(classes)}>{toFragment([input, calendar, trigger])}</span>;
+    return <span className={classSet(classes)} style={props.style}>{toFragment([input, calendar, trigger])}</span>;
   }
 
   focusInput() {
@@ -318,6 +318,7 @@ class Picker extends React.Component {
 Picker.propTypes = {
   onChange: React.PropTypes.func,
   calendar: React.PropTypes.element,
+  style: React.PropTypes.style,
   prefixCls: React.PropTypes.string,
   renderCalendarToBody: React.PropTypes.bool,
   adjustOrientOnCalendarOverflow: React.PropTypes.oneOfType([React.PropTypes.bool, React.PropTypes.object]),
@@ -327,6 +328,7 @@ Picker.defaultProps = {
   prefixCls: 'rc-calendar-picker',
   adjustOrientOnCalendarOverflow: true,
   renderCalendarToBody: false,
+  style: {},
   onChange: noop,
   formatter: new DateTimeFormat('yyyy-MM-dd'),
 };
