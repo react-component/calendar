@@ -141,9 +141,15 @@ webpackJsonp([2],{
 	var Test = _react2['default'].createClass({
 	  displayName: 'Test',
 	
-	  open: function open() {
-	    this.refs.picker.setState({
-	      open: true
+	  onOpenChange: function onOpenChange(e) {
+	    this.setState({
+	      open: e.open
+	    });
+	  },
+	
+	  toggle: function toggle() {
+	    this.setState({
+	      open: !this.state.open
 	    });
 	  },
 	
@@ -171,6 +177,7 @@ webpackJsonp([2],{
 	    return {
 	      time: Date.now(),
 	      showTime: true,
+	      open: false,
 	      value: value
 	    };
 	  },
@@ -204,13 +211,18 @@ webpackJsonp([2],{
 	        { className: 'input-group' },
 	        _react2['default'].createElement(
 	          _rcCalendar.Picker,
-	          { ref: 'picker', formatter: this.props.formatter, calendar: calendar,
-	            defaultValue: state.value, onChange: this.handleChange },
-	          _react2['default'].createElement('input', { type: 'text', className: 'form-control', style: { background: 'white', cursor: 'pointer' } })
+	          { formatter: this.props.formatter,
+	            calendar: calendar,
+	            open: this.state.open,
+	            onOpen: this.onOpenChange,
+	            onClose: this.onOpenChange,
+	            defaultValue: state.value,
+	            onChange: this.handleChange },
+	          _react2['default'].createElement('input', { type: 'text', className: 'form-control', style: { background: "white", cursor: "pointer" } })
 	        ),
 	        _react2['default'].createElement(
 	          'span',
-	          { className: 'input-group-addon', onClick: this.open },
+	          { className: 'input-group-addon', onClick: this.toggle },
 	          _react2['default'].createElement('span', { className: 'glyphicon glyphicon-calendar' })
 	        )
 	      )

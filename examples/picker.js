@@ -241,7 +241,19 @@ webpackJsonp([4],{
 	  displayName: 'Test',
 	
 	  toggle: function toggle() {
-	    this.refs.picker.toggle();
+	    var _this = this;
+	
+	    this.setState({
+	      open: !this.state.open
+	    }, function () {
+	      if (!_this.state.open) {
+	        _this.inputNode.focus();
+	      }
+	    });
+	  },
+	
+	  saveInputRef: function saveInputRef(input) {
+	    this.inputNode = _react2['default'].findDOMNode(input);
 	  },
 	
 	  handleChange: function handleChange(value) {
@@ -253,6 +265,7 @@ webpackJsonp([4],{
 	    // controlled value
 	    this.setState({
 	      time: Date.now(),
+	      open: this.state.showTime,
 	      value: value
 	    });
 	  },
@@ -267,6 +280,7 @@ webpackJsonp([4],{
 	    var value = new _gregorianCalendar2['default'](_gregorianCalendarLibLocaleZhCn2['default']);
 	    value.setTime(Date.now());
 	    return {
+	      open: false,
 	      time: Date.now(),
 	      showTime: true,
 	      value: value
@@ -279,11 +293,18 @@ webpackJsonp([4],{
 	    });
 	  },
 	
+	  onOpenChange: function onOpenChange(e) {
+	    this.setState({
+	      open: e.open
+	    });
+	  },
+	
 	  render: function render() {
 	    var state = this.state;
 	    var calendar = _react2['default'].createElement(_rcCalendar2['default'], { locale: _rcCalendarSrcLocaleZhCn2['default'],
 	      orient: ['top', 'left'],
-	      showTime: this.state.showTime, onSelect: this.handleCalendarSelect, onClear: this.handleCalendarSelect.bind(this, null), showClear: true });
+	      showTime: this.state.showTime, onSelect: this.handleCalendarSelect,
+	      onClear: this.handleCalendarSelect.bind(this, null), showClear: true });
 	    return _react2['default'].createElement(
 	      'div',
 	      { className: 'form-group', style: { width: 400, margin: 20 }, 'data-time': this.state.time },
@@ -303,9 +324,11 @@ webpackJsonp([4],{
 	        _react2['default'].createElement(
 	          _rcCalendar.Picker,
 	          { ref: 'picker',
+	            open: this.state.open,
 	            formatter: this.props.formatter, calendar: calendar,
 	            value: state.value, onChange: this.handleChange },
 	          _react2['default'].createElement('input', {
+	            ref: this.saveInputRef,
 	            placeholder: 'please select date',
 	            className: 'form-control rc-calendar-picker-input' })
 	        ),

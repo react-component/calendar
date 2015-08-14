@@ -5936,8 +5936,14 @@
 	    _classCallCheck(this, Picker);
 	
 	    _get(Object.getPrototypeOf(Picker.prototype), 'constructor', this).call(this, props);
+	    var open = undefined;
+	    if ('open' in props) {
+	      open = props.open;
+	    } else {
+	      open = props.defaultOpen;
+	    }
 	    this.state = {
-	      open: false,
+	      open: open,
 	      value: props.value || props.defaultValue
 	    };
 	    var events = ['onCalendarAlign', 'onInputClick', 'onCalendarBlur', 'onTriggerClick', 'onCalendarClear', 'onCalendarKeyDown', 'onCalendarOk', 'onKeyDown', 'onCalendarSelect', 'focusInput', 'getInputDOMNode'];
@@ -5958,6 +5964,11 @@
 	        value = value || nextProps.defaultValue || null;
 	        this.setState({
 	          value: value
+	        });
+	      }
+	      if ('open' in nextProps) {
+	        this.setState({
+	          open: nextProps.open
 	        });
 	      }
 	    }
@@ -6126,7 +6137,7 @@
 	        orient = getImmutableOrient(calendarProp.props.orient) || orientMap.tl;
 	      }
 	      var calendarElement = _react2['default'].cloneElement(calendarProp, {
-	        ref: (0, _rcUtil.createChainedFunction)(calendarProp.props.ref, this.saveCalendarRef),
+	        ref: (0, _rcUtil.createChainedFunction)(calendarProp.ref, this.saveCalendarRef),
 	        value: state.value,
 	        visible: state.open,
 	        orient: orient,
@@ -6178,7 +6189,7 @@
 	        inputValue = props.formatter.format(value);
 	      }
 	      input = _react2['default'].cloneElement(input, {
-	        ref: (0, _rcUtil.createChainedFunction)(input.props.ref, this.saveInputRef),
+	        ref: (0, _rcUtil.createChainedFunction)(input.ref, this.saveInputRef),
 	        disabled: disabled,
 	        onChange: noop,
 	        onClick: disabled ? noop : this.onInputClick,
@@ -6196,14 +6207,16 @@
 	      }
 	      return _react2['default'].createElement(
 	        'span',
-	        { className: (0, _rcUtil.classSet)(classes) },
+	        { className: (0, _rcUtil.classSet)(classes), style: props.style },
 	        toFragment([input, calendar, trigger])
 	      );
 	    }
 	  }, {
 	    key: 'focusInput',
 	    value: function focusInput() {
-	      this.getInputDOMNode().focus();
+	      if (!this.state.open) {
+	        this.getInputDOMNode().focus();
+	      }
 	    }
 	  }, {
 	    key: 'setOpen',
@@ -6212,6 +6225,14 @@
 	        this.setState({
 	          open: open
 	        }, callback);
+	        var _event = {
+	          open: open
+	        };
+	        if (open) {
+	          this.props.onOpen(_event);
+	        } else {
+	          this.props.onClose(_event);
+	        }
 	      }
 	    }
 	  }, {
@@ -6240,7 +6261,12 @@
 	
 	Picker.propTypes = {
 	  onChange: _react2['default'].PropTypes.func,
+	  onOpen: _react2['default'].PropTypes.func,
+	  onClose: _react2['default'].PropTypes.func,
 	  calendar: _react2['default'].PropTypes.element,
+	  style: _react2['default'].PropTypes.object,
+	  open: _react2['default'].PropTypes.bool,
+	  defaultOpen: _react2['default'].PropTypes.bool,
 	  prefixCls: _react2['default'].PropTypes.string,
 	  renderCalendarToBody: _react2['default'].PropTypes.bool,
 	  adjustOrientOnCalendarOverflow: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.bool, _react2['default'].PropTypes.object])
@@ -6250,7 +6276,11 @@
 	  prefixCls: 'rc-calendar-picker',
 	  adjustOrientOnCalendarOverflow: true,
 	  renderCalendarToBody: false,
+	  style: {},
+	  defaultOpen: false,
 	  onChange: noop,
+	  onOpen: noop,
+	  onClose: noop,
 	  formatter: new _gregorianCalendarFormat2['default']('yyyy-MM-dd')
 	};
 	
@@ -6295,7 +6325,7 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var _react = __webpack_require__(28);
 	
@@ -6338,24 +6368,15 @@
 	  _createClass(Align, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      var _this = this;
-	
 	      var props = this.props;
-	      // parent ref not attached ....
+	      // if parent ref not attached .... use document.getElementById
 	      if (!props.disabled) {
-	        this.hackRefTimer = setTimeout(function () {
-	          var source = _react2['default'].findDOMNode(_this);
-	          props.onAlign(source, (0, _domAlign2['default'])(source, props.target(), props.align));
-	        }, 0);
+	        var source = _react2['default'].findDOMNode(this);
+	        props.onAlign(source, (0, _domAlign2['default'])(source, props.target(), props.align));
 	        if (props.monitorWindowResize) {
 	          this.startMonitorWindowResize();
 	        }
 	      }
-	    }
-	  }, {
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps() {
-	      this.clearHackRefTimer();
 	    }
 	  }, {
 	    key: 'startMonitorWindowResize',
@@ -6373,14 +6394,6 @@
 	      }
 	    }
 	  }, {
-	    key: 'clearHackRefTimer',
-	    value: function clearHackRefTimer() {
-	      if (this.hackRefTimer) {
-	        clearTimeout(this.hackRefTimer);
-	        this.hackRefTimer = null;
-	      }
-	    }
-	  }, {
 	    key: 'handleWindowResize',
 	    value: function handleWindowResize() {
 	      var props = this.props;
@@ -6393,38 +6406,33 @@
 	    key: 'componentWillUnmount',
 	    value: function componentWillUnmount() {
 	      this.stopMonitorWindowResize();
-	      this.clearHackRefTimer();
 	    }
 	  }, {
 	    key: 'componentDidUpdate',
 	    value: function componentDidUpdate(prevProps) {
-	      var _this2 = this;
-	
 	      var reAlign = false;
 	      var props = this.props;
 	      var currentTarget;
 	
-	      this.hackRefTimer = setTimeout(function () {
-	        if (!props.disabled) {
-	          if (prevProps.disabled || prevProps.align !== props.align) {
+	      if (!props.disabled) {
+	        if (prevProps.disabled || prevProps.align !== props.align) {
+	          reAlign = true;
+	          currentTarget = props.target();
+	        } else {
+	          var lastTarget = prevProps.target();
+	          currentTarget = props.target();
+	          if (isWindow(lastTarget) && isWindow(currentTarget)) {
+	            reAlign = false;
+	          } else if (lastTarget !== currentTarget) {
 	            reAlign = true;
-	            currentTarget = props.target();
-	          } else {
-	            var lastTarget = prevProps.target();
-	            currentTarget = props.target();
-	            if (isWindow(lastTarget) && isWindow(currentTarget)) {
-	              reAlign = false;
-	            } else if (lastTarget !== currentTarget) {
-	              reAlign = true;
-	            }
 	          }
 	        }
+	      }
 	
-	        if (reAlign) {
-	          var source = _react2['default'].findDOMNode(_this2);
-	          props.onAlign(source, (0, _domAlign2['default'])(source, currentTarget, props.align));
-	        }
-	      }, 0);
+	      if (reAlign) {
+	        var source = _react2['default'].findDOMNode(this);
+	        props.onAlign(source, (0, _domAlign2['default'])(source, currentTarget, props.align));
+	      }
 	
 	      if (props.monitorWindowResize && !props.disabled) {
 	        this.startMonitorWindowResize();
