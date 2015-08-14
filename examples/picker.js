@@ -1,4 +1,3 @@
-
 import 'bootstrap/dist/css/bootstrap.css';
 import 'rc-calendar/assets/bootstrap.less';
 import React from 'react';
@@ -10,7 +9,17 @@ import CalendarLocale from 'rc-calendar/src/locale/zh-cn';
 
 var Test = React.createClass({
   toggle() {
-    this.refs.picker.toggle();
+    this.setState({
+      open: !this.state.open
+    }, () => {
+      if (!this.state.open) {
+        this.inputNode.focus();
+      }
+    });
+  },
+
+  saveInputRef(input) {
+    this.inputNode = React.findDOMNode(input);
   },
 
   handleChange(value) {
@@ -22,6 +31,7 @@ var Test = React.createClass({
     // controlled value
     this.setState({
       time: Date.now(),
+      open: this.state.showTime,
       value: value
     });
   },
@@ -36,6 +46,7 @@ var Test = React.createClass({
     var value = new GregorianCalendar(zhCn);
     value.setTime(Date.now());
     return {
+      open: false,
       time: Date.now(),
       showTime: true,
       value: value
@@ -48,30 +59,39 @@ var Test = React.createClass({
     });
   },
 
+  onOpenChange(e){
+    this.setState({
+      open: e.open
+    });
+  },
+
   render() {
     var state = this.state;
     var calendar = <Calendar locale={CalendarLocale}
-      orient={['top', 'left']}
-      showTime={this.state.showTime} onSelect={this.handleCalendarSelect} onClear={this.handleCalendarSelect.bind(this, null)} showClear={true}/>;
+                             orient={['top', 'left']}
+                             showTime={this.state.showTime} onSelect={this.handleCalendarSelect}
+                             onClear={this.handleCalendarSelect.bind(this, null)} showClear={true}/>;
     return <div className="form-group" style={{width: 400, margin: 20}} data-time={this.state.time}>
       <div className="input-group">
         <span>
-          <input type='checkbox' checked={this.state.showTime} onChange={this.handleShowTimeChange} />
+          <input type='checkbox' checked={this.state.showTime} onChange={this.handleShowTimeChange}/>
           showTime</span>
       </div>
       <div className="input-group">
         <DatePicker ref='picker'
-          formatter={this.props.formatter} calendar={calendar}
-          value={state.value} onChange={this.handleChange}>
+                    open={this.state.open}
+                    formatter={this.props.formatter} calendar={calendar}
+                    value={state.value} onChange={this.handleChange}>
           <input
+            ref={this.saveInputRef}
             placeholder="please select date"
             className="form-control rc-calendar-picker-input"/>
         </DatePicker>
         <span className="input-group-addon"
-          style={{'WebkitUserSelect': 'none'}}
-          onMouseDown={prevent}
-          unselectable="unselectable"
-          onClick={this.toggle}>
+              style={{'WebkitUserSelect': 'none'}}
+              onMouseDown={prevent}
+              unselectable="unselectable"
+              onClick={this.toggle}>
           <span className="glyphicon glyphicon-calendar"></span>
         </span>
       </div>

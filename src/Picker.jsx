@@ -41,8 +41,14 @@ function refFn(field, component) {
 class Picker extends React.Component {
   constructor(props) {
     super(props);
+    let open;
+    if ('open' in props) {
+      open = props.open;
+    } else {
+      open = props.defaultOpen;
+    }
     this.state = {
-      open: false,
+      open: open,
       value: props.value || props.defaultValue,
     };
     const events = [
@@ -66,6 +72,11 @@ class Picker extends React.Component {
       value = value || nextProps.defaultValue || null;
       this.setState({
         value: value,
+      });
+    }
+    if ('open' in nextProps) {
+      this.setState({
+        open: nextProps.open,
       });
     }
   }
@@ -218,7 +229,7 @@ class Picker extends React.Component {
       orient = getImmutableOrient(calendarProp.props.orient) || orientMap.tl;
     }
     const calendarElement = React.cloneElement(calendarProp, {
-      ref: createChainedFunction(calendarProp.props.ref, this.saveCalendarRef),
+      ref: createChainedFunction(calendarProp.ref, this.saveCalendarRef),
       value: state.value,
       visible: state.open,
       orient: orient,
@@ -263,7 +274,7 @@ class Picker extends React.Component {
       inputValue = props.formatter.format(value);
     }
     input = React.cloneElement(input, {
-      ref: createChainedFunction(input.props.ref, this.saveInputRef),
+      ref: createChainedFunction(input.ref, this.saveInputRef),
       disabled: disabled,
       onChange: noop,
       onClick: disabled ? noop : this.onInputClick,
@@ -283,11 +294,15 @@ class Picker extends React.Component {
         onClick: disabled ? noop : this.onTriggerClick,
       });
     }
-    return <span className={classSet(classes)} style={props.style}>{toFragment([input, calendar, trigger])}</span>;
+    return (<span className={classSet(classes)} style={props.style}>
+      {toFragment([input, calendar, trigger])}
+    </span>);
   }
 
   focusInput() {
-    this.getInputDOMNode().focus();
+    if (!this.state.open) {
+      this.getInputDOMNode().focus();
+    }
   }
 
   setOpen(open, callback) {
@@ -295,6 +310,14 @@ class Picker extends React.Component {
       this.setState({
         open: open,
       }, callback);
+      const event = {
+        open: open,
+      };
+      if (open) {
+        this.props.onOpen(event);
+      } else {
+        this.props.onClose(event);
+      }
     }
   }
 
@@ -317,8 +340,12 @@ class Picker extends React.Component {
 
 Picker.propTypes = {
   onChange: React.PropTypes.func,
+  onOpen: React.PropTypes.func,
+  onClose: React.PropTypes.func,
   calendar: React.PropTypes.element,
-  style: React.PropTypes.style,
+  style: React.PropTypes.object,
+  open: React.PropTypes.bool,
+  defaultOpen: React.PropTypes.bool,
   prefixCls: React.PropTypes.string,
   renderCalendarToBody: React.PropTypes.bool,
   adjustOrientOnCalendarOverflow: React.PropTypes.oneOfType([React.PropTypes.bool, React.PropTypes.object]),
@@ -329,7 +356,10 @@ Picker.defaultProps = {
   adjustOrientOnCalendarOverflow: true,
   renderCalendarToBody: false,
   style: {},
+  defaultOpen: false,
   onChange: noop,
+  onOpen: noop,
+  onClose: noop,
   formatter: new DateTimeFormat('yyyy-MM-dd'),
 };
 

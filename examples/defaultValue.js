@@ -8,9 +8,15 @@ import GregorianCalendar from 'gregorian-calendar';
 import CalendarLocale from 'rc-calendar/src/locale/zh-cn';
 
 var Test = React.createClass({
-  open() {
-    this.refs.picker.setState({
-      open: true
+  onOpenChange(e) {
+    this.setState({
+      open: e.open
+    });
+  },
+
+  toggle() {
+    this.setState({
+      open: !this.state.open
     });
   },
 
@@ -28,8 +34,8 @@ var Test = React.createClass({
 
   getDefaultProps() {
     return {
-      formatter: new DateTimeFormat('yyyy-MM-dd HH:mm:ss')
-    }
+      formatter: new DateTimeFormat('yyyy-MM-dd HH:mm:ss'),
+    };
   },
 
   getInitialState() {
@@ -38,6 +44,7 @@ var Test = React.createClass({
     return {
       time: Date.now(),
       showTime: true,
+      open: false,
       value: value
     };
   },
@@ -51,20 +58,25 @@ var Test = React.createClass({
   render() {
     var state = this.state;
     var calendar = <Calendar locale={CalendarLocale}
-      orient={['bottom', 'left']}
-      showTime={this.state.showTime} onSelect={this.handleCalendarSelect}/>;
+                             orient={['bottom', 'left']}
+                             showTime={this.state.showTime} onSelect={this.handleCalendarSelect}/>;
     return <div className="form-group" style={{width: 400, margin: 20}} data-time={state.time}>
       <div className="input-group">
         <span>
-          <input type='checkbox' checked={this.state.showTime} onChange={this.handleShowTimeChange} />
+          <input type="checkbox" checked={this.state.showTime} onChange={this.handleShowTimeChange}/>
           showTime</span>
       </div>
       <div className="input-group">
-        <DatePicker ref='picker' formatter={this.props.formatter} calendar={calendar}
-          defaultValue={state.value} onChange={this.handleChange}>
-          <input type="text" className="form-control" style={{background: 'white', cursor: 'pointer'}}/>
+        <DatePicker formatter={this.props.formatter}
+                    calendar={calendar}
+                    open={this.state.open}
+                    onOpen={this.onOpenChange}
+                    onClose={this.onOpenChange}
+                    defaultValue={state.value}
+                    onChange={this.handleChange}>
+          <input type="text" className="form-control" style={{background: "white", cursor: "pointer"}}/>
         </DatePicker>
-        <span className="input-group-addon" onClick={this.open}>
+        <span className="input-group-addon" onClick={this.toggle}>
           <span className="glyphicon glyphicon-calendar"></span>
         </span>
       </div>
@@ -72,7 +84,7 @@ var Test = React.createClass({
   }
 });
 
-React.render(<div>
+React.render((<div>
   <h2>zh-cn</h2>
   <Test />
-</div>, document.getElementById('__react-content'));
+</div>), document.getElementById('__react-content'));

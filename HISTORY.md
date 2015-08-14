@@ -1,6 +1,10 @@
 # History
 ----
 
+## 3.13.0 / 2015-08-15
+
+support controlled open prop for Picker
+
 ## 3.12.0 / 2015-07-30
 
 use rc-animate & rc-align (css change)

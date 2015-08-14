@@ -265,6 +265,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td></td>
           <td>called when select a different value</td>
         </tr>
+        <tr>
+          <td>open</td>
+          <td>Boolean</td>
+          <td></td>
+          <td>current open state of picker. controlled prop</td>
+        </tr>
     </tbody>
 </table>
 
