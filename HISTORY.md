@@ -3,7 +3,8 @@
 
 ## 3.13.0 / 2015-08-15
 
-support controlled open prop for Picker
+- support controlled open prop for Picker
+- add onOpen/onClose callback for Picker
 
 ## 3.12.0 / 2015-07-30
 

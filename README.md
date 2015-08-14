@@ -266,6 +266,18 @@ http://react-component.github.io/calendar/examples/index.html
           <td>called when select a different value</td>
         </tr>
         <tr>
+          <td>onOpen</td>
+          <td>Function</td>
+          <td></td>
+          <td>called when open picker</td>
+        </tr>
+        <tr>
+          <td>onClose</td>
+          <td>Function</td>
+          <td></td>
+          <td>called when close picker</td>
+        </tr>                
+        <tr>
           <td>open</td>
           <td>Boolean</td>
           <td></td>
