@@ -235,14 +235,13 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>rc-calendar@3.14.0</h1>
+            <h1>rc-calendar@3.14.1</h1>
             <p>calendar ui component for react</p>
         </div>
         <div class="example" id="__react-content"></div>
         <script src="common.js?nowrap"></script>
         <script src="disabled.js?nowrap"></script>
-        <div class="highlight"><pre><code>
-<span class="hljs-keyword">import</span> <span class="hljs-string">'rc-calendar/assets/bootstrap.css'</span>;
+        <div class="highlight"><pre><code><span class="hljs-keyword">import</span> <span class="hljs-string">'rc-calendar/assets/bootstrap.css'</span>;
 <span class="hljs-keyword">import</span> Calendar <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-calendar'</span>;
 <span class="hljs-keyword">import</span> GregorianCalendarFormat <span class="hljs-keyword">from</span> <span class="hljs-string">'gregorian-calendar-format'</span>;
 <span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
@@ -253,20 +252,20 @@
   <span class="hljs-built_in">console</span>.log(formatter.format(value))
 }
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">disabledDate</span>(<span class="hljs-params">current,value</span>)</span>{
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">disabledDate</span>(<span class="hljs-params">current, value</span>) </span>{
   <span class="hljs-keyword">var</span> date = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();
   date.setHours(<span class="hljs-number">0</span>);
   date.setMinutes(<span class="hljs-number">0</span>);
   date.setSeconds(<span class="hljs-number">0</span>);
-  <span class="hljs-keyword">return</span> current.getTime() &lt; date.getTime();  <span class="hljs-comment">//can not select days before today</span>
+  <span class="hljs-keyword">return</span> current.getTime() &lt; date.getTime() + <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>;  <span class="hljs-comment">//can not select days before today</span>
 }
 
 React.render(
   <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">h2</span>&gt;</span>calendar (en-us, U.S.A.  California  San Francisco)<span class="hljs-tag">&lt;/<span class="hljs-title">h2</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">h2</span>&gt;</span>calendar (en-us, U.S.A. California San Francisco)<span class="hljs-tag">&lt;/<span class="hljs-title">h2</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">Calendar</span> <span class="hljs-attribute">showWeekNumber</span>=<span class="hljs-value">{true}</span>
-      <span class="hljs-attribute">disabledDate</span>=<span class="hljs-value">{disabledDate}</span>
-      <span class="hljs-attribute">onSelect</span>=<span class="hljs-value">{onSelect}</span>/&gt;</span>
+              <span class="hljs-attribute">disabledDate</span>=<span class="hljs-value">{disabledDate}</span>
+              <span class="hljs-attribute">onSelect</span>=<span class="hljs-value">{onSelect}</span>/&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>, document.getElementById('__react-content'));
 </span></code></pre></div>
     </div>

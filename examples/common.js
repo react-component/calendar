@@ -682,6 +682,7 @@
 	          showToday: props.showToday,
 	          showTime: props.showTime,
 	          value: value,
+	          disabledDate: props.disabledDate,
 	          dateFormatter: this.dateFormatter,
 	          onClear: this.onClear,
 	          onOk: this.onOk,
@@ -5310,12 +5311,18 @@
 	  }
 	
 	  _createClass(CalendarFooter, [{
+	    key: 'getTodayTimeStr',
+	    value: function getTodayTimeStr() {
+	      var today = this.getTodayTime();
+	      return this.props.dateFormatter.format(today);
+	    }
+	  }, {
 	    key: 'getTodayTime',
 	    value: function getTodayTime() {
 	      var value = this.props.value;
 	      var today = value.clone();
 	      today.setTime(Date.now());
-	      return this.props.dateFormatter.format(today);
+	      return today;
 	    }
 	  }, {
 	    key: 'render',
@@ -5332,12 +5339,20 @@
 	          localeNow = locale.now || locale.today;
 	        }
 	        if (props.showToday) {
+	          var disabledToday = false;
+	          var disabledTodayClass = undefined;
+	          if (props.disabledDate) {
+	            disabledToday = props.disabledDate(this.getTodayTime());
+	            if (disabledToday) {
+	              disabledTodayClass = prefixCls + '-today-btn-disabled';
+	            }
+	          }
 	          nowEl = _react2['default'].createElement(
 	            'a',
-	            { className: prefixCls + '-today-btn',
+	            { className: prefixCls + '-today-btn ' + disabledTodayClass,
 	              role: 'button',
-	              onClick: props.onToday,
-	              title: this.getTodayTime() },
+	              onClick: disabledToday ? null : props.onToday,
+	              title: this.getTodayTimeStr() },
 	            localeNow
 	          );
 	        }
