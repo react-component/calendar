@@ -50,7 +50,7 @@ describe('DatePicker', function () {
       Simulate.click(input);
       setTimeout(next, 100);
     }, function (next) {
-      expect(TestUtils.scryRenderedDOMComponentsWithClass(picker, 'rc-calendar')[0]).to.be.ok();
+      expect(TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance, 'rc-calendar')[0]).to.be.ok();
       expect(picker.state.open).to.be(true);
       var day = TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance, 'rc-calendar-date')[1];
       Simulate.click(day);
@@ -68,11 +68,10 @@ describe('DatePicker', function () {
     });
   });
 
-  describe('renderCalendarToBody', function () {
+  describe('render calendar to body', function () {
     it('support correctly', function (done) {
       var change;
       var picker = renderPicker({
-        renderCalendarToBody: true,
         onChange: function (v) {
           change = v;
         }
@@ -104,7 +103,6 @@ describe('DatePicker', function () {
     it('destroy correctly', function (done) {
       var change;
       var picker = renderPicker({
-        renderCalendarToBody: true,
         onChange: function (v) {
           change = v;
         }

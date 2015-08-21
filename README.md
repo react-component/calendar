@@ -230,12 +230,6 @@ http://react-component.github.io/calendar/examples/index.html
           <td>css class for animation</td>
         </tr>
         <tr>
-          <td>renderCalendarToBody</td>
-          <td>Boolean</td>
-          <td>false</td>
-          <td>whether render picker's calendar to document.body</td>
-        </tr>
-        <tr>
           <td>formatter</td>
           <td> <a href="https://github.com/yiminghe/gregorian-calendar-format">GregorianCalendarFormatter</a> </td>
           <td></td>

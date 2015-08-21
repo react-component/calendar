@@ -65,6 +65,7 @@ var Test = React.createClass({
   render() {
     var state = this.state;
     var calendar = <Calendar locale={CalendarLocale}
+                             style={{zIndex:100}}
                              orient={['top', 'left']}
                              defaultValue={defaultCalendarValue}
                              showTime={this.state.showTime}
@@ -95,7 +96,8 @@ var Test = React.createClass({
           trigger={<span className="rc-calendar-picker-icon" />}
           formatter={this.props.formatter} calendar={calendar}
           value={state.value} onChange={this.handleChange}>
-          <input className="rc-calendar-picker-input" style={{width:200}} disabled={state.disabled} placeholder="请选择日期"/>
+          <input className="rc-calendar-picker-input" style={{width:200}} disabled={state.disabled}
+                 placeholder="请选择日期"/>
         </DatePicker>
       </div>
     </div>;
@@ -104,13 +106,14 @@ var Test = React.createClass({
 
 React.render(<div style={{zIndex:1000,position:'relative'}}>
   <h2>zh-cn</h2>
+
   <div style={{marginTop:200,width:600}}>
     <div style={{float:'left',width:300}}>
-    <Test defaultValue={now}/>
-      </div>
+      <Test defaultValue={now}/>
+    </div>
     <div style={{float:'right',width:300}}>
-    <Test/>
-      </div>
+      <Test/>
+    </div>
     <div style={{clear:'both'}}></div>
   </div>
 </div>, document.getElementById('__react-content'));

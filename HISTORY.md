@@ -1,6 +1,10 @@
 # History
 ----
 
+## 3.14.0 / 2015-08-21
+
+-- remove renderCalendarToBody. defaults to true
+
 ## 3.13.0 / 2015-08-15
 
 - support controlled open prop for Picker

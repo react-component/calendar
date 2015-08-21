@@ -38,32 +38,45 @@ function refFn(field, component) {
 /**
  * DatePicker = wrap input using Calendar
  */
-class Picker extends React.Component {
-  constructor(props) {
-    super(props);
+const Picker = React.createClass({
+  propTypes: {
+    onChange: React.PropTypes.func,
+    onOpen: React.PropTypes.func,
+    onClose: React.PropTypes.func,
+    calendar: React.PropTypes.element,
+    style: React.PropTypes.object,
+    open: React.PropTypes.bool,
+    defaultOpen: React.PropTypes.bool,
+    prefixCls: React.PropTypes.string,
+    adjustOrientOnCalendarOverflow: React.PropTypes.oneOfType([React.PropTypes.bool, React.PropTypes.object]),
+  },
+
+  getDefaultProps() {
+    return {
+      prefixCls: 'rc-calendar-picker',
+      adjustOrientOnCalendarOverflow: true,
+      style: {},
+      defaultOpen: false,
+      onChange: noop,
+      onOpen: noop,
+      onClose: noop,
+      formatter: new DateTimeFormat('yyyy-MM-dd'),
+    };
+  },
+
+  getInitialState() {
+    const props = this.props;
     let open;
     if ('open' in props) {
       open = props.open;
     } else {
       open = props.defaultOpen;
     }
-    this.state = {
-      open: open,
-      value: props.value || props.defaultValue,
-    };
-    const events = [
-      'onCalendarAlign',
-      'onInputClick', 'onCalendarBlur', 'onTriggerClick',
-      'onCalendarClear', 'onCalendarKeyDown', 'onCalendarOk',
-      'onKeyDown', 'onCalendarSelect', 'focusInput', 'getInputDOMNode',
-    ];
-    // bind methods
-    events.forEach(m => {
-      this[m] = this[m].bind(this);
-    });
+    const value = props.value || props.defaultValue;
     this.saveCalendarRef = refFn.bind(this, 'calendarInstance');
     this.saveInputRef = refFn.bind(this, 'inputInstance');
-  }
+    return {open, value};
+  },
 
   componentWillReceiveProps(nextProps) {
     let value = nextProps.value;
@@ -71,7 +84,7 @@ class Picker extends React.Component {
       // null special meaning
       value = value || nextProps.defaultValue || null;
       this.setState({
-        value: value,
+        value,
       });
     }
     if ('open' in nextProps) {
@@ -79,13 +92,13 @@ class Picker extends React.Component {
         open: nextProps.open,
       });
     }
-  }
+  },
 
   componentDidUpdate() {
-    if (this.haveOpened && this.props.renderCalendarToBody) {
+    if (this.haveOpened) {
       React.render(this.getCalendarElement(), this.getCalendarContainer());
     }
-  }
+  },
 
   componentWillUnmount() {
     if (this.calendarContainer) {
@@ -93,7 +106,7 @@ class Picker extends React.Component {
       this.calendarContainer.parentNode.removeChild(this.calendarContainer);
       this.calendarContainer = null;
     }
-  }
+  },
 
   onCalendarAlign(node, align) {
     const points = align.points;
@@ -101,15 +114,15 @@ class Picker extends React.Component {
     this.calendarInstance.setOrient(newOrient);
     // focus after align
     React.findDOMNode(this.calendarInstance).focus();
-  }
+  },
 
   onInputClick() {
     this.toggle();
-  }
+  },
 
   onTriggerClick() {
     this.toggle();
-  }
+  },
 
   onKeyDown(e) {
     // down
@@ -117,14 +130,14 @@ class Picker extends React.Component {
       e.preventDefault();
       this.open();
     }
-  }
+  },
 
   onCalendarKeyDown(e) {
     if (e.keyCode === KeyCode.ESC) {
       e.stopPropagation();
       this.close(this.focusInput);
     }
-  }
+  },
 
   onCalendarSelect(value) {
     const currentValue = this.state.value;
@@ -137,7 +150,7 @@ class Picker extends React.Component {
     if (!currentValue || currentValue.getTime() !== value.getTime()) {
       this.props.onChange(value);
     }
-  }
+  },
 
   onCalendarBlur() {
     if (document.activeElement === this.getInputDOMNode()) {
@@ -146,11 +159,11 @@ class Picker extends React.Component {
     // if invisible, will not trigger blur
     // do not set if already false, avoid ruin animate
     this.close();
-  }
+  },
 
   onCalendarOk() {
     this.close(this.focusInput);
-  }
+  },
 
   onCalendarClear() {
     this.setState({
@@ -160,11 +173,11 @@ class Picker extends React.Component {
     if (this.state.value !== null) {
       this.props.onChange(null);
     }
-  }
+  },
 
   getInputDOMNode() {
     return React.findDOMNode(this.inputInstance);
-  }
+  },
 
   getTransitionName() {
     const props = this.props;
@@ -173,7 +186,7 @@ class Picker extends React.Component {
       transitionName = `${props.prefixCls}-${props.animation}`;
     }
     return transitionName;
-  }
+  },
 
   getCalendarContainer() {
     if (!this.calendarContainer) {
@@ -182,7 +195,7 @@ class Picker extends React.Component {
       document.body.appendChild(this.calendarContainer);
     }
     return this.calendarContainer;
-  }
+  },
 
   getAlign(orient) {
     let points = ['tl', 'bl'];
@@ -217,7 +230,7 @@ class Picker extends React.Component {
         adjustY: adjustY,
       },
     };
-  }
+  },
 
   getCalendarElement() {
     const props = this.props;
@@ -254,21 +267,16 @@ class Picker extends React.Component {
         {calendarElement}
       </Align>
     </Animate>);
-  }
+  },
 
   render() {
     const props = this.props;
     const disabled = props.disabled;
     const prefixCls = props.prefixCls;
-    const renderCalendarToBody = props.renderCalendarToBody;
     let input = props.children;
     const state = this.state;
     const value = state.value;
-    let calendar;
     this.haveOpened = this.haveOpened || state.open;
-    if (!renderCalendarToBody && this.haveOpened) {
-      calendar = this.getCalendarElement();
-    }
     let inputValue = '';
     if (value) {
       inputValue = props.formatter.format(value);
@@ -295,15 +303,15 @@ class Picker extends React.Component {
       });
     }
     return (<span className={classSet(classes)} style={props.style}>
-      {toFragment([input, calendar, trigger])}
+      {toFragment([input, trigger])}
     </span>);
-  }
+  },
 
   focusInput() {
     if (!this.state.open) {
       this.getInputDOMNode().focus();
     }
-  }
+  },
 
   setOpen(open, callback) {
     if (this.state.open !== open) {
@@ -319,7 +327,7 @@ class Picker extends React.Component {
         this.props.onClose(event);
       }
     }
-  }
+  },
 
   toggle() {
     if (this.state.open) {
@@ -327,40 +335,15 @@ class Picker extends React.Component {
     } else {
       this.open();
     }
-  }
+  },
 
   open(callback) {
     this.setOpen(true, callback);
-  }
+  },
 
   close(callback) {
     this.setOpen(false, callback);
-  }
-}
-
-Picker.propTypes = {
-  onChange: React.PropTypes.func,
-  onOpen: React.PropTypes.func,
-  onClose: React.PropTypes.func,
-  calendar: React.PropTypes.element,
-  style: React.PropTypes.object,
-  open: React.PropTypes.bool,
-  defaultOpen: React.PropTypes.bool,
-  prefixCls: React.PropTypes.string,
-  renderCalendarToBody: React.PropTypes.bool,
-  adjustOrientOnCalendarOverflow: React.PropTypes.oneOfType([React.PropTypes.bool, React.PropTypes.object]),
-};
-
-Picker.defaultProps = {
-  prefixCls: 'rc-calendar-picker',
-  adjustOrientOnCalendarOverflow: true,
-  renderCalendarToBody: false,
-  style: {},
-  defaultOpen: false,
-  onChange: noop,
-  onOpen: noop,
-  onClose: noop,
-  formatter: new DateTimeFormat('yyyy-MM-dd'),
-};
+  },
+});
 
 export default Picker;

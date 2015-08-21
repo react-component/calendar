@@ -63,33 +63,63 @@ function getNowByCurrentStateValue(value) {
   return ret;
 }
 
-export default
-class Calendar extends React.Component {
-  constructor(props) {
-    super(props);
+const Calendar = React.createClass({
+  propTypes: {
+    value: React.PropTypes.object,
+    defaultValue: React.PropTypes.object,
+    className: React.PropTypes.string,
+    orient: React.PropTypes.arrayOf(React.PropTypes.oneOf(['left', 'top', 'right', 'bottom'])),
+    locale: React.PropTypes.object,
+    showWeekNumber: React.PropTypes.bool,
+    style: React.PropTypes.object,
+    showToday: React.PropTypes.bool,
+    visible: React.PropTypes.bool,
+    showTime: React.PropTypes.bool,
+    onSelect: React.PropTypes.func,
+    onOk: React.PropTypes.func,
+    prefixCls: React.PropTypes.string,
+    onKeyDown: React.PropTypes.func,
+    onClear: React.PropTypes.func,
+    onFocus: React.PropTypes.func,
+    onBlur: React.PropTypes.func,
+  },
+
+  getDefaultProps() {
+    return {
+      locale: enUs,
+      style: {},
+      visible: true,
+      prefixCls: 'rc-calendar',
+      onKeyDown: noop,
+      className: '',
+      showToday: true,
+      onSelect: noop,
+      onFocus: noop,
+      onBlur: noop,
+      onClear: noop,
+      onOk: noop,
+    };
+  },
+
+  getInitialState() {
+    const props = this.props;
     const value = props.value || props.defaultValue || getNow();
     this.dateFormatter = new DateTimeFormat(props.locale.dateFormat);
-    this.state = {
-      orient: props.orient,
-      value: value,
-    };
+    const orient = props.orient;
     // bind methods
     this.nextMonth = goMonth.bind(this, 1);
     this.previousMonth = goMonth.bind(this, -1);
     this.nextYear = goYear.bind(this, 1);
     this.previousYear = goYear.bind(this, -1);
-
-    ['onBlur', 'onFocus', 'chooseToday', 'onClear', 'onSelect', 'setValue', 'onKeyDown', 'onOk'].forEach((m) => {
-      this[m] = this[m].bind(this);
-    });
-  }
+    return {orient, value};
+  },
 
   componentWillReceiveProps(nextProps) {
     let value = nextProps.value;
     if (value !== undefined) {
       value = value || nextProps.defaultValue || getNowByCurrentStateValue(this.state.value);
       this.setState({
-        value: value,
+        value,
       });
     }
     if (nextProps.orient) {
@@ -100,21 +130,21 @@ class Calendar extends React.Component {
     if (nextProps.locale !== this.props.locale) {
       this.dateFormatter = new DateTimeFormat(nextProps.locale.dateFormat);
     }
-  }
+  },
 
   shouldComponentUpdate() {
     return rcUtil.PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
-  }
+  },
 
-  onSelect(current, keyDownEvent) {
+  onSelect(value, keyDownEvent) {
     const props = this.props;
     this.setState({
-      value: current,
+      value,
     });
     if (!keyDownEvent) {
-      props.onSelect(current);
+      props.onSelect(value);
     }
-  }
+  },
 
   onKeyDown(e) {
     const keyCode = e.keyCode;
@@ -169,11 +199,11 @@ class Calendar extends React.Component {
       this.props.onKeyDown(e);
       return 1;
     }
-  }
+  },
 
   onClear() {
     this.props.onClear();
-  }
+  },
 
   onFocus() {
     if (this._blurTimer) {
@@ -182,7 +212,7 @@ class Calendar extends React.Component {
     } else {
       this.props.onFocus();
     }
-  }
+  },
 
   onBlur() {
     if (this._blurTimer) {
@@ -191,11 +221,11 @@ class Calendar extends React.Component {
     this._blurTimer = setTimeout(()=> {
       this.props.onBlur();
     }, 100);
-  }
+  },
 
   onOk() {
     this.props.onOk(this.state.value);
-  }
+  },
 
   render() {
     const props = this.props;
@@ -260,19 +290,19 @@ class Calendar extends React.Component {
             />
         </div>
       </div>);
-  }
+  },
 
   chooseToday() {
     const today = this.state.value.clone();
     today.setTime(Date.now());
     this.onSelect(today);
-  }
+  },
 
-  setValue(current) {
+  setValue(value) {
     this.setState({
-      value: current,
+      value,
     });
-  }
+  },
 
   setOrient(orient) {
     // FIXME: hack to prevent breaking rc-animate
@@ -289,40 +319,7 @@ class Calendar extends React.Component {
       });
     }
     root.className = className;
-  }
-}
+  },
+});
 
-Calendar.propTypes = {
-  value: React.PropTypes.object,
-  defaultValue: React.PropTypes.object,
-  className: React.PropTypes.string,
-  orient: React.PropTypes.arrayOf(React.PropTypes.oneOf(['left', 'top', 'right', 'bottom'])),
-  locale: React.PropTypes.object,
-  showWeekNumber: React.PropTypes.bool,
-  style: React.PropTypes.object,
-  showToday: React.PropTypes.bool,
-  visible: React.PropTypes.bool,
-  showTime: React.PropTypes.bool,
-  onSelect: React.PropTypes.func,
-  onOk: React.PropTypes.func,
-  prefixCls: React.PropTypes.string,
-  onKeyDown: React.PropTypes.func,
-  onClear: React.PropTypes.func,
-  onFocus: React.PropTypes.func,
-  onBlur: React.PropTypes.func,
-};
-
-Calendar.defaultProps = {
-  locale: enUs,
-  style: {},
-  visible: true,
-  prefixCls: 'rc-calendar',
-  onKeyDown: noop,
-  className: '',
-  showToday: true,
-  onSelect: noop,
-  onFocus: noop,
-  onBlur: noop,
-  onClear: noop,
-  onOk: noop,
-};
+export default Calendar;
