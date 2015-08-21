@@ -282,6 +282,7 @@ const Calendar = React.createClass({
             showToday={props.showToday}
             showTime={props.showTime}
             value={value}
+            disabledDate={props.disabledDate}
             dateFormatter={this.dateFormatter}
             onClear={this.onClear}
             onOk={this.onOk}

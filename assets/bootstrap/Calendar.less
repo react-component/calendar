@@ -95,8 +95,8 @@
   height: 30px;
   line-height: 30px;
   text-align: center;
-  user-select:none;
-  -webkit-user-select:none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .rc-calendar-header > a {
@@ -245,7 +245,7 @@
   display: block;
 }
 
-.rc-calendar-today-btn, .rc-calendar-clear-btn, .rc-calendar-ok-btn{
+.rc-calendar-today-btn, .rc-calendar-clear-btn, .rc-calendar-ok-btn {
   font-weight: bold;
   box-sizing: border-box;
   display: inline-block;
@@ -257,13 +257,21 @@
   border-radius: 4px;
   margin-left: 5px;
 
-  &:hover{
+  &:hover {
     background: #eeeeee;
+  }
+
+  &-disabled {
+    color: #bfbfbf;
+    cursor: default !important;
+    &:hover {
+      background: white;
+    }
   }
 }
 
 .rc-calendar-footer-btn {
-  margin-top:2px;
+  margin-top: 2px;
 }
 
 

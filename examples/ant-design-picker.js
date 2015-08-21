@@ -65,7 +65,7 @@ var Test = React.createClass({
   render() {
     var state = this.state;
     var calendar = <Calendar locale={CalendarLocale}
-                             style={{zIndex:100}}
+                             style={{zIndex:1000}}
                              orient={['top', 'left']}
                              defaultValue={defaultCalendarValue}
                              showTime={this.state.showTime}
