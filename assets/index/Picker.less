@@ -78,6 +78,13 @@
     animation-play-state: paused;
   }
 
+  &-slide-up-appear {
+    .effect();
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
+    animation-play-state: paused;
+  }
+
   &-slide-up-leave {
     .effect();
     opacity: 1;
@@ -91,6 +98,16 @@
   }
 
   &-slide-up-enter&-slide-up-enter-active.@{prefixClass}-orient-bottom {
+    animation-name: rcDropdownSlideDownIn;
+    animation-play-state: running;
+  }
+
+  &-slide-up-appear&-slide-up-appear-active.@{prefixClass}-orient-top {
+    animation-name: rcDropdownSlideUpIn;
+    animation-play-state: running;
+  }
+
+  &-slide-up-appear&-slide-up-appear-active.@{prefixClass}-orient-bottom {
     animation-name: rcDropdownSlideDownIn;
     animation-play-state: running;
   }

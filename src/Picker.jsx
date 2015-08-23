@@ -255,7 +255,7 @@ const Picker = React.createClass({
     return (<Animate
       component=""
       exclusive={true}
-      animateMount={true}
+      transitionAppear={true}
       showProp="calendarOpen"
       transitionName={this.getTransitionName()}>
       <Align target={this.getInputDOMNode}
