@@ -1,4 +1,3 @@
-
 import 'rc-calendar/assets/index.less';
 
 import Calendar from 'rc-calendar';
@@ -12,7 +11,7 @@ import CalendarLocale from 'rc-calendar/src/locale/zh-cn';
 var value = new GregorianCalendar(zhCn);
 value.setTime(Date.now());
 
-function disabledDate(current,value){
+function disabledDate(current, value) {
   var date = new Date();
   date.setHours(0);
   date.setMinutes(0);
@@ -25,13 +24,19 @@ function onSelect(value) {
   console.log(formatter.format(value))
 }
 
+function onChange(value) {
+  console.log('onChange');
+  console.log(formatter.format(value))
+}
+
 React.render(
   <div>
     <h2>calendar (zh-cn)</h2>
     <Calendar showWeekNumber={false}
-      locale={CalendarLocale}
-      value={value}
-      disabledDate={disabledDate}
-      onSelect={onSelect} showTime={true}/>
+              locale={CalendarLocale}
+              defaultValue={value}
+              onChange={onChange}
+              disabledDate={disabledDate}
+              onSelect={onSelect} showTime={true}/>
   </div>, document.getElementById('__react-content'));
 

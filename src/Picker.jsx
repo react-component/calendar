@@ -175,6 +175,12 @@ const Picker = React.createClass({
     }
   },
 
+  onCalendarChange(value) {
+    this.calendarInstance.setState({
+      value,
+    });
+  },
+
   getInputDOMNode() {
     return React.findDOMNode(this.inputInstance);
   },
@@ -248,6 +254,7 @@ const Picker = React.createClass({
       orient: orient,
       onBlur: this.onCalendarBlur,
       onKeyDown: this.onCalendarKeyDown,
+      onChange: createChainedFunction(calendarProp.props.onChange, this.onCalendarChange),
       onOk: createChainedFunction(calendarProp.props.onOk, this.onCalendarOk),
       onSelect: createChainedFunction(calendarProp.props.onSelect, this.onCalendarSelect),
       onClear: createChainedFunction(calendarProp.props.onClear, this.onCalendarClear),

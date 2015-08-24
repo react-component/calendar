@@ -13,37 +13,37 @@ function noop() {
 function goStartMonth() {
   const next = this.state.value.clone();
   next.setDayOfMonth(1);
-  this.setState({value: next});
+  this.setValue(next);
 }
 
 function goEndMonth() {
   const next = this.state.value.clone();
   next.setDayOfMonth(next.getActualMaximum(GregorianCalendar.MONTH));
-  this.setState({value: next});
+  this.setValue(next);
 }
 
 function goMonth(direction) {
   const next = this.state.value.clone();
   next.addMonth(direction);
-  this.setState({value: next});
+  this.setValue(next);
 }
 
 function goYear(direction) {
   const next = this.state.value.clone();
   next.addYear(direction);
-  this.setState({value: next});
+  this.setValue(next);
 }
 
 function goWeek(direction) {
   const next = this.state.value.clone();
   next.addWeekOfYear(direction);
-  this.setState({value: next});
+  this.setValue(next);
 }
 
 function goDay(direction) {
   const next = this.state.value.clone();
   next.addDayOfMonth(direction);
-  this.setState({value: next});
+  this.setValue(next);
 }
 
 function getNow() {
@@ -80,6 +80,7 @@ const Calendar = React.createClass({
     prefixCls: React.PropTypes.string,
     onKeyDown: React.PropTypes.func,
     onClear: React.PropTypes.func,
+    onChange: React.PropTypes.func,
     onFocus: React.PropTypes.func,
     onBlur: React.PropTypes.func,
   },
@@ -94,6 +95,7 @@ const Calendar = React.createClass({
       className: '',
       showToday: true,
       onSelect: noop,
+      onChange: noop,
       onFocus: noop,
       onBlur: noop,
       onClear: noop,
@@ -132,15 +134,13 @@ const Calendar = React.createClass({
     }
   },
 
-  shouldComponentUpdate() {
-    return rcUtil.PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
+  shouldComponentUpdate(nextProps) {
+    return this.props.visible || nextProps.visible;
   },
 
   onSelect(value, keyDownEvent) {
     const props = this.props;
-    this.setState({
-      value,
-    });
+    this.setValue(value);
     if (!keyDownEvent) {
       props.onSelect(value);
     }
@@ -300,9 +300,12 @@ const Calendar = React.createClass({
   },
 
   setValue(value) {
-    this.setState({
-      value,
-    });
+    if (!('value' in this.props)) {
+      this.setState({
+        value,
+      });
+    }
+    this.props.onChange(value);
   },
 
   setOrient(orient) {

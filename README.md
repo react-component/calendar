@@ -168,9 +168,15 @@ http://react-component.github.io/calendar/examples/index.html
         </tr>
         <tr>
           <td>onSelect</td>
-          <td>Function(GregorianCalendar date)</td>
+          <td>Function(date: GregorianCalendar)</td>
           <td>function(){}</td>
           <td>called when a date is selected from calendar</td>
+        </tr>
+        <tr>
+          <td>onChange</td>
+          <td>Function(date: GregorianCalendar)</td>
+          <td>function(){}</td>
+          <td>called when a date is changed inside calendar (next year/next month/keyboard)</td>
         </tr>
         <tr>
            <td>onBlur</td>
