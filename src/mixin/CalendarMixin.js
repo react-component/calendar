@@ -76,11 +76,10 @@ const CalendarMixin = {
   },
 
   onSelect(value, keyDownEvent) {
-    const props = this.props;
     this.setValue(value);
     if (!keyDownEvent) {
       if (this.isAllowedDate(value)) {
-        props.onSelect(value);
+        this.props.onSelect(value);
       }
     }
   },
