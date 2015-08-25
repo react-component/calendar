@@ -22,7 +22,7 @@ class YearPanel extends React.Component {
     super(props);
     this.prefixCls = props.rootPrefixCls + '-year-panel';
     this.state = {
-      value: props.value,
+      value: props.value || props.defaultValue,
     };
     this.nextDecade = goYear.bind(this, 10);
     this.previousDecade = goYear.bind(this, -10);

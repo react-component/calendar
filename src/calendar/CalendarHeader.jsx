@@ -73,7 +73,7 @@ class CalendarHeader extends React.Component {
     }
     let panel;
     if (PanelClass) {
-      panel = <PanelClass locale={locale} value={value} rootPrefixCls={prefixCls} onSelect={this.onSelect}/>;
+      panel = <PanelClass locale={locale} defaultValue={value} rootPrefixCls={prefixCls} onSelect={this.onSelect}/>;
     }
     return (<div className={`${prefixCls}-header`}>
       <a className={`${prefixCls}-prev-year-btn`}

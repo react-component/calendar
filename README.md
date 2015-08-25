@@ -187,6 +187,81 @@ http://react-component.github.io/calendar/examples/index.html
     </tbody>
 </table>
 
+### Calendar.MonthCalendar props
+
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th style="width: 100px;">name</th>
+        <th style="width: 50px;">type</th>
+        <th style="width: 50px;">default</th>
+        <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>prefixCls</td>
+          <td>String</td>
+          <td></td>
+          <td>prefixCls of this component</td>
+        </tr>
+        <tr>
+          <td>className</td>
+          <td>String</td>
+          <td></td>
+          <td>additional css class of root dom node</td>
+        </tr>
+        <tr>
+          <td>style</td>
+          <td>Object</td>
+          <td></td>
+          <td>additional style of root dom node</td>
+        </tr>
+        <tr>
+          <td>value</td>
+          <td> <a href="https://github.com/yiminghe/gregorian-calendar">GregorianCalendar</a> </td>
+          <td></td>
+          <td>current value like input's value</td>
+        </tr>
+        <tr>
+          <td>defaultValue</td>
+          <td>GregorianCalendar</td>
+          <td></td>
+          <td>defaultValue like input's defaultValue</td>
+        </tr>
+        <tr>
+          <td>orient</td>
+          <td>String[]</td>
+          <td></td>
+          <td>affect the position of arrow. exp: ['left','top']</td>
+        </tr>
+        <tr>
+          <td>locale</td>
+          <td>Object</td>
+          <td>import from 'rc-calendar/lib/locale/en-us'</td>
+          <td>calendar locale</td>
+        </tr>
+        <tr>
+          <td>disabledDate</td>
+          <td>Function(current:GregorianCalendar):Boolean</td>
+          <td>null</td>
+          <td>whether to disable select of current month</td>
+        </tr>
+        <tr>
+          <td>onSelect</td>
+          <td>Function(date: GregorianCalendar)</td>
+          <td>function(){}</td>
+          <td>called when a date is selected from calendar</td>
+        </tr>
+        <tr>
+          <td>onChange</td>
+          <td>Function(date: GregorianCalendar)</td>
+          <td>function(){}</td>
+          <td>called when a date is changed inside calendar (next year/next month/keyboard)</td>
+        </tr>
+    </tbody>
+</table>
+
 ### Calendar.Picker props
 
 <table class="table table-bordered table-striped">

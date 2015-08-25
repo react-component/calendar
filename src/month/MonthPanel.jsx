@@ -7,44 +7,57 @@ const COL = 3;
 function goYear(direction) {
   const next = this.state.value.clone();
   next.addYear(direction);
-  this.setState({
-    value: next,
-  });
-}
-
-function showYearPanel() {
-  this.setState({
-    showYearPanel: 1,
-  });
+  this.setAndChangeValue(next);
 }
 
 function chooseMonth(month) {
   const next = this.state.value.clone();
   next.setMonth(month);
-  this.props.onSelect(next);
+  this.setAndSelectValue(next);
 }
 
-function onYearPanelSelect(current) {
-  this.setState({
-    value: current,
-    showYearPanel: 0,
-  });
+function noop() {
+
 }
 
-export default
-class MonthPanel extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: props.value,
+const MonthPanel = React.createClass({
+  propTypes: {
+    onChange: React.PropTypes.func,
+    onSelect: React.PropTypes.func,
+  },
+
+  getDefaultProps() {
+    return {
+      onChange: noop,
+      onSelect: noop,
     };
+  },
+
+  getInitialState() {
+    const props = this.props;
     // bind methods
     this.nextYear = goYear.bind(this, 1);
     this.previousYear = goYear.bind(this, -1);
-    this.showYearPanel = showYearPanel.bind(this);
-    this.onYearPanelSelect = onYearPanelSelect.bind(this);
     this.prefixCls = props.rootPrefixCls + '-month-panel';
-  }
+    return {
+      value: props.value || props.defaultValue,
+    };
+  },
+
+  componentWillReceiveProps(nextProps) {
+    if ('value' in nextProps) {
+      this.setState({
+        value: nextProps.value,
+      });
+    }
+  },
+
+  onYearPanelSelect(current) {
+    this.setState({
+      showYearPanel: 0,
+    });
+    this.setAndChangeValue(current);
+  },
 
   getMonths() {
     const props = this.props;
@@ -68,7 +81,7 @@ class MonthPanel extends React.Component {
     }
 
     return months;
-  }
+  },
 
   render() {
     const props = this.props;
@@ -80,14 +93,21 @@ class MonthPanel extends React.Component {
     const prefixCls = this.prefixCls;
     const monthsEls = months.map((month, index)=> {
       const tds = month.map(m => {
+        let disabled = false;
+        if (props.disabledDate) {
+          const testValue = value.clone();
+          testValue.setMonth(m.value);
+          disabled = props.disabledDate(testValue);
+        }
         const classNameMap = {
           [`${prefixCls}-cell`]: 1,
+          [`${prefixCls}-cell-disabled`]: disabled,
           [`${prefixCls}-selected-cell`]: m.value === currentMonth,
         };
         return (
           <td role="gridcell"
               key={m.value}
-              onClick={chooseMonth.bind(this, m.value)}
+              onClick={disabled ? null : chooseMonth.bind(this, m.value)}
               title={m.title}
               className={cx(classNameMap)}>
             <a
@@ -102,11 +122,11 @@ class MonthPanel extends React.Component {
     let yearPanel;
     if (this.state.showYearPanel) {
       yearPanel = (<YearPanel locale={locale} value={value} rootPrefixCls={props.rootPrefixCls}
-                             onSelect={this.onYearPanelSelect}/>);
+                              onSelect={this.onYearPanelSelect}/>);
     }
 
     return (
-      <div className={this.prefixCls}>
+      <div className={prefixCls} style={props.style}>
         <div>
           <div className={`${prefixCls}-header`}>
             <a className={`${prefixCls}-prev-year-btn`}
@@ -141,10 +161,31 @@ class MonthPanel extends React.Component {
         </div>
         {yearPanel}
       </div>);
-  }
-}
-
-MonthPanel.defaultProps = {
-  onSelect() {
   },
-};
+
+  setAndChangeValue(value) {
+    this.setValue(value);
+    this.props.onChange(value);
+  },
+
+  setAndSelectValue(value) {
+    this.setValue(value);
+    this.props.onSelect(value);
+  },
+
+  setValue(value) {
+    if (!('value' in this.props)) {
+      this.setState({
+        value,
+      });
+    }
+  },
+
+  showYearPanel() {
+    this.setState({
+      showYearPanel: 1,
+    });
+  },
+});
+
+export default MonthPanel;

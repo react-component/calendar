@@ -33,7 +33,7 @@ class CalendarFooter extends React.Component {
         let disabledToday = false;
         let disabledTodayClass;
         if (props.disabledDate) {
-          disabledToday = props.disabledDate(this.getTodayTime());
+          disabledToday = props.disabledDate(this.getTodayTime(), value);
           if (disabledToday) {
             disabledTodayClass = `${prefixCls}-today-btn-disabled`;
           }

@@ -1,5 +1,10 @@
 # History
 ----
+
+## 3.16.0 / 2015-08-25
+
+-- add Calendar.MonthCalendar component
+
 ## 3.15.0 / 2015-08-24
 
 -- add onChange prop

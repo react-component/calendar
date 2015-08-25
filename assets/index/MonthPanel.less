@@ -73,25 +73,40 @@
 
 .@{prefixClass}-month-panel-cell {
   text-align: center;
-}
 
-.@{prefixClass}-month-panel-month {
-  display: block;
-  width: 46px;
-  margin: 0 auto;
-  color: #666;
-  border-radius: 4px 4px;
-  height: 36px;
-  padding: 0;
-  background: transparent;
-  line-height: 36px;
-  text-align: center;
 
-  &:hover {
-    background: #ebfaff;
-    cursor: pointer;
+
+  .@{prefixClass}-month-panel-month {
+    display: block;
+    width: 46px;
+    margin: 0 auto;
+    color: #666;
+    border-radius: 4px 4px;
+    height: 36px;
+    padding: 0;
+    background: transparent;
+    line-height: 36px;
+    text-align: center;
+
+    &:hover {
+      background: #ebfaff;
+      cursor: pointer;
+    }
+  }
+
+  &-disabled{
+    .@{prefixClass}-month-panel-month {
+      color: #bfbfbf;
+
+      &:hover {
+        background: white;
+        cursor: not-allowed;
+      }
+    }
   }
 }
+
+
 
 .@{prefixClass}-month-panel-selected-cell .@{prefixClass}-month-panel-month {
   background: #3fc7fa;

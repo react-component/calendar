@@ -9,6 +9,11 @@ function onSelect(value) {
   console.log(formatter.format(value))
 }
 
+function onChange(value) {
+  console.log('onChange');
+  console.log(formatter.format(value))
+}
+
 function disabledDate(current, value) {
   var date = new Date();
   date.setHours(0);
@@ -22,5 +27,6 @@ React.render(
     <h2>calendar (en-us, U.S.A. California San Francisco)</h2>
     <Calendar showWeekNumber={true}
               disabledDate={disabledDate}
+              onChange={onChange}
               onSelect={onSelect}/>
   </div>, document.getElementById('__react-content'));
