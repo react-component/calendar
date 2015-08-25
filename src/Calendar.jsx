@@ -147,7 +147,7 @@ const Calendar = React.createClass({
       e.preventDefault();
       return 1;
     case KeyCode.ENTER:
-      this.props.onSelect(this.state.value);
+      this.onSelect(this.state.value);
       e.preventDefault();
       return 1;
     default:

@@ -136,9 +136,7 @@ const CalendarMixin = {
         value,
       });
     }
-    if (this.isAllowedDate(value)) {
-      this.props.onChange(value);
-    }
+    this.props.onChange(value);
   },
 
   isAllowedDate(value) {

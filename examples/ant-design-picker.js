@@ -12,6 +12,15 @@ var defaultCalendarValue = new GregorianCalendar(zhCn);
 defaultCalendarValue.setTime(Date.now());
 defaultCalendarValue.addMonth(-1);
 
+
+function disabledDate(current, value) {
+  var date = new Date();
+  date.setHours(0);
+  date.setMinutes(0);
+  date.setSeconds(0);
+  return current.getTime() < date.getTime();  //can not select days before today
+}
+
 var Test = React.createClass({
   handleChange(value) {
     console.log('DatePicker change: ' + (value && this.props.formatter.format(value)));
@@ -70,6 +79,7 @@ var Test = React.createClass({
                              defaultValue={defaultCalendarValue}
                              showTime={this.state.showTime}
                              showOk={true}
+                             disabledDate={disabledDate}
                              onOk={this.handleCalendarOk}
                              onSelect={this.handleCalendarSelect}
                              onClear={this.handleCalendarSelect.bind(this, null)} showClear={true}/>;
