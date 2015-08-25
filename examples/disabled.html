@@ -235,7 +235,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>rc-calendar@3.14.1</h1>
+            <h1>rc-calendar@3.16.0</h1>
             <p>calendar ui component for react</p>
         </div>
         <div class="example" id="__react-content"></div>
@@ -252,6 +252,11 @@
   <span class="hljs-built_in">console</span>.log(formatter.format(value))
 }
 
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onChange</span>(<span class="hljs-params">value</span>) </span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onChange'</span>);
+  <span class="hljs-built_in">console</span>.log(formatter.format(value))
+}
+
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">disabledDate</span>(<span class="hljs-params">current, value</span>) </span>{
   <span class="hljs-keyword">var</span> date = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();
   date.setHours(<span class="hljs-number">0</span>);
@@ -265,6 +270,7 @@ React.render(
     <span class="hljs-tag">&lt;<span class="hljs-title">h2</span>&gt;</span>calendar (en-us, U.S.A. California San Francisco)<span class="hljs-tag">&lt;/<span class="hljs-title">h2</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">Calendar</span> <span class="hljs-attribute">showWeekNumber</span>=<span class="hljs-value">{true}</span>
               <span class="hljs-attribute">disabledDate</span>=<span class="hljs-value">{disabledDate}</span>
+              <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{onChange}</span>
               <span class="hljs-attribute">onSelect</span>=<span class="hljs-value">{onSelect}</span>/&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>, document.getElementById('__react-content'));
 </span></code></pre></div>

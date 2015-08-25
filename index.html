@@ -7,7 +7,7 @@
   <meta charset="utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" rel="stylesheet"/>
-  <title>rc-calendar@3.14.1 - calendar ui component for react</title>
+  <title>rc-calendar@3.16.0 - calendar ui component for react</title>
   <style>
     @font-face {
       font-family: octicons-anchor;
@@ -737,7 +737,7 @@
 
 <body>
 <div class="header">
-  <h1>rc-calendar@3.14.1</h1>
+  <h1>rc-calendar@3.16.0</h1>
 </div>
 <div class="examples">
   <h3>EXAMPLES</h3>
@@ -752,6 +752,8 @@
       <li><a href="examples/defaultValue.html">defaultValue</a></li>
       
       <li><a href="examples/disabled.html">disabled</a></li>
+      
+      <li><a href="examples/month-calendar.html">month-calendar</a></li>
       
       <li><a href="examples/picker.html">picker</a></li>
       
@@ -887,9 +889,15 @@ React.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-titl
         </tr>
         <tr>
           <td>onSelect</td>
-          <td>Function(GregorianCalendar date)</td>
+          <td>Function(date: GregorianCalendar)</td>
           <td>function(){}</td>
           <td>called when a date is selected from calendar</td>
+        </tr>
+        <tr>
+          <td>onChange</td>
+          <td>Function(date: GregorianCalendar)</td>
+          <td>function(){}</td>
+          <td>called when a date is changed inside calendar (next year/next month/keyboard)</td>
         </tr>
         <tr>
            <td>onBlur</td>
@@ -897,6 +905,79 @@ React.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-titl
            <td>function(){}</td>
            <td>called when calendar loose focus</td>
          </tr>
+    </tbody>
+</table>
+
+<h3>Calendar.MonthCalendar props<a id="user-content-calendar.monthcalendar-props" name="calendar.monthcalendar-props" class="anchor" aria-hidden="true" href="#calendar.monthcalendar-props"><span class="octicon octicon-link"></span></a></h3><table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th style="width: 100px;">name</th>
+        <th style="width: 50px;">type</th>
+        <th style="width: 50px;">default</th>
+        <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>prefixCls</td>
+          <td>String</td>
+          <td></td>
+          <td>prefixCls of this component</td>
+        </tr>
+        <tr>
+          <td>className</td>
+          <td>String</td>
+          <td></td>
+          <td>additional css class of root dom node</td>
+        </tr>
+        <tr>
+          <td>style</td>
+          <td>Object</td>
+          <td></td>
+          <td>additional style of root dom node</td>
+        </tr>
+        <tr>
+          <td>value</td>
+          <td> <a href="https://github.com/yiminghe/gregorian-calendar">GregorianCalendar</a> </td>
+          <td></td>
+          <td>current value like input&#39;s value</td>
+        </tr>
+        <tr>
+          <td>defaultValue</td>
+          <td>GregorianCalendar</td>
+          <td></td>
+          <td>defaultValue like input&#39;s defaultValue</td>
+        </tr>
+        <tr>
+          <td>orient</td>
+          <td>String[]</td>
+          <td></td>
+          <td>affect the position of arrow. exp: [&#39;left&#39;,&#39;top&#39;]</td>
+        </tr>
+        <tr>
+          <td>locale</td>
+          <td>Object</td>
+          <td>import from &#39;rc-calendar/lib/locale/en-us&#39;</td>
+          <td>calendar locale</td>
+        </tr>
+        <tr>
+          <td>disabledDate</td>
+          <td>Function(current:GregorianCalendar):Boolean</td>
+          <td>null</td>
+          <td>whether to disable select of current month</td>
+        </tr>
+        <tr>
+          <td>onSelect</td>
+          <td>Function(date: GregorianCalendar)</td>
+          <td>function(){}</td>
+          <td>called when a date is selected from calendar</td>
+        </tr>
+        <tr>
+          <td>onChange</td>
+          <td>Function(date: GregorianCalendar)</td>
+          <td>function(){}</td>
+          <td>called when a date is changed inside calendar (next year/next month/keyboard)</td>
+        </tr>
     </tbody>
 </table>
 
