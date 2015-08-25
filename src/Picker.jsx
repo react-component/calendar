@@ -53,6 +53,7 @@ const Picker = React.createClass({
 
   getDefaultProps() {
     return {
+      rootNode: document.body,
       prefixCls: 'rc-calendar-picker',
       adjustOrientOnCalendarOverflow: true,
       style: {},
@@ -198,7 +199,7 @@ const Picker = React.createClass({
     if (!this.calendarContainer) {
       this.calendarContainer = document.createElement('div');
       this.calendarContainer.className = `${this.props.prefixCls}-container`;
-      document.body.appendChild(this.calendarContainer);
+      this.props.rootNode.appendChild(this.calendarContainer);
     }
     return this.calendarContainer;
   },
