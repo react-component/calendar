@@ -65,7 +65,7 @@ class DateTBody extends React.Component {
     const month1 = value.clone();
     month1.set(value.getYear(), value.getMonth(), 1);
     const day = month1.getDayOfWeek();
-    const lastMonthDiffDay = (day + 7 - value.getFirstDayOfWeek()) % 7;
+    const lastMonthDiffDay = (day + 7 - props.firstDayOfWeek) % 7;
     // calculate last month
     const lastMonth1 = month1.clone();
     lastMonth1.addDayOfMonth(0 - lastMonthDiffDay);

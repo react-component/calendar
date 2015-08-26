@@ -46,6 +46,18 @@ function goDay(direction) {
   this.setValue(next);
 }
 
+function getFirstDayOfWeek(props, value) {
+  let firstDayOfWeek;
+
+  if(typeof props.firstDayOfWeek === 'undefined') {
+    firstDayOfWeek = value.getFirstDayOfWeek();
+  } else {
+    firstDayOfWeek = props.firstDayOfWeek;
+  }
+  
+  return firstDayOfWeek;
+};
+
 const Calendar = React.createClass({
   mixins: [CalendarMixin],
 
@@ -56,6 +68,7 @@ const Calendar = React.createClass({
     orient: React.PropTypes.arrayOf(React.PropTypes.oneOf(['left', 'top', 'right', 'bottom'])),
     locale: React.PropTypes.object,
     showWeekNumber: React.PropTypes.bool,
+    firstDayOfWeek: React.PropTypes.number,
     style: React.PropTypes.object,
     showToday: React.PropTypes.bool,
     visible: React.PropTypes.bool,
@@ -170,6 +183,7 @@ const Calendar = React.createClass({
     const state = this.state;
     const value = state.value;
     const prefixCls = props.prefixCls;
+    const firstDayOfWeek = getFirstDayOfWeek(props, value);
     const children = (<div style={{outline: 'none'}}>
       <CalendarHeader
         locale={locale}
@@ -190,6 +204,7 @@ const Calendar = React.createClass({
           onSelect={this.onSelect}
           disabledDate={props.disabledDate}
           showWeekNumber={props.showWeekNumber}
+          firstDayOfWeek={firstDayOfWeek}
           dateFormatter={this.dateFormatter}/>
       </div>
       <CalendarFooter
