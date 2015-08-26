@@ -198,7 +198,7 @@ const Picker = React.createClass({
     if (!this.calendarContainer) {
       this.calendarContainer = document.createElement('div');
       this.calendarContainer.className = `${this.props.prefixCls}-container`;
-      document.body.appendChild(this.calendarContainer);
+      this.getInputDOMNode().parentNode.appendChild(this.calendarContainer);
     }
     return this.calendarContainer;
   },
