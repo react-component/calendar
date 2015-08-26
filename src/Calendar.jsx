@@ -49,14 +49,14 @@ function goDay(direction) {
 function getFirstDayOfWeek(props, value) {
   let firstDayOfWeek;
 
-  if(typeof props.firstDayOfWeek === 'undefined') {
+  if (typeof props.firstDayOfWeek === 'undefined') {
     firstDayOfWeek = value.getFirstDayOfWeek();
   } else {
     firstDayOfWeek = props.firstDayOfWeek;
   }
-  
+
   return firstDayOfWeek;
-};
+}
 
 const Calendar = React.createClass({
   mixins: [CalendarMixin],
