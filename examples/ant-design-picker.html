@@ -235,7 +235,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>rc-calendar@3.16.0</h1>
+            <h1>rc-calendar@3.16.1</h1>
             <p>calendar ui component for react</p>
         </div>
         <div class="example" id="__react-content"></div>
@@ -254,6 +254,15 @@ now.setTime(Date.now());
 <span class="hljs-keyword">var</span> defaultCalendarValue = <span class="hljs-keyword">new</span> GregorianCalendar(zhCn);
 defaultCalendarValue.setTime(Date.now());
 defaultCalendarValue.addMonth(-<span class="hljs-number">1</span>);
+
+
+<span class="hljs-function">function <span class="hljs-title">disabledDate</span>(<span class="hljs-params">current, <span class="hljs-keyword">value</span></span>) </span>{
+  <span class="hljs-keyword">var</span> date = <span class="hljs-keyword">new</span> Date();
+  date.setHours(<span class="hljs-number">0</span>);
+  date.setMinutes(<span class="hljs-number">0</span>);
+  date.setSeconds(<span class="hljs-number">0</span>);
+  <span class="hljs-keyword">return</span> current.getTime() &lt; date.getTime();  <span class="hljs-comment">//can not select days before today</span>
+}
 
 <span class="hljs-keyword">var</span> Test = React.createClass({
   handleChange(<span class="hljs-keyword">value</span>) {
@@ -313,6 +322,7 @@ defaultCalendarValue.addMonth(-<span class="hljs-number">1</span>);
                              defaultValue={defaultCalendarValue}
                              showTime={<span class="hljs-keyword">this</span>.state.showTime}
                              showOk={<span class="hljs-keyword">true</span>}
+                             disabledDate={disabledDate}
                              onOk={<span class="hljs-keyword">this</span>.handleCalendarOk}
                              onSelect={<span class="hljs-keyword">this</span>.handleCalendarSelect}
                              onClear={<span class="hljs-keyword">this</span>.handleCalendarSelect.bind(<span class="hljs-keyword">this</span>, <span class="hljs-keyword">null</span>)} showClear={<span class="hljs-keyword">true</span>}/&gt;;
