@@ -6,12 +6,11 @@ export default
 class DateTHead extends React.Component {
   render() {
     const props = this.props;
-    const value = props.value;
     const locale = props.locale;
     const prefixCls = props.prefixCls;
     const veryShortWeekdays = [];
     const weekDays = [];
-    const firstDayOfWeek = value.getFirstDayOfWeek();
+    const firstDayOfWeek = props.firstDayOfWeek;
     let showWeekNumberEl;
 
     for (let i = 0; i < DateConstants.DATE_COL_COUNT; i++) {
