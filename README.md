@@ -134,6 +134,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>calendar locale</td>
         </tr>
         <tr>
+          <td>firstDayOfWeek</td>
+          <td>Number</td>
+          <td>Based on current locale</td>
+          <td>Value [0..6] starts from Sunday</td>
+        </tr>
+        <tr>
           <td>disabledDate</td>
           <td>Function(current:GregorianCalendar):Boolean</td>
           <td>null</td>
@@ -348,7 +354,7 @@ http://react-component.github.io/calendar/examples/index.html
           <td>Function</td>
           <td></td>
           <td>called when close picker</td>
-        </tr>                
+        </tr>
         <tr>
           <td>open</td>
           <td>Boolean</td>
