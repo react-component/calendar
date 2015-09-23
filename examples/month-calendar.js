@@ -1,6 +1,7 @@
 import 'rc-calendar/assets/index.less';
 import React from 'react';
-import Calendar,{Picker as DatePicker, MonthCalendar} from 'rc-calendar';
+import MonthCalendar from 'rc-calendar/src/MonthCalendar';
+import DatePicker from 'rc-calendar/src/Picker';
 import zhCn from 'gregorian-calendar/lib/locale/zh-cn'; // spm error
 import DateTimeFormat from 'gregorian-calendar-format';
 import GregorianCalendar from 'gregorian-calendar';
