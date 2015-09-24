@@ -55,7 +55,12 @@ function onInputSelect(direction, value) {
 const RangeCalendar = React.createClass({
   propTypes: {
     visible: PropTypes.bool,
+    defaultAnchor: PropTypes.object,
+    anchor: PropTypes.object,
+    value: PropTypes.array,
+    defaultValue: PropTypes.array,
     onChange: PropTypes.func,
+    formatter: PropTypes.object,
     onOk: PropTypes.func,
   },
 
@@ -72,6 +77,7 @@ const RangeCalendar = React.createClass({
       defaultValue: [],
       onChange: noop,
       onAnchorChange: noop,
+      onOk: noop,
       style: {},
       visible: true,
       formatter: new DateTimeFormat('yyyy-MM-dd'),
