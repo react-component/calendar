@@ -2,46 +2,25 @@ import React from 'react';
 import Time from '../time/Time';
 import rcUtil from 'rc-util';
 const toFragment = rcUtil.Children.mapSelf;
+import {getTodayElement, getOkElement} from '../util/';
 
-export default
-class CalendarFooter extends React.Component {
-  getTodayTimeStr() {
-    const today = this.getTodayTime();
-    return this.props.dateFormatter.format(today);
-  }
+const CalendarFooter = React.createClass({
+  propTypes: {
+    onSelect: React.PropTypes.func,
+  },
 
-  getTodayTime() {
-    const value = this.props.value;
-    const today = value.clone();
-    today.setTime(Date.now());
-    return today;
-  }
+  onSelect(value) {
+    this.props.onSelect(value);
+  },
 
   render() {
     const props = this.props;
-    const value = props.value;
-    const locale = props.locale;
-    const prefixCls = props.prefixCls;
+    const {value, locale, prefixCls} = props;
     let footerEl = null;
     if (props.showToday || props.showTime) {
       let nowEl;
-      let localeNow = locale.today;
-      if (props.showTime) {
-        localeNow = locale.now || locale.today;
-      }
       if (props.showToday) {
-        let disabledToday = false;
-        let disabledTodayClass = '';
-        if (props.disabledDate) {
-          disabledToday = props.disabledDate(this.getTodayTime(), value);
-          if (disabledToday) {
-            disabledTodayClass = `${prefixCls}-today-btn-disabled`;
-          }
-        }
-        nowEl = (<a className={`${prefixCls}-today-btn ${disabledTodayClass}`}
-                    role="button"
-                    onClick={disabledToday ? null : props.onToday}
-                    title={this.getTodayTimeStr()}>{localeNow}</a>);
+        nowEl = getTodayElement(props);
       }
       let clearEl;
       if (props.showClear) {
@@ -51,9 +30,7 @@ class CalendarFooter extends React.Component {
       }
       let okBtn;
       if (props.showOk) {
-        okBtn = (<a className={`${prefixCls}-ok-btn`}
-                    role="button"
-                    onClick={props.onOk}>{locale.ok}</a>);
+        okBtn = getOkElement(props);
       }
       let footerBtn;
       if (nowEl || clearEl) {
@@ -61,7 +38,9 @@ class CalendarFooter extends React.Component {
       }
       let timeEl;
       if (props.showTime) {
-        timeEl = (<Time value={value} prefixCls={prefixCls} locale={locale} onChange={props.onSelect}/>);
+        timeEl = (<Time value={value} prefixCls={prefixCls}
+                        disabled={props.timeDisabled}
+                        locale={locale} onChange={this.onSelect}/>);
       }
       footerEl = (
         <div className={`${prefixCls}-footer`}>
@@ -71,5 +50,7 @@ class CalendarFooter extends React.Component {
     }
 
     return footerEl;
-  }
-}
+  },
+});
+
+export default CalendarFooter;

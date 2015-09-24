@@ -10,6 +10,11 @@ function onSelect(value) {
   console.log(formatter.format(value))
 }
 
+function onChange(value) {
+  console.log('onChange');
+  console.log(formatter.format(value))
+}
+
 React.render(
   <div>
     <h2>calendar (en-us, U.S.A.  California  San Francisco)</h2>
@@ -17,6 +22,7 @@ React.render(
       showOk={0}
       showClear={0}
       onSelect={onSelect}
+      onChange={onChange}
       showTime={true}/>
   </div>, document.getElementById('__react-content'));
 

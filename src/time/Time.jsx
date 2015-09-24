@@ -25,6 +25,9 @@ function loop(value, min, max) {
 
 function keyDownWrap(method, min, max) {
   return function onKeyDown(e) {
+    if (this.props.disabled) {
+      return;
+    }
     const value = e.target.value;
     let number = parseInt(value, 10);
     const keyCode = e.keyCode;
@@ -86,6 +89,9 @@ class Time extends React.Component {
   }
 
   onHourClick() {
+    if (this.props.disabled) {
+      return;
+    }
     this.setState({
       showHourPanel: 1,
       showMinutePanel: 0,
@@ -94,6 +100,9 @@ class Time extends React.Component {
   }
 
   onMinuteClick() {
+    if (this.props.disabled) {
+      return;
+    }
     this.setState({
       showHourPanel: 0,
       showMinutePanel: 1,
@@ -102,6 +111,9 @@ class Time extends React.Component {
   }
 
   onSecondClick() {
+    if (this.props.disabled) {
+      return;
+    }
     this.setState({
       showHourPanel: 0,
       showMinutePanel: 0,
@@ -113,6 +125,7 @@ class Time extends React.Component {
   render() {
     const state = this.state;
     const props = this.props;
+    const disabled = props.disabled;
     const prefixCls = props.prefixCls;
     const value = props.value;
     const locale = props.locale;
@@ -143,6 +156,7 @@ class Time extends React.Component {
              title={locale.hourInput}
              ref={setHourOfDay}
              readOnly
+             disabled={disabled}
              value={padding(hour)}
              onClick={this.onHourClick}
              onKeyDown={this.onHourKeyDown}/>
@@ -152,6 +166,7 @@ class Time extends React.Component {
                title={locale.minuteInput}
                ref={setMinutes}
                readOnly
+               disabled={disabled}
                value={padding(minute)}
                onClick={this.onMinuteClick}
                onKeyDown={this.onMinuteKeyDown}/>
@@ -162,6 +177,7 @@ class Time extends React.Component {
                title={locale.secondInput}
                ref={setSeconds}
                readOnly
+               disabled={disabled}
                value={padding(second)}
                onClick={this.onSecondClick}
                onKeyDown={this.onSecondKeyDown}/>
@@ -177,6 +193,7 @@ Time.prototype.onSecondKeyDown = keyDownWrap('setSeconds', 0, 59);
 
 Time.propTypes = {
   onChange: React.PropTypes.func,
+  disabled: React.PropTypes.bool,
 };
 
 Time.defaultProps = {

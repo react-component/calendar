@@ -1,26 +1,26 @@
-.rc-calendar-month-panel {
-  left: 4px;
-  top: 4px;
-  bottom: 4px;
-  right: 4px;
+.@{prefixClass}-month-panel {
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
   background: #ffffff;
   z-index: 10;
   position: absolute;
   outline: none;
 }
 
-.rc-calendar-month-panel-hidden {
+.@{prefixClass}-month-panel-hidden {
   display: none;
 }
 
-.rc-calendar-month-panel-header {
+.@{prefixClass}-month-panel-header {
   height: 30px;
   line-height: 30px;
   position: relative;
   text-align: center;
 }
 
-.rc-calendar-month-panel-header > a {
+.@{prefixClass}-month-panel-header > a {
   font-weight: bold;
   box-sizing: border-box;
   display: inline-block;
@@ -32,45 +32,45 @@
   border-radius: 4px;
 }
 
-.rc-calendar-month-panel-header > a:hover {
+.@{prefixClass}-month-panel-header > a:hover {
   background: #eeeeee;
 }
 
-.rc-calendar-month-panel-prev-year-btn, .rc-calendar-month-panel-next-year-btn {
+.@{prefixClass}-month-panel-prev-year-btn, .@{prefixClass}-month-panel-next-year-btn {
   position: absolute;
   top: 0;
 }
 
-.rc-calendar-month-panel-prev-year-btn {
+.@{prefixClass}-month-panel-prev-year-btn {
   user-select: none;
   left: 0;
 }
 
-.rc-calendar-month-panel .rc-calendar-month-panel-year-select {
+.@{prefixClass}-month-panel .@{prefixClass}-month-panel-year-select {
   width: 180px;
 }
 
-.rc-calendar-month-panel-year-select-arrow {
+.@{prefixClass}-month-panel-year-select-arrow {
   display: none;
 }
 
-.rc-calendar-month-panel-next-year-btn {
+.@{prefixClass}-month-panel-next-year-btn {
   user-select: none;
   right: 0;
 }
 
-.rc-calendar-month-panel-table {
+.@{prefixClass}-month-panel-table {
   table-layout: fixed;
   width: 100%;
   border-collapse: separate;
   height: 275px;
 }
 
-.rc-calendar-month-panel-cell {
+.@{prefixClass}-month-panel-cell {
   text-align: center;
 }
 
-.rc-calendar-month-panel-month {
+.@{prefixClass}-month-panel-month {
   width: 46px;
   margin: 0 auto;
   color: #666;
@@ -83,11 +83,11 @@
   display: block;
 }
 
-.rc-calendar-month-panel-month:hover {
+.@{prefixClass}-month-panel-month:hover {
   background: #eeeeee;
 }
 
-.rc-calendar-month-panel-selected-cell .rc-calendar-month-panel-month {
+.@{prefixClass}-month-panel-selected-cell .@{prefixClass}-month-panel-month {
   color: #ffffff;
   background-color: #3276b1;
   border-color: #285e8e;

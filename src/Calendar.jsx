@@ -1,5 +1,4 @@
 import React from 'react';
-import DateTimeFormat from 'gregorian-calendar-format';
 import GregorianCalendar from 'gregorian-calendar';
 import {KeyCode} from 'rc-util';
 import DateTable from './date/DateTable';
@@ -80,7 +79,6 @@ const Calendar = React.createClass({
 
   getInitialState() {
     const props = this.props;
-    this.dateFormatter = new DateTimeFormat(props.locale.dateFormat);
     const orient = props.orient;
     // bind methods
     this.nextMonth = goMonth.bind(this, 1);
@@ -95,9 +93,6 @@ const Calendar = React.createClass({
       this.setState({
         orient: nextProps.orient,
       });
-    }
-    if (nextProps.locale !== this.props.locale) {
-      this.dateFormatter = new DateTimeFormat(nextProps.locale.dateFormat);
     }
   },
 
@@ -174,10 +169,6 @@ const Calendar = React.createClass({
       <CalendarHeader
         locale={locale}
         onValueChange={this.setValue}
-        previousYear={this.previousYear}
-        previousMonth={this.previousMonth}
-        nextMonth={this.nextMonth}
-        nextYear={this.nextYear}
         value={value}
         prefixCls={prefixCls}/>
 
@@ -189,8 +180,7 @@ const Calendar = React.createClass({
           dateRender={props.dateRender}
           onSelect={this.onSelect}
           disabledDate={props.disabledDate}
-          showWeekNumber={props.showWeekNumber}
-          dateFormatter={this.dateFormatter}/>
+          showWeekNumber={props.showWeekNumber}/>
       </div>
       <CalendarFooter
         locale={locale}
@@ -201,7 +191,6 @@ const Calendar = React.createClass({
         showTime={props.showTime}
         value={value}
         disabledDate={props.disabledDate}
-        dateFormatter={this.dateFormatter}
         onClear={this.onClear}
         onOk={this.onOk}
         onSelect={this.onSelect}

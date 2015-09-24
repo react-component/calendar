@@ -1,6 +1,7 @@
 import {KeyCode as keyCode} from 'rc-util';
 import expect from 'expect.js';
-import Calendar,{Picker as DatePicker} from '../index';
+import Calendar from '../index';
+import DatePicker from '../lib/Picker';
 import React from 'react/addons';
 var TestUtils = React.addons.TestUtils;
 var Simulate = TestUtils.Simulate;

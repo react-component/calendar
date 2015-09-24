@@ -1,5 +1,7 @@
 import React from 'react';
 import DateConstants from './DateConstants';
+import {getTitleString} from '../util/';
+import {compareByDay} from '../util/';
 
 function isSameDay(one, two) {
   return one.getYear() === two.getYear() &&
@@ -36,8 +38,17 @@ function handleDayClick(current) {
   this.props.onSelect(current);
 }
 
-export default
-class DateTBody extends React.Component {
+function handleCellMouseEnter(current) {
+  this.props.onDayHover(current);
+}
+
+const DateTBody = React.createClass({
+  getDefaultProps() {
+    return {
+      onDayHover: noop,
+    };
+  },
+
   render() {
     const props = this.props;
     let i;
@@ -46,6 +57,7 @@ class DateTBody extends React.Component {
     const dateTable = [];
     const showWeekNumber = props.showWeekNumber;
     const value = props.value;
+    const range = props.range;
     const today = value.clone();
     const prefixCls = props.prefixCls;
     const cellClass = prefixCls + '-cell';
@@ -53,9 +65,9 @@ class DateTBody extends React.Component {
     const dateClass = prefixCls + ('-date');
     const dateRender = props.dateRender;
     const disabledDate = props.disabledDate;
-    const dateFormatter = this.props.dateFormatter;
     const todayClass = prefixCls + ('-today');
     const selectedClass = prefixCls + ('-selected-day');
+    const inRangeClass = prefixCls + ('-in-range-cell');
     const lastMonthDayClass = prefixCls + ('-last-month-cell');
     const nextMonthDayClass = prefixCls + ('-next-month-btn-day');
     const disabledClass = prefixCls + ('-disabled-cell');
@@ -109,21 +121,39 @@ class DateTBody extends React.Component {
         if (isSameDay(current, today)) {
           cls += ' ' + todayClass;
         }
-        if (isSameDay(current, value)) {
-          cls += ' ' + selectedClass;
+
+        const isBeforeCurrentMonthYear = beforeCurrentMonthYear(current, value);
+        const isAfterCurrentMonthYear = afterCurrentMonthYear(current, value);
+
+        if (range) {
+          if (!isBeforeCurrentMonthYear && !isAfterCurrentMonthYear) {
+            const startValue = range[0];
+            const endValue = range[1];
+            if (startValue) {
+              if (isSameDay(current, startValue)) {
+                selected = true;
+              }
+            }
+            if (startValue && endValue) {
+              if (isSameDay(current, endValue) && !range.hovering) {
+                selected = true;
+              } else if (compareByDay(current, startValue) > 0 && compareByDay(current, endValue) < 0) {
+                cls += ' ' + inRangeClass;
+              }
+            }
+          }
+        } else if (isSameDay(current, value)) {
           selected = true;
         }
-        if (beforeCurrentMonthYear(current, value)) {
+        if (isBeforeCurrentMonthYear) {
           cls += ' ' + lastMonthDayClass;
         }
-        if (afterCurrentMonthYear(current, value)) {
+        if (isAfterCurrentMonthYear) {
           cls += ' ' + nextMonthDayClass;
         }
         if (disabledDate) {
           if (disabledDate(current, value)) {
-            cls += ' ' + disabledClass;
             disabled = true;
-
 
             if (!last || !disabledDate(last, value)) {
               cls += ' ' + firstDisableClass;
@@ -133,6 +163,14 @@ class DateTBody extends React.Component {
               cls += ' ' + lastDisableClass;
             }
           }
+        }
+
+        if (selected) {
+          cls += ' ' + selectedClass;
+        }
+
+        if (disabled) {
+          cls += ' ' + disabledClass;
         }
 
         let dateHtml;
@@ -150,8 +188,10 @@ class DateTBody extends React.Component {
         }
 
         dateCells.push(
-          <td key={passed} onClick={disabled ? noop : handleDayClick.bind(this, current)} role="gridcell"
-              title={dateFormatter.format(current)} className={cls}>
+          <td key={passed} onClick={disabled ? noop : handleDayClick.bind(this, current)}
+              onMouseEnter={disabled ? noop : handleCellMouseEnter.bind(this, current)}
+              role="gridcell"
+              title={getTitleString(current)} className={cls}>
             {dateHtml}
           </td>);
 
@@ -168,9 +208,7 @@ class DateTBody extends React.Component {
     return (<tbody className={prefixCls + ('tbody')}>
     {tableHtml}
     </tbody>);
-  }
-}
+  },
+});
 
-DateTBody.propTypes = {
-  dateFormatter: React.PropTypes.object,
-};
+export default DateTBody;

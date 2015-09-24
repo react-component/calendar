@@ -1,0 +1,32 @@
+@prefixRangeCalendarClass: rc-calendar-range;
+@import "./Input.less";
+
+.@{prefixRangeCalendarClass} {
+  width: 520px;
+  overflow: hidden;
+
+  &-part {
+    width: 250px;
+    position: relative;
+  }
+
+  &-left {
+    float: left;
+  }
+
+  &-right {
+    float: right;
+  }
+
+  &-input {
+    .input();
+    width: 100%;
+    cursor: auto;
+  }
+
+  .@{prefixClass}-in-range-cell {
+    background: #ebf4f8;
+    border-radius: 0;
+  }
+}
+

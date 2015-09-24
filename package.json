@@ -55,8 +55,10 @@
   "dependencies": {
     "gregorian-calendar": "3.x",
     "gregorian-calendar-format": "3.x",
+    "object-assign": "^4.0.1",
     "rc-align": "1.x",
     "rc-animate": "1.x",
-    "rc-util": "2.x"
+    "rc-util": "2.x",
+    "warning": "~2.0.0"
   }
 }
