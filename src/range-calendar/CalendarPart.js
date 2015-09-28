@@ -2,7 +2,7 @@ import React from 'react';
 import CalendarHeader from '../calendar/CalendarHeader';
 import DateTable from '../date/DateTable';
 import CalendarFooter from '../calendar/CalendarFooter';
-import DateInput from '../RangeCalendar/DateInput';
+import DateInput from '../date/DateInput';
 
 const Calendar = React.createClass({
   propTypes: {
@@ -11,17 +11,18 @@ const Calendar = React.createClass({
 
   render() {
     const props = this.props;
-    const {value, direction, prefixCls, locale, range, formatter} = props;
+    const {value, direction, prefixCls, locale, range, formatter, disabledDate} = props;
     const rangeClassName = `${prefixCls}-range`;
     const newProps = {locale, value, prefixCls};
     const index = direction === 'left' ? 0 : 1;
     return (<div className={`${rangeClassName}-part ${rangeClassName}-${direction}`}>
-      <div className={`${rangeClassName}-input-wrap`}>
-        <DateInput className={`${rangeClassName}-input`}
+      <div className={`${prefixCls}-input-wrap`}>
+        <DateInput className={`${prefixCls}-input`}
                    formatter={formatter}
+                   disabledDate={disabledDate}
                    value={range[index] || range[0]}
                    onChange={props.onInputSelect}/>
-        <i className={`${rangeClassName}-input-icon`}/>
+        <i className={`${prefixCls}-input-icon`}/>
       </div>
       <div style={{outline: 'none'}}>
         <CalendarHeader
@@ -37,7 +38,7 @@ const Calendar = React.createClass({
             dateRender={props.dateRender}
             onSelect={props.onSelect}
             onDayHover={props.onDayHover}
-            disabledDate={props.disabledDate}
+            disabledDate={disabledDate}
             showWeekNumber={props.showWeekNumber}/>
         </div>
         <CalendarFooter

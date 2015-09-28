@@ -1,7 +1,5 @@
 import React from 'react';
-import DateTimeFormat from 'gregorian-calendar-format';
-import rcUtil, {createChainedFunction, KeyCode, classSet} from 'rc-util';
-const toFragment = rcUtil.Children.mapSelf;
+import {createChainedFunction, KeyCode, classSet, Dom} from 'rc-util';
 import Align from 'rc-align';
 const orientMap = {
   tl: ['top', 'left'],
@@ -24,10 +22,6 @@ function getImmutableOrient(orient) {
   }
 }
 
-function prevent(e) {
-  e.preventDefault();
-}
-
 function noop() {
 }
 
@@ -43,6 +37,7 @@ const Picker = React.createClass({
     onChange: React.PropTypes.func,
     onOpen: React.PropTypes.func,
     onClose: React.PropTypes.func,
+    children: React.PropTypes.func,
     calendar: React.PropTypes.element,
     style: React.PropTypes.object,
     open: React.PropTypes.bool,
@@ -60,7 +55,6 @@ const Picker = React.createClass({
       onChange: noop,
       onOpen: noop,
       onClose: noop,
-      formatter: new DateTimeFormat('yyyy-MM-dd'),
     };
   },
 
@@ -94,9 +88,13 @@ const Picker = React.createClass({
     }
   },
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
     if (this.haveOpened) {
-      React.render(this.getCalendarElement(), this.getCalendarContainer());
+      React.render(this.getCalendarElement(), this.getCalendarContainer(), ()=> {
+        if (!prevState.open && this.state.open) {
+          React.findDOMNode(this.calendarInstance).focus();
+        }
+      });
     }
   },
 
@@ -112,8 +110,6 @@ const Picker = React.createClass({
     const points = align.points;
     const newOrient = orientMap[points[0]];
     this.calendarInstance.setOrient(newOrient);
-    // focus after align
-    React.findDOMNode(this.calendarInstance).focus();
   },
 
   onInputClick() {
@@ -135,25 +131,22 @@ const Picker = React.createClass({
   onCalendarKeyDown(e) {
     if (e.keyCode === KeyCode.ESC) {
       e.stopPropagation();
-      this.close(this.focusInput);
+      this.close(this.focus);
     }
   },
 
   onCalendarSelect(value) {
-    const currentValue = this.state.value;
     this.setState({
       value: value,
     });
     if (!this.props.calendar.props.showTime) {
-      this.close(this.focusInput);
+      this.close(this.focus);
     }
-    if (!currentValue || currentValue.getTime() !== value.getTime()) {
-      this.props.onChange(value);
-    }
+    this.props.onChange(value);
   },
 
   onCalendarBlur() {
-    if (document.activeElement === this.getInputDOMNode()) {
+    if (Dom.contains(this.getDOMNode(), document.activeElement)) {
       return;
     }
     // if invisible, will not trigger blur
@@ -162,14 +155,14 @@ const Picker = React.createClass({
   },
 
   onCalendarOk() {
-    this.close(this.focusInput);
+    this.close(this.focus);
   },
 
   onCalendarClear() {
     this.setState({
       value: null,
     });
-    this.close(this.focusInput);
+    this.close(this.focus);
     if (this.state.value !== null) {
       this.props.onChange(null);
     }
@@ -179,10 +172,6 @@ const Picker = React.createClass({
     this.calendarInstance.setState({
       value,
     });
-  },
-
-  getInputDOMNode() {
-    return React.findDOMNode(this.inputInstance);
   },
 
   getTransitionName() {
@@ -205,18 +194,16 @@ const Picker = React.createClass({
 
   getAlign(orient) {
     let points = ['tl', 'bl'];
-    let offset = [0, 5];
+    const offset = [0, 0];
     const adjustOrientOnCalendarOverflow = this.props.adjustOrientOnCalendarOverflow;
     if (orient.indexOf('top') !== -1 && orient.indexOf('left') !== -1) {
-      points = ['tl', 'bl'];
+      points = ['tl', 'tl'];
     } else if (orient.indexOf('top') !== -1 && orient.indexOf('right') !== -1) {
-      points = ['tr', 'br'];
+      points = ['tr', 'tr'];
     } else if (orient.indexOf('bottom') !== -1 && orient.indexOf('left') !== -1) {
-      points = ['bl', 'tl'];
-      offset = [0, -5];
+      points = ['bl', 'bl'];
     } else if (orient.indexOf('bottom') !== -1 && orient.indexOf('right') !== -1) {
-      points = ['br', 'tr'];
-      offset = [0, -5];
+      points = ['br', 'br'];
     }
     let adjustX;
     let adjustY;
@@ -265,7 +252,7 @@ const Picker = React.createClass({
       transitionAppear={true}
       showProp="calendarOpen"
       transitionName={this.getTransitionName()}>
-      <Align target={this.getInputDOMNode}
+      <Align target={this.getDOMNode}
              key="calendar"
              onAlign={this.onCalendarAlign}
              calendarOpen={state.open}
@@ -280,43 +267,23 @@ const Picker = React.createClass({
     const props = this.props;
     const disabled = props.disabled;
     const prefixCls = props.prefixCls;
-    let input = props.children;
     const state = this.state;
-    const value = state.value;
     this.haveOpened = this.haveOpened || state.open;
-    let inputValue = '';
-    if (value) {
-      inputValue = props.formatter.format(value);
-    }
-    input = React.cloneElement(input, {
-      ref: createChainedFunction(input.ref, this.saveInputRef),
-      disabled: disabled,
-      onChange: noop,
-      onClick: disabled ? noop : this.onInputClick,
-      value: inputValue,
-      onKeyDown: disabled ? noop : this.onKeyDown,
-    });
     const classes = {
       [prefixCls]: 1,
       [`${prefixCls}-open`]: state.open,
       [`${prefixCls}-disabled`]: disabled,
     };
-    let trigger = props.trigger;
-    if (trigger) {
-      trigger = React.cloneElement(trigger, {
-        unselectable: true,
-        onMouseDown: prevent,
-        onClick: disabled ? noop : this.onTriggerClick,
-      });
-    }
-    return (<span className={classSet(classes)} style={props.style}>
-      {toFragment([input, trigger])}
+    return (<span className={classSet(classes)} style={props.style} tabIndex="0"
+                  onKeyDown={disabled ? noop : this.onKeyDown}
+                  onClick={disabled ? noop : this.onInputClick}>
+      {props.children(state, props)}
     </span>);
   },
 
-  focusInput() {
+  focus() {
     if (!this.state.open) {
-      this.getInputDOMNode().focus();
+      this.getDOMNode().focus();
     }
   },
 

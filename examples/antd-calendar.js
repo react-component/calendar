@@ -9,10 +9,11 @@ import CalendarLocale from 'rc-calendar/src/locale/zh-cn';
 var now = new GregorianCalendar(zhCn);
 now.setTime(Date.now());
 
+const formatter= new DateTimeFormat('yyyy-MM-dd HH:mm:ss');
+
 var defaultCalendarValue = new GregorianCalendar(zhCn);
 defaultCalendarValue.setTime(Date.now());
 defaultCalendarValue.addMonth(-1);
-
 
 function disabledDate(current, value) {
   var date = new Date();
@@ -23,12 +24,12 @@ function disabledDate(current, value) {
 }
 
 var Test = React.createClass({
-  handleChange(value) {
-    console.log('DatePicker change: ' + (value && this.props.formatter.format(value)));
+  onChange(value) {
+    console.log('DatePicker change: ' + (value && formatter.format(value)));
   },
 
   handleCalendarSelect(value) {
-    console.log('calendar select: ' + (value && this.props.formatter.format(value)));
+    console.log('calendar select: ' + (value && formatter.format(value)));
     // controlled value
     this.setState({
       time: Date.now(),
@@ -37,18 +38,12 @@ var Test = React.createClass({
   },
 
   handleCalendarOk(value) {
-    console.log('calendar ok: ' + (value && this.props.formatter.format(value)));
+    console.log('calendar ok: ' + (value && formatter.format(value)));
     // controlled value
     this.setState({
       time: Date.now(),
       value: value
     });
-  },
-
-  getDefaultProps() {
-    return {
-      formatter: new DateTimeFormat('yyyy-MM-dd HH:mm:ss')
-    }
   },
 
   getInitialState() {
@@ -80,6 +75,7 @@ var Test = React.createClass({
                              defaultValue={defaultCalendarValue}
                              showTime={this.state.showTime}
                              showOk={true}
+                             formatter={formatter}
                              disabledDate={disabledDate}
                              onOk={this.handleCalendarOk}
                              onSelect={this.handleCalendarSelect}
@@ -102,23 +98,53 @@ var Test = React.createClass({
       }}>
         <DatePicker
           adjustOrientOnCalendarOverflow={true}
+          adjustOrientOnCalendarOverflow={true}
           animation="slide-up"
           disabled={state.disabled}
-          trigger={<span className="rc-calendar-picker-icon" />}
-          formatter={this.props.formatter} calendar={calendar}
-          value={state.value} onChange={this.handleChange}>
-          <input className="rc-calendar-picker-input" style={{width:200}} disabled={state.disabled}
-                 placeholder="请选择日期"/>
+          calendar={calendar}
+          value={state.value}
+          onChange={this.onChange}>
+          {
+            ({value})=> {
+              return (
+                <input
+                       value={value && formatter.format(value)}
+                       style={{width:200}}
+                       readOnly
+                       placeholder="请选择日期"/>
+              );
+            }
+          }
         </DatePicker>
       </div>
     </div>;
   }
 });
 
+function onCalendarSelect(value) {
+  console.log('onCalendarSelect');
+  console.log(formatter.format(value))
+}
+
+function onCalendarChange(value) {
+  console.log('onCalendarChange');
+  console.log(formatter.format(value))
+}
+
+
 React.render(<div style={{zIndex:1000,position:'relative'}}>
   <h2>zh-cn</h2>
-
-  <div style={{marginTop:200,width:600}}>
+  <div style={{width:600}}>
+    <div style={{margin:10}}>
+      <Calendar showWeekNumber={false}
+                formatter={formatter}
+                locale={CalendarLocale}
+                defaultValue={now}
+                onChange={onCalendarChange}
+                disabledDate={disabledDate}
+                onSelect={onCalendarSelect}
+                showTime={true}/>
+    </div>
     <div style={{float:'left',width:300}}>
       <Test defaultValue={now}/>
     </div>

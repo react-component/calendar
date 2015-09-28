@@ -1,5 +1,4 @@
 import React from 'react';
-import enUs from '../locale/en-us';
 import {classSet} from 'rc-util';
 import GregorianCalendar from 'gregorian-calendar';
 
@@ -27,31 +26,12 @@ const CalendarMixin = {
   propTypes: {
     value: React.PropTypes.object,
     defaultValue: React.PropTypes.object,
-    className: React.PropTypes.string,
-    orient: React.PropTypes.arrayOf(React.PropTypes.oneOf(['left', 'top', 'right', 'bottom'])),
-    locale: React.PropTypes.object,
-    style: React.PropTypes.object,
-    visible: React.PropTypes.bool,
-    onSelect: React.PropTypes.func,
-    prefixCls: React.PropTypes.string,
     onKeyDown: React.PropTypes.func,
-    onChange: React.PropTypes.func,
-    onFocus: React.PropTypes.func,
-    onBlur: React.PropTypes.func,
   },
 
   getDefaultProps() {
     return {
-      locale: enUs,
-      style: {},
-      visible: true,
-      prefixCls: 'rc-calendar',
-      className: '',
       onKeyDown: noop,
-      onSelect: noop,
-      onChange: noop,
-      onFocus: noop,
-      onBlur: noop,
     };
   },
 
@@ -71,10 +51,6 @@ const CalendarMixin = {
     }
   },
 
-  shouldComponentUpdate(nextProps) {
-    return this.props.visible || nextProps.visible;
-  },
-
   onSelect(value, keyDownEvent) {
     this.setValue(value);
     if (!keyDownEvent) {
@@ -82,24 +58,6 @@ const CalendarMixin = {
         this.props.onSelect(value);
       }
     }
-  },
-
-  onFocus() {
-    if (this._blurTimer) {
-      clearTimeout(this._blurTimer);
-      this._blurTimer = null;
-    } else {
-      this.props.onFocus();
-    }
-  },
-
-  onBlur() {
-    if (this._blurTimer) {
-      clearTimeout(this._blurTimer);
-    }
-    this._blurTimer = setTimeout(()=> {
-      this.props.onBlur();
-    }, 100);
   },
 
   renderRoot(newProps) {
@@ -141,23 +99,6 @@ const CalendarMixin = {
   isAllowedDate(value) {
     const disabledDate = this.props.disabledDate;
     return !disabledDate || !disabledDate(value);
-  },
-
-  setOrient(orient) {
-    // FIXME: hack to prevent breaking rc-animate
-    if (this.state.orient === orient) {
-      return;
-    }
-    this.state.orient = orient;
-    const prefixCls = this.props.prefixCls;
-    const root = React.findDOMNode(this);
-    let className = root.className.replace(new RegExp(`${prefixCls}-orient-\\w+`, 'g'), '');
-    if (orient) {
-      orient.forEach(o => {
-        className += ` ${prefixCls}-orient-${o}`;
-      });
-    }
-    root.className = className;
   },
 };
 

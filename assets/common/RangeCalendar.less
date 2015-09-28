@@ -1,7 +1,4 @@
-@prefixRangeCalendarClass: rc-calendar-range;
-@import "./Input.less";
-
-.@{prefixRangeCalendarClass} {
+.@{prefixClass}-range {
   width: 520px;
   overflow: hidden;
 
@@ -16,12 +13,6 @@
 
   &-right {
     float: right;
-  }
-
-  &-input {
-    .input();
-    width: 100%;
-    cursor: auto;
   }
 
   .@{prefixClass}-in-range-cell {

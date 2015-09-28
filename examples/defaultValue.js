@@ -7,6 +7,7 @@ import zhCn from 'gregorian-calendar/lib/locale/zh-cn'; // spm error
 import DateTimeFormat from 'gregorian-calendar-format';
 import GregorianCalendar from 'gregorian-calendar';
 import CalendarLocale from 'rc-calendar/src/locale/zh-cn';
+const formatter = new DateTimeFormat('yyyy-MM-dd HH:mm:ss');
 
 var Test = React.createClass({
   onOpenChange(e) {
@@ -21,7 +22,7 @@ var Test = React.createClass({
     });
   },
 
-  handleChange(value) {
+  onChange(value) {
     console.log('DatePicker change: ' + (this.props.formatter.format(value)));
   },
 
@@ -59,6 +60,7 @@ var Test = React.createClass({
   render() {
     var state = this.state;
     var calendar = <Calendar locale={CalendarLocale}
+                             formatter={this.props.formatter}
                              orient={['bottom', 'left']}
                              showTime={this.state.showTime} onSelect={this.handleCalendarSelect}/>;
     return <div className="form-group" style={{width: 400, margin: 20}} data-time={state.time}>
@@ -67,15 +69,22 @@ var Test = React.createClass({
           <input type="checkbox" checked={this.state.showTime} onChange={this.handleShowTimeChange}/>
           showTime</span>
       </div>
-      <div className="input-group">
-        <DatePicker formatter={this.props.formatter}
-                    calendar={calendar}
+      <div className="input-group" style={{width:250}}>
+        <DatePicker calendar={calendar}
+                    style={{display:'inline'}}
                     open={this.state.open}
                     onOpen={this.onOpenChange}
                     onClose={this.onOpenChange}
                     defaultValue={state.value}
-                    onChange={this.handleChange}>
-          <input type="text" className="form-control" style={{background: "white", cursor: "pointer"}}/>
+                    onChange={this.onChange}>
+          {
+            ({value}) => {
+              return <input type="text" className="form-control"
+                            readOnly
+                            value={formatter.format(value)}
+                            style={{background: "white", cursor: "pointer"}}/>;
+            }
+          }
         </DatePicker>
         <span className="input-group-addon" onClick={this.toggle}>
           <span className="glyphicon glyphicon-calendar"></span>

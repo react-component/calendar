@@ -1,11 +1,11 @@
 import React, {PropTypes} from 'react';
 import DateTimeFormat from 'gregorian-calendar-format';
 import GregorianCalendar from 'gregorian-calendar';
-import enUs from './locale/en-us';
 import {classSet} from 'rc-util';
-import CalendarPart from './RangeCalendar/CalendarPart';
+import CalendarPart from './range-calendar/CalendarPart';
 import {syncTime, getTodayElement, getOkElement, getTodayTime} from './util/';
 import assign from 'object-assign';
+import CommonMixin from './mixin/CommonMixin';
 
 function noop() {
 }
@@ -26,63 +26,58 @@ function onAnchorChange(direction, current) {
 }
 
 function normalizeAnchor(props, init) {
-  const range = props.value || init && props.defaultValue || [];
-  return props.anchor || init && props.defaultAnchor || range[0] || init && getNow();
+  const value = props.value || init && props.defaultValue || [];
+  return props.anchor || init && props.defaultAnchor || value[0] || init && getNow();
 }
 
-function onTimeSelect(direction, value) {
+function onTimeSelect(direction, selectedValue) {
   const index = direction === 'left' ? 0 : 1;
-  let range = this.state.range;
-  if (range[index]) {
-    range = range.concat();
-    range[index] = range[index].clone();
-    syncTime(value, range[index]);
-    this.fireValueChange(range);
+  let value = this.state.value;
+  if (value[index]) {
+    value = value.concat();
+    value[index] = value[index].clone();
+    syncTime(selectedValue, value[index]);
+    this.fireValueChange(value);
   }
 }
 
-function onInputSelect(direction, value) {
-  const originalRange = this.state.range;
-  const range = originalRange.concat();
+function onInputSelect(direction, selectedValue) {
+  const originalValue = this.state.value;
+  const value = originalValue.concat();
   const index = direction === 'left' ? 0 : 1;
-  range[index] = value;
-  if (range[0].getTime() > range[1].getTime()) {
-    range.length = 1;
+  value[index] = selectedValue;
+  if (value[0].getTime() > value[1].getTime()) {
+    value.length = 1;
   }
-  this.fireValueChange(range);
+  this.fireValueChange(value);
 }
 
 const RangeCalendar = React.createClass({
   propTypes: {
-    visible: PropTypes.bool,
     defaultAnchor: PropTypes.object,
     anchor: PropTypes.object,
     value: PropTypes.array,
     defaultValue: PropTypes.array,
-    onChange: PropTypes.func,
-    formatter: PropTypes.object,
     onOk: PropTypes.func,
+    onChange: PropTypes.func,
+    onSelect: PropTypes.func,
+    formatter: PropTypes.object,
   },
+
+  mixins: [CommonMixin],
 
   getInitialState() {
     const props = this.props;
-    const range = props.value || props.defaultValue;
+    const value = props.value || props.defaultValue;
     const anchor = normalizeAnchor(props, 1);
-    return {range, anchor};
+    return {value, anchor};
   },
 
   getDefaultProps() {
     return {
-      locale: enUs,
       defaultValue: [],
-      onChange: noop,
       onAnchorChange: noop,
-      onOk: noop,
-      style: {},
-      visible: true,
       formatter: new DateTimeFormat('yyyy-MM-dd'),
-      prefixCls: 'rc-calendar',
-      className: '',
     };
   },
 
@@ -94,47 +89,43 @@ const RangeCalendar = React.createClass({
       } else {
         newState.anchor = normalizeAnchor(nextProps, 0);
       }
+      this.setState(newState);
     }
-    this.fireAnchorChange(newState);
   },
 
-  shouldComponentUpdate(nextProps) {
-    return this.props.visible || nextProps.visible;
-  },
-
-  onSelect(value) {
-    const originalRange = this.state.range;
-    const range = originalRange.concat();
+  onSelect(selectedValue) {
+    const originalValue = this.state.value;
+    const value = originalValue.concat();
     let changed = false;
-    if (!range.length || range.length === 2 && !originalRange.hovering) {
-      range.length = 1;
-      range[0] = value;
+    if (!value.length || value.length === 2 && !originalValue.hovering) {
+      value.length = 1;
+      value[0] = selectedValue;
       changed = true;
-    } else if (range[0].getTime() < value.getTime()) {
-      range[1] = value;
+    } else if (value[0].getTime() < selectedValue.getTime()) {
+      value[1] = selectedValue;
       changed = true;
-    } else if (range[0].getTime() > value.getTime()) {
-      range.length = 1;
-      range[0] = value;
+    } else if (value[0].getTime() > selectedValue.getTime()) {
+      value.length = 1;
+      value[0] = selectedValue;
       changed = true;
     }
     if (changed) {
-      this.fireValueChange(range);
+      this.fireValueChange(value);
     }
   },
 
-  onDayHover(value) {
-    let range = this.state.range;
-    if (!range.length || range.length === 2 && !range.hovering) {
+  onDayHover(hoverValue) {
+    let value = this.state.value;
+    if (!value.length || value.length === 2 && !value.hovering) {
       return;
     }
-    if (value.getTime() < range[0].getTime()) {
+    if (hoverValue.getTime() < value[0].getTime()) {
       return;
     }
-    range = range.concat();
-    range[1] = value;
-    range.hovering = 1;
-    this.fireValueChange(range);
+    value = value.concat();
+    value[1] = hoverValue;
+    value.hovering = 1;
+    this.fireValueChange(value);
   },
 
   onToday() {
@@ -144,15 +135,15 @@ const RangeCalendar = React.createClass({
   },
 
   onOk() {
-    this.props.onOk(this.state.range);
+    this.props.onOk(this.state.value);
   },
 
   getAnchor() {
     let anchor = this.state.anchor;
-    const range = this.state.range;
-    if (range[0]) {
+    const value = this.state.value;
+    if (value[0]) {
       anchor = anchor.clone();
-      syncTime(range[0], anchor);
+      syncTime(value[0], anchor);
     }
     return anchor;
   },
@@ -160,9 +151,9 @@ const RangeCalendar = React.createClass({
   getAnchorEndValue() {
     const endValue = this.state.anchor.clone();
     endValue.addMonth(1);
-    const range = this.state.range;
-    if (range[1]) {
-      syncTime(range[1], endValue);
+    const value = this.state.value;
+    if (value[1]) {
+      syncTime(value[1], endValue);
     }
     return endValue;
   },
@@ -171,17 +162,28 @@ const RangeCalendar = React.createClass({
     const props = this.props;
     const state = this.state;
     const prefixCls = props.prefixCls;
-    const classes = classSet({
+    const orient = state.orient;
+    const className = {
       [props.className]: !!props.className,
       [prefixCls]: 1,
+      [`${prefixCls}-hidden`]: !props.visible,
       [prefixCls + '-range']: 1,
-    });
+    };
+    if (orient) {
+      orient.forEach(o => {
+        className[`${prefixCls}-orient-${o}`] = 1;
+      });
+    }
+    const classes = classSet(className);
     const newProps = {
-      range: state.range,
+      range: state.value,
       onSelect: this.onSelect,
       onDayHover: this.onDayHover,
     };
-    return (<div className={classes} style={props.style}>
+
+    return (<div className={classes} style={props.style}
+                 tabIndex="0" onFocus={this.onFocus}
+                 onBlur={this.onBlur}>
       <CalendarPart {...props} {...newProps} direction="left"
                                              value={this.getAnchor()}
                                              onInputSelect={onInputSelect.bind(this, 'left')}
@@ -198,17 +200,20 @@ const RangeCalendar = React.createClass({
         {getOkElement(assign({}, props, {
           value: state.anchor,
           onOk: this.onOk,
-          okDisabled: state.range.length !== 2 || state.range.hovering,
+          okDisabled: state.value.length !== 2 || state.value.hovering,
         }))}
       </div>
     </div>);
   },
 
-  fireValueChange(range) {
+  fireValueChange(value) {
     if (!('value' in this.props)) {
-      this.setState({range});
+      this.setState({value});
     }
-    this.props.onChange(range);
+    this.props.onChange(value);
+    if (value.length === 2 && !value.hovering) {
+      this.props.onSelect(value);
+    }
   },
 
   fireAnchorChange(anchor) {

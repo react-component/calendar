@@ -27,6 +27,7 @@ React.render(
     <h2>calendar (en-us, U.S.A. California San Francisco)</h2>
     <Calendar showWeekNumber={true}
               disabledDate={disabledDate}
+              formatter={formatter}
               onChange={onChange}
               onSelect={onSelect}/>
   </div>, document.getElementById('__react-content'));

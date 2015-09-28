@@ -4,8 +4,10 @@ import warning from 'warning';
 const DateInput = React.createClass({
   propTypes: {
     formatter: PropTypes.object,
+    disabledDate: PropTypes.func,
     className: PropTypes.string,
     onChange: PropTypes.func,
+    onSelect: PropTypes.func,
     value: PropTypes.object,
   },
 
@@ -24,26 +26,32 @@ const DateInput = React.createClass({
   },
 
   onInputChange(e) {
+    const str = e.target.value;
     this.setState({
-      str: e.target.value,
+      str,
     });
   },
 
   onBlur() {
+    const {str} = this.state;
+    const {disabledDate, formatter} = this.props;
     try {
-      const value = this.props.formatter.parse(this.state.str, this.props.value.locale);
-      if (value.getTime() !== this.props.value.getTime()) {
+      const value = formatter.parse(str, this.props.value.locale);
+      if (value && (!disabledDate || !disabledDate(value))) {
         this.props.onChange(value);
+      } else {
+        this.setState(this.getInitialState());
       }
     } catch (e) {
-      warning(false, `invalid date input: ${this.state.str}`);
+      warning(false, `invalid date input: ${str}`);
+      this.setState(this.getInitialState());
     }
   },
 
   render() {
     const props = this.props;
     return (<input className={props.className} value={this.state.str} onChange={this.onInputChange}
-                  onBlur={this.onBlur}/>);
+                   onBlur={this.onBlur}/>);
   },
 });
 
