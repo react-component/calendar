@@ -68,7 +68,6 @@ const Picker = React.createClass({
     }
     const value = props.value || props.defaultValue;
     this.saveCalendarRef = refFn.bind(this, 'calendarInstance');
-    this.saveInputRef = refFn.bind(this, 'inputInstance');
     return {open, value};
   },
 
@@ -193,7 +192,7 @@ const Picker = React.createClass({
   },
 
   getAlign(orient) {
-    let points = ['tl', 'bl'];
+    let points = ['tl', 'tl'];
     const offset = [0, 0];
     const adjustOrientOnCalendarOverflow = this.props.adjustOrientOnCalendarOverflow;
     if (orient.indexOf('top') !== -1 && orient.indexOf('left') !== -1) {

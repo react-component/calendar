@@ -35,15 +35,17 @@ const DateInput = React.createClass({
   onBlur() {
     const {str} = this.state;
     const {disabledDate, formatter} = this.props;
+    let value;
     try {
-      const value = formatter.parse(str, this.props.value.locale);
-      if (value && (!disabledDate || !disabledDate(value))) {
-        this.props.onChange(value);
-      } else {
-        this.setState(this.getInitialState());
-      }
+      value = formatter.parse(str, this.props.value.locale);
     } catch (e) {
       warning(false, `invalid date input: ${str}`);
+      this.setState(this.getInitialState());
+      return;
+    }
+    if (value && (!disabledDate || !disabledDate(value))) {
+      this.props.onChange(value);
+    } else {
       this.setState(this.getInitialState());
     }
   },

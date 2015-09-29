@@ -20,17 +20,17 @@ function disabledDate(current) {
   return current.getTime() < date.getTime();  //can not select days before today
 }
 
-function onChange(value) {
+function onStandaloneChange(value) {
   console.log('onChange');
   console.log(value[0] && formatter.format(value[0]), value[1] && formatter.format(value[1]))
 }
 
-function onSelect(value) {
+function onStandaloneSelect(value) {
   console.log('onSelect');
   console.log(formatter.format(value[0]), formatter.format(value[1]))
 }
 
-function onOk(value) {
+function onStandaloneOk(value) {
   console.log('onOk');
   console.log(formatter.format(value[0]), formatter.format(value[1]))
 }
@@ -58,8 +58,6 @@ const Test = React.createClass({
     const state = this.state;
     const calendar = <RangeCalendar showWeekNumber={false}
                                     locale={CalendarLocale}
-      //defaultValue={[value]}
-                                    formatter={formatter}
                                     disabledDate={disabledDate}
                                     showTime={true}/>;
     return <div className="form-group" style={{width: 400, margin: 20}} data-time={this.state.time}>
@@ -104,11 +102,9 @@ React.render(
     <div style={{margin:10}}>
       <RangeCalendar showWeekNumber={true}
                      locale={CalendarLocale}
-        //defaultValue={[value]}
-                     formatter={formatter}
-                     onChange={onChange}
-                     onSelect={onSelect}
-                     onOk={onOk}
+                     onChange={onStandaloneChange}
+                     onSelect={onStandaloneSelect}
+                     onOk={onStandaloneOk}
                      disabledDate={disabledDate}
                      showTime={true}/>
     </div>

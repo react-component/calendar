@@ -20,17 +20,17 @@ function disabledDate(current) {
   return current.getTime() < date.getTime();  //can not select days before today
 }
 
-function onChange(value) {
+function onStandaloneChange(value) {
   console.log('onChange');
   console.log(value[0] && formatter.format(value[0]), value[1] && formatter.format(value[1]))
 }
 
-function onSelect(value) {
+function onStandaloneSelect(value) {
   console.log('onSelect');
   console.log(formatter.format(value[0]), formatter.format(value[1]))
 }
 
-function onOk(value) {
+function onStandaloneOk(value) {
   console.log('onOk');
   console.log(formatter.format(value[0]), formatter.format(value[1]))
 }
@@ -57,15 +57,21 @@ const Test = React.createClass({
     const state = this.state;
     const calendar = <RangeCalendar showWeekNumber={false}
                                     locale={CalendarLocale}
-      //defaultValue={[value]}
-                                    formatter={formatter}
                                     disabledDate={disabledDate}
                                     showTime={true}/>;
-    return (<Picker value={state.value} onChange={this.onChange} calendar={calendar}
-                    style={{border:'1px solid red',cursor:'pointer'}}>
+    return (<Picker value={state.value}
+                    onChange={this.onChange}
+                    animation="slide-up"
+                    calendar={calendar}>
       {
         ({value}) => {
-          return value ? <span>{formatter.format(value[0])} - {formatter.format(value[1])}</span> : '';
+          return (<span>
+                <input placeholder="请选择日期" style={{width:350}}
+                       disabled={state.disabled}
+                       className="ant-calendar-picker-input ant-input"
+                       value={value && (formatter.format(value[0])+' - '+formatter.format(value[1]))}/>
+                <span className="ant-calendar-picker-icon" unselectable="true"/>
+                </span>);
         }
       }
     </Picker>);
@@ -75,15 +81,13 @@ const Test = React.createClass({
 React.render(
   <div>
     <h2>calendar (zh-cn)</h2>
-
+    <link href="http://ant.design/dist/antd.css" rel="stylesheet" type="text/css"/>
     <div style={{margin:10}}>
       <RangeCalendar showWeekNumber={true}
                      locale={CalendarLocale}
-        //defaultValue={[value]}
-                     formatter={formatter}
-                     onChange={onChange}
-                     onSelect={onSelect}
-                     onOk={onOk}
+                     onChange={onStandaloneChange}
+                     onSelect={onStandaloneSelect}
+                     onOk={onStandaloneOk}
                      disabledDate={disabledDate}
                      showTime={true}/>
     </div>

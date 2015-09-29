@@ -14,7 +14,7 @@ var Test = React.createClass({
     console.log('DatePicker change: ' + (value && formatter.format(value)));
   },
 
-  handleCalendarSelect(value) {
+  onCalendarSelect(value) {
     console.log('calendar select: ' + (value && formatter.format(value)));
     // controlled value
     this.setState({
@@ -35,7 +35,7 @@ var Test = React.createClass({
     };
   },
 
-  handleShowTimeChange(e) {
+  onShowTimeChange(e) {
     this.setState({
       showTime: e.target.checked
     });
@@ -45,13 +45,12 @@ var Test = React.createClass({
     var state = this.state;
     var calendar = <Calendar locale={CalendarLocale}
                              orient={['top', 'left']}
-                             formatter={formatter}
-                             showTime={this.state.showTime} onSelect={this.handleCalendarSelect}
-                             onClear={this.handleCalendarSelect.bind(this, null)} showClear={true}/>;
+                             showTime={this.state.showTime} onSelect={this.onCalendarSelect}
+                             onClear={this.onCalendarSelect.bind(this, null)} showClear={true}/>;
     return <div className="form-group" style={{width: 400, margin: 20}} data-time={this.state.time}>
       <div className="input-group">
         <span>
-          <input type='checkbox' checked={this.state.showTime} onChange={this.handleShowTimeChange}/>
+          <input type='checkbox' checked={this.state.showTime} onChange={this.onShowTimeChange}/>
           showTime</span>
       </div>
       <div className="input-group" style={{width:250}}>
@@ -92,17 +91,13 @@ var Test = React.createClass({
   }
 });
 
-function prevent(e) {
-  e.preventDefault();
-}
 
-
-function onCalendarSelect(value) {
+function onStandaloneSelect(value) {
   console.log('onCalendarSelect');
   console.log(formatter.format(value))
 }
 
-function onCalendarChange(value) {
+function onStandaloneChange(value) {
   console.log('onCalendarChange');
   console.log(formatter.format(value))
 }
@@ -114,9 +109,8 @@ React.render(<div>
     <Calendar showWeekNumber={true}
               showOk={0}
               showClear={0}
-              formatter={formatter}
-              onSelect={onCalendarSelect}
-              onChange={onCalendarChange}
+              onSelect={onStandaloneSelect}
+              onChange={onStandaloneChange}
               showTime={true}/>
   </div>
 

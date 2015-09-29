@@ -14,7 +14,7 @@ var Test = React.createClass({
     console.log('DatePicker change: ' + (this.props.formatter.format(value)));
   },
 
-  handleCalendarSelect(value) {
+  onCalendarSelect(value) {
     console.log('calendar select: ' + (this.props.formatter.format(value)));
     // uncontrolled value
     this.setState({
@@ -39,7 +39,7 @@ var Test = React.createClass({
     };
   },
 
-  handleShowTimeChange(e) {
+  onShowTimeChange(e) {
     this.setState({
       showTime: e.target.checked
     });
@@ -48,13 +48,12 @@ var Test = React.createClass({
   render() {
     var state = this.state;
     var calendar = <Calendar locale={CalendarLocale}
-                             formatter={this.props.formatter}
                              orient={['bottom', 'left']}
-                             showTime={this.state.showTime} onSelect={this.handleCalendarSelect}/>;
+                             showTime={this.state.showTime} onSelect={this.onCalendarSelect}/>;
     return <div className="form-group" style={{width: 400, margin: 20}} data-time={state.time}>
       <div className="input-group">
         <span>
-          <input type="checkbox" checked={this.state.showTime} onChange={this.handleShowTimeChange}/>
+          <input type="checkbox" checked={this.state.showTime} onChange={this.onShowTimeChange}/>
           showTime</span>
       </div>
       <div className="input-group" style={{width:250}}>

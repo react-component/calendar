@@ -28,7 +28,7 @@ var Test = React.createClass({
     console.log('DatePicker change: ' + (value && formatter.format(value)));
   },
 
-  handleCalendarSelect(value) {
+  onCalendarSelect(value) {
     console.log('calendar select: ' + (value && formatter.format(value)));
     // controlled value
     this.setState({
@@ -37,7 +37,7 @@ var Test = React.createClass({
     });
   },
 
-  handleCalendarOk(value) {
+  onCalendarOk(value) {
     console.log('calendar ok: ' + (value && formatter.format(value)));
     // controlled value
     this.setState({
@@ -55,7 +55,7 @@ var Test = React.createClass({
     };
   },
 
-  handleShowTimeChange(e) {
+  onShowTimeChange(e) {
     this.setState({
       showTime: e.target.checked
     });
@@ -75,15 +75,14 @@ var Test = React.createClass({
                              defaultValue={defaultCalendarValue}
                              showTime={this.state.showTime}
                              showOk={true}
-                             formatter={formatter}
                              disabledDate={disabledDate}
-                             onOk={this.handleCalendarOk}
-                             onSelect={this.handleCalendarSelect}
-                             onClear={this.handleCalendarSelect.bind(this, null)} showClear={true}/>;
+                             onOk={this.onCalendarOk}
+                             onSelect={this.onCalendarSelect}
+                             onClear={this.onCalendarSelect.bind(this, null)} showClear={true}/>;
     return <div style={{width: 240, margin: 20}} data-time={this.state.time}>
       <div style={{marginBottom:10}}>
         <span>
-          <input type='checkbox' checked={this.state.showTime} onChange={this.handleShowTimeChange}/>
+          <input type='checkbox' checked={this.state.showTime} onChange={this.onShowTimeChange}/>
           showTime
         </span>
         &nbsp;&nbsp;&nbsp;&nbsp;
@@ -108,7 +107,9 @@ var Test = React.createClass({
             ({value})=> {
               return (
                 <span>
-                <input placeholder="请选择日期" style={{width:250}} className="ant-calendar-picker-input ant-input"
+                <input placeholder="请选择日期" style={{width:250}}
+                       disabled={state.disabled}
+                       className="ant-calendar-picker-input ant-input"
                        value={value && formatter.format(value)}/>
                 <span className="ant-calendar-picker-icon" unselectable="true"/>
                 </span>
@@ -121,13 +122,13 @@ var Test = React.createClass({
   }
 });
 
-function onCalendarSelect(value) {
-  console.log('onCalendarSelect');
+function onStandaloneSelect(value) {
+  console.log('onStandaloneSelect');
   console.log(formatter.format(value))
 }
 
-function onCalendarChange(value) {
-  console.log('onCalendarChange');
+function onStandaloneChange(value) {
+  console.log('onStandaloneChange');
   console.log(formatter.format(value))
 }
 
@@ -139,12 +140,11 @@ React.render(<div style={{zIndex:1000,position:'relative'}}>
   <div style={{width:600}}>
     <div style={{margin:10}}>
       <Calendar showWeekNumber={false}
-                formatter={formatter}
                 locale={CalendarLocale}
                 defaultValue={now}
-                onChange={onCalendarChange}
+                onChange={onStandaloneChange}
                 disabledDate={disabledDate}
-                onSelect={onCalendarSelect}
+                onSelect={onStandaloneSelect}
                 showTime={true}/>
     </div>
     <div style={{float:'left',width:300}}>

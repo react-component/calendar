@@ -1,5 +1,4 @@
 import React, {PropTypes} from 'react';
-import DateTimeFormat from 'gregorian-calendar-format';
 import GregorianCalendar from 'gregorian-calendar';
 import {classSet} from 'rc-util';
 import CalendarPart from './range-calendar/CalendarPart';
@@ -77,7 +76,6 @@ const RangeCalendar = React.createClass({
     return {
       defaultValue: [],
       onAnchorChange: noop,
-      formatter: new DateTimeFormat('yyyy-MM-dd'),
     };
   },
 
@@ -186,11 +184,13 @@ const RangeCalendar = React.createClass({
                  tabIndex="0" onFocus={this.onFocus}
                  onBlur={this.onBlur}>
       <CalendarPart {...props} {...newProps} direction="left"
+                                             formatter={this.getFormatter()}
                                              value={this.getAnchor()}
                                              onInputSelect={onInputSelect.bind(this, 'left')}
                                              onTimeSelect={onTimeSelect.bind(this, 'left')}
                                              onAnchorChange={onAnchorChange.bind(this, 'left')}/>
       <CalendarPart {...props} {...newProps} direction="right"
+                                             formatter={this.getFormatter()}
                                              value={this.getAnchorEndValue()}
                                              onInputSelect={onInputSelect.bind(this, 'right')}
                                              onTimeSelect={onTimeSelect.bind(this, 'right')}

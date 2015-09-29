@@ -17,20 +17,6 @@ defaultCalendarValue.addMonth(-1);
 var Test = React.createClass({
   onChange(value) {
     console.log('DatePicker change: ' + (value && formatter.format(value)));
-  },
-
-  handleCalendarSelect(value) {
-    console.log('calendar select: ' + (value && formatter.format(value)));
-    // controlled value
-    this.setState({
-      time: Date.now(),
-      value: value
-    });
-  },
-
-  handleCalendarOk(value) {
-    console.log('calendar ok: ' + (value && formatter.format(value)));
-    // controlled value
     this.setState({
       time: Date.now(),
       value: value
@@ -46,7 +32,7 @@ var Test = React.createClass({
     };
   },
 
-  handleShowTimeChange(e) {
+  onShowTimeChange(e) {
     this.setState({
       showTime: e.target.checked
     });
@@ -86,6 +72,7 @@ var Test = React.createClass({
             ({value})=> {
               return <input style={{width:200}}
                             readOnly
+                            disabled={state.disabled}
                             value={value && formatter.format(value)}
                             placeholder="请选择日期"/>
             }
@@ -97,11 +84,11 @@ var Test = React.createClass({
   }
 });
 
-function onSelect(value) {
+function onStandaloneSelect(value) {
   console.log('month-calendar select', (value && formatter.format(value)));
 }
 
-function onChange(value) {
+function onStandaloneChange(value) {
   console.log('month-calendar change', (value && formatter.format(value)));
 }
 
@@ -116,8 +103,8 @@ React.render(
                    style={{zIndex:1000}}
                    orient={['top', 'left']}
                    disabledDate={disabledDate}
-                   onSelect={onSelect}
-                   onChange={onChange}
+                   onSelect={onStandaloneSelect}
+                   onChange={onStandaloneChange}
                    defaultValue={defaultCalendarValue}/>
 
     <div style={{marginTop:200}}>

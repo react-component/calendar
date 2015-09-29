@@ -178,7 +178,7 @@ const Calendar = React.createClass({
     const children = (<div style={{outline: 'none'}}>
       <div className={`${prefixCls}-input-wrap`}>
         <DateInput className={`${prefixCls}-input`}
-                   formatter={props.formatter}
+                   formatter={this.getFormatter()}
                    value={value}
                    onChange={this.onDateInputChange}/>
         <i className={`${prefixCls}-input-icon`}/>

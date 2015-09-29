@@ -1,6 +1,8 @@
 import enUs from '../locale/en-us';
+import DateTimeFormat from 'gregorian-calendar-format';
 
-function noop() {}
+function noop() {
+}
 
 export default {
   propTypes: {
@@ -51,6 +53,31 @@ export default {
     this._blurTimer = setTimeout(()=> {
       this.props.onBlur();
     }, 100);
+  },
+
+  getFormatter() {
+    const formatter = this.props.formatter;
+    if (formatter) {
+      if (typeof formatter === 'string') {
+        if (formatter === this.lastFormatter) {
+          return this.normalFormatter;
+        }
+        this.normalFormatter = new DateTimeFormat(formatter);
+        this.lastFormatter = formatter;
+        return this.normalFormatter;
+      }
+      return formatter;
+    }
+    if (this.props.showTime) {
+      if (!this.showTimeFormatter) {
+        this.showTimeFormatter = new DateTimeFormat('yyyy-MM-dd HH:mm:ss');
+      }
+      return this.showTimeFormatter;
+    }
+    if (!this.showDateFormatter) {
+      this.showDateFormatter = new DateTimeFormat('yyyy-MM-dd');
+    }
+    return this.showDateFormatter;
   },
 
   setOrient(orient) {
