@@ -1,10 +1,18 @@
 .@{prefixClass}-range {
-  width: 520px;
+  width: 524px;
   overflow: hidden;
 
   &-part {
     width: 250px;
     position: relative;
+  }
+
+  &.@{prefixClass}-week-number {
+    width: 574px;
+
+    .@{prefixClass}-range-part {
+      width: 286px;
+    }
   }
 
   &-left {
@@ -20,4 +28,3 @@
     border-radius: 0;
   }
 }
-

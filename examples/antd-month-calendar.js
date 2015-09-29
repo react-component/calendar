@@ -98,11 +98,11 @@ var Test = React.createClass({
 });
 
 function onSelect(value) {
-  console.log('month-calendar select', value);
+  console.log('month-calendar select', (value && formatter.format(value)));
 }
 
 function onChange(value) {
-  console.log('month-calendar change', value);
+  console.log('month-calendar change', (value && formatter.format(value)));
 }
 
 function disabledDate(value) {

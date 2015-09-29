@@ -168,6 +168,7 @@ const RangeCalendar = React.createClass({
       [prefixCls]: 1,
       [`${prefixCls}-hidden`]: !props.visible,
       [prefixCls + '-range']: 1,
+      [`${prefixCls}-week-number`]: props.showWeekNumber,
     };
     if (orient) {
       orient.forEach(o => {

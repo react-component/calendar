@@ -1,5 +1,5 @@
-import 'rc-calendar/assets/bootstrap.less';
-import 'bootstrap/dist/css/bootstrap.css';
+import 'rc-calendar/assets/index.less';
+
 import RangeCalendar from 'rc-calendar/src/RangeCalendar';
 import GregorianCalendarFormat from 'gregorian-calendar-format';
 import React from 'react';
@@ -51,7 +51,6 @@ const Test = React.createClass({
       value[1].addDayOfMonth(10);
     }
     this.setState({value});
-    console.log(value);
   },
 
   render(){
@@ -62,38 +61,14 @@ const Test = React.createClass({
                                     formatter={formatter}
                                     disabledDate={disabledDate}
                                     showTime={true}/>;
-    return <div className="form-group" style={{width: 400, margin: 20}} data-time={this.state.time}>
-      <div className="input-group" style={{width:350}}>
-        <Picker value={state.value} onChange={this.onChange} calendar={calendar} style={{display:'inline'}}>
-          {
-            ({value}) => {
-              return <span>
-                <input type="text"
-                       className="form-control"
-                       readOnly
-                       value={formatter.format(value[0]) +' - '+formatter.format(value[1])}
-                       style={{
-                       background: "white",
-                       borderTopRightRadius:4,
-                       borderBottomRightRadius:4,
-                       cursor: "pointer"
-                       }}/>
-                <span className="input-group-addon" style={{
-                width:39,
-                height:34,
-                borderRight:0,
-                borderLeft:'1px solid #ccc',
-                position:'absolute',
-                zIndex:99,
-                right:1,top:0}}>
-          <span className="glyphicon glyphicon-calendar"></span>
-        </span>
-                </span>;
-            }
-          }
-        </Picker>
-      </div>
-    </div>;
+    return (<Picker value={state.value} onChange={this.onChange} calendar={calendar}
+                    style={{border:'1px solid red',cursor:'pointer'}}>
+      {
+        ({value}) => {
+          return value ? <span>{formatter.format(value[0])} - {formatter.format(value[1])}</span> : '';
+        }
+      }
+    </Picker>);
   }
 });
 

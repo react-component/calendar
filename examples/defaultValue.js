@@ -10,18 +10,6 @@ import CalendarLocale from 'rc-calendar/src/locale/zh-cn';
 const formatter = new DateTimeFormat('yyyy-MM-dd HH:mm:ss');
 
 var Test = React.createClass({
-  onOpenChange(e) {
-    this.setState({
-      open: e.open
-    });
-  },
-
-  toggle() {
-    this.setState({
-      open: !this.state.open
-    });
-  },
-
   onChange(value) {
     console.log('DatePicker change: ' + (this.props.formatter.format(value)));
   },
@@ -72,23 +60,36 @@ var Test = React.createClass({
       <div className="input-group" style={{width:250}}>
         <DatePicker calendar={calendar}
                     style={{display:'inline'}}
-                    open={this.state.open}
-                    onOpen={this.onOpenChange}
-                    onClose={this.onOpenChange}
                     defaultValue={state.value}
                     onChange={this.onChange}>
           {
             ({value}) => {
-              return <input type="text" className="form-control"
-                            readOnly
-                            value={formatter.format(value)}
-                            style={{background: "white", cursor: "pointer"}}/>;
+              return <span>
+                <input type="text"
+                       className="form-control"
+                       readOnly
+                       value={formatter.format(value)}
+                       style={{
+                       background: "white",
+                       borderTopRightRadius:4,
+                       borderBottomRightRadius:4,
+                       cursor: "pointer"
+                       }}/>
+                <span className="input-group-addon" style={{
+                width:39,
+                height:34,
+                borderRight:0,
+                borderLeft:'1px solid #ccc',
+                position:'absolute',
+                zIndex:99,
+                right:1,top:0}}>
+          <span className="glyphicon glyphicon-calendar"></span>
+        </span>
+                </span>;
             }
           }
         </DatePicker>
-        <span className="input-group-addon" onClick={this.toggle}>
-          <span className="glyphicon glyphicon-calendar"></span>
-        </span>
+
       </div>
     </div>;
   }

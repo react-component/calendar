@@ -9,7 +9,7 @@ import CalendarLocale from 'rc-calendar/src/locale/zh-cn';
 var now = new GregorianCalendar(zhCn);
 now.setTime(Date.now());
 
-const formatter= new DateTimeFormat('yyyy-MM-dd HH:mm:ss');
+const formatter = new DateTimeFormat('yyyy-MM-dd HH:mm:ss');
 
 var defaultCalendarValue = new GregorianCalendar(zhCn);
 defaultCalendarValue.setTime(Date.now());
@@ -107,11 +107,11 @@ var Test = React.createClass({
           {
             ({value})=> {
               return (
-                <input
-                       value={value && formatter.format(value)}
-                       style={{width:200}}
-                       readOnly
-                       placeholder="请选择日期"/>
+                <span>
+                <input placeholder="请选择日期" style={{width:250}} className="ant-calendar-picker-input ant-input"
+                       value={value && formatter.format(value)}/>
+                <span className="ant-calendar-picker-icon" unselectable="true"/>
+                </span>
               );
             }
           }
@@ -133,7 +133,9 @@ function onCalendarChange(value) {
 
 
 React.render(<div style={{zIndex:1000,position:'relative'}}>
+  <link href="http://ant.design/dist/antd.css" rel="stylesheet" type="text/css"/>
   <h2>zh-cn</h2>
+
   <div style={{width:600}}>
     <div style={{margin:10}}>
       <Calendar showWeekNumber={false}
