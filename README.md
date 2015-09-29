@@ -31,6 +31,8 @@ calendar ui component for react, port from https://github.com/modulex/date-picke
 
 <img src="http://gtms03.alicdn.com/tps/i3/TB1lmz_GFXXXXbEXVXXbMpwQXXX-692-732.png" width="288"/>
 
+<img src="http://gtms04.alicdn.com/tps/i4/TB1DmwLJFXXXXXXXFXXpRpsPFXX-614-455.png" width="500"/>
+
 ## Feature
 
 * support ie8,ie8+,chrome,firefox,safari
