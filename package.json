@@ -32,13 +32,13 @@
   "scripts": {
     "build": "rc-tools run build",
     "gh-pages": "rc-tools run gh-pages",
-    "start": "node --harmony node_modules/.bin/rc-server",
+    "start": "rc-server",
     "pub": "rc-tools run pub",
     "lint": "rc-tools run lint",
     "karma": "rc-tools run karma",
-    "saucelabs": "node --harmony node_modules/.bin/rc-tools run saucelabs",
-    "browser-test": "node --harmony node_modules/.bin/rc-tools run browser-test",
-    "browser-test-cover": "node --harmony node_modules/.bin/rc-tools run browser-test-cover"
+    "saucelabs": "rc-tools run saucelabs",
+    "browser-test": "rc-tools run browser-test",
+    "browser-test-cover": "rc-tools run browser-test-cover"
   },
   "devDependencies": {
     "async": "~0.9.0",
