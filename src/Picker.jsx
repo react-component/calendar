@@ -43,6 +43,7 @@ const Picker = React.createClass({
     open: React.PropTypes.bool,
     defaultOpen: React.PropTypes.bool,
     prefixCls: React.PropTypes.string,
+    getCalendarContainer: React.PropTypes.func,
     adjustOrientOnCalendarOverflow: React.PropTypes.oneOfType([React.PropTypes.bool, React.PropTypes.object]),
   },
 
@@ -51,6 +52,9 @@ const Picker = React.createClass({
       prefixCls: 'rc-calendar-picker',
       adjustOrientOnCalendarOverflow: true,
       style: {},
+      getCalendarContainer() {
+        return document.body;
+      },
       defaultOpen: false,
       onChange: noop,
       onOpen: noop,
@@ -186,7 +190,7 @@ const Picker = React.createClass({
     if (!this.calendarContainer) {
       this.calendarContainer = document.createElement('div');
       this.calendarContainer.className = `${this.props.prefixCls}-container`;
-      document.body.appendChild(this.calendarContainer);
+      this.props.getCalendarContainer().appendChild(this.calendarContainer);
     }
     return this.calendarContainer;
   },
