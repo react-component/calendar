@@ -1,7 +1,7 @@
 # rc-calendar
 ---
 
-calendar ui component for react, port from https://github.com/modulex/date-picker
+React Calendar
 
 [![NPM version][npm-image]][npm-url]
 [![build status][travis-image]][travis-url]

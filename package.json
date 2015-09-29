@@ -1,7 +1,7 @@
 {
   "name": "rc-calendar",
   "version": "4.0.0-alpha1",
-  "description": "calendar ui component for react",
+  "description": "React Calendar",
   "keywords": [
     "react",
     "react-calendar",
