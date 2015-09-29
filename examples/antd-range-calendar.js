@@ -1,329 +1,17 @@
-webpackJsonp([4],{
+webpackJsonp([2],{
 
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(223);
+	module.exports = __webpack_require__(216);
 
 
 /***/ },
 
-/***/ 159:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 2:
+/***/ function(module, exports) {
 
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var _src = __webpack_require__(160);
-	
-	var _src2 = _interopRequireDefault(_src);
-
-	exports['default'] = _src2['default'];
-	module.exports = exports['default'];
-
-/***/ },
-
-/***/ 160:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var _Calendar = __webpack_require__(161);
-	
-	var _Calendar2 = _interopRequireDefault(_Calendar);
-
-	exports['default'] = _Calendar2['default'];
-	module.exports = exports['default'];
-
-/***/ },
-
-/***/ 161:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var _react = __webpack_require__(3);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _gregorianCalendar = __webpack_require__(162);
-	
-	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
-	
-	var _rcUtil = __webpack_require__(166);
-	
-	var _dateDateTable = __webpack_require__(178);
-	
-	var _dateDateTable2 = _interopRequireDefault(_dateDateTable);
-	
-	var _calendarCalendarHeader = __webpack_require__(183);
-	
-	var _calendarCalendarHeader2 = _interopRequireDefault(_calendarCalendarHeader);
-	
-	var _calendarCalendarFooter = __webpack_require__(190);
-	
-	var _calendarCalendarFooter2 = _interopRequireDefault(_calendarCalendarFooter);
-	
-	var _mixinCalendarMixin = __webpack_require__(193);
-	
-	var _mixinCalendarMixin2 = _interopRequireDefault(_mixinCalendarMixin);
-	
-	var _mixinCommonMixin = __webpack_require__(194);
-	
-	var _mixinCommonMixin2 = _interopRequireDefault(_mixinCommonMixin);
-	
-	var _dateDateInput = __webpack_require__(196);
-	
-	var _dateDateInput2 = _interopRequireDefault(_dateDateInput);
-	
-	function noop() {}
-	
-	function goStartMonth() {
-	  var next = this.state.value.clone();
-	  next.setDayOfMonth(1);
-	  this.setValue(next);
-	}
-	
-	function goEndMonth() {
-	  var next = this.state.value.clone();
-	  next.setDayOfMonth(next.getActualMaximum(_gregorianCalendar2['default'].MONTH));
-	  this.setValue(next);
-	}
-	
-	function goMonth(direction) {
-	  var next = this.state.value.clone();
-	  next.addMonth(direction);
-	  this.setValue(next);
-	}
-	
-	function goYear(direction) {
-	  var next = this.state.value.clone();
-	  next.addYear(direction);
-	  this.setValue(next);
-	}
-	
-	function goWeek(direction) {
-	  var next = this.state.value.clone();
-	  next.addWeekOfYear(direction);
-	  this.setValue(next);
-	}
-	
-	function goDay(direction) {
-	  var next = this.state.value.clone();
-	  next.addDayOfMonth(direction);
-	  this.setValue(next);
-	}
-	
-	var Calendar = _react2['default'].createClass({
-	  displayName: 'Calendar',
-	
-	  mixins: [_mixinCommonMixin2['default'], _mixinCalendarMixin2['default']],
-	
-	  propTypes: {
-	    value: _react2['default'].PropTypes.object,
-	    defaultValue: _react2['default'].PropTypes.object,
-	    className: _react2['default'].PropTypes.string,
-	    orient: _react2['default'].PropTypes.arrayOf(_react2['default'].PropTypes.oneOf(['left', 'top', 'right', 'bottom'])),
-	    locale: _react2['default'].PropTypes.object,
-	    showWeekNumber: _react2['default'].PropTypes.bool,
-	    style: _react2['default'].PropTypes.object,
-	    showToday: _react2['default'].PropTypes.bool,
-	    visible: _react2['default'].PropTypes.bool,
-	    showTime: _react2['default'].PropTypes.bool,
-	    onSelect: _react2['default'].PropTypes.func,
-	    onOk: _react2['default'].PropTypes.func,
-	    prefixCls: _react2['default'].PropTypes.string,
-	    onKeyDown: _react2['default'].PropTypes.func,
-	    onClear: _react2['default'].PropTypes.func,
-	    onChange: _react2['default'].PropTypes.func,
-	    onFocus: _react2['default'].PropTypes.func,
-	    onBlur: _react2['default'].PropTypes.func
-	  },
-	
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      showToday: true,
-	      onClear: noop,
-	      onOk: noop
-	    };
-	  },
-	
-	  getInitialState: function getInitialState() {
-	    var props = this.props;
-	    var orient = props.orient;
-	    // bind methods
-	    this.nextMonth = goMonth.bind(this, 1);
-	    this.previousMonth = goMonth.bind(this, -1);
-	    this.nextYear = goYear.bind(this, 1);
-	    this.previousYear = goYear.bind(this, -1);
-	    return { orient: orient };
-	  },
-	
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	    if (nextProps.orient) {
-	      this.setState({
-	        orient: nextProps.orient
-	      });
-	    }
-	  },
-	
-	  onKeyDown: function onKeyDown(e) {
-	    if (e.target.nodeName.toLowerCase() === 'input') {
-	      return undefined;
-	    }
-	    var keyCode = e.keyCode;
-	    // mac
-	    var ctrlKey = e.ctrlKey || e.metaKey;
-	    switch (keyCode) {
-	      case _rcUtil.KeyCode.DOWN:
-	        goWeek.call(this, 1);
-	        e.preventDefault();
-	        return 1;
-	      case _rcUtil.KeyCode.UP:
-	        goWeek.call(this, -1);
-	        e.preventDefault();
-	        return 1;
-	      case _rcUtil.KeyCode.LEFT:
-	        if (ctrlKey) {
-	          this.previousYear();
-	        } else {
-	          goDay.call(this, -1);
-	        }
-	        e.preventDefault();
-	        return 1;
-	      case _rcUtil.KeyCode.RIGHT:
-	        if (ctrlKey) {
-	          this.nextYear();
-	        } else {
-	          goDay.call(this, 1);
-	        }
-	        e.preventDefault();
-	        return 1;
-	      case _rcUtil.KeyCode.HOME:
-	        goStartMonth.call(this);
-	        e.preventDefault();
-	        return 1;
-	      case _rcUtil.KeyCode.END:
-	        goEndMonth.call(this);
-	        e.preventDefault();
-	        return 1;
-	      case _rcUtil.KeyCode.PAGE_DOWN:
-	        this.nextMonth();
-	        e.preventDefault();
-	        return 1;
-	      case _rcUtil.KeyCode.PAGE_UP:
-	        this.previousMonth();
-	        e.preventDefault();
-	        return 1;
-	      case _rcUtil.KeyCode.ENTER:
-	        this.onSelect(this.state.value);
-	        e.preventDefault();
-	        return 1;
-	      default:
-	        this.props.onKeyDown(e);
-	        return 1;
-	    }
-	  },
-	
-	  onClear: function onClear() {
-	    this.props.onClear();
-	  },
-	
-	  onOk: function onOk() {
-	    if (this.isAllowedDate(this.state.value)) {
-	      this.props.onOk(this.state.value);
-	    }
-	  },
-	
-	  onDateInputChange: function onDateInputChange(value) {
-	    this.onSelect(value);
-	  },
-	
-	  render: function render() {
-	    var props = this.props;
-	    var locale = props.locale;
-	    var prefixCls = props.prefixCls;
-	    var disabledDate = props.disabledDate;
-	
-	    var state = this.state;
-	    var value = state.value;
-	    var children = _react2['default'].createElement(
-	      'div',
-	      { style: { outline: 'none' } },
-	      _react2['default'].createElement(
-	        'div',
-	        { className: prefixCls + '-input-wrap' },
-	        _react2['default'].createElement(_dateDateInput2['default'], { className: prefixCls + '-input',
-	          formatter: this.getFormatter(),
-	          value: value,
-	          onChange: this.onDateInputChange }),
-	        _react2['default'].createElement('i', { className: prefixCls + '-input-icon' })
-	      ),
-	      _react2['default'].createElement(_calendarCalendarHeader2['default'], {
-	        locale: locale,
-	        onValueChange: this.setValue,
-	        value: value,
-	        prefixCls: prefixCls }),
-	      _react2['default'].createElement(
-	        'div',
-	        { className: prefixCls + '-calendar-body' },
-	        _react2['default'].createElement(_dateDateTable2['default'], {
-	          locale: locale,
-	          value: value,
-	          prefixCls: prefixCls,
-	          dateRender: props.dateRender,
-	          onSelect: this.onSelect,
-	          disabledDate: disabledDate,
-	          showWeekNumber: props.showWeekNumber })
-	      ),
-	      _react2['default'].createElement(_calendarCalendarFooter2['default'], {
-	        locale: locale,
-	        showClear: props.showClear,
-	        showOk: props.showOk,
-	        prefixCls: prefixCls,
-	        showToday: props.showToday,
-	        showTime: props.showTime,
-	        value: value,
-	        disabledDate: disabledDate,
-	        onClear: this.onClear,
-	        onOk: this.onOk,
-	        onSelect: this.onSelect,
-	        onToday: this.chooseToday
-	      })
-	    );
-	
-	    return this.renderRoot({
-	      children: children,
-	      className: props.showWeekNumber ? prefixCls + '-week-number' : ''
-	    });
-	  },
-	
-	  chooseToday: function chooseToday() {
-	    var today = this.state.value.clone();
-	    today.setTime(Date.now());
-	    this.onSelect(today);
-	  }
-	});
-	
-	exports['default'] = Calendar;
-	module.exports = exports['default'];
+	// removed by extract-text-webpack-plugin
 
 /***/ },
 
@@ -1558,131 +1246,6 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 193:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-	
-	var _react = __webpack_require__(3);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _rcUtil = __webpack_require__(166);
-	
-	var _gregorianCalendar = __webpack_require__(162);
-	
-	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
-	
-	function noop() {}
-	
-	function getNow() {
-	  var value = new _gregorianCalendar2['default']();
-	  value.setTime(Date.now());
-	  return value;
-	}
-	
-	function getNowByCurrentStateValue(value) {
-	  var ret = undefined;
-	  if (value) {
-	    ret = value.clone();
-	    ret.setTime(Date.now());
-	  } else {
-	    ret = getNow();
-	  }
-	  return ret;
-	}
-	
-	var CalendarMixin = {
-	  propTypes: {
-	    value: _react2['default'].PropTypes.object,
-	    defaultValue: _react2['default'].PropTypes.object,
-	    onKeyDown: _react2['default'].PropTypes.func
-	  },
-	
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      onKeyDown: noop
-	    };
-	  },
-	
-	  getInitialState: function getInitialState() {
-	    var props = this.props;
-	    var value = props.value || props.defaultValue || getNow();
-	    return { value: value };
-	  },
-	
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	    var value = nextProps.value;
-	    if (value !== undefined) {
-	      value = value || nextProps.defaultValue || getNowByCurrentStateValue(this.state.value);
-	      this.setState({
-	        value: value
-	      });
-	    }
-	  },
-	
-	  onSelect: function onSelect(value, keyDownEvent) {
-	    this.setValue(value);
-	    if (!keyDownEvent) {
-	      if (this.isAllowedDate(value)) {
-	        this.props.onSelect(value);
-	      }
-	    }
-	  },
-	
-	  renderRoot: function renderRoot(newProps) {
-	    var _className;
-	
-	    var props = this.props;
-	    var state = this.state;
-	    var prefixCls = props.prefixCls;
-	
-	    var className = (_className = {}, _defineProperty(_className, prefixCls, 1), _defineProperty(_className, prefixCls + '-hidden', !props.visible), _defineProperty(_className, props.className, !!props.className), _className);
-	
-	    var orient = state.orient;
-	    if (orient) {
-	      orient.forEach(function (o) {
-	        className[prefixCls + '-orient-' + o] = 1;
-	      });
-	    }
-	
-	    return _react2['default'].createElement(
-	      'div',
-	      { className: (0, _rcUtil.classSet)(className) + ' ' + newProps.className, style: this.props.style,
-	        tabIndex: '0', onFocus: this.onFocus,
-	        onBlur: this.onBlur, onKeyDown: this.onKeyDown },
-	      newProps.children
-	    );
-	  },
-	
-	  setValue: function setValue(value) {
-	    if (!('value' in this.props)) {
-	      this.setState({
-	        value: value
-	      });
-	    }
-	    this.props.onChange(value);
-	  },
-	
-	  isAllowedDate: function isAllowedDate(value) {
-	    var disabledDate = this.props.disabledDate;
-	    return !disabledDate || !disabledDate(value);
-	  }
-	};
-	
-	exports['default'] = CalendarMixin;
-	module.exports = exports['default'];
-
-/***/ },
-
 /***/ 196:
 /***/ function(module, exports, __webpack_require__) {
 
@@ -1836,160 +1399,116 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 221:
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-
-/***/ 222:
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-
-/***/ 223:
+/***/ 216:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	__webpack_require__(221);
+	__webpack_require__(2);
 	
-	__webpack_require__(222);
+	var _rcCalendarSrcRangeCalendar = __webpack_require__(217);
 	
-	var _react = __webpack_require__(3);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _rcCalendar = __webpack_require__(159);
-	
-	var _rcCalendar2 = _interopRequireDefault(_rcCalendar);
-	
-	var _rcCalendarSrcPicker = __webpack_require__(198);
-	
-	var _rcCalendarSrcPicker2 = _interopRequireDefault(_rcCalendarSrcPicker);
-	
-	var _gregorianCalendarLibLocaleZhCn = __webpack_require__(211);
-	
-	var _gregorianCalendarLibLocaleZhCn2 = _interopRequireDefault(_gregorianCalendarLibLocaleZhCn);
-	
-	// spm error
+	var _rcCalendarSrcRangeCalendar2 = _interopRequireDefault(_rcCalendarSrcRangeCalendar);
 	
 	var _gregorianCalendarFormat = __webpack_require__(187);
 	
 	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
 	
+	var _react = __webpack_require__(3);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
 	var _gregorianCalendar = __webpack_require__(162);
 	
 	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
+	
+	var _gregorianCalendarLibLocaleZhCn = __webpack_require__(211);
+	
+	var _gregorianCalendarLibLocaleZhCn2 = _interopRequireDefault(_gregorianCalendarLibLocaleZhCn);
 	
 	var _rcCalendarSrcLocaleZhCn = __webpack_require__(212);
 	
 	var _rcCalendarSrcLocaleZhCn2 = _interopRequireDefault(_rcCalendarSrcLocaleZhCn);
 	
+	var _rcCalendarSrcPicker = __webpack_require__(198);
+	
+	var _rcCalendarSrcPicker2 = _interopRequireDefault(_rcCalendarSrcPicker);
+	
 	var formatter = new _gregorianCalendarFormat2['default']('yyyy-MM-dd HH:mm:ss');
+	
+	var value = new _gregorianCalendar2['default'](_gregorianCalendarLibLocaleZhCn2['default']);
+	value.setTime(Date.now());
+	
+	function disabledDate(current) {
+	  var date = new Date();
+	  date.setHours(0);
+	  date.setMinutes(0);
+	  date.setSeconds(0);
+	  return current.getTime() < date.getTime(); //can not select days before today
+	}
+	
+	function onStandaloneChange(value) {
+	  console.log('onChange');
+	  console.log(value[0] && formatter.format(value[0]), value[1] && formatter.format(value[1]));
+	}
+	
+	function onStandaloneSelect(value) {
+	  console.log('onSelect');
+	  console.log(formatter.format(value[0]), formatter.format(value[1]));
+	}
+	
+	function onStandaloneOk(value) {
+	  console.log('onOk');
+	  console.log(formatter.format(value[0]), formatter.format(value[1]));
+	}
 	
 	var Test = _react2['default'].createClass({
 	  displayName: 'Test',
 	
-	  onChange: function onChange(value) {
-	    console.log('DatePicker change: ' + this.props.formatter.format(value));
-	  },
-	
-	  onCalendarSelect: function onCalendarSelect(value) {
-	    console.log('calendar select: ' + this.props.formatter.format(value));
-	    // uncontrolled value
-	    this.setState({
-	      time: Date.now()
-	    });
-	  },
-	
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      formatter: new _gregorianCalendarFormat2['default']('yyyy-MM-dd HH:mm:ss')
-	    };
-	  },
-	
 	  getInitialState: function getInitialState() {
-	    var value = new _gregorianCalendar2['default'](_gregorianCalendarLibLocaleZhCn2['default']);
-	    value.setTime(Date.now());
+	    var end = value.clone();
+	    end.addDayOfMonth(5);
 	    return {
-	      time: Date.now(),
-	      showTime: true,
-	      open: false,
-	      value: value
+	      value: [value, end]
 	    };
 	  },
 	
-	  onShowTimeChange: function onShowTimeChange(e) {
-	    this.setState({
-	      showTime: e.target.checked
-	    });
+	  onChange: function onChange(value) {
+	    if (value[1].getTime() - value[0].getTime() > 60 * 24 * 60 * 1000 * 10) {
+	      console.log('only last no more than 10 days');
+	      value[1] = value[0].clone();
+	      value[1].addDayOfMonth(10);
+	    }
+	    this.setState({ value: value });
 	  },
 	
 	  render: function render() {
 	    var state = this.state;
-	    var calendar = _react2['default'].createElement(_rcCalendar2['default'], { locale: _rcCalendarSrcLocaleZhCn2['default'],
-	      orient: ['bottom', 'left'],
-	      showTime: this.state.showTime, onSelect: this.onCalendarSelect });
+	    var calendar = _react2['default'].createElement(_rcCalendarSrcRangeCalendar2['default'], { showWeekNumber: false,
+	      locale: _rcCalendarSrcLocaleZhCn2['default'],
+	      disabledDate: disabledDate,
+	      showTime: true });
 	    return _react2['default'].createElement(
-	      'div',
-	      { className: 'form-group', style: { width: 400, margin: 20 }, 'data-time': state.time },
-	      _react2['default'].createElement(
-	        'div',
-	        { className: 'input-group' },
-	        _react2['default'].createElement(
+	      _rcCalendarSrcPicker2['default'],
+	      { value: state.value,
+	        onChange: this.onChange,
+	        animation: 'slide-up',
+	        calendar: calendar },
+	      function (_ref) {
+	        var value = _ref.value;
+	
+	        return _react2['default'].createElement(
 	          'span',
 	          null,
-	          _react2['default'].createElement('input', { type: 'checkbox', checked: this.state.showTime, onChange: this.onShowTimeChange }),
-	          'showTime'
-	        )
-	      ),
-	      _react2['default'].createElement(
-	        'div',
-	        { className: 'input-group', style: { width: 250 } },
-	        _react2['default'].createElement(
-	          _rcCalendarSrcPicker2['default'],
-	          { calendar: calendar,
-	            style: { display: 'inline' },
-	            defaultValue: state.value,
-	            onChange: this.onChange },
-	          function (_ref) {
-	            var value = _ref.value;
-	
-	            return _react2['default'].createElement(
-	              'span',
-	              null,
-	              _react2['default'].createElement('input', { type: 'text',
-	                className: 'form-control',
-	                readOnly: true,
-	                value: formatter.format(value),
-	                style: {
-	                  background: "white",
-	                  borderTopRightRadius: 4,
-	                  borderBottomRightRadius: 4,
-	                  cursor: "pointer"
-	                } }),
-	              _react2['default'].createElement(
-	                'span',
-	                { className: 'input-group-addon', style: {
-	                    width: 39,
-	                    height: 34,
-	                    borderRight: 0,
-	                    borderLeft: '1px solid #ccc',
-	                    position: 'absolute',
-	                    zIndex: 99,
-	                    right: 1, top: 0 } },
-	                _react2['default'].createElement('span', { className: 'glyphicon glyphicon-calendar' })
-	              )
-	            );
-	          }
-	        )
-	      )
+	          _react2['default'].createElement('input', { placeholder: '请选择日期', style: { width: 350 },
+	            disabled: state.disabled,
+	            className: 'ant-calendar-picker-input ant-input',
+	            value: value && formatter.format(value[0]) + ' - ' + formatter.format(value[1]) }),
+	          _react2['default'].createElement('span', { className: 'ant-calendar-picker-icon', unselectable: 'true' })
+	        );
+	      }
 	    );
 	  }
 	});
@@ -2000,12 +1519,441 @@ webpackJsonp([4],{
 	  _react2['default'].createElement(
 	    'h2',
 	    null,
-	    'zh-cn'
+	    'calendar (zh-cn)'
 	  ),
-	  _react2['default'].createElement(Test, null)
+	  _react2['default'].createElement('link', { href: 'http://ant.design/dist/antd.css', rel: 'stylesheet', type: 'text/css' }),
+	  _react2['default'].createElement(
+	    'div',
+	    { style: { margin: 10 } },
+	    _react2['default'].createElement(_rcCalendarSrcRangeCalendar2['default'], { showWeekNumber: true,
+	      locale: _rcCalendarSrcLocaleZhCn2['default'],
+	      onChange: onStandaloneChange,
+	      onSelect: onStandaloneSelect,
+	      onOk: onStandaloneOk,
+	      disabledDate: disabledDate,
+	      showTime: true })
+	  ),
+	  _react2['default'].createElement('br', null),
+	  _react2['default'].createElement(
+	    'div',
+	    { style: { margin: 20 } },
+	    _react2['default'].createElement(Test, null)
+	  )
 	), document.getElementById('__react-content'));
+
+/***/ },
+
+/***/ 217:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	var _react = __webpack_require__(3);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _gregorianCalendar = __webpack_require__(162);
+	
+	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
+	
+	var _rcUtil = __webpack_require__(166);
+	
+	var _rangeCalendarCalendarPart = __webpack_require__(218);
+	
+	var _rangeCalendarCalendarPart2 = _interopRequireDefault(_rangeCalendarCalendarPart);
+	
+	var _util = __webpack_require__(182);
+	
+	var _objectAssign = __webpack_require__(219);
+	
+	var _objectAssign2 = _interopRequireDefault(_objectAssign);
+	
+	var _mixinCommonMixin = __webpack_require__(194);
+	
+	var _mixinCommonMixin2 = _interopRequireDefault(_mixinCommonMixin);
+	
+	function noop() {}
+	
+	function getNow() {
+	  var value = new _gregorianCalendar2['default']();
+	  value.setTime(Date.now());
+	  return value;
+	}
+	
+	function onAnchorChange(direction, current) {
+	  var anchor = undefined;
+	  anchor = current;
+	  if (direction === 'right') {
+	    anchor.addMonth(-1);
+	  }
+	  this.fireAnchorChange(anchor);
+	}
+	
+	function normalizeAnchor(props, init) {
+	  var value = props.value || init && props.defaultValue || [];
+	  return props.anchor || init && props.defaultAnchor || value[0] || init && getNow();
+	}
+	
+	function onTimeSelect(direction, selectedValue) {
+	  var index = direction === 'left' ? 0 : 1;
+	  var value = this.state.value;
+	  if (value[index]) {
+	    value = value.concat();
+	    value[index] = value[index].clone();
+	    (0, _util.syncTime)(selectedValue, value[index]);
+	    this.fireValueChange(value);
+	  }
+	}
+	
+	function onInputSelect(direction, selectedValue) {
+	  var originalValue = this.state.value;
+	  var value = originalValue.concat();
+	  var index = direction === 'left' ? 0 : 1;
+	  value[index] = selectedValue;
+	  if (value[0].getTime() > value[1].getTime()) {
+	    value.length = 1;
+	  }
+	  this.fireValueChange(value);
+	}
+	
+	var RangeCalendar = _react2['default'].createClass({
+	  displayName: 'RangeCalendar',
+	
+	  propTypes: {
+	    defaultAnchor: _react.PropTypes.object,
+	    anchor: _react.PropTypes.object,
+	    value: _react.PropTypes.array,
+	    defaultValue: _react.PropTypes.array,
+	    onOk: _react.PropTypes.func,
+	    onChange: _react.PropTypes.func,
+	    onSelect: _react.PropTypes.func,
+	    formatter: _react.PropTypes.object
+	  },
+	
+	  mixins: [_mixinCommonMixin2['default']],
+	
+	  getInitialState: function getInitialState() {
+	    var props = this.props;
+	    var value = props.value || props.defaultValue;
+	    var anchor = normalizeAnchor(props, 1);
+	    return { value: value, anchor: anchor };
+	  },
+	
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      defaultValue: [],
+	      onAnchorChange: noop
+	    };
+	  },
+	
+	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	    var newState = {};
+	    if ('anchor' in nextProps) {
+	      if (nextProps.anchor) {
+	        newState.anchor = nextProps.anchor;
+	      } else {
+	        newState.anchor = normalizeAnchor(nextProps, 0);
+	      }
+	      this.setState(newState);
+	    }
+	  },
+	
+	  onSelect: function onSelect(selectedValue) {
+	    var originalValue = this.state.value;
+	    var value = originalValue.concat();
+	    var changed = false;
+	    if (!value.length || value.length === 2 && !originalValue.hovering) {
+	      value.length = 1;
+	      value[0] = selectedValue;
+	      changed = true;
+	    } else if (value[0].getTime() < selectedValue.getTime()) {
+	      value[1] = selectedValue;
+	      changed = true;
+	    } else if (value[0].getTime() > selectedValue.getTime()) {
+	      value.length = 1;
+	      value[0] = selectedValue;
+	      changed = true;
+	    }
+	    if (changed) {
+	      this.fireValueChange(value);
+	    }
+	  },
+	
+	  onDayHover: function onDayHover(hoverValue) {
+	    var value = this.state.value;
+	    if (!value.length || value.length === 2 && !value.hovering) {
+	      return;
+	    }
+	    if (hoverValue.getTime() < value[0].getTime()) {
+	      return;
+	    }
+	    value = value.concat();
+	    value[1] = hoverValue;
+	    value.hovering = 1;
+	    this.fireValueChange(value);
+	  },
+	
+	  onToday: function onToday() {
+	    this.setState({
+	      anchor: (0, _util.getTodayTime)(this.state.anchor)
+	    });
+	  },
+	
+	  onOk: function onOk() {
+	    this.props.onOk(this.state.value);
+	  },
+	
+	  getAnchor: function getAnchor() {
+	    var anchor = this.state.anchor;
+	    var value = this.state.value;
+	    if (value[0]) {
+	      anchor = anchor.clone();
+	      (0, _util.syncTime)(value[0], anchor);
+	    }
+	    return anchor;
+	  },
+	
+	  getAnchorEndValue: function getAnchorEndValue() {
+	    var endValue = this.state.anchor.clone();
+	    endValue.addMonth(1);
+	    var value = this.state.value;
+	    if (value[1]) {
+	      (0, _util.syncTime)(value[1], endValue);
+	    }
+	    return endValue;
+	  },
+	
+	  render: function render() {
+	    var _className;
+	
+	    var props = this.props;
+	    var state = this.state;
+	    var prefixCls = props.prefixCls;
+	    var orient = state.orient;
+	    var className = (_className = {}, _defineProperty(_className, props.className, !!props.className), _defineProperty(_className, prefixCls, 1), _defineProperty(_className, prefixCls + '-hidden', !props.visible), _defineProperty(_className, prefixCls + '-range', 1), _defineProperty(_className, prefixCls + '-week-number', props.showWeekNumber), _className);
+	    if (orient) {
+	      orient.forEach(function (o) {
+	        className[prefixCls + '-orient-' + o] = 1;
+	      });
+	    }
+	    var classes = (0, _rcUtil.classSet)(className);
+	    var newProps = {
+	      range: state.value,
+	      onSelect: this.onSelect,
+	      onDayHover: this.onDayHover
+	    };
+	
+	    return _react2['default'].createElement(
+	      'div',
+	      { className: classes, style: props.style,
+	        tabIndex: '0', onFocus: this.onFocus,
+	        onBlur: this.onBlur },
+	      _react2['default'].createElement(_rangeCalendarCalendarPart2['default'], _extends({}, props, newProps, { direction: 'left',
+	        formatter: this.getFormatter(),
+	        value: this.getAnchor(),
+	        onInputSelect: onInputSelect.bind(this, 'left'),
+	        onTimeSelect: onTimeSelect.bind(this, 'left'),
+	        onAnchorChange: onAnchorChange.bind(this, 'left') })),
+	      _react2['default'].createElement(_rangeCalendarCalendarPart2['default'], _extends({}, props, newProps, { direction: 'right',
+	        formatter: this.getFormatter(),
+	        value: this.getAnchorEndValue(),
+	        onInputSelect: onInputSelect.bind(this, 'right'),
+	        onTimeSelect: onTimeSelect.bind(this, 'right'),
+	        onAnchorChange: onAnchorChange.bind(this, 'right') })),
+	      _react2['default'].createElement(
+	        'div',
+	        { style: { textAlign: 'center' } },
+	        (0, _util.getTodayElement)((0, _objectAssign2['default'])({}, props, { value: state.anchor, onToday: this.onToday })),
+	        (0, _util.getOkElement)((0, _objectAssign2['default'])({}, props, {
+	          value: state.anchor,
+	          onOk: this.onOk,
+	          okDisabled: state.value.length !== 2 || state.value.hovering
+	        }))
+	      )
+	    );
+	  },
+	
+	  fireValueChange: function fireValueChange(value) {
+	    if (!('value' in this.props)) {
+	      this.setState({ value: value });
+	    }
+	    this.props.onChange(value);
+	    if (value.length === 2 && !value.hovering) {
+	      this.props.onSelect(value);
+	    }
+	  },
+	
+	  fireAnchorChange: function fireAnchorChange(anchor) {
+	    var props = this.props;
+	    if (!('anchor' in props)) {
+	      this.setState({ anchor: anchor });
+	    }
+	    props.onAnchorChange(anchor);
+	  }
+	});
+	
+	exports['default'] = RangeCalendar;
+	module.exports = exports['default'];
+
+/***/ },
+
+/***/ 218:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	var _react = __webpack_require__(3);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _calendarCalendarHeader = __webpack_require__(183);
+	
+	var _calendarCalendarHeader2 = _interopRequireDefault(_calendarCalendarHeader);
+	
+	var _dateDateTable = __webpack_require__(178);
+	
+	var _dateDateTable2 = _interopRequireDefault(_dateDateTable);
+	
+	var _calendarCalendarFooter = __webpack_require__(190);
+	
+	var _calendarCalendarFooter2 = _interopRequireDefault(_calendarCalendarFooter);
+	
+	var _dateDateInput = __webpack_require__(196);
+	
+	var _dateDateInput2 = _interopRequireDefault(_dateDateInput);
+	
+	var Calendar = _react2['default'].createClass({
+	  displayName: 'Calendar',
+	
+	  propTypes: {
+	    onTimeSelect: _react2['default'].PropTypes.func
+	  },
+	
+	  render: function render() {
+	    var props = this.props;
+	    var value = props.value;
+	    var direction = props.direction;
+	    var prefixCls = props.prefixCls;
+	    var locale = props.locale;
+	    var range = props.range;
+	    var formatter = props.formatter;
+	    var disabledDate = props.disabledDate;
+	
+	    var rangeClassName = prefixCls + '-range';
+	    var newProps = { locale: locale, value: value, prefixCls: prefixCls };
+	    var index = direction === 'left' ? 0 : 1;
+	    return _react2['default'].createElement(
+	      'div',
+	      { className: rangeClassName + '-part ' + rangeClassName + '-' + direction },
+	      _react2['default'].createElement(
+	        'div',
+	        { className: prefixCls + '-input-wrap' },
+	        _react2['default'].createElement(_dateDateInput2['default'], { className: prefixCls + '-input',
+	          formatter: formatter,
+	          disabledDate: disabledDate,
+	          value: range[index] || range[0],
+	          onChange: props.onInputSelect }),
+	        _react2['default'].createElement('i', { className: prefixCls + '-input-icon' })
+	      ),
+	      _react2['default'].createElement(
+	        'div',
+	        { style: { outline: 'none' } },
+	        _react2['default'].createElement(_calendarCalendarHeader2['default'], _extends({}, newProps, {
+	          enableNext: direction === 'right',
+	          enablePrev: direction === 'left',
+	          onValueChange: props.onAnchorChange })),
+	        _react2['default'].createElement(
+	          'div',
+	          { className: prefixCls + '-calendar-body' },
+	          _react2['default'].createElement(_dateDateTable2['default'], _extends({}, newProps, {
+	            range: range,
+	            dateRender: props.dateRender,
+	            onSelect: props.onSelect,
+	            onDayHover: props.onDayHover,
+	            disabledDate: disabledDate,
+	            showWeekNumber: props.showWeekNumber }))
+	        ),
+	        _react2['default'].createElement(_calendarCalendarFooter2['default'], _extends({
+	          showTime: props.showTime
+	        }, newProps, {
+	          disabledDate: props.disabledDate,
+	          timeDisabled: !range[index] || !!range.hovering,
+	          onSelect: this.props.onTimeSelect,
+	          onToday: this.chooseToday
+	        }))
+	      )
+	    );
+	  }
+	});
+	
+	exports['default'] = Calendar;
+	module.exports = exports['default'];
+
+/***/ },
+
+/***/ 219:
+/***/ function(module, exports) {
+
+	/* eslint-disable no-unused-vars */
+	'use strict';
+	var hasOwnProperty = Object.prototype.hasOwnProperty;
+	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+	
+	function toObject(val) {
+		if (val === null || val === undefined) {
+			throw new TypeError('Object.assign cannot be called with null or undefined');
+		}
+	
+		return Object(val);
+	}
+	
+	module.exports = Object.assign || function (target, source) {
+		var from;
+		var to = toObject(target);
+		var symbols;
+	
+		for (var s = 1; s < arguments.length; s++) {
+			from = Object(arguments[s]);
+	
+			for (var key in from) {
+				if (hasOwnProperty.call(from, key)) {
+					to[key] = from[key];
+				}
+			}
+	
+			if (Object.getOwnPropertySymbols) {
+				symbols = Object.getOwnPropertySymbols(from);
+				for (var i = 0; i < symbols.length; i++) {
+					if (propIsEnumerable.call(from, symbols[i])) {
+						to[symbols[i]] = from[symbols[i]];
+					}
+				}
+			}
+		}
+	
+		return to;
+	};
+
 
 /***/ }
 
 });
-//# sourceMappingURL=defaultValue.js.map
+//# sourceMappingURL=antd-range-calendar.js.map

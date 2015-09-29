@@ -1,9 +1,9 @@
-webpackJsonp([4],{
+webpackJsonp([3],{
 
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(223);
+	module.exports = __webpack_require__(220);
 
 
 /***/ },
@@ -1836,21 +1836,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 221:
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-
-/***/ 222:
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-
-/***/ 223:
+/***/ 220:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1897,30 +1883,26 @@ webpackJsonp([4],{
 	  displayName: 'Test',
 	
 	  onChange: function onChange(value) {
-	    console.log('DatePicker change: ' + this.props.formatter.format(value));
+	    console.log('DatePicker change: ' + (value && formatter.format(value)));
 	  },
 	
 	  onCalendarSelect: function onCalendarSelect(value) {
-	    console.log('calendar select: ' + this.props.formatter.format(value));
-	    // uncontrolled value
+	    console.log('calendar select: ' + (value && formatter.format(value)));
+	    // controlled value
 	    this.setState({
-	      time: Date.now()
+	      time: Date.now(),
+	      open: this.state.showTime,
+	      value: value
 	    });
-	  },
-	
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      formatter: new _gregorianCalendarFormat2['default']('yyyy-MM-dd HH:mm:ss')
-	    };
 	  },
 	
 	  getInitialState: function getInitialState() {
 	    var value = new _gregorianCalendar2['default'](_gregorianCalendarLibLocaleZhCn2['default']);
 	    value.setTime(Date.now());
 	    return {
+	      open: false,
 	      time: Date.now(),
 	      showTime: true,
-	      open: false,
 	      value: value
 	    };
 	  },
@@ -1934,11 +1916,12 @@ webpackJsonp([4],{
 	  render: function render() {
 	    var state = this.state;
 	    var calendar = _react2['default'].createElement(_rcCalendar2['default'], { locale: _rcCalendarSrcLocaleZhCn2['default'],
-	      orient: ['bottom', 'left'],
-	      showTime: this.state.showTime, onSelect: this.onCalendarSelect });
+	      orient: ['top', 'left'],
+	      showTime: this.state.showTime, onSelect: this.onCalendarSelect,
+	      onClear: this.onCalendarSelect.bind(this, null), showClear: true });
 	    return _react2['default'].createElement(
 	      'div',
-	      { className: 'form-group', style: { width: 400, margin: 20 }, 'data-time': state.time },
+	      { className: 'form-group', style: { width: 400, margin: 20 }, 'data-time': this.state.time },
 	      _react2['default'].createElement(
 	        'div',
 	        { className: 'input-group' },
@@ -1954,9 +1937,10 @@ webpackJsonp([4],{
 	        { className: 'input-group', style: { width: 250 } },
 	        _react2['default'].createElement(
 	          _rcCalendarSrcPicker2['default'],
-	          { calendar: calendar,
+	          { ref: 'picker',
 	            style: { display: 'inline' },
-	            defaultValue: state.value,
+	            calendar: calendar,
+	            value: state.value,
 	            onChange: this.onChange },
 	          function (_ref) {
 	            var value = _ref.value;
@@ -1994,6 +1978,16 @@ webpackJsonp([4],{
 	  }
 	});
 	
+	function onStandaloneSelect(value) {
+	  console.log('onCalendarSelect');
+	  console.log(formatter.format(value));
+	}
+	
+	function onStandaloneChange(value) {
+	  console.log('onCalendarChange');
+	  console.log(formatter.format(value));
+	}
+	
 	_react2['default'].render(_react2['default'].createElement(
 	  'div',
 	  null,
@@ -2002,10 +1996,34 @@ webpackJsonp([4],{
 	    null,
 	    'zh-cn'
 	  ),
+	  _react2['default'].createElement(
+	    'div',
+	    { style: { margin: 10 } },
+	    _react2['default'].createElement(_rcCalendar2['default'], { showWeekNumber: true,
+	      showOk: 0,
+	      showClear: 0,
+	      onSelect: onStandaloneSelect,
+	      onChange: onStandaloneChange,
+	      showTime: true })
+	  ),
 	  _react2['default'].createElement(Test, null)
 	), document.getElementById('__react-content'));
+
+/***/ },
+
+/***/ 221:
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+
+/***/ 222:
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
 
 /***/ }
 
 });
-//# sourceMappingURL=defaultValue.js.map
+//# sourceMappingURL=calendar.js.map

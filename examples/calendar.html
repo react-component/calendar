@@ -233,7 +233,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
   <!--[if lt IE 9]>
   <script src="https://a.alipayobjects.com/??es5-shim/4.0.5/es5-shim.js,es5-shim/4.0.5/es5-sham.js,html5shiv/3.7.2/src/html5shiv.js"></script>
   <![endif]-->
-  <link rel="stylesheet" href="defaultValue.css" />
+  <link rel="stylesheet" href="calendar.css" />
 </head>
 
 <body>
@@ -245,7 +245,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
   </div>
   <div class="example" id="__react-content"></div>
   <script src="common.js?nowrap"></script>
-  <script src="defaultValue.js?nowrap"></script>
+  <script src="calendar.js?nowrap"></script>
   <div class="highlight">
     <pre><code>import <span class="hljs-string">'bootstrap/dist/css/bootstrap.css'</span>;
 import <span class="hljs-string">'rc-calendar/assets/bootstrap.css'</span>;
@@ -260,30 +260,26 @@ import CalendarLocale <span class="hljs-keyword">from</span> <span class="hljs-s
 
 <span class="hljs-keyword">var</span> Test = React.createClass({
   onChange(<span class="hljs-keyword">value</span>) {
-    console.log(<span class="hljs-string">'DatePicker change: '</span> + (<span class="hljs-keyword">this</span>.props.formatter.format(<span class="hljs-keyword">value</span>)));
+    console.log(<span class="hljs-string">'DatePicker change: '</span> + (<span class="hljs-keyword">value</span> &amp;&amp; formatter.format(<span class="hljs-keyword">value</span>)));
   },
 
   onCalendarSelect(<span class="hljs-keyword">value</span>) {
-    console.log(<span class="hljs-string">'calendar select: '</span> + (<span class="hljs-keyword">this</span>.props.formatter.format(<span class="hljs-keyword">value</span>)));
-    <span class="hljs-comment">// uncontrolled value</span>
+    console.log(<span class="hljs-string">'calendar select: '</span> + (<span class="hljs-keyword">value</span> &amp;&amp; formatter.format(<span class="hljs-keyword">value</span>)));
+    <span class="hljs-comment">// controlled value</span>
     <span class="hljs-keyword">this</span>.setState({
-      time: Date.now()
+      time: Date.now(),
+      open: <span class="hljs-keyword">this</span>.state.showTime,
+      <span class="hljs-keyword">value</span>: <span class="hljs-keyword">value</span>
     });
-  },
-
-  getDefaultProps() {
-    <span class="hljs-keyword">return</span> {
-      formatter: <span class="hljs-keyword">new</span> DateTimeFormat(<span class="hljs-string">'yyyy-MM-dd HH:mm:ss'</span>),
-    };
   },
 
   getInitialState() {
     <span class="hljs-keyword">var</span> <span class="hljs-keyword">value</span> = <span class="hljs-keyword">new</span> GregorianCalendar(zhCn);
     <span class="hljs-keyword">value</span>.setTime(Date.now());
     <span class="hljs-keyword">return</span> {
+      open: <span class="hljs-keyword">false</span>,
       time: Date.now(),
       showTime: <span class="hljs-keyword">true</span>,
-      open: <span class="hljs-keyword">false</span>,
       <span class="hljs-keyword">value</span>: <span class="hljs-keyword">value</span>
     };
   },
@@ -297,18 +293,20 @@ import CalendarLocale <span class="hljs-keyword">from</span> <span class="hljs-s
   render() {
     <span class="hljs-keyword">var</span> state = <span class="hljs-keyword">this</span>.state;
     <span class="hljs-keyword">var</span> calendar = &lt;Calendar locale={CalendarLocale}
-                             orient={[<span class="hljs-string">'bottom'</span>, <span class="hljs-string">'left'</span>]}
-                             showTime={<span class="hljs-keyword">this</span>.state.showTime} onSelect={<span class="hljs-keyword">this</span>.onCalendarSelect}/&gt;;
-    <span class="hljs-keyword">return</span> &lt;div className=<span class="hljs-string">"form-group"</span> style={{width: <span class="hljs-number">400</span>, margin: <span class="hljs-number">20</span>}} data-time={state.time}&gt;
+                             orient={[<span class="hljs-string">'top'</span>, <span class="hljs-string">'left'</span>]}
+                             showTime={<span class="hljs-keyword">this</span>.state.showTime} onSelect={<span class="hljs-keyword">this</span>.onCalendarSelect}
+                             onClear={<span class="hljs-keyword">this</span>.onCalendarSelect.bind(<span class="hljs-keyword">this</span>, <span class="hljs-keyword">null</span>)} showClear={<span class="hljs-keyword">true</span>}/&gt;;
+    <span class="hljs-keyword">return</span> &lt;div className=<span class="hljs-string">"form-group"</span> style={{width: <span class="hljs-number">400</span>, margin: <span class="hljs-number">20</span>}} data-time={<span class="hljs-keyword">this</span>.state.time}&gt;
       &lt;div className=<span class="hljs-string">"input-group"</span>&gt;
         &lt;span&gt;
-          &lt;input type=<span class="hljs-string">"checkbox"</span> <span class="hljs-keyword">checked</span>={<span class="hljs-keyword">this</span>.state.showTime} onChange={<span class="hljs-keyword">this</span>.onShowTimeChange}/&gt;
+          &lt;input type=<span class="hljs-string">'checkbox'</span> <span class="hljs-keyword">checked</span>={<span class="hljs-keyword">this</span>.state.showTime} onChange={<span class="hljs-keyword">this</span>.onShowTimeChange}/&gt;
           showTime&lt;/span&gt;
       &lt;/div&gt;
       &lt;div className=<span class="hljs-string">"input-group"</span> style={{width:<span class="hljs-number">250</span>}}&gt;
-        &lt;DatePicker calendar={calendar}
+        &lt;DatePicker <span class="hljs-keyword">ref</span>=<span class="hljs-string">'picker'</span>
                     style={{display:<span class="hljs-string">'inline'</span>}}
-                    defaultValue={state.<span class="hljs-keyword">value</span>}
+                    calendar={calendar}
+                    <span class="hljs-keyword">value</span>={state.<span class="hljs-keyword">value</span>}
                     onChange={<span class="hljs-keyword">this</span>.onChange}&gt;
           {
             ({<span class="hljs-keyword">value</span>}) =&gt; {
@@ -337,16 +335,37 @@ import CalendarLocale <span class="hljs-keyword">from</span> <span class="hljs-s
             }
           }
         &lt;/DatePicker&gt;
-
       &lt;/div&gt;
     &lt;/div&gt;;
   }
 });
 
-React.render((&lt;div&gt;
+
+<span class="hljs-function">function <span class="hljs-title">onStandaloneSelect</span>(<span class="hljs-params"><span class="hljs-keyword">value</span></span>) </span>{
+  console.log(<span class="hljs-string">'onCalendarSelect'</span>);
+  console.log(formatter.format(<span class="hljs-keyword">value</span>))
+}
+
+<span class="hljs-function">function <span class="hljs-title">onStandaloneChange</span>(<span class="hljs-params"><span class="hljs-keyword">value</span></span>) </span>{
+  console.log(<span class="hljs-string">'onCalendarChange'</span>);
+  console.log(formatter.format(<span class="hljs-keyword">value</span>))
+}
+
+React.render(&lt;div&gt;
   &lt;h2&gt;zh-cn&lt;/h2&gt;
+
+  &lt;div style={{margin:<span class="hljs-number">10</span>}}&gt;
+    &lt;Calendar showWeekNumber={<span class="hljs-keyword">true</span>}
+              showOk={<span class="hljs-number">0</span>}
+              showClear={<span class="hljs-number">0</span>}
+              onSelect={onStandaloneSelect}
+              onChange={onStandaloneChange}
+              showTime={<span class="hljs-keyword">true</span>}/&gt;
+  &lt;/div&gt;
+
+
   &lt;Test /&gt;
-&lt;/div&gt;), document.getElementById(<span class="hljs-string">'__react-content'</span>));
+&lt;/div&gt;, document.getElementById(<span class="hljs-string">'__react-content'</span>));
 </code></pre>
   </div>
 </div>
