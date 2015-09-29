@@ -365,24 +365,24 @@ webpackJsonp([0],{
 	  mixins: [_mixinCommonMixin2['default'], _mixinCalendarMixin2['default']],
 	
 	  propTypes: {
-	    value: _react2['default'].PropTypes.object,
-	    defaultValue: _react2['default'].PropTypes.object,
-	    className: _react2['default'].PropTypes.string,
-	    orient: _react2['default'].PropTypes.arrayOf(_react2['default'].PropTypes.oneOf(['left', 'top', 'right', 'bottom'])),
-	    locale: _react2['default'].PropTypes.object,
-	    showWeekNumber: _react2['default'].PropTypes.bool,
-	    style: _react2['default'].PropTypes.object,
-	    showToday: _react2['default'].PropTypes.bool,
-	    visible: _react2['default'].PropTypes.bool,
-	    showTime: _react2['default'].PropTypes.bool,
-	    onSelect: _react2['default'].PropTypes.func,
-	    onOk: _react2['default'].PropTypes.func,
-	    prefixCls: _react2['default'].PropTypes.string,
-	    onKeyDown: _react2['default'].PropTypes.func,
-	    onClear: _react2['default'].PropTypes.func,
-	    onChange: _react2['default'].PropTypes.func,
-	    onFocus: _react2['default'].PropTypes.func,
-	    onBlur: _react2['default'].PropTypes.func
+	    value: _react.PropTypes.object,
+	    defaultValue: _react.PropTypes.object,
+	    className: _react.PropTypes.string,
+	    orient: _react.PropTypes.arrayOf(_react.PropTypes.oneOf(['left', 'top', 'right', 'bottom'])),
+	    locale: _react.PropTypes.object,
+	    showWeekNumber: _react.PropTypes.bool,
+	    style: _react.PropTypes.object,
+	    showToday: _react.PropTypes.bool,
+	    visible: _react.PropTypes.bool,
+	    showTime: _react.PropTypes.bool,
+	    onSelect: _react.PropTypes.func,
+	    onOk: _react.PropTypes.func,
+	    prefixCls: _react.PropTypes.string,
+	    onKeyDown: _react.PropTypes.func,
+	    onClear: _react.PropTypes.func,
+	    onChange: _react.PropTypes.func,
+	    onFocus: _react.PropTypes.func,
+	    onBlur: _react.PropTypes.func
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
@@ -1132,9 +1132,9 @@ webpackJsonp([0],{
 	  displayName: 'CalendarHeader',
 	
 	  propTypes: {
-	    locale: _react2['default'].PropTypes.object,
-	    value: _react2['default'].PropTypes.object,
-	    onValueChange: _react2['default'].PropTypes.func
+	    locale: _react.PropTypes.object,
+	    value: _react.PropTypes.object,
+	    onValueChange: _react.PropTypes.func
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
@@ -1323,7 +1323,7 @@ webpackJsonp([0],{
 	  displayName: 'CalendarFooter',
 	
 	  propTypes: {
-	    onSelect: _react2['default'].PropTypes.func
+	    onSelect: _react.PropTypes.func
 	  },
 	
 	  onSelect: function onSelect(value) {
@@ -1638,8 +1638,8 @@ webpackJsonp([0],{
 	Time.prototype.onSecondKeyDown = keyDownWrap('setSeconds', 0, 59);
 	
 	Time.propTypes = {
-	  onChange: _react2['default'].PropTypes.func,
-	  disabled: _react2['default'].PropTypes.bool
+	  onChange: _react.PropTypes.func,
+	  disabled: _react.PropTypes.bool
 	};
 	
 	Time.defaultProps = {
@@ -1830,9 +1830,9 @@ webpackJsonp([0],{
 	
 	var CalendarMixin = {
 	  propTypes: {
-	    value: _react2['default'].PropTypes.object,
-	    defaultValue: _react2['default'].PropTypes.object,
-	    onKeyDown: _react2['default'].PropTypes.func
+	    value: _react.PropTypes.object,
+	    defaultValue: _react.PropTypes.object,
+	    onKeyDown: _react.PropTypes.func
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {

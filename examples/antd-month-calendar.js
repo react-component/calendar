@@ -59,9 +59,9 @@ webpackJsonp([1],{
 	
 	var CalendarMixin = {
 	  propTypes: {
-	    value: _react2['default'].PropTypes.object,
-	    defaultValue: _react2['default'].PropTypes.object,
-	    onKeyDown: _react2['default'].PropTypes.func
+	    value: _react.PropTypes.object,
+	    defaultValue: _react.PropTypes.object,
+	    onKeyDown: _react.PropTypes.func
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {

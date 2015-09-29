@@ -22996,8 +22996,8 @@
 	  displayName: 'MonthPanel',
 	
 	  propTypes: {
-	    onChange: _react2['default'].PropTypes.func,
-	    onSelect: _react2['default'].PropTypes.func
+	    onChange: _react.PropTypes.func,
+	    onSelect: _react.PropTypes.func
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
@@ -23627,7 +23627,7 @@
 	exports['default'] = DecadePanel;
 	
 	DecadePanel.propTypes = {
-	  locale: _react2['default'].PropTypes.object
+	  locale: _react.PropTypes.object
 	};
 	
 	DecadePanel.defaultProps = {
@@ -24486,6 +24486,10 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
+	var _react = __webpack_require__(3);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
 	var _localeEnUs = __webpack_require__(195);
 	
 	var _localeEnUs2 = _interopRequireDefault(_localeEnUs);
@@ -24498,17 +24502,17 @@
 	
 	exports['default'] = {
 	  propTypes: {
-	    className: React.PropTypes.string,
-	    locale: React.PropTypes.object,
-	    style: React.PropTypes.object,
-	    visible: React.PropTypes.bool,
-	    onSelect: React.PropTypes.func,
-	    prefixCls: React.PropTypes.string,
-	    onChange: React.PropTypes.func,
-	    onOk: React.PropTypes.func,
-	    onFocus: React.PropTypes.func,
-	    onBlur: React.PropTypes.func,
-	    orient: React.PropTypes.arrayOf(React.PropTypes.oneOf(['left', 'top', 'right', 'bottom']))
+	    className: _react.PropTypes.string,
+	    locale: _react.PropTypes.object,
+	    style: _react.PropTypes.object,
+	    visible: _react.PropTypes.bool,
+	    onSelect: _react.PropTypes.func,
+	    prefixCls: _react.PropTypes.string,
+	    onChange: _react.PropTypes.func,
+	    onOk: _react.PropTypes.func,
+	    onFocus: _react.PropTypes.func,
+	    onBlur: _react.PropTypes.func,
+	    orient: _react.PropTypes.arrayOf(_react.PropTypes.oneOf(['left', 'top', 'right', 'bottom']))
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
@@ -24581,7 +24585,7 @@
 	    }
 	    this.state.orient = orient;
 	    var prefixCls = this.props.prefixCls;
-	    var root = React.findDOMNode(this);
+	    var root = _react2['default'].findDOMNode(this);
 	    var className = root.className.replace(new RegExp(prefixCls + '-orient-\\w+', 'g'), '');
 	    if (orient) {
 	      orient.forEach(function (o) {
@@ -24702,17 +24706,17 @@
 	  displayName: 'Picker',
 	
 	  propTypes: {
-	    onChange: _react2['default'].PropTypes.func,
-	    onOpen: _react2['default'].PropTypes.func,
-	    onClose: _react2['default'].PropTypes.func,
-	    children: _react2['default'].PropTypes.func,
-	    calendar: _react2['default'].PropTypes.element,
-	    style: _react2['default'].PropTypes.object,
-	    open: _react2['default'].PropTypes.bool,
-	    defaultOpen: _react2['default'].PropTypes.bool,
-	    prefixCls: _react2['default'].PropTypes.string,
-	    getCalendarContainer: _react2['default'].PropTypes.func,
-	    adjustOrientOnCalendarOverflow: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.bool, _react2['default'].PropTypes.object])
+	    onChange: _react.PropTypes.func,
+	    onOpen: _react.PropTypes.func,
+	    onClose: _react.PropTypes.func,
+	    children: _react.PropTypes.func,
+	    calendar: _react.PropTypes.element,
+	    style: _react.PropTypes.object,
+	    open: _react.PropTypes.bool,
+	    defaultOpen: _react.PropTypes.bool,
+	    prefixCls: _react.PropTypes.string,
+	    getCalendarContainer: _react.PropTypes.func,
+	    adjustOrientOnCalendarOverflow: _react.PropTypes.oneOfType([_react.PropTypes.bool, _react.PropTypes.object])
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {

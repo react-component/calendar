@@ -592,9 +592,9 @@ webpackJsonp([2],{
 	  displayName: 'CalendarHeader',
 	
 	  propTypes: {
-	    locale: _react2['default'].PropTypes.object,
-	    value: _react2['default'].PropTypes.object,
-	    onValueChange: _react2['default'].PropTypes.func
+	    locale: _react.PropTypes.object,
+	    value: _react.PropTypes.object,
+	    onValueChange: _react.PropTypes.func
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
@@ -783,7 +783,7 @@ webpackJsonp([2],{
 	  displayName: 'CalendarFooter',
 	
 	  propTypes: {
-	    onSelect: _react2['default'].PropTypes.func
+	    onSelect: _react.PropTypes.func
 	  },
 	
 	  onSelect: function onSelect(value) {
@@ -1098,8 +1098,8 @@ webpackJsonp([2],{
 	Time.prototype.onSecondKeyDown = keyDownWrap('setSeconds', 0, 59);
 	
 	Time.propTypes = {
-	  onChange: _react2['default'].PropTypes.func,
-	  disabled: _react2['default'].PropTypes.bool
+	  onChange: _react.PropTypes.func,
+	  disabled: _react.PropTypes.bool
 	};
 	
 	Time.defaultProps = {
@@ -1844,7 +1844,7 @@ webpackJsonp([2],{
 	  displayName: 'Calendar',
 	
 	  propTypes: {
-	    onTimeSelect: _react2['default'].PropTypes.func
+	    onTimeSelect: _react.PropTypes.func
 	  },
 	
 	  render: function render() {
