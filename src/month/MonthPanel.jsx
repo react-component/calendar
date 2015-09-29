@@ -12,7 +12,7 @@ function goYear(direction) {
 
 function chooseMonth(month) {
   const next = this.state.value.clone();
-  next.setMonth(month);
+  next.rollSetMonth(month);
   this.setAndSelectValue(next);
 }
 
@@ -70,7 +70,7 @@ const MonthPanel = React.createClass({
     for (let i = 0; i < ROW; i++) {
       months[i] = [];
       for (let j = 0; j < COL; j++) {
-        current.setMonth(index);
+        current.rollSetMonth(index);
         months[i][j] = {
           value: index,
           content: shortMonths[index],
@@ -96,7 +96,7 @@ const MonthPanel = React.createClass({
         let disabled = false;
         if (props.disabledDate) {
           const testValue = value.clone();
-          testValue.setMonth(m.value);
+          testValue.rollSetMonth(m.value);
           disabled = props.disabledDate(testValue);
         }
         const classNameMap = {

@@ -1,44 +1,26 @@
 import 'rc-calendar/assets/index.less';
 import React from 'react';
-import Calendar,{Picker as DatePicker, MonthCalendar} from 'rc-calendar';
+import MonthCalendar from 'rc-calendar/src/MonthCalendar';
+import DatePicker from 'rc-calendar/src/Picker';
 import zhCn from 'gregorian-calendar/lib/locale/zh-cn'; // spm error
 import DateTimeFormat from 'gregorian-calendar-format';
 import GregorianCalendar from 'gregorian-calendar';
 import CalendarLocale from 'rc-calendar/src/locale/zh-cn';
 var now = new GregorianCalendar(zhCn);
 now.setTime(Date.now());
+const formatter = new DateTimeFormat('yyyy-MM');
 
 var defaultCalendarValue = new GregorianCalendar(zhCn);
 defaultCalendarValue.setTime(Date.now());
 defaultCalendarValue.addMonth(-1);
 
 var Test = React.createClass({
-  handleChange(value) {
-    console.log('DatePicker change: ' + (value && this.props.formatter.format(value)));
-  },
-
-  handleCalendarSelect(value) {
-    console.log('calendar select: ' + (value && this.props.formatter.format(value)));
-    // controlled value
+  onChange(value) {
+    console.log('DatePicker change: ' + (value && formatter.format(value)));
     this.setState({
       time: Date.now(),
       value: value
     });
-  },
-
-  handleCalendarOk(value) {
-    console.log('calendar ok: ' + (value && this.props.formatter.format(value)));
-    // controlled value
-    this.setState({
-      time: Date.now(),
-      value: value
-    });
-  },
-
-  getDefaultProps() {
-    return {
-      formatter: new DateTimeFormat('yyyy-MM')
-    }
   },
 
   getInitialState() {
@@ -50,7 +32,7 @@ var Test = React.createClass({
     };
   },
 
-  handleShowTimeChange(e) {
+  onShowTimeChange(e) {
     this.setState({
       showTime: e.target.checked
     });
@@ -84,27 +66,34 @@ var Test = React.createClass({
           adjustOrientOnCalendarOverflow={true}
           animation="slide-up"
           disabled={state.disabled}
-          trigger={<span className="rc-calendar-picker-icon" />}
-          formatter={this.props.formatter} calendar={calendar}
-          value={state.value} onChange={this.handleChange}>
-          <input className="rc-calendar-picker-input" style={{width:200}} disabled={state.disabled}
-                 placeholder="请选择日期"/>
+          calendar={calendar}
+          value={state.value} onChange={this.onChange}>
+          {
+            ({value})=> {
+              return <input style={{width:200}}
+                            readOnly
+                            disabled={state.disabled}
+                            value={value && formatter.format(value)}
+                            placeholder="请选择日期"/>
+            }
+          }
+
         </DatePicker>
       </div>
     </div>);
   }
 });
 
-function onSelect(value){
-  console.log('month-calendar select',value);
+function onStandaloneSelect(value) {
+  console.log('month-calendar select', (value && formatter.format(value)));
 }
 
-function onChange(value){
-  console.log('month-calendar change',value);
+function onStandaloneChange(value) {
+  console.log('month-calendar change', (value && formatter.format(value)));
 }
 
-function disabledDate(value){
-  return value.getTime()>Date.now();
+function disabledDate(value) {
+  return value.getTime() > Date.now();
 }
 
 React.render(
@@ -114,9 +103,10 @@ React.render(
                    style={{zIndex:1000}}
                    orient={['top', 'left']}
                    disabledDate={disabledDate}
-                   onSelect={onSelect}
-                   onChange={onChange}
+                   onSelect={onStandaloneSelect}
+                   onChange={onStandaloneChange}
                    defaultValue={defaultCalendarValue}/>
+
     <div style={{marginTop:200}}>
       <Test defaultValue={now}/>
     </div>

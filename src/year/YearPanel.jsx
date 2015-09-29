@@ -13,6 +13,7 @@ function goYear(direction) {
 function chooseYear(year) {
   const next = this.state.value.clone();
   next.setYear(year);
+  next.rollSetMonth(this.state.value.getMonth());
   this.props.onSelect(next);
 }
 

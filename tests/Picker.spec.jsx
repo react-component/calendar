@@ -1,6 +1,7 @@
 import {KeyCode as keyCode} from 'rc-util';
 import expect from 'expect.js';
-import Calendar,{Picker as DatePicker} from '../index';
+import Calendar from '../index';
+import DatePicker from '../src/Picker';
 import React from 'react/addons';
 var TestUtils = React.addons.TestUtils;
 var Simulate = TestUtils.Simulate;
@@ -18,24 +19,26 @@ describe('DatePicker', function () {
 
   function renderPicker(props) {
     return React.render(<DatePicker
-      formatter={formatter} calendar={<Calendar
+      calendar={<Calendar
         locale={CalendarLocale}/>}
       defaultValue={value}
-    {...props}
-    >
-      <input className="rc-calendar-picker-input"/>
+      {...props}
+      >{({value}) => {
+      return <input className="rc-calendar-picker-input" value={value  && formatter.format(value)}/>;
+    }
+    }
     </DatePicker>, div);
   }
 
   beforeEach(function () {
     div = document.createElement('div');
     document.body.appendChild(div);
-  }),
+  });
 
-    afterEach(function () {
-      React.unmountComponentAtNode(div);
-      document.body.removeChild(div);
-    });
+  afterEach(function () {
+    React.unmountComponentAtNode(div);
+    document.body.removeChild(div);
+  });
 
   it('popup correctly', function (done) {
     var change;

@@ -1,6 +1,12 @@
 # History
 ----
 
+## 4.0.0
+
+- change MonthCalendar to require('rc-calendar/lib/MonthCalendar')
+- change Picker to require('rc-calendar/lib/Picker')
+- add RangeCalendar: require('rc-calendar/lib/RangeCalendar')
+
 ## 3.16.0 / 2015-08-25
 
 -- add Calendar.MonthCalendar component

@@ -4,7 +4,6 @@
 calendar ui component for react, port from https://github.com/modulex/date-picker
 
 [![NPM version][npm-image]][npm-url]
-[![SPM version](http://spmjs.io/badge/rc-calendar)](http://spmjs.io/package/rc-calendar)
 [![build status][travis-image]][travis-url]
 [![Test coverage][coveralls-image]][coveralls-url]
 [![gemnasium deps][gemnasium-image]][gemnasium-url]
@@ -122,16 +121,16 @@ http://react-component.github.io/calendar/examples/index.html
           <td>defaultValue like input's defaultValue</td>
         </tr>
         <tr>
-          <td>orient</td>
-          <td>String[]</td>
-          <td></td>
-          <td>affect the position of arrow. exp: ['left','top']</td>
-        </tr>
-        <tr>
           <td>locale</td>
           <td>Object</td>
           <td>import from 'rc-calendar/lib/locale/en-us'</td>
           <td>calendar locale</td>
+        </tr>
+        <tr>
+          <td>formatter</td>
+          <td> <a href="https://github.com/yiminghe/gregorian-calendar-format">GregorianCalendarFormatter</a> </td>
+          <td></td>
+          <td>use to format/parse value to/from input</td>
         </tr>
         <tr>
           <td>disabledDate</td>
@@ -175,16 +174,98 @@ http://react-component.github.io/calendar/examples/index.html
           <td>function(){}</td>
           <td>called when a date is changed inside calendar (next year/next month/keyboard)</td>
         </tr>
-        <tr>
-           <td>onBlur</td>
-           <td>Function()</td>
-           <td>function(){}</td>
-           <td>called when calendar loose focus</td>
-         </tr>
     </tbody>
 </table>
 
-### Calendar.MonthCalendar props
+
+### rc-calendar/lib/RangeCalendar props
+
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th style="width: 100px;">name</th>
+        <th style="width: 50px;">type</th>
+        <th style="width: 50px;">default</th>
+        <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>prefixCls</td>
+          <td>String</td>
+          <td></td>
+          <td>prefixCls of this component</td>
+        </tr>
+        <tr>
+          <td>className</td>
+          <td>String</td>
+          <td></td>
+          <td>additional css class of root dom node</td>
+        </tr>
+        <tr>
+          <td>style</td>
+          <td>Object</td>
+          <td></td>
+          <td>additional style of root dom node</td>
+        </tr>
+        <tr>
+          <td>value</td>
+          <td> <a href="https://github.com/yiminghe/gregorian-calendar">GregorianCalendar</a>[] </td>
+          <td></td>
+          <td>current value range. with two elements.</td>
+        </tr>
+        <tr>
+          <td>defaultValue</td>
+          <td>GregorianCalendar[]</td>
+          <td></td>
+          <td>defaultValue range</td>
+        </tr>
+        <tr>
+          <td>locale</td>
+          <td>Object</td>
+          <td>import from 'rc-calendar/lib/locale/en-us'</td>
+          <td>calendar locale</td>
+        </tr>
+        <tr>
+          <td>formatter</td>
+          <td>String|GregorianCalendarFormatter. see <a href="https://github.com/yiminghe/gregorian-calendar-format">GregorianCalendarFormatter</a> spec</td>
+          <td>yyyy-MM-dd or yyyy-MM-dd HH:mm:ss</td>
+          <td>use to format/parse value to/from input</td>
+        </tr>
+        <tr>
+          <td>disabledDate</td>
+          <td>Function(current:GregorianCalendar):Boolean</td>
+          <td>null</td>
+          <td>whether to disable select of current date</td>
+        </tr>
+        <tr>
+          <td>showWeekNumber</td>
+          <td>Boolean</td>
+          <td>false</td>
+          <td>whether to show week number of year</td>
+        </tr>
+        <tr>
+          <td>showTime</td>
+          <td>Boolean</td>
+          <td>true</td>
+          <td>whether to support time select</td>
+        </tr>
+        <tr>
+          <td>onSelect</td>
+          <td>Function(date: GregorianCalendar[])</td>
+          <td>function(){}</td>
+          <td>called when a date range is selected from calendar</td>
+        </tr>
+        <tr>
+          <td>onChange</td>
+          <td>Function(date: GregorianCalendar[])</td>
+          <td>function(){}</td>
+          <td>called when a date range is changed inside calendar (next year/next month/keyboard)</td>
+        </tr>
+    </tbody>
+</table>
+
+### rc-calendar/lib/MonthCalendar props
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -227,12 +308,6 @@ http://react-component.github.io/calendar/examples/index.html
           <td>defaultValue like input's defaultValue</td>
         </tr>
         <tr>
-          <td>orient</td>
-          <td>String[]</td>
-          <td></td>
-          <td>affect the position of arrow. exp: ['left','top']</td>
-        </tr>
-        <tr>
           <td>locale</td>
           <td>Object</td>
           <td>import from 'rc-calendar/lib/locale/en-us'</td>
@@ -243,6 +318,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>Function(current:GregorianCalendar):Boolean</td>
           <td>null</td>
           <td>whether to disable select of current month</td>
+        </tr>
+        <tr>
+          <td>getCalendarContainer</td>
+          <td>Function():Element</td>
+          <td>function(){return document.body;}</td>
+          <td>dom node where calendar to be rendered into</td>
         </tr>
         <tr>
           <td>onSelect</td>
@@ -259,7 +340,7 @@ http://react-component.github.io/calendar/examples/index.html
     </tbody>
 </table>
 
-### Calendar.Picker props
+### rc-calendar/lib/Picker props
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -290,6 +371,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>whether picker is disabled</td>
         </tr>
         <tr>
+          <td>orient</td>
+          <td>String[]</td>
+          <td></td>
+          <td>affect the position of arrow. exp: ['left','top']</td>
+        </tr>
+        <tr>
           <td>adjustOrientOnCalendarOverflow</td>
           <td>Boolean</td>
           <td>true</td>
@@ -306,18 +393,6 @@ http://react-component.github.io/calendar/examples/index.html
           <td>String</td>
           <td></td>
           <td>css class for animation</td>
-        </tr>
-        <tr>
-          <td>formatter</td>
-          <td> <a href="https://github.com/yiminghe/gregorian-calendar-format">GregorianCalendarFormatter</a> </td>
-          <td></td>
-          <td>use to format/parse value to/from input</td>
-        </tr>
-        <tr>
-          <td>trigger</td>
-          <td>React.Element</td>
-          <td></td>
-          <td>additional trigger appended to picker</td>
         </tr>
         <tr>
           <td>value</td>

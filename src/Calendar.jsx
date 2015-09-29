@@ -1,11 +1,12 @@
 import React from 'react';
-import DateTimeFormat from 'gregorian-calendar-format';
 import GregorianCalendar from 'gregorian-calendar';
 import {KeyCode} from 'rc-util';
 import DateTable from './date/DateTable';
 import CalendarHeader from './calendar/CalendarHeader';
 import CalendarFooter from './calendar/CalendarFooter';
 import CalendarMixin from './mixin/CalendarMixin';
+import CommonMixin from './mixin/CommonMixin';
+import DateInput from './date/DateInput';
 
 function noop() {
 }
@@ -47,7 +48,7 @@ function goDay(direction) {
 }
 
 const Calendar = React.createClass({
-  mixins: [CalendarMixin],
+  mixins: [CommonMixin, CalendarMixin],
 
   propTypes: {
     value: React.PropTypes.object,
@@ -80,7 +81,6 @@ const Calendar = React.createClass({
 
   getInitialState() {
     const props = this.props;
-    this.dateFormatter = new DateTimeFormat(props.locale.dateFormat);
     const orient = props.orient;
     // bind methods
     this.nextMonth = goMonth.bind(this, 1);
@@ -96,12 +96,12 @@ const Calendar = React.createClass({
         orient: nextProps.orient,
       });
     }
-    if (nextProps.locale !== this.props.locale) {
-      this.dateFormatter = new DateTimeFormat(nextProps.locale.dateFormat);
-    }
   },
 
   onKeyDown(e) {
+    if (e.target.nodeName.toLowerCase() === 'input') {
+      return undefined;
+    }
     const keyCode = e.keyCode;
     // mac
     const ctrlKey = e.ctrlKey || e.metaKey;
@@ -161,23 +161,33 @@ const Calendar = React.createClass({
   },
 
   onOk() {
-    this.props.onOk(this.state.value);
+    if (this.isAllowedDate(this.state.value)) {
+      this.props.onOk(this.state.value);
+    }
+  },
+
+  onDateInputChange(value) {
+    this.onSelect(value);
   },
 
   render() {
     const props = this.props;
-    const locale = props.locale;
+    const {locale, prefixCls, disabledDate} = props;
     const state = this.state;
     const value = state.value;
-    const prefixCls = props.prefixCls;
     const children = (<div style={{outline: 'none'}}>
+      <div className={`${prefixCls}-input-wrap`}>
+        <DateInput className={`${prefixCls}-input`}
+                   formatter={this.getFormatter()}
+                   value={value}
+                   onChange={this.onDateInputChange}/>
+        <i className={`${prefixCls}-input-icon`}/>
+      </div>
+
+
       <CalendarHeader
         locale={locale}
         onValueChange={this.setValue}
-        previousYear={this.previousYear}
-        previousMonth={this.previousMonth}
-        nextMonth={this.nextMonth}
-        nextYear={this.nextYear}
         value={value}
         prefixCls={prefixCls}/>
 
@@ -188,9 +198,8 @@ const Calendar = React.createClass({
           prefixCls={prefixCls}
           dateRender={props.dateRender}
           onSelect={this.onSelect}
-          disabledDate={props.disabledDate}
-          showWeekNumber={props.showWeekNumber}
-          dateFormatter={this.dateFormatter}/>
+          disabledDate={disabledDate}
+          showWeekNumber={props.showWeekNumber}/>
       </div>
       <CalendarFooter
         locale={locale}
@@ -200,8 +209,7 @@ const Calendar = React.createClass({
         showToday={props.showToday}
         showTime={props.showTime}
         value={value}
-        disabledDate={props.disabledDate}
-        dateFormatter={this.dateFormatter}
+        disabledDate={disabledDate}
         onClear={this.onClear}
         onOk={this.onOk}
         onSelect={this.onSelect}

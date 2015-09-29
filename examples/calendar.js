@@ -11,30 +11,26 @@ const formatter = new DateTimeFormat('yyyy-MM-dd HH:mm:ss');
 
 var Test = React.createClass({
   onChange(value) {
-    console.log('DatePicker change: ' + (this.props.formatter.format(value)));
+    console.log('DatePicker change: ' + (value && formatter.format(value)));
   },
 
   onCalendarSelect(value) {
-    console.log('calendar select: ' + (this.props.formatter.format(value)));
-    // uncontrolled value
+    console.log('calendar select: ' + (value && formatter.format(value)));
+    // controlled value
     this.setState({
-      time: Date.now()
+      time: Date.now(),
+      open: this.state.showTime,
+      value: value
     });
-  },
-
-  getDefaultProps() {
-    return {
-      formatter: new DateTimeFormat('yyyy-MM-dd HH:mm:ss'),
-    };
   },
 
   getInitialState() {
     var value = new GregorianCalendar(zhCn);
     value.setTime(Date.now());
     return {
+      open: false,
       time: Date.now(),
       showTime: true,
-      open: false,
       value: value
     };
   },
@@ -48,18 +44,20 @@ var Test = React.createClass({
   render() {
     var state = this.state;
     var calendar = <Calendar locale={CalendarLocale}
-                             orient={['bottom', 'left']}
-                             showTime={this.state.showTime} onSelect={this.onCalendarSelect}/>;
-    return <div className="form-group" style={{width: 400, margin: 20}} data-time={state.time}>
+                             orient={['top', 'left']}
+                             showTime={this.state.showTime} onSelect={this.onCalendarSelect}
+                             onClear={this.onCalendarSelect.bind(this, null)} showClear={true}/>;
+    return <div className="form-group" style={{width: 400, margin: 20}} data-time={this.state.time}>
       <div className="input-group">
         <span>
-          <input type="checkbox" checked={this.state.showTime} onChange={this.onShowTimeChange}/>
+          <input type='checkbox' checked={this.state.showTime} onChange={this.onShowTimeChange}/>
           showTime</span>
       </div>
       <div className="input-group" style={{width:250}}>
-        <DatePicker calendar={calendar}
+        <DatePicker ref='picker'
                     style={{display:'inline'}}
-                    defaultValue={state.value}
+                    calendar={calendar}
+                    value={state.value}
                     onChange={this.onChange}>
           {
             ({value}) => {
@@ -88,13 +86,34 @@ var Test = React.createClass({
             }
           }
         </DatePicker>
-
       </div>
     </div>;
   }
 });
 
-React.render((<div>
+
+function onStandaloneSelect(value) {
+  console.log('onCalendarSelect');
+  console.log(formatter.format(value))
+}
+
+function onStandaloneChange(value) {
+  console.log('onCalendarChange');
+  console.log(formatter.format(value))
+}
+
+React.render(<div>
   <h2>zh-cn</h2>
+
+  <div style={{margin:10}}>
+    <Calendar showWeekNumber={true}
+              showOk={0}
+              showClear={0}
+              onSelect={onStandaloneSelect}
+              onChange={onStandaloneChange}
+              showTime={true}/>
+  </div>
+
+
   <Test />
-</div>), document.getElementById('__react-content'));
+</div>, document.getElementById('__react-content'));
