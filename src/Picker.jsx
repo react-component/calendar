@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {createChainedFunction, KeyCode, classSet, Dom} from 'rc-util';
 import Align from 'rc-align';
 const orientMap = {
@@ -34,17 +34,17 @@ function refFn(field, component) {
  */
 const Picker = React.createClass({
   propTypes: {
-    onChange: React.PropTypes.func,
-    onOpen: React.PropTypes.func,
-    onClose: React.PropTypes.func,
-    children: React.PropTypes.func,
-    calendar: React.PropTypes.element,
-    style: React.PropTypes.object,
-    open: React.PropTypes.bool,
-    defaultOpen: React.PropTypes.bool,
-    prefixCls: React.PropTypes.string,
-    getCalendarContainer: React.PropTypes.func,
-    adjustOrientOnCalendarOverflow: React.PropTypes.oneOfType([React.PropTypes.bool, React.PropTypes.object]),
+    onChange: PropTypes.func,
+    onOpen: PropTypes.func,
+    onClose: PropTypes.func,
+    children: PropTypes.func,
+    calendar: PropTypes.element,
+    style: PropTypes.object,
+    open: PropTypes.bool,
+    defaultOpen: PropTypes.bool,
+    prefixCls: PropTypes.string,
+    getCalendarContainer: PropTypes.func,
+    adjustOrientOnCalendarOverflow: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   },
 
   getDefaultProps() {

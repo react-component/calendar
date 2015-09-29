@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {classSet as cx} from 'rc-util';
 import YearPanel from '../year/YearPanel';
 const ROW = 4;
@@ -22,8 +22,8 @@ function noop() {
 
 const MonthPanel = React.createClass({
   propTypes: {
-    onChange: React.PropTypes.func,
-    onSelect: React.PropTypes.func,
+    onChange: PropTypes.func,
+    onSelect: PropTypes.func,
   },
 
   getDefaultProps() {

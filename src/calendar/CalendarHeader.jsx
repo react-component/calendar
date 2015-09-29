@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import MonthPanel from '../month/MonthPanel';
 import DateTimeFormat from 'gregorian-calendar-format';
 import YearPanel from '../year/YearPanel';
@@ -19,9 +19,9 @@ function goYear(direction) {
 
 const CalendarHeader = React.createClass({
   propTypes: {
-    locale: React.PropTypes.object,
-    value: React.PropTypes.object,
-    onValueChange: React.PropTypes.func,
+    locale: PropTypes.object,
+    value: PropTypes.object,
+    onValueChange: PropTypes.func,
   },
 
   getDefaultProps() {

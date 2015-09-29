@@ -1,3 +1,4 @@
+import React, {PropTypes} from 'react';
 import enUs from '../locale/en-us';
 import DateTimeFormat from 'gregorian-calendar-format';
 
@@ -6,17 +7,17 @@ function noop() {
 
 export default {
   propTypes: {
-    className: React.PropTypes.string,
-    locale: React.PropTypes.object,
-    style: React.PropTypes.object,
-    visible: React.PropTypes.bool,
-    onSelect: React.PropTypes.func,
-    prefixCls: React.PropTypes.string,
-    onChange: React.PropTypes.func,
-    onOk: React.PropTypes.func,
-    onFocus: React.PropTypes.func,
-    onBlur: React.PropTypes.func,
-    orient: React.PropTypes.arrayOf(React.PropTypes.oneOf(['left', 'top', 'right', 'bottom'])),
+    className: PropTypes.string,
+    locale: PropTypes.object,
+    style: PropTypes.object,
+    visible: PropTypes.bool,
+    onSelect: PropTypes.func,
+    prefixCls: PropTypes.string,
+    onChange: PropTypes.func,
+    onOk: PropTypes.func,
+    onFocus: PropTypes.func,
+    onBlur: PropTypes.func,
+    orient: PropTypes.arrayOf(PropTypes.oneOf(['left', 'top', 'right', 'bottom'])),
   },
 
   getDefaultProps() {

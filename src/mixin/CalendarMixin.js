@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {classSet} from 'rc-util';
 import GregorianCalendar from 'gregorian-calendar';
 
@@ -24,9 +24,9 @@ function getNowByCurrentStateValue(value) {
 
 const CalendarMixin = {
   propTypes: {
-    value: React.PropTypes.object,
-    defaultValue: React.PropTypes.object,
-    onKeyDown: React.PropTypes.func,
+    value: PropTypes.object,
+    defaultValue: PropTypes.object,
+    onKeyDown: PropTypes.func,
   },
 
   getDefaultProps() {

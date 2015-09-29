@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import CalendarHeader from '../calendar/CalendarHeader';
 import DateTable from '../date/DateTable';
 import CalendarFooter from '../calendar/CalendarFooter';
@@ -6,7 +6,7 @@ import DateInput from '../date/DateInput';
 
 const Calendar = React.createClass({
   propTypes: {
-    onTimeSelect: React.PropTypes.func,
+    onTimeSelect: PropTypes.func,
   },
 
   render() {

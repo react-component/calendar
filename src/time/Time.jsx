@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import rcUtil, {KeyCode} from 'rc-util';
 import TimePanel from './TimePanel';
 const setHourOfDay = 'setHourOfDay';
@@ -192,8 +192,8 @@ Time.prototype.onMinuteKeyDown = keyDownWrap('setMinutes', 0, 59);
 Time.prototype.onSecondKeyDown = keyDownWrap('setSeconds', 0, 59);
 
 Time.propTypes = {
-  onChange: React.PropTypes.func,
-  disabled: React.PropTypes.bool,
+  onChange: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 Time.defaultProps = {

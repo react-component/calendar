@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import GregorianCalendar from 'gregorian-calendar';
 import {KeyCode} from 'rc-util';
 import DateTable from './date/DateTable';
@@ -51,24 +51,24 @@ const Calendar = React.createClass({
   mixins: [CommonMixin, CalendarMixin],
 
   propTypes: {
-    value: React.PropTypes.object,
-    defaultValue: React.PropTypes.object,
-    className: React.PropTypes.string,
-    orient: React.PropTypes.arrayOf(React.PropTypes.oneOf(['left', 'top', 'right', 'bottom'])),
-    locale: React.PropTypes.object,
-    showWeekNumber: React.PropTypes.bool,
-    style: React.PropTypes.object,
-    showToday: React.PropTypes.bool,
-    visible: React.PropTypes.bool,
-    showTime: React.PropTypes.bool,
-    onSelect: React.PropTypes.func,
-    onOk: React.PropTypes.func,
-    prefixCls: React.PropTypes.string,
-    onKeyDown: React.PropTypes.func,
-    onClear: React.PropTypes.func,
-    onChange: React.PropTypes.func,
-    onFocus: React.PropTypes.func,
-    onBlur: React.PropTypes.func,
+    value: PropTypes.object,
+    defaultValue: PropTypes.object,
+    className: PropTypes.string,
+    orient: PropTypes.arrayOf(PropTypes.oneOf(['left', 'top', 'right', 'bottom'])),
+    locale: PropTypes.object,
+    showWeekNumber: PropTypes.bool,
+    style: PropTypes.object,
+    showToday: PropTypes.bool,
+    visible: PropTypes.bool,
+    showTime: PropTypes.bool,
+    onSelect: PropTypes.func,
+    onOk: PropTypes.func,
+    prefixCls: PropTypes.string,
+    onKeyDown: PropTypes.func,
+    onClear: PropTypes.func,
+    onChange: PropTypes.func,
+    onFocus: PropTypes.func,
+    onBlur: PropTypes.func,
   },
 
   getDefaultProps() {

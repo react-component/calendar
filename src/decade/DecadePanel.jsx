@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 const ROW = 4;
 const COL = 3;
 import {classSet as cx} from 'rc-util';
@@ -126,7 +126,7 @@ class DecadePanel extends React.Component {
 }
 
 DecadePanel.propTypes = {
-  locale: React.PropTypes.object,
+  locale: PropTypes.object,
 };
 
 DecadePanel.defaultProps = {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import Time from '../time/Time';
 import rcUtil from 'rc-util';
 const toFragment = rcUtil.Children.mapSelf;
@@ -6,7 +6,7 @@ import {getTodayElement, getOkElement} from '../util/';
 
 const CalendarFooter = React.createClass({
   propTypes: {
-    onSelect: React.PropTypes.func,
+    onSelect: PropTypes.func,
   },
 
   onSelect(value) {
