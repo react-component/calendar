@@ -38,7 +38,7 @@ const CalendarFooter = React.createClass({
       }
       let timeEl;
       if (props.showTime) {
-        timeEl = (<Time value={value} prefixCls={prefixCls}
+        timeEl = (<Time ref="time" value={value} prefixCls={prefixCls}
                         disabled={props.timeDisabled}
                         locale={locale} onChange={this.onSelect}/>);
       }

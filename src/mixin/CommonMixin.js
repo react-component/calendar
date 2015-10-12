@@ -52,6 +52,26 @@ export default {
       clearTimeout(this._blurTimer);
     }
     this._blurTimer = setTimeout(()=> {
+      const header = this.refs.header;
+      if (header) {
+        header.setState({
+          showMonthPanel: 0,
+          showYearPanel: 0,
+        });
+      }
+
+      const footer = this.refs.footer;
+      if (footer) {
+        const time = footer.refs.time;
+        if (time) {
+          time.setState({
+            showHourPanel: 0,
+            showMinutePanel: 0,
+            showSecondPanel: 0,
+          });
+        }
+      }
+
       this.props.onBlur();
     }, 100);
   },

@@ -186,6 +186,7 @@ const Calendar = React.createClass({
 
 
       <CalendarHeader
+        ref="header"
         locale={locale}
         onValueChange={this.setValue}
         value={value}
@@ -202,6 +203,7 @@ const Calendar = React.createClass({
           showWeekNumber={props.showWeekNumber}/>
       </div>
       <CalendarFooter
+        ref="footer"
         locale={locale}
         showClear={props.showClear}
         showOk={props.showOk}
