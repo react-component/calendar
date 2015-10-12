@@ -88,12 +88,17 @@ const CalendarMixin = {
   },
 
   setValue(value) {
+    const originalValue = this.state.value;
     if (!('value' in this.props)) {
       this.setState({
         value,
       });
     }
-    this.props.onChange(value);
+    if (originalValue && value && originalValue.getTime() !== value.getTime() ||
+      (!originalValue && value) ||
+      (originalValue && !value)) {
+      this.props.onChange(value);
+    }
   },
 
   isAllowedDate(value) {

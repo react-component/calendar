@@ -86,6 +86,7 @@ export default {
     if (this.state.orient === orient) {
       return;
     }
+    // keep orient to animate on hide
     this.state.orient = orient;
     const prefixCls = this.props.prefixCls;
     const root = React.findDOMNode(this);
