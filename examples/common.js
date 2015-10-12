@@ -24851,6 +24851,10 @@
 	    });
 	  },
 	
+	  onAnimateLeave: function onAnimateLeave() {
+	    _react2['default'].unmountComponentAtNode(this.getCalendarContainer());
+	  },
+	
 	  getTransitionName: function getTransitionName() {
 	    var props = this.props;
 	    var transitionName = props.transitionName;
@@ -24928,6 +24932,7 @@
 	      {
 	        component: '',
 	        exclusive: true,
+	        onLeave: this.onAnimateLeave,
 	        transitionAppear: true,
 	        showProp: 'calendarOpen',
 	        transitionName: this.getTransitionName() },
@@ -26062,12 +26067,6 @@
 	    };
 	  },
 	
-	  componentDidMount: function componentDidMount() {
-	    this.state.children.map(function (c) {
-	      return c.key;
-	    }).forEach(this.performAppear);
-	  },
-	
 	  getInitialState: function getInitialState() {
 	    this.currentlyAnimatingKeys = {};
 	    this.keysToEnter = [];
@@ -26077,8 +26076,23 @@
 	    };
 	  },
 	
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	  componentDidMount: function componentDidMount() {
 	    var _this = this;
+	
+	    var showProp = this.props.showProp;
+	    var children = this.state.children;
+	    if (showProp) {
+	      children = children.filter(function (c) {
+	        return !!c.props[showProp];
+	      });
+	    }
+	    children.forEach(function (c) {
+	      _this.performAppear(c.key);
+	    });
+	  },
+	
+	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	    var _this2 = this;
 	
 	    var nextChildren = (0, _ChildrenUtils.toArrayChildren)(getChildrenFromProps(nextProps));
 	    var props = this.props;
@@ -26088,46 +26102,56 @@
 	    // last props children if exclusive
 	    // exclusive needs immediate response
 	    var currentChildren = this.state.children;
-	    var newChildren = _ChildrenUtils2['default'].mergeChildren(currentChildren, nextChildren);
-	
-	    if (showProp && !exclusive) {
-	      newChildren = newChildren.map(function (c) {
-	        var ret = c;
-	        if (!c.props[showProp] && (0, _ChildrenUtils.isShownInChildren)(currentChildren, c, showProp)) {
-	          ret = _react2['default'].cloneElement(c, _defineProperty({}, showProp, true));
+	    // in case destroy in showProp mode
+	    var newChildren = [];
+	    if (showProp) {
+	      currentChildren.forEach(function (currentChild) {
+	        var nextChild = (0, _ChildrenUtils.findChildInChildrenByKey)(nextChildren, currentChild.key);
+	        var newChild = undefined;
+	        if ((!nextChild || !nextChild.props[showProp]) && currentChild.props[showProp]) {
+	          newChild = _react2['default'].cloneElement(nextChild || currentChild, _defineProperty({}, showProp, true));
+	        } else {
+	          newChild = nextChild;
 	        }
-	        return ret;
+	        if (newChild) {
+	          newChildren.push(newChild);
+	        }
 	      });
+	    } else {
+	      newChildren = _ChildrenUtils2['default'].mergeChildren(currentChildren, nextChildren);
 	    }
-	
-	    this.setState({
-	      children: newChildren
-	    });
 	
 	    // exclusive needs immediate response
 	    if (exclusive) {
 	      Object.keys(currentlyAnimatingKeys).forEach(function (key) {
-	        _this.stop(key);
+	        _this2.stop(key);
 	      });
 	      currentChildren = (0, _ChildrenUtils.toArrayChildren)(getChildrenFromProps(props));
 	    }
+	
+	    // need render to avoid update
+	    this.setState({
+	      children: newChildren
+	    });
 	
 	    nextChildren.forEach(function (c) {
 	      var key = c.key;
 	      if (currentlyAnimatingKeys[key]) {
 	        return;
 	      }
-	      var hasPrev = (0, _ChildrenUtils.inChildren)(currentChildren, c);
+	      var hasPrev = (0, _ChildrenUtils.findChildInChildrenByKey)(currentChildren, key);
 	      if (showProp) {
+	        var showInNext = c.props[showProp];
 	        if (hasPrev) {
-	          var showInNow = (0, _ChildrenUtils.isShownInChildren)(currentChildren, c, showProp);
-	          var showInNext = c.props[showProp];
+	          var showInNow = (0, _ChildrenUtils.findShownChildInChildrenByKey)(currentChildren, key, showProp);
 	          if (!showInNow && showInNext) {
-	            _this.keysToEnter.push(key);
+	            _this2.keysToEnter.push(key);
 	          }
+	        } else if (showInNext) {
+	          _this2.keysToEnter.push(key);
 	        }
 	      } else if (!hasPrev) {
-	        _this.keysToEnter.push(key);
+	        _this2.keysToEnter.push(key);
 	      }
 	    });
 	
@@ -26136,17 +26160,19 @@
 	      if (currentlyAnimatingKeys[key]) {
 	        return;
 	      }
-	      var hasNext = (0, _ChildrenUtils.inChildren)(nextChildren, c);
+	      var hasNext = (0, _ChildrenUtils.findChildInChildrenByKey)(nextChildren, key);
 	      if (showProp) {
+	        var showInNow = c.props[showProp];
 	        if (hasNext) {
-	          var showInNext = (0, _ChildrenUtils.isShownInChildren)(nextChildren, c, showProp);
-	          var showInNow = c.props[showProp];
+	          var showInNext = (0, _ChildrenUtils.findShownChildInChildrenByKey)(nextChildren, key, showProp);
 	          if (!showInNext && showInNow) {
-	            _this.keysToLeave.push(key);
+	            _this2.keysToLeave.push(key);
 	          }
+	        } else if (showInNow) {
+	          _this2.keysToLeave.push(key);
 	        }
 	      } else if (!hasNext) {
-	        _this.keysToLeave.push(key);
+	        _this2.keysToLeave.push(key);
 	      }
 	    });
 	  },
@@ -26162,23 +26188,27 @@
 	
 	  render: function render() {
 	    var props = this.props;
-	    var children = this.state.children.map(function (child) {
-	      if (!child.key) {
-	        throw new Error('must set key for <rc-animate> children');
-	      }
-	      return _react2['default'].createElement(
-	        _AnimateChild2['default'],
-	        {
-	          key: child.key,
-	          ref: child.key,
-	          animation: props.animation,
-	          transitionName: props.transitionName,
-	          transitionEnter: props.transitionEnter,
-	          transitionAppear: props.transitionAppear,
-	          transitionLeave: props.transitionLeave },
-	        child
-	      );
-	    });
+	    var stateChildren = this.state.children;
+	    var children = null;
+	    if (stateChildren) {
+	      children = stateChildren.map(function (child) {
+	        if (!child.key) {
+	          throw new Error('must set key for <rc-animate> children');
+	        }
+	        return _react2['default'].createElement(
+	          _AnimateChild2['default'],
+	          {
+	            key: child.key,
+	            ref: child.key,
+	            animation: props.animation,
+	            transitionName: props.transitionName,
+	            transitionEnter: props.transitionEnter,
+	            transitionAppear: props.transitionAppear,
+	            transitionLeave: props.transitionLeave },
+	          child
+	        );
+	      });
+	    }
 	    var Component = props.component;
 	    if (Component) {
 	      return _react2['default'].createElement(
@@ -26214,20 +26244,15 @@
 	      this.performLeave(key);
 	    } else {
 	      if (type === 'appear') {
-	        if (_util2['default'].isAppearSupported(props)) {
+	        if (_util2['default'].allowAppearCallback(props)) {
 	          props.onAppear(key);
+	          props.onEnd(key, true);
 	        }
-	        props.onEnd(key, true);
 	      } else {
-	        if (_util2['default'].isEnterSupported(props)) {
+	        if (_util2['default'].allowEnterCallback(props)) {
 	          props.onEnter(key);
+	          props.onEnd(key, true);
 	        }
-	        props.onEnd(key, true);
-	      }
-	      if (this.isMounted() && !(0, _ChildrenUtils.isSameChildren)(this.state.children, currentChildren)) {
-	        this.setState({
-	          children: currentChildren
-	        });
 	      }
 	    }
 	  },
@@ -26248,11 +26273,11 @@
 	    if (this.isValidChildByKey(currentChildren, key)) {
 	      this.performEnter(key);
 	    } else {
-	      if (_util2['default'].isLeaveSupported(props)) {
+	      if (_util2['default'].allowLeaveCallback(props)) {
 	        props.onLeave(key);
 	        props.onEnd(key, false);
 	      }
-	      if (this.isMounted() && !(0, _ChildrenUtils.isSameChildren)(this.state.children, currentChildren)) {
+	      if (this.isMounted() && !(0, _ChildrenUtils.isSameChildren)(this.state.children, currentChildren, props.showProp)) {
 	        this.setState({
 	          children: currentChildren
 	        });
@@ -26263,9 +26288,9 @@
 	  isValidChildByKey: function isValidChildByKey(currentChildren, key) {
 	    var showProp = this.props.showProp;
 	    if (showProp) {
-	      return (0, _ChildrenUtils.isShownInChildrenByKey)(currentChildren, key, showProp);
+	      return (0, _ChildrenUtils.findShownChildInChildrenByKey)(currentChildren, key, showProp);
 	    }
-	    return (0, _ChildrenUtils.inChildrenByKey)(currentChildren, key);
+	    return (0, _ChildrenUtils.findChildInChildrenByKey)(currentChildren, key);
 	  },
 	
 	  stop: function stop(key) {
@@ -26296,20 +26321,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	function inChildren(children, child) {
-	  var found = 0;
-	  children.forEach(function (c) {
-	    if (found) {
-	      return;
-	    }
-	    found = c.key === child.key;
-	  });
-	  return found;
-	}
-	
-	exports['default'] = {
-	  inChildren: inChildren,
-	
+	var utils = {
 	  toArrayChildren: function toArrayChildren(children) {
 	    var ret = [];
 	    _react2['default'].Children.forEach(children, function (c) {
@@ -26318,48 +26330,57 @@
 	    return ret;
 	  },
 	
-	  isShownInChildren: function isShownInChildren(children, child, showProp) {
-	    var found = 0;
-	    children.forEach(function (c) {
-	      if (found) {
-	        return;
-	      }
-	      found = c.key === child.key && c.props[showProp];
-	    });
-	    return found;
+	  findChildInChildrenByKey: function findChildInChildrenByKey(children, key) {
+	    var ret = null;
+	    if (children) {
+	      children.forEach(function (c) {
+	        if (ret) {
+	          return;
+	        }
+	        if (c.key === key) {
+	          ret = c;
+	        }
+	      });
+	    }
+	    return ret;
 	  },
 	
-	  inChildrenByKey: function inChildrenByKey(children, key) {
+	  findShownChildInChildrenByKey: function findShownChildInChildrenByKey(children, key, showProp) {
+	    var ret = null;
+	    if (children) {
+	      children.forEach(function (c) {
+	        if (c.key === key && c.props[showProp]) {
+	          if (ret) {
+	            throw new Error('two child with same key for <rc-animate> children');
+	          }
+	          ret = c;
+	        }
+	      });
+	    }
+	    return ret;
+	  },
+	
+	  findHiddenChildInChildrenByKey: function findHiddenChildInChildrenByKey(children, key, showProp) {
 	    var found = 0;
 	    if (children) {
 	      children.forEach(function (c) {
 	        if (found) {
 	          return;
 	        }
-	        found = c.key === key;
+	        found = c.key === key && !c.props[showProp];
 	      });
 	    }
 	    return found;
 	  },
 	
-	  isShownInChildrenByKey: function isShownInChildrenByKey(children, key, showProp) {
-	    var found = 0;
-	    if (children) {
-	      children.forEach(function (c) {
-	        if (found) {
-	          return;
-	        }
-	        found = c.key === key && c.props[showProp];
-	      });
-	    }
-	    return found;
-	  },
-	
-	  isSameChildren: function isSameChildren(c1, c2) {
+	  isSameChildren: function isSameChildren(c1, c2, showProp) {
 	    var same = c1.length === c2.length;
 	    if (same) {
-	      c1.forEach(function (c, i) {
-	        if (c !== c2[i]) {
+	      c1.forEach(function (child, i) {
+	        var child2 = c2[i];
+	        if (child.key !== child2.key) {
+	          same = false;
+	        } else if (showProp && child.props[showProp] !== child2.props[showProp]) {
 	          same = false;
 	        }
 	      });
@@ -26375,7 +26396,7 @@
 	    var nextChildrenPending = {};
 	    var pendingChildren = [];
 	    prev.forEach(function (c) {
-	      if (inChildren(next, c)) {
+	      if (utils.findChildInChildrenByKey(next, c.key)) {
 	        if (pendingChildren.length) {
 	          nextChildrenPending[c.key] = pendingChildren;
 	          pendingChildren = [];
@@ -26397,6 +26418,8 @@
 	    return ret;
 	  }
 	};
+	
+	exports['default'] = utils;
 	module.exports = exports['default'];
 
 /***/ },
@@ -26792,6 +26815,16 @@
 	  },
 	  isLeaveSupported: function isLeaveSupported(props) {
 	    return props.transitionName && props.transitionLeave || props.animation.leave;
+	  },
+	
+	  allowAppearCallback: function allowAppearCallback(props) {
+	    return props.transitionAppear || props.animation.appear;
+	  },
+	  allowEnterCallback: function allowEnterCallback(props) {
+	    return props.transitionEnter || props.animation.enter;
+	  },
+	  allowLeaveCallback: function allowLeaveCallback(props) {
+	    return props.transitionLeave || props.animation.leave;
 	  }
 	};
 	exports["default"] = util;
