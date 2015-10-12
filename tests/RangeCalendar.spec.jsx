@@ -75,7 +75,7 @@ describe('RangeCalendar', function () {
     expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-cell').length).to.above(0);
   });
 
-  it('onSelect works', function (done) {
+  it.only('onSelect works', function (done) {
     var day;
 
     function onSelect(d) {
@@ -85,10 +85,10 @@ describe('RangeCalendar', function () {
     }
 
     var now = new GregorianCalendar();
-    now.set(2015, 10, 29);
+    now.set(2015, 8, 29);
     calendar = React.render(<RangeCalendar
       onSelect={onSelect}
-      archor={now}
+      anchor={now}
       showWeekNumber={true}/>, container);
     var leftCalendar = TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-range-left')[0];
     var leftInput = TestUtils.scryRenderedDOMComponentsWithClass(leftCalendar, 'rc-calendar-input')[0];
