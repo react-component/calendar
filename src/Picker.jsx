@@ -177,6 +177,10 @@ const Picker = React.createClass({
     });
   },
 
+  onAnimateLeave() {
+    React.unmountComponentAtNode(this.getCalendarContainer());
+  },
+
   getTransitionName() {
     const props = this.props;
     let transitionName = props.transitionName;
@@ -252,6 +256,7 @@ const Picker = React.createClass({
     return (<Animate
       component=""
       exclusive={true}
+      onLeave={this.onAnimateLeave}
       transitionAppear={true}
       showProp="calendarOpen"
       transitionName={this.getTransitionName()}>
