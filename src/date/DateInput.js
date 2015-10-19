@@ -4,6 +4,7 @@ import warning from 'warning';
 const DateInput = React.createClass({
   propTypes: {
     formatter: PropTypes.object,
+    locale: PropTypes.object,
     disabledDate: PropTypes.func,
     className: PropTypes.string,
     onChange: PropTypes.func,
@@ -34,25 +35,38 @@ const DateInput = React.createClass({
 
   onBlur() {
     const {str} = this.state;
-    const {disabledDate, formatter} = this.props;
+    const {disabledDate, formatter, locale, onChange} = this.props;
     let value;
-    try {
-      value = formatter.parse(str, this.props.value.locale);
-    } catch (e) {
-      warning(false, `invalid date input: ${str}`);
-      this.setState(this.getInitialState());
-      return;
-    }
-    if (value && (!disabledDate || !disabledDate(value))) {
-      this.props.onChange(value);
+    if (str) {
+      try {
+        value = formatter.parse(str, locale);
+      } catch (e) {
+        warning(false, `invalid date input: ${str}`);
+        this.setState(this.getInitialState());
+        return;
+      }
+      if (value && (!disabledDate || !disabledDate(value))) {
+        const originalValue = this.props.value;
+        if (originalValue && value) {
+          if (originalValue.getTime() !== value.getTime()) {
+            onChange(value);
+          }
+        } else if (originalValue !== value) {
+          onChange(value);
+        }
+      } else {
+        this.setState(this.getInitialState());
+      }
     } else {
-      this.setState(this.getInitialState());
+      onChange(null);
     }
   },
 
   render() {
     const props = this.props;
-    return (<input className={props.className} value={this.state.str} onChange={this.onInputChange}
+    return (<input className={props.className}
+                   value={this.state.str}
+                   onChange={this.onInputChange}
                    onBlur={this.onBlur}/>);
   },
 });

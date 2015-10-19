@@ -52,9 +52,9 @@ const Calendar = React.createClass({
 
   propTypes: {
     value: PropTypes.object,
+    selectedValue: PropTypes.object,
     defaultValue: PropTypes.object,
     className: PropTypes.string,
-    orient: PropTypes.arrayOf(PropTypes.oneOf(['left', 'top', 'right', 'bottom'])),
     locale: PropTypes.object,
     showWeekNumber: PropTypes.bool,
     style: PropTypes.object,
@@ -80,22 +80,12 @@ const Calendar = React.createClass({
   },
 
   getInitialState() {
-    const props = this.props;
-    const orient = props.orient;
     // bind methods
     this.nextMonth = goMonth.bind(this, 1);
     this.previousMonth = goMonth.bind(this, -1);
     this.nextYear = goYear.bind(this, 1);
     this.previousYear = goYear.bind(this, -1);
-    return {orient};
-  },
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.orient) {
-      this.setState({
-        orient: nextProps.orient,
-      });
-    }
+    return {};
   },
 
   onKeyDown(e) {
@@ -157,33 +147,46 @@ const Calendar = React.createClass({
   },
 
   onClear() {
+    this.dateTableSelectTime = Date.now();
+    this.onSelect(null);
     this.props.onClear();
   },
 
   onOk() {
-    if (this.isAllowedDate(this.state.value)) {
-      this.props.onOk(this.state.value);
+    const {selectedValue} = this.state;
+    if (this.isAllowedDate(selectedValue)) {
+      this.props.onOk(selectedValue);
     }
   },
 
   onDateInputChange(value) {
+    if (Date.now() - this.dateTableSelectTime < 50) {
+      // avoid blur by click date table
+      return;
+    }
+    this.dateTableSelectTime = 0;
     this.onSelect(value);
+  },
+
+  onDateTableSelect(v) {
+    this.dateTableSelectTime = Date.now();
+    this.onSelect(v);
   },
 
   render() {
     const props = this.props;
     const {locale, prefixCls, disabledDate} = props;
     const state = this.state;
-    const value = state.value;
+    const {value, selectedValue} = state;
     const children = (<div style={{outline: 'none'}}>
       <div className={`${prefixCls}-input-wrap`}>
         <DateInput className={`${prefixCls}-input`}
                    formatter={this.getFormatter()}
-                   value={value}
+                   locale={value.locale}
+                   value={selectedValue}
                    onChange={this.onDateInputChange}/>
         <i className={`${prefixCls}-input-icon`}/>
       </div>
-
 
       <CalendarHeader
         locale={locale}
@@ -197,10 +200,11 @@ const Calendar = React.createClass({
           value={value}
           prefixCls={prefixCls}
           dateRender={props.dateRender}
-          onSelect={this.onSelect}
+          onSelect={this.onDateTableSelect}
           disabledDate={disabledDate}
           showWeekNumber={props.showWeekNumber}/>
       </div>
+
       <CalendarFooter
         locale={locale}
         showClear={props.showClear}

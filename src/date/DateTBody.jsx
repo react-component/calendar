@@ -57,7 +57,7 @@ const DateTBody = React.createClass({
     const dateTable = [];
     const showWeekNumber = props.showWeekNumber;
     const value = props.value;
-    const range = props.range;
+    const selectedValue = props.selectedValue;
     const today = value.clone();
     const prefixCls = props.prefixCls;
     const cellClass = prefixCls + '-cell';
@@ -125,17 +125,17 @@ const DateTBody = React.createClass({
         const isBeforeCurrentMonthYear = beforeCurrentMonthYear(current, value);
         const isAfterCurrentMonthYear = afterCurrentMonthYear(current, value);
 
-        if (range) {
+        if (selectedValue && Array.isArray(selectedValue)) {
           if (!isBeforeCurrentMonthYear && !isAfterCurrentMonthYear) {
-            const startValue = range[0];
-            const endValue = range[1];
+            const startValue = selectedValue[0];
+            const endValue = selectedValue[1];
             if (startValue) {
               if (isSameDay(current, startValue)) {
                 selected = true;
               }
             }
             if (startValue && endValue) {
-              if (isSameDay(current, endValue) && !range.hovering) {
+              if (isSameDay(current, endValue) && !selectedValue.hovering) {
                 selected = true;
               } else if (compareByDay(current, startValue) > 0 && compareByDay(current, endValue) < 0) {
                 cls += ' ' + inRangeClass;
@@ -188,7 +188,8 @@ const DateTBody = React.createClass({
         }
 
         dateCells.push(
-          <td key={passed} onClick={disabled ? noop : handleDayClick.bind(this, current)}
+          <td key={passed}
+              onMouseDown={disabled ? noop : handleDayClick.bind(this, current)}
               onMouseEnter={disabled ? noop : handleCellMouseEnter.bind(this, current)}
               role="gridcell"
               title={getTitleString(current)} className={cls}>

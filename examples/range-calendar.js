@@ -60,7 +60,7 @@ const Test = React.createClass({
                                     locale={CalendarLocale}
                                     disabledDate={disabledDate}
                                     showTime={true}/>;
-    return <div className="form-group" style={{width: 400, margin: 20}} data-time={this.state.time}>
+    return <div className="form-group" style={{width: 400, margin: 20}} >
       <div className="input-group" style={{width:350}}>
         <Picker value={state.value} onChange={this.onChange} calendar={calendar} style={{display:'inline'}}>
           {

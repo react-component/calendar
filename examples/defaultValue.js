@@ -11,15 +11,7 @@ const formatter = new DateTimeFormat('yyyy-MM-dd HH:mm:ss');
 
 var Test = React.createClass({
   onChange(value) {
-    console.log('DatePicker change: ' + (this.props.formatter.format(value)));
-  },
-
-  onCalendarSelect(value) {
-    console.log('calendar select: ' + (this.props.formatter.format(value)));
-    // uncontrolled value
-    this.setState({
-      time: Date.now()
-    });
+    console.log('DatePicker change: ' + (value && this.props.formatter.format(value)));
   },
 
   getDefaultProps() {
@@ -32,7 +24,7 @@ var Test = React.createClass({
     var value = new GregorianCalendar(zhCn);
     value.setTime(Date.now());
     return {
-      time: Date.now(),
+
       showTime: true,
       open: false,
       value: value
@@ -48,9 +40,8 @@ var Test = React.createClass({
   render() {
     var state = this.state;
     var calendar = <Calendar locale={CalendarLocale}
-                             orient={['bottom', 'left']}
-                             showTime={this.state.showTime} onSelect={this.onCalendarSelect}/>;
-    return <div className="form-group" style={{width: 400, margin: 20}} data-time={state.time}>
+                             showTime={this.state.showTime}/>;
+    return <div className="form-group" style={{width: 400, margin: 20}}>
       <div className="input-group">
         <span>
           <input type="checkbox" checked={this.state.showTime} onChange={this.onShowTimeChange}/>
@@ -58,6 +49,7 @@ var Test = React.createClass({
       </div>
       <div className="input-group" style={{width:250}}>
         <DatePicker calendar={calendar}
+                    placement="bottomLeft"
                     style={{display:'inline'}}
                     defaultValue={state.value}
                     onChange={this.onChange}>
@@ -67,7 +59,8 @@ var Test = React.createClass({
                 <input type="text"
                        className="form-control"
                        readOnly
-                       value={formatter.format(value)}
+                       placeholder="选择日期"
+                       value={value && formatter.format(value)}
                        style={{
                        background: "white",
                        borderTopRightRadius:4,
@@ -96,5 +89,6 @@ var Test = React.createClass({
 
 React.render((<div>
   <h2>zh-cn</h2>
+  <div style={{height:200}}></div>
   <Test />
 </div>), document.getElementById('__react-content'));

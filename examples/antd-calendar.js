@@ -10,45 +10,36 @@ var now = new GregorianCalendar(zhCn);
 now.setTime(Date.now());
 
 const formatter = new DateTimeFormat('yyyy-MM-dd HH:mm:ss');
+const dateFormatter = new DateTimeFormat('yyyy-MM-dd');
+
+function getFormatter(showTime) {
+  return showTime ? formatter : dateFormatter;
+}
 
 var defaultCalendarValue = new GregorianCalendar(zhCn);
 defaultCalendarValue.setTime(Date.now());
 defaultCalendarValue.addMonth(-1);
 
 function disabledDate(current, value) {
+  if (!current) {
+    // allow empty select
+    return false;
+  }
   var date = new Date();
   date.setHours(0);
   date.setMinutes(0);
   date.setSeconds(0);
-  return current.getTime() < date.getTime();  //can not select days before today
+  return current.getYear() + 10 < date.getFullYear();  //can not select days before today
 }
 
 var Test = React.createClass({
   onChange(value) {
     console.log('DatePicker change: ' + (value && formatter.format(value)));
-  },
-
-  onCalendarSelect(value) {
-    console.log('calendar select: ' + (value && formatter.format(value)));
-    // controlled value
-    this.setState({
-      time: Date.now(),
-      value: value
-    });
-  },
-
-  onCalendarOk(value) {
-    console.log('calendar ok: ' + (value && formatter.format(value)));
-    // controlled value
-    this.setState({
-      time: Date.now(),
-      value: value
-    });
+    this.setState({value});
   },
 
   getInitialState() {
     return {
-      time: Date.now(),
       showTime: true,
       disabled: false,
       value: this.props.defaultValue
@@ -71,15 +62,11 @@ var Test = React.createClass({
     var state = this.state;
     var calendar = <Calendar locale={CalendarLocale}
                              style={{zIndex:1000}}
-                             orient={['top', 'left']}
-                             defaultValue={defaultCalendarValue}
                              showTime={this.state.showTime}
                              showOk={true}
                              disabledDate={disabledDate}
-                             onOk={this.onCalendarOk}
-                             onSelect={this.onCalendarSelect}
-                             onClear={this.onCalendarSelect.bind(this, null)} showClear={true}/>;
-    return <div style={{width: 240, margin: 20}} data-time={this.state.time}>
+                             showClear={true}/>;
+    return <div style={{width: 240, margin: 20}} >
       <div style={{marginBottom:10}}>
         <span>
           <input type='checkbox' checked={this.state.showTime} onChange={this.onShowTimeChange}/>
@@ -96,8 +83,6 @@ var Test = React.createClass({
         marginBottom: 22
       }}>
         <DatePicker
-          adjustOrientOnCalendarOverflow={true}
-          adjustOrientOnCalendarOverflow={true}
           animation="slide-up"
           disabled={state.disabled}
           calendar={calendar}
@@ -110,7 +95,7 @@ var Test = React.createClass({
                 <input placeholder="请选择日期" style={{width:250}}
                        disabled={state.disabled}
                        className="ant-calendar-picker-input ant-input"
-                       value={value && formatter.format(value)}/>
+                       value={value && getFormatter(this.state.showTime).format(value)}/>
                 <span className="ant-calendar-picker-icon" unselectable="true"/>
                 </span>
               );
@@ -124,7 +109,7 @@ var Test = React.createClass({
 
 function onStandaloneSelect(value) {
   console.log('onStandaloneSelect');
-  console.log(formatter.format(value))
+  console.log(value && formatter.format(value))
 }
 
 function onStandaloneChange(value) {

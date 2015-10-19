@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react';
+import {PropTypes} from 'react';
 import enUs from '../locale/en-us';
 import DateTimeFormat from 'gregorian-calendar-format';
 
@@ -17,7 +17,6 @@ export default {
     onOk: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
-    orient: PropTypes.arrayOf(PropTypes.oneOf(['left', 'top', 'right', 'bottom'])),
   },
 
   getDefaultProps() {
@@ -79,23 +78,5 @@ export default {
       this.showDateFormatter = new DateTimeFormat('yyyy-MM-dd');
     }
     return this.showDateFormatter;
-  },
-
-  setOrient(orient) {
-    // FIXME: hack to prevent breaking rc-animate
-    if (this.state.orient === orient) {
-      return;
-    }
-    // keep orient to animate on hide
-    this.state.orient = orient;
-    const prefixCls = this.props.prefixCls;
-    const root = React.findDOMNode(this);
-    let className = root.className.replace(new RegExp(`${prefixCls}-orient-\\w+`, 'g'), '');
-    if (orient) {
-      orient.forEach(o => {
-        className += ` ${prefixCls}-orient-${o}`;
-      });
-    }
-    root.className = className;
   },
 };

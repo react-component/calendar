@@ -6,6 +6,7 @@
 - change MonthCalendar to require('rc-calendar/lib/MonthCalendar')
 - change Picker to require('rc-calendar/lib/Picker')
 - add RangeCalendar: require('rc-calendar/lib/RangeCalendar')
+- change Picker's orient to placement and align as rc-tooltip
 
 ## 3.16.0 / 2015-08-25
 

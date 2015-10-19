@@ -1,26 +1,9 @@
 import React, {PropTypes} from 'react';
 import {createChainedFunction, KeyCode, classSet, Dom} from 'rc-util';
 import Align from 'rc-align';
-const orientMap = {
-  tl: ['top', 'left'],
-  tr: ['top', 'right'],
-  bl: ['bottom', 'left'],
-  br: ['bottom', 'right'],
-};
 import Animate from 'rc-animate';
-
-function getImmutableOrient(orient) {
-  if (orient) {
-    for (const i in orientMap) {
-      if (orientMap.hasOwnProperty(i)) {
-        const original = orientMap[i];
-        if (original[0] === orient[0] && original[1] === orient[1]) {
-          return original;
-        }
-      }
-    }
-  }
-}
+import {getCalendarClassByPlacement, fromPointsToPlacement, fromPlacementStrToAlign} from './picker/placement';
+import assign from 'object-assign';
 
 function noop() {
 }
@@ -38,23 +21,28 @@ const Picker = React.createClass({
     onOpen: PropTypes.func,
     onClose: PropTypes.func,
     children: PropTypes.func,
+    getCalendarContainer: PropTypes.func,
     calendar: PropTypes.element,
     style: PropTypes.object,
     open: PropTypes.bool,
     defaultOpen: PropTypes.bool,
     prefixCls: PropTypes.string,
-    getCalendarContainer: PropTypes.func,
-    adjustOrientOnCalendarOverflow: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+    placement: PropTypes.any,
+    align: PropTypes.shape({
+      offset: PropTypes.array,
+      targetOffset: PropTypes.array,
+    }),
   },
 
   getDefaultProps() {
     return {
       prefixCls: 'rc-calendar-picker',
-      adjustOrientOnCalendarOverflow: true,
       style: {},
+      align: {},
       getCalendarContainer() {
         return document.body;
       },
+      placement: 'topLeft',
       defaultOpen: false,
       onChange: noop,
       onOpen: noop,
@@ -110,9 +98,21 @@ const Picker = React.createClass({
   },
 
   onCalendarAlign(node, align) {
-    const points = align.points;
-    const newOrient = orientMap[points[0]];
-    this.calendarInstance.setOrient(newOrient);
+    const props = this.props;
+    const placement = props.placement;
+    const prefixCls = props.calendar.props.prefixCls;
+    if (placement) {
+      const originalClassName = getCalendarClassByPlacement(prefixCls, placement);
+      let nextClassName;
+      if (placement.points) {
+        nextClassName = getCalendarClassByPlacement(prefixCls, align);
+      } else if (typeof placement === 'string') {
+        nextClassName = getCalendarClassByPlacement(prefixCls, fromPointsToPlacement(align));
+      }
+      if (nextClassName !== originalClassName) {
+        node.className = node.className.replace(originalClassName, nextClassName);
+      }
+    }
   },
 
   onInputClick() {
@@ -139,13 +139,16 @@ const Picker = React.createClass({
   },
 
   onCalendarSelect(value) {
-    this.setState({
-      value: value,
-    });
-    if (!this.props.calendar.props.showTime) {
+    const props = this.props;
+    if (!('value' in props)) {
+      this.setState({
+        value: value,
+      });
+    }
+    if (!props.calendar.props.showTime) {
       this.close(this.focus);
     }
-    this.props.onChange(value);
+    props.onChange(value);
   },
 
   onCalendarBlur() {
@@ -162,19 +165,7 @@ const Picker = React.createClass({
   },
 
   onCalendarClear() {
-    this.setState({
-      value: null,
-    });
     this.close(this.focus);
-    if (this.state.value !== null) {
-      this.props.onChange(null);
-    }
-  },
-
-  onCalendarChange(value) {
-    this.calendarInstance.setState({
-      value,
-    });
   },
 
   onAnimateLeave() {
@@ -199,60 +190,75 @@ const Picker = React.createClass({
     return this.calendarContainer;
   },
 
-  getAlign(orient) {
-    let points = ['tl', 'tl'];
-    const offset = [0, 0];
-    const adjustOrientOnCalendarOverflow = this.props.adjustOrientOnCalendarOverflow;
-    if (orient.indexOf('top') !== -1 && orient.indexOf('left') !== -1) {
-      points = ['tl', 'tl'];
-    } else if (orient.indexOf('top') !== -1 && orient.indexOf('right') !== -1) {
-      points = ['tr', 'tr'];
-    } else if (orient.indexOf('bottom') !== -1 && orient.indexOf('left') !== -1) {
-      points = ['bl', 'bl'];
-    } else if (orient.indexOf('bottom') !== -1 && orient.indexOf('right') !== -1) {
-      points = ['br', 'br'];
-    }
-    let adjustX;
-    let adjustY;
-    if (adjustOrientOnCalendarOverflow === true) {
-      adjustX = adjustY = true;
-    } else if (!adjustOrientOnCalendarOverflow) {
-      adjustX = adjustY = false;
+  getAlign() {
+    let align;
+    const props = this.props;
+    const placement = props.placement;
+    if (placement && placement.points) {
+      align = placement;
     } else {
-      adjustX = adjustOrientOnCalendarOverflow.x;
-      adjustY = adjustOrientOnCalendarOverflow.y;
+      align = fromPlacementStrToAlign(placement);
+      const {offset, targetOffset} = align;
+      let offsetProp = props.align.offset;
+      let targetOffsetProp = props.align.targetOffset;
+      if (offsetProp) {
+        offsetProp = offsetProp.concat();
+      }
+      if (targetOffsetProp) {
+        targetOffsetProp = targetOffsetProp.concat();
+      }
+      const updateAlign = {};
+      for (let i = 0; i < 2; i++) {
+        if (offsetProp) {
+          if (offsetProp[i] === undefined) {
+            offsetProp[i] = offset[i];
+          }
+          updateAlign.offset = offsetProp;
+        }
+        if (targetOffsetProp) {
+          if (targetOffsetProp[i] === undefined) {
+            targetOffsetProp[i] = targetOffset[i];
+          }
+          updateAlign.targetOffset = offsetProp;
+        }
+      }
+      align = assign({}, align, updateAlign);
     }
-    return {
-      points: points,
-      offset: offset,
-      overflow: {
-        adjustX: adjustX,
-        adjustY: adjustY,
-      },
-    };
+    return align;
   },
 
   getCalendarElement() {
     const props = this.props;
     const state = this.state;
     const calendarProp = props.calendar;
-    let orient;
-    // re align when open
-    if (state.open) {
-      orient = getImmutableOrient(calendarProp.props.orient) || orientMap.tl;
+    let className = calendarProp.props.className || '';
+    if (className) {
+      className += ' ';
     }
-    const calendarElement = React.cloneElement(calendarProp, {
+
+    if (state.open) {
+      className += getCalendarClassByPlacement(calendarProp.props.prefixCls, props.placement);
+    } else {
+      const calendarDOMNode = React.findDOMNode(this.calendarInstance);
+      // fix auto adjust
+      className = calendarDOMNode && calendarDOMNode.className || '';
+    }
+
+    const extraProps = {
       ref: createChainedFunction(calendarProp.ref, this.saveCalendarRef),
-      value: state.value,
+      className: className,
+      defaultValue: calendarProp.props.defaultValue || state.value,
+      defaultSelectedValue: state.value,
       visible: state.open,
-      orient: orient,
+      placement: props.placement,
       onBlur: this.onCalendarBlur,
       onKeyDown: this.onCalendarKeyDown,
-      onChange: createChainedFunction(calendarProp.props.onChange, this.onCalendarChange),
       onOk: createChainedFunction(calendarProp.props.onOk, this.onCalendarOk),
       onSelect: createChainedFunction(calendarProp.props.onSelect, this.onCalendarSelect),
       onClear: createChainedFunction(calendarProp.props.onClear, this.onCalendarClear),
-    });
+    };
+
+    const calendarElement = React.cloneElement(calendarProp, extraProps);
     return (<Animate
       component=""
       exclusive={true}
@@ -265,7 +271,7 @@ const Picker = React.createClass({
              onAlign={this.onCalendarAlign}
              calendarOpen={state.open}
              disabled={!state.open}
-             align={orient && this.getAlign(orient)}>
+             align={this.getAlign()}>
         {calendarElement}
       </Align>
     </Animate>);

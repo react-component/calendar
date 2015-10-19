@@ -18,14 +18,14 @@ var Test = React.createClass({
   onChange(value) {
     console.log('DatePicker change: ' + (value && formatter.format(value)));
     this.setState({
-      time: Date.now(),
+
       value: value
     });
   },
 
   getInitialState() {
     return {
-      time: Date.now(),
+
       showTime: true,
       disabled: false,
       value: this.props.defaultValue
@@ -47,10 +47,8 @@ var Test = React.createClass({
   render() {
     var state = this.state;
     var calendar = <MonthCalendar locale={CalendarLocale}
-                                  style={{zIndex:1000}}
-                                  orient={['top', 'left']}
-                                  defaultValue={defaultCalendarValue}/>;
-    return (<div style={{width: 240, margin: 20}} data-time={this.state.time}>
+                                  style={{zIndex:1000}}/>;
+    return (<div style={{width: 240, margin: 20}} >
       <div style={{marginBottom:10}}>
         &nbsp;&nbsp;&nbsp;&nbsp;
         <label><input checked={state.disabled} onChange={this.toggleDisabled} type='checkbox'/> disabled </label>
@@ -63,7 +61,6 @@ var Test = React.createClass({
         marginBottom: 22
       }}>
         <DatePicker
-          adjustOrientOnCalendarOverflow={true}
           animation="slide-up"
           disabled={state.disabled}
           calendar={calendar}
@@ -101,7 +98,6 @@ React.render(
     <h2>zh-cn</h2>
     <MonthCalendar locale={CalendarLocale}
                    style={{zIndex:1000}}
-                   orient={['top', 'left']}
                    disabledDate={disabledDate}
                    onSelect={onStandaloneSelect}
                    onChange={onStandaloneChange}

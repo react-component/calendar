@@ -26,7 +26,7 @@ const CalendarFooter = React.createClass({
       if (props.showClear) {
         clearEl = (<a className={`${prefixCls}-clear-btn`}
                       role="button"
-                      onClick={props.onClear}>{locale.clear}</a>);
+                      onMouseDown={props.onClear}>{locale.clear}</a>);
       }
       let okBtn;
       if (props.showOk) {

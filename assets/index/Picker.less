@@ -27,32 +27,30 @@
     animation-play-state: paused;
   }
 
-  &-slide-up-enter&-slide-up-enter-active.@{prefixClass}-orient-top {
+  &-slide-up-enter&-slide-up-enter-active.@{prefixClass}-placement-topLeft,
+  &-slide-up-enter&-slide-up-enter-active.@{prefixClass}-placement-topRight,
+  &-slide-up-appear&-slide-up-appear-active.@{prefixClass}-placement-topLeft,
+  &-slide-up-appear&-slide-up-appear-active.@{prefixClass}-placement-topRight {
     animation-name: rcDropdownSlideUpIn;
     animation-play-state: running;
   }
 
-  &-slide-up-enter&-slide-up-enter-active.@{prefixClass}-orient-bottom {
+  &-slide-up-enter&-slide-up-enter-active.@{prefixClass}-placement-bottomLeft,
+  &-slide-up-enter&-slide-up-enter-active.@{prefixClass}-placement-bottomRight,
+  &-slide-up-appear&-slide-up-appear-active.@{prefixClass}-placement-bottomLeft,
+  &-slide-up-appear&-slide-up-appear-active.@{prefixClass}-placement-bottomRight {
     animation-name: rcDropdownSlideDownIn;
     animation-play-state: running;
   }
 
-  &-slide-up-appear&-slide-up-appear-active.@{prefixClass}-orient-top {
-    animation-name: rcDropdownSlideUpIn;
-    animation-play-state: running;
-  }
-
-  &-slide-up-appear&-slide-up-appear-active.@{prefixClass}-orient-bottom {
-    animation-name: rcDropdownSlideDownIn;
-    animation-play-state: running;
-  }
-
-  &-slide-up-leave&-slide-up-leave-active.@{prefixClass}-orient-top {
+  &-slide-up-leave&-slide-up-leave-active.@{prefixClass}-placement-topLeft,
+  &-slide-up-leave&-slide-up-leave-active.@{prefixClass}-placement-topRight {
     animation-name: rcDropdownSlideUpOut;
     animation-play-state: running;
   }
 
-  &-slide-up-leave&-slide-up-leave-active.@{prefixClass}-orient-bottom {
+  &-slide-up-leave&-slide-up-leave-active.@{prefixClass}-placement-bottomLeft,
+  &-slide-up-leave&-slide-up-leave-active.@{prefixClass}-placement-bottomRight {
     animation-name: rcDropdownSlideDownOut;
     animation-play-state: running;
   }
@@ -69,6 +67,7 @@
       transform: scaleY(1);
     }
   }
+
   @keyframes rcDropdownSlideUpOut {
     0% {
       opacity: 1;

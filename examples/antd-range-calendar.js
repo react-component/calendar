@@ -45,11 +45,6 @@ const Test = React.createClass({
   },
 
   onChange(value){
-    if ((value[1].getTime() - value[0].getTime()) > 60 * 24 * 60 * 1000 * 10) {
-      console.log('only last no more than 10 days');
-      value[1] = value[0].clone();
-      value[1].addDayOfMonth(10);
-    }
     this.setState({value});
   },
 

@@ -38,31 +38,41 @@ const CalendarMixin = {
   getInitialState() {
     const props = this.props;
     const value = props.value || props.defaultValue || getNow();
-    return {value};
+    return {
+      value,
+      selectedValue: props.selectedValue || props.defaultSelectedValue,
+    };
   },
 
   componentWillReceiveProps(nextProps) {
-    let value = nextProps.value;
+    let {value} = nextProps;
+    const {selectedValue} = nextProps;
     if (value !== undefined) {
       value = value || nextProps.defaultValue || getNowByCurrentStateValue(this.state.value);
       this.setState({
         value,
       });
     }
+    if (selectedValue !== undefined) {
+      this.setState({
+        selectedValue,
+      });
+    }
   },
 
-  onSelect(value, keyDownEvent) {
-    this.setValue(value);
-    if (!keyDownEvent) {
-      if (this.isAllowedDate(value)) {
-        this.props.onSelect(value);
-      }
+  onSelect(value, cause) {
+    if (this._blurPending) {
+      clearTimeout(this._blurPending);
+      this._blurPending = null;
     }
+    if (value) {
+      this.setValue(value);
+    }
+    this.setSelectedValue(value, cause);
   },
 
   renderRoot(newProps) {
     const props = this.props;
-    const state = this.state;
     const prefixCls = props.prefixCls;
 
     const className = {
@@ -71,20 +81,25 @@ const CalendarMixin = {
       [props.className]: !!props.className,
     };
 
-    const orient = state.orient;
-    if (orient) {
-      orient.forEach(o => {
-        className [`${prefixCls}-orient-${o}`] = 1;
-      });
-    }
-
     return (
-      <div className={`${classSet(className)} ${newProps.className}`} style={this.props.style}
+      <div className={`${classSet(className)} ${newProps.className}`}
+           style={this.props.style}
            tabIndex="0" onFocus={this.onFocus}
            onBlur={this.onBlur} onKeyDown={this.onKeyDown}>
         {newProps.children}
       </div>
     );
+  },
+
+  setSelectedValue(selectedValue, cause) {
+    if (this.isAllowedDate(selectedValue)) {
+      if (!('selectedValue' in this.props)) {
+        this.setState({
+          selectedValue,
+        });
+      }
+      this.props.onSelect(selectedValue, cause || {});
+    }
   },
 
   setValue(value) {

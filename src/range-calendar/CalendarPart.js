@@ -11,7 +11,7 @@ const Calendar = React.createClass({
 
   render() {
     const props = this.props;
-    const {value, direction, prefixCls, locale, range, formatter, disabledDate} = props;
+    const {value, direction, prefixCls, locale, selectedValue, formatter, disabledDate} = props;
     const rangeClassName = `${prefixCls}-range`;
     const newProps = {locale, value, prefixCls};
     const index = direction === 'left' ? 0 : 1;
@@ -20,7 +20,7 @@ const Calendar = React.createClass({
         <DateInput className={`${prefixCls}-input`}
                    formatter={formatter}
                    disabledDate={disabledDate}
-                   value={range[index] || range[0]}
+                   value={selectedValue[index] || selectedValue[0]}
                    onChange={props.onInputSelect}/>
         <i className={`${prefixCls}-input-icon`}/>
       </div>
@@ -29,12 +29,12 @@ const Calendar = React.createClass({
           {...newProps}
           enableNext={direction === 'right'}
           enablePrev={direction === 'left'}
-          onValueChange={props.onAnchorChange}/>
+          onValueChange={props.onValueChange}/>
 
         <div className={`${prefixCls}-calendar-body`}>
           <DateTable
             {...newProps}
-            range={range}
+            selectedValue={selectedValue}
             dateRender={props.dateRender}
             onSelect={props.onSelect}
             onDayHover={props.onDayHover}
@@ -45,7 +45,7 @@ const Calendar = React.createClass({
           showTime={props.showTime}
           {...newProps}
           disabledDate={props.disabledDate}
-          timeDisabled={!range[index] || !!range.hovering}
+          timeDisabled={!selectedValue[index] || !!selectedValue.hovering}
           onSelect={this.props.onTimeSelect}
           onToday={this.chooseToday}
           />

@@ -10,56 +10,65 @@ function noop() {
 }
 
 function getNow() {
-  const value = new GregorianCalendar();
-  value.setTime(Date.now());
-  return value;
+  const selectedValue = new GregorianCalendar();
+  selectedValue.setTime(Date.now());
+  return selectedValue;
 }
 
-function onAnchorChange(direction, current) {
-  let anchor;
-  anchor = current;
+function onValueChange(direction, current) {
+  let value;
+  value = current;
   if (direction === 'right') {
-    anchor.addMonth(-1);
-  }
-  this.fireAnchorChange(anchor);
-}
-
-function normalizeAnchor(props, init) {
-  const value = props.value || init && props.defaultValue || [];
-  return props.anchor || init && props.defaultAnchor || value[0] || init && getNow();
-}
-
-function onTimeSelect(direction, selectedValue) {
-  const index = direction === 'left' ? 0 : 1;
-  let value = this.state.value;
-  if (value[index]) {
-    value = value.concat();
-    value[index] = value[index].clone();
-    syncTime(selectedValue, value[index]);
-    this.fireValueChange(value);
-  }
-}
-
-function onInputSelect(direction, selectedValue) {
-  const originalValue = this.state.value;
-  const value = originalValue.concat();
-  const index = direction === 'left' ? 0 : 1;
-  value[index] = selectedValue;
-  if (value[0].getTime() > value[1].getTime()) {
-    value.length = 1;
+    value.addMonth(-1);
   }
   this.fireValueChange(value);
 }
 
+function normalizeAnchor(props, init) {
+  const selectedValue = props.selectedValue || init && props.defaultSelectedValue || [];
+  let value = props.value;
+  if (Array.isArray(value)) {
+    value = value[0];
+  }
+  let defaultValue = props.defaultValue;
+  if (Array.isArray(defaultValue)) {
+    defaultValue = defaultValue[0];
+  }
+  return value || init && defaultValue || selectedValue[0] || init && getNow();
+}
+
+function onTimeSelect(direction, v) {
+  const index = direction === 'left' ? 0 : 1;
+  let selectedValue = this.state.selectedValue;
+  if (selectedValue[index]) {
+    selectedValue = selectedValue.concat();
+    selectedValue[index] = selectedValue[index].clone();
+    syncTime(v, selectedValue[index]);
+    this.fireSelectValueChange(selectedValue);
+  }
+}
+
+function onInputSelect(direction, v) {
+  const originalValue = this.state.selectedValue;
+  const selectedValue = originalValue.concat();
+  const index = direction === 'left' ? 0 : 1;
+  selectedValue[index] = v;
+  if (selectedValue[0].getTime() > selectedValue[1].getTime()) {
+    selectedValue.length = 1;
+  }
+  this.fireSelectValueChange(selectedValue);
+}
+
 const RangeCalendar = React.createClass({
   propTypes: {
-    defaultAnchor: PropTypes.object,
-    anchor: PropTypes.object,
-    value: PropTypes.array,
-    defaultValue: PropTypes.array,
+    defaultValue: PropTypes.any,
+    value: PropTypes.any,
+    selectedValue: PropTypes.array,
+    defaultSelectedValue: PropTypes.array,
     onOk: PropTypes.func,
     onChange: PropTypes.func,
     onSelect: PropTypes.func,
+    onValueChange: PropTypes.func,
     formatter: PropTypes.object,
   },
 
@@ -67,91 +76,95 @@ const RangeCalendar = React.createClass({
 
   getInitialState() {
     const props = this.props;
-    const value = props.value || props.defaultValue;
-    const anchor = normalizeAnchor(props, 1);
-    return {value, anchor};
+    const selectedValue = props.selectedValue || props.defaultSelectedValue;
+    const value = normalizeAnchor(props, 1);
+    return {selectedValue, value};
   },
 
   getDefaultProps() {
     return {
-      defaultValue: [],
-      onAnchorChange: noop,
+      defaultSelectedValue: [],
+      onValueChange: noop,
     };
   },
 
   componentWillReceiveProps(nextProps) {
     const newState = {};
-    if ('anchor' in nextProps) {
-      if (nextProps.anchor) {
-        newState.anchor = nextProps.anchor;
+    if ('value' in nextProps) {
+      if (nextProps.value) {
+        newState.value = nextProps.value;
       } else {
-        newState.anchor = normalizeAnchor(nextProps, 0);
+        newState.value = normalizeAnchor(nextProps, 0);
       }
+      this.setState(newState);
+    }
+    if ('selectedValue' in nextProps) {
+      newState.selectedValue = nextProps.selectedValue;
       this.setState(newState);
     }
   },
 
-  onSelect(selectedValue) {
-    const originalValue = this.state.value;
-    const value = originalValue.concat();
+  onSelect(v) {
+    const originalValue = this.state.selectedValue;
+    const selectedValue = originalValue.concat();
     let changed = false;
-    if (!value.length || value.length === 2 && !originalValue.hovering) {
-      value.length = 1;
-      value[0] = selectedValue;
+    if (!selectedValue.length || selectedValue.length === 2 && !originalValue.hovering) {
+      selectedValue.length = 1;
+      selectedValue[0] = v;
       changed = true;
-    } else if (value[0].getTime() < selectedValue.getTime()) {
-      value[1] = selectedValue;
+    } else if (selectedValue[0].getTime() < v.getTime()) {
+      selectedValue[1] = v;
       changed = true;
-    } else if (value[0].getTime() > selectedValue.getTime()) {
-      value.length = 1;
-      value[0] = selectedValue;
+    } else if (selectedValue[0].getTime() > v.getTime()) {
+      selectedValue.length = 1;
+      selectedValue[0] = v;
       changed = true;
     }
     if (changed) {
-      this.fireValueChange(value);
+      this.fireSelectValueChange(selectedValue);
     }
   },
 
   onDayHover(hoverValue) {
-    let value = this.state.value;
-    if (!value.length || value.length === 2 && !value.hovering) {
+    let selectedValue = this.state.selectedValue;
+    if (!selectedValue.length || selectedValue.length === 2 && !selectedValue.hovering) {
       return;
     }
-    if (hoverValue.getTime() < value[0].getTime()) {
+    if (hoverValue.getTime() < selectedValue[0].getTime()) {
       return;
     }
-    value = value.concat();
-    value[1] = hoverValue;
-    value.hovering = 1;
-    this.fireValueChange(value);
+    selectedValue = selectedValue.concat();
+    selectedValue[1] = hoverValue;
+    selectedValue.hovering = 1;
+    this.fireSelectValueChange(selectedValue);
   },
 
   onToday() {
     this.setState({
-      anchor: getTodayTime(this.state.anchor),
+      value: getTodayTime(this.state.value),
     });
   },
 
   onOk() {
-    this.props.onOk(this.state.value);
+    this.props.onOk(this.state.selectedValue);
   },
 
-  getAnchor() {
-    let anchor = this.state.anchor;
-    const value = this.state.value;
-    if (value[0]) {
-      anchor = anchor.clone();
-      syncTime(value[0], anchor);
+  getStartValue() {
+    let value = this.state.value;
+    const selectedValue = this.state.selectedValue;
+    if (selectedValue[0]) {
+      value = value.clone();
+      syncTime(selectedValue[0], value);
     }
-    return anchor;
+    return value;
   },
 
-  getAnchorEndValue() {
-    const endValue = this.state.anchor.clone();
+  getEndValue() {
+    const endValue = this.state.value.clone();
     endValue.addMonth(1);
-    const value = this.state.value;
-    if (value[1]) {
-      syncTime(value[1], endValue);
+    const selectedValue = this.state.selectedValue;
+    if (selectedValue[1]) {
+      syncTime(selectedValue[1], endValue);
     }
     return endValue;
   },
@@ -160,7 +173,6 @@ const RangeCalendar = React.createClass({
     const props = this.props;
     const state = this.state;
     const prefixCls = props.prefixCls;
-    const orient = state.orient;
     const className = {
       [props.className]: !!props.className,
       [prefixCls]: 1,
@@ -168,14 +180,9 @@ const RangeCalendar = React.createClass({
       [prefixCls + '-range']: 1,
       [`${prefixCls}-week-number`]: props.showWeekNumber,
     };
-    if (orient) {
-      orient.forEach(o => {
-        className[`${prefixCls}-orient-${o}`] = 1;
-      });
-    }
     const classes = classSet(className);
     const newProps = {
-      range: state.value,
+      selectedValue: state.selectedValue,
       onSelect: this.onSelect,
       onDayHover: this.onDayHover,
     };
@@ -185,44 +192,44 @@ const RangeCalendar = React.createClass({
                  onBlur={this.onBlur}>
       <CalendarPart {...props} {...newProps} direction="left"
                                              formatter={this.getFormatter()}
-                                             value={this.getAnchor()}
+                                             value={this.getStartValue()}
                                              onInputSelect={onInputSelect.bind(this, 'left')}
                                              onTimeSelect={onTimeSelect.bind(this, 'left')}
-                                             onAnchorChange={onAnchorChange.bind(this, 'left')}/>
+                                             onValueChange={onValueChange.bind(this, 'left')}/>
       <CalendarPart {...props} {...newProps} direction="right"
                                              formatter={this.getFormatter()}
-                                             value={this.getAnchorEndValue()}
+                                             value={this.getEndValue()}
                                              onInputSelect={onInputSelect.bind(this, 'right')}
                                              onTimeSelect={onTimeSelect.bind(this, 'right')}
-                                             onAnchorChange={onAnchorChange.bind(this, 'right')}/>
+                                             onValueChange={onValueChange.bind(this, 'right')}/>
 
       <div style={{textAlign: 'center'}}>
-        {getTodayElement(assign({}, props, {value: state.anchor, onToday: this.onToday}))}
+        {getTodayElement(assign({}, props, {value: state.value, onToday: this.onToday}))}
         {getOkElement(assign({}, props, {
-          value: state.anchor,
+          value: state.value,
           onOk: this.onOk,
-          okDisabled: state.value.length !== 2 || state.value.hovering,
+          okDisabled: state.selectedValue.length !== 2 || state.selectedValue.hovering,
         }))}
       </div>
     </div>);
   },
 
-  fireValueChange(value) {
-    if (!('value' in this.props)) {
-      this.setState({value});
+  fireSelectValueChange(selectedValue) {
+    if (!('selectedValue' in this.props)) {
+      this.setState({selectedValue});
     }
-    this.props.onChange(value);
-    if (value.length === 2 && !value.hovering) {
-      this.props.onSelect(value);
+    this.props.onChange(selectedValue);
+    if (selectedValue.length === 2 && !selectedValue.hovering) {
+      this.props.onSelect(selectedValue);
     }
   },
 
-  fireAnchorChange(anchor) {
+  fireValueChange(value) {
     const props = this.props;
-    if (!('anchor' in props)) {
-      this.setState({anchor});
+    if (!('value' in props)) {
+      this.setState({value});
     }
-    props.onAnchorChange(anchor);
+    props.onValueChange(value);
   },
 });
 

@@ -211,16 +211,16 @@ http://react-component.github.io/calendar/examples/index.html
           <td>additional style of root dom node</td>
         </tr>
         <tr>
-          <td>value</td>
+          <td>selectedValue</td>
           <td> <a href="https://github.com/yiminghe/gregorian-calendar">GregorianCalendar</a>[] </td>
           <td></td>
-          <td>current value range. with two elements.</td>
+          <td>current selected value range. with two elements.</td>
         </tr>
         <tr>
-          <td>defaultValue</td>
+          <td>defaultSelectedValue</td>
           <td>GregorianCalendar[]</td>
           <td></td>
-          <td>defaultValue range</td>
+          <td>default selected value range</td>
         </tr>
         <tr>
           <td>locale</td>
@@ -373,16 +373,16 @@ http://react-component.github.io/calendar/examples/index.html
           <td>whether picker is disabled</td>
         </tr>
         <tr>
-          <td>orient</td>
-          <td>String[]</td>
+          <td>placement</td>
+          <td>String|Object</td>
           <td></td>
-          <td>affect the position of arrow. exp: ['left','top']</td>
+          <td>one of ['left','right','top','bottom', 'topLeft', 'topRight', 'bottomLeft', 'bottomRight'] or alignConfig of [dom-align](https://github.com/yiminghe/dom-align) </td>
         </tr>
         <tr>
-          <td>adjustOrientOnCalendarOverflow</td>
-          <td>Boolean</td>
-          <td>true</td>
-          <td>whether adjust calendar orient if there is not enough space to show. better false if animation is 'slide-up'</td>
+          <td>align</td>
+          <td>Object: alignConfig of [dom-align](https://github.com/yiminghe/dom-align)</td>
+          <td></td>
+          <td>only valid when placement's type is String. value will be merged into placement's align config. note: can only accept offset and targetOffset</td>
         </tr>
         <tr>
           <td>animation</td>
@@ -398,13 +398,13 @@ http://react-component.github.io/calendar/examples/index.html
         </tr>
         <tr>
           <td>value</td>
-          <td>GregorianCalendar</td>
+          <td>GregorianCalendar|GregorianCalendar[]</td>
           <td></td>
           <td>current value like input's value</td>
         </tr>
         <tr>
           <td>defaultValue</td>
-          <td>GregorianCalendar</td>
+          <td>GregorianCalendar|GregorianCalendar[]</td>
           <td></td>
           <td>defaultValue like input's defaultValue</td>
         </tr>
