@@ -7,7 +7,7 @@
   <meta charset="utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" rel="stylesheet"/>
-  <title>rc-calendar@4.0.0-alpha3 - React Calendar</title>
+  <title>rc-calendar@4.0.0-alpha5 - React Calendar</title>
   <style>
     @font-face {
       font-family: octicons-anchor;
@@ -737,7 +737,7 @@
 
 <body>
 <div class="header">
-  <h1>rc-calendar@4.0.0-alpha3</h1>
+  <h1>rc-calendar@4.0.0-alpha5</h1>
 </div>
 <div class="examples">
   <h3>EXAMPLES</h3>
@@ -924,16 +924,16 @@ React.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-titl
           <td>additional style of root dom node</td>
         </tr>
         <tr>
-          <td>value</td>
+          <td>selectedValue</td>
           <td> <a href="https://github.com/yiminghe/gregorian-calendar">GregorianCalendar</a>[] </td>
           <td></td>
-          <td>current value range. with two elements.</td>
+          <td>current selected value range. with two elements.</td>
         </tr>
         <tr>
-          <td>defaultValue</td>
+          <td>defaultSelectedValue</td>
           <td>GregorianCalendar[]</td>
           <td></td>
-          <td>defaultValue range</td>
+          <td>default selected value range</td>
         </tr>
         <tr>
           <td>locale</td>
@@ -1082,16 +1082,16 @@ React.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-titl
           <td>whether picker is disabled</td>
         </tr>
         <tr>
-          <td>orient</td>
-          <td>String[]</td>
+          <td>placement</td>
+          <td>String|Object</td>
           <td></td>
-          <td>affect the position of arrow. exp: [&#39;left&#39;,&#39;top&#39;]</td>
+          <td>one of [&#39;left&#39;,&#39;right&#39;,&#39;top&#39;,&#39;bottom&#39;, &#39;topLeft&#39;, &#39;topRight&#39;, &#39;bottomLeft&#39;, &#39;bottomRight&#39;] or alignConfig of <a href="https://github.com/yiminghe/dom-align" title="null">dom-align</a> </td>
         </tr>
         <tr>
-          <td>adjustOrientOnCalendarOverflow</td>
-          <td>Boolean</td>
-          <td>true</td>
-          <td>whether adjust calendar orient if there is not enough space to show. better false if animation is &#39;slide-up&#39;</td>
+          <td>align</td>
+          <td>Object: alignConfig of <a href="https://github.com/yiminghe/dom-align" title="null">dom-align</a></td>
+          <td></td>
+          <td>only valid when placement&#39;s type is String. value will be merged into placement&#39;s align config. note: can only accept offset and targetOffset</td>
         </tr>
         <tr>
           <td>animation</td>
@@ -1107,13 +1107,13 @@ React.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-titl
         </tr>
         <tr>
           <td>value</td>
-          <td>GregorianCalendar</td>
+          <td>GregorianCalendar|GregorianCalendar[]</td>
           <td></td>
           <td>current value like input&#39;s value</td>
         </tr>
         <tr>
           <td>defaultValue</td>
-          <td>GregorianCalendar</td>
+          <td>GregorianCalendar|GregorianCalendar[]</td>
           <td></td>
           <td>defaultValue like input&#39;s defaultValue</td>
         </tr>

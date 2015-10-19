@@ -239,7 +239,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
 <div class="container">
   <div class="header">
-    <h1>rc-calendar@4.0.0-alpha3</h1>
+    <h1>rc-calendar@4.0.0-alpha5</h1>
 
     <p>React Calendar</p>
   </div>
@@ -267,14 +267,14 @@ defaultCalendarValue.addMonth(-<span class="hljs-number">1</span>);
   onChange(<span class="hljs-keyword">value</span>) {
     console.log(<span class="hljs-string">'DatePicker change: '</span> + (<span class="hljs-keyword">value</span> &amp;&amp; formatter.format(<span class="hljs-keyword">value</span>)));
     <span class="hljs-keyword">this</span>.setState({
-      time: Date.now(),
+
       <span class="hljs-keyword">value</span>: <span class="hljs-keyword">value</span>
     });
   },
 
   getInitialState() {
     <span class="hljs-keyword">return</span> {
-      time: Date.now(),
+
       showTime: <span class="hljs-keyword">true</span>,
       disabled: <span class="hljs-keyword">false</span>,
       <span class="hljs-keyword">value</span>: <span class="hljs-keyword">this</span>.props.defaultValue
@@ -296,10 +296,8 @@ defaultCalendarValue.addMonth(-<span class="hljs-number">1</span>);
   render() {
     <span class="hljs-keyword">var</span> state = <span class="hljs-keyword">this</span>.state;
     <span class="hljs-keyword">var</span> calendar = &lt;MonthCalendar locale={CalendarLocale}
-                                  style={{zIndex:<span class="hljs-number">1000</span>}}
-                                  orient={[<span class="hljs-string">'top'</span>, <span class="hljs-string">'left'</span>]}
-                                  defaultValue={defaultCalendarValue}/&gt;;
-    <span class="hljs-keyword">return</span> (&lt;div style={{width: <span class="hljs-number">240</span>, margin: <span class="hljs-number">20</span>}} data-time={<span class="hljs-keyword">this</span>.state.time}&gt;
+                                  style={{zIndex:<span class="hljs-number">1000</span>}}/&gt;;
+    <span class="hljs-keyword">return</span> (&lt;div style={{width: <span class="hljs-number">240</span>, margin: <span class="hljs-number">20</span>}} &gt;
       &lt;div style={{marginBottom:<span class="hljs-number">10</span>}}&gt;
         &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
         &lt;label&gt;&lt;input <span class="hljs-keyword">checked</span>={state.disabled} onChange={<span class="hljs-keyword">this</span>.toggleDisabled} type=<span class="hljs-string">'checkbox'</span>/&gt; disabled &lt;/label&gt;
@@ -312,7 +310,6 @@ defaultCalendarValue.addMonth(-<span class="hljs-number">1</span>);
         marginBottom: <span class="hljs-number">22</span>
       }}&gt;
         &lt;DatePicker
-          adjustOrientOnCalendarOverflow={<span class="hljs-keyword">true</span>}
           animation=<span class="hljs-string">"slide-up"</span>
           disabled={state.disabled}
           calendar={calendar}
@@ -350,7 +347,6 @@ React.render(
     &lt;h2&gt;zh-cn&lt;/h2&gt;
     &lt;MonthCalendar locale={CalendarLocale}
                    style={{zIndex:<span class="hljs-number">1000</span>}}
-                   orient={[<span class="hljs-string">'top'</span>, <span class="hljs-string">'left'</span>]}
                    disabledDate={disabledDate}
                    onSelect={onStandaloneSelect}
                    onChange={onStandaloneChange}

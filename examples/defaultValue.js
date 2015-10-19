@@ -3,7 +3,7 @@ webpackJsonp([4],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(223);
+	module.exports = __webpack_require__(224);
 
 
 /***/ },
@@ -138,9 +138,9 @@ webpackJsonp([4],{
 	
 	  propTypes: {
 	    value: _react.PropTypes.object,
+	    selectedValue: _react.PropTypes.object,
 	    defaultValue: _react.PropTypes.object,
 	    className: _react.PropTypes.string,
-	    orient: _react.PropTypes.arrayOf(_react.PropTypes.oneOf(['left', 'top', 'right', 'bottom'])),
 	    locale: _react.PropTypes.object,
 	    showWeekNumber: _react.PropTypes.bool,
 	    style: _react.PropTypes.object,
@@ -166,22 +166,12 @@ webpackJsonp([4],{
 	  },
 	
 	  getInitialState: function getInitialState() {
-	    var props = this.props;
-	    var orient = props.orient;
 	    // bind methods
 	    this.nextMonth = goMonth.bind(this, 1);
 	    this.previousMonth = goMonth.bind(this, -1);
 	    this.nextYear = goYear.bind(this, 1);
 	    this.previousYear = goYear.bind(this, -1);
-	    return { orient: orient };
-	  },
-	
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	    if (nextProps.orient) {
-	      this.setState({
-	        orient: nextProps.orient
-	      });
-	    }
+	    return {};
 	  },
 	
 	  onKeyDown: function onKeyDown(e) {
@@ -243,17 +233,31 @@ webpackJsonp([4],{
 	  },
 	
 	  onClear: function onClear() {
+	    this.dateTableSelectTime = Date.now();
+	    this.onSelect(null);
 	    this.props.onClear();
 	  },
 	
 	  onOk: function onOk() {
-	    if (this.isAllowedDate(this.state.value)) {
-	      this.props.onOk(this.state.value);
+	    var selectedValue = this.state.selectedValue;
+	
+	    if (this.isAllowedDate(selectedValue)) {
+	      this.props.onOk(selectedValue);
 	    }
 	  },
 	
 	  onDateInputChange: function onDateInputChange(value) {
+	    if (Date.now() - this.dateTableSelectTime < 50) {
+	      // avoid blur by click date table
+	      return;
+	    }
+	    this.dateTableSelectTime = 0;
 	    this.onSelect(value);
+	  },
+	
+	  onDateTableSelect: function onDateTableSelect(v) {
+	    this.dateTableSelectTime = Date.now();
+	    this.onSelect(v);
 	  },
 	
 	  render: function render() {
@@ -264,6 +268,8 @@ webpackJsonp([4],{
 	
 	    var state = this.state;
 	    var value = state.value;
+	    var selectedValue = state.selectedValue;
+	
 	    var children = _react2['default'].createElement(
 	      'div',
 	      { style: { outline: 'none' } },
@@ -272,7 +278,8 @@ webpackJsonp([4],{
 	        { className: prefixCls + '-input-wrap' },
 	        _react2['default'].createElement(_dateDateInput2['default'], { className: prefixCls + '-input',
 	          formatter: this.getFormatter(),
-	          value: value,
+	          locale: value.locale,
+	          value: selectedValue,
 	          onChange: this.onDateInputChange }),
 	        _react2['default'].createElement('i', { className: prefixCls + '-input-icon' })
 	      ),
@@ -289,7 +296,7 @@ webpackJsonp([4],{
 	          value: value,
 	          prefixCls: prefixCls,
 	          dateRender: props.dateRender,
-	          onSelect: this.onSelect,
+	          onSelect: this.onDateTableSelect,
 	          disabledDate: disabledDate,
 	          showWeekNumber: props.showWeekNumber })
 	      ),
@@ -572,7 +579,7 @@ webpackJsonp([4],{
 	    var dateTable = [];
 	    var showWeekNumber = props.showWeekNumber;
 	    var value = props.value;
-	    var range = props.range;
+	    var selectedValue = props.selectedValue;
 	    var today = value.clone();
 	    var prefixCls = props.prefixCls;
 	    var cellClass = prefixCls + '-cell';
@@ -642,17 +649,17 @@ webpackJsonp([4],{
 	        var isBeforeCurrentMonthYear = beforeCurrentMonthYear(current, value);
 	        var isAfterCurrentMonthYear = afterCurrentMonthYear(current, value);
 	
-	        if (range) {
+	        if (selectedValue && Array.isArray(selectedValue)) {
 	          if (!isBeforeCurrentMonthYear && !isAfterCurrentMonthYear) {
-	            var startValue = range[0];
-	            var endValue = range[1];
+	            var startValue = selectedValue[0];
+	            var endValue = selectedValue[1];
 	            if (startValue) {
 	              if (isSameDay(current, startValue)) {
 	                selected = true;
 	              }
 	            }
 	            if (startValue && endValue) {
-	              if (isSameDay(current, endValue) && !range.hovering) {
+	              if (isSameDay(current, endValue) && !selectedValue.hovering) {
 	                selected = true;
 	              } else if ((0, _util.compareByDay)(current, startValue) > 0 && (0, _util.compareByDay)(current, endValue) < 0) {
 	                cls += ' ' + inRangeClass;
@@ -707,7 +714,8 @@ webpackJsonp([4],{
 	
 	        dateCells.push(_react2['default'].createElement(
 	          'td',
-	          { key: passed, onClick: disabled ? noop : handleDayClick.bind(this, current),
+	          { key: passed,
+	            onMouseDown: disabled ? noop : handleDayClick.bind(this, current),
 	            onMouseEnter: disabled ? noop : handleCellMouseEnter.bind(this, current),
 	            role: 'gridcell',
 	            title: (0, _util.getTitleString)(current), className: cls },
@@ -1120,7 +1128,7 @@ webpackJsonp([4],{
 	          'a',
 	          { className: prefixCls + '-clear-btn',
 	            role: 'button',
-	            onClick: props.onClear },
+	            onMouseDown: props.onClear },
 	          locale.clear
 	        );
 	      }
@@ -1616,60 +1624,79 @@ webpackJsonp([4],{
 	  getInitialState: function getInitialState() {
 	    var props = this.props;
 	    var value = props.value || props.defaultValue || getNow();
-	    return { value: value };
+	    return {
+	      value: value,
+	      selectedValue: props.selectedValue || props.defaultSelectedValue
+	    };
 	  },
 	
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
 	    var value = nextProps.value;
+	    var selectedValue = nextProps.selectedValue;
+	
 	    if (value !== undefined) {
 	      value = value || nextProps.defaultValue || getNowByCurrentStateValue(this.state.value);
 	      this.setState({
 	        value: value
 	      });
 	    }
+	    if (selectedValue !== undefined) {
+	      this.setState({
+	        selectedValue: selectedValue
+	      });
+	    }
 	  },
 	
-	  onSelect: function onSelect(value, keyDownEvent) {
-	    this.setValue(value);
-	    if (!keyDownEvent) {
-	      if (this.isAllowedDate(value)) {
-	        this.props.onSelect(value);
-	      }
+	  onSelect: function onSelect(value, cause) {
+	    if (this._blurPending) {
+	      clearTimeout(this._blurPending);
+	      this._blurPending = null;
 	    }
+	    if (value) {
+	      this.setValue(value);
+	    }
+	    this.setSelectedValue(value, cause);
 	  },
 	
 	  renderRoot: function renderRoot(newProps) {
 	    var _className;
 	
 	    var props = this.props;
-	    var state = this.state;
 	    var prefixCls = props.prefixCls;
 	
 	    var className = (_className = {}, _defineProperty(_className, prefixCls, 1), _defineProperty(_className, prefixCls + '-hidden', !props.visible), _defineProperty(_className, props.className, !!props.className), _className);
 	
-	    var orient = state.orient;
-	    if (orient) {
-	      orient.forEach(function (o) {
-	        className[prefixCls + '-orient-' + o] = 1;
-	      });
-	    }
-	
 	    return _react2['default'].createElement(
 	      'div',
-	      { className: (0, _rcUtil.classSet)(className) + ' ' + newProps.className, style: this.props.style,
+	      { className: (0, _rcUtil.classSet)(className) + ' ' + newProps.className,
+	        style: this.props.style,
 	        tabIndex: '0', onFocus: this.onFocus,
 	        onBlur: this.onBlur, onKeyDown: this.onKeyDown },
 	      newProps.children
 	    );
 	  },
 	
+	  setSelectedValue: function setSelectedValue(selectedValue, cause) {
+	    if (this.isAllowedDate(selectedValue)) {
+	      if (!('selectedValue' in this.props)) {
+	        this.setState({
+	          selectedValue: selectedValue
+	        });
+	      }
+	      this.props.onSelect(selectedValue, cause || {});
+	    }
+	  },
+	
 	  setValue: function setValue(value) {
+	    var originalValue = this.state.value;
 	    if (!('value' in this.props)) {
 	      this.setState({
 	        value: value
 	      });
 	    }
-	    this.props.onChange(value);
+	    if (originalValue && value && originalValue.getTime() !== value.getTime() || !originalValue && value || originalValue && !value) {
+	      this.props.onChange(value);
+	    }
 	  },
 	
 	  isAllowedDate: function isAllowedDate(value) {
@@ -1707,6 +1734,7 @@ webpackJsonp([4],{
 	
 	  propTypes: {
 	    formatter: _react.PropTypes.object,
+	    locale: _react.PropTypes.object,
 	    disabledDate: _react.PropTypes.func,
 	    className: _react.PropTypes.string,
 	    onChange: _react.PropTypes.func,
@@ -1740,25 +1768,40 @@ webpackJsonp([4],{
 	    var _props = this.props;
 	    var disabledDate = _props.disabledDate;
 	    var formatter = _props.formatter;
+	    var locale = _props.locale;
+	    var onChange = _props.onChange;
 	
 	    var value = undefined;
-	    try {
-	      value = formatter.parse(str, this.props.value.locale);
-	    } catch (e) {
-	      (0, _warning2['default'])(false, 'invalid date input: ' + str);
-	      this.setState(this.getInitialState());
-	      return;
-	    }
-	    if (value && (!disabledDate || !disabledDate(value))) {
-	      this.props.onChange(value);
+	    if (str) {
+	      try {
+	        value = formatter.parse(str, locale);
+	      } catch (e) {
+	        (0, _warning2['default'])(false, 'invalid date input: ' + str);
+	        this.setState(this.getInitialState());
+	        return;
+	      }
+	      if (value && (!disabledDate || !disabledDate(value))) {
+	        var originalValue = this.props.value;
+	        if (originalValue && value) {
+	          if (originalValue.getTime() !== value.getTime()) {
+	            onChange(value);
+	          }
+	        } else if (originalValue !== value) {
+	          onChange(value);
+	        }
+	      } else {
+	        this.setState(this.getInitialState());
+	      }
 	    } else {
-	      this.setState(this.getInitialState());
+	      onChange(null);
 	    }
 	  },
 	
 	  render: function render() {
 	    var props = this.props;
-	    return _react2['default'].createElement('input', { className: props.className, value: this.state.str, onChange: this.onInputChange,
+	    return _react2['default'].createElement('input', { className: props.className,
+	      value: this.state.str,
+	      onChange: this.onInputChange,
 	      onBlur: this.onBlur });
 	  }
 	});
@@ -1836,13 +1879,6 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 221:
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-
 /***/ 222:
 /***/ function(module, exports) {
 
@@ -1851,15 +1887,22 @@ webpackJsonp([4],{
 /***/ },
 
 /***/ 223:
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+
+/***/ 224:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	__webpack_require__(221);
-	
 	__webpack_require__(222);
+	
+	__webpack_require__(223);
 	
 	var _react = __webpack_require__(3);
 	
@@ -1873,7 +1916,7 @@ webpackJsonp([4],{
 	
 	var _rcCalendarSrcPicker2 = _interopRequireDefault(_rcCalendarSrcPicker);
 	
-	var _gregorianCalendarLibLocaleZhCn = __webpack_require__(211);
+	var _gregorianCalendarLibLocaleZhCn = __webpack_require__(213);
 	
 	var _gregorianCalendarLibLocaleZhCn2 = _interopRequireDefault(_gregorianCalendarLibLocaleZhCn);
 	
@@ -1887,7 +1930,7 @@ webpackJsonp([4],{
 	
 	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
 	
-	var _rcCalendarSrcLocaleZhCn = __webpack_require__(212);
+	var _rcCalendarSrcLocaleZhCn = __webpack_require__(214);
 	
 	var _rcCalendarSrcLocaleZhCn2 = _interopRequireDefault(_rcCalendarSrcLocaleZhCn);
 	
@@ -1897,15 +1940,7 @@ webpackJsonp([4],{
 	  displayName: 'Test',
 	
 	  onChange: function onChange(value) {
-	    console.log('DatePicker change: ' + this.props.formatter.format(value));
-	  },
-	
-	  onCalendarSelect: function onCalendarSelect(value) {
-	    console.log('calendar select: ' + this.props.formatter.format(value));
-	    // uncontrolled value
-	    this.setState({
-	      time: Date.now()
-	    });
+	    console.log('DatePicker change: ' + (value && this.props.formatter.format(value)));
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
@@ -1918,7 +1953,7 @@ webpackJsonp([4],{
 	    var value = new _gregorianCalendar2['default'](_gregorianCalendarLibLocaleZhCn2['default']);
 	    value.setTime(Date.now());
 	    return {
-	      time: Date.now(),
+	
 	      showTime: true,
 	      open: false,
 	      value: value
@@ -1934,11 +1969,10 @@ webpackJsonp([4],{
 	  render: function render() {
 	    var state = this.state;
 	    var calendar = _react2['default'].createElement(_rcCalendar2['default'], { locale: _rcCalendarSrcLocaleZhCn2['default'],
-	      orient: ['bottom', 'left'],
-	      showTime: this.state.showTime, onSelect: this.onCalendarSelect });
+	      showTime: this.state.showTime });
 	    return _react2['default'].createElement(
 	      'div',
-	      { className: 'form-group', style: { width: 400, margin: 20 }, 'data-time': state.time },
+	      { className: 'form-group', style: { width: 400, margin: 20 } },
 	      _react2['default'].createElement(
 	        'div',
 	        { className: 'input-group' },
@@ -1955,6 +1989,7 @@ webpackJsonp([4],{
 	        _react2['default'].createElement(
 	          _rcCalendarSrcPicker2['default'],
 	          { calendar: calendar,
+	            placement: 'bottomLeft',
 	            style: { display: 'inline' },
 	            defaultValue: state.value,
 	            onChange: this.onChange },
@@ -1967,7 +2002,8 @@ webpackJsonp([4],{
 	              _react2['default'].createElement('input', { type: 'text',
 	                className: 'form-control',
 	                readOnly: true,
-	                value: formatter.format(value),
+	                placeholder: '选择日期',
+	                value: value && formatter.format(value),
 	                style: {
 	                  background: "white",
 	                  borderTopRightRadius: 4,
@@ -2002,6 +2038,7 @@ webpackJsonp([4],{
 	    null,
 	    'zh-cn'
 	  ),
+	  _react2['default'].createElement('div', { style: { height: 200 } }),
 	  _react2['default'].createElement(Test, null)
 	), document.getElementById('__react-content'));
 

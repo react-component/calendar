@@ -64,37 +64,33 @@
   -webkit-animation-play-state: paused;
           animation-play-state: paused;
 }
-.rc-calendar-picker-slide-up-enter.rc-calendar-picker-slide-up-enter-active.rc-calendar-orient-top {
+.rc-calendar-picker-slide-up-enter.rc-calendar-picker-slide-up-enter-active.rc-calendar-placement-topLeft,
+.rc-calendar-picker-slide-up-enter.rc-calendar-picker-slide-up-enter-active.rc-calendar-placement-topRight,
+.rc-calendar-picker-slide-up-appear.rc-calendar-picker-slide-up-appear-active.rc-calendar-placement-topLeft,
+.rc-calendar-picker-slide-up-appear.rc-calendar-picker-slide-up-appear-active.rc-calendar-placement-topRight {
   -webkit-animation-name: rcDropdownSlideUpIn;
           animation-name: rcDropdownSlideUpIn;
   -webkit-animation-play-state: running;
           animation-play-state: running;
 }
-.rc-calendar-picker-slide-up-enter.rc-calendar-picker-slide-up-enter-active.rc-calendar-orient-bottom {
+.rc-calendar-picker-slide-up-enter.rc-calendar-picker-slide-up-enter-active.rc-calendar-placement-bottomLeft,
+.rc-calendar-picker-slide-up-enter.rc-calendar-picker-slide-up-enter-active.rc-calendar-placement-bottomRight,
+.rc-calendar-picker-slide-up-appear.rc-calendar-picker-slide-up-appear-active.rc-calendar-placement-bottomLeft,
+.rc-calendar-picker-slide-up-appear.rc-calendar-picker-slide-up-appear-active.rc-calendar-placement-bottomRight {
   -webkit-animation-name: rcDropdownSlideDownIn;
           animation-name: rcDropdownSlideDownIn;
   -webkit-animation-play-state: running;
           animation-play-state: running;
 }
-.rc-calendar-picker-slide-up-appear.rc-calendar-picker-slide-up-appear-active.rc-calendar-orient-top {
-  -webkit-animation-name: rcDropdownSlideUpIn;
-          animation-name: rcDropdownSlideUpIn;
-  -webkit-animation-play-state: running;
-          animation-play-state: running;
-}
-.rc-calendar-picker-slide-up-appear.rc-calendar-picker-slide-up-appear-active.rc-calendar-orient-bottom {
-  -webkit-animation-name: rcDropdownSlideDownIn;
-          animation-name: rcDropdownSlideDownIn;
-  -webkit-animation-play-state: running;
-          animation-play-state: running;
-}
-.rc-calendar-picker-slide-up-leave.rc-calendar-picker-slide-up-leave-active.rc-calendar-orient-top {
+.rc-calendar-picker-slide-up-leave.rc-calendar-picker-slide-up-leave-active.rc-calendar-placement-topLeft,
+.rc-calendar-picker-slide-up-leave.rc-calendar-picker-slide-up-leave-active.rc-calendar-placement-topRight {
   -webkit-animation-name: rcDropdownSlideUpOut;
           animation-name: rcDropdownSlideUpOut;
   -webkit-animation-play-state: running;
           animation-play-state: running;
 }
-.rc-calendar-picker-slide-up-leave.rc-calendar-picker-slide-up-leave-active.rc-calendar-orient-bottom {
+.rc-calendar-picker-slide-up-leave.rc-calendar-picker-slide-up-leave-active.rc-calendar-placement-bottomLeft,
+.rc-calendar-picker-slide-up-leave.rc-calendar-picker-slide-up-leave-active.rc-calendar-placement-bottomRight {
   -webkit-animation-name: rcDropdownSlideDownOut;
           animation-name: rcDropdownSlideDownOut;
   -webkit-animation-play-state: running;

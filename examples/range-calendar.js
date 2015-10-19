@@ -3,7 +3,7 @@ webpackJsonp([5],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(224);
+	module.exports = __webpack_require__(225);
 
 
 /***/ },
@@ -253,7 +253,7 @@ webpackJsonp([5],{
 	    var dateTable = [];
 	    var showWeekNumber = props.showWeekNumber;
 	    var value = props.value;
-	    var range = props.range;
+	    var selectedValue = props.selectedValue;
 	    var today = value.clone();
 	    var prefixCls = props.prefixCls;
 	    var cellClass = prefixCls + '-cell';
@@ -323,17 +323,17 @@ webpackJsonp([5],{
 	        var isBeforeCurrentMonthYear = beforeCurrentMonthYear(current, value);
 	        var isAfterCurrentMonthYear = afterCurrentMonthYear(current, value);
 	
-	        if (range) {
+	        if (selectedValue && Array.isArray(selectedValue)) {
 	          if (!isBeforeCurrentMonthYear && !isAfterCurrentMonthYear) {
-	            var startValue = range[0];
-	            var endValue = range[1];
+	            var startValue = selectedValue[0];
+	            var endValue = selectedValue[1];
 	            if (startValue) {
 	              if (isSameDay(current, startValue)) {
 	                selected = true;
 	              }
 	            }
 	            if (startValue && endValue) {
-	              if (isSameDay(current, endValue) && !range.hovering) {
+	              if (isSameDay(current, endValue) && !selectedValue.hovering) {
 	                selected = true;
 	              } else if ((0, _util.compareByDay)(current, startValue) > 0 && (0, _util.compareByDay)(current, endValue) < 0) {
 	                cls += ' ' + inRangeClass;
@@ -388,7 +388,8 @@ webpackJsonp([5],{
 	
 	        dateCells.push(_react2['default'].createElement(
 	          'td',
-	          { key: passed, onClick: disabled ? noop : handleDayClick.bind(this, current),
+	          { key: passed,
+	            onMouseDown: disabled ? noop : handleDayClick.bind(this, current),
 	            onMouseEnter: disabled ? noop : handleCellMouseEnter.bind(this, current),
 	            role: 'gridcell',
 	            title: (0, _util.getTitleString)(current), className: cls },
@@ -801,7 +802,7 @@ webpackJsonp([5],{
 	          'a',
 	          { className: prefixCls + '-clear-btn',
 	            role: 'button',
-	            onClick: props.onClear },
+	            onMouseDown: props.onClear },
 	          locale.clear
 	        );
 	      }
@@ -1263,6 +1264,7 @@ webpackJsonp([5],{
 	
 	  propTypes: {
 	    formatter: _react.PropTypes.object,
+	    locale: _react.PropTypes.object,
 	    disabledDate: _react.PropTypes.func,
 	    className: _react.PropTypes.string,
 	    onChange: _react.PropTypes.func,
@@ -1296,25 +1298,40 @@ webpackJsonp([5],{
 	    var _props = this.props;
 	    var disabledDate = _props.disabledDate;
 	    var formatter = _props.formatter;
+	    var locale = _props.locale;
+	    var onChange = _props.onChange;
 	
 	    var value = undefined;
-	    try {
-	      value = formatter.parse(str, this.props.value.locale);
-	    } catch (e) {
-	      (0, _warning2['default'])(false, 'invalid date input: ' + str);
-	      this.setState(this.getInitialState());
-	      return;
-	    }
-	    if (value && (!disabledDate || !disabledDate(value))) {
-	      this.props.onChange(value);
+	    if (str) {
+	      try {
+	        value = formatter.parse(str, locale);
+	      } catch (e) {
+	        (0, _warning2['default'])(false, 'invalid date input: ' + str);
+	        this.setState(this.getInitialState());
+	        return;
+	      }
+	      if (value && (!disabledDate || !disabledDate(value))) {
+	        var originalValue = this.props.value;
+	        if (originalValue && value) {
+	          if (originalValue.getTime() !== value.getTime()) {
+	            onChange(value);
+	          }
+	        } else if (originalValue !== value) {
+	          onChange(value);
+	        }
+	      } else {
+	        this.setState(this.getInitialState());
+	      }
 	    } else {
-	      this.setState(this.getInitialState());
+	      onChange(null);
 	    }
 	  },
 	
 	  render: function render() {
 	    var props = this.props;
-	    return _react2['default'].createElement('input', { className: props.className, value: this.state.str, onChange: this.onInputChange,
+	    return _react2['default'].createElement('input', { className: props.className,
+	      value: this.state.str,
+	      onChange: this.onInputChange,
 	      onBlur: this.onBlur });
 	  }
 	});
@@ -1392,7 +1409,7 @@ webpackJsonp([5],{
 
 /***/ },
 
-/***/ 217:
+/***/ 219:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1417,13 +1434,13 @@ webpackJsonp([5],{
 	
 	var _rcUtil = __webpack_require__(166);
 	
-	var _rangeCalendarCalendarPart = __webpack_require__(218);
+	var _rangeCalendarCalendarPart = __webpack_require__(220);
 	
 	var _rangeCalendarCalendarPart2 = _interopRequireDefault(_rangeCalendarCalendarPart);
 	
 	var _util = __webpack_require__(182);
 	
-	var _objectAssign = __webpack_require__(219);
+	var _objectAssign = __webpack_require__(212);
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
@@ -1434,58 +1451,67 @@ webpackJsonp([5],{
 	function noop() {}
 	
 	function getNow() {
-	  var value = new _gregorianCalendar2['default']();
-	  value.setTime(Date.now());
-	  return value;
+	  var selectedValue = new _gregorianCalendar2['default']();
+	  selectedValue.setTime(Date.now());
+	  return selectedValue;
 	}
 	
-	function onAnchorChange(direction, current) {
-	  var anchor = undefined;
-	  anchor = current;
+	function onValueChange(direction, current) {
+	  var value = undefined;
+	  value = current;
 	  if (direction === 'right') {
-	    anchor.addMonth(-1);
+	    value.addMonth(-1);
 	  }
-	  this.fireAnchorChange(anchor);
+	  this.fireValueChange(value);
 	}
 	
 	function normalizeAnchor(props, init) {
-	  var value = props.value || init && props.defaultValue || [];
-	  return props.anchor || init && props.defaultAnchor || value[0] || init && getNow();
+	  var selectedValue = props.selectedValue || init && props.defaultSelectedValue || [];
+	  var value = props.value;
+	  if (Array.isArray(value)) {
+	    value = value[0];
+	  }
+	  var defaultValue = props.defaultValue;
+	  if (Array.isArray(defaultValue)) {
+	    defaultValue = defaultValue[0];
+	  }
+	  return value || init && defaultValue || selectedValue[0] || init && getNow();
 	}
 	
-	function onTimeSelect(direction, selectedValue) {
+	function onTimeSelect(direction, v) {
 	  var index = direction === 'left' ? 0 : 1;
-	  var value = this.state.value;
-	  if (value[index]) {
-	    value = value.concat();
-	    value[index] = value[index].clone();
-	    (0, _util.syncTime)(selectedValue, value[index]);
-	    this.fireValueChange(value);
+	  var selectedValue = this.state.selectedValue;
+	  if (selectedValue[index]) {
+	    selectedValue = selectedValue.concat();
+	    selectedValue[index] = selectedValue[index].clone();
+	    (0, _util.syncTime)(v, selectedValue[index]);
+	    this.fireSelectValueChange(selectedValue);
 	  }
 	}
 	
-	function onInputSelect(direction, selectedValue) {
-	  var originalValue = this.state.value;
-	  var value = originalValue.concat();
+	function onInputSelect(direction, v) {
+	  var originalValue = this.state.selectedValue;
+	  var selectedValue = originalValue.concat();
 	  var index = direction === 'left' ? 0 : 1;
-	  value[index] = selectedValue;
-	  if (value[0].getTime() > value[1].getTime()) {
-	    value.length = 1;
+	  selectedValue[index] = v;
+	  if (selectedValue[0].getTime() > selectedValue[1].getTime()) {
+	    selectedValue.length = 1;
 	  }
-	  this.fireValueChange(value);
+	  this.fireSelectValueChange(selectedValue);
 	}
 	
 	var RangeCalendar = _react2['default'].createClass({
 	  displayName: 'RangeCalendar',
 	
 	  propTypes: {
-	    defaultAnchor: _react.PropTypes.object,
-	    anchor: _react.PropTypes.object,
-	    value: _react.PropTypes.array,
-	    defaultValue: _react.PropTypes.array,
+	    defaultValue: _react.PropTypes.any,
+	    value: _react.PropTypes.any,
+	    selectedValue: _react.PropTypes.array,
+	    defaultSelectedValue: _react.PropTypes.array,
 	    onOk: _react.PropTypes.func,
 	    onChange: _react.PropTypes.func,
 	    onSelect: _react.PropTypes.func,
+	    onValueChange: _react.PropTypes.func,
 	    formatter: _react.PropTypes.object
 	  },
 	
@@ -1493,91 +1519,95 @@ webpackJsonp([5],{
 	
 	  getInitialState: function getInitialState() {
 	    var props = this.props;
-	    var value = props.value || props.defaultValue;
-	    var anchor = normalizeAnchor(props, 1);
-	    return { value: value, anchor: anchor };
+	    var selectedValue = props.selectedValue || props.defaultSelectedValue;
+	    var value = normalizeAnchor(props, 1);
+	    return { selectedValue: selectedValue, value: value };
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
-	      defaultValue: [],
-	      onAnchorChange: noop
+	      defaultSelectedValue: [],
+	      onValueChange: noop
 	    };
 	  },
 	
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
 	    var newState = {};
-	    if ('anchor' in nextProps) {
-	      if (nextProps.anchor) {
-	        newState.anchor = nextProps.anchor;
+	    if ('value' in nextProps) {
+	      if (nextProps.value) {
+	        newState.value = nextProps.value;
 	      } else {
-	        newState.anchor = normalizeAnchor(nextProps, 0);
+	        newState.value = normalizeAnchor(nextProps, 0);
 	      }
+	      this.setState(newState);
+	    }
+	    if ('selectedValue' in nextProps) {
+	      newState.selectedValue = nextProps.selectedValue;
 	      this.setState(newState);
 	    }
 	  },
 	
-	  onSelect: function onSelect(selectedValue) {
-	    var originalValue = this.state.value;
-	    var value = originalValue.concat();
+	  onSelect: function onSelect(v) {
+	    var originalValue = this.state.selectedValue;
+	    var selectedValue = originalValue.concat();
 	    var changed = false;
-	    if (!value.length || value.length === 2 && !originalValue.hovering) {
-	      value.length = 1;
-	      value[0] = selectedValue;
+	    if (!selectedValue.length || selectedValue.length === 2 && !originalValue.hovering) {
+	      selectedValue.length = 1;
+	      selectedValue[0] = v;
 	      changed = true;
-	    } else if (value[0].getTime() < selectedValue.getTime()) {
-	      value[1] = selectedValue;
+	    } else if (selectedValue[0].getTime() < v.getTime()) {
+	      selectedValue[1] = v;
 	      changed = true;
-	    } else if (value[0].getTime() > selectedValue.getTime()) {
-	      value.length = 1;
-	      value[0] = selectedValue;
+	    } else if (selectedValue[0].getTime() > v.getTime()) {
+	      selectedValue.length = 1;
+	      selectedValue[0] = v;
 	      changed = true;
 	    }
 	    if (changed) {
-	      this.fireValueChange(value);
+	      this.fireSelectValueChange(selectedValue);
 	    }
 	  },
 	
 	  onDayHover: function onDayHover(hoverValue) {
-	    var value = this.state.value;
-	    if (!value.length || value.length === 2 && !value.hovering) {
+	    var selectedValue = this.state.selectedValue;
+	    if (!selectedValue.length || selectedValue.length === 2 && !selectedValue.hovering) {
 	      return;
 	    }
-	    if (hoverValue.getTime() < value[0].getTime()) {
+	    if (hoverValue.getTime() < selectedValue[0].getTime()) {
 	      return;
 	    }
-	    value = value.concat();
-	    value[1] = hoverValue;
-	    value.hovering = 1;
-	    this.fireValueChange(value);
+	    selectedValue = selectedValue.concat();
+	    selectedValue[1] = hoverValue;
+	    selectedValue.hovering = 1;
+	    this.fireSelectValueChange(selectedValue);
 	  },
 	
 	  onToday: function onToday() {
 	    this.setState({
-	      anchor: (0, _util.getTodayTime)(this.state.anchor)
+	      value: (0, _util.getTodayTime)(this.state.value)
 	    });
 	  },
 	
 	  onOk: function onOk() {
-	    this.props.onOk(this.state.value);
+	    this.props.onOk(this.state.selectedValue);
 	  },
 	
-	  getAnchor: function getAnchor() {
-	    var anchor = this.state.anchor;
+	  getStartValue: function getStartValue() {
 	    var value = this.state.value;
-	    if (value[0]) {
-	      anchor = anchor.clone();
-	      (0, _util.syncTime)(value[0], anchor);
+	    var selectedValue = this.state.selectedValue;
+	    if (selectedValue[0]) {
+	      value = value.clone();
+	      (0, _util.syncTime)(selectedValue[0], value);
 	    }
-	    return anchor;
+	    return value;
 	  },
 	
-	  getAnchorEndValue: function getAnchorEndValue() {
-	    var endValue = this.state.anchor.clone();
+	  getEndValue: function getEndValue() {
+	    var endValue = this.state.value.clone();
 	    endValue.addMonth(1);
-	    var value = this.state.value;
-	    if (value[1]) {
-	      (0, _util.syncTime)(value[1], endValue);
+	    var selectedValue = this.state.selectedValue;
+	    if (selectedValue[1]) {
+	      (0, _util.syncTime)(selectedValue[1], endValue);
 	    }
 	    return endValue;
 	  },
@@ -1588,16 +1618,10 @@ webpackJsonp([5],{
 	    var props = this.props;
 	    var state = this.state;
 	    var prefixCls = props.prefixCls;
-	    var orient = state.orient;
 	    var className = (_className = {}, _defineProperty(_className, props.className, !!props.className), _defineProperty(_className, prefixCls, 1), _defineProperty(_className, prefixCls + '-hidden', !props.visible), _defineProperty(_className, prefixCls + '-range', 1), _defineProperty(_className, prefixCls + '-week-number', props.showWeekNumber), _className);
-	    if (orient) {
-	      orient.forEach(function (o) {
-	        className[prefixCls + '-orient-' + o] = 1;
-	      });
-	    }
 	    var classes = (0, _rcUtil.classSet)(className);
 	    var newProps = {
-	      range: state.value,
+	      selectedValue: state.selectedValue,
 	      onSelect: this.onSelect,
 	      onDayHover: this.onDayHover
 	    };
@@ -1609,45 +1633,45 @@ webpackJsonp([5],{
 	        onBlur: this.onBlur },
 	      _react2['default'].createElement(_rangeCalendarCalendarPart2['default'], _extends({}, props, newProps, { direction: 'left',
 	        formatter: this.getFormatter(),
-	        value: this.getAnchor(),
+	        value: this.getStartValue(),
 	        onInputSelect: onInputSelect.bind(this, 'left'),
 	        onTimeSelect: onTimeSelect.bind(this, 'left'),
-	        onAnchorChange: onAnchorChange.bind(this, 'left') })),
+	        onValueChange: onValueChange.bind(this, 'left') })),
 	      _react2['default'].createElement(_rangeCalendarCalendarPart2['default'], _extends({}, props, newProps, { direction: 'right',
 	        formatter: this.getFormatter(),
-	        value: this.getAnchorEndValue(),
+	        value: this.getEndValue(),
 	        onInputSelect: onInputSelect.bind(this, 'right'),
 	        onTimeSelect: onTimeSelect.bind(this, 'right'),
-	        onAnchorChange: onAnchorChange.bind(this, 'right') })),
+	        onValueChange: onValueChange.bind(this, 'right') })),
 	      _react2['default'].createElement(
 	        'div',
 	        { style: { textAlign: 'center' } },
-	        (0, _util.getTodayElement)((0, _objectAssign2['default'])({}, props, { value: state.anchor, onToday: this.onToday })),
+	        (0, _util.getTodayElement)((0, _objectAssign2['default'])({}, props, { value: state.value, onToday: this.onToday })),
 	        (0, _util.getOkElement)((0, _objectAssign2['default'])({}, props, {
-	          value: state.anchor,
+	          value: state.value,
 	          onOk: this.onOk,
-	          okDisabled: state.value.length !== 2 || state.value.hovering
+	          okDisabled: state.selectedValue.length !== 2 || state.selectedValue.hovering
 	        }))
 	      )
 	    );
 	  },
 	
-	  fireValueChange: function fireValueChange(value) {
-	    if (!('value' in this.props)) {
-	      this.setState({ value: value });
+	  fireSelectValueChange: function fireSelectValueChange(selectedValue) {
+	    if (!('selectedValue' in this.props)) {
+	      this.setState({ selectedValue: selectedValue });
 	    }
-	    this.props.onChange(value);
-	    if (value.length === 2 && !value.hovering) {
-	      this.props.onSelect(value);
+	    this.props.onChange(selectedValue);
+	    if (selectedValue.length === 2 && !selectedValue.hovering) {
+	      this.props.onSelect(selectedValue);
 	    }
 	  },
 	
-	  fireAnchorChange: function fireAnchorChange(anchor) {
+	  fireValueChange: function fireValueChange(value) {
 	    var props = this.props;
-	    if (!('anchor' in props)) {
-	      this.setState({ anchor: anchor });
+	    if (!('value' in props)) {
+	      this.setState({ value: value });
 	    }
-	    props.onAnchorChange(anchor);
+	    props.onValueChange(value);
 	  }
 	});
 	
@@ -1656,7 +1680,7 @@ webpackJsonp([5],{
 
 /***/ },
 
-/***/ 218:
+/***/ 220:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1702,7 +1726,7 @@ webpackJsonp([5],{
 	    var direction = props.direction;
 	    var prefixCls = props.prefixCls;
 	    var locale = props.locale;
-	    var range = props.range;
+	    var selectedValue = props.selectedValue;
 	    var formatter = props.formatter;
 	    var disabledDate = props.disabledDate;
 	
@@ -1718,7 +1742,7 @@ webpackJsonp([5],{
 	        _react2['default'].createElement(_dateDateInput2['default'], { className: prefixCls + '-input',
 	          formatter: formatter,
 	          disabledDate: disabledDate,
-	          value: range[index] || range[0],
+	          value: selectedValue[index] || selectedValue[0],
 	          onChange: props.onInputSelect }),
 	        _react2['default'].createElement('i', { className: prefixCls + '-input-icon' })
 	      ),
@@ -1728,12 +1752,12 @@ webpackJsonp([5],{
 	        _react2['default'].createElement(_calendarCalendarHeader2['default'], _extends({}, newProps, {
 	          enableNext: direction === 'right',
 	          enablePrev: direction === 'left',
-	          onValueChange: props.onAnchorChange })),
+	          onValueChange: props.onValueChange })),
 	        _react2['default'].createElement(
 	          'div',
 	          { className: prefixCls + '-calendar-body' },
 	          _react2['default'].createElement(_dateDateTable2['default'], _extends({}, newProps, {
-	            range: range,
+	            selectedValue: selectedValue,
 	            dateRender: props.dateRender,
 	            onSelect: props.onSelect,
 	            onDayHover: props.onDayHover,
@@ -1744,7 +1768,7 @@ webpackJsonp([5],{
 	          showTime: props.showTime
 	        }, newProps, {
 	          disabledDate: props.disabledDate,
-	          timeDisabled: !range[index] || !!range.hovering,
+	          timeDisabled: !selectedValue[index] || !!selectedValue.hovering,
 	          onSelect: this.props.onTimeSelect,
 	          onToday: this.chooseToday
 	        }))
@@ -1758,59 +1782,6 @@ webpackJsonp([5],{
 
 /***/ },
 
-/***/ 219:
-/***/ function(module, exports) {
-
-	/* eslint-disable no-unused-vars */
-	'use strict';
-	var hasOwnProperty = Object.prototype.hasOwnProperty;
-	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-	
-	function toObject(val) {
-		if (val === null || val === undefined) {
-			throw new TypeError('Object.assign cannot be called with null or undefined');
-		}
-	
-		return Object(val);
-	}
-	
-	module.exports = Object.assign || function (target, source) {
-		var from;
-		var to = toObject(target);
-		var symbols;
-	
-		for (var s = 1; s < arguments.length; s++) {
-			from = Object(arguments[s]);
-	
-			for (var key in from) {
-				if (hasOwnProperty.call(from, key)) {
-					to[key] = from[key];
-				}
-			}
-	
-			if (Object.getOwnPropertySymbols) {
-				symbols = Object.getOwnPropertySymbols(from);
-				for (var i = 0; i < symbols.length; i++) {
-					if (propIsEnumerable.call(from, symbols[i])) {
-						to[symbols[i]] = from[symbols[i]];
-					}
-				}
-			}
-		}
-	
-		return to;
-	};
-
-
-/***/ },
-
-/***/ 221:
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-
 /***/ 222:
 /***/ function(module, exports) {
 
@@ -1818,18 +1789,25 @@ webpackJsonp([5],{
 
 /***/ },
 
-/***/ 224:
+/***/ 223:
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+
+/***/ 225:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
+	__webpack_require__(223);
+	
 	__webpack_require__(222);
 	
-	__webpack_require__(221);
-	
-	var _rcCalendarSrcRangeCalendar = __webpack_require__(217);
+	var _rcCalendarSrcRangeCalendar = __webpack_require__(219);
 	
 	var _rcCalendarSrcRangeCalendar2 = _interopRequireDefault(_rcCalendarSrcRangeCalendar);
 	
@@ -1845,11 +1823,11 @@ webpackJsonp([5],{
 	
 	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
 	
-	var _gregorianCalendarLibLocaleZhCn = __webpack_require__(211);
+	var _gregorianCalendarLibLocaleZhCn = __webpack_require__(213);
 	
 	var _gregorianCalendarLibLocaleZhCn2 = _interopRequireDefault(_gregorianCalendarLibLocaleZhCn);
 	
-	var _rcCalendarSrcLocaleZhCn = __webpack_require__(212);
+	var _rcCalendarSrcLocaleZhCn = __webpack_require__(214);
 	
 	var _rcCalendarSrcLocaleZhCn2 = _interopRequireDefault(_rcCalendarSrcLocaleZhCn);
 	
@@ -1914,7 +1892,7 @@ webpackJsonp([5],{
 	      showTime: true });
 	    return _react2['default'].createElement(
 	      'div',
-	      { className: 'form-group', style: { width: 400, margin: 20 }, 'data-time': this.state.time },
+	      { className: 'form-group', style: { width: 400, margin: 20 } },
 	      _react2['default'].createElement(
 	        'div',
 	        { className: 'input-group', style: { width: 350 } },

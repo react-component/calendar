@@ -24488,8 +24488,6 @@
 	
 	var _react = __webpack_require__(3);
 	
-	var _react2 = _interopRequireDefault(_react);
-	
 	var _localeEnUs = __webpack_require__(195);
 	
 	var _localeEnUs2 = _interopRequireDefault(_localeEnUs);
@@ -24511,8 +24509,7 @@
 	    onChange: _react.PropTypes.func,
 	    onOk: _react.PropTypes.func,
 	    onFocus: _react.PropTypes.func,
-	    onBlur: _react.PropTypes.func,
-	    orient: _react.PropTypes.arrayOf(_react.PropTypes.oneOf(['left', 'top', 'right', 'bottom']))
+	    onBlur: _react.PropTypes.func
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
@@ -24576,23 +24573,6 @@
 	      this.showDateFormatter = new _gregorianCalendarFormat2['default']('yyyy-MM-dd');
 	    }
 	    return this.showDateFormatter;
-	  },
-	
-	  setOrient: function setOrient(orient) {
-	    // FIXME: hack to prevent breaking rc-animate
-	    if (this.state.orient === orient) {
-	      return;
-	    }
-	    this.state.orient = orient;
-	    var prefixCls = this.props.prefixCls;
-	    var root = _react2['default'].findDOMNode(this);
-	    var className = root.className.replace(new RegExp(prefixCls + '-orient-\\w+', 'g'), '');
-	    if (orient) {
-	      orient.forEach(function (o) {
-	        className += ' ' + prefixCls + '-orient-' + o;
-	      });
-	    }
-	    root.className = className;
 	  }
 	};
 	module.exports = exports['default'];
@@ -24673,25 +24653,11 @@
 	
 	var _rcAnimate2 = _interopRequireDefault(_rcAnimate);
 	
-	var orientMap = {
-	  tl: ['top', 'left'],
-	  tr: ['top', 'right'],
-	  bl: ['bottom', 'left'],
-	  br: ['bottom', 'right']
-	};
+	var _pickerPlacement = __webpack_require__(211);
 	
-	function getImmutableOrient(orient) {
-	  if (orient) {
-	    for (var i in orientMap) {
-	      if (orientMap.hasOwnProperty(i)) {
-	        var original = orientMap[i];
-	        if (original[0] === orient[0] && original[1] === orient[1]) {
-	          return original;
-	        }
-	      }
-	    }
-	  }
-	}
+	var _objectAssign = __webpack_require__(212);
+	
+	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
 	function noop() {}
 	
@@ -24710,23 +24676,28 @@
 	    onOpen: _react.PropTypes.func,
 	    onClose: _react.PropTypes.func,
 	    children: _react.PropTypes.func,
+	    getCalendarContainer: _react.PropTypes.func,
 	    calendar: _react.PropTypes.element,
 	    style: _react.PropTypes.object,
 	    open: _react.PropTypes.bool,
 	    defaultOpen: _react.PropTypes.bool,
 	    prefixCls: _react.PropTypes.string,
-	    getCalendarContainer: _react.PropTypes.func,
-	    adjustOrientOnCalendarOverflow: _react.PropTypes.oneOfType([_react.PropTypes.bool, _react.PropTypes.object])
+	    placement: _react.PropTypes.any,
+	    align: _react.PropTypes.shape({
+	      offset: _react.PropTypes.array,
+	      targetOffset: _react.PropTypes.array
+	    })
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
 	      prefixCls: 'rc-calendar-picker',
-	      adjustOrientOnCalendarOverflow: true,
 	      style: {},
+	      align: {},
 	      getCalendarContainer: function getCalendarContainer() {
 	        return document.body;
 	      },
+	      placement: 'topLeft',
 	      defaultOpen: false,
 	      onChange: noop,
 	      onOpen: noop,
@@ -24784,9 +24755,21 @@
 	  },
 	
 	  onCalendarAlign: function onCalendarAlign(node, align) {
-	    var points = align.points;
-	    var newOrient = orientMap[points[0]];
-	    this.calendarInstance.setOrient(newOrient);
+	    var props = this.props;
+	    var placement = props.placement;
+	    var prefixCls = props.calendar.props.prefixCls;
+	    if (placement) {
+	      var originalClassName = (0, _pickerPlacement.getCalendarClassByPlacement)(prefixCls, placement);
+	      var nextClassName = undefined;
+	      if (placement.points) {
+	        nextClassName = (0, _pickerPlacement.getCalendarClassByPlacement)(prefixCls, align);
+	      } else if (typeof placement === 'string') {
+	        nextClassName = (0, _pickerPlacement.getCalendarClassByPlacement)(prefixCls, (0, _pickerPlacement.fromPointsToPlacement)(align));
+	      }
+	      if (nextClassName !== originalClassName) {
+	        node.className = node.className.replace(originalClassName, nextClassName);
+	      }
+	    }
 	  },
 	
 	  onInputClick: function onInputClick() {
@@ -24813,13 +24796,16 @@
 	  },
 	
 	  onCalendarSelect: function onCalendarSelect(value) {
-	    this.setState({
-	      value: value
-	    });
-	    if (!this.props.calendar.props.showTime) {
+	    var props = this.props;
+	    if (!('value' in props)) {
+	      this.setState({
+	        value: value
+	      });
+	    }
+	    if (!props.calendar.props.showTime) {
 	      this.close(this.focus);
 	    }
-	    this.props.onChange(value);
+	    props.onChange(value);
 	  },
 	
 	  onCalendarBlur: function onCalendarBlur() {
@@ -24836,19 +24822,7 @@
 	  },
 	
 	  onCalendarClear: function onCalendarClear() {
-	    this.setState({
-	      value: null
-	    });
 	    this.close(this.focus);
-	    if (this.state.value !== null) {
-	      this.props.onChange(null);
-	    }
-	  },
-	
-	  onCalendarChange: function onCalendarChange(value) {
-	    this.calendarInstance.setState({
-	      value: value
-	    });
 	  },
 	
 	  onAnimateLeave: function onAnimateLeave() {
@@ -24873,60 +24847,78 @@
 	    return this.calendarContainer;
 	  },
 	
-	  getAlign: function getAlign(orient) {
-	    var points = ['tl', 'tl'];
-	    var offset = [0, 0];
-	    var adjustOrientOnCalendarOverflow = this.props.adjustOrientOnCalendarOverflow;
-	    if (orient.indexOf('top') !== -1 && orient.indexOf('left') !== -1) {
-	      points = ['tl', 'tl'];
-	    } else if (orient.indexOf('top') !== -1 && orient.indexOf('right') !== -1) {
-	      points = ['tr', 'tr'];
-	    } else if (orient.indexOf('bottom') !== -1 && orient.indexOf('left') !== -1) {
-	      points = ['bl', 'bl'];
-	    } else if (orient.indexOf('bottom') !== -1 && orient.indexOf('right') !== -1) {
-	      points = ['br', 'br'];
-	    }
-	    var adjustX = undefined;
-	    var adjustY = undefined;
-	    if (adjustOrientOnCalendarOverflow === true) {
-	      adjustX = adjustY = true;
-	    } else if (!adjustOrientOnCalendarOverflow) {
-	      adjustX = adjustY = false;
+	  getAlign: function getAlign() {
+	    var align = undefined;
+	    var props = this.props;
+	    var placement = props.placement;
+	    if (placement && placement.points) {
+	      align = placement;
 	    } else {
-	      adjustX = adjustOrientOnCalendarOverflow.x;
-	      adjustY = adjustOrientOnCalendarOverflow.y;
-	    }
-	    return {
-	      points: points,
-	      offset: offset,
-	      overflow: {
-	        adjustX: adjustX,
-	        adjustY: adjustY
+	      align = (0, _pickerPlacement.fromPlacementStrToAlign)(placement);
+	      var _align = align;
+	      var offset = _align.offset;
+	      var targetOffset = _align.targetOffset;
+	
+	      var offsetProp = props.align.offset;
+	      var targetOffsetProp = props.align.targetOffset;
+	      if (offsetProp) {
+	        offsetProp = offsetProp.concat();
 	      }
-	    };
+	      if (targetOffsetProp) {
+	        targetOffsetProp = targetOffsetProp.concat();
+	      }
+	      var updateAlign = {};
+	      for (var i = 0; i < 2; i++) {
+	        if (offsetProp) {
+	          if (offsetProp[i] === undefined) {
+	            offsetProp[i] = offset[i];
+	          }
+	          updateAlign.offset = offsetProp;
+	        }
+	        if (targetOffsetProp) {
+	          if (targetOffsetProp[i] === undefined) {
+	            targetOffsetProp[i] = targetOffset[i];
+	          }
+	          updateAlign.targetOffset = offsetProp;
+	        }
+	      }
+	      align = (0, _objectAssign2['default'])({}, align, updateAlign);
+	    }
+	    return align;
 	  },
 	
 	  getCalendarElement: function getCalendarElement() {
 	    var props = this.props;
 	    var state = this.state;
 	    var calendarProp = props.calendar;
-	    var orient = undefined;
-	    // re align when open
-	    if (state.open) {
-	      orient = getImmutableOrient(calendarProp.props.orient) || orientMap.tl;
+	    var className = calendarProp.props.className || '';
+	    if (className) {
+	      className += ' ';
 	    }
-	    var calendarElement = _react2['default'].cloneElement(calendarProp, {
+	
+	    if (state.open) {
+	      className += (0, _pickerPlacement.getCalendarClassByPlacement)(calendarProp.props.prefixCls, props.placement);
+	    } else {
+	      var calendarDOMNode = _react2['default'].findDOMNode(this.calendarInstance);
+	      // fix auto adjust
+	      className = calendarDOMNode && calendarDOMNode.className || '';
+	    }
+	
+	    var extraProps = {
 	      ref: (0, _rcUtil.createChainedFunction)(calendarProp.ref, this.saveCalendarRef),
-	      value: state.value,
+	      className: className,
+	      defaultValue: calendarProp.props.defaultValue || state.value,
+	      defaultSelectedValue: state.value,
 	      visible: state.open,
-	      orient: orient,
+	      placement: props.placement,
 	      onBlur: this.onCalendarBlur,
 	      onKeyDown: this.onCalendarKeyDown,
-	      onChange: (0, _rcUtil.createChainedFunction)(calendarProp.props.onChange, this.onCalendarChange),
 	      onOk: (0, _rcUtil.createChainedFunction)(calendarProp.props.onOk, this.onCalendarOk),
 	      onSelect: (0, _rcUtil.createChainedFunction)(calendarProp.props.onSelect, this.onCalendarSelect),
 	      onClear: (0, _rcUtil.createChainedFunction)(calendarProp.props.onClear, this.onCalendarClear)
-	    });
+	    };
+	
+	    var calendarElement = _react2['default'].cloneElement(calendarProp, extraProps);
 	    return _react2['default'].createElement(
 	      _rcAnimate2['default'],
 	      {
@@ -24943,7 +24935,7 @@
 	          onAlign: this.onCalendarAlign,
 	          calendarOpen: state.open,
 	          disabled: !state.open,
-	          align: orient && this.getAlign(orient) },
+	          align: this.getAlign() },
 	        calendarElement
 	      )
 	    );
@@ -26834,6 +26826,137 @@
 /* 211 */
 /***/ function(module, exports) {
 
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	exports.getCalendarClassByAlign = getCalendarClassByAlign;
+	exports.getCalendarClassByPlacement = getCalendarClassByPlacement;
+	exports.fromPlacementStrToAlign = fromPlacementStrToAlign;
+	exports.fromPointsToPlacement = fromPointsToPlacement;
+	
+	function getCalendarClassByAlign(prefixCls, placement) {
+	  var offset = placement.offset || [0, 0];
+	  var offsetClass = '';
+	  if (offset && offset.length) {
+	    offsetClass = prefixCls + '-placement-offset-x-' + offset[0] + ' ' + prefixCls + '-placement-offset-y-' + offset[1];
+	  }
+	  var points = placement.points;
+	  return offsetClass + ' ' + prefixCls + '-placement-points-' + points[0] + '-' + points[1];
+	}
+	
+	function getCalendarClassByPlacement(prefixCls, placement) {
+	  if (typeof placement === 'string') {
+	    return prefixCls + '-placement-' + placement;
+	  }
+	  return getCalendarClassByAlign(prefixCls, placement);
+	}
+	
+	var autoAdjustOverflow = {
+	  adjustX: 1,
+	  adjustY: 1
+	};
+	
+	var targetOffset = [0, 0];
+	
+	var placementAlignMap = {
+	  topLeft: {
+	    points: ['tl', 'tl'],
+	    overflow: autoAdjustOverflow,
+	    offset: [0, -3],
+	    targetOffset: targetOffset
+	  },
+	  topRight: {
+	    points: ['tr', 'tr'],
+	    overflow: autoAdjustOverflow,
+	    offset: [0, -3],
+	    targetOffset: targetOffset
+	  },
+	  bottomRight: {
+	    points: ['br', 'br'],
+	    overflow: autoAdjustOverflow,
+	    offset: [0, 3],
+	    targetOffset: targetOffset
+	  },
+	  bottomLeft: {
+	    points: ['bl', 'bl'],
+	    overflow: autoAdjustOverflow,
+	    offset: [0, 3],
+	    targetOffset: targetOffset
+	  }
+	};
+	
+	exports.placementAlignMap = placementAlignMap;
+	function isPointsEq(a1, a2) {
+	  return a1[0] === a2[0] && a1[1] === a2[1];
+	}
+	
+	function fromPlacementStrToAlign(placementStr) {
+	  return placementAlignMap[placementStr];
+	}
+	
+	function fromPointsToPlacement(align) {
+	  var points = align.points;
+	  for (var p in placementAlignMap) {
+	    if (placementAlignMap.hasOwnProperty(p)) {
+	      if (isPointsEq(placementAlignMap[p].points, points)) {
+	        return p;
+	      }
+	    }
+	  }
+	  throw new Error('can not find placement for', points);
+	}
+
+/***/ },
+/* 212 */
+/***/ function(module, exports) {
+
+	/* eslint-disable no-unused-vars */
+	'use strict';
+	var hasOwnProperty = Object.prototype.hasOwnProperty;
+	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+	
+	function toObject(val) {
+		if (val === null || val === undefined) {
+			throw new TypeError('Object.assign cannot be called with null or undefined');
+		}
+	
+		return Object(val);
+	}
+	
+	module.exports = Object.assign || function (target, source) {
+		var from;
+		var to = toObject(target);
+		var symbols;
+	
+		for (var s = 1; s < arguments.length; s++) {
+			from = Object(arguments[s]);
+	
+			for (var key in from) {
+				if (hasOwnProperty.call(from, key)) {
+					to[key] = from[key];
+				}
+			}
+	
+			if (Object.getOwnPropertySymbols) {
+				symbols = Object.getOwnPropertySymbols(from);
+				for (var i = 0; i < symbols.length; i++) {
+					if (propIsEnumerable.call(from, symbols[i])) {
+						to[symbols[i]] = from[symbols[i]];
+					}
+				}
+			}
+		}
+	
+		return to;
+	};
+
+
+/***/ },
+/* 213 */
+/***/ function(module, exports) {
+
 	/*
 	 * zh-cn locale
 	 * @ignore
@@ -26849,7 +26972,7 @@
 	};
 
 /***/ },
-/* 212 */
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26860,7 +26983,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _gregorianCalendarFormatLibLocaleZhCn = __webpack_require__(213);
+	var _gregorianCalendarFormatLibLocaleZhCn = __webpack_require__(215);
 	
 	var _gregorianCalendarFormatLibLocaleZhCn2 = _interopRequireDefault(_gregorianCalendarFormatLibLocaleZhCn);
 	
@@ -26894,7 +27017,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 213 */
+/* 215 */
 /***/ function(module, exports) {
 
 	/**

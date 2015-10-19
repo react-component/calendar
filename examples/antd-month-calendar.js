@@ -3,7 +3,7 @@ webpackJsonp([1],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(214);
+	module.exports = __webpack_require__(216);
 
 
 /***/ },
@@ -73,60 +73,79 @@ webpackJsonp([1],{
 	  getInitialState: function getInitialState() {
 	    var props = this.props;
 	    var value = props.value || props.defaultValue || getNow();
-	    return { value: value };
+	    return {
+	      value: value,
+	      selectedValue: props.selectedValue || props.defaultSelectedValue
+	    };
 	  },
 	
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
 	    var value = nextProps.value;
+	    var selectedValue = nextProps.selectedValue;
+	
 	    if (value !== undefined) {
 	      value = value || nextProps.defaultValue || getNowByCurrentStateValue(this.state.value);
 	      this.setState({
 	        value: value
 	      });
 	    }
+	    if (selectedValue !== undefined) {
+	      this.setState({
+	        selectedValue: selectedValue
+	      });
+	    }
 	  },
 	
-	  onSelect: function onSelect(value, keyDownEvent) {
-	    this.setValue(value);
-	    if (!keyDownEvent) {
-	      if (this.isAllowedDate(value)) {
-	        this.props.onSelect(value);
-	      }
+	  onSelect: function onSelect(value, cause) {
+	    if (this._blurPending) {
+	      clearTimeout(this._blurPending);
+	      this._blurPending = null;
 	    }
+	    if (value) {
+	      this.setValue(value);
+	    }
+	    this.setSelectedValue(value, cause);
 	  },
 	
 	  renderRoot: function renderRoot(newProps) {
 	    var _className;
 	
 	    var props = this.props;
-	    var state = this.state;
 	    var prefixCls = props.prefixCls;
 	
 	    var className = (_className = {}, _defineProperty(_className, prefixCls, 1), _defineProperty(_className, prefixCls + '-hidden', !props.visible), _defineProperty(_className, props.className, !!props.className), _className);
 	
-	    var orient = state.orient;
-	    if (orient) {
-	      orient.forEach(function (o) {
-	        className[prefixCls + '-orient-' + o] = 1;
-	      });
-	    }
-	
 	    return _react2['default'].createElement(
 	      'div',
-	      { className: (0, _rcUtil.classSet)(className) + ' ' + newProps.className, style: this.props.style,
+	      { className: (0, _rcUtil.classSet)(className) + ' ' + newProps.className,
+	        style: this.props.style,
 	        tabIndex: '0', onFocus: this.onFocus,
 	        onBlur: this.onBlur, onKeyDown: this.onKeyDown },
 	      newProps.children
 	    );
 	  },
 	
+	  setSelectedValue: function setSelectedValue(selectedValue, cause) {
+	    if (this.isAllowedDate(selectedValue)) {
+	      if (!('selectedValue' in this.props)) {
+	        this.setState({
+	          selectedValue: selectedValue
+	        });
+	      }
+	      this.props.onSelect(selectedValue, cause || {});
+	    }
+	  },
+	
 	  setValue: function setValue(value) {
+	    var originalValue = this.state.value;
 	    if (!('value' in this.props)) {
 	      this.setState({
 	        value: value
 	      });
 	    }
-	    this.props.onChange(value);
+	    if (originalValue && value && originalValue.getTime() !== value.getTime() || !originalValue && value || originalValue && !value) {
+	      this.props.onChange(value);
+	    }
 	  },
 	
 	  isAllowedDate: function isAllowedDate(value) {
@@ -140,7 +159,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 214:
+/***/ 216:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -153,7 +172,7 @@ webpackJsonp([1],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _rcCalendarSrcMonthCalendar = __webpack_require__(215);
+	var _rcCalendarSrcMonthCalendar = __webpack_require__(217);
 	
 	var _rcCalendarSrcMonthCalendar2 = _interopRequireDefault(_rcCalendarSrcMonthCalendar);
 	
@@ -161,7 +180,7 @@ webpackJsonp([1],{
 	
 	var _rcCalendarSrcPicker2 = _interopRequireDefault(_rcCalendarSrcPicker);
 	
-	var _gregorianCalendarLibLocaleZhCn = __webpack_require__(211);
+	var _gregorianCalendarLibLocaleZhCn = __webpack_require__(213);
 	
 	var _gregorianCalendarLibLocaleZhCn2 = _interopRequireDefault(_gregorianCalendarLibLocaleZhCn);
 	
@@ -175,7 +194,7 @@ webpackJsonp([1],{
 	
 	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
 	
-	var _rcCalendarSrcLocaleZhCn = __webpack_require__(212);
+	var _rcCalendarSrcLocaleZhCn = __webpack_require__(214);
 	
 	var _rcCalendarSrcLocaleZhCn2 = _interopRequireDefault(_rcCalendarSrcLocaleZhCn);
 	
@@ -193,14 +212,14 @@ webpackJsonp([1],{
 	  onChange: function onChange(value) {
 	    console.log('DatePicker change: ' + (value && formatter.format(value)));
 	    this.setState({
-	      time: Date.now(),
+	
 	      value: value
 	    });
 	  },
 	
 	  getInitialState: function getInitialState() {
 	    return {
-	      time: Date.now(),
+	
 	      showTime: true,
 	      disabled: false,
 	      value: this.props.defaultValue
@@ -222,12 +241,10 @@ webpackJsonp([1],{
 	  render: function render() {
 	    var state = this.state;
 	    var calendar = _react2['default'].createElement(_rcCalendarSrcMonthCalendar2['default'], { locale: _rcCalendarSrcLocaleZhCn2['default'],
-	      style: { zIndex: 1000 },
-	      orient: ['top', 'left'],
-	      defaultValue: defaultCalendarValue });
+	      style: { zIndex: 1000 } });
 	    return _react2['default'].createElement(
 	      'div',
-	      { style: { width: 240, margin: 20 }, 'data-time': this.state.time },
+	      { style: { width: 240, margin: 20 } },
 	      _react2['default'].createElement(
 	        'div',
 	        { style: { marginBottom: 10 } },
@@ -251,7 +268,6 @@ webpackJsonp([1],{
 	        _react2['default'].createElement(
 	          _rcCalendarSrcPicker2['default'],
 	          {
-	            adjustOrientOnCalendarOverflow: true,
 	            animation: 'slide-up',
 	            disabled: state.disabled,
 	            calendar: calendar,
@@ -293,7 +309,6 @@ webpackJsonp([1],{
 	  ),
 	  _react2['default'].createElement(_rcCalendarSrcMonthCalendar2['default'], { locale: _rcCalendarSrcLocaleZhCn2['default'],
 	    style: { zIndex: 1000 },
-	    orient: ['top', 'left'],
 	    disabledDate: disabledDate,
 	    onSelect: onStandaloneSelect,
 	    onChange: onStandaloneChange,
@@ -307,7 +322,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 215:
+/***/ 217:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
