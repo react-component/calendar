@@ -1,0 +1,100 @@
+import 'rc-calendar/assets/index.less';
+import React from 'react';
+import Calendar from 'rc-calendar';
+import DatePicker from 'rc-calendar/src/Picker';
+import zhCn from 'gregorian-calendar/lib/locale/zh-cn'; // spm error
+import DateTimeFormat from 'gregorian-calendar-format';
+import GregorianCalendar from 'gregorian-calendar';
+import CalendarLocale from 'rc-calendar/src/locale/zh-cn';
+
+const formatter = new DateTimeFormat('yyyy-MM-dd HH:mm:ss');
+const dateFormatter = new DateTimeFormat('yyyy-MM-dd');
+
+function getFormatter(showTime) {
+  return showTime ? formatter : dateFormatter;
+}
+
+var Picker = React.createClass({
+  getDefaultProps() {
+    return {
+      showTime: false,
+      disabled: false
+    };
+  },
+  render() {
+    const props = this.props;
+    var calendar = <Calendar locale={CalendarLocale}
+                             showTime={props.showTime}
+                             showOk={true}
+                             disabledDate={props.disabledDate}
+                             showClear={true}/>;
+    return <DatePicker
+      animation="slide-up"
+      disabled={props.disabled}
+      calendar={calendar}
+      value={props.value}
+      onChange={props.onChange}>
+      {
+        ({value})=> {
+          return (
+            <span>
+                <input placeholder="请选择日期" style={{width:250}}
+                       disabled={props.disabled}
+                       value={value && getFormatter(props.showTime).format(value)}/>
+                </span>
+          );
+        }
+      }
+    </DatePicker>;
+  }
+});
+
+var Test = React.createClass({
+  getInitialState() {
+    return {
+      startValue: null,
+      endValue: null
+    };
+  },
+
+  disabledEndDate(endValue) {
+    if (!this.state.startValue) {
+      return false;
+    }
+    return endValue.getTime() <= this.state.startValue.getTime();
+  },
+
+  disabledStartDate(startValue) {
+    if (!this.state.endValue) {
+      return false;
+    }
+    return startValue.getTime() >= this.state.endValue.getTime();
+  },
+
+  onChange(field, value) {
+    console.log('onChange', field, getFormatter().format(value))
+    this.setState({
+      [field]: value,
+    });
+  },
+
+  render() {
+    var state = this.state;
+    return <div style={{width: 240, margin: 20}}>
+      <p>
+        开始时间：
+        <Picker disabledDate={this.disabledStartDate} value={state.startValue}
+                onChange={this.onChange.bind(this,'startValue')}/>
+      </p>
+
+      <p>
+        结束时间：
+        <Picker disabledDate={this.disabledEndDate} value={state.endValue}
+                onChange={this.onChange.bind(this,'endValue')}/>
+      </p>
+    </div>;
+  }
+});
+
+
+React.render(<Test />, document.getElementById('__react-content'));
