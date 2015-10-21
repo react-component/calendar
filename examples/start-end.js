@@ -1984,6 +1984,9 @@ webpackJsonp([6],{
 	  },
 	
 	  disabledEndDate: function disabledEndDate(endValue) {
+	    if (!endValue) {
+	      return false;
+	    }
 	    if (!this.state.startValue) {
 	      return false;
 	    }
@@ -1991,6 +1994,9 @@ webpackJsonp([6],{
 	  },
 	
 	  disabledStartDate: function disabledStartDate(startValue) {
+	    if (!startValue) {
+	      return false;
+	    }
 	    if (!this.state.endValue) {
 	      return false;
 	    }
@@ -1998,7 +2004,7 @@ webpackJsonp([6],{
 	  },
 	
 	  onChange: function onChange(field, value) {
-	    console.log('onChange', field, getFormatter().format(value));
+	    console.log('onChange', field, value && getFormatter().format(value));
 	    this.setState(_defineProperty({}, field, value));
 	  },
 	

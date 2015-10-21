@@ -307,6 +307,9 @@ import CalendarLocale <span class="hljs-keyword">from</span> <span class="hljs-s
   },
 
   disabledEndDate(endValue) {
+    <span class="hljs-keyword">if</span>(!endValue){
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+    }
     <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.state.startValue) {
       <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
     }
@@ -314,6 +317,9 @@ import CalendarLocale <span class="hljs-keyword">from</span> <span class="hljs-s
   },
 
   disabledStartDate(startValue) {
+    <span class="hljs-keyword">if</span>(!startValue){
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+    }
     <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.state.endValue) {
       <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
     }
@@ -321,7 +327,7 @@ import CalendarLocale <span class="hljs-keyword">from</span> <span class="hljs-s
   },
 
   onChange(field, <span class="hljs-keyword">value</span>) {
-    console.log(<span class="hljs-string">'onChange'</span>, field, getFormatter().format(<span class="hljs-keyword">value</span>))
+    console.log(<span class="hljs-string">'onChange'</span>, field, <span class="hljs-keyword">value</span> &amp;&amp; getFormatter().format(<span class="hljs-keyword">value</span>))
     <span class="hljs-keyword">this</span>.setState({
       [field]: <span class="hljs-keyword">value</span>,
     });
