@@ -26,8 +26,8 @@ const DateInput = React.createClass({
     });
   },
 
-  onInputChange(e) {
-    const str = e.target.value;
+  onInputChange(event) {
+    const str = event.target.value;
     this.setState({
       str,
     });
@@ -40,7 +40,7 @@ const DateInput = React.createClass({
     if (str) {
       try {
         value = formatter.parse(str, locale);
-      } catch (e) {
+      } catch (ex) {
         warning(false, `invalid date input: ${str}`);
         this.setState(this.getInitialState());
         return;

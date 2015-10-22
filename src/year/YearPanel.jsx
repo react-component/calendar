@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {classSet as cx} from 'rc-util';
 import DecadePanel from '../decade/DecadePanel';
 const ROW = 4;
@@ -27,8 +27,8 @@ class YearPanel extends React.Component {
     };
     this.nextDecade = goYear.bind(this, 10);
     this.previousDecade = goYear.bind(this, -10);
-    ['showDecadePanel', 'onDecadePanelSelect'].forEach(m => {
-      this[m] = this[m].bind(this);
+    ['showDecadePanel', 'onDecadePanelSelect'].forEach(method => {
+      this[method] = this[method].bind(this);
     });
   }
 
@@ -47,9 +47,9 @@ class YearPanel extends React.Component {
     const endYear = startYear + 9;
     const years = [];
     let index = 0;
-    for (let i = 0; i < ROW; i++) {
-      years[i] = [];
-      for (let j = 0; j < COL; j++) {
+    for (let rowIndex = 0; rowIndex < ROW; rowIndex++) {
+      years[rowIndex] = [];
+      for (let colIndex = 0; colIndex < COL; colIndex++) {
         const year = previousYear + index;
         let content;
         if (year < startYear) {
@@ -59,7 +59,7 @@ class YearPanel extends React.Component {
         } else {
           content = year + '';
         }
-        years[i][j] = {
+        years[rowIndex][colIndex] = {
           content: content,
           year: year,
           title: content,
@@ -68,6 +68,12 @@ class YearPanel extends React.Component {
       }
     }
     return years;
+  }
+
+  showDecadePanel() {
+    this.setState({
+      showDecadePanel: 1,
+    });
   }
 
   render() {
@@ -81,31 +87,31 @@ class YearPanel extends React.Component {
     const prefixCls = this.prefixCls;
 
     const yeasEls = years.map((row, index) => {
-      const tds = row.map(y => {
+      const tds = row.map(yearData => {
         const classNameMap = {
           [`${prefixCls}-cell`]: 1,
-          [`${prefixCls}-selected-cell`]: y.year === currentYear,
-          [`${prefixCls}-last-decade-cell`]: y.year < startYear,
-          [`${prefixCls}-next-decade-cell`]: y.year > endYear,
+          [`${prefixCls}-selected-cell`]: yearData.year === currentYear,
+          [`${prefixCls}-last-decade-cell`]: yearData.year < startYear,
+          [`${prefixCls}-next-decade-cell`]: yearData.year > endYear,
         };
         let clickHandler;
-        if (y.year < startYear) {
+        if (yearData.year < startYear) {
           clickHandler = this.previousDecade;
-        } else if (y.year > endYear) {
+        } else if (yearData.year > endYear) {
           clickHandler = this.nextDecade;
         } else {
-          clickHandler = chooseYear.bind(this, y.year);
+          clickHandler = chooseYear.bind(this, yearData.year);
         }
         return (
           <td role="gridcell"
-              title={y.title}
-              key={y.content}
+              title={yearData.title}
+              key={yearData.content}
               onClick={clickHandler}
               className={cx(classNameMap)}
             >
             <a
               className={`${prefixCls}-year`}>
-              {y.content}
+              {yearData.content}
             </a>
           </td>);
       });
@@ -115,7 +121,7 @@ class YearPanel extends React.Component {
     let decadePanel;
     if (this.state.showDecadePanel) {
       decadePanel = (<DecadePanel locale={locale} value={value} rootPrefixCls={props.rootPrefixCls}
-                                 onSelect={this.onDecadePanelSelect}/>);
+                                  onSelect={this.onDecadePanelSelect}/>);
     }
 
     return (
@@ -156,13 +162,13 @@ class YearPanel extends React.Component {
         {decadePanel}
       </div>);
   }
-
-  showDecadePanel() {
-    this.setState({
-      showDecadePanel: 1,
-    });
-  }
 }
+
+YearPanel.propTypes = {
+  rootPrefixCls: PropTypes.string,
+  value: PropTypes.object,
+  defaultValue: PropTypes.object,
+};
 
 YearPanel.defaultProps = {
   onSelect() {

@@ -7,9 +7,9 @@ import {KeyCode} from 'rc-util';
 const MonthCalendar = React.createClass({
   mixins: [CommonMixin, CalendarMixin],
 
-  onKeyDown(e) {
-    const keyCode = e.keyCode;
-    const ctrlKey = e.ctrlKey || e.metaKey;
+  onKeyDown(event) {
+    const keyCode = event.keyCode;
+    const ctrlKey = event.ctrlKey || event.metaKey;
     const stateValue = this.state.value;
     let value = stateValue;
     switch (keyCode) {
@@ -39,14 +39,14 @@ const MonthCalendar = React.createClass({
       break;
     case KeyCode.ENTER:
       this.onSelect(stateValue);
-      e.preventDefault();
+      event.preventDefault();
       return 1;
     default:
       return undefined;
     }
     if (value !== stateValue) {
       this.setValue(value);
-      e.preventDefault();
+      event.preventDefault();
       return 1;
     }
   },

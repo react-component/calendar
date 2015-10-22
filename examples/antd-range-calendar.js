@@ -3,6 +3,7 @@ import 'rc-calendar/assets/index.less';
 import RangeCalendar from 'rc-calendar/src/RangeCalendar';
 import GregorianCalendarFormat from 'gregorian-calendar-format';
 import React from 'react';
+import ReactDOM from 'react-dom';
 var formatter = new GregorianCalendarFormat('yyyy-MM-dd HH:mm:ss');
 import GregorianCalendar from 'gregorian-calendar';
 import zhCn from 'gregorian-calendar/lib/locale/zh-cn';
@@ -65,7 +66,6 @@ const Test = React.createClass({
                        disabled={state.disabled}
                        className="ant-calendar-picker-input ant-input"
                        value={value && (formatter.format(value[0])+' - '+formatter.format(value[1]))}/>
-                <span className="ant-calendar-picker-icon" unselectable="true"/>
                 </span>);
         }
       }
@@ -73,10 +73,9 @@ const Test = React.createClass({
   }
 });
 
-React.render(
+ReactDOM.render(
   <div>
     <h2>calendar (zh-cn)</h2>
-    <link href="http://ant.design/dist/antd.css" rel="stylesheet" type="text/css"/>
     <div style={{margin:10}}>
       <RangeCalendar showWeekNumber={true}
                      locale={CalendarLocale}

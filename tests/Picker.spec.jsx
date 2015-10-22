@@ -2,8 +2,9 @@ import {KeyCode as keyCode} from 'rc-util';
 import expect from 'expect.js';
 import Calendar from '../index';
 import DatePicker from '../src/Picker';
-import React from 'react/addons';
-var TestUtils = React.addons.TestUtils;
+import ReactDOM from 'react-dom';
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
 var Simulate = TestUtils.Simulate;
 import async from 'async';
 import DateTimeFormat from 'gregorian-calendar-format';
@@ -17,14 +18,18 @@ value.set(2015, 5, 1);
 describe('DatePicker', function () {
   var div;
 
+  function noop(){}
+
   function renderPicker(props) {
-    return React.render(<DatePicker
+    return ReactDOM.render(<DatePicker
       calendar={<Calendar
         locale={CalendarLocale}/>}
       defaultValue={value}
       {...props}
       >{({value}) => {
-      return <input className="rc-calendar-picker-input" value={value  && formatter.format(value)}/>;
+      return <input className="rc-calendar-picker-input"
+                    onChange={noop}
+                    value={value  && formatter.format(value)}/>;
     }
     }
     </DatePicker>, div);
@@ -36,7 +41,7 @@ describe('DatePicker', function () {
   });
 
   afterEach(function () {
-    React.unmountComponentAtNode(div);
+    ReactDOM.unmountComponentAtNode(div);
     document.body.removeChild(div);
   });
 
@@ -63,7 +68,7 @@ describe('DatePicker', function () {
       expect(change.getYear()).to.be(2015);
       expect(change.getMonth()).to.be(5);
       expect(change.getDayOfMonth()).to.be(2);
-      expect(React.findDOMNode(input).value).to.be('2015-06-02');
+      expect(ReactDOM.findDOMNode(input).value).to.be('2015-06-02');
       expect(picker.state.open).not.to.be.ok();
       next();
     }], function () {
@@ -95,7 +100,7 @@ describe('DatePicker', function () {
         expect(change.getYear()).to.be(2015);
         expect(change.getMonth()).to.be(5);
         expect(change.getDayOfMonth()).to.be(2);
-        expect(React.findDOMNode(input).value).to.be('2015-06-02');
+        expect(ReactDOM.findDOMNode(input).value).to.be('2015-06-02');
         expect(picker.state.open).not.to.be.ok();
         next();
       }], function () {
@@ -122,7 +127,7 @@ describe('DatePicker', function () {
           expect(document.querySelectorAll('.rc-calendar-picker-container .rc-calendar').length).not.to.be(0);
         }
         expect(TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance, 'rc-calendar-date')[0]).to.be.ok();
-        React.unmountComponentAtNode(div);
+        ReactDOM.unmountComponentAtNode(div);
         setTimeout(next, 100);
       }, function (next) {
         if (document.querySelectorAll) {

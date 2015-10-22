@@ -1,8 +1,9 @@
 import {KeyCode as keyCode} from 'rc-util';
 import expect from 'expect.js';
 import Calendar from '../index';
-import React from 'react/addons';
-var TestUtils = React.addons.TestUtils;
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
+import ReactDOM from 'react-dom';
 var Simulate = TestUtils.Simulate;
 import async from 'async';
 
@@ -12,14 +13,14 @@ describe('Time', function () {
   document.body.appendChild(container);
 
   beforeEach(function (done) {
-    React.render(<Calendar showToday={true} showWeekNumber={true} showTime={true}/>, container, function () {
+    ReactDOM.render(<Calendar showToday={true} showWeekNumber={true} showTime={true}/>, container, function () {
       calendar = this;
       done();
     });
   });
 
   afterEach(function () {
-    React.unmountComponentAtNode(container);
+    ReactDOM.unmountComponentAtNode(container);
   });
 
   describe('keyboard', function () {

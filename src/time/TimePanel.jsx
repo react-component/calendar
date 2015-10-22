@@ -1,12 +1,12 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {classSet as cx} from 'rc-util';
 
-function choose(hour, e) {
+function choose(hour, event) {
   const next = this.state.value.clone();
   const method = this.props.setter;
   next[method](hour);
   this.props.onSelect(next, method);
-  e.preventDefault();
+  event.preventDefault();
 }
 
 export default
@@ -29,27 +29,27 @@ class TimePanel extends React.Component {
     const ROW = props.rowCount;
     const COL = props.colCount;
 
-    for (let i = 0; i < ROW; i++) {
-      data[i] = [];
-      for (let j = 0; j < COL; j++) {
-        data[i][j] = i * COL + j;
+    for (let rowIndex = 0; rowIndex < ROW; rowIndex++) {
+      data[rowIndex] = [];
+      for (let colIndex = 0; colIndex < COL; colIndex++) {
+        data[rowIndex][colIndex] = rowIndex * COL + colIndex;
       }
     }
 
     const hoursEls = data.map((row, index)=> {
-      const tds = row.map(d => {
+      const tds = row.map(hour => {
         const classNameMap = {
           [`${prefixCls}-cell`]: 1,
-          [`${prefixCls}-selected-cell`]: d === currentHour,
+          [`${prefixCls}-selected-cell`]: hour === currentHour,
         };
         return (<td
-          key={d}
-          onClick={choose.bind(this, d)}
+          key={hour}
+          onClick={choose.bind(this, hour)}
           role="gridcell"
           className={cx(classNameMap)}>
           <a
             className={`${prefixCls}-time`}>
-            {d}
+            {hour}
           </a>
         </td>);
       });
@@ -73,6 +73,11 @@ class TimePanel extends React.Component {
       </div>);
   }
 }
+
+TimePanel.propTypes = {
+  value: PropTypes.object,
+  rootPrefixCls: PropTypes.string,
+};
 
 TimePanel.defaultProps = {
   onSelect() {

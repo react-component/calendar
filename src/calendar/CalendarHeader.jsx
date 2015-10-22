@@ -84,6 +84,24 @@ const CalendarHeader = React.createClass({
     </span>);
   },
 
+  showIf(condition, el) {
+    return condition ? el : null;
+  },
+
+  showMonthPanel() {
+    this.setState({
+      showMonthPanel: 1,
+      showYearPanel: 0,
+    });
+  },
+
+  showYearPanel() {
+    this.setState({
+      showMonthPanel: 0,
+      showYearPanel: 1,
+    });
+  },
+
   render() {
     const props = this.props;
     const {enableNext, enablePrev, prefixCls, locale, value} = props;
@@ -127,24 +145,6 @@ const CalendarHeader = React.createClass({
       {panel}
     </div>);
   },
-
-  showIf(condition, el) {
-    return condition ? el : null;
-  },
-
-  showMonthPanel() {
-    this.setState({
-      showMonthPanel: 1,
-      showYearPanel: 0,
-    });
-  },
-
-  showYearPanel() {
-    this.setState({
-      showMonthPanel: 0,
-      showYearPanel: 1,
-    });
-  },
 });
 
-export default  CalendarHeader;
+export default CalendarHeader;

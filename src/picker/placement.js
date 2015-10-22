@@ -59,10 +59,10 @@ export function fromPlacementStrToAlign(placementStr) {
 
 export function fromPointsToPlacement(align) {
   const points = align.points;
-  for (const p in placementAlignMap) {
-    if (placementAlignMap.hasOwnProperty(p)) {
-      if (isPointsEq(placementAlignMap[p].points, points)) {
-        return p;
+  for (const placement in placementAlignMap) {
+    if (placementAlignMap.hasOwnProperty(placement)) {
+      if (isPointsEq(placementAlignMap[placement].points, points)) {
+        return placement;
       }
     }
   }

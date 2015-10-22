@@ -24,30 +24,30 @@ function loop(value, min, max) {
 }
 
 function keyDownWrap(method, min, max) {
-  return function onKeyDown(e) {
+  return function onKeyDown(event) {
     if (this.props.disabled) {
       return;
     }
-    const value = e.target.value;
+    const value = event.target.value;
     let number = parseInt(value, 10);
-    const keyCode = e.keyCode;
+    const keyCode = event.keyCode;
     let handled;
     if (keyCode === KeyCode.DOWN) {
       number++;
-      e.stopPropagation();
-      e.preventDefault();
+      event.stopPropagation();
+      event.preventDefault();
       handled = 1;
     } else if (keyCode === KeyCode.UP) {
       number--;
-      e.stopPropagation();
-      e.preventDefault();
+      event.stopPropagation();
+      event.preventDefault();
       handled = 1;
     }
     if (handled) {
       number = loop(number, min, max);
       const time = this.props.value.clone();
       time[method](number);
-      this.props.onChange(time, e);
+      this.props.onChange(time, event);
     }
   };
 }
@@ -67,8 +67,8 @@ class Time extends React.Component {
       'onMinuteClick', 'onSecondClick',
       'onSelectPanel',
     ];
-    events.forEach(m => {
-      this[m] = this[m].bind(this);
+    events.forEach(method => {
+      this[method] = this[method].bind(this);
     });
   }
 
@@ -83,7 +83,7 @@ class Time extends React.Component {
       showSecondPanel: 0,
     }, ()=> {
       // ie9 has broken focus
-      React.findDOMNode(this.refs[setter]).focus();
+      this.refs[setter].focus();
     });
     this.props.onChange(value);
   }

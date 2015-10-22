@@ -37,22 +37,22 @@ function normalizeAnchor(props, init) {
   return value || init && defaultValue || selectedValue[0] || init && getNow();
 }
 
-function onTimeSelect(direction, v) {
+function onTimeSelect(direction, value) {
   const index = direction === 'left' ? 0 : 1;
   let selectedValue = this.state.selectedValue;
   if (selectedValue[index]) {
     selectedValue = selectedValue.concat();
     selectedValue[index] = selectedValue[index].clone();
-    syncTime(v, selectedValue[index]);
+    syncTime(value, selectedValue[index]);
     this.fireSelectValueChange(selectedValue);
   }
 }
 
-function onInputSelect(direction, v) {
+function onInputSelect(direction, value) {
   const originalValue = this.state.selectedValue;
   const selectedValue = originalValue.concat();
   const index = direction === 'left' ? 0 : 1;
-  selectedValue[index] = v;
+  selectedValue[index] = value;
   if (selectedValue[0].getTime() > selectedValue[1].getTime()) {
     selectedValue.length = 1;
   }
@@ -74,18 +74,18 @@ const RangeCalendar = React.createClass({
 
   mixins: [CommonMixin],
 
-  getInitialState() {
-    const props = this.props;
-    const selectedValue = props.selectedValue || props.defaultSelectedValue;
-    const value = normalizeAnchor(props, 1);
-    return {selectedValue, value};
-  },
-
   getDefaultProps() {
     return {
       defaultSelectedValue: [],
       onValueChange: noop,
     };
+  },
+
+  getInitialState() {
+    const props = this.props;
+    const selectedValue = props.selectedValue || props.defaultSelectedValue;
+    const value = normalizeAnchor(props, 1);
+    return {selectedValue, value};
   },
 
   componentWillReceiveProps(nextProps) {
@@ -104,20 +104,20 @@ const RangeCalendar = React.createClass({
     }
   },
 
-  onSelect(v) {
+  onSelect(value) {
     const originalValue = this.state.selectedValue;
     const selectedValue = originalValue.concat();
     let changed = false;
     if (!selectedValue.length || selectedValue.length === 2 && !originalValue.hovering) {
       selectedValue.length = 1;
-      selectedValue[0] = v;
+      selectedValue[0] = value;
       changed = true;
-    } else if (selectedValue[0].getTime() < v.getTime()) {
-      selectedValue[1] = v;
+    } else if (selectedValue[0].getTime() < value.getTime()) {
+      selectedValue[1] = value;
       changed = true;
-    } else if (selectedValue[0].getTime() > v.getTime()) {
+    } else if (selectedValue[0].getTime() > value.getTime()) {
       selectedValue.length = 1;
-      selectedValue[0] = v;
+      selectedValue[0] = value;
       changed = true;
     }
     if (changed) {
@@ -169,6 +169,24 @@ const RangeCalendar = React.createClass({
     return endValue;
   },
 
+  fireSelectValueChange(selectedValue) {
+    if (!('selectedValue' in this.props)) {
+      this.setState({selectedValue});
+    }
+    this.props.onChange(selectedValue);
+    if (selectedValue.length === 2 && !selectedValue.hovering) {
+      this.props.onSelect(selectedValue);
+    }
+  },
+
+  fireValueChange(value) {
+    const props = this.props;
+    if (!('value' in props)) {
+      this.setState({value});
+    }
+    props.onValueChange(value);
+  },
+
   render() {
     const props = this.props;
     const state = this.state;
@@ -212,24 +230,6 @@ const RangeCalendar = React.createClass({
         }))}
       </div>
     </div>);
-  },
-
-  fireSelectValueChange(selectedValue) {
-    if (!('selectedValue' in this.props)) {
-      this.setState({selectedValue});
-    }
-    this.props.onChange(selectedValue);
-    if (selectedValue.length === 2 && !selectedValue.hovering) {
-      this.props.onSelect(selectedValue);
-    }
-  },
-
-  fireValueChange(value) {
-    const props = this.props;
-    if (!('value' in props)) {
-      this.setState({value});
-    }
-    props.onValueChange(value);
   },
 });
 

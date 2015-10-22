@@ -25,10 +25,10 @@ function afterCurrentMonthYear(current, today) {
     current.getMonth() > today.getMonth();
 }
 
-function getIdFromDate(d) {
-  return 'rc-calendar-' + d.getYear() +
-    '-' + d.getMonth() + '-' +
-    d.getDayOfMonth();
+function getIdFromDate(date) {
+  return 'rc-calendar-' + date.getYear() +
+    '-' + date.getMonth() + '-' +
+    date.getDayOfMonth();
 }
 
 function noop() {
@@ -51,8 +51,8 @@ const DateTBody = React.createClass({
 
   render() {
     const props = this.props;
-    let i;
-    let j;
+    let iIndex;
+    let jIndex;
     let current;
     const dateTable = [];
     const showWeekNumber = props.showWeekNumber;
@@ -82,8 +82,8 @@ const DateTBody = React.createClass({
     const lastMonth1 = month1.clone();
     lastMonth1.addDayOfMonth(0 - lastMonthDiffDay);
     let passed = 0;
-    for (i = 0; i < DateConstants.DATE_ROW_COUNT; i++) {
-      for (j = 0; j < DateConstants.DATE_COL_COUNT; j++) {
+    for (iIndex = 0; iIndex < DateConstants.DATE_ROW_COUNT; iIndex++) {
+      for (jIndex = 0; jIndex < DateConstants.DATE_COL_COUNT; jIndex++) {
         current = lastMonth1;
         if (passed) {
           current = current.clone();
@@ -95,7 +95,7 @@ const DateTBody = React.createClass({
     }
     const tableHtml = [];
     passed = 0;
-    for (i = 0; i < DateConstants.DATE_ROW_COUNT; i++) {
+    for (iIndex = 0; iIndex < DateConstants.DATE_ROW_COUNT; iIndex++) {
       let weekNumberCell;
       const dateCells = [];
       if (showWeekNumber) {
@@ -104,14 +104,14 @@ const DateTBody = React.createClass({
               className={weekNumberCellClass}>{dateTable[passed].getWeekOfYear()}</td>
         );
       }
-      for (j = 0; j < DateConstants.DATE_COL_COUNT; j++) {
+      for (jIndex = 0; jIndex < DateConstants.DATE_COL_COUNT; jIndex++) {
         let next = null;
         let last = null;
         current = dateTable[passed];
-        if (j < DateConstants.DATE_COL_COUNT - 1) {
+        if (jIndex < DateConstants.DATE_COL_COUNT - 1) {
           next = dateTable[passed + 1];
         }
-        if (j > 0) {
+        if (jIndex > 0) {
           last = dateTable[passed - 1];
         }
         let cls = cellClass;
@@ -200,7 +200,7 @@ const DateTBody = React.createClass({
       }
       tableHtml.push(
         <tr
-          key={i}
+          key={iIndex}
           role="row">
           {weekNumberCell}
           {dateCells}

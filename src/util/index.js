@@ -48,35 +48,35 @@ export default {
     return getTodayTime(value);
   },
 
-  getTodayElement(props) {
-    const {prefixCls, locale, value} = props;
+  getTodayElement(componentProps) {
+    const {prefixCls, locale, value} = componentProps;
     let disabledToday = false;
     let localeNow = locale.today;
-    if (props.showTime) {
+    if (componentProps.showTime) {
       localeNow = locale.now || locale.today;
     }
     let disabledTodayClass = '';
-    if (props.disabledDate) {
-      disabledToday = props.disabledDate(getTodayTime(value), value);
+    if (componentProps.disabledDate) {
+      disabledToday = componentProps.disabledDate(getTodayTime(value), value);
       if (disabledToday) {
         disabledTodayClass = `${prefixCls}-today-btn-disabled`;
       }
     }
     return (<a className={`${prefixCls}-today-btn ${disabledTodayClass}`}
                role="button"
-               onClick={disabledToday ? null : props.onToday}
-               title={getTodayTimeStr(props.value)}>{localeNow}</a>);
+               onClick={disabledToday ? null : componentProps.onToday}
+               title={getTodayTimeStr(componentProps.value)}>{localeNow}</a>);
   },
 
-  getOkElement(props) {
-    const {prefixCls, locale} = props;
+  getOkElement(componentProps) {
+    const {prefixCls, locale} = componentProps;
     let className = `${prefixCls}-ok-btn`;
-    if (props.okDisabled) {
+    if (componentProps.okDisabled) {
       className += ` ${prefixCls}-ok-btn-disabled`;
     }
     return (<a className={className}
                role="button"
-               onClick={props.okDisabled ? null : props.onOk}>{locale.ok}</a>);
+               onClick={componentProps.okDisabled ? null : componentProps.onOk}>{locale.ok}</a>);
   },
 
   syncTime(from, to) {

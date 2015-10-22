@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import RangeCalendar from 'rc-calendar/src/RangeCalendar';
 import GregorianCalendarFormat from 'gregorian-calendar-format';
 import React from 'react';
+import ReactDOM from 'react-dom';
 var formatter = new GregorianCalendarFormat('yyyy-MM-dd HH:mm:ss');
 import GregorianCalendar from 'gregorian-calendar';
 import zhCn from 'gregorian-calendar/lib/locale/zh-cn';
@@ -95,7 +96,7 @@ const Test = React.createClass({
   }
 });
 
-React.render(
+ReactDOM.render(
   <div>
     <h2>calendar (zh-cn)</h2>
 

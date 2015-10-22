@@ -1,5 +1,6 @@
 import 'rc-calendar/assets/index.less';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Calendar from 'rc-calendar';
 import DatePicker from 'rc-calendar/src/Picker';
 import zhCn from 'gregorian-calendar/lib/locale/zh-cn'; // spm error
@@ -103,4 +104,4 @@ var Test = React.createClass({
 });
 
 
-React.render(<Test />, document.getElementById('__react-content'));
+ReactDOM.render(<Test />, document.getElementById('__react-content'));

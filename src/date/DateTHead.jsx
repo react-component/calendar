@@ -14,10 +14,10 @@ class DateTHead extends React.Component {
     const firstDayOfWeek = value.getFirstDayOfWeek();
     let showWeekNumberEl;
 
-    for (let i = 0; i < DateConstants.DATE_COL_COUNT; i++) {
-      const index = (firstDayOfWeek + i) % DateConstants.DATE_COL_COUNT;
-      veryShortWeekdays[i] = locale.format.veryShortWeekdays[index];
-      weekDays[i] = locale.format.weekdays[index];
+    for (let dateColIndex = 0; dateColIndex < DateConstants.DATE_COL_COUNT; dateColIndex++) {
+      const index = (firstDayOfWeek + dateColIndex) % DateConstants.DATE_COL_COUNT;
+      veryShortWeekdays[dateColIndex] = locale.format.veryShortWeekdays[index];
+      weekDays[dateColIndex] = locale.format.weekdays[index];
     }
 
     if (props.showWeekNumber) {

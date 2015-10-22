@@ -48,8 +48,6 @@ function goDay(direction) {
 }
 
 const Calendar = React.createClass({
-  mixins: [CommonMixin, CalendarMixin],
-
   propTypes: {
     value: PropTypes.object,
     selectedValue: PropTypes.object,
@@ -71,6 +69,8 @@ const Calendar = React.createClass({
     onBlur: PropTypes.func,
   },
 
+  mixins: [CommonMixin, CalendarMixin],
+
   getDefaultProps() {
     return {
       showToday: true,
@@ -88,21 +88,21 @@ const Calendar = React.createClass({
     return {};
   },
 
-  onKeyDown(e) {
-    if (e.target.nodeName.toLowerCase() === 'input') {
+  onKeyDown(event) {
+    if (event.target.nodeName.toLowerCase() === 'input') {
       return undefined;
     }
-    const keyCode = e.keyCode;
+    const keyCode = event.keyCode;
     // mac
-    const ctrlKey = e.ctrlKey || e.metaKey;
+    const ctrlKey = event.ctrlKey || event.metaKey;
     switch (keyCode) {
     case KeyCode.DOWN:
       goWeek.call(this, 1);
-      e.preventDefault();
+      event.preventDefault();
       return 1;
     case KeyCode.UP:
       goWeek.call(this, -1);
-      e.preventDefault();
+      event.preventDefault();
       return 1;
     case KeyCode.LEFT:
       if (ctrlKey) {
@@ -110,7 +110,7 @@ const Calendar = React.createClass({
       } else {
         goDay.call(this, -1);
       }
-      e.preventDefault();
+      event.preventDefault();
       return 1;
     case KeyCode.RIGHT:
       if (ctrlKey) {
@@ -118,30 +118,30 @@ const Calendar = React.createClass({
       } else {
         goDay.call(this, 1);
       }
-      e.preventDefault();
+      event.preventDefault();
       return 1;
     case KeyCode.HOME:
       goStartMonth.call(this);
-      e.preventDefault();
+      event.preventDefault();
       return 1;
     case KeyCode.END:
       goEndMonth.call(this);
-      e.preventDefault();
+      event.preventDefault();
       return 1;
     case KeyCode.PAGE_DOWN:
       this.nextMonth();
-      e.preventDefault();
+      event.preventDefault();
       return 1;
     case KeyCode.PAGE_UP:
       this.previousMonth();
-      e.preventDefault();
+      event.preventDefault();
       return 1;
     case KeyCode.ENTER:
       this.onSelect(this.state.value);
-      e.preventDefault();
+      event.preventDefault();
       return 1;
     default:
-      this.props.onKeyDown(e);
+      this.props.onKeyDown(event);
       return 1;
     }
   },
@@ -168,9 +168,15 @@ const Calendar = React.createClass({
     this.onSelect(value);
   },
 
-  onDateTableSelect(v) {
+  onDateTableSelect(value) {
     this.dateTableSelectTime = Date.now();
-    this.onSelect(v);
+    this.onSelect(value);
+  },
+
+  chooseToday() {
+    const today = this.state.value.clone();
+    today.setTime(Date.now());
+    this.onSelect(today);
   },
 
   render() {
@@ -225,12 +231,6 @@ const Calendar = React.createClass({
       children,
       className: props.showWeekNumber ? `${prefixCls}-week-number` : '',
     });
-  },
-
-  chooseToday() {
-    const today = this.state.value.clone();
-    today.setTime(Date.now());
-    this.onSelect(today);
   },
 });
 

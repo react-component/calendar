@@ -1,5 +1,6 @@
 import 'rc-calendar/assets/index.less';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import MonthCalendar from 'rc-calendar/src/MonthCalendar';
 import DatePicker from 'rc-calendar/src/Picker';
 import zhCn from 'gregorian-calendar/lib/locale/zh-cn'; // spm error
@@ -93,7 +94,7 @@ function disabledDate(value) {
   return value.getTime() > Date.now();
 }
 
-React.render(
+ReactDOM.render(
   <div style={{zIndex:1000,position:'relative',width:600,margin:'0 auto'}}>
     <h2>zh-cn</h2>
     <MonthCalendar locale={CalendarLocale}

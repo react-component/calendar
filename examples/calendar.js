@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import 'rc-calendar/assets/bootstrap.less';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Calendar from 'rc-calendar';
 import DatePicker from 'rc-calendar/src/Picker';
 import zhCn from 'gregorian-calendar/lib/locale/zh-cn'; // spm error
@@ -92,7 +93,7 @@ function onStandaloneChange(value) {
   console.log(formatter.format(value))
 }
 
-React.render(<div>
+ReactDOM.render(<div>
   <h2>zh-cn</h2>
 
   <div style={{margin:10}}>

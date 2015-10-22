@@ -7,6 +7,8 @@ import {getTodayElement, getOkElement} from '../util/';
 const CalendarFooter = React.createClass({
   propTypes: {
     onSelect: PropTypes.func,
+    value: PropTypes.object,
+    defaultValue: PropTypes.object,
   },
 
   onSelect(value) {

@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import ReactDOM from 'react-dom';
 import {createChainedFunction, KeyCode, classSet, Dom} from 'rc-util';
 import Align from 'rc-align';
 import Animate from 'rc-animate';
@@ -81,9 +82,9 @@ const Picker = React.createClass({
 
   componentDidUpdate(prevProps, prevState) {
     if (this.haveOpened) {
-      React.render(this.getCalendarElement(), this.getCalendarContainer(), ()=> {
+      ReactDOM.render(this.getCalendarElement(), this.getCalendarContainer(), ()=> {
         if (!prevState.open && this.state.open) {
-          React.findDOMNode(this.calendarInstance).focus();
+          ReactDOM.findDOMNode(this.calendarInstance).focus();
         }
       });
     }
@@ -91,7 +92,7 @@ const Picker = React.createClass({
 
   componentWillUnmount() {
     if (this.calendarContainer) {
-      React.unmountComponentAtNode(this.calendarContainer);
+      ReactDOM.unmountComponentAtNode(this.calendarContainer);
       this.calendarContainer.parentNode.removeChild(this.calendarContainer);
       this.calendarContainer = null;
     }
@@ -123,17 +124,17 @@ const Picker = React.createClass({
     this.toggle();
   },
 
-  onKeyDown(e) {
+  onKeyDown(event) {
     // down
-    if (e.keyCode === KeyCode.DOWN) {
-      e.preventDefault();
+    if (event.keyCode === KeyCode.DOWN) {
+      event.preventDefault();
       this.open();
     }
   },
 
-  onCalendarKeyDown(e) {
-    if (e.keyCode === KeyCode.ESC) {
-      e.stopPropagation();
+  onCalendarKeyDown(event) {
+    if (event.keyCode === KeyCode.ESC) {
+      event.stopPropagation();
       this.close(this.focus);
     }
   },
@@ -152,7 +153,7 @@ const Picker = React.createClass({
   },
 
   onCalendarBlur() {
-    if (Dom.contains(this.getDOMNode(), document.activeElement)) {
+    if (Dom.contains(this.getNativeDOMNode(), document.activeElement)) {
       return;
     }
     // if invisible, will not trigger blur
@@ -169,7 +170,11 @@ const Picker = React.createClass({
   },
 
   onAnimateLeave() {
-    React.unmountComponentAtNode(this.getCalendarContainer());
+    ReactDOM.unmountComponentAtNode(this.getCalendarContainer());
+  },
+
+  getNativeDOMNode() {
+    return ReactDOM.findDOMNode(this);
   },
 
   getTransitionName() {
@@ -208,16 +213,16 @@ const Picker = React.createClass({
         targetOffsetProp = targetOffsetProp.concat();
       }
       const updateAlign = {};
-      for (let i = 0; i < 2; i++) {
+      for (let index = 0; index < 2; index++) {
         if (offsetProp) {
-          if (offsetProp[i] === undefined) {
-            offsetProp[i] = offset[i];
+          if (offsetProp[index] === undefined) {
+            offsetProp[index] = offset[index];
           }
           updateAlign.offset = offsetProp;
         }
         if (targetOffsetProp) {
-          if (targetOffsetProp[i] === undefined) {
-            targetOffsetProp[i] = targetOffset[i];
+          if (targetOffsetProp[index] === undefined) {
+            targetOffsetProp[index] = targetOffset[index];
           }
           updateAlign.targetOffset = offsetProp;
         }
@@ -239,7 +244,7 @@ const Picker = React.createClass({
     if (state.open) {
       className += getCalendarClassByPlacement(calendarProp.props.prefixCls, props.placement);
     } else {
-      const calendarDOMNode = React.findDOMNode(this.calendarInstance);
+      const calendarDOMNode = ReactDOM.findDOMNode(this.calendarInstance);
       // fix auto adjust
       className = calendarDOMNode && calendarDOMNode.className || '';
     }
@@ -261,12 +266,12 @@ const Picker = React.createClass({
     const calendarElement = React.cloneElement(calendarProp, extraProps);
     return (<Animate
       component=""
-      exclusive={true}
+      exclusive
       onLeave={this.onAnimateLeave}
-      transitionAppear={true}
+      transitionAppear
       showProp="calendarOpen"
       transitionName={this.getTransitionName()}>
-      <Align target={this.getDOMNode}
+      <Align target={this.getNativeDOMNode}
              key="calendar"
              onAlign={this.onCalendarAlign}
              calendarOpen={state.open}
@@ -275,30 +280,6 @@ const Picker = React.createClass({
         {calendarElement}
       </Align>
     </Animate>);
-  },
-
-  render() {
-    const props = this.props;
-    const disabled = props.disabled;
-    const prefixCls = props.prefixCls;
-    const state = this.state;
-    this.haveOpened = this.haveOpened || state.open;
-    const classes = {
-      [prefixCls]: 1,
-      [`${prefixCls}-open`]: state.open,
-      [`${prefixCls}-disabled`]: disabled,
-    };
-    return (<span className={classSet(classes)} style={props.style} tabIndex="0"
-                  onKeyDown={disabled ? noop : this.onKeyDown}
-                  onClick={disabled ? noop : this.onInputClick}>
-      {props.children(state, props)}
-    </span>);
-  },
-
-  focus() {
-    if (!this.state.open) {
-      this.getDOMNode().focus();
-    }
   },
 
   setOpen(open, callback) {
@@ -317,6 +298,12 @@ const Picker = React.createClass({
     }
   },
 
+  focus() {
+    if (!this.state.open) {
+      this.getNativeDOMNode().focus();
+    }
+  },
+
   toggle() {
     if (this.state.open) {
       this.close();
@@ -331,6 +318,24 @@ const Picker = React.createClass({
 
   close(callback) {
     this.setOpen(false, callback);
+  },
+
+  render() {
+    const props = this.props;
+    const disabled = props.disabled;
+    const prefixCls = props.prefixCls;
+    const state = this.state;
+    this.haveOpened = this.haveOpened || state.open;
+    const classes = {
+      [prefixCls]: 1,
+      [`${prefixCls}-open`]: state.open,
+      [`${prefixCls}-disabled`]: disabled,
+    };
+    return (<span className={classSet(classes)} style={props.style} tabIndex="0"
+                  onKeyDown={disabled ? noop : this.onKeyDown}
+                  onClick={disabled ? noop : this.onInputClick}>
+      {props.children(state, props)}
+    </span>);
   },
 });
 

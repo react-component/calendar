@@ -11,12 +11,12 @@ function goYear(direction) {
   });
 }
 
-function chooseDecade(year, e) {
+function chooseDecade(year, event) {
   const next = this.state.value.clone();
   next.setYear(year);
   next.rollSetMonth(this.state.value.getMonth());
   this.props.onSelect(next);
-  e.preventDefault();
+  event.preventDefault();
 }
 
 export default
@@ -44,12 +44,12 @@ class DecadePanel extends React.Component {
     let index = 0;
     const prefixCls = this.prefixCls;
 
-    for (let i = 0; i < ROW; i++) {
-      decades[i] = [];
-      for (let j = 0; j < COL; j++) {
+    for (let rowIndex = 0; rowIndex < ROW; rowIndex++) {
+      decades[rowIndex] = [];
+      for (let colIndex = 0; colIndex < COL; colIndex++) {
         const startDecade = preYear + index * 10;
         const endDecade = preYear + index * 10 + 9;
-        decades[i][j] = {
+        decades[rowIndex][colIndex] = {
           startDecade: startDecade,
           endDecade: endDecade,
         };
@@ -58,9 +58,9 @@ class DecadePanel extends React.Component {
     }
 
     const decadesEls = decades.map((row, decadeIndex) => {
-      const tds = row.map(d => {
-        const dStartDecade = d.startDecade;
-        const dEndDecade = d.endDecade;
+      const tds = row.map(decadeData => {
+        const dStartDecade = decadeData.startDecade;
+        const dEndDecade = decadeData.endDecade;
         const isLast = dStartDecade < startYear;
         const isNext = dEndDecade > endYear;
         const classNameMap = {
@@ -127,6 +127,9 @@ class DecadePanel extends React.Component {
 
 DecadePanel.propTypes = {
   locale: PropTypes.object,
+  value: PropTypes.object,
+  defaultValue: PropTypes.object,
+  rootPrefixCls: PropTypes.string,
 };
 
 DecadePanel.defaultProps = {

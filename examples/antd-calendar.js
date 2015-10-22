@@ -1,5 +1,6 @@
 import 'rc-calendar/assets/index.less';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Calendar from 'rc-calendar';
 import DatePicker from 'rc-calendar/src/Picker';
 import zhCn from 'gregorian-calendar/lib/locale/zh-cn'; // spm error
@@ -96,7 +97,6 @@ var Test = React.createClass({
                        disabled={state.disabled}
                        className="ant-calendar-picker-input ant-input"
                        value={value && getFormatter(this.state.showTime).format(value)}/>
-                <span className="ant-calendar-picker-icon" unselectable="true"/>
                 </span>
               );
             }
@@ -118,8 +118,7 @@ function onStandaloneChange(value) {
 }
 
 
-React.render(<div style={{zIndex:1000,position:'relative'}}>
-  <link href="http://ant.design/dist/antd.css" rel="stylesheet" type="text/css"/>
+ReactDOM.render(<div style={{zIndex:1000,position:'relative'}}>
   <h2>zh-cn</h2>
 
   <div style={{width:600}}>
