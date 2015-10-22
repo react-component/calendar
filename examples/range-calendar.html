@@ -239,7 +239,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
 <div class="container">
   <div class="header">
-    <h1>rc-calendar@4.0.0-alpha5</h1>
+    <h1>rc-calendar@4.0.0-alpha6</h1>
 
     <p>React Calendar</p>
   </div>
@@ -252,6 +252,7 @@ import <span class="hljs-string">'bootstrap/dist/css/bootstrap.css'</span>;
 import RangeCalendar <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-calendar/lib/RangeCalendar'</span>;
 import GregorianCalendarFormat <span class="hljs-keyword">from</span> <span class="hljs-string">'gregorian-calendar-format'</span>;
 import React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+import ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>;
 <span class="hljs-keyword">var</span> formatter = <span class="hljs-keyword">new</span> GregorianCalendarFormat(<span class="hljs-string">'yyyy-MM-dd HH:mm:ss'</span>);
 import GregorianCalendar <span class="hljs-keyword">from</span> <span class="hljs-string">'gregorian-calendar'</span>;
 import zhCn <span class="hljs-keyword">from</span> <span class="hljs-string">'gregorian-calendar/lib/locale/zh-cn'</span>;
@@ -344,7 +345,7 @@ import Picker <span class="hljs-keyword">from</span> <span class="hljs-string">'
   }
 });
 
-React.render(
+ReactDOM.render(
   &lt;div&gt;
     &lt;h2&gt;calendar (zh-cn)&lt;/h2&gt;
 

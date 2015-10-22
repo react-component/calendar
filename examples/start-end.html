@@ -239,7 +239,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
 <div class="container">
   <div class="header">
-    <h1>rc-calendar@4.0.0-alpha5</h1>
+    <h1>rc-calendar@4.0.0-alpha6</h1>
 
     <p>React Calendar</p>
   </div>
@@ -249,6 +249,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
   <div class="highlight">
     <pre><code>import <span class="hljs-string">'rc-calendar/assets/index.css'</span>;
 import React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+import ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>;
 import Calendar <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-calendar'</span>;
 import DatePicker <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-calendar/lib/Picker'</span>;
 import zhCn <span class="hljs-keyword">from</span> <span class="hljs-string">'gregorian-calendar/lib/locale/zh-cn'</span>; <span class="hljs-comment">// spm error</span>
@@ -352,7 +353,7 @@ import CalendarLocale <span class="hljs-keyword">from</span> <span class="hljs-s
 });
 
 
-React.render(&lt;Test /&gt;, document.getElementById(<span class="hljs-string">'__react-content'</span>));
+ReactDOM.render(&lt;Test /&gt;, document.getElementById(<span class="hljs-string">'__react-content'</span>));
 </code></pre>
   </div>
 </div>

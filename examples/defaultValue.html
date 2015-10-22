@@ -239,7 +239,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
 <div class="container">
   <div class="header">
-    <h1>rc-calendar@4.0.0-alpha5</h1>
+    <h1>rc-calendar@4.0.0-alpha6</h1>
 
     <p>React Calendar</p>
   </div>
@@ -250,6 +250,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
     <pre><code><span class="xml">import 'bootstrap/dist/css/bootstrap.css';
 import 'rc-calendar/assets/bootstrap.css';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Calendar from 'rc-calendar';
 import DatePicker from 'rc-calendar/lib/Picker';
 import zhCn from 'gregorian-calendar/lib/locale/zh-cn'; // spm error
@@ -336,7 +337,7 @@ var Test = React.createClass({
   }
 });
 
-React.render((<span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+ReactDOM.render((<span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">h2</span>&gt;</span>zh-cn<span class="hljs-tag">&lt;/<span class="hljs-title">h2</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=</span></span><span class="hljs-expression">{{<span class="hljs-variable">height</span>:200}}</span><span class="xml"><span class="hljs-tag">&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">Test</span> /&gt;</span>

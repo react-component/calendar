@@ -239,7 +239,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
 <div class="container">
   <div class="header">
-    <h1>rc-calendar@4.0.0-alpha5</h1>
+    <h1>rc-calendar@4.0.0-alpha6</h1>
 
     <p>React Calendar</p>
   </div>
@@ -249,6 +249,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
   <div class="highlight">
     <pre><code>import <span class="hljs-string">'rc-calendar/assets/index.css'</span>;
 import React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+import ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>;
 import Calendar <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-calendar'</span>;
 import DatePicker <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-calendar/lib/Picker'</span>;
 import zhCn <span class="hljs-keyword">from</span> <span class="hljs-string">'gregorian-calendar/lib/locale/zh-cn'</span>; <span class="hljs-comment">// spm error</span>
@@ -345,7 +346,6 @@ defaultCalendarValue.addMonth(-<span class="hljs-number">1</span>);
                        disabled={state.disabled}
                        className=<span class="hljs-string">"ant-calendar-picker-input ant-input"</span>
                        <span class="hljs-keyword">value</span>={<span class="hljs-keyword">value</span> &amp;&amp; getFormatter(<span class="hljs-keyword">this</span>.state.showTime).format(<span class="hljs-keyword">value</span>)}/&gt;
-                &lt;span className=<span class="hljs-string">"ant-calendar-picker-icon"</span> unselectable=<span class="hljs-string">"true"</span>/&gt;
                 &lt;/span&gt;
               );
             }
@@ -367,8 +367,7 @@ defaultCalendarValue.addMonth(-<span class="hljs-number">1</span>);
 }
 
 
-React.render(&lt;div style={{zIndex:<span class="hljs-number">1000</span>,position:<span class="hljs-string">'relative'</span>}}&gt;
-  &lt;link href=<span class="hljs-string">"http://ant.design/dist/antd.css"</span> rel=<span class="hljs-string">"stylesheet"</span> type=<span class="hljs-string">"text/css"</span>/&gt;
+ReactDOM.render(&lt;div style={{zIndex:<span class="hljs-number">1000</span>,position:<span class="hljs-string">'relative'</span>}}&gt;
   &lt;h2&gt;zh-cn&lt;/h2&gt;
 
   &lt;div style={{width:<span class="hljs-number">600</span>}}&gt;

@@ -3,7 +3,7 @@ webpackJsonp([6],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(226);
+	module.exports = __webpack_require__(234);
 
 
 /***/ },
@@ -12,26 +12,6 @@ webpackJsonp([6],{
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
-
-/***/ },
-
-/***/ 159:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var _src = __webpack_require__(160);
-	
-	var _src2 = _interopRequireDefault(_src);
-
-	exports['default'] = _src2['default'];
-	module.exports = exports['default'];
 
 /***/ },
 
@@ -46,11 +26,11 @@ webpackJsonp([6],{
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _Calendar = __webpack_require__(161);
+	var _src = __webpack_require__(161);
 	
-	var _Calendar2 = _interopRequireDefault(_Calendar);
+	var _src2 = _interopRequireDefault(_src);
 
-	exports['default'] = _Calendar2['default'];
+	exports['default'] = _src2['default'];
 	module.exports = exports['default'];
 
 /***/ },
@@ -66,37 +46,57 @@ webpackJsonp([6],{
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
+	var _Calendar = __webpack_require__(162);
+	
+	var _Calendar2 = _interopRequireDefault(_Calendar);
+
+	exports['default'] = _Calendar2['default'];
+	module.exports = exports['default'];
+
+/***/ },
+
+/***/ 162:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
 	var _react = __webpack_require__(3);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _gregorianCalendar = __webpack_require__(162);
+	var _gregorianCalendar = __webpack_require__(163);
 	
 	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
 	
-	var _rcUtil = __webpack_require__(166);
+	var _rcUtil = __webpack_require__(167);
 	
-	var _dateDateTable = __webpack_require__(178);
+	var _dateDateTable = __webpack_require__(179);
 	
 	var _dateDateTable2 = _interopRequireDefault(_dateDateTable);
 	
-	var _calendarCalendarHeader = __webpack_require__(183);
+	var _calendarCalendarHeader = __webpack_require__(184);
 	
 	var _calendarCalendarHeader2 = _interopRequireDefault(_calendarCalendarHeader);
 	
-	var _calendarCalendarFooter = __webpack_require__(190);
+	var _calendarCalendarFooter = __webpack_require__(191);
 	
 	var _calendarCalendarFooter2 = _interopRequireDefault(_calendarCalendarFooter);
 	
-	var _mixinCalendarMixin = __webpack_require__(193);
+	var _mixinCalendarMixin = __webpack_require__(194);
 	
 	var _mixinCalendarMixin2 = _interopRequireDefault(_mixinCalendarMixin);
 	
-	var _mixinCommonMixin = __webpack_require__(194);
+	var _mixinCommonMixin = __webpack_require__(195);
 	
 	var _mixinCommonMixin2 = _interopRequireDefault(_mixinCommonMixin);
 	
-	var _dateDateInput = __webpack_require__(196);
+	var _dateDateInput = __webpack_require__(197);
 	
 	var _dateDateInput2 = _interopRequireDefault(_dateDateInput);
 	
@@ -141,8 +141,6 @@ webpackJsonp([6],{
 	var Calendar = _react2['default'].createClass({
 	  displayName: 'Calendar',
 	
-	  mixins: [_mixinCommonMixin2['default'], _mixinCalendarMixin2['default']],
-	
 	  propTypes: {
 	    value: _react.PropTypes.object,
 	    selectedValue: _react.PropTypes.object,
@@ -164,6 +162,8 @@ webpackJsonp([6],{
 	    onBlur: _react.PropTypes.func
 	  },
 	
+	  mixins: [_mixinCommonMixin2['default'], _mixinCalendarMixin2['default']],
+	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
 	      showToday: true,
@@ -181,21 +181,21 @@ webpackJsonp([6],{
 	    return {};
 	  },
 	
-	  onKeyDown: function onKeyDown(e) {
-	    if (e.target.nodeName.toLowerCase() === 'input') {
+	  onKeyDown: function onKeyDown(event) {
+	    if (event.target.nodeName.toLowerCase() === 'input') {
 	      return undefined;
 	    }
-	    var keyCode = e.keyCode;
+	    var keyCode = event.keyCode;
 	    // mac
-	    var ctrlKey = e.ctrlKey || e.metaKey;
+	    var ctrlKey = event.ctrlKey || event.metaKey;
 	    switch (keyCode) {
 	      case _rcUtil.KeyCode.DOWN:
 	        goWeek.call(this, 1);
-	        e.preventDefault();
+	        event.preventDefault();
 	        return 1;
 	      case _rcUtil.KeyCode.UP:
 	        goWeek.call(this, -1);
-	        e.preventDefault();
+	        event.preventDefault();
 	        return 1;
 	      case _rcUtil.KeyCode.LEFT:
 	        if (ctrlKey) {
@@ -203,7 +203,7 @@ webpackJsonp([6],{
 	        } else {
 	          goDay.call(this, -1);
 	        }
-	        e.preventDefault();
+	        event.preventDefault();
 	        return 1;
 	      case _rcUtil.KeyCode.RIGHT:
 	        if (ctrlKey) {
@@ -211,30 +211,30 @@ webpackJsonp([6],{
 	        } else {
 	          goDay.call(this, 1);
 	        }
-	        e.preventDefault();
+	        event.preventDefault();
 	        return 1;
 	      case _rcUtil.KeyCode.HOME:
 	        goStartMonth.call(this);
-	        e.preventDefault();
+	        event.preventDefault();
 	        return 1;
 	      case _rcUtil.KeyCode.END:
 	        goEndMonth.call(this);
-	        e.preventDefault();
+	        event.preventDefault();
 	        return 1;
 	      case _rcUtil.KeyCode.PAGE_DOWN:
 	        this.nextMonth();
-	        e.preventDefault();
+	        event.preventDefault();
 	        return 1;
 	      case _rcUtil.KeyCode.PAGE_UP:
 	        this.previousMonth();
-	        e.preventDefault();
+	        event.preventDefault();
 	        return 1;
 	      case _rcUtil.KeyCode.ENTER:
 	        this.onSelect(this.state.value);
-	        e.preventDefault();
+	        event.preventDefault();
 	        return 1;
 	      default:
-	        this.props.onKeyDown(e);
+	        this.props.onKeyDown(event);
 	        return 1;
 	    }
 	  },
@@ -262,9 +262,15 @@ webpackJsonp([6],{
 	    this.onSelect(value);
 	  },
 	
-	  onDateTableSelect: function onDateTableSelect(v) {
+	  onDateTableSelect: function onDateTableSelect(value) {
 	    this.dateTableSelectTime = Date.now();
-	    this.onSelect(v);
+	    this.onSelect(value);
+	  },
+	
+	  chooseToday: function chooseToday() {
+	    var today = this.state.value.clone();
+	    today.setTime(Date.now());
+	    this.onSelect(today);
 	  },
 	
 	  render: function render() {
@@ -327,12 +333,6 @@ webpackJsonp([6],{
 	      children: children,
 	      className: props.showWeekNumber ? prefixCls + '-week-number' : ''
 	    });
-	  },
-	
-	  chooseToday: function chooseToday() {
-	    var today = this.state.value.clone();
-	    today.setTime(Date.now());
-	    this.onSelect(today);
 	  }
 	});
 	
@@ -341,7 +341,7 @@ webpackJsonp([6],{
 
 /***/ },
 
-/***/ 178:
+/***/ 179:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -364,11 +364,11 @@ webpackJsonp([6],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _DateTHead = __webpack_require__(179);
+	var _DateTHead = __webpack_require__(180);
 	
 	var _DateTHead2 = _interopRequireDefault(_DateTHead);
 	
-	var _DateTBody = __webpack_require__(181);
+	var _DateTBody = __webpack_require__(182);
 	
 	var _DateTBody2 = _interopRequireDefault(_DateTBody);
 	
@@ -403,7 +403,7 @@ webpackJsonp([6],{
 
 /***/ },
 
-/***/ 179:
+/***/ 180:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -426,7 +426,7 @@ webpackJsonp([6],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _DateConstants = __webpack_require__(180);
+	var _DateConstants = __webpack_require__(181);
 	
 	var _DateConstants2 = _interopRequireDefault(_DateConstants);
 	
@@ -451,10 +451,10 @@ webpackJsonp([6],{
 	      var firstDayOfWeek = value.getFirstDayOfWeek();
 	      var showWeekNumberEl = undefined;
 	
-	      for (var i = 0; i < _DateConstants2['default'].DATE_COL_COUNT; i++) {
-	        var index = (firstDayOfWeek + i) % _DateConstants2['default'].DATE_COL_COUNT;
-	        veryShortWeekdays[i] = locale.format.veryShortWeekdays[index];
-	        weekDays[i] = locale.format.weekdays[index];
+	      for (var dateColIndex = 0; dateColIndex < _DateConstants2['default'].DATE_COL_COUNT; dateColIndex++) {
+	        var index = (firstDayOfWeek + dateColIndex) % _DateConstants2['default'].DATE_COL_COUNT;
+	        veryShortWeekdays[dateColIndex] = locale.format.veryShortWeekdays[index];
+	        weekDays[dateColIndex] = locale.format.weekdays[index];
 	      }
 	
 	      if (props.showWeekNumber) {
@@ -500,7 +500,7 @@ webpackJsonp([6],{
 
 /***/ },
 
-/***/ 180:
+/***/ 181:
 /***/ function(module, exports) {
 
 	"use strict";
@@ -516,7 +516,7 @@ webpackJsonp([6],{
 
 /***/ },
 
-/***/ 181:
+/***/ 182:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -531,11 +531,11 @@ webpackJsonp([6],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _DateConstants = __webpack_require__(180);
+	var _DateConstants = __webpack_require__(181);
 	
 	var _DateConstants2 = _interopRequireDefault(_DateConstants);
 	
-	var _util = __webpack_require__(182);
+	var _util = __webpack_require__(183);
 	
 	function isSameDay(one, two) {
 	  return one.getYear() === two.getYear() && one.getMonth() === two.getMonth() && one.getDayOfMonth() === two.getDayOfMonth();
@@ -555,8 +555,8 @@ webpackJsonp([6],{
 	  return current.getYear() === today.getYear() && current.getMonth() > today.getMonth();
 	}
 	
-	function getIdFromDate(d) {
-	  return 'rc-calendar-' + d.getYear() + '-' + d.getMonth() + '-' + d.getDayOfMonth();
+	function getIdFromDate(date) {
+	  return 'rc-calendar-' + date.getYear() + '-' + date.getMonth() + '-' + date.getDayOfMonth();
 	}
 	
 	function noop() {}
@@ -580,8 +580,8 @@ webpackJsonp([6],{
 	
 	  render: function render() {
 	    var props = this.props;
-	    var i = undefined;
-	    var j = undefined;
+	    var iIndex = undefined;
+	    var jIndex = undefined;
 	    var current = undefined;
 	    var dateTable = [];
 	    var showWeekNumber = props.showWeekNumber;
@@ -611,8 +611,8 @@ webpackJsonp([6],{
 	    var lastMonth1 = month1.clone();
 	    lastMonth1.addDayOfMonth(0 - lastMonthDiffDay);
 	    var passed = 0;
-	    for (i = 0; i < _DateConstants2['default'].DATE_ROW_COUNT; i++) {
-	      for (j = 0; j < _DateConstants2['default'].DATE_COL_COUNT; j++) {
+	    for (iIndex = 0; iIndex < _DateConstants2['default'].DATE_ROW_COUNT; iIndex++) {
+	      for (jIndex = 0; jIndex < _DateConstants2['default'].DATE_COL_COUNT; jIndex++) {
 	        current = lastMonth1;
 	        if (passed) {
 	          current = current.clone();
@@ -624,7 +624,7 @@ webpackJsonp([6],{
 	    }
 	    var tableHtml = [];
 	    passed = 0;
-	    for (i = 0; i < _DateConstants2['default'].DATE_ROW_COUNT; i++) {
+	    for (iIndex = 0; iIndex < _DateConstants2['default'].DATE_ROW_COUNT; iIndex++) {
 	      var weekNumberCell = undefined;
 	      var dateCells = [];
 	      if (showWeekNumber) {
@@ -635,14 +635,14 @@ webpackJsonp([6],{
 	          dateTable[passed].getWeekOfYear()
 	        );
 	      }
-	      for (j = 0; j < _DateConstants2['default'].DATE_COL_COUNT; j++) {
+	      for (jIndex = 0; jIndex < _DateConstants2['default'].DATE_COL_COUNT; jIndex++) {
 	        var next = null;
 	        var last = null;
 	        current = dateTable[passed];
-	        if (j < _DateConstants2['default'].DATE_COL_COUNT - 1) {
+	        if (jIndex < _DateConstants2['default'].DATE_COL_COUNT - 1) {
 	          next = dateTable[passed + 1];
 	        }
-	        if (j > 0) {
+	        if (jIndex > 0) {
 	          last = dateTable[passed - 1];
 	        }
 	        var cls = cellClass;
@@ -734,7 +734,7 @@ webpackJsonp([6],{
 	      tableHtml.push(_react2['default'].createElement(
 	        'tr',
 	        {
-	          key: i,
+	          key: iIndex,
 	          role: 'row' },
 	        weekNumberCell,
 	        dateCells
@@ -753,7 +753,7 @@ webpackJsonp([6],{
 
 /***/ },
 
-/***/ 182:
+/***/ 183:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -816,19 +816,19 @@ webpackJsonp([6],{
 	    return _getTodayTime(value);
 	  },
 	
-	  getTodayElement: function getTodayElement(props) {
-	    var prefixCls = props.prefixCls;
-	    var locale = props.locale;
-	    var value = props.value;
+	  getTodayElement: function getTodayElement(componentProps) {
+	    var prefixCls = componentProps.prefixCls;
+	    var locale = componentProps.locale;
+	    var value = componentProps.value;
 	
 	    var disabledToday = false;
 	    var localeNow = locale.today;
-	    if (props.showTime) {
+	    if (componentProps.showTime) {
 	      localeNow = locale.now || locale.today;
 	    }
 	    var disabledTodayClass = '';
-	    if (props.disabledDate) {
-	      disabledToday = props.disabledDate(_getTodayTime(value), value);
+	    if (componentProps.disabledDate) {
+	      disabledToday = componentProps.disabledDate(_getTodayTime(value), value);
 	      if (disabledToday) {
 	        disabledTodayClass = prefixCls + '-today-btn-disabled';
 	      }
@@ -837,25 +837,25 @@ webpackJsonp([6],{
 	      'a',
 	      { className: prefixCls + '-today-btn ' + disabledTodayClass,
 	        role: 'button',
-	        onClick: disabledToday ? null : props.onToday,
-	        title: getTodayTimeStr(props.value) },
+	        onClick: disabledToday ? null : componentProps.onToday,
+	        title: getTodayTimeStr(componentProps.value) },
 	      localeNow
 	    );
 	  },
 	
-	  getOkElement: function getOkElement(props) {
-	    var prefixCls = props.prefixCls;
-	    var locale = props.locale;
+	  getOkElement: function getOkElement(componentProps) {
+	    var prefixCls = componentProps.prefixCls;
+	    var locale = componentProps.locale;
 	
 	    var className = prefixCls + '-ok-btn';
-	    if (props.okDisabled) {
+	    if (componentProps.okDisabled) {
 	      className += ' ' + prefixCls + '-ok-btn-disabled';
 	    }
 	    return _react2['default'].createElement(
 	      'a',
 	      { className: className,
 	        role: 'button',
-	        onClick: props.okDisabled ? null : props.onOk },
+	        onClick: componentProps.okDisabled ? null : componentProps.onOk },
 	      locale.ok
 	    );
 	  },
@@ -870,7 +870,7 @@ webpackJsonp([6],{
 
 /***/ },
 
-/***/ 183:
+/***/ 184:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -885,19 +885,19 @@ webpackJsonp([6],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _monthMonthPanel = __webpack_require__(184);
+	var _monthMonthPanel = __webpack_require__(185);
 	
 	var _monthMonthPanel2 = _interopRequireDefault(_monthMonthPanel);
 	
-	var _gregorianCalendarFormat = __webpack_require__(187);
+	var _gregorianCalendarFormat = __webpack_require__(188);
 	
 	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
 	
-	var _yearYearPanel = __webpack_require__(185);
+	var _yearYearPanel = __webpack_require__(186);
 	
 	var _yearYearPanel2 = _interopRequireDefault(_yearYearPanel);
 	
-	var _rcUtil = __webpack_require__(166);
+	var _rcUtil = __webpack_require__(167);
 	
 	var _rcUtil2 = _interopRequireDefault(_rcUtil);
 	
@@ -994,6 +994,24 @@ webpackJsonp([6],{
 	    );
 	  },
 	
+	  showIf: function showIf(condition, el) {
+	    return condition ? el : null;
+	  },
+	
+	  showMonthPanel: function showMonthPanel() {
+	    this.setState({
+	      showMonthPanel: 1,
+	      showYearPanel: 0
+	    });
+	  },
+	
+	  showYearPanel: function showYearPanel() {
+	    this.setState({
+	      showMonthPanel: 0,
+	      showYearPanel: 1
+	    });
+	  },
+	
 	  render: function render() {
 	    var props = this.props;
 	    var enableNext = props.enableNext;
@@ -1053,24 +1071,6 @@ webpackJsonp([6],{
 	      ),
 	      panel
 	    );
-	  },
-	
-	  showIf: function showIf(condition, el) {
-	    return condition ? el : null;
-	  },
-	
-	  showMonthPanel: function showMonthPanel() {
-	    this.setState({
-	      showMonthPanel: 1,
-	      showYearPanel: 0
-	    });
-	  },
-	
-	  showYearPanel: function showYearPanel() {
-	    this.setState({
-	      showMonthPanel: 0,
-	      showYearPanel: 1
-	    });
 	  }
 	});
 	
@@ -1079,7 +1079,7 @@ webpackJsonp([6],{
 
 /***/ },
 
-/***/ 190:
+/***/ 191:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1094,15 +1094,15 @@ webpackJsonp([6],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _timeTime = __webpack_require__(191);
+	var _timeTime = __webpack_require__(192);
 	
 	var _timeTime2 = _interopRequireDefault(_timeTime);
 	
-	var _rcUtil = __webpack_require__(166);
+	var _rcUtil = __webpack_require__(167);
 	
 	var _rcUtil2 = _interopRequireDefault(_rcUtil);
 	
-	var _util = __webpack_require__(182);
+	var _util = __webpack_require__(183);
 	
 	var toFragment = _rcUtil2['default'].Children.mapSelf;
 	
@@ -1110,7 +1110,9 @@ webpackJsonp([6],{
 	  displayName: 'CalendarFooter',
 	
 	  propTypes: {
-	    onSelect: _react.PropTypes.func
+	    onSelect: _react.PropTypes.func,
+	    value: _react.PropTypes.object,
+	    defaultValue: _react.PropTypes.object
 	  },
 	
 	  onSelect: function onSelect(value) {
@@ -1174,7 +1176,7 @@ webpackJsonp([6],{
 
 /***/ },
 
-/***/ 191:
+/***/ 192:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1199,11 +1201,11 @@ webpackJsonp([6],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _rcUtil = __webpack_require__(166);
+	var _rcUtil = __webpack_require__(167);
 	
 	var _rcUtil2 = _interopRequireDefault(_rcUtil);
 	
-	var _TimePanel = __webpack_require__(192);
+	var _TimePanel = __webpack_require__(193);
 	
 	var _TimePanel2 = _interopRequireDefault(_TimePanel);
 	
@@ -1230,30 +1232,30 @@ webpackJsonp([6],{
 	}
 	
 	function keyDownWrap(method, min, max) {
-	  return function onKeyDown(e) {
+	  return function onKeyDown(event) {
 	    if (this.props.disabled) {
 	      return;
 	    }
-	    var value = e.target.value;
+	    var value = event.target.value;
 	    var number = parseInt(value, 10);
-	    var keyCode = e.keyCode;
+	    var keyCode = event.keyCode;
 	    var handled = undefined;
 	    if (keyCode === _rcUtil.KeyCode.DOWN) {
 	      number++;
-	      e.stopPropagation();
-	      e.preventDefault();
+	      event.stopPropagation();
+	      event.preventDefault();
 	      handled = 1;
 	    } else if (keyCode === _rcUtil.KeyCode.UP) {
 	      number--;
-	      e.stopPropagation();
-	      e.preventDefault();
+	      event.stopPropagation();
+	      event.preventDefault();
 	      handled = 1;
 	    }
 	    if (handled) {
 	      number = loop(number, min, max);
 	      var time = this.props.value.clone();
 	      time[method](number);
-	      this.props.onChange(time, e);
+	      this.props.onChange(time, event);
 	    }
 	  };
 	}
@@ -1273,8 +1275,8 @@ webpackJsonp([6],{
 	      showSecondPanel: 0
 	    };
 	    var events = ['onHourKeyDown', 'onMinuteKeyDown', 'onSecondKeyDown', 'onHourClick', 'onMinuteClick', 'onSecondClick', 'onSelectPanel'];
-	    events.forEach(function (m) {
-	      _this[m] = _this[m].bind(_this);
+	    events.forEach(function (method) {
+	      _this[method] = _this[method].bind(_this);
 	    });
 	  }
 	
@@ -1294,7 +1296,7 @@ webpackJsonp([6],{
 	        showSecondPanel: 0
 	      }, function () {
 	        // ie9 has broken focus
-	        _react2['default'].findDOMNode(_this2.refs[setter]).focus();
+	        _this2.refs[setter].focus();
 	      });
 	      this.props.onChange(value);
 	    }
@@ -1436,7 +1438,7 @@ webpackJsonp([6],{
 
 /***/ },
 
-/***/ 192:
+/***/ 193:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1461,14 +1463,14 @@ webpackJsonp([6],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _rcUtil = __webpack_require__(166);
+	var _rcUtil = __webpack_require__(167);
 	
-	function choose(hour, e) {
+	function choose(hour, event) {
 	  var next = this.state.value.clone();
 	  var method = this.props.setter;
 	  next[method](hour);
 	  this.props.onSelect(next, method);
-	  e.preventDefault();
+	  event.preventDefault();
 	}
 	
 	var TimePanel = (function (_React$Component) {
@@ -1498,30 +1500,30 @@ webpackJsonp([6],{
 	      var ROW = props.rowCount;
 	      var COL = props.colCount;
 	
-	      for (var i = 0; i < ROW; i++) {
-	        data[i] = [];
-	        for (var j = 0; j < COL; j++) {
-	          data[i][j] = i * COL + j;
+	      for (var rowIndex = 0; rowIndex < ROW; rowIndex++) {
+	        data[rowIndex] = [];
+	        for (var colIndex = 0; colIndex < COL; colIndex++) {
+	          data[rowIndex][colIndex] = rowIndex * COL + colIndex;
 	        }
 	      }
 	
 	      var hoursEls = data.map(function (row, index) {
-	        var tds = row.map(function (d) {
+	        var tds = row.map(function (hour) {
 	          var _classNameMap;
 	
-	          var classNameMap = (_classNameMap = {}, _defineProperty(_classNameMap, prefixCls + '-cell', 1), _defineProperty(_classNameMap, prefixCls + '-selected-cell', d === currentHour), _classNameMap);
+	          var classNameMap = (_classNameMap = {}, _defineProperty(_classNameMap, prefixCls + '-cell', 1), _defineProperty(_classNameMap, prefixCls + '-selected-cell', hour === currentHour), _classNameMap);
 	          return _react2['default'].createElement(
 	            'td',
 	            {
-	              key: d,
-	              onClick: choose.bind(_this, d),
+	              key: hour,
+	              onClick: choose.bind(_this, hour),
 	              role: 'gridcell',
 	              className: (0, _rcUtil.classSet)(classNameMap) },
 	            _react2['default'].createElement(
 	              'a',
 	              {
 	                className: prefixCls + '-time' },
-	              d
+	              hour
 	            )
 	          );
 	        });
@@ -1566,6 +1568,11 @@ webpackJsonp([6],{
 	
 	exports['default'] = TimePanel;
 	
+	TimePanel.propTypes = {
+	  value: _react.PropTypes.object,
+	  rootPrefixCls: _react.PropTypes.string
+	};
+	
 	TimePanel.defaultProps = {
 	  onSelect: function onSelect() {}
 	};
@@ -1573,7 +1580,7 @@ webpackJsonp([6],{
 
 /***/ },
 
-/***/ 193:
+/***/ 194:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1590,9 +1597,9 @@ webpackJsonp([6],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _rcUtil = __webpack_require__(166);
+	var _rcUtil = __webpack_require__(167);
 	
-	var _gregorianCalendar = __webpack_require__(162);
+	var _gregorianCalendar = __webpack_require__(163);
 	
 	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
 	
@@ -1717,7 +1724,7 @@ webpackJsonp([6],{
 
 /***/ },
 
-/***/ 196:
+/***/ 197:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1732,7 +1739,7 @@ webpackJsonp([6],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _warning = __webpack_require__(197);
+	var _warning = __webpack_require__(198);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
@@ -1763,8 +1770,8 @@ webpackJsonp([6],{
 	    });
 	  },
 	
-	  onInputChange: function onInputChange(e) {
-	    var str = e.target.value;
+	  onInputChange: function onInputChange(event) {
+	    var str = event.target.value;
 	    this.setState({
 	      str: str
 	    });
@@ -1782,7 +1789,7 @@ webpackJsonp([6],{
 	    if (str) {
 	      try {
 	        value = formatter.parse(str, locale);
-	      } catch (e) {
+	      } catch (ex) {
 	        (0, _warning2['default'])(false, 'invalid date input: ' + str);
 	        this.setState(this.getInitialState());
 	        return;
@@ -1818,7 +1825,7 @@ webpackJsonp([6],{
 
 /***/ },
 
-/***/ 197:
+/***/ 198:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -1882,11 +1889,11 @@ webpackJsonp([6],{
 	
 	module.exports = warning;
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ },
 
-/***/ 226:
+/***/ 234:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1901,29 +1908,33 @@ webpackJsonp([6],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _rcCalendar = __webpack_require__(159);
+	var _reactDom = __webpack_require__(159);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _rcCalendar = __webpack_require__(160);
 	
 	var _rcCalendar2 = _interopRequireDefault(_rcCalendar);
 	
-	var _rcCalendarSrcPicker = __webpack_require__(198);
+	var _rcCalendarSrcPicker = __webpack_require__(199);
 	
 	var _rcCalendarSrcPicker2 = _interopRequireDefault(_rcCalendarSrcPicker);
 	
-	var _gregorianCalendarLibLocaleZhCn = __webpack_require__(213);
+	var _gregorianCalendarLibLocaleZhCn = __webpack_require__(221);
 	
 	var _gregorianCalendarLibLocaleZhCn2 = _interopRequireDefault(_gregorianCalendarLibLocaleZhCn);
 	
 	// spm error
 	
-	var _gregorianCalendarFormat = __webpack_require__(187);
+	var _gregorianCalendarFormat = __webpack_require__(188);
 	
 	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
 	
-	var _gregorianCalendar = __webpack_require__(162);
+	var _gregorianCalendar = __webpack_require__(163);
 	
 	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
 	
-	var _rcCalendarSrcLocaleZhCn = __webpack_require__(214);
+	var _rcCalendarSrcLocaleZhCn = __webpack_require__(222);
 	
 	var _rcCalendarSrcLocaleZhCn2 = _interopRequireDefault(_rcCalendarSrcLocaleZhCn);
 	
@@ -2031,7 +2042,7 @@ webpackJsonp([6],{
 	  }
 	});
 	
-	_react2['default'].render(_react2['default'].createElement(Test, null), document.getElementById('__react-content'));
+	_reactDom2['default'].render(_react2['default'].createElement(Test, null), document.getElementById('__react-content'));
 
 /***/ }
 
