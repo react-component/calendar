@@ -60,7 +60,8 @@ React Calendar
 ```js
 import Calendar from 'rc-calendar';
 import React from 'react';
-React.render(<Calendar />, container);
+import ReactDOM from 'react-dom';
+ReactDOM.render(<Calendar />, container);
 ```
 
 ## Development
