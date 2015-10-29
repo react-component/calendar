@@ -68,10 +68,8 @@ const Picker = React.createClass({
     let value = nextProps.value;
     if (value !== undefined) {
       // null special meaning
-      value = value || nextProps.defaultValue || null;
-      this.setState({
-        value,
-      });
+      value = value || null;
+      this.setState({ value });
     }
     if ('open' in nextProps) {
       this.setState({
