@@ -5,6 +5,8 @@ export default {
   now: 'Now',
   ok: 'Ok',
   clear: 'Clear',
+  monthWord: 'Month',
+  yearWord: 'Year',
   hourPanelTitle: 'Select hour',
   minutePanelTitle: 'Select minute',
   secondPanelTitle: 'Select second',
