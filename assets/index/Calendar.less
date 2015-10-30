@@ -21,10 +21,14 @@
   }
 
   &-input {
-    border: 0;
+    border: 1px solid transparent;
     width: 100%;
     cursor: auto;
     outline: 0;
+
+    &-invalid {
+      border-color: red;
+    }
   }
 
   &-clear-btn {
@@ -51,6 +55,11 @@
 
   &-clear-btn:hover:after {
     color: #666;
+  }
+
+  &-main-panel {
+    position: relative;
+    outline: none;
   }
 
   &-week-number {

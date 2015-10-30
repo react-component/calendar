@@ -71,14 +71,14 @@ const Picker = React.createClass({
     }
   },
 
-  onCalendarSelect(value) {
+  onCalendarSelect(value, cause) {
     const props = this.props;
     if (!('value' in props)) {
       this.setState({
         value: value,
       });
     }
-    if (!props.calendar.props.showTime) {
+    if (!props.calendar.props.showTime && cause.source !== 'dateInput') {
       this.close(this.focus);
     }
     props.onChange(value);

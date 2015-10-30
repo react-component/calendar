@@ -209,8 +209,7 @@ const RangeCalendar = React.createClass({
     };
 
     return (<div className={classes} style={props.style}
-                 tabIndex="0" onFocus={this.onFocus}
-                 onBlur={this.onBlur}>
+                 tabIndex="0">
       <CalendarPart {...props} {...newProps} direction="left"
                                              formatter={this.getFormatter()}
                                              value={this.getStartValue()}

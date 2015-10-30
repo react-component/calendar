@@ -15,8 +15,6 @@ export default {
     prefixCls: PropTypes.string,
     onChange: PropTypes.func,
     onOk: PropTypes.func,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
   },
 
   getDefaultProps() {
@@ -28,31 +26,11 @@ export default {
       className: '',
       onSelect: noop,
       onChange: noop,
-      onFocus: noop,
-      onBlur: noop,
     };
   },
 
   shouldComponentUpdate(nextProps) {
     return this.props.visible || nextProps.visible;
-  },
-
-  onFocus() {
-    if (this._blurTimer) {
-      clearTimeout(this._blurTimer);
-      this._blurTimer = null;
-    } else {
-      this.props.onFocus();
-    }
-  },
-
-  onBlur() {
-    if (this._blurTimer) {
-      clearTimeout(this._blurTimer);
-    }
-    this._blurTimer = setTimeout(()=> {
-      this.props.onBlur();
-    }, 100);
   },
 
   getFormatter() {
