@@ -29,6 +29,7 @@ describe('DatePicker', function () {
       >{({value}) => {
       return <input className="rc-calendar-picker-input"
                     onChange={noop}
+                    readOnly
                     value={value  && formatter.format(value)}/>;
     }
     }
@@ -124,14 +125,14 @@ describe('DatePicker', function () {
         expect(TestUtils.scryRenderedDOMComponentsWithClass(picker, 'rc-calendar')[0]).not.to.be.ok();
         expect(picker.state.open).to.be(true);
         if (document.querySelectorAll) {
-          expect(document.querySelectorAll('.rc-calendar-picker-container .rc-calendar').length).not.to.be(0);
+          expect(document.querySelectorAll('.rc-calendar-picker').length).not.to.be(0);
         }
         expect(TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance, 'rc-calendar-date')[0]).to.be.ok();
         ReactDOM.unmountComponentAtNode(div);
         setTimeout(next, 100);
       }, function (next) {
         if (document.querySelectorAll) {
-          expect(document.querySelectorAll('.rc-calendar-picker-container .rc-calendar').length).to.be(0);
+          expect(document.querySelectorAll('.rc-calendar-picker').length).to.be(0);
         }
         expect(picker.calendarInstance).not.to.be.ok();
         next();

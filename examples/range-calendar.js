@@ -63,7 +63,7 @@ const Test = React.createClass({
                                     showTime={true}/>;
     return <div className="form-group" style={{width: 400, margin: 20}} >
       <div className="input-group" style={{width:350}}>
-        <Picker value={state.value} onChange={this.onChange} calendar={calendar} style={{display:'inline'}}>
+        <Picker value={state.value} onChange={this.onChange} calendar={calendar}>
           {
             ({value}) => {
               return <span>
