@@ -239,7 +239,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
 <div class="container">
   <div class="header">
-    <h1>rc-calendar@4.0.0-alpha6</h1>
+    <h1>rc-calendar@4.0.0-alpha7</h1>
 
     <p>React Calendar</p>
   </div>
@@ -303,7 +303,7 @@ import Picker <span class="hljs-keyword">from</span> <span class="hljs-string">'
     <span class="hljs-keyword">const</span> calendar = &lt;RangeCalendar showWeekNumber={<span class="hljs-keyword">false</span>}
                                     locale={CalendarLocale}
                                     disabledDate={disabledDate}
-                                    showTime={<span class="hljs-keyword">true</span>}/&gt;;
+                                    showTime/&gt;;
     <span class="hljs-keyword">return</span> (&lt;Picker <span class="hljs-keyword">value</span>={state.<span class="hljs-keyword">value</span>}
                     onChange={<span class="hljs-keyword">this</span>.onChange}
                     animation=<span class="hljs-string">"slide-up"</span>
@@ -313,6 +313,7 @@ import Picker <span class="hljs-keyword">from</span> <span class="hljs-string">'
           <span class="hljs-keyword">return</span> (&lt;span&gt;
                 &lt;input placeholder=<span class="hljs-string">"请选择日期"</span> style={{width:<span class="hljs-number">350</span>}}
                        disabled={state.disabled}
+                       readOnly
                        className=<span class="hljs-string">"ant-calendar-picker-input ant-input"</span>
                        <span class="hljs-keyword">value</span>={<span class="hljs-keyword">value</span> &amp;&amp; (formatter.format(<span class="hljs-keyword">value</span>[<span class="hljs-number">0</span>])+<span class="hljs-string">' - '</span>+formatter.format(<span class="hljs-keyword">value</span>[<span class="hljs-number">1</span>]))}/&gt;
                 &lt;/span&gt;);
@@ -326,13 +327,13 @@ ReactDOM.render(
   &lt;div&gt;
     &lt;h2&gt;calendar (zh-cn)&lt;/h2&gt;
     &lt;div style={{margin:<span class="hljs-number">10</span>}}&gt;
-      &lt;RangeCalendar showWeekNumber={<span class="hljs-keyword">true</span>}
+      &lt;RangeCalendar showWeekNumber
                      locale={CalendarLocale}
                      onChange={onStandaloneChange}
                      onSelect={onStandaloneSelect}
                      onOk={onStandaloneOk}
                      disabledDate={disabledDate}
-                     showTime={<span class="hljs-keyword">true</span>}/&gt;
+                     showTime/&gt;
     &lt;/div&gt;
     &lt;br/&gt;
 

@@ -6727,17 +6727,14 @@ button.close {
 /*# sourceMappingURL=node_modules/bootstrap/dist/css/bootstrap.css.map */.rc-calendar-hidden {
   display: none;
 }
-.rc-calendar-picker .rc-calendar,
-.rc-calendar-picker-container .rc-calendar {
+.rc-calendar-picker {
   position: absolute;
   left: -9999px;
   top: -9999px;
   z-index: 1000;
 }
-.rc-calendar-picker {
-  position: relative;
-  display: inline-block;
-  outline: none;
+.rc-calendar-picker-hidden {
+  display: none;
 }
 .rc-calendar {
   box-sizing: border-box;

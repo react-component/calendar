@@ -239,7 +239,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
 <div class="container">
   <div class="header">
-    <h1>rc-calendar@4.0.0-alpha6</h1>
+    <h1>rc-calendar@4.0.0-alpha7</h1>
 
     <p>React Calendar</p>
   </div>
@@ -275,9 +275,9 @@ import CalendarLocale <span class="hljs-keyword">from</span> <span class="hljs-s
     <span class="hljs-keyword">const</span> props = <span class="hljs-keyword">this</span>.props;
     <span class="hljs-keyword">var</span> calendar = &lt;Calendar locale={CalendarLocale}
                              showTime={props.showTime}
-                             showOk={<span class="hljs-keyword">true</span>}
+                             showOk
                              disabledDate={props.disabledDate}
-                             showClear={<span class="hljs-keyword">true</span>}/&gt;;
+                             showClear/&gt;;
     <span class="hljs-keyword">return</span> &lt;DatePicker
       animation=<span class="hljs-string">"slide-up"</span>
       disabled={props.disabled}
@@ -290,6 +290,7 @@ import CalendarLocale <span class="hljs-keyword">from</span> <span class="hljs-s
             &lt;span&gt;
                 &lt;input placeholder=<span class="hljs-string">"请选择日期"</span> style={{width:<span class="hljs-number">250</span>}}
                        disabled={props.disabled}
+                       readOnly
                        <span class="hljs-keyword">value</span>={<span class="hljs-keyword">value</span> &amp;&amp; getFormatter(props.showTime).format(<span class="hljs-keyword">value</span>)}/&gt;
                 &lt;/span&gt;
           );

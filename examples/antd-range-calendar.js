@@ -3,7 +3,7 @@ webpackJsonp([2],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(226);
+	module.exports = __webpack_require__(230);
 
 
 /***/ },
@@ -15,7 +15,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 179:
+/***/ 180:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38,11 +38,11 @@ webpackJsonp([2],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _DateTHead = __webpack_require__(180);
+	var _DateTHead = __webpack_require__(181);
 	
 	var _DateTHead2 = _interopRequireDefault(_DateTHead);
 	
-	var _DateTBody = __webpack_require__(182);
+	var _DateTBody = __webpack_require__(183);
 	
 	var _DateTBody2 = _interopRequireDefault(_DateTBody);
 	
@@ -77,7 +77,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 180:
+/***/ 181:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -100,7 +100,7 @@ webpackJsonp([2],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _DateConstants = __webpack_require__(181);
+	var _DateConstants = __webpack_require__(182);
 	
 	var _DateConstants2 = _interopRequireDefault(_DateConstants);
 	
@@ -174,7 +174,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 181:
+/***/ 182:
 /***/ function(module, exports) {
 
 	"use strict";
@@ -190,7 +190,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 182:
+/***/ 183:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -205,11 +205,11 @@ webpackJsonp([2],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _DateConstants = __webpack_require__(181);
+	var _DateConstants = __webpack_require__(182);
 	
 	var _DateConstants2 = _interopRequireDefault(_DateConstants);
 	
-	var _util = __webpack_require__(183);
+	var _util = __webpack_require__(184);
 	
 	function isSameDay(one, two) {
 	  return one.getYear() === two.getYear() && one.getMonth() === two.getMonth() && one.getDayOfMonth() === two.getDayOfMonth();
@@ -427,7 +427,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 183:
+/***/ 184:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -544,7 +544,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 184:
+/***/ 185:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -559,19 +559,19 @@ webpackJsonp([2],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _monthMonthPanel = __webpack_require__(185);
+	var _monthMonthPanel = __webpack_require__(186);
 	
 	var _monthMonthPanel2 = _interopRequireDefault(_monthMonthPanel);
 	
-	var _gregorianCalendarFormat = __webpack_require__(188);
+	var _gregorianCalendarFormat = __webpack_require__(189);
 	
 	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
 	
-	var _yearYearPanel = __webpack_require__(186);
+	var _yearYearPanel = __webpack_require__(187);
 	
 	var _yearYearPanel2 = _interopRequireDefault(_yearYearPanel);
 	
-	var _rcUtil = __webpack_require__(167);
+	var _rcUtil = __webpack_require__(168);
 	
 	var _rcUtil2 = _interopRequireDefault(_rcUtil);
 	
@@ -753,7 +753,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 191:
+/***/ 192:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -768,15 +768,15 @@ webpackJsonp([2],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _timeTime = __webpack_require__(192);
+	var _timeTime = __webpack_require__(193);
 	
 	var _timeTime2 = _interopRequireDefault(_timeTime);
 	
-	var _rcUtil = __webpack_require__(167);
+	var _rcUtil = __webpack_require__(168);
 	
 	var _rcUtil2 = _interopRequireDefault(_rcUtil);
 	
-	var _util = __webpack_require__(183);
+	var _util = __webpack_require__(184);
 	
 	var toFragment = _rcUtil2['default'].Children.mapSelf;
 	
@@ -850,7 +850,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 192:
+/***/ 193:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -875,11 +875,11 @@ webpackJsonp([2],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _rcUtil = __webpack_require__(167);
+	var _rcUtil = __webpack_require__(168);
 	
 	var _rcUtil2 = _interopRequireDefault(_rcUtil);
 	
-	var _TimePanel = __webpack_require__(193);
+	var _TimePanel = __webpack_require__(194);
 	
 	var _TimePanel2 = _interopRequireDefault(_TimePanel);
 	
@@ -1112,7 +1112,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 193:
+/***/ 194:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1137,7 +1137,7 @@ webpackJsonp([2],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _rcUtil = __webpack_require__(167);
+	var _rcUtil = __webpack_require__(168);
 	
 	function choose(hour, event) {
 	  var next = this.state.value.clone();
@@ -1254,7 +1254,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 197:
+/***/ 198:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1269,7 +1269,7 @@ webpackJsonp([2],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _warning = __webpack_require__(198);
+	var _warning = __webpack_require__(199);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
@@ -1355,75 +1355,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 198:
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {/**
-	 * Copyright 2014-2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 */
-	
-	'use strict';
-	
-	/**
-	 * Similar to invariant but only logs a warning if the condition is not met.
-	 * This can be used to log issues in development environments in critical
-	 * paths. Removing the logging code for production environments will keep the
-	 * same logic and follow the same code paths.
-	 */
-	
-	var warning = function() {};
-	
-	if (process.env.NODE_ENV !== 'production') {
-	  warning = function(condition, format, args) {
-	    var len = arguments.length;
-	    args = new Array(len > 2 ? len - 2 : 0);
-	    for (var key = 2; key < len; key++) {
-	      args[key - 2] = arguments[key];
-	    }
-	    if (format === undefined) {
-	      throw new Error(
-	        '`warning(condition, format, ...args)` requires a warning ' +
-	        'message argument'
-	      );
-	    }
-	
-	    if (format.length < 10 || (/^[s\W]*$/).test(format)) {
-	      throw new Error(
-	        'The warning format should be able to uniquely identify this ' +
-	        'warning. Please, use a more descriptive format than: ' + format
-	      );
-	    }
-	
-	    if (!condition) {
-	      var argIndex = 0;
-	      var message = 'Warning: ' +
-	        format.replace(/%s/g, function() {
-	          return args[argIndex++];
-	        });
-	      if (typeof console !== 'undefined') {
-	        console.error(message);
-	      }
-	      try {
-	        // This error was thrown as a convenience so that you can use this stack
-	        // to find the callsite that caused this warning to fire.
-	        throw new Error(message);
-	      } catch(x) {}
-	    }
-	  };
-	}
-	
-	module.exports = warning;
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
-
-/***/ },
-
-/***/ 226:
+/***/ 230:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1432,11 +1364,11 @@ webpackJsonp([2],{
 	
 	__webpack_require__(2);
 	
-	var _rcCalendarSrcRangeCalendar = __webpack_require__(227);
+	var _rcCalendarSrcRangeCalendar = __webpack_require__(231);
 	
 	var _rcCalendarSrcRangeCalendar2 = _interopRequireDefault(_rcCalendarSrcRangeCalendar);
 	
-	var _gregorianCalendarFormat = __webpack_require__(188);
+	var _gregorianCalendarFormat = __webpack_require__(189);
 	
 	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
 	
@@ -1444,23 +1376,23 @@ webpackJsonp([2],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(159);
+	var _reactDom = __webpack_require__(160);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _gregorianCalendar = __webpack_require__(163);
+	var _gregorianCalendar = __webpack_require__(164);
 	
 	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
 	
-	var _gregorianCalendarLibLocaleZhCn = __webpack_require__(221);
+	var _gregorianCalendarLibLocaleZhCn = __webpack_require__(225);
 	
 	var _gregorianCalendarLibLocaleZhCn2 = _interopRequireDefault(_gregorianCalendarLibLocaleZhCn);
 	
-	var _rcCalendarSrcLocaleZhCn = __webpack_require__(222);
+	var _rcCalendarSrcLocaleZhCn = __webpack_require__(226);
 	
 	var _rcCalendarSrcLocaleZhCn2 = _interopRequireDefault(_rcCalendarSrcLocaleZhCn);
 	
-	var _rcCalendarSrcPicker = __webpack_require__(199);
+	var _rcCalendarSrcPicker = __webpack_require__(200);
 	
 	var _rcCalendarSrcPicker2 = _interopRequireDefault(_rcCalendarSrcPicker);
 	
@@ -1527,6 +1459,7 @@ webpackJsonp([2],{
 	          null,
 	          _react2['default'].createElement('input', { placeholder: '请选择日期', style: { width: 350 },
 	            disabled: state.disabled,
+	            readOnly: true,
 	            className: 'ant-calendar-picker-input ant-input',
 	            value: value && formatter.format(value[0]) + ' - ' + formatter.format(value[1]) })
 	        );
@@ -1564,7 +1497,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 227:
+/***/ 231:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1583,23 +1516,23 @@ webpackJsonp([2],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _gregorianCalendar = __webpack_require__(163);
+	var _gregorianCalendar = __webpack_require__(164);
 	
 	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
 	
-	var _rcUtil = __webpack_require__(167);
+	var _rcUtil = __webpack_require__(168);
 	
-	var _rangeCalendarCalendarPart = __webpack_require__(228);
+	var _rangeCalendarCalendarPart = __webpack_require__(232);
 	
 	var _rangeCalendarCalendarPart2 = _interopRequireDefault(_rangeCalendarCalendarPart);
 	
-	var _util = __webpack_require__(183);
+	var _util = __webpack_require__(184);
 	
-	var _objectAssign = __webpack_require__(220);
+	var _objectAssign = __webpack_require__(202);
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
-	var _mixinCommonMixin = __webpack_require__(195);
+	var _mixinCommonMixin = __webpack_require__(196);
 	
 	var _mixinCommonMixin2 = _interopRequireDefault(_mixinCommonMixin);
 	
@@ -1835,7 +1768,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 228:
+/***/ 232:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1852,19 +1785,19 @@ webpackJsonp([2],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _calendarCalendarHeader = __webpack_require__(184);
+	var _calendarCalendarHeader = __webpack_require__(185);
 	
 	var _calendarCalendarHeader2 = _interopRequireDefault(_calendarCalendarHeader);
 	
-	var _dateDateTable = __webpack_require__(179);
+	var _dateDateTable = __webpack_require__(180);
 	
 	var _dateDateTable2 = _interopRequireDefault(_dateDateTable);
 	
-	var _calendarCalendarFooter = __webpack_require__(191);
+	var _calendarCalendarFooter = __webpack_require__(192);
 	
 	var _calendarCalendarFooter2 = _interopRequireDefault(_calendarCalendarFooter);
 	
-	var _dateDateInput = __webpack_require__(197);
+	var _dateDateInput = __webpack_require__(198);
 	
 	var _dateDateInput2 = _interopRequireDefault(_dateDateInput);
 	
