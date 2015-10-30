@@ -63,14 +63,15 @@ var Test = React.createClass({
     var state = this.state;
     var calendar = <Calendar locale={CalendarLocale}
                              style={{zIndex:1000}}
-                             showTime={this.state.showTime}
-                             showOk={true}
+                             defaultValue={this.props.defaultCalendarValue}
+                             showTime={state.showTime}
+                             showOk
                              disabledDate={disabledDate}
-                             showClear={true}/>;
+                             showClear/>;
     return <div style={{width: 240, margin: 20}} >
       <div style={{marginBottom:10}}>
         <span>
-          <input type='checkbox' checked={this.state.showTime} onChange={this.onShowTimeChange}/>
+          <input type='checkbox' checked={state.showTime} onChange={this.onShowTimeChange}/>
           showTime
         </span>
         &nbsp;&nbsp;&nbsp;&nbsp;
@@ -97,7 +98,7 @@ var Test = React.createClass({
                        disabled={state.disabled}
                        readOnly
                        className="ant-calendar-picker-input ant-input"
-                       value={value && getFormatter(this.state.showTime).format(value)}/>
+                       value={value && getFormatter(state.showTime).format(value)}/>
                 </span>
               );
             }
@@ -130,13 +131,13 @@ ReactDOM.render(<div style={{zIndex:1000,position:'relative'}}>
                 onChange={onStandaloneChange}
                 disabledDate={disabledDate}
                 onSelect={onStandaloneSelect}
-                showTime={true}/>
+                showTime/>
     </div>
     <div style={{float:'left',width:300}}>
       <Test defaultValue={now}/>
     </div>
     <div style={{float:'right',width:300}}>
-      <Test/>
+      <Test defaultCalendarValue={defaultCalendarValue}/>
     </div>
     <div style={{clear:'both'}}></div>
   </div>

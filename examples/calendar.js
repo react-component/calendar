@@ -37,7 +37,7 @@ var Test = React.createClass({
     var state = this.state;
     var calendar = <Calendar locale={CalendarLocale}
                              showTime={this.state.showTime}
-                             showClear={true}/>;
+                             showClear/>;
     return <div className="form-group" style={{width: 400, margin: 20}} >
       <div className="input-group">
         <span>
@@ -96,12 +96,12 @@ ReactDOM.render(<div>
   <h2>zh-cn</h2>
 
   <div style={{margin:10}}>
-    <Calendar showWeekNumber={true}
+    <Calendar showWeekNumber
               showOk={0}
               showClear={0}
               onSelect={onStandaloneSelect}
               onChange={onStandaloneChange}
-              showTime={true}/>
+              showTime/>
   </div>
 
 

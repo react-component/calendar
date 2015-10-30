@@ -54,7 +54,7 @@ const Test = React.createClass({
     const calendar = <RangeCalendar showWeekNumber={false}
                                     locale={CalendarLocale}
                                     disabledDate={disabledDate}
-                                    showTime={true}/>;
+                                    showTime/>;
     return (<Picker value={state.value}
                     onChange={this.onChange}
                     animation="slide-up"
@@ -78,13 +78,13 @@ ReactDOM.render(
   <div>
     <h2>calendar (zh-cn)</h2>
     <div style={{margin:10}}>
-      <RangeCalendar showWeekNumber={true}
+      <RangeCalendar showWeekNumber
                      locale={CalendarLocale}
                      onChange={onStandaloneChange}
                      onSelect={onStandaloneSelect}
                      onOk={onStandaloneOk}
                      disabledDate={disabledDate}
-                     showTime={true}/>
+                     showTime/>
     </div>
     <br/>
 
