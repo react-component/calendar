@@ -168,8 +168,7 @@ const Picker = React.createClass({
     return (<Trigger popup={this.getCalendarElement()}
                      popupAlign={newAlign}
                      getPopupClassNameFromAlign={this.getPickerClassNameFromAlign}
-                     action="click"
-                     disabled={disabled}
+                     action={disabled ? [] : ['click']}
                      destroyPopupOnHide
                      getPopupContainer={getCalendarContainer}
                      popupStyle={style}
