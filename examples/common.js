@@ -23329,7 +23329,7 @@
 	  var str = dateStr;
 	  var n;
 	  if (obeyCount) {
-	    if (dateStr.length <= startIndex + count) {
+	    if (dateStr.length < startIndex + count) {
 	      return null;
 	    }
 	    str = dateStr.slice(startIndex, startIndex + count);
@@ -23510,12 +23510,12 @@
 	   * @param {String} dateStr formatted string of GregorianDate
 	   * @returns {GregorianCalendar}
 	   */
-	  parse: function (dateStr, calendarLocale) {
+	  parse: function (dateStr, calendarLocale,options) {
 	    var calendar = new GregorianCalendar(calendarLocale);
 	    var i;
 	    var j;
 	    var tmp = {};
-	    var obeyCount = false;
+	    var obeyCount = true;
 	    var dateStrLen = dateStr.length;
 	    var errorIndex = -1;
 	    var startIndex = 0;
@@ -23541,7 +23541,6 @@
 	            startIndex += textLen;
 	          }
 	        } else if ('field' in comp) {
-	          obeyCount = false;
 	          var nextComp = pattern[i + 1];
 	          if (nextComp) {
 	            if ('field' in nextComp) {
@@ -23653,6 +23652,7 @@
 	
 	// gc_format@163.com
 
+
 /***/ },
 /* 191 */
 /***/ function(module, exports) {
@@ -23716,9 +23716,7 @@
 	    onSelect: _react.PropTypes.func,
 	    prefixCls: _react.PropTypes.string,
 	    onChange: _react.PropTypes.func,
-	    onOk: _react.PropTypes.func,
-	    onFocus: _react.PropTypes.func,
-	    onBlur: _react.PropTypes.func
+	    onOk: _react.PropTypes.func
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
@@ -23729,34 +23727,12 @@
 	      prefixCls: 'rc-calendar',
 	      className: '',
 	      onSelect: noop,
-	      onChange: noop,
-	      onFocus: noop,
-	      onBlur: noop
+	      onChange: noop
 	    };
 	  },
 	
 	  shouldComponentUpdate: function shouldComponentUpdate(nextProps) {
 	    return this.props.visible || nextProps.visible;
-	  },
-	
-	  onFocus: function onFocus() {
-	    if (this._blurTimer) {
-	      clearTimeout(this._blurTimer);
-	      this._blurTimer = null;
-	    } else {
-	      this.props.onFocus();
-	    }
-	  },
-	
-	  onBlur: function onBlur() {
-	    var _this = this;
-	
-	    if (this._blurTimer) {
-	      clearTimeout(this._blurTimer);
-	    }
-	    this._blurTimer = setTimeout(function () {
-	      _this.props.onBlur();
-	    }, 100);
 	  },
 	
 	  getFormatter: function getFormatter() {
@@ -23839,73 +23815,6 @@
 /* 199 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process) {/**
-	 * Copyright 2014-2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 */
-	
-	'use strict';
-	
-	/**
-	 * Similar to invariant but only logs a warning if the condition is not met.
-	 * This can be used to log issues in development environments in critical
-	 * paths. Removing the logging code for production environments will keep the
-	 * same logic and follow the same code paths.
-	 */
-	
-	var warning = function() {};
-	
-	if (process.env.NODE_ENV !== 'production') {
-	  warning = function(condition, format, args) {
-	    var len = arguments.length;
-	    args = new Array(len > 2 ? len - 2 : 0);
-	    for (var key = 2; key < len; key++) {
-	      args[key - 2] = arguments[key];
-	    }
-	    if (format === undefined) {
-	      throw new Error(
-	        '`warning(condition, format, ...args)` requires a warning ' +
-	        'message argument'
-	      );
-	    }
-	
-	    if (format.length < 10 || (/^[s\W]*$/).test(format)) {
-	      throw new Error(
-	        'The warning format should be able to uniquely identify this ' +
-	        'warning. Please, use a more descriptive format than: ' + format
-	      );
-	    }
-	
-	    if (!condition) {
-	      var argIndex = 0;
-	      var message = 'Warning: ' +
-	        format.replace(/%s/g, function() {
-	          return args[argIndex++];
-	        });
-	      if (typeof console !== 'undefined') {
-	        console.error(message);
-	      }
-	      try {
-	        // This error was thrown as a convenience so that you can use this stack
-	        // to find the callsite that caused this warning to fire.
-	        throw new Error(message);
-	      } catch(x) {}
-	    }
-	  };
-	}
-	
-	module.exports = warning;
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
-
-/***/ },
-/* 200 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';
 	
 	Object.defineProperty(exports, '__esModule', {
@@ -23924,7 +23833,7 @@
 	
 	var _rcUtil = __webpack_require__(168);
 	
-	var _pickerPlacement = __webpack_require__(201);
+	var _pickerPlacement = __webpack_require__(200);
 	
 	var _objectAssign = __webpack_require__(202);
 	
@@ -24003,14 +23912,14 @@
 	    }
 	  },
 	
-	  onCalendarSelect: function onCalendarSelect(value) {
+	  onCalendarSelect: function onCalendarSelect(value, cause) {
 	    var props = this.props;
 	    if (!('value' in props)) {
 	      this.setState({
 	        value: value
 	      });
 	    }
-	    if (!props.calendar.props.showTime) {
+	    if (!props.calendar.props.showTime && cause.source !== 'dateInput') {
 	      this.close(this.focus);
 	    }
 	    props.onChange(value);
@@ -24130,7 +24039,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 201 */
+/* 200 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24143,7 +24052,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _warning = __webpack_require__(199);
+	var _warning = __webpack_require__(201);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
@@ -24205,6 +24114,73 @@
 	  }
 	  (0, _warning2['default'])(false, 'can not find placement for', points.join(','));
 	}
+
+/***/ },
+/* 201 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2014-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 */
+	
+	'use strict';
+	
+	/**
+	 * Similar to invariant but only logs a warning if the condition is not met.
+	 * This can be used to log issues in development environments in critical
+	 * paths. Removing the logging code for production environments will keep the
+	 * same logic and follow the same code paths.
+	 */
+	
+	var warning = function() {};
+	
+	if (process.env.NODE_ENV !== 'production') {
+	  warning = function(condition, format, args) {
+	    var len = arguments.length;
+	    args = new Array(len > 2 ? len - 2 : 0);
+	    for (var key = 2; key < len; key++) {
+	      args[key - 2] = arguments[key];
+	    }
+	    if (format === undefined) {
+	      throw new Error(
+	        '`warning(condition, format, ...args)` requires a warning ' +
+	        'message argument'
+	      );
+	    }
+	
+	    if (format.length < 10 || (/^[s\W]*$/).test(format)) {
+	      throw new Error(
+	        'The warning format should be able to uniquely identify this ' +
+	        'warning. Please, use a more descriptive format than: ' + format
+	      );
+	    }
+	
+	    if (!condition) {
+	      var argIndex = 0;
+	      var message = 'Warning: ' +
+	        format.replace(/%s/g, function() {
+	          return args[argIndex++];
+	        });
+	      if (typeof console !== 'undefined') {
+	        console.error(message);
+	      }
+	      try {
+	        // This error was thrown as a convenience so that you can use this stack
+	        // to find the callsite that caused this warning to fire.
+	        throw new Error(message);
+	      } catch(x) {}
+	    }
+	  };
+	}
+	
+	module.exports = warning;
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ },
 /* 202 */

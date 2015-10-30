@@ -798,26 +798,16 @@ webpackJsonp([5],{
 	      if (props.showToday) {
 	        nowEl = (0, _util.getTodayElement)(props);
 	      }
-	      var clearEl = undefined;
-	      if (props.showClear) {
-	        clearEl = _react2['default'].createElement(
-	          'a',
-	          { className: prefixCls + '-clear-btn',
-	            role: 'button',
-	            onMouseDown: props.onClear },
-	          locale.clear
-	        );
-	      }
 	      var okBtn = undefined;
 	      if (props.showOk) {
 	        okBtn = (0, _util.getOkElement)(props);
 	      }
 	      var footerBtn = undefined;
-	      if (nowEl || clearEl) {
+	      if (nowEl) {
 	        footerBtn = _react2['default'].createElement(
 	          'span',
 	          { className: prefixCls + '-footer-btn' },
-	          toFragment([nowEl, okBtn, clearEl])
+	          toFragment([nowEl, okBtn])
 	        );
 	      }
 	      var timeEl = undefined;
@@ -1262,19 +1252,17 @@ webpackJsonp([5],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _warning = __webpack_require__(199);
-	
-	var _warning2 = _interopRequireDefault(_warning);
-	
 	var DateInput = _react2['default'].createClass({
 	  displayName: 'DateInput',
 	
 	  propTypes: {
 	    formatter: _react.PropTypes.object,
 	    locale: _react.PropTypes.object,
+	    gregorianCalendarLocale: _react.PropTypes.object,
 	    disabledDate: _react.PropTypes.func,
-	    className: _react.PropTypes.string,
 	    onChange: _react.PropTypes.func,
+	    onClear: _react.PropTypes.func,
+	    placeholder: _react.PropTypes.string,
 	    onSelect: _react.PropTypes.func,
 	    value: _react.PropTypes.object
 	  },
@@ -1282,14 +1270,17 @@ webpackJsonp([5],{
 	  getInitialState: function getInitialState() {
 	    var value = this.props.value;
 	    return {
-	      str: value && this.props.formatter.format(value) || ''
+	      str: value && this.props.formatter.format(value) || '',
+	      invalid: false
 	    };
 	  },
 	
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	    // when popup show, click body will call this, bug!
 	    var value = nextProps.value;
 	    this.setState({
-	      str: value && nextProps.formatter.format(value) || ''
+	      str: value && nextProps.formatter.format(value) || '',
+	      invalid: false
 	    });
 	  },
 	
@@ -1298,23 +1289,22 @@ webpackJsonp([5],{
 	    this.setState({
 	      str: str
 	    });
-	  },
-	
-	  onBlur: function onBlur() {
-	    var str = this.state.str;
+	    var value = undefined;
 	    var _props = this.props;
 	    var disabledDate = _props.disabledDate;
 	    var formatter = _props.formatter;
-	    var locale = _props.locale;
+	    var gregorianCalendarLocale = _props.gregorianCalendarLocale;
 	    var onChange = _props.onChange;
 	
-	    var value = undefined;
 	    if (str) {
 	      try {
-	        value = formatter.parse(str, locale);
+	        value = formatter.parse(str, gregorianCalendarLocale, {
+	          obeyCount: true
+	        });
 	      } catch (ex) {
-	        (0, _warning2['default'])(false, 'invalid date input: ' + str);
-	        this.setState(this.getInitialState());
+	        this.setState({
+	          invalid: true
+	        });
 	        return;
 	      }
 	      if (value && (!disabledDate || !disabledDate(value))) {
@@ -1327,19 +1317,46 @@ webpackJsonp([5],{
 	          onChange(value);
 	        }
 	      } else {
-	        this.setState(this.getInitialState());
+	        this.setState({
+	          invalid: true
+	        });
+	        return;
 	      }
 	    } else {
 	      onChange(null);
 	    }
+	    this.setState({
+	      invalid: false
+	    });
+	  },
+	
+	  onClear: function onClear() {
+	    this.setState({ str: '' });
+	    this.props.onClear(null);
 	  },
 	
 	  render: function render() {
 	    var props = this.props;
-	    return _react2['default'].createElement('input', { className: props.className,
-	      value: this.state.str,
-	      onChange: this.onInputChange,
-	      onBlur: this.onBlur });
+	    var _state = this.state;
+	    var invalid = _state.invalid;
+	    var str = _state.str;
+	    var locale = props.locale;
+	    var prefixCls = props.prefixCls;
+	    var placeholder = props.placeholder;
+	
+	    var invalidClass = invalid ? prefixCls + '-input-invalid' : '';
+	    return _react2['default'].createElement(
+	      'div',
+	      { className: prefixCls + '-input-wrap' },
+	      _react2['default'].createElement('input', { className: prefixCls + '-input  ' + invalidClass,
+	        value: str,
+	        placeholder: placeholder,
+	        onChange: this.onInputChange }),
+	      props.showClear ? _react2['default'].createElement('a', { className: prefixCls + '-clear-btn',
+	        role: 'button',
+	        title: locale.clear,
+	        onMouseDown: this.onClear }) : null
+	    );
 	  }
 	});
 	
@@ -1429,6 +1446,9 @@ webpackJsonp([5],{
 	}
 	
 	function onInputSelect(direction, value) {
+	  if (!value) {
+	    return;
+	  }
 	  var originalValue = this.state.selectedValue;
 	  var selectedValue = originalValue.concat();
 	  var index = direction === 'left' ? 0 : 1;
@@ -1586,8 +1606,7 @@ webpackJsonp([5],{
 	    return _react2['default'].createElement(
 	      'div',
 	      { className: classes, style: props.style,
-	        tabIndex: '0', onFocus: this.onFocus,
-	        onBlur: this.onBlur },
+	        tabIndex: '0' },
 	      _react2['default'].createElement(_rangeCalendarCalendarPart2['default'], _extends({}, props, newProps, { direction: 'left',
 	        formatter: this.getFormatter(),
 	        value: this.getStartValue(),
@@ -1675,16 +1694,14 @@ webpackJsonp([5],{
 	    return _react2['default'].createElement(
 	      'div',
 	      { className: rangeClassName + '-part ' + rangeClassName + '-' + direction },
-	      _react2['default'].createElement(
-	        'div',
-	        { className: prefixCls + '-input-wrap' },
-	        _react2['default'].createElement(_dateDateInput2['default'], { className: prefixCls + '-input',
-	          formatter: formatter,
-	          disabledDate: disabledDate,
-	          value: selectedValue[index] || selectedValue[0],
-	          onChange: props.onInputSelect }),
-	        _react2['default'].createElement('i', { className: prefixCls + '-input-icon' })
-	      ),
+	      _react2['default'].createElement(_dateDateInput2['default'], { formatter: formatter,
+	        locale: locale,
+	        prefixCls: prefixCls,
+	        disabledDate: disabledDate,
+	        gregorianCalendarLocale: value.locale,
+	        showClear: false,
+	        value: selectedValue[index] || selectedValue[0],
+	        onChange: props.onInputSelect }),
 	      _react2['default'].createElement(
 	        'div',
 	        { style: { outline: 'none' } },
@@ -1774,7 +1791,7 @@ webpackJsonp([5],{
 	
 	var _rcCalendarSrcLocaleZhCn2 = _interopRequireDefault(_rcCalendarSrcLocaleZhCn);
 	
-	var _rcCalendarSrcPicker = __webpack_require__(200);
+	var _rcCalendarSrcPicker = __webpack_require__(199);
 	
 	var _rcCalendarSrcPicker2 = _interopRequireDefault(_rcCalendarSrcPicker);
 	

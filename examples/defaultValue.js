@@ -150,10 +150,9 @@ webpackJsonp([4],{
 	    onOk: _react.PropTypes.func,
 	    prefixCls: _react.PropTypes.string,
 	    onKeyDown: _react.PropTypes.func,
+	    dateInputPlaceholder: _react.PropTypes.string,
 	    onClear: _react.PropTypes.func,
-	    onChange: _react.PropTypes.func,
-	    onFocus: _react.PropTypes.func,
-	    onBlur: _react.PropTypes.func
+	    onChange: _react.PropTypes.func
 	  },
 	
 	  mixins: [_mixinCommonMixin2['default'], _mixinCalendarMixin2['default']],
@@ -235,7 +234,6 @@ webpackJsonp([4],{
 	  },
 	
 	  onClear: function onClear() {
-	    this.dateTableSelectTime = Date.now();
 	    this.onSelect(null);
 	    this.props.onClear();
 	  },
@@ -249,16 +247,12 @@ webpackJsonp([4],{
 	  },
 	
 	  onDateInputChange: function onDateInputChange(value) {
-	    if (Date.now() - this.dateTableSelectTime < 50) {
-	      // avoid blur by click date table
-	      return;
-	    }
-	    this.dateTableSelectTime = 0;
-	    this.onSelect(value);
+	    this.onSelect(value, {
+	      source: 'dateInput'
+	    });
 	  },
 	
 	  onDateTableSelect: function onDateTableSelect(value) {
-	    this.dateTableSelectTime = Date.now();
 	    this.onSelect(value);
 	  },
 	
@@ -273,25 +267,26 @@ webpackJsonp([4],{
 	    var locale = props.locale;
 	    var prefixCls = props.prefixCls;
 	    var disabledDate = props.disabledDate;
+	    var dateInputPlaceholder = props.dateInputPlaceholder;
 	
 	    var state = this.state;
 	    var value = state.value;
 	    var selectedValue = state.selectedValue;
 	
-	    var dateInputElement = props.showDateInput ? _react2['default'].createElement(
+	    var dateInputElement = props.showDateInput ? _react2['default'].createElement(_dateDateInput2['default'], { formatter: this.getFormatter(),
+	      key: 'date-input',
+	      gregorianCalendarLocale: value.locale,
+	      locale: locale,
+	      placeholder: dateInputPlaceholder,
+	      showClear: true,
+	      onClear: this.onClear,
+	      prefixCls: prefixCls,
+	      value: selectedValue,
+	      onChange: this.onDateInputChange }) : null;
+	    var children = [dateInputElement, _react2['default'].createElement(
 	      'div',
-	      { className: prefixCls + '-input-wrap' },
-	      _react2['default'].createElement(_dateDateInput2['default'], { className: prefixCls + '-input',
-	        formatter: this.getFormatter(),
-	        locale: value.locale,
-	        value: selectedValue,
-	        onChange: this.onDateInputChange }),
-	      _react2['default'].createElement('i', { className: prefixCls + '-input-icon' })
-	    ) : null;
-	    var children = _react2['default'].createElement(
-	      'div',
-	      { style: { outline: 'none' } },
-	      dateInputElement,
+	      { key: 'date-panel',
+	        className: prefixCls + '-date-panel' },
 	      _react2['default'].createElement(_calendarCalendarHeader2['default'], {
 	        locale: locale,
 	        onValueChange: this.setValue,
@@ -311,19 +306,17 @@ webpackJsonp([4],{
 	      ),
 	      _react2['default'].createElement(_calendarCalendarFooter2['default'], {
 	        locale: locale,
-	        showClear: props.showClear,
 	        showOk: props.showOk,
 	        prefixCls: prefixCls,
 	        showToday: props.showToday,
 	        showTime: props.showTime,
 	        value: value,
 	        disabledDate: disabledDate,
-	        onClear: this.onClear,
 	        onOk: this.onOk,
 	        onSelect: this.onSelect,
 	        onToday: this.chooseToday
 	      })
-	    );
+	    )];
 	
 	    return this.renderRoot({
 	      children: children,
@@ -1127,26 +1120,16 @@ webpackJsonp([4],{
 	      if (props.showToday) {
 	        nowEl = (0, _util.getTodayElement)(props);
 	      }
-	      var clearEl = undefined;
-	      if (props.showClear) {
-	        clearEl = _react2['default'].createElement(
-	          'a',
-	          { className: prefixCls + '-clear-btn',
-	            role: 'button',
-	            onMouseDown: props.onClear },
-	          locale.clear
-	        );
-	      }
 	      var okBtn = undefined;
 	      if (props.showOk) {
 	        okBtn = (0, _util.getOkElement)(props);
 	      }
 	      var footerBtn = undefined;
-	      if (nowEl || clearEl) {
+	      if (nowEl) {
 	        footerBtn = _react2['default'].createElement(
 	          'span',
 	          { className: prefixCls + '-footer-btn' },
-	          toFragment([nowEl, okBtn, clearEl])
+	          toFragment([nowEl, okBtn])
 	        );
 	      }
 	      var timeEl = undefined;
@@ -1680,8 +1663,7 @@ webpackJsonp([4],{
 	      'div',
 	      { className: (0, _rcUtil.classSet)(className) + ' ' + newProps.className,
 	        style: this.props.style,
-	        tabIndex: '0', onFocus: this.onFocus,
-	        onBlur: this.onBlur, onKeyDown: this.onKeyDown },
+	        tabIndex: '0', onKeyDown: this.onKeyDown },
 	      newProps.children
 	    );
 	  },
@@ -1735,19 +1717,17 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _warning = __webpack_require__(199);
-	
-	var _warning2 = _interopRequireDefault(_warning);
-	
 	var DateInput = _react2['default'].createClass({
 	  displayName: 'DateInput',
 	
 	  propTypes: {
 	    formatter: _react.PropTypes.object,
 	    locale: _react.PropTypes.object,
+	    gregorianCalendarLocale: _react.PropTypes.object,
 	    disabledDate: _react.PropTypes.func,
-	    className: _react.PropTypes.string,
 	    onChange: _react.PropTypes.func,
+	    onClear: _react.PropTypes.func,
+	    placeholder: _react.PropTypes.string,
 	    onSelect: _react.PropTypes.func,
 	    value: _react.PropTypes.object
 	  },
@@ -1755,14 +1735,17 @@ webpackJsonp([4],{
 	  getInitialState: function getInitialState() {
 	    var value = this.props.value;
 	    return {
-	      str: value && this.props.formatter.format(value) || ''
+	      str: value && this.props.formatter.format(value) || '',
+	      invalid: false
 	    };
 	  },
 	
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	    // when popup show, click body will call this, bug!
 	    var value = nextProps.value;
 	    this.setState({
-	      str: value && nextProps.formatter.format(value) || ''
+	      str: value && nextProps.formatter.format(value) || '',
+	      invalid: false
 	    });
 	  },
 	
@@ -1771,23 +1754,22 @@ webpackJsonp([4],{
 	    this.setState({
 	      str: str
 	    });
-	  },
-	
-	  onBlur: function onBlur() {
-	    var str = this.state.str;
+	    var value = undefined;
 	    var _props = this.props;
 	    var disabledDate = _props.disabledDate;
 	    var formatter = _props.formatter;
-	    var locale = _props.locale;
+	    var gregorianCalendarLocale = _props.gregorianCalendarLocale;
 	    var onChange = _props.onChange;
 	
-	    var value = undefined;
 	    if (str) {
 	      try {
-	        value = formatter.parse(str, locale);
+	        value = formatter.parse(str, gregorianCalendarLocale, {
+	          obeyCount: true
+	        });
 	      } catch (ex) {
-	        (0, _warning2['default'])(false, 'invalid date input: ' + str);
-	        this.setState(this.getInitialState());
+	        this.setState({
+	          invalid: true
+	        });
 	        return;
 	      }
 	      if (value && (!disabledDate || !disabledDate(value))) {
@@ -1800,19 +1782,46 @@ webpackJsonp([4],{
 	          onChange(value);
 	        }
 	      } else {
-	        this.setState(this.getInitialState());
+	        this.setState({
+	          invalid: true
+	        });
+	        return;
 	      }
 	    } else {
 	      onChange(null);
 	    }
+	    this.setState({
+	      invalid: false
+	    });
+	  },
+	
+	  onClear: function onClear() {
+	    this.setState({ str: '' });
+	    this.props.onClear(null);
 	  },
 	
 	  render: function render() {
 	    var props = this.props;
-	    return _react2['default'].createElement('input', { className: props.className,
-	      value: this.state.str,
-	      onChange: this.onInputChange,
-	      onBlur: this.onBlur });
+	    var _state = this.state;
+	    var invalid = _state.invalid;
+	    var str = _state.str;
+	    var locale = props.locale;
+	    var prefixCls = props.prefixCls;
+	    var placeholder = props.placeholder;
+	
+	    var invalidClass = invalid ? prefixCls + '-input-invalid' : '';
+	    return _react2['default'].createElement(
+	      'div',
+	      { className: prefixCls + '-input-wrap' },
+	      _react2['default'].createElement('input', { className: prefixCls + '-input  ' + invalidClass,
+	        value: str,
+	        placeholder: placeholder,
+	        onChange: this.onInputChange }),
+	      props.showClear ? _react2['default'].createElement('a', { className: prefixCls + '-clear-btn',
+	        role: 'button',
+	        title: locale.clear,
+	        onMouseDown: this.onClear }) : null
+	    );
 	  }
 	});
 	
@@ -1858,7 +1867,7 @@ webpackJsonp([4],{
 	
 	var _rcCalendar2 = _interopRequireDefault(_rcCalendar);
 	
-	var _rcCalendarSrcPicker = __webpack_require__(200);
+	var _rcCalendarSrcPicker = __webpack_require__(199);
 	
 	var _rcCalendarSrcPicker2 = _interopRequireDefault(_rcCalendarSrcPicker);
 	

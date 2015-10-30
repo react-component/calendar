@@ -119,8 +119,7 @@ webpackJsonp([1],{
 	      'div',
 	      { className: (0, _rcUtil.classSet)(className) + ' ' + newProps.className,
 	        style: this.props.style,
-	        tabIndex: '0', onFocus: this.onFocus,
-	        onBlur: this.onBlur, onKeyDown: this.onKeyDown },
+	        tabIndex: '0', onKeyDown: this.onKeyDown },
 	      newProps.children
 	    );
 	  },
@@ -180,7 +179,7 @@ webpackJsonp([1],{
 	
 	var _rcCalendarSrcMonthCalendar2 = _interopRequireDefault(_rcCalendarSrcMonthCalendar);
 	
-	var _rcCalendarSrcPicker = __webpack_require__(200);
+	var _rcCalendarSrcPicker = __webpack_require__(199);
 	
 	var _rcCalendarSrcPicker2 = _interopRequireDefault(_rcCalendarSrcPicker);
 	
