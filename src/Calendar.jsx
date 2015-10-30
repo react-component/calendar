@@ -66,8 +66,6 @@ const Calendar = React.createClass({
     onKeyDown: PropTypes.func,
     onClear: PropTypes.func,
     onChange: PropTypes.func,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
   },
 
   mixins: [CommonMixin, CalendarMixin],
@@ -161,16 +159,12 @@ const Calendar = React.createClass({
   },
 
   onDateInputChange(value) {
-    if (Date.now() - this.dateTableSelectTime < 50) {
-      // avoid blur by click date table
-      return;
-    }
-    this.dateTableSelectTime = 0;
-    this.onSelect(value);
+    this.onSelect(value, {
+      source: 'dateInput',
+    });
   },
 
   onDateTableSelect(value) {
-    this.dateTableSelectTime = Date.now();
     this.onSelect(value);
   },
 
@@ -187,6 +181,7 @@ const Calendar = React.createClass({
     const {value, selectedValue} = state;
     const dateInputElement = props.showDateInput ? (
       <DateInput formatter={this.getFormatter()}
+                 key="date-input"
                  gregorianCalendarLocale={value.locale}
                  locale={locale}
                  showClear
@@ -195,8 +190,8 @@ const Calendar = React.createClass({
                  value={selectedValue}
                  onChange={this.onDateInputChange}/>
     ) : null;
-    const children = (<div style={{outline: 'none'}}>
-      {dateInputElement}
+    const children = [dateInputElement, (<div key="main-panel"
+                                              className={`${prefixCls}-main-panel`}>
       <CalendarHeader
         locale={locale}
         onValueChange={this.setValue}
@@ -226,7 +221,7 @@ const Calendar = React.createClass({
         onSelect={this.onSelect}
         onToday={this.chooseToday}
         />
-    </div>);
+    </div>)];
 
     return this.renderRoot({
       children,

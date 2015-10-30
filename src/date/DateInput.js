@@ -1,5 +1,4 @@
 import React, {PropTypes} from 'react';
-import warning from 'warning';
 
 const DateInput = React.createClass({
   propTypes: {
@@ -17,6 +16,7 @@ const DateInput = React.createClass({
     const value = this.props.value;
     return {
       str: value && this.props.formatter.format(value) || '',
+      invalid: false,
     };
   },
 
@@ -25,6 +25,7 @@ const DateInput = React.createClass({
     const value = nextProps.value;
     this.setState({
       str: value && nextProps.formatter.format(value) || '',
+      invalid: false,
     });
   },
 
@@ -33,18 +34,17 @@ const DateInput = React.createClass({
     this.setState({
       str,
     });
-  },
-
-  onBlur() {
-    const {str} = this.state;
-    const {disabledDate, formatter, gregorianCalendarLocale, onChange} = this.props;
     let value;
+    const {disabledDate, formatter, gregorianCalendarLocale, onChange} = this.props;
     if (str) {
       try {
-        value = formatter.parse(str, gregorianCalendarLocale);
+        value = formatter.parse(str, gregorianCalendarLocale, {
+          obeyCount: true,
+        });
       } catch (ex) {
-        warning(false, `invalid date input: ${str}`);
-        this.setState(this.getInitialState());
+        this.setState({
+          invalid: true,
+        });
         return;
       }
       if (value && (!disabledDate || !disabledDate(value))) {
@@ -57,11 +57,17 @@ const DateInput = React.createClass({
           onChange(value);
         }
       } else {
-        this.setState(this.getInitialState());
+        this.setState({
+          invalid: true,
+        });
+        return;
       }
     } else {
       onChange(null);
     }
+    this.setState({
+      invalid: false,
+    });
   },
 
   onClear() {
@@ -71,12 +77,13 @@ const DateInput = React.createClass({
 
   render() {
     const props = this.props;
+    const {invalid, str} = this.state;
     const {locale, prefixCls} = props;
+    const invalidClass = invalid ? `${prefixCls}-input-invalid` : '';
     return (<div className={`${prefixCls}-input-wrap`}>
-      <input className={`${prefixCls}-input`}
-             value={this.state.str}
-             onChange={this.onInputChange}
-             onBlur={this.onBlur}/>
+      <input className={`${prefixCls}-input  ${invalidClass}`}
+             value={str}
+             onChange={this.onInputChange}/>
       {props.showClear ? <a className={`${prefixCls}-clear-btn`}
                             role="button"
                             title={locale.clear}

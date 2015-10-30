@@ -84,8 +84,7 @@ const CalendarMixin = {
     return (
       <div className={`${classSet(className)} ${newProps.className}`}
            style={this.props.style}
-           tabIndex="0" onFocus={this.onFocus}
-           onBlur={this.onBlur} onKeyDown={this.onKeyDown}>
+           tabIndex="0" onKeyDown={this.onKeyDown}>
         {newProps.children}
       </div>
     );
