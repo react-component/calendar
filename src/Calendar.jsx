@@ -64,6 +64,7 @@ const Calendar = React.createClass({
     onOk: PropTypes.func,
     prefixCls: PropTypes.string,
     onKeyDown: PropTypes.func,
+    dateInputPlaceholder: PropTypes.string,
     onClear: PropTypes.func,
     onChange: PropTypes.func,
   },
@@ -176,7 +177,7 @@ const Calendar = React.createClass({
 
   render() {
     const props = this.props;
-    const {locale, prefixCls, disabledDate} = props;
+    const {locale, prefixCls, disabledDate, dateInputPlaceholder} = props;
     const state = this.state;
     const {value, selectedValue} = state;
     const dateInputElement = props.showDateInput ? (
@@ -184,14 +185,15 @@ const Calendar = React.createClass({
                  key="date-input"
                  gregorianCalendarLocale={value.locale}
                  locale={locale}
+                 placeholder={dateInputPlaceholder}
                  showClear
                  onClear={this.onClear}
                  prefixCls={prefixCls}
                  value={selectedValue}
                  onChange={this.onDateInputChange}/>
     ) : null;
-    const children = [dateInputElement, (<div key="main-panel"
-                                              className={`${prefixCls}-main-panel`}>
+    const children = [dateInputElement, (<div key="date-panel"
+                                              className={`${prefixCls}-date-panel`}>
       <CalendarHeader
         locale={locale}
         onValueChange={this.setValue}

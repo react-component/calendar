@@ -160,12 +160,6 @@ http://react-component.github.io/calendar/examples/index.html
           <td>whether to support time select</td>
         </tr>
         <tr>
-           <td>focused</td>
-           <td>Boolean</td>
-           <td>false</td>
-           <td>whether to focus on render</td>
-        </tr>
-        <tr>
           <td>onSelect</td>
           <td>Function(date: GregorianCalendar)</td>
           <td>function(){}</td>
@@ -176,6 +170,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>Function(date: GregorianCalendar)</td>
           <td>function(){}</td>
           <td>called when a date is changed inside calendar (next year/next month/keyboard)</td>
+        </tr>
+        <tr>
+          <td>dateInputPlaceholder</td>
+          <td>String</td>
+          <td>''</td>
+          <td>date input's placeholder</td>
         </tr>
     </tbody>
 </table>

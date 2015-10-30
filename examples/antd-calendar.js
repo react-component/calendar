@@ -63,6 +63,7 @@ var Test = React.createClass({
     var state = this.state;
     var calendar = <Calendar locale={CalendarLocale}
                              style={{zIndex:1000}}
+                             dateInputPlaceholder="请输入"
                              defaultValue={this.props.defaultCalendarValue}
                              showTime={state.showTime}
                              showOk

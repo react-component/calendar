@@ -8,6 +8,7 @@ const DateInput = React.createClass({
     disabledDate: PropTypes.func,
     onChange: PropTypes.func,
     onClear: PropTypes.func,
+    placeholder: PropTypes.string,
     onSelect: PropTypes.func,
     value: PropTypes.object,
   },
@@ -78,11 +79,12 @@ const DateInput = React.createClass({
   render() {
     const props = this.props;
     const {invalid, str} = this.state;
-    const {locale, prefixCls} = props;
+    const {locale, prefixCls, placeholder} = props;
     const invalidClass = invalid ? `${prefixCls}-input-invalid` : '';
     return (<div className={`${prefixCls}-input-wrap`}>
       <input className={`${prefixCls}-input  ${invalidClass}`}
              value={str}
+             placeholder={placeholder}
              onChange={this.onInputChange}/>
       {props.showClear ? <a className={`${prefixCls}-clear-btn`}
                             role="button"
