@@ -57,6 +57,7 @@ const Calendar = React.createClass({
     showWeekNumber: PropTypes.bool,
     style: PropTypes.object,
     showToday: PropTypes.bool,
+    showDateInput: PropTypes.bool,
     visible: PropTypes.bool,
     showTime: PropTypes.bool,
     onSelect: PropTypes.func,
@@ -74,6 +75,7 @@ const Calendar = React.createClass({
   getDefaultProps() {
     return {
       showToday: true,
+      showDateInput: true,
       onClear: noop,
       onOk: noop,
     };
@@ -184,7 +186,7 @@ const Calendar = React.createClass({
     const {locale, prefixCls, disabledDate} = props;
     const state = this.state;
     const {value, selectedValue} = state;
-    const children = (<div style={{outline: 'none'}}>
+    const dateInputElement = props.showDateInput ? (
       <div className={`${prefixCls}-input-wrap`}>
         <DateInput className={`${prefixCls}-input`}
                    formatter={this.getFormatter()}
@@ -193,7 +195,9 @@ const Calendar = React.createClass({
                    onChange={this.onDateInputChange}/>
         <i className={`${prefixCls}-input-icon`}/>
       </div>
-
+    ) : null;
+    const children = (<div style={{outline: 'none'}}>
+      {dateInputElement}
       <CalendarHeader
         locale={locale}
         onValueChange={this.setValue}
