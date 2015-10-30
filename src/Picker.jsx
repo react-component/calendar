@@ -158,6 +158,7 @@ const Picker = React.createClass({
     const { prefixCls, placement,
       style, getCalendarContainer,
       align, animation,
+      disabled,
       transitionName, children } = props;
     const state = this.state;
     let newAlign = getAlignFromPlacement(placement);
@@ -168,6 +169,7 @@ const Picker = React.createClass({
                      popupAlign={newAlign}
                      getPopupClassNameFromAlign={this.getPickerClassNameFromAlign}
                      action="click"
+                     disabled={disabled}
                      destroyPopupOnHide
                      getPopupContainer={getCalendarContainer}
                      popupStyle={style}
