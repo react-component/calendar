@@ -26,9 +26,9 @@ var Picker = React.createClass({
     const props = this.props;
     var calendar = <Calendar locale={CalendarLocale}
                              showTime={props.showTime}
-                             showOk={true}
+                             showOk
                              disabledDate={props.disabledDate}
-                             showClear={true}/>;
+                             showClear/>;
     return <DatePicker
       animation="slide-up"
       disabled={props.disabled}

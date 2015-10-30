@@ -60,7 +60,7 @@ const Test = React.createClass({
     const calendar = <RangeCalendar showWeekNumber={false}
                                     locale={CalendarLocale}
                                     disabledDate={disabledDate}
-                                    showTime={true}/>;
+                                    showTime/>;
     return <div className="form-group" style={{width: 400, margin: 20}} >
       <div className="input-group" style={{width:350}}>
         <Picker value={state.value} onChange={this.onChange} calendar={calendar}>
@@ -101,13 +101,13 @@ ReactDOM.render(
     <h2>calendar (zh-cn)</h2>
 
     <div style={{margin:10}}>
-      <RangeCalendar showWeekNumber={true}
+      <RangeCalendar showWeekNumber
                      locale={CalendarLocale}
                      onChange={onStandaloneChange}
                      onSelect={onStandaloneSelect}
                      onOk={onStandaloneOk}
                      disabledDate={disabledDate}
-                     showTime={true}/>
+                     showTime/>
     </div>
     <br/>
 

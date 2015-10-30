@@ -55,16 +55,12 @@ const Picker = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    let value = nextProps.value;
+    const {value, open} = nextProps;
     if (value !== undefined) {
-      // null special meaning
-      value = value || null;
-      this.setState({ value });
+      this.setState({value});
     }
-    if ('open' in nextProps) {
-      this.setState({
-        open: nextProps.open,
-      });
+    if (open !== undefined) {
+      this.setState({open});
     }
   },
 
@@ -110,7 +106,7 @@ const Picker = React.createClass({
     const calendarProp = props.calendar;
     const extraProps = {
       ref: this.saveCalendarRef,
-      defaultValue: calendarProp.props.defaultValue || state.value,
+      defaultValue: state.value || calendarProp.props.defaultValue,
       defaultSelectedValue: state.value,
       onKeyDown: this.onCalendarKeyDown,
       onOk: createChainedFunction(calendarProp.props.onOk, this.onCalendarOk),
