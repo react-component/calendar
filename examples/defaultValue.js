@@ -51,7 +51,6 @@ var Test = React.createClass({
       <div className="input-group" style={{width:250}}>
         <DatePicker calendar={calendar}
                     placement="bottomLeft"
-                    style={{display:'inline'}}
                     defaultValue={state.value}
                     onChange={this.onChange}>
           {

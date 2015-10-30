@@ -1,12 +1,10 @@
-.@{prefixClass}-picker .@{prefixClass}, .@{prefixClass}-picker-container .@{prefixClass} {
+.@{prefixClass}-picker {
   position: absolute;
   left: -9999px;
   top: -9999px;
   z-index: 1000;
-}
 
-.@{prefixClass}-picker {
-  position: relative;
-  display: inline-block;
-  outline: none;
+  &-hidden {
+    display: none;
+  }
 }

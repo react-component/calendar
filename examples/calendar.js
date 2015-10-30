@@ -46,7 +46,6 @@ var Test = React.createClass({
       </div>
       <div className="input-group" style={{width:250}}>
         <DatePicker ref='picker'
-                    style={{display:'inline'}}
                     calendar={calendar}
                     value={state.value}
                     onChange={this.onChange}>

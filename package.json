@@ -46,7 +46,7 @@
     "bootstrap": "~3.3.2",
     "expect.js": "~0.3.1",
     "jquery": "~1.11.3",
-    "precommit-hook-eslint": "3.x",
+    "pre-commit": "1.x",
     "rc-server": "3.x",
     "rc-tools": "4.x",
     "react": "0.14.x",
@@ -60,9 +60,8 @@
     "gregorian-calendar": "3.x",
     "gregorian-calendar-format": "3.x",
     "object-assign": "4.x",
-    "rc-align": "2.x",
-    "rc-animate": "2.x",
+    "rc-trigger": "0.1.x",
     "rc-util": "2.x",
-    "warning": "~2.0.0"
+    "warning": "2.x"
   }
 }

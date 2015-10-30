@@ -64,6 +64,7 @@ const Test = React.createClass({
           return (<span>
                 <input placeholder="请选择日期" style={{width:350}}
                        disabled={state.disabled}
+                       readOnly
                        className="ant-calendar-picker-input ant-input"
                        value={value && (formatter.format(value[0])+' - '+formatter.format(value[1]))}/>
                 </span>);

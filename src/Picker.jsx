@@ -1,10 +1,9 @@
 import React, {PropTypes} from 'react';
 import ReactDOM from 'react-dom';
-import {createChainedFunction, KeyCode, classSet, Dom} from 'rc-util';
-import Align from 'rc-align';
-import Animate from 'rc-animate';
-import {getCalendarClassByPlacement, fromPointsToPlacement, fromPlacementStrToAlign} from './picker/placement';
+import {createChainedFunction, KeyCode} from 'rc-util';
+import {getPlacementFromAlign, getAlignFromPlacement} from './picker/placement';
 import assign from 'object-assign';
+import Trigger from 'rc-trigger';
 
 function noop() {
 }
@@ -13,9 +12,6 @@ function refFn(field, component) {
   this[field] = component;
 }
 
-/**
- * DatePicker = wrap input using Calendar
- */
 const Picker = React.createClass({
   propTypes: {
     onChange: PropTypes.func,
@@ -29,10 +25,7 @@ const Picker = React.createClass({
     defaultOpen: PropTypes.bool,
     prefixCls: PropTypes.string,
     placement: PropTypes.any,
-    align: PropTypes.shape({
-      offset: PropTypes.array,
-      targetOffset: PropTypes.array,
-    }),
+    align: PropTypes.object,
   },
 
   getDefaultProps() {
@@ -40,10 +33,7 @@ const Picker = React.createClass({
       prefixCls: 'rc-calendar-picker',
       style: {},
       align: {},
-      getCalendarContainer() {
-        return document.body;
-      },
-      placement: 'topLeft',
+      placement: 'bottomLeft',
       defaultOpen: false,
       onChange: noop,
       onOpen: noop,
@@ -80,58 +70,6 @@ const Picker = React.createClass({
     }
   },
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.haveOpened) {
-      ReactDOM.render(this.getCalendarElement(), this.getCalendarContainer(), ()=> {
-        if (!prevState.open && this.state.open) {
-          ReactDOM.findDOMNode(this.calendarInstance).focus();
-        }
-      });
-    }
-  },
-
-  componentWillUnmount() {
-    if (this.calendarContainer) {
-      ReactDOM.unmountComponentAtNode(this.calendarContainer);
-      this.calendarContainer.parentNode.removeChild(this.calendarContainer);
-      this.calendarContainer = null;
-    }
-  },
-
-  onCalendarAlign(node, align) {
-    const props = this.props;
-    const placement = props.placement;
-    const prefixCls = props.calendar.props.prefixCls;
-    if (placement) {
-      const originalClassName = getCalendarClassByPlacement(prefixCls, placement);
-      let nextClassName;
-      if (placement.points) {
-        nextClassName = getCalendarClassByPlacement(prefixCls, align);
-      } else if (typeof placement === 'string') {
-        nextClassName = getCalendarClassByPlacement(prefixCls, fromPointsToPlacement(align));
-      }
-      if (nextClassName !== originalClassName) {
-        node.className = node.className.replace(originalClassName, nextClassName);
-      }
-    }
-  },
-
-  onInputClick() {
-    this.toggle();
-  },
-
-  onTriggerClick() {
-    this.toggle();
-  },
-
-  onKeyDown(event) {
-    // down
-    if (event.keyCode === KeyCode.DOWN) {
-      event.preventDefault();
-      this.open();
-    }
-  },
-
   onCalendarKeyDown(event) {
     if (event.keyCode === KeyCode.ESC) {
       event.stopPropagation();
@@ -152,15 +90,6 @@ const Picker = React.createClass({
     props.onChange(value);
   },
 
-  onCalendarBlur() {
-    if (Dom.contains(this.getNativeDOMNode(), document.activeElement)) {
-      return;
-    }
-    // if invisible, will not trigger blur
-    // do not set if already false, avoid ruin animate
-    this.close();
-  },
-
   onCalendarOk() {
     this.close(this.focus);
   },
@@ -169,120 +98,38 @@ const Picker = React.createClass({
     this.close(this.focus);
   },
 
-  onAnimateLeave() {
-    ReactDOM.unmountComponentAtNode(this.getCalendarContainer());
-  },
-
-  getNativeDOMNode() {
-    return ReactDOM.findDOMNode(this);
-  },
-
-  getTransitionName() {
-    const props = this.props;
-    let transitionName = props.transitionName;
-    if (!transitionName && props.animation) {
-      transitionName = `${props.prefixCls}-${props.animation}`;
-    }
-    return transitionName;
-  },
-
-  getCalendarContainer() {
-    if (!this.calendarContainer) {
-      this.calendarContainer = document.createElement('div');
-      this.calendarContainer.className = `${this.props.prefixCls}-container`;
-      this.props.getCalendarContainer().appendChild(this.calendarContainer);
-    }
-    return this.calendarContainer;
-  },
-
-  getAlign() {
-    let align;
-    const props = this.props;
-    const placement = props.placement;
-    if (placement && placement.points) {
-      align = placement;
-    } else {
-      align = fromPlacementStrToAlign(placement);
-      const {offset, targetOffset} = align;
-      let offsetProp = props.align.offset;
-      let targetOffsetProp = props.align.targetOffset;
-      if (offsetProp) {
-        offsetProp = offsetProp.concat();
+  onVisibleChange(open) {
+    this.setOpen(open, () => {
+      if (open) {
+        ReactDOM.findDOMNode(this.calendarInstance).focus();
       }
-      if (targetOffsetProp) {
-        targetOffsetProp = targetOffsetProp.concat();
-      }
-      const updateAlign = {};
-      for (let index = 0; index < 2; index++) {
-        if (offsetProp) {
-          if (offsetProp[index] === undefined) {
-            offsetProp[index] = offset[index];
-          }
-          updateAlign.offset = offsetProp;
-        }
-        if (targetOffsetProp) {
-          if (targetOffsetProp[index] === undefined) {
-            targetOffsetProp[index] = targetOffset[index];
-          }
-          updateAlign.targetOffset = offsetProp;
-        }
-      }
-      align = assign({}, align, updateAlign);
-    }
-    return align;
+    });
   },
 
   getCalendarElement() {
     const props = this.props;
     const state = this.state;
     const calendarProp = props.calendar;
-    let className = calendarProp.props.className || '';
-    if (className) {
-      className += ' ';
-    }
-
-    if (state.open) {
-      className += getCalendarClassByPlacement(calendarProp.props.prefixCls, props.placement);
-    } else {
-      const calendarDOMNode = ReactDOM.findDOMNode(this.calendarInstance);
-      // fix auto adjust
-      className = calendarDOMNode && calendarDOMNode.className || '';
-    }
-
     const extraProps = {
-      ref: createChainedFunction(calendarProp.ref, this.saveCalendarRef),
-      className: className,
+      ref: this.saveCalendarRef,
       defaultValue: calendarProp.props.defaultValue || state.value,
       defaultSelectedValue: state.value,
-      visible: state.open,
-      placement: props.placement,
-      onBlur: this.onCalendarBlur,
       onKeyDown: this.onCalendarKeyDown,
       onOk: createChainedFunction(calendarProp.props.onOk, this.onCalendarOk),
       onSelect: createChainedFunction(calendarProp.props.onSelect, this.onCalendarSelect),
       onClear: createChainedFunction(calendarProp.props.onClear, this.onCalendarClear),
     };
 
-    const calendarElement = React.cloneElement(calendarProp, extraProps);
-    return (<Animate
-      component=""
-      exclusive
-      onLeave={this.onAnimateLeave}
-      transitionAppear
-      showProp="calendarOpen"
-      transitionName={this.getTransitionName()}>
-      <Align target={this.getNativeDOMNode}
-             key="calendar"
-             onAlign={this.onCalendarAlign}
-             calendarOpen={state.open}
-             disabled={!state.open}
-             align={this.getAlign()}>
-        {calendarElement}
-      </Align>
-    </Animate>);
+    return React.cloneElement(calendarProp, extraProps);
+  },
+
+  getPickerClassNameFromAlign(align) {
+    const placement = getPlacementFromAlign(align);
+    return `${this.props.prefixCls}-placement-${placement}`;
   },
 
   setOpen(open, callback) {
+    const {onOpen, onClose} = this.props;
     if (this.state.open !== open) {
       this.setState({
         open: open,
@@ -291,24 +138,10 @@ const Picker = React.createClass({
         open: open,
       };
       if (open) {
-        this.props.onOpen(event);
+        onOpen(event);
       } else {
-        this.props.onClose(event);
+        onClose(event);
       }
-    }
-  },
-
-  focus() {
-    if (!this.state.open) {
-      this.getNativeDOMNode().focus();
-    }
-  },
-
-  toggle() {
-    if (this.state.open) {
-      this.close();
-    } else {
-      this.open();
     }
   },
 
@@ -320,22 +153,37 @@ const Picker = React.createClass({
     this.setOpen(false, callback);
   },
 
+  focus() {
+    if (!this.state.open) {
+      ReactDOM.findDOMNode(this).focus();
+    }
+  },
+
   render() {
     const props = this.props;
-    const disabled = props.disabled;
-    const prefixCls = props.prefixCls;
+    const { prefixCls, placement,
+      style, getCalendarContainer,
+      align, animation,
+      transitionName, children } = props;
     const state = this.state;
-    this.haveOpened = this.haveOpened || state.open;
-    const classes = {
-      [prefixCls]: 1,
-      [`${prefixCls}-open`]: state.open,
-      [`${prefixCls}-disabled`]: disabled,
-    };
-    return (<span className={classSet(classes)} style={props.style} tabIndex="0"
-                  onKeyDown={disabled ? noop : this.onKeyDown}
-                  onClick={disabled ? noop : this.onInputClick}>
-      {props.children(state, props)}
-    </span>);
+    let newAlign = getAlignFromPlacement(placement);
+    if (align) {
+      newAlign = assign({}, newAlign, align);
+    }
+    return (<Trigger popup={this.getCalendarElement()}
+                     popupAlign={newAlign}
+                     getPopupClassNameFromAlign={this.getPickerClassNameFromAlign}
+                     action="click"
+                     destroyPopupOnHide
+                     getPopupContainer={getCalendarContainer}
+                     popupStyle={style}
+                     popupAnimation={animation}
+                     popupTransitionName={transitionName}
+                     popupVisible={state.open}
+                     onPopupVisibleChange={this.onVisibleChange}
+                     prefixCls={prefixCls}>
+      {children(state, props)}
+    </Trigger>);
   },
 });
 

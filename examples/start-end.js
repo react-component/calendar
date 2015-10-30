@@ -41,6 +41,7 @@ var Picker = React.createClass({
             <span>
                 <input placeholder="请选择日期" style={{width:250}}
                        disabled={props.disabled}
+                       readOnly
                        value={value && getFormatter(props.showTime).format(value)}/>
                 </span>
           );
