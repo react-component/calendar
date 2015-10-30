@@ -15,13 +15,42 @@
   line-height: 1.5;
 
   &-input-wrap {
+    position: relative;
     padding: 8px;
+    border-bottom: 1px solid #e9e9e9;
   }
 
   &-input {
-    .input();
+    border: 0;
     width: 100%;
     cursor: auto;
+    outline: 0;
+  }
+
+  &-clear-btn {
+    position: absolute;
+    right: 6px;
+    overflow: hidden;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    top: 6px;
+    margin: 0;
+  }
+
+  &-clear-btn:after {
+    content: "x";
+    font-size: 12px;
+    color: #aaa;
+    display: inline-block;
+    line-height: 1;
+    width: 20px;
+    transition: color 0.3s ease;
+  }
+
+  &-clear-btn:hover:after {
+    color: #666;
   }
 
   &-week-number {
@@ -88,7 +117,7 @@
     top: 0;
     cursor: pointer;
     color: #999;
-    font-family: Arial,"Hiragino Sans GB","Microsoft Yahei","Microsoft Sans Serif",sans-serif;
+    font-family: Arial, "Hiragino Sans GB", "Microsoft Yahei", "Microsoft Sans Serif", sans-serif;
     padding: 0 5px;
     font-size: 16px;
     display: inline-block;
@@ -215,7 +244,7 @@
     margin-top: 2px;
   }
 
-  &-today-btn, &-clear-btn, &-ok-btn {
+  &-today-btn, &-ok-btn {
     display: inline-block;
     padding: 4px 5px;
     text-align: center;
