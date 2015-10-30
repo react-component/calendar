@@ -24,19 +24,13 @@ const CalendarFooter = React.createClass({
       if (props.showToday) {
         nowEl = getTodayElement(props);
       }
-      let clearEl;
-      if (props.showClear) {
-        clearEl = (<a className={`${prefixCls}-clear-btn`}
-                      role="button"
-                      onMouseDown={props.onClear}>{locale.clear}</a>);
-      }
       let okBtn;
       if (props.showOk) {
         okBtn = getOkElement(props);
       }
       let footerBtn;
-      if (nowEl || clearEl) {
-        footerBtn = <span className={`${prefixCls}-footer-btn`}>{toFragment([nowEl, okBtn, clearEl])}</span>;
+      if (nowEl) {
+        footerBtn = <span className={`${prefixCls}-footer-btn`}>{toFragment([nowEl, okBtn])}</span>;
       }
       let timeEl;
       if (props.showTime) {

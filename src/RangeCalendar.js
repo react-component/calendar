@@ -49,6 +49,9 @@ function onTimeSelect(direction, value) {
 }
 
 function onInputSelect(direction, value) {
+  if (!value) {
+    return;
+  }
   const originalValue = this.state.selectedValue;
   const selectedValue = originalValue.concat();
   const index = direction === 'left' ? 0 : 1;

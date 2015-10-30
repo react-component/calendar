@@ -5,9 +5,10 @@ const DateInput = React.createClass({
   propTypes: {
     formatter: PropTypes.object,
     locale: PropTypes.object,
+    gregorianCalendarLocale: PropTypes.object,
     disabledDate: PropTypes.func,
-    className: PropTypes.string,
     onChange: PropTypes.func,
+    onClear: PropTypes.func,
     onSelect: PropTypes.func,
     value: PropTypes.object,
   },
@@ -20,6 +21,7 @@ const DateInput = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
+    // when popup show, click body will call this, bug!
     const value = nextProps.value;
     this.setState({
       str: value && nextProps.formatter.format(value) || '',
@@ -35,11 +37,11 @@ const DateInput = React.createClass({
 
   onBlur() {
     const {str} = this.state;
-    const {disabledDate, formatter, locale, onChange} = this.props;
+    const {disabledDate, formatter, gregorianCalendarLocale, onChange} = this.props;
     let value;
     if (str) {
       try {
-        value = formatter.parse(str, locale);
+        value = formatter.parse(str, gregorianCalendarLocale);
       } catch (ex) {
         warning(false, `invalid date input: ${str}`);
         this.setState(this.getInitialState());
@@ -62,12 +64,24 @@ const DateInput = React.createClass({
     }
   },
 
+  onClear() {
+    this.setState({str: ''});
+    this.props.onClear(null);
+  },
+
   render() {
     const props = this.props;
-    return (<input className={props.className}
-                   value={this.state.str}
-                   onChange={this.onInputChange}
-                   onBlur={this.onBlur}/>);
+    const {locale, prefixCls} = props;
+    return (<div className={`${prefixCls}-input-wrap`}>
+      <input className={`${prefixCls}-input`}
+             value={this.state.str}
+             onChange={this.onInputChange}
+             onBlur={this.onBlur}/>
+      {props.showClear ? <a className={`${prefixCls}-clear-btn`}
+                            role="button"
+                            title={locale.clear}
+                            onMouseDown={this.onClear}/> : null}
+    </div>);
   },
 });
 

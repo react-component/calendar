@@ -16,14 +16,14 @@ const Calendar = React.createClass({
     const newProps = {locale, value, prefixCls};
     const index = direction === 'left' ? 0 : 1;
     return (<div className={`${rangeClassName}-part ${rangeClassName}-${direction}`}>
-      <div className={`${prefixCls}-input-wrap`}>
-        <DateInput className={`${prefixCls}-input`}
-                   formatter={formatter}
+        <DateInput formatter={formatter}
+                   locale={locale}
+                   prefixCls={prefixCls}
                    disabledDate={disabledDate}
+                   gregorianCalendarLocale={value.locale}
+                   showClear={false}
                    value={selectedValue[index] || selectedValue[0]}
                    onChange={props.onInputSelect}/>
-        <i className={`${prefixCls}-input-icon`}/>
-      </div>
       <div style={{outline: 'none'}}>
         <CalendarHeader
           {...newProps}

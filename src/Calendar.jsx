@@ -149,7 +149,6 @@ const Calendar = React.createClass({
   },
 
   onClear() {
-    this.dateTableSelectTime = Date.now();
     this.onSelect(null);
     this.props.onClear();
   },
@@ -187,14 +186,14 @@ const Calendar = React.createClass({
     const state = this.state;
     const {value, selectedValue} = state;
     const dateInputElement = props.showDateInput ? (
-      <div className={`${prefixCls}-input-wrap`}>
-        <DateInput className={`${prefixCls}-input`}
-                   formatter={this.getFormatter()}
-                   locale={value.locale}
-                   value={selectedValue}
-                   onChange={this.onDateInputChange}/>
-        <i className={`${prefixCls}-input-icon`}/>
-      </div>
+      <DateInput formatter={this.getFormatter()}
+                 gregorianCalendarLocale={value.locale}
+                 locale={locale}
+                 showClear
+                 onClear={this.onClear}
+                 prefixCls={prefixCls}
+                 value={selectedValue}
+                 onChange={this.onDateInputChange}/>
     ) : null;
     const children = (<div style={{outline: 'none'}}>
       {dateInputElement}
@@ -217,14 +216,12 @@ const Calendar = React.createClass({
 
       <CalendarFooter
         locale={locale}
-        showClear={props.showClear}
         showOk={props.showOk}
         prefixCls={prefixCls}
         showToday={props.showToday}
         showTime={props.showTime}
         value={value}
         disabledDate={disabledDate}
-        onClear={this.onClear}
         onOk={this.onOk}
         onSelect={this.onSelect}
         onToday={this.chooseToday}
