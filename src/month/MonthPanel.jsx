@@ -1,8 +1,6 @@
 import React, {PropTypes} from 'react';
-import {classSet as cx} from 'rc-util';
 import YearPanel from '../year/YearPanel';
-const ROW = 4;
-const COL = 3;
+import MonthTable from './MonthTable';
 
 function goYear(direction) {
   const next = this.state.value.clone();
@@ -10,11 +8,6 @@ function goYear(direction) {
   this.setAndChangeValue(next);
 }
 
-function chooseMonth(month) {
-  const next = this.state.value.clone();
-  next.rollSetMonth(month);
-  this.setAndSelectValue(next);
-}
 
 function noop() {
 
@@ -59,29 +52,6 @@ const MonthPanel = React.createClass({
     this.setAndChangeValue(current);
   },
 
-  getMonths() {
-    const props = this.props;
-    const value = this.state.value;
-    const current = value.clone();
-    const locale = props.locale;
-    const months = [];
-    const shortMonths = locale.format.shortMonths;
-    let index = 0;
-    for (let rowIndex = 0; rowIndex < ROW; rowIndex++) {
-      months[rowIndex] = [];
-      for (let colIndex = 0; colIndex < COL; colIndex++) {
-        current.rollSetMonth(index);
-        months[rowIndex][colIndex] = {
-          value: index,
-          content: shortMonths[index],
-          title: shortMonths[index],
-        };
-        index++;
-      }
-    }
-
-    return months;
-  },
 
   setAndChangeValue(value) {
     this.setValue(value);
@@ -111,44 +81,13 @@ const MonthPanel = React.createClass({
     const props = this.props;
     const value = this.state.value;
     const locale = props.locale;
-    const months = this.getMonths();
     const year = value.getYear();
-    const currentMonth = value.getMonth();
     const prefixCls = this.prefixCls;
-    const monthsEls = months.map((month, index)=> {
-      const tds = month.map(monthData => {
-        let disabled = false;
-        if (props.disabledDate) {
-          const testValue = value.clone();
-          testValue.rollSetMonth(monthData.value);
-          disabled = props.disabledDate(testValue);
-        }
-        const classNameMap = {
-          [`${prefixCls}-cell`]: 1,
-          [`${prefixCls}-cell-disabled`]: disabled,
-          [`${prefixCls}-selected-cell`]: monthData.value === currentMonth,
-        };
-        return (
-          <td role="gridcell"
-              key={monthData.value}
-              onClick={disabled ? null : chooseMonth.bind(this, monthData.value)}
-              title={monthData.title}
-              className={cx(classNameMap)}>
-            <a
-              className={`${prefixCls}-month`}>
-              {monthData.content}
-            </a>
-          </td>);
-      });
-      return (<tr key={index} role="row">{tds}</tr>);
-    });
-
     let yearPanel;
     if (this.state.showYearPanel) {
       yearPanel = (<YearPanel locale={locale} value={value} rootPrefixCls={props.rootPrefixCls}
                               onSelect={this.onYearPanelSelect}/>);
     }
-
     return (
       <div className={prefixCls} style={props.style}>
         <div>
@@ -175,13 +114,11 @@ const MonthPanel = React.createClass({
               »
             </a>
           </div>
-          <div className={`${prefixCls}-body`}>
-            <table className={`${prefixCls}-table`} cellSpacing="0" role="grid">
-              <tbody className={`${prefixCls}-tbody`}>
-              {monthsEls}
-              </tbody>
-            </table>
-          </div>
+          <MonthTable
+            onSelect={this.setAndSelectValue}
+            locale={locale}
+            value={value}
+            rootPrefixCls={props.rootPrefixCls} />
         </div>
         {yearPanel}
       </div>);
