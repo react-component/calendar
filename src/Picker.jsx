@@ -1,8 +1,7 @@
 import React, {PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 import {createChainedFunction, KeyCode} from 'rc-util';
-import {getPlacementFromAlign, getAlignFromPlacement} from './picker/placement';
-import assign from 'object-assign';
+import placements from './picker/placements';
 import Trigger from 'rc-trigger';
 
 function noop() {
@@ -117,11 +116,6 @@ const Picker = React.createClass({
     return React.cloneElement(calendarProp, extraProps);
   },
 
-  getPickerClassNameFromAlign(align) {
-    const placement = getPlacementFromAlign(align);
-    return `${this.props.prefixCls}-placement-${placement}`;
-  },
-
   setOpen(open, callback) {
     const {onOpen, onClose} = this.props;
     if (this.state.open !== open) {
@@ -161,13 +155,10 @@ const Picker = React.createClass({
       disabled,
       transitionName, children } = props;
     const state = this.state;
-    let newAlign = getAlignFromPlacement(placement);
-    if (align) {
-      newAlign = assign({}, newAlign, align);
-    }
     return (<Trigger popup={this.getCalendarElement()}
-                     popupAlign={newAlign}
-                     getPopupClassNameFromAlign={this.getPickerClassNameFromAlign}
+                     popupAlign={align}
+                     builtinPlacements={placements}
+                     popupPlacement={placement}
                      action={disabled ? [] : ['click']}
                      destroyPopupOnHide
                      getPopupContainer={getCalendarContainer}

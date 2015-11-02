@@ -10,8 +10,8 @@ import async from 'async';
 import DateTimeFormat from 'gregorian-calendar-format';
 var formatter = new DateTimeFormat('yyyy-MM-dd');
 import GregorianCalendar from 'gregorian-calendar';
-import zhCn from 'gregorian-calendar/lib/locale/zh-cn';
-import CalendarLocale from '../src/locale/zh-cn';
+import zhCn from 'gregorian-calendar/lib/locale/zh_CN';
+import CalendarLocale from '../src/locale/zh_CN';
 var value = new GregorianCalendar(zhCn);
 value.set(2015, 5, 1);
 

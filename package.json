@@ -1,6 +1,6 @@
 {
   "name": "rc-calendar",
-  "version": "4.0.0-alpha9",
+  "version": "4.0.0-alpha10",
   "description": "React Calendar",
   "keywords": [
     "react",
@@ -57,11 +57,10 @@
     "lint"
   ],
   "dependencies": {
-    "gregorian-calendar": "3.x",
-    "gregorian-calendar-format": "3.x",
+    "gregorian-calendar": "4.x",
+    "gregorian-calendar-format": "4.x",
     "object-assign": "4.x",
-    "rc-trigger": "0.1.x",
-    "rc-util": "2.x",
-    "warning": "2.x"
+    "rc-trigger": "1.x",
+    "rc-util": "2.x"
   }
 }

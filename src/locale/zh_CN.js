@@ -1,4 +1,4 @@
-import zhCn from 'gregorian-calendar-format/lib/locale/zh-cn';
+import zhCn from 'gregorian-calendar-format/lib/locale/zh_CN';
 
 export default {
   today: '今天',

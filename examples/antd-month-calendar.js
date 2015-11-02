@@ -3,10 +3,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import MonthCalendar from 'rc-calendar/src/MonthCalendar';
 import DatePicker from 'rc-calendar/src/Picker';
-import zhCn from 'gregorian-calendar/lib/locale/zh-cn'; // spm error
+import zhCn from 'gregorian-calendar/lib/locale/zh_CN'; // spm error
 import DateTimeFormat from 'gregorian-calendar-format';
 import GregorianCalendar from 'gregorian-calendar';
-import CalendarLocale from 'rc-calendar/src/locale/zh-cn';
+import CalendarLocale from 'rc-calendar/src/locale/zh_CN';
 var now = new GregorianCalendar(zhCn);
 now.setTime(Date.now());
 const formatter = new DateTimeFormat('yyyy-MM');

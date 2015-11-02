@@ -1,5 +1,5 @@
 import {PropTypes} from 'react';
-import enUs from '../locale/en-us';
+import enUs from '../locale/en_US';
 import DateTimeFormat from 'gregorian-calendar-format';
 
 function noop() {

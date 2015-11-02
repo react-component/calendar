@@ -6,8 +6,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 var formatter = new GregorianCalendarFormat('yyyy-MM-dd HH:mm:ss');
 import GregorianCalendar from 'gregorian-calendar';
-import zhCn from 'gregorian-calendar/lib/locale/zh-cn';
-import CalendarLocale from 'rc-calendar/src/locale/zh-cn';
+import zhCn from 'gregorian-calendar/lib/locale/zh_CN';
+import CalendarLocale from 'rc-calendar/src/locale/zh_CN';
 import Picker from 'rc-calendar/src/Picker';
 
 var value = new GregorianCalendar(zhCn);
