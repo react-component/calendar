@@ -68,7 +68,7 @@ var Test = React.createClass({
                              showTime={state.showTime}
                              showOk
                              disabledDate={disabledDate}
-                             showClear/>;
+                             />;
     return <div style={{width: 240, margin: 20}} >
       <div style={{marginBottom:10}}>
         <span>
@@ -117,7 +117,7 @@ function onStandaloneSelect(value) {
 
 function onStandaloneChange(value) {
   console.log('onStandaloneChange');
-  console.log(formatter.format(value))
+  console.log(value &&formatter.format(value))
 }
 
 
@@ -129,6 +129,8 @@ ReactDOM.render(<div style={{zIndex:1000,position:'relative'}}>
       <Calendar showWeekNumber={false}
                 locale={CalendarLocale}
                 defaultValue={now}
+                showOk
+                showToday
                 onChange={onStandaloneChange}
                 disabledDate={disabledDate}
                 onSelect={onStandaloneSelect}

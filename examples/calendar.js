@@ -21,7 +21,6 @@ var Test = React.createClass({
     value.setTime(Date.now());
     return {
       open: false,
-
       showTime: true,
       value: value
     };
@@ -37,7 +36,7 @@ var Test = React.createClass({
     var state = this.state;
     var calendar = <Calendar locale={CalendarLocale}
                              showTime={this.state.showTime}
-                             showClear/>;
+                             />;
     return <div className="form-group" style={{width: 400, margin: 20}} >
       <div className="input-group">
         <span>
@@ -54,8 +53,9 @@ var Test = React.createClass({
               return <span>
                 <input type="text"
                        className="form-control"
+                       placeholder="请选择时间"
                        readOnly
-                       value={formatter.format(value)}
+                       value={value &&formatter.format(value)}
                        style={{
                        background: "white",
                        borderTopRightRadius:4,
@@ -84,12 +84,12 @@ var Test = React.createClass({
 
 function onStandaloneSelect(value) {
   console.log('onCalendarSelect');
-  console.log(formatter.format(value))
+  console.log(value &&formatter.format(value))
 }
 
 function onStandaloneChange(value) {
   console.log('onCalendarChange');
-  console.log(formatter.format(value))
+  console.log(value &&formatter.format(value))
 }
 
 ReactDOM.render(<div>
@@ -97,8 +97,8 @@ ReactDOM.render(<div>
 
   <div style={{margin:10}}>
     <Calendar showWeekNumber
-              showOk={0}
-              showClear={0}
+              showOk={true}
+              showToday={true}
               onSelect={onStandaloneSelect}
               onChange={onStandaloneChange}
               showTime/>

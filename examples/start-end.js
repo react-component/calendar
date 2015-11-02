@@ -28,7 +28,7 @@ var Picker = React.createClass({
                              showTime={props.showTime}
                              showOk
                              disabledDate={props.disabledDate}
-                             showClear/>;
+                             />;
     return <DatePicker
       animation="slide-up"
       disabled={props.disabled}

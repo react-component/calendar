@@ -39,7 +39,8 @@ const DateInput = React.createClass({
     const {disabledDate, formatter, gregorianCalendarLocale, onChange} = this.props;
     if (str) {
       try {
-        value = formatter.parse(str, gregorianCalendarLocale, {
+        value = formatter.parse(str, {
+          locale: gregorianCalendarLocale,
           obeyCount: true,
         });
       } catch (ex) {
