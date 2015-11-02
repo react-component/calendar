@@ -22163,31 +22163,22 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-	
 	var _react = __webpack_require__(3);
 	
 	var _react2 = _interopRequireDefault(_react);
-	
-	var _rcUtil = __webpack_require__(168);
 	
 	var _yearYearPanel = __webpack_require__(187);
 	
 	var _yearYearPanel2 = _interopRequireDefault(_yearYearPanel);
 	
-	var ROW = 4;
-	var COL = 3;
+	var _MonthTable = __webpack_require__(189);
+	
+	var _MonthTable2 = _interopRequireDefault(_MonthTable);
 	
 	function goYear(direction) {
 	  var next = this.state.value.clone();
 	  next.addYear(direction);
 	  this.setAndChangeValue(next);
-	}
-	
-	function chooseMonth(month) {
-	  var next = this.state.value.clone();
-	  next.rollSetMonth(month);
-	  this.setAndSelectValue(next);
 	}
 	
 	function noop() {}
@@ -22233,30 +22224,6 @@
 	    this.setAndChangeValue(current);
 	  },
 	
-	  getMonths: function getMonths() {
-	    var props = this.props;
-	    var value = this.state.value;
-	    var current = value.clone();
-	    var locale = props.locale;
-	    var months = [];
-	    var shortMonths = locale.format.shortMonths;
-	    var index = 0;
-	    for (var rowIndex = 0; rowIndex < ROW; rowIndex++) {
-	      months[rowIndex] = [];
-	      for (var colIndex = 0; colIndex < COL; colIndex++) {
-	        current.rollSetMonth(index);
-	        months[rowIndex][colIndex] = {
-	          value: index,
-	          content: shortMonths[index],
-	          title: shortMonths[index]
-	        };
-	        index++;
-	      }
-	    }
-	
-	    return months;
-	  },
-	
 	  setAndChangeValue: function setAndChangeValue(value) {
 	    this.setValue(value);
 	    this.props.onChange(value);
@@ -22282,54 +22249,16 @@
 	  },
 	
 	  render: function render() {
-	    var _this = this;
-	
 	    var props = this.props;
 	    var value = this.state.value;
 	    var locale = props.locale;
-	    var months = this.getMonths();
 	    var year = value.getYear();
-	    var currentMonth = value.getMonth();
 	    var prefixCls = this.prefixCls;
-	    var monthsEls = months.map(function (month, index) {
-	      var tds = month.map(function (monthData) {
-	        var _classNameMap;
-	
-	        var disabled = false;
-	        if (props.disabledDate) {
-	          var testValue = value.clone();
-	          testValue.rollSetMonth(monthData.value);
-	          disabled = props.disabledDate(testValue);
-	        }
-	        var classNameMap = (_classNameMap = {}, _defineProperty(_classNameMap, prefixCls + '-cell', 1), _defineProperty(_classNameMap, prefixCls + '-cell-disabled', disabled), _defineProperty(_classNameMap, prefixCls + '-selected-cell', monthData.value === currentMonth), _classNameMap);
-	        return _react2['default'].createElement(
-	          'td',
-	          { role: 'gridcell',
-	            key: monthData.value,
-	            onClick: disabled ? null : chooseMonth.bind(_this, monthData.value),
-	            title: monthData.title,
-	            className: (0, _rcUtil.classSet)(classNameMap) },
-	          _react2['default'].createElement(
-	            'a',
-	            {
-	              className: prefixCls + '-month' },
-	            monthData.content
-	          )
-	        );
-	      });
-	      return _react2['default'].createElement(
-	        'tr',
-	        { key: index, role: 'row' },
-	        tds
-	      );
-	    });
-	
 	    var yearPanel = undefined;
 	    if (this.state.showYearPanel) {
 	      yearPanel = _react2['default'].createElement(_yearYearPanel2['default'], { locale: locale, value: value, rootPrefixCls: props.rootPrefixCls,
 	        onSelect: this.onYearPanelSelect });
 	    }
-	
 	    return _react2['default'].createElement(
 	      'div',
 	      { className: prefixCls, style: props.style },
@@ -22373,19 +22302,11 @@
 	            '»'
 	          )
 	        ),
-	        _react2['default'].createElement(
-	          'div',
-	          { className: prefixCls + '-body' },
-	          _react2['default'].createElement(
-	            'table',
-	            { className: prefixCls + '-table', cellSpacing: '0', role: 'grid' },
-	            _react2['default'].createElement(
-	              'tbody',
-	              { className: prefixCls + '-tbody' },
-	              monthsEls
-	            )
-	          )
-	        )
+	        _react2['default'].createElement(_MonthTable2['default'], {
+	          onSelect: this.setAndSelectValue,
+	          locale: locale,
+	          value: value,
+	          rootPrefixCls: props.rootPrefixCls })
 	      ),
 	      yearPanel
 	    );
@@ -22848,7 +22769,169 @@
 /* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(190);
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var _react = __webpack_require__(3);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _rcUtil = __webpack_require__(168);
+	
+	var ROW = 4;
+	var COL = 3;
+	
+	function chooseMonth(month) {
+	  var next = this.state.value.clone();
+	  next.rollSetMonth(month);
+	  this.setAndSelectValue(next);
+	}
+	
+	function noop() {}
+	
+	var MonthTable = (function (_Component) {
+	  _inherits(MonthTable, _Component);
+	
+	  function MonthTable(props) {
+	    _classCallCheck(this, MonthTable);
+	
+	    _get(Object.getPrototypeOf(MonthTable.prototype), 'constructor', this).call(this, props);
+	
+	    this.prefixCls = props.rootPrefixCls + '-month-panel';
+	
+	    this.state = {
+	      value: props.value
+	    };
+	  }
+	
+	  _createClass(MonthTable, [{
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      if ('value' in nextProps) {
+	        this.setState({
+	          value: nextProps.value
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'getMonths',
+	    value: function getMonths() {
+	      var props = this.props;
+	      var value = this.state.value;
+	      var current = value.clone();
+	      var locale = props.locale;
+	      var months = [];
+	      var shortMonths = locale.format.shortMonths;
+	      var index = 0;
+	      for (var rowIndex = 0; rowIndex < ROW; rowIndex++) {
+	        months[rowIndex] = [];
+	        for (var colIndex = 0; colIndex < COL; colIndex++) {
+	          current.rollSetMonth(index);
+	          months[rowIndex][colIndex] = {
+	            value: index,
+	            content: shortMonths[index],
+	            title: shortMonths[index]
+	          };
+	          index++;
+	        }
+	      }
+	      return months;
+	    }
+	  }, {
+	    key: 'setAndSelectValue',
+	    value: function setAndSelectValue(value) {
+	      this.setState({
+	        value: value
+	      });
+	      this.props.onSelect(value);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this = this;
+	
+	      var props = this.props;
+	      var value = this.state.value;
+	      var months = this.getMonths();
+	      var currentMonth = value.getMonth();
+	      var prefixCls = this.prefixCls;
+	      var monthsEls = months.map(function (month, index) {
+	        var tds = month.map(function (monthData) {
+	          var _classNameMap;
+	
+	          var disabled = false;
+	          if (props.disabledDate) {
+	            var testValue = value.clone();
+	            testValue.rollSetMonth(monthData.value);
+	            disabled = props.disabledDate(testValue);
+	          }
+	          var classNameMap = (_classNameMap = {}, _defineProperty(_classNameMap, prefixCls + '-cell', 1), _defineProperty(_classNameMap, prefixCls + '-cell-disabled', disabled), _defineProperty(_classNameMap, prefixCls + '-selected-cell', monthData.value === currentMonth), _classNameMap);
+	          return _react2['default'].createElement(
+	            'td',
+	            { role: 'gridcell',
+	              key: monthData.value,
+	              onClick: disabled ? null : chooseMonth.bind(_this, monthData.value),
+	              title: monthData.title,
+	              className: (0, _rcUtil.classSet)(classNameMap) },
+	            _react2['default'].createElement(
+	              'a',
+	              {
+	                className: prefixCls + '-month' },
+	              monthData.content
+	            )
+	          );
+	        });
+	        return _react2['default'].createElement(
+	          'tr',
+	          { key: index, role: 'row' },
+	          tds
+	        );
+	      });
+	
+	      return _react2['default'].createElement(
+	        'div',
+	        { className: prefixCls + '-body' },
+	        _react2['default'].createElement(
+	          'table',
+	          { className: prefixCls + '-table', cellSpacing: '0', role: 'grid' },
+	          _react2['default'].createElement(
+	            'tbody',
+	            { className: prefixCls + '-tbody' },
+	            monthsEls
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return MonthTable;
+	})(_react.Component);
+	
+	MonthTable.defaultProps = {
+	  onSelect: noop
+	};
+	MonthTable.propTypes = {
+	  onSelect: _react.PropTypes.func,
+	  rootPrefixCls: _react.PropTypes.string,
+	  value: _react.PropTypes.object
+	};
+	exports['default'] = MonthTable;
+	module.exports = exports['default'];
 
 /***/ },
 /* 190 */
@@ -23215,71 +23298,71 @@
 	  var current,
 	    value;
 	  switch (field) {
-	    case 'G':
-	      value = calendar.getYear() > 0 ? 1 : 0;
-	      current = locale.eras[value];
-	      break;
-	    case 'y':
-	      value = calendar.getYear();
-	      if (value <= 0) {
-	        value = 1 - value;
-	      }
-	      current = (zeroPaddingNumber(value, 2, count !== 2 ? MAX_VALUE : 2));
-	      break;
-	    case 'M':
-	      value = calendar.getMonth();
-	      if (count >= 4) {
-	        current = locale.months[value];
-	      } else if (count === 3) {
-	        current = locale.shortMonths[value];
-	      } else {
-	        current = zeroPaddingNumber(value + 1, count);
-	      }
-	      break;
-	    case 'k':
-	      current = zeroPaddingNumber(calendar.getHourOfDay() || 24,
-	        count);
-	      break;
-	    case 'E':
-	      value = calendar.getDayOfWeek();
-	      current = count >= 4 ?
-	        locale.weekdays[value] :
-	        locale.shortWeekdays[value];
-	      break;
-	    case 'a':
-	      current = locale.ampms[calendar.getHourOfDay() >= 12 ?
-	        1 :
-	        0];
-	      break;
-	    case 'h':
-	      current = zeroPaddingNumber(calendar.
+	  case 'G':
+	    value = calendar.getYear() > 0 ? 1 : 0;
+	    current = locale.eras[value];
+	    break;
+	  case 'y':
+	    value = calendar.getYear();
+	    if (value <= 0) {
+	      value = 1 - value;
+	    }
+	    current = (zeroPaddingNumber(value, 2, count !== 2 ? MAX_VALUE : 2));
+	    break;
+	  case 'M':
+	    value = calendar.getMonth();
+	    if (count >= 4) {
+	      current = locale.months[value];
+	    } else if (count === 3) {
+	      current = locale.shortMonths[value];
+	    } else {
+	      current = zeroPaddingNumber(value + 1, count);
+	    }
+	    break;
+	  case 'k':
+	    current = zeroPaddingNumber(calendar.getHourOfDay() || 24,
+	      count);
+	    break;
+	  case 'E':
+	    value = calendar.getDayOfWeek();
+	    current = count >= 4 ?
+	      locale.weekdays[value] :
+	      locale.shortWeekdays[value];
+	    break;
+	  case 'a':
+	    current = locale.ampms[calendar.getHourOfDay() >= 12 ?
+	      1 :
+	      0];
+	    break;
+	  case 'h':
+	    current = zeroPaddingNumber(calendar.
 	        getHourOfDay() % 12 || 12, count);
-	      break;
-	    case 'K':
-	      current = zeroPaddingNumber(calendar.
+	    break;
+	  case 'K':
+	    current = zeroPaddingNumber(calendar.
 	        getHourOfDay() % 12, count);
-	      break;
-	    case 'Z':
-	      var offset = calendar.getTimezoneOffset();
-	      var parts = [offset < 0 ? '-' : '+'];
-	      offset = Math.abs(offset);
-	      parts.push(zeroPaddingNumber(Math.floor(offset / 60) % 100, 2),
-	        zeroPaddingNumber(offset % 60, 2));
-	      current = parts.join('');
-	      break;
-	    default :
-	      // case 'd':
-	      // case 'H':
-	      // case 'm':
-	      // case 's':
-	      // case 'S':
-	      // case 'D':
-	      // case 'F':
-	      // case 'w':
-	      // case 'W':
-	      var index = calendarIndexMap[field];
-	      value = calendar.get(index);
-	      current = zeroPaddingNumber(value, count);
+	    break;
+	  case 'Z':
+	    var offset = calendar.getTimezoneOffset();
+	    var parts = [offset < 0 ? '-' : '+'];
+	    offset = Math.abs(offset);
+	    parts.push(zeroPaddingNumber(Math.floor(offset / 60) % 100, 2),
+	      zeroPaddingNumber(offset % 60, 2));
+	    current = parts.join('');
+	    break;
+	  default :
+	    // case 'd':
+	    // case 'H':
+	    // case 'm':
+	    // case 's':
+	    // case 'S':
+	    // case 'D':
+	    // case 'F':
+	    // case 'w':
+	    // case 'W':
+	    var index = calendarIndexMap[field];
+	    value = calendar.get(index);
+	    current = zeroPaddingNumber(value, count);
 	  }
 	  return current;
 	}
@@ -23356,123 +23439,123 @@
 	  }
 	  var locale = this.locale;
 	  switch (field) {
-	    case 'G':
-	      if ((match = matchField(dateStr, startIndex, locale.eras))) {
-	        if (calendar.isSetYear()) {
-	          if (match.value === 0) {
-	            year = calendar.getYear();
-	            calendar.setYear(1 - year);
-	          }
-	        } else {
-	          tmp.era = match.value;
-	        }
-	      }
-	      break;
-	    case 'y':
-	      if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
-	        year = match.value;
-	        if ('era' in tmp) {
-	          if (tmp.era === 0) {
-	            year = 1 - year;
-	          }
-	        }
-	        calendar.setYear(year);
-	      }
-	      break;
-	    case 'M':
-	      var month;
-	      if (count >= 3) {
-	        if ((match = matchField(dateStr, startIndex, locale[count === 3 ?
-	            'shortMonths' : 'months']))) {
-	          month = match.value;
+	  case 'G':
+	    if ((match = matchField(dateStr, startIndex, locale.eras))) {
+	      if (calendar.isSetYear()) {
+	        if (match.value === 0) {
+	          year = calendar.getYear();
+	          calendar.setYear(1 - year);
 	        }
 	      } else {
-	        if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
-	          month = match.value - 1;
+	        tmp.era = match.value;
+	      }
+	    }
+	    break;
+	  case 'y':
+	    if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
+	      year = match.value;
+	      if ('era' in tmp) {
+	        if (tmp.era === 0) {
+	          year = 1 - year;
 	        }
 	      }
-	      if (match) {
-	        calendar.setMonth(month);
+	      calendar.setYear(year);
+	    }
+	    break;
+	  case 'M':
+	    var month;
+	    if (count >= 3) {
+	      if ((match = matchField(dateStr, startIndex, locale[count === 3 ?
+	          'shortMonths' : 'months']))) {
+	        month = match.value;
 	      }
-	      break;
-	    case 'k':
+	    } else {
 	      if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
-	        calendar.setHourOfDay(match.value % 24);
+	        month = match.value - 1;
 	      }
-	      break;
-	    case 'E':
-	      if ((match = matchField(dateStr, startIndex, locale[count > 3 ?
-	          'weekdays' :
-	          'shortWeekdays']))) {
-	        calendar.setDayOfWeek(match.value);
-	      }
-	      break;
-	    case 'a':
-	      if ((match = matchField(dateStr, startIndex, locale.ampms))) {
-	        if (calendar.isSetHourOfDay()) {
-	          if (match.value) {
-	            hour = calendar.getHourOfDay();
-	            if (hour < 12) {
-	              calendar.setHourOfDay((hour + 12) % 24);
-	            }
+	    }
+	    if (match) {
+	      calendar.setMonth(month);
+	    }
+	    break;
+	  case 'k':
+	    if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
+	      calendar.setHourOfDay(match.value % 24);
+	    }
+	    break;
+	  case 'E':
+	    if ((match = matchField(dateStr, startIndex, locale[count > 3 ?
+	        'weekdays' :
+	        'shortWeekdays']))) {
+	      calendar.setDayOfWeek(match.value);
+	    }
+	    break;
+	  case 'a':
+	    if ((match = matchField(dateStr, startIndex, locale.ampms))) {
+	      if (calendar.isSetHourOfDay()) {
+	        if (match.value) {
+	          hour = calendar.getHourOfDay();
+	          if (hour < 12) {
+	            calendar.setHourOfDay((hour + 12) % 24);
 	          }
-	        } else {
-	          tmp.ampm = match.value;
 	        }
-	      }
-	      break;
-	    case 'h':
-	      if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
-	        hour = match.value %= 12;
-	        if (tmp.ampm) {
-	          hour += 12;
-	        }
-	        calendar.setHourOfDay(hour);
-	      }
-	      break;
-	    case 'K':
-	      if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
-	        hour = match.value;
-	        if (tmp.ampm) {
-	          hour += 12;
-	        }
-	        calendar.setHourOfDay(hour);
-	      }
-	      break;
-	    case 'Z':
-	      var sign = 1;
-	      var zoneChar = dateStr.charAt(startIndex);
-	      if (zoneChar === '-') {
-	        sign = -1;
-	        startIndex++;
-	      } else if (zoneChar === '+') {
-	        startIndex++;
 	      } else {
-	        break;
+	        tmp.ampm = match.value;
 	      }
+	    }
+	    break;
+	  case 'h':
+	    if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
+	      hour = match.value %= 12;
+	      if (tmp.ampm) {
+	        hour += 12;
+	      }
+	      calendar.setHourOfDay(hour);
+	    }
+	    break;
+	  case 'K':
+	    if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
+	      hour = match.value;
+	      if (tmp.ampm) {
+	        hour += 12;
+	      }
+	      calendar.setHourOfDay(hour);
+	    }
+	    break;
+	  case 'Z':
+	    var sign = 1;
+	    var zoneChar = dateStr.charAt(startIndex);
+	    if (zoneChar === '-') {
+	      sign = -1;
+	      startIndex++;
+	    } else if (zoneChar === '+') {
+	      startIndex++;
+	    } else {
+	      break;
+	    }
+	    if ((match = matchNumber.call(this, dateStr, startIndex, 2, true))) {
+	      var zoneOffset = match.value * 60;
+	      startIndex = match.startIndex;
 	      if ((match = matchNumber.call(this, dateStr, startIndex, 2, true))) {
-	        var zoneOffset = match.value * 60;
-	        startIndex = match.startIndex;
-	        if ((match = matchNumber.call(this, dateStr, startIndex, 2, true))) {
-	          zoneOffset += match.value;
-	        }
-	        calendar.setTimezoneOffset(zoneOffset);
+	        zoneOffset += match.value;
 	      }
-	      break;
-	    default :
-	      // case 'd':
-	      // case 'H':
-	      // case 'm':
-	      // case 's':
-	      // case 'S':
-	      // case 'D':
-	      // case 'F':
-	      // case 'w':
-	      // case 'W'
-	      if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
-	        var index = calendarIndexMap[field];
-	        calendar.set(index, match.value);
-	      }
+	      calendar.setTimezoneOffset(zoneOffset);
+	    }
+	    break;
+	  default :
+	    // case 'd':
+	    // case 'H':
+	    // case 'm':
+	    // case 's':
+	    // case 'S':
+	    // case 'D':
+	    // case 'F':
+	    // case 'w':
+	    // case 'W'
+	    if ((match = matchNumber.call(this, dateStr, startIndex, count, obeyCount))) {
+	      var index = calendarIndexMap[field];
+	      calendar.set(index, match.value);
+	    }
 	  }
 	  if (match) {
 	    startIndex = match.startIndex;
@@ -23510,12 +23593,14 @@
 	   * @param {String} dateStr formatted string of GregorianDate
 	   * @returns {GregorianCalendar}
 	   */
-	  parse: function (dateStr, calendarLocale,options) {
+	  parse: function (dateStr, option) {
+	    option = option || {};
+	    var calendarLocale = option.locale;
 	    var calendar = new GregorianCalendar(calendarLocale);
 	    var i;
 	    var j;
 	    var tmp = {};
-	    var obeyCount = true;
+	    var obeyCount = option.obeyCount || false;
 	    var dateStrLen = dateStr.length;
 	    var errorIndex = -1;
 	    var startIndex = 0;
@@ -23541,14 +23626,17 @@
 	            startIndex += textLen;
 	          }
 	        } else if ('field' in comp) {
-	          var nextComp = pattern[i + 1];
-	          if (nextComp) {
-	            if ('field' in nextComp) {
-	              obeyCount = true;
-	            } else {
-	              var c = nextComp.text.charAt(0);
-	              if (c >= '0' && c <= '9') {
+	          if (!option.obeyCount) {
+	            var nextComp = pattern[i + 1];
+	            obeyCount = false;
+	            if (nextComp) {
+	              if ('field' in nextComp) {
 	                obeyCount = true;
+	              } else {
+	                var c = nextComp.text.charAt(0);
+	                if (c >= '0' && c <= '9') {
+	                  obeyCount = true;
+	                }
 	              }
 	            }
 	          }
@@ -23652,7 +23740,6 @@
 	
 	// gc_format@163.com
 
-
 /***/ },
 /* 191 */
 /***/ function(module, exports) {
@@ -23697,11 +23784,11 @@
 	
 	var _react = __webpack_require__(3);
 	
-	var _localeEnUs = __webpack_require__(197);
+	var _localeEn_US = __webpack_require__(197);
 	
-	var _localeEnUs2 = _interopRequireDefault(_localeEnUs);
+	var _localeEn_US2 = _interopRequireDefault(_localeEn_US);
 	
-	var _gregorianCalendarFormat = __webpack_require__(189);
+	var _gregorianCalendarFormat = __webpack_require__(190);
 	
 	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
 	
@@ -23721,7 +23808,7 @@
 	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
-	      locale: _localeEnUs2['default'],
+	      locale: _localeEn_US2['default'],
 	      style: {},
 	      visible: true,
 	      prefixCls: 'rc-calendar',
@@ -23774,9 +23861,9 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _gregorianCalendarFormatLibLocaleEnUs = __webpack_require__(191);
+	var _gregorianCalendarFormatLibLocaleEn_US = __webpack_require__(191);
 	
-	var _gregorianCalendarFormatLibLocaleEnUs2 = _interopRequireDefault(_gregorianCalendarFormatLibLocaleEnUs);
+	var _gregorianCalendarFormatLibLocaleEn_US2 = _interopRequireDefault(_gregorianCalendarFormatLibLocaleEn_US);
 	
 	exports['default'] = {
 	  today: 'Today',
@@ -23806,7 +23893,7 @@
 	  nextDecade: 'Next decade',
 	  previousCentury: 'Last century',
 	  nextCentury: 'Next century',
-	  format: _gregorianCalendarFormatLibLocaleEnUs2['default']
+	  format: _gregorianCalendarFormatLibLocaleEn_US2['default']
 	};
 	module.exports = exports['default'];
 
@@ -23833,13 +23920,11 @@
 	
 	var _rcUtil = __webpack_require__(168);
 	
-	var _pickerPlacement = __webpack_require__(200);
+	var _pickerPlacements = __webpack_require__(200);
 	
-	var _objectAssign = __webpack_require__(202);
+	var _pickerPlacements2 = _interopRequireDefault(_pickerPlacements);
 	
-	var _objectAssign2 = _interopRequireDefault(_objectAssign);
-	
-	var _rcTrigger = __webpack_require__(203);
+	var _rcTrigger = __webpack_require__(201);
 	
 	var _rcTrigger2 = _interopRequireDefault(_rcTrigger);
 	
@@ -23960,11 +24045,6 @@
 	    return _react2['default'].cloneElement(calendarProp, extraProps);
 	  },
 	
-	  getPickerClassNameFromAlign: function getPickerClassNameFromAlign(align) {
-	    var placement = (0, _pickerPlacement.getPlacementFromAlign)(align);
-	    return this.props.prefixCls + '-placement-' + placement;
-	  },
-	
 	  setOpen: function setOpen(open, callback) {
 	    var _props = this.props;
 	    var onOpen = _props.onOpen;
@@ -24012,15 +24092,12 @@
 	    var children = props.children;
 	
 	    var state = this.state;
-	    var newAlign = (0, _pickerPlacement.getAlignFromPlacement)(placement);
-	    if (align) {
-	      newAlign = (0, _objectAssign2['default'])({}, newAlign, align);
-	    }
 	    return _react2['default'].createElement(
 	      _rcTrigger2['default'],
 	      { popup: this.getCalendarElement(),
-	        popupAlign: newAlign,
-	        getPopupClassNameFromAlign: this.getPickerClassNameFromAlign,
+	        popupAlign: align,
+	        builtinPlacements: _pickerPlacements2['default'],
+	        popupPlacement: placement,
 	        action: disabled ? [] : ['click'],
 	        destroyPopupOnHide: true,
 	        getPopupContainer: getCalendarContainer,
@@ -24040,22 +24117,13 @@
 
 /***/ },
 /* 200 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
-	exports.getAlignFromPlacement = getAlignFromPlacement;
-	exports.getPlacementFromAlign = getPlacementFromAlign;
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var _warning = __webpack_require__(201);
-	
-	var _warning2 = _interopRequireDefault(_warning);
-	
 	var autoAdjustOverflow = {
 	  adjustX: 1,
 	  adjustY: 1
@@ -24063,7 +24131,7 @@
 	
 	var targetOffset = [0, 0];
 	
-	var placementAlignMap = {
+	var placements = {
 	  topLeft: {
 	    points: ['tl', 'tl'],
 	    overflow: autoAdjustOverflow,
@@ -24090,153 +24158,19 @@
 	  }
 	};
 	
-	exports.placementAlignMap = placementAlignMap;
-	function isPointsEq(a1, a2) {
-	  return a1[0] === a2[0] && a1[1] === a2[1];
-	}
-	
-	function getAlignFromPlacement(placementStr) {
-	  var align = placementAlignMap[placementStr];
-	  if (!align) {
-	    (0, _warning2['default'])(false, 'can not find align for placement ' + placementStr);
-	  }
-	  return align;
-	}
-	
-	function getPlacementFromAlign(align) {
-	  var points = align.points;
-	  for (var placement in placementAlignMap) {
-	    if (placementAlignMap.hasOwnProperty(placement)) {
-	      if (isPointsEq(placementAlignMap[placement].points, points)) {
-	        return placement;
-	      }
-	    }
-	  }
-	  (0, _warning2['default'])(false, 'can not find placement for', points.join(','));
-	}
+	exports['default'] = placements;
+	module.exports = exports['default'];
 
 /***/ },
 /* 201 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process) {/**
-	 * Copyright 2014-2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 */
-	
 	'use strict';
 	
-	/**
-	 * Similar to invariant but only logs a warning if the condition is not met.
-	 * This can be used to log issues in development environments in critical
-	 * paths. Removing the logging code for production environments will keep the
-	 * same logic and follow the same code paths.
-	 */
-	
-	var warning = function() {};
-	
-	if (process.env.NODE_ENV !== 'production') {
-	  warning = function(condition, format, args) {
-	    var len = arguments.length;
-	    args = new Array(len > 2 ? len - 2 : 0);
-	    for (var key = 2; key < len; key++) {
-	      args[key - 2] = arguments[key];
-	    }
-	    if (format === undefined) {
-	      throw new Error(
-	        '`warning(condition, format, ...args)` requires a warning ' +
-	        'message argument'
-	      );
-	    }
-	
-	    if (format.length < 10 || (/^[s\W]*$/).test(format)) {
-	      throw new Error(
-	        'The warning format should be able to uniquely identify this ' +
-	        'warning. Please, use a more descriptive format than: ' + format
-	      );
-	    }
-	
-	    if (!condition) {
-	      var argIndex = 0;
-	      var message = 'Warning: ' +
-	        format.replace(/%s/g, function() {
-	          return args[argIndex++];
-	        });
-	      if (typeof console !== 'undefined') {
-	        console.error(message);
-	      }
-	      try {
-	        // This error was thrown as a convenience so that you can use this stack
-	        // to find the callsite that caused this warning to fire.
-	        throw new Error(message);
-	      } catch(x) {}
-	    }
-	  };
-	}
-	
-	module.exports = warning;
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
+	module.exports = __webpack_require__(202);
 
 /***/ },
 /* 202 */
-/***/ function(module, exports) {
-
-	/* eslint-disable no-unused-vars */
-	'use strict';
-	var hasOwnProperty = Object.prototype.hasOwnProperty;
-	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-	
-	function toObject(val) {
-		if (val === null || val === undefined) {
-			throw new TypeError('Object.assign cannot be called with null or undefined');
-		}
-	
-		return Object(val);
-	}
-	
-	module.exports = Object.assign || function (target, source) {
-		var from;
-		var to = toObject(target);
-		var symbols;
-	
-		for (var s = 1; s < arguments.length; s++) {
-			from = Object(arguments[s]);
-	
-			for (var key in from) {
-				if (hasOwnProperty.call(from, key)) {
-					to[key] = from[key];
-				}
-			}
-	
-			if (Object.getOwnPropertySymbols) {
-				symbols = Object.getOwnPropertySymbols(from);
-				for (var i = 0; i < symbols.length; i++) {
-					if (propIsEnumerable.call(from, symbols[i])) {
-						to[symbols[i]] = from[symbols[i]];
-					}
-				}
-			}
-		}
-	
-		return to;
-	};
-
-
-/***/ },
-/* 203 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	module.exports = __webpack_require__(204);
-
-/***/ },
-/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24259,9 +24193,11 @@
 	
 	var _rcUtil = __webpack_require__(168);
 	
-	var _Popup = __webpack_require__(205);
+	var _Popup = __webpack_require__(203);
 	
 	var _Popup2 = _interopRequireDefault(_Popup);
+	
+	var _utils = __webpack_require__(223);
 	
 	function noop() {}
 	
@@ -24280,6 +24216,10 @@
 	    popup: _react.PropTypes.node.isRequired,
 	    popupStyle: _react.PropTypes.object,
 	    popupClassName: _react.PropTypes.string,
+	    popupPlacement: _react.PropTypes.string,
+	    builtinPlacements: _react.PropTypes.object,
+	    popupTransitionName: _react.PropTypes.string,
+	    popupAnimation: _react.PropTypes.any,
 	    mouseEnterDelay: _react.PropTypes.number,
 	    mouseLeaveDelay: _react.PropTypes.number,
 	    getPopupContainer: _react.PropTypes.func,
@@ -24474,6 +24414,34 @@
 	    return this.popupContainer;
 	  },
 	
+	  getPopupClassNameFromAlign: function getPopupClassNameFromAlign(align) {
+	    var className = [];
+	    var props = this.props;
+	    var popupPlacement = props.popupPlacement;
+	    var builtinPlacements = props.builtinPlacements;
+	    var prefixCls = props.prefixCls;
+	
+	    if (popupPlacement && builtinPlacements) {
+	      className.push((0, _utils.getPopupClassNameFromAlign)(builtinPlacements, prefixCls, align));
+	    }
+	    if (props.getPopupClassNameFromAlign) {
+	      className.push(props.getPopupClassNameFromAlign(align));
+	    }
+	    return className.join(' ');
+	  },
+	
+	  getPopupAlign: function getPopupAlign() {
+	    var props = this.props;
+	    var popupPlacement = props.popupPlacement;
+	    var popupAlign = props.popupAlign;
+	    var builtinPlacements = props.builtinPlacements;
+	
+	    if (popupPlacement && builtinPlacements) {
+	      return (0, _utils.getAlignFromPlacement)(builtinPlacements, popupPlacement, popupAlign);
+	    }
+	    return popupAlign;
+	  },
+	
 	  getPopupElement: function getPopupElement() {
 	    if (!this.popupRendered) {
 	      return null;
@@ -24491,10 +24459,10 @@
 	        visible: state.popupVisible,
 	        className: props.popupClassName,
 	        action: props.action,
-	        align: props.popupAlign,
+	        align: this.getPopupAlign(),
 	        animation: props.popupAnimation,
 	        onAnimateLeave: this.onAnimateLeave,
-	        getClassNameFromAlign: props.getPopupClassNameFromAlign
+	        getClassNameFromAlign: this.getPopupClassNameFromAlign
 	      }, mouseProps, {
 	        wrap: this,
 	        style: props.popupStyle,
@@ -24564,7 +24532,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 205 */
+/* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24583,11 +24551,11 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _rcAlign = __webpack_require__(206);
+	var _rcAlign = __webpack_require__(204);
 	
 	var _rcAlign2 = _interopRequireDefault(_rcAlign);
 	
-	var _rcAnimate = __webpack_require__(217);
+	var _rcAnimate = __webpack_require__(215);
 	
 	var _rcAnimate2 = _interopRequireDefault(_rcAnimate);
 	
@@ -24697,7 +24665,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 206 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// export this package's api
@@ -24709,7 +24677,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _Align = __webpack_require__(207);
+	var _Align = __webpack_require__(205);
 	
 	var _Align2 = _interopRequireDefault(_Align);
 	
@@ -24717,7 +24685,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 207 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24736,13 +24704,13 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _domAlign = __webpack_require__(208);
+	var _domAlign = __webpack_require__(206);
 	
 	var _domAlign2 = _interopRequireDefault(_domAlign);
 	
 	var _rcUtil = __webpack_require__(168);
 	
-	var _isWindow = __webpack_require__(216);
+	var _isWindow = __webpack_require__(214);
 	
 	var _isWindow2 = _interopRequireDefault(_isWindow);
 	
@@ -24859,7 +24827,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 208 */
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -24875,27 +24843,27 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _utils = __webpack_require__(209);
+	var _utils = __webpack_require__(207);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
-	var _getOffsetParent = __webpack_require__(210);
+	var _getOffsetParent = __webpack_require__(208);
 	
 	var _getOffsetParent2 = _interopRequireDefault(_getOffsetParent);
 	
-	var _getVisibleRectForElement = __webpack_require__(211);
+	var _getVisibleRectForElement = __webpack_require__(209);
 	
 	var _getVisibleRectForElement2 = _interopRequireDefault(_getVisibleRectForElement);
 	
-	var _adjustForViewport = __webpack_require__(212);
+	var _adjustForViewport = __webpack_require__(210);
 	
 	var _adjustForViewport2 = _interopRequireDefault(_adjustForViewport);
 	
-	var _getRegion = __webpack_require__(213);
+	var _getRegion = __webpack_require__(211);
 	
 	var _getRegion2 = _interopRequireDefault(_getRegion);
 	
-	var _getElFuturePos = __webpack_require__(214);
+	var _getElFuturePos = __webpack_require__(212);
 	
 	var _getElFuturePos2 = _interopRequireDefault(_getElFuturePos);
 	
@@ -25069,7 +25037,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 209 */
+/* 207 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -25525,7 +25493,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 210 */
+/* 208 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25536,7 +25504,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _utils = __webpack_require__(209);
+	var _utils = __webpack_require__(207);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
@@ -25583,7 +25551,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 211 */
+/* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25594,11 +25562,11 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _utils = __webpack_require__(209);
+	var _utils = __webpack_require__(207);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
-	var _getOffsetParent = __webpack_require__(210);
+	var _getOffsetParent = __webpack_require__(208);
 	
 	var _getOffsetParent2 = _interopRequireDefault(_getOffsetParent);
 	
@@ -25664,7 +25632,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 212 */
+/* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25675,7 +25643,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _utils = __webpack_require__(209);
+	var _utils = __webpack_require__(207);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
@@ -25724,7 +25692,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 213 */
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25735,7 +25703,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _utils = __webpack_require__(209);
+	var _utils = __webpack_require__(207);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
@@ -25765,7 +25733,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 214 */
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25776,7 +25744,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _getAlignOffset = __webpack_require__(215);
+	var _getAlignOffset = __webpack_require__(213);
 	
 	var _getAlignOffset2 = _interopRequireDefault(_getAlignOffset);
 	
@@ -25806,7 +25774,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 215 */
+/* 213 */
 /***/ function(module, exports) {
 
 	/**
@@ -25851,7 +25819,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 216 */
+/* 214 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -25870,16 +25838,16 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 217 */
+/* 215 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// export this package's api
 	'use strict';
 	
-	module.exports = __webpack_require__(218);
+	module.exports = __webpack_require__(216);
 
 /***/ },
-/* 218 */
+/* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25896,15 +25864,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _ChildrenUtils = __webpack_require__(219);
+	var _ChildrenUtils = __webpack_require__(217);
 	
 	var _ChildrenUtils2 = _interopRequireDefault(_ChildrenUtils);
 	
-	var _AnimateChild = __webpack_require__(220);
+	var _AnimateChild = __webpack_require__(218);
 	
 	var _AnimateChild2 = _interopRequireDefault(_AnimateChild);
 	
-	var _util = __webpack_require__(224);
+	var _util = __webpack_require__(222);
 	
 	var _util2 = _interopRequireDefault(_util);
 	
@@ -26199,7 +26167,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 219 */
+/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26316,7 +26284,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 220 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26335,11 +26303,11 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _cssAnimation = __webpack_require__(221);
+	var _cssAnimation = __webpack_require__(219);
 	
 	var _cssAnimation2 = _interopRequireDefault(_cssAnimation);
 	
-	var _util = __webpack_require__(224);
+	var _util = __webpack_require__(222);
 	
 	var _util2 = _interopRequireDefault(_util);
 	
@@ -26418,13 +26386,13 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 221 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var Event = __webpack_require__(222);
-	var Css = __webpack_require__(223);
+	var Event = __webpack_require__(220);
+	var Css = __webpack_require__(221);
 	var isCssAnimationSupported = Event.endEvents.length !== 0;
 	
 	function getDuration(node, name) {
@@ -26576,7 +26544,7 @@
 	module.exports = cssAnimation;
 
 /***/ },
-/* 222 */
+/* 220 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26664,7 +26632,7 @@
 	module.exports = TransitionEvents;
 
 /***/ },
-/* 223 */
+/* 221 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26695,7 +26663,7 @@
 	};
 
 /***/ },
-/* 224 */
+/* 222 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -26728,6 +26696,90 @@
 	module.exports = exports["default"];
 
 /***/ },
+/* 223 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	exports.getAlignFromPlacement = getAlignFromPlacement;
+	exports.getPopupClassNameFromAlign = getPopupClassNameFromAlign;
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	var _objectAssign = __webpack_require__(224);
+	
+	var _objectAssign2 = _interopRequireDefault(_objectAssign);
+	
+	function isPointsEq(a1, a2) {
+	  return a1[0] === a2[0] && a1[1] === a2[1];
+	}
+	
+	function getAlignFromPlacement(builtinPlacements, placementStr, align) {
+	  var baseAlign = builtinPlacements[placementStr] || {};
+	  return (0, _objectAssign2['default'])({}, baseAlign, align);
+	}
+	
+	function getPopupClassNameFromAlign(builtinPlacements, prefixCls, align) {
+	  var points = align.points;
+	  for (var placement in builtinPlacements) {
+	    if (builtinPlacements.hasOwnProperty(placement)) {
+	      if (isPointsEq(builtinPlacements[placement].points, points)) {
+	        return prefixCls + '-placement-' + placement;
+	      }
+	    }
+	  }
+	  return '';
+	}
+
+/***/ },
+/* 224 */
+/***/ function(module, exports) {
+
+	/* eslint-disable no-unused-vars */
+	'use strict';
+	var hasOwnProperty = Object.prototype.hasOwnProperty;
+	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+	
+	function toObject(val) {
+		if (val === null || val === undefined) {
+			throw new TypeError('Object.assign cannot be called with null or undefined');
+		}
+	
+		return Object(val);
+	}
+	
+	module.exports = Object.assign || function (target, source) {
+		var from;
+		var to = toObject(target);
+		var symbols;
+	
+		for (var s = 1; s < arguments.length; s++) {
+			from = Object(arguments[s]);
+	
+			for (var key in from) {
+				if (hasOwnProperty.call(from, key)) {
+					to[key] = from[key];
+				}
+			}
+	
+			if (Object.getOwnPropertySymbols) {
+				symbols = Object.getOwnPropertySymbols(from);
+				for (var i = 0; i < symbols.length; i++) {
+					if (propIsEnumerable.call(from, symbols[i])) {
+						to[symbols[i]] = from[symbols[i]];
+					}
+				}
+			}
+		}
+	
+		return to;
+	};
+
+
+/***/ },
 /* 225 */
 /***/ function(module, exports) {
 
@@ -26757,9 +26809,9 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _gregorianCalendarFormatLibLocaleZhCn = __webpack_require__(227);
+	var _gregorianCalendarFormatLibLocaleZh_CN = __webpack_require__(227);
 	
-	var _gregorianCalendarFormatLibLocaleZhCn2 = _interopRequireDefault(_gregorianCalendarFormatLibLocaleZhCn);
+	var _gregorianCalendarFormatLibLocaleZh_CN2 = _interopRequireDefault(_gregorianCalendarFormatLibLocaleZh_CN);
 	
 	exports['default'] = {
 	  today: '今天',
@@ -26788,7 +26840,7 @@
 	  nextDecade: '下一年代',
 	  previousCentury: '上一世纪',
 	  nextCentury: '下一世纪',
-	  format: _gregorianCalendarFormatLibLocaleZhCn2['default']
+	  format: _gregorianCalendarFormatLibLocaleZh_CN2['default']
 	};
 	module.exports = exports['default'];
 

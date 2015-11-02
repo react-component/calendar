@@ -183,13 +183,13 @@ webpackJsonp([1],{
 	
 	var _rcCalendarSrcPicker2 = _interopRequireDefault(_rcCalendarSrcPicker);
 	
-	var _gregorianCalendarLibLocaleZhCn = __webpack_require__(225);
+	var _gregorianCalendarLibLocaleZh_CN = __webpack_require__(225);
 	
-	var _gregorianCalendarLibLocaleZhCn2 = _interopRequireDefault(_gregorianCalendarLibLocaleZhCn);
+	var _gregorianCalendarLibLocaleZh_CN2 = _interopRequireDefault(_gregorianCalendarLibLocaleZh_CN);
 	
 	// spm error
 	
-	var _gregorianCalendarFormat = __webpack_require__(189);
+	var _gregorianCalendarFormat = __webpack_require__(190);
 	
 	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
 	
@@ -197,15 +197,15 @@ webpackJsonp([1],{
 	
 	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
 	
-	var _rcCalendarSrcLocaleZhCn = __webpack_require__(226);
+	var _rcCalendarSrcLocaleZh_CN = __webpack_require__(226);
 	
-	var _rcCalendarSrcLocaleZhCn2 = _interopRequireDefault(_rcCalendarSrcLocaleZhCn);
+	var _rcCalendarSrcLocaleZh_CN2 = _interopRequireDefault(_rcCalendarSrcLocaleZh_CN);
 	
-	var now = new _gregorianCalendar2['default'](_gregorianCalendarLibLocaleZhCn2['default']);
+	var now = new _gregorianCalendar2['default'](_gregorianCalendarLibLocaleZh_CN2['default']);
 	now.setTime(Date.now());
 	var formatter = new _gregorianCalendarFormat2['default']('yyyy-MM');
 	
-	var defaultCalendarValue = new _gregorianCalendar2['default'](_gregorianCalendarLibLocaleZhCn2['default']);
+	var defaultCalendarValue = new _gregorianCalendar2['default'](_gregorianCalendarLibLocaleZh_CN2['default']);
 	defaultCalendarValue.setTime(Date.now());
 	defaultCalendarValue.addMonth(-1);
 	
@@ -243,7 +243,7 @@ webpackJsonp([1],{
 	
 	  render: function render() {
 	    var state = this.state;
-	    var calendar = _react2['default'].createElement(_rcCalendarSrcMonthCalendar2['default'], { locale: _rcCalendarSrcLocaleZhCn2['default'],
+	    var calendar = _react2['default'].createElement(_rcCalendarSrcMonthCalendar2['default'], { locale: _rcCalendarSrcLocaleZh_CN2['default'],
 	      style: { zIndex: 1000 } });
 	    return _react2['default'].createElement(
 	      'div',
@@ -310,7 +310,7 @@ webpackJsonp([1],{
 	    null,
 	    'zh-cn'
 	  ),
-	  _react2['default'].createElement(_rcCalendarSrcMonthCalendar2['default'], { locale: _rcCalendarSrcLocaleZhCn2['default'],
+	  _react2['default'].createElement(_rcCalendarSrcMonthCalendar2['default'], { locale: _rcCalendarSrcLocaleZh_CN2['default'],
 	    style: { zIndex: 1000 },
 	    disabledDate: disabledDate,
 	    onSelect: onStandaloneSelect,

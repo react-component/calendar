@@ -33,13 +33,13 @@ webpackJsonp([0],{
 	
 	var _rcCalendarSrcPicker2 = _interopRequireDefault(_rcCalendarSrcPicker);
 	
-	var _gregorianCalendarLibLocaleZhCn = __webpack_require__(225);
+	var _gregorianCalendarLibLocaleZh_CN = __webpack_require__(225);
 	
-	var _gregorianCalendarLibLocaleZhCn2 = _interopRequireDefault(_gregorianCalendarLibLocaleZhCn);
+	var _gregorianCalendarLibLocaleZh_CN2 = _interopRequireDefault(_gregorianCalendarLibLocaleZh_CN);
 	
 	// spm error
 	
-	var _gregorianCalendarFormat = __webpack_require__(189);
+	var _gregorianCalendarFormat = __webpack_require__(190);
 	
 	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
 	
@@ -47,11 +47,11 @@ webpackJsonp([0],{
 	
 	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
 	
-	var _rcCalendarSrcLocaleZhCn = __webpack_require__(226);
+	var _rcCalendarSrcLocaleZh_CN = __webpack_require__(226);
 	
-	var _rcCalendarSrcLocaleZhCn2 = _interopRequireDefault(_rcCalendarSrcLocaleZhCn);
+	var _rcCalendarSrcLocaleZh_CN2 = _interopRequireDefault(_rcCalendarSrcLocaleZh_CN);
 	
-	var now = new _gregorianCalendar2['default'](_gregorianCalendarLibLocaleZhCn2['default']);
+	var now = new _gregorianCalendar2['default'](_gregorianCalendarLibLocaleZh_CN2['default']);
 	now.setTime(Date.now());
 	
 	var formatter = new _gregorianCalendarFormat2['default']('yyyy-MM-dd HH:mm:ss');
@@ -61,7 +61,7 @@ webpackJsonp([0],{
 	  return showTime ? formatter : dateFormatter;
 	}
 	
-	var defaultCalendarValue = new _gregorianCalendar2['default'](_gregorianCalendarLibLocaleZhCn2['default']);
+	var defaultCalendarValue = new _gregorianCalendar2['default'](_gregorianCalendarLibLocaleZh_CN2['default']);
 	defaultCalendarValue.setTime(Date.now());
 	defaultCalendarValue.addMonth(-1);
 	
@@ -107,14 +107,14 @@ webpackJsonp([0],{
 	
 	  render: function render() {
 	    var state = this.state;
-	    var calendar = _react2['default'].createElement(_rcCalendar2['default'], { locale: _rcCalendarSrcLocaleZhCn2['default'],
+	    var calendar = _react2['default'].createElement(_rcCalendar2['default'], { locale: _rcCalendarSrcLocaleZh_CN2['default'],
 	      style: { zIndex: 1000 },
 	      dateInputPlaceholder: '请输入',
 	      defaultValue: this.props.defaultCalendarValue,
 	      showTime: state.showTime,
 	      showOk: true,
-	      disabledDate: disabledDate,
-	      showClear: true });
+	      disabledDate: disabledDate
+	    });
 	    return _react2['default'].createElement(
 	      'div',
 	      { style: { width: 240, margin: 20 } },
@@ -178,7 +178,7 @@ webpackJsonp([0],{
 	
 	function onStandaloneChange(value) {
 	  console.log('onStandaloneChange');
-	  console.log(formatter.format(value));
+	  console.log(value && formatter.format(value));
 	}
 	
 	_reactDom2['default'].render(_react2['default'].createElement(
@@ -196,8 +196,10 @@ webpackJsonp([0],{
 	      'div',
 	      { style: { margin: 10 } },
 	      _react2['default'].createElement(_rcCalendar2['default'], { showWeekNumber: false,
-	        locale: _rcCalendarSrcLocaleZhCn2['default'],
+	        locale: _rcCalendarSrcLocaleZh_CN2['default'],
 	        defaultValue: now,
+	        showOk: true,
+	        showToday: true,
 	        onChange: onStandaloneChange,
 	        disabledDate: disabledDate,
 	        onSelect: onStandaloneSelect,
@@ -1096,7 +1098,7 @@ webpackJsonp([0],{
 	
 	var _monthMonthPanel2 = _interopRequireDefault(_monthMonthPanel);
 	
-	var _gregorianCalendarFormat = __webpack_require__(189);
+	var _gregorianCalendarFormat = __webpack_require__(190);
 	
 	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
 	
@@ -1343,7 +1345,7 @@ webpackJsonp([0],{
 	        okBtn = (0, _util.getOkElement)(props);
 	      }
 	      var footerBtn = undefined;
-	      if (nowEl) {
+	      if (nowEl || okBtn) {
 	        footerBtn = _react2['default'].createElement(
 	          'span',
 	          { className: prefixCls + '-footer-btn' },
@@ -1981,7 +1983,8 @@ webpackJsonp([0],{
 	
 	    if (str) {
 	      try {
-	        value = formatter.parse(str, gregorianCalendarLocale, {
+	        value = formatter.parse(str, {
+	          locale: gregorianCalendarLocale,
 	          obeyCount: true
 	        });
 	      } catch (ex) {

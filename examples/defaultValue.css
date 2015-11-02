@@ -6930,22 +6930,18 @@ button.close {
   padding: 4px 0;
   text-align: center;
 }
-.rc-calendar-footer-btn {
-  display: block;
-  margin-top: 2px;
-}
 .rc-calendar-today-btn,
 .rc-calendar-ok-btn {
   font-weight: bold;
   box-sizing: border-box;
   display: inline-block;
-  padding: 4px 5px;
+  padding: 4px 2px;
   text-align: center;
-  width: 60px;
+  width: 38px;
   height: 30px;
   line-height: 22px;
   border-radius: 4px;
-  margin-left: 5px;
+  margin-left: 2px;
 }
 .rc-calendar-today-btn:hover,
 .rc-calendar-ok-btn:hover {
@@ -6983,6 +6979,9 @@ button.close {
   cursor: not-allowed;
   background-color: #eee;
 }
+.rc-calendar-time {
+  margin-right: 3px;
+}
 .rc-calendar-time-panel {
   left: 0;
   top: 0;
@@ -7014,6 +7013,7 @@ button.close {
   table-layout: fixed;
   width: 100%;
   border-collapse: separate;
+  height: 250px;
 }
 .rc-calendar-time-panel-cell {
   text-align: center;
@@ -7100,7 +7100,7 @@ button.close {
 .rc-calendar-decade-panel-table {
   table-layout: fixed;
   width: 100%;
-  height: 260px;
+  height: 250px;
   border-collapse: separate;
 }
 .rc-calendar-decade-panel-cell {
@@ -7201,7 +7201,7 @@ button.close {
   table-layout: fixed;
   width: 100%;
   border-collapse: separate;
-  height: 275px;
+  height: 250px;
 }
 .rc-calendar-month-panel-cell {
   text-align: center;
@@ -7284,7 +7284,7 @@ button.close {
   table-layout: fixed;
   width: 100%;
   border-collapse: separate;
-  height: 275px;
+  height: 250px;
 }
 .rc-calendar-year-panel-cell {
   text-align: center;

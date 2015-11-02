@@ -239,7 +239,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
 <div class="container">
   <div class="header">
-    <h1>rc-calendar@4.0.0-alpha9</h1>
+    <h1>rc-calendar@4.0.0-alpha10</h1>
 
     <p>React Calendar</p>
   </div>
@@ -252,10 +252,10 @@ import React <span class="hljs-keyword">from</span> <span class="hljs-string">'r
 import ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>;
 import Calendar <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-calendar'</span>;
 import DatePicker <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-calendar/lib/Picker'</span>;
-import zhCn <span class="hljs-keyword">from</span> <span class="hljs-string">'gregorian-calendar/lib/locale/zh-cn'</span>; <span class="hljs-comment">// spm error</span>
+import zhCn <span class="hljs-keyword">from</span> <span class="hljs-string">'gregorian-calendar/lib/locale/zh_CN'</span>; <span class="hljs-comment">// spm error</span>
 import DateTimeFormat <span class="hljs-keyword">from</span> <span class="hljs-string">'gregorian-calendar-format'</span>;
 import GregorianCalendar <span class="hljs-keyword">from</span> <span class="hljs-string">'gregorian-calendar'</span>;
-import CalendarLocale <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-calendar/lib/locale/zh-cn'</span>;
+import CalendarLocale <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-calendar/lib/locale/zh_CN'</span>;
 <span class="hljs-keyword">var</span> now = <span class="hljs-keyword">new</span> GregorianCalendar(zhCn);
 now.setTime(Date.now());
 
@@ -317,7 +317,7 @@ defaultCalendarValue.addMonth(-<span class="hljs-number">1</span>);
                              showTime={state.showTime}
                              showOk
                              disabledDate={disabledDate}
-                             showClear/&gt;;
+                             /&gt;;
     <span class="hljs-keyword">return</span> &lt;div style={{width: <span class="hljs-number">240</span>, margin: <span class="hljs-number">20</span>}} &gt;
       &lt;div style={{marginBottom:<span class="hljs-number">10</span>}}&gt;
         &lt;span&gt;
@@ -366,7 +366,7 @@ defaultCalendarValue.addMonth(-<span class="hljs-number">1</span>);
 
 <span class="hljs-function">function <span class="hljs-title">onStandaloneChange</span>(<span class="hljs-params"><span class="hljs-keyword">value</span></span>) </span>{
   console.log(<span class="hljs-string">'onStandaloneChange'</span>);
-  console.log(formatter.format(<span class="hljs-keyword">value</span>))
+  console.log(<span class="hljs-keyword">value</span> &amp;&amp;formatter.format(<span class="hljs-keyword">value</span>))
 }
 
 
@@ -378,6 +378,8 @@ ReactDOM.render(&lt;div style={{zIndex:<span class="hljs-number">1000</span>,pos
       &lt;Calendar showWeekNumber={<span class="hljs-keyword">false</span>}
                 locale={CalendarLocale}
                 defaultValue={now}
+                showOk
+                showToday
                 onChange={onStandaloneChange}
                 disabledDate={disabledDate}
                 onSelect={onStandaloneSelect}

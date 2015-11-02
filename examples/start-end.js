@@ -885,7 +885,7 @@ webpackJsonp([6],{
 	
 	var _monthMonthPanel2 = _interopRequireDefault(_monthMonthPanel);
 	
-	var _gregorianCalendarFormat = __webpack_require__(189);
+	var _gregorianCalendarFormat = __webpack_require__(190);
 	
 	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
 	
@@ -1132,7 +1132,7 @@ webpackJsonp([6],{
 	        okBtn = (0, _util.getOkElement)(props);
 	      }
 	      var footerBtn = undefined;
-	      if (nowEl) {
+	      if (nowEl || okBtn) {
 	        footerBtn = _react2['default'].createElement(
 	          'span',
 	          { className: prefixCls + '-footer-btn' },
@@ -1770,7 +1770,8 @@ webpackJsonp([6],{
 	
 	    if (str) {
 	      try {
-	        value = formatter.parse(str, gregorianCalendarLocale, {
+	        value = formatter.parse(str, {
+	          locale: gregorianCalendarLocale,
 	          obeyCount: true
 	        });
 	      } catch (ex) {
@@ -1864,13 +1865,13 @@ webpackJsonp([6],{
 	
 	var _rcCalendarSrcPicker2 = _interopRequireDefault(_rcCalendarSrcPicker);
 	
-	var _gregorianCalendarLibLocaleZhCn = __webpack_require__(225);
+	var _gregorianCalendarLibLocaleZh_CN = __webpack_require__(225);
 	
-	var _gregorianCalendarLibLocaleZhCn2 = _interopRequireDefault(_gregorianCalendarLibLocaleZhCn);
+	var _gregorianCalendarLibLocaleZh_CN2 = _interopRequireDefault(_gregorianCalendarLibLocaleZh_CN);
 	
 	// spm error
 	
-	var _gregorianCalendarFormat = __webpack_require__(189);
+	var _gregorianCalendarFormat = __webpack_require__(190);
 	
 	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
 	
@@ -1878,9 +1879,9 @@ webpackJsonp([6],{
 	
 	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
 	
-	var _rcCalendarSrcLocaleZhCn = __webpack_require__(226);
+	var _rcCalendarSrcLocaleZh_CN = __webpack_require__(226);
 	
-	var _rcCalendarSrcLocaleZhCn2 = _interopRequireDefault(_rcCalendarSrcLocaleZhCn);
+	var _rcCalendarSrcLocaleZh_CN2 = _interopRequireDefault(_rcCalendarSrcLocaleZh_CN);
 	
 	var formatter = new _gregorianCalendarFormat2['default']('yyyy-MM-dd HH:mm:ss');
 	var dateFormatter = new _gregorianCalendarFormat2['default']('yyyy-MM-dd');
@@ -1900,11 +1901,11 @@ webpackJsonp([6],{
 	  },
 	  render: function render() {
 	    var props = this.props;
-	    var calendar = _react2['default'].createElement(_rcCalendar2['default'], { locale: _rcCalendarSrcLocaleZhCn2['default'],
+	    var calendar = _react2['default'].createElement(_rcCalendar2['default'], { locale: _rcCalendarSrcLocaleZh_CN2['default'],
 	      showTime: props.showTime,
 	      showOk: true,
-	      disabledDate: props.disabledDate,
-	      showClear: true });
+	      disabledDate: props.disabledDate
+	    });
 	    return _react2['default'].createElement(
 	      _rcCalendarSrcPicker2['default'],
 	      {

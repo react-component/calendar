@@ -556,7 +556,7 @@ webpackJsonp([5],{
 	
 	var _monthMonthPanel2 = _interopRequireDefault(_monthMonthPanel);
 	
-	var _gregorianCalendarFormat = __webpack_require__(189);
+	var _gregorianCalendarFormat = __webpack_require__(190);
 	
 	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
 	
@@ -803,7 +803,7 @@ webpackJsonp([5],{
 	        okBtn = (0, _util.getOkElement)(props);
 	      }
 	      var footerBtn = undefined;
-	      if (nowEl) {
+	      if (nowEl || okBtn) {
 	        footerBtn = _react2['default'].createElement(
 	          'span',
 	          { className: prefixCls + '-footer-btn' },
@@ -1298,7 +1298,8 @@ webpackJsonp([5],{
 	
 	    if (str) {
 	      try {
-	        value = formatter.parse(str, gregorianCalendarLocale, {
+	        value = formatter.parse(str, {
+	          locale: gregorianCalendarLocale,
 	          obeyCount: true
 	        });
 	      } catch (ex) {
@@ -1396,7 +1397,7 @@ webpackJsonp([5],{
 	
 	var _util = __webpack_require__(184);
 	
-	var _objectAssign = __webpack_require__(202);
+	var _objectAssign = __webpack_require__(224);
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
@@ -1767,7 +1768,7 @@ webpackJsonp([5],{
 	
 	var _rcCalendarSrcRangeCalendar2 = _interopRequireDefault(_rcCalendarSrcRangeCalendar);
 	
-	var _gregorianCalendarFormat = __webpack_require__(189);
+	var _gregorianCalendarFormat = __webpack_require__(190);
 	
 	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
 	
@@ -1783,13 +1784,13 @@ webpackJsonp([5],{
 	
 	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
 	
-	var _gregorianCalendarLibLocaleZhCn = __webpack_require__(225);
+	var _gregorianCalendarLibLocaleZh_CN = __webpack_require__(225);
 	
-	var _gregorianCalendarLibLocaleZhCn2 = _interopRequireDefault(_gregorianCalendarLibLocaleZhCn);
+	var _gregorianCalendarLibLocaleZh_CN2 = _interopRequireDefault(_gregorianCalendarLibLocaleZh_CN);
 	
-	var _rcCalendarSrcLocaleZhCn = __webpack_require__(226);
+	var _rcCalendarSrcLocaleZh_CN = __webpack_require__(226);
 	
-	var _rcCalendarSrcLocaleZhCn2 = _interopRequireDefault(_rcCalendarSrcLocaleZhCn);
+	var _rcCalendarSrcLocaleZh_CN2 = _interopRequireDefault(_rcCalendarSrcLocaleZh_CN);
 	
 	var _rcCalendarSrcPicker = __webpack_require__(199);
 	
@@ -1797,7 +1798,7 @@ webpackJsonp([5],{
 	
 	var formatter = new _gregorianCalendarFormat2['default']('yyyy-MM-dd HH:mm:ss');
 	
-	var value = new _gregorianCalendar2['default'](_gregorianCalendarLibLocaleZhCn2['default']);
+	var value = new _gregorianCalendar2['default'](_gregorianCalendarLibLocaleZh_CN2['default']);
 	value.setTime(Date.now());
 	
 	function disabledDate(current) {
@@ -1847,7 +1848,7 @@ webpackJsonp([5],{
 	  render: function render() {
 	    var state = this.state;
 	    var calendar = _react2['default'].createElement(_rcCalendarSrcRangeCalendar2['default'], { showWeekNumber: false,
-	      locale: _rcCalendarSrcLocaleZhCn2['default'],
+	      locale: _rcCalendarSrcLocaleZh_CN2['default'],
 	      disabledDate: disabledDate,
 	      showTime: true });
 	    return _react2['default'].createElement(
@@ -1907,7 +1908,7 @@ webpackJsonp([5],{
 	    'div',
 	    { style: { margin: 10 } },
 	    _react2['default'].createElement(_rcCalendarSrcRangeCalendar2['default'], { showWeekNumber: true,
-	      locale: _rcCalendarSrcLocaleZhCn2['default'],
+	      locale: _rcCalendarSrcLocaleZh_CN2['default'],
 	      onChange: onStandaloneChange,
 	      onSelect: onStandaloneSelect,
 	      onOk: onStandaloneOk,

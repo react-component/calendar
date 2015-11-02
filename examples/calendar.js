@@ -878,7 +878,7 @@ webpackJsonp([3],{
 	
 	var _monthMonthPanel2 = _interopRequireDefault(_monthMonthPanel);
 	
-	var _gregorianCalendarFormat = __webpack_require__(189);
+	var _gregorianCalendarFormat = __webpack_require__(190);
 	
 	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
 	
@@ -1125,7 +1125,7 @@ webpackJsonp([3],{
 	        okBtn = (0, _util.getOkElement)(props);
 	      }
 	      var footerBtn = undefined;
-	      if (nowEl) {
+	      if (nowEl || okBtn) {
 	        footerBtn = _react2['default'].createElement(
 	          'span',
 	          { className: prefixCls + '-footer-btn' },
@@ -1763,7 +1763,8 @@ webpackJsonp([3],{
 	
 	    if (str) {
 	      try {
-	        value = formatter.parse(str, gregorianCalendarLocale, {
+	        value = formatter.parse(str, {
+	          locale: gregorianCalendarLocale,
 	          obeyCount: true
 	        });
 	      } catch (ex) {
@@ -1857,13 +1858,13 @@ webpackJsonp([3],{
 	
 	var _rcCalendarSrcPicker2 = _interopRequireDefault(_rcCalendarSrcPicker);
 	
-	var _gregorianCalendarLibLocaleZhCn = __webpack_require__(225);
+	var _gregorianCalendarLibLocaleZh_CN = __webpack_require__(225);
 	
-	var _gregorianCalendarLibLocaleZhCn2 = _interopRequireDefault(_gregorianCalendarLibLocaleZhCn);
+	var _gregorianCalendarLibLocaleZh_CN2 = _interopRequireDefault(_gregorianCalendarLibLocaleZh_CN);
 	
 	// spm error
 	
-	var _gregorianCalendarFormat = __webpack_require__(189);
+	var _gregorianCalendarFormat = __webpack_require__(190);
 	
 	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
 	
@@ -1871,9 +1872,9 @@ webpackJsonp([3],{
 	
 	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
 	
-	var _rcCalendarSrcLocaleZhCn = __webpack_require__(226);
+	var _rcCalendarSrcLocaleZh_CN = __webpack_require__(226);
 	
-	var _rcCalendarSrcLocaleZhCn2 = _interopRequireDefault(_rcCalendarSrcLocaleZhCn);
+	var _rcCalendarSrcLocaleZh_CN2 = _interopRequireDefault(_rcCalendarSrcLocaleZh_CN);
 	
 	var formatter = new _gregorianCalendarFormat2['default']('yyyy-MM-dd HH:mm:ss');
 	
@@ -1886,11 +1887,10 @@ webpackJsonp([3],{
 	  },
 	
 	  getInitialState: function getInitialState() {
-	    var value = new _gregorianCalendar2['default'](_gregorianCalendarLibLocaleZhCn2['default']);
+	    var value = new _gregorianCalendar2['default'](_gregorianCalendarLibLocaleZh_CN2['default']);
 	    value.setTime(Date.now());
 	    return {
 	      open: false,
-	
 	      showTime: true,
 	      value: value
 	    };
@@ -1904,9 +1904,9 @@ webpackJsonp([3],{
 	
 	  render: function render() {
 	    var state = this.state;
-	    var calendar = _react2['default'].createElement(_rcCalendar2['default'], { locale: _rcCalendarSrcLocaleZhCn2['default'],
-	      showTime: this.state.showTime,
-	      showClear: true });
+	    var calendar = _react2['default'].createElement(_rcCalendar2['default'], { locale: _rcCalendarSrcLocaleZh_CN2['default'],
+	      showTime: this.state.showTime
+	    });
 	    return _react2['default'].createElement(
 	      'div',
 	      { className: 'form-group', style: { width: 400, margin: 20 } },
@@ -1937,8 +1937,9 @@ webpackJsonp([3],{
 	              null,
 	              _react2['default'].createElement('input', { type: 'text',
 	                className: 'form-control',
+	                placeholder: '请选择时间',
 	                readOnly: true,
-	                value: formatter.format(value),
+	                value: value && formatter.format(value),
 	                style: {
 	                  background: "white",
 	                  borderTopRightRadius: 4,
@@ -1967,12 +1968,12 @@ webpackJsonp([3],{
 	
 	function onStandaloneSelect(value) {
 	  console.log('onCalendarSelect');
-	  console.log(formatter.format(value));
+	  console.log(value && formatter.format(value));
 	}
 	
 	function onStandaloneChange(value) {
 	  console.log('onCalendarChange');
-	  console.log(formatter.format(value));
+	  console.log(value && formatter.format(value));
 	}
 	
 	_reactDom2['default'].render(_react2['default'].createElement(
@@ -1987,8 +1988,8 @@ webpackJsonp([3],{
 	    'div',
 	    { style: { margin: 10 } },
 	    _react2['default'].createElement(_rcCalendar2['default'], { showWeekNumber: true,
-	      showOk: 0,
-	      showClear: 0,
+	      showOk: true,
+	      showToday: true,
 	      onSelect: onStandaloneSelect,
 	      onChange: onStandaloneChange,
 	      showTime: true })

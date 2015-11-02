@@ -239,7 +239,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
 <div class="container">
   <div class="header">
-    <h1>rc-calendar@4.0.0-alpha9</h1>
+    <h1>rc-calendar@4.0.0-alpha10</h1>
 
     <p>React Calendar</p>
   </div>
@@ -252,10 +252,10 @@ import React <span class="hljs-keyword">from</span> <span class="hljs-string">'r
 import ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>;
 import Calendar <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-calendar'</span>;
 import DatePicker <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-calendar/lib/Picker'</span>;
-import zhCn <span class="hljs-keyword">from</span> <span class="hljs-string">'gregorian-calendar/lib/locale/zh-cn'</span>; <span class="hljs-comment">// spm error</span>
+import zhCn <span class="hljs-keyword">from</span> <span class="hljs-string">'gregorian-calendar/lib/locale/zh_CN'</span>; <span class="hljs-comment">// spm error</span>
 import DateTimeFormat <span class="hljs-keyword">from</span> <span class="hljs-string">'gregorian-calendar-format'</span>;
 import GregorianCalendar <span class="hljs-keyword">from</span> <span class="hljs-string">'gregorian-calendar'</span>;
-import CalendarLocale <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-calendar/lib/locale/zh-cn'</span>;
+import CalendarLocale <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-calendar/lib/locale/zh_CN'</span>;
 
 <span class="hljs-keyword">const</span> formatter = <span class="hljs-keyword">new</span> DateTimeFormat(<span class="hljs-string">'yyyy-MM-dd HH:mm:ss'</span>);
 <span class="hljs-keyword">const</span> dateFormatter = <span class="hljs-keyword">new</span> DateTimeFormat(<span class="hljs-string">'yyyy-MM-dd'</span>);
@@ -277,7 +277,7 @@ import CalendarLocale <span class="hljs-keyword">from</span> <span class="hljs-s
                              showTime={props.showTime}
                              showOk
                              disabledDate={props.disabledDate}
-                             showClear/&gt;;
+                             /&gt;;
     <span class="hljs-keyword">return</span> &lt;DatePicker
       animation=<span class="hljs-string">"slide-up"</span>
       disabled={props.disabled}
