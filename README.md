@@ -38,7 +38,7 @@ React Calendar
 * support ie8,ie8+,chrome,firefox,safari
 * support date, month, year, decade select panel
 * support week number
-* support en-us and zh-cn locale (ui and timeOffset)
+* support en_US and zh_CN locale (ui and timeOffset)
 * support aria and keyboard accessibility
 
 ### Keyboard
@@ -126,7 +126,7 @@ http://react-component.github.io/calendar/examples/index.html
         <tr>
           <td>locale</td>
           <td>Object</td>
-          <td>import from 'rc-calendar/lib/locale/en-us'</td>
+          <td>import from 'rc-calendar/lib/locale/en_US'</td>
           <td>calendar locale</td>
         </tr>
         <tr>
@@ -226,7 +226,7 @@ http://react-component.github.io/calendar/examples/index.html
         <tr>
           <td>locale</td>
           <td>Object</td>
-          <td>import from 'rc-calendar/lib/locale/en-us'</td>
+          <td>import from 'rc-calendar/lib/locale/en_US'</td>
           <td>calendar locale</td>
         </tr>
         <tr>
@@ -313,7 +313,7 @@ http://react-component.github.io/calendar/examples/index.html
         <tr>
           <td>locale</td>
           <td>Object</td>
-          <td>import from 'rc-calendar/lib/locale/en-us'</td>
+          <td>import from 'rc-calendar/lib/locale/en_US'</td>
           <td>calendar locale</td>
         </tr>
         <tr>
