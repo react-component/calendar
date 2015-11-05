@@ -39,20 +39,33 @@ webpackJsonp([0],{
 	
 	// spm error
 	
-	var _gregorianCalendarFormat = __webpack_require__(190);
+	var _gregorianCalendarFormat = __webpack_require__(185);
 	
 	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
+	
+	var _gregorianCalendarFormatLibLocaleZh_CN = __webpack_require__(226);
+	
+	var _gregorianCalendarFormatLibLocaleZh_CN2 = _interopRequireDefault(_gregorianCalendarFormatLibLocaleZh_CN);
 	
 	var _gregorianCalendar = __webpack_require__(164);
 	
 	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
 	
-	var _rcCalendarSrcLocaleZh_CN = __webpack_require__(226);
+	var _rcCalendarSrcLocaleZh_CN = __webpack_require__(227);
 	
 	var _rcCalendarSrcLocaleZh_CN2 = _interopRequireDefault(_rcCalendarSrcLocaleZh_CN);
 	
+	var _objectAssign = __webpack_require__(224);
+	
+	var _objectAssign2 = _interopRequireDefault(_objectAssign);
+	
 	var now = new _gregorianCalendar2['default'](_gregorianCalendarLibLocaleZh_CN2['default']);
 	now.setTime(Date.now());
+	
+	// change locale
+	var CalendarLocale2 = (0, _objectAssign2['default'])({}, _rcCalendarSrcLocaleZh_CN2['default'], {
+	  monthFormat: new _gregorianCalendarFormat2['default']('MMMM', _gregorianCalendarFormatLibLocaleZh_CN2['default'])
+	});
 	
 	var formatter = new _gregorianCalendarFormat2['default']('yyyy-MM-dd HH:mm:ss');
 	var dateFormatter = new _gregorianCalendarFormat2['default']('yyyy-MM-dd');
@@ -107,7 +120,7 @@ webpackJsonp([0],{
 	
 	  render: function render() {
 	    var state = this.state;
-	    var calendar = _react2['default'].createElement(_rcCalendar2['default'], { locale: _rcCalendarSrcLocaleZh_CN2['default'],
+	    var calendar = _react2['default'].createElement(_rcCalendar2['default'], { locale: CalendarLocale2,
 	      style: { zIndex: 1000 },
 	      dateInputPlaceholder: '请输入',
 	      defaultValue: this.props.defaultCalendarValue,
@@ -293,7 +306,7 @@ webpackJsonp([0],{
 	
 	var _dateDateTable2 = _interopRequireDefault(_dateDateTable);
 	
-	var _calendarCalendarHeader = __webpack_require__(185);
+	var _calendarCalendarHeader = __webpack_require__(187);
 	
 	var _calendarCalendarHeader2 = _interopRequireDefault(_calendarCalendarHeader);
 	
@@ -962,7 +975,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 184:
+/***/ 187:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -977,132 +990,13 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	function _getTodayTime(value) {
-	  var today = value.clone();
-	  today.setTime(Date.now());
-	  return today;
-	}
-	
-	function _getTitleString(value) {
-	  return value.getYear() + '-' + (value.getMonth() + 1) + '-' + value.getDayOfMonth();
-	}
-	
-	function getTodayTimeStr(value) {
-	  var today = _getTodayTime(value);
-	  return _getTitleString(today);
-	}
-	
-	exports['default'] = {
-	  compareByDay: function compareByDay(v1, v2) {
-	    if (v1.getYear() > v2.getYear()) {
-	      return 1;
-	    }
-	    if (v1.getYear() < v2.getYear()) {
-	      return -1;
-	    }
-	    if (v1.getMonth() > v2.getMonth()) {
-	      return 1;
-	    }
-	    if (v1.getMonth() < v2.getMonth()) {
-	      return -1;
-	    }
-	
-	    if (v1.getDayOfMonth() > v2.getDayOfMonth()) {
-	      return 1;
-	    }
-	    if (v1.getDayOfMonth() < v2.getDayOfMonth()) {
-	      return -1;
-	    }
-	
-	    return 0;
-	  },
-	
-	  getTitleString: function getTitleString(value) {
-	    return _getTitleString(value);
-	  },
-	
-	  getTodayTime: function getTodayTime(value) {
-	    return _getTodayTime(value);
-	  },
-	
-	  getTodayElement: function getTodayElement(componentProps) {
-	    var prefixCls = componentProps.prefixCls;
-	    var locale = componentProps.locale;
-	    var value = componentProps.value;
-	
-	    var disabledToday = false;
-	    var localeNow = locale.today;
-	    if (componentProps.showTime) {
-	      localeNow = locale.now || locale.today;
-	    }
-	    var disabledTodayClass = '';
-	    if (componentProps.disabledDate) {
-	      disabledToday = componentProps.disabledDate(_getTodayTime(value), value);
-	      if (disabledToday) {
-	        disabledTodayClass = prefixCls + '-today-btn-disabled';
-	      }
-	    }
-	    return _react2['default'].createElement(
-	      'a',
-	      { className: prefixCls + '-today-btn ' + disabledTodayClass,
-	        role: 'button',
-	        onClick: disabledToday ? null : componentProps.onToday,
-	        title: getTodayTimeStr(componentProps.value) },
-	      localeNow
-	    );
-	  },
-	
-	  getOkElement: function getOkElement(componentProps) {
-	    var prefixCls = componentProps.prefixCls;
-	    var locale = componentProps.locale;
-	
-	    var className = prefixCls + '-ok-btn';
-	    if (componentProps.okDisabled) {
-	      className += ' ' + prefixCls + '-ok-btn-disabled';
-	    }
-	    return _react2['default'].createElement(
-	      'a',
-	      { className: className,
-	        role: 'button',
-	        onClick: componentProps.okDisabled ? null : componentProps.onOk },
-	      locale.ok
-	    );
-	  },
-	
-	  syncTime: function syncTime(from, to) {
-	    to.setHourOfDay(from.getHourOfDay());
-	    to.setMinutes(from.getMinutes());
-	    to.setSeconds(from.getSeconds());
-	  }
-	};
-	module.exports = exports['default'];
-
-/***/ },
-
-/***/ 185:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var _react = __webpack_require__(3);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _monthMonthPanel = __webpack_require__(186);
+	var _monthMonthPanel = __webpack_require__(188);
 	
 	var _monthMonthPanel2 = _interopRequireDefault(_monthMonthPanel);
 	
-	var _gregorianCalendarFormat = __webpack_require__(190);
+	var _utilIndex = __webpack_require__(184);
 	
-	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
-	
-	var _yearYearPanel = __webpack_require__(187);
+	var _yearYearPanel = __webpack_require__(189);
 	
 	var _yearYearPanel2 = _interopRequireDefault(_yearYearPanel);
 	
@@ -1142,8 +1036,8 @@ webpackJsonp([0],{
 	
 	  getInitialState: function getInitialState() {
 	    var props = this.props;
-	    this.yearFormatter = new _gregorianCalendarFormat2['default'](props.locale.yearFormat);
-	    this.monthFormatter = new _gregorianCalendarFormat2['default'](props.locale.monthFormat);
+	    this.yearFormatter = (0, _utilIndex.getFormatter)(props.locale.yearFormat);
+	    this.monthFormatter = (0, _utilIndex.getFormatter)(props.locale.monthFormat);
 	    this.nextMonth = goMonth.bind(this, 1);
 	    this.previousMonth = goMonth.bind(this, -1);
 	    this.nextYear = goYear.bind(this, 1);
@@ -1154,8 +1048,8 @@ webpackJsonp([0],{
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
 	    var locale = this.props.locale;
 	    if (nextProps.locale !== locale) {
-	      this.yearFormatter = new _gregorianCalendarFormat2['default'](locale.yearFormat);
-	      this.monthFormatter = new _gregorianCalendarFormat2['default'](locale.monthFormat);
+	      this.yearFormatter = (0, _utilIndex.getFormatter)(locale.yearFormat);
+	      this.monthFormatter = (0, _utilIndex.getFormatter)(locale.monthFormat);
 	    }
 	  },
 	
