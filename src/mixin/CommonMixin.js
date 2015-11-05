@@ -1,6 +1,6 @@
 import {PropTypes} from 'react';
 import enUs from '../locale/en_US';
-import DateTimeFormat from 'gregorian-calendar-format';
+import {getFormatter} from '../util/index';
 
 function noop() {
 }
@@ -40,7 +40,7 @@ export default {
         if (formatter === this.lastFormatter) {
           return this.normalFormatter;
         }
-        this.normalFormatter = new DateTimeFormat(formatter);
+        this.normalFormatter = getFormatter(formatter);
         this.lastFormatter = formatter;
         return this.normalFormatter;
       }
@@ -48,12 +48,12 @@ export default {
     }
     if (this.props.showTime) {
       if (!this.showTimeFormatter) {
-        this.showTimeFormatter = new DateTimeFormat('yyyy-MM-dd HH:mm:ss');
+        this.showTimeFormatter = getFormatter('yyyy-MM-dd HH:mm:ss');
       }
       return this.showTimeFormatter;
     }
     if (!this.showDateFormatter) {
-      this.showDateFormatter = new DateTimeFormat('yyyy-MM-dd');
+      this.showDateFormatter = getFormatter('yyyy-MM-dd');
     }
     return this.showDateFormatter;
   },

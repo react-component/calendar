@@ -1,4 +1,5 @@
 import React from 'react';
+import DateTimeFormat from 'gregorian-calendar-format';
 
 function getTodayTime(value) {
   const today = value.clone();
@@ -38,6 +39,13 @@ export default {
     }
 
     return 0;
+  },
+
+  getFormatter(format) {
+    if (typeof format === 'string') {
+      return new DateTimeFormat(format);
+    }
+    return format;
   },
 
   getTitleString(value) {

@@ -5,10 +5,18 @@ import Calendar from 'rc-calendar';
 import DatePicker from 'rc-calendar/src/Picker';
 import zhCn from 'gregorian-calendar/lib/locale/zh_CN'; // spm error
 import DateTimeFormat from 'gregorian-calendar-format';
+import formatZhCn from 'gregorian-calendar-format/lib/locale/zh_CN';
 import GregorianCalendar from 'gregorian-calendar';
 import CalendarLocale from 'rc-calendar/src/locale/zh_CN';
+import assign from 'object-assign';
+
 var now = new GregorianCalendar(zhCn);
 now.setTime(Date.now());
+
+// change locale
+const CalendarLocale2 = assign({}, CalendarLocale, {
+  monthFormat: new DateTimeFormat('MMMM', formatZhCn),
+});
 
 const formatter = new DateTimeFormat('yyyy-MM-dd HH:mm:ss');
 const dateFormatter = new DateTimeFormat('yyyy-MM-dd');
@@ -61,15 +69,15 @@ var Test = React.createClass({
 
   render() {
     var state = this.state;
-    var calendar = <Calendar locale={CalendarLocale}
+    var calendar = <Calendar locale={CalendarLocale2}
                              style={{zIndex:1000}}
                              dateInputPlaceholder="请输入"
                              defaultValue={this.props.defaultCalendarValue}
                              showTime={state.showTime}
                              showOk
                              disabledDate={disabledDate}
-                             />;
-    return <div style={{width: 240, margin: 20}} >
+      />;
+    return <div style={{width: 240, margin: 20}}>
       <div style={{marginBottom:10}}>
         <span>
           <input type='checkbox' checked={state.showTime} onChange={this.onShowTimeChange}/>
@@ -117,7 +125,7 @@ function onStandaloneSelect(value) {
 
 function onStandaloneChange(value) {
   console.log('onStandaloneChange');
-  console.log(value &&formatter.format(value))
+  console.log(value && formatter.format(value))
 }
 
 

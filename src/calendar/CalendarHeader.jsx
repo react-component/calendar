@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import MonthPanel from '../month/MonthPanel';
-import DateTimeFormat from 'gregorian-calendar-format';
+import {getFormatter} from '../util/index';
 import YearPanel from '../year/YearPanel';
 import rcUtil from 'rc-util';
 const toFragment = rcUtil.Children.mapSelf;
@@ -33,8 +33,8 @@ const CalendarHeader = React.createClass({
 
   getInitialState() {
     const props = this.props;
-    this.yearFormatter = new DateTimeFormat(props.locale.yearFormat);
-    this.monthFormatter = new DateTimeFormat(props.locale.monthFormat);
+    this.yearFormatter = getFormatter(props.locale.yearFormat);
+    this.monthFormatter = getFormatter(props.locale.monthFormat);
     this.nextMonth = goMonth.bind(this, 1);
     this.previousMonth = goMonth.bind(this, -1);
     this.nextYear = goYear.bind(this, 1);
@@ -45,8 +45,8 @@ const CalendarHeader = React.createClass({
   componentWillReceiveProps(nextProps) {
     const locale = this.props.locale;
     if (nextProps.locale !== locale) {
-      this.yearFormatter = new DateTimeFormat(locale.yearFormat);
-      this.monthFormatter = new DateTimeFormat(locale.monthFormat);
+      this.yearFormatter = getFormatter(locale.yearFormat);
+      this.monthFormatter = getFormatter(locale.monthFormat);
     }
   },
 
