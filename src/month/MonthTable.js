@@ -84,10 +84,11 @@ class MonthTable extends Component {
               onClick={disabled ? null : chooseMonth.bind(this, monthData.value)}
               title={monthData.title}
               className={cx(classNameMap)}>
-            <a
-              className={`${prefixCls}-month`}>
-              {monthData.content}
-            </a>
+            {
+              props.cellRender ? 
+              props.cellRender(monthData.value, props.locale) : 
+              <a className={`${prefixCls}-month`}>{monthData.content}</a>
+            }
           </td>);
       });
       return (<tr key={index} role="row">{tds}</tr>);
@@ -110,6 +111,7 @@ MonthTable.defaultProps = {
 };
 MonthTable.propTypes = {
   onSelect: PropTypes.func,
+  cellRender: PropTypes.func,
   rootPrefixCls: PropTypes.string,
   value: PropTypes.object,
 };
