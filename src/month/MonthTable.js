@@ -85,8 +85,8 @@ class MonthTable extends Component {
               title={monthData.title}
               className={cx(classNameMap)}>
             {
-              props.cellRender ? 
-              props.cellRender(monthData.value, props.locale) : 
+              props.cellRender ?
+              props.cellRender(monthData.value, props.locale) :
               <a className={`${prefixCls}-month`}>{monthData.content}</a>
             }
           </td>);

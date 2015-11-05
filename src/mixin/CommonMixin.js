@@ -36,15 +36,12 @@ export default {
   getFormatter() {
     const formatter = this.props.formatter;
     if (formatter) {
-      if (typeof formatter === 'string') {
-        if (formatter === this.lastFormatter) {
-          return this.normalFormatter;
-        }
-        this.normalFormatter = getFormatter(formatter);
-        this.lastFormatter = formatter;
+      if (formatter === this.lastFormatter) {
         return this.normalFormatter;
       }
-      return formatter;
+      this.normalFormatter = getFormatter(formatter);
+      this.lastFormatter = formatter;
+      return this.normalFormatter;
     }
     if (this.props.showTime) {
       if (!this.showTimeFormatter) {
