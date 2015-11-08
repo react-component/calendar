@@ -43,15 +43,11 @@ webpackJsonp([0],{
 	
 	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
 	
-	var _gregorianCalendarFormatLibLocaleZh_CN = __webpack_require__(226);
-	
-	var _gregorianCalendarFormatLibLocaleZh_CN2 = _interopRequireDefault(_gregorianCalendarFormatLibLocaleZh_CN);
-	
 	var _gregorianCalendar = __webpack_require__(164);
 	
 	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
 	
-	var _rcCalendarSrcLocaleZh_CN = __webpack_require__(227);
+	var _rcCalendarSrcLocaleZh_CN = __webpack_require__(226);
 	
 	var _rcCalendarSrcLocaleZh_CN2 = _interopRequireDefault(_rcCalendarSrcLocaleZh_CN);
 	
@@ -64,7 +60,7 @@ webpackJsonp([0],{
 	
 	// change locale
 	var CalendarLocale2 = (0, _objectAssign2['default'])({}, _rcCalendarSrcLocaleZh_CN2['default'], {
-	  monthFormat: new _gregorianCalendarFormat2['default']('MMMM', _gregorianCalendarFormatLibLocaleZh_CN2['default'])
+	  monthFormat: 'MMMM'
 	});
 	
 	var formatter = new _gregorianCalendarFormat2['default']('yyyy-MM-dd HH:mm:ss');
@@ -1036,8 +1032,8 @@ webpackJsonp([0],{
 	
 	  getInitialState: function getInitialState() {
 	    var props = this.props;
-	    this.yearFormatter = (0, _utilIndex.getFormatter)(props.locale.yearFormat);
-	    this.monthFormatter = (0, _utilIndex.getFormatter)(props.locale.monthFormat);
+	    this.yearFormatter = (0, _utilIndex.getFormatter)(props.locale.yearFormat, props.locale);
+	    this.monthFormatter = (0, _utilIndex.getFormatter)(props.locale.monthFormat, props.locale);
 	    this.nextMonth = goMonth.bind(this, 1);
 	    this.previousMonth = goMonth.bind(this, -1);
 	    this.nextYear = goYear.bind(this, 1);
@@ -1048,8 +1044,8 @@ webpackJsonp([0],{
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
 	    var locale = this.props.locale;
 	    if (nextProps.locale !== locale) {
-	      this.yearFormatter = (0, _utilIndex.getFormatter)(locale.yearFormat);
-	      this.monthFormatter = (0, _utilIndex.getFormatter)(locale.monthFormat);
+	      this.yearFormatter = (0, _utilIndex.getFormatter)(nextProps.yearFormat, nextProps.locale);
+	      this.monthFormatter = (0, _utilIndex.getFormatter)(nextProps.monthFormat, nextProps.locale);
 	    }
 	  },
 	

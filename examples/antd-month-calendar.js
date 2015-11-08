@@ -197,7 +197,7 @@ webpackJsonp([1],{
 	
 	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
 	
-	var _rcCalendarSrcLocaleZh_CN = __webpack_require__(227);
+	var _rcCalendarSrcLocaleZh_CN = __webpack_require__(226);
 	
 	var _rcCalendarSrcLocaleZh_CN2 = _interopRequireDefault(_rcCalendarSrcLocaleZh_CN);
 	

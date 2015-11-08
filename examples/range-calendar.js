@@ -481,8 +481,8 @@ webpackJsonp([5],{
 	
 	  getInitialState: function getInitialState() {
 	    var props = this.props;
-	    this.yearFormatter = (0, _utilIndex.getFormatter)(props.locale.yearFormat);
-	    this.monthFormatter = (0, _utilIndex.getFormatter)(props.locale.monthFormat);
+	    this.yearFormatter = (0, _utilIndex.getFormatter)(props.locale.yearFormat, props.locale);
+	    this.monthFormatter = (0, _utilIndex.getFormatter)(props.locale.monthFormat, props.locale);
 	    this.nextMonth = goMonth.bind(this, 1);
 	    this.previousMonth = goMonth.bind(this, -1);
 	    this.nextYear = goYear.bind(this, 1);
@@ -493,8 +493,8 @@ webpackJsonp([5],{
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
 	    var locale = this.props.locale;
 	    if (nextProps.locale !== locale) {
-	      this.yearFormatter = (0, _utilIndex.getFormatter)(locale.yearFormat);
-	      this.monthFormatter = (0, _utilIndex.getFormatter)(locale.monthFormat);
+	      this.yearFormatter = (0, _utilIndex.getFormatter)(nextProps.yearFormat, nextProps.locale);
+	      this.monthFormatter = (0, _utilIndex.getFormatter)(nextProps.monthFormat, nextProps.locale);
 	    }
 	  },
 	
@@ -1669,7 +1669,7 @@ webpackJsonp([5],{
 	
 	var _gregorianCalendarLibLocaleZh_CN2 = _interopRequireDefault(_gregorianCalendarLibLocaleZh_CN);
 	
-	var _rcCalendarSrcLocaleZh_CN = __webpack_require__(227);
+	var _rcCalendarSrcLocaleZh_CN = __webpack_require__(226);
 	
 	var _rcCalendarSrcLocaleZh_CN2 = _interopRequireDefault(_rcCalendarSrcLocaleZh_CN);
 	

@@ -22158,6 +22158,13 @@
 	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
+	exports.getTodayTime = getTodayTime;
+	exports.getTitleString = getTitleString;
+	exports.compareByDay = compareByDay;
+	exports.getFormatter = getFormatter;
+	exports.getTodayElement = getTodayElement;
+	exports.getOkElement = getOkElement;
+	exports.syncTime = syncTime;
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -22169,112 +22176,101 @@
 	
 	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
 	
-	function _getTodayTime(value) {
+	function getTodayTime(value) {
 	  var today = value.clone();
 	  today.setTime(Date.now());
 	  return today;
 	}
 	
-	function _getTitleString(value) {
+	function getTitleString(value) {
 	  return value.getYear() + '-' + (value.getMonth() + 1) + '-' + value.getDayOfMonth();
 	}
 	
 	function getTodayTimeStr(value) {
-	  var today = _getTodayTime(value);
-	  return _getTitleString(today);
+	  var today = getTodayTime(value);
+	  return getTitleString(today);
 	}
 	
-	exports['default'] = {
-	  compareByDay: function compareByDay(v1, v2) {
-	    if (v1.getYear() > v2.getYear()) {
-	      return 1;
-	    }
-	    if (v1.getYear() < v2.getYear()) {
-	      return -1;
-	    }
-	    if (v1.getMonth() > v2.getMonth()) {
-	      return 1;
-	    }
-	    if (v1.getMonth() < v2.getMonth()) {
-	      return -1;
-	    }
-	
-	    if (v1.getDayOfMonth() > v2.getDayOfMonth()) {
-	      return 1;
-	    }
-	    if (v1.getDayOfMonth() < v2.getDayOfMonth()) {
-	      return -1;
-	    }
-	
-	    return 0;
-	  },
-	
-	  getFormatter: function getFormatter(format) {
-	    if (typeof format === 'string') {
-	      return new _gregorianCalendarFormat2['default'](format);
-	    }
-	    return format;
-	  },
-	
-	  getTitleString: function getTitleString(value) {
-	    return _getTitleString(value);
-	  },
-	
-	  getTodayTime: function getTodayTime(value) {
-	    return _getTodayTime(value);
-	  },
-	
-	  getTodayElement: function getTodayElement(componentProps) {
-	    var prefixCls = componentProps.prefixCls;
-	    var locale = componentProps.locale;
-	    var value = componentProps.value;
-	
-	    var disabledToday = false;
-	    var localeNow = locale.today;
-	    if (componentProps.showTime) {
-	      localeNow = locale.now || locale.today;
-	    }
-	    var disabledTodayClass = '';
-	    if (componentProps.disabledDate) {
-	      disabledToday = componentProps.disabledDate(_getTodayTime(value), value);
-	      if (disabledToday) {
-	        disabledTodayClass = prefixCls + '-today-btn-disabled';
-	      }
-	    }
-	    return _react2['default'].createElement(
-	      'a',
-	      { className: prefixCls + '-today-btn ' + disabledTodayClass,
-	        role: 'button',
-	        onClick: disabledToday ? null : componentProps.onToday,
-	        title: getTodayTimeStr(componentProps.value) },
-	      localeNow
-	    );
-	  },
-	
-	  getOkElement: function getOkElement(componentProps) {
-	    var prefixCls = componentProps.prefixCls;
-	    var locale = componentProps.locale;
-	
-	    var className = prefixCls + '-ok-btn';
-	    if (componentProps.okDisabled) {
-	      className += ' ' + prefixCls + '-ok-btn-disabled';
-	    }
-	    return _react2['default'].createElement(
-	      'a',
-	      { className: className,
-	        role: 'button',
-	        onClick: componentProps.okDisabled ? null : componentProps.onOk },
-	      locale.ok
-	    );
-	  },
-	
-	  syncTime: function syncTime(from, to) {
-	    to.setHourOfDay(from.getHourOfDay());
-	    to.setMinutes(from.getMinutes());
-	    to.setSeconds(from.getSeconds());
+	function compareByDay(v1, v2) {
+	  if (v1.getYear() > v2.getYear()) {
+	    return 1;
 	  }
-	};
-	module.exports = exports['default'];
+	  if (v1.getYear() < v2.getYear()) {
+	    return -1;
+	  }
+	  if (v1.getMonth() > v2.getMonth()) {
+	    return 1;
+	  }
+	  if (v1.getMonth() < v2.getMonth()) {
+	    return -1;
+	  }
+	
+	  if (v1.getDayOfMonth() > v2.getDayOfMonth()) {
+	    return 1;
+	  }
+	  if (v1.getDayOfMonth() < v2.getDayOfMonth()) {
+	    return -1;
+	  }
+	
+	  return 0;
+	}
+	
+	function getFormatter(format, locale) {
+	  if (typeof format === 'string') {
+	    return new _gregorianCalendarFormat2['default'](format, locale.format);
+	  }
+	  return format;
+	}
+	
+	function getTodayElement(componentProps) {
+	  var prefixCls = componentProps.prefixCls;
+	  var locale = componentProps.locale;
+	  var value = componentProps.value;
+	
+	  var disabledToday = false;
+	  var localeNow = locale.today;
+	  if (componentProps.showTime) {
+	    localeNow = locale.now || locale.today;
+	  }
+	  var disabledTodayClass = '';
+	  if (componentProps.disabledDate) {
+	    disabledToday = componentProps.disabledDate(getTodayTime(value), value);
+	    if (disabledToday) {
+	      disabledTodayClass = prefixCls + '-today-btn-disabled';
+	    }
+	  }
+	  return _react2['default'].createElement(
+	    'a',
+	    { className: prefixCls + '-today-btn ' + disabledTodayClass,
+	      role: 'button',
+	      onClick: disabledToday ? null : componentProps.onToday,
+	      title: getTodayTimeStr(componentProps.value) },
+	    localeNow
+	  );
+	}
+	
+	function getOkElement(componentProps) {
+	  var prefixCls = componentProps.prefixCls;
+	  var locale = componentProps.locale;
+	
+	  var className = prefixCls + '-ok-btn';
+	  if (componentProps.okDisabled) {
+	    className += ' ' + prefixCls + '-ok-btn-disabled';
+	  }
+	  return _react2['default'].createElement(
+	    'a',
+	    { className: className,
+	      role: 'button',
+	      onClick: componentProps.okDisabled ? null : componentProps.onOk },
+	    locale.ok
+	  );
+	}
+	
+	function syncTime(from, to) {
+	  to.setHourOfDay(from.getHourOfDay());
+	  to.setMinutes(from.getMinutes());
+	  to.setSeconds(from.getSeconds());
+	}
 
 /***/ },
 /* 185 */
@@ -23948,25 +23944,23 @@
 	
 	  getFormatter: function getFormatter() {
 	    var formatter = this.props.formatter;
+	    var locale = this.props.locale;
 	    if (formatter) {
-	      if (typeof formatter === 'string') {
-	        if (formatter === this.lastFormatter) {
-	          return this.normalFormatter;
-	        }
-	        this.normalFormatter = (0, _utilIndex.getFormatter)(formatter);
-	        this.lastFormatter = formatter;
+	      if (formatter === this.lastFormatter) {
 	        return this.normalFormatter;
 	      }
-	      return formatter;
+	      this.normalFormatter = (0, _utilIndex.getFormatter)(formatter, locale);
+	      this.lastFormatter = formatter;
+	      return this.normalFormatter;
 	    }
 	    if (this.props.showTime) {
 	      if (!this.showTimeFormatter) {
-	        this.showTimeFormatter = (0, _utilIndex.getFormatter)('yyyy-MM-dd HH:mm:ss');
+	        this.showTimeFormatter = (0, _utilIndex.getFormatter)('yyyy-MM-dd HH:mm:ss', locale);
 	      }
 	      return this.showTimeFormatter;
 	    }
 	    if (!this.showDateFormatter) {
-	      this.showDateFormatter = (0, _utilIndex.getFormatter)('yyyy-MM-dd');
+	      this.showDateFormatter = (0, _utilIndex.getFormatter)('yyyy-MM-dd', locale);
 	    }
 	    return this.showDateFormatter;
 	  }
@@ -26923,34 +26917,6 @@
 
 /***/ },
 /* 226 */
-/***/ function(module, exports) {
-
-	/**
-	 * zh-cn locale
-	 * @ignore
-	 * @author yiminghe@gmail.com
-	 */
-	module.exports = {
-	  eras: ['公元前', '公元'],
-	  months: ['一月', '二月', '三月', '四月', '五月', '六月',
-	    '七月', '八月', '九月', '十月', '十一月', '十二月'],
-	  shortMonths: ['一月', '二月', '三月', '四月', '五月', '六月',
-	    '七月', '八月', '九月', '十月', '十一月', '十二月'],
-	  weekdays: ['星期天', '星期一', '星期二', '星期三', '星期四',
-	    '星期五', '星期六'],
-	  shortWeekdays: ['周日', '周一', '周二', '周三', '周四', '周五',
-	    '周六'],
-	  veryShortWeekdays: ['日', '一', '二', '三', '四', '五', '六'],
-	  ampms: ['上午', '下午'],
-	  /*jshint quotmark: false*/
-	  datePatterns: ["yyyy'年'M'月'd'日' EEEE", "yyyy'年'M'月'd'日'", "yyyy-M-d", "yy-M-d"],
-	  timePatterns: ["ahh'时'mm'分'ss'秒' 'GMT'Z", "ahh'时'mm'分'ss'秒'", "H:mm:ss", "ah:mm"],
-	  dateTimePattern: '{date} {time}'
-	};
-
-
-/***/ },
-/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26961,7 +26927,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _gregorianCalendarFormatLibLocaleZh_CN = __webpack_require__(226);
+	var _gregorianCalendarFormatLibLocaleZh_CN = __webpack_require__(227);
 	
 	var _gregorianCalendarFormatLibLocaleZh_CN2 = _interopRequireDefault(_gregorianCalendarFormatLibLocaleZh_CN);
 	
@@ -26995,6 +26961,34 @@
 	  format: _gregorianCalendarFormatLibLocaleZh_CN2['default']
 	};
 	module.exports = exports['default'];
+
+/***/ },
+/* 227 */
+/***/ function(module, exports) {
+
+	/**
+	 * zh-cn locale
+	 * @ignore
+	 * @author yiminghe@gmail.com
+	 */
+	module.exports = {
+	  eras: ['公元前', '公元'],
+	  months: ['一月', '二月', '三月', '四月', '五月', '六月',
+	    '七月', '八月', '九月', '十月', '十一月', '十二月'],
+	  shortMonths: ['一月', '二月', '三月', '四月', '五月', '六月',
+	    '七月', '八月', '九月', '十月', '十一月', '十二月'],
+	  weekdays: ['星期天', '星期一', '星期二', '星期三', '星期四',
+	    '星期五', '星期六'],
+	  shortWeekdays: ['周日', '周一', '周二', '周三', '周四', '周五',
+	    '周六'],
+	  veryShortWeekdays: ['日', '一', '二', '三', '四', '五', '六'],
+	  ampms: ['上午', '下午'],
+	  /*jshint quotmark: false*/
+	  datePatterns: ["yyyy'年'M'月'd'日' EEEE", "yyyy'年'M'月'd'日'", "yyyy-M-d", "yy-M-d"],
+	  timePatterns: ["ahh'时'mm'分'ss'秒' 'GMT'Z", "ahh'时'mm'分'ss'秒'", "H:mm:ss", "ah:mm"],
+	  dateTimePattern: '{date} {time}'
+	};
+
 
 /***/ }
 /******/ ]);
