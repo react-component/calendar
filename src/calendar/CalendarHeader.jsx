@@ -33,8 +33,8 @@ const CalendarHeader = React.createClass({
 
   getInitialState() {
     const props = this.props;
-    this.yearFormatter = getFormatter(props.locale.yearFormat);
-    this.monthFormatter = getFormatter(props.locale.monthFormat);
+    this.yearFormatter = getFormatter(props.locale.yearFormat, props.locale);
+    this.monthFormatter = getFormatter(props.locale.monthFormat, props.locale);
     this.nextMonth = goMonth.bind(this, 1);
     this.previousMonth = goMonth.bind(this, -1);
     this.nextYear = goYear.bind(this, 1);
@@ -45,8 +45,8 @@ const CalendarHeader = React.createClass({
   componentWillReceiveProps(nextProps) {
     const locale = this.props.locale;
     if (nextProps.locale !== locale) {
-      this.yearFormatter = getFormatter(locale.yearFormat);
-      this.monthFormatter = getFormatter(locale.monthFormat);
+      this.yearFormatter = getFormatter(nextProps.yearFormat, nextProps.locale);
+      this.monthFormatter = getFormatter(nextProps.monthFormat, nextProps.locale);
     }
   },
 

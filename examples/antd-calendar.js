@@ -5,7 +5,6 @@ import Calendar from 'rc-calendar';
 import DatePicker from 'rc-calendar/src/Picker';
 import zhCn from 'gregorian-calendar/lib/locale/zh_CN'; // spm error
 import DateTimeFormat from 'gregorian-calendar-format';
-import formatZhCn from 'gregorian-calendar-format/lib/locale/zh_CN';
 import GregorianCalendar from 'gregorian-calendar';
 import CalendarLocale from 'rc-calendar/src/locale/zh_CN';
 import assign from 'object-assign';
@@ -15,7 +14,7 @@ now.setTime(Date.now());
 
 // change locale
 const CalendarLocale2 = assign({}, CalendarLocale, {
-  monthFormat: new DateTimeFormat('MMMM', formatZhCn),
+  monthFormat: 'MMMM',
 });
 
 const formatter = new DateTimeFormat('yyyy-MM-dd HH:mm:ss');

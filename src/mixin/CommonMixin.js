@@ -35,22 +35,23 @@ export default {
 
   getFormatter() {
     const formatter = this.props.formatter;
+    const locale = this.props.locale;
     if (formatter) {
       if (formatter === this.lastFormatter) {
         return this.normalFormatter;
       }
-      this.normalFormatter = getFormatter(formatter);
+      this.normalFormatter = getFormatter(formatter, locale);
       this.lastFormatter = formatter;
       return this.normalFormatter;
     }
     if (this.props.showTime) {
       if (!this.showTimeFormatter) {
-        this.showTimeFormatter = getFormatter('yyyy-MM-dd HH:mm:ss');
+        this.showTimeFormatter = getFormatter('yyyy-MM-dd HH:mm:ss', locale);
       }
       return this.showTimeFormatter;
     }
     if (!this.showDateFormatter) {
-      this.showDateFormatter = getFormatter('yyyy-MM-dd');
+      this.showDateFormatter = getFormatter('yyyy-MM-dd', locale);
     }
     return this.showDateFormatter;
   },
