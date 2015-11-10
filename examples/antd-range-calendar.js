@@ -499,9 +499,11 @@ webpackJsonp([2],{
 	
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
 	    var locale = this.props.locale;
-	    if (nextProps.locale !== locale) {
-	      this.yearFormatter = (0, _utilIndex.getFormatter)(nextProps.yearFormat, nextProps.locale);
-	      this.monthFormatter = (0, _utilIndex.getFormatter)(nextProps.monthFormat, nextProps.locale);
+	    var nextLocale = nextProps.locale;
+	
+	    if (nextLocale !== locale) {
+	      this.yearFormatter = (0, _utilIndex.getFormatter)(nextLocale.yearFormat, nextLocale);
+	      this.monthFormatter = (0, _utilIndex.getFormatter)(nextLocale.monthFormat, nextLocale);
 	    }
 	  },
 	
