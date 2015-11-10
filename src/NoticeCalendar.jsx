@@ -1,5 +1,4 @@
 import React, {PropTypes} from 'react';
-import GregorianCalendar from 'gregorian-calendar';
 import DateTable from './date/DateTable';
 import MonthTable from './month/MonthTable';
 import CalendarMixin from './mixin/CalendarMixin';
@@ -15,11 +14,6 @@ const NoticeCalendar = React.createClass({
     showTypeSwitch: PropTypes.bool,
   },
   mixins: [CommonMixin, CalendarMixin],
-  getInitialState() {
-    return {
-      type: this.props.type
-    };
-  },
   getDefaultProps() {
     return {
       type: 'date',
@@ -27,12 +21,17 @@ const NoticeCalendar = React.createClass({
       showTypeSwitch: true,
     };
   },
-  setType(type) {
-    this.setState({ type, });
+  getInitialState() {
+    return {
+      type: this.props.type,
+    };
   },
   onMonthSelect(value) {
     this.setType('date');
     this.onSelect(value);
+  },
+  setType(type) {
+    this.setState({ type });
   },
   render() {
     const props = this.props;
@@ -68,7 +67,7 @@ const NoticeCalendar = React.createClass({
       header,
       (<div key="calendar-body" className={`${prefixCls}-calendar-body`}>
         { table }
-      </div>)
+      </div>),
     ];
 
 

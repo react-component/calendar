@@ -5,19 +5,15 @@ import 'rc-select/assets/index.css';
 function noop() {}
 
 class CalendarHeader extends Component {
-  constructor(props) {
-    super();
-  }
-
   onYearChange(year) {
-    let newValue = this.props.value.clone();
-    newValue.setYear(parseInt(year));
+    const newValue = this.props.value.clone();
+    newValue.setYear(parseInt(year, 10));
     this.props.onValueChange(newValue);
   }
 
   onMonthChange(month) {
-    let newValue = this.props.value.clone();
-    newValue.setMonth(parseInt(month));
+    const newValue = this.props.value.clone();
+    newValue.setMonth(parseInt(month, 10));
     this.props.onValueChange(newValue);
   }
 
@@ -25,7 +21,7 @@ class CalendarHeader extends Component {
     const {yearSelectOffset, yearSelectTotal, locale, prefixCls} = this.props;
     const start = year - yearSelectOffset;
     const end = start + yearSelectTotal;
-    const suffix = locale.year === '年' ? '年': '';
+    const suffix = locale.year === '年' ? '年' : '';
 
     const options = [];
     for (let i = start; i < end; i++) {
@@ -36,7 +32,7 @@ class CalendarHeader extends Component {
         style={{ float: 'right', marginRight: 5, marginTop: 4 }}
         className={`${prefixCls}-header-year-select`}
         onChange={this.onYearChange.bind(this)}
-        dropdownStyle={{ zIndex:2000 }}
+        dropdownStyle={{ zIndex: 2000 }}
         dropdownMenuStyle={{maxHeight: 250, overflow: 'auto', fontSize: 12}}
         optionLabelProp="children"
         value={String(year)}
@@ -60,7 +56,7 @@ class CalendarHeader extends Component {
       <Select
         style={{ float: 'right', marginRight: 5, marginTop: 4 }}
         className={`${prefixCls}-header-month-select`}
-        dropdownStyle={{ zIndex:2000 }}
+        dropdownStyle={{ zIndex: 2000 }}
         dropdownMenuStyle={{maxHeight: 250, overflow: 'auto', fontSize: 12}}
         optionLabelProp="children"
         value={String(month)}
@@ -112,6 +108,8 @@ CalendarHeader.propTypes = {
   yearSelectTotal: PropTypes.number,
   onValueChange: PropTypes.func,
   onTypeChange: PropTypes.func,
+  prefixCls: PropTypes.string,
+  type: PropTypes.string,
 };
 CalendarHeader.defaultProps = {
   yearSelectOffset: 10,
