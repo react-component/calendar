@@ -18,8 +18,6 @@ class MonthTable extends Component {
   constructor(props) {
     super(props);
 
-    this.prefixCls = props.rootPrefixCls + '-month-panel';
-
     this.state = {
       value: props.value,
     };
@@ -64,7 +62,7 @@ class MonthTable extends Component {
     const value = this.state.value;
     const months = this.getMonths();
     const currentMonth = value.getMonth();
-    const prefixCls = this.prefixCls;
+    const {prefixCls, locale} = props;
     const monthsEls = months.map((month, index)=> {
       const tds = month.map(monthData => {
         let disabled = false;
@@ -78,30 +76,32 @@ class MonthTable extends Component {
           [`${prefixCls}-cell-disabled`]: disabled,
           [`${prefixCls}-selected-cell`]: monthData.value === currentMonth,
         };
+        let cellEl;
+        if (props.cellRender) {
+          const currentValue = value.clone();
+          currentValue.rollSetMonth(monthData.value);
+          cellEl = props.cellRender(currentValue, locale);
+        } else {
+          cellEl = <a className={`${prefixCls}-month`}>{monthData.content}</a>;
+        }
         return (
           <td role="gridcell"
               key={monthData.value}
               onClick={disabled ? null : chooseMonth.bind(this, monthData.value)}
               title={monthData.title}
               className={cx(classNameMap)}>
-            {
-              props.cellRender ?
-              props.cellRender(monthData.value, props.locale) :
-              <a className={`${prefixCls}-month`}>{monthData.content}</a>
-            }
+            {cellEl}
           </td>);
       });
       return (<tr key={index} role="row">{tds}</tr>);
     });
 
     return (
-      <div className={`${prefixCls}-body`}>
-        <table className={`${prefixCls}-table`} cellSpacing="0" role="grid">
-          <tbody className={`${prefixCls}-tbody`}>
-          {monthsEls}
-          </tbody>
-        </table>
-      </div>
+      <table className={`${prefixCls}-table`} cellSpacing="0" role="grid">
+        <tbody className={`${prefixCls}-tbody`}>
+        {monthsEls}
+        </tbody>
+      </table>
     );
   }
 }
@@ -112,7 +112,7 @@ MonthTable.defaultProps = {
 MonthTable.propTypes = {
   onSelect: PropTypes.func,
   cellRender: PropTypes.func,
-  rootPrefixCls: PropTypes.string,
+  prefixCls: PropTypes.string,
   value: PropTypes.object,
 };
 export default MonthTable;
