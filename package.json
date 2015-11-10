@@ -1,6 +1,6 @@
 {
   "name": "rc-calendar",
-  "version": "4.0.0-alpha13",
+  "version": "4.0.0-alpha14",
   "description": "React Calendar",
   "keywords": [
     "react",
@@ -61,6 +61,7 @@
     "gregorian-calendar-format": "4.x",
     "object-assign": "4.x",
     "rc-trigger": "1.x",
-    "rc-util": "3.x"
+    "rc-util": "3.x",
+    "rc-select": "5.x"
   }
 }
