@@ -114,11 +114,13 @@ const MonthPanel = React.createClass({
               »
             </a>
           </div>
-          <MonthTable
-            onSelect={this.setAndSelectValue}
-            locale={locale}
-            value={value}
-            rootPrefixCls={props.rootPrefixCls} />
+          <div className={`${prefixCls}-body`}>
+            <MonthTable
+              onSelect={this.setAndSelectValue}
+              locale={locale}
+              value={value}
+              prefixCls={prefixCls} />
+          </div>
         </div>
         {yearPanel}
       </div>);

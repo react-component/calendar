@@ -61,6 +61,7 @@
     "gregorian-calendar-format": "4.x",
     "object-assign": "4.x",
     "rc-trigger": "1.x",
-    "rc-util": "2.x"
+    "rc-util": "2.x",
+    "rc-select": "5.x"
   }
 }
