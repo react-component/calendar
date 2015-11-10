@@ -44,8 +44,8 @@ const CalendarHeader = React.createClass({
 
   componentWillReceiveProps(nextProps) {
     const locale = this.props.locale;
-    const {locale:nextLocale} = nextProps;
-    if (nextProps.locale !== locale) {
+    const {locale: nextLocale} = nextProps;
+    if (nextLocale !== locale) {
       this.yearFormatter = getFormatter(nextLocale.yearFormat, nextLocale);
       this.monthFormatter = getFormatter(nextLocale.monthFormat, nextLocale);
     }
