@@ -3,9 +3,9 @@ import DateTable from './date/DateTable';
 import MonthTable from './month/MonthTable';
 import CalendarMixin from './mixin/CalendarMixin';
 import CommonMixin from './mixin/CommonMixin';
-import CalendarHeader from './notice-calendar/CalendarHeader';
+import CalendarHeader from './full-calendar/CalendarHeader';
 
-const NoticeCalendar = React.createClass({
+const FullCalendar = React.createClass({
   propTypes: {
     type: PropTypes.string,
     fullscreen: PropTypes.bool,
@@ -71,7 +71,7 @@ const NoticeCalendar = React.createClass({
     ];
 
 
-    const className = [`${prefixCls}-notice`];
+    const className = [`${prefixCls}-full`];
 
     if (fullscreen) {
       className.push(`${prefixCls}-fullscreen`);
@@ -81,4 +81,4 @@ const NoticeCalendar = React.createClass({
   },
 });
 
-export default NoticeCalendar;
+export default FullCalendar;
