@@ -13,7 +13,7 @@ const FullCalendar = React.createClass({
     dateCellRender: PropTypes.func,
     showTypeSwitch: PropTypes.bool,
     selectPrefixCls: PropTypes.string,
-    headerControls: PropTypes.array,
+    headerComponents: PropTypes.array,
   },
   mixins: [CommonMixin, CalendarMixin],
   getDefaultProps() {

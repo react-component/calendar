@@ -73,7 +73,7 @@ class CalendarHeader extends Component {
     this.props.onTypeChange('month');
   }
   render() {
-    const {value, locale, prefixCls, type, showTypeSwitch, headerControls} = this.props;
+    const {value, locale, prefixCls, type, showTypeSwitch, headerComponents} = this.props;
     const year = value.getYear();
     const month = value.getMonth();
     const yearSelect = this.getYearSelectElement(year);
@@ -97,7 +97,7 @@ class CalendarHeader extends Component {
         { typeSwitcher }
         { monthSelect }
         { yearSelect }
-        { headerControls }
+        { headerComponents }
       </div>
     );
   }
@@ -113,7 +113,7 @@ CalendarHeader.propTypes = {
   selectPrefixCls: PropTypes.string,
   type: PropTypes.string,
   showTypeSwitch: PropTypes.bool,
-  headerControls: PropTypes.array,
+  headerComponents: PropTypes.array,
 };
 CalendarHeader.defaultProps = {
   yearSelectOffset: 10,
