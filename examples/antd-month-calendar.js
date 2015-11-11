@@ -1013,25 +1013,25 @@ webpackJsonp([1],{
 	var targetOffset = [0, 0];
 	
 	var placements = {
-	  topLeft: {
+	  bottomLeft: {
 	    points: ['tl', 'tl'],
 	    overflow: autoAdjustOverflow,
 	    offset: [0, -3],
 	    targetOffset: targetOffset
 	  },
-	  topRight: {
+	  bottomRight: {
 	    points: ['tr', 'tr'],
 	    overflow: autoAdjustOverflow,
 	    offset: [0, -3],
 	    targetOffset: targetOffset
 	  },
-	  bottomRight: {
+	  topRight: {
 	    points: ['br', 'br'],
 	    overflow: autoAdjustOverflow,
 	    offset: [0, 3],
 	    targetOffset: targetOffset
 	  },
-	  bottomLeft: {
+	  topLeft: {
 	    points: ['bl', 'bl'],
 	    overflow: autoAdjustOverflow,
 	    offset: [0, 3],
