@@ -12,6 +12,8 @@ const FullCalendar = React.createClass({
     monthCellRender: PropTypes.func,
     dateCellRender: PropTypes.func,
     showTypeSwitch: PropTypes.bool,
+    selectPrefixCls: PropTypes.string,
+    headerComponents: PropTypes.array,
   },
   mixins: [CommonMixin, CalendarMixin],
   getDefaultProps() {

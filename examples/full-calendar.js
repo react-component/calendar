@@ -6,6 +6,13 @@ import FullCalendar from 'rc-calendar/src/FullCalendar';
 
 ReactDOM.render(<div style={{zIndex:1000,position:'relative'}}>
   <FullCalendar
+    style={{margin: 10}}
     fullscreen={false}
+    showTypeSwitch={true}
+    locale={CalendarLocale}/>
+  <FullCalendar
+    style={{margin: 10}}
+    fullscreen={true}
+    showTypeSwitch={true}
     locale={CalendarLocale}/>
 </div>, document.getElementById('__react-content'));
