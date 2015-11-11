@@ -6,25 +6,25 @@ const autoAdjustOverflow = {
 const targetOffset = [0, 0];
 
 const placements = {
-  topLeft: {
+  bottomLeft: {
     points: ['tl', 'tl'],
     overflow: autoAdjustOverflow,
     offset: [0, -3],
     targetOffset,
   },
-  topRight: {
+  bottomRight: {
     points: ['tr', 'tr'],
     overflow: autoAdjustOverflow,
     offset: [0, -3],
     targetOffset,
   },
-  bottomRight: {
+  topRight: {
     points: ['br', 'br'],
     overflow: autoAdjustOverflow,
     offset: [0, 3],
     targetOffset,
   },
-  bottomLeft: {
+  topLeft: {
     points: ['bl', 'bl'],
     overflow: autoAdjustOverflow,
     offset: [0, 3],
