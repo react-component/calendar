@@ -7350,6 +7350,12 @@ button.close {
   background: #ebf4f8;
   border-radius: 0;
 }
+.rc-calendar-full .rc-calendar-header-month-select,
+.rc-calendar-full .rc-calendar-header-year-select {
+  float: right;
+  margin-right: 5px;
+  margin-top: 4px;
+}
 .rc-calendar-full .rc-calendar-header .rc-select-selection--single {
   height: 24px;
 }
@@ -7390,7 +7396,7 @@ button.close {
   color: #fff;
 }
 .rc-calendar-fullscreen {
-  width: 100%;
+  width: auto;
 }
 .rc-calendar-fullscreen .rc-calendar-header {
   border-bottom: none;

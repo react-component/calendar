@@ -826,7 +826,14 @@ webpackJsonp([5],[
 	  'div',
 	  { style: { zIndex: 1000, position: 'relative' } },
 	  _react2['default'].createElement(_rcCalendarSrcFullCalendar2['default'], {
+	    style: { margin: 10 },
 	    fullscreen: false,
+	    showTypeSwitch: true,
+	    locale: _rcCalendarSrcLocaleZh_CN2['default'] }),
+	  _react2['default'].createElement(_rcCalendarSrcFullCalendar2['default'], {
+	    style: { margin: 10 },
+	    fullscreen: true,
+	    showTypeSwitch: true,
 	    locale: _rcCalendarSrcLocaleZh_CN2['default'] })
 	), document.getElementById('__react-content'));
 
@@ -876,7 +883,9 @@ webpackJsonp([5],[
 	    fullscreen: _react.PropTypes.bool,
 	    monthCellRender: _react.PropTypes.func,
 	    dateCellRender: _react.PropTypes.func,
-	    showTypeSwitch: _react.PropTypes.bool
+	    showTypeSwitch: _react.PropTypes.bool,
+	    selectPrefixCls: _react.PropTypes.string,
+	    headerComponents: _react.PropTypes.array
 	  },
 	  mixins: [_mixinCommonMixin2['default'], _mixinCalendarMixin2['default']],
 	  getDefaultProps: function getDefaultProps() {
@@ -1008,6 +1017,7 @@ webpackJsonp([5],[
 	      var yearSelectTotal = _props.yearSelectTotal;
 	      var locale = _props.locale;
 	      var prefixCls = _props.prefixCls;
+	      var selectPrefixCls = _props.selectPrefixCls;
 	
 	      var start = year - yearSelectOffset;
 	      var end = start + yearSelectTotal;
@@ -1024,7 +1034,7 @@ webpackJsonp([5],[
 	      return _react2['default'].createElement(
 	        _rcSelect2['default'],
 	        {
-	          style: { float: 'right', marginRight: 5, marginTop: 4 },
+	          prefixCls: selectPrefixCls,
 	          className: prefixCls + '-header-year-select',
 	          onChange: this.onYearChange.bind(this),
 	          dropdownStyle: { zIndex: 2000 },
@@ -1041,6 +1051,8 @@ webpackJsonp([5],[
 	      var props = this.props;
 	      var months = props.locale.format.months;
 	      var prefixCls = props.prefixCls;
+	      var selectPrefixCls = props.selectPrefixCls;
+	
 	      var options = [];
 	
 	      for (var index = 0; index < 12; index++) {
@@ -1054,7 +1066,7 @@ webpackJsonp([5],[
 	      return _react2['default'].createElement(
 	        _rcSelect2['default'],
 	        {
-	          style: { float: 'right', marginRight: 5, marginTop: 4 },
+	          prefixCls: selectPrefixCls,
 	          className: prefixCls + '-header-month-select',
 	          dropdownStyle: { zIndex: 2000 },
 	          dropdownMenuStyle: { maxHeight: 250, overflow: 'auto', fontSize: 12 },
@@ -1083,13 +1095,15 @@ webpackJsonp([5],[
 	      var locale = _props2.locale;
 	      var prefixCls = _props2.prefixCls;
 	      var type = _props2.type;
+	      var showTypeSwitch = _props2.showTypeSwitch;
+	      var headerComponents = _props2.headerComponents;
 	
 	      var year = value.getYear();
 	      var month = value.getMonth();
 	      var yearSelect = this.getYearSelectElement(year);
 	      var monthSelect = type === 'month' ? null : this.getMonthSelectElement(month);
 	
-	      var typeSwitcher = _react2['default'].createElement(
+	      var typeSwitcher = showTypeSwitch ? _react2['default'].createElement(
 	        'span',
 	        { className: prefixCls + '-header-switcher' },
 	        type === 'date' ? _react2['default'].createElement(
@@ -1110,14 +1124,15 @@ webpackJsonp([5],[
 	          { onClick: this.changeTypeToMonth.bind(this), className: 'normal' },
 	          locale.year
 	        )
-	      );
+	      ) : null;
 	
 	      return _react2['default'].createElement(
 	        'div',
 	        { className: prefixCls + '-header' },
 	        typeSwitcher,
 	        monthSelect,
-	        yearSelect
+	        yearSelect,
+	        headerComponents
 	      );
 	    }
 	  }]);
@@ -1133,7 +1148,10 @@ webpackJsonp([5],[
 	  onValueChange: _react.PropTypes.func,
 	  onTypeChange: _react.PropTypes.func,
 	  prefixCls: _react.PropTypes.string,
-	  type: _react.PropTypes.string
+	  selectPrefixCls: _react.PropTypes.string,
+	  type: _react.PropTypes.string,
+	  showTypeSwitch: _react.PropTypes.bool,
+	  headerComponents: _react.PropTypes.array
 	};
 	CalendarHeader.defaultProps = {
 	  yearSelectOffset: 10,
