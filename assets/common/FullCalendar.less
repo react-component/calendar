@@ -1,4 +1,14 @@
 .@{prefixClass}-full {
+
+  .@{prefixClass} {
+    &-header-month-select,
+    &-header-year-select {
+      float: right; 
+      margin-right: 5px; 
+      margin-top: 4px; 
+    }
+  }
+
   .@{prefixClass}-header {
     .rc-select-selection--single {
       height: 24px;
@@ -43,36 +53,37 @@
 
 }
 .@{prefixClass}-fullscreen {
-  width: 100%;
-  .@{prefixClass}-header {
-    border-bottom: none;
-  }
-  .@{prefixClass}-column-header {
-    text-align: right; padding-right: 12px;
-  }
-  
-  .@{prefixClass}-cell { padding:0; }
-  .@{prefixClass}-cell .@{prefixClass}-date,
-  .@{prefixClass}-month-panel-cell .@{prefixClass}-month-panel-month {
-    display: block;
-    height: 116px; 
-    width: auto;
-    border-radius: 0; 
-    margin: 0 4px;
-    border: none;
-    border-top: 2px solid #eee;
-    text-align: right;
-    padding-right: 8px;
-  }
-  .@{prefixClass}-selected-day .@{prefixClass}-date,
-  .@{prefixClass}-month-panel-selected-cell .@{prefixClass}-month-panel-month {
-    background-color: #ebfaff; 
-    color: #666;
-  }
-  .@{prefixClass}-today .@{prefixClass}-date,
-  .@{prefixClass}-month-panel-selected-cell .@{prefixClass}-month-panel-month {
-    border-top-color: #3FC7FA;
-    color: #3FC7FA;
+  width: auto;
+  .@{prefixClass} {
+    &-header {
+      border-bottom: none;
+    }
+    &-column-header {
+      text-align: right; padding-right: 12px;
+    }
+    &-cell { padding:0; }
+    &-cell .@{prefixClass}-date,
+    &-month-panel-cell .@{prefixClass}-month-panel-month {
+      display: block;
+      height: 116px; 
+      width: auto;
+      border-radius: 0; 
+      margin: 0 4px;
+      border: none;
+      border-top: 2px solid #eee;
+      text-align: right;
+      padding-right: 8px;
+    }
+    &-selected-day .@{prefixClass}-date,
+    &-month-panel-selected-cell .@{prefixClass}-month-panel-month {
+      background-color: #ebfaff; 
+      color: #666;
+    }
+    &-today .@{prefixClass}-date,
+    &-month-panel-selected-cell .@{prefixClass}-month-panel-month {
+      border-top-color: #3FC7FA;
+      color: #3FC7FA;
+    }
   }
   
 }

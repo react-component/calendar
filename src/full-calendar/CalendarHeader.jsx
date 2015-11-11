@@ -18,7 +18,7 @@ class CalendarHeader extends Component {
   }
 
   getYearSelectElement(year) {
-    const {yearSelectOffset, yearSelectTotal, locale, prefixCls} = this.props;
+    const {yearSelectOffset, yearSelectTotal, locale, prefixCls, selectPrefixCls} = this.props;
     const start = year - yearSelectOffset;
     const end = start + yearSelectTotal;
     const suffix = locale.year === '年' ? '年' : '';
@@ -29,7 +29,7 @@ class CalendarHeader extends Component {
     }
     return (
       <Select
-        style={{ float: 'right', marginRight: 5, marginTop: 4 }}
+        prefixCls={selectPrefixCls}
         className={`${prefixCls}-header-year-select`}
         onChange={this.onYearChange.bind(this)}
         dropdownStyle={{ zIndex: 2000 }}
@@ -45,7 +45,7 @@ class CalendarHeader extends Component {
   getMonthSelectElement(month) {
     const props = this.props;
     const months = props.locale.format.months;
-    const prefixCls = props.prefixCls;
+    const {prefixCls, selectPrefixCls} = props;
     const options = [];
 
     for (let index = 0; index < 12; index++) {
@@ -54,7 +54,7 @@ class CalendarHeader extends Component {
 
     return (
       <Select
-        style={{ float: 'right', marginRight: 5, marginTop: 4 }}
+        prefixCls={selectPrefixCls}
         className={`${prefixCls}-header-month-select`}
         dropdownStyle={{ zIndex: 2000 }}
         dropdownMenuStyle={{maxHeight: 250, overflow: 'auto', fontSize: 12}}
@@ -73,13 +73,13 @@ class CalendarHeader extends Component {
     this.props.onTypeChange('month');
   }
   render() {
-    const {value, locale, prefixCls, type} = this.props;
+    const {value, locale, prefixCls, type, showTypeSwitch, headerControls} = this.props;
     const year = value.getYear();
     const month = value.getMonth();
     const yearSelect = this.getYearSelectElement(year);
     const monthSelect = type === 'month' ? null : this.getMonthSelectElement(month);
 
-    const typeSwitcher = (
+    const typeSwitcher = showTypeSwitch ? (
       <span className={`${prefixCls}-header-switcher`}>
         { type === 'date' ?
           <span className="focus">{locale.month}</span> :
@@ -90,13 +90,14 @@ class CalendarHeader extends Component {
           <span onClick={this.changeTypeToMonth.bind(this)} className="normal">{locale.year}</span>
         }
       </span>
-    );
+    ) : null;
 
     return (
       <div className={`${prefixCls}-header`}>
         { typeSwitcher }
         { monthSelect }
         { yearSelect }
+        { headerControls }
       </div>
     );
   }
@@ -109,7 +110,10 @@ CalendarHeader.propTypes = {
   onValueChange: PropTypes.func,
   onTypeChange: PropTypes.func,
   prefixCls: PropTypes.string,
+  selectPrefixCls: PropTypes.string,
   type: PropTypes.string,
+  showTypeSwitch: PropTypes.bool,
+  headerControls: PropTypes.array,
 };
 CalendarHeader.defaultProps = {
   yearSelectOffset: 10,
