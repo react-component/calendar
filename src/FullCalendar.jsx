@@ -14,6 +14,9 @@ const FullCalendar = React.createClass({
     showTypeSwitch: PropTypes.bool,
     selectPrefixCls: PropTypes.string,
     headerComponents: PropTypes.array,
+    headerComponent: PropTypes.object, // The whole header component
+    headerRender: PropTypes.func,
+    showHeader: PropTypes.bool,
   },
   mixins: [CommonMixin, CalendarMixin],
   getDefaultProps() {
@@ -21,12 +24,19 @@ const FullCalendar = React.createClass({
       type: 'date',
       fullscreen: false,
       showTypeSwitch: true,
+      showHeader: true,
     };
   },
   getInitialState() {
     return {
       type: this.props.type,
     };
+  },
+  componentWillReceiveProps(nextProps) {
+    const type = nextProps.type;
+    if (type !== undefined) {
+      this.setState({ type });
+    }
   },
   onMonthSelect(value) {
     this.setType('date');
@@ -37,17 +47,25 @@ const FullCalendar = React.createClass({
   },
   render() {
     const props = this.props;
-    const {locale, prefixCls, fullscreen} = props;
+    const {locale, prefixCls, fullscreen, showHeader, headerComponent, headerRender} = props;
     const {value, type} = this.state;
 
-    const header = (
-      <CalendarHeader key="calendar-header"
-        {...props}
-        type={type}
-        value={value}
-        onTypeChange={this.setType}
-        onValueChange={this.setValue}/>
-    );
+    let header = null;
+    if (showHeader) {
+      if (headerRender) {
+        header = headerRender(value, type, locale);
+      } else {
+        const TheHeader = headerComponent || CalendarHeader;
+        header = (
+          <TheHeader key="calendar-header"
+            {...props}
+            type={type}
+            value={value}
+            onTypeChange={this.setType}
+            onValueChange={this.setValue}/>
+        );
+      }
+    }
 
     const table = type === 'date' ? (
       <DateTable
