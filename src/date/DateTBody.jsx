@@ -189,7 +189,7 @@ const DateTBody = React.createClass({
 
         dateCells.push(
           <td key={passed}
-              onMouseDown={disabled ? noop : handleDayClick.bind(this, current)}
+              onClick={disabled ? noop : handleDayClick.bind(this, current)}
               onMouseEnter={disabled ? noop : handleCellMouseEnter.bind(this, current)}
               role="gridcell"
               title={getTitleString(current)} className={cls}>

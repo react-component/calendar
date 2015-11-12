@@ -90,7 +90,7 @@ const DateInput = React.createClass({
       {props.showClear ? <a className={`${prefixCls}-clear-btn`}
                             role="button"
                             title={locale.clear}
-                            onMouseDown={this.onClear}/> : null}
+                            onClick={this.onClear}/> : null}
     </div>);
   },
 });
