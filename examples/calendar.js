@@ -711,7 +711,7 @@ webpackJsonp([3],{
 	        dateCells.push(_react2['default'].createElement(
 	          'td',
 	          { key: passed,
-	            onMouseDown: disabled ? noop : handleDayClick.bind(this, current),
+	            onClick: disabled ? noop : handleDayClick.bind(this, current),
 	            onMouseEnter: disabled ? noop : handleCellMouseEnter.bind(this, current),
 	            role: 'gridcell',
 	            title: (0, _util.getTitleString)(current), className: cls },
@@ -2145,10 +2145,6 @@ webpackJsonp([3],{
 	  },
 	
 	  onSelect: function onSelect(value, cause) {
-	    if (this._blurPending) {
-	      clearTimeout(this._blurPending);
-	      this._blurPending = null;
-	    }
 	    if (value) {
 	      this.setValue(value);
 	    }
@@ -2325,7 +2321,7 @@ webpackJsonp([3],{
 	      props.showClear ? _react2['default'].createElement('a', { className: prefixCls + '-clear-btn',
 	        role: 'button',
 	        title: locale.clear,
-	        onMouseDown: this.onClear }) : null
+	        onClick: this.onClear }) : null
 	    );
 	  }
 	});

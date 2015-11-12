@@ -718,10 +718,6 @@ webpackJsonp([1],{
 	  },
 	
 	  onSelect: function onSelect(value, cause) {
-	    if (this._blurPending) {
-	      clearTimeout(this._blurPending);
-	      this._blurPending = null;
-	    }
 	    if (value) {
 	      this.setValue(value);
 	    }
