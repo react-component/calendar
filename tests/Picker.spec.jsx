@@ -62,7 +62,7 @@ describe('DatePicker', function () {
       expect(TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance, 'rc-calendar')[0]).to.be.ok();
       expect(picker.state.open).to.be(true);
       var day = TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance, 'rc-calendar-date')[1];
-      Simulate.mouseDown(day);
+      Simulate.click(day);
       setTimeout(next, 100);
     }, function (next) {
       expect(change).to.be.ok();
@@ -94,7 +94,7 @@ describe('DatePicker', function () {
         expect(TestUtils.scryRenderedDOMComponentsWithClass(picker, 'rc-calendar')[0]).not.to.be.ok();
         expect(picker.state.open).to.be(true);
         var day = TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance, 'rc-calendar-date')[1];
-        Simulate.mouseDown(day);
+        Simulate.click(day);
         setTimeout(next, 100);
       }, function (next) {
         expect(change).to.be.ok();

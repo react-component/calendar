@@ -215,7 +215,7 @@ describe('Calendar', function () {
                                         onSelect={onSelect}
                                         showWeekNumber={true} showTime={true}/>, container);
       day = TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-date')[5];
-      Simulate.mouseDown(day);
+      Simulate.click(day);
       expect(ReactDOM.findDOMNode(input).value).to.be(formatter.format(calendar.state.value));
     });
 

@@ -98,10 +98,10 @@ describe('RangeCalendar', function () {
     var rightCalendar = TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-range-right')[0];
     var rightInput = $(rightCalendar).find('.rc-calendar-input')[0];
     day = $(leftCalendar).find('.rc-calendar-date')[5]; // 9.4
-    Simulate.mouseDown(day);
+    Simulate.click(day);
     expect(ReactDOM.findDOMNode(leftInput).value).to.be('2015-09-04');
     day =$(rightCalendar).find('.rc-calendar-date')[5]; // 10.2
-    Simulate.mouseDown(day);
+    Simulate.click(day);
     expect(ReactDOM.findDOMNode(rightInput).value).to.be('2015-10-02');
   });
 });
