@@ -40,7 +40,7 @@ const FullCalendar = React.createClass({
   },
   onMonthSelect(value) {
     this.setType('date');
-    this.onSelect(value);
+    this.onSelect(value, { target: 'month' });
   },
   setType(type) {
     this.setState({ type });
