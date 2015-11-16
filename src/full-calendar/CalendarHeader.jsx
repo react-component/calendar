@@ -1,8 +1,8 @@
 import React, {PropTypes, Component} from 'react';
 import Select, {Option} from 'rc-select';
-import 'rc-select/assets/index.css';
 
-function noop() {}
+function noop() {
+}
 
 class CalendarHeader extends Component {
   onYearChange(year) {
@@ -25,7 +25,7 @@ class CalendarHeader extends Component {
 
     const options = [];
     for (let index = start; index < end; index++) {
-      options.push(<Option key={`${index}`}>{index + suffix}</Option> );
+      options.push(<Option key={`${index}`}>{index + suffix}</Option>);
     }
     return (
       <Select
@@ -57,7 +57,7 @@ class CalendarHeader extends Component {
         prefixCls={selectPrefixCls}
         className={`${prefixCls}-header-month-select`}
         dropdownStyle={{ zIndex: 2000 }}
-        dropdownMenuStyle={{maxHeight: 250, overflow: 'auto', fontSize: 12}}
+        dropdownMenuStyle={{maxHeight: 250, overflow: 'auto', overflowX: 'hidden', fontSize: 12}}
         optionLabelProp="children"
         value={String(month)}
         showSearch={false}
@@ -66,29 +66,32 @@ class CalendarHeader extends Component {
       </Select>
     );
   }
+
   changeTypeToDate() {
     this.props.onTypeChange('date');
   }
+
   changeTypeToMonth() {
     this.props.onTypeChange('month');
   }
+
   render() {
     const {value, locale, prefixCls, type, showTypeSwitch, headerComponents} = this.props;
     const year = value.getYear();
     const month = value.getMonth();
     const yearSelect = this.getYearSelectElement(year);
     const monthSelect = type === 'month' ? null : this.getMonthSelectElement(month);
-
+    const switchCls = `${prefixCls}-header-switcher`;
     const typeSwitcher = showTypeSwitch ? (
-      <span className={`${prefixCls}-header-switcher`}>
+      <span className={switchCls}>
         { type === 'date' ?
-          <span className="focus">{locale.month}</span> :
-          <span onClick={this.changeTypeToDate.bind(this)} className="normal">{locale.month}</span>
-        }
+        <span className={`${switchCls}-focus`}>{locale.month}</span> :
+        <span onClick={this.changeTypeToDate.bind(this)} className={`${switchCls}-normal`}>{locale.month}</span>
+          }
         { type === 'month' ?
-          <span className="focus">{locale.year}</span> :
-          <span onClick={this.changeTypeToMonth.bind(this)} className="normal">{locale.year}</span>
-        }
+        <span className={`${switchCls}-focus`}>{locale.year}</span> :
+        <span onClick={this.changeTypeToMonth.bind(this)} className={`${switchCls}-normal`}>{locale.year}</span>
+          }
       </span>
     ) : null;
 

@@ -1,6 +1,6 @@
 {
   "name": "rc-calendar",
-  "version": "4.0.0-alpha19",
+  "version": "4.0.0-alpha20",
   "description": "React Calendar",
   "keywords": [
     "react",
@@ -38,8 +38,7 @@
     "karma": "rc-tools run karma",
     "saucelabs": "rc-tools run saucelabs",
     "browser-test": "rc-tools run browser-test",
-    "browser-test-cover": "rc-tools run browser-test-cover",
-    "validate": "npm ls"
+    "browser-test-cover": "rc-tools run browser-test-cover"
   },
   "devDependencies": {
     "async": "~0.9.0",

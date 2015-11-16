@@ -59,6 +59,7 @@ const FullCalendar = React.createClass({
         header = (
           <TheHeader key="calendar-header"
             {...props}
+            prefixCls={`${prefixCls}-full`}
             type={type}
             value={value}
             onTypeChange={this.setType}
