@@ -881,14 +881,18 @@ webpackJsonp([5],[
 	    dateCellRender: _react.PropTypes.func,
 	    showTypeSwitch: _react.PropTypes.bool,
 	    selectPrefixCls: _react.PropTypes.string,
-	    headerComponents: _react.PropTypes.array
+	    headerComponents: _react.PropTypes.array,
+	    headerComponent: _react.PropTypes.object, // The whole header component
+	    headerRender: _react.PropTypes.func,
+	    showHeader: _react.PropTypes.bool
 	  },
 	  mixins: [_mixinCommonMixin2['default'], _mixinCalendarMixin2['default']],
 	  getDefaultProps: function getDefaultProps() {
 	    return {
 	      type: 'date',
 	      fullscreen: false,
-	      showTypeSwitch: true
+	      showTypeSwitch: true,
+	      showHeader: true
 	    };
 	  },
 	  getInitialState: function getInitialState() {
@@ -896,9 +900,15 @@ webpackJsonp([5],[
 	      type: this.props.type
 	    };
 	  },
+	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	    var type = nextProps.type;
+	    if (type !== undefined) {
+	      this.setState({ type: type });
+	    }
+	  },
 	  onMonthSelect: function onMonthSelect(value) {
 	    this.setType('date');
-	    this.onSelect(value);
+	    this.onSelect(value, { target: 'month' });
 	  },
 	  setType: function setType(type) {
 	    this.setState({ type: type });
@@ -908,16 +918,27 @@ webpackJsonp([5],[
 	    var locale = props.locale;
 	    var prefixCls = props.prefixCls;
 	    var fullscreen = props.fullscreen;
+	    var showHeader = props.showHeader;
+	    var headerComponent = props.headerComponent;
+	    var headerRender = props.headerRender;
 	    var _state = this.state;
 	    var value = _state.value;
 	    var type = _state.type;
 	
-	    var header = _react2['default'].createElement(_fullCalendarCalendarHeader2['default'], _extends({ key: 'calendar-header'
-	    }, props, {
-	      type: type,
-	      value: value,
-	      onTypeChange: this.setType,
-	      onValueChange: this.setValue }));
+	    var header = null;
+	    if (showHeader) {
+	      if (headerRender) {
+	        header = headerRender(value, type, locale);
+	      } else {
+	        var TheHeader = headerComponent || _fullCalendarCalendarHeader2['default'];
+	        header = _react2['default'].createElement(TheHeader, _extends({ key: 'calendar-header'
+	        }, props, {
+	          type: type,
+	          value: value,
+	          onTypeChange: this.setType,
+	          onValueChange: this.setValue }));
+	      }
+	    }
 	
 	    var table = type === 'date' ? _react2['default'].createElement(_dateDateTable2['default'], {
 	      dateRender: props.dateCellRender,

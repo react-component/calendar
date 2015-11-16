@@ -23638,6 +23638,8 @@
 	
 	      var props = this.props;
 	      var value = this.state.value;
+	      var today = value.clone();
+	      today.setTime(Date.now());
 	      var months = this.getMonths();
 	      var currentMonth = value.getMonth();
 	      var prefixCls = props.prefixCls;
@@ -23653,7 +23655,7 @@
 	            testValue.rollSetMonth(monthData.value);
 	            disabled = props.disabledDate(testValue);
 	          }
-	          var classNameMap = (_classNameMap = {}, _defineProperty(_classNameMap, prefixCls + '-cell', 1), _defineProperty(_classNameMap, prefixCls + '-cell-disabled', disabled), _defineProperty(_classNameMap, prefixCls + '-selected-cell', monthData.value === currentMonth), _classNameMap);
+	          var classNameMap = (_classNameMap = {}, _defineProperty(_classNameMap, prefixCls + '-cell', 1), _defineProperty(_classNameMap, prefixCls + '-cell-disabled', disabled), _defineProperty(_classNameMap, prefixCls + '-selected-cell', monthData.value === currentMonth), _defineProperty(_classNameMap, prefixCls + '-current-cell', today.getYear() === value.getYear() && monthData.value === today.getMonth()), _classNameMap);
 	          var cellEl = undefined;
 	          if (props.cellRender) {
 	            var currentValue = value.clone();
