@@ -2,6 +2,7 @@
 <html>
 
 <head>
+  <title>range-calendar.js - example - rc-calendar@4.0.0-alpha20</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -42,153 +43,170 @@
       hyphens: none;
       color: #E5E5C2;
     }
+  </style>
+  <style>
+/*
 
-    /*
 Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-license.org/
+
 */
 
-    .hljs {
-      display: block;
-      overflow-x: auto;
-      padding: 0.5em;
-      background: #23241f;
-      -webkit-text-size-adjust: none;
-    }
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #23241f;
+  -webkit-text-size-adjust: none;
+}
 
-    .hljs,
-    .hljs-tag,
-    .css .hljs-rules,
-    .css .hljs-value,
-    .css .hljs-function
-    .hljs-preprocessor,
-    .hljs-pragma {
-      color: #f8f8f2;
-    }
+.hljs,
+.hljs-tag,
+.css .hljs-rule,
+.css .hljs-value,
+.aspectj .hljs-function,
+.css .hljs-function
+.hljs-preprocessor,
+.hljs-pragma {
+  color: #f8f8f2;
+}
 
-    .hljs-strongemphasis,
-    .hljs-strong,
-    .hljs-emphasis {
-      color: #a8a8a2;
-    }
+.hljs-strongemphasis,
+.hljs-strong,
+.hljs-emphasis {
+  color: #a8a8a2;
+}
 
-    .hljs-bullet,
-    .hljs-blockquote,
-    .hljs-horizontal_rule,
-    .hljs-number,
-    .hljs-regexp,
-    .alias .hljs-keyword,
-    .hljs-literal,
-    .hljs-hexcolor {
-      color: #ae81ff;
-    }
+.hljs-bullet,
+.hljs-blockquote,
+.hljs-horizontal_rule,
+.hljs-number,
+.hljs-regexp,
+.alias .hljs-keyword,
+.hljs-literal,
+.hljs-hexcolor {
+  color: #ae81ff;
+}
 
-    .hljs-tag .hljs-value,
-    .hljs-code,
-    .hljs-title,
-    .css .hljs-class,
-    .hljs-class .hljs-title:last-child {
-      color: #a6e22e;
-    }
+.hljs-code,
+.hljs-title,
+.css .hljs-class,
+.hljs-class .hljs-title:last-child {
+  color: #a6e22e;
+  /*color: #e6db74;*/
+}
 
-    .hljs-link_url {
-      font-size: 80%;
-    }
+.hljs-link_url {
+  font-size: 80%;
+}
 
-    .hljs-strong,
-    .hljs-strongemphasis {
-      font-weight: bold;
-    }
+.hljs-strong,
+.hljs-strongemphasis {
+  font-weight: bold;
+}
 
-    .hljs-emphasis,
-    .hljs-strongemphasis,
-    .hljs-class .hljs-title:last-child {
-      font-style: italic;
-    }
+.hljs-emphasis,
+.hljs-strongemphasis,
+.hljs-class .hljs-title:last-child,
+.hljs-typename {
+  font-style: italic;
+}
 
-    .hljs-keyword,
-    .hljs-function,
-    .hljs-change,
-    .hljs-winutils,
-    .hljs-flow,
-    .nginx .hljs-title,
-    .tex .hljs-special,
-    .hljs-header,
-    .hljs-attribute,
-    .hljs-symbol,
-    .hljs-symbol .hljs-string,
-    .hljs-tag .hljs-title,
-    .hljs-value,
-    .alias .hljs-keyword:first-child,
-    .css .hljs-tag,
-    .css .unit,
-    .css .hljs-important {
-      color: #f92672;
-    }
+.hljs-keyword,
+.ruby .hljs-class .hljs-keyword:first-child,
+.ruby .hljs-function .hljs-keyword,
+.hljs-function,
+.hljs-change,
+.hljs-winutils,
+.hljs-flow,
+.nginx .hljs-title,
+.tex .hljs-special,
+.hljs-header,
+.hljs-symbol,
+.hljs-symbol .hljs-string,
+.hljs-tag .hljs-title,
+.hljs-value,
+.alias .hljs-keyword:first-child,
+.css .hljs-tag,
+.css .unit,
+.css .hljs-important {
+  color: #f92672;
+}
 
-    .hljs-function .hljs-keyword,
-    .hljs-class .hljs-keyword:first-child,
-    .hljs-constant,
-    .css .hljs-attribute {
-      color: #66d9ef;
-    }
+.hljs-function .hljs-keyword,
+.hljs-class .hljs-keyword:first-child,
+.hljs-aspect .hljs-keyword:first-child,
+.hljs-constant,
+.hljs-typename,
+.hljs-name,
+.css .hljs-attribute {
+  color: #66d9ef;
+}
 
-    .hljs-variable,
-    .hljs-params,
-    .hljs-class .hljs-title {
-      color: #f8f8f2;
-    }
+.hljs-variable,
+.hljs-params,
+.hljs-class .hljs-title,
+.hljs-aspect .hljs-title {
+  color: #f8f8f2;
+}
 
-    .hljs-string,
-    .css .hljs-id,
-    .hljs-subst,
-    .hljs-type,
-    .ruby .hljs-class .hljs-parent,
-    .hljs-built_in,
-    .django .hljs-template_tag,
-    .django .hljs-variable,
-    .smalltalk .hljs-class,
-    .django .hljs-filter .hljs-argument,
-    .smalltalk .hljs-localvars,
-    .smalltalk .hljs-array,
-    .hljs-attr_selector,
-    .hljs-pseudo,
-    .hljs-addition,
-    .hljs-stream,
-    .hljs-envvar,
-    .apache .hljs-tag,
-    .apache .hljs-cbracket,
-    .tex .hljs-command,
-    .hljs-prompt,
-    .hljs-link_label,
-    .hljs-link_url {
-      color: #e6db74;
-    }
+.hljs-tag .hljs-value,
+.hljs-string,
+.css .hljs-id,
+.hljs-subst,
+.hljs-type,
+.ruby .hljs-class .hljs-parent,
+.django .hljs-template_tag,
+.django .hljs-variable,
+.smalltalk .hljs-class,
+.django .hljs-filter .hljs-argument,
+.smalltalk .hljs-localvars,
+.smalltalk .hljs-array,
+.hljs-attr_selector,
+.hljs-pseudo,
+.hljs-addition,
+.hljs-stream,
+.hljs-envvar,
+.apache .hljs-tag,
+.apache .hljs-cbracket,
+.tex .hljs-command,
+.hljs-prompt,
+.hljs-link_label,
+.hljs-link_url {
+  color: #e6db74;
+}
 
-    .hljs-comment,
-    .hljs-javadoc,
-    .hljs-annotation,
-    .hljs-decorator,
-    .hljs-template_comment,
-    .hljs-pi,
-    .hljs-doctype,
-    .hljs-deletion,
-    .hljs-shebang,
-    .apache .hljs-sqbracket,
-    .tex .hljs-formula {
-      color: #75715e;
-    }
+.hljs-comment,
+.hljs-annotation,
+.hljs-decorator,
+.hljs-pi,
+.hljs-doctype,
+.hljs-deletion,
+.hljs-shebang,
+.apache .hljs-sqbracket,
+.tex .hljs-formula {
+  color: #75715e;
+}
 
-    .coffeescript .javascript,
-    .javascript .xml,
-    .tex .hljs-formula,
-    .xml .javascript,
-    .xml .vbscript,
-    .xml .css,
-    .xml .hljs-cdata,
-    .xml .php,
-    .php .xml {
-      opacity: 0.5;
-    }
+.coffeescript .javascript,
+.javascript .xml,
+.tex .hljs-formula,
+.xml .javascript,
+.xml .vbscript,
+.xml .css,
+.xml .hljs-cdata,
+.xml .php,
+.php .xml {
+  opacity: 0.5;
+}
+/***********/
+.hljs-attribute{
+  color: #a6e22e;
+}
+/***** node keyword ******/
+.hljs-built_in{
+  color: #3396dc;
+  font-weight: bold;
+}
   </style>
   <style>
     .container {
@@ -239,102 +257,101 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
 <div class="container">
   <div class="header">
-    <h1>rc-calendar@4.0.0-alpha19</h1>
+    <h1>rc-calendar@4.0.0-alpha20</h1>
 
     <p>React Calendar</p>
   </div>
   <div class="example" id="__react-content"></div>
   <script src="common.js?nowrap"></script>
   <script src="range-calendar.js?nowrap"></script>
-  <div class="highlight">
-    <pre><code>import <span class="hljs-string">'rc-calendar/assets/bootstrap.css'</span>;
-import <span class="hljs-string">'bootstrap/dist/css/bootstrap.css'</span>;
-import RangeCalendar <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-calendar/lib/RangeCalendar'</span>;
-import GregorianCalendarFormat <span class="hljs-keyword">from</span> <span class="hljs-string">'gregorian-calendar-format'</span>;
-import React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
-import ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>;
-<span class="hljs-keyword">var</span> formatter = <span class="hljs-keyword">new</span> GregorianCalendarFormat(<span class="hljs-string">'yyyy-MM-dd HH:mm:ss'</span>);
-import GregorianCalendar <span class="hljs-keyword">from</span> <span class="hljs-string">'gregorian-calendar'</span>;
-import zhCn <span class="hljs-keyword">from</span> <span class="hljs-string">'gregorian-calendar/lib/locale/zh_CN'</span>;
-import CalendarLocale <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-calendar/lib/locale/zh_CN'</span>;
-import Picker <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-calendar/lib/Picker'</span>;
+  <div class="highlight"><pre><code language="undefined">import 'rc-calendar/assets/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import RangeCalendar from 'rc-calendar/lib/RangeCalendar';
+import GregorianCalendarFormat from 'gregorian-calendar-format';
+import React from 'react';
+import ReactDOM from 'react-dom';
+var formatter = new GregorianCalendarFormat('yyyy-MM-dd HH:mm:ss');
+import GregorianCalendar from 'gregorian-calendar';
+import zhCn from 'gregorian-calendar/lib/locale/zh_CN';
+import CalendarLocale from 'rc-calendar/lib/locale/zh_CN';
+import Picker from 'rc-calendar/lib/Picker';
 
-<span class="hljs-keyword">var</span> <span class="hljs-keyword">value</span> = <span class="hljs-keyword">new</span> GregorianCalendar(zhCn);
-<span class="hljs-keyword">value</span>.setTime(Date.now());
+var value = new GregorianCalendar(zhCn);
+value.setTime(Date.now());
 
-<span class="hljs-function">function <span class="hljs-title">disabledDate</span>(<span class="hljs-params">current</span>) </span>{
-  <span class="hljs-keyword">var</span> date = <span class="hljs-keyword">new</span> Date();
-  date.setHours(<span class="hljs-number">0</span>);
-  date.setMinutes(<span class="hljs-number">0</span>);
-  date.setSeconds(<span class="hljs-number">0</span>);
-  <span class="hljs-keyword">return</span> current.getTime() &lt; date.getTime();  <span class="hljs-comment">//can not select days before today</span>
+function disabledDate(current) {
+  var date = new Date();
+  date.setHours(0);
+  date.setMinutes(0);
+  date.setSeconds(0);
+  return current.getTime() &lt; date.getTime();  //can not select days before today
 }
 
-<span class="hljs-function">function <span class="hljs-title">onStandaloneChange</span>(<span class="hljs-params"><span class="hljs-keyword">value</span></span>) </span>{
-  console.log(<span class="hljs-string">'onChange'</span>);
-  console.log(<span class="hljs-keyword">value</span>[<span class="hljs-number">0</span>] &amp;&amp; formatter.format(<span class="hljs-keyword">value</span>[<span class="hljs-number">0</span>]), <span class="hljs-keyword">value</span>[<span class="hljs-number">1</span>] &amp;&amp; formatter.format(<span class="hljs-keyword">value</span>[<span class="hljs-number">1</span>]))
+function onStandaloneChange(value) {
+  console.log('onChange');
+  console.log(value[0] &amp;&amp; formatter.format(value[0]), value[1] &amp;&amp; formatter.format(value[1]))
 }
 
-<span class="hljs-function">function <span class="hljs-title">onStandaloneSelect</span>(<span class="hljs-params"><span class="hljs-keyword">value</span></span>) </span>{
-  console.log(<span class="hljs-string">'onSelect'</span>);
-  console.log(formatter.format(<span class="hljs-keyword">value</span>[<span class="hljs-number">0</span>]), formatter.format(<span class="hljs-keyword">value</span>[<span class="hljs-number">1</span>]))
+function onStandaloneSelect(value) {
+  console.log('onSelect');
+  console.log(formatter.format(value[0]), formatter.format(value[1]))
 }
 
-<span class="hljs-function">function <span class="hljs-title">onStandaloneOk</span>(<span class="hljs-params"><span class="hljs-keyword">value</span></span>) </span>{
-  console.log(<span class="hljs-string">'onOk'</span>);
-  console.log(formatter.format(<span class="hljs-keyword">value</span>[<span class="hljs-number">0</span>]), formatter.format(<span class="hljs-keyword">value</span>[<span class="hljs-number">1</span>]))
+function onStandaloneOk(value) {
+  console.log('onOk');
+  console.log(formatter.format(value[0]), formatter.format(value[1]))
 }
 
-<span class="hljs-keyword">const</span> Test = React.createClass({
+const Test = React.createClass({
   getInitialState(){
-    <span class="hljs-keyword">const</span> end = <span class="hljs-keyword">value</span>.clone();
-    end.addDayOfMonth(<span class="hljs-number">5</span>);
-    <span class="hljs-keyword">return</span> {
-      <span class="hljs-keyword">value</span>: [<span class="hljs-keyword">value</span>, end]
+    const end = value.clone();
+    end.addDayOfMonth(5);
+    return {
+      value: [value, end]
     };
   },
 
-  onChange(<span class="hljs-keyword">value</span>){
-    <span class="hljs-keyword">if</span> ((<span class="hljs-keyword">value</span>[<span class="hljs-number">1</span>].getTime() - <span class="hljs-keyword">value</span>[<span class="hljs-number">0</span>].getTime()) &gt; <span class="hljs-number">60</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span> * <span class="hljs-number">10</span>) {
-      console.log(<span class="hljs-string">'only last no more than 10 days'</span>);
-      <span class="hljs-keyword">value</span>[<span class="hljs-number">1</span>] = <span class="hljs-keyword">value</span>[<span class="hljs-number">0</span>].clone();
-      <span class="hljs-keyword">value</span>[<span class="hljs-number">1</span>].addDayOfMonth(<span class="hljs-number">10</span>);
+  onChange(value){
+    if ((value[1].getTime() - value[0].getTime()) &gt; 60 * 24 * 60 * 1000 * 10) {
+      console.log('only last no more than 10 days');
+      value[1] = value[0].clone();
+      value[1].addDayOfMonth(10);
     }
-    <span class="hljs-keyword">this</span>.setState({<span class="hljs-keyword">value</span>});
-    console.log(<span class="hljs-keyword">value</span>);
+    this.setState({value});
+    console.log(value);
   },
 
   render(){
-    <span class="hljs-keyword">const</span> state = <span class="hljs-keyword">this</span>.state;
-    <span class="hljs-keyword">const</span> calendar = &lt;RangeCalendar showWeekNumber={<span class="hljs-keyword">false</span>}
+    const state = this.state;
+    const calendar = &lt;RangeCalendar showWeekNumber={false}
                                     locale={CalendarLocale}
                                     disabledDate={disabledDate}
                                     showTime/&gt;;
-    <span class="hljs-keyword">return</span> &lt;div className=<span class="hljs-string">"form-group"</span> style={{width: <span class="hljs-number">400</span>, margin: <span class="hljs-number">20</span>}} &gt;
-      &lt;div className=<span class="hljs-string">"input-group"</span> style={{width:<span class="hljs-number">350</span>}}&gt;
-        &lt;Picker <span class="hljs-keyword">value</span>={state.<span class="hljs-keyword">value</span>} onChange={<span class="hljs-keyword">this</span>.onChange} calendar={calendar}&gt;
+    return &lt;div className="form-group" style={{width: 400, margin: 20}} &gt;
+      &lt;div className="input-group" style={{width:350}}&gt;
+        &lt;Picker value={state.value} onChange={this.onChange} calendar={calendar}&gt;
           {
-            ({<span class="hljs-keyword">value</span>}) =&gt; {
-              <span class="hljs-keyword">return</span> &lt;span&gt;
-                &lt;input type=<span class="hljs-string">"text"</span>
-                       className=<span class="hljs-string">"form-control"</span>
+            ({value}) =&gt; {
+              return &lt;span&gt;
+                &lt;input type="text"
+                       className="form-control"
                        readOnly
-                       <span class="hljs-keyword">value</span>={formatter.format(<span class="hljs-keyword">value</span>[<span class="hljs-number">0</span>]) +<span class="hljs-string">' - '</span>+formatter.format(<span class="hljs-keyword">value</span>[<span class="hljs-number">1</span>])}
+                       value={formatter.format(value[0]) +' - '+formatter.format(value[1])}
                        style={{
-                       background: <span class="hljs-string">"white"</span>,
-                       borderTopRightRadius:<span class="hljs-number">4</span>,
-                       borderBottomRightRadius:<span class="hljs-number">4</span>,
-                       cursor: <span class="hljs-string">"pointer"</span>
+                       background: "white",
+                       borderTopRightRadius:4,
+                       borderBottomRightRadius:4,
+                       cursor: "pointer"
                        }}/&gt;
-                &lt;span className=<span class="hljs-string">"input-group-addon"</span> style={{
-                width:<span class="hljs-number">39</span>,
-                height:<span class="hljs-number">34</span>,
-                borderRight:<span class="hljs-number">0</span>,
-                borderLeft:<span class="hljs-string">'1px solid #ccc'</span>,
-                position:<span class="hljs-string">'absolute'</span>,
-                zIndex:<span class="hljs-number">99</span>,
-                right:<span class="hljs-number">1</span>,top:<span class="hljs-number">0</span>}}&gt;
-          &lt;span className=<span class="hljs-string">"glyphicon glyphicon-calendar"</span>&gt;&lt;/span&gt;
+                &lt;span className="input-group-addon" style={{
+                width:39,
+                height:34,
+                borderRight:0,
+                borderLeft:'1px solid #ccc',
+                position:'absolute',
+                zIndex:99,
+                right:1,top:0}}&gt;
+          &lt;span className="glyphicon glyphicon-calendar"&gt;&lt;/span&gt;
         &lt;/span&gt;
                 &lt;/span&gt;;
             }
@@ -349,7 +366,7 @@ ReactDOM.render(
   &lt;div&gt;
     &lt;h2&gt;calendar (zh-cn)&lt;/h2&gt;
 
-    &lt;div style={{margin:<span class="hljs-number">10</span>}}&gt;
+    &lt;div style={{margin:10}}&gt;
       &lt;RangeCalendar showWeekNumber
                      locale={CalendarLocale}
                      onChange={onStandaloneChange}
@@ -360,18 +377,19 @@ ReactDOM.render(
     &lt;/div&gt;
     &lt;br/&gt;
 
-    &lt;div style={{margin:<span class="hljs-number">20</span>}}&gt;
+    &lt;div style={{margin:20}}&gt;
       &lt;Test /&gt;
     &lt;/div&gt;
-  &lt;/div&gt;, document.getElementById(<span class="hljs-string">'__react-content'</span>));
+  &lt;/div&gt;, document.getElementById('__react-content'));
 
-</code></pre>
-  </div>
+</code></pre></div>
 </div>
-<a href="http://github.com/react-component/calendar"><img style="position: absolute; top: 0; right: 0; border: 0;"
-                            src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67"
-                            alt="Fork me on GitHub"
-                            data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+<a href="http://github.com/react-component/calendar">
+  <img style="position: absolute; top: 0; right: 0; border: 0;"
+       src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67"
+       alt="Fork me on GitHub"
+       data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
+</a>
 </body>
 
 </html>

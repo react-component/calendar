@@ -910,55 +910,57 @@
   background: #ebf4f8;
   border-radius: 0;
 }
-.rc-calendar-full .rc-calendar-header-month-select,
-.rc-calendar-full .rc-calendar-header-year-select {
+.rc-calendar-full-header {
+  padding: 5px 10px;
+  text-align: center;
+  -moz-user-select: none;
+   -ms-user-select: none;
+       user-select: none;
+  -webkit-user-select: none;
+  border-bottom: 1px solid #ccc;
+  overflow: hidden;
+}
+.rc-calendar-full-header-month-select,
+.rc-calendar-full-header-year-select {
   float: right;
   margin-right: 5px;
-  margin-top: 4px;
 }
-.rc-calendar-full .rc-calendar-header .rc-select-selection--single {
-  height: 24px;
-}
-.rc-calendar-full .rc-calendar-header .rc-select-selection--single .rc-select-selection__rendered {
-  line-height: 24px;
-}
-.rc-calendar-full .rc-calendar-header-switcher {
-  margin-top: 4px;
+.rc-calendar-full-header-switcher {
   float: right;
   display: inline-block;
 }
-.rc-calendar-full .rc-calendar-header-switcher > span {
+.rc-calendar-full-header-switcher-normal:hover {
+  border-color: #23c0fa;
+  box-shadow: 0 0 2px rgba(45, 183, 245, 0.8);
+  cursor: pointer;
+}
+.rc-calendar-full-header-switcher-focus {
+  border-color: #3fc7fa;
+  background-color: #3fc7fa;
+  color: #fff;
+}
+.rc-calendar-full-header-switcher > span {
   float: left;
-  height: 24px;
+  height: 28px;
   line-height: 24px;
   border: 1px solid #d9d9d9;
   padding: 0 10px;
   color: #666;
 }
-.rc-calendar-full .rc-calendar-header-switcher > span:first-child {
+.rc-calendar-full-header-switcher > span:first-child {
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
   border-right: none;
 }
-.rc-calendar-full .rc-calendar-header-switcher > span:last-child {
+.rc-calendar-full-header-switcher > span:last-child {
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
   border-left: none;
 }
-.rc-calendar-full .rc-calendar-header-switcher > span.normal:hover {
-  border-color: #23c0fa;
-  box-shadow: 0 0 2px rgba(45, 183, 245, 0.8);
-  cursor: pointer;
-}
-.rc-calendar-full .rc-calendar-header-switcher > span.focus {
-  border-color: #3fc7fa;
-  background-color: #3fc7fa;
-  color: #fff;
-}
 .rc-calendar-fullscreen {
   width: auto;
 }
-.rc-calendar-fullscreen .rc-calendar-header {
+.rc-calendar-fullscreen .rc-calendar-full-header {
   border-bottom: none;
 }
 .rc-calendar-fullscreen .rc-calendar-column-header {
@@ -993,7 +995,6 @@
 .rc-select {
   box-sizing: border-box;
   display: inline-block;
-  margin: 0;
   position: relative;
   vertical-align: middle;
   color: #666;
@@ -1264,27 +1265,27 @@ li.rc-select-dropdown-menu-item-divider {
   -webkit-animation-play-state: paused;
           animation-play-state: paused;
 }
-.rc-select-dropdown-slide-up-enter.rc-select-dropdown-slide-up-enter-active.rc-select-dropdown--below,
-.rc-select-dropdown-slide-up-appear.rc-select-dropdown-slide-up-appear-active.rc-select-dropdown--below {
+.rc-select-dropdown-slide-up-enter.rc-select-dropdown-slide-up-enter-active.rc-select-dropdown-placement-bottomLeft,
+.rc-select-dropdown-slide-up-appear.rc-select-dropdown-slide-up-appear-active.rc-select-dropdown-placement-bottomLeft {
   -webkit-animation-name: rcDropdownSlideUpIn;
           animation-name: rcDropdownSlideUpIn;
   -webkit-animation-play-state: running;
           animation-play-state: running;
 }
-.rc-select-dropdown-slide-up-leave.rc-select-dropdown-slide-up-leave-active.rc-select-dropdown--below {
+.rc-select-dropdown-slide-up-leave.rc-select-dropdown-slide-up-leave-active.rc-select-dropdown-placement-bottomLeft {
   -webkit-animation-name: rcDropdownSlideUpOut;
           animation-name: rcDropdownSlideUpOut;
   -webkit-animation-play-state: running;
           animation-play-state: running;
 }
-.rc-select-dropdown-slide-up-enter.rc-select-dropdown-slide-up-enter-active.rc-select-dropdown--top,
-.rc-select-dropdown-slide-up-appear.rc-select-dropdown-slide-up-appear-active.rc-select-dropdown--top {
+.rc-select-dropdown-slide-up-enter.rc-select-dropdown-slide-up-enter-active.rc-select-dropdown-placement-topLeft,
+.rc-select-dropdown-slide-up-appear.rc-select-dropdown-slide-up-appear-active.rc-select-dropdown-placement-topLeft {
   -webkit-animation-name: rcDropdownSlideDownIn;
           animation-name: rcDropdownSlideDownIn;
   -webkit-animation-play-state: running;
           animation-play-state: running;
 }
-.rc-select-dropdown-slide-up-leave.rc-select-dropdown-slide-up-leave-active.rc-select-dropdown--top {
+.rc-select-dropdown-slide-up-leave.rc-select-dropdown-slide-up-leave-active.rc-select-dropdown-placement-topLeft {
   -webkit-animation-name: rcDropdownSlideDownOut;
           animation-name: rcDropdownSlideDownOut;
   -webkit-animation-play-state: running;
@@ -1418,17 +1419,17 @@ li.rc-select-dropdown-menu-item-divider {
             transform: scaleY(0);
   }
 }
-.rc-select-search--dropdown {
+.rc-select-dropdown-search {
   display: block;
   padding: 4px;
 }
-.rc-select-search--dropdown .rc-select-search__field__wrap {
+.rc-select-dropdown-search .rc-select-search__field__wrap {
   width: 100%;
 }
-.rc-select-search--dropdown .rc-select-search__field__placeholder {
+.rc-select-dropdown-search .rc-select-search__field__placeholder {
   top: 4px;
 }
-.rc-select-search--dropdown .rc-select-search__field {
+.rc-select-dropdown-search .rc-select-search__field {
   padding: 4px;
   width: 100%;
   box-sizing: border-box;
@@ -1436,7 +1437,7 @@ li.rc-select-dropdown-menu-item-divider {
   border-radius: 4px;
   outline: none;
 }
-.rc-select-search--dropdown.rc-select-search--hide {
+.rc-select-dropdown-search.rc-select-search--hide {
   display: none;
 }
 .rc-select-open .rc-select-arrow b {

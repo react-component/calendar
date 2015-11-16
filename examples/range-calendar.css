@@ -7350,55 +7350,57 @@ button.close {
   background: #ebf4f8;
   border-radius: 0;
 }
-.rc-calendar-full .rc-calendar-header-month-select,
-.rc-calendar-full .rc-calendar-header-year-select {
+.rc-calendar-full-header {
+  padding: 5px 10px;
+  text-align: center;
+  -moz-user-select: none;
+   -ms-user-select: none;
+       user-select: none;
+  -webkit-user-select: none;
+  border-bottom: 1px solid #ccc;
+  overflow: hidden;
+}
+.rc-calendar-full-header-month-select,
+.rc-calendar-full-header-year-select {
   float: right;
   margin-right: 5px;
-  margin-top: 4px;
 }
-.rc-calendar-full .rc-calendar-header .rc-select-selection--single {
-  height: 24px;
-}
-.rc-calendar-full .rc-calendar-header .rc-select-selection--single .rc-select-selection__rendered {
-  line-height: 24px;
-}
-.rc-calendar-full .rc-calendar-header-switcher {
-  margin-top: 4px;
+.rc-calendar-full-header-switcher {
   float: right;
   display: inline-block;
 }
-.rc-calendar-full .rc-calendar-header-switcher > span {
+.rc-calendar-full-header-switcher-normal:hover {
+  border-color: #23c0fa;
+  box-shadow: 0 0 2px rgba(45, 183, 245, 0.8);
+  cursor: pointer;
+}
+.rc-calendar-full-header-switcher-focus {
+  border-color: #3fc7fa;
+  background-color: #3fc7fa;
+  color: #fff;
+}
+.rc-calendar-full-header-switcher > span {
   float: left;
-  height: 24px;
+  height: 28px;
   line-height: 24px;
   border: 1px solid #d9d9d9;
   padding: 0 10px;
   color: #666;
 }
-.rc-calendar-full .rc-calendar-header-switcher > span:first-child {
+.rc-calendar-full-header-switcher > span:first-child {
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
   border-right: none;
 }
-.rc-calendar-full .rc-calendar-header-switcher > span:last-child {
+.rc-calendar-full-header-switcher > span:last-child {
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
   border-left: none;
 }
-.rc-calendar-full .rc-calendar-header-switcher > span.normal:hover {
-  border-color: #23c0fa;
-  box-shadow: 0 0 2px rgba(45, 183, 245, 0.8);
-  cursor: pointer;
-}
-.rc-calendar-full .rc-calendar-header-switcher > span.focus {
-  border-color: #3fc7fa;
-  background-color: #3fc7fa;
-  color: #fff;
-}
 .rc-calendar-fullscreen {
   width: auto;
 }
-.rc-calendar-fullscreen .rc-calendar-header {
+.rc-calendar-fullscreen .rc-calendar-full-header {
   border-bottom: none;
 }
 .rc-calendar-fullscreen .rc-calendar-column-header {

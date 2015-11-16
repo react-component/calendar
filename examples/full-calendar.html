@@ -2,6 +2,7 @@
 <html>
 
 <head>
+  <title>full-calendar.js - example - rc-calendar@4.0.0-alpha20</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -42,153 +43,170 @@
       hyphens: none;
       color: #E5E5C2;
     }
+  </style>
+  <style>
+/*
 
-    /*
 Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-license.org/
+
 */
 
-    .hljs {
-      display: block;
-      overflow-x: auto;
-      padding: 0.5em;
-      background: #23241f;
-      -webkit-text-size-adjust: none;
-    }
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #23241f;
+  -webkit-text-size-adjust: none;
+}
 
-    .hljs,
-    .hljs-tag,
-    .css .hljs-rules,
-    .css .hljs-value,
-    .css .hljs-function
-    .hljs-preprocessor,
-    .hljs-pragma {
-      color: #f8f8f2;
-    }
+.hljs,
+.hljs-tag,
+.css .hljs-rule,
+.css .hljs-value,
+.aspectj .hljs-function,
+.css .hljs-function
+.hljs-preprocessor,
+.hljs-pragma {
+  color: #f8f8f2;
+}
 
-    .hljs-strongemphasis,
-    .hljs-strong,
-    .hljs-emphasis {
-      color: #a8a8a2;
-    }
+.hljs-strongemphasis,
+.hljs-strong,
+.hljs-emphasis {
+  color: #a8a8a2;
+}
 
-    .hljs-bullet,
-    .hljs-blockquote,
-    .hljs-horizontal_rule,
-    .hljs-number,
-    .hljs-regexp,
-    .alias .hljs-keyword,
-    .hljs-literal,
-    .hljs-hexcolor {
-      color: #ae81ff;
-    }
+.hljs-bullet,
+.hljs-blockquote,
+.hljs-horizontal_rule,
+.hljs-number,
+.hljs-regexp,
+.alias .hljs-keyword,
+.hljs-literal,
+.hljs-hexcolor {
+  color: #ae81ff;
+}
 
-    .hljs-tag .hljs-value,
-    .hljs-code,
-    .hljs-title,
-    .css .hljs-class,
-    .hljs-class .hljs-title:last-child {
-      color: #a6e22e;
-    }
+.hljs-code,
+.hljs-title,
+.css .hljs-class,
+.hljs-class .hljs-title:last-child {
+  color: #a6e22e;
+  /*color: #e6db74;*/
+}
 
-    .hljs-link_url {
-      font-size: 80%;
-    }
+.hljs-link_url {
+  font-size: 80%;
+}
 
-    .hljs-strong,
-    .hljs-strongemphasis {
-      font-weight: bold;
-    }
+.hljs-strong,
+.hljs-strongemphasis {
+  font-weight: bold;
+}
 
-    .hljs-emphasis,
-    .hljs-strongemphasis,
-    .hljs-class .hljs-title:last-child {
-      font-style: italic;
-    }
+.hljs-emphasis,
+.hljs-strongemphasis,
+.hljs-class .hljs-title:last-child,
+.hljs-typename {
+  font-style: italic;
+}
 
-    .hljs-keyword,
-    .hljs-function,
-    .hljs-change,
-    .hljs-winutils,
-    .hljs-flow,
-    .nginx .hljs-title,
-    .tex .hljs-special,
-    .hljs-header,
-    .hljs-attribute,
-    .hljs-symbol,
-    .hljs-symbol .hljs-string,
-    .hljs-tag .hljs-title,
-    .hljs-value,
-    .alias .hljs-keyword:first-child,
-    .css .hljs-tag,
-    .css .unit,
-    .css .hljs-important {
-      color: #f92672;
-    }
+.hljs-keyword,
+.ruby .hljs-class .hljs-keyword:first-child,
+.ruby .hljs-function .hljs-keyword,
+.hljs-function,
+.hljs-change,
+.hljs-winutils,
+.hljs-flow,
+.nginx .hljs-title,
+.tex .hljs-special,
+.hljs-header,
+.hljs-symbol,
+.hljs-symbol .hljs-string,
+.hljs-tag .hljs-title,
+.hljs-value,
+.alias .hljs-keyword:first-child,
+.css .hljs-tag,
+.css .unit,
+.css .hljs-important {
+  color: #f92672;
+}
 
-    .hljs-function .hljs-keyword,
-    .hljs-class .hljs-keyword:first-child,
-    .hljs-constant,
-    .css .hljs-attribute {
-      color: #66d9ef;
-    }
+.hljs-function .hljs-keyword,
+.hljs-class .hljs-keyword:first-child,
+.hljs-aspect .hljs-keyword:first-child,
+.hljs-constant,
+.hljs-typename,
+.hljs-name,
+.css .hljs-attribute {
+  color: #66d9ef;
+}
 
-    .hljs-variable,
-    .hljs-params,
-    .hljs-class .hljs-title {
-      color: #f8f8f2;
-    }
+.hljs-variable,
+.hljs-params,
+.hljs-class .hljs-title,
+.hljs-aspect .hljs-title {
+  color: #f8f8f2;
+}
 
-    .hljs-string,
-    .css .hljs-id,
-    .hljs-subst,
-    .hljs-type,
-    .ruby .hljs-class .hljs-parent,
-    .hljs-built_in,
-    .django .hljs-template_tag,
-    .django .hljs-variable,
-    .smalltalk .hljs-class,
-    .django .hljs-filter .hljs-argument,
-    .smalltalk .hljs-localvars,
-    .smalltalk .hljs-array,
-    .hljs-attr_selector,
-    .hljs-pseudo,
-    .hljs-addition,
-    .hljs-stream,
-    .hljs-envvar,
-    .apache .hljs-tag,
-    .apache .hljs-cbracket,
-    .tex .hljs-command,
-    .hljs-prompt,
-    .hljs-link_label,
-    .hljs-link_url {
-      color: #e6db74;
-    }
+.hljs-tag .hljs-value,
+.hljs-string,
+.css .hljs-id,
+.hljs-subst,
+.hljs-type,
+.ruby .hljs-class .hljs-parent,
+.django .hljs-template_tag,
+.django .hljs-variable,
+.smalltalk .hljs-class,
+.django .hljs-filter .hljs-argument,
+.smalltalk .hljs-localvars,
+.smalltalk .hljs-array,
+.hljs-attr_selector,
+.hljs-pseudo,
+.hljs-addition,
+.hljs-stream,
+.hljs-envvar,
+.apache .hljs-tag,
+.apache .hljs-cbracket,
+.tex .hljs-command,
+.hljs-prompt,
+.hljs-link_label,
+.hljs-link_url {
+  color: #e6db74;
+}
 
-    .hljs-comment,
-    .hljs-javadoc,
-    .hljs-annotation,
-    .hljs-decorator,
-    .hljs-template_comment,
-    .hljs-pi,
-    .hljs-doctype,
-    .hljs-deletion,
-    .hljs-shebang,
-    .apache .hljs-sqbracket,
-    .tex .hljs-formula {
-      color: #75715e;
-    }
+.hljs-comment,
+.hljs-annotation,
+.hljs-decorator,
+.hljs-pi,
+.hljs-doctype,
+.hljs-deletion,
+.hljs-shebang,
+.apache .hljs-sqbracket,
+.tex .hljs-formula {
+  color: #75715e;
+}
 
-    .coffeescript .javascript,
-    .javascript .xml,
-    .tex .hljs-formula,
-    .xml .javascript,
-    .xml .vbscript,
-    .xml .css,
-    .xml .hljs-cdata,
-    .xml .php,
-    .php .xml {
-      opacity: 0.5;
-    }
+.coffeescript .javascript,
+.javascript .xml,
+.tex .hljs-formula,
+.xml .javascript,
+.xml .vbscript,
+.xml .css,
+.xml .hljs-cdata,
+.xml .php,
+.php .xml {
+  opacity: 0.5;
+}
+/***********/
+.hljs-attribute{
+  color: #a6e22e;
+}
+/***** node keyword ******/
+.hljs-built_in{
+  color: #3396dc;
+  font-weight: bold;
+}
   </style>
   <style>
     .container {
@@ -239,39 +257,40 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
 <div class="container">
   <div class="header">
-    <h1>rc-calendar@4.0.0-alpha19</h1>
+    <h1>rc-calendar@4.0.0-alpha20</h1>
 
     <p>React Calendar</p>
   </div>
   <div class="example" id="__react-content"></div>
   <script src="common.js?nowrap"></script>
   <script src="full-calendar.js?nowrap"></script>
-  <div class="highlight">
-    <pre><code><span class="hljs-keyword">import</span> <span class="hljs-string">'rc-calendar/assets/index.css'</span>;
-<span class="hljs-keyword">import</span> React, {Component} <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
-<span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>;
-<span class="hljs-keyword">import</span> CalendarLocale <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-calendar/lib/locale/zh_CN'</span>;
-<span class="hljs-keyword">import</span> FullCalendar <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-calendar/lib/FullCalendar'</span>;
+  <div class="highlight"><pre><code language="js">import <span class="hljs-string">'rc-calendar/assets/index.css'</span>;
+import <span class="hljs-string">'rc-calendar/lib/assets/full-calendar'</span>;
+import React, {Component} from <span class="hljs-string">'react'</span>;
+import ReactDOM from <span class="hljs-string">'react-dom'</span>;
+import CalendarLocale from <span class="hljs-string">'rc-calendar/lib/locale/zh_CN'</span>;
+import FullCalendar from <span class="hljs-string">'rc-calendar/lib/FullCalendar'</span>;
 
-ReactDOM.render(&lt;div style={{<span class="hljs-attribute">zIndex</span>:<span class="hljs-number">1000</span>,<span class="hljs-attribute">position</span>:<span class="hljs-string">'relative'</span>}}&gt;
-  &lt;FullCalendar
-    style={{<span class="hljs-attribute">margin</span>: <span class="hljs-number">10</span>}}
-    fullscreen={<span class="hljs-literal">false</span>}
-    showTypeSwitch={<span class="hljs-literal">true</span>}
-    locale={CalendarLocale}/&gt;
-  &lt;FullCalendar
-    style={{<span class="hljs-attribute">margin</span>: <span class="hljs-number">10</span>}}
-    fullscreen={<span class="hljs-literal">true</span>}
-    showTypeSwitch={<span class="hljs-literal">true</span>}
-    locale={CalendarLocale}/&gt;
-&lt;/div&gt;, <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'__react-content'</span>));
-</code></pre>
-  </div>
+ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{zIndex:1000,position:'relative'}}</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">FullCalendar</span>
+    <span class="hljs-attribute">style</span>=<span class="hljs-value">{{margin:</span> <span class="hljs-attribute">10</span>}}
+    <span class="hljs-attribute">fullscreen</span>=<span class="hljs-value">{false}</span>
+    <span class="hljs-attribute">showTypeSwitch</span>=<span class="hljs-value">{true}</span>
+    <span class="hljs-attribute">locale</span>=<span class="hljs-value">{CalendarLocale}</span>/&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">FullCalendar</span>
+    <span class="hljs-attribute">style</span>=<span class="hljs-value">{{margin:</span> <span class="hljs-attribute">10</span>}}
+    <span class="hljs-attribute">fullscreen</span>=<span class="hljs-value">{true}</span>
+    <span class="hljs-attribute">showTypeSwitch</span>=<span class="hljs-value">{true}</span>
+    <span class="hljs-attribute">locale</span>=<span class="hljs-value">{CalendarLocale}</span>/&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>, document.getElementById('__react-content'));
+</span></code></pre></div>
 </div>
-<a href="http://github.com/react-component/calendar"><img style="position: absolute; top: 0; right: 0; border: 0;"
-                            src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67"
-                            alt="Fork me on GitHub"
-                            data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+<a href="http://github.com/react-component/calendar">
+  <img style="position: absolute; top: 0; right: 0; border: 0;"
+       src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67"
+       alt="Fork me on GitHub"
+       data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
+</a>
 </body>
 
 </html>
