@@ -60,6 +60,8 @@ class MonthTable extends Component {
   render() {
     const props = this.props;
     const value = this.state.value;
+    const today = value.clone();
+    today.setTime(Date.now());
     const months = this.getMonths();
     const currentMonth = value.getMonth();
     const {prefixCls, locale} = props;
@@ -75,6 +77,8 @@ class MonthTable extends Component {
           [`${prefixCls}-cell`]: 1,
           [`${prefixCls}-cell-disabled`]: disabled,
           [`${prefixCls}-selected-cell`]: monthData.value === currentMonth,
+          [`${prefixCls}-current-cell`]: today.getYear() === value.getYear() &&
+            monthData.value === today.getMonth(),
         };
         let cellEl;
         if (props.cellRender) {
