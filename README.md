@@ -455,10 +455,22 @@ http://react-component.github.io/calendar/examples/index.html
           <td>prefixCls of this component</td>
         </tr>
         <tr>
-          <td>type</td>
+          <td>value</td>
+          <td> <a href="https://github.com/yiminghe/gregorian-calendar">GregorianCalendar</a> </td>
+          <td></td>
+          <td>current value like input's value</td>
+        </tr>
+        <tr>
+          <td>defaultValue</td>
+          <td>GregorianCalendar</td>
+          <td></td>
+          <td>defaultValue like input's defaultValue</td>
+        </tr>
+        <tr>
+          <td>defaultType</td>
           <td>string</td>
           <td>date</td>
-          <td>Panel type: date/month</td>
+          <td>default panel type: date/month</td>
         </tr>
         <tr>
           <td>fullscreen</td>
@@ -479,28 +491,10 @@ http://react-component.github.io/calendar/examples/index.html
           <td>Custom date cell render method</td>
         </tr>
         <tr>
-          <td>showTypeSwitch</td>
-          <td>bool</td>
-          <td>true</td>
-          <td>whether show type switch button</td>
-        </tr>
-        <tr>
-          <td>headerComponents</td>
-          <td>array</td>
-          <td></td>
-          <td>Add custom header components</td>
-        </tr>
-        <tr>
-          <td>headerRender</td>
-          <td>React element</td>
-          <td></td>
-          <td>Replace the whole header component</td>
-        </tr>
-        <tr>
-          <td>showHeader</td>
-          <td>bool</td>
-          <td>true</td>
-          <td>You can hide the whole header</td>
+          <td>onSelect</td>
+          <td>Function(date: GregorianCalendar)</td>
+          <td>function(){}</td>
+          <td>called when a date is selected from calendar</td>
         </tr>
     </tbody>
 </table>

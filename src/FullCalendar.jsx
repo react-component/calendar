@@ -7,7 +7,7 @@ import CalendarHeader from './full-calendar/CalendarHeader';
 
 const FullCalendar = React.createClass({
   propTypes: {
-    type: PropTypes.string,
+    defaultType: PropTypes.string,
     fullscreen: PropTypes.bool,
     monthCellRender: PropTypes.func,
     dateCellRender: PropTypes.func,
@@ -21,7 +21,7 @@ const FullCalendar = React.createClass({
   mixins: [CommonMixin, CalendarMixin],
   getDefaultProps() {
     return {
-      type: 'date',
+      defaultType: 'date',
       fullscreen: false,
       showTypeSwitch: true,
       showHeader: true,
@@ -29,14 +29,8 @@ const FullCalendar = React.createClass({
   },
   getInitialState() {
     return {
-      type: this.props.type,
+      type: this.props.defaultType,
     };
-  },
-  componentWillReceiveProps(nextProps) {
-    const type = nextProps.type;
-    if (type !== undefined) {
-      this.setState({ type });
-    }
   },
   onMonthSelect(value) {
     this.setType('date');

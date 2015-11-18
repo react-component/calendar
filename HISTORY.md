@@ -3,10 +3,13 @@
 
 ## 4.0.0
 
+- refactor!
+- support input inside rc-calendar
 - change MonthCalendar to require('rc-calendar/lib/MonthCalendar')
 - change Picker to require('rc-calendar/lib/Picker')
+- change Picker's orient to placement and align as rc-trigger
 - add RangeCalendar: require('rc-calendar/lib/RangeCalendar')
-- change Picker's orient to placement and align as rc-tooltip
+- add FullCalendar: require('rc-calendar/lib/FullCalendar')
 
 ## 3.16.0 / 2015-08-25
 
