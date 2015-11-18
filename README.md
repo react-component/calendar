@@ -81,7 +81,7 @@ http://react-component.github.io/calendar/examples/index.html
 
 ## API
 
-### Calendar props
+### rc-calendar props
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -505,6 +505,9 @@ http://react-component.github.io/calendar/examples/index.html
     </tbody>
 </table>
 
+### rc-calendar/lib/assets/FullCalendar
+
+If you need to use rc-calendar/lib/FullCalendar's default css, you should require this instead of rc-calendar/assets/index.css
 
 ## Test Case
 

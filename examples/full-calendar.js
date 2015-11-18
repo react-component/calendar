@@ -1,5 +1,4 @@
-import 'rc-calendar/assets/index.less';
-import 'rc-calendar/src/assets/full-calendar';
+import 'rc-calendar/src/assets/FullCalendar';
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import CalendarLocale from 'rc-calendar/src/locale/zh_CN';
