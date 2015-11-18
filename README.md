@@ -436,6 +436,75 @@ http://react-component.github.io/calendar/examples/index.html
     </tbody>
 </table>
 
+### rc-calendar/lib/FullCalendar props
+
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th style="width: 100px;">name</th>
+        <th style="width: 50px;">type</th>
+        <th style="width: 50px;">default</th>
+        <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>prefixCls</td>
+          <td>String</td>
+          <td></td>
+          <td>prefixCls of this component</td>
+        </tr>
+        <tr>
+          <td>type</td>
+          <td>string</td>
+          <td>date</td>
+          <td>Panel type: date/month</td>
+        </tr>
+        <tr>
+          <td>fullscreen</td>
+          <td>bool</td>
+          <td>false</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>monthCellRender</td>
+          <td>function</td>
+          <td></td>
+          <td>Custom month cell render method</td>
+        </tr>
+        <tr>
+          <td>dateCellRender</td>
+          <td>function</td>
+          <td></td>
+          <td>Custom date cell render method</td>
+        </tr>
+        <tr>
+          <td>showTypeSwitch</td>
+          <td>bool</td>
+          <td>true</td>
+          <td>whether show type switch button</td>
+        </tr>
+        <tr>
+          <td>headerComponents</td>
+          <td>array</td>
+          <td></td>
+          <td>Add custom header components</td>
+        </tr>
+        <tr>
+          <td>headerRender</td>
+          <td>React element</td>
+          <td></td>
+          <td>Replace the whole header component</td>
+        </tr>
+        <tr>
+          <td>showHeader</td>
+          <td>bool</td>
+          <td>true</td>
+          <td>You can hide the whole header</td>
+        </tr>
+    </tbody>
+</table>
+
 
 ## Test Case
 
