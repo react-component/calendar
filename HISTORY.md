@@ -1,7 +1,7 @@
 # History
 ----
 
-## 4.0.0
+## 4.0.0 / 2015-11-18
 
 - refactor!
 - support input inside rc-calendar
