@@ -142,6 +142,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>whether to disable select of current date</td>
         </tr>
         <tr>
+          <td>showDateInput</td>
+          <td>Boolean</td>
+          <td>true</td>
+          <td>whether to show input on top of calendar panel</td>
+        </tr>
+        <tr>
           <td>showWeekNumber</td>
           <td>Boolean</td>
           <td>false</td>
