@@ -7,7 +7,7 @@
   <meta charset="utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" rel="stylesheet"/>
-  <title>rc-calendar@4.0.0-alpha20 - React Calendar</title>
+  <title>rc-calendar@4.0.0 - React Calendar</title>
   <style>
     @font-face {
       font-family: octicons-anchor;
@@ -737,7 +737,7 @@
 
 <body>
 <div class="header">
-  <h1>rc-calendar@4.0.0-alpha20</h1>
+  <h1>rc-calendar@4.0.0</h1>
 </div>
 <div class="examples">
   <h3>EXAMPLES</h3>
@@ -802,7 +802,7 @@ ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-t
 npm start</code></pre></div><h2>Example<a id="user-content-example" name="example" class="anchor" aria-hidden="true" href="#example"><span class="octicon octicon-link"></span></a></h2><p><a href="http://localhost:8001/examples/" title="null">http://localhost:8001/examples/</a></p>
 <p>online example:</p>
 <p><a href="http://react-component.github.io/calendar/examples/index.html" title="null">http://react-component.github.io/calendar/examples/index.html</a></p>
-<h2>API<a id="user-content-api" name="api" class="anchor" aria-hidden="true" href="#api"><span class="octicon octicon-link"></span></a></h2><h3>Calendar props<a id="user-content-calendar-props" name="calendar-props" class="anchor" aria-hidden="true" href="#calendar-props"><span class="octicon octicon-link"></span></a></h3><table class="table table-bordered table-striped">
+<h2>API<a id="user-content-api" name="api" class="anchor" aria-hidden="true" href="#api"><span class="octicon octicon-link"></span></a></h2><h3>rc-calendar props<a id="user-content-rc-calendar-props" name="rc-calendar-props" class="anchor" aria-hidden="true" href="#rc-calendar-props"><span class="octicon octicon-link"></span></a></h3><table class="table table-bordered table-striped">
     <thead>
     <tr>
         <th style="width: 100px;">name</th>
@@ -1148,7 +1148,68 @@ npm start</code></pre></div><h2>Example<a id="user-content-example" name="exampl
     </tbody>
 </table>
 
+<h3>rc-calendar/lib/FullCalendar props<a id="user-content-rc-calendar/lib/fullcalendar-props" name="rc-calendar/lib/fullcalendar-props" class="anchor" aria-hidden="true" href="#rc-calendar/lib/fullcalendar-props"><span class="octicon octicon-link"></span></a></h3><table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th style="width: 100px;">name</th>
+        <th style="width: 50px;">type</th>
+        <th style="width: 50px;">default</th>
+        <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>prefixCls</td>
+          <td>String</td>
+          <td></td>
+          <td>prefixCls of this component</td>
+        </tr>
+        <tr>
+          <td>value</td>
+          <td> <a href="https://github.com/yiminghe/gregorian-calendar">GregorianCalendar</a> </td>
+          <td></td>
+          <td>current value like input&#39;s value</td>
+        </tr>
+        <tr>
+          <td>defaultValue</td>
+          <td>GregorianCalendar</td>
+          <td></td>
+          <td>defaultValue like input&#39;s defaultValue</td>
+        </tr>
+        <tr>
+          <td>defaultType</td>
+          <td>string</td>
+          <td>date</td>
+          <td>default panel type: date/month</td>
+        </tr>
+        <tr>
+          <td>fullscreen</td>
+          <td>bool</td>
+          <td>false</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>monthCellRender</td>
+          <td>function</td>
+          <td></td>
+          <td>Custom month cell render method</td>
+        </tr>
+        <tr>
+          <td>dateCellRender</td>
+          <td>function</td>
+          <td></td>
+          <td>Custom date cell render method</td>
+        </tr>
+        <tr>
+          <td>onSelect</td>
+          <td>Function(date: GregorianCalendar)</td>
+          <td>function(){}</td>
+          <td>called when a date is selected from calendar</td>
+        </tr>
+    </tbody>
+</table>
 
+<h3>rc-calendar/lib/assets/FullCalendar<a id="user-content-rc-calendar/lib/assets/fullcalendar" name="rc-calendar/lib/assets/fullcalendar" class="anchor" aria-hidden="true" href="#rc-calendar/lib/assets/fullcalendar"><span class="octicon octicon-link"></span></a></h3><p>If you need to use rc-calendar/lib/FullCalendar&#39;s default css, you should require this instead of rc-calendar/assets/index.css</p>
 <h2>Test Case<a id="user-content-test-case" name="test-case" class="anchor" aria-hidden="true" href="#test-case"><span class="octicon octicon-link"></span></a></h2><p><a href="http://localhost:8001/tests/runner.html?coverage" title="null">http://localhost:8001/tests/runner.html?coverage</a></p>
 <h2>Coverage<a id="user-content-coverage" name="coverage" class="anchor" aria-hidden="true" href="#coverage"><span class="octicon octicon-link"></span></a></h2><p><a href="http://localhost:8001/node_modules/rc-server/node_modules/node-jscover/lib/front-end/jscoverage.html?w=http://localhost:8001/tests/runner.html?coverage" title="null">http://localhost:8001/node_modules/rc-server/node_modules/node-jscover/lib/front-end/jscoverage.html?w=http://localhost:8001/tests/runner.html?coverage</a></p>
 <h2>License<a id="user-content-license" name="license" class="anchor" aria-hidden="true" href="#license"><span class="octicon octicon-link"></span></a></h2><p>rc-calendar is released under the MIT license.</p>

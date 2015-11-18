@@ -573,8 +573,6 @@ webpackJsonp([5],{
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	__webpack_require__(2);
-	
 	__webpack_require__(244);
 	
 	var _react = __webpack_require__(3);
@@ -593,18 +591,28 @@ webpackJsonp([5],{
 	
 	var _rcCalendarSrcFullCalendar2 = _interopRequireDefault(_rcCalendarSrcFullCalendar);
 	
+	var _gregorianCalendarFormat = __webpack_require__(190);
+	
+	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
+	
+	var dateFormatter = new _gregorianCalendarFormat2['default']('yyyy-MM-dd');
+	
+	function onSelect(value) {
+	  console.log('select', dateFormatter.format(value));
+	}
+	
 	_reactDom2['default'].render(_react2['default'].createElement(
 	  'div',
 	  { style: { zIndex: 1000, position: 'relative' } },
 	  _react2['default'].createElement(_rcCalendarSrcFullCalendar2['default'], {
 	    style: { margin: 10 },
 	    fullscreen: false,
-	    showTypeSwitch: true,
 	    locale: _rcCalendarSrcLocaleZh_CN2['default'] }),
 	  _react2['default'].createElement(_rcCalendarSrcFullCalendar2['default'], {
 	    style: { margin: 10 },
 	    fullscreen: true,
-	    showTypeSwitch: true,
+	    defaultType: 'month',
+	    onSelect: onSelect,
 	    locale: _rcCalendarSrcLocaleZh_CN2['default'] })
 	), document.getElementById('__react-content'));
 
@@ -614,6 +622,8 @@ webpackJsonp([5],{
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+	
+	__webpack_require__(2);
 	
 	__webpack_require__(245);
 
@@ -667,7 +677,7 @@ webpackJsonp([5],{
 	  displayName: 'FullCalendar',
 	
 	  propTypes: {
-	    type: _react.PropTypes.string,
+	    defaultType: _react.PropTypes.string,
 	    fullscreen: _react.PropTypes.bool,
 	    monthCellRender: _react.PropTypes.func,
 	    dateCellRender: _react.PropTypes.func,
@@ -681,7 +691,7 @@ webpackJsonp([5],{
 	  mixins: [_mixinCommonMixin2['default'], _mixinCalendarMixin2['default']],
 	  getDefaultProps: function getDefaultProps() {
 	    return {
-	      type: 'date',
+	      defaultType: 'date',
 	      fullscreen: false,
 	      showTypeSwitch: true,
 	      showHeader: true
@@ -689,14 +699,8 @@ webpackJsonp([5],{
 	  },
 	  getInitialState: function getInitialState() {
 	    return {
-	      type: this.props.type
+	      type: this.props.defaultType
 	    };
-	  },
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	    var type = nextProps.type;
-	    if (type !== undefined) {
-	      this.setState({ type: type });
-	    }
 	  },
 	  onMonthSelect: function onMonthSelect(value) {
 	    this.setType('date');
