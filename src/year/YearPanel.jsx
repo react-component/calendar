@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import {classSet as cx} from 'rc-util';
+import classnames from 'classnames';
 import DecadePanel from '../decade/DecadePanel';
 const ROW = 4;
 const COL = 3;
@@ -107,7 +107,7 @@ class YearPanel extends React.Component {
               title={yearData.title}
               key={yearData.content}
               onClick={clickHandler}
-              className={cx(classNameMap)}
+              className={classnames(classNameMap)}
             >
             <a
               className={`${prefixCls}-year`}>

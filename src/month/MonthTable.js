@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {classSet as cx} from 'rc-util';
+import classnames from 'classnames';
 
 const ROW = 4;
 const COL = 3;
@@ -93,7 +93,7 @@ class MonthTable extends Component {
               key={monthData.value}
               onClick={disabled ? null : chooseMonth.bind(this, monthData.value)}
               title={monthData.title}
-              className={cx(classNameMap)}>
+              className={classnames(classNameMap)}>
             {cellEl}
           </td>);
       });

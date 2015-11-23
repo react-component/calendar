@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import GregorianCalendar from 'gregorian-calendar';
-import {classSet} from 'rc-util';
+import classnames from 'classnames';
 import CalendarPart from './range-calendar/CalendarPart';
 import {syncTime, getTodayElement, getOkElement, getTodayTime} from './util/';
 import assign from 'object-assign';
@@ -201,7 +201,7 @@ const RangeCalendar = React.createClass({
       [prefixCls + '-range']: 1,
       [`${prefixCls}-week-number`]: props.showWeekNumber,
     };
-    const classes = classSet(className);
+    const classes = classnames(className);
     const newProps = {
       selectedValue: state.selectedValue,
       onSelect: this.onSelect,
