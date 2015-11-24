@@ -1,4 +1,3 @@
-import React from 'react';
 import DateTimeFormat from 'gregorian-calendar-format';
 
 export function getTodayTime(value) {
@@ -11,7 +10,7 @@ export function getTitleString(value) {
   return value.getYear() + '-' + (value.getMonth() + 1) + '-' + value.getDayOfMonth();
 }
 
-function getTodayTimeStr(value) {
+export function getTodayTimeStr(value) {
   const today = getTodayTime(value);
   return getTitleString(today);
 }
@@ -45,37 +44,6 @@ export function getFormatter(format, locale) {
     return new DateTimeFormat(format, locale.format);
   }
   return format;
-}
-
-export function getTodayElement(componentProps) {
-  const {prefixCls, locale, value} = componentProps;
-  let disabledToday = false;
-  let localeNow = locale.today;
-  if (componentProps.showTime) {
-    localeNow = locale.now || locale.today;
-  }
-  let disabledTodayClass = '';
-  if (componentProps.disabledDate) {
-    disabledToday = componentProps.disabledDate(getTodayTime(value), value);
-    if (disabledToday) {
-      disabledTodayClass = `${prefixCls}-today-btn-disabled`;
-    }
-  }
-  return (<a className={`${prefixCls}-today-btn ${disabledTodayClass}`}
-             role="button"
-             onClick={disabledToday ? null : componentProps.onToday}
-             title={getTodayTimeStr(componentProps.value)}>{localeNow}</a>);
-}
-
-export function getOkElement(componentProps) {
-  const {prefixCls, locale} = componentProps;
-  let className = `${prefixCls}-ok-btn`;
-  if (componentProps.okDisabled) {
-    className += ` ${prefixCls}-ok-btn-disabled`;
-  }
-  return (<a className={className}
-             role="button"
-             onClick={componentProps.okDisabled ? null : componentProps.onOk}>{locale.ok}</a>);
 }
 
 export function syncTime(from, to) {

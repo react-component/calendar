@@ -2,7 +2,8 @@ import React, {PropTypes} from 'react';
 import Time from '../time/Time';
 import rcUtil from 'rc-util';
 const toFragment = rcUtil.Children.mapSelf;
-import {getTodayElement, getOkElement} from '../util/';
+import TodayButton from '../calendar/TodayButton';
+import OkButton from '../calendar/OkButton';
 
 const CalendarFooter = React.createClass({
   propTypes: {
@@ -22,11 +23,11 @@ const CalendarFooter = React.createClass({
     if (props.showToday || props.showTime) {
       let nowEl;
       if (props.showToday) {
-        nowEl = getTodayElement(props);
+        nowEl = <TodayButton {...props}/>;
       }
       let okBtn;
       if (props.showOk) {
-        okBtn = getOkElement(props);
+        okBtn = <OkButton {...props}/>;
       }
       let footerBtn;
       if (nowEl || okBtn) {

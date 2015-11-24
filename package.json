@@ -50,7 +50,8 @@
     "rc-tools": "4.x",
     "react": "0.14.x",
     "react-addons-test-utils": "~0.14.0",
-    "react-dom": "0.14.x"
+    "react-dom": "0.14.x",
+    "object-assign": "4.x"
   },
   "pre-commit": [
     "lint"
@@ -59,7 +60,6 @@
     "classnames": "2.x",
     "gregorian-calendar": "4.x",
     "gregorian-calendar-format": "4.x",
-    "object-assign": "4.x",
     "rc-select": "5.x",
     "rc-trigger": "1.x",
     "rc-util": "3.x"

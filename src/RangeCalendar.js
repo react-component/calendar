@@ -2,8 +2,9 @@ import React, {PropTypes} from 'react';
 import GregorianCalendar from 'gregorian-calendar';
 import classnames from 'classnames';
 import CalendarPart from './range-calendar/CalendarPart';
-import {syncTime, getTodayElement, getOkElement, getTodayTime} from './util/';
-import assign from 'object-assign';
+import {syncTime, getTodayTime} from './util/';
+import TodayButton from './calendar/TodayButton';
+import OkButton from './calendar/OkButton';
 import CommonMixin from './mixin/CommonMixin';
 
 function noop() {
@@ -224,12 +225,12 @@ const RangeCalendar = React.createClass({
                                              onValueChange={onValueChange.bind(this, 'right')}/>
 
       <div style={{textAlign: 'center'}}>
-        {getTodayElement(assign({}, props, {value: state.value, onToday: this.onToday}))}
-        {getOkElement(assign({}, props, {
-          value: state.value,
-          onOk: this.onOk,
-          okDisabled: state.selectedValue.length !== 2 || state.selectedValue.hovering,
-        }))}
+        <TodayButton {...props} value={state.value}
+                                onToday={this.onToday}/>
+        <OkButton {...props} value={state.value}
+                             onOk={this.onOk}
+                             okDisabled={state.selectedValue.length !== 2 || state.selectedValue.hovering}
+        />
       </div>
     </div>);
   },
