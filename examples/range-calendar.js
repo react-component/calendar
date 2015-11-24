@@ -824,7 +824,9 @@ webpackJsonp([6],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _rcUtil = __webpack_require__(168);
+	var _classnames = __webpack_require__(171);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
 	
 	var _decadeDecadePanel = __webpack_require__(196);
 	
@@ -946,7 +948,7 @@ webpackJsonp([6],{
 	              title: yearData.title,
 	              key: yearData.content,
 	              onClick: clickHandler,
-	              className: (0, _rcUtil.classSet)(classNameMap)
+	              className: (0, _classnames2['default'])(classNameMap)
 	            },
 	            _react2['default'].createElement(
 	              'a',
@@ -1076,7 +1078,9 @@ webpackJsonp([6],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _rcUtil = __webpack_require__(168);
+	var _classnames = __webpack_require__(171);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
 	
 	var ROW = 4;
 	var COL = 3;
@@ -1167,7 +1171,7 @@ webpackJsonp([6],{
 	              key: dStartDecade,
 	              onClick: clickHandler,
 	              role: 'gridcell',
-	              className: (0, _rcUtil.classSet)(classNameMap)
+	              className: (0, _classnames2['default'])(classNameMap)
 	            },
 	            _react2['default'].createElement(
 	              'a',
@@ -1624,7 +1628,9 @@ webpackJsonp([6],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _rcUtil = __webpack_require__(168);
+	var _classnames = __webpack_require__(171);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
 	
 	function choose(hour, event) {
 	  var next = this.state.value.clone();
@@ -1679,7 +1685,7 @@ webpackJsonp([6],{
 	              key: hour,
 	              onClick: choose.bind(_this, hour),
 	              role: 'gridcell',
-	              className: (0, _rcUtil.classSet)(classNameMap) },
+	              className: (0, _classnames2['default'])(classNameMap) },
 	            _react2['default'].createElement(
 	              'a',
 	              {
@@ -2177,7 +2183,9 @@ webpackJsonp([6],{
 	
 	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
 	
-	var _rcUtil = __webpack_require__(168);
+	var _classnames = __webpack_require__(171);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
 	
 	var _rangeCalendarCalendarPart = __webpack_require__(238);
 	
@@ -2385,7 +2393,7 @@ webpackJsonp([6],{
 	    var state = this.state;
 	    var prefixCls = props.prefixCls;
 	    var className = (_className = {}, _defineProperty(_className, props.className, !!props.className), _defineProperty(_className, prefixCls, 1), _defineProperty(_className, prefixCls + '-hidden', !props.visible), _defineProperty(_className, prefixCls + '-range', 1), _defineProperty(_className, prefixCls + '-week-number', props.showWeekNumber), _className);
-	    var classes = (0, _rcUtil.classSet)(className);
+	    var classes = (0, _classnames2['default'])(className);
 	    var newProps = {
 	      selectedValue: state.selectedValue,
 	      onSelect: this.onSelect,
