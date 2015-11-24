@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import {classSet} from 'rc-util';
+import classnames from 'classnames';
 import GregorianCalendar from 'gregorian-calendar';
 
 function noop() {
@@ -78,7 +78,7 @@ const CalendarMixin = {
     };
 
     return (
-      <div className={`${classSet(className)} ${newProps.className}`}
+      <div className={`${classnames(className)} ${newProps.className}`}
            style={this.props.style}
            tabIndex="0" onKeyDown={this.onKeyDown}>
         {newProps.children}

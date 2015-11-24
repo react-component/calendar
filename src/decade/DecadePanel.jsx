@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 const ROW = 4;
 const COL = 3;
-import {classSet as cx} from 'rc-util';
+import classnames from 'classnames';
 
 function goYear(direction) {
   const next = this.state.value.clone();
@@ -83,7 +83,7 @@ class DecadePanel extends React.Component {
           key={dStartDecade}
           onClick={clickHandler}
           role="gridcell"
-          className={cx(classNameMap)}
+          className={classnames(classNameMap)}
           >
           <a
             className={`${prefixCls}-decade`}>

@@ -56,11 +56,12 @@
     "lint"
   ],
   "dependencies": {
+    "classnames": "^2.2.0",
     "gregorian-calendar": "4.x",
     "gregorian-calendar-format": "4.x",
     "object-assign": "4.x",
+    "rc-select": "5.x",
     "rc-trigger": "1.x",
-    "rc-util": "3.x",
-    "rc-select": "5.x"
+    "rc-util": "3.x"
   }
 }

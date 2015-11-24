@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import {classSet as cx} from 'rc-util';
+import classnames from 'classnames';
 
 function choose(hour, event) {
   const next = this.state.value.clone();
@@ -46,7 +46,7 @@ class TimePanel extends React.Component {
           key={hour}
           onClick={choose.bind(this, hour)}
           role="gridcell"
-          className={cx(classNameMap)}>
+          className={classnames(classNameMap)}>
           <a
             className={`${prefixCls}-time`}>
             {hour}
