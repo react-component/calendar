@@ -1211,23 +1211,17 @@ li.rc-select-dropdown-menu-item {
   color: #666666;
   white-space: nowrap;
 }
-li.rc-select-dropdown-menu-item:hover,
-li.rc-select-dropdown-menu-item-active,
-li.rc-select-dropdown-menu-item-selected {
-  background-color: rgba(142, 200, 249, 0.1) !important;
-}
 li.rc-select-dropdown-menu-item-selected {
   background-color: #ddd;
+}
+li.rc-select-dropdown-menu-item-active {
+  background-color: #5897fb;
+  color: white;
 }
 li.rc-select-dropdown-menu-item-disabled {
   color: #ccc;
   cursor: not-allowed;
   pointer-events: none;
-}
-li.rc-select-dropdown-menu-item-disabled:hover {
-  color: #ccc;
-  background-color: #fff;
-  cursor: not-allowed;
 }
 li.rc-select-dropdown-menu-item-divider {
   height: 1px;

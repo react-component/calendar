@@ -29,17 +29,17 @@ webpackJsonp([0],{
 	
 	var _rcCalendar2 = _interopRequireDefault(_rcCalendar);
 	
-	var _rcCalendarSrcPicker = __webpack_require__(205);
+	var _rcCalendarSrcPicker = __webpack_require__(213);
 	
 	var _rcCalendarSrcPicker2 = _interopRequireDefault(_rcCalendarSrcPicker);
 	
-	var _gregorianCalendarLibLocaleZh_CN = __webpack_require__(231);
+	var _gregorianCalendarLibLocaleZh_CN = __webpack_require__(239);
 	
 	var _gregorianCalendarLibLocaleZh_CN2 = _interopRequireDefault(_gregorianCalendarLibLocaleZh_CN);
 	
 	// spm error
 	
-	var _gregorianCalendarFormat = __webpack_require__(190);
+	var _gregorianCalendarFormat = __webpack_require__(196);
 	
 	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
 	
@@ -47,11 +47,11 @@ webpackJsonp([0],{
 	
 	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
 	
-	var _rcCalendarSrcLocaleZh_CN = __webpack_require__(232);
+	var _rcCalendarSrcLocaleZh_CN = __webpack_require__(240);
 	
 	var _rcCalendarSrcLocaleZh_CN2 = _interopRequireDefault(_rcCalendarSrcLocaleZh_CN);
 	
-	var _objectAssign = __webpack_require__(181);
+	var _objectAssign = __webpack_require__(187);
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
@@ -298,27 +298,27 @@ webpackJsonp([0],{
 	
 	var _rcUtil = __webpack_require__(168);
 	
-	var _dateDateTable = __webpack_require__(185);
+	var _dateDateTable = __webpack_require__(191);
 	
 	var _dateDateTable2 = _interopRequireDefault(_dateDateTable);
 	
-	var _calendarCalendarHeader = __webpack_require__(193);
+	var _calendarCalendarHeader = __webpack_require__(199);
 	
 	var _calendarCalendarHeader2 = _interopRequireDefault(_calendarCalendarHeader);
 	
-	var _calendarCalendarFooter = __webpack_require__(198);
+	var _calendarCalendarFooter = __webpack_require__(204);
 	
 	var _calendarCalendarFooter2 = _interopRequireDefault(_calendarCalendarFooter);
 	
-	var _mixinCalendarMixin = __webpack_require__(201);
+	var _mixinCalendarMixin = __webpack_require__(209);
 	
 	var _mixinCalendarMixin2 = _interopRequireDefault(_mixinCalendarMixin);
 	
-	var _mixinCommonMixin = __webpack_require__(202);
+	var _mixinCommonMixin = __webpack_require__(210);
 	
 	var _mixinCommonMixin2 = _interopRequireDefault(_mixinCommonMixin);
 	
-	var _dateDateInput = __webpack_require__(204);
+	var _dateDateInput = __webpack_require__(212);
 	
 	var _dateDateInput2 = _interopRequireDefault(_dateDateInput);
 	
@@ -559,7 +559,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 185:
+/***/ 191:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -582,11 +582,11 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _DateTHead = __webpack_require__(186);
+	var _DateTHead = __webpack_require__(192);
 	
 	var _DateTHead2 = _interopRequireDefault(_DateTHead);
 	
-	var _DateTBody = __webpack_require__(188);
+	var _DateTBody = __webpack_require__(194);
 	
 	var _DateTBody2 = _interopRequireDefault(_DateTBody);
 	
@@ -621,7 +621,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 186:
+/***/ 192:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -644,7 +644,7 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _DateConstants = __webpack_require__(187);
+	var _DateConstants = __webpack_require__(193);
 	
 	var _DateConstants2 = _interopRequireDefault(_DateConstants);
 	
@@ -718,7 +718,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 187:
+/***/ 193:
 /***/ function(module, exports) {
 
 	"use strict";
@@ -734,7 +734,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 188:
+/***/ 194:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -749,11 +749,11 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _DateConstants = __webpack_require__(187);
+	var _DateConstants = __webpack_require__(193);
 	
 	var _DateConstants2 = _interopRequireDefault(_DateConstants);
 	
-	var _util = __webpack_require__(189);
+	var _util = __webpack_require__(195);
 	
 	function isSameDay(one, two) {
 	  return one.getYear() === two.getYear() && one.getMonth() === two.getMonth() && one.getDayOfMonth() === two.getDayOfMonth();
@@ -971,7 +971,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 193:
+/***/ 199:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -986,13 +986,13 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _monthMonthPanel = __webpack_require__(194);
+	var _monthMonthPanel = __webpack_require__(200);
 	
 	var _monthMonthPanel2 = _interopRequireDefault(_monthMonthPanel);
 	
-	var _utilIndex = __webpack_require__(189);
+	var _utilIndex = __webpack_require__(195);
 	
-	var _yearYearPanel = __webpack_require__(195);
+	var _yearYearPanel = __webpack_require__(201);
 	
 	var _yearYearPanel2 = _interopRequireDefault(_yearYearPanel);
 	
@@ -1180,7 +1180,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 194:
+/***/ 200:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1195,11 +1195,11 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _yearYearPanel = __webpack_require__(195);
+	var _yearYearPanel = __webpack_require__(201);
 	
 	var _yearYearPanel2 = _interopRequireDefault(_yearYearPanel);
 	
-	var _MonthTable = __webpack_require__(197);
+	var _MonthTable = __webpack_require__(203);
 	
 	var _MonthTable2 = _interopRequireDefault(_MonthTable);
 	
@@ -1350,7 +1350,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 195:
+/***/ 201:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1375,11 +1375,11 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(171);
+	var _classnames = __webpack_require__(172);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _decadeDecadePanel = __webpack_require__(196);
+	var _decadeDecadePanel = __webpack_require__(202);
 	
 	var _decadeDecadePanel2 = _interopRequireDefault(_decadeDecadePanel);
 	
@@ -1604,7 +1604,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 196:
+/***/ 202:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1629,7 +1629,7 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(171);
+	var _classnames = __webpack_require__(172);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -1805,7 +1805,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 198:
+/***/ 204:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1820,7 +1820,7 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _timeTime = __webpack_require__(199);
+	var _timeTime = __webpack_require__(205);
 	
 	var _timeTime2 = _interopRequireDefault(_timeTime);
 	
@@ -1828,7 +1828,13 @@ webpackJsonp([0],{
 	
 	var _rcUtil2 = _interopRequireDefault(_rcUtil);
 	
-	var _util = __webpack_require__(189);
+	var _calendarTodayButton = __webpack_require__(207);
+	
+	var _calendarTodayButton2 = _interopRequireDefault(_calendarTodayButton);
+	
+	var _calendarOkButton = __webpack_require__(208);
+	
+	var _calendarOkButton2 = _interopRequireDefault(_calendarOkButton);
 	
 	var toFragment = _rcUtil2['default'].Children.mapSelf;
 	
@@ -1855,11 +1861,11 @@ webpackJsonp([0],{
 	    if (props.showToday || props.showTime) {
 	      var nowEl = undefined;
 	      if (props.showToday) {
-	        nowEl = (0, _util.getTodayElement)(props);
+	        nowEl = _react2['default'].createElement(_calendarTodayButton2['default'], props);
 	      }
 	      var okBtn = undefined;
 	      if (props.showOk) {
-	        okBtn = (0, _util.getOkElement)(props);
+	        okBtn = _react2['default'].createElement(_calendarOkButton2['default'], props);
 	      }
 	      var footerBtn = undefined;
 	      if (nowEl || okBtn) {
@@ -1892,7 +1898,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 199:
+/***/ 205:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1921,7 +1927,7 @@ webpackJsonp([0],{
 	
 	var _rcUtil2 = _interopRequireDefault(_rcUtil);
 	
-	var _TimePanel = __webpack_require__(200);
+	var _TimePanel = __webpack_require__(206);
 	
 	var _TimePanel2 = _interopRequireDefault(_TimePanel);
 	
@@ -2154,7 +2160,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 200:
+/***/ 206:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2179,7 +2185,7 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(171);
+	var _classnames = __webpack_require__(172);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -2298,7 +2304,98 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 201:
+/***/ 207:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	exports['default'] = TodayButton;
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	var _react = __webpack_require__(3);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _util = __webpack_require__(195);
+	
+	function TodayButton(_ref) {
+	  var prefixCls = _ref.prefixCls;
+	  var locale = _ref.locale;
+	  var value = _ref.value;
+	  var showTime = _ref.showTime;
+	  var disabledDate = _ref.disabledDate;
+	  var onToday = _ref.onToday;
+	
+	  var disabledToday = false;
+	  var localeNow = locale.today;
+	  if (showTime) {
+	    localeNow = locale.now || locale.today;
+	  }
+	  var disabledTodayClass = '';
+	  if (disabledDate) {
+	    disabledToday = disabledDate((0, _util.getTodayTime)(value), value);
+	    if (disabledToday) {
+	      disabledTodayClass = prefixCls + '-today-btn-disabled';
+	    }
+	  }
+	  return _react2['default'].createElement(
+	    'a',
+	    { className: prefixCls + '-today-btn ' + disabledTodayClass,
+	      role: 'button',
+	      onClick: disabledToday ? null : onToday,
+	      title: (0, _util.getTodayTimeStr)(value) },
+	    localeNow
+	  );
+	}
+	
+	module.exports = exports['default'];
+
+/***/ },
+
+/***/ 208:
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports["default"] = OkButton;
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	var _react = __webpack_require__(3);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function OkButton(_ref) {
+	  var prefixCls = _ref.prefixCls;
+	  var locale = _ref.locale;
+	  var okDisabled = _ref.okDisabled;
+	  var onOk = _ref.onOk;
+	
+	  var className = prefixCls + "-ok-btn";
+	  if (okDisabled) {
+	    className += " " + prefixCls + "-ok-btn-disabled";
+	  }
+	  return _react2["default"].createElement(
+	    "a",
+	    { className: className,
+	      role: "button",
+	      onClick: okDisabled ? null : onOk },
+	    locale.ok
+	  );
+	}
+	
+	module.exports = exports["default"];
+
+/***/ },
+
+/***/ 209:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2315,7 +2412,7 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(171);
+	var _classnames = __webpack_require__(172);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -2439,7 +2536,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 204:
+/***/ 212:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2568,7 +2665,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 205:
+/***/ 213:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2589,11 +2686,11 @@ webpackJsonp([0],{
 	
 	var _rcUtil = __webpack_require__(168);
 	
-	var _pickerPlacements = __webpack_require__(206);
+	var _pickerPlacements = __webpack_require__(214);
 	
 	var _pickerPlacements2 = _interopRequireDefault(_pickerPlacements);
 	
-	var _rcTrigger = __webpack_require__(207);
+	var _rcTrigger = __webpack_require__(215);
 	
 	var _rcTrigger2 = _interopRequireDefault(_rcTrigger);
 	
@@ -2786,7 +2883,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 206:
+/***/ 214:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2833,7 +2930,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 231:
+/***/ 239:
 /***/ function(module, exports) {
 
 	/*
