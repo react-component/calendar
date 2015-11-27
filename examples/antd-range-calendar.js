@@ -10,6 +10,10 @@ import zhCn from 'gregorian-calendar/lib/locale/zh_CN';
 import CalendarLocale from 'rc-calendar/src/locale/zh_CN';
 import Picker from 'rc-calendar/src/Picker';
 
+import 'rc-time-picker/assets/index.css';
+import TimePicker from 'rc-time-picker';
+const timePickerElement = <TimePicker />;
+
 var value = new GregorianCalendar(zhCn);
 value.setTime(Date.now());
 
@@ -54,7 +58,7 @@ const Test = React.createClass({
     const calendar = <RangeCalendar showWeekNumber={false}
                                     locale={CalendarLocale}
                                     disabledDate={disabledDate}
-                                    showTime/>;
+                                    timePicker={timePickerElement}/>;
     return (<Picker value={state.value}
                     onChange={this.onChange}
                     animation="slide-up"
@@ -84,7 +88,7 @@ ReactDOM.render(
                      onSelect={onStandaloneSelect}
                      onOk={onStandaloneOk}
                      disabledDate={disabledDate}
-                     showTime/>
+                     timePicker={timePickerElement}/>
     </div>
     <br/>
 

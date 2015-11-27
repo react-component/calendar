@@ -44,12 +44,6 @@ export default {
       this.lastFormatter = formatter;
       return this.normalFormatter;
     }
-    if (this.props.showTime) {
-      if (!this.showTimeFormatter) {
-        this.showTimeFormatter = getFormatter('yyyy-MM-dd HH:mm:ss', locale);
-      }
-      return this.showTimeFormatter;
-    }
     if (!this.showDateFormatter) {
       this.showDateFormatter = getFormatter('yyyy-MM-dd', locale);
     }

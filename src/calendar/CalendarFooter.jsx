@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import Time from '../time/Time';
+import ReactDOM from 'react-dom';
 import rcUtil from 'rc-util';
 const toFragment = rcUtil.Children.mapSelf;
 import TodayButton from '../calendar/TodayButton';
@@ -16,11 +16,16 @@ const CalendarFooter = React.createClass({
     this.props.onSelect(value);
   },
 
+  getRootDOMNode() {
+    return ReactDOM.findDOMNode(this);
+  },
+
   render() {
     const props = this.props;
-    const {value, locale, prefixCls} = props;
+    const {value, prefixCls, showDateInput} = props;
+    let timePicker = !showDateInput && props.timePicker || null;
     let footerEl = null;
-    if (props.showToday || props.showTime) {
+    if (props.showToday || timePicker) {
       let nowEl;
       if (props.showToday) {
         nowEl = <TodayButton {...props}/>;
@@ -33,15 +38,17 @@ const CalendarFooter = React.createClass({
       if (nowEl || okBtn) {
         footerBtn = <span className={`${prefixCls}-footer-btn`}>{toFragment([nowEl, okBtn])}</span>;
       }
-      let timeEl;
-      if (props.showTime) {
-        timeEl = (<Time value={value} prefixCls={prefixCls}
-                        disabled={props.timeDisabled}
-                        locale={locale} onChange={this.onSelect}/>);
+      if (timePicker) {
+        timePicker = React.cloneElement(timePicker, {
+          onChange: this.onSelect,
+          allowEmpty: false,
+          getPopupContainer: this.getRootDOMNode,
+          value,
+        });
       }
       footerEl = (
         <div className={`${prefixCls}-footer`}>
-          {timeEl}
+          {timePicker}
           {footerBtn}
         </div>);
     }

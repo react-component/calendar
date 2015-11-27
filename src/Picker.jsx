@@ -77,7 +77,7 @@ const Picker = React.createClass({
         value: value,
       });
     }
-    if (!props.calendar.props.showTime && cause.source !== 'dateInput') {
+    if (!props.calendar.props.timePicker && cause.source !== 'dateInput') {
       this.close(this.focus);
     }
     props.onChange(value);

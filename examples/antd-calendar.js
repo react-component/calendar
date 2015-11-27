@@ -1,4 +1,5 @@
 import 'rc-calendar/assets/index.less';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Calendar from 'rc-calendar';
@@ -9,6 +10,10 @@ import GregorianCalendar from 'gregorian-calendar';
 import CalendarLocale from 'rc-calendar/src/locale/zh_CN';
 import assign from 'object-assign';
 
+import 'rc-time-picker/assets/index.css';
+import TimePicker from 'rc-time-picker';
+const timePickerElement = <TimePicker />;
+
 var now = new GregorianCalendar(zhCn);
 now.setTime(Date.now());
 
@@ -17,8 +22,8 @@ const CalendarLocale2 = assign({}, CalendarLocale, {
   monthFormat: 'MMMM',
 });
 
-const formatter = new DateTimeFormat('yyyy-MM-dd HH:mm:ss');
 const dateFormatter = new DateTimeFormat('yyyy-MM-dd');
+const formatter = new DateTimeFormat('yyyy-MM-dd HH:mm:ss');
 
 function getFormatter(showTime) {
   return showTime ? formatter : dateFormatter;
@@ -49,6 +54,7 @@ var Test = React.createClass({
   getInitialState() {
     return {
       showTime: true,
+      showDateInput: true,
       disabled: false,
       value: this.props.defaultValue
     };
@@ -57,6 +63,12 @@ var Test = React.createClass({
   onShowTimeChange(e) {
     this.setState({
       showTime: e.target.checked
+    });
+  },
+
+  onShowDateInputChange(e) {
+    this.setState({
+      showDateInput: e.target.checked
     });
   },
 
@@ -71,17 +83,23 @@ var Test = React.createClass({
     var calendar = <Calendar locale={CalendarLocale2}
                              style={{zIndex:1000}}
                              dateInputPlaceholder="请输入"
+                             timePicker={state.showTime?timePickerElement:null}
                              defaultValue={this.props.defaultCalendarValue}
-                             showTime={state.showTime}
                              showOk
+                             showDateInput={state.showDateInput}
                              disabledDate={disabledDate}
-      />;
-    return <div style={{width: 240, margin: 20}}>
+    />;
+    return <div style={{width: 400, margin: 20}}>
       <div style={{marginBottom:10}}>
-        <span>
+        <label>
           <input type='checkbox' checked={state.showTime} onChange={this.onShowTimeChange}/>
           showTime
-        </span>
+        </label>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <label>
+          <input type='checkbox' checked={state.showDateInput} onChange={this.onShowDateInputChange}/>
+          showDateInput
+        </label>
         &nbsp;&nbsp;&nbsp;&nbsp;
         <label><input checked={state.disabled} onChange={this.toggleDisabled} type='checkbox'/> disabled </label>
       </div>
@@ -128,20 +146,20 @@ function onStandaloneChange(value) {
 }
 
 
-ReactDOM.render(<div style={{zIndex:1000,position:'relative'}}>
+ReactDOM.render(<div style={{zIndex:1000,position:'relative',width:900,margin:'20px auto'}}>
   <h2>zh-cn</h2>
 
-  <div style={{width:600}}>
+  <div>
     <div style={{margin:10}}>
       <Calendar showWeekNumber={false}
                 locale={CalendarLocale}
                 defaultValue={now}
                 showOk
                 showToday
+                timePicker={timePickerElement}
                 onChange={onStandaloneChange}
                 disabledDate={disabledDate}
-                onSelect={onStandaloneSelect}
-                showTime/>
+                onSelect={onStandaloneSelect}/>
     </div>
     <div style={{float:'left',width:300}}>
       <Test defaultValue={now}/>

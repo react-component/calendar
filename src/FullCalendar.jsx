@@ -12,7 +12,7 @@ const FullCalendar = React.createClass({
     monthCellRender: PropTypes.func,
     dateCellRender: PropTypes.func,
     showTypeSwitch: PropTypes.bool,
-    selectPrefixCls: PropTypes.string,
+    Select: PropTypes.func.isRequired,
     headerComponents: PropTypes.array,
     headerComponent: PropTypes.object, // The whole header component
     headerRender: PropTypes.func,

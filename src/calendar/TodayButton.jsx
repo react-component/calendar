@@ -1,10 +1,10 @@
 import React from 'react';
 import { getTodayTimeStr, getTodayTime } from '../util/';
 
-export default function TodayButton({prefixCls, locale, value, showTime, disabledDate, onToday}) {
+export default function TodayButton({prefixCls, locale, value, timePicker, disabledDate, onToday}) {
   let disabledToday = false;
   let localeNow = locale.today;
-  if (showTime) {
+  if (timePicker) {
     localeNow = locale.now || locale.today;
   }
   let disabledTodayClass = '';

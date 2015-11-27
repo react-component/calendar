@@ -1,4 +1,12 @@
 import React, {PropTypes} from 'react';
+import ReactDOM from 'react-dom';
+
+function copyTime(target, source) {
+  target.setHourOfDay(source.getHourOfDay());
+  target.setMinutes(source.getMinutes());
+  target.setSeconds(source.getSeconds());
+  return target;
+}
 
 const DateInput = React.createClass({
   propTypes: {
@@ -39,10 +47,10 @@ const DateInput = React.createClass({
     const {disabledDate, formatter, gregorianCalendarLocale, onChange} = this.props;
     if (str) {
       try {
-        value = formatter.parse(str, {
+        value = copyTime(formatter.parse(str, {
           locale: gregorianCalendarLocale,
           obeyCount: true,
-        });
+        }), this.props.value);
       } catch (ex) {
         this.setState({
           invalid: true,
@@ -77,16 +85,31 @@ const DateInput = React.createClass({
     this.props.onClear(null);
   },
 
+  getRootDOMNode() {
+    return ReactDOM.findDOMNode(this);
+  },
+
   render() {
     const props = this.props;
     const {invalid, str} = this.state;
-    const {locale, prefixCls, placeholder} = props;
+    const {locale, prefixCls, placeholder, value, onChange, timePicker} = props;
     const invalidClass = invalid ? `${prefixCls}-input-invalid` : '';
     return (<div className={`${prefixCls}-input-wrap`}>
-      <input className={`${prefixCls}-input  ${invalidClass}`}
-             value={str}
-             placeholder={placeholder}
-             onChange={this.onInputChange}/>
+      <div className={`${prefixCls}-time-picker-wrap`}>
+        {timePicker ? React.cloneElement(timePicker, {
+          showClear: false,
+          allowEmpty: false,
+          getPopupContainer: this.getRootDOMNode,
+          value,
+          onChange,
+        }) : null}
+      </div>
+      <div className={`${prefixCls}-date-input-wrap`}>
+        <input className={`${prefixCls}-input  ${invalidClass}`}
+               value={str}
+               placeholder={placeholder}
+               onChange={this.onInputChange}/>
+      </div>
       {props.showClear ? <a className={`${prefixCls}-clear-btn`}
                             role="button"
                             title={locale.clear}

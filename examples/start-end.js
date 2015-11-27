@@ -8,6 +8,10 @@ import DateTimeFormat from 'gregorian-calendar-format';
 import GregorianCalendar from 'gregorian-calendar';
 import CalendarLocale from 'rc-calendar/src/locale/zh_CN';
 
+import 'rc-time-picker/assets/index.css';
+import TimePicker from 'rc-time-picker';
+const timePickerElement = <TimePicker />;
+
 const formatter = new DateTimeFormat('yyyy-MM-dd HH:mm:ss');
 const dateFormatter = new DateTimeFormat('yyyy-MM-dd');
 
@@ -18,14 +22,14 @@ function getFormatter(showTime) {
 var Picker = React.createClass({
   getDefaultProps() {
     return {
-      showTime: false,
+      showTime: true,
       disabled: false
     };
   },
   render() {
     const props = this.props;
     var calendar = <Calendar locale={CalendarLocale}
-                             showTime={props.showTime}
+                             timePicker={props.showTime?timePickerElement:null}
                              showOk
                              disabledDate={props.disabledDate}
                              />;

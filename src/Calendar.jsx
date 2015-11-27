@@ -59,11 +59,11 @@ const Calendar = React.createClass({
     showToday: PropTypes.bool,
     showDateInput: PropTypes.bool,
     visible: PropTypes.bool,
-    showTime: PropTypes.bool,
     onSelect: PropTypes.func,
     onOk: PropTypes.func,
     prefixCls: PropTypes.string,
     onKeyDown: PropTypes.func,
+    timePicker: PropTypes.element,
     dateInputPlaceholder: PropTypes.string,
     onClear: PropTypes.func,
     onChange: PropTypes.func,
@@ -75,6 +75,7 @@ const Calendar = React.createClass({
     return {
       showToday: true,
       showDateInput: true,
+      timePicker: null,
       onClear: noop,
       onOk: noop,
     };
@@ -177,12 +178,13 @@ const Calendar = React.createClass({
 
   render() {
     const props = this.props;
-    const {locale, prefixCls, disabledDate, dateInputPlaceholder} = props;
+    const {locale, prefixCls, disabledDate, dateInputPlaceholder, timePicker} = props;
     const state = this.state;
     const {value, selectedValue} = state;
     const dateInputElement = props.showDateInput ? (
       <DateInput formatter={this.getFormatter()}
                  key="date-input"
+                 timePicker={timePicker}
                  gregorianCalendarLocale={value.locale}
                  locale={locale}
                  placeholder={dateInputPlaceholder}
@@ -216,7 +218,8 @@ const Calendar = React.createClass({
         showOk={props.showOk}
         prefixCls={prefixCls}
         showToday={props.showToday}
-        showTime={props.showTime}
+        showDateInput={props.showDateInput}
+        timePicker={timePicker}
         value={value}
         disabledDate={disabledDate}
         onOk={this.onOk}

@@ -57,8 +57,10 @@ function onInputSelect(direction, value) {
   const selectedValue = originalValue.concat();
   const index = direction === 'left' ? 0 : 1;
   selectedValue[index] = value;
-  if (selectedValue[0].getTime() > selectedValue[1].getTime()) {
-    selectedValue.length = 1;
+  if (selectedValue[0] && selectedValue[1]) {
+    if (selectedValue[0].getTime() > selectedValue[1].getTime()) {
+      selectedValue.length = 1;
+    }
   }
   this.fireSelectValueChange(selectedValue);
 }

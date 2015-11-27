@@ -1,5 +1,4 @@
 import React, {PropTypes, Component} from 'react';
-import Select, {Option} from 'rc-select';
 
 function noop() {
 }
@@ -18,18 +17,17 @@ class CalendarHeader extends Component {
   }
 
   getYearSelectElement(year) {
-    const {yearSelectOffset, yearSelectTotal, locale, prefixCls, selectPrefixCls} = this.props;
+    const {yearSelectOffset, yearSelectTotal, locale, prefixCls, Select} = this.props;
     const start = year - yearSelectOffset;
     const end = start + yearSelectTotal;
     const suffix = locale.year === '年' ? '年' : '';
 
     const options = [];
     for (let index = start; index < end; index++) {
-      options.push(<Option key={`${index}`}>{index + suffix}</Option>);
+      options.push(<Select.Option key={`${index}`}>{index + suffix}</Select.Option>);
     }
     return (
       <Select
-        prefixCls={selectPrefixCls}
         className={`${prefixCls}-header-year-select`}
         onChange={this.onYearChange.bind(this)}
         dropdownStyle={{ zIndex: 2000 }}
@@ -45,16 +43,16 @@ class CalendarHeader extends Component {
   getMonthSelectElement(month) {
     const props = this.props;
     const months = props.locale.format.months;
-    const {prefixCls, selectPrefixCls} = props;
+    const {prefixCls} = props;
     const options = [];
+    const Select = props.Select;
 
     for (let index = 0; index < 12; index++) {
-      options.push(<Option key={`${index}`}>{months[index]}</Option>);
+      options.push(<Select.Option key={`${index}`}>{months[index]}</Select.Option>);
     }
 
     return (
       <Select
-        prefixCls={selectPrefixCls}
         className={`${prefixCls}-header-month-select`}
         dropdownStyle={{ zIndex: 2000 }}
         dropdownMenuStyle={{maxHeight: 250, overflow: 'auto', overflowX: 'hidden', fontSize: 12}}
@@ -112,8 +110,8 @@ CalendarHeader.propTypes = {
   yearSelectTotal: PropTypes.number,
   onValueChange: PropTypes.func,
   onTypeChange: PropTypes.func,
+  Select: PropTypes.func,
   prefixCls: PropTypes.string,
-  selectPrefixCls: PropTypes.string,
   type: PropTypes.string,
   showTypeSwitch: PropTypes.bool,
   headerComponents: PropTypes.array,

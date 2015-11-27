@@ -461,6 +461,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>prefixCls of this component</td>
         </tr>
         <tr>
+          <td>Select</td>
+          <td>React Component Class</td>
+          <td></td>
+          <td>rc-select Component Class</td>
+        </tr>
+        <tr>
           <td>value</td>
           <td> <a href="https://github.com/yiminghe/gregorian-calendar">GregorianCalendar</a> </td>
           <td></td>
@@ -504,10 +510,6 @@ http://react-component.github.io/calendar/examples/index.html
         </tr>
     </tbody>
 </table>
-
-### rc-calendar/lib/assets/FullCalendar
-
-If you need to use rc-calendar/lib/FullCalendar's default css, you should require this instead of rc-calendar/assets/index.css
 
 ## Test Case
 

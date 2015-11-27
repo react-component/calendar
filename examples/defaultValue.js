@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.css';
-import 'rc-calendar/assets/bootstrap.less';
+import 'rc-calendar/assets/index.less';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Calendar from 'rc-calendar';
@@ -9,6 +9,9 @@ import DateTimeFormat from 'gregorian-calendar-format';
 import GregorianCalendar from 'gregorian-calendar';
 import CalendarLocale from 'rc-calendar/src/locale/zh_CN';
 const formatter = new DateTimeFormat('yyyy-MM-dd HH:mm:ss');
+import 'rc-time-picker/assets/index.css';
+import TimePicker from 'rc-time-picker';
+const timePickerElement = <TimePicker />;
 
 var Test = React.createClass({
   onChange(value) {
@@ -41,7 +44,7 @@ var Test = React.createClass({
   render() {
     var state = this.state;
     var calendar = <Calendar locale={CalendarLocale}
-                             showTime={this.state.showTime}/>;
+                             timePicker={this.state.showTime?timePickerElement:null}/>;
     return <div className="form-group" style={{width: 400, margin: 20}}>
       <div className="input-group">
         <span>
