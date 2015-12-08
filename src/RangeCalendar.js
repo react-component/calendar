@@ -219,6 +219,7 @@ const RangeCalendar = React.createClass({
                                              onInputSelect={onInputSelect.bind(this, 'left')}
                                              onTimeSelect={onTimeSelect.bind(this, 'left')}
                                              onValueChange={onValueChange.bind(this, 'left')}/>
+      <span className={`${prefixCls}-range-middle`}>~</span>
       <CalendarPart {...props} {...newProps} direction="right"
                                              formatter={this.getFormatter()}
                                              value={this.getEndValue()}
