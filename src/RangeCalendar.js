@@ -228,12 +228,12 @@ const RangeCalendar = React.createClass({
                                              onValueChange={onValueChange.bind(this, 'right')}/>
 
       <div style={{textAlign: 'center'}}>
-        <TodayButton {...props} value={state.value}
-                                onToday={this.onToday}/>
         <OkButton {...props} value={state.value}
                              onOk={this.onOk}
                              okDisabled={state.selectedValue.length !== 2 || state.selectedValue.hovering}
         />
+        <TodayButton {...props} value={state.value}
+                                onToday={this.onToday}/>
       </div>
     </div>);
   },
