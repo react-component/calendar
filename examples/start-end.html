@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>start-end.js - example - rc-calendar@4.0.1</title>
+  <title>start-end.js - example - rc-calendar@5.0.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -251,20 +251,22 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
   <!--[if lt IE 9]>
   <script src="https://a.alipayobjects.com/??es5-shim/4.0.5/es5-shim.js,es5-shim/4.0.5/es5-sham.js,html5shiv/3.7.2/src/html5shiv.js"></script>
   <![endif]-->
-  <link rel="stylesheet" href="start-end.css" />
+  <link rel="stylesheet" href="start-end.css" /><link rel="stylesheet" href="common.css" />
 </head>
 
 <body>
 <div class="container">
   <div class="header">
-    <h1>rc-calendar@4.0.1</h1>
+    <h1>rc-calendar@5.0.0</h1>
 
     <p>React Calendar</p>
   </div>
   <div class="example" id="__react-content"></div>
   <script src="common.js?nowrap"></script>
   <script src="start-end.js?nowrap"></script>
-  <div class="highlight"><pre><code language="js">import <span class="hljs-string">'rc-calendar/assets/index.css'</span>;
+  <div class="highlight"><pre><code language="js"><span class="hljs-comment">/* eslint react/no-multi-comp:0, no-console:0 */</span>
+
+import <span class="hljs-string">'rc-calendar/assets/index.css'</span>;
 import React from <span class="hljs-string">'react'</span>;
 import ReactDOM from <span class="hljs-string">'react-dom'</span>;
 import Calendar from <span class="hljs-string">'rc-calendar'</span>;
@@ -274,28 +276,38 @@ import DateTimeFormat from <span class="hljs-string">'gregorian-calendar-format'
 import GregorianCalendar from <span class="hljs-string">'gregorian-calendar'</span>;
 import CalendarLocale from <span class="hljs-string">'rc-calendar/lib/locale/zh_CN'</span>;
 
+import <span class="hljs-string">'rc-time-picker/assets/index.css'</span>;
+import TimePicker from <span class="hljs-string">'rc-time-picker'</span>;
+<span class="hljs-keyword">const</span> timePickerElement = <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">TimePicker</span> /&gt;</span>;</span>
+
 <span class="hljs-keyword">const</span> formatter = <span class="hljs-keyword">new</span> DateTimeFormat(<span class="hljs-string">'yyyy-MM-dd HH:mm:ss'</span>);
 <span class="hljs-keyword">const</span> dateFormatter = <span class="hljs-keyword">new</span> DateTimeFormat(<span class="hljs-string">'yyyy-MM-dd'</span>);
+
+<span class="hljs-keyword">const</span> SHOW_TIME = <span class="hljs-literal">true</span>;
+
+<span class="hljs-keyword">const</span> now = <span class="hljs-keyword">new</span> GregorianCalendar(zhCn);
+now.setTime(<span class="hljs-built_in">Date</span>.now());
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getFormatter</span><span class="hljs-params">(showTime)</span> </span>{
   <span class="hljs-keyword">return</span> showTime ? formatter : dateFormatter;
 }
 
-<span class="hljs-keyword">var</span> Picker = React.createClass({
+<span class="hljs-keyword">const</span> Picker = React.createClass({
   getDefaultProps() {
     <span class="hljs-keyword">return</span> {
-      showTime: <span class="hljs-literal">false</span>,
-      disabled: <span class="hljs-literal">false</span>
+      showTime: SHOW_TIME,
+      disabled: <span class="hljs-literal">false</span>,
     };
   },
   render() {
     <span class="hljs-keyword">const</span> props = <span class="hljs-keyword">this</span>.props;
-    <span class="hljs-keyword">var</span> calendar = <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Calendar</span> <span class="hljs-attribute">locale</span>=<span class="hljs-value">{CalendarLocale}</span>
-                             <span class="hljs-attribute">showTime</span>=<span class="hljs-value">{props.showTime}</span>
+    <span class="hljs-keyword">const</span> calendar = (<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Calendar</span> <span class="hljs-attribute">locale</span>=<span class="hljs-value">{CalendarLocale}</span>
+                             <span class="hljs-attribute">defaultValue</span>=<span class="hljs-value">{now}</span>
+                             <span class="hljs-attribute">timePicker</span>=<span class="hljs-value">{props.showTime</span> ? <span class="hljs-attribute">timePickerElement</span> <span class="hljs-attribute">:</span> <span class="hljs-attribute">null</span>}
                              <span class="hljs-attribute">showOk</span>
                              <span class="hljs-attribute">disabledDate</span>=<span class="hljs-value">{props.disabledDate}</span>
-                             /&gt;</span>;</span>
-    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">DatePicker</span>
+    /&gt;</span>);
+    return (<span class="hljs-tag">&lt;<span class="hljs-title">DatePicker</span>
       <span class="hljs-attribute">animation</span>=<span class="hljs-value">"slide-up"</span>
       <span class="hljs-attribute">disabled</span>=<span class="hljs-value">{props.disabled}</span>
       <span class="hljs-attribute">calendar</span>=<span class="hljs-value">{calendar}</span>
@@ -305,7 +317,7 @@ import CalendarLocale from <span class="hljs-string">'rc-calendar/lib/locale/zh_
         ({value})=&gt; {
           return (
             <span class="hljs-tag">&lt;<span class="hljs-title">span</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">placeholder</span>=<span class="hljs-value">"请选择日期"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{width:250}}</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">placeholder</span>=<span class="hljs-value">"请选择日期"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{width:</span> <span class="hljs-attribute">250</span>}}
                        <span class="hljs-attribute">disabled</span>=<span class="hljs-value">{props.disabled}</span>
                        <span class="hljs-attribute">readOnly</span>
                        <span class="hljs-attribute">value</span>=<span class="hljs-value">{value</span> &amp;&amp; <span class="hljs-attribute">getFormatter</span>(<span class="hljs-attribute">props.showTime</span>)<span class="hljs-attribute">.format</span>(<span class="hljs-attribute">value</span>)}/&gt;</span>
@@ -313,65 +325,69 @@ import CalendarLocale from <span class="hljs-string">'rc-calendar/lib/locale/zh_
           );
         }
       }
-    <span class="hljs-tag">&lt;/<span class="hljs-title">DatePicker</span>&gt;</span>;</span>
-  }
+    <span class="hljs-tag">&lt;/<span class="hljs-title">DatePicker</span>&gt;</span>);
+  },
 });
 
-<span class="hljs-keyword">var</span> Test = React.createClass({
+const Test = React.createClass({
   getInitialState() {
-    <span class="hljs-keyword">return</span> {
-      startValue: <span class="hljs-literal">null</span>,
-      endValue: <span class="hljs-literal">null</span>
+    return {
+      startValue: null,
+      endValue: null,
     };
   },
 
-  disabledEndDate(endValue) {
-    <span class="hljs-keyword">if</span>(!endValue){
-      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
-    }
-    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.state.startValue) {
-      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
-    }
-    <span class="hljs-keyword">return</span> endValue.getTime() &lt;= <span class="hljs-keyword">this</span>.state.startValue.getTime();
-  },
-
-  disabledStartDate(startValue) {
-    <span class="hljs-keyword">if</span>(!startValue){
-      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
-    }
-    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.state.endValue) {
-      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
-    }
-    <span class="hljs-keyword">return</span> startValue.getTime() &gt;= <span class="hljs-keyword">this</span>.state.endValue.getTime();
-  },
-
   onChange(field, value) {
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onChange'</span>, field, value &amp;&amp; getFormatter().format(value))
-    <span class="hljs-keyword">this</span>.setState({
+    console.log('onChange', field, value &amp;&amp; getFormatter(SHOW_TIME).format(value));
+    this.setState({
       [field]: value,
     });
   },
 
+  disabledEndDate(endValue) {
+    if (!endValue) {
+      return false;
+    }
+    const startValue = this.state.startValue;
+    if (!startValue) {
+      return false;
+    }
+    // console.log(getFormatter(SHOW_TIME).format(startValue), getFormatter(SHOW_TIME).format(endValue));
+    return SHOW_TIME ? endValue.getTime() <span class="hljs-tag">&lt; <span class="hljs-attribute">startValue.getTime</span>() <span class="hljs-attribute">:</span> <span class="hljs-attribute">endValue.compareToDay</span>(<span class="hljs-attribute">startValue</span>) &lt;= <span class="hljs-attribute">0</span>;
+  },
+
+  <span class="hljs-attribute">disabledStartDate</span>(<span class="hljs-attribute">startValue</span>) {
+    <span class="hljs-attribute">if</span> (!<span class="hljs-attribute">startValue</span>) {
+      <span class="hljs-attribute">return</span> <span class="hljs-attribute">false</span>;
+    }
+    <span class="hljs-attribute">const</span> <span class="hljs-attribute">endValue</span> = <span class="hljs-attribute">this.state.endValue</span>;
+    <span class="hljs-attribute">if</span> (!<span class="hljs-attribute">endValue</span>) {
+      <span class="hljs-attribute">return</span> <span class="hljs-attribute">false</span>;
+    }
+    // <span class="hljs-attribute">console.log</span>(<span class="hljs-attribute">getFormatter</span>(<span class="hljs-attribute">SHOW_TIME</span>)<span class="hljs-attribute">.format</span>(<span class="hljs-attribute">startValue</span>), <span class="hljs-attribute">getFormatter</span>(<span class="hljs-attribute">SHOW_TIME</span>)<span class="hljs-attribute">.format</span>(<span class="hljs-attribute">endValue</span>));
+    <span class="hljs-attribute">return</span> <span class="hljs-attribute">SHOW_TIME</span> ? <span class="hljs-attribute">endValue.getTime</span>() &lt; <span class="hljs-attribute">startValue.getTime</span>() <span class="hljs-attribute">:</span> <span class="hljs-attribute">startValue.compareToDay</span>(<span class="hljs-attribute">endValue</span>) &gt;</span>= 0;
+  },
+
   render() {
-    <span class="hljs-keyword">var</span> state = <span class="hljs-keyword">this</span>.state;
-    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{width:</span> <span class="hljs-attribute">240</span>, <span class="hljs-attribute">margin:</span> <span class="hljs-attribute">20</span>}}&gt;</span>
+    const state = this.state;
+    return (<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{width:</span> <span class="hljs-attribute">240</span>, <span class="hljs-attribute">margin:</span> <span class="hljs-attribute">20</span>}}&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>
         开始时间：
         <span class="hljs-tag">&lt;<span class="hljs-title">Picker</span> <span class="hljs-attribute">disabledDate</span>=<span class="hljs-value">{this.disabledStartDate}</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">{state.startValue}</span>
-                <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onChange.bind(this,'startValue')}</span>/&gt;</span>
+                <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onChange.bind(this,</span> '<span class="hljs-attribute">startValue</span>')}/&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
 
       <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>
         结束时间：
         <span class="hljs-tag">&lt;<span class="hljs-title">Picker</span> <span class="hljs-attribute">disabledDate</span>=<span class="hljs-value">{this.disabledEndDate}</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">{state.endValue}</span>
-                <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onChange.bind(this,'endValue')}</span>/&gt;</span>
+                <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onChange.bind(this,</span> '<span class="hljs-attribute">endValue</span>')}/&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>;</span>
-  }
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>);
+  },
 });
 
 
-ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Test</span> /&gt;</span>, document.getElementById('__react-content'));
+ReactDOM.render(<span class="hljs-tag">&lt;<span class="hljs-title">Test</span> /&gt;</span>, document.getElementById('__react-content'));
 </span></code></pre></div>
 </div>
 <a href="http://github.com/react-component/calendar">

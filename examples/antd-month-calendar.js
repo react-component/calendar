@@ -3,15 +3,8 @@ webpackJsonp([1],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(242);
+	module.exports = __webpack_require__(253);
 
-
-/***/ },
-
-/***/ 2:
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
 
 /***/ },
 
@@ -640,7 +633,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 209:
+/***/ 207:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -664,6 +657,8 @@ webpackJsonp([1],{
 	var _gregorianCalendar = __webpack_require__(164);
 	
 	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
+	
+	var _utilIndex = __webpack_require__(195);
 	
 	function noop() {}
 	
@@ -772,7 +767,8 @@ webpackJsonp([1],{
 	
 	  isAllowedDate: function isAllowedDate(value) {
 	    var disabledDate = this.props.disabledDate;
-	    return !disabledDate || !disabledDate(value);
+	    var disabledTime = this.props.disabledTime;
+	    return (0, _utilIndex.isAllowedDate)(value, disabledDate, disabledTime);
 	  }
 	};
 	
@@ -781,7 +777,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 213:
+/***/ 211:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -802,11 +798,11 @@ webpackJsonp([1],{
 	
 	var _rcUtil = __webpack_require__(168);
 	
-	var _pickerPlacements = __webpack_require__(214);
+	var _pickerPlacements = __webpack_require__(212);
 	
 	var _pickerPlacements2 = _interopRequireDefault(_pickerPlacements);
 	
-	var _rcTrigger = __webpack_require__(215);
+	var _rcTrigger = __webpack_require__(213);
 	
 	var _rcTrigger2 = _interopRequireDefault(_rcTrigger);
 	
@@ -886,7 +882,7 @@ webpackJsonp([1],{
 	        value: value
 	      });
 	    }
-	    if (!props.calendar.props.showTime && cause.source !== 'dateInput') {
+	    if (!props.calendar.props.timePicker && cause.source !== 'dateInput') {
 	      this.close(this.focus);
 	    }
 	    props.onChange(value);
@@ -999,7 +995,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 214:
+/***/ 212:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1046,7 +1042,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 239:
+/***/ 237:
 /***/ function(module, exports) {
 
 	/*
@@ -1065,9 +1061,11 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 242:
+/***/ 253:
 /***/ function(module, exports, __webpack_require__) {
 
+	/* eslint react/no-multi-comp:0, no-console:0 */
+	
 	'use strict';
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -1082,15 +1080,15 @@ webpackJsonp([1],{
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _rcCalendarSrcMonthCalendar = __webpack_require__(243);
+	var _rcCalendarSrcMonthCalendar = __webpack_require__(254);
 	
 	var _rcCalendarSrcMonthCalendar2 = _interopRequireDefault(_rcCalendarSrcMonthCalendar);
 	
-	var _rcCalendarSrcPicker = __webpack_require__(213);
+	var _rcCalendarSrcPicker = __webpack_require__(211);
 	
 	var _rcCalendarSrcPicker2 = _interopRequireDefault(_rcCalendarSrcPicker);
 	
-	var _gregorianCalendarLibLocaleZh_CN = __webpack_require__(239);
+	var _gregorianCalendarLibLocaleZh_CN = __webpack_require__(237);
 	
 	var _gregorianCalendarLibLocaleZh_CN2 = _interopRequireDefault(_gregorianCalendarLibLocaleZh_CN);
 	
@@ -1104,7 +1102,7 @@ webpackJsonp([1],{
 	
 	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
 	
-	var _rcCalendarSrcLocaleZh_CN = __webpack_require__(240);
+	var _rcCalendarSrcLocaleZh_CN = __webpack_require__(238);
 	
 	var _rcCalendarSrcLocaleZh_CN2 = _interopRequireDefault(_rcCalendarSrcLocaleZh_CN);
 	
@@ -1119,21 +1117,22 @@ webpackJsonp([1],{
 	var Test = _react2['default'].createClass({
 	  displayName: 'Test',
 	
-	  onChange: function onChange(value) {
-	    console.log('DatePicker change: ' + (value && formatter.format(value)));
-	    this.setState({
-	
-	      value: value
-	    });
+	  propTypes: {
+	    defaultValue: _react2['default'].PropTypes.object
 	  },
-	
 	  getInitialState: function getInitialState() {
 	    return {
-	
 	      showTime: true,
 	      disabled: false,
 	      value: this.props.defaultValue
 	    };
+	  },
+	
+	  onChange: function onChange(value) {
+	    console.log('DatePicker change: ' + (value && formatter.format(value)));
+	    this.setState({
+	      value: value
+	    });
 	  },
 	
 	  onShowTimeChange: function onShowTimeChange(e) {
@@ -1232,7 +1231,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 243:
+/***/ 254:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1251,11 +1250,11 @@ webpackJsonp([1],{
 	
 	var _monthMonthPanel2 = _interopRequireDefault(_monthMonthPanel);
 	
-	var _mixinCalendarMixin = __webpack_require__(209);
+	var _mixinCalendarMixin = __webpack_require__(207);
 	
 	var _mixinCalendarMixin2 = _interopRequireDefault(_mixinCalendarMixin);
 	
-	var _mixinCommonMixin = __webpack_require__(210);
+	var _mixinCommonMixin = __webpack_require__(208);
 	
 	var _mixinCommonMixin2 = _interopRequireDefault(_mixinCommonMixin);
 	

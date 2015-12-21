@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>full-calendar.js - example - rc-calendar@4.0.1</title>
+  <title>full-calendar.js - example - rc-calendar@5.0.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -251,39 +251,46 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
   <!--[if lt IE 9]>
   <script src="https://a.alipayobjects.com/??es5-shim/4.0.5/es5-shim.js,es5-shim/4.0.5/es5-sham.js,html5shiv/3.7.2/src/html5shiv.js"></script>
   <![endif]-->
-  <link rel="stylesheet" href="full-calendar.css" />
+  <link rel="stylesheet" href="full-calendar.css" /><link rel="stylesheet" href="common.css" />
 </head>
 
 <body>
 <div class="container">
   <div class="header">
-    <h1>rc-calendar@4.0.1</h1>
+    <h1>rc-calendar@5.0.0</h1>
 
     <p>React Calendar</p>
   </div>
   <div class="example" id="__react-content"></div>
   <script src="common.js?nowrap"></script>
   <script src="full-calendar.js?nowrap"></script>
-  <div class="highlight"><pre><code language="js">import <span class="hljs-string">'rc-calendar/lib/assets/FullCalendar'</span>;
-import React, {Component} from <span class="hljs-string">'react'</span>;
+  <div class="highlight"><pre><code language="js"><span class="hljs-comment">/* eslint react/no-multi-comp:0, no-console:0 */</span>
+
+import <span class="hljs-string">'rc-calendar/assets/index.css'</span>;
+import React from <span class="hljs-string">'react'</span>;
 import ReactDOM from <span class="hljs-string">'react-dom'</span>;
 import CalendarLocale from <span class="hljs-string">'rc-calendar/lib/locale/zh_CN'</span>;
 import FullCalendar from <span class="hljs-string">'rc-calendar/lib/FullCalendar'</span>;
 import DateTimeFormat from <span class="hljs-string">'gregorian-calendar-format'</span>;
 <span class="hljs-keyword">const</span> dateFormatter = <span class="hljs-keyword">new</span> DateTimeFormat(<span class="hljs-string">'yyyy-MM-dd'</span>);
 
+import <span class="hljs-string">'rc-select/assets/index.css'</span>;
+import Select from <span class="hljs-string">'rc-select'</span>;
+
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onSelect</span><span class="hljs-params">(value)</span> </span>{
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'select'</span>, dateFormatter.format(value));
 }
 
-ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{zIndex:1000,position:'relative'}}</span>&gt;</span>
+ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{zIndex:</span> <span class="hljs-attribute">1000</span>, <span class="hljs-attribute">position:</span> '<span class="hljs-attribute">relative</span>'}}&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">FullCalendar</span>
     <span class="hljs-attribute">style</span>=<span class="hljs-value">{{margin:</span> <span class="hljs-attribute">10</span>}}
+    <span class="hljs-attribute">Select</span>=<span class="hljs-value">{Select}</span>
     <span class="hljs-attribute">fullscreen</span>=<span class="hljs-value">{false}</span>
     <span class="hljs-attribute">locale</span>=<span class="hljs-value">{CalendarLocale}</span>/&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">FullCalendar</span>
     <span class="hljs-attribute">style</span>=<span class="hljs-value">{{margin:</span> <span class="hljs-attribute">10</span>}}
-    <span class="hljs-attribute">fullscreen</span>=<span class="hljs-value">{true}</span>
+    <span class="hljs-attribute">Select</span>=<span class="hljs-value">{Select}</span>
+    <span class="hljs-attribute">fullscreen</span>
     <span class="hljs-attribute">defaultType</span>=<span class="hljs-value">"month"</span>
     <span class="hljs-attribute">onSelect</span>=<span class="hljs-value">{onSelect}</span>
     <span class="hljs-attribute">locale</span>=<span class="hljs-value">{CalendarLocale}</span>/&gt;</span>
