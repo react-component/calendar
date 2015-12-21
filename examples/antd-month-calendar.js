@@ -1,3 +1,5 @@
+/* eslint react/no-multi-comp:0, no-console:0 */
+
 import 'rc-calendar/assets/index.less';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -7,59 +9,60 @@ import zhCn from 'gregorian-calendar/lib/locale/zh_CN'; // spm error
 import DateTimeFormat from 'gregorian-calendar-format';
 import GregorianCalendar from 'gregorian-calendar';
 import CalendarLocale from 'rc-calendar/src/locale/zh_CN';
-var now = new GregorianCalendar(zhCn);
+const now = new GregorianCalendar(zhCn);
 now.setTime(Date.now());
 const formatter = new DateTimeFormat('yyyy-MM');
 
-var defaultCalendarValue = new GregorianCalendar(zhCn);
+const defaultCalendarValue = new GregorianCalendar(zhCn);
 defaultCalendarValue.setTime(Date.now());
 defaultCalendarValue.addMonth(-1);
 
-var Test = React.createClass({
+const Test = React.createClass({
+  propTypes: {
+    defaultValue: React.PropTypes.object,
+  },
+  getInitialState() {
+    return {
+      showTime: true,
+      disabled: false,
+      value: this.props.defaultValue,
+    };
+  },
+
   onChange(value) {
     console.log('DatePicker change: ' + (value && formatter.format(value)));
     this.setState({
-
-      value: value
+      value: value,
     });
-  },
-
-  getInitialState() {
-    return {
-
-      showTime: true,
-      disabled: false,
-      value: this.props.defaultValue
-    };
   },
 
   onShowTimeChange(e) {
     this.setState({
-      showTime: e.target.checked
+      showTime: e.target.checked,
     });
   },
 
-  toggleDisabled(){
+  toggleDisabled() {
     this.setState({
-      disabled: !this.state.disabled
+      disabled: !this.state.disabled,
     });
   },
 
   render() {
-    var state = this.state;
-    var calendar = <MonthCalendar locale={CalendarLocale}
-                                  style={{zIndex:1000}}/>;
-    return (<div style={{width: 240, margin: 20}} >
-      <div style={{marginBottom:10}}>
+    const state = this.state;
+    const calendar = (<MonthCalendar locale={CalendarLocale}
+                                    style={{zIndex: 1000}}/>);
+    return (<div style={{width: 240, margin: 20}}>
+      <div style={{marginBottom: 10}}>
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <label><input checked={state.disabled} onChange={this.toggleDisabled} type='checkbox'/> disabled </label>
+        <label><input checked={state.disabled} onChange={this.toggleDisabled} type="checkbox"/> disabled </label>
       </div>
       <div style={{
         'boxSizing': 'border-box',
         'position': 'relative',
         'display': 'block',
         'lineHeight': 1.5,
-        marginBottom: 22
+        marginBottom: 22,
       }}>
         <DatePicker
           animation="slide-up"
@@ -68,18 +71,18 @@ var Test = React.createClass({
           value={state.value} onChange={this.onChange}>
           {
             ({value})=> {
-              return <input style={{width:200}}
+              return (<input style={{width: 200}}
                             readOnly
                             disabled={state.disabled}
                             value={value && formatter.format(value)}
-                            placeholder="请选择日期"/>
+                            placeholder="请选择日期"/>);
             }
           }
 
         </DatePicker>
       </div>
     </div>);
-  }
+  },
 });
 
 function onStandaloneSelect(value) {
@@ -95,17 +98,17 @@ function disabledDate(value) {
 }
 
 ReactDOM.render(
-  <div style={{zIndex:1000,position:'relative',width:600,margin:'0 auto'}}>
+  (<div style={{zIndex: 1000, position: 'relative', width: 600, margin: '0 auto'}}>
     <h2>zh-cn</h2>
     <MonthCalendar locale={CalendarLocale}
-                   style={{zIndex:1000}}
+                   style={{zIndex: 1000}}
                    disabledDate={disabledDate}
                    onSelect={onStandaloneSelect}
                    onChange={onStandaloneChange}
                    defaultValue={defaultCalendarValue}/>
 
-    <div style={{marginTop:200}}>
+    <div style={{marginTop: 200}}>
       <Test defaultValue={now}/>
     </div>
-  </div>
+  </div>)
   , document.getElementById('__react-content'));

@@ -11,27 +11,27 @@ const Calendar = React.createClass({
 
   render() {
     const props = this.props;
-    const {value, direction, prefixCls, locale, selectedValue, formatter, disabledDate, timePicker} = props;
+    const {value, direction, prefixCls, locale, selectedValue, formatter, disabledDate, timePicker, disabledTime} = props;
     const rangeClassName = `${prefixCls}-range`;
     const newProps = {locale, value, prefixCls};
     const index = direction === 'left' ? 0 : 1;
     return (<div className={`${rangeClassName}-part ${rangeClassName}-${direction}`}>
-        <DateInput formatter={formatter}
-                   locale={locale}
-                   prefixCls={prefixCls}
-                   timePicker={timePicker}
-                   disabledDate={disabledDate}
-                   gregorianCalendarLocale={value.locale}
-                   showClear={false}
-                   value={selectedValue[index] || selectedValue[0]}
-                   onChange={props.onInputSelect}/>
+      <DateInput formatter={formatter}
+                 locale={locale}
+                 prefixCls={prefixCls}
+                 timePicker={timePicker}
+                 disabledDate={disabledDate}
+                 disabledTime={disabledTime}
+                 gregorianCalendarLocale={value.locale}
+                 showClear={false}
+                 selectedValue={selectedValue[index] || selectedValue[0]}
+                 onChange={props.onInputSelect}/>
       <div style={{outline: 'none'}}>
         <CalendarHeader
           {...newProps}
           enableNext={direction === 'right'}
           enablePrev={direction === 'left'}
           onValueChange={props.onValueChange}/>
-
         <div className={`${prefixCls}-calendar-body`}>
           <DateTable
             {...newProps}
@@ -48,7 +48,7 @@ const Calendar = React.createClass({
           timeDisabled={!selectedValue[index] || !!selectedValue.hovering}
           onSelect={this.props.onTimeSelect}
           onToday={this.chooseToday}
-          />
+        />
       </div>
     </div>);
   },

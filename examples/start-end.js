@@ -1,3 +1,5 @@
+/* eslint react/no-multi-comp:0, no-console:0 */
+
 import 'rc-calendar/assets/index.less';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -15,25 +17,31 @@ const timePickerElement = <TimePicker />;
 const formatter = new DateTimeFormat('yyyy-MM-dd HH:mm:ss');
 const dateFormatter = new DateTimeFormat('yyyy-MM-dd');
 
+const SHOW_TIME = true;
+
+const now = new GregorianCalendar(zhCn);
+now.setTime(Date.now());
+
 function getFormatter(showTime) {
   return showTime ? formatter : dateFormatter;
 }
 
-var Picker = React.createClass({
+const Picker = React.createClass({
   getDefaultProps() {
     return {
-      showTime: true,
-      disabled: false
+      showTime: SHOW_TIME,
+      disabled: false,
     };
   },
   render() {
     const props = this.props;
-    var calendar = <Calendar locale={CalendarLocale}
-                             timePicker={props.showTime?timePickerElement:null}
+    const calendar = (<Calendar locale={CalendarLocale}
+                             defaultValue={now}
+                             timePicker={props.showTime ? timePickerElement : null}
                              showOk
                              disabledDate={props.disabledDate}
-                             />;
-    return <DatePicker
+    />);
+    return (<DatePicker
       animation="slide-up"
       disabled={props.disabled}
       calendar={calendar}
@@ -43,7 +51,7 @@ var Picker = React.createClass({
         ({value})=> {
           return (
             <span>
-                <input placeholder="请选择日期" style={{width:250}}
+                <input placeholder="请选择日期" style={{width: 250}}
                        disabled={props.disabled}
                        readOnly
                        value={value && getFormatter(props.showTime).format(value)}/>
@@ -51,61 +59,65 @@ var Picker = React.createClass({
           );
         }
       }
-    </DatePicker>;
-  }
+    </DatePicker>);
+  },
 });
 
-var Test = React.createClass({
+const Test = React.createClass({
   getInitialState() {
     return {
       startValue: null,
-      endValue: null
+      endValue: null,
     };
   },
 
-  disabledEndDate(endValue) {
-    if(!endValue){
-      return false;
-    }
-    if (!this.state.startValue) {
-      return false;
-    }
-    return endValue.getTime() <= this.state.startValue.getTime();
-  },
-
-  disabledStartDate(startValue) {
-    if(!startValue){
-      return false;
-    }
-    if (!this.state.endValue) {
-      return false;
-    }
-    return startValue.getTime() >= this.state.endValue.getTime();
-  },
-
   onChange(field, value) {
-    console.log('onChange', field, value && getFormatter().format(value))
+    console.log('onChange', field, value && getFormatter(SHOW_TIME).format(value));
     this.setState({
       [field]: value,
     });
   },
 
+  disabledEndDate(endValue) {
+    if (!endValue) {
+      return false;
+    }
+    const startValue = this.state.startValue;
+    if (!startValue) {
+      return false;
+    }
+    // console.log(getFormatter(SHOW_TIME).format(startValue), getFormatter(SHOW_TIME).format(endValue));
+    return SHOW_TIME ? endValue.getTime() < startValue.getTime() : endValue.compareToDay(startValue) <= 0;
+  },
+
+  disabledStartDate(startValue) {
+    if (!startValue) {
+      return false;
+    }
+    const endValue = this.state.endValue;
+    if (!endValue) {
+      return false;
+    }
+    // console.log(getFormatter(SHOW_TIME).format(startValue), getFormatter(SHOW_TIME).format(endValue));
+    return SHOW_TIME ? endValue.getTime() < startValue.getTime() : startValue.compareToDay(endValue) >= 0;
+  },
+
   render() {
-    var state = this.state;
-    return <div style={{width: 240, margin: 20}}>
+    const state = this.state;
+    return (<div style={{width: 240, margin: 20}}>
       <p>
         开始时间：
         <Picker disabledDate={this.disabledStartDate} value={state.startValue}
-                onChange={this.onChange.bind(this,'startValue')}/>
+                onChange={this.onChange.bind(this, 'startValue')}/>
       </p>
 
       <p>
         结束时间：
         <Picker disabledDate={this.disabledEndDate} value={state.endValue}
-                onChange={this.onChange.bind(this,'endValue')}/>
+                onChange={this.onChange.bind(this, 'endValue')}/>
       </p>
-    </div>;
-  }
+    </div>);
+  },
 });
 
 

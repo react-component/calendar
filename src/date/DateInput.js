@@ -1,10 +1,13 @@
 import React, {PropTypes} from 'react';
 import ReactDOM from 'react-dom';
+import {getTimeConfig} from '../util/index';
 
 function copyTime(target, source) {
-  target.setHourOfDay(source.getHourOfDay());
-  target.setMinutes(source.getMinutes());
-  target.setSeconds(source.getSeconds());
+  if (source) {
+    target.setHourOfDay(source.getHourOfDay());
+    target.setMinutes(source.getMinutes());
+    target.setSeconds(source.getSeconds());
+  }
   return target;
 }
 
@@ -18,22 +21,22 @@ const DateInput = React.createClass({
     onClear: PropTypes.func,
     placeholder: PropTypes.string,
     onSelect: PropTypes.func,
-    value: PropTypes.object,
+    selectedValue: PropTypes.object,
   },
 
   getInitialState() {
-    const value = this.props.value;
+    const selectedValue = this.props.selectedValue;
     return {
-      str: value && this.props.formatter.format(value) || '',
+      str: selectedValue && this.props.formatter.format(selectedValue) || '',
       invalid: false,
     };
   },
 
   componentWillReceiveProps(nextProps) {
     // when popup show, click body will call this, bug!
-    const value = nextProps.value;
+    const selectedValue = nextProps.selectedValue;
     this.setState({
-      str: value && nextProps.formatter.format(value) || '',
+      str: selectedValue && nextProps.formatter.format(selectedValue) || '',
       invalid: false,
     });
   },
@@ -50,7 +53,7 @@ const DateInput = React.createClass({
         value = copyTime(formatter.parse(str, {
           locale: gregorianCalendarLocale,
           obeyCount: true,
-        }), this.props.value);
+        }), this.props.selectedValue);
       } catch (ex) {
         this.setState({
           invalid: true,
@@ -58,7 +61,7 @@ const DateInput = React.createClass({
         return;
       }
       if (value && (!disabledDate || !disabledDate(value))) {
-        const originalValue = this.props.value;
+        const originalValue = this.props.selectedValue;
         if (originalValue && value) {
           if (originalValue.getTime() !== value.getTime()) {
             onChange(value);
@@ -92,16 +95,19 @@ const DateInput = React.createClass({
   render() {
     const props = this.props;
     const {invalid, str} = this.state;
-    const {locale, prefixCls, placeholder, value, onChange, timePicker} = props;
+    const {selectedValue, locale, prefixCls, placeholder, onChange, timePicker, disabledTime, gregorianCalendarLocale} = props;
     const invalidClass = invalid ? `${prefixCls}-input-invalid` : '';
+    const disabledTimeConfig = timePicker ? getTimeConfig(selectedValue, disabledTime) : null;
     return (<div className={`${prefixCls}-input-wrap`}>
       <div className={`${prefixCls}-time-picker-wrap`}>
         {timePicker ? React.cloneElement(timePicker, {
           showClear: false,
           allowEmpty: false,
           getPopupContainer: this.getRootDOMNode,
-          value,
+          gregorianCalendarLocale,
+          value: selectedValue,
           onChange,
+          ...disabledTimeConfig,
         }) : null}
       </div>
       <div className={`${prefixCls}-date-input-wrap`}>

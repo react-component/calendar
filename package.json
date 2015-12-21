@@ -1,6 +1,6 @@
 {
   "name": "rc-calendar",
-  "version": "5.0.0-alpha1",
+  "version": "5.0.0",
   "description": "React Calendar",
   "keywords": [
     "react",
@@ -49,7 +49,7 @@
     "pre-commit": "1.x",
     "rc-select": "5.x",
     "rc-server": "3.x",
-    "rc-time-picker": "1.0.0-alpha1",
+    "rc-time-picker": "1.x",
     "rc-tools": "4.x",
     "react": "0.14.x",
     "react-addons-test-utils": "~0.14.0",

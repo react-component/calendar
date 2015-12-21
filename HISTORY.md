@@ -1,6 +1,12 @@
 # History
 ----
 
+## 5.0.0 / 2015-12-21
+
+- use rc-time-picker, add timePicker, disabledTime props
+- remove showTime props
+- remove bootstrap style
+
 ## 4.0.0 / 2015-11-18
 
 - refactor!

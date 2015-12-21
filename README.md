@@ -142,6 +142,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>whether to disable select of current date</td>
         </tr>
         <tr>
+          <td>disabledTime</td>
+          <td>Function(current:GregorianCalendar):Object</td>
+          <td>null</td>
+          <td>a function which return a object with member of disabledHours/disabledMinutes/disabledSeconds according to rc-time-picker</td>
+        </tr>
+        <tr>
           <td>showDateInput</td>
           <td>Boolean</td>
           <td>true</td>
@@ -160,10 +166,10 @@ http://react-component.github.io/calendar/examples/index.html
           <td>whether to show today button</td>
         </tr>
         <tr>
-          <td>showTime</td>
-          <td>Boolean</td>
-          <td>true</td>
-          <td>whether to support time select</td>
+          <td>timePicker</td>
+          <td>React Element</td>
+          <td>null</td>
+          <td>rc-timer-picker element</td>
         </tr>
         <tr>
           <td>onSelect</td>
@@ -254,10 +260,10 @@ http://react-component.github.io/calendar/examples/index.html
           <td>whether to show week number of year</td>
         </tr>
         <tr>
-          <td>showTime</td>
-          <td>Boolean</td>
-          <td>true</td>
-          <td>whether to support time select</td>
+          <td>timePicker</td>
+          <td>React Element</td>
+          <td>null</td>
+          <td>rc-timer-picker element</td>
         </tr>
         <tr>
           <td>onSelect</td>

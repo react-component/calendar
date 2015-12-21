@@ -4,6 +4,7 @@ import rcUtil from 'rc-util';
 const toFragment = rcUtil.Children.mapSelf;
 import TodayButton from '../calendar/TodayButton';
 import OkButton from '../calendar/OkButton';
+import {getTimeConfig} from '../util/index';
 
 const CalendarFooter = React.createClass({
   propTypes: {
@@ -22,13 +23,14 @@ const CalendarFooter = React.createClass({
 
   render() {
     const props = this.props;
-    const {value, prefixCls, showDateInput} = props;
+    const {value, prefixCls, showDateInput, disabledTime, gregorianCalendarLocale, selectedValue} = props;
     let timePicker = !showDateInput && props.timePicker || null;
+    const disabledTimeConfig = timePicker ? getTimeConfig(selectedValue, disabledTime) : null;
     let footerEl = null;
     if (props.showToday || timePicker) {
       let nowEl;
       if (props.showToday) {
-        nowEl = <TodayButton {...props}/>;
+        nowEl = <TodayButton {...props} value={value}/>;
       }
       let okBtn;
       if (props.showOk) {
@@ -42,8 +44,10 @@ const CalendarFooter = React.createClass({
         timePicker = React.cloneElement(timePicker, {
           onChange: this.onSelect,
           allowEmpty: false,
+          gregorianCalendarLocale,
+          ...disabledTimeConfig,
           getPopupContainer: this.getRootDOMNode,
-          value,
+          value: selectedValue,
         });
       }
       footerEl = (

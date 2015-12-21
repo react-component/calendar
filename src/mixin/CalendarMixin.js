@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import classnames from 'classnames';
 import GregorianCalendar from 'gregorian-calendar';
+import {isAllowedDate} from '../util/index';
 
 function noop() {
 }
@@ -113,7 +114,8 @@ const CalendarMixin = {
 
   isAllowedDate(value) {
     const disabledDate = this.props.disabledDate;
-    return !disabledDate || !disabledDate(value);
+    const disabledTime = this.props.disabledTime;
+    return isAllowedDate(value, disabledDate, disabledTime);
   },
 };
 

@@ -1,10 +1,11 @@
-import 'rc-calendar/assets/index.less';
+/* eslint react/no-multi-comp:0, no-console:0 */
 
+import 'rc-calendar/assets/index.less';
 import RangeCalendar from 'rc-calendar/src/RangeCalendar';
 import GregorianCalendarFormat from 'gregorian-calendar-format';
 import React from 'react';
 import ReactDOM from 'react-dom';
-var formatter = new GregorianCalendarFormat('yyyy-MM-dd HH:mm:ss');
+const formatter = new GregorianCalendarFormat('yyyy-MM-dd HH:mm:ss');
 import GregorianCalendar from 'gregorian-calendar';
 import zhCn from 'gregorian-calendar/lib/locale/zh_CN';
 import CalendarLocale from 'rc-calendar/src/locale/zh_CN';
@@ -14,51 +15,51 @@ import 'rc-time-picker/assets/index.css';
 import TimePicker from 'rc-time-picker';
 const timePickerElement = <TimePicker />;
 
-var value = new GregorianCalendar(zhCn);
-value.setTime(Date.now());
+const now = new GregorianCalendar(zhCn);
+now.setTime(Date.now());
 
 function disabledDate(current) {
-  var date = new Date();
+  const date = new Date();
   date.setHours(0);
   date.setMinutes(0);
   date.setSeconds(0);
-  return current.getTime() < date.getTime();  //can not select days before today
+  return current.getTime() < date.getTime();  // can not select days before today
 }
 
 function onStandaloneChange(value) {
   console.log('onChange');
-  console.log(value[0] && formatter.format(value[0]), value[1] && formatter.format(value[1]))
+  console.log(value[0] && formatter.format(value[0]), value[1] && formatter.format(value[1]));
 }
 
 function onStandaloneSelect(value) {
   console.log('onSelect');
-  console.log(formatter.format(value[0]), formatter.format(value[1]))
+  console.log(formatter.format(value[0]), formatter.format(value[1]));
 }
 
 function onStandaloneOk(value) {
   console.log('onOk');
-  console.log(formatter.format(value[0]), formatter.format(value[1]))
+  console.log(formatter.format(value[0]), formatter.format(value[1]));
 }
 
 const Test = React.createClass({
-  getInitialState(){
-    const end = value.clone();
+  getInitialState() {
+    const end = now.clone();
     end.addDayOfMonth(5);
     return {
-      value: [value, end]
+      value: [now, end],
     };
   },
 
-  onChange(value){
+  onChange(value) {
     this.setState({value});
   },
 
-  render(){
+  render() {
     const state = this.state;
-    const calendar = <RangeCalendar showWeekNumber={false}
+    const calendar = (<RangeCalendar showWeekNumber={false}
                                     locale={CalendarLocale}
                                     disabledDate={disabledDate}
-                                    timePicker={timePickerElement}/>;
+                                    timePicker={timePickerElement}/>);
     return (<Picker value={state.value}
                     onChange={this.onChange}
                     animation="slide-up"
@@ -66,23 +67,24 @@ const Test = React.createClass({
       {
         ({value}) => {
           return (<span>
-                <input placeholder="请选择日期" style={{width:350}}
+                <input placeholder="请选择日期" style={{width: 350}}
                        disabled={state.disabled}
                        readOnly
                        className="ant-calendar-picker-input ant-input"
-                       value={value && (formatter.format(value[0])+' - '+formatter.format(value[1]))}/>
+                       value={value && (formatter.format(value[0]) + ' - ' + formatter.format(value[1]))}/>
                 </span>);
         }
       }
     </Picker>);
-  }
+  },
 });
 
 ReactDOM.render(
   <div>
     <h2>calendar (zh-cn)</h2>
-    <div style={{margin:10}}>
+    <div style={{margin: 10}}>
       <RangeCalendar showWeekNumber
+                     defaultValue={now}
                      locale={CalendarLocale}
                      onChange={onStandaloneChange}
                      onSelect={onStandaloneSelect}
@@ -92,8 +94,7 @@ ReactDOM.render(
     </div>
     <br/>
 
-    <div style={{margin:20}}>
+    <div style={{margin: 20}}>
       <Test />
     </div>
   </div>, document.getElementById('__react-content'));
-

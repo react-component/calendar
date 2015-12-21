@@ -1,12 +1,9 @@
 import React from 'react';
 import DateConstants from './DateConstants';
 import {getTitleString} from '../util/';
-import {compareByDay} from '../util/';
 
 function isSameDay(one, two) {
-  return one.getYear() === two.getYear() &&
-    one.getMonth() === two.getMonth() &&
-    one.getDayOfMonth() === two.getDayOfMonth();
+  return one && two && one.compareToDay(two) === 0;
 }
 
 function beforeCurrentMonthYear(current, today) {
@@ -137,12 +134,12 @@ const DateTBody = React.createClass({
             if (startValue && endValue) {
               if (isSameDay(current, endValue) && !selectedValue.hovering) {
                 selected = true;
-              } else if (compareByDay(current, startValue) > 0 && compareByDay(current, endValue) < 0) {
+              } else if (current.compareToDay(startValue) > 0 && current.compareToDay(endValue) < 0) {
                 cls += ' ' + inRangeClass;
               }
             }
           }
-        } else if (isSameDay(current, value)) {
+        } else if (isSameDay(current, selectedValue)) {
           selected = true;
         }
         if (isBeforeCurrentMonthYear) {
@@ -151,6 +148,7 @@ const DateTBody = React.createClass({
         if (isAfterCurrentMonthYear) {
           cls += ' ' + nextMonthDayClass;
         }
+
         if (disabledDate) {
           if (disabledDate(current, value)) {
             disabled = true;
