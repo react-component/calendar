@@ -25,7 +25,7 @@ const CalendarFooter = React.createClass({
     const props = this.props;
     const {value, prefixCls, showDateInput, disabledTime, gregorianCalendarLocale, selectedValue} = props;
     let timePicker = !showDateInput && props.timePicker || null;
-    const disabledTimeConfig = timePicker ? getTimeConfig(selectedValue, disabledTime) : null;
+    const disabledTimeConfig = disabledTime && timePicker ? getTimeConfig(selectedValue, disabledTime) : null;
     let footerEl = null;
     if (props.showToday || timePicker) {
       let nowEl;

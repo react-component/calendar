@@ -97,7 +97,7 @@ const DateInput = React.createClass({
     const {invalid, str} = this.state;
     const {selectedValue, locale, prefixCls, placeholder, onChange, timePicker, disabledTime, gregorianCalendarLocale} = props;
     const invalidClass = invalid ? `${prefixCls}-input-invalid` : '';
-    const disabledTimeConfig = timePicker ? getTimeConfig(selectedValue, disabledTime) : null;
+    const disabledTimeConfig = disabledTime && timePicker ? getTimeConfig(selectedValue, disabledTime) : null;
     return (<div className={`${prefixCls}-input-wrap`}>
       <div className={`${prefixCls}-time-picker-wrap`}>
         {timePicker ? React.cloneElement(timePicker, {
