@@ -1925,7 +1925,7 @@ webpackJsonp([0],{
 	    var selectedValue = props.selectedValue;
 	
 	    var timePicker = !showDateInput && props.timePicker || null;
-	    var disabledTimeConfig = timePicker ? (0, _utilIndex.getTimeConfig)(selectedValue, disabledTime) : null;
+	    var disabledTimeConfig = disabledTime && timePicker ? (0, _utilIndex.getTimeConfig)(selectedValue, disabledTime) : null;
 	    var footerEl = null;
 	    if (props.showToday || timePicker) {
 	      var nowEl = undefined;
@@ -2342,7 +2342,7 @@ webpackJsonp([0],{
 	    var gregorianCalendarLocale = props.gregorianCalendarLocale;
 	
 	    var invalidClass = invalid ? prefixCls + '-input-invalid' : '';
-	    var disabledTimeConfig = timePicker ? (0, _utilIndex.getTimeConfig)(selectedValue, disabledTime) : null;
+	    var disabledTimeConfig = disabledTime && timePicker ? (0, _utilIndex.getTimeConfig)(selectedValue, disabledTime) : null;
 	    return _react2['default'].createElement(
 	      'div',
 	      { className: prefixCls + '-input-wrap' },
