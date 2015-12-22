@@ -3539,6 +3539,11 @@ webpackJsonp([2],{
 	        onInputSelect: onInputSelect.bind(this, 'left'),
 	        onTimeSelect: onTimeSelect.bind(this, 'left'),
 	        onValueChange: onValueChange.bind(this, 'left') })),
+	      _react2['default'].createElement(
+	        'span',
+	        { className: prefixCls + '-range-middle' },
+	        '~'
+	      ),
 	      _react2['default'].createElement(_rangeCalendarCalendarPart2['default'], _extends({}, props, newProps, { direction: 'right',
 	        formatter: this.getFormatter(),
 	        value: this.getEndValue(),
@@ -3547,7 +3552,7 @@ webpackJsonp([2],{
 	        onValueChange: onValueChange.bind(this, 'right') })),
 	      _react2['default'].createElement(
 	        'div',
-	        { style: { textAlign: 'center' } },
+	        { className: prefixCls + '-range-bottom' },
 	        _react2['default'].createElement(_calendarTodayButton2['default'], _extends({}, props, { value: state.value,
 	          onToday: this.onToday })),
 	        _react2['default'].createElement(_calendarOkButton2['default'], _extends({}, props, { value: state.value,

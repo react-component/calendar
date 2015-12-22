@@ -913,18 +913,12 @@
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
 }
 .rc-calendar-range {
-  width: 524px;
+  width: 502px;
   overflow: hidden;
 }
 .rc-calendar-range-part {
   width: 250px;
   position: relative;
-}
-.rc-calendar-range.rc-calendar-week-number {
-  width: 574px;
-}
-.rc-calendar-range.rc-calendar-week-number .rc-calendar-range-part {
-  width: 286px;
 }
 .rc-calendar-range-left {
   float: left;
@@ -932,9 +926,76 @@
 .rc-calendar-range-right {
   float: right;
 }
+.rc-calendar-range-middle {
+  position: absolute;
+  left: 50%;
+  width: 20px;
+  margin-left: -10px;
+  text-align: center;
+  height: 35px;
+  line-height: 35px;
+}
+.rc-calendar-range .rc-calendar-date-input-wrap,
+.rc-calendar-range .rc-calendar-time-picker-wrap {
+  width: 47%;
+}
+.rc-calendar-range .rc-calendar-time-picker-wrap {
+  position: absolute;
+  left: 50%;
+}
+.rc-calendar-range .rc-time-picker-input {
+  width: 100%;
+}
+.rc-calendar-range .rc-calendar-input-wrap {
+  height: 35px;
+}
+.rc-calendar-range .rc-calendar-input,
+.rc-calendar-range .rc-time-picker-input {
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  padding: 1px 7px;
+  height: 22px;
+}
+.rc-calendar-range .rc-time-picker-icon {
+  display: none;
+}
+.rc-calendar-range .rc-calendar-calendar-body,
+.rc-calendar-range .rc-calendar-decade-panel-body,
+.rc-calendar-range .rc-calendar-year-panel-body,
+.rc-calendar-range .rc-calendar-month-panel-body {
+  border-bottom: 1px solid #e9e9e9;
+}
+.rc-calendar-range.rc-calendar-week-number {
+  width: 574px;
+}
+.rc-calendar-range.rc-calendar-week-number .rc-calendar-range-part {
+  width: 286px;
+}
+.rc-calendar-range .rc-calendar-year-panel,
+.rc-calendar-range .rc-calendar-month-panel {
+  top: 35px;
+}
+.rc-calendar-range .rc-calendar-month-panel .rc-calendar-year-panel {
+  top: 0;
+}
+.rc-calendar-range .rc-calendar-decade-panel-table,
+.rc-calendar-range .rc-calendar-year-panel-table,
+.rc-calendar-range .rc-calendar-month-panel-table {
+  height: 198px;
+}
 .rc-calendar-range .rc-calendar-in-range-cell {
   background: #ebf4f8;
   border-radius: 0;
+}
+.rc-calendar-range-bottom {
+  text-align: right;
+}
+.rc-calendar-range .rc-calendar-ok-btn {
+  position: static;
+  margin: 9px;
+}
+.rc-calendar-range .rc-calendar-today-btn {
+  margin: 12px 9px 0;
 }
 .rc-calendar-full-header {
   padding: 5px 10px;
