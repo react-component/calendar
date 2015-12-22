@@ -1,5 +1,5 @@
 .@{prefixClass}-range {
-  width: 524px;
+  width: 502px;
   overflow: hidden;
 
   &-part {
@@ -21,6 +21,20 @@
 
   &-right {
     float: right;
+  }
+
+  &-middle {
+    position: absolute;
+    left: 50%;
+    width: 20px;
+    margin-left: -10px;
+    text-align: center;
+    height: 35px;
+    line-height: 35px;
+  }
+
+  &-bottom {
+    text-align: center;
   }
 
   .@{prefixClass}-in-range-cell {
