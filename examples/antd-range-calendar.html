@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>antd-range-calendar.js - example - rc-calendar@5.0.2</title>
+  <title>antd-range-calendar.js - example - rc-calendar@5.1.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -257,7 +257,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
 <div class="container">
   <div class="header">
-    <h1>rc-calendar@5.0.2</h1>
+    <h1>rc-calendar@5.1.0</h1>
 
     <p>React Calendar</p>
   </div>
@@ -279,7 +279,7 @@ import Picker from <span class="hljs-string">'rc-calendar/lib/Picker'</span>;
 
 import <span class="hljs-string">'rc-time-picker/assets/index.css'</span>;
 import TimePicker from <span class="hljs-string">'rc-time-picker'</span>;
-<span class="hljs-keyword">const</span> timePickerElement = <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">TimePicker</span> /&gt;</span>;</span>
+<span class="hljs-keyword">const</span> timePickerElement = <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">TimePicker</span> <span class="hljs-attribute">placeholder</span>=<span class="hljs-value">"请选择时间"</span>/&gt;</span>;</span>
 
 <span class="hljs-keyword">const</span> now = <span class="hljs-keyword">new</span> GregorianCalendar(zhCn);
 now.setTime(<span class="hljs-built_in">Date</span>.now());
@@ -292,19 +292,23 @@ now.setTime(<span class="hljs-built_in">Date</span>.now());
   <span class="hljs-keyword">return</span> current.getTime() &lt; date.getTime();  <span class="hljs-comment">// can not select days before today</span>
 }
 
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">format</span><span class="hljs-params">(v)</span> </span>{
+  <span class="hljs-keyword">return</span> v &amp;&amp; formatter.format(v);
+}
+
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onStandaloneChange</span><span class="hljs-params">(value)</span> </span>{
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onChange'</span>);
-  <span class="hljs-built_in">console</span>.log(value[<span class="hljs-number">0</span>] &amp;&amp; formatter.format(value[<span class="hljs-number">0</span>]), value[<span class="hljs-number">1</span>] &amp;&amp; formatter.format(value[<span class="hljs-number">1</span>]));
+  <span class="hljs-built_in">console</span>.log(value[<span class="hljs-number">0</span>] &amp;&amp; format(value[<span class="hljs-number">0</span>]), value[<span class="hljs-number">1</span>] &amp;&amp; format(value[<span class="hljs-number">1</span>]));
 }
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onStandaloneSelect</span><span class="hljs-params">(value)</span> </span>{
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onSelect'</span>);
-  <span class="hljs-built_in">console</span>.log(formatter.format(value[<span class="hljs-number">0</span>]), formatter.format(value[<span class="hljs-number">1</span>]));
+  <span class="hljs-built_in">console</span>.log(format(value[<span class="hljs-number">0</span>]), format(value[<span class="hljs-number">1</span>]));
 }
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onStandaloneOk</span><span class="hljs-params">(value)</span> </span>{
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onOk'</span>);
-  <span class="hljs-built_in">console</span>.log(formatter.format(value[<span class="hljs-number">0</span>]), formatter.format(value[<span class="hljs-number">1</span>]));
+  <span class="hljs-built_in">console</span>.log(format(value[<span class="hljs-number">0</span>]), format(value[<span class="hljs-number">1</span>]));
 }
 
 <span class="hljs-keyword">const</span> Test = React.createClass({
@@ -337,7 +341,7 @@ now.setTime(<span class="hljs-built_in">Date</span>.now());
                        <span class="hljs-attribute">disabled</span>=<span class="hljs-value">{state.disabled}</span>
                        <span class="hljs-attribute">readOnly</span>
                        <span class="hljs-attribute">className</span>=<span class="hljs-value">"ant-calendar-picker-input ant-input"</span>
-                       <span class="hljs-attribute">value</span>=<span class="hljs-value">{value</span> &amp;&amp; (<span class="hljs-attribute">formatter.format</span>(<span class="hljs-attribute">value</span>[<span class="hljs-attribute">0</span>]) + ' <span class="hljs-attribute">-</span> ' + <span class="hljs-attribute">formatter.format</span>(<span class="hljs-attribute">value</span>[<span class="hljs-attribute">1</span>]))}/&gt;</span>
+                       <span class="hljs-attribute">value</span>=<span class="hljs-value">{value</span> &amp;&amp; (<span class="hljs-attribute">format</span>(<span class="hljs-attribute">value</span>[<span class="hljs-attribute">0</span>]) + ' <span class="hljs-attribute">-</span> ' + <span class="hljs-attribute">format</span>(<span class="hljs-attribute">value</span>[<span class="hljs-attribute">1</span>]))}/&gt;</span>
                 <span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>);
         }
       }
@@ -351,6 +355,7 @@ ReactDOM.render(
     <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{margin:</span> <span class="hljs-attribute">10</span>}}&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-title">RangeCalendar</span> <span class="hljs-attribute">showWeekNumber</span>
                      <span class="hljs-attribute">defaultValue</span>=<span class="hljs-value">{now}</span>
+                     <span class="hljs-attribute">dateInputPlaceholder</span>=<span class="hljs-value">{['请输入开始日期',</span> '请输入结束日期']}
                      <span class="hljs-attribute">locale</span>=<span class="hljs-value">{CalendarLocale}</span>
                      <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{onStandaloneChange}</span>
                      <span class="hljs-attribute">onSelect</span>=<span class="hljs-value">{onStandaloneSelect}</span>

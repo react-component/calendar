@@ -1727,7 +1727,9 @@ webpackJsonp([2],{
 	    }
 	  },
 	
-	  onCalendarSelect: function onCalendarSelect(value, cause) {
+	  onCalendarSelect: function onCalendarSelect(value) {
+	    var cause = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	
 	    var props = this.props;
 	    if (!('value' in props)) {
 	      this.setState({
@@ -3181,7 +3183,7 @@ webpackJsonp([2],{
 	
 	var formatter = new _gregorianCalendarFormat2['default']('yyyy-MM-dd HH:mm:ss');
 	
-	var timePickerElement = _react2['default'].createElement(_rcTimePicker2['default'], null);
+	var timePickerElement = _react2['default'].createElement(_rcTimePicker2['default'], { placeholder: '请选择时间' });
 	
 	var now = new _gregorianCalendar2['default'](_gregorianCalendarLibLocaleZh_CN2['default']);
 	now.setTime(Date.now());
@@ -3194,19 +3196,23 @@ webpackJsonp([2],{
 	  return current.getTime() < date.getTime(); // can not select days before today
 	}
 	
+	function format(v) {
+	  return v && formatter.format(v);
+	}
+	
 	function onStandaloneChange(value) {
 	  console.log('onChange');
-	  console.log(value[0] && formatter.format(value[0]), value[1] && formatter.format(value[1]));
+	  console.log(value[0] && format(value[0]), value[1] && format(value[1]));
 	}
 	
 	function onStandaloneSelect(value) {
 	  console.log('onSelect');
-	  console.log(formatter.format(value[0]), formatter.format(value[1]));
+	  console.log(format(value[0]), format(value[1]));
 	}
 	
 	function onStandaloneOk(value) {
 	  console.log('onOk');
-	  console.log(formatter.format(value[0]), formatter.format(value[1]));
+	  console.log(format(value[0]), format(value[1]));
 	}
 	
 	var Test = _react2['default'].createClass({
@@ -3246,7 +3252,7 @@ webpackJsonp([2],{
 	            disabled: state.disabled,
 	            readOnly: true,
 	            className: 'ant-calendar-picker-input ant-input',
-	            value: value && formatter.format(value[0]) + ' - ' + formatter.format(value[1]) })
+	            value: value && format(value[0]) + ' - ' + format(value[1]) })
 	        );
 	      }
 	    );
@@ -3266,6 +3272,7 @@ webpackJsonp([2],{
 	    { style: { margin: 10 } },
 	    _react2['default'].createElement(_rcCalendarSrcRangeCalendar2['default'], { showWeekNumber: true,
 	      defaultValue: now,
+	      dateInputPlaceholder: ['请输入开始日期', '请输入结束日期'],
 	      locale: _rcCalendarSrcLocaleZh_CN2['default'],
 	      onChange: onStandaloneChange,
 	      onSelect: onStandaloneSelect,
@@ -3293,6 +3300,8 @@ webpackJsonp([2],{
 	});
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }; })();
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -3521,6 +3530,8 @@ webpackJsonp([2],{
 	    var props = this.props;
 	    var state = this.state;
 	    var prefixCls = props.prefixCls;
+	    var dateInputPlaceholder = props.dateInputPlaceholder;
+	
 	    var className = (_className = {}, _defineProperty(_className, props.className, !!props.className), _defineProperty(_className, prefixCls, 1), _defineProperty(_className, prefixCls + '-hidden', !props.visible), _defineProperty(_className, prefixCls + '-range', 1), _defineProperty(_className, prefixCls + '-week-number', props.showWeekNumber), _className);
 	    var classes = (0, _classnames2['default'])(className);
 	    var newProps = {
@@ -3529,6 +3540,19 @@ webpackJsonp([2],{
 	      onDayHover: this.onDayHover
 	    };
 	
+	    var placeholder1 = undefined;
+	    var placeholder2 = undefined;
+	
+	    if (dateInputPlaceholder) {
+	      if (Array.isArray(dateInputPlaceholder)) {
+	        var _dateInputPlaceholder = _slicedToArray(dateInputPlaceholder, 2);
+	
+	        placeholder1 = _dateInputPlaceholder[0];
+	        placeholder2 = _dateInputPlaceholder[1];
+	      } else {
+	        placeholder1 = placeholder2 = dateInputPlaceholder;
+	      }
+	    }
 	    return _react2['default'].createElement(
 	      'div',
 	      { className: classes, style: props.style,
@@ -3536,6 +3560,7 @@ webpackJsonp([2],{
 	      _react2['default'].createElement(_rangeCalendarCalendarPart2['default'], _extends({}, props, newProps, { direction: 'left',
 	        formatter: this.getFormatter(),
 	        value: this.getStartValue(),
+	        placeholder: placeholder1,
 	        onInputSelect: onInputSelect.bind(this, 'left'),
 	        onTimeSelect: onTimeSelect.bind(this, 'left'),
 	        onValueChange: onValueChange.bind(this, 'left') })),
@@ -3546,6 +3571,7 @@ webpackJsonp([2],{
 	      ),
 	      _react2['default'].createElement(_rangeCalendarCalendarPart2['default'], _extends({}, props, newProps, { direction: 'right',
 	        formatter: this.getFormatter(),
+	        placeholder: placeholder2,
 	        value: this.getEndValue(),
 	        onInputSelect: onInputSelect.bind(this, 'right'),
 	        onTimeSelect: onTimeSelect.bind(this, 'right'),
@@ -3617,6 +3643,7 @@ webpackJsonp([2],{
 	    var locale = props.locale;
 	    var selectedValue = props.selectedValue;
 	    var formatter = props.formatter;
+	    var placeholder = props.placeholder;
 	    var disabledDate = props.disabledDate;
 	    var timePicker = props.timePicker;
 	    var disabledTime = props.disabledTime;
@@ -3632,6 +3659,7 @@ webpackJsonp([2],{
 	        prefixCls: prefixCls,
 	        timePicker: timePicker,
 	        disabledDate: disabledDate,
+	        placeholder: placeholder,
 	        disabledTime: disabledTime,
 	        gregorianCalendarLocale: value.locale,
 	        showClear: false,

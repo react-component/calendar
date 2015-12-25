@@ -2179,7 +2179,7 @@ webpackJsonp([0],{
 	          selectedValue: selectedValue
 	        });
 	      }
-	      this.props.onSelect(selectedValue, cause || {});
+	      this.props.onSelect(selectedValue, cause);
 	    }
 	  },
 	
@@ -2477,7 +2477,9 @@ webpackJsonp([0],{
 	    }
 	  },
 	
-	  onCalendarSelect: function onCalendarSelect(value, cause) {
+	  onCalendarSelect: function onCalendarSelect(value) {
+	    var cause = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	
 	    var props = this.props;
 	    if (!('value' in props)) {
 	      this.setState({

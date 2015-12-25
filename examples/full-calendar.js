@@ -537,7 +537,7 @@ webpackJsonp([3],{
 	          selectedValue: selectedValue
 	        });
 	      }
-	      this.props.onSelect(selectedValue, cause || {});
+	      this.props.onSelect(selectedValue, cause);
 	    }
 	  },
 	
