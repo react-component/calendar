@@ -196,7 +196,7 @@ const RangeCalendar = React.createClass({
   render() {
     const props = this.props;
     const state = this.state;
-    const prefixCls = props.prefixCls;
+    const {prefixCls, dateInputPlaceholder} = props;
     const className = {
       [props.className]: !!props.className,
       [prefixCls]: 1,
@@ -211,17 +211,29 @@ const RangeCalendar = React.createClass({
       onDayHover: this.onDayHover,
     };
 
+    let placeholder1;
+    let placeholder2;
+
+    if (dateInputPlaceholder) {
+      if (Array.isArray(dateInputPlaceholder)) {
+        [placeholder1, placeholder2] = dateInputPlaceholder;
+      } else {
+        placeholder1 = placeholder2 = dateInputPlaceholder;
+      }
+    }
     return (<div className={classes} style={props.style}
                  tabIndex="0">
       <CalendarPart {...props} {...newProps} direction="left"
                                              formatter={this.getFormatter()}
                                              value={this.getStartValue()}
+                                             placeholder={placeholder1}
                                              onInputSelect={onInputSelect.bind(this, 'left')}
                                              onTimeSelect={onTimeSelect.bind(this, 'left')}
                                              onValueChange={onValueChange.bind(this, 'left')}/>
       <span className={`${prefixCls}-range-middle`}>~</span>
       <CalendarPart {...props} {...newProps} direction="right"
                                              formatter={this.getFormatter()}
+                                             placeholder={placeholder2}
                                              value={this.getEndValue()}
                                              onInputSelect={onInputSelect.bind(this, 'right')}
                                              onTimeSelect={onTimeSelect.bind(this, 'right')}

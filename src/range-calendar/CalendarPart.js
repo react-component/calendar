@@ -11,7 +11,9 @@ const Calendar = React.createClass({
 
   render() {
     const props = this.props;
-    const {value, direction, prefixCls, locale, selectedValue, formatter, disabledDate, timePicker, disabledTime} = props;
+    const {value, direction, prefixCls,
+      locale, selectedValue, formatter, placeholder,
+      disabledDate, timePicker, disabledTime} = props;
     const rangeClassName = `${prefixCls}-range`;
     const newProps = {locale, value, prefixCls};
     const index = direction === 'left' ? 0 : 1;
@@ -21,6 +23,7 @@ const Calendar = React.createClass({
                  prefixCls={prefixCls}
                  timePicker={timePicker}
                  disabledDate={disabledDate}
+                 placeholder={placeholder}
                  disabledTime={disabledTime}
                  gregorianCalendarLocale={value.locale}
                  showClear={false}

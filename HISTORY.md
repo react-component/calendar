@@ -1,6 +1,10 @@
 # History
 ----
 
+## 5.1.0 / 2015-12-25
+
+- support dateInputPlaceholder for RangeCalendar
+
 ## 5.0.0 / 2015-12-21
 
 - use rc-time-picker, add timePicker, disabledTime props

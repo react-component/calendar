@@ -94,7 +94,7 @@ const CalendarMixin = {
           selectedValue,
         });
       }
-      this.props.onSelect(selectedValue, cause || {});
+      this.props.onSelect(selectedValue, cause);
     }
   },
 

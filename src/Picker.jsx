@@ -70,7 +70,7 @@ const Picker = React.createClass({
     }
   },
 
-  onCalendarSelect(value, cause) {
+  onCalendarSelect(value, cause = {}) {
     const props = this.props;
     if (!('value' in props)) {
       this.setState({

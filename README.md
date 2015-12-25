@@ -277,6 +277,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>function(){}</td>
           <td>called when a date range is changed inside calendar (next year/next month/keyboard)</td>
         </tr>
+        <tr>
+          <td>dateInputPlaceholder</td>
+          <td>String[]</td>
+          <td></td>
+          <td>range date input's placeholders</td>
+        </tr>
     </tbody>
 </table>
 

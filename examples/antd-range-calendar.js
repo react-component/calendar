@@ -13,7 +13,7 @@ import Picker from 'rc-calendar/src/Picker';
 
 import 'rc-time-picker/assets/index.css';
 import TimePicker from 'rc-time-picker';
-const timePickerElement = <TimePicker />;
+const timePickerElement = <TimePicker placeholder="请选择时间"/>;
 
 const now = new GregorianCalendar(zhCn);
 now.setTime(Date.now());
@@ -26,19 +26,23 @@ function disabledDate(current) {
   return current.getTime() < date.getTime();  // can not select days before today
 }
 
+function format(v) {
+  return v && formatter.format(v);
+}
+
 function onStandaloneChange(value) {
   console.log('onChange');
-  console.log(value[0] && formatter.format(value[0]), value[1] && formatter.format(value[1]));
+  console.log(value[0] && format(value[0]), value[1] && format(value[1]));
 }
 
 function onStandaloneSelect(value) {
   console.log('onSelect');
-  console.log(formatter.format(value[0]), formatter.format(value[1]));
+  console.log(format(value[0]), format(value[1]));
 }
 
 function onStandaloneOk(value) {
   console.log('onOk');
-  console.log(formatter.format(value[0]), formatter.format(value[1]));
+  console.log(format(value[0]), format(value[1]));
 }
 
 const Test = React.createClass({
@@ -71,7 +75,7 @@ const Test = React.createClass({
                        disabled={state.disabled}
                        readOnly
                        className="ant-calendar-picker-input ant-input"
-                       value={value && (formatter.format(value[0]) + ' - ' + formatter.format(value[1]))}/>
+                       value={value && (format(value[0]) + ' - ' + format(value[1]))}/>
                 </span>);
         }
       }
@@ -85,6 +89,7 @@ ReactDOM.render(
     <div style={{margin: 10}}>
       <RangeCalendar showWeekNumber
                      defaultValue={now}
+                     dateInputPlaceholder={['请输入开始日期', '请输入结束日期']}
                      locale={CalendarLocale}
                      onChange={onStandaloneChange}
                      onSelect={onStandaloneSelect}
