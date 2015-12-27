@@ -15,17 +15,35 @@ function onSelect(value) {
   console.log('select', dateFormatter.format(value));
 }
 
-ReactDOM.render(<div style={{zIndex: 1000, position: 'relative'}}>
-  <FullCalendar
-    style={{margin: 10}}
-    Select={Select}
-    fullscreen={false}
-    locale={CalendarLocale}/>
-  <FullCalendar
-    style={{margin: 10}}
-    Select={Select}
-    fullscreen
-    defaultType="month"
-    onSelect={onSelect}
-    locale={CalendarLocale}/>
-</div>, document.getElementById('__react-content'));
+const App = React.createClass({
+  getInitialState() {
+    return {
+      type: 'month',
+    };
+  },
+  onTypeChange(type) {
+    this.setState({ type });
+  },
+  render() {
+    return (
+      <div style={{zIndex: 1000, position: 'relative'}}>
+        <FullCalendar
+          style={{margin: 10}}
+          Select={Select}
+          fullscreen={false}
+          onSelect={onSelect}
+          locale={CalendarLocale}/>
+        <FullCalendar
+          style={{margin: 10}}
+          Select={Select}
+          fullscreen
+          onSelect={onSelect}
+          type={this.state.type}
+          onTypeChange={this.onTypeChange}
+          locale={CalendarLocale}/>
+      </div>
+    );
+  },
+});
+
+ReactDOM.render(<App />, document.getElementById('__react-content'));

@@ -497,6 +497,18 @@ http://react-component.github.io/calendar/examples/index.html
           <td>default panel type: date/month</td>
         </tr>
         <tr>
+          <td>type</td>
+          <td>string</td>
+          <td></td>
+          <td>panel type: date/month</td>
+        </tr>
+        <tr>
+          <td>onTypeChange</td>
+          <td>function(type)</td>
+          <td></td>
+          <td>called when panel type change</td>
+        </tr>
+        <tr>
           <td>fullscreen</td>
           <td>bool</td>
           <td>false</td>
