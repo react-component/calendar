@@ -608,22 +608,40 @@ webpackJsonp([3],{
 	  console.log('select', dateFormatter.format(value));
 	}
 	
-	_reactDom2['default'].render(_react2['default'].createElement(
-	  'div',
-	  { style: { zIndex: 1000, position: 'relative' } },
-	  _react2['default'].createElement(_rcCalendarSrcFullCalendar2['default'], {
-	    style: { margin: 10 },
-	    Select: _rcSelect2['default'],
-	    fullscreen: false,
-	    locale: _rcCalendarSrcLocaleZh_CN2['default'] }),
-	  _react2['default'].createElement(_rcCalendarSrcFullCalendar2['default'], {
-	    style: { margin: 10 },
-	    Select: _rcSelect2['default'],
-	    fullscreen: true,
-	    defaultType: 'month',
-	    onSelect: onSelect,
-	    locale: _rcCalendarSrcLocaleZh_CN2['default'] })
-	), document.getElementById('__react-content'));
+	var App = _react2['default'].createClass({
+	  displayName: 'App',
+	
+	  getInitialState: function getInitialState() {
+	    return {
+	      type: 'month'
+	    };
+	  },
+	  onTypeChange: function onTypeChange(type) {
+	    this.setState({ type: type });
+	  },
+	  render: function render() {
+	    return _react2['default'].createElement(
+	      'div',
+	      { style: { zIndex: 1000, position: 'relative' } },
+	      _react2['default'].createElement(_rcCalendarSrcFullCalendar2['default'], {
+	        style: { margin: 10 },
+	        Select: _rcSelect2['default'],
+	        fullscreen: false,
+	        onSelect: onSelect,
+	        locale: _rcCalendarSrcLocaleZh_CN2['default'] }),
+	      _react2['default'].createElement(_rcCalendarSrcFullCalendar2['default'], {
+	        style: { margin: 10 },
+	        Select: _rcSelect2['default'],
+	        fullscreen: true,
+	        onSelect: onSelect,
+	        type: this.state.type,
+	        onTypeChange: this.onTypeChange,
+	        locale: _rcCalendarSrcLocaleZh_CN2['default'] })
+	    );
+	  }
+	});
+	
+	_reactDom2['default'].render(_react2['default'].createElement(App, null), document.getElementById('__react-content'));
 
 /***/ },
 
@@ -669,6 +687,8 @@ webpackJsonp([3],{
 	
 	  propTypes: {
 	    defaultType: _react.PropTypes.string,
+	    type: _react.PropTypes.string,
+	    onTypeChange: _react.PropTypes.func,
 	    fullscreen: _react.PropTypes.bool,
 	    monthCellRender: _react.PropTypes.func,
 	    dateCellRender: _react.PropTypes.func,
@@ -685,20 +705,34 @@ webpackJsonp([3],{
 	      defaultType: 'date',
 	      fullscreen: false,
 	      showTypeSwitch: true,
-	      showHeader: true
+	      showHeader: true,
+	      onTypeChange: function onTypeChange() {}
 	    };
 	  },
 	  getInitialState: function getInitialState() {
-	    return {
-	      type: this.props.defaultType
-	    };
+	    var type = undefined;
+	    if ('type' in this.props) {
+	      type = this.props.type;
+	    } else {
+	      type = this.props.defaultType;
+	    }
+	    return { type: type };
+	  },
+	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	    if ('type' in nextProps) {
+	      this.setState({
+	        type: nextProps.type
+	      });
+	    }
 	  },
 	  onMonthSelect: function onMonthSelect(value) {
-	    this.setType('date');
 	    this.onSelect(value, { target: 'month' });
 	  },
 	  setType: function setType(type) {
-	    this.setState({ type: type });
+	    if (!('type' in this.props)) {
+	      this.setState({ type: type });
+	    }
+	    this.props.onTypeChange(type);
 	  },
 	  render: function render() {
 	    var props = this.props;

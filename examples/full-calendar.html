@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>full-calendar.js - example - rc-calendar@5.1.0</title>
+  <title>full-calendar.js - example - rc-calendar@5.2.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -257,7 +257,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
 <div class="container">
   <div class="header">
-    <h1>rc-calendar@5.1.0</h1>
+    <h1>rc-calendar@5.2.0</h1>
 
     <p>React Calendar</p>
   </div>
@@ -281,20 +281,38 @@ import Select from <span class="hljs-string">'rc-select'</span>;
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'select'</span>, dateFormatter.format(value));
 }
 
-ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{zIndex:</span> <span class="hljs-attribute">1000</span>, <span class="hljs-attribute">position:</span> '<span class="hljs-attribute">relative</span>'}}&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">FullCalendar</span>
-    <span class="hljs-attribute">style</span>=<span class="hljs-value">{{margin:</span> <span class="hljs-attribute">10</span>}}
-    <span class="hljs-attribute">Select</span>=<span class="hljs-value">{Select}</span>
-    <span class="hljs-attribute">fullscreen</span>=<span class="hljs-value">{false}</span>
-    <span class="hljs-attribute">locale</span>=<span class="hljs-value">{CalendarLocale}</span>/&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">FullCalendar</span>
-    <span class="hljs-attribute">style</span>=<span class="hljs-value">{{margin:</span> <span class="hljs-attribute">10</span>}}
-    <span class="hljs-attribute">Select</span>=<span class="hljs-value">{Select}</span>
-    <span class="hljs-attribute">fullscreen</span>
-    <span class="hljs-attribute">defaultType</span>=<span class="hljs-value">"month"</span>
-    <span class="hljs-attribute">onSelect</span>=<span class="hljs-value">{onSelect}</span>
-    <span class="hljs-attribute">locale</span>=<span class="hljs-value">{CalendarLocale}</span>/&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>, document.getElementById('__react-content'));
+<span class="hljs-keyword">const</span> App = React.createClass({
+  getInitialState() {
+    <span class="hljs-keyword">return</span> {
+      type: <span class="hljs-string">'month'</span>,
+    };
+  },
+  onTypeChange(type) {
+    <span class="hljs-keyword">this</span>.setState({ type });
+  },
+  render() {
+    <span class="hljs-keyword">return</span> (
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{zIndex:</span> <span class="hljs-attribute">1000</span>, <span class="hljs-attribute">position:</span> '<span class="hljs-attribute">relative</span>'}}&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">FullCalendar</span>
+          <span class="hljs-attribute">style</span>=<span class="hljs-value">{{margin:</span> <span class="hljs-attribute">10</span>}}
+          <span class="hljs-attribute">Select</span>=<span class="hljs-value">{Select}</span>
+          <span class="hljs-attribute">fullscreen</span>=<span class="hljs-value">{false}</span>
+          <span class="hljs-attribute">onSelect</span>=<span class="hljs-value">{onSelect}</span>
+          <span class="hljs-attribute">locale</span>=<span class="hljs-value">{CalendarLocale}</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">FullCalendar</span>
+          <span class="hljs-attribute">style</span>=<span class="hljs-value">{{margin:</span> <span class="hljs-attribute">10</span>}}
+          <span class="hljs-attribute">Select</span>=<span class="hljs-value">{Select}</span>
+          <span class="hljs-attribute">fullscreen</span>
+          <span class="hljs-attribute">onSelect</span>=<span class="hljs-value">{onSelect}</span>
+          <span class="hljs-attribute">type</span>=<span class="hljs-value">{this.state.type}</span>
+          <span class="hljs-attribute">onTypeChange</span>=<span class="hljs-value">{this.onTypeChange}</span>
+          <span class="hljs-attribute">locale</span>=<span class="hljs-value">{CalendarLocale}</span>/&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+    );
+  },
+});
+
+ReactDOM.render(<span class="hljs-tag">&lt;<span class="hljs-title">App</span> /&gt;</span>, document.getElementById('__react-content'));
 </span></code></pre></div>
 </div>
 <a href="http://github.com/react-component/calendar">
