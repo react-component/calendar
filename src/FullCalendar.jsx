@@ -31,9 +31,13 @@ const FullCalendar = React.createClass({
     };
   },
   getInitialState() {
-    return {
-      type: this.props.defaultType,
-    };
+    let type;
+    if ('type' in this.props) {
+      type = this.props.type;
+    } else {
+      type = this.props.defaultType;
+    }
+    return { type };
   },
   componentWillReceiveProps(nextProps) {
     if ('type' in nextProps) {
