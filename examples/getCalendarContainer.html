@@ -276,31 +276,59 @@ import <span class="hljs-string">'rc-dialog/assets/index.css'</span>;
 <span class="hljs-keyword">const</span> dateFormatter = <span class="hljs-keyword">new</span> DateTimeFormat(<span class="hljs-string">'yyyy-MM-dd'</span>);
 
 <span class="hljs-keyword">const</span> Test = React.createClass({
+  getInitialState() {
+    <span class="hljs-keyword">return</span> {
+      open: <span class="hljs-literal">false</span>,
+      destroy: <span class="hljs-literal">false</span>,
+    };
+  },
   getCalendarContainer() {
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.refs.d || <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'d'</span>);
   },
+  setVisible(open) {
+    <span class="hljs-keyword">this</span>.setState({
+      open,
+    });
+  },
+  open() {
+    <span class="hljs-keyword">this</span>.setVisible(<span class="hljs-literal">true</span>);
+  },
+  close() {
+    <span class="hljs-keyword">this</span>.setVisible(<span class="hljs-literal">false</span>);
+  },
+  destroy() {
+    <span class="hljs-keyword">this</span>.setState({
+      destroy: <span class="hljs-literal">true</span>,
+    });
+  },
   render() {
-    <span class="hljs-keyword">const</span> calendar = <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Calendar</span> /&gt;</span>;</span>
-    <span class="hljs-keyword">return</span> (<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Dialog</span> <span class="hljs-attribute">visible</span> <span class="hljs-attribute">closable</span>=<span class="hljs-value">{false}</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"d"</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"d"</span>/&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">DatePicker</span>
-          <span class="hljs-attribute">getCalendarContainer</span>=<span class="hljs-value">{this.getCalendarContainer}</span>
-          <span class="hljs-attribute">calendar</span>=<span class="hljs-value">{calendar}</span>&gt;</span>
-          {
-            ({value})=&gt; {
-              return (
-                <span class="hljs-tag">&lt;<span class="hljs-title">span</span>&gt;</span>
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.state.destroy) {
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+    }
+    <span class="hljs-keyword">return</span> (<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">onClick</span>=<span class="hljs-value">{this.open}</span>&gt;</span>open<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
+      &amp;nbsp;
+      <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">onClick</span>=<span class="hljs-value">{this.destroy}</span>&gt;</span>destroy<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">Dialog</span> <span class="hljs-attribute">visible</span>=<span class="hljs-value">{this.state.open}</span> <span class="hljs-attribute">onClose</span>=<span class="hljs-value">{this.close}</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"d"</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"d"</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{marginTop:</span> <span class="hljs-attribute">20</span>}}&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">DatePicker</span>
+            <span class="hljs-attribute">getCalendarContainer</span>=<span class="hljs-value">{this.getCalendarContainer}</span>
+            <span class="hljs-attribute">calendar</span>=<span class="hljs-value">{&lt;Calendar</span> /&gt;</span>}&gt;
+            {
+              ({value})=&gt; {
+                return (
+                  <span class="hljs-tag">&lt;<span class="hljs-title">span</span>&gt;</span>
                 <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{width:</span> <span class="hljs-attribute">250</span>}}
                        <span class="hljs-attribute">readOnly</span>
                        <span class="hljs-attribute">value</span>=<span class="hljs-value">{value</span> &amp;&amp; <span class="hljs-attribute">dateFormatter.format</span>(<span class="hljs-attribute">value</span>)}/&gt;</span>
                 <span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
-              );
+                );
+              }
             }
-          }
-        <span class="hljs-tag">&lt;/<span class="hljs-title">DatePicker</span>&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">Dialog</span>&gt;</span>);
+          <span class="hljs-tag">&lt;/<span class="hljs-title">DatePicker</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">Dialog</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>);
   },
 });
 

@@ -2415,34 +2415,73 @@ webpackJsonp([4],{
 	var Test = _react2['default'].createClass({
 	  displayName: 'Test',
 	
+	  getInitialState: function getInitialState() {
+	    return {
+	      open: false,
+	      destroy: false
+	    };
+	  },
 	  getCalendarContainer: function getCalendarContainer() {
 	    return this.refs.d || document.getElementById('d');
 	  },
+	  setVisible: function setVisible(open) {
+	    this.setState({
+	      open: open
+	    });
+	  },
+	  open: function open() {
+	    this.setVisible(true);
+	  },
+	  close: function close() {
+	    this.setVisible(false);
+	  },
+	  destroy: function destroy() {
+	    this.setState({
+	      destroy: true
+	    });
+	  },
 	  render: function render() {
-	    var calendar = _react2['default'].createElement(_rcCalendar2['default'], null);
+	    if (this.state.destroy) {
+	      return null;
+	    }
 	    return _react2['default'].createElement(
-	      _rcDialog2['default'],
-	      { visible: true, closable: false },
-	      _react2['default'].createElement('div', { id: 'd', ref: 'd' }),
+	      'div',
+	      null,
 	      _react2['default'].createElement(
-	        'div',
-	        null,
+	        'button',
+	        { onClick: this.open },
+	        'open'
+	      ),
+	      ' ',
+	      _react2['default'].createElement(
+	        'button',
+	        { onClick: this.destroy },
+	        'destroy'
+	      ),
+	      _react2['default'].createElement(
+	        _rcDialog2['default'],
+	        { visible: this.state.open, onClose: this.close },
+	        _react2['default'].createElement('div', { id: 'd', ref: 'd' }),
 	        _react2['default'].createElement(
-	          _rcCalendarSrcPicker2['default'],
-	          {
-	            getCalendarContainer: this.getCalendarContainer,
-	            calendar: calendar },
-	          function (_ref) {
-	            var value = _ref.value;
+	          'div',
+	          { style: { marginTop: 20 } },
+	          _react2['default'].createElement(
+	            _rcCalendarSrcPicker2['default'],
+	            {
+	              getCalendarContainer: this.getCalendarContainer,
+	              calendar: _react2['default'].createElement(_rcCalendar2['default'], null) },
+	            function (_ref) {
+	              var value = _ref.value;
 	
-	            return _react2['default'].createElement(
-	              'span',
-	              null,
-	              _react2['default'].createElement('input', { style: { width: 250 },
-	                readOnly: true,
-	                value: value && dateFormatter.format(value) })
-	            );
-	          }
+	              return _react2['default'].createElement(
+	                'span',
+	                null,
+	                _react2['default'].createElement('input', { style: { width: 250 },
+	                  readOnly: true,
+	                  value: value && dateFormatter.format(value) })
+	              );
+	            }
+	          )
 	        )
 	      )
 	    );
