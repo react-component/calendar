@@ -1,6 +1,6 @@
 {
   "name": "rc-calendar",
-  "version": "5.2.0",
+  "version": "5.2.1",
   "description": "React Calendar",
   "keywords": [
     "react",
@@ -47,6 +47,7 @@
     "jquery": "~1.11.3",
     "object-assign": "4.x",
     "pre-commit": "1.x",
+    "rc-dialog": "^5.3.1",
     "rc-select": "5.x",
     "rc-server": "3.x",
     "rc-time-picker": "1.x",

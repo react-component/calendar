@@ -341,12 +341,6 @@ http://react-component.github.io/calendar/examples/index.html
           <td>whether to disable select of current month</td>
         </tr>
         <tr>
-          <td>getCalendarContainer</td>
-          <td>Function():Element</td>
-          <td>function(){return document.body;}</td>
-          <td>dom node where calendar to be rendered into</td>
-        </tr>
-        <tr>
           <td>onSelect</td>
           <td>Function(date: GregorianCalendar)</td>
           <td>function(){}</td>
@@ -450,6 +444,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>Boolean</td>
           <td></td>
           <td>current open state of picker. controlled prop</td>
+        </tr>
+        <tr>
+          <td>getCalendarContainer</td>
+          <td>Function():Element</td>
+          <td>function(){return document.body;}</td>
+          <td>dom node where calendar to be rendered into</td>
         </tr>
     </tbody>
 </table>
