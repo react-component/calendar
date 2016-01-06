@@ -24,6 +24,8 @@ const Picker = React.createClass({
     defaultOpen: PropTypes.bool,
     prefixCls: PropTypes.string,
     placement: PropTypes.any,
+    value: PropTypes.object,
+    defaultValue: PropTypes.object,
     align: PropTypes.object,
   },
 
@@ -55,7 +57,7 @@ const Picker = React.createClass({
 
   componentWillReceiveProps(nextProps) {
     const {value, open} = nextProps;
-    if (value !== undefined) {
+    if ('value' in nextProps) {
       this.setState({value});
     }
     if (open !== undefined) {

@@ -48,13 +48,13 @@ const CalendarMixin = {
   componentWillReceiveProps(nextProps) {
     let {value} = nextProps;
     const {selectedValue} = nextProps;
-    if (value !== undefined) {
+    if ('value' in nextProps) {
       value = value || nextProps.defaultValue || getNowByCurrentStateValue(this.state.value);
       this.setState({
         value,
       });
     }
-    if (selectedValue !== undefined) {
+    if ('selectedValue' in nextProps) {
       this.setState({
         selectedValue,
       });
