@@ -10,31 +10,59 @@ import 'rc-dialog/assets/index.css';
 const dateFormatter = new DateTimeFormat('yyyy-MM-dd');
 
 const Test = React.createClass({
+  getInitialState() {
+    return {
+      open: false,
+      destroy: false,
+    };
+  },
   getCalendarContainer() {
     return this.refs.d || document.getElementById('d');
   },
+  setVisible(open) {
+    this.setState({
+      open,
+    });
+  },
+  open() {
+    this.setVisible(true);
+  },
+  close() {
+    this.setVisible(false);
+  },
+  destroy() {
+    this.setState({
+      destroy: true,
+    });
+  },
   render() {
-    const calendar = <Calendar />;
-    return (<Dialog visible closable={false}>
-      <div id="d" ref="d"/>
-      <div>
-        <DatePicker
-          getCalendarContainer={this.getCalendarContainer}
-          calendar={calendar}>
-          {
-            ({value})=> {
-              return (
-                <span>
+    if (this.state.destroy) {
+      return null;
+    }
+    return (<div>
+      <button onClick={this.open}>open</button>
+      &nbsp;
+      <button onClick={this.destroy}>destroy</button>
+      <Dialog visible={this.state.open} onClose={this.close}>
+        <div id="d" ref="d"/>
+        <div style={{marginTop: 20}}>
+          <DatePicker
+            getCalendarContainer={this.getCalendarContainer}
+            calendar={<Calendar />}>
+            {
+              ({value})=> {
+                return (
+                  <span>
                 <input style={{width: 250}}
                        readOnly
                        value={value && dateFormatter.format(value)}/>
                 </span>
-              );
+                );
+              }
             }
-          }
-        </DatePicker>
-      </div>
-    </Dialog>);
+          </DatePicker>
+        </div>
+      </Dialog></div>);
   },
 });
 
