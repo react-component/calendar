@@ -1,283 +1,10 @@
-webpackJsonp([0],{
+webpackJsonp([4],{
 
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(1);
+	module.exports = __webpack_require__(283);
 
-
-/***/ },
-
-/***/ 1:
-/***/ function(module, exports, __webpack_require__) {
-
-	/* eslint react/no-multi-comp:0, no-console:0 */
-	
-	'use strict';
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	__webpack_require__(2);
-	
-	var _react = __webpack_require__(3);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactDom = __webpack_require__(160);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
-	var _rcCalendar = __webpack_require__(161);
-	
-	var _rcCalendar2 = _interopRequireDefault(_rcCalendar);
-	
-	var _rcCalendarSrcPicker = __webpack_require__(211);
-	
-	var _rcCalendarSrcPicker2 = _interopRequireDefault(_rcCalendarSrcPicker);
-	
-	var _gregorianCalendarLibLocaleZh_CN = __webpack_require__(237);
-	
-	var _gregorianCalendarLibLocaleZh_CN2 = _interopRequireDefault(_gregorianCalendarLibLocaleZh_CN);
-	
-	// spm error
-	
-	var _gregorianCalendarFormat = __webpack_require__(196);
-	
-	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
-	
-	var _gregorianCalendar = __webpack_require__(164);
-	
-	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
-	
-	var _rcCalendarSrcLocaleZh_CN = __webpack_require__(238);
-	
-	var _rcCalendarSrcLocaleZh_CN2 = _interopRequireDefault(_rcCalendarSrcLocaleZh_CN);
-	
-	var _objectAssign = __webpack_require__(187);
-	
-	var _objectAssign2 = _interopRequireDefault(_objectAssign);
-	
-	var _rcTimePickerLibLocaleZh_CN = __webpack_require__(240);
-	
-	var _rcTimePickerLibLocaleZh_CN2 = _interopRequireDefault(_rcTimePickerLibLocaleZh_CN);
-	
-	__webpack_require__(241);
-	
-	var _rcTimePicker = __webpack_require__(242);
-	
-	var _rcTimePicker2 = _interopRequireDefault(_rcTimePicker);
-	
-	var timePickerElement = _react2['default'].createElement(_rcTimePicker2['default'], { locale: _rcTimePickerLibLocaleZh_CN2['default'] });
-	
-	function disabledTime(date) {
-	  if (date && date.getDayOfMonth() === 15) {
-	    return {
-	      disabledHours: function disabledHours() {
-	        return [3, 4];
-	      }
-	    };
-	  }
-	  return {
-	    disabledHours: function disabledHours() {
-	      return [1, 2];
-	    }
-	  };
-	}
-	
-	var now = new _gregorianCalendar2['default'](_gregorianCalendarLibLocaleZh_CN2['default']);
-	now.setTime(Date.now());
-	
-	// change locale
-	var CalendarLocale2 = (0, _objectAssign2['default'])({}, _rcCalendarSrcLocaleZh_CN2['default'], {
-	  monthFormat: 'MMMM'
-	});
-	
-	var dateFormatter = new _gregorianCalendarFormat2['default']('yyyy-MM-dd');
-	var formatter = new _gregorianCalendarFormat2['default']('yyyy-MM-dd HH:mm:ss');
-	
-	function getFormatter(showTime) {
-	  return showTime ? formatter : dateFormatter;
-	}
-	
-	var defaultCalendarValue = new _gregorianCalendar2['default'](_gregorianCalendarLibLocaleZh_CN2['default']);
-	defaultCalendarValue.setTime(Date.now());
-	defaultCalendarValue.addMonth(-1);
-	
-	function disabledDate(current) {
-	  if (!current) {
-	    // allow empty select
-	    return false;
-	  }
-	  var date = new Date();
-	  date.setHours(0);
-	  date.setMinutes(0);
-	  date.setSeconds(0);
-	  return current.getYear() + 10 < date.getFullYear(); // can not select days before today
-	}
-	
-	var Test = _react2['default'].createClass({
-	  displayName: 'Test',
-	
-	  propTypes: {
-	    defaultValue: _react2['default'].PropTypes.object,
-	    defaultCalendarValue: _react2['default'].PropTypes.object
-	  },
-	
-	  getInitialState: function getInitialState() {
-	    return {
-	      showTime: true,
-	      showDateInput: true,
-	      disabled: false,
-	      value: this.props.defaultValue
-	    };
-	  },
-	
-	  onChange: function onChange(value) {
-	    console.log('DatePicker change: ' + (value && formatter.format(value)));
-	    this.setState({ value: value });
-	  },
-	
-	  onShowTimeChange: function onShowTimeChange(e) {
-	    this.setState({
-	      showTime: e.target.checked
-	    });
-	  },
-	
-	  onShowDateInputChange: function onShowDateInputChange(e) {
-	    this.setState({
-	      showDateInput: e.target.checked
-	    });
-	  },
-	
-	  toggleDisabled: function toggleDisabled() {
-	    this.setState({
-	      disabled: !this.state.disabled
-	    });
-	  },
-	
-	  render: function render() {
-	    var state = this.state;
-	    var calendar = _react2['default'].createElement(_rcCalendar2['default'], { locale: CalendarLocale2,
-	      style: { zIndex: 1000 },
-	      dateInputPlaceholder: '请输入',
-	      disabledTime: state.showTime ? disabledTime : null,
-	      timePicker: state.showTime ? timePickerElement : null,
-	      defaultValue: this.props.defaultCalendarValue,
-	      showOk: true,
-	      showDateInput: state.showDateInput,
-	      disabledDate: disabledDate
-	    });
-	    return _react2['default'].createElement(
-	      'div',
-	      { style: { width: 400, margin: 20 } },
-	      _react2['default'].createElement(
-	        'div',
-	        { style: { marginBottom: 10 } },
-	        _react2['default'].createElement(
-	          'label',
-	          null,
-	          _react2['default'].createElement('input', { type: 'checkbox', checked: state.showTime, onChange: this.onShowTimeChange }),
-	          'showTime'
-	        ),
-	        '    ',
-	        _react2['default'].createElement(
-	          'label',
-	          null,
-	          _react2['default'].createElement('input', { type: 'checkbox', checked: state.showDateInput, onChange: this.onShowDateInputChange }),
-	          'showDateInput'
-	        ),
-	        '    ',
-	        _react2['default'].createElement(
-	          'label',
-	          null,
-	          _react2['default'].createElement('input', { checked: state.disabled, onChange: this.toggleDisabled, type: 'checkbox' }),
-	          ' disabled '
-	        )
-	      ),
-	      _react2['default'].createElement(
-	        'div',
-	        { style: {
-	            'boxSizing': 'border-box',
-	            'position': 'relative',
-	            'display': 'block',
-	            'lineHeight': 1.5,
-	            marginBottom: 22
-	          } },
-	        _react2['default'].createElement(
-	          _rcCalendarSrcPicker2['default'],
-	          {
-	            animation: 'slide-up',
-	            disabled: state.disabled,
-	            calendar: calendar,
-	            value: state.value,
-	            onChange: this.onChange },
-	          function (_ref) {
-	            var value = _ref.value;
-	
-	            return _react2['default'].createElement(
-	              'span',
-	              null,
-	              _react2['default'].createElement('input', { placeholder: '请选择日期', style: { width: 250 },
-	                disabled: state.disabled,
-	                readOnly: true,
-	                className: 'ant-calendar-picker-input ant-input',
-	                value: value && getFormatter(state.showTime).format(value) })
-	            );
-	          }
-	        )
-	      )
-	    );
-	  }
-	});
-	
-	function onStandaloneSelect(value) {
-	  console.log('onStandaloneSelect');
-	  console.log(value && formatter.format(value));
-	}
-	
-	function onStandaloneChange(value) {
-	  console.log('onStandaloneChange');
-	  console.log(value && formatter.format(value));
-	}
-	
-	_reactDom2['default'].render(_react2['default'].createElement(
-	  'div',
-	  { style: { zIndex: 1000, position: 'relative', width: 900, margin: '20px auto' } },
-	  _react2['default'].createElement(
-	    'h2',
-	    null,
-	    'zh-cn'
-	  ),
-	  _react2['default'].createElement(
-	    'div',
-	    null,
-	    _react2['default'].createElement(
-	      'div',
-	      { style: { margin: 10 } },
-	      _react2['default'].createElement(_rcCalendar2['default'], { showWeekNumber: false,
-	        locale: _rcCalendarSrcLocaleZh_CN2['default'],
-	        defaultValue: now,
-	        showOk: true,
-	        disabledTime: disabledTime,
-	        showToday: true,
-	        timePicker: timePickerElement,
-	        onChange: onStandaloneChange,
-	        disabledDate: disabledDate,
-	        onSelect: onStandaloneSelect })
-	    ),
-	    _react2['default'].createElement(
-	      'div',
-	      { style: { float: 'left', width: 300 } },
-	      _react2['default'].createElement(Test, { defaultValue: now })
-	    ),
-	    _react2['default'].createElement(
-	      'div',
-	      { style: { float: 'right', width: 300 } },
-	      _react2['default'].createElement(Test, { defaultCalendarValue: defaultCalendarValue })
-	    ),
-	    _react2['default'].createElement('div', { style: { clear: 'both' } })
-	  )
-	), document.getElementById('__react-content'));
 
 /***/ },
 
@@ -2648,450 +2375,94 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 237:
-/***/ function(module, exports) {
-
-	/*
-	 * zh-cn locale
-	 * @ignore
-	 * @author yiminghe@gmail.com
-	 */
-	"use strict";
-	
-	module.exports = {
-	  // in minutes
-	  timezoneOffset: 8 * 60,
-	  firstDayOfWeek: 1,
-	  minimalDaysInFirstWeek: 1
-	};
-
-/***/ },
-
-/***/ 238:
+/***/ 283:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _gregorianCalendarFormatLibLocaleZh_CN = __webpack_require__(239);
-	
-	var _gregorianCalendarFormatLibLocaleZh_CN2 = _interopRequireDefault(_gregorianCalendarFormatLibLocaleZh_CN);
-	
-	exports['default'] = {
-	  today: '今天',
-	  now: '此刻',
-	  ok: '确定',
-	  clear: '清除',
-	  month: '月',
-	  year: '年',
-	  previousMonth: '上个月 (翻页上键)',
-	  nextMonth: '下个月 (翻页下键)',
-	  monthSelect: '选择月份',
-	  yearSelect: '选择年份',
-	  decadeSelect: '选择年代',
-	  yearFormat: 'yyyy\'年\'',
-	  monthFormat: 'M\'月\'',
-	  dateFormat: 'yyyy\'年\'M\'月\'d\'日\'',
-	  previousYear: '上一年 (Control键加左方向键)',
-	  nextYear: '下一年 (Control键加右方向键)',
-	  previousDecade: '上一年代',
-	  nextDecade: '下一年代',
-	  previousCentury: '上一世纪',
-	  nextCentury: '下一世纪',
-	  format: _gregorianCalendarFormatLibLocaleZh_CN2['default']
-	};
-	module.exports = exports['default'];
-
-/***/ },
-
-/***/ 239:
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	module.exports = {
-	  eras: ['公元前', '公元'],
-	  months: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
-	  shortMonths: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
-	  weekdays: ['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
-	  shortWeekdays: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
-	  veryShortWeekdays: ['日', '一', '二', '三', '四', '五', '六'],
-	  ampms: ['上午', '下午'],
-	  datePatterns: ['yyyy\'年\'M\'月\'d\'日\' EEEE', 'yyyy\'年\'M\'月\'d\'日\'', 'yyyy-M-d', 'yy-M-d'],
-	  timePatterns: ['ahh\'时\'mm\'分\'ss\'秒\' \'GMT\'Z', 'ahh\'时\'mm\'分\'ss\'秒\'', 'H:mm:ss', 'ah:mm'],
-	  dateTimePattern: '{date} {time}'
-	};
-
-/***/ },
-
-/***/ 240:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var _gregorianCalendarFormatLibLocaleZh_CN = __webpack_require__(239);
-	
-	var _gregorianCalendarFormatLibLocaleZh_CN2 = _interopRequireDefault(_gregorianCalendarFormatLibLocaleZh_CN);
-	
-	exports['default'] = {
-	  clear: '清除',
-	  format: _gregorianCalendarFormatLibLocaleZh_CN2['default']
-	};
-	module.exports = exports['default'];
-
-/***/ },
-
-/***/ 241:
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-
-/***/ 242:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var _TimePicker = __webpack_require__(243);
-	
-	var _TimePicker2 = _interopRequireDefault(_TimePicker);
-	
-	exports['default'] = _TimePicker2['default'];
-	module.exports = exports['default'];
-
-/***/ },
-
-/***/ 243:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	__webpack_require__(2);
 	
 	var _react = __webpack_require__(3);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _rcTrigger = __webpack_require__(213);
+	var _reactDom = __webpack_require__(160);
 	
-	var _rcTrigger2 = _interopRequireDefault(_rcTrigger);
+	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _modulePanel = __webpack_require__(244);
+	var _rcCalendar = __webpack_require__(161);
 	
-	var _modulePanel2 = _interopRequireDefault(_modulePanel);
+	var _rcCalendar2 = _interopRequireDefault(_rcCalendar);
 	
-	var _utilPlacements = __webpack_require__(251);
+	var _rcCalendarSrcPicker = __webpack_require__(211);
 	
-	var _utilPlacements2 = _interopRequireDefault(_utilPlacements);
+	var _rcCalendarSrcPicker2 = _interopRequireDefault(_rcCalendarSrcPicker);
 	
-	var _mixinCommonMixin = __webpack_require__(245);
+	var _gregorianCalendarFormat = __webpack_require__(196);
 	
-	var _mixinCommonMixin2 = _interopRequireDefault(_mixinCommonMixin);
+	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
 	
-	var _utilIndex = __webpack_require__(252);
+	var _rcDialog = __webpack_require__(284);
 	
-	var _gregorianCalendarLibLocaleEn_US = __webpack_require__(167);
+	var _rcDialog2 = _interopRequireDefault(_rcDialog);
 	
-	var _gregorianCalendarLibLocaleEn_US2 = _interopRequireDefault(_gregorianCalendarLibLocaleEn_US);
+	__webpack_require__(288);
 	
-	function noop() {}
+	var dateFormatter = new _gregorianCalendarFormat2['default']('yyyy-MM-dd');
 	
-	function refFn(field, component) {
-	  this[field] = component;
-	}
+	var Test = _react2['default'].createClass({
+	  displayName: 'Test',
 	
-	var Picker = _react2['default'].createClass({
-	  displayName: 'Picker',
-	
-	  propTypes: {
-	    prefixCls: _react.PropTypes.string,
-	    locale: _react.PropTypes.object,
-	    value: _react.PropTypes.object,
-	    disabled: _react.PropTypes.bool,
-	    allowEmpty: _react.PropTypes.bool,
-	    defaultValue: _react.PropTypes.object,
-	    open: _react.PropTypes.bool,
-	    defaultOpen: _react.PropTypes.bool,
-	    align: _react.PropTypes.object,
-	    placement: _react.PropTypes.any,
-	    transitionName: _react.PropTypes.string,
-	    getPopupContainer: _react.PropTypes.func,
-	    gregorianCalendarLocale: _react.PropTypes.object,
-	    placeholder: _react.PropTypes.string,
-	    formatter: _react.PropTypes.any,
-	    showHour: _react.PropTypes.bool,
-	    style: _react.PropTypes.object,
-	    className: _react.PropTypes.string,
-	    showSecond: _react.PropTypes.bool,
-	    disabledHours: _react.PropTypes.func,
-	    disabledMinutes: _react.PropTypes.func,
-	    disabledSeconds: _react.PropTypes.func,
-	    hideDisabledOptions: _react.PropTypes.bool,
-	    onChange: _react.PropTypes.func,
-	    onOpen: _react.PropTypes.func,
-	    onClose: _react.PropTypes.func
+	  getCalendarContainer: function getCalendarContainer() {
+	    return this.refs.d || document.getElementById('d');
 	  },
-	
-	  mixins: [_mixinCommonMixin2['default']],
-	
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      defaultOpen: false,
-	      style: {},
-	      className: '',
-	      gregorianCalendarLocale: _gregorianCalendarLibLocaleEn_US2['default'],
-	      align: {},
-	      allowEmpty: true,
-	      showHour: true,
-	      showSecond: true,
-	      disabledHours: noop,
-	      disabledMinutes: noop,
-	      disabledSeconds: noop,
-	      hideDisabledOptions: false,
-	      placement: 'bottomLeft',
-	      onChange: noop,
-	      onOpen: noop,
-	      onClose: noop
-	    };
-	  },
-	
-	  getInitialState: function getInitialState() {
-	    this.savePanelRef = refFn.bind(this, 'panelInstance');
-	    var _props = this.props;
-	    var defaultOpen = _props.defaultOpen;
-	    var defaultValue = _props.defaultValue;
-	    var _props$open = _props.open;
-	    var open = _props$open === undefined ? defaultOpen : _props$open;
-	    var _props$value = _props.value;
-	    var value = _props$value === undefined ? defaultValue : _props$value;
-	
-	    return {
-	      open: open,
-	      value: value
-	    };
-	  },
-	
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	    var value = nextProps.value;
-	    var open = nextProps.open;
-	
-	    if (value !== undefined) {
-	      this.setState({
-	        value: value
-	      });
-	    }
-	    if (open !== undefined) {
-	      this.setState({ open: open });
-	    }
-	  },
-	
-	  onPanelChange: function onPanelChange(value) {
-	    this.setValue(value);
-	  },
-	
-	  onPanelClear: function onPanelClear() {
-	    this.setValue(null);
-	    this.setOpen(false);
-	  },
-	
-	  onVisibleChange: function onVisibleChange(open) {
-	    this.setOpen(open);
-	  },
-	
-	  onEsc: function onEsc() {
-	    this.setOpen(false);
-	    this.refs.picker.focus();
-	  },
-	
-	  onKeyDown: function onKeyDown(e) {
-	    if (e.keyCode === 40) {
-	      this.setOpen(true);
-	    }
-	  },
-	
-	  setValue: function setValue(value) {
-	    if (!('value' in this.props)) {
-	      this.setState({
-	        value: value
-	      });
-	    }
-	    this.props.onChange(value);
-	  },
-	
-	  getFormatter: function getFormatter() {
-	    var formatter = this.props.formatter;
-	    var locale = this.props.locale;
-	    if (formatter) {
-	      if (formatter === this.lastFormatter) {
-	        return this.normalFormatter;
-	      }
-	      this.normalFormatter = (0, _utilIndex.getFormatter)(formatter, locale);
-	      this.lastFormatter = formatter;
-	      return this.normalFormatter;
-	    }
-	    if (!this.props.showSecond) {
-	      if (!this.notShowSecondFormatter) {
-	        this.notShowSecondFormatter = (0, _utilIndex.getFormatter)('HH:mm', locale);
-	      }
-	      return this.notShowSecondFormatter;
-	    }
-	    if (!this.props.showHour) {
-	      if (!this.notShowHourFormatter) {
-	        this.notShowHourFormatter = (0, _utilIndex.getFormatter)('mm:ss', locale);
-	      }
-	      return this.notShowHourFormatter;
-	    }
-	    if (!this.normalFormatter) {
-	      this.normalFormatter = (0, _utilIndex.getFormatter)('HH:mm:ss', locale);
-	    }
-	    return this.normalFormatter;
-	  },
-	
-	  getPanelElement: function getPanelElement() {
-	    var _props2 = this.props;
-	    var prefixCls = _props2.prefixCls;
-	    var defaultValue = _props2.defaultValue;
-	    var locale = _props2.locale;
-	    var placeholder = _props2.placeholder;
-	    var disabledHours = _props2.disabledHours;
-	    var disabledMinutes = _props2.disabledMinutes;
-	    var disabledSeconds = _props2.disabledSeconds;
-	    var hideDisabledOptions = _props2.hideDisabledOptions;
-	    var allowEmpty = _props2.allowEmpty;
-	    var showHour = _props2.showHour;
-	    var showSecond = _props2.showSecond;
-	    var gregorianCalendarLocale = _props2.gregorianCalendarLocale;
-	    var value = _props2.value;
-	
-	    var calendarLocale = undefined;
-	    if (value) {
-	      calendarLocale = value.locale;
-	    } else if (defaultValue) {
-	      calendarLocale = defaultValue.locale;
-	    } else {
-	      calendarLocale = gregorianCalendarLocale;
-	    }
-	    return _react2['default'].createElement(_modulePanel2['default'], {
-	      prefixCls: prefixCls + '-panel',
-	      ref: this.savePanelRef,
-	      value: this.state.value,
-	      onChange: this.onPanelChange,
-	      gregorianCalendarLocale: calendarLocale,
-	      onClear: this.onPanelClear,
-	      defaultValue: defaultValue,
-	      showHour: showHour,
-	      onEsc: this.onEsc,
-	      showSecond: showSecond,
-	      locale: locale,
-	      allowEmpty: allowEmpty,
-	      formatter: this.getFormatter(),
-	      placeholder: placeholder,
-	      disabledHours: disabledHours,
-	      disabledMinutes: disabledMinutes,
-	      disabledSeconds: disabledSeconds,
-	      hideDisabledOptions: hideDisabledOptions
-	    });
-	  },
-	
-	  setOpen: function setOpen(open, callback) {
-	    var _props3 = this.props;
-	    var onOpen = _props3.onOpen;
-	    var onClose = _props3.onClose;
-	
-	    if (this.state.open !== open) {
-	      this.setState({
-	        open: open
-	      }, callback);
-	      var _event = {
-	        open: open
-	      };
-	      if (open) {
-	        onOpen(_event);
-	      } else {
-	        onClose(_event);
-	      }
-	    }
-	  },
-	
 	  render: function render() {
-	    var _props4 = this.props;
-	    var prefixCls = _props4.prefixCls;
-	    var placeholder = _props4.placeholder;
-	    var placement = _props4.placement;
-	    var align = _props4.align;
-	    var disabled = _props4.disabled;
-	    var transitionName = _props4.transitionName;
-	    var style = _props4.style;
-	    var className = _props4.className;
-	    var showHour = _props4.showHour;
-	    var showSecond = _props4.showSecond;
-	    var getPopupContainer = _props4.getPopupContainer;
-	    var _state = this.state;
-	    var open = _state.open;
-	    var value = _state.value;
-	
-	    var popupClassName = undefined;
-	    if (!showHour || !showSecond) {
-	      popupClassName = prefixCls + '-panel-narrow';
-	    }
+	    var calendar = _react2['default'].createElement(_rcCalendar2['default'], null);
 	    return _react2['default'].createElement(
-	      _rcTrigger2['default'],
-	      {
-	        prefixCls: prefixCls + '-panel',
-	        popupClassName: popupClassName,
-	        popup: this.getPanelElement(),
-	        popupAlign: align,
-	        builtinPlacements: _utilPlacements2['default'],
-	        popupPlacement: placement,
-	        action: disabled ? [] : ['click'],
-	        destroyPopupOnHide: true,
-	        getPopupContainer: getPopupContainer,
-	        popupTransitionName: transitionName,
-	        popupVisible: open,
-	        onPopupVisibleChange: this.onVisibleChange
-	      },
+	      _rcDialog2['default'],
+	      { visible: true, closable: false },
+	      _react2['default'].createElement('div', { id: 'd', ref: 'd' }),
 	      _react2['default'].createElement(
-	        'span',
-	        { className: prefixCls + ' ' + className, style: style },
-	        _react2['default'].createElement('input', { className: prefixCls + '-input',
-	          ref: 'picker', type: 'text', placeholder: placeholder,
-	          readOnly: true,
-	          onKeyDown: this.onKeyDown,
-	          disabled: disabled, value: value && this.getFormatter().format(value) }),
-	        _react2['default'].createElement('span', { className: prefixCls + '-icon' })
+	        'div',
+	        null,
+	        _react2['default'].createElement(
+	          _rcCalendarSrcPicker2['default'],
+	          {
+	            getCalendarContainer: this.getCalendarContainer,
+	            calendar: calendar },
+	          function (_ref) {
+	            var value = _ref.value;
+	
+	            return _react2['default'].createElement(
+	              'span',
+	              null,
+	              _react2['default'].createElement('input', { style: { width: 250 },
+	                readOnly: true,
+	                value: value && dateFormatter.format(value) })
+	            );
+	          }
+	        )
 	      )
 	    );
 	  }
 	});
 	
-	exports['default'] = Picker;
-	module.exports = exports['default'];
+	_reactDom2['default'].render(_react2['default'].createElement(Test, null), document.getElementById('__react-content'));
 
 /***/ },
 
-/***/ 244:
+/***/ 284:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports = __webpack_require__(285);
+
+/***/ },
+
+/***/ 285:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3100,665 +2471,184 @@ webpackJsonp([0],{
 	  value: true
 	});
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var _react = __webpack_require__(3);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _mixinCommonMixin = __webpack_require__(245);
+	var _reactDom = __webpack_require__(160);
 	
-	var _mixinCommonMixin2 = _interopRequireDefault(_mixinCommonMixin);
+	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _Header = __webpack_require__(247);
+	var _Dialog = __webpack_require__(286);
 	
-	var _Header2 = _interopRequireDefault(_Header);
+	var _Dialog2 = _interopRequireDefault(_Dialog);
 	
-	var _Combobox = __webpack_require__(249);
+	var _objectAssign = __webpack_require__(187);
 	
-	var _Combobox2 = _interopRequireDefault(_Combobox);
+	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
 	function noop() {}
 	
-	function generateOptions(length, disabledOptions, hideDisabledOptions) {
-	  var arr = [];
-	  for (var value = 0; value < length; value++) {
-	    if (!disabledOptions || disabledOptions.indexOf(value) < 0 || !hideDisabledOptions) {
-	      arr.push(value);
+	function copy(obj, fields) {
+	  var ret = {};
+	  fields.forEach(function (f) {
+	    if (obj[f] !== undefined) {
+	      ret[f] = obj[f];
 	    }
-	  }
-	  return arr;
+	  });
+	  return ret;
 	}
 	
-	var Panel = _react2['default'].createClass({
-	  displayName: 'Panel',
+	var DialogWrap = (function (_React$Component) {
+	  _inherits(DialogWrap, _React$Component);
 	
-	  propTypes: {
-	    prefixCls: _react.PropTypes.string,
-	    value: _react.PropTypes.object,
-	    locale: _react.PropTypes.object,
-	    placeholder: _react.PropTypes.string,
-	    gregorianCalendarLocale: _react.PropTypes.object,
-	    formatter: _react.PropTypes.object,
-	    disabledHours: _react.PropTypes.func,
-	    disabledMinutes: _react.PropTypes.func,
-	    disabledSeconds: _react.PropTypes.func,
-	    hideDisabledOptions: _react.PropTypes.bool,
-	    onChange: _react.PropTypes.func,
-	    onEsc: _react.PropTypes.func,
-	    allowEmpty: _react.PropTypes.bool,
-	    showHour: _react.PropTypes.bool,
-	    showSecond: _react.PropTypes.bool,
-	    onClear: _react.PropTypes.func
-	  },
+	  function DialogWrap(props) {
+	    var _this = this;
 	
-	  mixins: [_mixinCommonMixin2['default']],
+	    _classCallCheck(this, DialogWrap);
 	
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      onChange: noop,
-	      onClear: noop
+	    _get(Object.getPrototypeOf(DialogWrap.prototype), 'constructor', this).call(this, props);
+	    this.state = {
+	      visible: props.visible
 	    };
-	  },
+	    ['onClose', 'cleanDialogContainer'].forEach(function (m) {
+	      _this[m] = _this[m].bind(_this);
+	    });
+	  }
 	
-	  getInitialState: function getInitialState() {
-	    return {
-	      value: this.props.value,
-	      selectionRange: []
-	    };
-	  },
-	
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	    var value = nextProps.value;
-	    if (value) {
-	      this.setState({
-	        value: value
-	      });
+	  _createClass(DialogWrap, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.componentDidUpdate();
 	    }
-	  },
-	
-	  onChange: function onChange(newValue) {
-	    this.setState({ value: newValue });
-	    this.props.onChange(newValue);
-	  },
-	
-	  onClear: function onClear() {
-	    this.props.onClear();
-	  },
-	
-	  onCurrentSelectPanelChange: function onCurrentSelectPanelChange(currentSelectPanel) {
-	    this.setState({ currentSelectPanel: currentSelectPanel });
-	  },
-	
-	  render: function render() {
-	    var _props = this.props;
-	    var locale = _props.locale;
-	    var prefixCls = _props.prefixCls;
-	    var placeholder = _props.placeholder;
-	    var disabledHours = _props.disabledHours;
-	    var disabledMinutes = _props.disabledMinutes;
-	    var disabledSeconds = _props.disabledSeconds;
-	    var hideDisabledOptions = _props.hideDisabledOptions;
-	    var allowEmpty = _props.allowEmpty;
-	    var showHour = _props.showHour;
-	    var showSecond = _props.showSecond;
-	    var formatter = _props.formatter;
-	    var gregorianCalendarLocale = _props.gregorianCalendarLocale;
-	
-	    var value = this.state.value;
-	    var disabledHourOptions = disabledHours();
-	    var disabledMinuteOptions = disabledMinutes(value ? value.getHourOfDay() : null);
-	    var disabledSecondOptions = disabledSeconds(value ? value.getHourOfDay() : null, value ? value.getMinutes() : null);
-	    var hourOptions = generateOptions(24, disabledHourOptions, hideDisabledOptions);
-	    var minuteOptions = generateOptions(60, disabledMinuteOptions, hideDisabledOptions);
-	    var secondOptions = generateOptions(60, disabledSecondOptions, hideDisabledOptions);
-	
-	    return _react2['default'].createElement(
-	      'div',
-	      { className: prefixCls + '-inner' },
-	      _react2['default'].createElement(_Header2['default'], {
-	        prefixCls: prefixCls,
-	        gregorianCalendarLocale: gregorianCalendarLocale,
-	        locale: locale,
-	        value: value,
-	        currentSelectPanel: this.state.currentSelectPanel,
-	        onEsc: this.props.onEsc,
-	        formatter: formatter,
-	        placeholder: placeholder,
-	        hourOptions: hourOptions,
-	        minuteOptions: minuteOptions,
-	        secondOptions: secondOptions,
-	        disabledHours: disabledHours,
-	        disabledMinutes: disabledMinutes,
-	        disabledSeconds: disabledSeconds,
-	        onChange: this.onChange,
-	        onClear: this.onClear,
-	        allowEmpty: allowEmpty
-	      }),
-	      _react2['default'].createElement(_Combobox2['default'], {
-	        prefixCls: prefixCls,
-	        value: value,
-	        gregorianCalendarLocale: gregorianCalendarLocale,
-	        formatter: formatter,
-	        onChange: this.onChange,
-	        showHour: showHour,
-	        showSecond: showSecond,
-	        hourOptions: hourOptions,
-	        minuteOptions: minuteOptions,
-	        secondOptions: secondOptions,
-	        disabledHours: disabledHours,
-	        disabledMinutes: disabledMinutes,
-	        disabledSeconds: disabledSeconds,
-	        onCurrentSelectPanelChange: this.onCurrentSelectPanelChange
-	      })
-	    );
-	  }
-	});
-	
-	exports['default'] = Panel;
-	module.exports = exports['default'];
-
-/***/ },
-
-/***/ 245:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var _react = __webpack_require__(3);
-	
-	var _localeEn_US = __webpack_require__(246);
-	
-	var _localeEn_US2 = _interopRequireDefault(_localeEn_US);
-	
-	exports['default'] = {
-	  propTypes: {
-	    prefixCls: _react.PropTypes.string,
-	    locale: _react.PropTypes.object
-	  },
-	
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      prefixCls: 'rc-time-picker',
-	      locale: _localeEn_US2['default']
-	    };
-	  }
-	};
-	module.exports = exports['default'];
-
-/***/ },
-
-/***/ 246:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var _gregorianCalendarFormatLibLocaleEn_US = __webpack_require__(197);
-	
-	var _gregorianCalendarFormatLibLocaleEn_US2 = _interopRequireDefault(_gregorianCalendarFormatLibLocaleEn_US);
-	
-	exports['default'] = {
-	  clear: 'Clear',
-	  format: _gregorianCalendarFormatLibLocaleEn_US2['default']
-	};
-	module.exports = exports['default'];
-
-/***/ },
-
-/***/ 247:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var _react = __webpack_require__(3);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _utilSelection = __webpack_require__(248);
-	
-	var _utilSelection2 = _interopRequireDefault(_utilSelection);
-	
-	var Header = _react2['default'].createClass({
-	  displayName: 'Header',
-	
-	  propTypes: {
-	    formatter: _react.PropTypes.object,
-	    prefixCls: _react.PropTypes.string,
-	    gregorianCalendarLocale: _react.PropTypes.object,
-	    locale: _react.PropTypes.object,
-	    disabledDate: _react.PropTypes.func,
-	    placeholder: _react.PropTypes.string,
-	    value: _react.PropTypes.object,
-	    hourOptions: _react.PropTypes.array,
-	    minuteOptions: _react.PropTypes.array,
-	    secondOptions: _react.PropTypes.array,
-	    disabledHours: _react.PropTypes.func,
-	    disabledMinutes: _react.PropTypes.func,
-	    disabledSeconds: _react.PropTypes.func,
-	    onChange: _react.PropTypes.func,
-	    onClear: _react.PropTypes.func,
-	    onEsc: _react.PropTypes.func,
-	    allowEmpty: _react.PropTypes.bool,
-	    currentSelectPanel: _react.PropTypes.string
-	  },
-	
-	  getInitialState: function getInitialState() {
-	    var value = this.props.value;
-	    return {
-	      str: value && this.props.formatter.format(value) || '',
-	      invalid: false
-	    };
-	  },
-	
-	  componentDidMount: function componentDidMount() {
-	    this.timer = setTimeout(this.selectRange, 0);
-	  },
-	
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	    var value = nextProps.value;
-	    this.setState({
-	      str: value && nextProps.formatter.format(value) || '',
-	      invalid: false
-	    });
-	  },
-	
-	  componentDidUpdate: function componentDidUpdate() {
-	    this.timer = setTimeout(this.selectRange, 0);
-	  },
-	
-	  componentWillUnmount: function componentWillUnmount() {
-	    clearTimeout(this.timer);
-	  },
-	
-	  onInputChange: function onInputChange(event) {
-	    var str = event.target.value;
-	    this.setState({
-	      str: str
-	    });
-	    var value = null;
-	    var _props = this.props;
-	    var formatter = _props.formatter;
-	    var gregorianCalendarLocale = _props.gregorianCalendarLocale;
-	    var hourOptions = _props.hourOptions;
-	    var minuteOptions = _props.minuteOptions;
-	    var secondOptions = _props.secondOptions;
-	    var disabledHours = _props.disabledHours;
-	    var disabledMinutes = _props.disabledMinutes;
-	    var disabledSeconds = _props.disabledSeconds;
-	    var onChange = _props.onChange;
-	    var allowEmpty = _props.allowEmpty;
-	
-	    if (str) {
-	      var originalValue = this.props.value;
-	      try {
-	        value = formatter.parse(str, {
-	          locale: gregorianCalendarLocale,
-	          obeyCount: true
-	        });
-	      } catch (ex) {
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(props) {
+	      if ('visible' in props) {
 	        this.setState({
-	          invalid: true
+	          visible: props.visible
 	        });
-	        return;
 	      }
-	
-	      if (value) {
-	        // if time value not allowed, response warning.
-	        if (hourOptions.indexOf(value.getHourOfDay()) < 0 || minuteOptions.indexOf(value.getMinutes()) < 0 || secondOptions.indexOf(value.getSeconds()) < 0) {
-	          this.setState({
-	            invalid: true
-	          });
-	          return;
-	        }
-	
-	        // if time value is disabled, response warning.
-	        var disabledHourOptions = disabledHours();
-	        var disabledMinuteOptions = disabledMinutes(value.getHourOfDay());
-	        var disabledSecondOptions = disabledSeconds(value.getHourOfDay(), value.getMinutes());
-	        if (disabledHourOptions && disabledHourOptions.indexOf(value.getHourOfDay()) >= 0 || disabledMinuteOptions && disabledMinuteOptions.indexOf(value.getMinutes()) >= 0 || disabledSecondOptions && disabledSecondOptions.indexOf(value.getSeconds()) >= 0) {
-	          this.setState({
-	            invalid: true
-	          });
-	          return;
-	        }
-	
-	        if (originalValue && value) {
-	          if (originalValue.getHourOfDay() !== value.getHourOfDay() || originalValue.getMinutes() !== value.getMinutes() || originalValue.getSeconds() !== value.getSeconds()) {
-	            onChange(value);
-	          }
-	        } else if (originalValue !== value) {
-	          onChange(value);
-	        }
-	      } else {
-	        this.setState({
-	          invalid: true
-	        });
-	        return;
+	    }
+	  }, {
+	    key: 'shouldComponentUpdate',
+	    value: function shouldComponentUpdate(nextProps, nextState) {
+	      return !!(this.state.visible || nextState.visible);
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      if (this.dialogRendered) {
+	        _reactDom2['default'].unstable_renderSubtreeIntoContainer(this, this.getDialogElement(), this.getDialogContainer());
 	      }
-	    } else if (allowEmpty) {
-	      onChange(null);
-	    } else {
-	      this.setState({
-	        invalid: true
-	      });
-	      return;
 	    }
-	
-	    this.setState({
-	      invalid: false
-	    });
-	  },
-	
-	  onKeyDown: function onKeyDown(e) {
-	    if (e.keyCode === 27) {
-	      this.props.onEsc();
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      if (this.dialogContainer) {
+	        if (this.state.visible) {
+	          _reactDom2['default'].unstable_renderSubtreeIntoContainer(this, this.getDialogElement({
+	            onAfterClose: this.cleanDialogContainer,
+	            onClose: noop,
+	            visible: false
+	          }), this.dialogContainer);
+	        } else {
+	          this.cleanDialogContainer();
+	        }
+	      }
 	    }
-	  },
+	  }, {
+	    key: 'onClose',
+	    value: function onClose() {
+	      this.props.onClose();
+	    }
+	  }, {
+	    key: 'getDialogContainer',
+	    value: function getDialogContainer() {
+	      if (!this.dialogContainer) {
+	        this.dialogContainer = document.createElement('div');
+	        this.dialogContainer.className = this.props.prefixCls + '-container';
+	        document.body.appendChild(this.dialogContainer);
+	      }
+	      return this.dialogContainer;
+	    }
+	  }, {
+	    key: 'getDialogElement',
+	    value: function getDialogElement(extra) {
+	      var props = this.props;
+	      var dialogProps = copy(props, ['className', 'closable', 'align', 'title', 'footer', 'mask', 'animation', 'transitionName', 'maskAnimation', 'maskTransitionName', 'mousePosition', 'prefixCls', 'style', 'width', 'height', 'zIndex']);
 	
-	  onClear: function onClear() {
-	    this.setState({ str: '' });
-	    this.props.onClear();
-	  },
-	
-	  getClearButton: function getClearButton() {
-	    var _props2 = this.props;
-	    var locale = _props2.locale;
-	    var prefixCls = _props2.prefixCls;
-	    var allowEmpty = _props2.allowEmpty;
-	
-	    if (!allowEmpty) {
+	      (0, _objectAssign2['default'])(dialogProps, {
+	        onClose: this.onClose,
+	        visible: this.state.visible
+	      }, extra);
+	      return _react2['default'].createElement(
+	        _Dialog2['default'],
+	        _extends({}, dialogProps, { key: 'dialog' }),
+	        props.children
+	      );
+	    }
+	  }, {
+	    key: 'cleanDialogContainer',
+	    value: function cleanDialogContainer() {
+	      _reactDom2['default'].unmountComponentAtNode(this.getDialogContainer());
+	      document.body.removeChild(this.dialogContainer);
+	      this.dialogContainer = null;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      this.dialogRendered = this.dialogRendered || this.state.visible;
 	      return null;
 	    }
-	    return _react2['default'].createElement('a', { className: prefixCls + '-clear-btn', role: 'button', title: locale.clear, onMouseDown: this.onClear });
+	  }]);
+	
+	  return DialogWrap;
+	})(_react2['default'].Component);
+	
+	DialogWrap.defaultProps = {
+	  className: '',
+	  align: {
+	    points: ['tc', 'tc'],
+	    offset: [0, 100]
 	  },
-	
-	  getInput: function getInput() {
-	    var _props3 = this.props;
-	    var prefixCls = _props3.prefixCls;
-	    var placeholder = _props3.placeholder;
-	    var _state = this.state;
-	    var invalid = _state.invalid;
-	    var str = _state.str;
-	
-	    var invalidClass = invalid ? prefixCls + '-input-invalid' : '';
-	    return _react2['default'].createElement('input', { className: prefixCls + '-input  ' + invalidClass,
-	      ref: 'input',
-	      onKeyDown: this.onKeyDown,
-	      value: str,
-	      placeholder: placeholder, onChange: this.onInputChange });
-	  },
-	
-	  selectRange: function selectRange() {
-	    this.refs.input.focus();
-	    if (this.props.currentSelectPanel && this.refs.input.value) {
-	      var selectionRangeStart = 0;
-	      var selectionRangeEnd = 0;
-	      if (this.props.currentSelectPanel === 'hour') {
-	        selectionRangeStart = 0;
-	        selectionRangeEnd = this.refs.input.value.indexOf(':');
-	      } else if (this.props.currentSelectPanel === 'minute') {
-	        selectionRangeStart = this.refs.input.value.indexOf(':') + 1;
-	        selectionRangeEnd = this.refs.input.value.lastIndexOf(':');
-	      } else if (this.props.currentSelectPanel === 'second') {
-	        selectionRangeStart = this.refs.input.value.lastIndexOf(':') + 1;
-	        selectionRangeEnd = this.refs.input.value.length;
-	      }
-	      if (selectionRangeEnd - selectionRangeStart === 2) {
-	        (0, _utilSelection2['default'])(this.refs.input, selectionRangeStart, selectionRangeEnd);
-	      }
-	    }
-	  },
-	
-	  render: function render() {
-	    var prefixCls = this.props.prefixCls;
-	
-	    return _react2['default'].createElement(
-	      'div',
-	      { className: prefixCls + '-input-wrap' },
-	      this.getInput(),
-	      this.getClearButton()
-	    );
-	  }
-	});
-	
-	exports['default'] = Header;
-	module.exports = exports['default'];
-
-/***/ },
-
-/***/ 248:
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	exports['default'] = createSelection;
-	
-	function createSelection(field, start, end) {
-	  if (field.createTextRange) {
-	    var selRange = field.createTextRange();
-	    selRange.collapse(true);
-	    selRange.moveStart('character', start);
-	    selRange.moveEnd('character', end);
-	    selRange.select();
-	    field.focus();
-	  } else if (field.setSelectionRange) {
-	    field.focus();
-	    field.setSelectionRange(start, end);
-	  } else if (typeof field.selectionStart !== 'undefined') {
-	    field.selectionStart = start;
-	    field.selectionEnd = end;
-	    field.focus();
-	  }
-	}
-	
-	module.exports = exports['default'];
-
-/***/ },
-
-/***/ 249:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var _react = __webpack_require__(3);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _Select = __webpack_require__(250);
-	
-	var _Select2 = _interopRequireDefault(_Select);
-	
-	var _gregorianCalendar = __webpack_require__(164);
-	
-	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
-	
-	var formatOption = function formatOption(option, disabledOptions) {
-	  var value = '' + option;
-	  if (option < 10) {
-	    value = '0' + option;
-	  }
-	
-	  var disabled = false;
-	  if (disabledOptions && disabledOptions.indexOf(option) >= 0) {
-	    disabled = true;
-	  }
-	
-	  return {
-	    value: value,
-	    disabled: disabled
-	  };
+	  mask: true,
+	  closable: true,
+	  prefixCls: 'rc-dialog',
+	  onClose: noop
 	};
 	
-	var Combobox = _react2['default'].createClass({
-	  displayName: 'Combobox',
+	DialogWrap.propTypes = {
+	  className: _react2['default'].PropTypes.string,
+	  align: _react2['default'].PropTypes.shape({
+	    align: _react2['default'].PropTypes.array,
+	    offset: _react2['default'].PropTypes.arrayOf(_react2['default'].PropTypes.number)
+	  }),
+	  mask: _react2['default'].PropTypes.bool,
+	  closable: _react2['default'].PropTypes.bool,
+	  prefixCls: _react2['default'].PropTypes.string,
+	  visible: _react2['default'].PropTypes.bool,
+	  onClose: _react2['default'].PropTypes.func
+	};
 	
-	  propTypes: {
-	    formatter: _react.PropTypes.object,
-	    prefixCls: _react.PropTypes.string,
-	    value: _react.PropTypes.object,
-	    onChange: _react.PropTypes.func,
-	    showHour: _react.PropTypes.bool,
-	    gregorianCalendarLocale: _react.PropTypes.object,
-	    showSecond: _react.PropTypes.bool,
-	    hourOptions: _react.PropTypes.array,
-	    minuteOptions: _react.PropTypes.array,
-	    secondOptions: _react.PropTypes.array,
-	    disabledHours: _react.PropTypes.func,
-	    disabledMinutes: _react.PropTypes.func,
-	    disabledSeconds: _react.PropTypes.func,
-	    onCurrentSelectPanelChange: _react.PropTypes.func
-	  },
-	
-	  onItemChange: function onItemChange(type, itemValue) {
-	    var onChange = this.props.onChange;
-	
-	    var value = this.props.value;
-	    if (value) {
-	      value = value.clone();
-	    } else {
-	      value = this.getNow().clone();
-	    }
-	    if (type === 'hour') {
-	      value.setHourOfDay(itemValue);
-	    } else if (type === 'minute') {
-	      value.setMinutes(itemValue);
-	    } else {
-	      value.setSeconds(itemValue);
-	    }
-	    onChange(value);
-	  },
-	
-	  onEnterSelectPanel: function onEnterSelectPanel(range) {
-	    this.props.onCurrentSelectPanelChange(range);
-	  },
-	
-	  getHourSelect: function getHourSelect(hour) {
-	    var _props = this.props;
-	    var prefixCls = _props.prefixCls;
-	    var hourOptions = _props.hourOptions;
-	    var disabledHours = _props.disabledHours;
-	    var showHour = _props.showHour;
-	
-	    if (!showHour) {
-	      return null;
-	    }
-	    var disabledOptions = disabledHours();
-	
-	    return _react2['default'].createElement(_Select2['default'], {
-	      prefixCls: prefixCls,
-	      options: hourOptions.map(function (option) {
-	        return formatOption(option, disabledOptions);
-	      }),
-	      selectedIndex: hourOptions.indexOf(hour),
-	      type: 'hour',
-	      onSelect: this.onItemChange,
-	      onMouseEnter: this.onEnterSelectPanel.bind(this, 'hour')
-	    });
-	  },
-	
-	  getMinuteSelect: function getMinuteSelect(minute) {
-	    var _props2 = this.props;
-	    var prefixCls = _props2.prefixCls;
-	    var minuteOptions = _props2.minuteOptions;
-	    var disabledMinutes = _props2.disabledMinutes;
-	
-	    var value = this.props.value || this.getNow();
-	    var disabledOptions = disabledMinutes(value.getHourOfDay());
-	
-	    return _react2['default'].createElement(_Select2['default'], {
-	      prefixCls: prefixCls,
-	      options: minuteOptions.map(function (option) {
-	        return formatOption(option, disabledOptions);
-	      }),
-	      selectedIndex: minuteOptions.indexOf(minute),
-	      type: 'minute',
-	      onSelect: this.onItemChange,
-	      onMouseEnter: this.onEnterSelectPanel.bind(this, 'minute')
-	    });
-	  },
-	
-	  getSecondSelect: function getSecondSelect(second) {
-	    var _props3 = this.props;
-	    var prefixCls = _props3.prefixCls;
-	    var secondOptions = _props3.secondOptions;
-	    var disabledSeconds = _props3.disabledSeconds;
-	    var showSecond = _props3.showSecond;
-	
-	    if (!showSecond) {
-	      return null;
-	    }
-	    var value = this.props.value || this.getNow();
-	    var disabledOptions = disabledSeconds(value.getHourOfDay(), value.getMinutes());
-	
-	    return _react2['default'].createElement(_Select2['default'], {
-	      prefixCls: prefixCls,
-	      options: secondOptions.map(function (option) {
-	        return formatOption(option, disabledOptions);
-	      }),
-	      selectedIndex: secondOptions.indexOf(second),
-	      type: 'second',
-	      onSelect: this.onItemChange,
-	      onMouseEnter: this.onEnterSelectPanel.bind(this, 'second')
-	    });
-	  },
-	
-	  getNow: function getNow() {
-	    if (this.showNow) {
-	      return this.showNow;
-	    }
-	    var value = new _gregorianCalendar2['default'](this.props.gregorianCalendarLocale);
-	    value.setTime(Date.now());
-	    this.showNow = value;
-	    return value;
-	  },
-	
-	  render: function render() {
-	    var prefixCls = this.props.prefixCls;
-	
-	    var value = this.props.value || this.getNow();
-	    return _react2['default'].createElement(
-	      'div',
-	      { className: prefixCls + '-combobox' },
-	      this.getHourSelect(value.getHourOfDay()),
-	      this.getMinuteSelect(value.getMinutes()),
-	      this.getSecondSelect(value.getSeconds())
-	    );
-	  }
-	});
-	
-	exports['default'] = Combobox;
+	exports['default'] = DialogWrap;
 	module.exports = exports['default'];
 
 /***/ },
 
-/***/ 250:
+/***/ 286:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3766,6 +2656,8 @@ webpackJsonp([0],{
 	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -3779,172 +2671,325 @@ webpackJsonp([0],{
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _classnames2 = __webpack_require__(172);
+	var _rcAlign = __webpack_require__(216);
 	
-	var _classnames3 = _interopRequireDefault(_classnames2);
+	var _rcAlign2 = _interopRequireDefault(_rcAlign);
 	
-	var scrollTo = function scrollTo(element, to, duration) {
-	  var requestAnimationFrame = window.requestAnimationFrame || function requestAnimationFrameTimeout() {
-	    return setTimeout(arguments[0], 10);
-	  };
-	  // jump to target if duration zero
-	  if (duration <= 0) {
-	    element.scrollTop = to;
-	    return;
+	var _rcUtil = __webpack_require__(168);
+	
+	var _objectAssign = __webpack_require__(187);
+	
+	var _objectAssign2 = _interopRequireDefault(_objectAssign);
+	
+	var _rcAnimate = __webpack_require__(227);
+	
+	var _rcAnimate2 = _interopRequireDefault(_rcAnimate);
+	
+	var _DOMWrap = __webpack_require__(287);
+	
+	var _DOMWrap2 = _interopRequireDefault(_DOMWrap);
+	
+	function noop() {}
+	
+	function getScroll(w, top) {
+	  var ret = w['page' + (top ? 'Y' : 'X') + 'Offset'];
+	  var method = 'scroll' + (top ? 'Top' : 'Left');
+	  if (typeof ret !== 'number') {
+	    var d = w.document;
+	    ret = d.documentElement[method];
+	    if (typeof ret !== 'number') {
+	      ret = d.body[method];
+	    }
 	  }
-	  var difference = to - element.scrollTop;
-	  var perTick = difference / duration * 10;
+	  return ret;
+	}
 	
-	  requestAnimationFrame(function () {
-	    element.scrollTop = element.scrollTop + perTick;
-	    if (element.scrollTop === to) return;
-	    scrollTo(element, to, duration - 10);
+	function setTransformOrigin(node, value) {
+	  var style = node.style;
+	  ['Webkit', 'Moz', 'Ms', 'ms'].forEach(function (prefix) {
+	    style[prefix + 'TransformOrigin'] = value;
 	  });
-	};
+	  style['transformOrigin'] = value;
+	}
 	
-	var Select = _react2['default'].createClass({
-	  displayName: 'Select',
+	function offset(el) {
+	  var rect = el.getBoundingClientRect();
+	  var pos = {
+	    left: rect.left,
+	    top: rect.top
+	  };
+	  var doc = el.ownerDocument;
+	  var w = doc.defaultView || doc.parentWindow;
+	  pos.left += getScroll(w);
+	  pos.top += getScroll(w, 1);
+	  return pos;
+	}
+	
+	var Dialog = _react2['default'].createClass({
+	  displayName: 'Dialog',
 	
 	  propTypes: {
-	    prefixCls: _react.PropTypes.string,
-	    options: _react.PropTypes.array,
-	    gregorianCalendarLocale: _react.PropTypes.object,
-	    selectedIndex: _react.PropTypes.number,
-	    type: _react.PropTypes.string,
-	    onSelect: _react.PropTypes.func,
-	    onMouseEnter: _react.PropTypes.func
+	    onAfterClose: _react.PropTypes.func,
+	    onClose: _react.PropTypes.func,
+	    closable: _react.PropTypes.bool,
+	    visible: _react.PropTypes.bool,
+	    mousePosition: _react.PropTypes.object
+	  },
+	
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      onAfterClose: noop,
+	      onClose: noop
+	    };
 	  },
 	
 	  componentDidMount: function componentDidMount() {
-	    // jump to selected option
-	    this.scrollToSelected(0);
+	    this.componentDidUpdate({});
 	  },
 	
 	  componentDidUpdate: function componentDidUpdate(prevProps) {
-	    // smooth scroll to selected option
-	    if (prevProps.selectedIndex !== this.props.selectedIndex) {
-	      this.scrollToSelected(120);
-	    }
-	  },
-	
-	  onSelect: function onSelect(value) {
-	    var _props = this.props;
-	    var onSelect = _props.onSelect;
-	    var type = _props.type;
-	
-	    onSelect(type, value);
-	  },
-	
-	  getOptions: function getOptions() {
-	    var _this = this;
-	
-	    var _props2 = this.props;
-	    var options = _props2.options;
-	    var selectedIndex = _props2.selectedIndex;
-	    var prefixCls = _props2.prefixCls;
-	
-	    return options.map(function (item, index) {
-	      var _classnames;
-	
-	      var cls = (0, _classnames3['default'])((_classnames = {}, _defineProperty(_classnames, prefixCls + '-select-option-selected', selectedIndex === index), _defineProperty(_classnames, prefixCls + '-select-option-disabled', item.disabled), _classnames));
-	      var onclick = null;
-	      if (!item.disabled) {
-	        onclick = _this.onSelect.bind(_this, +item.value);
+	    var props = this.props;
+	    if (props.visible) {
+	      // first show
+	      if (!prevProps.visible) {
+	        this.lastOutSideFocusNode = document.activeElement;
+	        _reactDom2['default'].findDOMNode(this.refs.dialog).focus();
 	      }
-	      return _react2['default'].createElement(
-	        'li',
-	        { className: cls, key: index, onClick: onclick, disabled: item.disabled },
-	        item.value
-	      );
-	    });
+	    } else if (prevProps.visible) {
+	      if (props.mask && this.lastOutSideFocusNode) {
+	        try {
+	          this.lastOutSideFocusNode.focus();
+	        } catch (e) {
+	          this.lastOutSideFocusNode = null;
+	        }
+	        this.lastOutSideFocusNode = null;
+	      }
+	    }
 	  },
 	
-	  scrollToSelected: function scrollToSelected(duration) {
-	    // move to selected item
-	    var select = _reactDom2['default'].findDOMNode(this);
-	    var list = _reactDom2['default'].findDOMNode(this.refs.list);
-	    var index = this.props.selectedIndex;
-	    if (index < 0) {
-	      index = 0;
+	  onAnimateLeave: function onAnimateLeave() {
+	    this.props.onAfterClose();
+	  },
+	
+	  onMaskClick: function onMaskClick() {
+	    if (this.props.closable) {
+	      this.close();
 	    }
-	    var topOption = list.children[index];
-	    var to = topOption.offsetTop;
-	    scrollTo(select, to, duration);
+	    _reactDom2['default'].findDOMNode(this.refs.dialog).focus();
+	  },
+	
+	  onKeyDown: function onKeyDown(e) {
+	    var props = this.props;
+	    if (props.closable) {
+	      if (e.keyCode === _rcUtil.KeyCode.ESC) {
+	        this.close();
+	      }
+	    }
+	    // keep focus inside dialog
+	    if (props.visible) {
+	      if (e.keyCode === _rcUtil.KeyCode.TAB) {
+	        var activeElement = document.activeElement;
+	        var dialogRoot = _reactDom2['default'].findDOMNode(this.refs.dialog);
+	        var sentinel = this.refs.sentinel;
+	        if (e.shiftKey) {
+	          if (activeElement === dialogRoot) {
+	            sentinel.focus();
+	          }
+	        } else if (activeElement === this.refs.sentinel) {
+	          dialogRoot.focus();
+	        }
+	      }
+	    }
+	  },
+	
+	  onAlign: function onAlign(dialogNode) {
+	    var mousePosition = this.props.mousePosition;
+	    if (this.props.visible) {
+	      if (mousePosition) {
+	        var elOffset = offset(dialogNode);
+	        setTransformOrigin(dialogNode, mousePosition.x - elOffset.left + 'px ' + (mousePosition.y - elOffset.top) + 'px');
+	      } else {
+	        setTransformOrigin(dialogNode, '');
+	      }
+	    }
+	  },
+	
+	  getDialogElement: function getDialogElement() {
+	    var props = this.props;
+	    var closable = props.closable;
+	    var prefixCls = props.prefixCls;
+	    var dest = {};
+	    if (props.width !== undefined) {
+	      dest.width = props.width;
+	    }
+	    if (props.height !== undefined) {
+	      dest.height = props.height;
+	    }
+	    if (props.zIndex !== undefined) {
+	      dest.zIndex = props.zIndex;
+	    }
+	
+	    var footer = undefined;
+	    if (props.footer) {
+	      footer = _react2['default'].createElement(
+	        'div',
+	        { className: prefixCls + '-footer' },
+	        props.footer
+	      );
+	    }
+	
+	    var header = undefined;
+	    if (props.title) {
+	      header = _react2['default'].createElement(
+	        'div',
+	        { className: prefixCls + '-header' },
+	        _react2['default'].createElement(
+	          'div',
+	          { className: prefixCls + '-title' },
+	          props.title
+	        )
+	      );
+	    }
+	
+	    var closer = undefined;
+	    if (closable) {
+	      closer = _react2['default'].createElement(
+	        'a',
+	        { tabIndex: '0', onClick: this.close, className: prefixCls + '-close' },
+	        _react2['default'].createElement('span', { className: prefixCls + '-close-x' })
+	      );
+	    }
+	
+	    var style = (0, _objectAssign2['default'])({}, props.style, dest);
+	    var dialogProps = {
+	      className: [props.prefixCls, props.className].join(' '),
+	      tabIndex: '0',
+	      role: 'dialog',
+	      ref: 'dialog',
+	      style: style,
+	      onKeyDown: this.onKeyDown
+	    };
+	    var transitionName = this.getTransitionName();
+	    var dialogElement = _react2['default'].createElement(
+	      _DOMWrap2['default'],
+	      _extends({}, dialogProps, {
+	        hiddenClassName: prefixCls + '-hidden' }),
+	      _react2['default'].createElement(
+	        'div',
+	        { className: prefixCls + '-content' },
+	        closer,
+	        header,
+	        _react2['default'].createElement(
+	          'div',
+	          { className: prefixCls + '-body' },
+	          props.children
+	        ),
+	        footer
+	      ),
+	      _react2['default'].createElement(
+	        'div',
+	        { tabIndex: '0', ref: 'sentinel', style: { width: 0, height: 0, overflow: 'hidden' } },
+	        'sentinel'
+	      )
+	    );
+	    // add key for align to keep animate children stable
+	    return _react2['default'].createElement(
+	      _rcAnimate2['default'],
+	      { key: 'dialog',
+	        showProp: 'dialogVisible',
+	        onLeave: this.onAnimateLeave,
+	        transitionName: transitionName,
+	        component: '',
+	        transitionAppear: true },
+	      _react2['default'].createElement(
+	        _rcAlign2['default'],
+	        { align: props.align,
+	          key: 'dialog',
+	          onAlign: this.onAlign,
+	          dialogVisible: props.visible,
+	          childrenProps: {
+	            visible: 'dialogVisible'
+	          },
+	          monitorBufferTime: 80,
+	          monitorWindowResize: true,
+	          disabled: !props.visible },
+	        dialogElement
+	      )
+	    );
+	  },
+	
+	  getMaskElement: function getMaskElement() {
+	    var props = this.props;
+	    var maskProps = {
+	      onClick: this.onMaskClick
+	    };
+	
+	    if (props.zIndex) {
+	      maskProps.style = { zIndex: props.zIndex };
+	    }
+	    var maskElement = undefined;
+	    if (props.mask) {
+	      var maskTransition = this.getMaskTransitionName();
+	      maskElement = _react2['default'].createElement(_DOMWrap2['default'], _extends({}, maskProps, { key: 'mask',
+	        className: props.prefixCls + '-mask',
+	        visible: props.visible,
+	        hiddenClassName: props.prefixCls + '-mask-hidden' }));
+	      if (maskTransition) {
+	        maskElement = _react2['default'].createElement(
+	          _rcAnimate2['default'],
+	          { key: 'mask', showProp: 'visible',
+	            transitionAppear: true, component: '',
+	            transitionName: maskTransition },
+	          maskElement
+	        );
+	      }
+	    }
+	    return maskElement;
+	  },
+	
+	  getMaskTransitionName: function getMaskTransitionName() {
+	    var props = this.props;
+	    var transitionName = props.maskTransitionName;
+	    var animation = props.maskAnimation;
+	    if (!transitionName && animation) {
+	      transitionName = props.prefixCls + '-' + animation;
+	    }
+	    return transitionName;
+	  },
+	
+	  getTransitionName: function getTransitionName() {
+	    var props = this.props;
+	    var transitionName = props.transitionName;
+	    var animation = props.animation;
+	    if (!transitionName && animation) {
+	      transitionName = props.prefixCls + '-' + animation;
+	    }
+	    return transitionName;
+	  },
+	
+	  close: function close() {
+	    this.props.onClose();
 	  },
 	
 	  render: function render() {
-	    if (this.props.options.length === 0) {
-	      return null;
-	    }
-	
-	    var prefixCls = this.props.prefixCls;
+	    var props = this.props;
+	    var prefixCls = props.prefixCls;
+	    var className = _defineProperty({}, prefixCls + '-wrap', 1);
 	
 	    return _react2['default'].createElement(
 	      'div',
-	      { className: prefixCls + '-select',
-	        onMouseEnter: this.props.onMouseEnter },
-	      _react2['default'].createElement(
-	        'ul',
-	        { ref: 'list' },
-	        this.getOptions()
-	      )
+	      { className: (0, _rcUtil.classSet)(className) },
+	      [this.getMaskElement(), this.getDialogElement()]
 	    );
 	  }
 	});
 	
-	exports['default'] = Select;
+	exports['default'] = Dialog;
 	module.exports = exports['default'];
 
 /***/ },
 
-/***/ 251:
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	var autoAdjustOverflow = {
-	  adjustX: 1,
-	  adjustY: 1
-	};
-	
-	var targetOffset = [0, 0];
-	
-	var placements = {
-	  bottomLeft: {
-	    points: ['tl', 'tl'],
-	    overflow: autoAdjustOverflow,
-	    offset: [0, -3],
-	    targetOffset: targetOffset
-	  },
-	  bottomRight: {
-	    points: ['tr', 'tr'],
-	    overflow: autoAdjustOverflow,
-	    offset: [0, -3],
-	    targetOffset: targetOffset
-	  },
-	  topRight: {
-	    points: ['br', 'br'],
-	    overflow: autoAdjustOverflow,
-	    offset: [0, 3],
-	    targetOffset: targetOffset
-	  },
-	  topLeft: {
-	    points: ['bl', 'bl'],
-	    overflow: autoAdjustOverflow,
-	    offset: [0, 3],
-	    targetOffset: targetOffset
-	  }
-	};
-	
-	exports['default'] = placements;
-	module.exports = exports['default'];
-
-/***/ },
-
-/***/ 252:
+/***/ 287:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3952,22 +2997,52 @@ webpackJsonp([0],{
 	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
-	exports.getFormatter = getFormatter;
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _gregorianCalendarFormat = __webpack_require__(196);
+	var _react = __webpack_require__(3);
 	
-	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
+	var _react2 = _interopRequireDefault(_react);
 	
-	function getFormatter(format, locale) {
-	  if (typeof format === 'string') {
-	    return new _gregorianCalendarFormat2['default'](format, locale.format);
+	var _objectAssign = __webpack_require__(187);
+	
+	var _objectAssign2 = _interopRequireDefault(_objectAssign);
+	
+	var DOMWrap = _react2['default'].createClass({
+	  displayName: 'DOMWrap',
+	
+	  propTypes: {
+	    tag: _react2['default'].PropTypes.string
+	  },
+	
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      tag: 'div'
+	    };
+	  },
+	
+	  render: function render() {
+	    var props = (0, _objectAssign2['default'])({}, this.props);
+	    if (!props.visible) {
+	      props.className = props.className || '';
+	      props.className += ' ' + props.hiddenClassName;
+	    }
+	    var Tag = props.tag;
+	    return _react2['default'].createElement(Tag, props);
 	  }
-	  return format;
-	}
+	});
+	
+	exports['default'] = DOMWrap;
+	module.exports = exports['default'];
+
+/***/ },
+
+/***/ 288:
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
 
 /***/ }
 
 });
-//# sourceMappingURL=antd-calendar.js.map
+//# sourceMappingURL=getCalendarContainer.js.map
