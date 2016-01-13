@@ -24,8 +24,14 @@ const Picker = React.createClass({
     defaultOpen: PropTypes.bool,
     prefixCls: PropTypes.string,
     placement: PropTypes.any,
-    value: PropTypes.object,
-    defaultValue: PropTypes.object,
+    value: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.array,
+    ]),
+    defaultValue: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.array,
+    ]),
     align: PropTypes.object,
   },
 
