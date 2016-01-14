@@ -9,14 +9,13 @@ import zhCn from 'gregorian-calendar/lib/locale/zh_CN'; // spm error
 import DateTimeFormat from 'gregorian-calendar-format';
 import GregorianCalendar from 'gregorian-calendar';
 import CalendarLocale from 'rc-calendar/src/locale/zh_CN';
-
+import TimePickerLocale from 'rc-time-picker/lib/locale/zh_CN';
 import 'rc-time-picker/assets/index.css';
 import TimePicker from 'rc-time-picker';
-const timePickerElement = <TimePicker />;
 
+const timePickerElement = <TimePicker locale={TimePickerLocale}/>;
 const formatter = new DateTimeFormat('yyyy-MM-dd HH:mm:ss');
 const dateFormatter = new DateTimeFormat('yyyy-MM-dd');
-
 const SHOW_TIME = true;
 
 const now = new GregorianCalendar(zhCn);

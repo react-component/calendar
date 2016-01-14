@@ -38,17 +38,6 @@ function normalizeAnchor(props, init) {
   return value || init && defaultValue || selectedValue[0] || init && getNow();
 }
 
-function onTimeSelect(direction, value) {
-  const index = direction === 'left' ? 0 : 1;
-  let selectedValue = this.state.selectedValue;
-  if (selectedValue[index]) {
-    selectedValue = selectedValue.concat();
-    selectedValue[index] = selectedValue[index].clone();
-    syncTime(value, selectedValue[index]);
-    this.fireSelectValueChange(selectedValue);
-  }
-}
-
 function onInputSelect(direction, value) {
   if (!value) {
     return;
@@ -58,8 +47,8 @@ function onInputSelect(direction, value) {
   const index = direction === 'left' ? 0 : 1;
   selectedValue[index] = value;
   if (selectedValue[0] && selectedValue[1]) {
-    if (selectedValue[0].getTime() > selectedValue[1].getTime()) {
-      selectedValue.length = 1;
+    if (this.compare(selectedValue[0], selectedValue[1]) > 0) {
+      selectedValue[1 - index] = undefined;
     }
   }
   this.fireSelectValueChange(selectedValue);
@@ -68,6 +57,7 @@ function onInputSelect(direction, value) {
 const RangeCalendar = React.createClass({
   propTypes: {
     defaultValue: PropTypes.any,
+    timePicker: PropTypes.any,
     value: PropTypes.any,
     selectedValue: PropTypes.array,
     defaultSelectedValue: PropTypes.array,
@@ -118,10 +108,10 @@ const RangeCalendar = React.createClass({
       selectedValue.length = 1;
       selectedValue[0] = value;
       changed = true;
-    } else if (selectedValue[0].getTime() < value.getTime()) {
+    } else if (this.compare(selectedValue[0], value) <= 0) {
       selectedValue[1] = value;
       changed = true;
-    } else if (selectedValue[0].getTime() > value.getTime()) {
+    } else if (this.compare(selectedValue[0], value) > 0) {
       selectedValue.length = 1;
       selectedValue[0] = value;
       changed = true;
@@ -136,7 +126,7 @@ const RangeCalendar = React.createClass({
     if (!selectedValue.length || selectedValue.length === 2 && !selectedValue.hovering) {
       return;
     }
-    if (hoverValue.getTime() < selectedValue[0].getTime()) {
+    if (this.compare(hoverValue, selectedValue[0]) < 0) {
       return;
     }
     selectedValue = selectedValue.concat();
@@ -158,7 +148,8 @@ const RangeCalendar = React.createClass({
   getStartValue() {
     let value = this.state.value;
     const selectedValue = this.state.selectedValue;
-    if (selectedValue[0]) {
+    // keep selectedTime when select date
+    if (selectedValue[0] && this.props.timePicker) {
       value = value.clone();
       syncTime(selectedValue[0], value);
     }
@@ -169,10 +160,18 @@ const RangeCalendar = React.createClass({
     const endValue = this.state.value.clone();
     endValue.addMonth(1);
     const selectedValue = this.state.selectedValue;
-    if (selectedValue[1]) {
+    // keep selectedTime when select date
+    if (selectedValue[1] && this.props.timePicker) {
       syncTime(selectedValue[1], endValue);
     }
     return endValue;
+  },
+
+  compare(v1, v2) {
+    if (this.props.timePicker) {
+      return v1.getTime() - v2.getTime();
+    }
+    return v1.compareToDay(v2);
   },
 
   fireSelectValueChange(selectedValue) {
@@ -180,7 +179,7 @@ const RangeCalendar = React.createClass({
       this.setState({selectedValue});
     }
     this.props.onChange(selectedValue);
-    if (selectedValue.length === 2 && !selectedValue.hovering) {
+    if (selectedValue[0] && selectedValue[1] && !selectedValue.hovering) {
       this.props.onSelect(selectedValue);
     }
   },
@@ -228,7 +227,6 @@ const RangeCalendar = React.createClass({
                                              value={this.getStartValue()}
                                              placeholder={placeholder1}
                                              onInputSelect={onInputSelect.bind(this, 'left')}
-                                             onTimeSelect={onTimeSelect.bind(this, 'left')}
                                              onValueChange={onValueChange.bind(this, 'left')}/>
       <span className={`${prefixCls}-range-middle`}>~</span>
       <CalendarPart {...props} {...newProps} direction="right"
@@ -236,7 +234,6 @@ const RangeCalendar = React.createClass({
                                              placeholder={placeholder2}
                                              value={this.getEndValue()}
                                              onInputSelect={onInputSelect.bind(this, 'right')}
-                                             onTimeSelect={onTimeSelect.bind(this, 'right')}
                                              onValueChange={onValueChange.bind(this, 'right')}/>
 
       <div className={`${prefixCls}-range-bottom`}>

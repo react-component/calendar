@@ -9,11 +9,12 @@ const formatter = new GregorianCalendarFormat('yyyy-MM-dd HH:mm:ss');
 import GregorianCalendar from 'gregorian-calendar';
 import zhCn from 'gregorian-calendar/lib/locale/zh_CN';
 import CalendarLocale from 'rc-calendar/src/locale/zh_CN';
+import TimePickerLocale from 'rc-time-picker/lib/locale/zh_CN';
 import Picker from 'rc-calendar/src/Picker';
 
 import 'rc-time-picker/assets/index.css';
 import TimePicker from 'rc-time-picker';
-const timePickerElement = <TimePicker placeholder="请选择时间"/>;
+const timePickerElement = <TimePicker placeholder="请选择时间" locale={TimePickerLocale}/>;
 
 const now = new GregorianCalendar(zhCn);
 now.setTime(Date.now());

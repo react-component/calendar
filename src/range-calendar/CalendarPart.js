@@ -1,14 +1,10 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import CalendarHeader from '../calendar/CalendarHeader';
 import DateTable from '../date/DateTable';
 import CalendarFooter from '../calendar/CalendarFooter';
 import DateInput from '../date/DateInput';
 
 const Calendar = React.createClass({
-  propTypes: {
-    onTimeSelect: PropTypes.func,
-  },
-
   render() {
     const props = this.props;
     const {value, direction, prefixCls,
@@ -27,7 +23,7 @@ const Calendar = React.createClass({
                  disabledTime={disabledTime}
                  gregorianCalendarLocale={value.locale}
                  showClear={false}
-                 selectedValue={selectedValue[index] || selectedValue[0]}
+                 selectedValue={selectedValue[index]}
                  onChange={props.onInputSelect}/>
       <div style={{outline: 'none'}}>
         <CalendarHeader
@@ -49,7 +45,6 @@ const Calendar = React.createClass({
           {...newProps}
           disabledDate={props.disabledDate}
           timeDisabled={!selectedValue[index] || !!selectedValue.hovering}
-          onSelect={this.props.onTimeSelect}
           onToday={this.chooseToday}
         />
       </div>
