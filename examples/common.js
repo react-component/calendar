@@ -20994,6 +20994,12 @@
 	    }
 	    this.time = undefined;
 	    this.fieldsComputed = false;
+	  },
+	
+	  toString: function toString() {
+	    // for debug
+	    var v = this;
+	    return '[GregorianCalendar]: ' + v.getYear() + '/' + v.getMonth() + '/' + v.getDayOfMonth() + ' ' + v.getHourOfDay() + ':' + v.getMinutes() + ':' + v.getSeconds();
 	  }
 	};
 	

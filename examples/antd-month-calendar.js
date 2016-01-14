@@ -827,8 +827,8 @@ webpackJsonp([1],{
 	    defaultOpen: _react.PropTypes.bool,
 	    prefixCls: _react.PropTypes.string,
 	    placement: _react.PropTypes.any,
-	    value: _react.PropTypes.object,
-	    defaultValue: _react.PropTypes.object,
+	    value: _react.PropTypes.oneOfType([_react.PropTypes.object, _react.PropTypes.array]),
+	    defaultValue: _react.PropTypes.oneOfType([_react.PropTypes.object, _react.PropTypes.array]),
 	    align: _react.PropTypes.object
 	  },
 	

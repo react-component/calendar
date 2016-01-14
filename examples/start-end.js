@@ -2156,8 +2156,8 @@ webpackJsonp([5],{
 	    defaultOpen: _react.PropTypes.bool,
 	    prefixCls: _react.PropTypes.string,
 	    placement: _react.PropTypes.any,
-	    value: _react.PropTypes.object,
-	    defaultValue: _react.PropTypes.object,
+	    value: _react.PropTypes.oneOfType([_react.PropTypes.object, _react.PropTypes.array]),
+	    defaultValue: _react.PropTypes.oneOfType([_react.PropTypes.object, _react.PropTypes.array]),
 	    align: _react.PropTypes.object
 	  },
 	
@@ -2456,6 +2456,34 @@ webpackJsonp([5],{
 
 /***/ },
 
+/***/ 240:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	var _gregorianCalendarFormatLibLocaleZh_CN = __webpack_require__(239);
+	
+	var _gregorianCalendarFormatLibLocaleZh_CN2 = _interopRequireDefault(_gregorianCalendarFormatLibLocaleZh_CN);
+	
+	var _gregorianCalendarLibLocaleZh_CN = __webpack_require__(237);
+	
+	var _gregorianCalendarLibLocaleZh_CN2 = _interopRequireDefault(_gregorianCalendarLibLocaleZh_CN);
+	
+	exports['default'] = {
+	  clear: '清除',
+	  format: _gregorianCalendarFormatLibLocaleZh_CN2['default'],
+	  calendar: _gregorianCalendarLibLocaleZh_CN2['default']
+	};
+	module.exports = exports['default'];
+
+/***/ },
+
 /***/ 241:
 /***/ function(module, exports) {
 
@@ -2516,10 +2544,6 @@ webpackJsonp([5],{
 	
 	var _utilIndex = __webpack_require__(252);
 	
-	var _gregorianCalendarLibLocaleEn_US = __webpack_require__(167);
-	
-	var _gregorianCalendarLibLocaleEn_US2 = _interopRequireDefault(_gregorianCalendarLibLocaleEn_US);
-	
 	function noop() {}
 	
 	function refFn(field, component) {
@@ -2542,7 +2566,6 @@ webpackJsonp([5],{
 	    placement: _react.PropTypes.any,
 	    transitionName: _react.PropTypes.string,
 	    getPopupContainer: _react.PropTypes.func,
-	    gregorianCalendarLocale: _react.PropTypes.object,
 	    placeholder: _react.PropTypes.string,
 	    formatter: _react.PropTypes.any,
 	    showHour: _react.PropTypes.bool,
@@ -2565,7 +2588,6 @@ webpackJsonp([5],{
 	      defaultOpen: false,
 	      style: {},
 	      className: '',
-	      gregorianCalendarLocale: _gregorianCalendarLibLocaleEn_US2['default'],
 	      align: {},
 	      allowEmpty: true,
 	      showHour: true,
@@ -2601,7 +2623,7 @@ webpackJsonp([5],{
 	    var value = nextProps.value;
 	    var open = nextProps.open;
 	
-	    if (value !== undefined) {
+	    if ('value' in nextProps) {
 	      this.setState({
 	        value: value
 	      });
@@ -2686,23 +2708,13 @@ webpackJsonp([5],{
 	    var allowEmpty = _props2.allowEmpty;
 	    var showHour = _props2.showHour;
 	    var showSecond = _props2.showSecond;
-	    var gregorianCalendarLocale = _props2.gregorianCalendarLocale;
-	    var value = _props2.value;
 	
-	    var calendarLocale = undefined;
-	    if (value) {
-	      calendarLocale = value.locale;
-	    } else if (defaultValue) {
-	      calendarLocale = defaultValue.locale;
-	    } else {
-	      calendarLocale = gregorianCalendarLocale;
-	    }
 	    return _react2['default'].createElement(_modulePanel2['default'], {
 	      prefixCls: prefixCls + '-panel',
 	      ref: this.savePanelRef,
 	      value: this.state.value,
 	      onChange: this.onPanelChange,
-	      gregorianCalendarLocale: calendarLocale,
+	      gregorianCalendarLocale: locale.calendar,
 	      onClear: this.onPanelClear,
 	      defaultValue: defaultValue,
 	      showHour: showHour,
@@ -3013,9 +3025,14 @@ webpackJsonp([5],{
 	
 	var _gregorianCalendarFormatLibLocaleEn_US2 = _interopRequireDefault(_gregorianCalendarFormatLibLocaleEn_US);
 	
+	var _gregorianCalendarLibLocaleEn_US = __webpack_require__(167);
+	
+	var _gregorianCalendarLibLocaleEn_US2 = _interopRequireDefault(_gregorianCalendarLibLocaleEn_US);
+	
 	exports['default'] = {
 	  clear: 'Clear',
-	  format: _gregorianCalendarFormatLibLocaleEn_US2['default']
+	  format: _gregorianCalendarFormatLibLocaleEn_US2['default'],
+	  calendar: _gregorianCalendarLibLocaleEn_US2['default']
 	};
 	module.exports = exports['default'];
 
@@ -3720,17 +3737,19 @@ webpackJsonp([5],{
 	
 	var _rcCalendarSrcLocaleZh_CN2 = _interopRequireDefault(_rcCalendarSrcLocaleZh_CN);
 	
+	var _rcTimePickerLibLocaleZh_CN = __webpack_require__(240);
+	
+	var _rcTimePickerLibLocaleZh_CN2 = _interopRequireDefault(_rcTimePickerLibLocaleZh_CN);
+	
 	__webpack_require__(241);
 	
 	var _rcTimePicker = __webpack_require__(242);
 	
 	var _rcTimePicker2 = _interopRequireDefault(_rcTimePicker);
 	
-	var timePickerElement = _react2['default'].createElement(_rcTimePicker2['default'], null);
-	
+	var timePickerElement = _react2['default'].createElement(_rcTimePicker2['default'], { locale: _rcTimePickerLibLocaleZh_CN2['default'] });
 	var formatter = new _gregorianCalendarFormat2['default']('yyyy-MM-dd HH:mm:ss');
 	var dateFormatter = new _gregorianCalendarFormat2['default']('yyyy-MM-dd');
-	
 	var SHOW_TIME = true;
 	
 	var now = new _gregorianCalendar2['default'](_gregorianCalendarLibLocaleZh_CN2['default']);

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>antd-range-calendar.js - example - rc-calendar@5.2.1</title>
+  <title>antd-range-calendar.js - example - rc-calendar@5.2.2</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -257,7 +257,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
 <div class="container">
   <div class="header">
-    <h1>rc-calendar@5.2.1</h1>
+    <h1>rc-calendar@5.2.2</h1>
 
     <p>React Calendar</p>
   </div>
@@ -275,11 +275,12 @@ import ReactDOM from <span class="hljs-string">'react-dom'</span>;
 import GregorianCalendar from <span class="hljs-string">'gregorian-calendar'</span>;
 import zhCn from <span class="hljs-string">'gregorian-calendar/lib/locale/zh_CN'</span>;
 import CalendarLocale from <span class="hljs-string">'rc-calendar/lib/locale/zh_CN'</span>;
+import TimePickerLocale from <span class="hljs-string">'rc-time-picker/lib/locale/zh_CN'</span>;
 import Picker from <span class="hljs-string">'rc-calendar/lib/Picker'</span>;
 
 import <span class="hljs-string">'rc-time-picker/assets/index.css'</span>;
 import TimePicker from <span class="hljs-string">'rc-time-picker'</span>;
-<span class="hljs-keyword">const</span> timePickerElement = <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">TimePicker</span> <span class="hljs-attribute">placeholder</span>=<span class="hljs-value">"请选择时间"</span>/&gt;</span>;</span>
+<span class="hljs-keyword">const</span> timePickerElement = <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">TimePicker</span> <span class="hljs-attribute">placeholder</span>=<span class="hljs-value">"请选择时间"</span> <span class="hljs-attribute">locale</span>=<span class="hljs-value">{TimePickerLocale}</span>/&gt;</span>;</span>
 
 <span class="hljs-keyword">const</span> now = <span class="hljs-keyword">new</span> GregorianCalendar(zhCn);
 now.setTime(<span class="hljs-built_in">Date</span>.now());
