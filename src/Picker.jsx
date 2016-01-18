@@ -11,6 +11,12 @@ function refFn(field, component) {
   this[field] = component;
 }
 
+function isEmptyArray(arr) {
+  return Array.isArray(arr) && (arr.length === 0 || arr.every((item) => {
+    return item === undefined;
+  }));
+}
+
 const Picker = React.createClass({
   propTypes: {
     onChange: PropTypes.func,
@@ -113,7 +119,9 @@ const Picker = React.createClass({
     const calendarProp = props.calendar;
     const extraProps = {
       ref: this.saveCalendarRef,
-      defaultValue: state.value || calendarProp.props.defaultValue,
+      defaultValue: state.value && !isEmptyArray(state.value) ?
+        state.value :
+        calendarProp.props.defaultValue,
       defaultSelectedValue: state.value,
       onKeyDown: this.onCalendarKeyDown,
       onOk: createChainedFunction(calendarProp.props.onOk, this.onCalendarOk),
