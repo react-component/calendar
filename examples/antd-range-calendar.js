@@ -1766,10 +1766,19 @@ webpackJsonp([2],{
 	    var props = this.props;
 	    var state = this.state;
 	    var calendarProp = props.calendar;
+	    var value = state.value;
+	
+	    var defaultValue = undefined;
+	    // RangeCalendar
+	    if (Array.isArray(value)) {
+	      defaultValue = value[0];
+	    } else {
+	      defaultValue = value;
+	    }
 	    var extraProps = {
 	      ref: this.saveCalendarRef,
-	      defaultValue: state.value || calendarProp.props.defaultValue,
-	      defaultSelectedValue: state.value,
+	      defaultValue: defaultValue || calendarProp.props.defaultValue,
+	      defaultSelectedValue: value,
 	      onKeyDown: this.onCalendarKeyDown,
 	      onOk: (0, _rcUtil.createChainedFunction)(calendarProp.props.onOk, this.onCalendarOk),
 	      onSelect: (0, _rcUtil.createChainedFunction)(calendarProp.props.onSelect, this.onCalendarSelect),
@@ -3282,7 +3291,11 @@ webpackJsonp([2],{
 	}
 	
 	function format(v) {
-	  return v && formatter.format(v);
+	  return v ? formatter.format(v) : '';
+	}
+	
+	function isValidRange(v) {
+	  return v && v[0] && v[1];
 	}
 	
 	function onStandaloneChange(value) {
@@ -3304,10 +3317,8 @@ webpackJsonp([2],{
 	  displayName: 'Test',
 	
 	  getInitialState: function getInitialState() {
-	    var end = now.clone();
-	    end.addDayOfMonth(5);
 	    return {
-	      value: [now, end]
+	      value: []
 	    };
 	  },
 	
@@ -3318,6 +3329,8 @@ webpackJsonp([2],{
 	  render: function render() {
 	    var state = this.state;
 	    var calendar = _react2['default'].createElement(_rcCalendarSrcRangeCalendar2['default'], { showWeekNumber: false,
+	      dateInputPlaceholder: ['开始日期', '结束日期'],
+	      defaultValue: [now, now],
 	      locale: _rcCalendarSrcLocaleZh_CN2['default'],
 	      disabledDate: disabledDate,
 	      timePicker: timePickerElement });
@@ -3337,7 +3350,7 @@ webpackJsonp([2],{
 	            disabled: state.disabled,
 	            readOnly: true,
 	            className: 'ant-calendar-picker-input ant-input',
-	            value: value && format(value[0]) + ' - ' + format(value[1]) })
+	            value: isValidRange(value) && format(value[0]) + ' - ' + format(value[1]) })
 	        );
 	      }
 	    );
@@ -3357,7 +3370,7 @@ webpackJsonp([2],{
 	    { style: { margin: 10 } },
 	    _react2['default'].createElement(_rcCalendarSrcRangeCalendar2['default'], { showWeekNumber: true,
 	      defaultValue: now,
-	      dateInputPlaceholder: ['请输入开始日期', '请输入结束日期'],
+	      dateInputPlaceholder: ['开始日期', '结束日期'],
 	      locale: _rcCalendarSrcLocaleZh_CN2['default'],
 	      onChange: onStandaloneChange,
 	      onSelect: onStandaloneSelect,
@@ -3481,7 +3494,8 @@ webpackJsonp([2],{
 	    onChange: _react.PropTypes.func,
 	    onSelect: _react.PropTypes.func,
 	    onValueChange: _react.PropTypes.func,
-	    formatter: _react.PropTypes.object
+	    formatter: _react.PropTypes.object,
+	    onClear: _react.PropTypes.func
 	  },
 	
 	  mixins: [_mixinCommonMixin2['default']],
@@ -3590,12 +3604,12 @@ webpackJsonp([2],{
 	    return v1.compareToDay(v2);
 	  },
 	
-	  fireSelectValueChange: function fireSelectValueChange(selectedValue) {
+	  fireSelectValueChange: function fireSelectValueChange(selectedValue, direct) {
 	    if (!('selectedValue' in this.props)) {
 	      this.setState({ selectedValue: selectedValue });
 	    }
 	    this.props.onChange(selectedValue);
-	    if (selectedValue[0] && selectedValue[1] && !selectedValue.hovering) {
+	    if (direct || selectedValue[0] && selectedValue[1] && !selectedValue.hovering) {
 	      this.props.onSelect(selectedValue);
 	    }
 	  },
@@ -3606,6 +3620,11 @@ webpackJsonp([2],{
 	      this.setState({ value: value });
 	    }
 	    props.onValueChange(value);
+	  },
+	
+	  clear: function clear() {
+	    this.fireSelectValueChange([], true);
+	    this.props.onClear();
 	  },
 	
 	  render: function render() {
@@ -3641,6 +3660,7 @@ webpackJsonp([2],{
 	      'div',
 	      { className: classes, style: props.style,
 	        tabIndex: '0' },
+	      _react2['default'].createElement('a', { className: prefixCls + '-clear-btn', role: 'button', title: '清除', onClick: this.clear }),
 	      _react2['default'].createElement(_rangeCalendarCalendarPart2['default'], _extends({}, props, newProps, { direction: 'left',
 	        formatter: this.getFormatter(),
 	        value: this.getStartValue(),

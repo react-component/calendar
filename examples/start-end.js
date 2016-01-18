@@ -162,7 +162,6 @@ webpackJsonp([5],{
 	      showToday: true,
 	      showDateInput: true,
 	      timePicker: null,
-	      onClear: noop,
 	      onOk: noop
 	    };
 	  },
@@ -2243,10 +2242,19 @@ webpackJsonp([5],{
 	    var props = this.props;
 	    var state = this.state;
 	    var calendarProp = props.calendar;
+	    var value = state.value;
+	
+	    var defaultValue = undefined;
+	    // RangeCalendar
+	    if (Array.isArray(value)) {
+	      defaultValue = value[0];
+	    } else {
+	      defaultValue = value;
+	    }
 	    var extraProps = {
 	      ref: this.saveCalendarRef,
-	      defaultValue: state.value || calendarProp.props.defaultValue,
-	      defaultSelectedValue: state.value,
+	      defaultValue: defaultValue || calendarProp.props.defaultValue,
+	      defaultSelectedValue: value,
 	      onKeyDown: this.onCalendarKeyDown,
 	      onOk: (0, _rcUtil.createChainedFunction)(calendarProp.props.onOk, this.onCalendarOk),
 	      onSelect: (0, _rcUtil.createChainedFunction)(calendarProp.props.onSelect, this.onCalendarSelect),

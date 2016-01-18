@@ -24630,7 +24630,8 @@
 	      prefixCls: 'rc-calendar',
 	      className: '',
 	      onSelect: noop,
-	      onChange: noop
+	      onChange: noop,
+	      onClear: noop
 	    };
 	  },
 	

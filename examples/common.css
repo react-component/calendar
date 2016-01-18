@@ -48,6 +48,7 @@
   border-color: red;
 }
 .rc-calendar-clear-btn {
+  z-index: 9999;
   position: absolute;
   right: 6px;
   cursor: pointer;
@@ -926,9 +927,12 @@
 .rc-calendar-range-right {
   float: right;
 }
+.rc-calendar-range-right .rc-calendar-input-wrap {
+  margin-left: -39px;
+}
 .rc-calendar-range-middle {
   position: absolute;
-  left: 50%;
+  left: 41%;
   width: 20px;
   margin-left: -10px;
   text-align: center;
@@ -937,11 +941,11 @@
 }
 .rc-calendar-range .rc-calendar-date-input-wrap,
 .rc-calendar-range .rc-calendar-time-picker-wrap {
-  width: 47%;
+  width: 37%;
 }
 .rc-calendar-range .rc-calendar-time-picker-wrap {
   position: absolute;
-  left: 50%;
+  left: 40%;
 }
 .rc-calendar-range .rc-time-picker-input {
   width: 100%;
