@@ -28,7 +28,7 @@ function disabledDate(current) {
 }
 
 function format(v) {
-  return v && formatter.format(v);
+  return v ? formatter.format(v) : '';
 }
 
 function onStandaloneChange(value) {
@@ -61,10 +61,51 @@ const Test = React.createClass({
 
   render() {
     const state = this.state;
-    const calendar = (<RangeCalendar showWeekNumber={false}
-                                    locale={CalendarLocale}
-                                    disabledDate={disabledDate}
-                                    timePicker={timePickerElement}/>);
+    const calendar = (
+      <RangeCalendar showWeekNumber={false}
+        locale={CalendarLocale}
+        disabledDate={disabledDate}
+        timePicker={timePickerElement} />
+    );
+    return (<Picker value={state.value}
+                    onChange={this.onChange}
+                    animation="slide-up"
+                    calendar={calendar}>
+      {
+        ({value}) => {
+          return (<span>
+                <input placeholder="请选择日期" style={{width: 350}}
+                       disabled={state.disabled}
+                       readOnly
+                       className="ant-calendar-picker-input ant-input"
+                       value={value && (format(value[0]) + ' - ' + format(value[1]))}/>
+                </span>);
+        }
+      }
+    </Picker>);
+  },
+});
+
+const Test1 = React.createClass({
+  getInitialState() {
+    return {
+      value: [],
+    };
+  },
+
+  onChange(value) {
+    this.setState({value});
+  },
+
+  render() {
+    const state = this.state;
+    const calendar = (
+      <RangeCalendar showWeekNumber={false}
+        defaultValue={[now, now]}
+        locale={CalendarLocale}
+        disabledDate={disabledDate}
+        timePicker={timePickerElement} />
+    );
     return (<Picker value={state.value}
                     onChange={this.onChange}
                     animation="slide-up"
@@ -102,5 +143,8 @@ ReactDOM.render(
 
     <div style={{margin: 20}}>
       <Test />
+    </div>
+    <div style={{margin: 20}}>
+      <Test1 />
     </div>
   </div>, document.getElementById('__react-content'));
