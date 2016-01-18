@@ -1,6 +1,10 @@
 # History
 ----
 
+## 5.3.0 / 2016-01-18
+
+- support clear for RangeCalendar
+
 ## 5.1.0 / 2015-12-25
 
 - support dateInputPlaceholder for RangeCalendar

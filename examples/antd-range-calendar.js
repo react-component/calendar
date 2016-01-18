@@ -31,6 +31,10 @@ function format(v) {
   return v ? formatter.format(v) : '';
 }
 
+function isValidRange(v) {
+  return v && v[0] && v[1];
+}
+
 function onStandaloneChange(value) {
   console.log('onChange');
   console.log(value[0] && format(value[0]), value[1] && format(value[1]));
@@ -48,46 +52,6 @@ function onStandaloneOk(value) {
 
 const Test = React.createClass({
   getInitialState() {
-    const end = now.clone();
-    end.addDayOfMonth(5);
-    return {
-      value: [now, end],
-    };
-  },
-
-  onChange(value) {
-    this.setState({value});
-  },
-
-  render() {
-    const state = this.state;
-    const calendar = (
-      <RangeCalendar showWeekNumber={false}
-        locale={CalendarLocale}
-        disabledDate={disabledDate}
-        timePicker={timePickerElement} />
-    );
-    return (<Picker value={state.value}
-                    onChange={this.onChange}
-                    animation="slide-up"
-                    calendar={calendar}>
-      {
-        ({value}) => {
-          return (<span>
-                <input placeholder="请选择日期" style={{width: 350}}
-                       disabled={state.disabled}
-                       readOnly
-                       className="ant-calendar-picker-input ant-input"
-                       value={value && (format(value[0]) + ' - ' + format(value[1]))}/>
-                </span>);
-        }
-      }
-    </Picker>);
-  },
-});
-
-const Test1 = React.createClass({
-  getInitialState() {
     return {
       value: [],
     };
@@ -101,10 +65,11 @@ const Test1 = React.createClass({
     const state = this.state;
     const calendar = (
       <RangeCalendar showWeekNumber={false}
-        defaultValue={[now, now]}
-        locale={CalendarLocale}
-        disabledDate={disabledDate}
-        timePicker={timePickerElement} />
+                     dateInputPlaceholder={['开始日期', '结束日期']}
+                     defaultValue={[now, now]}
+                     locale={CalendarLocale}
+                     disabledDate={disabledDate}
+                     timePicker={timePickerElement}/>
     );
     return (<Picker value={state.value}
                     onChange={this.onChange}
@@ -117,7 +82,7 @@ const Test1 = React.createClass({
                        disabled={state.disabled}
                        readOnly
                        className="ant-calendar-picker-input ant-input"
-                       value={value && (format(value[0]) + ' - ' + format(value[1]))}/>
+                       value={isValidRange(value) && (format(value[0]) + ' - ' + format(value[1]))}/>
                 </span>);
         }
       }
@@ -131,7 +96,7 @@ ReactDOM.render(
     <div style={{margin: 10}}>
       <RangeCalendar showWeekNumber
                      defaultValue={now}
-                     dateInputPlaceholder={['请输入开始日期', '请输入结束日期']}
+                     dateInputPlaceholder={['开始日期', '结束日期']}
                      locale={CalendarLocale}
                      onChange={onStandaloneChange}
                      onSelect={onStandaloneSelect}
@@ -143,8 +108,5 @@ ReactDOM.render(
 
     <div style={{margin: 20}}>
       <Test />
-    </div>
-    <div style={{margin: 20}}>
-      <Test1 />
     </div>
   </div>, document.getElementById('__react-content'));

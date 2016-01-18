@@ -76,7 +76,6 @@ const Calendar = React.createClass({
       showToday: true,
       showDateInput: true,
       timePicker: null,
-      onClear: noop,
       onOk: noop,
     };
   },

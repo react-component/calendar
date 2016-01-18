@@ -26,6 +26,7 @@ export default {
       className: '',
       onSelect: noop,
       onChange: noop,
+      onClear: noop,
     };
   },
 

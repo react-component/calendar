@@ -66,6 +66,7 @@ const RangeCalendar = React.createClass({
     onSelect: PropTypes.func,
     onValueChange: PropTypes.func,
     formatter: PropTypes.object,
+    onClear: PropTypes.func,
   },
 
   mixins: [CommonMixin],
@@ -174,12 +175,12 @@ const RangeCalendar = React.createClass({
     return v1.compareToDay(v2);
   },
 
-  fireSelectValueChange(selectedValue) {
+  fireSelectValueChange(selectedValue, direct) {
     if (!('selectedValue' in this.props)) {
       this.setState({selectedValue});
     }
     this.props.onChange(selectedValue);
-    if (selectedValue[0] && selectedValue[1] && !selectedValue.hovering) {
+    if (direct || selectedValue[0] && selectedValue[1] && !selectedValue.hovering) {
       this.props.onSelect(selectedValue);
     }
   },
@@ -190,6 +191,11 @@ const RangeCalendar = React.createClass({
       this.setState({value});
     }
     props.onValueChange(value);
+  },
+
+  clear() {
+    this.fireSelectValueChange([], true);
+    this.props.onClear();
   },
 
   render() {
@@ -222,6 +228,7 @@ const RangeCalendar = React.createClass({
     }
     return (<div className={classes} style={props.style}
                  tabIndex="0">
+      <a className={`${prefixCls}-clear-btn`} role="button" title="清除" onClick={this.clear}/>
       <CalendarPart {...props} {...newProps} direction="left"
                                              formatter={this.getFormatter()}
                                              value={this.getStartValue()}
