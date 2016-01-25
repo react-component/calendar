@@ -44,6 +44,7 @@ webpackJsonp([1],{
 	
 	  propTypes: {
 	    onChange: _react.PropTypes.func,
+	    disabledDate: _react.PropTypes.func,
 	    onSelect: _react.PropTypes.func
 	  },
 	
@@ -162,6 +163,7 @@ webpackJsonp([1],{
 	          'div',
 	          { className: prefixCls + '-body' },
 	          _react2['default'].createElement(_MonthTable2['default'], {
+	            disabledDate: props.disabledDate,
 	            onSelect: this.setAndSelectValue,
 	            locale: locale,
 	            value: value,
@@ -731,11 +733,11 @@ webpackJsonp([1],{
 	    var props = this.props;
 	    var prefixCls = props.prefixCls;
 	
-	    var className = (_className = {}, _defineProperty(_className, prefixCls, 1), _defineProperty(_className, prefixCls + '-hidden', !props.visible), _defineProperty(_className, props.className, !!props.className), _className);
+	    var className = (_className = {}, _defineProperty(_className, prefixCls, 1), _defineProperty(_className, prefixCls + '-hidden', !props.visible), _defineProperty(_className, props.className, !!props.className), _defineProperty(_className, newProps.className, !!newProps.className), _className);
 	
 	    return _react2['default'].createElement(
 	      'div',
-	      { className: (0, _classnames2['default'])(className) + ' ' + newProps.className,
+	      { className: '' + (0, _classnames2['default'])(className),
 	        style: this.props.style,
 	        tabIndex: '0', onKeyDown: this.onKeyDown },
 	      newProps.children
@@ -1280,7 +1282,7 @@ webpackJsonp([1],{
 	}
 	
 	function disabledDate(value) {
-	  return value.getTime() > Date.now();
+	  return value.getYear() > now.getYear() || value.getYear() === now.getYear() && value.getMonth() > now.getMonth();
 	}
 	
 	_reactDom2['default'].render(_react2['default'].createElement(

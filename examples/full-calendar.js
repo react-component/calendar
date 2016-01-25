@@ -519,11 +519,11 @@ webpackJsonp([3],{
 	    var props = this.props;
 	    var prefixCls = props.prefixCls;
 	
-	    var className = (_className = {}, _defineProperty(_className, prefixCls, 1), _defineProperty(_className, prefixCls + '-hidden', !props.visible), _defineProperty(_className, props.className, !!props.className), _className);
+	    var className = (_className = {}, _defineProperty(_className, prefixCls, 1), _defineProperty(_className, prefixCls + '-hidden', !props.visible), _defineProperty(_className, props.className, !!props.className), _defineProperty(_className, newProps.className, !!newProps.className), _className);
 	
 	    return _react2['default'].createElement(
 	      'div',
-	      { className: (0, _classnames2['default'])(className) + ' ' + newProps.className,
+	      { className: '' + (0, _classnames2['default'])(className),
 	        style: this.props.style,
 	        tabIndex: '0', onKeyDown: this.onKeyDown },
 	      newProps.children

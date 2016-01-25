@@ -666,6 +666,7 @@ webpackJsonp([2],{
 	
 	  propTypes: {
 	    onChange: _react.PropTypes.func,
+	    disabledDate: _react.PropTypes.func,
 	    onSelect: _react.PropTypes.func
 	  },
 	
@@ -784,6 +785,7 @@ webpackJsonp([2],{
 	          'div',
 	          { className: prefixCls + '-body' },
 	          _react2['default'].createElement(_MonthTable2['default'], {
+	            disabledDate: props.disabledDate,
 	            onSelect: this.setAndSelectValue,
 	            locale: locale,
 	            value: value,
