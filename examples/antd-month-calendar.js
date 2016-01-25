@@ -51,7 +51,7 @@ const Test = React.createClass({
   render() {
     const state = this.state;
     const calendar = (<MonthCalendar locale={CalendarLocale}
-                                    style={{zIndex: 1000}}/>);
+                                     style={{zIndex: 1000}}/>);
     return (<div style={{width: 240, margin: 20}}>
       <div style={{marginBottom: 10}}>
         &nbsp;&nbsp;&nbsp;&nbsp;
@@ -72,10 +72,10 @@ const Test = React.createClass({
           {
             ({value})=> {
               return (<input style={{width: 200}}
-                            readOnly
-                            disabled={state.disabled}
-                            value={value && formatter.format(value)}
-                            placeholder="请选择日期"/>);
+                             readOnly
+                             disabled={state.disabled}
+                             value={value && formatter.format(value)}
+                             placeholder="请选择日期"/>);
             }
           }
 
@@ -94,7 +94,7 @@ function onStandaloneChange(value) {
 }
 
 function disabledDate(value) {
-  return value.getTime() > Date.now();
+  return value.getYear() > now.getYear() || value.getYear() === now.getYear() && value.getMonth() > now.getMonth();
 }
 
 ReactDOM.render(

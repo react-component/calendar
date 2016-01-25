@@ -76,10 +76,11 @@ const CalendarMixin = {
       [prefixCls]: 1,
       [`${prefixCls}-hidden`]: !props.visible,
       [props.className]: !!props.className,
+      [newProps.className]: !!newProps.className,
     };
 
     return (
-      <div className={`${classnames(className)} ${newProps.className}`}
+      <div className={`${classnames(className)}`}
            style={this.props.style}
            tabIndex="0" onKeyDown={this.onKeyDown}>
         {newProps.children}

@@ -8,7 +8,6 @@ function goYear(direction) {
   this.setAndChangeValue(next);
 }
 
-
 function noop() {
 
 }
@@ -16,6 +15,7 @@ function noop() {
 const MonthPanel = React.createClass({
   propTypes: {
     onChange: PropTypes.func,
+    disabledDate: PropTypes.func,
     onSelect: PropTypes.func,
   },
 
@@ -116,6 +116,7 @@ const MonthPanel = React.createClass({
           </div>
           <div className={`${prefixCls}-body`}>
             <MonthTable
+              disabledDate={props.disabledDate}
               onSelect={this.setAndSelectValue}
               locale={locale}
               value={value}
