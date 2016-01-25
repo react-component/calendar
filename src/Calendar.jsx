@@ -97,53 +97,53 @@ const Calendar = React.createClass({
     // mac
     const ctrlKey = event.ctrlKey || event.metaKey;
     switch (keyCode) {
-    case KeyCode.DOWN:
-      goWeek.call(this, 1);
-      event.preventDefault();
-      return 1;
-    case KeyCode.UP:
-      goWeek.call(this, -1);
-      event.preventDefault();
-      return 1;
-    case KeyCode.LEFT:
-      if (ctrlKey) {
-        this.previousYear();
-      } else {
-        goDay.call(this, -1);
-      }
-      event.preventDefault();
-      return 1;
-    case KeyCode.RIGHT:
-      if (ctrlKey) {
-        this.nextYear();
-      } else {
-        goDay.call(this, 1);
-      }
-      event.preventDefault();
-      return 1;
-    case KeyCode.HOME:
-      goStartMonth.call(this);
-      event.preventDefault();
-      return 1;
-    case KeyCode.END:
-      goEndMonth.call(this);
-      event.preventDefault();
-      return 1;
-    case KeyCode.PAGE_DOWN:
-      this.nextMonth();
-      event.preventDefault();
-      return 1;
-    case KeyCode.PAGE_UP:
-      this.previousMonth();
-      event.preventDefault();
-      return 1;
-    case KeyCode.ENTER:
-      this.onSelect(this.state.value);
-      event.preventDefault();
-      return 1;
-    default:
-      this.props.onKeyDown(event);
-      return 1;
+      case KeyCode.DOWN:
+        goWeek.call(this, 1);
+        event.preventDefault();
+        return 1;
+      case KeyCode.UP:
+        goWeek.call(this, -1);
+        event.preventDefault();
+        return 1;
+      case KeyCode.LEFT:
+        if (ctrlKey) {
+          this.previousYear();
+        } else {
+          goDay.call(this, -1);
+        }
+        event.preventDefault();
+        return 1;
+      case KeyCode.RIGHT:
+        if (ctrlKey) {
+          this.nextYear();
+        } else {
+          goDay.call(this, 1);
+        }
+        event.preventDefault();
+        return 1;
+      case KeyCode.HOME:
+        goStartMonth.call(this);
+        event.preventDefault();
+        return 1;
+      case KeyCode.END:
+        goEndMonth.call(this);
+        event.preventDefault();
+        return 1;
+      case KeyCode.PAGE_DOWN:
+        this.nextMonth();
+        event.preventDefault();
+        return 1;
+      case KeyCode.PAGE_UP:
+        this.previousMonth();
+        event.preventDefault();
+        return 1;
+      case KeyCode.ENTER:
+        this.onSelect(this.state.value);
+        event.preventDefault();
+        return 1;
+      default:
+        this.props.onKeyDown(event);
+        return 1;
     }
   },
 
