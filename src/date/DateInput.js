@@ -83,6 +83,22 @@ const DateInput = React.createClass({
     });
   },
 
+  onTimePickerChange(value) {
+    const { selectedValue, onChange } = this.props;
+    if (!selectedValue) {
+      // Default date is today.
+      const today = new Date();
+      value.setYear(today.getFullYear());
+      value.setMonth(today.getMonth());
+      value.setDayOfMonth(today.getDate());
+    } else {
+      value.setYear(selectedValue.getYear());
+      value.setMonth(selectedValue.getMonth());
+      value.setDayOfMonth(selectedValue.getDayOfMonth());
+    }
+    onChange(value);
+  },
+
   onClear() {
     this.setState({str: ''});
     this.props.onClear(null);
@@ -95,7 +111,7 @@ const DateInput = React.createClass({
   render() {
     const props = this.props;
     const {invalid, str} = this.state;
-    const {selectedValue, locale, prefixCls, placeholder, onChange, timePicker, disabledTime, gregorianCalendarLocale} = props;
+    const {selectedValue, locale, prefixCls, placeholder, timePicker, disabledTime, gregorianCalendarLocale} = props;
     const invalidClass = invalid ? `${prefixCls}-input-invalid` : '';
     const disabledTimeConfig = disabledTime && timePicker ? getTimeConfig(selectedValue, disabledTime) : null;
     return (<div className={`${prefixCls}-input-wrap`}>
@@ -106,7 +122,7 @@ const DateInput = React.createClass({
           getPopupContainer: this.getRootDOMNode,
           gregorianCalendarLocale,
           value: selectedValue,
-          onChange,
+          onChange: this.onTimePickerChange,
           ...disabledTimeConfig,
         }) : null}
       </div>
