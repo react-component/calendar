@@ -22,25 +22,29 @@ const App = React.createClass({
     };
   },
   onTypeChange(type) {
-    this.setState({ type });
+    this.setState({
+      type,
+    });
   },
   render() {
     return (
-      <div style={{zIndex: 1000, position: 'relative'}}>
+      <div style={{ zIndex: 1000, position: 'relative' }}>
         <FullCalendar
-          style={{margin: 10}}
+          style={{ margin: 10 }}
           Select={Select}
           fullscreen={false}
           onSelect={onSelect}
-          locale={CalendarLocale}/>
+          locale={CalendarLocale}
+        />
         <FullCalendar
-          style={{margin: 10}}
+          style={{ margin: 10 }}
           Select={Select}
           fullscreen
           onSelect={onSelect}
           type={this.state.type}
           onTypeChange={this.onTypeChange}
-          locale={CalendarLocale}/>
+          locale={CalendarLocale}
+        />
       </div>
     );
   },

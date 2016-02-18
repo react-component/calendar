@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 import DateTable from './date/DateTable';
 import MonthTable from './month/MonthTable';
 import CalendarMixin from './mixin/CalendarMixin';
@@ -9,6 +9,8 @@ const FullCalendar = React.createClass({
   propTypes: {
     defaultType: PropTypes.string,
     type: PropTypes.string,
+    prefixCls: PropTypes.string,
+    locale: PropTypes.object,
     onTypeChange: PropTypes.func,
     fullscreen: PropTypes.bool,
     monthCellRender: PropTypes.func,
@@ -27,7 +29,8 @@ const FullCalendar = React.createClass({
       fullscreen: false,
       showTypeSwitch: true,
       showHeader: true,
-      onTypeChange() {},
+      onTypeChange() {
+      },
     };
   },
   getInitialState() {
@@ -37,7 +40,9 @@ const FullCalendar = React.createClass({
     } else {
       type = this.props.defaultType;
     }
-    return { type };
+    return {
+      type,
+    };
   },
   componentWillReceiveProps(nextProps) {
     if ('type' in nextProps) {
@@ -47,18 +52,22 @@ const FullCalendar = React.createClass({
     }
   },
   onMonthSelect(value) {
-    this.onSelect(value, { target: 'month' });
+    this.onSelect(value, {
+      target: 'month',
+    });
   },
   setType(type) {
     if (!('type' in this.props)) {
-      this.setState({ type });
+      this.setState({
+        type,
+      });
     }
     this.props.onTypeChange(type);
   },
   render() {
     const props = this.props;
-    const {locale, prefixCls, fullscreen, showHeader, headerComponent, headerRender} = props;
-    const {value, type} = this.state;
+    const { locale, prefixCls, fullscreen, showHeader, headerComponent, headerRender } = props;
+    const { value, type } = this.state;
 
     let header = null;
     if (showHeader) {
@@ -67,13 +76,15 @@ const FullCalendar = React.createClass({
       } else {
         const TheHeader = headerComponent || CalendarHeader;
         header = (
-          <TheHeader key="calendar-header"
+          <TheHeader
+            key="calendar-header"
             {...props}
             prefixCls={`${prefixCls}-full`}
             type={type}
             value={value}
             onTypeChange={this.setType}
-            onValueChange={this.setValue}/>
+            onValueChange={this.setValue}
+          />
         );
       }
     }
@@ -84,14 +95,16 @@ const FullCalendar = React.createClass({
         locale={locale}
         prefixCls={prefixCls}
         onSelect={this.onSelect}
-        value={value} />
+        value={value}
+      />
     ) : (
       <MonthTable
         cellRender={props.monthCellRender}
         locale={locale}
         onSelect={this.onMonthSelect}
         prefixCls={`${prefixCls}-month-panel`}
-        value={value} />
+        value={value}
+      />
     );
 
     const children = [
@@ -108,7 +121,10 @@ const FullCalendar = React.createClass({
       className.push(`${prefixCls}-fullscreen`);
     }
 
-    return this.renderRoot({ children, className: className.join(' ') });
+    return this.renderRoot({
+      children,
+      className: className.join(' '),
+    });
   },
 });
 

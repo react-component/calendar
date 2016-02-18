@@ -19,7 +19,7 @@ export function getTodayTime(value) {
 }
 
 export function getTitleString(value) {
-  return value.getYear() + '-' + (value.getMonth() + 1) + '-' + value.getDayOfMonth();
+  return `${value.getYear()}-${value.getMonth() + 1}-${value.getDayOfMonth()}`;
 }
 
 export function getTodayTimeStr(value) {

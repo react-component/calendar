@@ -30,9 +30,9 @@ const Test = React.createClass({
   },
 
   onChange(value) {
-    console.log('DatePicker change: ' + (value && formatter.format(value)));
+    console.log(`DatePicker change: ${value && formatter.format(value)}`);
     this.setState({
-      value: value,
+      value,
     });
   },
 
@@ -50,32 +50,44 @@ const Test = React.createClass({
 
   render() {
     const state = this.state;
-    const calendar = (<MonthCalendar locale={CalendarLocale}
-                                     style={{zIndex: 1000}}/>);
-    return (<div style={{width: 240, margin: 20}}>
-      <div style={{marginBottom: 10}}>
+    const calendar = (<MonthCalendar
+      locale={CalendarLocale}
+      style={{ zIndex: 1000 }}
+    />);
+    return (<div style={{ width: 240, margin: 20 }}>
+      <div style={{ marginBottom: 10 }}>
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <label><input checked={state.disabled} onChange={this.toggleDisabled} type="checkbox"/> disabled </label>
+        <label>
+          <input
+            checked={state.disabled}
+            onChange={this.toggleDisabled}
+            type="checkbox"
+          /> disabled
+        </label>
       </div>
       <div style={{
-        'boxSizing': 'border-box',
-        'position': 'relative',
-        'display': 'block',
-        'lineHeight': 1.5,
+        boxSizing: 'border-box',
+        position: 'relative',
+        display: 'block',
+        lineHeight: 1.5,
         marginBottom: 22,
-      }}>
+      }}
+      >
         <DatePicker
           animation="slide-up"
           disabled={state.disabled}
           calendar={calendar}
-          value={state.value} onChange={this.onChange}>
+          value={state.value} onChange={this.onChange}
+        >
           {
-            ({value})=> {
-              return (<input style={{width: 200}}
-                             readOnly
-                             disabled={state.disabled}
-                             value={value && formatter.format(value)}
-                             placeholder="请选择日期"/>);
+            ({ value }) => {
+              return (<input
+                style={{ width: 200 }}
+                readOnly
+                disabled={state.disabled}
+                value={value && formatter.format(value)}
+                placeholder="请选择日期"
+              />);
             }
           }
 
@@ -94,20 +106,30 @@ function onStandaloneChange(value) {
 }
 
 function disabledDate(value) {
-  return value.getYear() > now.getYear() || value.getYear() === now.getYear() && value.getMonth() > now.getMonth();
+  return value.getYear() > now.getYear() ||
+    value.getYear() === now.getYear() && value.getMonth() > now.getMonth();
 }
 
 ReactDOM.render(
-  (<div style={{zIndex: 1000, position: 'relative', width: 600, margin: '0 auto'}}>
+  (<div
+    style={{
+      zIndex: 1000,
+      position: 'relative',
+      width: 600,
+      margin: '0 auto',
+    }}
+  >
     <h2>zh-cn</h2>
-    <MonthCalendar locale={CalendarLocale}
-                   style={{zIndex: 1000}}
-                   disabledDate={disabledDate}
-                   onSelect={onStandaloneSelect}
-                   onChange={onStandaloneChange}
-                   defaultValue={defaultCalendarValue}/>
+    <MonthCalendar
+      locale={CalendarLocale}
+      style={{ zIndex: 1000 }}
+      disabledDate={disabledDate}
+      onSelect={onStandaloneSelect}
+      onChange={onStandaloneChange}
+      defaultValue={defaultCalendarValue}
+    />
 
-    <div style={{marginTop: 200}}>
+    <div style={{ marginTop: 200 }}>
       <Test defaultValue={now}/>
     </div>
   </div>)

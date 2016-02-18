@@ -1,36 +1,55 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import CalendarHeader from '../calendar/CalendarHeader';
 import DateTable from '../date/DateTable';
 import CalendarFooter from '../calendar/CalendarFooter';
 import DateInput from '../date/DateInput';
 
 const Calendar = React.createClass({
+  propTypes: {
+    value: PropTypes.any,
+    direction: PropTypes.any,
+    prefixCls: PropTypes.any,
+    locale: PropTypes.any,
+    selectedValue: PropTypes.any,
+    formatter: PropTypes.any,
+    placeholder: PropTypes.any,
+    disabledDate: PropTypes.any,
+    timePicker: PropTypes.any,
+    disabledTime: PropTypes.any,
+  },
   render() {
     const props = this.props;
-    const {value, direction, prefixCls,
+    const { value, direction, prefixCls,
       locale, selectedValue, formatter, placeholder,
-      disabledDate, timePicker, disabledTime} = props;
+      disabledDate, timePicker, disabledTime } = props;
     const rangeClassName = `${prefixCls}-range`;
-    const newProps = {locale, value, prefixCls};
+    const newProps = {
+      locale,
+      value,
+      prefixCls,
+    };
     const index = direction === 'left' ? 0 : 1;
     return (<div className={`${rangeClassName}-part ${rangeClassName}-${direction}`}>
-      <DateInput formatter={formatter}
-                 locale={locale}
-                 prefixCls={prefixCls}
-                 timePicker={timePicker}
-                 disabledDate={disabledDate}
-                 placeholder={placeholder}
-                 disabledTime={disabledTime}
-                 gregorianCalendarLocale={value.locale}
-                 showClear={false}
-                 selectedValue={selectedValue[index]}
-                 onChange={props.onInputSelect}/>
-      <div style={{outline: 'none'}}>
+      <DateInput
+        formatter={formatter}
+        locale={locale}
+        prefixCls={prefixCls}
+        timePicker={timePicker}
+        disabledDate={disabledDate}
+        placeholder={placeholder}
+        disabledTime={disabledTime}
+        gregorianCalendarLocale={value.locale}
+        showClear={false}
+        selectedValue={selectedValue[index]}
+        onChange={props.onInputSelect}
+      />
+      <div style={{ outline: 'none' }}>
         <CalendarHeader
           {...newProps}
           enableNext={direction === 'right'}
           enablePrev={direction === 'left'}
-          onValueChange={props.onValueChange}/>
+          onValueChange={props.onValueChange}
+        />
         <div className={`${prefixCls}-calendar-body`}>
           <DateTable
             {...newProps}
@@ -39,7 +58,8 @@ const Calendar = React.createClass({
             onSelect={props.onSelect}
             onDayHover={props.onDayHover}
             disabledDate={disabledDate}
-            showWeekNumber={props.showWeekNumber}/>
+            showWeekNumber={props.showWeekNumber}
+          />
         </div>
         <CalendarFooter
           {...newProps}

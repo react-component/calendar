@@ -1,8 +1,8 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 import GregorianCalendar from 'gregorian-calendar';
 import classnames from 'classnames';
 import CalendarPart from './range-calendar/CalendarPart';
-import {syncTime, getTodayTime} from './util/';
+import { syncTime, getTodayTime } from './util/';
 import TodayButton from './calendar/TodayButton';
 import OkButton from './calendar/OkButton';
 import CommonMixin from './mixin/CommonMixin';
@@ -56,6 +56,8 @@ function onInputSelect(direction, value) {
 
 const RangeCalendar = React.createClass({
   propTypes: {
+    prefixCls: PropTypes.string,
+    dateInputPlaceholder: PropTypes.any,
     defaultValue: PropTypes.any,
     timePicker: PropTypes.any,
     value: PropTypes.any,
@@ -83,7 +85,10 @@ const RangeCalendar = React.createClass({
     const props = this.props;
     const selectedValue = props.selectedValue || props.defaultSelectedValue;
     const value = normalizeAnchor(props, 1);
-    return {selectedValue, value};
+    return {
+      selectedValue,
+      value,
+    };
   },
 
   componentWillReceiveProps(nextProps) {
@@ -178,7 +183,9 @@ const RangeCalendar = React.createClass({
 
   fireSelectValueChange(selectedValue, direct) {
     if (!('selectedValue' in this.props)) {
-      this.setState({selectedValue});
+      this.setState({
+        selectedValue,
+      });
     }
     this.props.onChange(selectedValue);
     if (direct || selectedValue[0] && selectedValue[1] && !selectedValue.hovering) {
@@ -189,7 +196,9 @@ const RangeCalendar = React.createClass({
   fireValueChange(value) {
     const props = this.props;
     if (!('value' in props)) {
-      this.setState({value});
+      this.setState({
+        value,
+      });
     }
     props.onValueChange(value);
   },
@@ -202,12 +211,12 @@ const RangeCalendar = React.createClass({
   render() {
     const props = this.props;
     const state = this.state;
-    const {prefixCls, dateInputPlaceholder, timePicker, showOk} = props;
+    const { prefixCls, dateInputPlaceholder, timePicker, showOk } = props;
     const className = {
       [props.className]: !!props.className,
       [prefixCls]: 1,
       [`${prefixCls}-hidden`]: !props.visible,
-      [prefixCls + '-range']: 1,
+      [`${prefixCls}-range`]: 1,
       [`${prefixCls}-week-number`]: props.showWeekNumber,
     };
     const classes = classnames(className);
@@ -227,8 +236,11 @@ const RangeCalendar = React.createClass({
         placeholder1 = placeholder2 = dateInputPlaceholder;
       }
     }
-    return (<div className={classes} style={props.style}
-                 tabIndex="0">
+    return (<div
+      className={classes}
+      style={props.style}
+      tabIndex="0"
+    >
       <a className={`${prefixCls}-clear-btn`} role="button" title="清除" onClick={this.clear}/>
       <CalendarPart
         {...props}
@@ -238,7 +250,8 @@ const RangeCalendar = React.createClass({
         value={this.getStartValue()}
         placeholder={placeholder1}
         onInputSelect={onInputSelect.bind(this, 'left')}
-        onValueChange={onValueChange.bind(this, 'left')}/>
+        onValueChange={onValueChange.bind(this, 'left')}
+      />
       <span className={`${prefixCls}-range-middle`}>~</span>
       <CalendarPart
         {...props}
@@ -248,12 +261,14 @@ const RangeCalendar = React.createClass({
         placeholder={placeholder2}
         value={this.getEndValue()}
         onInputSelect={onInputSelect.bind(this, 'right')}
-        onValueChange={onValueChange.bind(this, 'right')}/>
+        onValueChange={onValueChange.bind(this, 'right')}
+      />
       <div className={`${prefixCls}-range-bottom`}>
         <TodayButton
           {...props}
           value={state.value}
-          onToday={this.onToday}/>
+          onToday={this.onToday}
+        />
         {showOk === true || showOk !== false && !!timePicker ?
           <OkButton
             {...props}

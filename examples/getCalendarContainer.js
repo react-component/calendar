@@ -45,24 +45,28 @@ const Test = React.createClass({
       <button onClick={this.destroy}>destroy</button>
       <Dialog visible={this.state.open} onClose={this.close}>
         <div id="d" ref="d"/>
-        <div style={{marginTop: 20}}>
+        <div style={{ marginTop: 20 }}>
           <DatePicker
             getCalendarContainer={this.getCalendarContainer}
-            calendar={<Calendar />}>
+            calendar={<Calendar />}
+          >
             {
-              ({value})=> {
+              ({ value }) => {
                 return (
                   <span>
-                <input style={{width: 250}}
-                       readOnly
-                       value={value && dateFormatter.format(value)}/>
+                <input
+                  style={{ width: 250 }}
+                  readOnly
+                  value={value && dateFormatter.format(value)}
+                />
                 </span>
                 );
               }
             }
           </DatePicker>
         </div>
-      </Dialog></div>);
+      </Dialog>
+    </div>);
   },
 });
 

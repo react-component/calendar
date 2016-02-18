@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
 
 const ROW = 4;
@@ -22,6 +22,7 @@ class MonthTable extends Component {
       value: props.value,
     };
   }
+
   componentWillReceiveProps(nextProps) {
     if ('value' in nextProps) {
       this.setState({
@@ -29,6 +30,7 @@ class MonthTable extends Component {
       });
     }
   }
+
   getMonths() {
     const props = this.props;
     const value = this.state.value;
@@ -51,12 +53,14 @@ class MonthTable extends Component {
     }
     return months;
   }
+
   setAndSelectValue(value) {
     this.setState({
       value,
     });
     this.props.onSelect(value);
   }
+
   render() {
     const props = this.props;
     const value = this.state.value;
@@ -64,8 +68,8 @@ class MonthTable extends Component {
     today.setTime(Date.now());
     const months = this.getMonths();
     const currentMonth = value.getMonth();
-    const {prefixCls, locale} = props;
-    const monthsEls = months.map((month, index)=> {
+    const { prefixCls, locale } = props;
+    const monthsEls = months.map((month, index) => {
       const tds = month.map(monthData => {
         let disabled = false;
         if (props.disabledDate) {
@@ -78,7 +82,7 @@ class MonthTable extends Component {
           [`${prefixCls}-cell-disabled`]: disabled,
           [`${prefixCls}-selected-cell`]: monthData.value === currentMonth,
           [`${prefixCls}-current-cell`]: today.getYear() === value.getYear() &&
-            monthData.value === today.getMonth(),
+          monthData.value === today.getMonth(),
         };
         let cellEl;
         if (props.cellRender) {
@@ -89,11 +93,13 @@ class MonthTable extends Component {
           cellEl = <a className={`${prefixCls}-month`}>{monthData.content}</a>;
         }
         return (
-          <td role="gridcell"
-              key={monthData.value}
-              onClick={disabled ? null : chooseMonth.bind(this, monthData.value)}
-              title={monthData.title}
-              className={classnames(classNameMap)}>
+          <td
+            role="gridcell"
+            key={monthData.value}
+            onClick={disabled ? null : chooseMonth.bind(this, monthData.value)}
+            title={monthData.title}
+            className={classnames(classNameMap)}
+          >
             {cellEl}
           </td>);
       });

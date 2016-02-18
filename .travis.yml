@@ -5,32 +5,33 @@ sudo: false
 notifications:
   email:
   - yiminghe@gmail.com
+
 node_js:
 - 4.0.0
-# whitelist
-branches:
-  only:
-    - master
+
 before_install:
 - |
-  if ! git diff --name-only $TRAVIS_COMMIT_RANGE | grep -qvE '(\.md$)|(^(docs|examples))/'
-  then
-    echo "Only docs were updated, stopping build process."
-    exit
-  fi
-  phantomjs --version
+    if ! git diff --name-only $TRAVIS_COMMIT_RANGE | grep -qvE '(\.md$)|(^(docs|examples))/'
+    then
+      echo "Only docs were updated, stopping build process."
+      exit
+    fi
+    npm install npm@3.x -g
+    phantomjs --version
 script:
 - |
-  if [ "$TEST_TYPE" = test ]; then
-    npm test
-  else
-    npm run $TEST_TYPE
-  fi
+    if [ "$TEST_TYPE" = test ]; then
+      npm test
+    else
+      npm run $TEST_TYPE
+    fi
 env:
   matrix:
   - TEST_TYPE=lint
-  - TEST_TYPE=browser-test
-  - TEST_TYPE=browser-test-cover
-  global:
-  - secure: lVAWo3conmIjgXZ5kcxqi2SWRVts7WHsXZc/M8aGOHec843LHEbkqRmD1l/OCGu2WRgkGh9eI6UYBFZqc2I75kP0cmZZFAu3wNrUP/xcgNh/L1f3tdRJsgX8aL4iISUQWsALXBqjcvC+wMa5NPxAeWB5cjMSMDTPY0BZmLWpPXk=
-  - secure: OglE/x4351+7Ga/8Hja/OX1AGhCMbgFK0xwsQZ8P+K79wT/OOpeSIaOyf/oZEbymxBjRVi1htxMu4DJtJUSMGSdwZ01PHfPLWz/dLBz+8P+WauZBBwiwO/T4AZX/fw+1VPvi8y2BYZZlDrBPRBu2sDyHoIGUT6hnoKykW5rU99M=
+  - TEST_TYPE=test
+  - TEST_TYPE=coverage
+
+
+matrix:
+  allow_failures:
+  - env: "TEST_TYPE=saucelabs"

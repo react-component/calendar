@@ -20,19 +20,25 @@ describe('DatePicker', () => {
   function noop() {
   }
 
-  function renderOne({value}) {
-    return (<input className="rc-calendar-picker-input"
-                   onChange={noop}
-                   readOnly
-                   value={value && formatter.format(value)}/>);
+  function renderOne({ value }) {
+    return (<input
+      className="rc-calendar-picker-input"
+      onChange={noop}
+      readOnly
+      value={value && formatter.format(value)}
+    />);
   }
 
   function renderPicker(props) {
     return ReactDOM.render(<DatePicker
-      calendar={<Calendar
-        locale={CalendarLocale}/>}
+      calendar={
+      <Calendar
+        locale={CalendarLocale}
+      />
+        }
       defaultValue={VALUE}
-      {...props}>
+      {...props}
+    >
       {renderOne}
     </DatePicker>, div);
   }
@@ -55,14 +61,17 @@ describe('DatePicker', () => {
       },
     });
     expect(picker.state.open).not.to.be.ok();
-    const input = TestUtils.scryRenderedDOMComponentsWithClass(picker, 'rc-calendar-picker-input')[0];
+    const input = TestUtils.scryRenderedDOMComponentsWithClass(picker,
+      'rc-calendar-picker-input')[0];
     async.series([(next) => {
       Simulate.click(input);
       setTimeout(next, 100);
     }, (next) => {
-      expect(TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance, 'rc-calendar')[0]).to.be.ok();
+      expect(TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance,
+        'rc-calendar')[0]).to.be.ok();
       expect(picker.state.open).to.be(true);
-      const day = TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance, 'rc-calendar-date')[1];
+      const day = TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance,
+        'rc-calendar-date')[1];
       Simulate.click(day);
       setTimeout(next, 100);
     }, (next) => {
@@ -87,14 +96,17 @@ describe('DatePicker', () => {
         },
       });
       expect(picker.state.open).not.to.be.ok();
-      const input = TestUtils.scryRenderedDOMComponentsWithClass(picker, 'rc-calendar-picker-input')[0];
+      const input = TestUtils.scryRenderedDOMComponentsWithClass(picker,
+        'rc-calendar-picker-input')[0];
       async.series([(next) => {
         Simulate.click(input);
         setTimeout(next, 100);
       }, (next) => {
-        expect(TestUtils.scryRenderedDOMComponentsWithClass(picker, 'rc-calendar')[0]).not.to.be.ok();
+        expect(TestUtils.scryRenderedDOMComponentsWithClass(picker,
+          'rc-calendar')[0]).not.to.be.ok();
         expect(picker.state.open).to.be(true);
-        const day = TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance, 'rc-calendar-date')[1];
+        const day = TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance,
+          'rc-calendar-date')[1];
         Simulate.click(day);
         setTimeout(next, 100);
       }, (next) => {
@@ -113,17 +125,20 @@ describe('DatePicker', () => {
     it('destroy correctly', (done) => {
       const picker = renderPicker();
       expect(picker.state.open).not.to.be.ok();
-      const input = TestUtils.scryRenderedDOMComponentsWithClass(picker, 'rc-calendar-picker-input')[0];
+      const input = TestUtils.scryRenderedDOMComponentsWithClass(picker,
+        'rc-calendar-picker-input')[0];
       async.series([(next) => {
         Simulate.click(input);
         setTimeout(next, 100);
       }, (next) => {
-        expect(TestUtils.scryRenderedDOMComponentsWithClass(picker, 'rc-calendar')[0]).not.to.be.ok();
+        expect(TestUtils.scryRenderedDOMComponentsWithClass(picker,
+          'rc-calendar')[0]).not.to.be.ok();
         expect(picker.state.open).to.be(true);
         if (document.querySelectorAll) {
           expect(document.querySelectorAll('.rc-calendar-picker').length).not.to.be(0);
         }
-        expect(TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance, 'rc-calendar-date')[0]).to.be.ok();
+        expect(TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance,
+          'rc-calendar-date')[0]).to.be.ok();
         ReactDOM.unmountComponentAtNode(div);
         setTimeout(next, 100);
       }, (next) => {

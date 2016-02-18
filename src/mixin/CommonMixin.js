@@ -1,6 +1,6 @@
-import {PropTypes} from 'react';
+import { PropTypes } from 'react';
 import enUs from '../locale/en_US';
-import {getFormatter} from '../util/index';
+import { getFormatter } from '../util/index';
 
 function noop() {
 }

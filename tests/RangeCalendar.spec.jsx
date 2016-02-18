@@ -30,7 +30,8 @@ describe('RangeCalendar', () => {
     if (month === 11) {
       month = -1;
     }
-    const rightCalendar = TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-range-right')[0];
+    const rightCalendar = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+      'rc-calendar-range-right')[0];
     Simulate.click($(rightCalendar).find('.rc-calendar-next-month-btn')[0]);
     setTimeout(() => {
       expect(calendar.state.value.getMonth()).to.be(month + 1);
@@ -43,7 +44,8 @@ describe('RangeCalendar', () => {
     if (month === 0) {
       month = 12;
     }
-    const leftCalendar = TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-range-left')[0];
+    const leftCalendar = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+      'rc-calendar-range-left')[0];
     Simulate.click($(leftCalendar).find('.rc-calendar-prev-month-btn')[0]);
     setTimeout(() => {
       expect(calendar.state.value.getMonth()).to.be(month - 1);
@@ -53,7 +55,8 @@ describe('RangeCalendar', () => {
 
   it('next year works', (done) => {
     const year = calendar.state.value.getYear();
-    const rightCalendar = TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-range-right')[0];
+    const rightCalendar = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+      'rc-calendar-range-right')[0];
     Simulate.click($(rightCalendar).find('.rc-calendar-next-year-btn')[0]);
     setTimeout(() => {
       expect(calendar.state.value.getYear()).to.be(year + 1);
@@ -63,7 +66,8 @@ describe('RangeCalendar', () => {
 
   it('previous year works', (done) => {
     const year = calendar.state.value.getYear();
-    const leftCalendar = TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-range-left')[0];
+    const leftCalendar = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+      'rc-calendar-range-left')[0];
     Simulate.click($(leftCalendar).find('.rc-calendar-prev-year-btn')[0]);
     setTimeout(() => {
       expect(calendar.state.value.getYear()).to.be(year - 1);
@@ -72,7 +76,8 @@ describe('RangeCalendar', () => {
   });
 
   it('render works', () => {
-    expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-cell').length).to.above(0);
+    expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+      'rc-calendar-cell').length).to.above(0);
   });
 
   it('onSelect works', (done) => {
@@ -90,10 +95,13 @@ describe('RangeCalendar', () => {
     calendar = ReactDOM.render(<RangeCalendar
       onSelect={onSelect}
       defaultValue={now}
-      showWeekNumber/>, container);
-    const leftCalendar = TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-range-left')[0];
+      showWeekNumber
+    />, container);
+    const leftCalendar = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+      'rc-calendar-range-left')[0];
     const leftInput = $(leftCalendar).find('.rc-calendar-input')[0];
-    const rightCalendar = TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-range-right')[0];
+    const rightCalendar = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+      'rc-calendar-range-right')[0];
     const rightInput = $(rightCalendar).find('.rc-calendar-input')[0];
     day = $(leftCalendar).find('.rc-calendar-date')[5]; // 9.4
     Simulate.click(day);

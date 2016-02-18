@@ -1,4 +1,4 @@
-import {KeyCode as keyCode} from 'rc-util';
+import { KeyCode as keyCode } from 'rc-util';
 import expect from 'expect.js';
 import Calendar from '../index';
 import React from 'react';
@@ -23,7 +23,8 @@ describe('Calendar', () => {
     describe('render', () => {
       it('render showToday false', () => {
         calendar = ReactDOM.render(<Calendar showToday={false}/>, container);
-        expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-today-btn').length).to.be(0);
+        expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+          'rc-calendar-today-btn').length).to.be(0);
       });
     });
   });
@@ -32,7 +33,8 @@ describe('Calendar', () => {
     beforeEach((done) => {
       ReactDOM.render(<Calendar showToday showWeekNumber/>, container, function ok() {
         calendar = this;
-        input = TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-input')[0];
+        input = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+          'rc-calendar-input')[0];
         done();
       });
     });
@@ -46,7 +48,8 @@ describe('Calendar', () => {
           keyCode: keyCode.LEFT,
         });
         setTimeout(() => {
-          expect(calendar.state.value.getDayOfMonth()).to.be(expected.getDayOfMonth());
+          expect(calendar.state.value.getDayOfMonth())
+            .to.be(expected.getDayOfMonth());
           expect(ReactDOM.findDOMNode(input).value).to.be('');
           done();
         }, 10);
@@ -61,7 +64,8 @@ describe('Calendar', () => {
           keyCode: keyCode.RIGHT,
         });
         setTimeout(() => {
-          expect(calendar.state.value.getDayOfMonth()).to.be(expected.getDayOfMonth());
+          expect(calendar.state.value.getDayOfMonth())
+            .to.be(expected.getDayOfMonth());
           expect(ReactDOM.findDOMNode(input).value).to.be('');
           done();
         }, 10);
@@ -75,7 +79,8 @@ describe('Calendar', () => {
           keyCode: keyCode.UP,
         });
         setTimeout(() => {
-          expect(calendar.state.value.getDayOfMonth()).to.be(expected.getDayOfMonth());
+          expect(calendar.state.value.getDayOfMonth())
+            .to.be(expected.getDayOfMonth());
           expect(ReactDOM.findDOMNode(input).value).to.be('');
           done();
         }, 10);
@@ -89,7 +94,8 @@ describe('Calendar', () => {
           keyCode: keyCode.DOWN,
         });
         setTimeout(() => {
-          expect(calendar.state.value.getDayOfMonth()).to.be(expected.getDayOfMonth());
+          expect(calendar.state.value.getDayOfMonth())
+            .to.be(expected.getDayOfMonth());
           expect(ReactDOM.findDOMNode(input).value).to.be('');
           done();
         }, 10);
@@ -103,7 +109,8 @@ describe('Calendar', () => {
           keyCode: keyCode.PAGE_DOWN,
         });
         setTimeout(() => {
-          expect(calendar.state.value.getMonth()).to.be(expected.getMonth());
+          expect(calendar.state.value.getMonth())
+            .to.be(expected.getMonth());
           expect(ReactDOM.findDOMNode(input).value).to.be('');
           done();
         }, 10);
@@ -117,7 +124,8 @@ describe('Calendar', () => {
           keyCode: keyCode.PAGE_UP,
         });
         setTimeout(() => {
-          expect(calendar.state.value.getMonth()).to.be(expected.getMonth());
+          expect(calendar.state.value.getMonth())
+            .to.be(expected.getMonth());
           expect(ReactDOM.findDOMNode(input).value).to.be('');
           done();
         }, 10);
@@ -132,7 +140,8 @@ describe('Calendar', () => {
           ctrlKey: 1,
         });
         setTimeout(() => {
-          expect(calendar.state.value.getYear()).to.be(expected.getYear());
+          expect(calendar.state.value.getYear())
+            .to.be(expected.getYear());
           expect(ReactDOM.findDOMNode(input).value).to.be('');
           done();
         }, 10);
@@ -148,7 +157,8 @@ describe('Calendar', () => {
           ctrlKey: 1,
         });
         setTimeout(() => {
-          expect(calendar.state.value.getYear()).to.be(expected.getYear());
+          expect(calendar.state.value.getYear())
+            .to.be(expected.getYear());
           expect(ReactDOM.findDOMNode(input).value).to.be('');
           done();
         }, 10);
@@ -160,7 +170,8 @@ describe('Calendar', () => {
       if (month === 11) {
         month = -1;
       }
-      Simulate.click(TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-next-month-btn')[0]);
+      Simulate.click(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+        'rc-calendar-next-month-btn')[0]);
       setTimeout(() => {
         expect(calendar.state.value.getMonth()).to.be(month + 1);
         expect(ReactDOM.findDOMNode(input).value).to.be('');
@@ -173,7 +184,8 @@ describe('Calendar', () => {
       if (month === 0) {
         month = 12;
       }
-      Simulate.click(TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-prev-month-btn')[0]);
+      Simulate.click(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+        'rc-calendar-prev-month-btn')[0]);
       setTimeout(() => {
         expect(calendar.state.value.getMonth()).to.be(month - 1);
         expect(ReactDOM.findDOMNode(input).value).to.be('');
@@ -183,7 +195,8 @@ describe('Calendar', () => {
 
     it('next year works', (done) => {
       const year = calendar.state.value.getYear();
-      Simulate.click(TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-next-year-btn')[0]);
+      Simulate.click(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+        'rc-calendar-next-year-btn')[0]);
       setTimeout(() => {
         expect(calendar.state.value.getYear()).to.be(year + 1);
         done();
@@ -192,7 +205,8 @@ describe('Calendar', () => {
 
     it('previous year works', (done) => {
       const year = calendar.state.value.getYear();
-      Simulate.click(TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-prev-year-btn')[0]);
+      Simulate.click(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+        'rc-calendar-prev-year-btn')[0]);
       setTimeout(() => {
         expect(calendar.state.value.getYear()).to.be(year - 1);
         done();
@@ -200,7 +214,8 @@ describe('Calendar', () => {
     });
 
     it('render works', () => {
-      expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-cell').length).to.above(0);
+      expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+        'rc-calendar-cell').length).to.above(0);
     });
 
     it('onSelect works', (done) => {
@@ -211,21 +226,30 @@ describe('Calendar', () => {
         done();
       }
 
-      calendar = ReactDOM.render(<Calendar showToday
-                                        onSelect={onSelect}
-                                        showWeekNumber/>, container);
-      day = TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-date')[5];
+      calendar = ReactDOM.render(<Calendar
+        showToday
+        onSelect={onSelect}
+        showWeekNumber
+      />, container);
+      day = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+        'rc-calendar-date')[5];
       Simulate.click(day);
-      expect(ReactDOM.findDOMNode(input).value).to.be(formatter.format(calendar.state.value));
+      expect(ReactDOM.findDOMNode(input).value)
+        .to.be(formatter.format(calendar.state.value));
     });
 
     it('month panel shows', (done) => {
-      expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-month-panel').length).to.be(0);
-      Simulate.click(TestUtils.findRenderedDOMComponentWithClass(calendar, 'rc-calendar-month-select'));
+      expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+        'rc-calendar-month-panel').length).to.be(0);
+      Simulate.click(TestUtils.findRenderedDOMComponentWithClass(calendar,
+        'rc-calendar-month-select'));
       async.series([(next) => {
-        expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-month-panel').length).to.be(1);
-        expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-month-panel-month').length).to.be(12);
-        const m = TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-month-panel-month')[9];
+        expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+          'rc-calendar-month-panel').length).to.be(1);
+        expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+          'rc-calendar-month-panel-month').length).to.be(12);
+        const m = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+          'rc-calendar-month-panel-month')[9];
         Simulate.click(m);
         setTimeout(next, 10);
       }, (next) => {
@@ -236,17 +260,22 @@ describe('Calendar', () => {
 
     it('top year panel shows', (done) => {
       let text;
-      expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-year-panel').length).to.be(0);
-      Simulate.click(TestUtils.findRenderedDOMComponentWithClass(calendar, 'rc-calendar-year-select'));
+      expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+        'rc-calendar-year-panel').length).to.be(0);
+      Simulate.click(TestUtils.findRenderedDOMComponentWithClass(calendar,
+        'rc-calendar-year-select'));
       async.series([(next) => {
-        expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-year-panel').length).to.be(1);
-        expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-year-panel-year').length).to.be(12);
-        const year = TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-year-panel-year')[9];
+        expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+          'rc-calendar-year-panel').length).to.be(1);
+        expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+          'rc-calendar-year-panel-year').length).to.be(12);
+        const year = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+          'rc-calendar-year-panel-year')[9];
         text = year.innerHTML;
         Simulate.click(year);
         setTimeout(next, 10);
       }, (next) => {
-        expect(calendar.state.value.getYear() + '').to.be(text);
+        expect(String(calendar.state.value.getYear())).to.be(text);
         next();
       }], done);
     });
@@ -254,24 +283,30 @@ describe('Calendar', () => {
     it('year panel works', (done) => {
       let text;
       async.series([(next) => {
-        Simulate.click(TestUtils.findRenderedDOMComponentWithClass(calendar, 'rc-calendar-month-select'));
+        Simulate.click(TestUtils.findRenderedDOMComponentWithClass(calendar,
+          'rc-calendar-month-select'));
         setTimeout(next, 10);
       }, (next) => {
-        Simulate.click(TestUtils.findRenderedDOMComponentWithClass(calendar, 'rc-calendar-month-panel-year-select'));
+        Simulate.click(TestUtils.findRenderedDOMComponentWithClass(calendar,
+          'rc-calendar-month-panel-year-select'));
         setTimeout(next, 10);
       }, (next) => {
-        expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-year-panel').length).to.be(1);
-        expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-year-panel-year').length).to.be(12);
-        const year = TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-year-panel-year')[9];
+        expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+          'rc-calendar-year-panel').length).to.be(1);
+        expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+          'rc-calendar-year-panel-year').length).to.be(12);
+        const year = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+          'rc-calendar-year-panel-year')[9];
         text = year.innerHTML;
         Simulate.click(year);
         setTimeout(next, 10);
       }, (next) => {
-        const m = TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-month-panel-month')[9];
+        const m = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+          'rc-calendar-month-panel-month')[9];
         Simulate.click(m);
         setTimeout(next, 10);
       }, (next) => {
-        expect(calendar.state.value.getYear() + '').to.be(text);
+        expect(String(calendar.state.value.getYear())).to.be(text);
         expect(ReactDOM.findDOMNode(input).value).to.be('');
         next();
       }], done);
@@ -279,17 +314,22 @@ describe('Calendar', () => {
 
     it('decade panel works', (done) => {
       async.series([(next) => {
-        Simulate.click(TestUtils.findRenderedDOMComponentWithClass(calendar, 'rc-calendar-month-select'));
+        Simulate.click(TestUtils.findRenderedDOMComponentWithClass(calendar,
+          'rc-calendar-month-select'));
         setTimeout(next, 10);
       }, (next) => {
-        Simulate.click(TestUtils.findRenderedDOMComponentWithClass(calendar, 'rc-calendar-month-panel-year-select'));
+        Simulate.click(TestUtils.findRenderedDOMComponentWithClass(calendar,
+          'rc-calendar-month-panel-year-select'));
         setTimeout(next, 10);
       }, (next) => {
-        Simulate.click(TestUtils.findRenderedDOMComponentWithClass(calendar, 'rc-calendar-year-panel-decade-select'));
+        Simulate.click(TestUtils.findRenderedDOMComponentWithClass(calendar,
+          'rc-calendar-year-panel-decade-select'));
         setTimeout(next, 10);
       }, (next) => {
-        expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-decade-panel').length).to.be(1);
-        expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-decade-panel-decade').length).to.be(12);
+        expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+          'rc-calendar-decade-panel').length).to.be(1);
+        expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+          'rc-calendar-decade-panel-decade').length).to.be(12);
         next();
       }], done);
     });
@@ -318,12 +358,14 @@ describe('Calendar', () => {
         check();
       }
 
-      ReactDOM.render(<Calendar showToday
-                             onSelect={onSelect}
-                             onChange={onChange}
+      ReactDOM.render(<Calendar
+        showToday
+        onSelect={onSelect}
+        onChange={onChange}
       />, container, function ok() {
         calendar = this;
-        input = TestUtils.scryRenderedDOMComponentsWithClass(calendar, 'rc-calendar-input')[0];
+        input = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+          'rc-calendar-input')[0];
       });
       ReactDOM.findDOMNode(input).value = expected;
       Simulate.change(input);

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import DateConstants from './DateConstants';
 
@@ -22,23 +21,31 @@ class DateTHead extends React.Component {
 
     if (props.showWeekNumber) {
       showWeekNumberEl = (
-        <th role="columnheader" className = {`${prefixCls}-column-header ${prefixCls}-week-number-header`}>
-          <span className ={`${prefixCls}-column-header-inner`}>x</span>
+        <th
+          role="columnheader"
+          className={`${prefixCls}-column-header ${prefixCls}-week-number-header`}
+        >
+          <span className={`${prefixCls}-column-header-inner`}>x</span>
         </th>);
     }
-    const weekDaysEls = weekDays.map((day, xindex)=> {
+    const weekDaysEls = weekDays.map((day, xindex) => {
       return (
-        <th key={xindex} role="columnheader" title={day} className ={`${prefixCls}-column-header`}>
-          <span className = {`${prefixCls}-column-header-inner`}>
+        <th
+          key={xindex}
+          role="columnheader"
+          title={day}
+          className={`${prefixCls}-column-header`}
+        >
+          <span className={`${prefixCls}-column-header-inner`}>
           {veryShortWeekdays[xindex]}
           </span>
         </th>);
     });
     return (<thead>
-      <tr role="row">
-              {showWeekNumberEl}
-              {weekDaysEls}
-      </tr>
+    <tr role="row">
+      {showWeekNumberEl}
+      {weekDaysEls}
+    </tr>
     </thead>);
   }
 }

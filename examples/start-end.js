@@ -34,25 +34,30 @@ const Picker = React.createClass({
   },
   render() {
     const props = this.props;
-    const calendar = (<Calendar locale={CalendarLocale}
-                             defaultValue={now}
-                             timePicker={props.showTime ? timePickerElement : null}
-                             disabledDate={props.disabledDate}
+    const calendar = (<Calendar
+      locale={CalendarLocale}
+      defaultValue={now}
+      timePicker={props.showTime ? timePickerElement : null}
+      disabledDate={props.disabledDate}
     />);
     return (<DatePicker
       animation="slide-up"
       disabled={props.disabled}
       calendar={calendar}
       value={props.value}
-      onChange={props.onChange}>
+      onChange={props.onChange}
+    >
       {
-        ({value})=> {
+        ({ value }) => {
           return (
             <span>
-                <input placeholder="请选择日期" style={{width: 250}}
-                       disabled={props.disabled}
-                       readOnly
-                       value={value && getFormatter(props.showTime).format(value)}/>
+                <input
+                  placeholder="请选择日期"
+                  style={{ width: 250 }}
+                  disabled={props.disabled}
+                  readOnly
+                  value={value && getFormatter(props.showTime).format(value)}
+                />
                 </span>
           );
         }
@@ -84,8 +89,10 @@ const Test = React.createClass({
     if (!startValue) {
       return false;
     }
-    // console.log(getFormatter(SHOW_TIME).format(startValue), getFormatter(SHOW_TIME).format(endValue));
-    return SHOW_TIME ? endValue.getTime() < startValue.getTime() : endValue.compareToDay(startValue) <= 0;
+    // console.log(getFormatter(SHOW_TIME).format(startValue),
+    // getFormatter(SHOW_TIME).format(endValue));
+    return SHOW_TIME ? endValue.getTime() < startValue.getTime() :
+    endValue.compareToDay(startValue) <= 0;
   },
 
   disabledStartDate(startValue) {
@@ -96,23 +103,31 @@ const Test = React.createClass({
     if (!endValue) {
       return false;
     }
-    // console.log(getFormatter(SHOW_TIME).format(startValue), getFormatter(SHOW_TIME).format(endValue));
-    return SHOW_TIME ? endValue.getTime() < startValue.getTime() : startValue.compareToDay(endValue) >= 0;
+    // console.log(getFormatter(SHOW_TIME).format(startValue),
+    // getFormatter(SHOW_TIME).format(endValue));
+    return SHOW_TIME ? endValue.getTime() < startValue.getTime() :
+    startValue.compareToDay(endValue) >= 0;
   },
 
   render() {
     const state = this.state;
-    return (<div style={{width: 240, margin: 20}}>
+    return (<div style={{ width: 240, margin: 20 }}>
       <p>
         开始时间：
-        <Picker disabledDate={this.disabledStartDate} value={state.startValue}
-                onChange={this.onChange.bind(this, 'startValue')}/>
+        <Picker
+          disabledDate={this.disabledStartDate}
+          value={state.startValue}
+          onChange={this.onChange.bind(this, 'startValue')}
+        />
       </p>
 
       <p>
         结束时间：
-        <Picker disabledDate={this.disabledEndDate} value={state.endValue}
-                onChange={this.onChange.bind(this, 'endValue')}/>
+        <Picker
+          disabledDate={this.disabledEndDate}
+          value={state.endValue}
+          onChange={this.onChange.bind(this, 'endValue')}
+        />
       </p>
     </div>);
   },

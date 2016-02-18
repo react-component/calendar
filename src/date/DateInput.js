@@ -1,6 +1,6 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import {getTimeConfig} from '../util/index';
+import { getTimeConfig } from '../util/index';
 
 function copyTime(target, source) {
   if (source) {
@@ -13,6 +13,9 @@ function copyTime(target, source) {
 
 const DateInput = React.createClass({
   propTypes: {
+    prefixCls: PropTypes.string,
+    timePicker: PropTypes.object,
+    disabledTime: PropTypes.any,
     formatter: PropTypes.object,
     locale: PropTypes.object,
     gregorianCalendarLocale: PropTypes.object,
@@ -47,7 +50,7 @@ const DateInput = React.createClass({
       str,
     });
     let value;
-    const {disabledDate, formatter, gregorianCalendarLocale, onChange} = this.props;
+    const { disabledDate, formatter, gregorianCalendarLocale, onChange } = this.props;
     if (str) {
       try {
         value = copyTime(formatter.parse(str, {
@@ -84,7 +87,9 @@ const DateInput = React.createClass({
   },
 
   onClear() {
-    this.setState({str: ''});
+    this.setState({
+      str: '',
+    });
     this.props.onClear(null);
   },
 
@@ -94,10 +99,13 @@ const DateInput = React.createClass({
 
   render() {
     const props = this.props;
-    const {invalid, str} = this.state;
-    const {selectedValue, locale, prefixCls, placeholder, onChange, timePicker, disabledTime, gregorianCalendarLocale} = props;
+    const { invalid, str } = this.state;
+    const { selectedValue, locale, prefixCls,
+      placeholder, onChange, timePicker, disabledTime,
+      gregorianCalendarLocale } = props;
     const invalidClass = invalid ? `${prefixCls}-input-invalid` : '';
-    const disabledTimeConfig = disabledTime && timePicker ? getTimeConfig(selectedValue, disabledTime) : null;
+    const disabledTimeConfig = disabledTime && timePicker ?
+      getTimeConfig(selectedValue, disabledTime) : null;
     return (<div className={`${prefixCls}-input-wrap`}>
       <div className={`${prefixCls}-time-picker-wrap`}>
         {timePicker ? React.cloneElement(timePicker, {
@@ -111,15 +119,19 @@ const DateInput = React.createClass({
         }) : null}
       </div>
       <div className={`${prefixCls}-date-input-wrap`}>
-        <input className={`${prefixCls}-input  ${invalidClass}`}
-               value={str}
-               placeholder={placeholder}
-               onChange={this.onInputChange}/>
+        <input
+          className={`${prefixCls}-input  ${invalidClass}`}
+          value={str}
+          placeholder={placeholder}
+          onChange={this.onInputChange}
+        />
       </div>
-      {props.showClear ? <a className={`${prefixCls}-clear-btn`}
-                            role="button"
-                            title={locale.clear}
-                            onClick={this.onClear}/> : null}
+      {props.showClear ? <a
+        className={`${prefixCls}-clear-btn`}
+        role="button"
+        title={locale.clear}
+        onClick={this.onClear}
+      /> : null}
     </div>);
   },
 });

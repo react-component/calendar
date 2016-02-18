@@ -1,6 +1,6 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import {createChainedFunction, KeyCode} from 'rc-util';
+import { createChainedFunction, KeyCode } from 'rc-util';
 import placements from './picker/placements';
 import Trigger from 'rc-trigger';
 
@@ -13,6 +13,9 @@ function refFn(field, component) {
 
 const Picker = React.createClass({
   propTypes: {
+    animation: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    disabled: PropTypes.bool,
+    transitionName: PropTypes.string,
     onChange: PropTypes.func,
     onOpen: PropTypes.func,
     onClose: PropTypes.func,
@@ -58,16 +61,23 @@ const Picker = React.createClass({
     }
     const value = props.value || props.defaultValue;
     this.saveCalendarRef = refFn.bind(this, 'calendarInstance');
-    return {open, value};
+    return {
+      open,
+      value,
+    };
   },
 
   componentWillReceiveProps(nextProps) {
-    const {value, open} = nextProps;
+    const { value, open } = nextProps;
     if ('value' in nextProps) {
-      this.setState({value});
+      this.setState({
+        value,
+      });
     }
     if (open !== undefined) {
-      this.setState({open});
+      this.setState({
+        open,
+      });
     }
   },
 
@@ -82,7 +92,7 @@ const Picker = React.createClass({
     const props = this.props;
     if (!('value' in props)) {
       this.setState({
-        value: value,
+        value,
       });
     }
     if (!props.calendar.props.timePicker && cause.source !== 'dateInput') {
@@ -111,7 +121,7 @@ const Picker = React.createClass({
     const props = this.props;
     const state = this.state;
     const calendarProp = props.calendar;
-    const {value} = state;
+    const { value } = state;
     let defaultValue;
     // RangeCalendar
     if (Array.isArray(value)) {
@@ -133,13 +143,13 @@ const Picker = React.createClass({
   },
 
   setOpen(open, callback) {
-    const {onOpen, onClose} = this.props;
+    const { onOpen, onClose } = this.props;
     if (this.state.open !== open) {
       this.setState({
-        open: open,
+        open,
       }, callback);
       const event = {
-        open: open,
+        open,
       };
       if (open) {
         onOpen(event);
@@ -171,19 +181,21 @@ const Picker = React.createClass({
       disabled,
       transitionName, children } = props;
     const state = this.state;
-    return (<Trigger popup={this.getCalendarElement()}
-                     popupAlign={align}
-                     builtinPlacements={placements}
-                     popupPlacement={placement}
-                     action={disabled ? [] : ['click']}
-                     destroyPopupOnHide
-                     getPopupContainer={getCalendarContainer}
-                     popupStyle={style}
-                     popupAnimation={animation}
-                     popupTransitionName={transitionName}
-                     popupVisible={state.open}
-                     onPopupVisibleChange={this.onVisibleChange}
-                     prefixCls={prefixCls}>
+    return (<Trigger
+      popup={this.getCalendarElement()}
+      popupAlign={align}
+      builtinPlacements={placements}
+      popupPlacement={placement}
+      action={disabled ? [] : ['click']}
+      destroyPopupOnHide
+      getPopupContainer={getCalendarContainer}
+      popupStyle={style}
+      popupAnimation={animation}
+      popupTransitionName={transitionName}
+      popupVisible={state.open}
+      onPopupVisibleChange={this.onVisibleChange}
+      prefixCls={prefixCls}
+    >
       {children(state, props)}
     </Trigger>);
   },

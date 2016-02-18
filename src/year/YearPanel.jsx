@@ -1,27 +1,29 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 import DecadePanel from '../decade/DecadePanel';
 const ROW = 4;
 const COL = 3;
 
 function goYear(direction) {
-  const next = this.state.value.clone();
-  next.addYear(direction);
-  this.setState({value: next});
+  const value = this.state.value.clone();
+  value.addYear(direction);
+  this.setState({
+    value,
+  });
 }
 
 function chooseYear(year) {
-  const next = this.state.value.clone();
-  next.setYear(year);
-  next.rollSetMonth(this.state.value.getMonth());
-  this.props.onSelect(next);
+  const value = this.state.value.clone();
+  value.setYear(year);
+  value.rollSetMonth(this.state.value.getMonth());
+  this.props.onSelect(value);
 }
 
 export default
 class YearPanel extends React.Component {
   constructor(props) {
     super(props);
-    this.prefixCls = props.rootPrefixCls + '-year-panel';
+    this.prefixCls = `${props.rootPrefixCls}-year-panel`;
     this.state = {
       value: props.value || props.defaultValue,
     };
@@ -57,11 +59,11 @@ class YearPanel extends React.Component {
         } else if (year > endYear) {
           content = '';
         } else {
-          content = year + '';
+          content = String(year);
         }
         years[rowIndex][colIndex] = {
-          content: content,
-          year: year,
+          content,
+          year,
           title: content,
         };
         index++;
@@ -103,14 +105,16 @@ class YearPanel extends React.Component {
           clickHandler = chooseYear.bind(this, yearData.year);
         }
         return (
-          <td role="gridcell"
-              title={yearData.title}
-              key={yearData.content}
-              onClick={clickHandler}
-              className={classnames(classNameMap)}
-            >
+          <td
+            role="gridcell"
+            title={yearData.title}
+            key={yearData.content}
+            onClick={clickHandler}
+            className={classnames(classNameMap)}
+          >
             <a
-              className={`${prefixCls}-year`}>
+              className={`${prefixCls}-year`}
+            >
               {yearData.content}
             </a>
           </td>);
@@ -120,34 +124,44 @@ class YearPanel extends React.Component {
 
     let decadePanel;
     if (this.state.showDecadePanel) {
-      decadePanel = (<DecadePanel locale={locale} value={value} rootPrefixCls={props.rootPrefixCls}
-                                  onSelect={this.onDecadePanelSelect}/>);
+      decadePanel = (<DecadePanel
+        locale={locale}
+        value={value}
+        rootPrefixCls={props.rootPrefixCls}
+        onSelect={this.onDecadePanelSelect}
+      />);
     }
 
     return (
       <div className={this.prefixCls}>
         <div>
           <div className={`${prefixCls}-header`}>
-            <a className={`${prefixCls}-prev-decade-btn`}
-               role="button"
-               onClick={this.previousDecade}
-               title={locale.previousDecade}>
+            <a
+              className={`${prefixCls}-prev-decade-btn`}
+              role="button"
+              onClick={this.previousDecade}
+              title={locale.previousDecade}
+            >
               «
             </a>
-            <a className={`${prefixCls}-decade-select`}
-               role="button"
-               onClick={this.showDecadePanel}
-               title={locale.decadeSelect}>
+            <a
+              className={`${prefixCls}-decade-select`}
+              role="button"
+              onClick={this.showDecadePanel}
+              title={locale.decadeSelect}
+            >
               <span className={`${prefixCls}-decade-select-content`}>
                 {startYear}-{endYear}
               </span>
               <span className={`${prefixCls}-decade-select-arrow`}>x</span>
             </a>
 
-            <a className={`${prefixCls}-next-decade-btn`}
-               role="button"
-               onClick={this.nextDecade}
-               title={locale.nextDecade}>
+            <a
+              className={`${prefixCls}-next-decade-btn`}
+              role="button"
+              onClick={this.nextDecade}
+              title={locale.nextDecade}
+            >
               »
             </a>
           </div>

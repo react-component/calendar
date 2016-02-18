@@ -78,8 +78,10 @@ const Test = React.createClass({
   },
 
   onChange(value) {
-    console.log('DatePicker change: ' + (value && formatter.format(value)));
-    this.setState({value});
+    console.log('DatePicker change: ', (value && formatter.format(value)));
+    this.setState({
+      value,
+    });
   },
 
   onShowTimeChange(e) {
@@ -102,51 +104,72 @@ const Test = React.createClass({
 
   render() {
     const state = this.state;
-    const calendar = (<Calendar locale={CalendarLocale2}
-                             style={{zIndex: 1000}}
-                             dateInputPlaceholder="请输入"
-                             disabledTime={state.showTime ? disabledTime : null}
-                             timePicker={state.showTime ? timePickerElement : null}
-                             defaultValue={this.props.defaultCalendarValue}
-                             showDateInput={state.showDateInput}
-                             disabledDate={disabledDate}
+    const calendar = (<Calendar
+      locale={CalendarLocale2}
+      style={{ zIndex: 1000 }}
+      dateInputPlaceholder="请输入"
+      disabledTime={state.showTime ? disabledTime : null}
+      timePicker={state.showTime ? timePickerElement : null}
+      defaultValue={this.props.defaultCalendarValue}
+      showDateInput={state.showDateInput}
+      disabledDate={disabledDate}
     />);
-    return (<div style={{width: 400, margin: 20}}>
-      <div style={{marginBottom: 10}}>
+    return (<div style={{ width: 400, margin: 20 }}>
+      <div style={{ marginBottom: 10 }}>
         <label>
-          <input type="checkbox" checked={state.showTime} onChange={this.onShowTimeChange}/>
+          <input
+            type="checkbox"
+            checked={state.showTime}
+            onChange={this.onShowTimeChange}
+          />
           showTime
         </label>
         &nbsp;&nbsp;&nbsp;&nbsp;
         <label>
-          <input type="checkbox" checked={state.showDateInput} onChange={this.onShowDateInputChange}/>
+          <input
+            type="checkbox"
+            checked={state.showDateInput}
+            onChange={this.onShowDateInputChange}
+          />
           showDateInput
         </label>
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <label><input checked={state.disabled} onChange={this.toggleDisabled} type="checkbox"/> disabled </label>
+        <label>
+          <input
+            checked={state.disabled}
+            onChange={this.toggleDisabled}
+            type="checkbox"
+          />
+          disabled
+        </label>
       </div>
       <div style={{
-        'boxSizing': 'border-box',
-        'position': 'relative',
-        'display': 'block',
-        'lineHeight': 1.5,
+        boxSizing: 'border-box',
+        position: 'relative',
+        display: 'block',
+        lineHeight: 1.5,
         marginBottom: 22,
-      }}>
+      }}
+      >
         <DatePicker
           animation="slide-up"
           disabled={state.disabled}
           calendar={calendar}
           value={state.value}
-          onChange={this.onChange}>
+          onChange={this.onChange}
+        >
           {
-            ({value})=> {
+            ({ value }) => {
               return (
                 <span>
-                <input placeholder="请选择日期" style={{width: 250}}
-                       disabled={state.disabled}
-                       readOnly
-                       className="ant-calendar-picker-input ant-input"
-                       value={value && getFormatter(state.showTime).format(value)}/>
+                <input
+                  placeholder="请选择日期"
+                  style={{ width: 250 }}
+                  disabled={state.disabled}
+                  readOnly
+                  className="ant-calendar-picker-input ant-input"
+                  value={value && getFormatter(state.showTime).format(value)}
+                />
                 </span>
               );
             }
@@ -168,28 +191,37 @@ function onStandaloneChange(value) {
 }
 
 
-ReactDOM.render((<div style={{zIndex: 1000, position: 'relative', width: 900, margin: '20px auto'}}>
+ReactDOM.render((<div
+  style={{
+    zIndex: 1000,
+    position: 'relative',
+    width: 900,
+    margin: '20px auto',
+  }}
+>
   <h2>zh-cn</h2>
 
   <div>
-    <div style={{margin: 10}}>
-      <Calendar showWeekNumber={false}
-                locale={CalendarLocale}
-                defaultValue={now}
-                disabledTime={disabledTime}
-                showToday
-                showOk={false}
-                timePicker={timePickerElement}
-                onChange={onStandaloneChange}
-                disabledDate={disabledDate}
-                onSelect={onStandaloneSelect}/>
+    <div style={{ margin: 10 }}>
+      <Calendar
+        showWeekNumber={false}
+        locale={CalendarLocale}
+        defaultValue={now}
+        disabledTime={disabledTime}
+        showToday
+        showOk={false}
+        timePicker={timePickerElement}
+        onChange={onStandaloneChange}
+        disabledDate={disabledDate}
+        onSelect={onStandaloneSelect}
+      />
     </div>
-    <div style={{float: 'left', width: 300}}>
+    <div style={{ float: 'left', width: 300 }}>
       <Test defaultValue={now}/>
     </div>
-    <div style={{float: 'right', width: 300}}>
+    <div style={{ float: 'right', width: 300 }}>
       <Test defaultCalendarValue={defaultCalendarValue}/>
     </div>
-    <div style={{clear: 'both'}}></div>
+    <div style={{ clear: 'both' }}></div>
   </div>
 </div>), document.getElementById('__react-content'));

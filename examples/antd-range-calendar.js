@@ -53,31 +53,38 @@ const Test = React.createClass({
   },
 
   onChange(value) {
-    this.setState({value});
+    this.setState({ value });
   },
 
   render() {
     const state = this.state;
     const calendar = (
-      <RangeCalendar showWeekNumber={false}
-                     dateInputPlaceholder={['开始日期', '结束日期']}
-                     defaultValue={[now, now]}
-                     locale={CalendarLocale}
-                     disabledDate={disabledDate}
-                     timePicker={timePickerElement}/>
+      <RangeCalendar
+        showWeekNumber={false}
+        dateInputPlaceholder={['开始日期', '结束日期']}
+        defaultValue={[now, now]}
+        locale={CalendarLocale}
+        disabledDate={disabledDate}
+        timePicker={timePickerElement}
+      />
     );
-    return (<Picker value={state.value}
-                    onChange={this.onChange}
-                    animation="slide-up"
-                    calendar={calendar}>
+    return (<Picker
+      value={state.value}
+      onChange={this.onChange}
+      animation="slide-up"
+      calendar={calendar}
+    >
       {
-        ({value}) => {
+        ({ value }) => {
           return (<span>
-                <input placeholder="请选择日期" style={{width: 350}}
-                       disabled={state.disabled}
-                       readOnly
-                       className="ant-calendar-picker-input ant-input"
-                       value={isValidRange(value) && (format(value[0]) + ' - ' + format(value[1]))}/>
+                <input
+                  placeholder="请选择日期"
+                  style={{ width: 350 }}
+                  disabled={state.disabled}
+                  readOnly
+                  className="ant-calendar-picker-input ant-input"
+                  value={isValidRange(value) && `${format(value[0])} - ${format(value[1])}`}
+                />
                 </span>);
         }
       }
@@ -88,20 +95,22 @@ const Test = React.createClass({
 ReactDOM.render(
   <div>
     <h2>calendar (zh-cn)</h2>
-    <div style={{margin: 10}}>
-      <RangeCalendar showWeekNumber
-                     defaultValue={now}
-                     dateInputPlaceholder={['开始日期', '结束日期']}
-                     locale={CalendarLocale}
-                     showOk={false}
-                     onChange={onStandaloneChange}
-                     onSelect={onStandaloneSelect}
-                     disabledDate={disabledDate}
-                     timePicker={timePickerElement}/>
+    <div style={{ margin: 10 }}>
+      <RangeCalendar
+        showWeekNumber
+        defaultValue={now}
+        dateInputPlaceholder={['开始日期', '结束日期']}
+        locale={CalendarLocale}
+        showOk={false}
+        onChange={onStandaloneChange}
+        onSelect={onStandaloneSelect}
+        disabledDate={disabledDate}
+        timePicker={timePickerElement}
+      />
     </div>
     <br/>
 
-    <div style={{margin: 20}}>
+    <div style={{ margin: 20 }}>
       <Test />
     </div>
   </div>, document.getElementById('__react-content'));

@@ -1,6 +1,6 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 import GregorianCalendar from 'gregorian-calendar';
-import {KeyCode} from 'rc-util';
+import { KeyCode } from 'rc-util';
 import DateTable from './date/DateTable';
 import CalendarHeader from './calendar/CalendarHeader';
 import CalendarFooter from './calendar/CalendarFooter';
@@ -49,6 +49,8 @@ function goDay(direction) {
 
 const Calendar = React.createClass({
   propTypes: {
+    disabledDate: PropTypes.func,
+    disabledTime: PropTypes.any,
     value: PropTypes.object,
     selectedValue: PropTypes.object,
     defaultValue: PropTypes.object,
@@ -65,7 +67,7 @@ const Calendar = React.createClass({
     prefixCls: PropTypes.string,
     onKeyDown: PropTypes.func,
     timePicker: PropTypes.element,
-    dateInputPlaceholder: PropTypes.string,
+    dateInputPlaceholder: PropTypes.any,
     onClear: PropTypes.func,
     onChange: PropTypes.func,
   },
@@ -154,7 +156,7 @@ const Calendar = React.createClass({
   },
 
   onOk() {
-    const {selectedValue} = this.state;
+    const { selectedValue } = this.state;
     if (this.isAllowedDate(selectedValue)) {
       this.props.onOk(selectedValue);
     }
@@ -178,31 +180,37 @@ const Calendar = React.createClass({
 
   render() {
     const props = this.props;
-    const {locale, prefixCls, disabledDate, dateInputPlaceholder, timePicker, disabledTime} = props;
+    const { locale, prefixCls, disabledDate,
+      dateInputPlaceholder, timePicker, disabledTime } = props;
     const state = this.state;
-    const {value, selectedValue} = state;
+    const { value, selectedValue } = state;
     const dateInputElement = props.showDateInput ? (
-      <DateInput formatter={this.getFormatter()}
-                 key="date-input"
-                 timePicker={timePicker}
-                 gregorianCalendarLocale={value.locale}
-                 locale={locale}
-                 placeholder={dateInputPlaceholder}
-                 showClear
-                 disabledTime={disabledTime}
-                 disabledDate={disabledDate}
-                 onClear={this.onClear}
-                 prefixCls={prefixCls}
-                 selectedValue={selectedValue}
-                 onChange={this.onDateInputChange}/>
+      <DateInput
+        formatter={this.getFormatter()}
+        key="date-input"
+        timePicker={timePicker}
+        gregorianCalendarLocale={value.locale}
+        locale={locale}
+        placeholder={dateInputPlaceholder}
+        showClear
+        disabledTime={disabledTime}
+        disabledDate={disabledDate}
+        onClear={this.onClear}
+        prefixCls={prefixCls}
+        selectedValue={selectedValue}
+        onChange={this.onDateInputChange}
+      />
     ) : null;
-    const children = [dateInputElement, (<div key="date-panel"
-                                              className={`${prefixCls}-date-panel`}>
+    const children = [dateInputElement, (<div
+      key="date-panel"
+      className={`${prefixCls}-date-panel`}
+    >
       <CalendarHeader
         locale={locale}
         onValueChange={this.setValue}
         value={value}
-        prefixCls={prefixCls}/>
+        prefixCls={prefixCls}
+      />
 
       <div className={`${prefixCls}-calendar-body`}>
         <DateTable
@@ -213,7 +221,8 @@ const Calendar = React.createClass({
           dateRender={props.dateRender}
           onSelect={this.onDateTableSelect}
           disabledDate={disabledDate}
-          showWeekNumber={props.showWeekNumber}/>
+          showWeekNumber={props.showWeekNumber}
+        />
       </div>
 
       <CalendarFooter

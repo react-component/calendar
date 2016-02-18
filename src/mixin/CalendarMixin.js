@@ -1,7 +1,7 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 import GregorianCalendar from 'gregorian-calendar';
-import {isAllowedDate} from '../util/index';
+import { isAllowedDate } from '../util/index';
 
 function noop() {
 }
@@ -46,8 +46,8 @@ const CalendarMixin = {
   },
 
   componentWillReceiveProps(nextProps) {
-    let {value} = nextProps;
-    const {selectedValue} = nextProps;
+    let { value } = nextProps;
+    const { selectedValue } = nextProps;
     if ('value' in nextProps) {
       value = value || nextProps.defaultValue || getNowByCurrentStateValue(this.state.value);
       this.setState({
@@ -80,9 +80,11 @@ const CalendarMixin = {
     };
 
     return (
-      <div className={`${classnames(className)}`}
-           style={this.props.style}
-           tabIndex="0" onKeyDown={this.onKeyDown}>
+      <div
+        className={`${classnames(className)}`}
+        style={this.props.style}
+        tabIndex="0" onKeyDown={this.onKeyDown}
+      >
         {newProps.children}
       </div>
     );

@@ -2,7 +2,7 @@ import React from 'react';
 import MonthPanel from './month/MonthPanel';
 import CalendarMixin from './mixin/CalendarMixin';
 import CommonMixin from './mixin/CommonMixin';
-import {KeyCode} from 'rc-util';
+import { KeyCode } from 'rc-util';
 
 const MonthCalendar = React.createClass({
   mixins: [CommonMixin, CalendarMixin],
@@ -53,13 +53,15 @@ const MonthCalendar = React.createClass({
 
   render() {
     const props = this.props;
-    const children = (<MonthPanel locale={props.locale}
-                                  disabledDate={props.disabledDate}
-                                  style={{position: 'relative'}}
-                                  value={this.state.value}
-                                  rootPrefixCls={props.prefixCls}
-                                  onChange={this.setValue}
-                                  onSelect={this.onSelect}/>);
+    const children = (<MonthPanel
+      locale={props.locale}
+      disabledDate={props.disabledDate}
+      style={{ position: 'relative' }}
+      value={this.state.value}
+      rootPrefixCls={props.prefixCls}
+      onChange={this.setValue}
+      onSelect={this.onSelect}
+    />);
     return this.renderRoot({
       children,
     });

@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 const ROW = 4;
 const COL = 3;
 import classnames from 'classnames';
@@ -28,7 +28,7 @@ class DecadePanel extends React.Component {
     };
 
     // bind methods
-    this.prefixCls = props.rootPrefixCls + '-decade-panel';
+    this.prefixCls = `${props.rootPrefixCls}-decade-panel`;
     this.nextCentury = goYear.bind(this, 100);
     this.previousCentury = goYear.bind(this, -100);
   }
@@ -50,8 +50,8 @@ class DecadePanel extends React.Component {
         const startDecade = preYear + index * 10;
         const endDecade = preYear + index * 10 + 9;
         decades[rowIndex][colIndex] = {
-          startDecade: startDecade,
-          endDecade: endDecade,
+          startDecade,
+          endDecade,
         };
         index++;
       }
@@ -76,7 +76,7 @@ class DecadePanel extends React.Component {
         } else if (isNext) {
           clickHandler = this.nextCentury;
         } else {
-          content = dStartDecade + '-' + dEndDecade;
+          content = `${dStartDecade}-${dEndDecade}`;
           clickHandler = chooseDecade.bind(this, dStartDecade);
         }
         return (<td
@@ -84,9 +84,10 @@ class DecadePanel extends React.Component {
           onClick={clickHandler}
           role="gridcell"
           className={classnames(classNameMap)}
-          >
+        >
           <a
-            className={`${prefixCls}-decade`}>
+            className={`${prefixCls}-decade`}
+          >
             {content}
           </a>
         </td>);
@@ -97,20 +98,24 @@ class DecadePanel extends React.Component {
     return (
       <div className={this.prefixCls}>
         <div className={`${prefixCls}-header`}>
-          <a className={`${prefixCls}-prev-century-btn`}
-             role="button"
-             onClick={this.previousCentury}
-             title={locale.previousCentury}>
+          <a
+            className={`${prefixCls}-prev-century-btn`}
+            role="button"
+            onClick={this.previousCentury}
+            title={locale.previousCentury}
+          >
             «
           </a>
 
           <div className={`${prefixCls}-century`}>
             {startYear}-{endYear}
           </div>
-          <a className={`${prefixCls}-next-century-btn`}
-             role="button"
-             onClick={this.nextCentury}
-             title={locale.nextCentury}>
+          <a
+            className={`${prefixCls}-next-century-btn`}
+            role="button"
+            onClick={this.nextCentury}
+            title={locale.nextCentury}
+          >
             »
           </a>
         </div>
