@@ -61,6 +61,7 @@ const Calendar = React.createClass({
     visible: PropTypes.bool,
     onSelect: PropTypes.func,
     onOk: PropTypes.func,
+    showOk: PropTypes.bool,
     prefixCls: PropTypes.string,
     onKeyDown: PropTypes.func,
     timePicker: PropTypes.element,
@@ -216,8 +217,8 @@ const Calendar = React.createClass({
       </div>
 
       <CalendarFooter
-        locale={locale}
         showOk={props.showOk}
+        locale={locale}
         prefixCls={prefixCls}
         showToday={props.showToday}
         disabledTime={disabledTime}

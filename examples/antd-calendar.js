@@ -108,7 +108,6 @@ const Test = React.createClass({
                              disabledTime={state.showTime ? disabledTime : null}
                              timePicker={state.showTime ? timePickerElement : null}
                              defaultValue={this.props.defaultCalendarValue}
-                             showOk
                              showDateInput={state.showDateInput}
                              disabledDate={disabledDate}
     />);
@@ -177,9 +176,9 @@ ReactDOM.render((<div style={{zIndex: 1000, position: 'relative', width: 900, ma
       <Calendar showWeekNumber={false}
                 locale={CalendarLocale}
                 defaultValue={now}
-                showOk
                 disabledTime={disabledTime}
                 showToday
+                showOk={false}
                 timePicker={timePickerElement}
                 onChange={onStandaloneChange}
                 disabledDate={disabledDate}

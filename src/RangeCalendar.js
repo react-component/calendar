@@ -59,13 +59,14 @@ const RangeCalendar = React.createClass({
     defaultValue: PropTypes.any,
     timePicker: PropTypes.any,
     value: PropTypes.any,
+    showOk: PropTypes.bool,
     selectedValue: PropTypes.array,
     defaultSelectedValue: PropTypes.array,
     onOk: PropTypes.func,
     onChange: PropTypes.func,
     onSelect: PropTypes.func,
     onValueChange: PropTypes.func,
-    formatter: PropTypes.object,
+    formatter: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     onClear: PropTypes.func,
   },
 
@@ -201,7 +202,7 @@ const RangeCalendar = React.createClass({
   render() {
     const props = this.props;
     const state = this.state;
-    const {prefixCls, dateInputPlaceholder} = props;
+    const {prefixCls, dateInputPlaceholder, timePicker, showOk} = props;
     const className = {
       [props.className]: !!props.className,
       [prefixCls]: 1,
@@ -229,27 +230,37 @@ const RangeCalendar = React.createClass({
     return (<div className={classes} style={props.style}
                  tabIndex="0">
       <a className={`${prefixCls}-clear-btn`} role="button" title="清除" onClick={this.clear}/>
-      <CalendarPart {...props} {...newProps} direction="left"
-                                             formatter={this.getFormatter()}
-                                             value={this.getStartValue()}
-                                             placeholder={placeholder1}
-                                             onInputSelect={onInputSelect.bind(this, 'left')}
-                                             onValueChange={onValueChange.bind(this, 'left')}/>
+      <CalendarPart
+        {...props}
+        {...newProps}
+        direction="left"
+        formatter={this.getFormatter()}
+        value={this.getStartValue()}
+        placeholder={placeholder1}
+        onInputSelect={onInputSelect.bind(this, 'left')}
+        onValueChange={onValueChange.bind(this, 'left')}/>
       <span className={`${prefixCls}-range-middle`}>~</span>
-      <CalendarPart {...props} {...newProps} direction="right"
-                                             formatter={this.getFormatter()}
-                                             placeholder={placeholder2}
-                                             value={this.getEndValue()}
-                                             onInputSelect={onInputSelect.bind(this, 'right')}
-                                             onValueChange={onValueChange.bind(this, 'right')}/>
-
+      <CalendarPart
+        {...props}
+        {...newProps}
+        direction="right"
+        formatter={this.getFormatter()}
+        placeholder={placeholder2}
+        value={this.getEndValue()}
+        onInputSelect={onInputSelect.bind(this, 'right')}
+        onValueChange={onValueChange.bind(this, 'right')}/>
       <div className={`${prefixCls}-range-bottom`}>
-        <TodayButton {...props} value={state.value}
-                                onToday={this.onToday}/>
-        <OkButton {...props} value={state.value}
-                             onOk={this.onOk}
-                             okDisabled={state.selectedValue.length !== 2 || state.selectedValue.hovering}
-        />
+        <TodayButton
+          {...props}
+          value={state.value}
+          onToday={this.onToday}/>
+        {showOk === true || showOk !== false && !!timePicker ?
+          <OkButton
+            {...props}
+            value={state.value}
+            onOk={this.onOk}
+            okDisabled={state.selectedValue.length !== 2 || state.selectedValue.hovering}
+          /> : null}
       </div>
     </div>);
   },

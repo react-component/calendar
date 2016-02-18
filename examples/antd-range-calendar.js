@@ -45,11 +45,6 @@ function onStandaloneSelect(value) {
   console.log(format(value[0]), format(value[1]));
 }
 
-function onStandaloneOk(value) {
-  console.log('onOk');
-  console.log(format(value[0]), format(value[1]));
-}
-
 const Test = React.createClass({
   getInitialState() {
     return {
@@ -98,9 +93,9 @@ ReactDOM.render(
                      defaultValue={now}
                      dateInputPlaceholder={['开始日期', '结束日期']}
                      locale={CalendarLocale}
+                     showOk={false}
                      onChange={onStandaloneChange}
                      onSelect={onStandaloneSelect}
-                     onOk={onStandaloneOk}
                      disabledDate={disabledDate}
                      timePicker={timePickerElement}/>
     </div>

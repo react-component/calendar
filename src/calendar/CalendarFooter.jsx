@@ -23,7 +23,7 @@ const CalendarFooter = React.createClass({
 
   render() {
     const props = this.props;
-    const {value, prefixCls, showDateInput, disabledTime, gregorianCalendarLocale, selectedValue} = props;
+    const {value, prefixCls, showDateInput, disabledTime, gregorianCalendarLocale, selectedValue, showOk} = props;
     let timePicker = !showDateInput && props.timePicker || null;
     const disabledTimeConfig = disabledTime && timePicker ? getTimeConfig(selectedValue, disabledTime) : null;
     let footerEl = null;
@@ -33,7 +33,7 @@ const CalendarFooter = React.createClass({
         nowEl = <TodayButton {...props} value={value}/>;
       }
       let okBtn;
-      if (props.showOk) {
+      if (showOk === true || showOk !== false && !!props.timePicker) {
         okBtn = <OkButton {...props}/>;
       }
       let footerBtn;

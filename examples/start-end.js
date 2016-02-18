@@ -37,7 +37,6 @@ const Picker = React.createClass({
     const calendar = (<Calendar locale={CalendarLocale}
                              defaultValue={now}
                              timePicker={props.showTime ? timePickerElement : null}
-                             showOk
                              disabledDate={props.disabledDate}
     />);
     return (<DatePicker
