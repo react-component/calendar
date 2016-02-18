@@ -131,9 +131,9 @@ http://react-component.github.io/calendar/examples/index.html
         </tr>
         <tr>
           <td>formatter</td>
-          <td> <a href="https://github.com/yiminghe/gregorian-calendar-format">GregorianCalendarFormatter</a> </td>
-          <td></td>
-          <td>use to format/parse value to/from input</td>
+          <td>String|GregorianCalendarFormatter. see <a href="https://github.com/yiminghe/gregorian-calendar-format">GregorianCalendarFormatter</a> spec</td>
+          <td>yyyy-MM-dd</td>
+          <td>use to format/parse date(without time) value to/from input</td>
         </tr>
         <tr>
           <td>disabledDate</td>
@@ -244,8 +244,8 @@ http://react-component.github.io/calendar/examples/index.html
         <tr>
           <td>formatter</td>
           <td>String|GregorianCalendarFormatter. see <a href="https://github.com/yiminghe/gregorian-calendar-format">GregorianCalendarFormatter</a> spec</td>
-          <td>yyyy-MM-dd or yyyy-MM-dd HH:mm:ss</td>
-          <td>use to format/parse value to/from input</td>
+          <td>yyyy-MM-dd</td>
+          <td>use to format/parse date(without time) value to/from input</td>
         </tr>
         <tr>
           <td>disabledDate</td>
