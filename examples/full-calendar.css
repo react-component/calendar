@@ -61,6 +61,7 @@
 .rc-select-selection--single .rc-select-selection__rendered {
   display: block;
   overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
   padding-left: 10px;
   padding-right: 20px;

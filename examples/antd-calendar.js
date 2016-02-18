@@ -11,11 +11,7 @@ webpackJsonp([0],{
 /***/ 1:
 /***/ function(module, exports, __webpack_require__) {
 
-	/* eslint react/no-multi-comp:0, no-console:0 */
-	
 	'use strict';
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	__webpack_require__(2);
 	
@@ -31,17 +27,15 @@ webpackJsonp([0],{
 	
 	var _rcCalendar2 = _interopRequireDefault(_rcCalendar);
 	
-	var _rcCalendarSrcPicker = __webpack_require__(211);
+	var _Picker = __webpack_require__(210);
 	
-	var _rcCalendarSrcPicker2 = _interopRequireDefault(_rcCalendarSrcPicker);
+	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _gregorianCalendarLibLocaleZh_CN = __webpack_require__(237);
+	var _zh_CN = __webpack_require__(236);
 	
-	var _gregorianCalendarLibLocaleZh_CN2 = _interopRequireDefault(_gregorianCalendarLibLocaleZh_CN);
+	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
-	// spm error
-	
-	var _gregorianCalendarFormat = __webpack_require__(196);
+	var _gregorianCalendarFormat = __webpack_require__(195);
 	
 	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
 	
@@ -49,25 +43,28 @@ webpackJsonp([0],{
 	
 	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
 	
-	var _rcCalendarSrcLocaleZh_CN = __webpack_require__(238);
+	var _zh_CN3 = __webpack_require__(237);
 	
-	var _rcCalendarSrcLocaleZh_CN2 = _interopRequireDefault(_rcCalendarSrcLocaleZh_CN);
+	var _zh_CN4 = _interopRequireDefault(_zh_CN3);
 	
-	var _objectAssign = __webpack_require__(187);
+	var _objectAssign = __webpack_require__(186);
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
-	var _rcTimePickerLibLocaleZh_CN = __webpack_require__(240);
+	var _zh_CN5 = __webpack_require__(239);
 	
-	var _rcTimePickerLibLocaleZh_CN2 = _interopRequireDefault(_rcTimePickerLibLocaleZh_CN);
+	var _zh_CN6 = _interopRequireDefault(_zh_CN5);
 	
-	__webpack_require__(241);
+	__webpack_require__(240);
 	
-	var _rcTimePicker = __webpack_require__(242);
+	var _rcTimePicker = __webpack_require__(241);
 	
 	var _rcTimePicker2 = _interopRequireDefault(_rcTimePicker);
 	
-	var timePickerElement = _react2['default'].createElement(_rcTimePicker2['default'], { locale: _rcTimePickerLibLocaleZh_CN2['default'] });
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var timePickerElement = _react2.default.createElement(_rcTimePicker2.default, { locale: _zh_CN6.default }); // spm error
+	/* eslint react/no-multi-comp:0, no-console:0 */
 	
 	function disabledTime(date) {
 	  if (date && date.getDayOfMonth() === 15) {
@@ -84,22 +81,22 @@ webpackJsonp([0],{
 	  };
 	}
 	
-	var now = new _gregorianCalendar2['default'](_gregorianCalendarLibLocaleZh_CN2['default']);
+	var now = new _gregorianCalendar2.default(_zh_CN2.default);
 	now.setTime(Date.now());
 	
 	// change locale
-	var CalendarLocale2 = (0, _objectAssign2['default'])({}, _rcCalendarSrcLocaleZh_CN2['default'], {
+	var CalendarLocale2 = (0, _objectAssign2.default)({}, _zh_CN4.default, {
 	  monthFormat: 'MMMM'
 	});
 	
-	var dateFormatter = new _gregorianCalendarFormat2['default']('yyyy-MM-dd');
-	var formatter = new _gregorianCalendarFormat2['default']('yyyy-MM-dd HH:mm:ss');
+	var dateFormatter = new _gregorianCalendarFormat2.default('yyyy-MM-dd');
+	var formatter = new _gregorianCalendarFormat2.default('yyyy-MM-dd HH:mm:ss');
 	
 	function getFormatter(showTime) {
 	  return showTime ? formatter : dateFormatter;
 	}
 	
-	var defaultCalendarValue = new _gregorianCalendar2['default'](_gregorianCalendarLibLocaleZh_CN2['default']);
+	var defaultCalendarValue = new _gregorianCalendar2.default(_zh_CN2.default);
 	defaultCalendarValue.setTime(Date.now());
 	defaultCalendarValue.addMonth(-1);
 	
@@ -115,12 +112,12 @@ webpackJsonp([0],{
 	  return current.getYear() + 10 < date.getFullYear(); // can not select days before today
 	}
 	
-	var Test = _react2['default'].createClass({
+	var Test = _react2.default.createClass({
 	  displayName: 'Test',
 	
 	  propTypes: {
-	    defaultValue: _react2['default'].PropTypes.object,
-	    defaultCalendarValue: _react2['default'].PropTypes.object
+	    defaultValue: _react2.default.PropTypes.object,
+	    defaultCalendarValue: _react2.default.PropTypes.object
 	  },
 	
 	  getInitialState: function getInitialState() {
@@ -131,33 +128,31 @@ webpackJsonp([0],{
 	      value: this.props.defaultValue
 	    };
 	  },
-	
 	  onChange: function onChange(value) {
-	    console.log('DatePicker change: ' + (value && formatter.format(value)));
-	    this.setState({ value: value });
+	    console.log('DatePicker change: ', value && formatter.format(value));
+	    this.setState({
+	      value: value
+	    });
 	  },
-	
 	  onShowTimeChange: function onShowTimeChange(e) {
 	    this.setState({
 	      showTime: e.target.checked
 	    });
 	  },
-	
 	  onShowDateInputChange: function onShowDateInputChange(e) {
 	    this.setState({
 	      showDateInput: e.target.checked
 	    });
 	  },
-	
 	  toggleDisabled: function toggleDisabled() {
 	    this.setState({
 	      disabled: !this.state.disabled
 	    });
 	  },
-	
 	  render: function render() {
 	    var state = this.state;
-	    var calendar = _react2['default'].createElement(_rcCalendar2['default'], { locale: CalendarLocale2,
+	    var calendar = _react2.default.createElement(_rcCalendar2.default, {
+	      locale: CalendarLocale2,
 	      style: { zIndex: 1000 },
 	      dateInputPlaceholder: '请输入',
 	      disabledTime: state.showTime ? disabledTime : null,
@@ -166,61 +161,78 @@ webpackJsonp([0],{
 	      showDateInput: state.showDateInput,
 	      disabledDate: disabledDate
 	    });
-	    return _react2['default'].createElement(
+	    return _react2.default.createElement(
 	      'div',
 	      { style: { width: 400, margin: 20 } },
-	      _react2['default'].createElement(
+	      _react2.default.createElement(
 	        'div',
 	        { style: { marginBottom: 10 } },
-	        _react2['default'].createElement(
+	        _react2.default.createElement(
 	          'label',
 	          null,
-	          _react2['default'].createElement('input', { type: 'checkbox', checked: state.showTime, onChange: this.onShowTimeChange }),
+	          _react2.default.createElement('input', {
+	            type: 'checkbox',
+	            checked: state.showTime,
+	            onChange: this.onShowTimeChange
+	          }),
 	          'showTime'
 	        ),
 	        '    ',
-	        _react2['default'].createElement(
+	        _react2.default.createElement(
 	          'label',
 	          null,
-	          _react2['default'].createElement('input', { type: 'checkbox', checked: state.showDateInput, onChange: this.onShowDateInputChange }),
+	          _react2.default.createElement('input', {
+	            type: 'checkbox',
+	            checked: state.showDateInput,
+	            onChange: this.onShowDateInputChange
+	          }),
 	          'showDateInput'
 	        ),
 	        '    ',
-	        _react2['default'].createElement(
+	        _react2.default.createElement(
 	          'label',
 	          null,
-	          _react2['default'].createElement('input', { checked: state.disabled, onChange: this.toggleDisabled, type: 'checkbox' }),
-	          ' disabled '
+	          _react2.default.createElement('input', {
+	            checked: state.disabled,
+	            onChange: this.toggleDisabled,
+	            type: 'checkbox'
+	          }),
+	          'disabled'
 	        )
 	      ),
-	      _react2['default'].createElement(
+	      _react2.default.createElement(
 	        'div',
 	        { style: {
-	            'boxSizing': 'border-box',
-	            'position': 'relative',
-	            'display': 'block',
-	            'lineHeight': 1.5,
+	            boxSizing: 'border-box',
+	            position: 'relative',
+	            display: 'block',
+	            lineHeight: 1.5,
 	            marginBottom: 22
-	          } },
-	        _react2['default'].createElement(
-	          _rcCalendarSrcPicker2['default'],
+	          }
+	        },
+	        _react2.default.createElement(
+	          _Picker2.default,
 	          {
 	            animation: 'slide-up',
 	            disabled: state.disabled,
 	            calendar: calendar,
 	            value: state.value,
-	            onChange: this.onChange },
+	            onChange: this.onChange
+	          },
 	          function (_ref) {
 	            var value = _ref.value;
 	
-	            return _react2['default'].createElement(
+	            return _react2.default.createElement(
 	              'span',
 	              null,
-	              _react2['default'].createElement('input', { placeholder: '请选择日期', style: { width: 250 },
+	              _react2.default.createElement('input', {
+	                placeholder: '请选择日期',
+	                style: { width: 250 },
 	                disabled: state.disabled,
 	                readOnly: true,
 	                className: 'ant-calendar-picker-input ant-input',
-	                value: value && getFormatter(state.showTime).format(value) })
+	                value: value && getFormatter(state.showTime).format(value)
+	              })
 	            );
 	          }
 	        )
@@ -239,22 +251,30 @@ webpackJsonp([0],{
 	  console.log(value && formatter.format(value));
 	}
 	
-	_reactDom2['default'].render(_react2['default'].createElement(
+	_reactDom2.default.render(_react2.default.createElement(
 	  'div',
-	  { style: { zIndex: 1000, position: 'relative', width: 900, margin: '20px auto' } },
-	  _react2['default'].createElement(
+	  {
+	    style: {
+	      zIndex: 1000,
+	      position: 'relative',
+	      width: 900,
+	      margin: '20px auto'
+	    }
+	  },
+	  _react2.default.createElement(
 	    'h2',
 	    null,
 	    'zh-cn'
 	  ),
-	  _react2['default'].createElement(
+	  _react2.default.createElement(
 	    'div',
 	    null,
-	    _react2['default'].createElement(
+	    _react2.default.createElement(
 	      'div',
 	      { style: { margin: 10 } },
-	      _react2['default'].createElement(_rcCalendar2['default'], { showWeekNumber: false,
-	        locale: _rcCalendarSrcLocaleZh_CN2['default'],
+	      _react2.default.createElement(_rcCalendar2.default, {
+	        showWeekNumber: false,
+	        locale: _zh_CN4.default,
 	        defaultValue: now,
 	        disabledTime: disabledTime,
 	        showToday: true,
@@ -262,19 +282,20 @@ webpackJsonp([0],{
 	        timePicker: timePickerElement,
 	        onChange: onStandaloneChange,
 	        disabledDate: disabledDate,
-	        onSelect: onStandaloneSelect })
+	        onSelect: onStandaloneSelect
+	      })
 	    ),
-	    _react2['default'].createElement(
+	    _react2.default.createElement(
 	      'div',
 	      { style: { float: 'left', width: 300 } },
-	      _react2['default'].createElement(Test, { defaultValue: now })
+	      _react2.default.createElement(Test, { defaultValue: now })
 	    ),
-	    _react2['default'].createElement(
+	    _react2.default.createElement(
 	      'div',
 	      { style: { float: 'right', width: 300 } },
-	      _react2['default'].createElement(Test, { defaultCalendarValue: defaultCalendarValue })
+	      _react2.default.createElement(Test, { defaultCalendarValue: defaultCalendarValue })
 	    ),
-	    _react2['default'].createElement('div', { style: { clear: 'both' } })
+	    _react2.default.createElement('div', { style: { clear: 'both' } })
 	  )
 	), document.getElementById('__react-content'));
 
@@ -284,18 +305,18 @@ webpackJsonp([0],{
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
+
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
+
 	var _src = __webpack_require__(162);
-	
+
 	var _src2 = _interopRequireDefault(_src);
 
-	exports['default'] = _src2['default'];
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _src2.default;
 	module.exports = exports['default'];
 
 /***/ },
@@ -304,18 +325,18 @@ webpackJsonp([0],{
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
+
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
+
 	var _Calendar = __webpack_require__(163);
-	
+
 	var _Calendar2 = _interopRequireDefault(_Calendar);
 
-	exports['default'] = _Calendar2['default'];
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _Calendar2.default;
 	module.exports = exports['default'];
 
 /***/ },
@@ -325,11 +346,9 @@ webpackJsonp([0],{
 
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	var _react = __webpack_require__(3);
 	
@@ -341,29 +360,31 @@ webpackJsonp([0],{
 	
 	var _rcUtil = __webpack_require__(168);
 	
-	var _dateDateTable = __webpack_require__(191);
+	var _DateTable = __webpack_require__(190);
 	
-	var _dateDateTable2 = _interopRequireDefault(_dateDateTable);
+	var _DateTable2 = _interopRequireDefault(_DateTable);
 	
-	var _calendarCalendarHeader = __webpack_require__(199);
+	var _CalendarHeader = __webpack_require__(198);
 	
-	var _calendarCalendarHeader2 = _interopRequireDefault(_calendarCalendarHeader);
+	var _CalendarHeader2 = _interopRequireDefault(_CalendarHeader);
 	
-	var _calendarCalendarFooter = __webpack_require__(204);
+	var _CalendarFooter = __webpack_require__(203);
 	
-	var _calendarCalendarFooter2 = _interopRequireDefault(_calendarCalendarFooter);
+	var _CalendarFooter2 = _interopRequireDefault(_CalendarFooter);
 	
-	var _mixinCalendarMixin = __webpack_require__(207);
+	var _CalendarMixin = __webpack_require__(206);
 	
-	var _mixinCalendarMixin2 = _interopRequireDefault(_mixinCalendarMixin);
+	var _CalendarMixin2 = _interopRequireDefault(_CalendarMixin);
 	
-	var _mixinCommonMixin = __webpack_require__(208);
+	var _CommonMixin = __webpack_require__(207);
 	
-	var _mixinCommonMixin2 = _interopRequireDefault(_mixinCommonMixin);
+	var _CommonMixin2 = _interopRequireDefault(_CommonMixin);
 	
-	var _dateDateInput = __webpack_require__(210);
+	var _DateInput = __webpack_require__(209);
 	
-	var _dateDateInput2 = _interopRequireDefault(_dateDateInput);
+	var _DateInput2 = _interopRequireDefault(_DateInput);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function noop() {}
 	
@@ -375,7 +396,7 @@ webpackJsonp([0],{
 	
 	function goEndMonth() {
 	  var next = this.state.value.clone();
-	  next.setDayOfMonth(next.getActualMaximum(_gregorianCalendar2['default'].MONTH));
+	  next.setDayOfMonth(next.getActualMaximum(_gregorianCalendar2.default.MONTH));
 	  this.setValue(next);
 	}
 	
@@ -403,10 +424,12 @@ webpackJsonp([0],{
 	  this.setValue(next);
 	}
 	
-	var Calendar = _react2['default'].createClass({
+	var Calendar = _react2.default.createClass({
 	  displayName: 'Calendar',
 	
 	  propTypes: {
+	    disabledDate: _react.PropTypes.func,
+	    disabledTime: _react.PropTypes.any,
 	    value: _react.PropTypes.object,
 	    selectedValue: _react.PropTypes.object,
 	    defaultValue: _react.PropTypes.object,
@@ -423,12 +446,12 @@ webpackJsonp([0],{
 	    prefixCls: _react.PropTypes.string,
 	    onKeyDown: _react.PropTypes.func,
 	    timePicker: _react.PropTypes.element,
-	    dateInputPlaceholder: _react.PropTypes.string,
+	    dateInputPlaceholder: _react.PropTypes.any,
 	    onClear: _react.PropTypes.func,
 	    onChange: _react.PropTypes.func
 	  },
 	
-	  mixins: [_mixinCommonMixin2['default'], _mixinCalendarMixin2['default']],
+	  mixins: [_CommonMixin2.default, _CalendarMixin2.default],
 	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
@@ -438,7 +461,6 @@ webpackJsonp([0],{
 	      onOk: noop
 	    };
 	  },
-	
 	  getInitialState: function getInitialState() {
 	    // bind methods
 	    this.nextMonth = goMonth.bind(this, 1);
@@ -447,7 +469,6 @@ webpackJsonp([0],{
 	    this.previousYear = goYear.bind(this, -1);
 	    return {};
 	  },
-	
 	  onKeyDown: function onKeyDown(event) {
 	    if (event.target.nodeName.toLowerCase() === 'input') {
 	      return undefined;
@@ -505,12 +526,10 @@ webpackJsonp([0],{
 	        return 1;
 	    }
 	  },
-	
 	  onClear: function onClear() {
 	    this.onSelect(null);
 	    this.props.onClear();
 	  },
-	
 	  onOk: function onOk() {
 	    var selectedValue = this.state.selectedValue;
 	
@@ -518,23 +537,19 @@ webpackJsonp([0],{
 	      this.props.onOk(selectedValue);
 	    }
 	  },
-	
 	  onDateInputChange: function onDateInputChange(value) {
 	    this.onSelect(value, {
 	      source: 'dateInput'
 	    });
 	  },
-	
 	  onDateTableSelect: function onDateTableSelect(value) {
 	    this.onSelect(value);
 	  },
-	
 	  chooseToday: function chooseToday() {
 	    var today = this.state.value.clone();
 	    today.setTime(Date.now());
 	    this.onSelect(today);
 	  },
-	
 	  render: function render() {
 	    var props = this.props;
 	    var locale = props.locale;
@@ -548,7 +563,8 @@ webpackJsonp([0],{
 	    var value = state.value;
 	    var selectedValue = state.selectedValue;
 	
-	    var dateInputElement = props.showDateInput ? _react2['default'].createElement(_dateDateInput2['default'], { formatter: this.getFormatter(),
+	    var dateInputElement = props.showDateInput ? _react2.default.createElement(_DateInput2.default, {
+	      formatter: this.getFormatter(),
 	      key: 'date-input',
 	      timePicker: timePicker,
 	      gregorianCalendarLocale: value.locale,
@@ -560,20 +576,24 @@ webpackJsonp([0],{
 	      onClear: this.onClear,
 	      prefixCls: prefixCls,
 	      selectedValue: selectedValue,
-	      onChange: this.onDateInputChange }) : null;
-	    var children = [dateInputElement, _react2['default'].createElement(
+	      onChange: this.onDateInputChange
+	    }) : null;
+	    var children = [dateInputElement, _react2.default.createElement(
 	      'div',
-	      { key: 'date-panel',
-	        className: prefixCls + '-date-panel' },
-	      _react2['default'].createElement(_calendarCalendarHeader2['default'], {
+	      {
+	        key: 'date-panel',
+	        className: prefixCls + '-date-panel'
+	      },
+	      _react2.default.createElement(_CalendarHeader2.default, {
 	        locale: locale,
 	        onValueChange: this.setValue,
 	        value: value,
-	        prefixCls: prefixCls }),
-	      _react2['default'].createElement(
+	        prefixCls: prefixCls
+	      }),
+	      _react2.default.createElement(
 	        'div',
 	        { className: prefixCls + '-calendar-body' },
-	        _react2['default'].createElement(_dateDateTable2['default'], {
+	        _react2.default.createElement(_DateTable2.default, {
 	          locale: locale,
 	          value: value,
 	          selectedValue: selectedValue,
@@ -581,9 +601,10 @@ webpackJsonp([0],{
 	          dateRender: props.dateRender,
 	          onSelect: this.onDateTableSelect,
 	          disabledDate: disabledDate,
-	          showWeekNumber: props.showWeekNumber })
+	          showWeekNumber: props.showWeekNumber
+	        })
 	      ),
-	      _react2['default'].createElement(_calendarCalendarFooter2['default'], {
+	      _react2.default.createElement(_CalendarFooter2.default, {
 	        showOk: props.showOk,
 	        locale: locale,
 	        prefixCls: prefixCls,
@@ -608,7 +629,69 @@ webpackJsonp([0],{
 	  }
 	});
 	
-	exports['default'] = Calendar;
+	exports.default = Calendar;
+	module.exports = exports['default'];
+
+/***/ },
+
+/***/ 190:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(3);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _DateTHead = __webpack_require__(191);
+	
+	var _DateTHead2 = _interopRequireDefault(_DateTHead);
+	
+	var _DateTBody = __webpack_require__(193);
+	
+	var _DateTBody2 = _interopRequireDefault(_DateTBody);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var DateTable = function (_React$Component) {
+	  _inherits(DateTable, _React$Component);
+	
+	  function DateTable() {
+	    _classCallCheck(this, DateTable);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(DateTable).apply(this, arguments));
+	  }
+	
+	  _createClass(DateTable, [{
+	    key: 'render',
+	    value: function render() {
+	      var props = this.props;
+	      var prefixCls = props.prefixCls;
+	      return _react2.default.createElement(
+	        'table',
+	        { className: prefixCls + '-table', cellSpacing: '0', role: 'grid' },
+	        _react2.default.createElement(_DateTHead2.default, props),
+	        _react2.default.createElement(_DateTBody2.default, props)
+	      );
+	    }
+	  }]);
+	
+	  return DateTable;
+	}(_react2.default.Component);
+	
+	exports.default = DateTable;
 	module.exports = exports['default'];
 
 /***/ },
@@ -618,97 +701,35 @@ webpackJsonp([0],{
 
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-	
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _react = __webpack_require__(3);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _DateTHead = __webpack_require__(192);
-	
-	var _DateTHead2 = _interopRequireDefault(_DateTHead);
-	
-	var _DateTBody = __webpack_require__(194);
-	
-	var _DateTBody2 = _interopRequireDefault(_DateTBody);
-	
-	var DateTable = (function (_React$Component) {
-	  _inherits(DateTable, _React$Component);
-	
-	  function DateTable() {
-	    _classCallCheck(this, DateTable);
-	
-	    _get(Object.getPrototypeOf(DateTable.prototype), 'constructor', this).apply(this, arguments);
-	  }
-	
-	  _createClass(DateTable, [{
-	    key: 'render',
-	    value: function render() {
-	      var props = this.props;
-	      var prefixCls = props.prefixCls;
-	      return _react2['default'].createElement(
-	        'table',
-	        { className: prefixCls + '-table', cellSpacing: '0', role: 'grid' },
-	        _react2['default'].createElement(_DateTHead2['default'], props),
-	        _react2['default'].createElement(_DateTBody2['default'], props)
-	      );
-	    }
-	  }]);
-	
-	  return DateTable;
-	})(_react2['default'].Component);
-	
-	exports['default'] = DateTable;
-	module.exports = exports['default'];
-
-/***/ },
-
-/***/ 192:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-	
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var _react = __webpack_require__(3);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _DateConstants = __webpack_require__(193);
+	var _DateConstants = __webpack_require__(192);
 	
 	var _DateConstants2 = _interopRequireDefault(_DateConstants);
 	
-	var DateTHead = (function (_React$Component) {
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var DateTHead = function (_React$Component) {
 	  _inherits(DateTHead, _React$Component);
 	
 	  function DateTHead() {
 	    _classCallCheck(this, DateTHead);
 	
-	    _get(Object.getPrototypeOf(DateTHead.prototype), 'constructor', this).apply(this, arguments);
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(DateTHead).apply(this, arguments));
 	  }
 	
 	  _createClass(DateTHead, [{
@@ -723,17 +744,20 @@ webpackJsonp([0],{
 	      var firstDayOfWeek = value.getFirstDayOfWeek();
 	      var showWeekNumberEl = undefined;
 	
-	      for (var dateColIndex = 0; dateColIndex < _DateConstants2['default'].DATE_COL_COUNT; dateColIndex++) {
-	        var index = (firstDayOfWeek + dateColIndex) % _DateConstants2['default'].DATE_COL_COUNT;
+	      for (var dateColIndex = 0; dateColIndex < _DateConstants2.default.DATE_COL_COUNT; dateColIndex++) {
+	        var index = (firstDayOfWeek + dateColIndex) % _DateConstants2.default.DATE_COL_COUNT;
 	        veryShortWeekdays[dateColIndex] = locale.format.veryShortWeekdays[index];
 	        weekDays[dateColIndex] = locale.format.weekdays[index];
 	      }
 	
 	      if (props.showWeekNumber) {
-	        showWeekNumberEl = _react2['default'].createElement(
+	        showWeekNumberEl = _react2.default.createElement(
 	          'th',
-	          { role: 'columnheader', className: prefixCls + '-column-header ' + prefixCls + '-week-number-header' },
-	          _react2['default'].createElement(
+	          {
+	            role: 'columnheader',
+	            className: prefixCls + '-column-header ' + prefixCls + '-week-number-header'
+	          },
+	          _react2.default.createElement(
 	            'span',
 	            { className: prefixCls + '-column-header-inner' },
 	            'x'
@@ -741,20 +765,25 @@ webpackJsonp([0],{
 	        );
 	      }
 	      var weekDaysEls = weekDays.map(function (day, xindex) {
-	        return _react2['default'].createElement(
+	        return _react2.default.createElement(
 	          'th',
-	          { key: xindex, role: 'columnheader', title: day, className: prefixCls + '-column-header' },
-	          _react2['default'].createElement(
+	          {
+	            key: xindex,
+	            role: 'columnheader',
+	            title: day,
+	            className: prefixCls + '-column-header'
+	          },
+	          _react2.default.createElement(
 	            'span',
 	            { className: prefixCls + '-column-header-inner' },
 	            veryShortWeekdays[xindex]
 	          )
 	        );
 	      });
-	      return _react2['default'].createElement(
+	      return _react2.default.createElement(
 	        'thead',
 	        null,
-	        _react2['default'].createElement(
+	        _react2.default.createElement(
 	          'tr',
 	          { role: 'row' },
 	          showWeekNumberEl,
@@ -765,14 +794,14 @@ webpackJsonp([0],{
 	  }]);
 	
 	  return DateTHead;
-	})(_react2['default'].Component);
+	}(_react2.default.Component);
 	
-	exports['default'] = DateTHead;
+	exports.default = DateTHead;
 	module.exports = exports['default'];
 
 /***/ },
 
-/***/ 193:
+/***/ 192:
 /***/ function(module, exports) {
 
 	"use strict";
@@ -780,34 +809,34 @@ webpackJsonp([0],{
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports["default"] = {
+	exports.default = {
 	  DATE_ROW_COUNT: 6,
 	  DATE_COL_COUNT: 7
 	};
-	module.exports = exports["default"];
+	module.exports = exports['default'];
 
 /***/ },
 
-/***/ 194:
+/***/ 193:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	var _react = __webpack_require__(3);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _DateConstants = __webpack_require__(193);
+	var _DateConstants = __webpack_require__(192);
 	
 	var _DateConstants2 = _interopRequireDefault(_DateConstants);
 	
-	var _util = __webpack_require__(195);
+	var _util = __webpack_require__(194);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function isSameDay(one, two) {
 	  return one && two && one.compareToDay(two) === 0;
@@ -841,15 +870,13 @@ webpackJsonp([0],{
 	  this.props.onDayHover(current);
 	}
 	
-	var DateTBody = _react2['default'].createClass({
+	var DateTBody = _react2.default.createClass({
 	  displayName: 'DateTBody',
-	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
 	      onDayHover: noop
 	    };
 	  },
-	
 	  render: function render() {
 	    var props = this.props;
 	    var iIndex = undefined;
@@ -883,8 +910,8 @@ webpackJsonp([0],{
 	    var lastMonth1 = month1.clone();
 	    lastMonth1.addDayOfMonth(0 - lastMonthDiffDay);
 	    var passed = 0;
-	    for (iIndex = 0; iIndex < _DateConstants2['default'].DATE_ROW_COUNT; iIndex++) {
-	      for (jIndex = 0; jIndex < _DateConstants2['default'].DATE_COL_COUNT; jIndex++) {
+	    for (iIndex = 0; iIndex < _DateConstants2.default.DATE_ROW_COUNT; iIndex++) {
+	      for (jIndex = 0; jIndex < _DateConstants2.default.DATE_COL_COUNT; jIndex++) {
 	        current = lastMonth1;
 	        if (passed) {
 	          current = current.clone();
@@ -896,22 +923,25 @@ webpackJsonp([0],{
 	    }
 	    var tableHtml = [];
 	    passed = 0;
-	    for (iIndex = 0; iIndex < _DateConstants2['default'].DATE_ROW_COUNT; iIndex++) {
+	    for (iIndex = 0; iIndex < _DateConstants2.default.DATE_ROW_COUNT; iIndex++) {
 	      var weekNumberCell = undefined;
 	      var dateCells = [];
 	      if (showWeekNumber) {
-	        weekNumberCell = _react2['default'].createElement(
+	        weekNumberCell = _react2.default.createElement(
 	          'td',
-	          { key: dateTable[passed].getWeekOfYear(), role: 'gridcell',
-	            className: weekNumberCellClass },
+	          {
+	            key: dateTable[passed].getWeekOfYear(),
+	            role: 'gridcell',
+	            className: weekNumberCellClass
+	          },
 	          dateTable[passed].getWeekOfYear()
 	        );
 	      }
-	      for (jIndex = 0; jIndex < _DateConstants2['default'].DATE_COL_COUNT; jIndex++) {
+	      for (jIndex = 0; jIndex < _DateConstants2.default.DATE_COL_COUNT; jIndex++) {
 	        var next = null;
 	        var last = null;
 	        current = dateTable[passed];
-	        if (jIndex < _DateConstants2['default'].DATE_COL_COUNT - 1) {
+	        if (jIndex < _DateConstants2.default.DATE_COL_COUNT - 1) {
 	          next = dateTable[passed + 1];
 	        }
 	        if (jIndex > 0) {
@@ -981,39 +1011,43 @@ webpackJsonp([0],{
 	        if (dateRender) {
 	          dateHtml = dateRender(current, value);
 	        } else {
-	          dateHtml = _react2['default'].createElement(
+	          dateHtml = _react2.default.createElement(
 	            'span',
 	            {
 	              key: getIdFromDate(current),
 	              className: dateClass,
 	              'aria-selected': selected,
-	              'aria-disabled': disabled },
+	              'aria-disabled': disabled
+	            },
 	            current.getDayOfMonth()
 	          );
 	        }
 	
-	        dateCells.push(_react2['default'].createElement(
+	        dateCells.push(_react2.default.createElement(
 	          'td',
-	          { key: passed,
+	          {
+	            key: passed,
 	            onClick: disabled ? noop : handleDayClick.bind(this, current),
 	            onMouseEnter: disabled ? noop : handleCellMouseEnter.bind(this, current),
 	            role: 'gridcell',
-	            title: (0, _util.getTitleString)(current), className: cls },
+	            title: (0, _util.getTitleString)(current), className: cls
+	          },
 	          dateHtml
 	        ));
 	
 	        passed++;
 	      }
-	      tableHtml.push(_react2['default'].createElement(
+	      tableHtml.push(_react2.default.createElement(
 	        'tr',
 	        {
 	          key: iIndex,
-	          role: 'row' },
+	          role: 'row'
+	        },
 	        weekNumberCell,
 	        dateCells
 	      ));
 	    }
-	    return _react2['default'].createElement(
+	    return _react2.default.createElement(
 	      'tbody',
 	      { className: prefixCls + 'tbody' },
 	      tableHtml
@@ -1021,41 +1055,41 @@ webpackJsonp([0],{
 	  }
 	});
 	
-	exports['default'] = DateTBody;
+	exports.default = DateTBody;
 	module.exports = exports['default'];
 
 /***/ },
 
-/***/ 199:
+/***/ 198:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	var _react = __webpack_require__(3);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _monthMonthPanel = __webpack_require__(200);
+	var _MonthPanel = __webpack_require__(199);
 	
-	var _monthMonthPanel2 = _interopRequireDefault(_monthMonthPanel);
+	var _MonthPanel2 = _interopRequireDefault(_MonthPanel);
 	
-	var _utilIndex = __webpack_require__(195);
+	var _index = __webpack_require__(194);
 	
-	var _yearYearPanel = __webpack_require__(201);
+	var _YearPanel = __webpack_require__(200);
 	
-	var _yearYearPanel2 = _interopRequireDefault(_yearYearPanel);
+	var _YearPanel2 = _interopRequireDefault(_YearPanel);
 	
 	var _rcUtil = __webpack_require__(168);
 	
 	var _rcUtil2 = _interopRequireDefault(_rcUtil);
 	
-	var toFragment = _rcUtil2['default'].Children.mapSelf;
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var toFragment = _rcUtil2.default.Children.mapSelf;
 	
 	function goMonth(direction) {
 	  var next = this.props.value.clone();
@@ -1069,10 +1103,13 @@ webpackJsonp([0],{
 	  this.props.onValueChange(next);
 	}
 	
-	var CalendarHeader = _react2['default'].createClass({
+	var CalendarHeader = _react2.default.createClass({
 	  displayName: 'CalendarHeader',
 	
 	  propTypes: {
+	    enablePrev: _react.PropTypes.any,
+	    enableNext: _react.PropTypes.any,
+	    prefixCls: _react.PropTypes.string,
 	    locale: _react.PropTypes.object,
 	    value: _react.PropTypes.object,
 	    onValueChange: _react.PropTypes.func
@@ -1084,28 +1121,25 @@ webpackJsonp([0],{
 	      enablePrev: 1
 	    };
 	  },
-	
 	  getInitialState: function getInitialState() {
 	    var props = this.props;
-	    this.yearFormatter = (0, _utilIndex.getFormatter)(props.locale.yearFormat, props.locale);
-	    this.monthFormatter = (0, _utilIndex.getFormatter)(props.locale.monthFormat, props.locale);
+	    this.yearFormatter = (0, _index.getFormatter)(props.locale.yearFormat, props.locale);
+	    this.monthFormatter = (0, _index.getFormatter)(props.locale.monthFormat, props.locale);
 	    this.nextMonth = goMonth.bind(this, 1);
 	    this.previousMonth = goMonth.bind(this, -1);
 	    this.nextYear = goYear.bind(this, 1);
 	    this.previousYear = goYear.bind(this, -1);
 	    return {};
 	  },
-	
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
 	    var locale = this.props.locale;
 	    var nextLocale = nextProps.locale;
 	
 	    if (nextLocale !== locale) {
-	      this.yearFormatter = (0, _utilIndex.getFormatter)(nextLocale.yearFormat, nextLocale);
-	      this.monthFormatter = (0, _utilIndex.getFormatter)(nextLocale.monthFormat, nextLocale);
+	      this.yearFormatter = (0, _index.getFormatter)(nextLocale.yearFormat, nextLocale);
+	      this.monthFormatter = (0, _index.getFormatter)(nextLocale.monthFormat, nextLocale);
 	    }
 	  },
-	
 	  onSelect: function onSelect(value) {
 	    this.setState({
 	      showMonthPanel: 0,
@@ -1113,7 +1147,6 @@ webpackJsonp([0],{
 	    });
 	    this.props.onValueChange(value);
 	  },
-	
 	  getMonthYearElement: function getMonthYearElement() {
 	    var props = this.props;
 	    var prefixCls = props.prefixCls;
@@ -1121,20 +1154,24 @@ webpackJsonp([0],{
 	    var value = this.props.value;
 	    var monthBeforeYear = locale.monthBeforeYear;
 	    var selectClassName = prefixCls + '-' + (monthBeforeYear ? 'my-select' : 'ym-select');
-	    var year = _react2['default'].createElement(
+	    var year = _react2.default.createElement(
 	      'a',
-	      { className: prefixCls + '-year-select',
+	      {
+	        className: prefixCls + '-year-select',
 	        role: 'button',
 	        onClick: this.showYearPanel,
-	        title: locale.monthSelect },
+	        title: locale.monthSelect
+	      },
 	      this.yearFormatter.format(value)
 	    );
-	    var month = _react2['default'].createElement(
+	    var month = _react2.default.createElement(
 	      'a',
-	      { className: prefixCls + '-month-select',
+	      {
+	        className: prefixCls + '-month-select',
 	        role: 'button',
 	        onClick: this.showMonthPanel,
-	        title: locale.monthSelect },
+	        title: locale.monthSelect
+	      },
 	      this.monthFormatter.format(value)
 	    );
 	    var my = [];
@@ -1143,31 +1180,27 @@ webpackJsonp([0],{
 	    } else {
 	      my = [year, month];
 	    }
-	    return _react2['default'].createElement(
+	    return _react2.default.createElement(
 	      'span',
 	      { className: selectClassName },
 	      toFragment(my)
 	    );
 	  },
-	
 	  showIf: function showIf(condition, el) {
 	    return condition ? el : null;
 	  },
-	
 	  showMonthPanel: function showMonthPanel() {
 	    this.setState({
 	      showMonthPanel: 1,
 	      showYearPanel: 0
 	    });
 	  },
-	
 	  showYearPanel: function showYearPanel() {
 	    this.setState({
 	      showMonthPanel: 0,
 	      showYearPanel: 1
 	    });
 	  },
-	
 	  render: function render() {
 	    var props = this.props;
 	    var enableNext = props.enableNext;
@@ -1179,49 +1212,62 @@ webpackJsonp([0],{
 	    var state = this.state;
 	    var PanelClass = null;
 	    if (state.showMonthPanel) {
-	      PanelClass = _monthMonthPanel2['default'];
+	      PanelClass = _MonthPanel2.default;
 	    } else if (state.showYearPanel) {
-	      PanelClass = _yearYearPanel2['default'];
+	      PanelClass = _YearPanel2.default;
 	    }
 	    var panel = undefined;
 	    if (PanelClass) {
-	      panel = _react2['default'].createElement(PanelClass, { locale: locale, defaultValue: value, rootPrefixCls: prefixCls, onSelect: this.onSelect });
+	      panel = _react2.default.createElement(PanelClass, {
+	        locale: locale,
+	        defaultValue: value,
+	        rootPrefixCls: prefixCls,
+	        onSelect: this.onSelect
+	      });
 	    }
-	    return _react2['default'].createElement(
+	    return _react2.default.createElement(
 	      'div',
 	      { className: prefixCls + '-header' },
-	      _react2['default'].createElement(
+	      _react2.default.createElement(
 	        'div',
 	        { style: { position: 'relative' } },
-	        this.showIf(enablePrev, _react2['default'].createElement(
+	        this.showIf(enablePrev, _react2.default.createElement(
 	          'a',
-	          { className: prefixCls + '-prev-year-btn',
+	          {
+	            className: prefixCls + '-prev-year-btn',
 	            role: 'button',
 	            onClick: this.previousYear,
-	            title: locale.previousYear },
+	            title: locale.previousYear
+	          },
 	          '«'
 	        )),
-	        this.showIf(enablePrev, _react2['default'].createElement(
+	        this.showIf(enablePrev, _react2.default.createElement(
 	          'a',
-	          { className: prefixCls + '-prev-month-btn',
+	          {
+	            className: prefixCls + '-prev-month-btn',
 	            role: 'button',
 	            onClick: this.previousMonth,
-	            title: locale.previousMonth },
+	            title: locale.previousMonth
+	          },
 	          '‹'
 	        )),
 	        this.getMonthYearElement(),
-	        this.showIf(enableNext, _react2['default'].createElement(
+	        this.showIf(enableNext, _react2.default.createElement(
 	          'a',
-	          { className: prefixCls + '-next-month-btn',
+	          {
+	            className: prefixCls + '-next-month-btn',
 	            onClick: this.nextMonth,
-	            title: locale.nextMonth },
+	            title: locale.nextMonth
+	          },
 	          '›'
 	        )),
-	        this.showIf(enableNext, _react2['default'].createElement(
+	        this.showIf(enableNext, _react2.default.createElement(
 	          'a',
-	          { className: prefixCls + '-next-year-btn',
+	          {
+	            className: prefixCls + '-next-year-btn',
 	            onClick: this.nextYear,
-	            title: locale.nextYear },
+	            title: locale.nextYear
+	          },
 	          '»'
 	        ))
 	      ),
@@ -1230,33 +1276,33 @@ webpackJsonp([0],{
 	  }
 	});
 	
-	exports['default'] = CalendarHeader;
+	exports.default = CalendarHeader;
 	module.exports = exports['default'];
 
 /***/ },
 
-/***/ 200:
+/***/ 199:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	var _react = __webpack_require__(3);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _yearYearPanel = __webpack_require__(201);
+	var _YearPanel = __webpack_require__(200);
 	
-	var _yearYearPanel2 = _interopRequireDefault(_yearYearPanel);
+	var _YearPanel2 = _interopRequireDefault(_YearPanel);
 	
-	var _MonthTable = __webpack_require__(203);
+	var _MonthTable = __webpack_require__(202);
 	
 	var _MonthTable2 = _interopRequireDefault(_MonthTable);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function goYear(direction) {
 	  var next = this.state.value.clone();
@@ -1266,7 +1312,7 @@ webpackJsonp([0],{
 	
 	function noop() {}
 	
-	var MonthPanel = _react2['default'].createClass({
+	var MonthPanel = _react2.default.createClass({
 	  displayName: 'MonthPanel',
 	
 	  propTypes: {
@@ -1281,7 +1327,6 @@ webpackJsonp([0],{
 	      onSelect: noop
 	    };
 	  },
-	
 	  getInitialState: function getInitialState() {
 	    var props = this.props;
 	    // bind methods
@@ -1292,7 +1337,6 @@ webpackJsonp([0],{
 	      value: props.value || props.defaultValue
 	    };
 	  },
-	
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
 	    if ('value' in nextProps) {
 	      this.setState({
@@ -1300,24 +1344,20 @@ webpackJsonp([0],{
 	      });
 	    }
 	  },
-	
 	  onYearPanelSelect: function onYearPanelSelect(current) {
 	    this.setState({
 	      showYearPanel: 0
 	    });
 	    this.setAndChangeValue(current);
 	  },
-	
 	  setAndChangeValue: function setAndChangeValue(value) {
 	    this.setValue(value);
 	    this.props.onChange(value);
 	  },
-	
 	  setAndSelectValue: function setAndSelectValue(value) {
 	    this.setValue(value);
 	    this.props.onSelect(value);
 	  },
-	
 	  setValue: function setValue(value) {
 	    if (!('value' in this.props)) {
 	      this.setState({
@@ -1325,13 +1365,11 @@ webpackJsonp([0],{
 	      });
 	    }
 	  },
-	
 	  showYearPanel: function showYearPanel() {
 	    this.setState({
 	      showYearPanel: 1
 	    });
 	  },
-	
 	  render: function render() {
 	    var props = this.props;
 	    var value = this.state.value;
@@ -1340,61 +1378,72 @@ webpackJsonp([0],{
 	    var prefixCls = this.prefixCls;
 	    var yearPanel = undefined;
 	    if (this.state.showYearPanel) {
-	      yearPanel = _react2['default'].createElement(_yearYearPanel2['default'], { locale: locale, value: value, rootPrefixCls: props.rootPrefixCls,
-	        onSelect: this.onYearPanelSelect });
+	      yearPanel = _react2.default.createElement(_YearPanel2.default, {
+	        locale: locale,
+	        value: value,
+	        rootPrefixCls: props.rootPrefixCls,
+	        onSelect: this.onYearPanelSelect
+	      });
 	    }
-	    return _react2['default'].createElement(
+	    return _react2.default.createElement(
 	      'div',
 	      { className: prefixCls, style: props.style },
-	      _react2['default'].createElement(
+	      _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2['default'].createElement(
+	        _react2.default.createElement(
 	          'div',
 	          { className: prefixCls + '-header' },
-	          _react2['default'].createElement(
+	          _react2.default.createElement(
 	            'a',
-	            { className: prefixCls + '-prev-year-btn',
+	            {
+	              className: prefixCls + '-prev-year-btn',
 	              role: 'button',
 	              onClick: this.previousYear,
-	              title: locale.previousYear },
+	              title: locale.previousYear
+	            },
 	            '«'
 	          ),
-	          _react2['default'].createElement(
+	          _react2.default.createElement(
 	            'a',
-	            { className: prefixCls + '-year-select',
+	            {
+	              className: prefixCls + '-year-select',
 	              role: 'button',
 	              onClick: this.showYearPanel,
-	              title: locale.yearSelect },
-	            _react2['default'].createElement(
+	              title: locale.yearSelect
+	            },
+	            _react2.default.createElement(
 	              'span',
 	              { className: prefixCls + '-year-select-content' },
 	              year
 	            ),
-	            _react2['default'].createElement(
+	            _react2.default.createElement(
 	              'span',
 	              { className: prefixCls + '-year-select-arrow' },
 	              'x'
 	            )
 	          ),
-	          _react2['default'].createElement(
+	          _react2.default.createElement(
 	            'a',
-	            { className: prefixCls + '-next-year-btn',
+	            {
+	              className: prefixCls + '-next-year-btn',
 	              role: 'button',
 	              onClick: this.nextYear,
-	              title: locale.nextYear },
+	              title: locale.nextYear
+	            },
 	            '»'
 	          )
 	        ),
-	        _react2['default'].createElement(
+	        _react2.default.createElement(
 	          'div',
 	          { className: prefixCls + '-body' },
-	          _react2['default'].createElement(_MonthTable2['default'], {
+	          _react2.default.createElement(_MonthTable2.default, {
 	            disabledDate: props.disabledDate,
 	            onSelect: this.setAndSelectValue,
 	            locale: locale,
 	            value: value,
-	            prefixCls: prefixCls })
+	            prefixCls: prefixCls
+	          })
 	        )
 	      ),
 	      yearPanel
@@ -1402,31 +1451,21 @@ webpackJsonp([0],{
 	  }
 	});
 	
-	exports['default'] = MonthPanel;
+	exports.default = MonthPanel;
 	module.exports = exports['default'];
 
 /***/ },
 
-/***/ 201:
+/***/ 200:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-	
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _react = __webpack_require__(3);
 	
@@ -1436,44 +1475,56 @@ webpackJsonp([0],{
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _decadeDecadePanel = __webpack_require__(202);
+	var _DecadePanel = __webpack_require__(201);
 	
-	var _decadeDecadePanel2 = _interopRequireDefault(_decadeDecadePanel);
+	var _DecadePanel2 = _interopRequireDefault(_DecadePanel);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var ROW = 4;
 	var COL = 3;
 	
 	function goYear(direction) {
-	  var next = this.state.value.clone();
-	  next.addYear(direction);
-	  this.setState({ value: next });
+	  var value = this.state.value.clone();
+	  value.addYear(direction);
+	  this.setState({
+	    value: value
+	  });
 	}
 	
 	function chooseYear(year) {
-	  var next = this.state.value.clone();
-	  next.setYear(year);
-	  next.rollSetMonth(this.state.value.getMonth());
-	  this.props.onSelect(next);
+	  var value = this.state.value.clone();
+	  value.setYear(year);
+	  value.rollSetMonth(this.state.value.getMonth());
+	  this.props.onSelect(value);
 	}
 	
-	var YearPanel = (function (_React$Component) {
+	var YearPanel = function (_React$Component) {
 	  _inherits(YearPanel, _React$Component);
 	
 	  function YearPanel(props) {
-	    var _this = this;
-	
 	    _classCallCheck(this, YearPanel);
 	
-	    _get(Object.getPrototypeOf(YearPanel.prototype), 'constructor', this).call(this, props);
-	    this.prefixCls = props.rootPrefixCls + '-year-panel';
-	    this.state = {
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(YearPanel).call(this, props));
+	
+	    _this.prefixCls = props.rootPrefixCls + '-year-panel';
+	    _this.state = {
 	      value: props.value || props.defaultValue
 	    };
-	    this.nextDecade = goYear.bind(this, 10);
-	    this.previousDecade = goYear.bind(this, -10);
+	    _this.nextDecade = goYear.bind(_this, 10);
+	    _this.previousDecade = goYear.bind(_this, -10);
 	    ['showDecadePanel', 'onDecadePanelSelect'].forEach(function (method) {
 	      _this[method] = _this[method].bind(_this);
 	    });
+	    return _this;
 	  }
 	
 	  _createClass(YearPanel, [{
@@ -1504,7 +1555,7 @@ webpackJsonp([0],{
 	          } else if (year > endYear) {
 	            content = '';
 	          } else {
-	            content = year + '';
+	            content = String(year);
 	          }
 	          years[rowIndex][colIndex] = {
 	            content: content,
@@ -1550,23 +1601,25 @@ webpackJsonp([0],{
 	          } else {
 	            clickHandler = chooseYear.bind(_this2, yearData.year);
 	          }
-	          return _react2['default'].createElement(
+	          return _react2.default.createElement(
 	            'td',
-	            { role: 'gridcell',
+	            {
+	              role: 'gridcell',
 	              title: yearData.title,
 	              key: yearData.content,
 	              onClick: clickHandler,
-	              className: (0, _classnames2['default'])(classNameMap)
+	              className: (0, _classnames2.default)(classNameMap)
 	            },
-	            _react2['default'].createElement(
+	            _react2.default.createElement(
 	              'a',
 	              {
-	                className: prefixCls + '-year' },
+	                className: prefixCls + '-year'
+	              },
 	              yearData.content
 	            )
 	          );
 	        });
-	        return _react2['default'].createElement(
+	        return _react2.default.createElement(
 	          'tr',
 	          { key: index, role: 'row' },
 	          tds
@@ -1575,62 +1628,72 @@ webpackJsonp([0],{
 	
 	      var decadePanel = undefined;
 	      if (this.state.showDecadePanel) {
-	        decadePanel = _react2['default'].createElement(_decadeDecadePanel2['default'], { locale: locale, value: value, rootPrefixCls: props.rootPrefixCls,
-	          onSelect: this.onDecadePanelSelect });
+	        decadePanel = _react2.default.createElement(_DecadePanel2.default, {
+	          locale: locale,
+	          value: value,
+	          rootPrefixCls: props.rootPrefixCls,
+	          onSelect: this.onDecadePanelSelect
+	        });
 	      }
 	
-	      return _react2['default'].createElement(
+	      return _react2.default.createElement(
 	        'div',
 	        { className: this.prefixCls },
-	        _react2['default'].createElement(
+	        _react2.default.createElement(
 	          'div',
 	          null,
-	          _react2['default'].createElement(
+	          _react2.default.createElement(
 	            'div',
 	            { className: prefixCls + '-header' },
-	            _react2['default'].createElement(
+	            _react2.default.createElement(
 	              'a',
-	              { className: prefixCls + '-prev-decade-btn',
+	              {
+	                className: prefixCls + '-prev-decade-btn',
 	                role: 'button',
 	                onClick: this.previousDecade,
-	                title: locale.previousDecade },
+	                title: locale.previousDecade
+	              },
 	              '«'
 	            ),
-	            _react2['default'].createElement(
+	            _react2.default.createElement(
 	              'a',
-	              { className: prefixCls + '-decade-select',
+	              {
+	                className: prefixCls + '-decade-select',
 	                role: 'button',
 	                onClick: this.showDecadePanel,
-	                title: locale.decadeSelect },
-	              _react2['default'].createElement(
+	                title: locale.decadeSelect
+	              },
+	              _react2.default.createElement(
 	                'span',
 	                { className: prefixCls + '-decade-select-content' },
 	                startYear,
 	                '-',
 	                endYear
 	              ),
-	              _react2['default'].createElement(
+	              _react2.default.createElement(
 	                'span',
 	                { className: prefixCls + '-decade-select-arrow' },
 	                'x'
 	              )
 	            ),
-	            _react2['default'].createElement(
+	            _react2.default.createElement(
 	              'a',
-	              { className: prefixCls + '-next-decade-btn',
+	              {
+	                className: prefixCls + '-next-decade-btn',
 	                role: 'button',
 	                onClick: this.nextDecade,
-	                title: locale.nextDecade },
+	                title: locale.nextDecade
+	              },
 	              '»'
 	            )
 	          ),
-	          _react2['default'].createElement(
+	          _react2.default.createElement(
 	            'div',
 	            { className: prefixCls + '-body' },
-	            _react2['default'].createElement(
+	            _react2.default.createElement(
 	              'table',
 	              { className: prefixCls + '-table', cellSpacing: '0', role: 'grid' },
-	              _react2['default'].createElement(
+	              _react2.default.createElement(
 	                'tbody',
 	                { className: prefixCls + '-tbody' },
 	                yeasEls
@@ -1644,9 +1707,10 @@ webpackJsonp([0],{
 	  }]);
 	
 	  return YearPanel;
-	})(_react2['default'].Component);
+	}(_react2.default.Component);
 	
-	exports['default'] = YearPanel;
+	exports.default = YearPanel;
+	
 	
 	YearPanel.propTypes = {
 	  rootPrefixCls: _react.PropTypes.string,
@@ -1661,26 +1725,16 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 202:
+/***/ 201:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-	
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _react = __webpack_require__(3);
 	
@@ -1690,8 +1744,19 @@ webpackJsonp([0],{
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
 	var ROW = 4;
 	var COL = 3;
+	
 	
 	function goYear(direction) {
 	  var next = this.state.value.clone();
@@ -1709,27 +1774,29 @@ webpackJsonp([0],{
 	  event.preventDefault();
 	}
 	
-	var DecadePanel = (function (_React$Component) {
+	var DecadePanel = function (_React$Component) {
 	  _inherits(DecadePanel, _React$Component);
 	
 	  function DecadePanel(props) {
 	    _classCallCheck(this, DecadePanel);
 	
-	    _get(Object.getPrototypeOf(DecadePanel.prototype), 'constructor', this).call(this, props);
-	    this.state = {
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DecadePanel).call(this, props));
+	
+	    _this.state = {
 	      value: props.value || props.defaultValue
 	    };
 	
 	    // bind methods
-	    this.prefixCls = props.rootPrefixCls + '-decade-panel';
-	    this.nextCentury = goYear.bind(this, 100);
-	    this.previousCentury = goYear.bind(this, -100);
+	    _this.prefixCls = props.rootPrefixCls + '-decade-panel';
+	    _this.nextCentury = goYear.bind(_this, 100);
+	    _this.previousCentury = goYear.bind(_this, -100);
+	    return _this;
 	  }
 	
 	  _createClass(DecadePanel, [{
 	    key: 'render',
 	    value: function render() {
-	      var _this = this;
+	      var _this2 = this;
 	
 	      var value = this.state.value;
 	      var locale = this.props.locale;
@@ -1766,73 +1833,78 @@ webpackJsonp([0],{
 	          var content = undefined;
 	          var clickHandler = undefined;
 	          if (isLast) {
-	            clickHandler = _this.previousCentury;
+	            clickHandler = _this2.previousCentury;
 	          } else if (isNext) {
-	            clickHandler = _this.nextCentury;
+	            clickHandler = _this2.nextCentury;
 	          } else {
 	            content = dStartDecade + '-' + dEndDecade;
-	            clickHandler = chooseDecade.bind(_this, dStartDecade);
+	            clickHandler = chooseDecade.bind(_this2, dStartDecade);
 	          }
-	          return _react2['default'].createElement(
+	          return _react2.default.createElement(
 	            'td',
 	            {
 	              key: dStartDecade,
 	              onClick: clickHandler,
 	              role: 'gridcell',
-	              className: (0, _classnames2['default'])(classNameMap)
+	              className: (0, _classnames2.default)(classNameMap)
 	            },
-	            _react2['default'].createElement(
+	            _react2.default.createElement(
 	              'a',
 	              {
-	                className: prefixCls + '-decade' },
+	                className: prefixCls + '-decade'
+	              },
 	              content
 	            )
 	          );
 	        });
-	        return _react2['default'].createElement(
+	        return _react2.default.createElement(
 	          'tr',
 	          { key: decadeIndex, role: 'row' },
 	          tds
 	        );
 	      });
 	
-	      return _react2['default'].createElement(
+	      return _react2.default.createElement(
 	        'div',
 	        { className: this.prefixCls },
-	        _react2['default'].createElement(
+	        _react2.default.createElement(
 	          'div',
 	          { className: prefixCls + '-header' },
-	          _react2['default'].createElement(
+	          _react2.default.createElement(
 	            'a',
-	            { className: prefixCls + '-prev-century-btn',
+	            {
+	              className: prefixCls + '-prev-century-btn',
 	              role: 'button',
 	              onClick: this.previousCentury,
-	              title: locale.previousCentury },
+	              title: locale.previousCentury
+	            },
 	            '«'
 	          ),
-	          _react2['default'].createElement(
+	          _react2.default.createElement(
 	            'div',
 	            { className: prefixCls + '-century' },
 	            startYear,
 	            '-',
 	            endYear
 	          ),
-	          _react2['default'].createElement(
+	          _react2.default.createElement(
 	            'a',
-	            { className: prefixCls + '-next-century-btn',
+	            {
+	              className: prefixCls + '-next-century-btn',
 	              role: 'button',
 	              onClick: this.nextCentury,
-	              title: locale.nextCentury },
+	              title: locale.nextCentury
+	            },
 	            '»'
 	          )
 	        ),
-	        _react2['default'].createElement(
+	        _react2.default.createElement(
 	          'div',
 	          { className: prefixCls + '-body' },
-	          _react2['default'].createElement(
+	          _react2.default.createElement(
 	            'table',
 	            { className: prefixCls + '-table', cellSpacing: '0', role: 'grid' },
-	            _react2['default'].createElement(
+	            _react2.default.createElement(
 	              'tbody',
 	              { className: prefixCls + '-tbody' },
 	              decadesEls
@@ -1844,9 +1916,10 @@ webpackJsonp([0],{
 	  }]);
 	
 	  return DecadePanel;
-	})(_react2['default'].Component);
+	}(_react2.default.Component);
 	
-	exports['default'] = DecadePanel;
+	exports.default = DecadePanel;
+	
 	
 	DecadePanel.propTypes = {
 	  locale: _react.PropTypes.object,
@@ -1862,18 +1935,16 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 204:
+/***/ 203:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	var _react = __webpack_require__(3);
 	
@@ -1887,22 +1958,31 @@ webpackJsonp([0],{
 	
 	var _rcUtil2 = _interopRequireDefault(_rcUtil);
 	
-	var _calendarTodayButton = __webpack_require__(205);
+	var _TodayButton = __webpack_require__(204);
 	
-	var _calendarTodayButton2 = _interopRequireDefault(_calendarTodayButton);
+	var _TodayButton2 = _interopRequireDefault(_TodayButton);
 	
-	var _calendarOkButton = __webpack_require__(206);
+	var _OkButton = __webpack_require__(205);
 	
-	var _calendarOkButton2 = _interopRequireDefault(_calendarOkButton);
+	var _OkButton2 = _interopRequireDefault(_OkButton);
 	
-	var _utilIndex = __webpack_require__(195);
+	var _index = __webpack_require__(194);
 	
-	var toFragment = _rcUtil2['default'].Children.mapSelf;
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var CalendarFooter = _react2['default'].createClass({
+	var toFragment = _rcUtil2.default.Children.mapSelf;
+	
+	
+	var CalendarFooter = _react2.default.createClass({
 	  displayName: 'CalendarFooter',
 	
 	  propTypes: {
+	    prefixCls: _react.PropTypes.string,
+	    showDateInput: _react.PropTypes.bool,
+	    disabledTime: _react.PropTypes.any,
+	    gregorianCalendarLocale: _react.PropTypes.object,
+	    selectedValue: _react.PropTypes.any,
+	    showOk: _react.PropTypes.bool,
 	    onSelect: _react.PropTypes.func,
 	    value: _react.PropTypes.object,
 	    defaultValue: _react.PropTypes.object
@@ -1911,11 +1991,9 @@ webpackJsonp([0],{
 	  onSelect: function onSelect(value) {
 	    this.props.onSelect(value);
 	  },
-	
 	  getRootDOMNode: function getRootDOMNode() {
-	    return _reactDom2['default'].findDOMNode(this);
+	    return _reactDom2.default.findDOMNode(this);
 	  },
-	
 	  render: function render() {
 	    var props = this.props;
 	    var value = props.value;
@@ -1927,27 +2005,27 @@ webpackJsonp([0],{
 	    var showOk = props.showOk;
 	
 	    var timePicker = !showDateInput && props.timePicker || null;
-	    var disabledTimeConfig = disabledTime && timePicker ? (0, _utilIndex.getTimeConfig)(selectedValue, disabledTime) : null;
+	    var disabledTimeConfig = disabledTime && timePicker ? (0, _index.getTimeConfig)(selectedValue, disabledTime) : null;
 	    var footerEl = null;
 	    if (props.showToday || timePicker) {
 	      var nowEl = undefined;
 	      if (props.showToday) {
-	        nowEl = _react2['default'].createElement(_calendarTodayButton2['default'], _extends({}, props, { value: value }));
+	        nowEl = _react2.default.createElement(_TodayButton2.default, _extends({}, props, { value: value }));
 	      }
 	      var okBtn = undefined;
 	      if (showOk === true || showOk !== false && !!props.timePicker) {
-	        okBtn = _react2['default'].createElement(_calendarOkButton2['default'], props);
+	        okBtn = _react2.default.createElement(_OkButton2.default, props);
 	      }
 	      var footerBtn = undefined;
 	      if (nowEl || okBtn) {
-	        footerBtn = _react2['default'].createElement(
+	        footerBtn = _react2.default.createElement(
 	          'span',
 	          { className: prefixCls + '-footer-btn' },
 	          toFragment([nowEl, okBtn])
 	        );
 	      }
 	      if (timePicker) {
-	        timePicker = _react2['default'].cloneElement(timePicker, _extends({
+	        timePicker = _react2.default.cloneElement(timePicker, _extends({
 	          onChange: this.onSelect,
 	          allowEmpty: false,
 	          gregorianCalendarLocale: gregorianCalendarLocale
@@ -1956,7 +2034,7 @@ webpackJsonp([0],{
 	          value: selectedValue
 	        }));
 	      }
-	      footerEl = _react2['default'].createElement(
+	      footerEl = _react2.default.createElement(
 	        'div',
 	        { className: prefixCls + '-footer' },
 	        timePicker,
@@ -1968,28 +2046,28 @@ webpackJsonp([0],{
 	  }
 	});
 	
-	exports['default'] = CalendarFooter;
+	exports.default = CalendarFooter;
 	module.exports = exports['default'];
 
 /***/ },
 
-/***/ 205:
+/***/ 204:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports['default'] = TodayButton;
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	exports.default = TodayButton;
 	
 	var _react = __webpack_require__(3);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _util = __webpack_require__(195);
+	var _util = __webpack_require__(194);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function TodayButton(_ref) {
 	  var prefixCls = _ref.prefixCls;
@@ -2012,21 +2090,22 @@ webpackJsonp([0],{
 	      disabledTodayClass = prefixCls + '-today-btn-disabled';
 	    }
 	  }
-	  return _react2['default'].createElement(
+	  return _react2.default.createElement(
 	    'a',
-	    { className: prefixCls + '-today-btn ' + disabledTodayClass,
+	    {
+	      className: prefixCls + '-today-btn ' + disabledTodayClass,
 	      role: 'button',
 	      onClick: disabledToday ? null : onToday,
-	      title: (0, _util.getTodayTimeStr)(value) },
+	      title: (0, _util.getTodayTimeStr)(value)
+	    },
 	    localeNow
 	  );
 	}
-	
 	module.exports = exports['default'];
 
 /***/ },
 
-/***/ 206:
+/***/ 205:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2034,13 +2113,13 @@ webpackJsonp([0],{
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports["default"] = OkButton;
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	exports.default = OkButton;
 	
 	var _react = __webpack_require__(3);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function OkButton(_ref) {
 	  var prefixCls = _ref.prefixCls;
@@ -2052,31 +2131,28 @@ webpackJsonp([0],{
 	  if (okDisabled) {
 	    className += " " + prefixCls + "-ok-btn-disabled";
 	  }
-	  return _react2["default"].createElement(
+	  return _react2.default.createElement(
 	    "a",
-	    { className: className,
+	    {
+	      className: className,
 	      role: "button",
-	      onClick: okDisabled ? null : onOk },
+	      onClick: okDisabled ? null : onOk
+	    },
 	    locale.ok
 	  );
 	}
-	
-	module.exports = exports["default"];
+	module.exports = exports['default'];
 
 /***/ },
 
-/***/ 207:
+/***/ 206:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
 	var _react = __webpack_require__(3);
 	
@@ -2090,12 +2166,16 @@ webpackJsonp([0],{
 	
 	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
 	
-	var _utilIndex = __webpack_require__(195);
+	var _index = __webpack_require__(194);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
 	function noop() {}
 	
 	function getNow() {
-	  var value = new _gregorianCalendar2['default']();
+	  var value = new _gregorianCalendar2.default();
 	  value.setTime(Date.now());
 	  return value;
 	}
@@ -2123,7 +2203,6 @@ webpackJsonp([0],{
 	      onKeyDown: noop
 	    };
 	  },
-	
 	  getInitialState: function getInitialState() {
 	    var props = this.props;
 	    var value = props.value || props.defaultValue || getNow();
@@ -2132,7 +2211,6 @@ webpackJsonp([0],{
 	      selectedValue: props.selectedValue || props.defaultSelectedValue
 	    };
 	  },
-	
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
 	    var value = nextProps.value;
 	    var selectedValue = nextProps.selectedValue;
@@ -2149,14 +2227,12 @@ webpackJsonp([0],{
 	      });
 	    }
 	  },
-	
 	  onSelect: function onSelect(value, cause) {
 	    if (value) {
 	      this.setValue(value);
 	    }
 	    this.setSelectedValue(value, cause);
 	  },
-	
 	  renderRoot: function renderRoot(newProps) {
 	    var _className;
 	
@@ -2165,15 +2241,16 @@ webpackJsonp([0],{
 	
 	    var className = (_className = {}, _defineProperty(_className, prefixCls, 1), _defineProperty(_className, prefixCls + '-hidden', !props.visible), _defineProperty(_className, props.className, !!props.className), _defineProperty(_className, newProps.className, !!newProps.className), _className);
 	
-	    return _react2['default'].createElement(
+	    return _react2.default.createElement(
 	      'div',
-	      { className: '' + (0, _classnames2['default'])(className),
+	      {
+	        className: '' + (0, _classnames2.default)(className),
 	        style: this.props.style,
-	        tabIndex: '0', onKeyDown: this.onKeyDown },
+	        tabIndex: '0', onKeyDown: this.onKeyDown
+	      },
 	      newProps.children
 	    );
 	  },
-	
 	  setSelectedValue: function setSelectedValue(selectedValue, cause) {
 	    if (this.isAllowedDate(selectedValue)) {
 	      if (!('selectedValue' in this.props)) {
@@ -2184,7 +2261,6 @@ webpackJsonp([0],{
 	      this.props.onSelect(selectedValue, cause);
 	    }
 	  },
-	
 	  setValue: function setValue(value) {
 	    var originalValue = this.state.value;
 	    if (!('value' in this.props)) {
@@ -2196,31 +2272,28 @@ webpackJsonp([0],{
 	      this.props.onChange(value);
 	    }
 	  },
-	
 	  isAllowedDate: function isAllowedDate(value) {
 	    var disabledDate = this.props.disabledDate;
 	    var disabledTime = this.props.disabledTime;
-	    return (0, _utilIndex.isAllowedDate)(value, disabledDate, disabledTime);
+	    return (0, _index.isAllowedDate)(value, disabledDate, disabledTime);
 	  }
 	};
 	
-	exports['default'] = CalendarMixin;
+	exports.default = CalendarMixin;
 	module.exports = exports['default'];
 
 /***/ },
 
-/***/ 210:
+/***/ 209:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	var _react = __webpack_require__(3);
 	
@@ -2230,7 +2303,9 @@ webpackJsonp([0],{
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _utilIndex = __webpack_require__(195);
+	var _index = __webpack_require__(194);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function copyTime(target, source) {
 	  if (source) {
@@ -2241,10 +2316,13 @@ webpackJsonp([0],{
 	  return target;
 	}
 	
-	var DateInput = _react2['default'].createClass({
+	var DateInput = _react2.default.createClass({
 	  displayName: 'DateInput',
 	
 	  propTypes: {
+	    prefixCls: _react.PropTypes.string,
+	    timePicker: _react.PropTypes.object,
+	    disabledTime: _react.PropTypes.any,
 	    formatter: _react.PropTypes.object,
 	    locale: _react.PropTypes.object,
 	    gregorianCalendarLocale: _react.PropTypes.object,
@@ -2263,7 +2341,6 @@ webpackJsonp([0],{
 	      invalid: false
 	    };
 	  },
-	
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
 	    // when popup show, click body will call this, bug!
 	    var selectedValue = nextProps.selectedValue;
@@ -2272,7 +2349,6 @@ webpackJsonp([0],{
 	      invalid: false
 	    });
 	  },
-	
 	  onInputChange: function onInputChange(event) {
 	    var str = event.target.value;
 	    this.setState({
@@ -2319,16 +2395,15 @@ webpackJsonp([0],{
 	      invalid: false
 	    });
 	  },
-	
 	  onClear: function onClear() {
-	    this.setState({ str: '' });
+	    this.setState({
+	      str: ''
+	    });
 	    this.props.onClear(null);
 	  },
-	
 	  getRootDOMNode: function getRootDOMNode() {
-	    return _reactDom2['default'].findDOMNode(this);
+	    return _reactDom2.default.findDOMNode(this);
 	  },
-	
 	  render: function render() {
 	    var props = this.props;
 	    var _state = this.state;
@@ -2344,14 +2419,14 @@ webpackJsonp([0],{
 	    var gregorianCalendarLocale = props.gregorianCalendarLocale;
 	
 	    var invalidClass = invalid ? prefixCls + '-input-invalid' : '';
-	    var disabledTimeConfig = disabledTime && timePicker ? (0, _utilIndex.getTimeConfig)(selectedValue, disabledTime) : null;
-	    return _react2['default'].createElement(
+	    var disabledTimeConfig = disabledTime && timePicker ? (0, _index.getTimeConfig)(selectedValue, disabledTime) : null;
+	    return _react2.default.createElement(
 	      'div',
 	      { className: prefixCls + '-input-wrap' },
-	      _react2['default'].createElement(
+	      _react2.default.createElement(
 	        'div',
 	        { className: prefixCls + '-time-picker-wrap' },
-	        timePicker ? _react2['default'].cloneElement(timePicker, _extends({
+	        timePicker ? _react2.default.cloneElement(timePicker, _extends({
 	          showClear: false,
 	          allowEmpty: false,
 	          getPopupContainer: this.getRootDOMNode,
@@ -2360,37 +2435,39 @@ webpackJsonp([0],{
 	          onChange: onChange
 	        }, disabledTimeConfig)) : null
 	      ),
-	      _react2['default'].createElement(
+	      _react2.default.createElement(
 	        'div',
 	        { className: prefixCls + '-date-input-wrap' },
-	        _react2['default'].createElement('input', { className: prefixCls + '-input  ' + invalidClass,
+	        _react2.default.createElement('input', {
+	          className: prefixCls + '-input  ' + invalidClass,
 	          value: str,
 	          placeholder: placeholder,
-	          onChange: this.onInputChange })
+	          onChange: this.onInputChange
+	        })
 	      ),
-	      props.showClear ? _react2['default'].createElement('a', { className: prefixCls + '-clear-btn',
+	      props.showClear ? _react2.default.createElement('a', {
+	        className: prefixCls + '-clear-btn',
 	        role: 'button',
 	        title: locale.clear,
-	        onClick: this.onClear }) : null
+	        onClick: this.onClear
+	      }) : null
 	    );
 	  }
 	});
 	
-	exports['default'] = DateInput;
+	exports.default = DateInput;
 	module.exports = exports['default'];
 
 /***/ },
 
-/***/ 211:
+/***/ 210:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	var _react = __webpack_require__(3);
 	
@@ -2402,13 +2479,15 @@ webpackJsonp([0],{
 	
 	var _rcUtil = __webpack_require__(168);
 	
-	var _pickerPlacements = __webpack_require__(212);
+	var _placements = __webpack_require__(211);
 	
-	var _pickerPlacements2 = _interopRequireDefault(_pickerPlacements);
+	var _placements2 = _interopRequireDefault(_placements);
 	
-	var _rcTrigger = __webpack_require__(213);
+	var _rcTrigger = __webpack_require__(212);
 	
 	var _rcTrigger2 = _interopRequireDefault(_rcTrigger);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function noop() {}
 	
@@ -2416,10 +2495,13 @@ webpackJsonp([0],{
 	  this[field] = component;
 	}
 	
-	var Picker = _react2['default'].createClass({
+	var Picker = _react2.default.createClass({
 	  displayName: 'Picker',
 	
 	  propTypes: {
+	    animation: _react.PropTypes.oneOfType([_react.PropTypes.func, _react.PropTypes.string]),
+	    disabled: _react.PropTypes.bool,
+	    transitionName: _react.PropTypes.string,
 	    onChange: _react.PropTypes.func,
 	    onOpen: _react.PropTypes.func,
 	    onClose: _react.PropTypes.func,
@@ -2448,7 +2530,6 @@ webpackJsonp([0],{
 	      onClose: noop
 	    };
 	  },
-	
 	  getInitialState: function getInitialState() {
 	    var props = this.props;
 	    var open = undefined;
@@ -2459,28 +2540,32 @@ webpackJsonp([0],{
 	    }
 	    var value = props.value || props.defaultValue;
 	    this.saveCalendarRef = refFn.bind(this, 'calendarInstance');
-	    return { open: open, value: value };
+	    return {
+	      open: open,
+	      value: value
+	    };
 	  },
-	
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
 	    var value = nextProps.value;
 	    var open = nextProps.open;
 	
 	    if ('value' in nextProps) {
-	      this.setState({ value: value });
+	      this.setState({
+	        value: value
+	      });
 	    }
 	    if (open !== undefined) {
-	      this.setState({ open: open });
+	      this.setState({
+	        open: open
+	      });
 	    }
 	  },
-	
 	  onCalendarKeyDown: function onCalendarKeyDown(event) {
 	    if (event.keyCode === _rcUtil.KeyCode.ESC) {
 	      event.stopPropagation();
 	      this.close(this.focus);
 	    }
 	  },
-	
 	  onCalendarSelect: function onCalendarSelect(value) {
 	    var cause = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 	
@@ -2495,25 +2580,21 @@ webpackJsonp([0],{
 	    }
 	    props.onChange(value);
 	  },
-	
 	  onCalendarOk: function onCalendarOk() {
 	    this.close(this.focus);
 	  },
-	
 	  onCalendarClear: function onCalendarClear() {
 	    this.close(this.focus);
 	  },
-	
 	  onVisibleChange: function onVisibleChange(open) {
 	    var _this = this;
 	
 	    this.setOpen(open, function () {
 	      if (open) {
-	        _reactDom2['default'].findDOMNode(_this.calendarInstance).focus();
+	        _reactDom2.default.findDOMNode(_this.calendarInstance).focus();
 	      }
 	    });
 	  },
-	
 	  getCalendarElement: function getCalendarElement() {
 	    var props = this.props;
 	    var state = this.state;
@@ -2537,9 +2618,8 @@ webpackJsonp([0],{
 	      onClear: (0, _rcUtil.createChainedFunction)(calendarProp.props.onClear, this.onCalendarClear)
 	    };
 	
-	    return _react2['default'].cloneElement(calendarProp, extraProps);
+	    return _react2.default.cloneElement(calendarProp, extraProps);
 	  },
-	
 	  setOpen: function setOpen(open, callback) {
 	    var _props = this.props;
 	    var onOpen = _props.onOpen;
@@ -2549,31 +2629,27 @@ webpackJsonp([0],{
 	      this.setState({
 	        open: open
 	      }, callback);
-	      var _event = {
+	      var event = {
 	        open: open
 	      };
 	      if (open) {
-	        onOpen(_event);
+	        onOpen(event);
 	      } else {
-	        onClose(_event);
+	        onClose(event);
 	      }
 	    }
 	  },
-	
 	  open: function open(callback) {
 	    this.setOpen(true, callback);
 	  },
-	
 	  close: function close(callback) {
 	    this.setOpen(false, callback);
 	  },
-	
 	  focus: function focus() {
 	    if (!this.state.open) {
-	      _reactDom2['default'].findDOMNode(this).focus();
+	      _reactDom2.default.findDOMNode(this).focus();
 	    }
 	  },
-	
 	  render: function render() {
 	    var props = this.props;
 	    var prefixCls = props.prefixCls;
@@ -2587,11 +2663,12 @@ webpackJsonp([0],{
 	    var children = props.children;
 	
 	    var state = this.state;
-	    return _react2['default'].createElement(
-	      _rcTrigger2['default'],
-	      { popup: this.getCalendarElement(),
+	    return _react2.default.createElement(
+	      _rcTrigger2.default,
+	      {
+	        popup: this.getCalendarElement(),
 	        popupAlign: align,
-	        builtinPlacements: _pickerPlacements2['default'],
+	        builtinPlacements: _placements2.default,
 	        popupPlacement: placement,
 	        action: disabled ? [] : ['click'],
 	        destroyPopupOnHide: true,
@@ -2601,23 +2678,24 @@ webpackJsonp([0],{
 	        popupTransitionName: transitionName,
 	        popupVisible: state.open,
 	        onPopupVisibleChange: this.onVisibleChange,
-	        prefixCls: prefixCls },
+	        prefixCls: prefixCls
+	      },
 	      children(state, props)
 	    );
 	  }
 	});
 	
-	exports['default'] = Picker;
+	exports.default = Picker;
 	module.exports = exports['default'];
 
 /***/ },
 
-/***/ 212:
+/***/ 211:
 /***/ function(module, exports) {
 
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	var autoAdjustOverflow = {
@@ -2654,12 +2732,12 @@ webpackJsonp([0],{
 	  }
 	};
 	
-	exports['default'] = placements;
+	exports.default = placements;
 	module.exports = exports['default'];
 
 /***/ },
 
-/***/ 237:
+/***/ 236:
 /***/ function(module, exports) {
 
 	/*
@@ -2678,22 +2756,22 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 238:
+/***/ 237:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	var _zh_CN = __webpack_require__(238);
 	
-	var _gregorianCalendarFormatLibLocaleZh_CN = __webpack_require__(239);
+	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
-	var _gregorianCalendarFormatLibLocaleZh_CN2 = _interopRequireDefault(_gregorianCalendarFormatLibLocaleZh_CN);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports['default'] = {
+	exports.default = {
 	  today: '今天',
 	  now: '此刻',
 	  ok: '确定',
@@ -2714,13 +2792,13 @@ webpackJsonp([0],{
 	  nextDecade: '下一年代',
 	  previousCentury: '上一世纪',
 	  nextCentury: '下一世纪',
-	  format: _gregorianCalendarFormatLibLocaleZh_CN2['default']
+	  format: _zh_CN2.default
 	};
 	module.exports = exports['default'];
 
 /***/ },
 
-/***/ 239:
+/***/ 238:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2740,7 +2818,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 240:
+/***/ 239:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2751,11 +2829,11 @@ webpackJsonp([0],{
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _gregorianCalendarFormatLibLocaleZh_CN = __webpack_require__(239);
+	var _gregorianCalendarFormatLibLocaleZh_CN = __webpack_require__(238);
 	
 	var _gregorianCalendarFormatLibLocaleZh_CN2 = _interopRequireDefault(_gregorianCalendarFormatLibLocaleZh_CN);
 	
-	var _gregorianCalendarLibLocaleZh_CN = __webpack_require__(237);
+	var _gregorianCalendarLibLocaleZh_CN = __webpack_require__(236);
 	
 	var _gregorianCalendarLibLocaleZh_CN2 = _interopRequireDefault(_gregorianCalendarLibLocaleZh_CN);
 	
@@ -2768,10 +2846,30 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 241:
+/***/ 240:
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
+
+/***/ },
+
+/***/ 241:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	var _TimePicker = __webpack_require__(242);
+	
+	var _TimePicker2 = _interopRequireDefault(_TimePicker);
+	
+	exports['default'] = _TimePicker2['default'];
+	module.exports = exports['default'];
 
 /***/ },
 
@@ -2786,47 +2884,27 @@ webpackJsonp([0],{
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _TimePicker = __webpack_require__(243);
-	
-	var _TimePicker2 = _interopRequireDefault(_TimePicker);
-	
-	exports['default'] = _TimePicker2['default'];
-	module.exports = exports['default'];
-
-/***/ },
-
-/***/ 243:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
 	var _react = __webpack_require__(3);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _rcTrigger = __webpack_require__(213);
+	var _rcTrigger = __webpack_require__(212);
 	
 	var _rcTrigger2 = _interopRequireDefault(_rcTrigger);
 	
-	var _modulePanel = __webpack_require__(244);
+	var _modulePanel = __webpack_require__(243);
 	
 	var _modulePanel2 = _interopRequireDefault(_modulePanel);
 	
-	var _utilPlacements = __webpack_require__(251);
+	var _utilPlacements = __webpack_require__(250);
 	
 	var _utilPlacements2 = _interopRequireDefault(_utilPlacements);
 	
-	var _mixinCommonMixin = __webpack_require__(245);
+	var _mixinCommonMixin = __webpack_require__(244);
 	
 	var _mixinCommonMixin2 = _interopRequireDefault(_mixinCommonMixin);
 	
-	var _utilIndex = __webpack_require__(252);
+	var _utilIndex = __webpack_require__(251);
 	
 	function noop() {}
 	
@@ -3091,7 +3169,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 244:
+/***/ 243:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3106,15 +3184,15 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _mixinCommonMixin = __webpack_require__(245);
+	var _mixinCommonMixin = __webpack_require__(244);
 	
 	var _mixinCommonMixin2 = _interopRequireDefault(_mixinCommonMixin);
 	
-	var _Header = __webpack_require__(247);
+	var _Header = __webpack_require__(246);
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _Combobox = __webpack_require__(249);
+	var _Combobox = __webpack_require__(248);
 	
 	var _Combobox2 = _interopRequireDefault(_Combobox);
 	
@@ -3260,7 +3338,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 245:
+/***/ 244:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3273,7 +3351,7 @@ webpackJsonp([0],{
 	
 	var _react = __webpack_require__(3);
 	
-	var _localeEn_US = __webpack_require__(246);
+	var _localeEn_US = __webpack_require__(245);
 	
 	var _localeEn_US2 = _interopRequireDefault(_localeEn_US);
 	
@@ -3294,7 +3372,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 246:
+/***/ 245:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3305,7 +3383,7 @@ webpackJsonp([0],{
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _gregorianCalendarFormatLibLocaleEn_US = __webpack_require__(197);
+	var _gregorianCalendarFormatLibLocaleEn_US = __webpack_require__(196);
 	
 	var _gregorianCalendarFormatLibLocaleEn_US2 = _interopRequireDefault(_gregorianCalendarFormatLibLocaleEn_US);
 	
@@ -3322,7 +3400,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 247:
+/***/ 246:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3337,7 +3415,7 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _utilSelection = __webpack_require__(248);
+	var _utilSelection = __webpack_require__(247);
 	
 	var _utilSelection2 = _interopRequireDefault(_utilSelection);
 	
@@ -3554,7 +3632,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 248:
+/***/ 247:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3586,7 +3664,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 249:
+/***/ 248:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3601,7 +3679,7 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Select = __webpack_require__(250);
+	var _Select = __webpack_require__(249);
 	
 	var _Select2 = _interopRequireDefault(_Select);
 	
@@ -3768,7 +3846,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 250:
+/***/ 249:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3907,7 +3985,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 251:
+/***/ 250:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3954,7 +4032,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 252:
+/***/ 251:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3966,7 +4044,7 @@ webpackJsonp([0],{
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _gregorianCalendarFormat = __webpack_require__(196);
+	var _gregorianCalendarFormat = __webpack_require__(195);
 	
 	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
 	

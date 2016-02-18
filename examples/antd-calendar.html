@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>antd-calendar.js - example - rc-calendar@5.4.0</title>
+  <title>antd-calendar.js - example - rc-calendar@5.4.1</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -257,169 +257,192 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
 <div class="container">
   <div class="header">
-    <h1>rc-calendar@5.4.0</h1>
+    <h1>rc-calendar@5.4.1</h1>
 
     <p>React Calendar</p>
   </div>
   <div class="example" id="__react-content"></div>
   <script src="common.js?nowrap"></script>
   <script src="antd-calendar.js?nowrap"></script>
-  <div class="highlight"><pre><code language="js"><span class="hljs-comment">/* eslint react/no-multi-comp:0, no-console:0 */</span>
+  <div class="highlight"><pre><code language="undefined">/* eslint react/no-multi-comp:0, no-console:0 */
 
-import <span class="hljs-string">'rc-calendar/assets/index.css'</span>;
-import React from <span class="hljs-string">'react'</span>;
-import ReactDOM from <span class="hljs-string">'react-dom'</span>;
-import Calendar from <span class="hljs-string">'rc-calendar'</span>;
-import DatePicker from <span class="hljs-string">'rc-calendar/lib/Picker'</span>;
-import zhCn from <span class="hljs-string">'gregorian-calendar/lib/locale/zh_CN'</span>; <span class="hljs-comment">// spm error</span>
-import DateTimeFormat from <span class="hljs-string">'gregorian-calendar-format'</span>;
-import GregorianCalendar from <span class="hljs-string">'gregorian-calendar'</span>;
-import CalendarLocale from <span class="hljs-string">'rc-calendar/lib/locale/zh_CN'</span>;
-import assign from <span class="hljs-string">'object-assign'</span>;
-import TimePickerLocale from <span class="hljs-string">'rc-time-picker/lib/locale/zh_CN'</span>;
+import 'rc-calendar/assets/index.css';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Calendar from 'rc-calendar';
+import DatePicker from 'rc-calendar/lib/Picker';
+import zhCn from 'gregorian-calendar/lib/locale/zh_CN'; // spm error
+import DateTimeFormat from 'gregorian-calendar-format';
+import GregorianCalendar from 'gregorian-calendar';
+import CalendarLocale from 'rc-calendar/lib/locale/zh_CN';
+import assign from 'object-assign';
+import TimePickerLocale from 'rc-time-picker/lib/locale/zh_CN';
 
-import <span class="hljs-string">'rc-time-picker/assets/index.css'</span>;
-import TimePicker from <span class="hljs-string">'rc-time-picker'</span>;
-<span class="hljs-keyword">const</span> timePickerElement = <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">TimePicker</span> <span class="hljs-attribute">locale</span>=<span class="hljs-value">{TimePickerLocale}</span>/&gt;</span>;</span>
+import 'rc-time-picker/assets/index.css';
+import TimePicker from 'rc-time-picker';
+const timePickerElement = &lt;TimePicker locale={TimePickerLocale}/&gt;;
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">disabledTime</span><span class="hljs-params">(date)</span> </span>{
-  <span class="hljs-keyword">if</span> (date &amp;&amp; (date.getDayOfMonth() === <span class="hljs-number">15</span>)) {
-    <span class="hljs-keyword">return</span> {
+function disabledTime(date) {
+  if (date &amp;&amp; (date.getDayOfMonth() === 15)) {
+    return {
       disabledHours() {
-        <span class="hljs-keyword">return</span> [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>];
+        return [3, 4];
       },
     };
   }
-  <span class="hljs-keyword">return</span> {
+  return {
     disabledHours() {
-      <span class="hljs-keyword">return</span> [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>];
+      return [1, 2];
     },
   };
 }
 
-<span class="hljs-keyword">const</span> now = <span class="hljs-keyword">new</span> GregorianCalendar(zhCn);
-now.setTime(<span class="hljs-built_in">Date</span>.now());
+const now = new GregorianCalendar(zhCn);
+now.setTime(Date.now());
 
-<span class="hljs-comment">// change locale</span>
-<span class="hljs-keyword">const</span> CalendarLocale2 = assign({}, CalendarLocale, {
-  monthFormat: <span class="hljs-string">'MMMM'</span>,
+// change locale
+const CalendarLocale2 = assign({}, CalendarLocale, {
+  monthFormat: 'MMMM',
 });
 
-<span class="hljs-keyword">const</span> dateFormatter = <span class="hljs-keyword">new</span> DateTimeFormat(<span class="hljs-string">'yyyy-MM-dd'</span>);
-<span class="hljs-keyword">const</span> formatter = <span class="hljs-keyword">new</span> DateTimeFormat(<span class="hljs-string">'yyyy-MM-dd HH:mm:ss'</span>);
+const dateFormatter = new DateTimeFormat('yyyy-MM-dd');
+const formatter = new DateTimeFormat('yyyy-MM-dd HH:mm:ss');
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getFormatter</span><span class="hljs-params">(showTime)</span> </span>{
-  <span class="hljs-keyword">return</span> showTime ? formatter : dateFormatter;
+function getFormatter(showTime) {
+  return showTime ? formatter : dateFormatter;
 }
 
-<span class="hljs-keyword">const</span> defaultCalendarValue = <span class="hljs-keyword">new</span> GregorianCalendar(zhCn);
-defaultCalendarValue.setTime(<span class="hljs-built_in">Date</span>.now());
-defaultCalendarValue.addMonth(-<span class="hljs-number">1</span>);
+const defaultCalendarValue = new GregorianCalendar(zhCn);
+defaultCalendarValue.setTime(Date.now());
+defaultCalendarValue.addMonth(-1);
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">disabledDate</span><span class="hljs-params">(current)</span> </span>{
-  <span class="hljs-keyword">if</span> (!current) {
-    <span class="hljs-comment">// allow empty select</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+function disabledDate(current) {
+  if (!current) {
+    // allow empty select
+    return false;
   }
-  <span class="hljs-keyword">const</span> date = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();
-  date.setHours(<span class="hljs-number">0</span>);
-  date.setMinutes(<span class="hljs-number">0</span>);
-  date.setSeconds(<span class="hljs-number">0</span>);
-  <span class="hljs-keyword">return</span> current.getYear() + <span class="hljs-number">10</span> &lt; date.getFullYear();  <span class="hljs-comment">// can not select days before today</span>
+  const date = new Date();
+  date.setHours(0);
+  date.setMinutes(0);
+  date.setSeconds(0);
+  return current.getYear() + 10 &lt; date.getFullYear();  // can not select days before today
 }
 
-<span class="hljs-keyword">const</span> Test = React.createClass({
+const Test = React.createClass({
   propTypes: {
     defaultValue: React.PropTypes.object,
     defaultCalendarValue: React.PropTypes.object,
   },
 
   getInitialState() {
-    <span class="hljs-keyword">return</span> {
-      showTime: <span class="hljs-literal">true</span>,
-      showDateInput: <span class="hljs-literal">true</span>,
-      disabled: <span class="hljs-literal">false</span>,
-      value: <span class="hljs-keyword">this</span>.props.defaultValue,
+    return {
+      showTime: true,
+      showDateInput: true,
+      disabled: false,
+      value: this.props.defaultValue,
     };
   },
 
   onChange(value) {
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'DatePicker change: '</span> + (value &amp;&amp; formatter.format(value)));
-    <span class="hljs-keyword">this</span>.setState({value});
+    console.log('DatePicker change: ', (value &amp;&amp; formatter.format(value)));
+    this.setState({
+      value,
+    });
   },
 
   onShowTimeChange(e) {
-    <span class="hljs-keyword">this</span>.setState({
+    this.setState({
       showTime: e.target.checked,
     });
   },
 
   onShowDateInputChange(e) {
-    <span class="hljs-keyword">this</span>.setState({
+    this.setState({
       showDateInput: e.target.checked,
     });
   },
 
   toggleDisabled() {
-    <span class="hljs-keyword">this</span>.setState({
-      disabled: !<span class="hljs-keyword">this</span>.state.disabled,
+    this.setState({
+      disabled: !this.state.disabled,
     });
   },
 
   render() {
-    <span class="hljs-keyword">const</span> state = <span class="hljs-keyword">this</span>.state;
-    <span class="hljs-keyword">const</span> calendar = (<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Calendar</span> <span class="hljs-attribute">locale</span>=<span class="hljs-value">{CalendarLocale2}</span>
-                             <span class="hljs-attribute">style</span>=<span class="hljs-value">{{zIndex:</span> <span class="hljs-attribute">1000</span>}}
-                             <span class="hljs-attribute">dateInputPlaceholder</span>=<span class="hljs-value">"请输入"</span>
-                             <span class="hljs-attribute">disabledTime</span>=<span class="hljs-value">{state.showTime</span> ? <span class="hljs-attribute">disabledTime</span> <span class="hljs-attribute">:</span> <span class="hljs-attribute">null</span>}
-                             <span class="hljs-attribute">timePicker</span>=<span class="hljs-value">{state.showTime</span> ? <span class="hljs-attribute">timePickerElement</span> <span class="hljs-attribute">:</span> <span class="hljs-attribute">null</span>}
-                             <span class="hljs-attribute">defaultValue</span>=<span class="hljs-value">{this.props.defaultCalendarValue}</span>
-                             <span class="hljs-attribute">showDateInput</span>=<span class="hljs-value">{state.showDateInput}</span>
-                             <span class="hljs-attribute">disabledDate</span>=<span class="hljs-value">{disabledDate}</span>
-    /&gt;</span>);
-    return (<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{width:</span> <span class="hljs-attribute">400</span>, <span class="hljs-attribute">margin:</span> <span class="hljs-attribute">20</span>}}&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{marginBottom:</span> <span class="hljs-attribute">10</span>}}&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"checkbox"</span> <span class="hljs-attribute">checked</span>=<span class="hljs-value">{state.showTime}</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onShowTimeChange}</span>/&gt;</span>
+    const state = this.state;
+    const calendar = (&lt;Calendar
+      locale={CalendarLocale2}
+      style={{ zIndex: 1000 }}
+      dateInputPlaceholder="请输入"
+      disabledTime={state.showTime ? disabledTime : null}
+      timePicker={state.showTime ? timePickerElement : null}
+      defaultValue={this.props.defaultCalendarValue}
+      showDateInput={state.showDateInput}
+      disabledDate={disabledDate}
+    /&gt;);
+    return (&lt;div style={{ width: 400, margin: 20 }}&gt;
+      &lt;div style={{ marginBottom: 10 }}&gt;
+        &lt;label&gt;
+          &lt;input
+            type="checkbox"
+            checked={state.showTime}
+            onChange={this.onShowTimeChange}
+          /&gt;
           showTime
-        <span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
+        &lt;/label&gt;
         &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
-        <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"checkbox"</span> <span class="hljs-attribute">checked</span>=<span class="hljs-value">{state.showDateInput}</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onShowDateInputChange}</span>/&gt;</span>
+        &lt;label&gt;
+          &lt;input
+            type="checkbox"
+            checked={state.showDateInput}
+            onChange={this.onShowDateInputChange}
+          /&gt;
           showDateInput
-        <span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
+        &lt;/label&gt;
         &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
-        <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">checked</span>=<span class="hljs-value">{state.disabled}</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.toggleDisabled}</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"checkbox"</span>/&gt;</span> disabled <span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
-        '<span class="hljs-attribute">boxSizing</span>'<span class="hljs-attribute">:</span> '<span class="hljs-attribute">border-box</span>',
-        '<span class="hljs-attribute">position</span>'<span class="hljs-attribute">:</span> '<span class="hljs-attribute">relative</span>',
-        '<span class="hljs-attribute">display</span>'<span class="hljs-attribute">:</span> '<span class="hljs-attribute">block</span>',
-        '<span class="hljs-attribute">lineHeight</span>'<span class="hljs-attribute">:</span> <span class="hljs-attribute">1.5</span>,
-        <span class="hljs-attribute">marginBottom:</span> <span class="hljs-attribute">22</span>,
-      }}&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">DatePicker</span>
-          <span class="hljs-attribute">animation</span>=<span class="hljs-value">"slide-up"</span>
-          <span class="hljs-attribute">disabled</span>=<span class="hljs-value">{state.disabled}</span>
-          <span class="hljs-attribute">calendar</span>=<span class="hljs-value">{calendar}</span>
-          <span class="hljs-attribute">value</span>=<span class="hljs-value">{state.value}</span>
-          <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onChange}</span>&gt;</span>
+        &lt;label&gt;
+          &lt;input
+            checked={state.disabled}
+            onChange={this.toggleDisabled}
+            type="checkbox"
+          /&gt;
+          disabled
+        &lt;/label&gt;
+      &lt;/div&gt;
+      &lt;div style={{
+        boxSizing: 'border-box',
+        position: 'relative',
+        display: 'block',
+        lineHeight: 1.5,
+        marginBottom: 22,
+      }}
+      &gt;
+        &lt;DatePicker
+          animation="slide-up"
+          disabled={state.disabled}
+          calendar={calendar}
+          value={state.value}
+          onChange={this.onChange}
+        &gt;
           {
-            ({value})=&gt; {
+            ({ value }) =&gt; {
               return (
-                <span class="hljs-tag">&lt;<span class="hljs-title">span</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">placeholder</span>=<span class="hljs-value">"请选择日期"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{width:</span> <span class="hljs-attribute">250</span>}}
-                       <span class="hljs-attribute">disabled</span>=<span class="hljs-value">{state.disabled}</span>
-                       <span class="hljs-attribute">readOnly</span>
-                       <span class="hljs-attribute">className</span>=<span class="hljs-value">"ant-calendar-picker-input ant-input"</span>
-                       <span class="hljs-attribute">value</span>=<span class="hljs-value">{value</span> &amp;&amp; <span class="hljs-attribute">getFormatter</span>(<span class="hljs-attribute">state.showTime</span>)<span class="hljs-attribute">.format</span>(<span class="hljs-attribute">value</span>)}/&gt;</span>
-                <span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+                &lt;span&gt;
+                &lt;input
+                  placeholder="请选择日期"
+                  style={{ width: 250 }}
+                  disabled={state.disabled}
+                  readOnly
+                  className="ant-calendar-picker-input ant-input"
+                  value={value &amp;&amp; getFormatter(state.showTime).format(value)}
+                /&gt;
+                &lt;/span&gt;
               );
             }
           }
-        <span class="hljs-tag">&lt;/<span class="hljs-title">DatePicker</span>&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>);
+        &lt;/DatePicker&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;);
   },
 });
 
@@ -434,32 +457,41 @@ function onStandaloneChange(value) {
 }
 
 
-ReactDOM.render((<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{zIndex:</span> <span class="hljs-attribute">1000</span>, <span class="hljs-attribute">position:</span> '<span class="hljs-attribute">relative</span>', <span class="hljs-attribute">width:</span> <span class="hljs-attribute">900</span>, <span class="hljs-attribute">margin:</span> '<span class="hljs-attribute">20px</span> <span class="hljs-attribute">auto</span>'}}&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">h2</span>&gt;</span>zh-cn<span class="hljs-tag">&lt;/<span class="hljs-title">h2</span>&gt;</span>
+ReactDOM.render((&lt;div
+  style={{
+    zIndex: 1000,
+    position: 'relative',
+    width: 900,
+    margin: '20px auto',
+  }}
+&gt;
+  &lt;h2&gt;zh-cn&lt;/h2&gt;
 
-  <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{margin:</span> <span class="hljs-attribute">10</span>}}&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">Calendar</span> <span class="hljs-attribute">showWeekNumber</span>=<span class="hljs-value">{false}</span>
-                <span class="hljs-attribute">locale</span>=<span class="hljs-value">{CalendarLocale}</span>
-                <span class="hljs-attribute">defaultValue</span>=<span class="hljs-value">{now}</span>
-                <span class="hljs-attribute">disabledTime</span>=<span class="hljs-value">{disabledTime}</span>
-                <span class="hljs-attribute">showToday</span>
-                <span class="hljs-attribute">showOk</span>=<span class="hljs-value">{false}</span>
-                <span class="hljs-attribute">timePicker</span>=<span class="hljs-value">{timePickerElement}</span>
-                <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{onStandaloneChange}</span>
-                <span class="hljs-attribute">disabledDate</span>=<span class="hljs-value">{disabledDate}</span>
-                <span class="hljs-attribute">onSelect</span>=<span class="hljs-value">{onStandaloneSelect}</span>/&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{float:</span> '<span class="hljs-attribute">left</span>', <span class="hljs-attribute">width:</span> <span class="hljs-attribute">300</span>}}&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">Test</span> <span class="hljs-attribute">defaultValue</span>=<span class="hljs-value">{now}</span>/&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{float:</span> '<span class="hljs-attribute">right</span>', <span class="hljs-attribute">width:</span> <span class="hljs-attribute">300</span>}}&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">Test</span> <span class="hljs-attribute">defaultCalendarValue</span>=<span class="hljs-value">{defaultCalendarValue}</span>/&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{clear:</span> '<span class="hljs-attribute">both</span>'}}&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>), document.getElementById('__react-content'));
-</span></code></pre></div>
+  &lt;div&gt;
+    &lt;div style={{ margin: 10 }}&gt;
+      &lt;Calendar
+        showWeekNumber={false}
+        locale={CalendarLocale}
+        defaultValue={now}
+        disabledTime={disabledTime}
+        showToday
+        showOk={false}
+        timePicker={timePickerElement}
+        onChange={onStandaloneChange}
+        disabledDate={disabledDate}
+        onSelect={onStandaloneSelect}
+      /&gt;
+    &lt;/div&gt;
+    &lt;div style={{ float: 'left', width: 300 }}&gt;
+      &lt;Test defaultValue={now}/&gt;
+    &lt;/div&gt;
+    &lt;div style={{ float: 'right', width: 300 }}&gt;
+      &lt;Test defaultCalendarValue={defaultCalendarValue}/&gt;
+    &lt;/div&gt;
+    &lt;div style={{ clear: 'both' }}&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;), document.getElementById('__react-content'));
+</code></pre></div>
 </div>
 <a href="http://github.com/react-component/calendar">
   <img style="position: absolute; top: 0; right: 0; border: 0;"
