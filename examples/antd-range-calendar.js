@@ -1319,6 +1319,7 @@ webpackJsonp([2],{
 	    var disabledTime = props.disabledTime;
 	    var gregorianCalendarLocale = props.gregorianCalendarLocale;
 	    var selectedValue = props.selectedValue;
+	    var showOk = props.showOk;
 	
 	    var timePicker = !showDateInput && props.timePicker || null;
 	    var disabledTimeConfig = disabledTime && timePicker ? (0, _utilIndex.getTimeConfig)(selectedValue, disabledTime) : null;
@@ -1329,7 +1330,7 @@ webpackJsonp([2],{
 	        nowEl = _react2['default'].createElement(_calendarTodayButton2['default'], _extends({}, props, { value: value }));
 	      }
 	      var okBtn = undefined;
-	      if (props.showOk) {
+	      if (showOk === true || showOk !== false && !!props.timePicker) {
 	        okBtn = _react2['default'].createElement(_calendarOkButton2['default'], props);
 	      }
 	      var footerBtn = undefined;
@@ -2697,7 +2698,12 @@ webpackJsonp([2],{
 	
 	        if (originalValue && value) {
 	          if (originalValue.getHourOfDay() !== value.getHourOfDay() || originalValue.getMinutes() !== value.getMinutes() || originalValue.getSeconds() !== value.getSeconds()) {
-	            onChange(value);
+	            // keep other fields for rc-calendar
+	            var changedValue = originalValue.clone();
+	            changedValue.setHourOfDay(value.getHourOfDay());
+	            changedValue.setMinutes(value.getMinutes());
+	            changedValue.setSeconds(value.getSeconds());
+	            onChange(changedValue);
 	          }
 	        } else if (originalValue !== value) {
 	          onChange(value);
@@ -3310,11 +3316,6 @@ webpackJsonp([2],{
 	  console.log(format(value[0]), format(value[1]));
 	}
 	
-	function onStandaloneOk(value) {
-	  console.log('onOk');
-	  console.log(format(value[0]), format(value[1]));
-	}
-	
 	var Test = _react2['default'].createClass({
 	  displayName: 'Test',
 	
@@ -3374,9 +3375,9 @@ webpackJsonp([2],{
 	      defaultValue: now,
 	      dateInputPlaceholder: ['开始日期', '结束日期'],
 	      locale: _rcCalendarSrcLocaleZh_CN2['default'],
+	      showOk: false,
 	      onChange: onStandaloneChange,
 	      onSelect: onStandaloneSelect,
-	      onOk: onStandaloneOk,
 	      disabledDate: disabledDate,
 	      timePicker: timePickerElement })
 	  ),
@@ -3490,13 +3491,14 @@ webpackJsonp([2],{
 	    defaultValue: _react.PropTypes.any,
 	    timePicker: _react.PropTypes.any,
 	    value: _react.PropTypes.any,
+	    showOk: _react.PropTypes.bool,
 	    selectedValue: _react.PropTypes.array,
 	    defaultSelectedValue: _react.PropTypes.array,
 	    onOk: _react.PropTypes.func,
 	    onChange: _react.PropTypes.func,
 	    onSelect: _react.PropTypes.func,
 	    onValueChange: _react.PropTypes.func,
-	    formatter: _react.PropTypes.object,
+	    formatter: _react.PropTypes.oneOfType([_react.PropTypes.object, _react.PropTypes.string]),
 	    onClear: _react.PropTypes.func
 	  },
 	
@@ -3636,6 +3638,8 @@ webpackJsonp([2],{
 	    var state = this.state;
 	    var prefixCls = props.prefixCls;
 	    var dateInputPlaceholder = props.dateInputPlaceholder;
+	    var timePicker = props.timePicker;
+	    var showOk = props.showOk;
 	
 	    var className = (_className = {}, _defineProperty(_className, props.className, !!props.className), _defineProperty(_className, prefixCls, 1), _defineProperty(_className, prefixCls + '-hidden', !props.visible), _defineProperty(_className, prefixCls + '-range', 1), _defineProperty(_className, prefixCls + '-week-number', props.showWeekNumber), _className);
 	    var classes = (0, _classnames2['default'])(className);
@@ -3663,7 +3667,8 @@ webpackJsonp([2],{
 	      { className: classes, style: props.style,
 	        tabIndex: '0' },
 	      _react2['default'].createElement('a', { className: prefixCls + '-clear-btn', role: 'button', title: '清除', onClick: this.clear }),
-	      _react2['default'].createElement(_rangeCalendarCalendarPart2['default'], _extends({}, props, newProps, { direction: 'left',
+	      _react2['default'].createElement(_rangeCalendarCalendarPart2['default'], _extends({}, props, newProps, {
+	        direction: 'left',
 	        formatter: this.getFormatter(),
 	        value: this.getStartValue(),
 	        placeholder: placeholder1,
@@ -3674,7 +3679,8 @@ webpackJsonp([2],{
 	        { className: prefixCls + '-range-middle' },
 	        '~'
 	      ),
-	      _react2['default'].createElement(_rangeCalendarCalendarPart2['default'], _extends({}, props, newProps, { direction: 'right',
+	      _react2['default'].createElement(_rangeCalendarCalendarPart2['default'], _extends({}, props, newProps, {
+	        direction: 'right',
 	        formatter: this.getFormatter(),
 	        placeholder: placeholder2,
 	        value: this.getEndValue(),
@@ -3683,12 +3689,14 @@ webpackJsonp([2],{
 	      _react2['default'].createElement(
 	        'div',
 	        { className: prefixCls + '-range-bottom' },
-	        _react2['default'].createElement(_calendarTodayButton2['default'], _extends({}, props, { value: state.value,
+	        _react2['default'].createElement(_calendarTodayButton2['default'], _extends({}, props, {
+	          value: state.value,
 	          onToday: this.onToday })),
-	        _react2['default'].createElement(_calendarOkButton2['default'], _extends({}, props, { value: state.value,
+	        showOk === true || showOk !== false && !!timePicker ? _react2['default'].createElement(_calendarOkButton2['default'], _extends({}, props, {
+	          value: state.value,
 	          onOk: this.onOk,
 	          okDisabled: state.selectedValue.length !== 2 || state.selectedValue.hovering
-	        }))
+	        })) : null
 	      )
 	    );
 	  }

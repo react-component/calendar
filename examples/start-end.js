@@ -147,6 +147,7 @@ webpackJsonp([5],{
 	    visible: _react.PropTypes.bool,
 	    onSelect: _react.PropTypes.func,
 	    onOk: _react.PropTypes.func,
+	    showOk: _react.PropTypes.bool,
 	    prefixCls: _react.PropTypes.string,
 	    onKeyDown: _react.PropTypes.func,
 	    timePicker: _react.PropTypes.element,
@@ -311,8 +312,8 @@ webpackJsonp([5],{
 	          showWeekNumber: props.showWeekNumber })
 	      ),
 	      _react2['default'].createElement(_calendarCalendarFooter2['default'], {
-	        locale: locale,
 	        showOk: props.showOk,
+	        locale: locale,
 	        prefixCls: prefixCls,
 	        showToday: props.showToday,
 	        disabledTime: disabledTime,
@@ -1651,6 +1652,7 @@ webpackJsonp([5],{
 	    var disabledTime = props.disabledTime;
 	    var gregorianCalendarLocale = props.gregorianCalendarLocale;
 	    var selectedValue = props.selectedValue;
+	    var showOk = props.showOk;
 	
 	    var timePicker = !showDateInput && props.timePicker || null;
 	    var disabledTimeConfig = disabledTime && timePicker ? (0, _utilIndex.getTimeConfig)(selectedValue, disabledTime) : null;
@@ -1661,7 +1663,7 @@ webpackJsonp([5],{
 	        nowEl = _react2['default'].createElement(_calendarTodayButton2['default'], _extends({}, props, { value: value }));
 	      }
 	      var okBtn = undefined;
-	      if (props.showOk) {
+	      if (showOk === true || showOk !== false && !!props.timePicker) {
 	        okBtn = _react2['default'].createElement(_calendarOkButton2['default'], props);
 	      }
 	      var footerBtn = undefined;
@@ -3173,7 +3175,12 @@ webpackJsonp([5],{
 	
 	        if (originalValue && value) {
 	          if (originalValue.getHourOfDay() !== value.getHourOfDay() || originalValue.getMinutes() !== value.getMinutes() || originalValue.getSeconds() !== value.getSeconds()) {
-	            onChange(value);
+	            // keep other fields for rc-calendar
+	            var changedValue = originalValue.clone();
+	            changedValue.setHourOfDay(value.getHourOfDay());
+	            changedValue.setMinutes(value.getMinutes());
+	            changedValue.setSeconds(value.getSeconds());
+	            onChange(changedValue);
 	          }
 	        } else if (originalValue !== value) {
 	          onChange(value);
@@ -3783,7 +3790,6 @@ webpackJsonp([5],{
 	    var calendar = _react2['default'].createElement(_rcCalendar2['default'], { locale: _rcCalendarSrcLocaleZh_CN2['default'],
 	      defaultValue: now,
 	      timePicker: props.showTime ? timePickerElement : null,
-	      showOk: true,
 	      disabledDate: props.disabledDate
 	    });
 	    return _react2['default'].createElement(

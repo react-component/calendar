@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>antd-range-calendar.js - example - rc-calendar@5.3.1</title>
+  <title>antd-range-calendar.js - example - rc-calendar@5.4.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -257,7 +257,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
 <div class="container">
   <div class="header">
-    <h1>rc-calendar@5.3.1</h1>
+    <h1>rc-calendar@5.4.0</h1>
 
     <p>React Calendar</p>
   </div>
@@ -311,11 +311,6 @@ now.setTime(<span class="hljs-built_in">Date</span>.now());
   <span class="hljs-built_in">console</span>.log(format(value[<span class="hljs-number">0</span>]), format(value[<span class="hljs-number">1</span>]));
 }
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onStandaloneOk</span><span class="hljs-params">(value)</span> </span>{
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onOk'</span>);
-  <span class="hljs-built_in">console</span>.log(format(value[<span class="hljs-number">0</span>]), format(value[<span class="hljs-number">1</span>]));
-}
-
 <span class="hljs-keyword">const</span> Test = React.createClass({
   getInitialState() {
     <span class="hljs-keyword">return</span> {
@@ -364,9 +359,9 @@ ReactDOM.render(
                      <span class="hljs-attribute">defaultValue</span>=<span class="hljs-value">{now}</span>
                      <span class="hljs-attribute">dateInputPlaceholder</span>=<span class="hljs-value">{['开始日期',</span> '结束日期']}
                      <span class="hljs-attribute">locale</span>=<span class="hljs-value">{CalendarLocale}</span>
+                     <span class="hljs-attribute">showOk</span>=<span class="hljs-value">{false}</span>
                      <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{onStandaloneChange}</span>
                      <span class="hljs-attribute">onSelect</span>=<span class="hljs-value">{onStandaloneSelect}</span>
-                     <span class="hljs-attribute">onOk</span>=<span class="hljs-value">{onStandaloneOk}</span>
                      <span class="hljs-attribute">disabledDate</span>=<span class="hljs-value">{disabledDate}</span>
                      <span class="hljs-attribute">timePicker</span>=<span class="hljs-value">{timePickerElement}</span>/&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>

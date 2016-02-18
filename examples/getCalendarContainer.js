@@ -147,6 +147,7 @@ webpackJsonp([4],{
 	    visible: _react.PropTypes.bool,
 	    onSelect: _react.PropTypes.func,
 	    onOk: _react.PropTypes.func,
+	    showOk: _react.PropTypes.bool,
 	    prefixCls: _react.PropTypes.string,
 	    onKeyDown: _react.PropTypes.func,
 	    timePicker: _react.PropTypes.element,
@@ -311,8 +312,8 @@ webpackJsonp([4],{
 	          showWeekNumber: props.showWeekNumber })
 	      ),
 	      _react2['default'].createElement(_calendarCalendarFooter2['default'], {
-	        locale: locale,
 	        showOk: props.showOk,
+	        locale: locale,
 	        prefixCls: prefixCls,
 	        showToday: props.showToday,
 	        disabledTime: disabledTime,
@@ -1651,6 +1652,7 @@ webpackJsonp([4],{
 	    var disabledTime = props.disabledTime;
 	    var gregorianCalendarLocale = props.gregorianCalendarLocale;
 	    var selectedValue = props.selectedValue;
+	    var showOk = props.showOk;
 	
 	    var timePicker = !showDateInput && props.timePicker || null;
 	    var disabledTimeConfig = disabledTime && timePicker ? (0, _utilIndex.getTimeConfig)(selectedValue, disabledTime) : null;
@@ -1661,7 +1663,7 @@ webpackJsonp([4],{
 	        nowEl = _react2['default'].createElement(_calendarTodayButton2['default'], _extends({}, props, { value: value }));
 	      }
 	      var okBtn = undefined;
-	      if (props.showOk) {
+	      if (showOk === true || showOk !== false && !!props.timePicker) {
 	        okBtn = _react2['default'].createElement(_calendarOkButton2['default'], props);
 	      }
 	      var footerBtn = undefined;

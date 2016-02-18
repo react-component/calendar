@@ -24628,6 +24628,7 @@
 	      style: {},
 	      visible: true,
 	      prefixCls: 'rc-calendar',
+	      formatter: 'yyyy-MM-dd',
 	      className: '',
 	      onSelect: noop,
 	      onChange: noop,
@@ -24642,18 +24643,12 @@
 	  getFormatter: function getFormatter() {
 	    var formatter = this.props.formatter;
 	    var locale = this.props.locale;
-	    if (formatter) {
-	      if (formatter === this.lastFormatter) {
-	        return this.normalFormatter;
-	      }
-	      this.normalFormatter = (0, _utilIndex.getFormatter)(formatter, locale);
-	      this.lastFormatter = formatter;
+	    if (this.normalFormatter && formatter === this.lastFormatter) {
 	      return this.normalFormatter;
 	    }
-	    if (!this.showDateFormatter) {
-	      this.showDateFormatter = (0, _utilIndex.getFormatter)('yyyy-MM-dd', locale);
-	    }
-	    return this.showDateFormatter;
+	    this.normalFormatter = (0, _utilIndex.getFormatter)(formatter, locale);
+	    this.lastFormatter = formatter;
+	    return this.normalFormatter;
 	  }
 	};
 	module.exports = exports['default'];

@@ -163,7 +163,6 @@ webpackJsonp([0],{
 	      disabledTime: state.showTime ? disabledTime : null,
 	      timePicker: state.showTime ? timePickerElement : null,
 	      defaultValue: this.props.defaultCalendarValue,
-	      showOk: true,
 	      showDateInput: state.showDateInput,
 	      disabledDate: disabledDate
 	    });
@@ -257,9 +256,9 @@ webpackJsonp([0],{
 	      _react2['default'].createElement(_rcCalendar2['default'], { showWeekNumber: false,
 	        locale: _rcCalendarSrcLocaleZh_CN2['default'],
 	        defaultValue: now,
-	        showOk: true,
 	        disabledTime: disabledTime,
 	        showToday: true,
+	        showOk: false,
 	        timePicker: timePickerElement,
 	        onChange: onStandaloneChange,
 	        disabledDate: disabledDate,
@@ -420,6 +419,7 @@ webpackJsonp([0],{
 	    visible: _react.PropTypes.bool,
 	    onSelect: _react.PropTypes.func,
 	    onOk: _react.PropTypes.func,
+	    showOk: _react.PropTypes.bool,
 	    prefixCls: _react.PropTypes.string,
 	    onKeyDown: _react.PropTypes.func,
 	    timePicker: _react.PropTypes.element,
@@ -584,8 +584,8 @@ webpackJsonp([0],{
 	          showWeekNumber: props.showWeekNumber })
 	      ),
 	      _react2['default'].createElement(_calendarCalendarFooter2['default'], {
-	        locale: locale,
 	        showOk: props.showOk,
+	        locale: locale,
 	        prefixCls: prefixCls,
 	        showToday: props.showToday,
 	        disabledTime: disabledTime,
@@ -1924,6 +1924,7 @@ webpackJsonp([0],{
 	    var disabledTime = props.disabledTime;
 	    var gregorianCalendarLocale = props.gregorianCalendarLocale;
 	    var selectedValue = props.selectedValue;
+	    var showOk = props.showOk;
 	
 	    var timePicker = !showDateInput && props.timePicker || null;
 	    var disabledTimeConfig = disabledTime && timePicker ? (0, _utilIndex.getTimeConfig)(selectedValue, disabledTime) : null;
@@ -1934,7 +1935,7 @@ webpackJsonp([0],{
 	        nowEl = _react2['default'].createElement(_calendarTodayButton2['default'], _extends({}, props, { value: value }));
 	      }
 	      var okBtn = undefined;
-	      if (props.showOk) {
+	      if (showOk === true || showOk !== false && !!props.timePicker) {
 	        okBtn = _react2['default'].createElement(_calendarOkButton2['default'], props);
 	      }
 	      var footerBtn = undefined;
@@ -3446,7 +3447,12 @@ webpackJsonp([0],{
 	
 	        if (originalValue && value) {
 	          if (originalValue.getHourOfDay() !== value.getHourOfDay() || originalValue.getMinutes() !== value.getMinutes() || originalValue.getSeconds() !== value.getSeconds()) {
-	            onChange(value);
+	            // keep other fields for rc-calendar
+	            var changedValue = originalValue.clone();
+	            changedValue.setHourOfDay(value.getHourOfDay());
+	            changedValue.setMinutes(value.getMinutes());
+	            changedValue.setSeconds(value.getSeconds());
+	            onChange(changedValue);
 	          }
 	        } else if (originalValue !== value) {
 	          onChange(value);
