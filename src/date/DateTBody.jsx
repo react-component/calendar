@@ -179,6 +179,10 @@ const DateTBody = React.createClass({
         if (dateRender) {
           dateHtml = dateRender(current, value);
         } else {
+          let dateContent;
+          if(props.contentRender) {
+            dateContent = props.contentRender(current,value);
+          }         
           dateHtml = (
             <span
               key={getIdFromDate(current)}
@@ -187,6 +191,7 @@ const DateTBody = React.createClass({
               aria-disabled={disabled}
             >
               {current.getDayOfMonth()}
+              {dateContent}
             </span>);
         }
 

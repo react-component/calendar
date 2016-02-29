@@ -92,6 +92,7 @@ const FullCalendar = React.createClass({
     const table = type === 'date' ? (
       <DateTable
         dateRender={props.dateCellRender}
+        contentRender={props.dateCellContentRender}
         locale={locale}
         prefixCls={prefixCls}
         onSelect={this.onSelect}
@@ -100,6 +101,7 @@ const FullCalendar = React.createClass({
     ) : (
       <MonthTable
         cellRender={props.monthCellRender}
+        contentRender={props.monthCellContentRender}
         locale={locale}
         onSelect={this.onMonthSelect}
         prefixCls={`${prefixCls}-month-panel`}
