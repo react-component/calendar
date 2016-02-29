@@ -91,13 +91,17 @@ class MonthTable extends Component {
           cellEl = props.cellRender(currentValue, locale);
         } else {
           let cellContent;
-          if(props.contentRender) {
+          if (props.contentRender) {
+            const currentValue = value.clone();
+            currentValue.rollSetMonth(monthData.value);
             cellContent = props.contentRender(currentValue, locale);
           }
-          cellEl = <div>
+          cellEl = (
+                   <div>
                     <a className={`${prefixCls}-month`}>{monthData.content}</a>
                     {cellContent}
-                   </div>;
+                   </div>
+                   );
         }
         return (
           <td

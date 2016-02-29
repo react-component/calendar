@@ -180,9 +180,9 @@ const DateTBody = React.createClass({
           dateHtml = dateRender(current, value);
         } else {
           let dateContent;
-          if(props.contentRender) {
-            dateContent = props.contentRender(current,value);
-          }         
+          if (props.contentRender) {
+            dateContent = props.contentRender(current, value);
+          }
           dateHtml = (
             <span
               key={getIdFromDate(current)}
