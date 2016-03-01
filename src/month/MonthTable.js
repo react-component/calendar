@@ -96,12 +96,7 @@ class MonthTable extends Component {
             currentValue.rollSetMonth(monthData.value);
             cellContent = (
                    <div className={`${prefixCls}-month`}>
-                    <a className={`${prefixCls}-month-value`}>
-                      {monthData.content}
-                    </a>
-                    <div className={`${prefixCls}-month-content`}>
                       {props.contentRender(currentValue, locale)}
-                    </div>
                    </div>
                    );
           }

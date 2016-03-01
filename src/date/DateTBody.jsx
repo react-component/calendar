@@ -196,12 +196,7 @@ const DateTBody = React.createClass({
                 aria-selected={selected}
                 aria-disabled={disabled}
               >
-                <span className={`${prefixCls}-date-value`}>
-                  {current.getDayOfMonth()}
-                </span>
-                <div className={`${prefixCls}-date-content`}>
                   {props.contentRender(current, value)}
-                </div>
               </div>);
           }
           dateHtml = dateContent;
