@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import DateConstants from './DateConstants';
 import { getTitleString } from '../util/';
 
@@ -38,6 +38,16 @@ function handleCellMouseEnter(current) {
 }
 
 const DateTBody = React.createClass({
+  propTypes: {
+    contentRender: PropTypes.func,
+    dateRender: PropTypes.func,
+    disabledDate: PropTypes.func,
+    prefixCls: PropTypes.string,
+    selectedValue: PropTypes.object,
+    value: PropTypes.object,
+    showWeekNumber: PropTypes.bool,
+  },
+
   getDefaultProps() {
     return {
       onDayHover: noop,
@@ -46,20 +56,16 @@ const DateTBody = React.createClass({
 
   render() {
     const props = this.props;
+    const { contentRender, prefixCls, selectedValue, value,
+      showWeekNumber, dateRender, disabledDate } = props;
     let iIndex;
     let jIndex;
     let current;
     const dateTable = [];
-    const showWeekNumber = props.showWeekNumber;
-    const value = props.value;
-    const selectedValue = props.selectedValue;
     const today = value.clone();
-    const prefixCls = props.prefixCls;
     const cellClass = `${prefixCls}-cell`;
     const weekNumberCellClass = `${prefixCls}-week-number-cell`;
     const dateClass = `${prefixCls}-date`;
-    const dateRender = props.dateRender;
-    const disabledDate = props.disabledDate;
     const todayClass = `${prefixCls}-today`;
     const selectedClass = `${prefixCls}-selected-day`;
     const inRangeClass = `${prefixCls}-in-range-cell`;
@@ -179,27 +185,16 @@ const DateTBody = React.createClass({
         if (dateRender) {
           dateHtml = dateRender(current, value);
         } else {
-          let dateContent = (
-              <span
-                key={getIdFromDate(current)}
-                className={dateClass}
-                aria-selected={selected}
-                aria-disabled={disabled}
-              >
-                {current.getDayOfMonth()}
-              </span>);
-          if (props.contentRender) {
-            dateContent = (
-              <div
-                key={getIdFromDate(current)}
-                className={dateClass}
-                aria-selected={selected}
-                aria-disabled={disabled}
-              >
-                  {props.contentRender(current, value)}
-              </div>);
-          }
-          dateHtml = dateContent;
+          const content = contentRender ? contentRender(current, value) : current.getDayOfMonth();
+          dateHtml = (
+            <div
+              key={getIdFromDate(current)}
+              className={dateClass}
+              aria-selected={selected}
+              aria-disabled={disabled}
+            >
+              {content}
+            </div>);
         }
 
         dateCells.push(

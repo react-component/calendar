@@ -1,6 +1,10 @@
 # History
 ----
 
+## 5.5.0 / 2016-03-22
+
+- support monthCellContentRender/dateCellContentRender
+
 ## 5.3.0 / 2016-01-18
 
 - support clear for RangeCalendar

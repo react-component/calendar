@@ -68,7 +68,7 @@ class MonthTable extends Component {
     today.setTime(Date.now());
     const months = this.getMonths();
     const currentMonth = value.getMonth();
-    const { prefixCls, locale } = props;
+    const { prefixCls, locale, contentRender, cellRender } = props;
     const monthsEls = months.map((month, index) => {
       const tds = month.map(monthData => {
         let disabled = false;
@@ -85,22 +85,24 @@ class MonthTable extends Component {
           monthData.value === today.getMonth(),
         };
         let cellEl;
-        if (props.cellRender) {
+        if (cellRender) {
           const currentValue = value.clone();
           currentValue.rollSetMonth(monthData.value);
-          cellEl = props.cellRender(currentValue, locale);
+          cellEl = cellRender(currentValue, locale);
         } else {
-          let cellContent = <a className={`${prefixCls}-month`}>{monthData.content}</a>;
-          if (props.contentRender) {
+          let content;
+          if (contentRender) {
             const currentValue = value.clone();
             currentValue.rollSetMonth(monthData.value);
-            cellContent = (
-                   <div className={`${prefixCls}-month`}>
-                      {props.contentRender(currentValue, locale)}
-                   </div>
-                   );
+            content = contentRender(currentValue, locale);
+          } else {
+            content = monthData.content;
           }
-          cellEl = cellContent;
+          cellEl = (
+            <div className={`${prefixCls}-month`}>
+              {content}
+            </div>
+          );
         }
         return (
           <td
