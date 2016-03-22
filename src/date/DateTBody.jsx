@@ -179,15 +179,27 @@ const DateTBody = React.createClass({
         if (dateRender) {
           dateHtml = dateRender(current, value);
         } else {
-          dateHtml = (
-            <span
-              key={getIdFromDate(current)}
-              className={dateClass}
-              aria-selected={selected}
-              aria-disabled={disabled}
-            >
-              {current.getDayOfMonth()}
-            </span>);
+          let dateContent = (
+              <span
+                key={getIdFromDate(current)}
+                className={dateClass}
+                aria-selected={selected}
+                aria-disabled={disabled}
+              >
+                {current.getDayOfMonth()}
+              </span>);
+          if (props.contentRender) {
+            dateContent = (
+              <div
+                key={getIdFromDate(current)}
+                className={dateClass}
+                aria-selected={selected}
+                aria-disabled={disabled}
+              >
+                  {props.contentRender(current, value)}
+              </div>);
+          }
+          dateHtml = dateContent;
         }
 
         dateCells.push(
