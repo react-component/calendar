@@ -31,7 +31,7 @@ webpackJsonp([3],{
 	
 	var _DateTBody2 = _interopRequireDefault(_DateTBody);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -53,19 +53,19 @@ webpackJsonp([3],{
 	    value: function render() {
 	      var props = this.props;
 	      var prefixCls = props.prefixCls;
-	      return _react2.default.createElement(
+	      return _react2["default"].createElement(
 	        'table',
 	        { className: prefixCls + '-table', cellSpacing: '0', role: 'grid' },
-	        _react2.default.createElement(_DateTHead2.default, props),
-	        _react2.default.createElement(_DateTBody2.default, props)
+	        _react2["default"].createElement(_DateTHead2["default"], props),
+	        _react2["default"].createElement(_DateTBody2["default"], props)
 	      );
 	    }
 	  }]);
 	
 	  return DateTable;
-	}(_react2.default.Component);
+	}(_react2["default"].Component);
 	
-	exports.default = DateTable;
+	exports["default"] = DateTable;
 	module.exports = exports['default'];
 
 /***/ },
@@ -89,7 +89,7 @@ webpackJsonp([3],{
 	
 	var _DateConstants2 = _interopRequireDefault(_DateConstants);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -118,20 +118,20 @@ webpackJsonp([3],{
 	      var firstDayOfWeek = value.getFirstDayOfWeek();
 	      var showWeekNumberEl = undefined;
 	
-	      for (var dateColIndex = 0; dateColIndex < _DateConstants2.default.DATE_COL_COUNT; dateColIndex++) {
-	        var index = (firstDayOfWeek + dateColIndex) % _DateConstants2.default.DATE_COL_COUNT;
+	      for (var dateColIndex = 0; dateColIndex < _DateConstants2["default"].DATE_COL_COUNT; dateColIndex++) {
+	        var index = (firstDayOfWeek + dateColIndex) % _DateConstants2["default"].DATE_COL_COUNT;
 	        veryShortWeekdays[dateColIndex] = locale.format.veryShortWeekdays[index];
 	        weekDays[dateColIndex] = locale.format.weekdays[index];
 	      }
 	
 	      if (props.showWeekNumber) {
-	        showWeekNumberEl = _react2.default.createElement(
+	        showWeekNumberEl = _react2["default"].createElement(
 	          'th',
 	          {
 	            role: 'columnheader',
 	            className: prefixCls + '-column-header ' + prefixCls + '-week-number-header'
 	          },
-	          _react2.default.createElement(
+	          _react2["default"].createElement(
 	            'span',
 	            { className: prefixCls + '-column-header-inner' },
 	            'x'
@@ -139,7 +139,7 @@ webpackJsonp([3],{
 	        );
 	      }
 	      var weekDaysEls = weekDays.map(function (day, xindex) {
-	        return _react2.default.createElement(
+	        return _react2["default"].createElement(
 	          'th',
 	          {
 	            key: xindex,
@@ -147,17 +147,17 @@ webpackJsonp([3],{
 	            title: day,
 	            className: prefixCls + '-column-header'
 	          },
-	          _react2.default.createElement(
+	          _react2["default"].createElement(
 	            'span',
 	            { className: prefixCls + '-column-header-inner' },
 	            veryShortWeekdays[xindex]
 	          )
 	        );
 	      });
-	      return _react2.default.createElement(
+	      return _react2["default"].createElement(
 	        'thead',
 	        null,
-	        _react2.default.createElement(
+	        _react2["default"].createElement(
 	          'tr',
 	          { role: 'row' },
 	          showWeekNumberEl,
@@ -168,9 +168,9 @@ webpackJsonp([3],{
 	  }]);
 	
 	  return DateTHead;
-	}(_react2.default.Component);
+	}(_react2["default"].Component);
 	
-	exports.default = DateTHead;
+	exports["default"] = DateTHead;
 	module.exports = exports['default'];
 
 /***/ },
@@ -183,7 +183,7 @@ webpackJsonp([3],{
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.default = {
+	exports["default"] = {
 	  DATE_ROW_COUNT: 6,
 	  DATE_COL_COUNT: 7
 	};
@@ -210,7 +210,7 @@ webpackJsonp([3],{
 	
 	var _util = __webpack_require__(194);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	function isSameDay(one, two) {
 	  return one && two && one.compareToDay(two) === 0;
@@ -244,8 +244,19 @@ webpackJsonp([3],{
 	  this.props.onDayHover(current);
 	}
 	
-	var DateTBody = _react2.default.createClass({
+	var DateTBody = _react2["default"].createClass({
 	  displayName: 'DateTBody',
+	
+	  propTypes: {
+	    contentRender: _react.PropTypes.func,
+	    dateRender: _react.PropTypes.func,
+	    disabledDate: _react.PropTypes.func,
+	    prefixCls: _react.PropTypes.string,
+	    selectedValue: _react.PropTypes.object,
+	    value: _react.PropTypes.object,
+	    showWeekNumber: _react.PropTypes.bool
+	  },
+	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
 	      onDayHover: noop
@@ -253,20 +264,22 @@ webpackJsonp([3],{
 	  },
 	  render: function render() {
 	    var props = this.props;
+	    var contentRender = props.contentRender;
+	    var prefixCls = props.prefixCls;
+	    var selectedValue = props.selectedValue;
+	    var value = props.value;
+	    var showWeekNumber = props.showWeekNumber;
+	    var dateRender = props.dateRender;
+	    var disabledDate = props.disabledDate;
+	
 	    var iIndex = undefined;
 	    var jIndex = undefined;
 	    var current = undefined;
 	    var dateTable = [];
-	    var showWeekNumber = props.showWeekNumber;
-	    var value = props.value;
-	    var selectedValue = props.selectedValue;
 	    var today = value.clone();
-	    var prefixCls = props.prefixCls;
 	    var cellClass = prefixCls + '-cell';
 	    var weekNumberCellClass = prefixCls + '-week-number-cell';
 	    var dateClass = prefixCls + '-date';
-	    var dateRender = props.dateRender;
-	    var disabledDate = props.disabledDate;
 	    var todayClass = prefixCls + '-today';
 	    var selectedClass = prefixCls + '-selected-day';
 	    var inRangeClass = prefixCls + '-in-range-cell';
@@ -284,8 +297,8 @@ webpackJsonp([3],{
 	    var lastMonth1 = month1.clone();
 	    lastMonth1.addDayOfMonth(0 - lastMonthDiffDay);
 	    var passed = 0;
-	    for (iIndex = 0; iIndex < _DateConstants2.default.DATE_ROW_COUNT; iIndex++) {
-	      for (jIndex = 0; jIndex < _DateConstants2.default.DATE_COL_COUNT; jIndex++) {
+	    for (iIndex = 0; iIndex < _DateConstants2["default"].DATE_ROW_COUNT; iIndex++) {
+	      for (jIndex = 0; jIndex < _DateConstants2["default"].DATE_COL_COUNT; jIndex++) {
 	        current = lastMonth1;
 	        if (passed) {
 	          current = current.clone();
@@ -297,11 +310,11 @@ webpackJsonp([3],{
 	    }
 	    var tableHtml = [];
 	    passed = 0;
-	    for (iIndex = 0; iIndex < _DateConstants2.default.DATE_ROW_COUNT; iIndex++) {
+	    for (iIndex = 0; iIndex < _DateConstants2["default"].DATE_ROW_COUNT; iIndex++) {
 	      var weekNumberCell = undefined;
 	      var dateCells = [];
 	      if (showWeekNumber) {
-	        weekNumberCell = _react2.default.createElement(
+	        weekNumberCell = _react2["default"].createElement(
 	          'td',
 	          {
 	            key: dateTable[passed].getWeekOfYear(),
@@ -311,11 +324,11 @@ webpackJsonp([3],{
 	          dateTable[passed].getWeekOfYear()
 	        );
 	      }
-	      for (jIndex = 0; jIndex < _DateConstants2.default.DATE_COL_COUNT; jIndex++) {
+	      for (jIndex = 0; jIndex < _DateConstants2["default"].DATE_COL_COUNT; jIndex++) {
 	        var next = null;
 	        var last = null;
 	        current = dateTable[passed];
-	        if (jIndex < _DateConstants2.default.DATE_COL_COUNT - 1) {
+	        if (jIndex < _DateConstants2["default"].DATE_COL_COUNT - 1) {
 	          next = dateTable[passed + 1];
 	        }
 	        if (jIndex > 0) {
@@ -385,19 +398,20 @@ webpackJsonp([3],{
 	        if (dateRender) {
 	          dateHtml = dateRender(current, value);
 	        } else {
-	          dateHtml = _react2.default.createElement(
-	            'span',
+	          var content = contentRender ? contentRender(current, value) : current.getDayOfMonth();
+	          dateHtml = _react2["default"].createElement(
+	            'div',
 	            {
 	              key: getIdFromDate(current),
 	              className: dateClass,
 	              'aria-selected': selected,
 	              'aria-disabled': disabled
 	            },
-	            current.getDayOfMonth()
+	            content
 	          );
 	        }
 	
-	        dateCells.push(_react2.default.createElement(
+	        dateCells.push(_react2["default"].createElement(
 	          'td',
 	          {
 	            key: passed,
@@ -411,7 +425,7 @@ webpackJsonp([3],{
 	
 	        passed++;
 	      }
-	      tableHtml.push(_react2.default.createElement(
+	      tableHtml.push(_react2["default"].createElement(
 	        'tr',
 	        {
 	          key: iIndex,
@@ -421,7 +435,7 @@ webpackJsonp([3],{
 	        dateCells
 	      ));
 	    }
-	    return _react2.default.createElement(
+	    return _react2["default"].createElement(
 	      'tbody',
 	      { className: prefixCls + 'tbody' },
 	      tableHtml
@@ -429,7 +443,7 @@ webpackJsonp([3],{
 	  }
 	});
 	
-	exports.default = DateTBody;
+	exports["default"] = DateTBody;
 	module.exports = exports['default'];
 
 /***/ },
@@ -457,14 +471,14 @@ webpackJsonp([3],{
 	
 	var _index = __webpack_require__(194);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
 	function noop() {}
 	
 	function getNow() {
-	  var value = new _gregorianCalendar2.default();
+	  var value = new _gregorianCalendar2["default"]();
 	  value.setTime(Date.now());
 	  return value;
 	}
@@ -530,10 +544,10 @@ webpackJsonp([3],{
 	
 	    var className = (_className = {}, _defineProperty(_className, prefixCls, 1), _defineProperty(_className, prefixCls + '-hidden', !props.visible), _defineProperty(_className, props.className, !!props.className), _defineProperty(_className, newProps.className, !!newProps.className), _className);
 	
-	    return _react2.default.createElement(
+	    return _react2["default"].createElement(
 	      'div',
 	      {
-	        className: '' + (0, _classnames2.default)(className),
+	        className: '' + (0, _classnames2["default"])(className),
 	        style: this.props.style,
 	        tabIndex: '0', onKeyDown: this.onKeyDown
 	      },
@@ -568,7 +582,7 @@ webpackJsonp([3],{
 	  }
 	};
 	
-	exports.default = CalendarMixin;
+	exports["default"] = CalendarMixin;
 	module.exports = exports['default'];
 
 /***/ },
@@ -586,9 +600,9 @@ webpackJsonp([3],{
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
-	exports.default = {
+	exports["default"] = {
 	  today: '今天',
 	  now: '此刻',
 	  ok: '确定',
@@ -609,7 +623,7 @@ webpackJsonp([3],{
 	  nextDecade: '下一年代',
 	  previousCentury: '上一世纪',
 	  nextCentury: '下一世纪',
-	  format: _zh_CN2.default
+	  format: _zh_CN2["default"]
 	};
 	module.exports = exports['default'];
 
@@ -668,17 +682,17 @@ webpackJsonp([3],{
 	
 	var _rcSelect2 = _interopRequireDefault(_rcSelect);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	/* eslint react/no-multi-comp:0, no-console:0 */
 	
-	var dateFormatter = new _gregorianCalendarFormat2.default('yyyy-MM-dd');
+	var dateFormatter = new _gregorianCalendarFormat2["default"]('yyyy-MM-dd');
 	
 	function onSelect(value) {
 	  console.log('select', dateFormatter.format(value));
 	}
 	
-	var App = _react2.default.createClass({
+	var App = _react2["default"].createClass({
 	  displayName: 'App',
 	  getInitialState: function getInitialState() {
 	    return {
@@ -691,30 +705,30 @@ webpackJsonp([3],{
 	    });
 	  },
 	  render: function render() {
-	    return _react2.default.createElement(
+	    return _react2["default"].createElement(
 	      'div',
 	      { style: { zIndex: 1000, position: 'relative' } },
-	      _react2.default.createElement(_FullCalendar2.default, {
+	      _react2["default"].createElement(_FullCalendar2["default"], {
 	        style: { margin: 10 },
-	        Select: _rcSelect2.default,
+	        Select: _rcSelect2["default"],
 	        fullscreen: false,
 	        onSelect: onSelect,
-	        locale: _zh_CN2.default
+	        locale: _zh_CN2["default"]
 	      }),
-	      _react2.default.createElement(_FullCalendar2.default, {
+	      _react2["default"].createElement(_FullCalendar2["default"], {
 	        style: { margin: 10 },
-	        Select: _rcSelect2.default,
+	        Select: _rcSelect2["default"],
 	        fullscreen: true,
 	        onSelect: onSelect,
 	        type: this.state.type,
 	        onTypeChange: this.onTypeChange,
-	        locale: _zh_CN2.default
+	        locale: _zh_CN2["default"]
 	      })
 	    );
 	  }
 	});
 	
-	_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('__react-content'));
+	_reactDom2["default"].render(_react2["default"].createElement(App, null), document.getElementById('__react-content'));
 
 /***/ },
 
@@ -753,9 +767,9 @@ webpackJsonp([3],{
 	
 	var _CalendarHeader2 = _interopRequireDefault(_CalendarHeader);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
-	var FullCalendar = _react2.default.createClass({
+	var FullCalendar = _react2["default"].createClass({
 	  displayName: 'FullCalendar',
 	
 	  propTypes: {
@@ -774,7 +788,7 @@ webpackJsonp([3],{
 	    headerRender: _react.PropTypes.func,
 	    showHeader: _react.PropTypes.bool
 	  },
-	  mixins: [_CommonMixin2.default, _CalendarMixin2.default],
+	  mixins: [_CommonMixin2["default"], _CalendarMixin2["default"]],
 	  getDefaultProps: function getDefaultProps() {
 	    return {
 	      defaultType: 'date',
@@ -833,8 +847,8 @@ webpackJsonp([3],{
 	      if (headerRender) {
 	        header = headerRender(value, type, locale);
 	      } else {
-	        var TheHeader = headerComponent || _CalendarHeader2.default;
-	        header = _react2.default.createElement(TheHeader, _extends({
+	        var TheHeader = headerComponent || _CalendarHeader2["default"];
+	        header = _react2["default"].createElement(TheHeader, _extends({
 	          key: 'calendar-header'
 	        }, props, {
 	          prefixCls: prefixCls + '-full',
@@ -846,21 +860,23 @@ webpackJsonp([3],{
 	      }
 	    }
 	
-	    var table = type === 'date' ? _react2.default.createElement(_DateTable2.default, {
+	    var table = type === 'date' ? _react2["default"].createElement(_DateTable2["default"], {
 	      dateRender: props.dateCellRender,
+	      contentRender: props.dateCellContentRender,
 	      locale: locale,
 	      prefixCls: prefixCls,
 	      onSelect: this.onSelect,
 	      value: value
-	    }) : _react2.default.createElement(_MonthTable2.default, {
+	    }) : _react2["default"].createElement(_MonthTable2["default"], {
 	      cellRender: props.monthCellRender,
+	      contentRender: props.monthCellContentRender,
 	      locale: locale,
 	      onSelect: this.onMonthSelect,
 	      prefixCls: prefixCls + '-month-panel',
 	      value: value
 	    });
 	
-	    var children = [header, _react2.default.createElement(
+	    var children = [header, _react2["default"].createElement(
 	      'div',
 	      { key: 'calendar-body', className: prefixCls + '-calendar-body' },
 	      table
@@ -879,7 +895,7 @@ webpackJsonp([3],{
 	  }
 	});
 	
-	exports.default = FullCalendar;
+	exports["default"] = FullCalendar;
 	module.exports = exports['default'];
 
 /***/ },
@@ -899,7 +915,7 @@ webpackJsonp([3],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -948,13 +964,13 @@ webpackJsonp([3],{
 	
 	      var options = [];
 	      for (var index = start; index < end; index++) {
-	        options.push(_react2.default.createElement(
+	        options.push(_react2["default"].createElement(
 	          Select.Option,
 	          { key: '' + index },
 	          index + suffix
 	        ));
 	      }
-	      return _react2.default.createElement(
+	      return _react2["default"].createElement(
 	        Select,
 	        {
 	          className: prefixCls + '-header-year-select',
@@ -979,14 +995,14 @@ webpackJsonp([3],{
 	      var Select = props.Select;
 	
 	      for (var index = 0; index < 12; index++) {
-	        options.push(_react2.default.createElement(
+	        options.push(_react2["default"].createElement(
 	          Select.Option,
 	          { key: '' + index },
 	          months[index]
 	        ));
 	      }
 	
-	      return _react2.default.createElement(
+	      return _react2["default"].createElement(
 	        Select,
 	        {
 	          className: prefixCls + '-header-month-select',
@@ -1026,14 +1042,14 @@ webpackJsonp([3],{
 	      var yearSelect = this.getYearSelectElement(year);
 	      var monthSelect = type === 'month' ? null : this.getMonthSelectElement(month);
 	      var switchCls = prefixCls + '-header-switcher';
-	      var typeSwitcher = showTypeSwitch ? _react2.default.createElement(
+	      var typeSwitcher = showTypeSwitch ? _react2["default"].createElement(
 	        'span',
 	        { className: switchCls },
-	        type === 'date' ? _react2.default.createElement(
+	        type === 'date' ? _react2["default"].createElement(
 	          'span',
 	          { className: switchCls + '-focus' },
 	          locale.month
-	        ) : _react2.default.createElement(
+	        ) : _react2["default"].createElement(
 	          'span',
 	          {
 	            onClick: this.changeTypeToDate.bind(this),
@@ -1041,11 +1057,11 @@ webpackJsonp([3],{
 	          },
 	          locale.month
 	        ),
-	        type === 'month' ? _react2.default.createElement(
+	        type === 'month' ? _react2["default"].createElement(
 	          'span',
 	          { className: switchCls + '-focus' },
 	          locale.year
-	        ) : _react2.default.createElement(
+	        ) : _react2["default"].createElement(
 	          'span',
 	          {
 	            onClick: this.changeTypeToMonth.bind(this),
@@ -1055,7 +1071,7 @@ webpackJsonp([3],{
 	        )
 	      ) : null;
 	
-	      return _react2.default.createElement(
+	      return _react2["default"].createElement(
 	        'div',
 	        { className: prefixCls + '-header' },
 	        typeSwitcher,
@@ -1089,7 +1105,7 @@ webpackJsonp([3],{
 	  onTypeChange: noop
 	};
 	
-	exports.default = CalendarHeader;
+	exports["default"] = CalendarHeader;
 	module.exports = exports['default'];
 
 /***/ },

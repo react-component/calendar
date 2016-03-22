@@ -150,6 +150,7 @@
 .rc-select-enabled .rc-select-selection__choice:hover .rc-select-selection__choice__remove {
   opacity: 1;
   -webkit-transform: scale(1);
+      -ms-transform: scale(1);
           transform: scale(1);
 }
 .rc-select-enabled .rc-select-selection__choice:hover .rc-select-selection__choice__content {
@@ -165,13 +166,13 @@
   position: relative;
   overflow: hidden;
   -webkit-transition: padding 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045), width 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045);
-          transition: padding 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045), width 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+  transition: padding 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045), width 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045);
 }
 .rc-select .rc-select-selection__choice__content {
   margin-left: 0;
   margin-right: 0;
   -webkit-transition: margin 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-          transition: margin 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: margin 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 .rc-select .rc-select-selection__choice-zoom-enter,
 .rc-select .rc-select-selection__choice-zoom-appear,
@@ -181,6 +182,7 @@
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   -webkit-transform-origin: 0 0;
+      -ms-transform-origin: 0 0;
           transform-origin: 0 0;
   opacity: 0;
   -webkit-animation-play-state: paused;
@@ -252,12 +254,14 @@
   position: absolute;
   opacity: 0;
   -webkit-transform: scale(0);
+      -ms-transform: scale(0);
           transform: scale(0);
   top: 0;
   right: 2px;
+  transition: opacity .3s, -webkit-transform .3s;
   -webkit-transition: opacity .3s, -webkit-transform .3s;
-          transition: opacity .3s, -webkit-transform .3s;
   transition: opacity .3s, transform .3s;
+  transition: opacity .3s, transform .3s, -webkit-transform .3s;
 }
 .rc-select .rc-select-selection__choice__remove:before {
   content: '×';
@@ -339,6 +343,7 @@ li.rc-select-dropdown-menu-item-divider {
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   -webkit-transform-origin: 0 0;
+      -ms-transform-origin: 0 0;
           transform-origin: 0 0;
   opacity: 0;
   -webkit-animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
@@ -352,6 +357,7 @@ li.rc-select-dropdown-menu-item-divider {
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   -webkit-transform-origin: 0 0;
+      -ms-transform-origin: 0 0;
           transform-origin: 0 0;
   opacity: 1;
   -webkit-animation-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.34);

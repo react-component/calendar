@@ -68,7 +68,7 @@
   line-height: 1;
   width: 20px;
   -webkit-transition: color 0.3s ease;
-          transition: color 0.3s ease;
+  transition: color 0.3s ease;
 }
 .rc-calendar-clear-btn:hover:after {
   color: #666;

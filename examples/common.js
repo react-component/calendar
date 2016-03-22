@@ -23541,7 +23541,7 @@
 	
 	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	var defaultDisabledTime = {
 	  disabledHours: function disabledHours() {
@@ -23572,7 +23572,7 @@
 	
 	function getFormatter(format, locale) {
 	  if (typeof format === 'string') {
-	    return new _gregorianCalendarFormat2.default(format, locale.format);
+	    return new _gregorianCalendarFormat2["default"](format, locale.format);
 	  }
 	  return format;
 	}
@@ -24581,7 +24581,7 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
@@ -24670,6 +24670,8 @@
 	      var currentMonth = value.getMonth();
 	      var prefixCls = props.prefixCls;
 	      var locale = props.locale;
+	      var contentRender = props.contentRender;
+	      var cellRender = props.cellRender;
 	
 	      var monthsEls = months.map(function (month, index) {
 	        var tds = month.map(function (monthData) {
@@ -24683,40 +24685,48 @@
 	          }
 	          var classNameMap = (_classNameMap = {}, _defineProperty(_classNameMap, prefixCls + '-cell', 1), _defineProperty(_classNameMap, prefixCls + '-cell-disabled', disabled), _defineProperty(_classNameMap, prefixCls + '-selected-cell', monthData.value === currentMonth), _defineProperty(_classNameMap, prefixCls + '-current-cell', today.getYear() === value.getYear() && monthData.value === today.getMonth()), _classNameMap);
 	          var cellEl = undefined;
-	          if (props.cellRender) {
+	          if (cellRender) {
 	            var currentValue = value.clone();
 	            currentValue.rollSetMonth(monthData.value);
-	            cellEl = props.cellRender(currentValue, locale);
+	            cellEl = cellRender(currentValue, locale);
 	          } else {
-	            cellEl = _react2.default.createElement(
-	              'a',
+	            var content = undefined;
+	            if (contentRender) {
+	              var currentValue = value.clone();
+	              currentValue.rollSetMonth(monthData.value);
+	              content = contentRender(currentValue, locale);
+	            } else {
+	              content = monthData.content;
+	            }
+	            cellEl = _react2["default"].createElement(
+	              'div',
 	              { className: prefixCls + '-month' },
-	              monthData.content
+	              content
 	            );
 	          }
-	          return _react2.default.createElement(
+	          return _react2["default"].createElement(
 	            'td',
 	            {
 	              role: 'gridcell',
 	              key: monthData.value,
 	              onClick: disabled ? null : chooseMonth.bind(_this2, monthData.value),
 	              title: monthData.title,
-	              className: (0, _classnames2.default)(classNameMap)
+	              className: (0, _classnames2["default"])(classNameMap)
 	            },
 	            cellEl
 	          );
 	        });
-	        return _react2.default.createElement(
+	        return _react2["default"].createElement(
 	          'tr',
 	          { key: index, role: 'row' },
 	          tds
 	        );
 	      });
 	
-	      return _react2.default.createElement(
+	      return _react2["default"].createElement(
 	        'table',
 	        { className: prefixCls + '-table', cellSpacing: '0', role: 'grid' },
-	        _react2.default.createElement(
+	        _react2["default"].createElement(
 	          'tbody',
 	          { className: prefixCls + '-tbody' },
 	          monthsEls
@@ -24737,7 +24747,7 @@
 	  prefixCls: _react.PropTypes.string,
 	  value: _react.PropTypes.object
 	};
-	exports.default = MonthTable;
+	exports["default"] = MonthTable;
 	module.exports = exports['default'];
 
 /***/ },
@@ -24762,11 +24772,11 @@
 	
 	var _index = __webpack_require__(194);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	function noop() {}
 	
-	exports.default = {
+	exports["default"] = {
 	  propTypes: {
 	    className: _react.PropTypes.string,
 	    locale: _react.PropTypes.object,
@@ -24780,7 +24790,7 @@
 	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
-	      locale: _en_US2.default,
+	      locale: _en_US2["default"],
 	      style: {},
 	      visible: true,
 	      prefixCls: 'rc-calendar',
@@ -24821,9 +24831,9 @@
 	
 	var _en_US2 = _interopRequireDefault(_en_US);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
-	exports.default = {
+	exports["default"] = {
 	  today: 'Today',
 	  now: 'Now',
 	  ok: 'Ok',
@@ -24845,7 +24855,7 @@
 	  nextDecade: 'Next decade',
 	  previousCentury: 'Last century',
 	  nextCentury: 'Next century',
-	  format: _en_US2.default
+	  format: _en_US2["default"]
 	};
 	module.exports = exports['default'];
 
