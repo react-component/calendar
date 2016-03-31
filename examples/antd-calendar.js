@@ -168,7 +168,7 @@ const Test = React.createClass({
                   disabled={state.disabled}
                   readOnly
                   className="ant-calendar-picker-input ant-input"
-                  value={value && getFormatter(state.showTime).format(value)}
+                  value={value && getFormatter(state.showTime).format(value) || ''}
                 />
                 </span>
               );
