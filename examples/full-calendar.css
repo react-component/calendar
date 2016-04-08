@@ -46,6 +46,10 @@
   border-radius: 6px;
   border: 1px solid #d9d9d9;
 }
+.rc-select-focused .rc-select-selection {
+  border-color: #23c0fa;
+  box-shadow: 0 0 2px rgba(45, 183, 245, 0.8);
+}
 .rc-select-enabled .rc-select-selection:hover {
   border-color: #23c0fa;
   box-shadow: 0 0 2px rgba(45, 183, 245, 0.8);
@@ -150,7 +154,6 @@
 .rc-select-enabled .rc-select-selection__choice:hover .rc-select-selection__choice__remove {
   opacity: 1;
   -webkit-transform: scale(1);
-      -ms-transform: scale(1);
           transform: scale(1);
 }
 .rc-select-enabled .rc-select-selection__choice:hover .rc-select-selection__choice__content {
@@ -182,7 +185,6 @@
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   -webkit-transform-origin: 0 0;
-      -ms-transform-origin: 0 0;
           transform-origin: 0 0;
   opacity: 0;
   -webkit-animation-play-state: paused;
@@ -254,12 +256,11 @@
   position: absolute;
   opacity: 0;
   -webkit-transform: scale(0);
-      -ms-transform: scale(0);
           transform: scale(0);
   top: 0;
   right: 2px;
-  transition: opacity .3s, -webkit-transform .3s;
   -webkit-transition: opacity .3s, -webkit-transform .3s;
+  transition: opacity .3s, -webkit-transform .3s;
   transition: opacity .3s, transform .3s;
   transition: opacity .3s, transform .3s, -webkit-transform .3s;
 }
@@ -343,7 +344,6 @@ li.rc-select-dropdown-menu-item-divider {
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   -webkit-transform-origin: 0 0;
-      -ms-transform-origin: 0 0;
           transform-origin: 0 0;
   opacity: 0;
   -webkit-animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
@@ -357,7 +357,6 @@ li.rc-select-dropdown-menu-item-divider {
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
   -webkit-transform-origin: 0 0;
-      -ms-transform-origin: 0 0;
           transform-origin: 0 0;
   opacity: 1;
   -webkit-animation-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.34);

@@ -1,12 +1,21 @@
-.rc-dialog {
-  outline: none;
-  position: absolute;
-  left: -9999px;
-  top: -9999px;
-  z-index: 1000;
+.rc-dialog-open {
+  overflow: hidden;
 }
-.rc-dialog-hidden {
-  display: none;
+.rc-dialog {
+  position: relative;
+  width: auto;
+  margin: 10px;
+}
+.rc-dialog-wrap {
+  position: fixed;
+  overflow: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  -webkit-overflow-scrolling: touch;
+  outline: 0;
 }
 .rc-dialog-title {
   margin: 0;
@@ -20,11 +29,11 @@
   border: none;
   border-radius: 6px 6px;
   background-clip: padding-box;
-  outline: 0;
 }
 .rc-dialog-close {
   cursor: pointer;
-  outline: none;
+  border: 0;
+  background: transparent;
   font-size: 21px;
   position: absolute;
   right: 20px;
@@ -142,6 +151,12 @@
             transform: scale(0, 0);
   }
 }
+@media (min-width: 768px) {
+  .rc-dialog {
+    width: 600px;
+    margin: 30px auto;
+  }
+}
 .rc-dialog-mask {
   position: fixed;
   top: 0;
@@ -151,8 +166,8 @@
   background-color: #373737;
   background-color: rgba(55, 55, 55, 0.6);
   height: 100%;
-  z-index: 1000;
   filter: alpha(opacity=50);
+  z-index: 1050;
 }
 .rc-dialog-mask-hidden {
   display: none;
