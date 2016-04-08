@@ -1,6 +1,6 @@
 {
   "name": "rc-calendar",
-  "version": "5.5.0",
+  "version": "5.5.1",
   "description": "React Calendar",
   "keywords": [
     "react",
@@ -48,17 +48,13 @@
     "jquery": "~1.11.3",
     "object-assign": "4.x",
     "pre-commit": "1.x",
-    "rc-dialog": "^5.3.1",
-    "rc-time-picker": "1.x",
-    "rc-tools": "5.x",
-    "react": "0.14.x",
-    "rc-select": "^5.9.3",
-    "react-addons-test-utils": "~0.14.0",
-    "react-dom": "0.14.x"
-  },
-  "peerDependencies": {
-    "react": "^0.14.0",
-    "react-dom": "^0.14.0"
+    "rc-dialog": "^6.0.1",
+    "rc-select": "^6.0.6",
+    "rc-time-picker": "^1.1.4",
+    "rc-tools": "^5.3.4",
+    "react": "^15.0.1",
+    "react-addons-test-utils": "^15.0.1",
+    "react-dom": "^15.0.1"
   },
   "pre-commit": [
     "lint"
