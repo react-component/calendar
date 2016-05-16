@@ -43,7 +43,7 @@ const DateTBody = React.createClass({
     dateRender: PropTypes.func,
     disabledDate: PropTypes.func,
     prefixCls: PropTypes.string,
-    selectedValue: PropTypes.object,
+    selectedValue: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
     value: PropTypes.object,
     showWeekNumber: PropTypes.bool,
   },
