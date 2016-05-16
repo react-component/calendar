@@ -878,7 +878,7 @@ webpackJsonp([0],{
 	    dateRender: _react.PropTypes.func,
 	    disabledDate: _react.PropTypes.func,
 	    prefixCls: _react.PropTypes.string,
-	    selectedValue: _react.PropTypes.object,
+	    selectedValue: _react.PropTypes.oneOfType([_react.PropTypes.object, _react.PropTypes.arrayOf(_react.PropTypes.object)]),
 	    value: _react.PropTypes.object,
 	    showWeekNumber: _react.PropTypes.bool
 	  },
