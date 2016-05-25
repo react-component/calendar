@@ -175,7 +175,9 @@ const Calendar = React.createClass({
   chooseToday() {
     const today = this.state.value.clone();
     today.setTime(Date.now());
-    this.onSelect(today);
+    this.onSelect(today, {
+      source: 'todayButton',
+    });
   },
 
   render() {
