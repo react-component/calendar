@@ -57,7 +57,7 @@ const Test = React.createClass({
                 <input
                   style={{ width: 250 }}
                   readOnly
-                  value={value && dateFormatter.format(value)}
+                  value={value && dateFormatter.format(value) || ''}
                 />
                 </span>
                 );

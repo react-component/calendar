@@ -1,10 +1,9 @@
 import React, { PropTypes } from 'react';
 import CalendarHeader from '../calendar/CalendarHeader';
 import DateTable from '../date/DateTable';
-import CalendarFooter from '../calendar/CalendarFooter';
 import DateInput from '../date/DateInput';
 
-const Calendar = React.createClass({
+const CalendarPart = React.createClass({
   propTypes: {
     value: PropTypes.any,
     direction: PropTypes.any,
@@ -61,15 +60,9 @@ const Calendar = React.createClass({
             showWeekNumber={props.showWeekNumber}
           />
         </div>
-        <CalendarFooter
-          {...newProps}
-          disabledDate={props.disabledDate}
-          timeDisabled={!selectedValue[index] || !!selectedValue.hovering}
-          onToday={this.chooseToday}
-        />
       </div>
     </div>);
   },
 });
 
-export default Calendar;
+export default CalendarPart;

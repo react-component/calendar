@@ -56,7 +56,7 @@ const Picker = React.createClass({
                   style={{ width: 250 }}
                   disabled={props.disabled}
                   readOnly
-                  value={value && getFormatter(props.showTime).format(value)}
+                  value={value && getFormatter(props.showTime).format(value) || ''}
                 />
                 </span>
           );

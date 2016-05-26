@@ -66,7 +66,6 @@ const CalendarFooter = React.createClass({
           {footerBtn}
         </div>);
     }
-
     return footerEl;
   },
 });
