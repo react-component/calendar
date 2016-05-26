@@ -95,7 +95,8 @@ const Picker = React.createClass({
         value,
       });
     }
-    if (!props.calendar.props.timePicker && cause.source !== 'dateInput') {
+    if ((!props.calendar.props.timePicker && cause.source !== 'dateInput')
+        || cause.source === 'todayButton') {
       this.close(this.focus);
     }
     props.onChange(value);
