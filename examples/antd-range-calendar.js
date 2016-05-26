@@ -1323,122 +1323,6 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 209:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _react = __webpack_require__(3);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactDom = __webpack_require__(34);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
-	var _rcUtil = __webpack_require__(175);
-	
-	var _rcUtil2 = _interopRequireDefault(_rcUtil);
-	
-	var _TodayButton = __webpack_require__(210);
-	
-	var _TodayButton2 = _interopRequireDefault(_TodayButton);
-	
-	var _OkButton = __webpack_require__(211);
-	
-	var _OkButton2 = _interopRequireDefault(_OkButton);
-	
-	var _index = __webpack_require__(200);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-	
-	var toFragment = _rcUtil2["default"].Children.mapSelf;
-	
-	
-	var CalendarFooter = _react2["default"].createClass({
-	  displayName: 'CalendarFooter',
-	
-	  propTypes: {
-	    prefixCls: _react.PropTypes.string,
-	    showDateInput: _react.PropTypes.bool,
-	    disabledTime: _react.PropTypes.any,
-	    gregorianCalendarLocale: _react.PropTypes.object,
-	    selectedValue: _react.PropTypes.any,
-	    showOk: _react.PropTypes.bool,
-	    onSelect: _react.PropTypes.func,
-	    value: _react.PropTypes.object,
-	    defaultValue: _react.PropTypes.object
-	  },
-	
-	  onSelect: function onSelect(value) {
-	    this.props.onSelect(value);
-	  },
-	  getRootDOMNode: function getRootDOMNode() {
-	    return _reactDom2["default"].findDOMNode(this);
-	  },
-	  render: function render() {
-	    var props = this.props;
-	    var value = props.value;
-	    var prefixCls = props.prefixCls;
-	    var showDateInput = props.showDateInput;
-	    var disabledTime = props.disabledTime;
-	    var gregorianCalendarLocale = props.gregorianCalendarLocale;
-	    var selectedValue = props.selectedValue;
-	    var showOk = props.showOk;
-	
-	    var timePicker = !showDateInput && props.timePicker || null;
-	    var disabledTimeConfig = disabledTime && timePicker ? (0, _index.getTimeConfig)(selectedValue, disabledTime) : null;
-	    var footerEl = null;
-	    if (props.showToday || timePicker) {
-	      var nowEl = undefined;
-	      if (props.showToday) {
-	        nowEl = _react2["default"].createElement(_TodayButton2["default"], _extends({}, props, { value: value }));
-	      }
-	      var okBtn = undefined;
-	      if (showOk === true || showOk !== false && !!props.timePicker) {
-	        okBtn = _react2["default"].createElement(_OkButton2["default"], props);
-	      }
-	      var footerBtn = undefined;
-	      if (nowEl || okBtn) {
-	        footerBtn = _react2["default"].createElement(
-	          'span',
-	          { className: prefixCls + '-footer-btn' },
-	          toFragment([nowEl, okBtn])
-	        );
-	      }
-	      if (timePicker) {
-	        timePicker = _react2["default"].cloneElement(timePicker, _extends({
-	          onChange: this.onSelect,
-	          allowEmpty: false,
-	          gregorianCalendarLocale: gregorianCalendarLocale
-	        }, disabledTimeConfig, {
-	          getPopupContainer: this.getRootDOMNode,
-	          value: selectedValue
-	        }));
-	      }
-	      footerEl = _react2["default"].createElement(
-	        'div',
-	        { className: prefixCls + '-footer' },
-	        timePicker,
-	        footerBtn
-	      );
-	    }
-	
-	    return footerEl;
-	  }
-	});
-	
-	exports["default"] = CalendarFooter;
-	module.exports = exports['default'];
-
-/***/ },
-
 /***/ 210:
 /***/ function(module, exports, __webpack_require__) {
 
@@ -1824,7 +1708,7 @@ webpackJsonp([2],{
 	        value: value
 	      });
 	    }
-	    if (!props.calendar.props.timePicker && cause.source !== 'dateInput') {
+	    if (!props.calendar.props.timePicker && cause.source !== 'dateInput' || cause.source === 'todayButton') {
 	      this.close(this.focus);
 	    }
 	    props.onChange(value);
@@ -3816,18 +3700,14 @@ webpackJsonp([2],{
 	
 	var _DateTable2 = _interopRequireDefault(_DateTable);
 	
-	var _CalendarFooter = __webpack_require__(209);
-	
-	var _CalendarFooter2 = _interopRequireDefault(_CalendarFooter);
-	
 	var _DateInput = __webpack_require__(215);
 	
 	var _DateInput2 = _interopRequireDefault(_DateInput);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
-	var Calendar = _react2["default"].createClass({
-	  displayName: 'Calendar',
+	var CalendarPart = _react2["default"].createClass({
+	  displayName: 'CalendarPart',
 	
 	  propTypes: {
 	    value: _react.PropTypes.any,
@@ -3896,18 +3776,13 @@ webpackJsonp([2],{
 	            disabledDate: disabledDate,
 	            showWeekNumber: props.showWeekNumber
 	          }))
-	        ),
-	        _react2["default"].createElement(_CalendarFooter2["default"], _extends({}, newProps, {
-	          disabledDate: props.disabledDate,
-	          timeDisabled: !selectedValue[index] || !!selectedValue.hovering,
-	          onToday: this.chooseToday
-	        }))
+	        )
 	      )
 	    );
 	  }
 	});
 	
-	exports["default"] = Calendar;
+	exports["default"] = CalendarPart;
 	module.exports = exports['default'];
 
 /***/ }

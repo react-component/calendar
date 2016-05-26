@@ -255,7 +255,9 @@ webpackJsonp([4],{
 	  chooseToday: function chooseToday() {
 	    var today = this.state.value.clone();
 	    today.setTime(Date.now());
-	    this.onSelect(today);
+	    this.onSelect(today, {
+	      source: 'todayButton'
+	    });
 	  },
 	  render: function render() {
 	    var props = this.props;
@@ -1762,7 +1764,6 @@ webpackJsonp([4],{
 	        footerBtn
 	      );
 	    }
-	
 	    return footerEl;
 	  }
 	});
@@ -2296,7 +2297,7 @@ webpackJsonp([4],{
 	        value: value
 	      });
 	    }
-	    if (!props.calendar.props.timePicker && cause.source !== 'dateInput') {
+	    if (!props.calendar.props.timePicker && cause.source !== 'dateInput' || cause.source === 'todayButton') {
 	      this.close(this.focus);
 	    }
 	    props.onChange(value);
@@ -2562,7 +2563,7 @@ webpackJsonp([4],{
 	                _react2["default"].createElement('input', {
 	                  style: { width: 250 },
 	                  readOnly: true,
-	                  value: value && dateFormatter.format(value)
+	                  value: value && dateFormatter.format(value) || ''
 	                })
 	              );
 	            }

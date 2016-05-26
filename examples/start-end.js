@@ -255,7 +255,9 @@ webpackJsonp([5],{
 	  chooseToday: function chooseToday() {
 	    var today = this.state.value.clone();
 	    today.setTime(Date.now());
-	    this.onSelect(today);
+	    this.onSelect(today, {
+	      source: 'todayButton'
+	    });
 	  },
 	  render: function render() {
 	    var props = this.props;
@@ -1762,7 +1764,6 @@ webpackJsonp([5],{
 	        footerBtn
 	      );
 	    }
-	
 	    return footerEl;
 	  }
 	});
@@ -2296,7 +2297,7 @@ webpackJsonp([5],{
 	        value: value
 	      });
 	    }
-	    if (!props.calendar.props.timePicker && cause.source !== 'dateInput') {
+	    if (!props.calendar.props.timePicker && cause.source !== 'dateInput' || cause.source === 'todayButton') {
 	      this.close(this.focus);
 	    }
 	    props.onChange(value);
@@ -3886,7 +3887,7 @@ webpackJsonp([5],{
 	            style: { width: 250 },
 	            disabled: props.disabled,
 	            readOnly: true,
-	            value: value && getFormatter(props.showTime).format(value)
+	            value: value && getFormatter(props.showTime).format(value) || ''
 	          })
 	        );
 	      }
