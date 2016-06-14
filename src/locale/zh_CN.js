@@ -3,7 +3,7 @@ import zhCn from 'gregorian-calendar-format/lib/locale/zh_CN';
 export default {
   today: '今天',
   now: '此刻',
-  back2Today: '返回今天',
+  backToToday: '返回今天',
   ok: '确定',
   clear: '清除',
   month: '月',

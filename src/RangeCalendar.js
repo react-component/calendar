@@ -65,6 +65,7 @@ const RangeCalendar = React.createClass({
     selectedValue: PropTypes.array,
     defaultSelectedValue: PropTypes.array,
     onOk: PropTypes.func,
+    locale: PropTypes.object,
     onChange: PropTypes.func,
     onSelect: PropTypes.func,
     onValueChange: PropTypes.func,
@@ -211,7 +212,7 @@ const RangeCalendar = React.createClass({
   render() {
     const props = this.props;
     const state = this.state;
-    const { prefixCls, dateInputPlaceholder, timePicker, showOk } = props;
+    const { prefixCls, dateInputPlaceholder, timePicker, showOk, locale } = props;
     const className = {
       [props.className]: !!props.className,
       [prefixCls]: 1,
@@ -268,7 +269,7 @@ const RangeCalendar = React.createClass({
           {...props}
           value={state.value}
           onToday={this.onToday}
-          range
+          text={locale.backToToday}
         />
         {showOk === true || showOk !== false && !!timePicker ?
           <OkButton
