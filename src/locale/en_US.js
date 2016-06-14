@@ -3,6 +3,7 @@ import enUs from 'gregorian-calendar-format/lib/locale/en_US';
 export default {
   today: 'Today',
   now: 'Now',
+  back2Today: 'Back today',
   ok: 'Ok',
   clear: 'Clear',
   month: 'Month',

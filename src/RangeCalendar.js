@@ -268,6 +268,7 @@ const RangeCalendar = React.createClass({
           {...props}
           value={state.value}
           onToday={this.onToday}
+          range
         />
         {showOk === true || showOk !== false && !!timePicker ?
           <OkButton
