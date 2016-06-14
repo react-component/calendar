@@ -2,11 +2,14 @@ import React from 'react';
 import { getTodayTimeStr, getTodayTime, isAllowedDate } from '../util/';
 
 export default function TodayButton({ prefixCls, locale, value, timePicker,
-  disabledDate, disabledTime, onToday }) {
+  disabledDate, disabledTime, onToday, range }) {
   let disabledToday = false;
   let localeNow = locale.today;
   if (timePicker) {
     localeNow = locale.now || locale.today;
+  }
+  if (range) {
+    localeNow = locale.back2Today;
   }
   let disabledTodayClass = '';
   if (disabledDate) {

@@ -3,6 +3,7 @@ import ruRU from 'gregorian-calendar-format/lib/locale/ru_RU';
 export default {
   today: 'Сегодня',
   now: 'Сейчас',
+  back2Today: 'Сейчас',
   ok: 'Ok',
   clear: 'Очистить',
   month: 'Месяц',
