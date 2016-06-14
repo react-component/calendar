@@ -242,7 +242,12 @@ const RangeCalendar = React.createClass({
       style={props.style}
       tabIndex="0"
     >
-      <a className={`${prefixCls}-clear-btn`} role="button" title="清除" onClick={this.clear}/>
+      <a
+        className={`${prefixCls}-clear-btn`}
+        role="button"
+        title={locale.clear}
+        onClick={this.clear}
+      />
       <CalendarPart
         {...props}
         {...newProps}
