@@ -12,7 +12,28 @@
 /******/ 			installedChunks[chunkId] = 0;
 /******/ 		}
 /******/ 		for(moduleId in moreModules) {
-/******/ 			modules[moduleId] = moreModules[moduleId];
+/******/ 			var _m = moreModules[moduleId];
+/******/
+/******/ 			// Check if module is deduplicated
+/******/ 			switch(typeof _m) {
+/******/ 			case "object":
+/******/ 				// Module can be created from a template
+/******/ 				modules[moduleId] = (function(_m) {
+/******/ 					var args = _m.slice(1), templateId = _m[0];
+/******/ 					return function (a,b,c) {
+/******/ 						modules[templateId].apply(this, [a,b,c].concat(args));
+/******/ 					};
+/******/ 				}(_m));
+/******/ 				break;
+/******/ 			case "function":
+/******/ 				// Normal module
+/******/ 				modules[moduleId] = _m;
+/******/ 				break;
+/******/ 			default:
+/******/ 				// Module is a copy of another module
+/******/ 				modules[moduleId] = modules[_m];
+/******/ 				break;
+/******/ 			}
 /******/ 		}
 /******/ 		if(parentJsonpFunction) parentJsonpFunction(chunkIds, moreModules);
 /******/ 		while(callbacks.length)
@@ -91,7 +112,30 @@
 /******/ 	__webpack_require__.p = "";
 /******/ })
 /************************************************************************/
-/******/ ([
+/******/ ((function(modules) {
+	// Check all modules for deduplicated modules
+	for(var i in modules) {
+		if(Object.prototype.hasOwnProperty.call(modules, i)) {
+			switch(typeof modules[i]) {
+			case "function": break;
+			case "object":
+				// Module can be created from a template
+				modules[i] = (function(_m) {
+					var args = _m.slice(1), fn = modules[_m[0]];
+					return function (a,b,c) {
+						fn.apply(this, [a,b,c].concat(args));
+					};
+				}(modules[i]));
+				break;
+			default:
+				// Module is a copy of another module
+				modules[i] = modules[modules[i]];
+				break;
+			}
+		}
+	}
+	return modules;
+}([
 /* 0 */,
 /* 1 */,
 /* 2 */
@@ -23850,7 +23894,7 @@
 	
 	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var defaultDisabledTime = {
 	  disabledHours: function disabledHours() {
@@ -23881,7 +23925,7 @@
 	
 	function getFormatter(format, locale) {
 	  if (typeof format === 'string') {
-	    return new _gregorianCalendarFormat2["default"](format, locale.format);
+	    return new _gregorianCalendarFormat2.default(format, locale.format);
 	  }
 	  return format;
 	}
@@ -24880,8 +24924,6 @@
 	  value: true
 	});
 	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
 	var _react = __webpack_require__(3);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -24890,7 +24932,9 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
 	
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
@@ -24898,7 +24942,7 @@
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
 	var ROW = 4;
 	var COL = 3;
@@ -24917,7 +24961,7 @@
 	  function MonthTable(props) {
 	    _classCallCheck(this, MonthTable);
 	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(MonthTable).call(this, props));
+	    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 	
 	    _this.state = {
 	      value: props.value
@@ -24925,124 +24969,118 @@
 	    return _this;
 	  }
 	
-	  _createClass(MonthTable, [{
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps(nextProps) {
-	      if ('value' in nextProps) {
-	        this.setState({
-	          value: nextProps.value
-	        });
-	      }
-	    }
-	  }, {
-	    key: 'getMonths',
-	    value: function getMonths() {
-	      var props = this.props;
-	      var value = this.state.value;
-	      var current = value.clone();
-	      var locale = props.locale;
-	      var months = [];
-	      var shortMonths = locale.format.shortMonths;
-	      var index = 0;
-	      for (var rowIndex = 0; rowIndex < ROW; rowIndex++) {
-	        months[rowIndex] = [];
-	        for (var colIndex = 0; colIndex < COL; colIndex++) {
-	          current.rollSetMonth(index);
-	          months[rowIndex][colIndex] = {
-	            value: index,
-	            content: shortMonths[index],
-	            title: shortMonths[index]
-	          };
-	          index++;
-	        }
-	      }
-	      return months;
-	    }
-	  }, {
-	    key: 'setAndSelectValue',
-	    value: function setAndSelectValue(value) {
+	  MonthTable.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+	    if ('value' in nextProps) {
 	      this.setState({
-	        value: value
+	        value: nextProps.value
 	      });
-	      this.props.onSelect(value);
 	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _this2 = this;
+	  };
 	
-	      var props = this.props;
-	      var value = this.state.value;
-	      var today = value.clone();
-	      today.setTime(Date.now());
-	      var months = this.getMonths();
-	      var currentMonth = value.getMonth();
-	      var prefixCls = props.prefixCls;
-	      var locale = props.locale;
-	      var contentRender = props.contentRender;
-	      var cellRender = props.cellRender;
+	  MonthTable.prototype.getMonths = function getMonths() {
+	    var props = this.props;
+	    var value = this.state.value;
+	    var current = value.clone();
+	    var locale = props.locale;
+	    var months = [];
+	    var shortMonths = locale.format.shortMonths;
+	    var index = 0;
+	    for (var rowIndex = 0; rowIndex < ROW; rowIndex++) {
+	      months[rowIndex] = [];
+	      for (var colIndex = 0; colIndex < COL; colIndex++) {
+	        current.rollSetMonth(index);
+	        months[rowIndex][colIndex] = {
+	          value: index,
+	          content: shortMonths[index],
+	          title: shortMonths[index]
+	        };
+	        index++;
+	      }
+	    }
+	    return months;
+	  };
 	
-	      var monthsEls = months.map(function (month, index) {
-	        var tds = month.map(function (monthData) {
-	          var _classNameMap;
+	  MonthTable.prototype.setAndSelectValue = function setAndSelectValue(value) {
+	    this.setState({
+	      value: value
+	    });
+	    this.props.onSelect(value);
+	  };
 	
-	          var disabled = false;
-	          if (props.disabledDate) {
-	            var testValue = value.clone();
-	            testValue.rollSetMonth(monthData.value);
-	            disabled = props.disabledDate(testValue);
-	          }
-	          var classNameMap = (_classNameMap = {}, _defineProperty(_classNameMap, prefixCls + '-cell', 1), _defineProperty(_classNameMap, prefixCls + '-cell-disabled', disabled), _defineProperty(_classNameMap, prefixCls + '-selected-cell', monthData.value === currentMonth), _defineProperty(_classNameMap, prefixCls + '-current-cell', today.getYear() === value.getYear() && monthData.value === today.getMonth()), _classNameMap);
-	          var cellEl = undefined;
-	          if (cellRender) {
-	            var currentValue = value.clone();
-	            currentValue.rollSetMonth(monthData.value);
-	            cellEl = cellRender(currentValue, locale);
+	  MonthTable.prototype.render = function render() {
+	    var _this2 = this;
+	
+	    var props = this.props;
+	    var value = this.state.value;
+	    var today = value.clone();
+	    today.setTime(Date.now());
+	    var months = this.getMonths();
+	    var currentMonth = value.getMonth();
+	    var prefixCls = props.prefixCls;
+	    var locale = props.locale;
+	    var contentRender = props.contentRender;
+	    var cellRender = props.cellRender;
+	
+	    var monthsEls = months.map(function (month, index) {
+	      var tds = month.map(function (monthData) {
+	        var _classNameMap;
+	
+	        var disabled = false;
+	        if (props.disabledDate) {
+	          var testValue = value.clone();
+	          testValue.rollSetMonth(monthData.value);
+	          disabled = props.disabledDate(testValue);
+	        }
+	        var classNameMap = (_classNameMap = {}, _defineProperty(_classNameMap, prefixCls + '-cell', 1), _defineProperty(_classNameMap, prefixCls + '-cell-disabled', disabled), _defineProperty(_classNameMap, prefixCls + '-selected-cell', monthData.value === currentMonth), _defineProperty(_classNameMap, prefixCls + '-current-cell', today.getYear() === value.getYear() && monthData.value === today.getMonth()), _classNameMap);
+	        var cellEl = undefined;
+	        if (cellRender) {
+	          var currentValue = value.clone();
+	          currentValue.rollSetMonth(monthData.value);
+	          cellEl = cellRender(currentValue, locale);
+	        } else {
+	          var content = undefined;
+	          if (contentRender) {
+	            var _currentValue = value.clone();
+	            _currentValue.rollSetMonth(monthData.value);
+	            content = contentRender(_currentValue, locale);
 	          } else {
-	            var content = undefined;
-	            if (contentRender) {
-	              var _currentValue = value.clone();
-	              _currentValue.rollSetMonth(monthData.value);
-	              content = contentRender(_currentValue, locale);
-	            } else {
-	              content = monthData.content;
-	            }
-	            cellEl = _react2["default"].createElement(
-	              'div',
-	              { className: prefixCls + '-month' },
-	              content
-	            );
+	            content = monthData.content;
 	          }
-	          return _react2["default"].createElement(
-	            'td',
-	            {
-	              role: 'gridcell',
-	              key: monthData.value,
-	              onClick: disabled ? null : chooseMonth.bind(_this2, monthData.value),
-	              title: monthData.title,
-	              className: (0, _classnames2["default"])(classNameMap)
-	            },
-	            cellEl
+	          cellEl = _react2.default.createElement(
+	            'div',
+	            { className: prefixCls + '-month' },
+	            content
 	          );
-	        });
-	        return _react2["default"].createElement(
-	          'tr',
-	          { key: index, role: 'row' },
-	          tds
+	        }
+	        return _react2.default.createElement(
+	          'td',
+	          {
+	            role: 'gridcell',
+	            key: monthData.value,
+	            onClick: disabled ? null : chooseMonth.bind(_this2, monthData.value),
+	            title: monthData.title,
+	            className: (0, _classnames2.default)(classNameMap)
+	          },
+	          cellEl
 	        );
 	      });
-	
-	      return _react2["default"].createElement(
-	        'table',
-	        { className: prefixCls + '-table', cellSpacing: '0', role: 'grid' },
-	        _react2["default"].createElement(
-	          'tbody',
-	          { className: prefixCls + '-tbody' },
-	          monthsEls
-	        )
+	      return _react2.default.createElement(
+	        'tr',
+	        { key: index, role: 'row' },
+	        tds
 	      );
-	    }
-	  }]);
+	    });
+	
+	    return _react2.default.createElement(
+	      'table',
+	      { className: prefixCls + '-table', cellSpacing: '0', role: 'grid' },
+	      _react2.default.createElement(
+	        'tbody',
+	        { className: prefixCls + '-tbody' },
+	        monthsEls
+	      )
+	    );
+	  };
 	
 	  return MonthTable;
 	}(_react.Component);
@@ -25056,7 +25094,7 @@
 	  prefixCls: _react.PropTypes.string,
 	  value: _react.PropTypes.object
 	};
-	exports["default"] = MonthTable;
+	exports.default = MonthTable;
 	module.exports = exports['default'];
 
 /***/ },
@@ -25081,11 +25119,11 @@
 	
 	var _index = __webpack_require__(200);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function noop() {}
 	
-	exports["default"] = {
+	exports.default = {
 	  propTypes: {
 	    className: _react.PropTypes.string,
 	    locale: _react.PropTypes.object,
@@ -25099,7 +25137,7 @@
 	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
-	      locale: _en_US2["default"],
+	      locale: _en_US2.default,
 	      style: {},
 	      visible: true,
 	      prefixCls: 'rc-calendar',
@@ -25140,11 +25178,12 @@
 	
 	var _en_US2 = _interopRequireDefault(_en_US);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports["default"] = {
+	exports.default = {
 	  today: 'Today',
 	  now: 'Now',
+	  backToToday: 'Back to today',
 	  ok: 'Ok',
 	  clear: 'Clear',
 	  month: 'Month',
@@ -25164,7 +25203,7 @@
 	  nextDecade: 'Next decade',
 	  previousCentury: 'Last century',
 	  nextCentury: 'Next century',
-	  format: _en_US2["default"]
+	  format: _en_US2.default
 	};
 	module.exports = exports['default'];
 
@@ -28054,5 +28093,5 @@
 	}
 
 /***/ }
-/******/ ]);
+/******/ ])));
 //# sourceMappingURL=common.js.map

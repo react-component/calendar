@@ -17,8 +17,6 @@ webpackJsonp([3],{
 	  value: true
 	});
 	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
 	var _react = __webpack_require__(3);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -31,13 +29,15 @@ webpackJsonp([3],{
 	
 	var _DateTBody2 = _interopRequireDefault(_DateTBody);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
 	var DateTable = function (_React$Component) {
 	  _inherits(DateTable, _React$Component);
@@ -45,27 +45,24 @@ webpackJsonp([3],{
 	  function DateTable() {
 	    _classCallCheck(this, DateTable);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(DateTable).apply(this, arguments));
+	    return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
 	  }
 	
-	  _createClass(DateTable, [{
-	    key: 'render',
-	    value: function render() {
-	      var props = this.props;
-	      var prefixCls = props.prefixCls;
-	      return _react2["default"].createElement(
-	        'table',
-	        { className: prefixCls + '-table', cellSpacing: '0', role: 'grid' },
-	        _react2["default"].createElement(_DateTHead2["default"], props),
-	        _react2["default"].createElement(_DateTBody2["default"], props)
-	      );
-	    }
-	  }]);
+	  DateTable.prototype.render = function render() {
+	    var props = this.props;
+	    var prefixCls = props.prefixCls;
+	    return _react2.default.createElement(
+	      'table',
+	      { className: prefixCls + '-table', cellSpacing: '0', role: 'grid' },
+	      _react2.default.createElement(_DateTHead2.default, props),
+	      _react2.default.createElement(_DateTBody2.default, props)
+	    );
+	  };
 	
 	  return DateTable;
-	}(_react2["default"].Component);
+	}(_react2.default.Component);
 	
-	exports["default"] = DateTable;
+	exports.default = DateTable;
 	module.exports = exports['default'];
 
 /***/ },
@@ -79,8 +76,6 @@ webpackJsonp([3],{
 	  value: true
 	});
 	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
 	var _react = __webpack_require__(3);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -89,13 +84,15 @@ webpackJsonp([3],{
 	
 	var _DateConstants2 = _interopRequireDefault(_DateConstants);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
 	var DateTHead = function (_React$Component) {
 	  _inherits(DateTHead, _React$Component);
@@ -103,74 +100,71 @@ webpackJsonp([3],{
 	  function DateTHead() {
 	    _classCallCheck(this, DateTHead);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(DateTHead).apply(this, arguments));
+	    return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
 	  }
 	
-	  _createClass(DateTHead, [{
-	    key: 'render',
-	    value: function render() {
-	      var props = this.props;
-	      var value = props.value;
-	      var locale = props.locale;
-	      var prefixCls = props.prefixCls;
-	      var veryShortWeekdays = [];
-	      var weekDays = [];
-	      var firstDayOfWeek = value.getFirstDayOfWeek();
-	      var showWeekNumberEl = undefined;
+	  DateTHead.prototype.render = function render() {
+	    var props = this.props;
+	    var value = props.value;
+	    var locale = props.locale;
+	    var prefixCls = props.prefixCls;
+	    var veryShortWeekdays = [];
+	    var weekDays = [];
+	    var firstDayOfWeek = value.getFirstDayOfWeek();
+	    var showWeekNumberEl = undefined;
 	
-	      for (var dateColIndex = 0; dateColIndex < _DateConstants2["default"].DATE_COL_COUNT; dateColIndex++) {
-	        var index = (firstDayOfWeek + dateColIndex) % _DateConstants2["default"].DATE_COL_COUNT;
-	        veryShortWeekdays[dateColIndex] = locale.format.veryShortWeekdays[index];
-	        weekDays[dateColIndex] = locale.format.weekdays[index];
-	      }
+	    for (var dateColIndex = 0; dateColIndex < _DateConstants2.default.DATE_COL_COUNT; dateColIndex++) {
+	      var index = (firstDayOfWeek + dateColIndex) % _DateConstants2.default.DATE_COL_COUNT;
+	      veryShortWeekdays[dateColIndex] = locale.format.veryShortWeekdays[index];
+	      weekDays[dateColIndex] = locale.format.weekdays[index];
+	    }
 	
-	      if (props.showWeekNumber) {
-	        showWeekNumberEl = _react2["default"].createElement(
-	          'th',
-	          {
-	            role: 'columnheader',
-	            className: prefixCls + '-column-header ' + prefixCls + '-week-number-header'
-	          },
-	          _react2["default"].createElement(
-	            'span',
-	            { className: prefixCls + '-column-header-inner' },
-	            'x'
-	          )
-	        );
-	      }
-	      var weekDaysEls = weekDays.map(function (day, xindex) {
-	        return _react2["default"].createElement(
-	          'th',
-	          {
-	            key: xindex,
-	            role: 'columnheader',
-	            title: day,
-	            className: prefixCls + '-column-header'
-	          },
-	          _react2["default"].createElement(
-	            'span',
-	            { className: prefixCls + '-column-header-inner' },
-	            veryShortWeekdays[xindex]
-	          )
-	        );
-	      });
-	      return _react2["default"].createElement(
-	        'thead',
-	        null,
-	        _react2["default"].createElement(
-	          'tr',
-	          { role: 'row' },
-	          showWeekNumberEl,
-	          weekDaysEls
+	    if (props.showWeekNumber) {
+	      showWeekNumberEl = _react2.default.createElement(
+	        'th',
+	        {
+	          role: 'columnheader',
+	          className: prefixCls + '-column-header ' + prefixCls + '-week-number-header'
+	        },
+	        _react2.default.createElement(
+	          'span',
+	          { className: prefixCls + '-column-header-inner' },
+	          'x'
 	        )
 	      );
 	    }
-	  }]);
+	    var weekDaysEls = weekDays.map(function (day, xindex) {
+	      return _react2.default.createElement(
+	        'th',
+	        {
+	          key: xindex,
+	          role: 'columnheader',
+	          title: day,
+	          className: prefixCls + '-column-header'
+	        },
+	        _react2.default.createElement(
+	          'span',
+	          { className: prefixCls + '-column-header-inner' },
+	          veryShortWeekdays[xindex]
+	        )
+	      );
+	    });
+	    return _react2.default.createElement(
+	      'thead',
+	      null,
+	      _react2.default.createElement(
+	        'tr',
+	        { role: 'row' },
+	        showWeekNumberEl,
+	        weekDaysEls
+	      )
+	    );
+	  };
 	
 	  return DateTHead;
-	}(_react2["default"].Component);
+	}(_react2.default.Component);
 	
-	exports["default"] = DateTHead;
+	exports.default = DateTHead;
 	module.exports = exports['default'];
 
 /***/ },
@@ -183,7 +177,7 @@ webpackJsonp([3],{
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports["default"] = {
+	exports.default = {
 	  DATE_ROW_COUNT: 6,
 	  DATE_COL_COUNT: 7
 	};
@@ -210,7 +204,7 @@ webpackJsonp([3],{
 	
 	var _util = __webpack_require__(200);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function isSameDay(one, two) {
 	  return one && two && one.compareToDay(two) === 0;
@@ -244,7 +238,7 @@ webpackJsonp([3],{
 	  this.props.onDayHover(current);
 	}
 	
-	var DateTBody = _react2["default"].createClass({
+	var DateTBody = _react2.default.createClass({
 	  displayName: 'DateTBody',
 	
 	  propTypes: {
@@ -297,8 +291,8 @@ webpackJsonp([3],{
 	    var lastMonth1 = month1.clone();
 	    lastMonth1.addDayOfMonth(0 - lastMonthDiffDay);
 	    var passed = 0;
-	    for (iIndex = 0; iIndex < _DateConstants2["default"].DATE_ROW_COUNT; iIndex++) {
-	      for (jIndex = 0; jIndex < _DateConstants2["default"].DATE_COL_COUNT; jIndex++) {
+	    for (iIndex = 0; iIndex < _DateConstants2.default.DATE_ROW_COUNT; iIndex++) {
+	      for (jIndex = 0; jIndex < _DateConstants2.default.DATE_COL_COUNT; jIndex++) {
 	        current = lastMonth1;
 	        if (passed) {
 	          current = current.clone();
@@ -310,11 +304,11 @@ webpackJsonp([3],{
 	    }
 	    var tableHtml = [];
 	    passed = 0;
-	    for (iIndex = 0; iIndex < _DateConstants2["default"].DATE_ROW_COUNT; iIndex++) {
+	    for (iIndex = 0; iIndex < _DateConstants2.default.DATE_ROW_COUNT; iIndex++) {
 	      var weekNumberCell = undefined;
 	      var dateCells = [];
 	      if (showWeekNumber) {
-	        weekNumberCell = _react2["default"].createElement(
+	        weekNumberCell = _react2.default.createElement(
 	          'td',
 	          {
 	            key: dateTable[passed].getWeekOfYear(),
@@ -324,11 +318,11 @@ webpackJsonp([3],{
 	          dateTable[passed].getWeekOfYear()
 	        );
 	      }
-	      for (jIndex = 0; jIndex < _DateConstants2["default"].DATE_COL_COUNT; jIndex++) {
+	      for (jIndex = 0; jIndex < _DateConstants2.default.DATE_COL_COUNT; jIndex++) {
 	        var next = null;
 	        var last = null;
 	        current = dateTable[passed];
-	        if (jIndex < _DateConstants2["default"].DATE_COL_COUNT - 1) {
+	        if (jIndex < _DateConstants2.default.DATE_COL_COUNT - 1) {
 	          next = dateTable[passed + 1];
 	        }
 	        if (jIndex > 0) {
@@ -399,7 +393,7 @@ webpackJsonp([3],{
 	          dateHtml = dateRender(current, value);
 	        } else {
 	          var content = contentRender ? contentRender(current, value) : current.getDayOfMonth();
-	          dateHtml = _react2["default"].createElement(
+	          dateHtml = _react2.default.createElement(
 	            'div',
 	            {
 	              key: getIdFromDate(current),
@@ -411,7 +405,7 @@ webpackJsonp([3],{
 	          );
 	        }
 	
-	        dateCells.push(_react2["default"].createElement(
+	        dateCells.push(_react2.default.createElement(
 	          'td',
 	          {
 	            key: passed,
@@ -425,7 +419,7 @@ webpackJsonp([3],{
 	
 	        passed++;
 	      }
-	      tableHtml.push(_react2["default"].createElement(
+	      tableHtml.push(_react2.default.createElement(
 	        'tr',
 	        {
 	          key: iIndex,
@@ -435,7 +429,7 @@ webpackJsonp([3],{
 	        dateCells
 	      ));
 	    }
-	    return _react2["default"].createElement(
+	    return _react2.default.createElement(
 	      'tbody',
 	      { className: prefixCls + 'tbody' },
 	      tableHtml
@@ -443,7 +437,7 @@ webpackJsonp([3],{
 	  }
 	});
 	
-	exports["default"] = DateTBody;
+	exports.default = DateTBody;
 	module.exports = exports['default'];
 
 /***/ },
@@ -471,14 +465,14 @@ webpackJsonp([3],{
 	
 	var _index = __webpack_require__(200);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
 	function noop() {}
 	
 	function getNow() {
-	  var value = new _gregorianCalendar2["default"]();
+	  var value = new _gregorianCalendar2.default();
 	  value.setTime(Date.now());
 	  return value;
 	}
@@ -544,10 +538,10 @@ webpackJsonp([3],{
 	
 	    var className = (_className = {}, _defineProperty(_className, prefixCls, 1), _defineProperty(_className, prefixCls + '-hidden', !props.visible), _defineProperty(_className, props.className, !!props.className), _defineProperty(_className, newProps.className, !!newProps.className), _className);
 	
-	    return _react2["default"].createElement(
+	    return _react2.default.createElement(
 	      'div',
 	      {
-	        className: '' + (0, _classnames2["default"])(className),
+	        className: '' + (0, _classnames2.default)(className),
 	        style: this.props.style,
 	        tabIndex: '0', onKeyDown: this.onKeyDown
 	      },
@@ -582,7 +576,7 @@ webpackJsonp([3],{
 	  }
 	};
 	
-	exports["default"] = CalendarMixin;
+	exports.default = CalendarMixin;
 	module.exports = exports['default'];
 
 /***/ },
@@ -600,11 +594,12 @@ webpackJsonp([3],{
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports["default"] = {
+	exports.default = {
 	  today: '今天',
 	  now: '此刻',
+	  backToToday: '返回今天',
 	  ok: '确定',
 	  clear: '清除',
 	  month: '月',
@@ -623,7 +618,7 @@ webpackJsonp([3],{
 	  nextDecade: '下一年代',
 	  previousCentury: '上一世纪',
 	  nextCentury: '下一世纪',
-	  format: _zh_CN2["default"]
+	  format: _zh_CN2.default
 	};
 	module.exports = exports['default'];
 
@@ -682,17 +677,17 @@ webpackJsonp([3],{
 	
 	var _rcSelect2 = _interopRequireDefault(_rcSelect);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	/* eslint react/no-multi-comp:0, no-console:0 */
 	
-	var dateFormatter = new _gregorianCalendarFormat2["default"]('yyyy-MM-dd');
+	var dateFormatter = new _gregorianCalendarFormat2.default('yyyy-MM-dd');
 	
 	function onSelect(value) {
 	  console.log('select', dateFormatter.format(value));
 	}
 	
-	var App = _react2["default"].createClass({
+	var App = _react2.default.createClass({
 	  displayName: 'App',
 	  getInitialState: function getInitialState() {
 	    return {
@@ -705,30 +700,30 @@ webpackJsonp([3],{
 	    });
 	  },
 	  render: function render() {
-	    return _react2["default"].createElement(
+	    return _react2.default.createElement(
 	      'div',
 	      { style: { zIndex: 1000, position: 'relative' } },
-	      _react2["default"].createElement(_FullCalendar2["default"], {
+	      _react2.default.createElement(_FullCalendar2.default, {
 	        style: { margin: 10 },
-	        Select: _rcSelect2["default"],
+	        Select: _rcSelect2.default,
 	        fullscreen: false,
 	        onSelect: onSelect,
-	        locale: _zh_CN2["default"]
+	        locale: _zh_CN2.default
 	      }),
-	      _react2["default"].createElement(_FullCalendar2["default"], {
+	      _react2.default.createElement(_FullCalendar2.default, {
 	        style: { margin: 10 },
-	        Select: _rcSelect2["default"],
+	        Select: _rcSelect2.default,
 	        fullscreen: true,
 	        onSelect: onSelect,
 	        type: this.state.type,
 	        onTypeChange: this.onTypeChange,
-	        locale: _zh_CN2["default"]
+	        locale: _zh_CN2.default
 	      })
 	    );
 	  }
 	});
 	
-	_reactDom2["default"].render(_react2["default"].createElement(App, null), document.getElementById('__react-content'));
+	_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('__react-content'));
 
 /***/ },
 
@@ -767,9 +762,9 @@ webpackJsonp([3],{
 	
 	var _CalendarHeader2 = _interopRequireDefault(_CalendarHeader);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var FullCalendar = _react2["default"].createClass({
+	var FullCalendar = _react2.default.createClass({
 	  displayName: 'FullCalendar',
 	
 	  propTypes: {
@@ -788,7 +783,7 @@ webpackJsonp([3],{
 	    headerRender: _react.PropTypes.func,
 	    showHeader: _react.PropTypes.bool
 	  },
-	  mixins: [_CommonMixin2["default"], _CalendarMixin2["default"]],
+	  mixins: [_CommonMixin2.default, _CalendarMixin2.default],
 	  getDefaultProps: function getDefaultProps() {
 	    return {
 	      defaultType: 'date',
@@ -847,8 +842,8 @@ webpackJsonp([3],{
 	      if (headerRender) {
 	        header = headerRender(value, type, locale);
 	      } else {
-	        var TheHeader = headerComponent || _CalendarHeader2["default"];
-	        header = _react2["default"].createElement(TheHeader, _extends({
+	        var TheHeader = headerComponent || _CalendarHeader2.default;
+	        header = _react2.default.createElement(TheHeader, _extends({
 	          key: 'calendar-header'
 	        }, props, {
 	          prefixCls: prefixCls + '-full',
@@ -860,14 +855,14 @@ webpackJsonp([3],{
 	      }
 	    }
 	
-	    var table = type === 'date' ? _react2["default"].createElement(_DateTable2["default"], {
+	    var table = type === 'date' ? _react2.default.createElement(_DateTable2.default, {
 	      dateRender: props.dateCellRender,
 	      contentRender: props.dateCellContentRender,
 	      locale: locale,
 	      prefixCls: prefixCls,
 	      onSelect: this.onSelect,
 	      value: value
-	    }) : _react2["default"].createElement(_MonthTable2["default"], {
+	    }) : _react2.default.createElement(_MonthTable2.default, {
 	      cellRender: props.monthCellRender,
 	      contentRender: props.monthCellContentRender,
 	      locale: locale,
@@ -876,7 +871,7 @@ webpackJsonp([3],{
 	      value: value
 	    });
 	
-	    var children = [header, _react2["default"].createElement(
+	    var children = [header, _react2.default.createElement(
 	      'div',
 	      { key: 'calendar-body', className: prefixCls + '-calendar-body' },
 	      table
@@ -895,7 +890,7 @@ webpackJsonp([3],{
 	  }
 	});
 	
-	exports["default"] = FullCalendar;
+	exports.default = FullCalendar;
 	module.exports = exports['default'];
 
 /***/ },
@@ -909,19 +904,19 @@ webpackJsonp([3],{
 	  value: true
 	});
 	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
 	var _react = __webpack_require__(3);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
 	function noop() {}
 	
@@ -931,156 +926,147 @@ webpackJsonp([3],{
 	  function CalendarHeader() {
 	    _classCallCheck(this, CalendarHeader);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(CalendarHeader).apply(this, arguments));
+	    return _possibleConstructorReturn(this, _Component.apply(this, arguments));
 	  }
 	
-	  _createClass(CalendarHeader, [{
-	    key: 'onYearChange',
-	    value: function onYearChange(year) {
-	      var newValue = this.props.value.clone();
-	      newValue.setYear(parseInt(year, 10));
-	      this.props.onValueChange(newValue);
-	    }
-	  }, {
-	    key: 'onMonthChange',
-	    value: function onMonthChange(month) {
-	      var newValue = this.props.value.clone();
-	      newValue.setMonth(parseInt(month, 10));
-	      this.props.onValueChange(newValue);
-	    }
-	  }, {
-	    key: 'getYearSelectElement',
-	    value: function getYearSelectElement(year) {
-	      var _props = this.props;
-	      var yearSelectOffset = _props.yearSelectOffset;
-	      var yearSelectTotal = _props.yearSelectTotal;
-	      var locale = _props.locale;
-	      var prefixCls = _props.prefixCls;
-	      var Select = _props.Select;
+	  CalendarHeader.prototype.onYearChange = function onYearChange(year) {
+	    var newValue = this.props.value.clone();
+	    newValue.setYear(parseInt(year, 10));
+	    this.props.onValueChange(newValue);
+	  };
 	
-	      var start = year - yearSelectOffset;
-	      var end = start + yearSelectTotal;
-	      var suffix = locale.year === '年' ? '年' : '';
+	  CalendarHeader.prototype.onMonthChange = function onMonthChange(month) {
+	    var newValue = this.props.value.clone();
+	    newValue.setMonth(parseInt(month, 10));
+	    this.props.onValueChange(newValue);
+	  };
 	
-	      var options = [];
-	      for (var index = start; index < end; index++) {
-	        options.push(_react2["default"].createElement(
-	          Select.Option,
-	          { key: '' + index },
-	          index + suffix
-	        ));
-	      }
-	      return _react2["default"].createElement(
-	        Select,
-	        {
-	          className: prefixCls + '-header-year-select',
-	          onChange: this.onYearChange.bind(this),
-	          dropdownStyle: { zIndex: 2000 },
-	          dropdownMenuStyle: { maxHeight: 250, overflow: 'auto', fontSize: 12 },
-	          optionLabelProp: 'children',
-	          value: String(year),
-	          showSearch: false
-	        },
-	        options
-	      );
+	  CalendarHeader.prototype.getYearSelectElement = function getYearSelectElement(year) {
+	    var _props = this.props;
+	    var yearSelectOffset = _props.yearSelectOffset;
+	    var yearSelectTotal = _props.yearSelectTotal;
+	    var locale = _props.locale;
+	    var prefixCls = _props.prefixCls;
+	    var Select = _props.Select;
+	
+	    var start = year - yearSelectOffset;
+	    var end = start + yearSelectTotal;
+	    var suffix = locale.year === '年' ? '年' : '';
+	
+	    var options = [];
+	    for (var index = start; index < end; index++) {
+	      options.push(_react2.default.createElement(
+	        Select.Option,
+	        { key: '' + index },
+	        index + suffix
+	      ));
 	    }
-	  }, {
-	    key: 'getMonthSelectElement',
-	    value: function getMonthSelectElement(month) {
-	      var props = this.props;
-	      var months = props.locale.format.months;
-	      var prefixCls = props.prefixCls;
+	    return _react2.default.createElement(
+	      Select,
+	      {
+	        className: prefixCls + '-header-year-select',
+	        onChange: this.onYearChange.bind(this),
+	        dropdownStyle: { zIndex: 2000 },
+	        dropdownMenuStyle: { maxHeight: 250, overflow: 'auto', fontSize: 12 },
+	        optionLabelProp: 'children',
+	        value: String(year),
+	        showSearch: false
+	      },
+	      options
+	    );
+	  };
 	
-	      var options = [];
-	      var Select = props.Select;
+	  CalendarHeader.prototype.getMonthSelectElement = function getMonthSelectElement(month) {
+	    var props = this.props;
+	    var months = props.locale.format.months;
+	    var prefixCls = props.prefixCls;
 	
-	      for (var index = 0; index < 12; index++) {
-	        options.push(_react2["default"].createElement(
-	          Select.Option,
-	          { key: '' + index },
-	          months[index]
-	        ));
-	      }
+	    var options = [];
+	    var Select = props.Select;
 	
-	      return _react2["default"].createElement(
-	        Select,
-	        {
-	          className: prefixCls + '-header-month-select',
-	          dropdownStyle: { zIndex: 2000 },
-	          dropdownMenuStyle: { maxHeight: 250, overflow: 'auto', overflowX: 'hidden', fontSize: 12 },
-	          optionLabelProp: 'children',
-	          value: String(month),
-	          showSearch: false,
-	          onChange: this.onMonthChange.bind(this)
-	        },
-	        options
-	      );
+	    for (var index = 0; index < 12; index++) {
+	      options.push(_react2.default.createElement(
+	        Select.Option,
+	        { key: '' + index },
+	        months[index]
+	      ));
 	    }
-	  }, {
-	    key: 'changeTypeToDate',
-	    value: function changeTypeToDate() {
-	      this.props.onTypeChange('date');
-	    }
-	  }, {
-	    key: 'changeTypeToMonth',
-	    value: function changeTypeToMonth() {
-	      this.props.onTypeChange('month');
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _props2 = this.props;
-	      var value = _props2.value;
-	      var locale = _props2.locale;
-	      var prefixCls = _props2.prefixCls;
-	      var type = _props2.type;
-	      var showTypeSwitch = _props2.showTypeSwitch;
-	      var headerComponents = _props2.headerComponents;
 	
-	      var year = value.getYear();
-	      var month = value.getMonth();
-	      var yearSelect = this.getYearSelectElement(year);
-	      var monthSelect = type === 'month' ? null : this.getMonthSelectElement(month);
-	      var switchCls = prefixCls + '-header-switcher';
-	      var typeSwitcher = showTypeSwitch ? _react2["default"].createElement(
+	    return _react2.default.createElement(
+	      Select,
+	      {
+	        className: prefixCls + '-header-month-select',
+	        dropdownStyle: { zIndex: 2000 },
+	        dropdownMenuStyle: { maxHeight: 250, overflow: 'auto', overflowX: 'hidden', fontSize: 12 },
+	        optionLabelProp: 'children',
+	        value: String(month),
+	        showSearch: false,
+	        onChange: this.onMonthChange.bind(this)
+	      },
+	      options
+	    );
+	  };
+	
+	  CalendarHeader.prototype.changeTypeToDate = function changeTypeToDate() {
+	    this.props.onTypeChange('date');
+	  };
+	
+	  CalendarHeader.prototype.changeTypeToMonth = function changeTypeToMonth() {
+	    this.props.onTypeChange('month');
+	  };
+	
+	  CalendarHeader.prototype.render = function render() {
+	    var _props2 = this.props;
+	    var value = _props2.value;
+	    var locale = _props2.locale;
+	    var prefixCls = _props2.prefixCls;
+	    var type = _props2.type;
+	    var showTypeSwitch = _props2.showTypeSwitch;
+	    var headerComponents = _props2.headerComponents;
+	
+	    var year = value.getYear();
+	    var month = value.getMonth();
+	    var yearSelect = this.getYearSelectElement(year);
+	    var monthSelect = type === 'month' ? null : this.getMonthSelectElement(month);
+	    var switchCls = prefixCls + '-header-switcher';
+	    var typeSwitcher = showTypeSwitch ? _react2.default.createElement(
+	      'span',
+	      { className: switchCls },
+	      type === 'date' ? _react2.default.createElement(
 	        'span',
-	        { className: switchCls },
-	        type === 'date' ? _react2["default"].createElement(
-	          'span',
-	          { className: switchCls + '-focus' },
-	          locale.month
-	        ) : _react2["default"].createElement(
-	          'span',
-	          {
-	            onClick: this.changeTypeToDate.bind(this),
-	            className: switchCls + '-normal'
-	          },
-	          locale.month
-	        ),
-	        type === 'month' ? _react2["default"].createElement(
-	          'span',
-	          { className: switchCls + '-focus' },
-	          locale.year
-	        ) : _react2["default"].createElement(
-	          'span',
-	          {
-	            onClick: this.changeTypeToMonth.bind(this),
-	            className: switchCls + '-normal'
-	          },
-	          locale.year
-	        )
-	      ) : null;
+	        { className: switchCls + '-focus' },
+	        locale.month
+	      ) : _react2.default.createElement(
+	        'span',
+	        {
+	          onClick: this.changeTypeToDate.bind(this),
+	          className: switchCls + '-normal'
+	        },
+	        locale.month
+	      ),
+	      type === 'month' ? _react2.default.createElement(
+	        'span',
+	        { className: switchCls + '-focus' },
+	        locale.year
+	      ) : _react2.default.createElement(
+	        'span',
+	        {
+	          onClick: this.changeTypeToMonth.bind(this),
+	          className: switchCls + '-normal'
+	        },
+	        locale.year
+	      )
+	    ) : null;
 	
-	      return _react2["default"].createElement(
-	        'div',
-	        { className: prefixCls + '-header' },
-	        typeSwitcher,
-	        monthSelect,
-	        yearSelect,
-	        headerComponents
-	      );
-	    }
-	  }]);
+	    return _react2.default.createElement(
+	      'div',
+	      { className: prefixCls + '-header' },
+	      typeSwitcher,
+	      monthSelect,
+	      yearSelect,
+	      headerComponents
+	    );
+	  };
 	
 	  return CalendarHeader;
 	}(_react.Component);
@@ -1105,17 +1091,13 @@ webpackJsonp([3],{
 	  onTypeChange: noop
 	};
 	
-	exports["default"] = CalendarHeader;
+	exports.default = CalendarHeader;
 	module.exports = exports['default'];
 
 /***/ },
 
 /***/ 267:
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
+2,
 
 /***/ 268:
 /***/ function(module, exports, __webpack_require__) {
