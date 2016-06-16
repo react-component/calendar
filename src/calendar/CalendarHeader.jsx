@@ -2,8 +2,7 @@ import React, { PropTypes } from 'react';
 import MonthPanel from '../month/MonthPanel';
 import { getFormatter } from '../util/index';
 import YearPanel from '../year/YearPanel';
-import rcUtil from 'rc-util';
-const toFragment = rcUtil.Children.mapSelf;
+import toFragment from 'rc-util/lib/Children/mapSelf';
 
 function goMonth(direction) {
   const next = this.props.value.clone();

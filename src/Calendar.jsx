@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import GregorianCalendar from 'gregorian-calendar';
-import { KeyCode } from 'rc-util';
+import KeyCode from 'rc-util/lib/KeyCode';
 import DateTable from './date/DateTable';
 import CalendarHeader from './calendar/CalendarHeader';
 import CalendarFooter from './calendar/CalendarFooter';

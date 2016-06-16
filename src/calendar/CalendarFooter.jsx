@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import rcUtil from 'rc-util';
-const toFragment = rcUtil.Children.mapSelf;
+import toFragment from 'rc-util/lib/Children/mapSelf';
 import TodayButton from '../calendar/TodayButton';
 import OkButton from '../calendar/OkButton';
 import { getTimeConfig } from '../util/index';

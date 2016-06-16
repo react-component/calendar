@@ -2,7 +2,7 @@ import React from 'react';
 import MonthPanel from './month/MonthPanel';
 import CalendarMixin from './mixin/CalendarMixin';
 import CommonMixin from './mixin/CommonMixin';
-import { KeyCode } from 'rc-util';
+import KeyCode from 'rc-util/lib/KeyCode';
 
 const MonthCalendar = React.createClass({
   mixins: [CommonMixin, CalendarMixin],

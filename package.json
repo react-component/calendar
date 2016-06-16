@@ -1,6 +1,6 @@
 {
   "name": "rc-calendar",
-  "version": "5.5.5",
+  "version": "5.5.6",
   "description": "React Calendar",
   "keywords": [
     "react",
@@ -52,9 +52,9 @@
     "rc-select": "^6.0.6",
     "rc-time-picker": "^1.1.4",
     "rc-tools": "^5.3.4",
-    "react": "^15.0.1",
-    "react-addons-test-utils": "^15.0.1",
-    "react-dom": "^15.0.1"
+    "react": "15.x",
+    "react-addons-test-utils": "15.x",
+    "react-dom": "15.x"
   },
   "pre-commit": [
     "lint"

@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import { createChainedFunction, KeyCode } from 'rc-util';
+import createChainedFunction from 'rc-util/lib/createChainedFunction';
+import KeyCode from 'rc-util/lib/KeyCode';
 import placements from './picker/placements';
 import Trigger from 'rc-trigger';
 
