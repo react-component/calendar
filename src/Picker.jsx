@@ -188,7 +188,7 @@ const Picker = React.createClass({
       popupAlign={align}
       builtinPlacements={placements}
       popupPlacement={placement}
-      action={disabled ? [] : ['click']}
+      action={(disabled && !state.open) ? [] : ['click']}
       destroyPopupOnHide
       getPopupContainer={getCalendarContainer}
       popupStyle={style}
