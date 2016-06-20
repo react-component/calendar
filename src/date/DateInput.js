@@ -35,6 +35,10 @@ const DateInput = React.createClass({
     };
   },
 
+  componentDidMount() {
+    this.timer = setTimeout(() => this.refs.input.focus());
+  },
+
   componentWillReceiveProps(nextProps) {
     // when popup show, click body will call this, bug!
     const selectedValue = nextProps.selectedValue;
@@ -42,6 +46,10 @@ const DateInput = React.createClass({
       str: selectedValue && nextProps.formatter.format(selectedValue) || '',
       invalid: false,
     });
+  },
+
+  componentWillUnmount() {
+    clearTimeout(this.timer);
   },
 
   onInputChange(event) {
@@ -120,7 +128,8 @@ const DateInput = React.createClass({
       </div>
       <div className={`${prefixCls}-date-input-wrap`}>
         <input
-          className={`${prefixCls}-input  ${invalidClass}`}
+          ref="input"
+          className={`${prefixCls}-input ${invalidClass}`}
           value={str}
           placeholder={placeholder}
           onChange={this.onInputChange}
