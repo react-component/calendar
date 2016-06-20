@@ -97,7 +97,7 @@ const Picker = React.createClass({
       });
     }
     if ((!props.calendar.props.timePicker && cause.source !== 'dateInput')
-        || cause.source === 'todayButton') {
+      || cause.source === 'todayButton') {
       this.close(this.focus);
     }
     props.onChange(value);
@@ -114,7 +114,7 @@ const Picker = React.createClass({
   onVisibleChange(open) {
     this.setOpen(open, () => {
       if (open) {
-        ReactDOM.findDOMNode(this.calendarInstance).focus();
+        this.calendarInstance.focus();
       }
     });
   },
@@ -177,11 +177,13 @@ const Picker = React.createClass({
 
   render() {
     const props = this.props;
-    const { prefixCls, placement,
+    const {
+      prefixCls, placement,
       style, getCalendarContainer,
       align, animation,
       disabled,
-      transitionName, children } = props;
+      transitionName, children,
+    } = props;
     const state = this.state;
     return (<Trigger
       popup={this.getCalendarElement()}

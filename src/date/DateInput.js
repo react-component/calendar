@@ -96,6 +96,9 @@ const DateInput = React.createClass({
   getRootDOMNode() {
     return ReactDOM.findDOMNode(this);
   },
+  focus() {
+    this.refs.dateInput.focus();
+  },
 
   render() {
     const props = this.props;
@@ -120,6 +123,7 @@ const DateInput = React.createClass({
       </div>
       <div className={`${prefixCls}-date-input-wrap`}>
         <input
+          ref="dateInput"
           className={`${prefixCls}-input  ${invalidClass}`}
           value={str}
           placeholder={placeholder}

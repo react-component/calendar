@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import ReactDOM from 'react-dom';
 import GregorianCalendar from 'gregorian-calendar';
 import KeyCode from 'rc-util/lib/KeyCode';
 import DateTable from './date/DateTable';
@@ -180,14 +181,26 @@ const Calendar = React.createClass({
     });
   },
 
+  focus() {
+    if (this.props.showDateInput) {
+      this.refs.dateInput.focus();
+    } else {
+      ReactDOM.findDOMNode(this).focus();
+    }
+  },
+
   render() {
     const props = this.props;
-    const { locale, prefixCls, disabledDate,
-      dateInputPlaceholder, timePicker, disabledTime } = props;
+    const {
+      locale, prefixCls, disabledDate,
+      dateInputPlaceholder, timePicker,
+      disabledTime,
+    } = props;
     const state = this.state;
     const { value, selectedValue } = state;
     const dateInputElement = props.showDateInput ? (
       <DateInput
+        ref="dateInput"
         formatter={this.getFormatter()}
         key="date-input"
         timePicker={timePicker}
