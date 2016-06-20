@@ -1,6 +1,10 @@
 # History
 ----
 
+## 5.6.0 / 2016-06-20
+
+- optimize keyboard, add onKeyDown for Picker children
+
 ## 5.5.0 / 2016-03-22
 
 - support monthCellContentRender/dateCellContentRender

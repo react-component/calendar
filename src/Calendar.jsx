@@ -84,15 +84,6 @@ const Calendar = React.createClass({
     };
   },
 
-  getInitialState() {
-    // bind methods
-    this.nextMonth = goMonth.bind(this, 1);
-    this.previousMonth = goMonth.bind(this, -1);
-    this.nextYear = goYear.bind(this, 1);
-    this.previousYear = goYear.bind(this, -1);
-    return {};
-  },
-
   onKeyDown(event) {
     if (event.target.nodeName.toLowerCase() === 'input') {
       return undefined;
@@ -111,7 +102,7 @@ const Calendar = React.createClass({
         return 1;
       case KeyCode.LEFT:
         if (ctrlKey) {
-          this.previousYear();
+          goYear.call(this, -1);
         } else {
           goDay.call(this, -1);
         }
@@ -119,7 +110,7 @@ const Calendar = React.createClass({
         return 1;
       case KeyCode.RIGHT:
         if (ctrlKey) {
-          this.nextYear();
+          goYear.call(this, 1);
         } else {
           goDay.call(this, 1);
         }
@@ -134,15 +125,17 @@ const Calendar = React.createClass({
         event.preventDefault();
         return 1;
       case KeyCode.PAGE_DOWN:
-        this.nextMonth();
+        goMonth.call(this, 1);
         event.preventDefault();
         return 1;
       case KeyCode.PAGE_UP:
-        this.previousMonth();
+        goMonth.call(this, -1);
         event.preventDefault();
         return 1;
       case KeyCode.ENTER:
-        this.onSelect(this.state.value);
+        this.onSelect(this.state.value, {
+          source: 'keyboard',
+        });
         event.preventDefault();
         return 1;
       default:
@@ -182,11 +175,7 @@ const Calendar = React.createClass({
   },
 
   focus() {
-    if (this.props.showDateInput) {
-      this.refs.dateInput.focus();
-    } else {
-      ReactDOM.findDOMNode(this).focus();
-    }
+    ReactDOM.findDOMNode(this).focus();
   },
 
   render() {
@@ -216,47 +205,50 @@ const Calendar = React.createClass({
         onChange={this.onDateInputChange}
       />
     ) : null;
-    const children = [dateInputElement, (<div
-      key="date-panel"
-      className={`${prefixCls}-date-panel`}
-    >
-      <CalendarHeader
-        locale={locale}
-        onValueChange={this.setValue}
-        value={value}
-        prefixCls={prefixCls}
-      />
-
-      <div className={`${prefixCls}-calendar-body`}>
-        <DateTable
+    const children = [
+      dateInputElement,
+      (<div
+        key="date-panel"
+        className={`${prefixCls}-date-panel`}
+      >
+        <CalendarHeader
           locale={locale}
+          onValueChange={this.setValue}
           value={value}
-          selectedValue={selectedValue}
           prefixCls={prefixCls}
-          dateRender={props.dateRender}
-          onSelect={this.onDateTableSelect}
-          disabledDate={disabledDate}
-          showWeekNumber={props.showWeekNumber}
         />
-      </div>
 
-      <CalendarFooter
-        showOk={props.showOk}
-        locale={locale}
-        prefixCls={prefixCls}
-        showToday={props.showToday}
-        disabledTime={disabledTime}
-        gregorianCalendarLocale={value.locale}
-        showDateInput={props.showDateInput}
-        timePicker={timePicker}
-        selectedValue={selectedValue}
-        value={value}
-        disabledDate={disabledDate}
-        onOk={this.onOk}
-        onSelect={this.onSelect}
-        onToday={this.chooseToday}
-      />
-    </div>)];
+        <div className={`${prefixCls}-calendar-body`}>
+          <DateTable
+            locale={locale}
+            value={value}
+            selectedValue={selectedValue}
+            prefixCls={prefixCls}
+            dateRender={props.dateRender}
+            onSelect={this.onDateTableSelect}
+            disabledDate={disabledDate}
+            showWeekNumber={props.showWeekNumber}
+          />
+        </div>
+
+        <CalendarFooter
+          showOk={props.showOk}
+          locale={locale}
+          prefixCls={prefixCls}
+          showToday={props.showToday}
+          disabledTime={disabledTime}
+          gregorianCalendarLocale={value.locale}
+          showDateInput={props.showDateInput}
+          timePicker={timePicker}
+          selectedValue={selectedValue}
+          value={value}
+          disabledDate={disabledDate}
+          onOk={this.onOk}
+          onSelect={this.onSelect}
+          onToday={this.chooseToday}
+        />
+      </div>),
+    ];
 
     return this.renderRoot({
       children,

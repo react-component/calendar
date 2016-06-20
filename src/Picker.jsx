@@ -96,11 +96,20 @@ const Picker = React.createClass({
         value,
       });
     }
-    if ((!props.calendar.props.timePicker && cause.source !== 'dateInput')
-      || cause.source === 'todayButton') {
+    if (
+      cause.source === 'keyboard' ||
+      (!props.calendar.props.timePicker && cause.source !== 'dateInput') ||
+      cause.source === 'todayButton') {
       this.close(this.focus);
     }
     props.onChange(value);
+  },
+
+  onKeyDown(event) {
+    if (event.keyCode === KeyCode.DOWN && !this.state.open) {
+      this.open(this.focusCalendar);
+      event.preventDefault();
+    }
   },
 
   onCalendarOk() {
@@ -112,11 +121,7 @@ const Picker = React.createClass({
   },
 
   onVisibleChange(open) {
-    this.setOpen(open, () => {
-      if (open) {
-        this.calendarInstance.focus();
-      }
-    });
+    this.setOpen(open, this.focusCalendar);
   },
 
   getCalendarElement() {
@@ -175,6 +180,12 @@ const Picker = React.createClass({
     }
   },
 
+  focusCalendar() {
+    if (this.state.open) {
+      this.calendarInstance.focus();
+    }
+  },
+
   render() {
     const props = this.props;
     const {
@@ -200,7 +211,7 @@ const Picker = React.createClass({
       onPopupVisibleChange={this.onVisibleChange}
       prefixCls={prefixCls}
     >
-      {children(state, props)}
+      {React.cloneElement(children(state, props), { onKeyDown: this.onKeyDown })}
     </Trigger>);
   },
 });

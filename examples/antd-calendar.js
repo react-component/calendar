@@ -161,12 +161,13 @@ const Test = React.createClass({
           {
             ({ value }) => {
               return (
-                <span>
+                <span tabIndex="0">
                 <input
                   placeholder="请选择日期"
                   style={{ width: 250 }}
                   disabled={state.disabled}
                   readOnly
+                  tabIndex="-1"
                   className="ant-calendar-picker-input ant-input"
                   value={value && getFormatter(state.showTime).format(value) || ''}
                 />
