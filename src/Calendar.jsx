@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import ReactDOM from 'react-dom';
 import GregorianCalendar from 'gregorian-calendar';
 import KeyCode from 'rc-util/lib/KeyCode';
 import DateTable from './date/DateTable';
@@ -175,7 +174,9 @@ const Calendar = React.createClass({
   },
 
   focus() {
-    ReactDOM.findDOMNode(this).focus();
+    if (this.refs.root) {
+      this.refs.root.focus();
+    }
   },
 
   render() {
