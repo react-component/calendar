@@ -224,12 +224,13 @@ webpackJsonp([0],{
 	
 	            return _react2.default.createElement(
 	              'span',
-	              null,
+	              { tabIndex: '0' },
 	              _react2.default.createElement('input', {
 	                placeholder: '请选择日期',
 	                style: { width: 250 },
 	                disabled: state.disabled,
 	                readOnly: true,
+	                tabIndex: '-1',
 	                className: 'ant-calendar-picker-input ant-input',
 	                value: value && getFormatter(state.showTime).format(value) || ''
 	              })
@@ -467,14 +468,6 @@ webpackJsonp([0],{
 	      onOk: noop
 	    };
 	  },
-	  getInitialState: function getInitialState() {
-	    // bind methods
-	    this.nextMonth = goMonth.bind(this, 1);
-	    this.previousMonth = goMonth.bind(this, -1);
-	    this.nextYear = goYear.bind(this, 1);
-	    this.previousYear = goYear.bind(this, -1);
-	    return {};
-	  },
 	  onKeyDown: function onKeyDown(event) {
 	    if (event.target.nodeName.toLowerCase() === 'input') {
 	      return undefined;
@@ -493,7 +486,7 @@ webpackJsonp([0],{
 	        return 1;
 	      case _KeyCode2.default.LEFT:
 	        if (ctrlKey) {
-	          this.previousYear();
+	          goYear.call(this, -1);
 	        } else {
 	          goDay.call(this, -1);
 	        }
@@ -501,7 +494,7 @@ webpackJsonp([0],{
 	        return 1;
 	      case _KeyCode2.default.RIGHT:
 	        if (ctrlKey) {
-	          this.nextYear();
+	          goYear.call(this, 1);
 	        } else {
 	          goDay.call(this, 1);
 	        }
@@ -516,15 +509,17 @@ webpackJsonp([0],{
 	        event.preventDefault();
 	        return 1;
 	      case _KeyCode2.default.PAGE_DOWN:
-	        this.nextMonth();
+	        goMonth.call(this, 1);
 	        event.preventDefault();
 	        return 1;
 	      case _KeyCode2.default.PAGE_UP:
-	        this.previousMonth();
+	        goMonth.call(this, -1);
 	        event.preventDefault();
 	        return 1;
 	      case _KeyCode2.default.ENTER:
-	        this.onSelect(this.state.value);
+	        this.onSelect(this.state.value, {
+	          source: 'keyboard'
+	        });
 	        event.preventDefault();
 	        return 1;
 	      default:
@@ -559,11 +554,7 @@ webpackJsonp([0],{
 	    });
 	  },
 	  focus: function focus() {
-	    if (this.props.showDateInput) {
-	      this.refs.dateInput.focus();
-	    } else {
-	      _reactDom2.default.findDOMNode(this).focus();
-	    }
+	    _reactDom2.default.findDOMNode(this).focus();
 	  },
 	  render: function render() {
 	    var props = this.props;
@@ -998,7 +989,8 @@ webpackJsonp([0],{
 	              }
 	            }
 	          }
-	        } else if (isSameDay(current, selectedValue)) {
+	        } else if (isSameDay(current, value)) {
+	          // keyboard change value, highlight works
 	          selected = true;
 	        }
 	        if (isBeforeCurrentMonthYear) {
@@ -2273,9 +2265,11 @@ webpackJsonp([0],{
 	    return _react2.default.createElement(
 	      'div',
 	      {
+	        ref: 'root',
 	        className: '' + (0, _classnames2.default)(className),
 	        style: this.props.style,
-	        tabIndex: '0', onKeyDown: this.onKeyDown
+	        tabIndex: '0',
+	        onKeyDown: this.onKeyDown
 	      },
 	      newProps.children
 	    );
@@ -2614,10 +2608,16 @@ webpackJsonp([0],{
 	        value: value
 	      });
 	    }
-	    if (!props.calendar.props.timePicker && cause.source !== 'dateInput' || cause.source === 'todayButton') {
+	    if (cause.source === 'keyboard' || !props.calendar.props.timePicker && cause.source !== 'dateInput' || cause.source === 'todayButton') {
 	      this.close(this.focus);
 	    }
 	    props.onChange(value);
+	  },
+	  onKeyDown: function onKeyDown(event) {
+	    if (event.keyCode === _KeyCode2.default.DOWN && !this.state.open) {
+	      this.open(this.focusCalendar);
+	      event.preventDefault();
+	    }
 	  },
 	  onCalendarOk: function onCalendarOk() {
 	    this.close(this.focus);
@@ -2626,13 +2626,7 @@ webpackJsonp([0],{
 	    this.close(this.focus);
 	  },
 	  onVisibleChange: function onVisibleChange(open) {
-	    var _this = this;
-	
-	    this.setOpen(open, function () {
-	      if (open) {
-	        _this.calendarInstance.focus();
-	      }
-	    });
+	    this.setOpen(open, this.focusCalendar);
 	  },
 	  getCalendarElement: function getCalendarElement() {
 	    var props = this.props;
@@ -2689,6 +2683,11 @@ webpackJsonp([0],{
 	      _reactDom2.default.findDOMNode(this).focus();
 	    }
 	  },
+	  focusCalendar: function focusCalendar() {
+	    if (this.state.open) {
+	      this.calendarInstance.focus();
+	    }
+	  },
 	  render: function render() {
 	    var props = this.props;
 	    var prefixCls = props.prefixCls;
@@ -2719,7 +2718,7 @@ webpackJsonp([0],{
 	        onPopupVisibleChange: this.onVisibleChange,
 	        prefixCls: prefixCls
 	      },
-	      children(state, props)
+	      _react2.default.cloneElement(children(state, props), { onKeyDown: this.onKeyDown })
 	    );
 	  }
 	});

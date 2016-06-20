@@ -752,9 +752,11 @@ webpackJsonp([1],{
 	    return _react2.default.createElement(
 	      'div',
 	      {
+	        ref: 'root',
 	        className: '' + (0, _classnames2.default)(className),
 	        style: this.props.style,
-	        tabIndex: '0', onKeyDown: this.onKeyDown
+	        tabIndex: '0',
+	        onKeyDown: this.onKeyDown
 	      },
 	      newProps.children
 	    );
@@ -913,10 +915,16 @@ webpackJsonp([1],{
 	        value: value
 	      });
 	    }
-	    if (!props.calendar.props.timePicker && cause.source !== 'dateInput' || cause.source === 'todayButton') {
+	    if (cause.source === 'keyboard' || !props.calendar.props.timePicker && cause.source !== 'dateInput' || cause.source === 'todayButton') {
 	      this.close(this.focus);
 	    }
 	    props.onChange(value);
+	  },
+	  onKeyDown: function onKeyDown(event) {
+	    if (event.keyCode === _KeyCode2.default.DOWN && !this.state.open) {
+	      this.open(this.focusCalendar);
+	      event.preventDefault();
+	    }
 	  },
 	  onCalendarOk: function onCalendarOk() {
 	    this.close(this.focus);
@@ -925,13 +933,7 @@ webpackJsonp([1],{
 	    this.close(this.focus);
 	  },
 	  onVisibleChange: function onVisibleChange(open) {
-	    var _this = this;
-	
-	    this.setOpen(open, function () {
-	      if (open) {
-	        _this.calendarInstance.focus();
-	      }
-	    });
+	    this.setOpen(open, this.focusCalendar);
 	  },
 	  getCalendarElement: function getCalendarElement() {
 	    var props = this.props;
@@ -988,6 +990,11 @@ webpackJsonp([1],{
 	      _reactDom2.default.findDOMNode(this).focus();
 	    }
 	  },
+	  focusCalendar: function focusCalendar() {
+	    if (this.state.open) {
+	      this.calendarInstance.focus();
+	    }
+	  },
 	  render: function render() {
 	    var props = this.props;
 	    var prefixCls = props.prefixCls;
@@ -1018,7 +1025,7 @@ webpackJsonp([1],{
 	        onPopupVisibleChange: this.onVisibleChange,
 	        prefixCls: prefixCls
 	      },
-	      children(state, props)
+	      _react2.default.cloneElement(children(state, props), { onKeyDown: this.onKeyDown })
 	    );
 	  }
 	});

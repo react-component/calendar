@@ -356,7 +356,8 @@ webpackJsonp([3],{
 	              }
 	            }
 	          }
-	        } else if (isSameDay(current, selectedValue)) {
+	        } else if (isSameDay(current, value)) {
+	          // keyboard change value, highlight works
 	          selected = true;
 	        }
 	        if (isBeforeCurrentMonthYear) {
@@ -559,9 +560,11 @@ webpackJsonp([3],{
 	    return _react2.default.createElement(
 	      'div',
 	      {
+	        ref: 'root',
 	        className: '' + (0, _classnames2.default)(className),
 	        style: this.props.style,
-	        tabIndex: '0', onKeyDown: this.onKeyDown
+	        tabIndex: '0',
+	        onKeyDown: this.onKeyDown
 	      },
 	      newProps.children
 	    );
