@@ -50,13 +50,16 @@ const DateInput = React.createClass({
       str,
     });
     let value;
-    const { disabledDate, formatter, gregorianCalendarLocale, onChange } = this.props;
+    const { disabledDate, formatter, gregorianCalendarLocale, onChange, timePicker } = this.props;
     if (str) {
       try {
-        value = copyTime(formatter.parse(str, {
+        value = formatter.parse(str, {
           locale: gregorianCalendarLocale,
           obeyCount: true,
-        }), this.props.selectedValue);
+        });
+        if (!timePicker) {
+          value = copyTime(value, this.props.selectedValue);
+        }
       } catch (ex) {
         this.setState({
           invalid: true,
