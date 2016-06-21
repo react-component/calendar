@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import { findDOMNode } from 'react-dom';
 import GregorianCalendar from 'gregorian-calendar';
 import classnames from 'classnames';
 import CalendarPart from './range-calendar/CalendarPart';
@@ -206,7 +205,7 @@ const RangeCalendar = React.createClass({
   },
 
   focus() {
-    findDOMNode(this).focus();
+    this.refs.root.focus();
   },
 
   clear() {
@@ -243,6 +242,7 @@ const RangeCalendar = React.createClass({
       }
     }
     return (<div
+      ref="root"
       className={classes}
       style={props.style}
       tabIndex="0"
