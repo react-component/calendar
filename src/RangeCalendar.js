@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { findDOMNode } from 'react-dom';
 import GregorianCalendar from 'gregorian-calendar';
 import classnames from 'classnames';
 import CalendarPart from './range-calendar/CalendarPart';
@@ -202,6 +203,10 @@ const RangeCalendar = React.createClass({
       });
     }
     props.onValueChange(value);
+  },
+
+  focus() {
+    findDOMNode(this).focus();
   },
 
   clear() {
