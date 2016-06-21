@@ -23952,6 +23952,11 @@
 	    this.normalFormatter = (0, _index.getFormatter)(formatter, locale);
 	    this.lastFormatter = formatter;
 	    return this.normalFormatter;
+	  },
+	  focus: function focus() {
+	    if (this.refs.root) {
+	      this.refs.root.focus();
+	    }
 	  }
 	};
 	module.exports = exports['default'];

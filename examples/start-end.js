@@ -255,11 +255,6 @@ webpackJsonp([5],{
 	      source: 'todayButton'
 	    });
 	  },
-	  focus: function focus() {
-	    if (this.refs.root) {
-	      this.refs.root.focus();
-	    }
-	  },
 	  render: function render() {
 	    var props = this.props;
 	    var locale = props.locale;

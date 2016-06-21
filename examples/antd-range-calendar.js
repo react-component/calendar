@@ -3608,9 +3608,6 @@ webpackJsonp([2],{
 	    }
 	    props.onValueChange(value);
 	  },
-	  focus: function focus() {
-	    this.refs.root.focus();
-	  },
 	  clear: function clear() {
 	    this.fireSelectValueChange([], true);
 	    this.props.onClear();
