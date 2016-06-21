@@ -1,4 +1,4 @@
-import { KeyCode as keyCode } from 'rc-util';
+import keyCode from 'rc-util/lib/KeyCode';
 import expect from 'expect.js';
 import Calendar from '../index';
 import React from 'react';
@@ -146,8 +146,6 @@ describe('Calendar', () => {
           done();
         }, 10);
       });
-
-
       it('ctrl right works', (done) => {
         const original = calendar.state.value;
         const expected = original.clone();

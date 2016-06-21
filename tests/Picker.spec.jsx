@@ -123,6 +123,9 @@ describe('DatePicker', () => {
     });
 
     it('destroy correctly', (done) => {
+      if (navigator.userAgent.toLowerCase().indexOf('phantomjs') !== -1) {
+        return done();
+      }
       const picker = renderPicker();
       expect(picker.state.open).not.to.be.ok();
       const input = TestUtils.scryRenderedDOMComponentsWithClass(picker,
