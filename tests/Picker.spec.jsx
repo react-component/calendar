@@ -1,6 +1,7 @@
 import expect from 'expect.js';
 import Calendar from '../index';
 import DatePicker from '../src/Picker';
+import RangeCalendar from '../src/RangeCalendar';
 import ReactDOM from 'react-dom';
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
@@ -29,6 +30,15 @@ describe('DatePicker', () => {
     />);
   }
 
+  function renderRange({ value }) {
+    return (<input
+      className="rc-calendar-picker-input"
+      onChange={noop}
+      readOnly
+      value={value && `${formatter.format(value[0])} - ${formatter.format(value[1])}`}
+    />);
+  }
+
   function renderPicker(props) {
     return ReactDOM.render(<DatePicker
       calendar={
@@ -40,6 +50,20 @@ describe('DatePicker', () => {
       {...props}
     >
       {renderOne}
+    </DatePicker>, div);
+  }
+
+  function renderRangePicker(props) {
+    return ReactDOM.render(<DatePicker
+      calendar={
+      <RangeCalendar
+        locale={CalendarLocale}
+      />
+        }
+      defaultValue={[VALUE, VALUE]}
+      {...props}
+    >
+      {renderRange}
     </DatePicker>, div);
   }
 
@@ -80,6 +104,47 @@ describe('DatePicker', () => {
       expect(change.getMonth()).to.be(5);
       expect(change.getDayOfMonth()).to.be(2);
       expect(ReactDOM.findDOMNode(input).value).to.be('2015-06-02');
+      expect(picker.state.open).not.to.be.ok();
+      next();
+    }], () => {
+      done();
+    });
+  });
+
+  it('popup range calendar correctly', (done) => {
+    let change;
+    const picker = renderRangePicker({
+      onChange(v) {
+        change = v;
+      },
+    });
+    expect(picker.state.open).not.to.be.ok();
+    const input = TestUtils.scryRenderedDOMComponentsWithClass(picker,
+      'rc-calendar-picker-input')[0];
+    async.series([(next) => {
+      Simulate.click(input);
+      setTimeout(next, 100);
+    }, (next) => {
+      expect(TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance,
+        'rc-calendar')[0]).to.be.ok();
+      expect(picker.state.open).to.be(true);
+      const day1 = TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance,
+        'rc-calendar-date')[1];
+      Simulate.click(day1);
+      const day2 = TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance,
+        'rc-calendar-date')[2];
+      Simulate.click(day2);
+      setTimeout(next, 100);
+    }, (next) => {
+      expect(change).to.be.ok();
+      expect(change.length).to.be(2);
+      expect(change[0].getYear()).to.be(2015);
+      expect(change[0].getMonth()).to.be(5);
+      expect(change[0].getDayOfMonth()).to.be(2);
+      expect(change[1].getYear()).to.be(2015);
+      expect(change[1].getMonth()).to.be(5);
+      expect(change[1].getDayOfMonth()).to.be(3);
+      expect(ReactDOM.findDOMNode(input).value).to.be('2015-06-02 - 2015-06-03');
       expect(picker.state.open).not.to.be.ok();
       next();
     }], () => {
