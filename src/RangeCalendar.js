@@ -204,10 +204,6 @@ const RangeCalendar = React.createClass({
     props.onValueChange(value);
   },
 
-  focus() {
-    this.refs.root.focus();
-  },
-
   clear() {
     this.fireSelectValueChange([], true);
     this.props.onClear();

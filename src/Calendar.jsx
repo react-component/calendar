@@ -172,13 +172,6 @@ const Calendar = React.createClass({
       source: 'todayButton',
     });
   },
-
-  focus() {
-    if (this.refs.root) {
-      this.refs.root.focus();
-    }
-  },
-
   render() {
     const props = this.props;
     const {

@@ -45,4 +45,10 @@ export default {
     this.lastFormatter = formatter;
     return this.normalFormatter;
   },
+
+  focus() {
+    if (this.refs.root) {
+      this.refs.root.focus();
+    }
+  },
 };
