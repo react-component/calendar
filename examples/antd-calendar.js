@@ -355,10 +355,6 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(40);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
 	var _gregorianCalendar = __webpack_require__(173);
 	
 	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
@@ -554,7 +550,9 @@ webpackJsonp([0],{
 	    });
 	  },
 	  focus: function focus() {
-	    _reactDom2.default.findDOMNode(this).focus();
+	    if (this.refs.root) {
+	      this.refs.root.focus();
+	    }
 	  },
 	  render: function render() {
 	    var props = this.props;
@@ -3634,7 +3632,7 @@ webpackJsonp([0],{
 	  },
 	
 	  selectRange: function selectRange() {
-	    this.refs.input.focus();
+	    this.refs.input.select();
 	    if (this.props.currentSelectPanel && this.refs.input.value) {
 	      var selectionRangeStart = 0;
 	      var selectionRangeEnd = 0;

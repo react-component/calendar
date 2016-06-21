@@ -2748,7 +2748,7 @@ webpackJsonp([2],{
 	  },
 	
 	  selectRange: function selectRange() {
-	    this.refs.input.focus();
+	    this.refs.input.select();
 	    if (this.props.currentSelectPanel && this.refs.input.value) {
 	      var selectionRangeStart = 0;
 	      var selectionRangeEnd = 0;
@@ -3608,6 +3608,9 @@ webpackJsonp([2],{
 	    }
 	    props.onValueChange(value);
 	  },
+	  focus: function focus() {
+	    this.refs.root.focus();
+	  },
 	  clear: function clear() {
 	    this.fireSelectValueChange([], true);
 	    this.props.onClear();
@@ -3647,6 +3650,7 @@ webpackJsonp([2],{
 	    return _react2.default.createElement(
 	      'div',
 	      {
+	        ref: 'root',
 	        className: classes,
 	        style: props.style,
 	        tabIndex: '0'
