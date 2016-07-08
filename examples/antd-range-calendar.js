@@ -13,8 +13,8 @@ import TimePickerLocale from 'rc-time-picker/lib/locale/zh_CN';
 import Picker from 'rc-calendar/src/Picker';
 
 import 'rc-time-picker/assets/index.css';
-import TimePicker from 'rc-time-picker';
-const timePickerElement = <TimePicker placeholder="请选择时间" locale={TimePickerLocale}/>;
+import TimePickerPanel from 'rc-time-picker/lib/module/Panel';
+const timePickerElement = <TimePickerPanel locale={TimePickerLocale} />;
 
 const now = new GregorianCalendar(zhCn);
 now.setTime(Date.now());
@@ -102,6 +102,8 @@ ReactDOM.render(
         dateInputPlaceholder={['开始日期', '结束日期']}
         locale={CalendarLocale}
         showOk={false}
+        showClear
+        formatter={formatter}
         onChange={onStandaloneChange}
         onSelect={onStandaloneSelect}
         disabledDate={disabledDate}

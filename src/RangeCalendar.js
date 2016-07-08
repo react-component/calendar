@@ -5,6 +5,7 @@ import CalendarPart from './range-calendar/CalendarPart';
 import { syncTime, getTodayTime } from './util/';
 import TodayButton from './calendar/TodayButton';
 import OkButton from './calendar/OkButton';
+import TimePickerButton from './calendar/TimepickerButton';
 import CommonMixin from './mixin/CommonMixin';
 
 function noop() {
@@ -65,6 +66,7 @@ const RangeCalendar = React.createClass({
     selectedValue: PropTypes.array,
     defaultSelectedValue: PropTypes.array,
     onOk: PropTypes.func,
+    showClear: PropTypes.bool,
     locale: PropTypes.object,
     onChange: PropTypes.func,
     onSelect: PropTypes.func,
@@ -89,6 +91,7 @@ const RangeCalendar = React.createClass({
     return {
       selectedValue,
       value,
+      showTimePicker: false,
     };
   },
 
@@ -149,6 +152,16 @@ const RangeCalendar = React.createClass({
     });
   },
 
+  onOpenTimePicker() {
+    this.setState({
+      showTimePicker: true,
+    });
+  },
+  onCloseTimePicker() {
+    this.setState({
+      showTimePicker: false,
+    });
+  },
   onOk() {
     this.props.onOk(this.state.selectedValue);
   },
@@ -212,7 +225,8 @@ const RangeCalendar = React.createClass({
   render() {
     const props = this.props;
     const state = this.state;
-    const { prefixCls, dateInputPlaceholder, timePicker, showOk, locale } = props;
+    const { showTimePicker } = state;
+    const { prefixCls, dateInputPlaceholder, timePicker, showOk, locale, showClear } = props;
     const className = {
       [props.className]: !!props.className,
       [prefixCls]: 1,
@@ -237,18 +251,25 @@ const RangeCalendar = React.createClass({
         placeholder1 = placeholder2 = dateInputPlaceholder;
       }
     }
+    const showOkButton = showOk === true || showOk !== false && !!timePicker;
+    const cls = classnames({
+      [`${prefixCls}-footer`]: true,
+      [`${prefixCls}-range-bottom`]: true,
+      [`${prefixCls}-footer-showOk`]: showOkButton,
+    });
     return (<div
       ref="root"
       className={classes}
       style={props.style}
       tabIndex="0"
     >
-      <a
+      {showClear ? <a
         className={`${prefixCls}-clear-btn`}
         role="button"
         title={locale.clear}
         onClick={this.clear}
-      />
+      /> : null}
+      <div className={`${prefixCls}-date-panel`}>
       <CalendarPart
         {...props}
         {...newProps}
@@ -258,6 +279,8 @@ const RangeCalendar = React.createClass({
         placeholder={placeholder1}
         onInputSelect={onInputSelect.bind(this, 'left')}
         onValueChange={onValueChange.bind(this, 'left')}
+        timePicker={timePicker}
+        showTimePicker={showTimePicker}
       />
       <span className={`${prefixCls}-range-middle`}>~</span>
       <CalendarPart
@@ -269,21 +292,33 @@ const RangeCalendar = React.createClass({
         value={this.getEndValue()}
         onInputSelect={onInputSelect.bind(this, 'right')}
         onValueChange={onValueChange.bind(this, 'right')}
+        timePicker={timePicker}
+        showTimePicker={showTimePicker}
       />
-      <div className={`${prefixCls}-range-bottom`}>
+      </div>
+      <div className={cls}>
+        <div className={`${prefixCls}-footer-btn`}>
         <TodayButton
           {...props}
           value={state.value}
           onToday={this.onToday}
           text={locale.backToToday}
         />
-        {showOk === true || showOk !== false && !!timePicker ?
+        {!!props.timePicker ?
+          <TimePickerButton
+            {...props}
+            showTimePicker={showTimePicker}
+            onOpenTimePicker={this.onOpenTimePicker}
+            onCloseTimePicker={this.onCloseTimePicker}
+          /> : null}
+        {showOkButton ?
           <OkButton
             {...props}
             value={state.value}
             onOk={this.onOk}
             okDisabled={state.selectedValue.length !== 2 || state.selectedValue.hovering}
           /> : null}
+          </div>
       </div>
     </div>);
   },

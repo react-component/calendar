@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import ReactDOM from 'react-dom';
 import GregorianCalendar from 'gregorian-calendar';
 import KeyCode from 'rc-util/lib/KeyCode';
 import DateTable from './date/DateTable';
@@ -7,6 +8,7 @@ import CalendarFooter from './calendar/CalendarFooter';
 import CalendarMixin from './mixin/CalendarMixin';
 import CommonMixin from './mixin/CommonMixin';
 import DateInput from './date/DateInput';
+import { getTimeConfig } from './util/index';
 
 function noop() {
 }
@@ -82,7 +84,11 @@ const Calendar = React.createClass({
       onOk: noop,
     };
   },
-
+  getInitialState() {
+    return {
+      showTimePicker: false,
+    };
+  },
   onKeyDown(event) {
     if (event.target.nodeName.toLowerCase() === 'input') {
       return undefined;
@@ -160,11 +166,22 @@ const Calendar = React.createClass({
       source: 'dateInput',
     });
   },
-
   onDateTableSelect(value) {
     this.onSelect(value);
   },
-
+  getRootDOMNode() {
+    return ReactDOM.findDOMNode(this);
+  },
+  openTimePicker() {
+    this.setState({
+      showTimePicker: true,
+    });
+  },
+  closeTimePicker() {
+    this.setState({
+      showTimePicker: false,
+    });
+  },
   chooseToday() {
     const today = this.state.value.clone();
     today.setTime(Date.now());
@@ -180,13 +197,28 @@ const Calendar = React.createClass({
       disabledTime,
     } = props;
     const state = this.state;
-    const { value, selectedValue } = state;
+    const { value, selectedValue, showTimePicker } = state;
+    const disabledTimeConfig = disabledTime && timePicker ?
+      getTimeConfig(selectedValue, disabledTime) : null;
+
+    const timePickerEle = timePicker && showTimePicker ? React.cloneElement(timePicker, {
+      prefixCls: 'rc-time-picker-panel',
+      showHour: true,
+      formatter: this.getFormatter(),
+      showSecond: true,
+      onChange: this.onDateInputChange,
+      gregorianCalendarLocale: value.locale,
+      value: selectedValue,
+      disabledHours: noop,
+      disabledMinutes: noop,
+      disabledSeconds: noop,
+      ...disabledTimeConfig,
+    }) : null;
     const dateInputElement = props.showDateInput ? (
       <DateInput
         ref="dateInput"
         formatter={this.getFormatter()}
         key="date-input"
-        timePicker={timePicker}
         gregorianCalendarLocale={value.locale}
         locale={locale}
         placeholder={dateInputPlaceholder}
@@ -209,9 +241,16 @@ const Calendar = React.createClass({
           locale={locale}
           onValueChange={this.setValue}
           value={value}
+          showTimePicker={showTimePicker}
           prefixCls={prefixCls}
         />
-
+        {timePicker && showTimePicker ?
+          (<div className="rc-time-picker">
+            <div className={`rc-time-picker-panel`}>
+              {timePickerEle }
+            </div>
+          </div>)
+        : null}
         <div className={`${prefixCls}-calendar-body`}>
           <DateTable
             locale={locale}
@@ -231,6 +270,7 @@ const Calendar = React.createClass({
           prefixCls={prefixCls}
           showToday={props.showToday}
           disabledTime={disabledTime}
+          showTimePicker={showTimePicker}
           gregorianCalendarLocale={value.locale}
           showDateInput={props.showDateInput}
           timePicker={timePicker}
@@ -240,6 +280,8 @@ const Calendar = React.createClass({
           onOk={this.onOk}
           onSelect={this.onSelect}
           onToday={this.chooseToday}
+          onOpenTimePicker={this.openTimePicker}
+          onCloseTimePicker={this.closeTimePicker}
         />
       </div>),
     ];

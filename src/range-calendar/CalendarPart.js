@@ -2,6 +2,10 @@ import React, { PropTypes } from 'react';
 import CalendarHeader from '../calendar/CalendarHeader';
 import DateTable from '../date/DateTable';
 import DateInput from '../date/DateInput';
+import { getTimeConfig } from '../util/index';
+
+function noop() {
+}
 
 const CalendarPart = React.createClass({
   propTypes: {
@@ -10,6 +14,7 @@ const CalendarPart = React.createClass({
     prefixCls: PropTypes.any,
     locale: PropTypes.any,
     selectedValue: PropTypes.any,
+    showTimePicker: PropTypes.bool,
     formatter: PropTypes.any,
     placeholder: PropTypes.any,
     disabledDate: PropTypes.any,
@@ -20,14 +25,32 @@ const CalendarPart = React.createClass({
     const props = this.props;
     const { value, direction, prefixCls,
       locale, selectedValue, formatter, placeholder,
-      disabledDate, timePicker, disabledTime } = props;
+      disabledDate, timePicker, disabledTime, showTimePicker } = props;
+    const disabledTimeConfig = disabledTime && timePicker ?
+      getTimeConfig(selectedValue, disabledTime) : null;
     const rangeClassName = `${prefixCls}-range`;
     const newProps = {
       locale,
       value,
       prefixCls,
+      showTimePicker,
     };
     const index = direction === 'left' ? 0 : 1;
+
+    const timePickerEle = React.cloneElement(timePicker, {
+      prefixCls: 'rc-time-picker-panel',
+      formatter,
+      showHour: true,
+      showSecond: true,
+      onChange: props.onInputSelect,
+      gregorianCalendarLocale: value.locale,
+      value: selectedValue[index],
+      disabledHours: noop,
+      disabledMinutes: noop,
+      disabledSeconds: noop,
+      ...disabledTimeConfig,
+    });
+
     return (<div className={`${rangeClassName}-part ${rangeClassName}-${direction}`}>
       <DateInput
         formatter={formatter}
@@ -49,6 +72,11 @@ const CalendarPart = React.createClass({
           enablePrev={direction === 'left'}
           onValueChange={props.onValueChange}
         />
+        {showTimePicker ? <div className="rc-time-picker">
+          <div className={`rc-time-picker-panel`}>
+            {timePickerEle}
+          </div>
+        </div> : null}
         <div className={`${prefixCls}-calendar-body`}>
           <DateTable
             {...newProps}
