@@ -12,7 +12,7 @@
   &-date-input-wrap {
     overflow: hidden;
   }
-  .@{timePickerClass} {
+  &-time-picker {
     position: absolute;
     width: 100%;
     top: 34px;
@@ -21,21 +21,23 @@
     &-panel {
       width: 100%;
       position: relative;
-      &-input-wrap {
-        display: none;
-      }
-      &-inner {
-        border: none;
-        box-shadow: none;
-      }
-      &-select {
-        width: 84px;
-        ul {
-          max-height: 217px;
+      .@{timePickerClass}-panel {
+        &-input-wrap {
+          display: none;
         }
-        li {
-          text-align: center;
-          padding: 0;
+        &-inner {
+          border: none;
+          box-shadow: none;
+        }
+        &-select {
+          width: 84px;
+          ul {
+            max-height: 217px;
+          }
+          li {
+            text-align: center;
+            padding: 0;
+          }
         }
       }
     }

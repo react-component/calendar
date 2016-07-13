@@ -38,7 +38,6 @@ const CalendarPart = React.createClass({
     const index = direction === 'left' ? 0 : 1;
 
     const timePickerEle = React.cloneElement(timePicker, {
-      prefixCls: 'rc-time-picker-panel',
       formatter,
       showHour: true,
       showSecond: true,
@@ -72,12 +71,12 @@ const CalendarPart = React.createClass({
           enablePrev={direction === 'left'}
           onValueChange={props.onValueChange}
         />
-        {showTimePicker ? <div className="rc-time-picker">
-          <div className={`rc-time-picker-panel`}>
+        {showTimePicker ? <div className={`${prefixCls}-time-picker`}>
+          <div className={`${prefixCls}-time-picker-panel`}>
             {timePickerEle}
           </div>
         </div> : null}
-        <div className={`${prefixCls}-calendar-body`}>
+        <div className={`${prefixCls}-body`}>
           <DateTable
             {...newProps}
             selectedValue={selectedValue}

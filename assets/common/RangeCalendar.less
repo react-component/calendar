@@ -59,24 +59,15 @@
     clear:both;
     visibility:hidden;
   }
-  .@{prefixClass}-date-input-wrap,
-  .@{prefixClass}-time-picker-wrap {
+  .@{prefixClass}-date-input-wrap {
     width: 172px;
-  }
-
-  .@{prefixClass}-time-picker-wrap {
-    position: absolute;
-    left: 40%;
-  }
-  .rc-time-picker-input {
-    width: 100%;
   }
 
   .@{prefixClass}-input-wrap {
     height: @input-box-height;
   }
   .@{prefixClass}-input,
-  .rc-time-picker-input {
+  .@{timePickerClass}-input {
     padding: 1px 7px;
     height: 22px;
   }
@@ -84,7 +75,7 @@
     display: none;
   }
 
-  .@{prefixClass}-calendar-body,
+  .@{prefixClass}-body,
   .@{prefixClass}-decade-panel-body,
   .@{prefixClass}-year-panel-body,
   .@{prefixClass}-month-panel-body {
