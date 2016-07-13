@@ -15,6 +15,7 @@ export default {
   decadeSelect: 'Choose a decade',
   yearFormat: 'yyyy',
   dateFormat: 'M/d/yyyy',
+  dayFormat: 'd',
   dateTimeFormat: 'M/d/yyyy HH:mm:ss',
   monthFormat: 'MMMM',
   monthBeforeYear: true,

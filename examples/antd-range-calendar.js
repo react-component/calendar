@@ -7,9 +7,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 const formatter = new GregorianCalendarFormat('yyyy-MM-dd HH:mm:ss');
 import GregorianCalendar from 'gregorian-calendar';
-import zhCn from 'gregorian-calendar/lib/locale/zh_CN';
-import CalendarLocale from 'rc-calendar/src/locale/zh_CN';
-import TimePickerLocale from 'rc-time-picker/lib/locale/zh_CN';
+import zhCn from 'gregorian-calendar/lib/locale/en_US';
+import CalendarLocale from 'rc-calendar/src/locale/en_US';
+import TimePickerLocale from 'rc-time-picker/lib/locale/en_US';
 import Picker from 'rc-calendar/src/Picker';
 
 import 'rc-time-picker/assets/index.css';
@@ -61,7 +61,7 @@ const Test = React.createClass({
     const calendar = (
       <RangeCalendar
         showWeekNumber={false}
-        dateInputPlaceholder={['开始日期', '结束日期']}
+        dateInputPlaceholder={['start', 'end']}
         defaultValue={[now, now]}
         locale={CalendarLocale}
         disabledDate={disabledDate}
@@ -79,7 +79,7 @@ const Test = React.createClass({
         ({ value }) => {
           return (<span>
                 <input
-                  placeholder="请选择日期"
+                  placeholder="please select"
                   style={{ width: 350 }}
                   disabled={state.disabled}
                   readOnly
@@ -100,7 +100,7 @@ ReactDOM.render(
       <RangeCalendar
         showWeekNumber
         defaultValue={now}
-        dateInputPlaceholder={['开始日期', '结束日期']}
+        dateInputPlaceholder={['start', 'end']}
         locale={CalendarLocale}
         showOk={false}
         showClear

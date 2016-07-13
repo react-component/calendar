@@ -5,12 +5,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Calendar from 'rc-calendar';
 import DatePicker from 'rc-calendar/src/Picker';
-import zhCn from 'gregorian-calendar/lib/locale/zh_CN';
+import zhCn from 'gregorian-calendar/lib/locale/en_US';
 import DateTimeFormat from 'gregorian-calendar-format';
 import GregorianCalendar from 'gregorian-calendar';
-import CalendarLocale from 'rc-calendar/src/locale/zh_CN';
+import CalendarLocale from 'rc-calendar/src/locale/en_US';
 import assign from 'object-assign';
-import TimePickerLocale from 'rc-time-picker/lib/locale/zh_CN';
+import TimePickerLocale from 'rc-time-picker/lib/locale/en_US';
 
 import 'rc-time-picker/assets/index.css';
 import TimePickerPanel from 'rc-time-picker/lib/module/Panel';
@@ -41,7 +41,7 @@ const CalendarLocale2 = assign({}, CalendarLocale, {
 });
 
 const dateFormatter = new DateTimeFormat('yyyy-MM-dd');
-const formatter = new DateTimeFormat('yyyy年MM月dd日 HH时mm分ss秒');
+const formatter = new DateTimeFormat('yyyy-MM-dd HH:mm:ss');
 
 function getFormatter(showTime) {
   return showTime ? formatter : dateFormatter;
@@ -108,7 +108,7 @@ const Test = React.createClass({
     const calendar = (<Calendar
       locale={CalendarLocale2}
       style={{ zIndex: 1000 }}
-      dateInputPlaceholder="请输入"
+      dateInputPlaceholder="please input"
       formatter={getFormatter(state.showTime)}
       disabledTime={state.showTime ? disabledTime : null}
       timePicker={state.showTime ? timePickerElement : null}
@@ -166,7 +166,7 @@ const Test = React.createClass({
               return (
                 <span tabIndex="0">
                 <input
-                  placeholder="请选择日期"
+                  placeholder="please select"
                   style={{ width: 250 }}
                   disabled={state.disabled}
                   readOnly
