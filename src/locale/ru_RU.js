@@ -13,6 +13,7 @@ export default {
   decadeSelect: 'Выберите десятилетие',
   yearFormat: 'yyyy',
   dateFormat: 'd-M-yyyy',
+  dateTimeFormat: 'd-M-yyyy HH:mm:ss',
   monthFormat: 'MMMM',
   monthBeforeYear: true,
   previousMonth: 'Предыдущий месяц (PageUp)',

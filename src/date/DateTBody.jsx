@@ -220,7 +220,7 @@ const DateTBody = React.createClass({
           {dateCells}
         </tr>);
     }
-    return (<tbody className={`${prefixCls}tbody`}>
+    return (<tbody className={`${prefixCls}-tbody`}>
     {tableHtml}
     </tbody>);
   },

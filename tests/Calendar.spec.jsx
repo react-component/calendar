@@ -357,6 +357,7 @@ describe('Calendar', () => {
       }
 
       ReactDOM.render(<Calendar
+        formatter={formatter}
         showToday
         onSelect={onSelect}
         onChange={onChange}

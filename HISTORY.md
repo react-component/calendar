@@ -1,6 +1,11 @@
 # History
 ----
 
+## 6.0.0 / 2016-07-13
+
+- use rc-time-picker/lib/module/panel as timepicker element
+- merge date input and time input. formatter can control time part.
+
 ## 5.6.0 / 2016-06-20
 
 - optimize keyboard, add onKeyDown for Picker children

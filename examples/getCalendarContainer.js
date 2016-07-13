@@ -48,7 +48,7 @@ const Test = React.createClass({
         <div style={{ marginTop: 20 }}>
           <DatePicker
             getCalendarContainer={this.getCalendarContainer}
-            calendar={<Calendar />}
+            calendar={<Calendar formatter={dateFormatter}/>}
           >
             {
               ({ value }) => {

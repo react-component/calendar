@@ -255,7 +255,7 @@ const RangeCalendar = React.createClass({
     const cls = classnames({
       [`${prefixCls}-footer`]: true,
       [`${prefixCls}-range-bottom`]: true,
-      [`${prefixCls}-footer-showOk`]: showOkButton,
+      [`${prefixCls}-footer-show-ok`]: showOkButton,
     });
     return (<div
       ref="root"

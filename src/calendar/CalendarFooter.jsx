@@ -38,7 +38,7 @@ const CalendarFooter = React.createClass({
         nowEl = <TodayButton {...props} value={value}/>;
       }
       let okBtn;
-      if (showOk === true || !!props.timePicker) {
+      if (showOk === true || showOk !== false && !!props.timePicker) {
         okBtn = <OkButton {...props}/>;
       }
       let timePickerBtn;
@@ -54,7 +54,7 @@ const CalendarFooter = React.createClass({
       }
       const cls = cx({
         [`${prefixCls}-footer`]: true,
-        [`${prefixCls}-footer-showOk`]: okBtn,
+        [`${prefixCls}-footer-show-ok`]: okBtn,
       });
       footerEl = (
         <div className={cls}>

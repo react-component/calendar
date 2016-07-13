@@ -66,6 +66,7 @@ const Test = React.createClass({
         locale={CalendarLocale}
         disabledDate={disabledDate}
         timePicker={timePickerElement}
+        formatter={formatter}
       />
     );
     return (<Picker
@@ -83,7 +84,7 @@ const Test = React.createClass({
                   disabled={state.disabled}
                   readOnly
                   className="ant-calendar-picker-input ant-input"
-                  value={isValidRange(value) && `${format(value[0])} - ${format(value[1])}`}
+                  value={isValidRange(value) && `${format(value[0])} - ${format(value[1])}` || ''}
                 />
                 </span>);
         }

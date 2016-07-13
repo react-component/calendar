@@ -212,7 +212,7 @@
         height: 24px;
       }
     }
-    &-showOk {
+    &-show-ok {
       text-align: right;
       .@{prefixClass} {
         &-footer-btn {
@@ -220,7 +220,8 @@
         }
 
         &-time-picker-btn {
-          padding:0 12px;
+          margin-left: 0;
+          padding: 0 12px;
         }
         &-today-btn {
           float: left;
@@ -232,6 +233,18 @@
 
   &-footer-btn {
     margin-top: 2px;
+
+    &:after {
+      content: 'x';
+      height: 0;
+      font-size: 0;
+      overflow: hidden;
+      clear: both;
+    }
+  }
+
+  &-time-picker-btn {
+    margin-left: 10px;
   }
 
   &-today-btn, &-ok-btn, &-time-picker-btn {

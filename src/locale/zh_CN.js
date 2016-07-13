@@ -19,6 +19,7 @@ export default {
   monthFormat: 'M\'月\'',
   dayFormat: 'd\'日\'',
   dateFormat: 'yyyy\'年\'M\'月\'d\'日\'',
+  dateTimeFormat: 'yyyy\'年\'M\'月\'d\'日\' HH\'时\'mm\'分\'ss\'秒\'',
   previousYear: '上一年 (Control键加左方向键)',
   nextYear: '下一年 (Control键加右方向键)',
   previousDecade: '上一年代',

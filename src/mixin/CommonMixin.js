@@ -23,7 +23,6 @@ export default {
       style: {},
       visible: true,
       prefixCls: 'rc-calendar',
-      formatter: 'yyyy-MM-dd',
       className: '',
       onSelect: noop,
       onChange: noop,
@@ -36,8 +35,15 @@ export default {
   },
 
   getFormatter() {
-    const formatter = this.props.formatter;
+    let formatter = this.props.formatter;
     const locale = this.props.locale;
+    if (!formatter) {
+      if (this.props.timePicker) {
+        formatter = locale.dateTimeFormat;
+      } else {
+        formatter = locale.dateFormat;
+      }
+    }
     if (this.normalFormatter && formatter === this.lastFormatter) {
       return this.normalFormatter;
     }

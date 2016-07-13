@@ -93,6 +93,7 @@ describe('RangeCalendar', () => {
     now.set(2015, 8, 29);
     ReactDOM.unmountComponentAtNode(container);
     calendar = ReactDOM.render(<RangeCalendar
+      formatter={formatter}
       onSelect={onSelect}
       defaultValue={now}
       showWeekNumber

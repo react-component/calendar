@@ -8,7 +8,7 @@
     width: 250px;
     position: relative;
 
-    .@{timePickerClass} {
+    .@{prefixClass}-time-picker {
       top: 69px;
       &-panel {
         &-select {
@@ -20,7 +20,7 @@
 
   &-left {
     float: left;
-    .@{timePickerClass}-panel {
+    .@{prefixClass}-time-picker-panel {
       &-select:last-child {
         border-right: 1px solid #e9e9e9;
       }
@@ -30,7 +30,7 @@
 
   &-right {
     float: right;
-    .@{timePickerClass}-panel {
+    .@{prefixClass}-time-picker-panel {
       left: 21px;
 
       &-select:first-child {
@@ -39,14 +39,8 @@
     }
   }
 
-  &-right .@{prefixClass}-input-wrap {
-    margin-left: -69px;
-  }
-
   &-middle {
     position: absolute;
-    left: 180px;
-    width: 20px;
     margin-left: -10px;
     text-align: center;
     height: @input-box-height;
@@ -59,9 +53,6 @@
     clear:both;
     visibility:hidden;
   }
-  .@{prefixClass}-date-input-wrap {
-    width: 172px;
-  }
 
   .@{prefixClass}-input-wrap {
     height: @input-box-height;
@@ -70,9 +61,6 @@
   .@{timePickerClass}-input {
     padding: 1px 7px;
     height: 22px;
-  }
-  .rc-time-picker-icon {
-    display: none;
   }
 
   .@{prefixClass}-body,
@@ -88,7 +76,7 @@
     .@{prefixClass}-range {
       &-part {
         width: 286px;
-        .@{timePickerClass} {
+        .@{prefixClass}-time-picker {
           top: 69px;
           &-panel {
             &-select {
@@ -98,11 +86,8 @@
         }
       }
       &-right {
-        .@{timePickerClass}-panel {
+        .@{prefixClass}-time-picker-panel {
           left: 21px;
-        }
-        .@{prefixClass}-input-wrap {
-          margin-left: -101px;
         }
       }
     }

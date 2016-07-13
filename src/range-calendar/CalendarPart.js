@@ -37,7 +37,7 @@ const CalendarPart = React.createClass({
     };
     const index = direction === 'left' ? 0 : 1;
 
-    const timePickerEle = React.cloneElement(timePicker, {
+    const timePickerEle = timePicker && React.cloneElement(timePicker, {
       formatter,
       showHour: true,
       showSecond: true,

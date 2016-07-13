@@ -202,7 +202,6 @@ const Calendar = React.createClass({
       getTimeConfig(selectedValue, disabledTime) : null;
 
     const timePickerEle = timePicker && showTimePicker ? React.cloneElement(timePicker, {
-      prefixCls: 'rc-time-picker-panel',
       showHour: true,
       formatter: this.getFormatter(),
       showSecond: true,
@@ -245,13 +244,13 @@ const Calendar = React.createClass({
           prefixCls={prefixCls}
         />
         {timePicker && showTimePicker ?
-          (<div className="rc-time-picker">
-            <div className={`rc-time-picker-panel`}>
+          (<div className={`${prefixCls}-time-picker`}>
+            <div className={`${prefixCls}-time-picker-panel`}>
               {timePickerEle }
             </div>
           </div>)
         : null}
-        <div className={`${prefixCls}-calendar-body`}>
+        <div className={`${prefixCls}-body`}>
           <DateTable
             locale={locale}
             value={value}
