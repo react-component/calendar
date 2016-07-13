@@ -21,6 +21,7 @@ const CalendarHeader = React.createClass({
     enablePrev: PropTypes.any,
     enableNext: PropTypes.any,
     prefixCls: PropTypes.string,
+    showTimePicker: PropTypes.bool,
     locale: PropTypes.object,
     value: PropTypes.object,
     onValueChange: PropTypes.func,
@@ -37,6 +38,7 @@ const CalendarHeader = React.createClass({
     const props = this.props;
     this.yearFormatter = getFormatter(props.locale.yearFormat, props.locale);
     this.monthFormatter = getFormatter(props.locale.monthFormat, props.locale);
+    this.dayFormatter = getFormatter(props.locale.dayFormat, props.locale);
     this.nextMonth = goMonth.bind(this, 1);
     this.previousMonth = goMonth.bind(this, -1);
     this.nextYear = goYear.bind(this, 1);
@@ -61,7 +63,7 @@ const CalendarHeader = React.createClass({
     this.props.onValueChange(value);
   },
 
-  getMonthYearElement() {
+  getMonthYearElement(showTimePicker) {
     const props = this.props;
     const prefixCls = props.prefixCls;
     const locale = props.locale;
@@ -84,11 +86,20 @@ const CalendarHeader = React.createClass({
     >
       {this.monthFormatter.format(value)}
     </a>);
+    let day;
+    if (showTimePicker) {
+      day = (<a
+        className={`${prefixCls}-day-select`}
+        role="button"
+      >
+        {this.dayFormatter.format(value)}
+      </a>);
+    }
     let my = [];
     if (monthBeforeYear) {
-      my = [month, year];
+      my = [month, day, year];
     } else {
-      my = [year, month];
+      my = [year, month, day];
     }
     return (<span className={selectClassName}>
     {toFragment(my)}
@@ -115,7 +126,7 @@ const CalendarHeader = React.createClass({
 
   render() {
     const props = this.props;
-    const { enableNext, enablePrev, prefixCls, locale, value } = props;
+    const { enableNext, enablePrev, prefixCls, locale, value, showTimePicker } = props;
     const state = this.state;
     let PanelClass = null;
     if (state.showMonthPanel) {
@@ -134,7 +145,7 @@ const CalendarHeader = React.createClass({
     }
     return (<div className={`${prefixCls}-header`}>
       <div style={{ position: 'relative' }}>
-        {this.showIf(enablePrev, <a
+        {this.showIf(enablePrev && !showTimePicker, <a
           className={`${prefixCls}-prev-year-btn`}
           role="button"
           onClick={this.previousYear}
@@ -142,7 +153,7 @@ const CalendarHeader = React.createClass({
         >
           «
         </a>)}
-        {this.showIf(enablePrev, <a
+        {this.showIf(enablePrev && !showTimePicker, <a
           className={`${prefixCls}-prev-month-btn`}
           role="button"
           onClick={this.previousMonth}
@@ -150,15 +161,15 @@ const CalendarHeader = React.createClass({
         >
           ‹
         </a>)}
-        {this.getMonthYearElement()}
-        {this.showIf(enableNext, <a
+        {this.getMonthYearElement(showTimePicker)}
+        {this.showIf(enableNext && !showTimePicker, <a
           className={`${prefixCls}-next-month-btn`}
           onClick={this.nextMonth}
           title={locale.nextMonth}
         >
           ›
         </a>)}
-        {this.showIf(enableNext, <a
+        {this.showIf(enableNext && !showTimePicker, <a
           className={`${prefixCls}-next-year-btn`}
           onClick={this.nextYear}
           title={locale.nextYear}

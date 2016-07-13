@@ -13,8 +13,9 @@ import assign from 'object-assign';
 import TimePickerLocale from 'rc-time-picker/lib/locale/zh_CN';
 
 import 'rc-time-picker/assets/index.css';
-import TimePicker from 'rc-time-picker';
-const timePickerElement = <TimePicker locale={TimePickerLocale}/>;
+import TimePickerPanel from 'rc-time-picker/lib/module/Panel';
+
+const timePickerElement = <TimePickerPanel locale={TimePickerLocale} />;
 
 function disabledTime(date) {
   if (date && (date.getDayOfMonth() === 15)) {
@@ -40,7 +41,7 @@ const CalendarLocale2 = assign({}, CalendarLocale, {
 });
 
 const dateFormatter = new DateTimeFormat('yyyy-MM-dd');
-const formatter = new DateTimeFormat('yyyy-MM-dd HH:mm:ss');
+const formatter = new DateTimeFormat('yyyy年MM月dd日 HH时mm分ss秒');
 
 function getFormatter(showTime) {
   return showTime ? formatter : dateFormatter;
@@ -108,6 +109,7 @@ const Test = React.createClass({
       locale={CalendarLocale2}
       style={{ zIndex: 1000 }}
       dateInputPlaceholder="请输入"
+      formatter={getFormatter(state.showTime)}
       disabledTime={state.showTime ? disabledTime : null}
       timePicker={state.showTime ? timePickerElement : null}
       defaultValue={this.props.defaultCalendarValue}
@@ -156,6 +158,7 @@ const Test = React.createClass({
           disabled={state.disabled}
           calendar={calendar}
           value={state.value}
+          formatter={formatter}
           onChange={this.onChange}
         >
           {
@@ -187,7 +190,7 @@ function onStandaloneSelect(value) {
 }
 
 function onStandaloneChange(value) {
-  console.log('onStandaloneChange');
+  console.log('onStandaloneChange', formatter.format(value));
   console.log(value && formatter.format(value));
 }
 
@@ -210,6 +213,7 @@ ReactDOM.render((<div
         defaultValue={now}
         disabledTime={disabledTime}
         showToday
+        formatter={getFormatter(true)}
         showOk={false}
         timePicker={timePickerElement}
         onChange={onStandaloneChange}

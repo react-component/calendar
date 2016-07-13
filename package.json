@@ -1,6 +1,6 @@
 {
   "name": "rc-calendar",
-  "version": "5.6.2",
+  "version": "5.7.0",
   "description": "React Calendar",
   "keywords": [
     "react",
@@ -27,7 +27,7 @@
   },
   "licenses": "MIT",
   "config": {
-    "port": 8001
+    "port": 8002
   },
   "scripts": {
     "build": "rc-tools run build",

@@ -7,33 +7,61 @@
   &-part {
     width: 250px;
     position: relative;
+
+    .@{timePickerClass} {
+      top: 69px;
+      &-panel {
+        &-select {
+          width: 77px;
+        }
+      }
+    }
   }
 
   &-left {
     float: left;
+    .@{timePickerClass}-panel {
+      &-select:last-child {
+        border-right: 1px solid #e9e9e9;
+      }
+
+    }
   }
 
   &-right {
     float: right;
+    .@{timePickerClass}-panel {
+      left: 21px;
+
+      &-select:first-child {
+        border-left: 1px solid #e9e9e9;
+      }
+    }
   }
 
   &-right .@{prefixClass}-input-wrap {
-    margin-left: -39px;
+    margin-left: -69px;
   }
 
   &-middle {
     position: absolute;
-    left: 41%;
+    left: 180px;
     width: 20px;
     margin-left: -10px;
     text-align: center;
     height: @input-box-height;
     line-height: @input-box-height;
   }
-
+  .@{prefixClass}-date-panel::after {
+    content:".";
+    display:block;
+    height:0;
+    clear:both;
+    visibility:hidden;
+  }
   .@{prefixClass}-date-input-wrap,
   .@{prefixClass}-time-picker-wrap {
-    width: 37%;
+    width: 172px;
   }
 
   .@{prefixClass}-time-picker-wrap {
@@ -49,8 +77,6 @@
   }
   .@{prefixClass}-input,
   .rc-time-picker-input {
-    border: 1px solid #d9d9d9;
-    border-radius: 6px;
     padding: 1px 7px;
     height: 22px;
   }
@@ -68,8 +94,26 @@
   &.@{prefixClass}-week-number {
     width: 574px;
 
-    .@{prefixClass}-range-part {
-      width: 286px;
+    .@{prefixClass}-range {
+      &-part {
+        width: 286px;
+        .@{timePickerClass} {
+          top: 69px;
+          &-panel {
+            &-select {
+              width: 89px;
+            }
+          }
+        }
+      }
+      &-right {
+        .@{timePickerClass}-panel {
+          left: 21px;
+        }
+        .@{prefixClass}-input-wrap {
+          margin-left: -101px;
+        }
+      }
     }
   }
 
@@ -94,11 +138,17 @@
   &-bottom {
     text-align: right;
   }
+
+  .@{prefixClass}-footer{
+    border-top: none;
+    &-btn {
+      padding-right: 12px;
+    }
+  }
   .@{prefixClass}-ok-btn {
     position: static;
-    margin: 9px;
   }
   .@{prefixClass}-today-btn {
-    margin: 12px 9px 0;
+    float: left;
   }
 }

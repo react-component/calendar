@@ -61,7 +61,7 @@
     }
   }
 
-  &-year-select, &-month-select {
+  &-year-select, &-month-select, &-day-select {
     display: inline-block;
     font-size: 12px;
     font-weight: bold;
@@ -212,15 +212,30 @@
         height: 24px;
       }
     }
+    &-showOk {
+      text-align: right;
+      .@{prefixClass} {
+        &-footer-btn {
+          padding-right: 12px;
+        }
+
+        &-time-picker-btn {
+          padding:0 12px;
+        }
+        &-today-btn {
+          float: left;
+          padding-left: 12px;
+        }
+      }
+    }
   }
 
   &-footer-btn {
     margin-top: 2px;
   }
 
-  &-today-btn, &-ok-btn {
+  &-today-btn, &-ok-btn, &-time-picker-btn {
     display: inline-block;
-    padding: 4px 5px;
     text-align: center;
     color: #f46830;
 
