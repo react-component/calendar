@@ -4,7 +4,7 @@ import toFragment from 'rc-util/lib/Children/mapSelf';
 import cx from 'classnames';
 import TodayButton from '../calendar/TodayButton';
 import OkButton from '../calendar/OkButton';
-import TimePickerButton from '../calendar/TimepickerButton';
+import TimePickerButton from '../calendar/TimePickerButton';
 
 const CalendarFooter = React.createClass({
   propTypes: {

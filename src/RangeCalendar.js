@@ -5,7 +5,7 @@ import CalendarPart from './range-calendar/CalendarPart';
 import { syncTime, getTodayTime } from './util/';
 import TodayButton from './calendar/TodayButton';
 import OkButton from './calendar/OkButton';
-import TimePickerButton from './calendar/TimepickerButton';
+import TimePickerButton from './calendar/TimePickerButton';
 import CommonMixin from './mixin/CommonMixin';
 
 function noop() {

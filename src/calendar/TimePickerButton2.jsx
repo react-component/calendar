@@ -9,6 +9,6 @@ export default function TimePickerButton({
     role="button"
     onClick={showTimePicker ? onCloseTimePicker : onOpenTimePicker}
   >
-    {showTimePicker ? locale.hideTimePicker : locale.showTimePicker}
+    {showTimePicker ? locale.dateSelect : locale.timeSelect}
   </a>);
 }

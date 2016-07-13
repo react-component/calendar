@@ -8,6 +8,8 @@ export default {
   clear: 'Clear',
   month: 'Month',
   year: 'Year',
+  timeSelect: 'Select time',
+  dateSelect: 'Select date',
   monthSelect: 'Choose a month',
   yearSelect: 'Choose a year',
   decadeSelect: 'Choose a decade',
