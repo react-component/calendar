@@ -23894,7 +23894,8 @@
 /* 194 */,
 /* 195 */,
 /* 196 */,
-/* 197 */
+/* 197 */,
+/* 198 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23905,7 +23906,7 @@
 	
 	var _react = __webpack_require__(3);
 	
-	var _en_US = __webpack_require__(198);
+	var _en_US = __webpack_require__(199);
 	
 	var _en_US2 = _interopRequireDefault(_en_US);
 	
@@ -23933,7 +23934,6 @@
 	      style: {},
 	      visible: true,
 	      prefixCls: 'rc-calendar',
-	      formatter: 'yyyy-MM-dd',
 	      className: '',
 	      onSelect: noop,
 	      onChange: noop,
@@ -23946,6 +23946,13 @@
 	  getFormatter: function getFormatter() {
 	    var formatter = this.props.formatter;
 	    var locale = this.props.locale;
+	    if (!formatter) {
+	      if (this.props.timePicker) {
+	        formatter = locale.dateTimeFormat;
+	      } else {
+	        formatter = locale.dateFormat;
+	      }
+	    }
 	    if (this.normalFormatter && formatter === this.lastFormatter) {
 	      return this.normalFormatter;
 	    }
@@ -23962,7 +23969,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 198 */
+/* 199 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23985,11 +23992,14 @@
 	  clear: 'Clear',
 	  month: 'Month',
 	  year: 'Year',
+	  timeSelect: 'Select time',
+	  dateSelect: 'Select date',
 	  monthSelect: 'Choose a month',
 	  yearSelect: 'Choose a year',
 	  decadeSelect: 'Choose a decade',
 	  yearFormat: 'yyyy',
 	  dateFormat: 'M/d/yyyy',
+	  dateTimeFormat: 'M/d/yyyy HH:mm:ss',
 	  monthFormat: 'MMMM',
 	  monthBeforeYear: true,
 	  previousMonth: 'Previous month (PageUp)',
@@ -24005,9 +24015,9 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 199 */,
 /* 200 */,
-/* 201 */
+/* 201 */,
+/* 202 */
 /***/ function(module, exports) {
 
 	/**
@@ -24034,16 +24044,16 @@
 	module.exports = createChainedFunction;
 
 /***/ },
-/* 202 */,
-/* 203 */
+/* 203 */,
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	module.exports = __webpack_require__(204);
+	module.exports = __webpack_require__(205);
 
 /***/ },
-/* 204 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24064,23 +24074,23 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _createChainedFunction = __webpack_require__(201);
+	var _createChainedFunction = __webpack_require__(202);
 	
 	var _createChainedFunction2 = _interopRequireDefault(_createChainedFunction);
 	
-	var _contains = __webpack_require__(205);
+	var _contains = __webpack_require__(206);
 	
 	var _contains2 = _interopRequireDefault(_contains);
 	
-	var _addEventListener = __webpack_require__(206);
+	var _addEventListener = __webpack_require__(207);
 	
 	var _addEventListener2 = _interopRequireDefault(_addEventListener);
 	
-	var _Popup = __webpack_require__(210);
+	var _Popup = __webpack_require__(211);
 	
 	var _Popup2 = _interopRequireDefault(_Popup);
 	
-	var _utils = __webpack_require__(233);
+	var _utils = __webpack_require__(234);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -24488,7 +24498,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 205 */
+/* 206 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -24506,7 +24516,7 @@
 	};
 
 /***/ },
-/* 206 */
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24518,7 +24528,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _addDomEventListener = __webpack_require__(207);
+	var _addDomEventListener = __webpack_require__(208);
 	
 	var _addDomEventListener2 = _interopRequireDefault(_addDomEventListener);
 	
@@ -24537,7 +24547,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 207 */
+/* 208 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24549,7 +24559,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _EventObject = __webpack_require__(208);
+	var _EventObject = __webpack_require__(209);
 	
 	var _EventObject2 = _interopRequireDefault(_EventObject);
 	
@@ -24579,7 +24589,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 208 */
+/* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -24596,7 +24606,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _EventBaseObject = __webpack_require__(209);
+	var _EventBaseObject = __webpack_require__(210);
 	
 	var _EventBaseObject2 = _interopRequireDefault(_EventBaseObject);
 	
@@ -24862,7 +24872,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 209 */
+/* 210 */
 /***/ function(module, exports) {
 
 	/**
@@ -24930,7 +24940,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 210 */
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24949,19 +24959,19 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _rcAlign = __webpack_require__(211);
+	var _rcAlign = __webpack_require__(212);
 	
 	var _rcAlign2 = _interopRequireDefault(_rcAlign);
 	
-	var _rcAnimate = __webpack_require__(222);
+	var _rcAnimate = __webpack_require__(223);
 	
 	var _rcAnimate2 = _interopRequireDefault(_rcAnimate);
 	
-	var _PopupInner = __webpack_require__(231);
+	var _PopupInner = __webpack_require__(232);
 	
 	var _PopupInner2 = _interopRequireDefault(_PopupInner);
 	
-	var _LazyRenderBox = __webpack_require__(232);
+	var _LazyRenderBox = __webpack_require__(233);
 	
 	var _LazyRenderBox2 = _interopRequireDefault(_LazyRenderBox);
 	
@@ -25159,7 +25169,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 211 */
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25168,7 +25178,7 @@
 	  value: true
 	});
 	
-	var _Align = __webpack_require__(212);
+	var _Align = __webpack_require__(213);
 	
 	var _Align2 = _interopRequireDefault(_Align);
 	
@@ -25179,7 +25189,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 212 */
+/* 213 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25196,15 +25206,15 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _domAlign = __webpack_require__(213);
+	var _domAlign = __webpack_require__(214);
 	
 	var _domAlign2 = _interopRequireDefault(_domAlign);
 	
-	var _addEventListener = __webpack_require__(206);
+	var _addEventListener = __webpack_require__(207);
 	
 	var _addEventListener2 = _interopRequireDefault(_addEventListener);
 	
-	var _isWindow = __webpack_require__(221);
+	var _isWindow = __webpack_require__(222);
 	
 	var _isWindow2 = _interopRequireDefault(_isWindow);
 	
@@ -25326,7 +25336,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 213 */
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -25342,27 +25352,27 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _utils = __webpack_require__(214);
+	var _utils = __webpack_require__(215);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
-	var _getOffsetParent = __webpack_require__(215);
+	var _getOffsetParent = __webpack_require__(216);
 	
 	var _getOffsetParent2 = _interopRequireDefault(_getOffsetParent);
 	
-	var _getVisibleRectForElement = __webpack_require__(216);
+	var _getVisibleRectForElement = __webpack_require__(217);
 	
 	var _getVisibleRectForElement2 = _interopRequireDefault(_getVisibleRectForElement);
 	
-	var _adjustForViewport = __webpack_require__(217);
+	var _adjustForViewport = __webpack_require__(218);
 	
 	var _adjustForViewport2 = _interopRequireDefault(_adjustForViewport);
 	
-	var _getRegion = __webpack_require__(218);
+	var _getRegion = __webpack_require__(219);
 	
 	var _getRegion2 = _interopRequireDefault(_getRegion);
 	
-	var _getElFuturePos = __webpack_require__(219);
+	var _getElFuturePos = __webpack_require__(220);
 	
 	var _getElFuturePos2 = _interopRequireDefault(_getElFuturePos);
 	
@@ -25549,7 +25559,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 214 */
+/* 215 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26047,7 +26057,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 215 */
+/* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26058,7 +26068,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _utils = __webpack_require__(214);
+	var _utils = __webpack_require__(215);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
@@ -26105,7 +26115,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 216 */
+/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26116,11 +26126,11 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _utils = __webpack_require__(214);
+	var _utils = __webpack_require__(215);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
-	var _getOffsetParent = __webpack_require__(215);
+	var _getOffsetParent = __webpack_require__(216);
 	
 	var _getOffsetParent2 = _interopRequireDefault(_getOffsetParent);
 	
@@ -26186,7 +26196,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 217 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26197,7 +26207,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _utils = __webpack_require__(214);
+	var _utils = __webpack_require__(215);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
@@ -26246,7 +26256,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 218 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26257,7 +26267,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _utils = __webpack_require__(214);
+	var _utils = __webpack_require__(215);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
@@ -26287,7 +26297,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 219 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26298,7 +26308,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _getAlignOffset = __webpack_require__(220);
+	var _getAlignOffset = __webpack_require__(221);
 	
 	var _getAlignOffset2 = _interopRequireDefault(_getAlignOffset);
 	
@@ -26328,7 +26338,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 220 */
+/* 221 */
 /***/ function(module, exports) {
 
 	/**
@@ -26373,7 +26383,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 221 */
+/* 222 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -26390,16 +26400,16 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 222 */
+/* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	// export this package's api
-	module.exports = __webpack_require__(223);
+	module.exports = __webpack_require__(224);
 
 /***/ },
-/* 223 */
+/* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26412,13 +26422,13 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _ChildrenUtils = __webpack_require__(224);
+	var _ChildrenUtils = __webpack_require__(225);
 	
-	var _AnimateChild = __webpack_require__(225);
+	var _AnimateChild = __webpack_require__(226);
 	
 	var _AnimateChild2 = _interopRequireDefault(_AnimateChild);
 	
-	var _util = __webpack_require__(230);
+	var _util = __webpack_require__(231);
 	
 	var _util2 = _interopRequireDefault(_util);
 	
@@ -26718,7 +26728,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 224 */
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26836,7 +26846,7 @@
 	}
 
 /***/ },
-/* 225 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26853,11 +26863,11 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _cssAnimation = __webpack_require__(226);
+	var _cssAnimation = __webpack_require__(227);
 	
 	var _cssAnimation2 = _interopRequireDefault(_cssAnimation);
 	
-	var _util = __webpack_require__(230);
+	var _util = __webpack_require__(231);
 	
 	var _util2 = _interopRequireDefault(_util);
 	
@@ -26935,7 +26945,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 226 */
+/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26944,11 +26954,11 @@
 	  value: true
 	});
 	
-	var _Event = __webpack_require__(227);
+	var _Event = __webpack_require__(228);
 	
 	var _Event2 = _interopRequireDefault(_Event);
 	
-	var _componentClasses = __webpack_require__(228);
+	var _componentClasses = __webpack_require__(229);
 	
 	var _componentClasses2 = _interopRequireDefault(_componentClasses);
 	
@@ -27125,7 +27135,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 227 */
+/* 228 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -27218,7 +27228,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 228 */
+/* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -27226,9 +27236,9 @@
 	 */
 	
 	try {
-	  var index = __webpack_require__(229);
+	  var index = __webpack_require__(230);
 	} catch (err) {
-	  var index = __webpack_require__(229);
+	  var index = __webpack_require__(230);
 	}
 	
 	/**
@@ -27415,7 +27425,7 @@
 
 
 /***/ },
-/* 229 */
+/* 230 */
 /***/ function(module, exports) {
 
 	module.exports = function(arr, obj){
@@ -27427,7 +27437,7 @@
 	};
 
 /***/ },
-/* 230 */
+/* 231 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -27459,7 +27469,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 231 */
+/* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27472,7 +27482,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _LazyRenderBox = __webpack_require__(232);
+	var _LazyRenderBox = __webpack_require__(233);
 	
 	var _LazyRenderBox2 = _interopRequireDefault(_LazyRenderBox);
 	
@@ -27516,7 +27526,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 232 */
+/* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27564,7 +27574,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 233 */
+/* 234 */
 /***/ function(module, exports) {
 
 	'use strict';

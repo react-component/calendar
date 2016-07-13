@@ -27,11 +27,11 @@ webpackJsonp([0],{
 	
 	var _rcCalendar2 = _interopRequireDefault(_rcCalendar);
 	
-	var _Picker = __webpack_require__(200);
+	var _Picker = __webpack_require__(201);
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _zh_CN = __webpack_require__(234);
+	var _zh_CN = __webpack_require__(235);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -43,7 +43,7 @@ webpackJsonp([0],{
 	
 	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
 	
-	var _zh_CN3 = __webpack_require__(235);
+	var _zh_CN3 = __webpack_require__(236);
 	
 	var _zh_CN4 = _interopRequireDefault(_zh_CN3);
 	
@@ -51,20 +51,19 @@ webpackJsonp([0],{
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
-	var _zh_CN5 = __webpack_require__(237);
+	var _zh_CN5 = __webpack_require__(238);
 	
 	var _zh_CN6 = _interopRequireDefault(_zh_CN5);
 	
-	__webpack_require__(238);
+	__webpack_require__(239);
 	
-	var _rcTimePicker = __webpack_require__(239);
+	var _Panel = __webpack_require__(240);
 	
-	var _rcTimePicker2 = _interopRequireDefault(_rcTimePicker);
+	var _Panel2 = _interopRequireDefault(_Panel);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var timePickerElement = _react2.default.createElement(_rcTimePicker2.default, { locale: _zh_CN6.default }); // spm error
-	/* eslint react/no-multi-comp:0, no-console:0 */
+	var timePickerElement = _react2.default.createElement(_Panel2.default, { locale: _zh_CN6.default }); /* eslint react/no-multi-comp:0, no-console:0 */
 	
 	function disabledTime(date) {
 	  if (date && date.getDayOfMonth() === 15) {
@@ -90,7 +89,7 @@ webpackJsonp([0],{
 	});
 	
 	var dateFormatter = new _gregorianCalendarFormat2.default('yyyy-MM-dd');
-	var formatter = new _gregorianCalendarFormat2.default('yyyy-MM-dd HH:mm:ss');
+	var formatter = new _gregorianCalendarFormat2.default('yyyy年MM月dd日 HH时mm分ss秒');
 	
 	function getFormatter(showTime) {
 	  return showTime ? formatter : dateFormatter;
@@ -155,6 +154,7 @@ webpackJsonp([0],{
 	      locale: CalendarLocale2,
 	      style: { zIndex: 1000 },
 	      dateInputPlaceholder: '请输入',
+	      formatter: getFormatter(state.showTime),
 	      disabledTime: state.showTime ? disabledTime : null,
 	      timePicker: state.showTime ? timePickerElement : null,
 	      defaultValue: this.props.defaultCalendarValue,
@@ -217,6 +217,7 @@ webpackJsonp([0],{
 	            disabled: state.disabled,
 	            calendar: calendar,
 	            value: state.value,
+	            formatter: formatter,
 	            onChange: this.onChange
 	          },
 	          function (_ref) {
@@ -248,7 +249,7 @@ webpackJsonp([0],{
 	}
 	
 	function onStandaloneChange(value) {
-	  console.log('onStandaloneChange');
+	  console.log('onStandaloneChange', formatter.format(value));
 	  console.log(value && formatter.format(value));
 	}
 	
@@ -279,6 +280,7 @@ webpackJsonp([0],{
 	        defaultValue: now,
 	        disabledTime: disabledTime,
 	        showToday: true,
+	        formatter: getFormatter(true),
 	        showOk: false,
 	        timePicker: timePickerElement,
 	        onChange: onStandaloneChange,
@@ -351,9 +353,15 @@ webpackJsonp([0],{
 	  value: true
 	});
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	var _react = __webpack_require__(3);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(40);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
 	var _gregorianCalendar = __webpack_require__(173);
 	
@@ -375,17 +383,19 @@ webpackJsonp([0],{
 	
 	var _CalendarFooter2 = _interopRequireDefault(_CalendarFooter);
 	
-	var _CalendarMixin = __webpack_require__(196);
+	var _CalendarMixin = __webpack_require__(197);
 	
 	var _CalendarMixin2 = _interopRequireDefault(_CalendarMixin);
 	
-	var _CommonMixin = __webpack_require__(197);
+	var _CommonMixin = __webpack_require__(198);
 	
 	var _CommonMixin2 = _interopRequireDefault(_CommonMixin);
 	
-	var _DateInput = __webpack_require__(199);
+	var _DateInput = __webpack_require__(200);
 	
 	var _DateInput2 = _interopRequireDefault(_DateInput);
+	
+	var _index = __webpack_require__(182);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -462,6 +472,11 @@ webpackJsonp([0],{
 	      showDateInput: true,
 	      timePicker: null,
 	      onOk: noop
+	    };
+	  },
+	  getInitialState: function getInitialState() {
+	    return {
+	      showTimePicker: false
 	    };
 	  },
 	  onKeyDown: function onKeyDown(event) {
@@ -542,6 +557,19 @@ webpackJsonp([0],{
 	  onDateTableSelect: function onDateTableSelect(value) {
 	    this.onSelect(value);
 	  },
+	  getRootDOMNode: function getRootDOMNode() {
+	    return _reactDom2.default.findDOMNode(this);
+	  },
+	  openTimePicker: function openTimePicker() {
+	    this.setState({
+	      showTimePicker: true
+	    });
+	  },
+	  closeTimePicker: function closeTimePicker() {
+	    this.setState({
+	      showTimePicker: false
+	    });
+	  },
 	  chooseToday: function chooseToday() {
 	    var today = this.state.value.clone();
 	    today.setTime(Date.now());
@@ -561,12 +589,25 @@ webpackJsonp([0],{
 	    var state = this.state;
 	    var value = state.value;
 	    var selectedValue = state.selectedValue;
+	    var showTimePicker = state.showTimePicker;
 	
+	    var disabledTimeConfig = disabledTime && timePicker ? (0, _index.getTimeConfig)(selectedValue, disabledTime) : null;
+	
+	    var timePickerEle = timePicker && showTimePicker ? _react2.default.cloneElement(timePicker, _extends({
+	      showHour: true,
+	      formatter: this.getFormatter(),
+	      showSecond: true,
+	      onChange: this.onDateInputChange,
+	      gregorianCalendarLocale: value.locale,
+	      value: selectedValue,
+	      disabledHours: noop,
+	      disabledMinutes: noop,
+	      disabledSeconds: noop
+	    }, disabledTimeConfig)) : null;
 	    var dateInputElement = props.showDateInput ? _react2.default.createElement(_DateInput2.default, {
 	      ref: 'dateInput',
 	      formatter: this.getFormatter(),
 	      key: 'date-input',
-	      timePicker: timePicker,
 	      gregorianCalendarLocale: value.locale,
 	      locale: locale,
 	      placeholder: dateInputPlaceholder,
@@ -588,11 +629,21 @@ webpackJsonp([0],{
 	        locale: locale,
 	        onValueChange: this.setValue,
 	        value: value,
+	        showTimePicker: showTimePicker,
 	        prefixCls: prefixCls
 	      }),
+	      timePicker && showTimePicker ? _react2.default.createElement(
+	        'div',
+	        { className: prefixCls + '-time-picker' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: prefixCls + '-time-picker-panel' },
+	          timePickerEle
+	        )
+	      ) : null,
 	      _react2.default.createElement(
 	        'div',
-	        { className: prefixCls + '-calendar-body' },
+	        { className: prefixCls + '-body' },
 	        _react2.default.createElement(_DateTable2.default, {
 	          locale: locale,
 	          value: value,
@@ -610,6 +661,7 @@ webpackJsonp([0],{
 	        prefixCls: prefixCls,
 	        showToday: props.showToday,
 	        disabledTime: disabledTime,
+	        showTimePicker: showTimePicker,
 	        gregorianCalendarLocale: value.locale,
 	        showDateInput: props.showDateInput,
 	        timePicker: timePicker,
@@ -618,7 +670,9 @@ webpackJsonp([0],{
 	        disabledDate: disabledDate,
 	        onOk: this.onOk,
 	        onSelect: this.onSelect,
-	        onToday: this.chooseToday
+	        onToday: this.chooseToday,
+	        onOpenTimePicker: this.openTimePicker,
+	        onCloseTimePicker: this.closeTimePicker
 	      })
 	    )];
 	
@@ -1058,7 +1112,7 @@ webpackJsonp([0],{
 	    }
 	    return _react2.default.createElement(
 	      'tbody',
-	      { className: prefixCls + 'tbody' },
+	      { className: prefixCls + '-tbody' },
 	      tableHtml
 	    );
 	  }
@@ -1117,6 +1171,7 @@ webpackJsonp([0],{
 	    enablePrev: _react.PropTypes.any,
 	    enableNext: _react.PropTypes.any,
 	    prefixCls: _react.PropTypes.string,
+	    showTimePicker: _react.PropTypes.bool,
 	    locale: _react.PropTypes.object,
 	    value: _react.PropTypes.object,
 	    onValueChange: _react.PropTypes.func
@@ -1132,6 +1187,7 @@ webpackJsonp([0],{
 	    var props = this.props;
 	    this.yearFormatter = (0, _index.getFormatter)(props.locale.yearFormat, props.locale);
 	    this.monthFormatter = (0, _index.getFormatter)(props.locale.monthFormat, props.locale);
+	    this.dayFormatter = (0, _index.getFormatter)(props.locale.dayFormat, props.locale);
 	    this.nextMonth = goMonth.bind(this, 1);
 	    this.previousMonth = goMonth.bind(this, -1);
 	    this.nextYear = goYear.bind(this, 1);
@@ -1154,7 +1210,7 @@ webpackJsonp([0],{
 	    });
 	    this.props.onValueChange(value);
 	  },
-	  getMonthYearElement: function getMonthYearElement() {
+	  getMonthYearElement: function getMonthYearElement(showTimePicker) {
 	    var props = this.props;
 	    var prefixCls = props.prefixCls;
 	    var locale = props.locale;
@@ -1166,7 +1222,7 @@ webpackJsonp([0],{
 	      {
 	        className: prefixCls + '-year-select',
 	        role: 'button',
-	        onClick: this.showYearPanel,
+	        onClick: showTimePicker ? null : this.showYearPanel,
 	        title: locale.monthSelect
 	      },
 	      this.yearFormatter.format(value)
@@ -1176,16 +1232,27 @@ webpackJsonp([0],{
 	      {
 	        className: prefixCls + '-month-select',
 	        role: 'button',
-	        onClick: this.showMonthPanel,
+	        onClick: showTimePicker ? null : this.showMonthPanel,
 	        title: locale.monthSelect
 	      },
 	      this.monthFormatter.format(value)
 	    );
+	    var day = void 0;
+	    if (showTimePicker) {
+	      day = _react2.default.createElement(
+	        'a',
+	        {
+	          className: prefixCls + '-day-select',
+	          role: 'button'
+	        },
+	        this.dayFormatter.format(value)
+	      );
+	    }
 	    var my = [];
 	    if (monthBeforeYear) {
-	      my = [month, year];
+	      my = [month, day, year];
 	    } else {
-	      my = [year, month];
+	      my = [year, month, day];
 	    }
 	    return _react2.default.createElement(
 	      'span',
@@ -1215,6 +1282,7 @@ webpackJsonp([0],{
 	    var prefixCls = props.prefixCls;
 	    var locale = props.locale;
 	    var value = props.value;
+	    var showTimePicker = props.showTimePicker;
 	
 	    var state = this.state;
 	    var PanelClass = null;
@@ -1238,7 +1306,7 @@ webpackJsonp([0],{
 	      _react2.default.createElement(
 	        'div',
 	        { style: { position: 'relative' } },
-	        this.showIf(enablePrev, _react2.default.createElement(
+	        this.showIf(enablePrev && !showTimePicker, _react2.default.createElement(
 	          'a',
 	          {
 	            className: prefixCls + '-prev-year-btn',
@@ -1248,7 +1316,7 @@ webpackJsonp([0],{
 	          },
 	          '«'
 	        )),
-	        this.showIf(enablePrev, _react2.default.createElement(
+	        this.showIf(enablePrev && !showTimePicker, _react2.default.createElement(
 	          'a',
 	          {
 	            className: prefixCls + '-prev-month-btn',
@@ -1258,8 +1326,8 @@ webpackJsonp([0],{
 	          },
 	          '‹'
 	        )),
-	        this.getMonthYearElement(),
-	        this.showIf(enableNext, _react2.default.createElement(
+	        this.getMonthYearElement(showTimePicker),
+	        this.showIf(enableNext && !showTimePicker, _react2.default.createElement(
 	          'a',
 	          {
 	            className: prefixCls + '-next-month-btn',
@@ -1268,7 +1336,7 @@ webpackJsonp([0],{
 	          },
 	          '›'
 	        )),
-	        this.showIf(enableNext, _react2.default.createElement(
+	        this.showIf(enableNext && !showTimePicker, _react2.default.createElement(
 	          'a',
 	          {
 	            className: prefixCls + '-next-year-btn',
@@ -1974,6 +2042,10 @@ webpackJsonp([0],{
 	
 	var _mapSelf2 = _interopRequireDefault(_mapSelf);
 	
+	var _classnames = __webpack_require__(189);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
 	var _TodayButton = __webpack_require__(194);
 	
 	var _TodayButton2 = _interopRequireDefault(_TodayButton);
@@ -1982,9 +2054,13 @@ webpackJsonp([0],{
 	
 	var _OkButton2 = _interopRequireDefault(_OkButton);
 	
-	var _index = __webpack_require__(182);
+	var _TimePickerButton = __webpack_require__(196);
+	
+	var _TimePickerButton2 = _interopRequireDefault(_TimePickerButton);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
 	var CalendarFooter = _react2.default.createClass({
 	  displayName: 'CalendarFooter',
@@ -1993,6 +2069,7 @@ webpackJsonp([0],{
 	    prefixCls: _react.PropTypes.string,
 	    showDateInput: _react.PropTypes.bool,
 	    disabledTime: _react.PropTypes.any,
+	    timePicker: _react.PropTypes.element,
 	    gregorianCalendarLocale: _react.PropTypes.object,
 	    selectedValue: _react.PropTypes.any,
 	    showOk: _react.PropTypes.bool,
@@ -2011,16 +2088,13 @@ webpackJsonp([0],{
 	    var props = this.props;
 	    var value = props.value;
 	    var prefixCls = props.prefixCls;
-	    var showDateInput = props.showDateInput;
-	    var disabledTime = props.disabledTime;
-	    var gregorianCalendarLocale = props.gregorianCalendarLocale;
-	    var selectedValue = props.selectedValue;
 	    var showOk = props.showOk;
+	    var timePicker = props.timePicker;
 	
-	    var timePicker = !showDateInput && props.timePicker || null;
-	    var disabledTimeConfig = disabledTime && timePicker ? (0, _index.getTimeConfig)(selectedValue, disabledTime) : null;
 	    var footerEl = null;
 	    if (props.showToday || timePicker) {
+	      var _cx;
+	
 	      var nowEl = void 0;
 	      if (props.showToday) {
 	        nowEl = _react2.default.createElement(_TodayButton2.default, _extends({}, props, { value: value }));
@@ -2029,28 +2103,23 @@ webpackJsonp([0],{
 	      if (showOk === true || showOk !== false && !!props.timePicker) {
 	        okBtn = _react2.default.createElement(_OkButton2.default, props);
 	      }
+	      var timePickerBtn = void 0;
+	      if (!!props.timePicker) {
+	        timePickerBtn = _react2.default.createElement(_TimePickerButton2.default, props);
+	      }
+	
 	      var footerBtn = void 0;
 	      if (nowEl || okBtn) {
 	        footerBtn = _react2.default.createElement(
 	          'span',
 	          { className: prefixCls + '-footer-btn' },
-	          (0, _mapSelf2.default)([nowEl, okBtn])
+	          (0, _mapSelf2.default)([nowEl, timePickerBtn, okBtn])
 	        );
 	      }
-	      if (timePicker) {
-	        timePicker = _react2.default.cloneElement(timePicker, _extends({
-	          onChange: this.onSelect,
-	          allowEmpty: false,
-	          gregorianCalendarLocale: gregorianCalendarLocale
-	        }, disabledTimeConfig, {
-	          getPopupContainer: this.getRootDOMNode,
-	          value: selectedValue
-	        }));
-	      }
+	      var cls = (0, _classnames2.default)((_cx = {}, _defineProperty(_cx, prefixCls + '-footer', true), _defineProperty(_cx, prefixCls + '-footer-show-ok', okBtn), _cx));
 	      footerEl = _react2.default.createElement(
 	        'div',
-	        { className: prefixCls + '-footer' },
-	        timePicker,
+	        { className: cls },
 	        footerBtn
 	      );
 	    }
@@ -2091,6 +2160,8 @@ webpackJsonp([0],{
 	  var onToday = _ref.onToday;
 	  var text = _ref.text;
 	
+	  var today = value.clone();
+	  today.setTime(Date.now());
 	  var disabledToday = false;
 	  var localeNow = text;
 	  if (!localeNow && timePicker) {
@@ -2160,6 +2231,44 @@ webpackJsonp([0],{
 /***/ },
 
 /***/ 196:
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = TimePickerButton;
+	
+	var _react = __webpack_require__(3);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function TimePickerButton(_ref) {
+	  var prefixCls = _ref.prefixCls;
+	  var locale = _ref.locale;
+	  var showTimePicker = _ref.showTimePicker;
+	  var onOpenTimePicker = _ref.onOpenTimePicker;
+	  var onCloseTimePicker = _ref.onCloseTimePicker;
+	
+	  var className = prefixCls + "-time-picker-btn";
+	  return _react2.default.createElement(
+	    "a",
+	    {
+	      className: className,
+	      role: "button",
+	      onClick: showTimePicker ? onCloseTimePicker : onOpenTimePicker
+	    },
+	    showTimePicker ? locale.dateSelect : locale.timeSelect
+	  );
+	}
+	module.exports = exports['default'];
+
+/***/ },
+
+/***/ 197:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2300,7 +2409,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 199:
+/***/ 200:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2308,8 +2417,6 @@ webpackJsonp([0],{
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var _react = __webpack_require__(3);
 	
@@ -2319,18 +2426,7 @@ webpackJsonp([0],{
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _index = __webpack_require__(182);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function copyTime(target, source) {
-	  if (source) {
-	    target.setHourOfDay(source.getHourOfDay());
-	    target.setMinutes(source.getMinutes());
-	    target.setSeconds(source.getSeconds());
-	  }
-	  return target;
-	}
 	
 	var DateInput = _react2.default.createClass({
 	  displayName: 'DateInput',
@@ -2379,10 +2475,11 @@ webpackJsonp([0],{
 	
 	    if (str) {
 	      try {
-	        value = copyTime(formatter.parse(str, {
+	        // remove `copyTime`, to enable input time
+	        value = formatter.parse(str, {
 	          locale: gregorianCalendarLocale,
 	          obeyCount: true
-	        }), this.props.selectedValue);
+	        });
 	      } catch (ex) {
 	        this.setState({
 	          invalid: true
@@ -2428,32 +2525,14 @@ webpackJsonp([0],{
 	    var _state = this.state;
 	    var invalid = _state.invalid;
 	    var str = _state.str;
-	    var selectedValue = props.selectedValue;
 	    var locale = props.locale;
 	    var prefixCls = props.prefixCls;
 	    var placeholder = props.placeholder;
-	    var onChange = props.onChange;
-	    var timePicker = props.timePicker;
-	    var disabledTime = props.disabledTime;
-	    var gregorianCalendarLocale = props.gregorianCalendarLocale;
 	
 	    var invalidClass = invalid ? prefixCls + '-input-invalid' : '';
-	    var disabledTimeConfig = disabledTime && timePicker ? (0, _index.getTimeConfig)(selectedValue, disabledTime) : null;
 	    return _react2.default.createElement(
 	      'div',
 	      { className: prefixCls + '-input-wrap' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: prefixCls + '-time-picker-wrap' },
-	        timePicker ? _react2.default.cloneElement(timePicker, _extends({
-	          showClear: false,
-	          allowEmpty: false,
-	          getPopupContainer: this.getRootDOMNode,
-	          gregorianCalendarLocale: gregorianCalendarLocale,
-	          value: selectedValue,
-	          onChange: onChange
-	        }, disabledTimeConfig)) : null
-	      ),
 	      _react2.default.createElement(
 	        'div',
 	        { className: prefixCls + '-date-input-wrap' },
@@ -2480,7 +2559,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 200:
+/***/ 201:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2497,7 +2576,7 @@ webpackJsonp([0],{
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _createChainedFunction = __webpack_require__(201);
+	var _createChainedFunction = __webpack_require__(202);
 	
 	var _createChainedFunction2 = _interopRequireDefault(_createChainedFunction);
 	
@@ -2505,11 +2584,11 @@ webpackJsonp([0],{
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _placements = __webpack_require__(202);
+	var _placements = __webpack_require__(203);
 	
 	var _placements2 = _interopRequireDefault(_placements);
 	
-	var _rcTrigger = __webpack_require__(203);
+	var _rcTrigger = __webpack_require__(204);
 	
 	var _rcTrigger2 = _interopRequireDefault(_rcTrigger);
 	
@@ -2721,7 +2800,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 202:
+/***/ 203:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2768,7 +2847,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 234:
+/***/ 235:
 /***/ function(module, exports) {
 
 	/*
@@ -2787,7 +2866,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 235:
+/***/ 236:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2796,7 +2875,7 @@ webpackJsonp([0],{
 	  value: true
 	});
 	
-	var _zh_CN = __webpack_require__(236);
+	var _zh_CN = __webpack_require__(237);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -2807,6 +2886,8 @@ webpackJsonp([0],{
 	  now: '此刻',
 	  backToToday: '返回今天',
 	  ok: '确定',
+	  timeSelect: '选择时间',
+	  dateSelect: '选择日期',
 	  clear: '清除',
 	  month: '月',
 	  year: '年',
@@ -2817,7 +2898,9 @@ webpackJsonp([0],{
 	  decadeSelect: '选择年代',
 	  yearFormat: 'yyyy\'年\'',
 	  monthFormat: 'M\'月\'',
+	  dayFormat: 'd\'日\'',
 	  dateFormat: 'yyyy\'年\'M\'月\'d\'日\'',
+	  dateTimeFormat: 'yyyy\'年\'M\'月\'d\'日\' HH\'时\'mm\'分\'ss\'秒\'',
 	  previousYear: '上一年 (Control键加左方向键)',
 	  nextYear: '下一年 (Control键加右方向键)',
 	  previousDecade: '上一年代',
@@ -2830,7 +2913,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 236:
+/***/ 237:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2850,7 +2933,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 237:
+/***/ 238:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2861,11 +2944,11 @@ webpackJsonp([0],{
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _gregorianCalendarFormatLibLocaleZh_CN = __webpack_require__(236);
+	var _gregorianCalendarFormatLibLocaleZh_CN = __webpack_require__(237);
 	
 	var _gregorianCalendarFormatLibLocaleZh_CN2 = _interopRequireDefault(_gregorianCalendarFormatLibLocaleZh_CN);
 	
-	var _gregorianCalendarLibLocaleZh_CN = __webpack_require__(234);
+	var _gregorianCalendarLibLocaleZh_CN = __webpack_require__(235);
 	
 	var _gregorianCalendarLibLocaleZh_CN2 = _interopRequireDefault(_gregorianCalendarLibLocaleZh_CN);
 	
@@ -2878,28 +2961,8 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 238:
-2,
-
 /***/ 239:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var _TimePicker = __webpack_require__(240);
-	
-	var _TimePicker2 = _interopRequireDefault(_TimePicker);
-	
-	exports['default'] = _TimePicker2['default'];
-	module.exports = exports['default'];
-
-/***/ },
+2,
 
 /***/ 240:
 /***/ function(module, exports, __webpack_require__) {
@@ -2916,313 +2979,15 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _rcTrigger = __webpack_require__(203);
-	
-	var _rcTrigger2 = _interopRequireDefault(_rcTrigger);
-	
-	var _modulePanel = __webpack_require__(241);
-	
-	var _modulePanel2 = _interopRequireDefault(_modulePanel);
-	
-	var _utilPlacements = __webpack_require__(248);
-	
-	var _utilPlacements2 = _interopRequireDefault(_utilPlacements);
-	
-	var _mixinCommonMixin = __webpack_require__(242);
+	var _mixinCommonMixin = __webpack_require__(241);
 	
 	var _mixinCommonMixin2 = _interopRequireDefault(_mixinCommonMixin);
 	
-	var _utilIndex = __webpack_require__(249);
-	
-	function noop() {}
-	
-	function refFn(field, component) {
-	  this[field] = component;
-	}
-	
-	var Picker = _react2['default'].createClass({
-	  displayName: 'Picker',
-	
-	  propTypes: {
-	    prefixCls: _react.PropTypes.string,
-	    locale: _react.PropTypes.object,
-	    value: _react.PropTypes.object,
-	    disabled: _react.PropTypes.bool,
-	    allowEmpty: _react.PropTypes.bool,
-	    defaultValue: _react.PropTypes.object,
-	    open: _react.PropTypes.bool,
-	    defaultOpen: _react.PropTypes.bool,
-	    align: _react.PropTypes.object,
-	    placement: _react.PropTypes.any,
-	    transitionName: _react.PropTypes.string,
-	    getPopupContainer: _react.PropTypes.func,
-	    placeholder: _react.PropTypes.string,
-	    formatter: _react.PropTypes.any,
-	    showHour: _react.PropTypes.bool,
-	    style: _react.PropTypes.object,
-	    className: _react.PropTypes.string,
-	    showSecond: _react.PropTypes.bool,
-	    disabledHours: _react.PropTypes.func,
-	    disabledMinutes: _react.PropTypes.func,
-	    disabledSeconds: _react.PropTypes.func,
-	    hideDisabledOptions: _react.PropTypes.bool,
-	    onChange: _react.PropTypes.func,
-	    onOpen: _react.PropTypes.func,
-	    onClose: _react.PropTypes.func
-	  },
-	
-	  mixins: [_mixinCommonMixin2['default']],
-	
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      defaultOpen: false,
-	      style: {},
-	      className: '',
-	      align: {},
-	      allowEmpty: true,
-	      showHour: true,
-	      showSecond: true,
-	      disabledHours: noop,
-	      disabledMinutes: noop,
-	      disabledSeconds: noop,
-	      hideDisabledOptions: false,
-	      placement: 'bottomLeft',
-	      onChange: noop,
-	      onOpen: noop,
-	      onClose: noop
-	    };
-	  },
-	
-	  getInitialState: function getInitialState() {
-	    this.savePanelRef = refFn.bind(this, 'panelInstance');
-	    var _props = this.props;
-	    var defaultOpen = _props.defaultOpen;
-	    var defaultValue = _props.defaultValue;
-	    var _props$open = _props.open;
-	    var open = _props$open === undefined ? defaultOpen : _props$open;
-	    var _props$value = _props.value;
-	    var value = _props$value === undefined ? defaultValue : _props$value;
-	
-	    return {
-	      open: open,
-	      value: value
-	    };
-	  },
-	
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	    var value = nextProps.value;
-	    var open = nextProps.open;
-	
-	    if ('value' in nextProps) {
-	      this.setState({
-	        value: value
-	      });
-	    }
-	    if (open !== undefined) {
-	      this.setState({ open: open });
-	    }
-	  },
-	
-	  onPanelChange: function onPanelChange(value) {
-	    this.setValue(value);
-	  },
-	
-	  onPanelClear: function onPanelClear() {
-	    this.setValue(null);
-	    this.setOpen(false);
-	  },
-	
-	  onVisibleChange: function onVisibleChange(open) {
-	    this.setOpen(open);
-	  },
-	
-	  onEsc: function onEsc() {
-	    this.setOpen(false);
-	    this.refs.picker.focus();
-	  },
-	
-	  onKeyDown: function onKeyDown(e) {
-	    if (e.keyCode === 40) {
-	      this.setOpen(true);
-	    }
-	  },
-	
-	  setValue: function setValue(value) {
-	    if (!('value' in this.props)) {
-	      this.setState({
-	        value: value
-	      });
-	    }
-	    this.props.onChange(value);
-	  },
-	
-	  getFormatter: function getFormatter() {
-	    var formatter = this.props.formatter;
-	    var locale = this.props.locale;
-	    if (formatter) {
-	      if (formatter === this.lastFormatter) {
-	        return this.normalFormatter;
-	      }
-	      this.normalFormatter = (0, _utilIndex.getFormatter)(formatter, locale);
-	      this.lastFormatter = formatter;
-	      return this.normalFormatter;
-	    }
-	    if (!this.props.showSecond) {
-	      if (!this.notShowSecondFormatter) {
-	        this.notShowSecondFormatter = (0, _utilIndex.getFormatter)('HH:mm', locale);
-	      }
-	      return this.notShowSecondFormatter;
-	    }
-	    if (!this.props.showHour) {
-	      if (!this.notShowHourFormatter) {
-	        this.notShowHourFormatter = (0, _utilIndex.getFormatter)('mm:ss', locale);
-	      }
-	      return this.notShowHourFormatter;
-	    }
-	    if (!this.normalFormatter) {
-	      this.normalFormatter = (0, _utilIndex.getFormatter)('HH:mm:ss', locale);
-	    }
-	    return this.normalFormatter;
-	  },
-	
-	  getPanelElement: function getPanelElement() {
-	    var _props2 = this.props;
-	    var prefixCls = _props2.prefixCls;
-	    var defaultValue = _props2.defaultValue;
-	    var locale = _props2.locale;
-	    var placeholder = _props2.placeholder;
-	    var disabledHours = _props2.disabledHours;
-	    var disabledMinutes = _props2.disabledMinutes;
-	    var disabledSeconds = _props2.disabledSeconds;
-	    var hideDisabledOptions = _props2.hideDisabledOptions;
-	    var allowEmpty = _props2.allowEmpty;
-	    var showHour = _props2.showHour;
-	    var showSecond = _props2.showSecond;
-	
-	    return _react2['default'].createElement(_modulePanel2['default'], {
-	      prefixCls: prefixCls + '-panel',
-	      ref: this.savePanelRef,
-	      value: this.state.value,
-	      onChange: this.onPanelChange,
-	      gregorianCalendarLocale: locale.calendar,
-	      onClear: this.onPanelClear,
-	      defaultValue: defaultValue,
-	      showHour: showHour,
-	      onEsc: this.onEsc,
-	      showSecond: showSecond,
-	      locale: locale,
-	      allowEmpty: allowEmpty,
-	      formatter: this.getFormatter(),
-	      placeholder: placeholder,
-	      disabledHours: disabledHours,
-	      disabledMinutes: disabledMinutes,
-	      disabledSeconds: disabledSeconds,
-	      hideDisabledOptions: hideDisabledOptions
-	    });
-	  },
-	
-	  setOpen: function setOpen(open, callback) {
-	    var _props3 = this.props;
-	    var onOpen = _props3.onOpen;
-	    var onClose = _props3.onClose;
-	
-	    if (this.state.open !== open) {
-	      this.setState({
-	        open: open
-	      }, callback);
-	      var _event = {
-	        open: open
-	      };
-	      if (open) {
-	        onOpen(_event);
-	      } else {
-	        onClose(_event);
-	      }
-	    }
-	  },
-	
-	  render: function render() {
-	    var _props4 = this.props;
-	    var prefixCls = _props4.prefixCls;
-	    var placeholder = _props4.placeholder;
-	    var placement = _props4.placement;
-	    var align = _props4.align;
-	    var disabled = _props4.disabled;
-	    var transitionName = _props4.transitionName;
-	    var style = _props4.style;
-	    var className = _props4.className;
-	    var showHour = _props4.showHour;
-	    var showSecond = _props4.showSecond;
-	    var getPopupContainer = _props4.getPopupContainer;
-	    var _state = this.state;
-	    var open = _state.open;
-	    var value = _state.value;
-	
-	    var popupClassName = undefined;
-	    if (!showHour || !showSecond) {
-	      popupClassName = prefixCls + '-panel-narrow';
-	    }
-	    return _react2['default'].createElement(
-	      _rcTrigger2['default'],
-	      {
-	        prefixCls: prefixCls + '-panel',
-	        popupClassName: popupClassName,
-	        popup: this.getPanelElement(),
-	        popupAlign: align,
-	        builtinPlacements: _utilPlacements2['default'],
-	        popupPlacement: placement,
-	        action: disabled ? [] : ['click'],
-	        destroyPopupOnHide: true,
-	        getPopupContainer: getPopupContainer,
-	        popupTransitionName: transitionName,
-	        popupVisible: open,
-	        onPopupVisibleChange: this.onVisibleChange
-	      },
-	      _react2['default'].createElement(
-	        'span',
-	        { className: prefixCls + ' ' + className, style: style },
-	        _react2['default'].createElement('input', {
-	          className: prefixCls + '-input',
-	          ref: 'picker', type: 'text', placeholder: placeholder,
-	          readOnly: true,
-	          onKeyDown: this.onKeyDown,
-	          disabled: disabled, value: value && this.getFormatter().format(value) || ''
-	        }),
-	        _react2['default'].createElement('span', { className: prefixCls + '-icon' })
-	      )
-	    );
-	  }
-	});
-	
-	exports['default'] = Picker;
-	module.exports = exports['default'];
-
-/***/ },
-
-/***/ 241:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var _react = __webpack_require__(3);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _mixinCommonMixin = __webpack_require__(242);
-	
-	var _mixinCommonMixin2 = _interopRequireDefault(_mixinCommonMixin);
-	
-	var _Header = __webpack_require__(244);
+	var _Header = __webpack_require__(243);
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _Combobox = __webpack_require__(246);
+	var _Combobox = __webpack_require__(245);
 	
 	var _Combobox2 = _interopRequireDefault(_Combobox);
 	
@@ -3264,6 +3029,7 @@ webpackJsonp([0],{
 	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
+	      prefixCls: 'rc-time-picker-panel',
 	      onChange: noop,
 	      onClear: noop
 	    };
@@ -3368,7 +3134,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 242:
+/***/ 241:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3381,7 +3147,7 @@ webpackJsonp([0],{
 	
 	var _react = __webpack_require__(3);
 	
-	var _localeEn_US = __webpack_require__(243);
+	var _localeEn_US = __webpack_require__(242);
 	
 	var _localeEn_US2 = _interopRequireDefault(_localeEn_US);
 	
@@ -3393,7 +3159,6 @@ webpackJsonp([0],{
 	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
-	      prefixCls: 'rc-time-picker',
 	      locale: _localeEn_US2['default']
 	    };
 	  }
@@ -3402,7 +3167,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 243:
+/***/ 242:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3430,7 +3195,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 244:
+/***/ 243:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3445,7 +3210,7 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _utilSelection = __webpack_require__(245);
+	var _utilSelection = __webpack_require__(244);
 	
 	var _utilSelection2 = _interopRequireDefault(_utilSelection);
 	
@@ -3664,7 +3429,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 245:
+/***/ 244:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3696,7 +3461,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 246:
+/***/ 245:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3711,7 +3476,7 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Select = __webpack_require__(247);
+	var _Select = __webpack_require__(246);
 	
 	var _Select2 = _interopRequireDefault(_Select);
 	
@@ -3878,7 +3643,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 247:
+/***/ 246:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4014,78 +3779,6 @@ webpackJsonp([0],{
 	
 	exports['default'] = Select;
 	module.exports = exports['default'];
-
-/***/ },
-
-/***/ 248:
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	var autoAdjustOverflow = {
-	  adjustX: 1,
-	  adjustY: 1
-	};
-	
-	var targetOffset = [0, 0];
-	
-	var placements = {
-	  bottomLeft: {
-	    points: ['tl', 'tl'],
-	    overflow: autoAdjustOverflow,
-	    offset: [0, -3],
-	    targetOffset: targetOffset
-	  },
-	  bottomRight: {
-	    points: ['tr', 'tr'],
-	    overflow: autoAdjustOverflow,
-	    offset: [0, -3],
-	    targetOffset: targetOffset
-	  },
-	  topRight: {
-	    points: ['br', 'br'],
-	    overflow: autoAdjustOverflow,
-	    offset: [0, 3],
-	    targetOffset: targetOffset
-	  },
-	  topLeft: {
-	    points: ['bl', 'bl'],
-	    overflow: autoAdjustOverflow,
-	    offset: [0, 3],
-	    targetOffset: targetOffset
-	  }
-	};
-	
-	exports['default'] = placements;
-	module.exports = exports['default'];
-
-/***/ },
-
-/***/ 249:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	exports.getFormatter = getFormatter;
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var _gregorianCalendarFormat = __webpack_require__(183);
-	
-	var _gregorianCalendarFormat2 = _interopRequireDefault(_gregorianCalendarFormat);
-	
-	function getFormatter(format, locale) {
-	  if (typeof format === 'string') {
-	    return new _gregorianCalendarFormat2['default'](format, locale.format);
-	  }
-	  return format;
-	}
 
 /***/ }
 

@@ -19,9 +19,37 @@
 .rc-calendar-date-input-wrap {
   overflow: hidden;
 }
+.rc-calendar-time-picker {
+  position: absolute;
+  width: 100%;
+  top: 34px;
+  background-color: white;
+  height: 217px;
+}
+.rc-calendar-time-picker-panel {
+  width: 100%;
+  position: relative;
+}
+.rc-calendar-time-picker-panel .rc-time-picker-panel-input-wrap {
+  display: none;
+}
+.rc-calendar-time-picker-panel .rc-time-picker-panel-inner {
+  border: none;
+  box-shadow: none;
+}
+.rc-calendar-time-picker-panel .rc-time-picker-panel-select {
+  width: 84px;
+}
+.rc-calendar-time-picker-panel .rc-time-picker-panel-select ul {
+  max-height: 217px;
+}
+.rc-calendar-time-picker-panel .rc-time-picker-panel-select li {
+  text-align: center;
+  padding: 0;
+}
 .rc-calendar-time-picker-wrap {
-  float: right;
-  width: 170px;
+  float: left;
+  width: 100%;
 }
 .rc-calendar-time-picker-wrap .rc-time-picker {
   width: 100%;
@@ -341,7 +369,8 @@
   right: 25px;
 }
 .rc-calendar-year-select,
-.rc-calendar-month-select {
+.rc-calendar-month-select,
+.rc-calendar-day-select {
   display: inline-block;
   font-size: 12px;
   font-weight: bold;
@@ -350,7 +379,8 @@
   line-height: 34px;
 }
 .rc-calendar-year-select:hover,
-.rc-calendar-month-select:hover {
+.rc-calendar-month-select:hover,
+.rc-calendar-day-select:hover {
   cursor: pointer;
   color: #23c0fa;
 }
@@ -380,7 +410,7 @@
 .rc-calendar-prev-year-btn {
   left: 0;
 }
-.rc-calendar-calendar-body {
+.rc-calendar-body {
   padding: 9px 10px 10px;
 }
 .rc-calendar table {
@@ -395,7 +425,7 @@
 .rc-calendar td {
   border: none;
 }
-.rc-calendar-calendar-table {
+.rc-calendar-table {
   border-spacing: 0;
   margin-bottom: 0;
 }
@@ -475,27 +505,54 @@
 .rc-calendar-footer .rc-time-picker-input {
   height: 24px;
 }
+.rc-calendar-footer-show-ok {
+  text-align: right;
+}
+.rc-calendar-footer-show-ok .rc-calendar-footer-btn {
+  padding-right: 12px;
+}
+.rc-calendar-footer-show-ok .rc-calendar-time-picker-btn {
+  margin-left: 0;
+  padding: 0 12px;
+}
+.rc-calendar-footer-show-ok .rc-calendar-today-btn {
+  float: left;
+  padding-left: 12px;
+}
 .rc-calendar-footer-btn {
   margin-top: 2px;
 }
+.rc-calendar-footer-btn:after {
+  content: 'x';
+  height: 0;
+  font-size: 0;
+  overflow: hidden;
+  clear: both;
+}
+.rc-calendar-time-picker-btn {
+  margin-left: 10px;
+}
 .rc-calendar-today-btn,
-.rc-calendar-ok-btn {
+.rc-calendar-ok-btn,
+.rc-calendar-time-picker-btn {
   display: inline-block;
-  padding: 4px 5px;
   text-align: center;
   color: #f46830;
 }
 .rc-calendar-today-btn:hover,
-.rc-calendar-ok-btn:hover {
+.rc-calendar-ok-btn:hover,
+.rc-calendar-time-picker-btn:hover {
   cursor: pointer;
   color: #23c0fa;
 }
 .rc-calendar-today-btn-disabled,
-.rc-calendar-ok-btn-disabled {
+.rc-calendar-ok-btn-disabled,
+.rc-calendar-time-picker-btn-disabled {
   color: #bbb;
 }
 .rc-calendar-today-btn-disabled:hover,
-.rc-calendar-ok-btn-disabled:hover {
+.rc-calendar-ok-btn-disabled:hover,
+.rc-calendar-time-picker-btn-disabled:hover {
   color: #bbb;
 }
 .rc-calendar-today-btn {
@@ -921,49 +978,50 @@
   width: 250px;
   position: relative;
 }
+.rc-calendar-range-part .rc-calendar-time-picker {
+  top: 69px;
+}
+.rc-calendar-range-part .rc-calendar-time-picker-panel-select {
+  width: 77px;
+}
 .rc-calendar-range-left {
   float: left;
+}
+.rc-calendar-range-left .rc-calendar-time-picker-panel-select:last-child {
+  border-right: 1px solid #e9e9e9;
 }
 .rc-calendar-range-right {
   float: right;
 }
-.rc-calendar-range-right .rc-calendar-input-wrap {
-  margin-left: -39px;
+.rc-calendar-range-right .rc-calendar-time-picker-panel {
+  left: 21px;
+}
+.rc-calendar-range-right .rc-calendar-time-picker-panel-select:first-child {
+  border-left: 1px solid #e9e9e9;
 }
 .rc-calendar-range-middle {
   position: absolute;
-  left: 41%;
-  width: 20px;
   margin-left: -10px;
   text-align: center;
   height: 35px;
   line-height: 35px;
 }
-.rc-calendar-range .rc-calendar-date-input-wrap,
-.rc-calendar-range .rc-calendar-time-picker-wrap {
-  width: 37%;
-}
-.rc-calendar-range .rc-calendar-time-picker-wrap {
-  position: absolute;
-  left: 40%;
-}
-.rc-calendar-range .rc-time-picker-input {
-  width: 100%;
+.rc-calendar-range .rc-calendar-date-panel::after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
 }
 .rc-calendar-range .rc-calendar-input-wrap {
   height: 35px;
 }
 .rc-calendar-range .rc-calendar-input,
 .rc-calendar-range .rc-time-picker-input {
-  border: 1px solid #d9d9d9;
-  border-radius: 6px;
   padding: 1px 7px;
   height: 22px;
 }
-.rc-calendar-range .rc-time-picker-icon {
-  display: none;
-}
-.rc-calendar-range .rc-calendar-calendar-body,
+.rc-calendar-range .rc-calendar-body,
 .rc-calendar-range .rc-calendar-decade-panel-body,
 .rc-calendar-range .rc-calendar-year-panel-body,
 .rc-calendar-range .rc-calendar-month-panel-body {
@@ -974,6 +1032,15 @@
 }
 .rc-calendar-range.rc-calendar-week-number .rc-calendar-range-part {
   width: 286px;
+}
+.rc-calendar-range.rc-calendar-week-number .rc-calendar-range-part .rc-calendar-time-picker {
+  top: 69px;
+}
+.rc-calendar-range.rc-calendar-week-number .rc-calendar-range-part .rc-calendar-time-picker-panel-select {
+  width: 89px;
+}
+.rc-calendar-range.rc-calendar-week-number .rc-calendar-range-right .rc-calendar-time-picker-panel {
+  left: 21px;
 }
 .rc-calendar-range .rc-calendar-year-panel,
 .rc-calendar-range .rc-calendar-month-panel {
@@ -994,12 +1061,17 @@
 .rc-calendar-range-bottom {
   text-align: right;
 }
+.rc-calendar-range .rc-calendar-footer {
+  border-top: none;
+}
+.rc-calendar-range .rc-calendar-footer-btn {
+  padding-right: 12px;
+}
 .rc-calendar-range .rc-calendar-ok-btn {
   position: static;
-  margin: 9px;
 }
 .rc-calendar-range .rc-calendar-today-btn {
-  margin: 12px 9px 0;
+  float: left;
 }
 .rc-calendar-full-header {
   padding: 5px 10px;
@@ -1013,6 +1085,7 @@
 }
 .rc-calendar-full-header-month-select,
 .rc-calendar-full-header-year-select {
+  width: 75px;
   float: right;
   margin-right: 5px;
 }

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>antd-range-calendar.js - example - rc-calendar@5.6.2</title>
+  <title>antd-range-calendar.js - example - rc-calendar@6.0.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -258,7 +258,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
   <div class="container">
     <div class="header">
-      <h1>rc-calendar@5.6.2</h1>
+      <h1>rc-calendar@6.0.0</h1>
 
       <p>React Calendar</p>
     </div>
@@ -279,8 +279,8 @@ import TimePickerLocale from 'rc-time-picker/lib/locale/zh_CN';
 import Picker from 'rc-calendar/lib/Picker';
 
 import 'rc-time-picker/assets/index.css';
-import TimePicker from 'rc-time-picker';
-const timePickerElement = &lt;TimePicker placeholder="请选择时间" locale={TimePickerLocale}/&gt;;
+import TimePickerPanel from 'rc-time-picker/lib/module/Panel';
+const timePickerElement = &lt;TimePickerPanel locale={TimePickerLocale} /&gt;;
 
 const now = new GregorianCalendar(zhCn);
 now.setTime(Date.now());
@@ -332,6 +332,7 @@ const Test = React.createClass({
         locale={CalendarLocale}
         disabledDate={disabledDate}
         timePicker={timePickerElement}
+        formatter={formatter}
       /&gt;
     );
     return (&lt;Picker
@@ -349,7 +350,7 @@ const Test = React.createClass({
                   disabled={state.disabled}
                   readOnly
                   className="ant-calendar-picker-input ant-input"
-                  value={isValidRange(value) &amp;&amp; `${format(value[0])} - ${format(value[1])}`}
+                  value={isValidRange(value) &amp;&amp; `${format(value[0])} - ${format(value[1])}` || ''}
                 /&gt;
                 &lt;/span&gt;);
         }
@@ -368,6 +369,8 @@ ReactDOM.render(
         dateInputPlaceholder={['开始日期', '结束日期']}
         locale={CalendarLocale}
         showOk={false}
+        showClear
+        formatter={formatter}
         onChange={onStandaloneChange}
         onSelect={onStandaloneSelect}
         disabledDate={disabledDate}

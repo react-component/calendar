@@ -3,7 +3,7 @@ webpackJsonp([1],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(250);
+	module.exports = __webpack_require__(247);
 
 
 /***/ },
@@ -653,7 +653,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 196:
+/***/ 197:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -794,7 +794,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 200:
+/***/ 201:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -811,7 +811,7 @@ webpackJsonp([1],{
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _createChainedFunction = __webpack_require__(201);
+	var _createChainedFunction = __webpack_require__(202);
 	
 	var _createChainedFunction2 = _interopRequireDefault(_createChainedFunction);
 	
@@ -819,11 +819,11 @@ webpackJsonp([1],{
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _placements = __webpack_require__(202);
+	var _placements = __webpack_require__(203);
 	
 	var _placements2 = _interopRequireDefault(_placements);
 	
-	var _rcTrigger = __webpack_require__(203);
+	var _rcTrigger = __webpack_require__(204);
 	
 	var _rcTrigger2 = _interopRequireDefault(_rcTrigger);
 	
@@ -1035,7 +1035,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 202:
+/***/ 203:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1082,7 +1082,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 234:
+/***/ 235:
 /***/ function(module, exports) {
 
 	/*
@@ -1101,7 +1101,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 235:
+/***/ 236:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1110,7 +1110,7 @@ webpackJsonp([1],{
 	  value: true
 	});
 	
-	var _zh_CN = __webpack_require__(236);
+	var _zh_CN = __webpack_require__(237);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -1121,6 +1121,8 @@ webpackJsonp([1],{
 	  now: '此刻',
 	  backToToday: '返回今天',
 	  ok: '确定',
+	  timeSelect: '选择时间',
+	  dateSelect: '选择日期',
 	  clear: '清除',
 	  month: '月',
 	  year: '年',
@@ -1131,7 +1133,9 @@ webpackJsonp([1],{
 	  decadeSelect: '选择年代',
 	  yearFormat: 'yyyy\'年\'',
 	  monthFormat: 'M\'月\'',
+	  dayFormat: 'd\'日\'',
 	  dateFormat: 'yyyy\'年\'M\'月\'d\'日\'',
+	  dateTimeFormat: 'yyyy\'年\'M\'月\'d\'日\' HH\'时\'mm\'分\'ss\'秒\'',
 	  previousYear: '上一年 (Control键加左方向键)',
 	  nextYear: '下一年 (Control键加右方向键)',
 	  previousDecade: '上一年代',
@@ -1144,7 +1148,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 236:
+/***/ 237:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1164,7 +1168,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 250:
+/***/ 247:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1179,15 +1183,15 @@ webpackJsonp([1],{
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _MonthCalendar = __webpack_require__(251);
+	var _MonthCalendar = __webpack_require__(248);
 	
 	var _MonthCalendar2 = _interopRequireDefault(_MonthCalendar);
 	
-	var _Picker = __webpack_require__(200);
+	var _Picker = __webpack_require__(201);
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _zh_CN = __webpack_require__(234);
+	var _zh_CN = __webpack_require__(235);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -1199,14 +1203,13 @@ webpackJsonp([1],{
 	
 	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
 	
-	var _zh_CN3 = __webpack_require__(235);
+	var _zh_CN3 = __webpack_require__(236);
 	
 	var _zh_CN4 = _interopRequireDefault(_zh_CN3);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var now = new _gregorianCalendar2.default(_zh_CN2.default); // spm error
-	/* eslint react/no-multi-comp:0, no-console:0 */
+	var now = new _gregorianCalendar2.default(_zh_CN2.default); /* eslint react/no-multi-comp:0, no-console:0 */
 	
 	now.setTime(Date.now());
 	var formatter = new _gregorianCalendarFormat2.default('yyyy-MM');
@@ -1347,7 +1350,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 251:
+/***/ 248:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1364,11 +1367,11 @@ webpackJsonp([1],{
 	
 	var _MonthPanel2 = _interopRequireDefault(_MonthPanel);
 	
-	var _CalendarMixin = __webpack_require__(196);
+	var _CalendarMixin = __webpack_require__(197);
 	
 	var _CalendarMixin2 = _interopRequireDefault(_CalendarMixin);
 	
-	var _CommonMixin = __webpack_require__(197);
+	var _CommonMixin = __webpack_require__(198);
 	
 	var _CommonMixin2 = _interopRequireDefault(_CommonMixin);
 	
