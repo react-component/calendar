@@ -3,7 +3,7 @@ webpackJsonp([2],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(249);
+	module.exports = __webpack_require__(248);
 
 
 /***/ },
@@ -1914,92 +1914,6 @@ webpackJsonp([2],{
 /***/ },
 
 /***/ 235:
-/***/ function(module, exports) {
-
-	/*
-	 * zh-cn locale
-	 * @ignore
-	 * @author yiminghe@gmail.com
-	 */
-	"use strict";
-	
-	module.exports = {
-	  // in minutes
-	  timezoneOffset: 8 * 60,
-	  firstDayOfWeek: 1,
-	  minimalDaysInFirstWeek: 1
-	};
-
-/***/ },
-
-/***/ 236:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _zh_CN = __webpack_require__(237);
-	
-	var _zh_CN2 = _interopRequireDefault(_zh_CN);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = {
-	  today: '今天',
-	  now: '此刻',
-	  backToToday: '返回今天',
-	  ok: '确定',
-	  timeSelect: '选择时间',
-	  dateSelect: '选择日期',
-	  clear: '清除',
-	  month: '月',
-	  year: '年',
-	  previousMonth: '上个月 (翻页上键)',
-	  nextMonth: '下个月 (翻页下键)',
-	  monthSelect: '选择月份',
-	  yearSelect: '选择年份',
-	  decadeSelect: '选择年代',
-	  yearFormat: 'yyyy\'年\'',
-	  monthFormat: 'M\'月\'',
-	  dayFormat: 'd\'日\'',
-	  dateFormat: 'yyyy\'年\'M\'月\'d\'日\'',
-	  dateTimeFormat: 'yyyy\'年\'M\'月\'d\'日\' HH\'时\'mm\'分\'ss\'秒\'',
-	  previousYear: '上一年 (Control键加左方向键)',
-	  nextYear: '下一年 (Control键加右方向键)',
-	  previousDecade: '上一年代',
-	  nextDecade: '下一年代',
-	  previousCentury: '上一世纪',
-	  nextCentury: '下一世纪',
-	  format: _zh_CN2.default
-	};
-	module.exports = exports['default'];
-
-/***/ },
-
-/***/ 237:
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	module.exports = {
-	  eras: ['公元前', '公元'],
-	  months: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
-	  shortMonths: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
-	  weekdays: ['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
-	  shortWeekdays: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
-	  veryShortWeekdays: ['日', '一', '二', '三', '四', '五', '六'],
-	  ampms: ['上午', '下午'],
-	  datePatterns: ['yyyy\'年\'M\'月\'d\'日\' EEEE', 'yyyy\'年\'M\'月\'d\'日\'', 'yyyy-M-d', 'yy-M-d'],
-	  timePatterns: ['ahh\'时\'mm\'分\'ss\'秒\' \'GMT\'Z', 'ahh\'时\'mm\'分\'ss\'秒\'', 'H:mm:ss', 'ah:mm'],
-	  dateTimePattern: '{date} {time}'
-	};
-
-/***/ },
-
-/***/ 238:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2010,27 +1924,27 @@ webpackJsonp([2],{
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _gregorianCalendarFormatLibLocaleZh_CN = __webpack_require__(237);
+	var _gregorianCalendarFormatLibLocaleEn_US = __webpack_require__(184);
 	
-	var _gregorianCalendarFormatLibLocaleZh_CN2 = _interopRequireDefault(_gregorianCalendarFormatLibLocaleZh_CN);
+	var _gregorianCalendarFormatLibLocaleEn_US2 = _interopRequireDefault(_gregorianCalendarFormatLibLocaleEn_US);
 	
-	var _gregorianCalendarLibLocaleZh_CN = __webpack_require__(235);
+	var _gregorianCalendarLibLocaleEn_US = __webpack_require__(176);
 	
-	var _gregorianCalendarLibLocaleZh_CN2 = _interopRequireDefault(_gregorianCalendarLibLocaleZh_CN);
+	var _gregorianCalendarLibLocaleEn_US2 = _interopRequireDefault(_gregorianCalendarLibLocaleEn_US);
 	
 	exports['default'] = {
-	  clear: '清除',
-	  format: _gregorianCalendarFormatLibLocaleZh_CN2['default'],
-	  calendar: _gregorianCalendarLibLocaleZh_CN2['default']
+	  clear: 'Clear',
+	  format: _gregorianCalendarFormatLibLocaleEn_US2['default'],
+	  calendar: _gregorianCalendarLibLocaleEn_US2['default']
 	};
 	module.exports = exports['default'];
 
 /***/ },
 
-/***/ 239:
+/***/ 236:
 2,
 
-/***/ 240:
+/***/ 237:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2045,15 +1959,15 @@ webpackJsonp([2],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _mixinCommonMixin = __webpack_require__(241);
+	var _mixinCommonMixin = __webpack_require__(238);
 	
 	var _mixinCommonMixin2 = _interopRequireDefault(_mixinCommonMixin);
 	
-	var _Header = __webpack_require__(243);
+	var _Header = __webpack_require__(239);
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _Combobox = __webpack_require__(245);
+	var _Combobox = __webpack_require__(241);
 	
 	var _Combobox2 = _interopRequireDefault(_Combobox);
 	
@@ -2200,7 +2114,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 241:
+/***/ 238:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2213,7 +2127,7 @@ webpackJsonp([2],{
 	
 	var _react = __webpack_require__(3);
 	
-	var _localeEn_US = __webpack_require__(242);
+	var _localeEn_US = __webpack_require__(235);
 	
 	var _localeEn_US2 = _interopRequireDefault(_localeEn_US);
 	
@@ -2233,35 +2147,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 242:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var _gregorianCalendarFormatLibLocaleEn_US = __webpack_require__(184);
-	
-	var _gregorianCalendarFormatLibLocaleEn_US2 = _interopRequireDefault(_gregorianCalendarFormatLibLocaleEn_US);
-	
-	var _gregorianCalendarLibLocaleEn_US = __webpack_require__(176);
-	
-	var _gregorianCalendarLibLocaleEn_US2 = _interopRequireDefault(_gregorianCalendarLibLocaleEn_US);
-	
-	exports['default'] = {
-	  clear: 'Clear',
-	  format: _gregorianCalendarFormatLibLocaleEn_US2['default'],
-	  calendar: _gregorianCalendarLibLocaleEn_US2['default']
-	};
-	module.exports = exports['default'];
-
-/***/ },
-
-/***/ 243:
+/***/ 239:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2276,7 +2162,7 @@ webpackJsonp([2],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _utilSelection = __webpack_require__(244);
+	var _utilSelection = __webpack_require__(240);
 	
 	var _utilSelection2 = _interopRequireDefault(_utilSelection);
 	
@@ -2495,7 +2381,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 244:
+/***/ 240:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2527,7 +2413,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 245:
+/***/ 241:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2542,7 +2428,7 @@ webpackJsonp([2],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Select = __webpack_require__(246);
+	var _Select = __webpack_require__(242);
 	
 	var _Select2 = _interopRequireDefault(_Select);
 	
@@ -2709,7 +2595,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 246:
+/***/ 242:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2848,14 +2734,14 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 249:
+/***/ 248:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	__webpack_require__(2);
 	
-	var _RangeCalendar = __webpack_require__(250);
+	var _RangeCalendar = __webpack_require__(249);
 	
 	var _RangeCalendar2 = _interopRequireDefault(_RangeCalendar);
 	
@@ -2875,25 +2761,25 @@ webpackJsonp([2],{
 	
 	var _gregorianCalendar2 = _interopRequireDefault(_gregorianCalendar);
 	
-	var _zh_CN = __webpack_require__(235);
+	var _en_US = __webpack_require__(176);
 	
-	var _zh_CN2 = _interopRequireDefault(_zh_CN);
+	var _en_US2 = _interopRequireDefault(_en_US);
 	
-	var _zh_CN3 = __webpack_require__(236);
+	var _en_US3 = __webpack_require__(199);
 	
-	var _zh_CN4 = _interopRequireDefault(_zh_CN3);
+	var _en_US4 = _interopRequireDefault(_en_US3);
 	
-	var _zh_CN5 = __webpack_require__(238);
+	var _en_US5 = __webpack_require__(235);
 	
-	var _zh_CN6 = _interopRequireDefault(_zh_CN5);
+	var _en_US6 = _interopRequireDefault(_en_US5);
 	
 	var _Picker = __webpack_require__(201);
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	__webpack_require__(239);
+	__webpack_require__(236);
 	
-	var _Panel = __webpack_require__(240);
+	var _Panel = __webpack_require__(237);
 	
 	var _Panel2 = _interopRequireDefault(_Panel);
 	
@@ -2901,9 +2787,9 @@ webpackJsonp([2],{
 	
 	var formatter = new _gregorianCalendarFormat2.default('yyyy-MM-dd HH:mm:ss'); /* eslint react/no-multi-comp:0, no-console:0 */
 	
-	var timePickerElement = _react2.default.createElement(_Panel2.default, { locale: _zh_CN6.default });
+	var timePickerElement = _react2.default.createElement(_Panel2.default, { locale: _en_US6.default });
 	
-	var now = new _gregorianCalendar2.default(_zh_CN2.default);
+	var now = new _gregorianCalendar2.default(_en_US2.default);
 	now.setTime(Date.now());
 	
 	function disabledDate(current) {
@@ -2946,9 +2832,9 @@ webpackJsonp([2],{
 	    var state = this.state;
 	    var calendar = _react2.default.createElement(_RangeCalendar2.default, {
 	      showWeekNumber: false,
-	      dateInputPlaceholder: ['开始日期', '结束日期'],
+	      dateInputPlaceholder: ['start', 'end'],
 	      defaultValue: [now, now],
-	      locale: _zh_CN4.default,
+	      locale: _en_US4.default,
 	      disabledDate: disabledDate,
 	      timePicker: timePickerElement,
 	      formatter: formatter
@@ -2968,7 +2854,7 @@ webpackJsonp([2],{
 	          'span',
 	          null,
 	          _react2.default.createElement('input', {
-	            placeholder: '请选择日期',
+	            placeholder: 'please select',
 	            style: { width: 350 },
 	            disabled: state.disabled,
 	            readOnly: true,
@@ -2995,8 +2881,8 @@ webpackJsonp([2],{
 	    _react2.default.createElement(_RangeCalendar2.default, {
 	      showWeekNumber: true,
 	      defaultValue: now,
-	      dateInputPlaceholder: ['开始日期', '结束日期'],
-	      locale: _zh_CN4.default,
+	      dateInputPlaceholder: ['start', 'end'],
+	      locale: _en_US4.default,
 	      showOk: false,
 	      showClear: true,
 	      formatter: formatter,
@@ -3016,7 +2902,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 250:
+/***/ 249:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3041,7 +2927,7 @@ webpackJsonp([2],{
 	
 	var _classnames3 = _interopRequireDefault(_classnames2);
 	
-	var _CalendarPart = __webpack_require__(251);
+	var _CalendarPart = __webpack_require__(250);
 	
 	var _CalendarPart2 = _interopRequireDefault(_CalendarPart);
 	
@@ -3380,7 +3266,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 251:
+/***/ 250:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

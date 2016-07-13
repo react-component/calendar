@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>antd-calendar.js - example - rc-calendar@6.0.0</title>
+  <title>antd-calendar.js - example - rc-calendar@6.0.1</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -258,7 +258,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
   <div class="container">
     <div class="header">
-      <h1>rc-calendar@6.0.0</h1>
+      <h1>rc-calendar@6.0.1</h1>
 
       <p>React Calendar</p>
     </div>
@@ -271,12 +271,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Calendar from 'rc-calendar';
 import DatePicker from 'rc-calendar/lib/Picker';
-import zhCn from 'gregorian-calendar/lib/locale/zh_CN';
+import zhCn from 'gregorian-calendar/lib/locale/en_US';
 import DateTimeFormat from 'gregorian-calendar-format';
 import GregorianCalendar from 'gregorian-calendar';
-import CalendarLocale from 'rc-calendar/lib/locale/zh_CN';
+import CalendarLocale from 'rc-calendar/lib/locale/en_US';
 import assign from 'object-assign';
-import TimePickerLocale from 'rc-time-picker/lib/locale/zh_CN';
+import TimePickerLocale from 'rc-time-picker/lib/locale/en_US';
 
 import 'rc-time-picker/assets/index.css';
 import TimePickerPanel from 'rc-time-picker/lib/module/Panel';
@@ -307,7 +307,7 @@ const CalendarLocale2 = assign({}, CalendarLocale, {
 });
 
 const dateFormatter = new DateTimeFormat('yyyy-MM-dd');
-const formatter = new DateTimeFormat('yyyy年MM月dd日 HH时mm分ss秒');
+const formatter = new DateTimeFormat('yyyy-MM-dd HH:mm:ss');
 
 function getFormatter(showTime) {
   return showTime ? formatter : dateFormatter;
@@ -374,7 +374,7 @@ const Test = React.createClass({
     const calendar = (&lt;Calendar
       locale={CalendarLocale2}
       style={{ zIndex: 1000 }}
-      dateInputPlaceholder="请输入"
+      dateInputPlaceholder="please input"
       formatter={getFormatter(state.showTime)}
       disabledTime={state.showTime ? disabledTime : null}
       timePicker={state.showTime ? timePickerElement : null}
@@ -432,7 +432,7 @@ const Test = React.createClass({
               return (
                 &lt;span tabIndex="0"&gt;
                 &lt;input
-                  placeholder="请选择日期"
+                  placeholder="please select"
                   style={{ width: 250 }}
                   disabled={state.disabled}
                   readOnly
