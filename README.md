@@ -165,10 +165,16 @@ http://react-component.github.io/calendar/examples/index.html
           <td>whether to show today button</td>
         </tr>
         <tr>
+          <td>showOk</td>
+          <td>Boolean</td>
+          <td>auto</td>
+          <td>whether has ok button in footer</td>
+        </tr>
+        <tr>
           <td>timePicker</td>
           <td>React Element</td>
           <td>null</td>
-          <td>rc-timer-picker element</td>
+          <td>rc-timer-picker/lib/module/panel element</td>
         </tr>
         <tr>
           <td>onSelect</td>
@@ -257,6 +263,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>Boolean</td>
           <td>false</td>
           <td>whether to show week number of year</td>
+        </tr>
+        <tr>
+          <td>showOk</td>
+          <td>Boolean</td>
+          <td>auto</td>
+          <td>whether has ok button in footer</td>
         </tr>
         <tr>
           <td>timePicker</td>
