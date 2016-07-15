@@ -20,7 +20,7 @@ const CalendarPart = React.createClass({
     disabledDate: PropTypes.any,
     timePicker: PropTypes.any,
     disabledTime: PropTypes.any,
-    timePickerDisabledTime: PropTypes.func,
+    timePickerDisabledTime: PropTypes.object,
   },
   render() {
     const props = this.props;
