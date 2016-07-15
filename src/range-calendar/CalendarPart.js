@@ -20,12 +20,13 @@ const CalendarPart = React.createClass({
     disabledDate: PropTypes.any,
     timePicker: PropTypes.any,
     disabledTime: PropTypes.any,
+    timePickerDisabledTime: PropTypes.func,
   },
   render() {
     const props = this.props;
     const { value, direction, prefixCls,
       locale, selectedValue, formatter, placeholder,
-      disabledDate, timePicker, disabledTime, showTimePicker } = props;
+      disabledDate, timePicker, disabledTime, timePickerDisabledTime, showTimePicker } = props;
     const disabledTimeConfig = disabledTime && timePicker ?
       getTimeConfig(selectedValue, disabledTime) : null;
     const rangeClassName = `${prefixCls}-range`;
@@ -48,6 +49,7 @@ const CalendarPart = React.createClass({
       disabledMinutes: noop,
       disabledSeconds: noop,
       ...disabledTimeConfig,
+      ...timePickerDisabledTime,
     });
 
     return (<div className={`${rangeClassName}-part ${rangeClassName}-${direction}`}>

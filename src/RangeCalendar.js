@@ -39,6 +39,14 @@ function normalizeAnchor(props, init) {
   return value || init && defaultValue || selectedValue[0] || init && getNow();
 }
 
+function generateOptions(length) {
+  const arr = [];
+  for (let value = 0; value < length; value++) {
+    arr.push(value);
+  }
+  return arr;
+}
+
 function onInputSelect(direction, value) {
   if (!value) {
     return;
@@ -49,8 +57,11 @@ function onInputSelect(direction, value) {
   selectedValue[index] = value;
   if (selectedValue[0] && selectedValue[1]) {
     if (this.compare(selectedValue[0], selectedValue[1]) > 0) {
-      selectedValue[1 - index] = undefined;
+      selectedValue[1 - index] = this.state.showTimePicker ? selectedValue[index] : undefined;
     }
+  }
+  if (this.state.showTimePicker && selectedValue[0] && !selectedValue[1]) {
+    selectedValue[1] = selectedValue[0];
   }
   this.fireSelectValueChange(selectedValue);
 }
@@ -185,9 +196,44 @@ const RangeCalendar = React.createClass({
     if (selectedValue[1] && this.props.timePicker) {
       syncTime(selectedValue[1], endValue);
     }
+    if (this.state.showTimePicker) {
+      return selectedValue[1] ? selectedValue[1] : this.getStartValue();
+    }
     return endValue;
   },
-
+  // get disabled hours for second picker
+  getDisableTime() {
+    const { selectedValue, value } = this.state;
+    const startValue = selectedValue && selectedValue[0] || value.clone();
+    // if startTime and endTime is same day..
+    // the second timepicker will not able to pick time before first timepicker
+    if (!selectedValue[1] || startValue.compareToDay(selectedValue[1]) === 0) {
+      const hours = startValue.getHourOfDay();
+      const minutes = startValue.getMinutes();
+      const second = startValue.getSeconds();
+      const disabledHours = generateOptions(hours);
+      const disabledMinutes = generateOptions(minutes);
+      const disabledSeconds = generateOptions(second);
+      return {
+        disabledHours() {
+          return disabledHours;
+        },
+        disabledMinutes(hour) {
+          if (hour === hours) {
+            return disabledMinutes;
+          }
+          return [];
+        },
+        disabledSeconds(hour, minute) {
+          if (hour === hours && minute === minutes) {
+            return disabledSeconds;
+          }
+          return [];
+        },
+      };
+    }
+    return null;
+  },
   compare(v1, v2) {
     if (this.props.timePicker) {
       return v1.getTime() - v2.getTime();
@@ -288,6 +334,7 @@ const RangeCalendar = React.createClass({
         {...newProps}
         direction="right"
         formatter={this.getFormatter()}
+        timePickerDisabledTime={this.getDisableTime()}
         placeholder={placeholder2}
         value={this.getEndValue()}
         onInputSelect={onInputSelect.bind(this, 'right')}
@@ -310,6 +357,7 @@ const RangeCalendar = React.createClass({
             showTimePicker={showTimePicker}
             onOpenTimePicker={this.onOpenTimePicker}
             onCloseTimePicker={this.onCloseTimePicker}
+            timePickerDisabled={state.selectedValue.length === 1 || state.selectedValue.hovering}
           /> : null}
         {showOkButton ?
           <OkButton
