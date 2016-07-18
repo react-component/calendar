@@ -1440,7 +1440,7 @@ webpackJsonp([2],{
 /***/ 196:
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -1451,22 +1451,35 @@ webpackJsonp([2],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _classnames2 = __webpack_require__(189);
+	
+	var _classnames3 = _interopRequireDefault(_classnames2);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
 	function TimePickerButton(_ref) {
+	  var _classnames;
+	
 	  var prefixCls = _ref.prefixCls;
 	  var locale = _ref.locale;
 	  var showTimePicker = _ref.showTimePicker;
 	  var onOpenTimePicker = _ref.onOpenTimePicker;
 	  var onCloseTimePicker = _ref.onCloseTimePicker;
+	  var timePickerDisabled = _ref.timePickerDisabled;
 	
-	  var className = prefixCls + "-time-picker-btn";
+	  var className = (0, _classnames3.default)((_classnames = {}, _defineProperty(_classnames, prefixCls + '-time-picker-btn', true), _defineProperty(_classnames, prefixCls + '-time-picker-btn-disabled', timePickerDisabled), _classnames));
+	  var onClick = null;
+	  if (!timePickerDisabled) {
+	    onClick = showTimePicker ? onCloseTimePicker : onOpenTimePicker;
+	  }
 	  return _react2.default.createElement(
-	    "a",
+	    'a',
 	    {
 	      className: className,
-	      role: "button",
-	      onClick: showTimePicker ? onCloseTimePicker : onOpenTimePicker
+	      role: 'button',
+	      onClick: onClick
 	    },
 	    showTimePicker ? locale.dateSelect : locale.timeSelect
 	  );
@@ -2915,6 +2928,8 @@ webpackJsonp([2],{
 	
 	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	
 	var _react = __webpack_require__(3);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -2983,6 +2998,14 @@ webpackJsonp([2],{
 	  return value || init && defaultValue || selectedValue[0] || init && getNow();
 	}
 	
+	function generateOptions(length) {
+	  var arr = [];
+	  for (var value = 0; value < length; value++) {
+	    arr.push(value);
+	  }
+	  return arr;
+	}
+	
 	function onInputSelect(direction, value) {
 	  if (!value) {
 	    return;
@@ -2993,8 +3016,11 @@ webpackJsonp([2],{
 	  selectedValue[index] = value;
 	  if (selectedValue[0] && selectedValue[1]) {
 	    if (this.compare(selectedValue[0], selectedValue[1]) > 0) {
-	      selectedValue[1 - index] = undefined;
+	      selectedValue[1 - index] = this.state.showTimePicker ? selectedValue[index] : undefined;
 	    }
+	  }
+	  if (this.state.showTimePicker && selectedValue[0] && !selectedValue[1]) {
+	    selectedValue[1] = selectedValue[0];
 	  }
 	  this.fireSelectValueChange(selectedValue);
 	}
@@ -3123,7 +3149,53 @@ webpackJsonp([2],{
 	    if (selectedValue[1] && this.props.timePicker) {
 	      (0, _util.syncTime)(selectedValue[1], endValue);
 	    }
+	    if (this.state.showTimePicker) {
+	      return selectedValue[1] ? selectedValue[1] : this.getStartValue();
+	    }
 	    return endValue;
+	  },
+	
+	  // get disabled hours for second picker
+	  getEndDisableTime: function getEndDisableTime() {
+	    var _state = this.state;
+	    var selectedValue = _state.selectedValue;
+	    var value = _state.value;
+	
+	    var startValue = selectedValue && selectedValue[0] || value.clone();
+	    // if startTime and endTime is same day..
+	    // the second time picker will not able to pick time before first time picker
+	    if (!selectedValue[1] || startValue.compareToDay(selectedValue[1]) === 0) {
+	      var _ret = function () {
+	        var hours = startValue.getHourOfDay();
+	        var minutes = startValue.getMinutes();
+	        var second = startValue.getSeconds();
+	        var _disabledHours = generateOptions(hours);
+	        var _disabledMinutes = generateOptions(minutes);
+	        var _disabledSeconds = generateOptions(second);
+	        return {
+	          v: {
+	            disabledHours: function disabledHours() {
+	              return _disabledHours;
+	            },
+	            disabledMinutes: function disabledMinutes(hour) {
+	              if (hour === hours) {
+	                return _disabledMinutes;
+	              }
+	              return [];
+	            },
+	            disabledSeconds: function disabledSeconds(hour, minute) {
+	              if (hour === hours && minute === minutes) {
+	                return _disabledSeconds;
+	              }
+	              return [];
+	            }
+	          }
+	        };
+	      }();
+	
+	      if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	    }
+	    return null;
 	  },
 	  compare: function compare(v1, v2) {
 	    if (this.props.timePicker) {
@@ -3226,6 +3298,7 @@ webpackJsonp([2],{
 	        _react2.default.createElement(_CalendarPart2.default, _extends({}, props, newProps, {
 	          direction: 'right',
 	          formatter: this.getFormatter(),
+	          timePickerDisabledTime: this.getEndDisableTime(),
 	          placeholder: placeholder2,
 	          value: this.getEndValue(),
 	          onInputSelect: onInputSelect.bind(this, 'right'),
@@ -3248,7 +3321,8 @@ webpackJsonp([2],{
 	          !!props.timePicker ? _react2.default.createElement(_TimePickerButton2.default, _extends({}, props, {
 	            showTimePicker: showTimePicker,
 	            onOpenTimePicker: this.onOpenTimePicker,
-	            onCloseTimePicker: this.onCloseTimePicker
+	            onCloseTimePicker: this.onCloseTimePicker,
+	            timePickerDisabled: state.selectedValue.length === 1 || state.selectedValue.hovering
 	          })) : null,
 	          showOkButton ? _react2.default.createElement(_OkButton2.default, _extends({}, props, {
 	            value: state.value,
@@ -3313,7 +3387,8 @@ webpackJsonp([2],{
 	    placeholder: _react.PropTypes.any,
 	    disabledDate: _react.PropTypes.any,
 	    timePicker: _react.PropTypes.any,
-	    disabledTime: _react.PropTypes.any
+	    disabledTime: _react.PropTypes.any,
+	    timePickerDisabledTime: _react.PropTypes.object
 	  },
 	  render: function render() {
 	    var props = this.props;
@@ -3327,6 +3402,7 @@ webpackJsonp([2],{
 	    var disabledDate = props.disabledDate;
 	    var timePicker = props.timePicker;
 	    var disabledTime = props.disabledTime;
+	    var timePickerDisabledTime = props.timePickerDisabledTime;
 	    var showTimePicker = props.showTimePicker;
 	
 	    var disabledTimeConfig = disabledTime && timePicker ? (0, _index.getTimeConfig)(selectedValue, disabledTime) : null;
@@ -3349,7 +3425,7 @@ webpackJsonp([2],{
 	      disabledHours: noop,
 	      disabledMinutes: noop,
 	      disabledSeconds: noop
-	    }, disabledTimeConfig));
+	    }, disabledTimeConfig, timePickerDisabledTime));
 	
 	    return _react2.default.createElement(
 	      'div',
