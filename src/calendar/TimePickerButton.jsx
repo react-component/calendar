@@ -16,7 +16,6 @@ export default function TimePickerButton({
     className={className}
     role="button"
     onClick={onClick}
-    disabled={timePickerDisabled}
   >
     {showTimePicker ? locale.dateSelect : locale.timeSelect}
   </a>);

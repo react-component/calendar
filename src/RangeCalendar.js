@@ -202,11 +202,11 @@ const RangeCalendar = React.createClass({
     return endValue;
   },
   // get disabled hours for second picker
-  getDisableTime() {
+  getEndDisableTime() {
     const { selectedValue, value } = this.state;
     const startValue = selectedValue && selectedValue[0] || value.clone();
     // if startTime and endTime is same day..
-    // the second timepicker will not able to pick time before first timepicker
+    // the second time picker will not able to pick time before first time picker
     if (!selectedValue[1] || startValue.compareToDay(selectedValue[1]) === 0) {
       const hours = startValue.getHourOfDay();
       const minutes = startValue.getMinutes();
@@ -309,64 +309,65 @@ const RangeCalendar = React.createClass({
       style={props.style}
       tabIndex="0"
     >
-      {showClear ? <a
-        className={`${prefixCls}-clear-btn`}
-        role="button"
-        title={locale.clear}
-        onClick={this.clear}
-      /> : null}
+      {showClear ?
+        <a
+          className={`${prefixCls}-clear-btn`}
+          role="button"
+          title={locale.clear}
+          onClick={this.clear}
+        /> : null}
       <div className={`${prefixCls}-date-panel`}>
-      <CalendarPart
-        {...props}
-        {...newProps}
-        direction="left"
-        formatter={this.getFormatter()}
-        value={this.getStartValue()}
-        placeholder={placeholder1}
-        onInputSelect={onInputSelect.bind(this, 'left')}
-        onValueChange={onValueChange.bind(this, 'left')}
-        timePicker={timePicker}
-        showTimePicker={showTimePicker}
-      />
-      <span className={`${prefixCls}-range-middle`}>~</span>
-      <CalendarPart
-        {...props}
-        {...newProps}
-        direction="right"
-        formatter={this.getFormatter()}
-        timePickerDisabledTime={this.getDisableTime()}
-        placeholder={placeholder2}
-        value={this.getEndValue()}
-        onInputSelect={onInputSelect.bind(this, 'right')}
-        onValueChange={onValueChange.bind(this, 'right')}
-        timePicker={timePicker}
-        showTimePicker={showTimePicker}
-      />
+        <CalendarPart
+          {...props}
+          {...newProps}
+          direction="left"
+          formatter={this.getFormatter()}
+          value={this.getStartValue()}
+          placeholder={placeholder1}
+          onInputSelect={onInputSelect.bind(this, 'left')}
+          onValueChange={onValueChange.bind(this, 'left')}
+          timePicker={timePicker}
+          showTimePicker={showTimePicker}
+        />
+        <span className={`${prefixCls}-range-middle`}>~</span>
+        <CalendarPart
+          {...props}
+          {...newProps}
+          direction="right"
+          formatter={this.getFormatter()}
+          timePickerDisabledTime={this.getEndDisableTime()}
+          placeholder={placeholder2}
+          value={this.getEndValue()}
+          onInputSelect={onInputSelect.bind(this, 'right')}
+          onValueChange={onValueChange.bind(this, 'right')}
+          timePicker={timePicker}
+          showTimePicker={showTimePicker}
+        />
       </div>
       <div className={cls}>
         <div className={`${prefixCls}-footer-btn`}>
-        <TodayButton
-          {...props}
-          value={state.value}
-          onToday={this.onToday}
-          text={locale.backToToday}
-        />
-        {!!props.timePicker ?
-          <TimePickerButton
-            {...props}
-            showTimePicker={showTimePicker}
-            onOpenTimePicker={this.onOpenTimePicker}
-            onCloseTimePicker={this.onCloseTimePicker}
-            timePickerDisabled={state.selectedValue.length === 1 || state.selectedValue.hovering}
-          /> : null}
-        {showOkButton ?
-          <OkButton
+          <TodayButton
             {...props}
             value={state.value}
-            onOk={this.onOk}
-            okDisabled={state.selectedValue.length !== 2 || state.selectedValue.hovering}
-          /> : null}
-          </div>
+            onToday={this.onToday}
+            text={locale.backToToday}
+          />
+          {!!props.timePicker ?
+            <TimePickerButton
+              {...props}
+              showTimePicker={showTimePicker}
+              onOpenTimePicker={this.onOpenTimePicker}
+              onCloseTimePicker={this.onCloseTimePicker}
+              timePickerDisabled={state.selectedValue.length === 1 || state.selectedValue.hovering}
+            /> : null}
+          {showOkButton ?
+            <OkButton
+              {...props}
+              value={state.value}
+              onOk={this.onOk}
+              okDisabled={state.selectedValue.length !== 2 || state.selectedValue.hovering}
+            /> : null}
+        </div>
       </div>
     </div>);
   },
