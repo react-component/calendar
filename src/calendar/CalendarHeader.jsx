@@ -53,7 +53,7 @@ const CalendarHeader = React.createClass({
     const props = this.props;
     const prefixCls = props.prefixCls;
     const locale = props.locale;
-    const value = this.props.value;
+    const value = props.value;
     const monthBeforeYear = locale.monthBeforeYear;
     const selectClassName = `${prefixCls}-${monthBeforeYear ? 'my-select' : 'ym-select'}`;
     const year = (<a
@@ -62,7 +62,7 @@ const CalendarHeader = React.createClass({
       onClick={showTimePicker ? null : this.showYearPanel}
       title={locale.monthSelect}
     >
-      {value.format(props.yearFormat)}
+      {value.format(locale.yearFormat)}
     </a>);
     const month = (<a
       className={`${prefixCls}-month-select`}
@@ -70,7 +70,7 @@ const CalendarHeader = React.createClass({
       onClick={showTimePicker ? null : this.showMonthPanel}
       title={locale.monthSelect}
     >
-      {value.format(props.monthFormat)}
+      {value.format(locale.monthFormat)}
     </a>);
     let day;
     if (showTimePicker) {
@@ -78,7 +78,7 @@ const CalendarHeader = React.createClass({
         className={`${prefixCls}-day-select`}
         role="button"
       >
-        {value.format(props.dayFormat)}
+        {value.format(locale.dayFormat)}
       </a>);
     }
     let my = [];

@@ -5,7 +5,7 @@ import TestUtils from 'react-addons-test-utils';
 import ReactDOM from 'react-dom';
 const Simulate = TestUtils.Simulate;
 import moment from 'moment';
-const format = ('yyyy-MM-dd');
+const format = ('YYYY-MM-DD');
 const $ = require('jquery');
 
 describe('RangeCalendar', () => {

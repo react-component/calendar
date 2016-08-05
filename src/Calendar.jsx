@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import moment from 'moment';
 import KeyCode from 'rc-util/lib/KeyCode';
 import DateTable from './date/DateTable';
 import CalendarHeader from './calendar/CalendarHeader';
@@ -8,7 +7,7 @@ import CalendarFooter from './calendar/CalendarFooter';
 import CalendarMixin from './mixin/CalendarMixin';
 import CommonMixin from './mixin/CommonMixin';
 import DateInput from './date/DateInput';
-import { getTimeConfig } from './util/index';
+import { getTimeConfig, getTodayTime } from './util/index';
 
 function noop() {
 }
@@ -27,24 +26,24 @@ function goEndMonth() {
 
 function goTime(direction, unit) {
   const next = this.state.value.clone();
-  next.add(direction,unit);
+  next.add(direction, unit);
   this.setValue(next);
 }
 
 function goMonth(direction) {
- return goTime(direction,'months');
+  return goTime.call(this, direction, 'months');
 }
 
 function goYear(direction) {
-  return goTime(direction,'years');
+  return goTime.call(this, direction, 'years');
 }
 
 function goWeek(direction) {
-  return goTime(direction,'weeks');
+  return goTime.call(this, direction, 'weeks');
 }
 
 function goDay(direction) {
-  return goTime(direction,'days');
+  return goTime.call(this, direction, 'days');
 }
 
 const Calendar = React.createClass({
@@ -167,6 +166,13 @@ const Calendar = React.createClass({
   onDateTableSelect(value) {
     this.onSelect(value);
   },
+  onToday() {
+    const { value } = this.state;
+    const now = getTodayTime(value);
+    this.onSelect(now, {
+      source: 'todayButton',
+    });
+  },
   getRootDOMNode() {
     return ReactDOM.findDOMNode(this);
   },
@@ -178,14 +184,6 @@ const Calendar = React.createClass({
   closeTimePicker() {
     this.setState({
       showTimePicker: false,
-    });
-  },
-  chooseToday() {
-    const { value } = this.state;
-    const now = moment();
-    now.locale(this.state.value.locale()).utcOffset(value.utcOffset());
-    this.onSelect(now, {
-      source: 'todayButton',
     });
   },
   render() {
@@ -204,7 +202,7 @@ const Calendar = React.createClass({
       showHour: true,
       showSecond: true,
       onChange: this.onDateInputChange,
-      defaultOpenValue:value,
+      defaultOpenValue: value,
       value: selectedValue,
       disabledHours: noop,
       disabledMinutes: noop,
@@ -247,7 +245,7 @@ const Calendar = React.createClass({
               {timePickerEle }
             </div>
           </div>)
-        : null}
+          : null}
         <div className={`${prefixCls}-body`}>
           <DateTable
             locale={locale}
@@ -275,7 +273,7 @@ const Calendar = React.createClass({
           disabledDate={disabledDate}
           onOk={this.onOk}
           onSelect={this.onSelect}
-          onToday={this.chooseToday}
+          onToday={this.onToday}
           onOpenTimePicker={this.openTimePicker}
           onCloseTimePicker={this.closeTimePicker}
         />

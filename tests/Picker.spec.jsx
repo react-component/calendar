@@ -7,9 +7,9 @@ import React from 'react';
 import TestUtils from 'react-addons-test-utils';
 const Simulate = TestUtils.Simulate;
 import async from 'async';
-import CalendarLocale from '../src/locale/zh_CN';
+import CalendarLocale from '../src/locale/en_US';
 import moment from 'moment';
-const format = ('yyyy-MM-dd');
+const format = ('YYYY-MM-DD');
 const VALUE = moment([2015, 5, 1]);
 
 describe('DatePicker', () => {
@@ -32,17 +32,18 @@ describe('DatePicker', () => {
       className="rc-calendar-picker-input"
       onChange={noop}
       readOnly
-      value={value && `${value[0] && value[0].format(format)} - ${value[1] && value[1].format(format)}`}
+      value={value && `${value[0] &&
+      value[0].format(format)} - ${value[1] && value[1].format(format)}`}
     />);
   }
 
   function renderPicker(props) {
     return ReactDOM.render(<DatePicker
       calendar={
-      <Calendar
-        locale={CalendarLocale}
-      />
-        }
+        <Calendar
+          locale={CalendarLocale}
+        />
+      }
       defaultValue={VALUE}
       {...props}
     >
@@ -53,10 +54,10 @@ describe('DatePicker', () => {
   function renderRangePicker(props) {
     return ReactDOM.render(<DatePicker
       calendar={
-      <RangeCalendar
-        locale={CalendarLocale}
-      />
-        }
+        <RangeCalendar
+          locale={CalendarLocale}
+        />
+      }
       defaultValue={[VALUE, VALUE]}
       {...props}
     >
@@ -92,7 +93,7 @@ describe('DatePicker', () => {
         'rc-calendar')[0]).to.be.ok();
       expect(picker.state.open).to.be(true);
       const day = TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance,
-        'rc-calendar-date')[1];
+        'rc-calendar-date')[2];
       Simulate.click(day);
       setTimeout(next, 100);
     }, (next) => {
@@ -129,10 +130,10 @@ describe('DatePicker', () => {
         'rc-calendar')[0]).to.be.ok();
       expect(picker.state.open).to.be(true);
       const day1 = TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance,
-        'rc-calendar-date')[1];
+        'rc-calendar-date')[2];
       Simulate.click(day1);
       const day2 = TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance,
-        'rc-calendar-date')[2];
+        'rc-calendar-date')[3];
       Simulate.click(day2);
       setTimeout(next, 10);
     }, (next) => {
@@ -171,7 +172,7 @@ describe('DatePicker', () => {
           'rc-calendar')[0]).not.to.be.ok();
         expect(picker.state.open).to.be(true);
         const day = TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance,
-          'rc-calendar-date')[1];
+          'rc-calendar-date')[2];
         Simulate.click(day);
         setTimeout(next, 100);
       }, (next) => {

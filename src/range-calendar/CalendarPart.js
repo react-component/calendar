@@ -27,7 +27,8 @@ const CalendarPart = React.createClass({
     const {
       value, direction, prefixCls,
       locale, selectedValue, format, placeholder,
-      disabledDate, timePicker, disabledTime, timePickerDisabledTime, showTimePicker
+      disabledDate, timePicker, disabledTime,
+      timePickerDisabledTime, showTimePicker,
     } = props;
     const disabledTimeConfig = disabledTime && timePicker ?
       getTimeConfig(selectedValue, disabledTime) : null;
@@ -40,7 +41,8 @@ const CalendarPart = React.createClass({
     };
     const index = direction === 'left' ? 0 : 1;
 
-    const timePickerEle = timePicker && React.cloneElement(timePicker, {
+    const timePickerEle = timePicker &&
+      React.cloneElement(timePicker, {
         showHour: true,
         showSecond: true,
         onChange: props.onInputSelect,
@@ -53,45 +55,46 @@ const CalendarPart = React.createClass({
         ...timePickerDisabledTime,
       });
 
-    return (<div className={`${rangeClassName}-part ${rangeClassName}-${direction}`}>
-      <DateInput
-        format={format}
-        locale={locale}
-        prefixCls={prefixCls}
-        timePicker={timePicker}
-        disabledDate={disabledDate}
-        placeholder={placeholder}
-        disabledTime={disabledTime}
-        value={value}
-        showClear={false}
-        selectedValue={selectedValue[index]}
-        onChange={props.onInputSelect}
-      />
-      <div style={{ outline: 'none' }}>
-        <CalendarHeader
-          {...newProps}
-          enableNext={direction === 'right'}
-          enablePrev={direction === 'left'}
-          onValueChange={props.onValueChange}
+    return (
+      <div className={`${rangeClassName}-part ${rangeClassName}-${direction}`}>
+        <DateInput
+          format={format}
+          locale={locale}
+          prefixCls={prefixCls}
+          timePicker={timePicker}
+          disabledDate={disabledDate}
+          placeholder={placeholder}
+          disabledTime={disabledTime}
+          value={value}
+          showClear={false}
+          selectedValue={selectedValue[index]}
+          onChange={props.onInputSelect}
         />
-        {showTimePicker ? <div className={`${prefixCls}-time-picker`}>
-          <div className={`${prefixCls}-time-picker-panel`}>
-            {timePickerEle}
-          </div>
-        </div> : null}
-        <div className={`${prefixCls}-body`}>
-          <DateTable
+        <div style={{ outline: 'none' }}>
+          <CalendarHeader
             {...newProps}
-            selectedValue={selectedValue}
-            dateRender={props.dateRender}
-            onSelect={props.onSelect}
-            onDayHover={props.onDayHover}
-            disabledDate={disabledDate}
-            showWeekNumber={props.showWeekNumber}
+            enableNext={direction === 'right'}
+            enablePrev={direction === 'left'}
+            onValueChange={props.onValueChange}
           />
+          {showTimePicker ? <div className={`${prefixCls}-time-picker`}>
+            <div className={`${prefixCls}-time-picker-panel`}>
+              {timePickerEle}
+            </div>
+          </div> : null}
+          <div className={`${prefixCls}-body`}>
+            <DateTable
+              {...newProps}
+              selectedValue={selectedValue}
+              dateRender={props.dateRender}
+              onSelect={props.onSelect}
+              onDayHover={props.onDayHover}
+              disabledDate={disabledDate}
+              showWeekNumber={props.showWeekNumber}
+            />
+          </div>
         </div>
-      </div>
-    </div>);
+      </div>);
   },
 });
 

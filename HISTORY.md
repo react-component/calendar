@@ -1,6 +1,10 @@
 # History
 ----
 
+## 7.0.0 / 2016-08-06
+
+- goodbye gregorian-calendar, hello moment
+
 ## 6.0.0 / 2016-07-13
 
 - use rc-time-picker/lib/module/panel as timepicker element

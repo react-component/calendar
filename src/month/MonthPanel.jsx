@@ -4,7 +4,7 @@ import MonthTable from './MonthTable';
 
 function goYear(direction) {
   const next = this.state.value.clone();
-  next.add(direction,'year');
+  next.add(direction, 'year');
   this.setAndChangeValue(next);
 }
 

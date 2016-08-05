@@ -19,7 +19,7 @@ function onValueChange(direction, current) {
   let value;
   value = current;
   if (direction === 'right') {
-    value.add(-1,'months');
+    value.add(-1, 'months');
   }
   this.fireValueChange(value);
 }
@@ -188,7 +188,7 @@ const RangeCalendar = React.createClass({
 
   getEndValue() {
     const endValue = this.state.value.clone();
-    endValue.add(1,'months');
+    endValue.add(1, 'months');
     const selectedValue = this.state.selectedValue;
     // keep selectedTime when select date
     if (selectedValue[1] && this.props.timePicker) {
@@ -205,7 +205,7 @@ const RangeCalendar = React.createClass({
     const startValue = selectedValue && selectedValue[0] || value.clone();
     // if startTime and endTime is same day..
     // the second time picker will not able to pick time before first time picker
-    if (!selectedValue[1] || startValue.isSame(selectedValue[1],'day')) {
+    if (!selectedValue[1] || startValue.isSame(selectedValue[1], 'day')) {
       const hours = startValue.hour();
       const minutes = startValue.minute();
       const second = startValue.second();
@@ -236,7 +236,7 @@ const RangeCalendar = React.createClass({
     if (this.props.timePicker) {
       return v1.diff(v2);
     }
-    return v1.diff(v2,'days');
+    return v1.diff(v2, 'days');
   },
 
   fireSelectValueChange(selectedValue, direct) {

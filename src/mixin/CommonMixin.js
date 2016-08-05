@@ -1,6 +1,5 @@
 import { PropTypes } from 'react';
 import enUs from '../locale/en_US';
-import { getFormat } from '../util/index';
 
 function noop() {
 }
@@ -35,9 +34,10 @@ export default {
   },
 
   getFormat() {
-    let { format, locale } = this.props;
+    let { format } = this.props;
+    const { locale, timePicker } = this.props;
     if (!format) {
-      if (this.props.timePicker) {
+      if (timePicker) {
         format = locale.dateTimeFormat;
       } else {
         format = locale.dateFormat;

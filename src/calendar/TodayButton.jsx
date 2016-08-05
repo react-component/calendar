@@ -5,8 +5,6 @@ export default function TodayButton({
   prefixCls, locale, value, timePicker,
   disabledDate, disabledTime, onToday, text,
 }) {
-  const today = value.clone();
-  today.setTime(Date.now());
   let disabledToday = false;
   let localeNow = text;
   if (!localeNow && timePicker) {

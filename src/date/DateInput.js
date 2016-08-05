@@ -1,12 +1,14 @@
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
+import moment from 'moment';
 
 const DateInput = React.createClass({
   propTypes: {
     prefixCls: PropTypes.string,
     timePicker: PropTypes.object,
+    value: PropTypes.object,
     disabledTime: PropTypes.any,
-    format: PropTypes.object,
+    format: PropTypes.string,
     locale: PropTypes.object,
     disabledDate: PropTypes.func,
     onChange: PropTypes.func,
@@ -41,8 +43,7 @@ const DateInput = React.createClass({
     let value;
     const { disabledDate, format, onChange } = this.props;
     if (str) {
-
-        const parsed = moment(str, format, true);
+      const parsed = moment(str, format, true);
       if (!parsed.isValid()) {
         this.setState({
           invalid: true,

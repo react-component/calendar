@@ -118,7 +118,7 @@ http://react-component.github.io/calendar/examples/index.html
         </tr>
         <tr>
           <td>defaultValue</td>
-          <td>GregorianCalendar</td>
+          <td>moment</td>
           <td></td>
           <td>defaultValue like input's defaultValue</td>
         </tr>
@@ -129,20 +129,20 @@ http://react-component.github.io/calendar/examples/index.html
           <td>calendar locale</td>
         </tr>
         <tr>
-          <td>formatter</td>
-          <td>String|GregorianCalendarFormatter. see <a href="https://github.com/yiminghe/gregorian-calendar-format">GregorianCalendarFormatter</a> spec</td>
-          <td>yyyy-MM-dd</td>
+          <td>format</td>
+          <td>String</td>
+          <td>YYYY-MM-DD</td>
           <td>use to format/parse date(without time) value to/from input</td>
         </tr>
         <tr>
           <td>disabledDate</td>
-          <td>Function(current:GregorianCalendar):Boolean</td>
+          <td>Function(current:moment):Boolean</td>
           <td>null</td>
           <td>whether to disable select of current date</td>
         </tr>
         <tr>
           <td>disabledTime</td>
-          <td>Function(current:GregorianCalendar):Object</td>
+          <td>Function(current:moment):Object</td>
           <td>null</td>
           <td>a function which return a object with member of disabledHours/disabledMinutes/disabledSeconds according to rc-time-picker</td>
         </tr>
@@ -178,13 +178,13 @@ http://react-component.github.io/calendar/examples/index.html
         </tr>
         <tr>
           <td>onSelect</td>
-          <td>Function(date: GregorianCalendar)</td>
+          <td>Function(date: moment)</td>
           <td>function(){}</td>
           <td>called when a date is selected from calendar</td>
         </tr>
         <tr>
           <td>onChange</td>
-          <td>Function(date: GregorianCalendar)</td>
+          <td>Function(date: moment)</td>
           <td>function(){}</td>
           <td>called when a date is changed inside calendar (next year/next month/keyboard)</td>
         </tr>
@@ -230,13 +230,13 @@ http://react-component.github.io/calendar/examples/index.html
         </tr>
         <tr>
           <td>selectedValue</td>
-          <td> <a href="https://github.com/yiminghe/gregorian-calendar">GregorianCalendar</a>[] </td>
+          <td>moment[]</td>
           <td></td>
           <td>current selected value range. with two elements.</td>
         </tr>
         <tr>
           <td>defaultSelectedValue</td>
-          <td>GregorianCalendar[]</td>
+          <td>moment[]</td>
           <td></td>
           <td>default selected value range</td>
         </tr>
@@ -247,14 +247,14 @@ http://react-component.github.io/calendar/examples/index.html
           <td>calendar locale</td>
         </tr>
         <tr>
-          <td>formatter</td>
-          <td>String|GregorianCalendarFormatter. see <a href="https://github.com/yiminghe/gregorian-calendar-format">GregorianCalendarFormatter</a> spec</td>
+          <td>format</td>
+          <td>String</td>
           <td>depends on whether you set timePicker and your locale</td>
           <td>use to format/parse date(without time) value to/from input</td>
         </tr>
         <tr>
           <td>disabledDate</td>
-          <td>Function(current:GregorianCalendar):Boolean</td>
+          <td>Function(current:moment):Boolean</td>
           <td>null</td>
           <td>whether to disable select of current date</td>
         </tr>
@@ -278,13 +278,13 @@ http://react-component.github.io/calendar/examples/index.html
         </tr>
         <tr>
           <td>onSelect</td>
-          <td>Function(date: GregorianCalendar[])</td>
+          <td>Function(date: moment[])</td>
           <td>function(){}</td>
           <td>called when a date range is selected from calendar</td>
         </tr>
         <tr>
           <td>onChange</td>
-          <td>Function(date: GregorianCalendar[])</td>
+          <td>Function(date: moment[])</td>
           <td>function(){}</td>
           <td>called when a date range is changed inside calendar (next year/next month/keyboard)</td>
         </tr>
@@ -329,13 +329,13 @@ http://react-component.github.io/calendar/examples/index.html
         </tr>
         <tr>
           <td>value</td>
-          <td> <a href="https://github.com/yiminghe/gregorian-calendar">GregorianCalendar</a> </td>
+          <td>moment</td>
           <td></td>
           <td>current value like input's value</td>
         </tr>
         <tr>
           <td>defaultValue</td>
-          <td>GregorianCalendar</td>
+          <td>moment</td>
           <td></td>
           <td>defaultValue like input's defaultValue</td>
         </tr>
@@ -347,19 +347,19 @@ http://react-component.github.io/calendar/examples/index.html
         </tr>
         <tr>
           <td>disabledDate</td>
-          <td>Function(current:GregorianCalendar):Boolean</td>
+          <td>Function(current:moment):Boolean</td>
           <td>null</td>
           <td>whether to disable select of current month</td>
         </tr>
         <tr>
           <td>onSelect</td>
-          <td>Function(date: GregorianCalendar)</td>
+          <td>Function(date: moment)</td>
           <td>function(){}</td>
           <td>called when a date is selected from calendar</td>
         </tr>
         <tr>
           <td>onChange</td>
-          <td>Function(date: GregorianCalendar)</td>
+          <td>Function(date: moment)</td>
           <td>function(){}</td>
           <td>called when a date is changed inside calendar (next year/next month/keyboard)</td>
         </tr>
@@ -422,13 +422,13 @@ http://react-component.github.io/calendar/examples/index.html
         </tr>
         <tr>
           <td>value</td>
-          <td>GregorianCalendar|GregorianCalendar[]</td>
+          <td>moment|moment[]</td>
           <td></td>
           <td>current value like input's value</td>
         </tr>
         <tr>
           <td>defaultValue</td>
-          <td>GregorianCalendar|GregorianCalendar[]</td>
+          <td>moment|moment[]</td>
           <td></td>
           <td>defaultValue like input's defaultValue</td>
         </tr>
@@ -491,13 +491,13 @@ http://react-component.github.io/calendar/examples/index.html
         </tr>
         <tr>
           <td>value</td>
-          <td> <a href="https://github.com/yiminghe/gregorian-calendar">GregorianCalendar</a> </td>
+          <td>moment</td>
           <td></td>
           <td>current value like input's value</td>
         </tr>
         <tr>
           <td>defaultValue</td>
-          <td>GregorianCalendar</td>
+          <td>moment</td>
           <td></td>
           <td>defaultValue like input's defaultValue</td>
         </tr>
@@ -550,7 +550,7 @@ http://react-component.github.io/calendar/examples/index.html
           <td>Custom date cell content render method,the content will be appended to the cell.</td>
         </tr>        <tr>
           <td>onSelect</td>
-          <td>Function(date: GregorianCalendar)</td>
+          <td>Function(date: moment)</td>
           <td>function(){}</td>
           <td>called when a date is selected from calendar</td>
         </tr>

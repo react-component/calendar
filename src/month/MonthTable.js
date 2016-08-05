@@ -32,34 +32,33 @@ class MonthTable extends Component {
     }
   }
 
-  months() {
-    const props = this.props;
-    const value = this.state.value;
-    const current = value.clone();
-    const locale = props.locale;
-    const months = [];
-    const shortMonths = value.localeData().monthsShort;
-    let index = 0;
-    for (let rowIndex = 0; rowIndex < ROW; rowIndex++) {
-      months[rowIndex] = [];
-      for (let colIndex = 0; colIndex < COL; colIndex++) {
-        current.month(index);
-        months[rowIndex][colIndex] = {
-          value: index,
-          content: shortMonths[index],
-          title: shortMonths[index],
-        };
-        index++;
-      }
-    }
-    return months;
-  }
-
   setAndSelectValue(value) {
     this.setState({
       value,
     });
     this.props.onSelect(value);
+  }
+
+  months() {
+    const value = this.state.value;
+    const current = value.clone();
+    const months = [];
+    const localeData = value.localeData();
+    let index = 0;
+    for (let rowIndex = 0; rowIndex < ROW; rowIndex++) {
+      months[rowIndex] = [];
+      for (let colIndex = 0; colIndex < COL; colIndex++) {
+        current.month(index);
+        const content = localeData.monthsShort(current);
+        months[rowIndex][colIndex] = {
+          value: index,
+          content,
+          title: content,
+        };
+        index++;
+      }
+    }
+    return months;
   }
 
   render() {

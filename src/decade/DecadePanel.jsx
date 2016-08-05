@@ -5,7 +5,7 @@ import classnames from 'classnames';
 
 function goYear(direction) {
   const next = this.state.value.clone();
-  next.add(direction,'years');
+  next.add(direction, 'years');
   this.setState({
     value: next,
   });

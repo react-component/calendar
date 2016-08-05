@@ -8,14 +8,14 @@ import FullCalendar from 'rc-calendar/src/FullCalendar';
 import 'rc-select/assets/index.css';
 import Select from 'rc-select';
 
-import zhCN from 'rc-calendar/lib/locale/zh_CN';
-import enUS from 'rc-calendar/lib/locale/en_US';
+import zhCN from 'rc-calendar/src/locale/zh_CN';
+import enUS from 'rc-calendar/src/locale/en_US';
 
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 import 'moment/locale/en-gb';
 
-const format = 'YYYY-MM-DD HH:mm';
+const format = 'YYYY-MM-DD';
 const cn = location.search.indexOf('cn') !== -1;
 
 const now = moment();
@@ -24,11 +24,6 @@ if (cn) {
 } else {
   now.locale('en-gb').utcOffset(0);
 }
-
-function getFormat(time) {
-  return time ? format : 'YYYY-MM-DD';
-}
-
 
 const defaultCalendarValue = now.clone();
 defaultCalendarValue.add(-1, 'month');
@@ -56,12 +51,14 @@ const App = React.createClass({
           Select={Select}
           fullscreen={false}
           onSelect={onSelect}
+          defaultValue={now}
           locale={cn ? zhCN : enUS}
         />
         <FullCalendar
           style={{ margin: 10 }}
           Select={Select}
           fullscreen
+          defaultValue={now}
           onSelect={onSelect}
           type={this.state.type}
           onTypeChange={this.onTypeChange}

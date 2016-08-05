@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 import moment from 'moment';
-import { isAllowedDate } from '../util/index';
+import { isAllowedDate, getTodayTime } from '../util/index';
 
 function noop() {
 }
@@ -13,8 +13,7 @@ function getNow() {
 function getNowByCurrentStateValue(value) {
   let ret;
   if (value) {
-    ret = moment();
-    ret.locale(value.locale()).utcOffset(value.utcOffset());
+    ret = getTodayTime(value);
   } else {
     ret = getNow();
   }
@@ -108,7 +107,7 @@ const CalendarMixin = {
         value,
       });
     }
-    if (originalValue && value && originalValue.isSame(value) ||
+    if (originalValue && value && !originalValue.isSame(value) ||
       (!originalValue && value) ||
       (originalValue && !value)) {
       this.props.onChange(value);

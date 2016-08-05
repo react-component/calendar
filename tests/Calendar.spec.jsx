@@ -6,8 +6,7 @@ import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 const Simulate = TestUtils.Simulate;
 import async from 'async';
-import moment from 'moment';
-const format = ('yyyy-MM-dd');
+const format = ('YYYY-MM-DD');
 
 describe('Calendar', () => {
   let calendar;
@@ -43,7 +42,7 @@ describe('Calendar', () => {
       it('left works', (done) => {
         const original = calendar.state.value;
         const expected = original.clone();
-        expected.add(-1,'day');
+        expected.add(-1, 'day');
         Simulate.keyDown(ReactDOM.findDOMNode(calendar), {
           keyCode: keyCode.LEFT,
         });
@@ -59,7 +58,7 @@ describe('Calendar', () => {
       it('right works', (done) => {
         const original = calendar.state.value;
         const expected = original.clone();
-        expected.add(1,'day');
+        expected.add(1, 'day');
         Simulate.keyDown(ReactDOM.findDOMNode(calendar), {
           keyCode: keyCode.RIGHT,
         });
@@ -74,7 +73,7 @@ describe('Calendar', () => {
       it('up works', (done) => {
         const original = calendar.state.value;
         const expected = original.clone();
-        expected.add(-7,'day');
+        expected.add(-7, 'day');
         Simulate.keyDown(ReactDOM.findDOMNode(calendar), {
           keyCode: keyCode.UP,
         });
@@ -89,7 +88,7 @@ describe('Calendar', () => {
       it('down works', (done) => {
         const original = calendar.state.value;
         const expected = original.clone();
-        expected.add(7,'day');
+        expected.add(7, 'day');
         Simulate.keyDown(ReactDOM.findDOMNode(calendar), {
           keyCode: keyCode.DOWN,
         });
@@ -104,7 +103,7 @@ describe('Calendar', () => {
       it('pageDown works', (done) => {
         const original = calendar.state.value;
         const expected = original.clone();
-        expected.add(1,'month');
+        expected.add(1, 'month');
         Simulate.keyDown(ReactDOM.findDOMNode(calendar), {
           keyCode: keyCode.PAGE_DOWN,
         });
@@ -119,7 +118,7 @@ describe('Calendar', () => {
       it('pageUp works', (done) => {
         const original = calendar.state.value;
         const expected = original.clone();
-        expected.add(-1,'month');
+        expected.add(-1, 'month');
         Simulate.keyDown(ReactDOM.findDOMNode(calendar), {
           keyCode: keyCode.PAGE_UP,
         });
@@ -134,7 +133,7 @@ describe('Calendar', () => {
       it('ctrl left works', (done) => {
         const original = calendar.state.value;
         const expected = original.clone();
-        expected.add(-1,'year');
+        expected.add(-1, 'year');
         Simulate.keyDown(ReactDOM.findDOMNode(calendar), {
           keyCode: keyCode.LEFT,
           ctrlKey: 1,
@@ -149,7 +148,7 @@ describe('Calendar', () => {
       it('ctrl right works', (done) => {
         const original = calendar.state.value;
         const expected = original.clone();
-        expected.add(1,'year');
+        expected.add(1, 'year');
         Simulate.keyDown(ReactDOM.findDOMNode(calendar), {
           keyCode: keyCode.RIGHT,
           ctrlKey: 1,
@@ -337,7 +336,7 @@ describe('Calendar', () => {
 
 
   describe('input', () => {
-    it('blur will fire onSelect/onChange', (done) => {
+    it('change will fire onSelect/onChange', (done) => {
       let count = 0;
       const expected = '2017-01-21';
 
@@ -370,7 +369,6 @@ describe('Calendar', () => {
       });
       ReactDOM.findDOMNode(input).value = expected;
       Simulate.change(input);
-      Simulate.blur(input);
     });
   });
 });

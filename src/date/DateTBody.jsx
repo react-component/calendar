@@ -3,7 +3,7 @@ import DateConstants from './DateConstants';
 import { getTitleString, getTodayTime } from '../util/';
 
 function isSameDay(one, two) {
-  return one && two && one.isSame(two,'day');
+  return one && two && one.isSame(two, 'day');
 }
 
 function beforeCurrentMonthYear(current, today) {
@@ -56,8 +56,10 @@ const DateTBody = React.createClass({
 
   render() {
     const props = this.props;
-    const { contentRender, prefixCls, selectedValue, value,
-      showWeekNumber, dateRender, disabledDate } = props;
+    const {
+      contentRender, prefixCls, selectedValue, value,
+      showWeekNumber, dateRender, disabledDate,
+    } = props;
     let iIndex;
     let jIndex;
     let current;
@@ -75,19 +77,19 @@ const DateTBody = React.createClass({
     const firstDisableClass = `${prefixCls}-disabled-cell-first-of-row`;
     const lastDisableClass = `${prefixCls}-disabled-cell-last-of-row`;
     const month1 = value.clone();
-    month1.startOf('month');
+    month1.date(1);
     const day = month1.day();
     const lastMonthDiffDay = (day + 7 - value.localeData().firstDayOfWeek()) % 7;
     // calculate last month
     const lastMonth1 = month1.clone();
-    lastMonth1.add(0 - lastMonthDiffDay,'days');
+    lastMonth1.add(0 - lastMonthDiffDay, 'days');
     let passed = 0;
     for (iIndex = 0; iIndex < DateConstants.DATE_ROW_COUNT; iIndex++) {
       for (jIndex = 0; jIndex < DateConstants.DATE_COL_COUNT; jIndex++) {
         current = lastMonth1;
         if (passed) {
           current = current.clone();
-          current.add(passed,'days');
+          current.add(passed, 'days');
         }
         dateTable.push(current);
         passed++;
@@ -101,11 +103,11 @@ const DateTBody = React.createClass({
       if (showWeekNumber) {
         weekNumberCell = (
           <td
-            key={dateTable[passed].weeksInYear()}
+            key={dateTable[passed].week()}
             role="gridcell"
             className={weekNumberCellClass}
           >
-            {dateTable[passed].weeksInYear()}
+            {dateTable[passed].week()}
           </td>
         );
       }
@@ -142,8 +144,8 @@ const DateTBody = React.createClass({
             if (startValue && endValue) {
               if (isSameDay(current, endValue) && !selectedValue.hovering) {
                 selected = true;
-              } else if (current.isAfter(startValue,'day') &&
-                current.isBefore(endValue,'day')) {
+              } else if (current.isAfter(startValue, 'day') &&
+                current.isBefore(endValue, 'day')) {
                 cls += ` ${inRangeClass}`;
               }
             }

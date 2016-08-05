@@ -6,14 +6,14 @@ import DatePicker from 'rc-calendar/src/Picker';
 import Dialog from 'rc-dialog';
 import 'rc-dialog/assets/index.css';
 
-import zhCN from 'rc-calendar/lib/locale/zh_CN';
-import enUS from 'rc-calendar/lib/locale/en_US';
+import zhCN from 'rc-calendar/src/locale/zh_CN';
+import enUS from 'rc-calendar/src/locale/en_US';
 
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 import 'moment/locale/en-gb';
 
-const format = 'YYYY-MM-DD HH:mm';
+const format = 'YYYY-MM-DD';
 const cn = location.search.indexOf('cn') !== -1;
 
 const now = moment();

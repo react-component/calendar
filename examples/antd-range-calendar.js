@@ -8,8 +8,8 @@ import Picker from 'rc-calendar/src/Picker';
 
 import 'rc-time-picker/assets/index.css';
 
-import zhCN from 'rc-calendar/lib/locale/zh_CN';
-import enUS from 'rc-calendar/lib/locale/en_US';
+import zhCN from 'rc-calendar/src/locale/zh_CN';
+import enUS from 'rc-calendar/src/locale/en_US';
 import 'rc-time-picker/assets/index.css';
 import TimePickerPanel from 'rc-time-picker/lib/Panel';
 
@@ -17,7 +17,7 @@ import moment from 'moment';
 import 'moment/locale/zh-cn';
 import 'moment/locale/en-gb';
 
-const formatStr = 'YYYY-MM-DD HH:mm';
+const formatStr = 'YYYY-MM-DD HH:mm:ss';
 const cn = location.search.indexOf('cn') !== -1;
 
 const now = moment();
@@ -27,18 +27,13 @@ if (cn) {
   now.locale('en-gb').utcOffset(0);
 }
 
-function getFormat(time) {
-  return time?format:'YYYY-MM-DD';
-}
-
-
 const defaultCalendarValue = now.clone();
-defaultCalendarValue.add(-1,'month');
+defaultCalendarValue.add(-1, 'month');
 
 const timePickerElement = <TimePickerPanel />;
 
 function disabledDate(current) {
-  const date = new Date();
+  const date = moment();
   date.hour(0);
   date.minute(0);
   date.second(0);
@@ -81,10 +76,9 @@ const Test = React.createClass({
         showWeekNumber={false}
         dateInputPlaceholder={['start', 'end']}
         defaultValue={[now, now]}
-        locale={cn?zhCN:enUS}
+        locale={cn ? zhCN : enUS}
         disabledDate={disabledDate}
         timePicker={timePickerElement}
-        formatter={formatter}
       />
     );
     return (<Picker
@@ -119,7 +113,7 @@ ReactDOM.render(
         showWeekNumber
         defaultValue={now}
         dateInputPlaceholder={['start', 'end']}
-        locale={cn?zhCN:enUS}
+        locale={cn ? zhCN : enUS}
         showOk={false}
         showClear
         format={formatStr}

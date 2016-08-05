@@ -6,14 +6,14 @@ import ReactDOM from 'react-dom';
 import MonthCalendar from 'rc-calendar/src/MonthCalendar';
 import DatePicker from 'rc-calendar/src/Picker';
 
-import zhCN from 'rc-calendar/lib/locale/zh_CN';
-import enUS from 'rc-calendar/lib/locale/en_US';
+import zhCN from 'rc-calendar/src/locale/zh_CN';
+import enUS from 'rc-calendar/src/locale/en_US';
 
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 import 'moment/locale/en-gb';
 
-const format = 'YYYY-MM-DD HH:mm';
+const format = 'YYYY-MM';
 const cn = location.search.indexOf('cn') !== -1;
 
 const now = moment();
@@ -23,13 +23,8 @@ if (cn) {
   now.locale('en-gb').utcOffset(0);
 }
 
-function getFormat(time) {
-  return time?format:'YYYY-MM-DD';
-}
-
-
 const defaultCalendarValue = now.clone();
-defaultCalendarValue.add(-1,'month');
+defaultCalendarValue.add(-1, 'month');
 
 const Test = React.createClass({
   propTypes: {
@@ -65,7 +60,7 @@ const Test = React.createClass({
   render() {
     const state = this.state;
     const calendar = (<MonthCalendar
-      locale={cn?zhCN:enUS}
+      locale={cn ? zhCN : enUS}
       style={{ zIndex: 1000 }}
     />);
     return (<div style={{ width: 240, margin: 20 }}>
@@ -113,16 +108,16 @@ const Test = React.createClass({
 });
 
 function onStandaloneSelect(value) {
-  console.log('month-calendar select', (value && formatter.format(value)));
+  console.log('month-calendar select', (value && value.format(format)));
 }
 
 function onStandaloneChange(value) {
-  console.log('month-calendar change', (value && formatter.format(value)));
+  console.log('month-calendar change', (value && value.format(format)));
 }
 
 function disabledDate(value) {
-  return value.getYear() > now.getYear() ||
-    value.getYear() === now.getYear() && value.getMonth() > now.getMonth();
+  return value.year() > now.year() ||
+    value.year() === now.year() && value.month() > now.month();
 }
 
 ReactDOM.render(
@@ -136,7 +131,7 @@ ReactDOM.render(
   >
     <h2>zh-cn</h2>
     <MonthCalendar
-      locale={cn?zhCN:enUS}
+      locale={cn ? zhCN : enUS}
       style={{ zIndex: 1000 }}
       disabledDate={disabledDate}
       onSelect={onStandaloneSelect}

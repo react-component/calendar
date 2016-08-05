@@ -17,14 +17,13 @@ class CalendarHeader extends Component {
   }
 
   yearSelectElement(year) {
-    const { yearSelectOffset, yearSelectTotal, locale, prefixCls, Select } = this.props;
+    const { yearSelectOffset, yearSelectTotal, prefixCls, Select } = this.props;
     const start = year - yearSelectOffset;
     const end = start + yearSelectTotal;
-    const suffix = locale.year === '年' ? '年' : '';
 
     const options = [];
     for (let index = start; index < end; index++) {
-      options.push(<Select.Option key={`${index}`}>{index + suffix}</Select.Option>);
+      options.push(<Select.Option key={`${index}`}>{index}</Select.Option>);
     }
     return (
       <Select
@@ -43,13 +42,15 @@ class CalendarHeader extends Component {
 
   monthSelectElement(month) {
     const props = this.props;
-    const months = props.value.localeData().months;
+    const localeData = props.value.localeData();
+    const t = props.value.clone();
     const { prefixCls } = props;
     const options = [];
     const Select = props.Select;
 
     for (let index = 0; index < 12; index++) {
-      options.push(<Select.Option key={`${index}`}>{months[index]}</Select.Option>);
+      t.month(index);
+      options.push(<Select.Option key={`${index}`}>{localeData.monthsShort(t)}</Select.Option>);
     }
 
     return (
