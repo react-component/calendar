@@ -37,7 +37,7 @@ React Calendar
 * support ie8,ie8+,chrome,firefox,safari
 * support date, month, year, decade select panel
 * support week number
-* support en_US and zh_CN locale (ui and timeOffset)
+* support en_US and zh_CN locale(UI), use moment.ufcOffset to set timezone
 * support aria and keyboard accessibility
 
 ### Keyboard
@@ -112,7 +112,7 @@ http://react-component.github.io/calendar/examples/index.html
         </tr>
         <tr>
           <td>value</td>
-          <td> <a href="https://github.com/yiminghe/gregorian-calendar">GregorianCalendar</a> </td>
+          <td>moment</td>
           <td></td>
           <td>current value like input's value</td>
         </tr>
@@ -131,19 +131,19 @@ http://react-component.github.io/calendar/examples/index.html
         <tr>
           <td>format</td>
           <td>String</td>
-          <td>YYYY-MM-DD</td>
+          <td>depends on whether you set timePicker and your locale</td>
           <td>use to format/parse date(without time) value to/from input</td>
         </tr>
         <tr>
           <td>disabledDate</td>
           <td>Function(current:moment):Boolean</td>
-          <td>null</td>
+          <td></td>
           <td>whether to disable select of current date</td>
         </tr>
         <tr>
           <td>disabledTime</td>
           <td>Function(current:moment):Object</td>
-          <td>null</td>
+          <td></td>
           <td>a function which return a object with member of disabledHours/disabledMinutes/disabledSeconds according to rc-time-picker</td>
         </tr>
         <tr>
@@ -173,25 +173,25 @@ http://react-component.github.io/calendar/examples/index.html
         <tr>
           <td>timePicker</td>
           <td>React Element</td>
-          <td>null</td>
+          <td></td>
           <td>rc-timer-picker/lib/module/panel element</td>
         </tr>
         <tr>
           <td>onSelect</td>
           <td>Function(date: moment)</td>
-          <td>function(){}</td>
+          <td></td>
           <td>called when a date is selected from calendar</td>
         </tr>
         <tr>
           <td>onChange</td>
           <td>Function(date: moment)</td>
-          <td>function(){}</td>
+          <td></td>
           <td>called when a date is changed inside calendar (next year/next month/keyboard)</td>
         </tr>
         <tr>
           <td>dateInputPlaceholder</td>
           <td>String</td>
-          <td>''</td>
+          <td></td>
           <td>date input's placeholder</td>
         </tr>
     </tbody>
@@ -255,7 +255,7 @@ http://react-component.github.io/calendar/examples/index.html
         <tr>
           <td>disabledDate</td>
           <td>Function(current:moment):Boolean</td>
-          <td>null</td>
+          <td></td>
           <td>whether to disable select of current date</td>
         </tr>
         <tr>
@@ -273,19 +273,19 @@ http://react-component.github.io/calendar/examples/index.html
         <tr>
           <td>timePicker</td>
           <td>React Element</td>
-          <td>null</td>
+          <td></td>
           <td>rc-timer-picker/lib/module/panel element</td>
         </tr>
         <tr>
           <td>onSelect</td>
           <td>Function(date: moment[])</td>
-          <td>function(){}</td>
+          <td></td>
           <td>called when a date range is selected from calendar</td>
         </tr>
         <tr>
           <td>onChange</td>
           <td>Function(date: moment[])</td>
-          <td>function(){}</td>
+          <td></td>
           <td>called when a date range is changed inside calendar (next year/next month/keyboard)</td>
         </tr>
         <tr>
@@ -348,19 +348,19 @@ http://react-component.github.io/calendar/examples/index.html
         <tr>
           <td>disabledDate</td>
           <td>Function(current:moment):Boolean</td>
-          <td>null</td>
+          <td></td>
           <td>whether to disable select of current month</td>
         </tr>
         <tr>
           <td>onSelect</td>
           <td>Function(date: moment)</td>
-          <td>function(){}</td>
+          <td></td>
           <td>called when a date is selected from calendar</td>
         </tr>
         <tr>
           <td>onChange</td>
           <td>Function(date: moment)</td>
-          <td>function(){}</td>
+          <td></td>
           <td>called when a date is changed inside calendar (next year/next month/keyboard)</td>
         </tr>
     </tbody>
@@ -551,7 +551,7 @@ http://react-component.github.io/calendar/examples/index.html
         </tr>        <tr>
           <td>onSelect</td>
           <td>Function(date: moment)</td>
-          <td>function(){}</td>
+          <td></td>
           <td>called when a date is selected from calendar</td>
         </tr>
     </tbody>
