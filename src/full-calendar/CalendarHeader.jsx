@@ -6,17 +6,17 @@ function noop() {
 class CalendarHeader extends Component {
   onYearChange(year) {
     const newValue = this.props.value.clone();
-    newValue.setYear(parseInt(year, 10));
+    newValue.year(parseInt(year, 10));
     this.props.onValueChange(newValue);
   }
 
   onMonthChange(month) {
     const newValue = this.props.value.clone();
-    newValue.setMonth(parseInt(month, 10));
+    newValue.month(parseInt(month, 10));
     this.props.onValueChange(newValue);
   }
 
-  getYearSelectElement(year) {
+  yearSelectElement(year) {
     const { yearSelectOffset, yearSelectTotal, locale, prefixCls, Select } = this.props;
     const start = year - yearSelectOffset;
     const end = start + yearSelectTotal;
@@ -41,9 +41,9 @@ class CalendarHeader extends Component {
     );
   }
 
-  getMonthSelectElement(month) {
+  monthSelectElement(month) {
     const props = this.props;
-    const months = props.locale.format.months;
+    const months = props.value.localeData().months;
     const { prefixCls } = props;
     const options = [];
     const Select = props.Select;
@@ -77,10 +77,10 @@ class CalendarHeader extends Component {
 
   render() {
     const { value, locale, prefixCls, type, showTypeSwitch, headerComponents } = this.props;
-    const year = value.getYear();
-    const month = value.getMonth();
-    const yearSelect = this.getYearSelectElement(year);
-    const monthSelect = type === 'month' ? null : this.getMonthSelectElement(month);
+    const year = value.year();
+    const month = value.month();
+    const yearSelect = this.yearSelectElement(year);
+    const monthSelect = type === 'month' ? null : this.monthSelectElement(month);
     const switchCls = `${prefixCls}-header-switcher`;
     const typeSwitcher = showTypeSwitch ? (
       <span className={switchCls}>

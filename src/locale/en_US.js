@@ -1,5 +1,3 @@
-import enUs from 'gregorian-calendar-format/lib/locale/en_US';
-
 export default {
   today: 'Today',
   now: 'Now',
@@ -13,10 +11,10 @@ export default {
   monthSelect: 'Choose a month',
   yearSelect: 'Choose a year',
   decadeSelect: 'Choose a decade',
-  yearFormat: 'yyyy',
-  dateFormat: 'M/d/yyyy',
+  yearFormat: 'YYYY',
+  dateFormat: 'M/d/YYYY',
   dayFormat: 'd',
-  dateTimeFormat: 'M/d/yyyy HH:mm:ss',
+  dateTimeFormat: 'M/d/YYYY HH:mm:ss',
   monthFormat: 'MMMM',
   monthBeforeYear: true,
   previousMonth: 'Previous month (PageUp)',
@@ -27,5 +25,4 @@ export default {
   nextDecade: 'Next decade',
   previousCentury: 'Last century',
   nextCentury: 'Next century',
-  format: enUs,
 };

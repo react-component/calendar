@@ -15,26 +15,26 @@ const MonthCalendar = React.createClass({
     switch (keyCode) {
       case KeyCode.DOWN:
         value = stateValue.clone();
-        value.addMonth(3);
+        value.add(3,'months');
         break;
       case KeyCode.UP:
         value = stateValue.clone();
-        value.addMonth(-3);
+        value.add(-3,'months');
         break;
       case KeyCode.LEFT:
         value = stateValue.clone();
         if (ctrlKey) {
-          value.addYear(-1);
+          value.add(-1,'years');
         } else {
-          value.addMonth(-1);
+          value.add(-1,'months');
         }
         break;
       case KeyCode.RIGHT:
         value = stateValue.clone();
         if (ctrlKey) {
-          value.addYear(1);
+          value.add(1,'years');
         } else {
-          value.addMonth(1);
+          value.add(1,'months');
         }
         break;
       case KeyCode.ENTER:

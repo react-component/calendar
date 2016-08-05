@@ -1,5 +1,3 @@
-import zhCn from 'gregorian-calendar-format/lib/locale/zh_CN';
-
 export default {
   today: '今天',
   now: '此刻',
@@ -15,16 +13,15 @@ export default {
   monthSelect: '选择月份',
   yearSelect: '选择年份',
   decadeSelect: '选择年代',
-  yearFormat: 'yyyy\'年\'',
+  yearFormat: 'YYYY\'年\'',
   monthFormat: 'M\'月\'',
   dayFormat: 'd\'日\'',
-  dateFormat: 'yyyy\'年\'M\'月\'d\'日\'',
-  dateTimeFormat: 'yyyy\'年\'M\'月\'d\'日\' HH\'时\'mm\'分\'ss\'秒\'',
+  dateFormat: 'YYYY\'年\'M\'月\'d\'日\'',
+  dateTimeFormat: 'YYYY\'年\'M\'月\'d\'日\' HH\'时\'mm\'分\'ss\'秒\'',
   previousYear: '上一年 (Control键加左方向键)',
   nextYear: '下一年 (Control键加右方向键)',
   previousDecade: '上一年代',
   nextDecade: '下一年代',
   previousCentury: '上一世纪',
   nextCentury: '下一世纪',
-  format: zhCn,
 };

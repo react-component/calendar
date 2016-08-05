@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import GregorianCalendar from 'gregorian-calendar';
+import moment from 'moment';
 import classnames from 'classnames';
 import CalendarPart from './range-calendar/CalendarPart';
 import { syncTime, getTodayTime } from './util/';
@@ -12,16 +12,14 @@ function noop() {
 }
 
 function getNow() {
-  const selectedValue = new GregorianCalendar();
-  selectedValue.setTime(Date.now());
-  return selectedValue;
+  return moment();
 }
 
 function onValueChange(direction, current) {
   let value;
   value = current;
   if (direction === 'right') {
-    value.addMonth(-1);
+    value.add(-1,'months');
   }
   this.fireValueChange(value);
 }
@@ -82,7 +80,7 @@ const RangeCalendar = React.createClass({
     onChange: PropTypes.func,
     onSelect: PropTypes.func,
     onValueChange: PropTypes.func,
-    formatter: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+    format: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     onClear: PropTypes.func,
   },
 
@@ -190,7 +188,7 @@ const RangeCalendar = React.createClass({
 
   getEndValue() {
     const endValue = this.state.value.clone();
-    endValue.addMonth(1);
+    endValue.add(1,'months');
     const selectedValue = this.state.selectedValue;
     // keep selectedTime when select date
     if (selectedValue[1] && this.props.timePicker) {
@@ -207,10 +205,10 @@ const RangeCalendar = React.createClass({
     const startValue = selectedValue && selectedValue[0] || value.clone();
     // if startTime and endTime is same day..
     // the second time picker will not able to pick time before first time picker
-    if (!selectedValue[1] || startValue.compareToDay(selectedValue[1]) === 0) {
-      const hours = startValue.getHourOfDay();
-      const minutes = startValue.getMinutes();
-      const second = startValue.getSeconds();
+    if (!selectedValue[1] || startValue.isSame(selectedValue[1],'day')) {
+      const hours = startValue.hour();
+      const minutes = startValue.minute();
+      const second = startValue.second();
       const disabledHours = generateOptions(hours);
       const disabledMinutes = generateOptions(minutes);
       const disabledSeconds = generateOptions(second);
@@ -236,9 +234,9 @@ const RangeCalendar = React.createClass({
   },
   compare(v1, v2) {
     if (this.props.timePicker) {
-      return v1.getTime() - v2.getTime();
+      return v1.diff(v2);
     }
-    return v1.compareToDay(v2);
+    return v1.diff(v2,'days');
   },
 
   fireSelectValueChange(selectedValue, direct) {
@@ -321,7 +319,7 @@ const RangeCalendar = React.createClass({
           {...props}
           {...newProps}
           direction="left"
-          formatter={this.getFormatter()}
+          format={this.getFormat()}
           value={this.getStartValue()}
           placeholder={placeholder1}
           onInputSelect={onInputSelect.bind(this, 'left')}
@@ -334,7 +332,7 @@ const RangeCalendar = React.createClass({
           {...props}
           {...newProps}
           direction="right"
-          formatter={this.getFormatter()}
+          format={this.getFormat()}
           timePickerDisabledTime={this.getEndDisableTime()}
           placeholder={placeholder2}
           value={this.getEndValue()}

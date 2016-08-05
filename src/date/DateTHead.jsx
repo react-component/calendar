@@ -7,6 +7,7 @@ class DateTHead extends React.Component {
     const props = this.props;
     const value = props.value;
     const locale = props.locale;
+    const localeData = value.localeData();
     const prefixCls = props.prefixCls;
     const veryShortWeekdays = [];
     const weekDays = [];
@@ -15,8 +16,8 @@ class DateTHead extends React.Component {
 
     for (let dateColIndex = 0; dateColIndex < DateConstants.DATE_COL_COUNT; dateColIndex++) {
       const index = (firstDayOfWeek + dateColIndex) % DateConstants.DATE_COL_COUNT;
-      veryShortWeekdays[dateColIndex] = locale.format.veryShortWeekdays[index];
-      weekDays[dateColIndex] = locale.format.weekdays[index];
+      veryShortWeekdays[dateColIndex] = localeData.weekdaysMin[index];
+      weekDays[dateColIndex] = localeData.weekdaysShort[index];
     }
 
     if (props.showWeekNumber) {

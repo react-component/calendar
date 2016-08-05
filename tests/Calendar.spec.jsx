@@ -6,8 +6,8 @@ import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 const Simulate = TestUtils.Simulate;
 import async from 'async';
-import DateTimeFormat from 'gregorian-calendar-format';
-const formatter = new DateTimeFormat('yyyy-MM-dd');
+import moment from 'moment';
+const format = ('yyyy-MM-dd');
 
 describe('Calendar', () => {
   let calendar;
@@ -43,13 +43,13 @@ describe('Calendar', () => {
       it('left works', (done) => {
         const original = calendar.state.value;
         const expected = original.clone();
-        expected.addDayOfMonth(-1);
+        expected.add(-1,'day');
         Simulate.keyDown(ReactDOM.findDOMNode(calendar), {
           keyCode: keyCode.LEFT,
         });
         setTimeout(() => {
-          expect(calendar.state.value.getDayOfMonth())
-            .to.be(expected.getDayOfMonth());
+          expect(calendar.state.value.date())
+            .to.be(expected.date());
           expect(ReactDOM.findDOMNode(input).value).to.be('');
           done();
         }, 10);
@@ -59,13 +59,13 @@ describe('Calendar', () => {
       it('right works', (done) => {
         const original = calendar.state.value;
         const expected = original.clone();
-        expected.addDayOfMonth(1);
+        expected.add(1,'day');
         Simulate.keyDown(ReactDOM.findDOMNode(calendar), {
           keyCode: keyCode.RIGHT,
         });
         setTimeout(() => {
-          expect(calendar.state.value.getDayOfMonth())
-            .to.be(expected.getDayOfMonth());
+          expect(calendar.state.value.date())
+            .to.be(expected.date());
           expect(ReactDOM.findDOMNode(input).value).to.be('');
           done();
         }, 10);
@@ -74,13 +74,13 @@ describe('Calendar', () => {
       it('up works', (done) => {
         const original = calendar.state.value;
         const expected = original.clone();
-        expected.addDayOfMonth(-7);
+        expected.add(-7,'day');
         Simulate.keyDown(ReactDOM.findDOMNode(calendar), {
           keyCode: keyCode.UP,
         });
         setTimeout(() => {
-          expect(calendar.state.value.getDayOfMonth())
-            .to.be(expected.getDayOfMonth());
+          expect(calendar.state.value.date())
+            .to.be(expected.date());
           expect(ReactDOM.findDOMNode(input).value).to.be('');
           done();
         }, 10);
@@ -89,13 +89,13 @@ describe('Calendar', () => {
       it('down works', (done) => {
         const original = calendar.state.value;
         const expected = original.clone();
-        expected.addDayOfMonth(7);
+        expected.add(7,'day');
         Simulate.keyDown(ReactDOM.findDOMNode(calendar), {
           keyCode: keyCode.DOWN,
         });
         setTimeout(() => {
-          expect(calendar.state.value.getDayOfMonth())
-            .to.be(expected.getDayOfMonth());
+          expect(calendar.state.value.date())
+            .to.be(expected.date());
           expect(ReactDOM.findDOMNode(input).value).to.be('');
           done();
         }, 10);
@@ -104,13 +104,13 @@ describe('Calendar', () => {
       it('pageDown works', (done) => {
         const original = calendar.state.value;
         const expected = original.clone();
-        expected.addMonth(1);
+        expected.add(1,'month');
         Simulate.keyDown(ReactDOM.findDOMNode(calendar), {
           keyCode: keyCode.PAGE_DOWN,
         });
         setTimeout(() => {
-          expect(calendar.state.value.getMonth())
-            .to.be(expected.getMonth());
+          expect(calendar.state.value.month())
+            .to.be(expected.month());
           expect(ReactDOM.findDOMNode(input).value).to.be('');
           done();
         }, 10);
@@ -119,13 +119,13 @@ describe('Calendar', () => {
       it('pageUp works', (done) => {
         const original = calendar.state.value;
         const expected = original.clone();
-        expected.addMonth(-1);
+        expected.add(-1,'month');
         Simulate.keyDown(ReactDOM.findDOMNode(calendar), {
           keyCode: keyCode.PAGE_UP,
         });
         setTimeout(() => {
-          expect(calendar.state.value.getMonth())
-            .to.be(expected.getMonth());
+          expect(calendar.state.value.month())
+            .to.be(expected.month());
           expect(ReactDOM.findDOMNode(input).value).to.be('');
           done();
         }, 10);
@@ -134,14 +134,14 @@ describe('Calendar', () => {
       it('ctrl left works', (done) => {
         const original = calendar.state.value;
         const expected = original.clone();
-        expected.addYear(-1);
+        expected.add(-1,'year');
         Simulate.keyDown(ReactDOM.findDOMNode(calendar), {
           keyCode: keyCode.LEFT,
           ctrlKey: 1,
         });
         setTimeout(() => {
-          expect(calendar.state.value.getYear())
-            .to.be(expected.getYear());
+          expect(calendar.state.value.year())
+            .to.be(expected.year());
           expect(ReactDOM.findDOMNode(input).value).to.be('');
           done();
         }, 10);
@@ -149,14 +149,14 @@ describe('Calendar', () => {
       it('ctrl right works', (done) => {
         const original = calendar.state.value;
         const expected = original.clone();
-        expected.addYear(1);
+        expected.add(1,'year');
         Simulate.keyDown(ReactDOM.findDOMNode(calendar), {
           keyCode: keyCode.RIGHT,
           ctrlKey: 1,
         });
         setTimeout(() => {
-          expect(calendar.state.value.getYear())
-            .to.be(expected.getYear());
+          expect(calendar.state.value.year())
+            .to.be(expected.year());
           expect(ReactDOM.findDOMNode(input).value).to.be('');
           done();
         }, 10);
@@ -164,49 +164,49 @@ describe('Calendar', () => {
     });
 
     it('next month works', (done) => {
-      let month = calendar.state.value.getMonth();
+      let month = calendar.state.value.month();
       if (month === 11) {
         month = -1;
       }
       Simulate.click(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
         'rc-calendar-next-month-btn')[0]);
       setTimeout(() => {
-        expect(calendar.state.value.getMonth()).to.be(month + 1);
+        expect(calendar.state.value.month()).to.be(month + 1);
         expect(ReactDOM.findDOMNode(input).value).to.be('');
         done();
       }, 10);
     });
 
     it('previous month works', (done) => {
-      let month = calendar.state.value.getMonth();
+      let month = calendar.state.value.month();
       if (month === 0) {
         month = 12;
       }
       Simulate.click(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
         'rc-calendar-prev-month-btn')[0]);
       setTimeout(() => {
-        expect(calendar.state.value.getMonth()).to.be(month - 1);
+        expect(calendar.state.value.month()).to.be(month - 1);
         expect(ReactDOM.findDOMNode(input).value).to.be('');
         done();
       }, 10);
     });
 
     it('next year works', (done) => {
-      const year = calendar.state.value.getYear();
+      const year = calendar.state.value.year();
       Simulate.click(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
         'rc-calendar-next-year-btn')[0]);
       setTimeout(() => {
-        expect(calendar.state.value.getYear()).to.be(year + 1);
+        expect(calendar.state.value.year()).to.be(year + 1);
         done();
       }, 10);
     });
 
     it('previous year works', (done) => {
-      const year = calendar.state.value.getYear();
+      const year = calendar.state.value.year();
       Simulate.click(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
         'rc-calendar-prev-year-btn')[0]);
       setTimeout(() => {
-        expect(calendar.state.value.getYear()).to.be(year - 1);
+        expect(calendar.state.value.year()).to.be(year - 1);
         done();
       }, 10);
     });
@@ -220,21 +220,22 @@ describe('Calendar', () => {
       let day;
 
       function onSelect(d) {
-        expect(d.getDayOfMonth()).to.be(parseInt(day.innerHTML, 10));
+        expect(d.date()).to.be(parseInt(day.innerHTML, 10));
         done();
       }
 
-      calendar = ReactDOM.render(<Calendar
-        formatter={formatter}
-        showToday
-        onSelect={onSelect}
-        showWeekNumber
-      />, container);
+      calendar = ReactDOM.render(
+        <Calendar
+          format={format}
+          showToday
+          onSelect={onSelect}
+          showWeekNumber
+        />, container);
       day = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
         'rc-calendar-date')[5];
       Simulate.click(day);
       expect(ReactDOM.findDOMNode(input).value)
-        .to.be(formatter.format(calendar.state.value));
+        .to.be(calendar.state.value.format(format));
     });
 
     it('month panel shows', (done) => {
@@ -252,7 +253,7 @@ describe('Calendar', () => {
         Simulate.click(m);
         setTimeout(next, 10);
       }, (next) => {
-        expect(calendar.state.value.getMonth()).to.be(9);
+        expect(calendar.state.value.month()).to.be(9);
         next();
       }], done);
     });
@@ -274,7 +275,7 @@ describe('Calendar', () => {
         Simulate.click(year);
         setTimeout(next, 10);
       }, (next) => {
-        expect(String(calendar.state.value.getYear())).to.be(text);
+        expect(String(calendar.state.value.year())).to.be(text);
         next();
       }], done);
     });
@@ -305,7 +306,7 @@ describe('Calendar', () => {
         Simulate.click(m);
         setTimeout(next, 10);
       }, (next) => {
-        expect(String(calendar.state.value.getYear())).to.be(text);
+        expect(String(calendar.state.value.year())).to.be(text);
         expect(ReactDOM.findDOMNode(input).value).to.be('');
         next();
       }], done);
@@ -348,17 +349,17 @@ describe('Calendar', () => {
       }
 
       function onSelect(d) {
-        expect(formatter.format(d)).to.be(expected);
+        expect(d.format(format)).to.be(expected);
         check();
       }
 
       function onChange(d) {
-        expect(formatter.format(d)).to.be(expected);
+        expect(d.format(format)).to.be(expected);
         check();
       }
 
       ReactDOM.render(<Calendar
-        formatter={formatter}
+        format={format}
         showToday
         onSelect={onSelect}
         onChange={onChange}

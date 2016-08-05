@@ -5,20 +5,37 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Calendar from 'rc-calendar';
 import DatePicker from 'rc-calendar/src/Picker';
-import zhCn from 'gregorian-calendar/lib/locale/en_US';
-import DateTimeFormat from 'gregorian-calendar-format';
-import GregorianCalendar from 'gregorian-calendar';
-import CalendarLocale from 'rc-calendar/src/locale/en_US';
-import assign from 'object-assign';
-import TimePickerLocale from 'rc-time-picker/lib/locale/en_US';
-
+import zhCN from 'rc-calendar/lib/locale/zh_CN';
+import enUS from 'rc-calendar/lib/locale/en_US';
 import 'rc-time-picker/assets/index.css';
-import TimePickerPanel from 'rc-time-picker/lib/module/Panel';
+import TimePickerPanel from 'rc-time-picker/lib/Panel';
 
-const timePickerElement = <TimePickerPanel locale={TimePickerLocale} />;
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+import 'moment/locale/en-gb';
+
+const format = 'YYYY-MM-DD HH:mm';
+const cn = location.search.indexOf('cn') !== -1;
+
+const now = moment();
+if (cn) {
+  now.locale('zh-cn').utcOffset(8);
+} else {
+  now.locale('en-gb').utcOffset(0);
+}
+
+function getFormat(time) {
+  return time?format:'YYYY-MM-DD';
+}
+
+
+const defaultCalendarValue = now.clone();
+defaultCalendarValue.add(-1,'month');
+
+const timePickerElement = <TimePickerPanel />;
 
 function disabledTime(date) {
-  if (date && (date.getDayOfMonth() === 15)) {
+  if (date && (date.date() === 15)) {
     return {
       disabledHours() {
         return [3, 4];
@@ -32,24 +49,6 @@ function disabledTime(date) {
   };
 }
 
-const now = new GregorianCalendar(zhCn);
-now.setTime(Date.now());
-
-// change locale
-const CalendarLocale2 = assign({}, CalendarLocale, {
-  monthFormat: 'MMMM',
-});
-
-const dateFormatter = new DateTimeFormat('yyyy-MM-dd');
-const formatter = new DateTimeFormat('yyyy-MM-dd HH:mm:ss');
-
-function getFormatter(showTime) {
-  return showTime ? formatter : dateFormatter;
-}
-
-const defaultCalendarValue = new GregorianCalendar(zhCn);
-defaultCalendarValue.setTime(Date.now());
-defaultCalendarValue.addMonth(-1);
 
 function disabledDate(current) {
   if (!current) {
@@ -57,10 +56,10 @@ function disabledDate(current) {
     return false;
   }
   const date = new Date();
-  date.setHours(0);
-  date.setMinutes(0);
-  date.setSeconds(0);
-  return current.getYear() + 10 < date.getFullYear();  // can not select days before today
+  date.hour(0);
+  date.minute(0);
+  date.second(0);
+  return current.date() + 10 < date.date();  // can not select days before today
 }
 
 const Test = React.createClass({
@@ -79,7 +78,7 @@ const Test = React.createClass({
   },
 
   onChange(value) {
-    console.log('DatePicker change: ', (value && formatter.format(value)));
+    console.log('DatePicker change: ', (value && value.format(format)));
     this.setState({
       value,
     });
@@ -106,10 +105,10 @@ const Test = React.createClass({
   render() {
     const state = this.state;
     const calendar = (<Calendar
-      locale={CalendarLocale2}
+      locale={cn?zhCN:enUS}
       style={{ zIndex: 1000 }}
       dateInputPlaceholder="please input"
-      formatter={getFormatter(state.showTime)}
+      formatter={getFormat(state.showTime)}
       disabledTime={state.showTime ? disabledTime : null}
       timePicker={state.showTime ? timePickerElement : null}
       defaultValue={this.props.defaultCalendarValue}
@@ -158,7 +157,6 @@ const Test = React.createClass({
           disabled={state.disabled}
           calendar={calendar}
           value={state.value}
-          formatter={formatter}
           onChange={this.onChange}
         >
           {
@@ -172,7 +170,7 @@ const Test = React.createClass({
                   readOnly
                   tabIndex="-1"
                   className="ant-calendar-picker-input ant-input"
-                  value={value && getFormatter(state.showTime).format(value) || ''}
+                  value={value && value.format(getFormat(state.showTime)) || ''}
                 />
                 </span>
               );
@@ -186,12 +184,12 @@ const Test = React.createClass({
 
 function onStandaloneSelect(value) {
   console.log('onStandaloneSelect');
-  console.log(value && formatter.format(value));
+  console.log(value && value.format(format));
 }
 
 function onStandaloneChange(value) {
-  console.log('onStandaloneChange', formatter.format(value));
-  console.log(value && formatter.format(value));
+  console.log('onStandaloneChange');
+  console.log(value && value.format(format));
 }
 
 
@@ -209,11 +207,11 @@ ReactDOM.render((<div
     <div style={{ margin: 10 }}>
       <Calendar
         showWeekNumber={false}
-        locale={CalendarLocale}
+        locale={cn?zhCN:enUS}
         defaultValue={now}
         disabledTime={disabledTime}
         showToday
-        formatter={getFormatter(true)}
+        formatter={getFormat(true)}
         showOk={false}
         timePicker={timePickerElement}
         onChange={onStandaloneChange}

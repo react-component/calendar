@@ -1,22 +1,20 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
-import GregorianCalendar from 'gregorian-calendar';
+import moment from 'moment';
 import { isAllowedDate } from '../util/index';
 
 function noop() {
 }
 
 function getNow() {
-  const value = new GregorianCalendar();
-  value.setTime(Date.now());
-  return value;
+  return moment();
 }
 
 function getNowByCurrentStateValue(value) {
   let ret;
   if (value) {
-    ret = value.clone();
-    ret.setTime(Date.now());
+    ret = moment();
+    ret.locale(value.locale()).utcOffset(value.utcOffset());
   } else {
     ret = getNow();
   }
@@ -110,7 +108,7 @@ const CalendarMixin = {
         value,
       });
     }
-    if (originalValue && value && originalValue.getTime() !== value.getTime() ||
+    if (originalValue && value && originalValue.isSame(value) ||
       (!originalValue && value) ||
       (originalValue && !value)) {
       this.props.onChange(value);

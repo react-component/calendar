@@ -1,29 +1,29 @@
 import React, { PropTypes } from 'react';
 import DateConstants from './DateConstants';
-import { getTitleString } from '../util/';
+import { getTitleString, getTodayTime } from '../util/';
 
 function isSameDay(one, two) {
-  return one && two && one.compareToDay(two) === 0;
+  return one && two && one.isSame(two,'day');
 }
 
 function beforeCurrentMonthYear(current, today) {
-  if (current.getYear() < today.getYear()) {
+  if (current.year() < today.year()) {
     return 1;
   }
-  return current.getYear() === today.getYear() &&
-    current.getMonth() < today.getMonth();
+  return current.year() === today.year() &&
+    current.month() < today.month();
 }
 
 function afterCurrentMonthYear(current, today) {
-  if (current.getYear() > today.getYear()) {
+  if (current.year() > today.year()) {
     return 1;
   }
-  return current.getYear() === today.getYear() &&
-    current.getMonth() > today.getMonth();
+  return current.year() === today.year() &&
+    current.month() > today.month();
 }
 
 function getIdFromDate(date) {
-  return `rc-calendar-${date.getYear()}-${date.getMonth()}-${date.getDayOfMonth()}`;
+  return `rc-calendar-${date.year()}-${date.month()}-${date.date()}`;
 }
 
 function noop() {
@@ -62,7 +62,7 @@ const DateTBody = React.createClass({
     let jIndex;
     let current;
     const dateTable = [];
-    const today = value.clone();
+    const today = getTodayTime(value);
     const cellClass = `${prefixCls}-cell`;
     const weekNumberCellClass = `${prefixCls}-week-number-cell`;
     const dateClass = `${prefixCls}-date`;
@@ -74,21 +74,20 @@ const DateTBody = React.createClass({
     const disabledClass = `${prefixCls}-disabled-cell`;
     const firstDisableClass = `${prefixCls}-disabled-cell-first-of-row`;
     const lastDisableClass = `${prefixCls}-disabled-cell-last-of-row`;
-    today.setTime(Date.now());
     const month1 = value.clone();
-    month1.set(value.getYear(), value.getMonth(), 1);
-    const day = month1.getDayOfWeek();
-    const lastMonthDiffDay = (day + 7 - value.getFirstDayOfWeek()) % 7;
+    month1.startOf('month');
+    const day = month1.day();
+    const lastMonthDiffDay = (day + 7 - value.localeData().firstDayOfWeek()) % 7;
     // calculate last month
     const lastMonth1 = month1.clone();
-    lastMonth1.addDayOfMonth(0 - lastMonthDiffDay);
+    lastMonth1.add(0 - lastMonthDiffDay,'days');
     let passed = 0;
     for (iIndex = 0; iIndex < DateConstants.DATE_ROW_COUNT; iIndex++) {
       for (jIndex = 0; jIndex < DateConstants.DATE_COL_COUNT; jIndex++) {
         current = lastMonth1;
         if (passed) {
           current = current.clone();
-          current.addDayOfMonth(passed);
+          current.add(passed,'days');
         }
         dateTable.push(current);
         passed++;
@@ -102,11 +101,11 @@ const DateTBody = React.createClass({
       if (showWeekNumber) {
         weekNumberCell = (
           <td
-            key={dateTable[passed].getWeekOfYear()}
+            key={dateTable[passed].weeksInYear()}
             role="gridcell"
             className={weekNumberCellClass}
           >
-            {dateTable[passed].getWeekOfYear()}
+            {dateTable[passed].weeksInYear()}
           </td>
         );
       }
@@ -143,8 +142,8 @@ const DateTBody = React.createClass({
             if (startValue && endValue) {
               if (isSameDay(current, endValue) && !selectedValue.hovering) {
                 selected = true;
-              } else if (current.compareToDay(startValue) > 0 &&
-                current.compareToDay(endValue) < 0) {
+              } else if (current.isAfter(startValue,'day') &&
+                current.isBefore(endValue,'day')) {
                 cls += ` ${inRangeClass}`;
               }
             }
@@ -186,7 +185,7 @@ const DateTBody = React.createClass({
         if (dateRender) {
           dateHtml = dateRender(current, value);
         } else {
-          const content = contentRender ? contentRender(current, value) : current.getDayOfMonth();
+          const content = contentRender ? contentRender(current, value) : current.date();
           dateHtml = (
             <div
               key={getIdFromDate(current)}

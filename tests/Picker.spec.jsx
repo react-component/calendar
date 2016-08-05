@@ -7,13 +7,10 @@ import React from 'react';
 import TestUtils from 'react-addons-test-utils';
 const Simulate = TestUtils.Simulate;
 import async from 'async';
-import DateTimeFormat from 'gregorian-calendar-format';
-const formatter = new DateTimeFormat('yyyy-MM-dd');
-import GregorianCalendar from 'gregorian-calendar';
-import zhCn from 'gregorian-calendar/lib/locale/zh_CN';
 import CalendarLocale from '../src/locale/zh_CN';
-const VALUE = new GregorianCalendar(zhCn);
-VALUE.set(2015, 5, 1);
+import moment from 'moment';
+const format = ('yyyy-MM-dd');
+const VALUE = moment([2015, 5, 1]);
 
 describe('DatePicker', () => {
   let div;
@@ -26,7 +23,7 @@ describe('DatePicker', () => {
       className="rc-calendar-picker-input"
       onChange={noop}
       readOnly
-      value={value && formatter.format(value)}
+      value={value && value.format(format)}
     />);
   }
 
@@ -35,7 +32,7 @@ describe('DatePicker', () => {
       className="rc-calendar-picker-input"
       onChange={noop}
       readOnly
-      value={value && `${formatter.format(value[0])} - ${formatter.format(value[1])}`}
+      value={value && `${value[0] && value[0].format(format)} - ${value[1] && value[1].format(format)}`}
     />);
   }
 
@@ -100,9 +97,9 @@ describe('DatePicker', () => {
       setTimeout(next, 100);
     }, (next) => {
       expect(change).to.be.ok();
-      expect(change.getYear()).to.be(2015);
-      expect(change.getMonth()).to.be(5);
-      expect(change.getDayOfMonth()).to.be(2);
+      expect(change.year()).to.be(2015);
+      expect(change.month()).to.be(5);
+      expect(change.date()).to.be(2);
       expect(ReactDOM.findDOMNode(input).value).to.be('2015-06-02');
       expect(picker.state.open).not.to.be.ok();
       next();
@@ -141,12 +138,12 @@ describe('DatePicker', () => {
     }, (next) => {
       expect(change).to.be.ok();
       expect(change.length).to.be(2);
-      expect(change[0].getYear()).to.be(2015);
-      expect(change[0].getMonth()).to.be(5);
-      expect(change[0].getDayOfMonth()).to.be(2);
-      expect(change[1].getYear()).to.be(2015);
-      expect(change[1].getMonth()).to.be(5);
-      expect(change[1].getDayOfMonth()).to.be(3);
+      expect(change[0].year()).to.be(2015);
+      expect(change[0].month()).to.be(5);
+      expect(change[0].date()).to.be(2);
+      expect(change[1].year()).to.be(2015);
+      expect(change[1].month()).to.be(5);
+      expect(change[1].date()).to.be(3);
       expect(input.value).to.be('2015-06-02 - 2015-06-03');
       expect(picker.state.open).not.to.be.ok();
       next();
@@ -179,9 +176,9 @@ describe('DatePicker', () => {
         setTimeout(next, 100);
       }, (next) => {
         expect(change).to.be.ok();
-        expect(change.getYear()).to.be(2015);
-        expect(change.getMonth()).to.be(5);
-        expect(change.getDayOfMonth()).to.be(2);
+        expect(change.year()).to.be(2015);
+        expect(change.month()).to.be(5);
+        expect(change.date()).to.be(2);
         expect(ReactDOM.findDOMNode(input).value).to.be('2015-06-02');
         expect(picker.state.open).not.to.be.ok();
         next();

@@ -1,6 +1,6 @@
 import { PropTypes } from 'react';
 import enUs from '../locale/en_US';
-import { getFormatter } from '../util/index';
+import { getFormat } from '../util/index';
 
 function noop() {
 }
@@ -34,22 +34,16 @@ export default {
     return this.props.visible || nextProps.visible;
   },
 
-  getFormatter() {
-    let formatter = this.props.formatter;
-    const locale = this.props.locale;
-    if (!formatter) {
+  getFormat() {
+    let { format, locale } = this.props;
+    if (!format) {
       if (this.props.timePicker) {
-        formatter = locale.dateTimeFormat;
+        format = locale.dateTimeFormat;
       } else {
-        formatter = locale.dateFormat;
+        format = locale.dateFormat;
       }
     }
-    if (this.normalFormatter && formatter === this.lastFormatter) {
-      return this.normalFormatter;
-    }
-    this.normalFormatter = getFormatter(formatter, locale);
-    this.lastFormatter = formatter;
-    return this.normalFormatter;
+    return format;
   },
 
   focus() {

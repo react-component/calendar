@@ -6,24 +6,39 @@ import ReactDOM from 'react-dom';
 import Calendar from 'rc-calendar';
 import DatePicker from 'rc-calendar/src/Picker';
 import zhCn from 'gregorian-calendar/lib/locale/zh_CN';
-import DateTimeFormat from 'gregorian-calendar-format';
-import GregorianCalendar from 'gregorian-calendar';
-import CalendarLocale from 'rc-calendar/src/locale/zh_CN';
-import TimePickerLocale from 'rc-time-picker/lib/locale/zh_CN';
+
+
+import zhCN from 'rc-calendar/lib/locale/zh_CN';
+import enUS from 'rc-calendar/lib/locale/en_US';
 import 'rc-time-picker/assets/index.css';
-import TimePicker from 'rc-time-picker';
+import TimePickerPanel from 'rc-time-picker/lib/Panel';
 
-const timePickerElement = <TimePicker locale={TimePickerLocale}/>;
-const formatter = new DateTimeFormat('yyyy-MM-dd HH:mm:ss');
-const dateFormatter = new DateTimeFormat('yyyy-MM-dd');
-const SHOW_TIME = true;
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+import 'moment/locale/en-gb';
 
-const now = new GregorianCalendar(zhCn);
-now.setTime(Date.now());
+const format = 'YYYY-MM-DD HH:mm';
+const cn = location.search.indexOf('cn') !== -1;
 
-function getFormatter(showTime) {
-  return showTime ? formatter : dateFormatter;
+const now = moment();
+if (cn) {
+  now.locale('zh-cn').utcOffset(8);
+} else {
+  now.locale('en-gb').utcOffset(0);
 }
+
+function getFormat(time) {
+  return time?format:'YYYY-MM-DD';
+}
+
+
+const defaultCalendarValue = now.clone();
+defaultCalendarValue.add(-1,'month');
+
+const timePickerElement = <TimePickerPanel />;
+
+
+const SHOW_TIME= true;
 
 const Picker = React.createClass({
   getDefaultProps() {
@@ -35,9 +50,8 @@ const Picker = React.createClass({
   render() {
     const props = this.props;
     const calendar = (<Calendar
-      locale={CalendarLocale}
+      locale={cn?zhCN:enUS}
       defaultValue={now}
-      formatter={props.showTime ? formatter : dateFormatter}
       timePicker={props.showTime ? timePickerElement : null}
       disabledDate={props.disabledDate}
     />);
@@ -57,7 +71,7 @@ const Picker = React.createClass({
                   style={{ width: 250 }}
                   disabled={props.disabled}
                   readOnly
-                  value={value && getFormatter(props.showTime).format(value) || ''}
+                  value={value && value.format(getFormat(props.showTime)) || ''}
                 />
                 </span>
           );
@@ -76,7 +90,7 @@ const Test = React.createClass({
   },
 
   onChange(field, value) {
-    console.log('onChange', field, value && getFormatter(SHOW_TIME).format(value));
+    console.log('onChange', field, value && value.format(getFormat(SHOW_TIME)));
     this.setState({
       [field]: value,
     });
@@ -90,10 +104,8 @@ const Test = React.createClass({
     if (!startValue) {
       return false;
     }
-    // console.log(getFormatter(SHOW_TIME).format(startValue),
-    // getFormatter(SHOW_TIME).format(endValue));
-    return SHOW_TIME ? endValue.getTime() < startValue.getTime() :
-    endValue.compareToDay(startValue) <= 0;
+    return SHOW_TIME ? endValue.isBefore(startValue) :
+    endValue.diff(startValue,'days') <= 0;
   },
 
   disabledStartDate(startValue) {
@@ -104,10 +116,8 @@ const Test = React.createClass({
     if (!endValue) {
       return false;
     }
-    // console.log(getFormatter(SHOW_TIME).format(startValue),
-    // getFormatter(SHOW_TIME).format(endValue));
-    return SHOW_TIME ? endValue.getTime() < startValue.getTime() :
-    startValue.compareToDay(endValue) >= 0;
+    return SHOW_TIME ? endValue.isBefore(startValue) :
+    endValue.diff(startValue,'days') <= 0;
   },
 
   render() {

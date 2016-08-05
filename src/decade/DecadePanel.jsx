@@ -5,7 +5,7 @@ import classnames from 'classnames';
 
 function goYear(direction) {
   const next = this.state.value.clone();
-  next.addYear(direction);
+  next.add(direction,'years');
   this.setState({
     value: next,
   });
@@ -13,8 +13,8 @@ function goYear(direction) {
 
 function chooseDecade(year, event) {
   const next = this.state.value.clone();
-  next.setYear(year);
-  next.rollSetMonth(this.state.value.getMonth());
+  next.year(year);
+  next.month(this.state.value.month());
   this.props.onSelect(next);
   event.preventDefault();
 }
@@ -36,7 +36,7 @@ class DecadePanel extends React.Component {
   render() {
     const value = this.state.value;
     const locale = this.props.locale;
-    const currentYear = value.getYear();
+    const currentYear = value.year();
     const startYear = parseInt(currentYear / 100, 10) * 100;
     const preYear = startYear - 10;
     const endYear = startYear + 99;

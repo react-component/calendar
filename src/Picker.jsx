@@ -127,7 +127,7 @@ const Picker = React.createClass({
   getCalendarElement() {
     const props = this.props;
     const state = this.state;
-    const calendarProp = props.calendar;
+    const calendarProps = props.calendar.props;
     const { value } = state;
     let defaultValue;
     // RangeCalendar
@@ -138,15 +138,15 @@ const Picker = React.createClass({
     }
     const extraProps = {
       ref: this.saveCalendarRef,
-      defaultValue: defaultValue || calendarProp.props.defaultValue,
+      defaultValue: defaultValue || calendarProps.defaultValue,
       defaultSelectedValue: value,
       onKeyDown: this.onCalendarKeyDown,
-      onOk: createChainedFunction(calendarProp.props.onOk, this.onCalendarOk),
-      onSelect: createChainedFunction(calendarProp.props.onSelect, this.onCalendarSelect),
-      onClear: createChainedFunction(calendarProp.props.onClear, this.onCalendarClear),
+      onOk: createChainedFunction(calendarProps.onOk, this.onCalendarOk),
+      onSelect: createChainedFunction(calendarProps.onSelect, this.onCalendarSelect),
+      onClear: createChainedFunction(calendarProps.onClear, this.onCalendarClear),
     };
 
-    return React.cloneElement(calendarProp, extraProps);
+    return React.cloneElement(props.calendar, extraProps);
   },
 
   setOpen(open, callback) {

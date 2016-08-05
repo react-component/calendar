@@ -5,17 +5,31 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import MonthCalendar from 'rc-calendar/src/MonthCalendar';
 import DatePicker from 'rc-calendar/src/Picker';
-import zhCn from 'gregorian-calendar/lib/locale/zh_CN';
-import DateTimeFormat from 'gregorian-calendar-format';
-import GregorianCalendar from 'gregorian-calendar';
-import CalendarLocale from 'rc-calendar/src/locale/zh_CN';
-const now = new GregorianCalendar(zhCn);
-now.setTime(Date.now());
-const formatter = new DateTimeFormat('yyyy-MM');
 
-const defaultCalendarValue = new GregorianCalendar(zhCn);
-defaultCalendarValue.setTime(Date.now());
-defaultCalendarValue.addMonth(-1);
+import zhCN from 'rc-calendar/lib/locale/zh_CN';
+import enUS from 'rc-calendar/lib/locale/en_US';
+
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+import 'moment/locale/en-gb';
+
+const format = 'YYYY-MM-DD HH:mm';
+const cn = location.search.indexOf('cn') !== -1;
+
+const now = moment();
+if (cn) {
+  now.locale('zh-cn').utcOffset(8);
+} else {
+  now.locale('en-gb').utcOffset(0);
+}
+
+function getFormat(time) {
+  return time?format:'YYYY-MM-DD';
+}
+
+
+const defaultCalendarValue = now.clone();
+defaultCalendarValue.add(-1,'month');
 
 const Test = React.createClass({
   propTypes: {
@@ -30,7 +44,7 @@ const Test = React.createClass({
   },
 
   onChange(value) {
-    console.log(`DatePicker change: ${value && formatter.format(value)}`);
+    console.log(`DatePicker change: ${value && value.format(format)}`);
     this.setState({
       value,
     });
@@ -51,7 +65,7 @@ const Test = React.createClass({
   render() {
     const state = this.state;
     const calendar = (<MonthCalendar
-      locale={CalendarLocale}
+      locale={cn?zhCN:enUS}
       style={{ zIndex: 1000 }}
     />);
     return (<div style={{ width: 240, margin: 20 }}>
@@ -77,7 +91,8 @@ const Test = React.createClass({
           animation="slide-up"
           disabled={state.disabled}
           calendar={calendar}
-          value={state.value} onChange={this.onChange}
+          value={state.value}
+          onChange={this.onChange}
         >
           {
             ({ value }) => {
@@ -85,7 +100,7 @@ const Test = React.createClass({
                 style={{ width: 200 }}
                 readOnly
                 disabled={state.disabled}
-                value={value && formatter.format(value)}
+                value={value && value.format(format)}
                 placeholder="请选择日期"
               />);
             }
@@ -121,7 +136,7 @@ ReactDOM.render(
   >
     <h2>zh-cn</h2>
     <MonthCalendar
-      locale={CalendarLocale}
+      locale={cn?zhCN:enUS}
       style={{ zIndex: 1000 }}
       disabledDate={disabledDate}
       onSelect={onStandaloneSelect}

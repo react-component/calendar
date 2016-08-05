@@ -12,7 +12,6 @@ const CalendarFooter = React.createClass({
     showDateInput: PropTypes.bool,
     disabledTime: PropTypes.any,
     timePicker: PropTypes.element,
-    gregorianCalendarLocale: PropTypes.object,
     selectedValue: PropTypes.any,
     showOk: PropTypes.bool,
     onSelect: PropTypes.func,

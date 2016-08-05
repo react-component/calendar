@@ -4,7 +4,7 @@ import MonthTable from './MonthTable';
 
 function goYear(direction) {
   const next = this.state.value.clone();
-  next.addYear(direction);
+  next.add(direction,'year');
   this.setAndChangeValue(next);
 }
 
@@ -81,7 +81,7 @@ const MonthPanel = React.createClass({
     const props = this.props;
     const value = this.state.value;
     const locale = props.locale;
-    const year = value.getYear();
+    const year = value.year();
     const prefixCls = this.prefixCls;
     let yearPanel;
     if (this.state.showYearPanel) {

@@ -3,16 +3,38 @@
 import 'rc-calendar/assets/index.less';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import CalendarLocale from 'rc-calendar/src/locale/zh_CN';
 import FullCalendar from 'rc-calendar/src/FullCalendar';
-import DateTimeFormat from 'gregorian-calendar-format';
-const dateFormatter = new DateTimeFormat('yyyy-MM-dd');
 
 import 'rc-select/assets/index.css';
 import Select from 'rc-select';
 
+import zhCN from 'rc-calendar/lib/locale/zh_CN';
+import enUS from 'rc-calendar/lib/locale/en_US';
+
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+import 'moment/locale/en-gb';
+
+const format = 'YYYY-MM-DD HH:mm';
+const cn = location.search.indexOf('cn') !== -1;
+
+const now = moment();
+if (cn) {
+  now.locale('zh-cn').utcOffset(8);
+} else {
+  now.locale('en-gb').utcOffset(0);
+}
+
+function getFormat(time) {
+  return time ? format : 'YYYY-MM-DD';
+}
+
+
+const defaultCalendarValue = now.clone();
+defaultCalendarValue.add(-1, 'month');
+
 function onSelect(value) {
-  console.log('select', dateFormatter.format(value));
+  console.log('select', value.format(format));
 }
 
 const App = React.createClass({
@@ -34,7 +56,7 @@ const App = React.createClass({
           Select={Select}
           fullscreen={false}
           onSelect={onSelect}
-          locale={CalendarLocale}
+          locale={cn ? zhCN : enUS}
         />
         <FullCalendar
           style={{ margin: 10 }}
@@ -43,7 +65,7 @@ const App = React.createClass({
           onSelect={onSelect}
           type={this.state.type}
           onTypeChange={this.onTypeChange}
-          locale={CalendarLocale}
+          locale={cn ? zhCN : enUS}
         />
       </div>
     );

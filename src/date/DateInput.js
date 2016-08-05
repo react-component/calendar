@@ -6,9 +6,8 @@ const DateInput = React.createClass({
     prefixCls: PropTypes.string,
     timePicker: PropTypes.object,
     disabledTime: PropTypes.any,
-    formatter: PropTypes.object,
+    format: PropTypes.object,
     locale: PropTypes.object,
-    gregorianCalendarLocale: PropTypes.object,
     disabledDate: PropTypes.func,
     onChange: PropTypes.func,
     onClear: PropTypes.func,
@@ -20,7 +19,7 @@ const DateInput = React.createClass({
   getInitialState() {
     const selectedValue = this.props.selectedValue;
     return {
-      str: selectedValue && this.props.formatter.format(selectedValue) || '',
+      str: selectedValue && selectedValue.format(this.props.format) || '',
       invalid: false,
     };
   },
@@ -29,7 +28,7 @@ const DateInput = React.createClass({
     // when popup show, click body will call this, bug!
     const selectedValue = nextProps.selectedValue;
     this.setState({
-      str: selectedValue && nextProps.formatter.format(selectedValue) || '',
+      str: selectedValue && selectedValue.format(nextProps.format) || '',
       invalid: false,
     });
   },
@@ -40,24 +39,29 @@ const DateInput = React.createClass({
       str,
     });
     let value;
-    const { disabledDate, formatter, gregorianCalendarLocale, onChange } = this.props;
+    const { disabledDate, format, onChange } = this.props;
     if (str) {
-      try {
-        // remove `copyTime`, to enable input time
-        value = formatter.parse(str, {
-          locale: gregorianCalendarLocale,
-          obeyCount: true,
-        });
-      } catch (ex) {
+
+        const parsed = moment(str, format, true);
+      if (!parsed.isValid()) {
         this.setState({
           invalid: true,
         });
         return;
       }
+      value = this.props.value.clone();
+      value
+        .year(parsed.year())
+        .month(parsed.month())
+        .date(parsed.date())
+        .hour(parsed.hour())
+        .minute(parsed.minute())
+        .second(parsed.second());
+
       if (value && (!disabledDate || !disabledDate(value))) {
         const originalValue = this.props.selectedValue;
         if (originalValue && value) {
-          if (originalValue.getTime() !== value.getTime()) {
+          if (!originalValue.isSame(value)) {
             onChange(value);
           }
         } else if (originalValue !== value) {

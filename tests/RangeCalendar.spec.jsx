@@ -4,9 +4,8 @@ import React from 'react';
 import TestUtils from 'react-addons-test-utils';
 import ReactDOM from 'react-dom';
 const Simulate = TestUtils.Simulate;
-import GregorianCalendar from 'gregorian-calendar';
-import DateTimeFormat from 'gregorian-calendar-format';
-const formatter = new DateTimeFormat('yyyy-MM-dd');
+import moment from 'moment';
+const format = ('yyyy-MM-dd');
 const $ = require('jquery');
 
 describe('RangeCalendar', () => {
@@ -26,7 +25,7 @@ describe('RangeCalendar', () => {
   });
 
   it('next month works', (done) => {
-    let month = calendar.state.value.getMonth();
+    let month = calendar.state.value.month();
     if (month === 11) {
       month = -1;
     }
@@ -34,13 +33,13 @@ describe('RangeCalendar', () => {
       'rc-calendar-range-right')[0];
     Simulate.click($(rightCalendar).find('.rc-calendar-next-month-btn')[0]);
     setTimeout(() => {
-      expect(calendar.state.value.getMonth()).to.be(month + 1);
+      expect(calendar.state.value.month()).to.be(month + 1);
       done();
     }, 10);
   });
 
   it('previous month works', (done) => {
-    let month = calendar.state.value.getMonth();
+    let month = calendar.state.value.month();
     if (month === 0) {
       month = 12;
     }
@@ -48,29 +47,29 @@ describe('RangeCalendar', () => {
       'rc-calendar-range-left')[0];
     Simulate.click($(leftCalendar).find('.rc-calendar-prev-month-btn')[0]);
     setTimeout(() => {
-      expect(calendar.state.value.getMonth()).to.be(month - 1);
+      expect(calendar.state.value.month()).to.be(month - 1);
       done();
     }, 10);
   });
 
   it('next year works', (done) => {
-    const year = calendar.state.value.getYear();
+    const year = calendar.state.value.year();
     const rightCalendar = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
       'rc-calendar-range-right')[0];
     Simulate.click($(rightCalendar).find('.rc-calendar-next-year-btn')[0]);
     setTimeout(() => {
-      expect(calendar.state.value.getYear()).to.be(year + 1);
+      expect(calendar.state.value.year()).to.be(year + 1);
       done();
     }, 10);
   });
 
   it('previous year works', (done) => {
-    const year = calendar.state.value.getYear();
+    const year = calendar.state.value.year();
     const leftCalendar = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
       'rc-calendar-range-left')[0];
     Simulate.click($(leftCalendar).find('.rc-calendar-prev-year-btn')[0]);
     setTimeout(() => {
-      expect(calendar.state.value.getYear()).to.be(year - 1);
+      expect(calendar.state.value.year()).to.be(year - 1);
       done();
     }, 10);
   });
@@ -84,16 +83,15 @@ describe('RangeCalendar', () => {
     let day;
 
     function onSelect(d) {
-      expect(formatter.format(d[0])).to.be('2015-09-04');
-      expect(formatter.format(d[1])).to.be('2015-10-02');
+      expect(d[0].format(format)).to.be('2015-09-04');
+      expect(d[1].format(format)).to.be('2015-10-02');
       done();
     }
 
-    const now = new GregorianCalendar();
-    now.set(2015, 8, 29);
+    const now = moment([2015, 8, 29]);
     ReactDOM.unmountComponentAtNode(container);
     calendar = ReactDOM.render(<RangeCalendar
-      formatter={formatter}
+      format={format}
       onSelect={onSelect}
       defaultValue={now}
       showWeekNumber

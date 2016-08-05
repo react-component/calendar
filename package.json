@@ -50,8 +50,8 @@
     "pre-commit": "1.x",
     "rc-dialog": "^6.0.1",
     "rc-select": "^6.0.6",
-    "rc-time-picker": "^1.1.4",
-    "rc-tools": "^5.3.4",
+    "rc-time-picker": "2.x",
+    "rc-tools": "5.x",
     "react": "15.x",
     "react-addons-test-utils": "15.x",
     "react-dom": "15.x"
@@ -61,8 +61,7 @@
   ],
   "dependencies": {
     "classnames": "2.x",
-    "gregorian-calendar": "4.x",
-    "gregorian-calendar-format": "4.x",
+    "moment": "2.x",
     "rc-trigger": "1.x",
     "rc-util": "3.x"
   }

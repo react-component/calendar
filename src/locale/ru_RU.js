@@ -1,5 +1,3 @@
-import ruRU from 'gregorian-calendar-format/lib/locale/ru_RU';
-
 export default {
   today: 'Сегодня',
   now: 'Сейчас',
@@ -11,10 +9,10 @@ export default {
   monthSelect: 'Выберите месяц',
   yearSelect: 'Выберите год',
   decadeSelect: 'Выберите десятилетие',
-  yearFormat: 'yyyy',
-  dateFormat: 'd-M-yyyy',
+  yearFormat: 'YYYY',
+  dateFormat: 'd-M-YYYY',
   dayFormat: 'd',
-  dateTimeFormat: 'd-M-yyyy HH:mm:ss',
+  dateTimeFormat: 'd-M-YYYY HH:mm:ss',
   monthFormat: 'MMMM',
   monthBeforeYear: true,
   previousMonth: 'Предыдущий месяц (PageUp)',
@@ -25,5 +23,4 @@ export default {
   nextDecade: 'Следущее десятилетие',
   previousCentury: 'Предыдущий век',
   nextCentury: 'Следующий век',
-  format: ruRU,
 };

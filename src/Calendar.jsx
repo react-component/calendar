@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import GregorianCalendar from 'gregorian-calendar';
+import moment from 'moment';
 import KeyCode from 'rc-util/lib/KeyCode';
 import DateTable from './date/DateTable';
 import CalendarHeader from './calendar/CalendarHeader';
@@ -15,38 +15,36 @@ function noop() {
 
 function goStartMonth() {
   const next = this.state.value.clone();
-  next.setDayOfMonth(1);
+  next.startOf('month');
   this.setValue(next);
 }
 
 function goEndMonth() {
   const next = this.state.value.clone();
-  next.setDayOfMonth(next.getActualMaximum(GregorianCalendar.MONTH));
+  next.endOf('month');
+  this.setValue(next);
+}
+
+function goTime(direction, unit) {
+  const next = this.state.value.clone();
+  next.add(direction,unit);
   this.setValue(next);
 }
 
 function goMonth(direction) {
-  const next = this.state.value.clone();
-  next.addMonth(direction);
-  this.setValue(next);
+ return goTime(direction,'months');
 }
 
 function goYear(direction) {
-  const next = this.state.value.clone();
-  next.addYear(direction);
-  this.setValue(next);
+  return goTime(direction,'years');
 }
 
 function goWeek(direction) {
-  const next = this.state.value.clone();
-  next.addWeekOfYear(direction);
-  this.setValue(next);
+  return goTime(direction,'weeks');
 }
 
 function goDay(direction) {
-  const next = this.state.value.clone();
-  next.addDayOfMonth(direction);
-  this.setValue(next);
+  return goTime(direction,'days');
 }
 
 const Calendar = React.createClass({
@@ -183,9 +181,10 @@ const Calendar = React.createClass({
     });
   },
   chooseToday() {
-    const today = this.state.value.clone();
-    today.setTime(Date.now());
-    this.onSelect(today, {
+    const { value } = this.state;
+    const now = moment();
+    now.locale(this.state.value.locale()).utcOffset(value.utcOffset());
+    this.onSelect(now, {
       source: 'todayButton',
     });
   },
@@ -203,10 +202,9 @@ const Calendar = React.createClass({
 
     const timePickerEle = timePicker && showTimePicker ? React.cloneElement(timePicker, {
       showHour: true,
-      formatter: this.getFormatter(),
       showSecond: true,
       onChange: this.onDateInputChange,
-      gregorianCalendarLocale: value.locale,
+      defaultOpenValue:value,
       value: selectedValue,
       disabledHours: noop,
       disabledMinutes: noop,
@@ -216,9 +214,9 @@ const Calendar = React.createClass({
     const dateInputElement = props.showDateInput ? (
       <DateInput
         ref="dateInput"
-        formatter={this.getFormatter()}
+        format={this.getFormat()}
         key="date-input"
-        gregorianCalendarLocale={value.locale}
+        value={value}
         locale={locale}
         placeholder={dateInputPlaceholder}
         showClear
@@ -270,7 +268,6 @@ const Calendar = React.createClass({
           showToday={props.showToday}
           disabledTime={disabledTime}
           showTimePicker={showTimePicker}
-          gregorianCalendarLocale={value.locale}
           showDateInput={props.showDateInput}
           timePicker={timePicker}
           selectedValue={selectedValue}

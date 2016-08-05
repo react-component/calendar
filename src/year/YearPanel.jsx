@@ -6,7 +6,7 @@ const COL = 3;
 
 function goYear(direction) {
   const value = this.state.value.clone();
-  value.addYear(direction);
+  value.add(direction, 'year');
   this.setState({
     value,
   });
@@ -14,8 +14,8 @@ function goYear(direction) {
 
 function chooseYear(year) {
   const value = this.state.value.clone();
-  value.setYear(year);
-  value.rollSetMonth(this.state.value.getMonth());
+  value.year(year);
+  value.month(this.state.value.month());
   this.props.onSelect(value);
 }
 
@@ -41,9 +41,9 @@ class YearPanel extends React.Component {
     });
   }
 
-  getYears() {
+  years() {
     const value = this.state.value;
-    const currentYear = value.getYear();
+    const currentYear = value.year();
     const startYear = parseInt(currentYear / 10, 10) * 10;
     const previousYear = startYear - 1;
     const endYear = startYear + 9;
@@ -82,8 +82,8 @@ class YearPanel extends React.Component {
     const props = this.props;
     const value = this.state.value;
     const locale = props.locale;
-    const years = this.getYears();
-    const currentYear = value.getYear();
+    const years = this.years();
+    const currentYear = value.year();
     const startYear = parseInt(currentYear / 10, 10) * 10;
     const endYear = startYear + 9;
     const prefixCls = this.prefixCls;

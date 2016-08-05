@@ -3,11 +3,28 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Calendar from 'rc-calendar';
 import DatePicker from 'rc-calendar/src/Picker';
-import DateTimeFormat from 'gregorian-calendar-format';
 import Dialog from 'rc-dialog';
 import 'rc-dialog/assets/index.css';
 
-const dateFormatter = new DateTimeFormat('yyyy-MM-dd');
+import zhCN from 'rc-calendar/lib/locale/zh_CN';
+import enUS from 'rc-calendar/lib/locale/en_US';
+
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+import 'moment/locale/en-gb';
+
+const format = 'YYYY-MM-DD HH:mm';
+const cn = location.search.indexOf('cn') !== -1;
+
+const now = moment();
+if (cn) {
+  now.locale('zh-cn').utcOffset(8);
+} else {
+  now.locale('en-gb').utcOffset(0);
+}
+
+const defaultCalendarValue = now.clone();
+defaultCalendarValue.add(-1, 'month');
 
 const Test = React.createClass({
   getInitialState() {
@@ -48,7 +65,7 @@ const Test = React.createClass({
         <div style={{ marginTop: 20 }}>
           <DatePicker
             getCalendarContainer={this.getCalendarContainer}
-            calendar={<Calendar formatter={dateFormatter}/>}
+            calendar={<Calendar locale={cn ? zhCN : enUS}/>}
           >
             {
               ({ value }) => {
@@ -57,7 +74,7 @@ const Test = React.createClass({
                 <input
                   style={{ width: 250 }}
                   readOnly
-                  value={value && dateFormatter.format(value) || ''}
+                  value={value && value.format(format) || ''}
                 />
                 </span>
                 );
