@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>start-end.js - example - rc-calendar@6.0.2</title>
+  <title>start-end.js - example - rc-calendar@7.0.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -258,7 +258,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
   <div class="container">
     <div class="header">
-      <h1>rc-calendar@6.0.2</h1>
+      <h1>rc-calendar@7.0.0</h1>
 
       <p>React Calendar</p>
     </div>
@@ -271,25 +271,38 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Calendar from 'rc-calendar';
 import DatePicker from 'rc-calendar/lib/Picker';
-import zhCn from 'gregorian-calendar/lib/locale/zh_CN';
-import DateTimeFormat from 'gregorian-calendar-format';
-import GregorianCalendar from 'gregorian-calendar';
-import CalendarLocale from 'rc-calendar/lib/locale/zh_CN';
-import TimePickerLocale from 'rc-time-picker/lib/locale/zh_CN';
+
+import zhCN from 'rc-calendar/lib/locale/zh_CN';
+import enUS from 'rc-calendar/lib/locale/en_US';
 import 'rc-time-picker/assets/index.css';
-import TimePicker from 'rc-time-picker';
+import TimePickerPanel from 'rc-time-picker/lib/Panel';
 
-const timePickerElement = &lt;TimePicker locale={TimePickerLocale}/&gt;;
-const formatter = new DateTimeFormat('yyyy-MM-dd HH:mm:ss');
-const dateFormatter = new DateTimeFormat('yyyy-MM-dd');
-const SHOW_TIME = true;
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+import 'moment/locale/en-gb';
 
-const now = new GregorianCalendar(zhCn);
-now.setTime(Date.now());
+const format = 'YYYY-MM-DD HH:mm:ss';
+const cn = location.search.indexOf('cn') !== -1;
 
-function getFormatter(showTime) {
-  return showTime ? formatter : dateFormatter;
+const now = moment();
+if (cn) {
+  now.locale('zh-cn').utcOffset(8);
+} else {
+  now.locale('en-gb').utcOffset(0);
 }
+
+function getFormat(time) {
+  return time ? format : 'YYYY-MM-DD';
+}
+
+
+const defaultCalendarValue = now.clone();
+defaultCalendarValue.add(-1, 'month');
+
+const timePickerElement = &lt;TimePickerPanel /&gt;;
+
+
+const SHOW_TIME = true;
 
 const Picker = React.createClass({
   getDefaultProps() {
@@ -301,9 +314,8 @@ const Picker = React.createClass({
   render() {
     const props = this.props;
     const calendar = (&lt;Calendar
-      locale={CalendarLocale}
+      locale={cn ? zhCN : enUS}
       defaultValue={now}
-      formatter={props.showTime ? formatter : dateFormatter}
       timePicker={props.showTime ? timePickerElement : null}
       disabledDate={props.disabledDate}
     /&gt;);
@@ -323,7 +335,7 @@ const Picker = React.createClass({
                   style={{ width: 250 }}
                   disabled={props.disabled}
                   readOnly
-                  value={value &amp;&amp; getFormatter(props.showTime).format(value) || ''}
+                  value={value &amp;&amp; value.format(getFormat(props.showTime)) || ''}
                 /&gt;
                 &lt;/span&gt;
           );
@@ -342,7 +354,7 @@ const Test = React.createClass({
   },
 
   onChange(field, value) {
-    console.log('onChange', field, value &amp;&amp; getFormatter(SHOW_TIME).format(value));
+    console.log('onChange', field, value &amp;&amp; value.format(getFormat(SHOW_TIME)));
     this.setState({
       [field]: value,
     });
@@ -356,10 +368,8 @@ const Test = React.createClass({
     if (!startValue) {
       return false;
     }
-    // console.log(getFormatter(SHOW_TIME).format(startValue),
-    // getFormatter(SHOW_TIME).format(endValue));
-    return SHOW_TIME ? endValue.getTime() &lt; startValue.getTime() :
-    endValue.compareToDay(startValue) &lt;= 0;
+    return SHOW_TIME ? endValue.isBefore(startValue) :
+    endValue.diff(startValue, 'days') &lt;= 0;
   },
 
   disabledStartDate(startValue) {
@@ -370,10 +380,8 @@ const Test = React.createClass({
     if (!endValue) {
       return false;
     }
-    // console.log(getFormatter(SHOW_TIME).format(startValue),
-    // getFormatter(SHOW_TIME).format(endValue));
-    return SHOW_TIME ? endValue.getTime() &lt; startValue.getTime() :
-    startValue.compareToDay(endValue) &gt;= 0;
+    return SHOW_TIME ? endValue.isBefore(startValue) :
+    endValue.diff(startValue, 'days') &lt;= 0;
   },
 
   render() {

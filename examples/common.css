@@ -412,6 +412,7 @@
 }
 .rc-calendar-body {
   padding: 9px 10px 10px;
+  height: 217px;
 }
 .rc-calendar table {
   border-collapse: collapse;
@@ -1073,6 +1074,9 @@
 .rc-calendar-range .rc-calendar-today-btn {
   float: left;
 }
+.rc-calendar-full {
+  width: 275px;
+}
 .rc-calendar-full-header {
   padding: 5px 10px;
   text-align: center;
@@ -1085,7 +1089,7 @@
 }
 .rc-calendar-full-header-month-select,
 .rc-calendar-full-header-year-select {
-  width: 75px;
+  width: 70px;
   float: right;
   margin-right: 5px;
 }
