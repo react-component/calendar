@@ -304,7 +304,7 @@ const RangeCalendar = React.createClass({
 
     const startValue = this.getStartValue();
     const endValue = this.getEndValue();
-    const thisMonth = moment().month();
+    const thisMonth = getTodayTime(startValue).month();
     const isTodayInView = thisMonth === startValue.month() ||
             thisMonth === endValue.month();
 
