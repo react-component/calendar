@@ -1864,6 +1864,7 @@ webpackJsonp([5],{
 	  var locale = _ref.locale;
 	  var value = _ref.value;
 	  var timePicker = _ref.timePicker;
+	  var disabled = _ref.disabled;
 	  var disabledDate = _ref.disabledDate;
 	  var disabledTime = _ref.disabledTime;
 	  var onToday = _ref.onToday;
@@ -1878,7 +1879,7 @@ webpackJsonp([5],{
 	  var disabledTodayClass = '';
 	  if (disabledDate) {
 	    disabledToday = !(0, _util.isAllowedDate)((0, _util.getTodayTime)(value), disabledDate, disabledTime);
-	    if (disabledToday) {
+	    if (disabledToday || disabled) {
 	      disabledTodayClass = prefixCls + '-today-btn-disabled';
 	    }
 	  }
@@ -1887,7 +1888,7 @@ webpackJsonp([5],{
 	    {
 	      className: prefixCls + '-today-btn ' + disabledTodayClass,
 	      role: 'button',
-	      onClick: disabledToday ? null : onToday,
+	      onClick: disabledToday || disabled ? null : onToday,
 	      title: (0, _util.getTodayTimeStr)(value)
 	    },
 	    localeNow

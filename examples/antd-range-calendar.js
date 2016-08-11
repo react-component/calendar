@@ -1369,6 +1369,7 @@ webpackJsonp([2],{
 	  var locale = _ref.locale;
 	  var value = _ref.value;
 	  var timePicker = _ref.timePicker;
+	  var disabled = _ref.disabled;
 	  var disabledDate = _ref.disabledDate;
 	  var disabledTime = _ref.disabledTime;
 	  var onToday = _ref.onToday;
@@ -1383,7 +1384,7 @@ webpackJsonp([2],{
 	  var disabledTodayClass = '';
 	  if (disabledDate) {
 	    disabledToday = !(0, _util.isAllowedDate)((0, _util.getTodayTime)(value), disabledDate, disabledTime);
-	    if (disabledToday) {
+	    if (disabledToday || disabled) {
 	      disabledTodayClass = prefixCls + '-today-btn-disabled';
 	    }
 	  }
@@ -1392,7 +1393,7 @@ webpackJsonp([2],{
 	    {
 	      className: prefixCls + '-today-btn ' + disabledTodayClass,
 	      role: 'button',
-	      onClick: disabledToday ? null : onToday,
+	      onClick: disabledToday || disabled ? null : onToday,
 	      title: (0, _util.getTodayTimeStr)(value)
 	    },
 	    localeNow
@@ -3134,6 +3135,12 @@ webpackJsonp([2],{
 	    }
 	    var showOkButton = showOk === true || showOk !== false && !!timePicker;
 	    var cls = (0, _classnames3.default)((_classnames = {}, (0, _defineProperty3.default)(_classnames, prefixCls + '-footer', true), (0, _defineProperty3.default)(_classnames, prefixCls + '-range-bottom', true), (0, _defineProperty3.default)(_classnames, prefixCls + '-footer-show-ok', showOkButton), _classnames));
+	
+	    var startValue = this.getStartValue();
+	    var endValue = this.getEndValue();
+	    var thisMonth = (0, _util.getTodayTime)(startValue).month();
+	    var isTodayInView = thisMonth === startValue.month() || thisMonth === endValue.month();
+	
 	    return _react2.default.createElement(
 	      'div',
 	      {
@@ -3154,7 +3161,7 @@ webpackJsonp([2],{
 	        _react2.default.createElement(_CalendarPart2.default, (0, _extends3.default)({}, props, newProps, {
 	          direction: 'left',
 	          format: this.getFormat(),
-	          value: this.getStartValue(),
+	          value: startValue,
 	          placeholder: placeholder1,
 	          onInputSelect: onInputSelect.bind(this, 'left'),
 	          onValueChange: onValueChange.bind(this, 'left'),
@@ -3171,7 +3178,7 @@ webpackJsonp([2],{
 	          format: this.getFormat(),
 	          timePickerDisabledTime: this.getEndDisableTime(),
 	          placeholder: placeholder2,
-	          value: this.getEndValue(),
+	          value: endValue,
 	          onInputSelect: onInputSelect.bind(this, 'right'),
 	          onValueChange: onValueChange.bind(this, 'right'),
 	          timePicker: timePicker,
@@ -3185,6 +3192,7 @@ webpackJsonp([2],{
 	          'div',
 	          { className: prefixCls + '-footer-btn' },
 	          _react2.default.createElement(_TodayButton2.default, (0, _extends3.default)({}, props, {
+	            disabled: isTodayInView,
 	            value: state.value,
 	            onToday: this.onToday,
 	            text: locale.backToToday
