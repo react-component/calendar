@@ -301,6 +301,13 @@ const RangeCalendar = React.createClass({
       [`${prefixCls}-range-bottom`]: true,
       [`${prefixCls}-footer-show-ok`]: showOkButton,
     });
+
+    const startValue = this.getStartValue();
+    const endValue = this.getEndValue();
+    const thisMonth = moment().month();
+    const isTodayInView = thisMonth === startValue.month() ||
+            thisMonth === endValue.month();
+
     return (<div
       ref="root"
       className={classes}
@@ -320,7 +327,7 @@ const RangeCalendar = React.createClass({
           {...newProps}
           direction="left"
           format={this.getFormat()}
-          value={this.getStartValue()}
+          value={startValue}
           placeholder={placeholder1}
           onInputSelect={onInputSelect.bind(this, 'left')}
           onValueChange={onValueChange.bind(this, 'left')}
@@ -335,7 +342,7 @@ const RangeCalendar = React.createClass({
           format={this.getFormat()}
           timePickerDisabledTime={this.getEndDisableTime()}
           placeholder={placeholder2}
-          value={this.getEndValue()}
+          value={endValue}
           onInputSelect={onInputSelect.bind(this, 'right')}
           onValueChange={onValueChange.bind(this, 'right')}
           timePicker={timePicker}
@@ -346,6 +353,7 @@ const RangeCalendar = React.createClass({
         <div className={`${prefixCls}-footer-btn`}>
           <TodayButton
             {...props}
+            disabled={isTodayInView}
             value={state.value}
             onToday={this.onToday}
             text={locale.backToToday}
