@@ -6,6 +6,7 @@ import { syncTime, getTodayTime } from './util/';
 import TodayButton from './calendar/TodayButton';
 import OkButton from './calendar/OkButton';
 import TimePickerButton from './calendar/TimePickerButton';
+import SingleDayCheckbox from './calendar/SingleDayCheckbox';
 import CommonMixin from './mixin/CommonMixin';
 
 function noop() {
@@ -61,6 +62,10 @@ function onInputSelect(direction, value) {
   if (this.state.showTimePicker && selectedValue[0] && !selectedValue[1]) {
     selectedValue[1] = selectedValue[0];
   }
+  if (selectedValue[0] && this.state.singleDay) {
+    selectedValue[1] = selectedValue[0];
+  }
+
   this.fireSelectValueChange(selectedValue);
 }
 
@@ -72,6 +77,8 @@ const RangeCalendar = React.createClass({
     timePicker: PropTypes.any,
     value: PropTypes.any,
     showOk: PropTypes.bool,
+    showSingleDay: PropTypes.bool,
+    singleDay: PropTypes.bool,
     selectedValue: PropTypes.array,
     defaultSelectedValue: PropTypes.array,
     onOk: PropTypes.func,
@@ -90,17 +97,20 @@ const RangeCalendar = React.createClass({
     return {
       defaultSelectedValue: [],
       onValueChange: noop,
+      showSingleDay: true,
     };
   },
 
   getInitialState() {
     const props = this.props;
+    const singleDay = props.singleDay || false;
     const selectedValue = props.selectedValue || props.defaultSelectedValue;
     const value = normalizeAnchor(props, 1);
     return {
       selectedValue,
       value,
       showTimePicker: false,
+      singleDay,
     };
   },
 
@@ -134,6 +144,11 @@ const RangeCalendar = React.createClass({
     } else if (this.compare(selectedValue[0], value) > 0) {
       selectedValue.length = 1;
       selectedValue[0] = value;
+      changed = true;
+    }
+    if (this.state.singleDay && selectedValue.length === 1) {
+      selectedValue.length = 2;
+      selectedValue[1] = selectedValue[0];
       changed = true;
     }
     if (changed) {
@@ -173,6 +188,11 @@ const RangeCalendar = React.createClass({
   },
   onOk() {
     this.props.onOk(this.state.selectedValue);
+  },
+  onSingleDayToggle() {
+    this.setState({
+      singleDay: !this.state.singleDay,
+    });
   },
 
   getStartValue() {
@@ -270,7 +290,14 @@ const RangeCalendar = React.createClass({
     const props = this.props;
     const state = this.state;
     const { showTimePicker } = state;
-    const { prefixCls, dateInputPlaceholder, timePicker, showOk, locale, showClear } = props;
+    const {
+            prefixCls,
+            dateInputPlaceholder,
+            timePicker, showOk,
+            showSingleDay,
+            locale,
+            showClear,
+          } = props;
     const className = {
       [props.className]: !!props.className,
       [prefixCls]: 1,
@@ -358,6 +385,13 @@ const RangeCalendar = React.createClass({
             onToday={this.onToday}
             text={locale.backToToday}
           />
+          {!!showSingleDay ?
+            <SingleDayCheckbox
+              {...props}
+              prefixCls={prefixCls}
+              singleDay={this.state.singleDay}
+              onSingleDayToggle={this.onSingleDayToggle}
+            /> : null}
           {!!props.timePicker ?
             <TimePickerButton
               {...props}
