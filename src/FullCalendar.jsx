@@ -21,6 +21,7 @@ const FullCalendar = React.createClass({
     headerComponent: PropTypes.object, // The whole header component
     headerRender: PropTypes.func,
     showHeader: PropTypes.bool,
+    disabledDate: PropTypes.func,
   },
   mixins: [CommonMixin, CalendarMixin],
   getDefaultProps() {
