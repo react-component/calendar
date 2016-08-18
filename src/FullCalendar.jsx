@@ -66,7 +66,15 @@ const FullCalendar = React.createClass({
   },
   render() {
     const props = this.props;
-    const { locale, prefixCls, fullscreen, showHeader, headerComponent, headerRender } = props;
+    const {
+      locale,
+      prefixCls,
+      fullscreen,
+      showHeader,
+      headerComponent,
+      headerRender,
+      disabledDate,
+    } = props;
     const { value, type } = this.state;
 
     let header = null;
@@ -97,6 +105,7 @@ const FullCalendar = React.createClass({
         prefixCls={prefixCls}
         onSelect={this.onSelect}
         value={value}
+        disabledDate={disabledDate}
       />
     ) : (
       <MonthTable
@@ -106,6 +115,7 @@ const FullCalendar = React.createClass({
         onSelect={this.onMonthSelect}
         prefixCls={`${prefixCls}-month-panel`}
         value={value}
+        disabledDate={disabledDate}
       />
     );
 
