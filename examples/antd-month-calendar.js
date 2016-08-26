@@ -3,7 +3,7 @@ webpackJsonp([1],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(332);
+	module.exports = __webpack_require__(338);
 
 
 /***/ },
@@ -1002,7 +1002,7 @@ webpackJsonp([1],{
 	    }
 	  },
 	  focusCalendar: function focusCalendar() {
-	    if (this.state.open) {
+	    if (this.state.open && this.calendarInstance !== null) {
 	      this.calendarInstance.focus();
 	    }
 	  },
@@ -1093,7 +1093,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 332:
+/***/ 338:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1108,7 +1108,7 @@ webpackJsonp([1],{
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _MonthCalendar = __webpack_require__(333);
+	var _MonthCalendar = __webpack_require__(339);
 	
 	var _MonthCalendar2 = _interopRequireDefault(_MonthCalendar);
 	
@@ -1116,7 +1116,7 @@ webpackJsonp([1],{
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _zh_CN = __webpack_require__(324);
+	var _zh_CN = __webpack_require__(330);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -1128,9 +1128,9 @@ webpackJsonp([1],{
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	__webpack_require__(330);
+	__webpack_require__(336);
 	
-	__webpack_require__(331);
+	__webpack_require__(337);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -1282,7 +1282,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 333:
+/***/ 339:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

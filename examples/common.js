@@ -28367,9 +28367,9 @@
 	
 	var _Popup2 = _interopRequireDefault(_Popup);
 	
-	var _utils = __webpack_require__(322);
+	var _utils = __webpack_require__(328);
 	
-	var _getContainerRenderMixin = __webpack_require__(323);
+	var _getContainerRenderMixin = __webpack_require__(329);
 	
 	var _getContainerRenderMixin2 = _interopRequireDefault(_getContainerRenderMixin);
 	
@@ -29269,15 +29269,15 @@
 	
 	var _rcAlign2 = _interopRequireDefault(_rcAlign);
 	
-	var _rcAnimate = __webpack_require__(311);
+	var _rcAnimate = __webpack_require__(317);
 	
 	var _rcAnimate2 = _interopRequireDefault(_rcAnimate);
 	
-	var _PopupInner = __webpack_require__(320);
+	var _PopupInner = __webpack_require__(326);
 	
 	var _PopupInner2 = _interopRequireDefault(_PopupInner);
 	
-	var _LazyRenderBox = __webpack_require__(321);
+	var _LazyRenderBox = __webpack_require__(327);
 	
 	var _LazyRenderBox2 = _interopRequireDefault(_LazyRenderBox);
 	
@@ -29520,7 +29520,7 @@
 	
 	var _addEventListener2 = _interopRequireDefault(_addEventListener);
 	
-	var _isWindow = __webpack_require__(310);
+	var _isWindow = __webpack_require__(316);
 	
 	var _isWindow2 = _interopRequireDefault(_isWindow);
 	
@@ -29657,44 +29657,44 @@
 /* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/**
-	 * align dom node flexibly
-	 * @author yiminghe@gmail.com
-	 */
-	
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	var _utils = __webpack_require__(303);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
-	var _getOffsetParent = __webpack_require__(304);
+	var _getOffsetParent = __webpack_require__(310);
 	
 	var _getOffsetParent2 = _interopRequireDefault(_getOffsetParent);
 	
-	var _getVisibleRectForElement = __webpack_require__(305);
+	var _getVisibleRectForElement = __webpack_require__(311);
 	
 	var _getVisibleRectForElement2 = _interopRequireDefault(_getVisibleRectForElement);
 	
-	var _adjustForViewport = __webpack_require__(306);
+	var _adjustForViewport = __webpack_require__(312);
 	
 	var _adjustForViewport2 = _interopRequireDefault(_adjustForViewport);
 	
-	var _getRegion = __webpack_require__(307);
+	var _getRegion = __webpack_require__(313);
 	
 	var _getRegion2 = _interopRequireDefault(_getRegion);
 	
-	var _getElFuturePos = __webpack_require__(308);
+	var _getElFuturePos = __webpack_require__(314);
 	
 	var _getElFuturePos2 = _interopRequireDefault(_getElFuturePos);
 	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
 	// http://yiminghe.iteye.com/blog/1124720
+	
+	/**
+	 * align dom node flexibly
+	 * @author yiminghe@gmail.com
+	 */
 	
 	function isFailX(elFuturePos, elRegion, visibleRect) {
 	  return elFuturePos.left < visibleRect.left || elFuturePos.left + elRegion.width > visibleRect.right;
@@ -29714,7 +29714,7 @@
 	
 	function flip(points, reg, map) {
 	  var ret = [];
-	  _utils2['default'].each(points, function (p) {
+	  _utils2["default"].each(points, function (p) {
 	    ret.push(p.replace(reg, function (m) {
 	      return map[m];
 	    }));
@@ -29728,7 +29728,7 @@
 	}
 	
 	function convertOffset(str, offsetLen) {
-	  var n = undefined;
+	  var n = void 0;
 	  if (/%$/.test(str)) {
 	    n = parseInt(str.substring(0, str.length - 1), 10) / 100 * offsetLen;
 	  } else {
@@ -29756,18 +29756,18 @@
 	
 	  var fail = 0;
 	  // 当前节点可以被放置的显示区域
-	  var visibleRect = (0, _getVisibleRectForElement2['default'])(source);
+	  var visibleRect = (0, _getVisibleRectForElement2["default"])(source);
 	  // 当前节点所占的区域, left/top/width/height
-	  var elRegion = (0, _getRegion2['default'])(source);
+	  var elRegion = (0, _getRegion2["default"])(source);
 	  // 参照节点所占的区域, left/top/width/height
-	  var refNodeRegion = (0, _getRegion2['default'])(target);
+	  var refNodeRegion = (0, _getRegion2["default"])(target);
 	  // 将 offset 转换成数值，支持百分比
 	  normalizeOffset(offset, elRegion);
 	  normalizeOffset(targetOffset, refNodeRegion);
 	  // 当前节点将要被放置的位置
-	  var elFuturePos = (0, _getElFuturePos2['default'])(elRegion, refNodeRegion, points, offset, targetOffset);
+	  var elFuturePos = (0, _getElFuturePos2["default"])(elRegion, refNodeRegion, points, offset, targetOffset);
 	  // 当前节点将要所处的区域
-	  var newElRegion = _utils2['default'].merge(elRegion, elFuturePos);
+	  var newElRegion = _utils2["default"].merge(elRegion, elFuturePos);
 	
 	  // 如果可视区域不能完全放置当前节点时允许调整
 	  if (visibleRect && (overflow.adjustX || overflow.adjustY)) {
@@ -29782,7 +29782,7 @@
 	        // 偏移量也反下
 	        var newOffset = flipOffset(offset, 0);
 	        var newTargetOffset = flipOffset(targetOffset, 0);
-	        var newElFuturePos = (0, _getElFuturePos2['default'])(elRegion, refNodeRegion, newPoints, newOffset, newTargetOffset);
+	        var newElFuturePos = (0, _getElFuturePos2["default"])(elRegion, refNodeRegion, newPoints, newOffset, newTargetOffset);
 	        if (!isCompleteFailX(newElFuturePos, elRegion, visibleRect)) {
 	          fail = 1;
 	          points = newPoints;
@@ -29796,27 +29796,27 @@
 	      // 如果纵向不能放下
 	      if (isFailY(elFuturePos, elRegion, visibleRect)) {
 	        // 对齐位置反下
-	        var newPoints = flip(points, /[tb]/ig, {
+	        var _newPoints = flip(points, /[tb]/ig, {
 	          t: 'b',
 	          b: 't'
 	        });
 	        // 偏移量也反下
-	        var newOffset = flipOffset(offset, 1);
-	        var newTargetOffset = flipOffset(targetOffset, 1);
-	        var newElFuturePos = (0, _getElFuturePos2['default'])(elRegion, refNodeRegion, newPoints, newOffset, newTargetOffset);
-	        if (!isCompleteFailY(newElFuturePos, elRegion, visibleRect)) {
+	        var _newOffset = flipOffset(offset, 1);
+	        var _newTargetOffset = flipOffset(targetOffset, 1);
+	        var _newElFuturePos = (0, _getElFuturePos2["default"])(elRegion, refNodeRegion, _newPoints, _newOffset, _newTargetOffset);
+	        if (!isCompleteFailY(_newElFuturePos, elRegion, visibleRect)) {
 	          fail = 1;
-	          points = newPoints;
-	          offset = newOffset;
-	          targetOffset = newTargetOffset;
+	          points = _newPoints;
+	          offset = _newOffset;
+	          targetOffset = _newTargetOffset;
 	        }
 	      }
 	    }
 	
 	    // 如果失败，重新计算当前节点将要被放置的位置
 	    if (fail) {
-	      elFuturePos = (0, _getElFuturePos2['default'])(elRegion, refNodeRegion, points, offset, targetOffset);
-	      _utils2['default'].mix(newElRegion, elFuturePos);
+	      elFuturePos = (0, _getElFuturePos2["default"])(elRegion, refNodeRegion, points, offset, targetOffset);
+	      _utils2["default"].mix(newElRegion, elFuturePos);
 	    }
 	
 	    // 检查反下后的位置是否可以放下了
@@ -29827,29 +29827,29 @@
 	
 	    // 确实要调整，甚至可能会调整高度宽度
 	    if (newOverflowCfg.adjustX || newOverflowCfg.adjustY) {
-	      newElRegion = (0, _adjustForViewport2['default'])(elFuturePos, elRegion, visibleRect, newOverflowCfg);
+	      newElRegion = (0, _adjustForViewport2["default"])(elFuturePos, elRegion, visibleRect, newOverflowCfg);
 	    }
 	  }
 	
 	  // need judge to in case set fixed with in css on height auto element
 	  if (newElRegion.width !== elRegion.width) {
-	    _utils2['default'].css(source, 'width', source.width() + newElRegion.width - elRegion.width);
+	    _utils2["default"].css(source, 'width', _utils2["default"].width(source) + newElRegion.width - elRegion.width);
 	  }
 	
 	  if (newElRegion.height !== elRegion.height) {
-	    _utils2['default'].css(source, 'height', source.height() + newElRegion.height - elRegion.height);
+	    _utils2["default"].css(source, 'height', _utils2["default"].height(source) + newElRegion.height - elRegion.height);
 	  }
 	
 	  // https://github.com/kissyteam/kissy/issues/190
-	  // http://localhost:8888/kissy/src/overlay/demo/other/relative_align/align.html
 	  // 相对于屏幕位置没变，而 left/top 变了
 	  // 例如 <div 'relative'><el absolute></div>
-	  _utils2['default'].offset(source, {
+	  _utils2["default"].offset(source, {
 	    left: newElRegion.left,
 	    top: newElRegion.top
 	  }, {
 	    useCssRight: align.useCssRight,
-	    useCssBottom: align.useCssBottom
+	    useCssBottom: align.useCssBottom,
+	    useCssTransform: align.useCssTransform
 	  });
 	
 	  return {
@@ -29860,12 +29860,11 @@
 	  };
 	}
 	
-	domAlign.__getOffsetParent = _getOffsetParent2['default'];
+	domAlign.__getOffsetParent = _getOffsetParent2["default"];
 	
-	domAlign.__getVisibleRectForElement = _getVisibleRectForElement2['default'];
+	domAlign.__getVisibleRectForElement = _getVisibleRectForElement2["default"];
 	
-	exports['default'] = domAlign;
-	
+	exports["default"] = domAlign;
 	/**
 	 *  2012-04-26 yiminghe@gmail.com
 	 *   - 优化智能对齐算法
@@ -29874,24 +29873,40 @@
 	 *  2011-07-13 yiminghe@gmail.com note:
 	 *   - 增加智能对齐，以及大小调整选项
 	 **/
+	
 	module.exports = exports['default'];
 
 /***/ },
 /* 303 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	
+	var _propertyUtils = __webpack_require__(304);
+	
+	var _cssVendor = __webpack_require__(305);
+	
+	var _cssVendor2 = _interopRequireDefault(_cssVendor);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
 	var RE_NUM = /[\-+]?(?:\d*\.|)\d+(?:[eE][\-+]?\d+|)/.source;
 	
-	var getComputedStyleX = undefined;
+	var getComputedStyleX = void 0;
+	
+	function force(x, y) {
+	  return x + y;
+	}
 	
 	function css(el, name, v) {
 	  var value = v;
-	  if (typeof name === 'object') {
+	  if ((typeof name === 'undefined' ? 'undefined' : _typeof(name)) === 'object') {
 	    for (var i in name) {
 	      if (name.hasOwnProperty(i)) {
 	        css(el, i, name[i]);
@@ -29910,9 +29925,9 @@
 	}
 	
 	function getClientPosition(elem) {
-	  var box = undefined;
-	  var x = undefined;
-	  var y = undefined;
+	  var box = void 0;
+	  var x = void 0;
+	  var y = void 0;
 	  var doc = elem.ownerDocument;
 	  var body = doc.body;
 	  var docElem = doc && doc.documentElement;
@@ -29949,7 +29964,10 @@
 	  x -= docElem.clientLeft || body.clientLeft || 0;
 	  y -= docElem.clientTop || body.clientTop || 0;
 	
-	  return { left: x, top: y };
+	  return {
+	    left: x,
+	    top: y
+	  };
 	}
 	
 	function getScroll(w, top) {
@@ -30064,7 +30082,7 @@
 	}
 	
 	// 设置 elem 相对 elem.ownerDocument 的坐标
-	function setOffset(elem, offset, option) {
+	function setLeftTop(elem, offset, option) {
 	  // set position first, in-case top/left are set even on static elem
 	  if (css(elem, 'position') === 'static') {
 	    elem.style.position = 'relative';
@@ -30083,7 +30101,12 @@
 	  if (verticalProperty !== 'top') {
 	    presetV = 999;
 	  }
-	
+	  var originalTransition = '';
+	  var originalOffset = getOffset(elem);
+	  if ('left' in offset || 'top' in offset) {
+	    originalTransition = (0, _propertyUtils.getTransitionProperty)(elem) || '';
+	    (0, _propertyUtils.setTransitionProperty)(elem, 'none');
+	  }
 	  if ('left' in offset) {
 	    elem.style[oppositeHorizontalProperty] = '';
 	    elem.style[horizontalProperty] = presetH + 'px';
@@ -30093,20 +30116,61 @@
 	    elem.style[verticalProperty] = presetV + 'px';
 	  }
 	  var old = getOffset(elem);
-	  var ret = {};
-	  var key = undefined;
-	  for (key in offset) {
+	  var originalStyle = {};
+	  for (var key in offset) {
 	    if (offset.hasOwnProperty(key)) {
 	      var dir = getOffsetDirection(key, option);
 	      var preset = key === 'left' ? presetH : presetV;
+	      var off = originalOffset[key] - old[key];
 	      if (dir === key) {
-	        ret[dir] = preset + offset[key] - old[key];
+	        originalStyle[dir] = preset + off;
 	      } else {
-	        ret[dir] = preset + old[key] - offset[key];
+	        originalStyle[dir] = preset - off;
+	      }
+	    }
+	  }
+	  css(elem, originalStyle);
+	  // force relayout
+	  force(elem.offsetTop, elem.offsetLeft);
+	  if ('left' in offset || 'top' in offset) {
+	    (0, _propertyUtils.setTransitionProperty)(elem, originalTransition);
+	  }
+	  var ret = {};
+	  for (var _key in offset) {
+	    if (offset.hasOwnProperty(_key)) {
+	      var _dir = getOffsetDirection(_key, option);
+	      var _off = offset[_key] - originalOffset[_key];
+	      if (_key === _dir) {
+	        ret[_dir] = originalStyle[_dir] + _off;
+	      } else {
+	        ret[_dir] = originalStyle[_dir] - _off;
 	      }
 	    }
 	  }
 	  css(elem, ret);
+	}
+	
+	function setTransform(elem, offset) {
+	  var originalOffset = getOffset(elem);
+	  var originalXY = (0, _propertyUtils.getTransformXY)(elem);
+	  var resultXY = { x: originalXY.x, y: originalXY.y };
+	  if ('left' in offset) {
+	    resultXY.x = originalXY.x + offset.left - originalOffset.left;
+	  }
+	  if ('top' in offset) {
+	    resultXY.y = originalXY.y + offset.top - originalOffset.top;
+	  }
+	  (0, _propertyUtils.setTransformXY)(elem, resultXY);
+	}
+	
+	function setOffset(elem, offset, option) {
+	  if (option.useCssRight || option.useCssBottom) {
+	    setLeftTop(elem, offset, option);
+	  } else if (option.useCssTransform && _cssVendor2["default"].supportedProperty('transform')) {
+	    setTransform(elem, offset, option);
+	  } else {
+	    setLeftTop(elem, offset, option);
+	  }
 	}
 	
 	function each(arr, fn) {
@@ -30128,7 +30192,7 @@
 	function swap(elem, options, callback) {
 	  var old = {};
 	  var style = elem.style;
-	  var name = undefined;
+	  var name = void 0;
 	
 	  // Remember the old values, and insert the new ones
 	  for (name in options) {
@@ -30150,16 +30214,16 @@
 	
 	function getPBMWidth(elem, props, which) {
 	  var value = 0;
-	  var prop = undefined;
-	  var j = undefined;
-	  var i = undefined;
+	  var prop = void 0;
+	  var j = void 0;
+	  var i = void 0;
 	  for (j = 0; j < props.length; j++) {
 	    prop = props[j];
 	    if (prop) {
 	      for (i = 0; i < which.length; i++) {
-	        var cssProp = undefined;
+	        var cssProp = void 0;
 	        if (prop === 'border') {
-	          cssProp = prop + which[i] + 'Width';
+	          cssProp = '' + prop + which[i] + 'Width';
 	        } else {
 	          cssProp = prop + which[i];
 	        }
@@ -30255,15 +30319,19 @@
 	  return cssBoxValue + getPBMWidth(elem, BOX_MODELS.slice(extra), which, computedStyle);
 	}
 	
-	var cssShow = { position: 'absolute', visibility: 'hidden', display: 'block' };
+	var cssShow = {
+	  position: 'absolute',
+	  visibility: 'hidden',
+	  display: 'block'
+	};
 	
 	// fix #119 : https://github.com/kissyteam/kissy/issues/119
 	function getWHIgnoreDisplay() {
-	  for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	    args[_key] = arguments[_key];
+	  for (var _len = arguments.length, args = Array(_len), _key2 = 0; _key2 < _len; _key2++) {
+	    args[_key2] = arguments[_key2];
 	  }
 	
-	  var val = undefined;
+	  var val = void 0;
 	  var elem = args[0];
 	  // in case elem is window
 	  // elem.offsetWidth === undefined
@@ -30325,11 +30393,12 @@
 	      return getOffset(el);
 	    }
 	  },
+	
 	  isWindow: isWindow,
 	  each: each,
 	  css: css,
 	  clone: function clone(obj) {
-	    var i = undefined;
+	    var i = void 0;
 	    var ret = {};
 	    for (i in obj) {
 	      if (obj.hasOwnProperty(i)) {
@@ -30346,6 +30415,7 @@
 	    }
 	    return ret;
 	  },
+	
 	  mix: mix,
 	  getWindowScrollLeft: function getWindowScrollLeft(w) {
 	    return getScrollLeft(w);
@@ -30356,8 +30426,8 @@
 	  merge: function merge() {
 	    var ret = {};
 	
-	    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-	      args[_key2] = arguments[_key2];
+	    for (var _len2 = arguments.length, args = Array(_len2), _key3 = 0; _key3 < _len2; _key3++) {
+	      args[_key3] = arguments[_key3];
 	    }
 	
 	    for (var i = 0; i < args.length; i++) {
@@ -30365,13 +30435,14 @@
 	    }
 	    return ret;
 	  },
+	
 	  viewportWidth: 0,
 	  viewportHeight: 0
 	};
 	
 	mix(utils, domUtils);
 	
-	exports['default'] = utils;
+	exports["default"] = utils;
 	module.exports = exports['default'];
 
 /***/ },
@@ -30380,15 +30451,371 @@
 
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.setTransitionProperty = setTransitionProperty;
+	exports.getTransitionProperty = getTransitionProperty;
+	exports.getTransformXY = getTransformXY;
+	exports.setTransformXY = setTransformXY;
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	var _cssVendor = __webpack_require__(305);
+	
+	var _cssVendor2 = _interopRequireDefault(_cssVendor);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function getTransitionName() {
+	  return _cssVendor2["default"].prefix.js ? _cssVendor2["default"].prefix.js + 'TransitionProperty' : 'transitionProperty';
+	}
+	
+	function getTransformName() {
+	  return _cssVendor2["default"].prefix.js ? _cssVendor2["default"].prefix.js + 'Transform' : 'transform';
+	}
+	
+	function setTransitionProperty(node, value) {
+	  var name = getTransitionName();
+	  if (name) {
+	    node.style[name] = value;
+	    if (name !== 'transitionProperty') {
+	      node.style.transitionProperty = value;
+	    }
+	  }
+	}
+	
+	function setTransform(node, value) {
+	  var name = getTransformName();
+	  if (name) {
+	    node.style[name] = value;
+	    if (name !== 'transform') {
+	      node.style.transform = value;
+	    }
+	  }
+	}
+	
+	function getTransitionProperty(node) {
+	  return node.style.transitionProperty || node.style[getTransitionName()];
+	}
+	
+	function getTransformXY(node) {
+	  var style = window.getComputedStyle(node, null);
+	  var transform = style.getPropertyValue('transform') || style.getPropertyValue(getTransformName());
+	  if (transform && transform !== 'none') {
+	    var matrix = transform.replace(/[^0-9\-.,]/g, '').split(',');
+	    return { x: parseFloat(matrix[12] || matrix[4], 0), y: parseFloat(matrix[13] || matrix[5], 0) };
+	  }
+	  return {
+	    x: 0,
+	    y: 0
+	  };
+	}
+	
+	var matrix2d = /matrix\((.*)\)/;
+	var matrix3d = /matrix3d\((.*)\)/;
+	
+	function setTransformXY(node, xy) {
+	  var style = window.getComputedStyle(node, null);
+	  var transform = style.getPropertyValue('transform') || style.getPropertyValue(getTransformName());
+	  if (transform && transform !== 'none') {
+	    var arr = void 0;
+	    var match2d = transform.match(matrix2d);
+	    if (match2d) {
+	      match2d = match2d[1];
+	      arr = match2d.split(',').map(function (item) {
+	        return parseFloat(item, 10);
+	      });
+	      arr[4] = xy.x;
+	      arr[5] = xy.y;
+	      setTransform(node, 'matrix(' + arr.join(',') + ')');
+	    } else {
+	      var match3d = transform.match(matrix3d)[1];
+	      arr = match3d.split(',').map(function (item) {
+	        return parseFloat(item, 10);
+	      });
+	      arr[12] = xy.x;
+	      arr[13] = xy.y;
+	      setTransform(node, 'matrix3d(' + arr.join(',') + ')');
+	    }
+	  } else {
+	    setTransform(node, 'translateX(' + xy.x + 'px) translateY(' + xy.y + 'px) translateZ(0)');
+	  }
+	}
+
+/***/ },
+/* 305 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.supportedValue = exports.supportedProperty = exports.prefix = undefined;
+	
+	var _prefix = __webpack_require__(306);
+	
+	var _prefix2 = _interopRequireDefault(_prefix);
+	
+	var _supportedProperty = __webpack_require__(307);
+	
+	var _supportedProperty2 = _interopRequireDefault(_supportedProperty);
+	
+	var _supportedValue = __webpack_require__(309);
+	
+	var _supportedValue2 = _interopRequireDefault(_supportedValue);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	  prefix: _prefix2.default,
+	  supportedProperty: _supportedProperty2.default,
+	  supportedValue: _supportedValue2.default
+	}; /**
+	    * CSS Vendor prefix detection and property feature testing.
+	    *
+	    * @copyright Oleg Slobodskoi 2015
+	    * @website https://github.com/jsstyles/css-vendor
+	    * @license MIT
+	    */
+	
+	exports.prefix = _prefix2.default;
+	exports.supportedProperty = _supportedProperty2.default;
+	exports.supportedValue = _supportedValue2.default;
+
+/***/ },
+/* 306 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	/**
+	 * Export javascript style and css style vendor prefixes.
+	 * Based on "transform" support test.
+	 */
+	
+	var js = '';
+	var css = '';
+	
+	// We should not do anything if required serverside.
+	if (typeof document != 'undefined') {
+	  var jsCssMap = {
+	    Webkit: '-webkit-',
+	    Moz: '-moz-',
+	    // IE did it wrong again ...
+	    ms: '-ms-',
+	    O: '-o-'
+	  };
+	  var style = document.createElement('p').style;
+	  var testProp = 'Transform';
+	
+	  for (var key in jsCssMap) {
+	    if (key + testProp in style) {
+	      js = key;
+	      css = jsCssMap[key];
+	      break;
+	    }
+	  }
+	}
+	
+	/**
+	 * Vendor prefix string for the current browser.
+	 *
+	 * @type {{js: String, css: String}}
+	 * @api public
+	 */
+	exports.default = { js: js, css: css };
+
+/***/ },
+/* 307 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = supportedProperty;
+	
+	var _prefix = __webpack_require__(306);
+	
+	var _prefix2 = _interopRequireDefault(_prefix);
+	
+	var _camelize = __webpack_require__(308);
+	
+	var _camelize2 = _interopRequireDefault(_camelize);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var el = void 0;
+	var cache = {};
+	
+	// For server-side rendering.
+	if (typeof document != 'undefined') {
+	  el = document.createElement('p');
+	
+	  /**
+	   * We test every property on vendor prefix requirement.
+	   * Once tested, result is cached. It gives us up to 70% perf boost.
+	   * http://jsperf.com/element-style-object-access-vs-plain-object
+	   *
+	   * Prefill cache with known css properties to reduce amount of
+	   * properties we need to feature test at runtime.
+	   * http://davidwalsh.name/vendor-prefix
+	   */
+	  var computed = window.getComputedStyle(document.documentElement, '');
+	  for (var key in computed) {
+	    cache[computed[key]] = computed[key];
+	  }
+	}
+	
+	/**
+	 * Test if a property is supported, returns supported property with vendor
+	 * prefix if required. Returns `false` if not supported.
+	 *
+	 * @param {String} prop dash separated
+	 * @return {String|Boolean}
+	 * @api public
+	 */
+	function supportedProperty(prop) {
+	  // For server-side rendering.
+	  if (!el) return prop;
+	
+	  // We have not tested this prop yet, lets do the test.
+	  if (cache[prop] != null) return cache[prop];
+	
+	  // Camelization is required because we can't test using
+	  // css syntax for e.g. in FF.
+	  // Test if property is supported as it is.
+	  if ((0, _camelize2.default)(prop) in el.style) {
+	    cache[prop] = prop;
+	  }
+	  // Test if property is supported with vendor prefix.
+	  else if (_prefix2.default.js + (0, _camelize2.default)('-' + prop) in el.style) {
+	      cache[prop] = _prefix2.default.css + prop;
+	    } else {
+	      cache[prop] = false;
+	    }
+	
+	  return cache[prop];
+	}
+
+/***/ },
+/* 308 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = camelize;
+	var regExp = /[-\s]+(.)?/g;
+	
+	/**
+	 * Convert dash separated strings to camel cased.
+	 *
+	 * @param {String} str
+	 * @return {String}
+	 */
+	function camelize(str) {
+	  return str.replace(regExp, toUpper);
+	}
+	
+	function toUpper(match, c) {
+	  return c ? c.toUpperCase() : '';
+	}
+
+/***/ },
+/* 309 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = supportedValue;
+	
+	var _prefix = __webpack_require__(306);
+	
+	var _prefix2 = _interopRequireDefault(_prefix);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var cache = {};
+	var el = void 0;
+	
+	// For server-side rendering.
+	if (typeof document != 'undefined') el = document.createElement('p');
+	
+	/**
+	 * Returns prefixed value if needed. Returns `false` if value is not supported.
+	 *
+	 * @param {String} property
+	 * @param {String} value
+	 * @return {String|Boolean}
+	 * @api public
+	 */
+	function supportedValue(property, value) {
+	  // For server-side rendering.
+	  if (!el) return value;
+	
+	  // It is a string or a number as a string like '1'.
+	  // We want only prefixable values here.
+	  if (typeof value !== 'string' || !isNaN(parseInt(value, 10))) return value;
+	
+	  var cacheKey = property + value;
+	
+	  if (cache[cacheKey] != null) return cache[cacheKey];
+	
+	  // IE can even throw an error in some cases, for e.g. style.content = 'bar'
+	  try {
+	    // Test value as it is.
+	    el.style[property] = value;
+	  } catch (err) {
+	    cache[cacheKey] = false;
+	    return false;
+	  }
+	
+	  // Value is supported as it is.
+	  if (el.style[property] === value) {
+	    cache[cacheKey] = value;
+	  } else {
+	    // Test value with vendor prefix.
+	    value = _prefix2.default.css + value;
+	
+	    // Hardcode test to convert "flex" to "-ms-flexbox" for IE10.
+	    if (value === '-ms-flex') value = '-ms-flexbox';
+	
+	    el.style[property] = value;
+	
+	    // Value is supported with vendor prefix.
+	    if (el.style[property] === value) cache[cacheKey] = value;
+	  }
+	
+	  if (!cache[cacheKey]) cache[cacheKey] = false;
+	
+	  return cache[cacheKey];
+	}
+
+/***/ },
+/* 310 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	
 	var _utils = __webpack_require__(303);
 	
 	var _utils2 = _interopRequireDefault(_utils);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	/**
 	 * 得到会导致元素显示不全的祖先元素
@@ -30412,8 +30839,8 @@
 	  // 统一的 offsetParent 方法
 	  var doc = element.ownerDocument;
 	  var body = doc.body;
-	  var parent = undefined;
-	  var positionStyle = _utils2['default'].css(element, 'position');
+	  var parent = void 0;
+	  var positionStyle = _utils2["default"].css(element, 'position');
 	  var skipStatic = positionStyle === 'fixed' || positionStyle === 'absolute';
 	
 	  if (!skipStatic) {
@@ -30421,7 +30848,7 @@
 	  }
 	
 	  for (parent = element.parentNode; parent && parent !== body; parent = parent.parentNode) {
-	    positionStyle = _utils2['default'].css(parent, 'position');
+	    positionStyle = _utils2["default"].css(parent, 'position');
 	    if (positionStyle !== 'static') {
 	      return parent;
 	    }
@@ -30429,28 +30856,28 @@
 	  return null;
 	}
 	
-	exports['default'] = getOffsetParent;
+	exports["default"] = getOffsetParent;
 	module.exports = exports['default'];
 
 /***/ },
-/* 305 */
+/* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	var _utils = __webpack_require__(303);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
-	var _getOffsetParent = __webpack_require__(304);
+	var _getOffsetParent = __webpack_require__(310);
 	
 	var _getOffsetParent2 = _interopRequireDefault(_getOffsetParent);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	/**
 	 * 获得元素的显示部分的区域
@@ -30462,10 +30889,10 @@
 	    top: 0,
 	    bottom: Infinity
 	  };
-	  var el = (0, _getOffsetParent2['default'])(element);
-	  var scrollX = undefined;
-	  var scrollY = undefined;
-	  var winSize = undefined;
+	  var el = (0, _getOffsetParent2["default"])(element);
+	  var scrollX = void 0;
+	  var scrollY = void 0;
+	  var winSize = void 0;
 	  var doc = element.ownerDocument;
 	  var win = doc.defaultView || doc.parentWindow;
 	  var body = doc.body;
@@ -30479,8 +30906,8 @@
 	    // body may have overflow set on it, yet we still get the entire
 	    // viewport. In some browsers, el.offsetParent may be
 	    // document.documentElement, so check for that too.
-	    el !== body && el !== documentElement && _utils2['default'].css(el, 'overflow') !== 'visible') {
-	      var pos = _utils2['default'].offset(el);
+	    el !== body && el !== documentElement && _utils2["default"].css(el, 'overflow') !== 'visible') {
+	      var pos = _utils2["default"].offset(el);
 	      // add border
 	      pos.left += el.clientLeft;
 	      pos.top += el.clientTop;
@@ -30493,44 +30920,44 @@
 	    } else if (el === body || el === documentElement) {
 	      break;
 	    }
-	    el = (0, _getOffsetParent2['default'])(el);
+	    el = (0, _getOffsetParent2["default"])(el);
 	  }
 	
 	  // Clip by window's viewport.
-	  scrollX = _utils2['default'].getWindowScrollLeft(win);
-	  scrollY = _utils2['default'].getWindowScrollTop(win);
+	  scrollX = _utils2["default"].getWindowScrollLeft(win);
+	  scrollY = _utils2["default"].getWindowScrollTop(win);
 	  visibleRect.left = Math.max(visibleRect.left, scrollX);
 	  visibleRect.top = Math.max(visibleRect.top, scrollY);
 	  winSize = {
-	    width: _utils2['default'].viewportWidth(win),
-	    height: _utils2['default'].viewportHeight(win)
+	    width: _utils2["default"].viewportWidth(win),
+	    height: _utils2["default"].viewportHeight(win)
 	  };
 	  visibleRect.right = Math.min(visibleRect.right, scrollX + winSize.width);
 	  visibleRect.bottom = Math.min(visibleRect.bottom, scrollY + winSize.height);
 	  return visibleRect.top >= 0 && visibleRect.left >= 0 && visibleRect.bottom > visibleRect.top && visibleRect.right > visibleRect.left ? visibleRect : null;
 	}
 	
-	exports['default'] = getVisibleRectForElement;
+	exports["default"] = getVisibleRectForElement;
 	module.exports = exports['default'];
 
 /***/ },
-/* 306 */
+/* 312 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	var _utils = __webpack_require__(303);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
 	function adjustForViewport(elFuturePos, elRegion, visibleRect, overflow) {
-	  var pos = _utils2['default'].clone(elFuturePos);
+	  var pos = _utils2["default"].clone(elFuturePos);
 	  var size = {
 	    width: elRegion.width,
 	    height: elRegion.height
@@ -30567,82 +30994,82 @@
 	    pos.top = Math.max(visibleRect.bottom - size.height, visibleRect.top);
 	  }
 	
-	  return _utils2['default'].mix(pos, size);
+	  return _utils2["default"].mix(pos, size);
 	}
 	
-	exports['default'] = adjustForViewport;
+	exports["default"] = adjustForViewport;
 	module.exports = exports['default'];
 
 /***/ },
-/* 307 */
+/* 313 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	var _utils = __webpack_require__(303);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
 	function getRegion(node) {
-	  var offset = undefined;
-	  var w = undefined;
-	  var h = undefined;
-	  if (!_utils2['default'].isWindow(node) && node.nodeType !== 9) {
-	    offset = _utils2['default'].offset(node);
-	    w = _utils2['default'].outerWidth(node);
-	    h = _utils2['default'].outerHeight(node);
+	  var offset = void 0;
+	  var w = void 0;
+	  var h = void 0;
+	  if (!_utils2["default"].isWindow(node) && node.nodeType !== 9) {
+	    offset = _utils2["default"].offset(node);
+	    w = _utils2["default"].outerWidth(node);
+	    h = _utils2["default"].outerHeight(node);
 	  } else {
-	    var win = _utils2['default'].getWindow(node);
+	    var win = _utils2["default"].getWindow(node);
 	    offset = {
-	      left: _utils2['default'].getWindowScrollLeft(win),
-	      top: _utils2['default'].getWindowScrollTop(win)
+	      left: _utils2["default"].getWindowScrollLeft(win),
+	      top: _utils2["default"].getWindowScrollTop(win)
 	    };
-	    w = _utils2['default'].viewportWidth(win);
-	    h = _utils2['default'].viewportHeight(win);
+	    w = _utils2["default"].viewportWidth(win);
+	    h = _utils2["default"].viewportHeight(win);
 	  }
 	  offset.width = w;
 	  offset.height = h;
 	  return offset;
 	}
 	
-	exports['default'] = getRegion;
+	exports["default"] = getRegion;
 	module.exports = exports['default'];
 
 /***/ },
-/* 308 */
+/* 314 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var _getAlignOffset = __webpack_require__(309);
+	var _getAlignOffset = __webpack_require__(315);
 	
 	var _getAlignOffset2 = _interopRequireDefault(_getAlignOffset);
 	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
 	function getElFuturePos(elRegion, refNodeRegion, points, offset, targetOffset) {
-	  var xy = undefined;
-	  var diff = undefined;
-	  var p1 = undefined;
-	  var p2 = undefined;
+	  var xy = void 0;
+	  var diff = void 0;
+	  var p1 = void 0;
+	  var p2 = void 0;
 	
 	  xy = {
 	    left: elRegion.left,
 	    top: elRegion.top
 	  };
 	
-	  p1 = (0, _getAlignOffset2['default'])(refNodeRegion, points[1]);
-	  p2 = (0, _getAlignOffset2['default'])(elRegion, points[0]);
+	  p1 = (0, _getAlignOffset2["default"])(refNodeRegion, points[1]);
+	  p2 = (0, _getAlignOffset2["default"])(elRegion, points[0]);
 	
 	  diff = [p2.left - p1.left, p2.top - p1.top];
 	
@@ -30652,29 +31079,29 @@
 	  };
 	}
 	
-	exports['default'] = getElFuturePos;
+	exports["default"] = getElFuturePos;
 	module.exports = exports['default'];
 
 /***/ },
-/* 309 */
+/* 315 */
 /***/ function(module, exports) {
 
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	/**
 	 * 获取 node 上的 align 对齐点 相对于页面的坐标
 	 */
 	
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
 	function getAlignOffset(region, align) {
 	  var V = align.charAt(0);
 	  var H = align.charAt(1);
 	  var w = region.width;
 	  var h = region.height;
-	  var x = undefined;
-	  var y = undefined;
+	  var x = void 0;
+	  var y = void 0;
 	
 	  x = region.left;
 	  y = region.top;
@@ -30697,11 +31124,11 @@
 	  };
 	}
 	
-	exports['default'] = getAlignOffset;
+	exports["default"] = getAlignOffset;
 	module.exports = exports['default'];
 
 /***/ },
-/* 310 */
+/* 316 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -30718,16 +31145,16 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 311 */
+/* 317 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	// export this package's api
-	module.exports = __webpack_require__(312);
+	module.exports = __webpack_require__(318);
 
 /***/ },
-/* 312 */
+/* 318 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30740,13 +31167,13 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _ChildrenUtils = __webpack_require__(313);
+	var _ChildrenUtils = __webpack_require__(319);
 	
-	var _AnimateChild = __webpack_require__(314);
+	var _AnimateChild = __webpack_require__(320);
 	
 	var _AnimateChild2 = _interopRequireDefault(_AnimateChild);
 	
-	var _util = __webpack_require__(319);
+	var _util = __webpack_require__(325);
 	
 	var _util2 = _interopRequireDefault(_util);
 	
@@ -31059,7 +31486,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 313 */
+/* 319 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31181,7 +31608,7 @@
 	}
 
 /***/ },
-/* 314 */
+/* 320 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31200,11 +31627,11 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _cssAnimation = __webpack_require__(315);
+	var _cssAnimation = __webpack_require__(321);
 	
 	var _cssAnimation2 = _interopRequireDefault(_cssAnimation);
 	
-	var _util = __webpack_require__(319);
+	var _util = __webpack_require__(325);
 	
 	var _util2 = _interopRequireDefault(_util);
 	
@@ -31292,7 +31719,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 315 */
+/* 321 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31303,11 +31730,11 @@
 	
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 	
-	var _Event = __webpack_require__(316);
+	var _Event = __webpack_require__(322);
 	
 	var _Event2 = _interopRequireDefault(_Event);
 	
-	var _componentClasses = __webpack_require__(317);
+	var _componentClasses = __webpack_require__(323);
 	
 	var _componentClasses2 = _interopRequireDefault(_componentClasses);
 	
@@ -31487,7 +31914,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 316 */
+/* 322 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -31580,7 +32007,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 317 */
+/* 323 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -31588,9 +32015,9 @@
 	 */
 	
 	try {
-	  var index = __webpack_require__(318);
+	  var index = __webpack_require__(324);
 	} catch (err) {
-	  var index = __webpack_require__(318);
+	  var index = __webpack_require__(324);
 	}
 	
 	/**
@@ -31777,7 +32204,7 @@
 
 
 /***/ },
-/* 318 */
+/* 324 */
 /***/ function(module, exports) {
 
 	module.exports = function(arr, obj){
@@ -31789,7 +32216,7 @@
 	};
 
 /***/ },
-/* 319 */
+/* 325 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -31821,7 +32248,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 320 */
+/* 326 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31834,7 +32261,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _LazyRenderBox = __webpack_require__(321);
+	var _LazyRenderBox = __webpack_require__(327);
 	
 	var _LazyRenderBox2 = _interopRequireDefault(_LazyRenderBox);
 	
@@ -31878,7 +32305,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 321 */
+/* 327 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31929,7 +32356,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 322 */
+/* 328 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -31964,7 +32391,7 @@
 	}
 
 /***/ },
-/* 323 */
+/* 329 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32063,7 +32490,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 324 */
+/* 330 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -32101,12 +32528,12 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 325 */,
-/* 326 */,
-/* 327 */,
-/* 328 */,
-/* 329 */,
-/* 330 */
+/* 331 */,
+/* 332 */,
+/* 333 */,
+/* 334 */,
+/* 335 */,
+/* 336 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -32237,7 +32664,7 @@
 	}));
 
 /***/ },
-/* 331 */
+/* 337 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration

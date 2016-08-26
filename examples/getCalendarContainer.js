@@ -3,7 +3,7 @@ webpackJsonp([4],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(374);
+	module.exports = __webpack_require__(380);
 
 
 /***/ },
@@ -2480,7 +2480,7 @@ webpackJsonp([4],{
 	    }
 	  },
 	  focusCalendar: function focusCalendar() {
-	    if (this.state.open) {
+	    if (this.state.open && this.calendarInstance !== null) {
 	      this.calendarInstance.focus();
 	    }
 	  },
@@ -2571,7 +2571,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 374:
+/***/ 380:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2594,13 +2594,13 @@ webpackJsonp([4],{
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _rcDialog = __webpack_require__(375);
+	var _rcDialog = __webpack_require__(381);
 	
 	var _rcDialog2 = _interopRequireDefault(_rcDialog);
 	
-	__webpack_require__(379);
+	__webpack_require__(385);
 	
-	var _zh_CN = __webpack_require__(324);
+	var _zh_CN = __webpack_require__(330);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -2612,9 +2612,9 @@ webpackJsonp([4],{
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	__webpack_require__(330);
+	__webpack_require__(336);
 	
-	__webpack_require__(331);
+	__webpack_require__(337);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -2713,16 +2713,16 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 375:
+/***/ 381:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	module.exports = __webpack_require__(376);
+	module.exports = __webpack_require__(382);
 
 /***/ },
 
-/***/ 376:
+/***/ 382:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2739,11 +2739,11 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Dialog = __webpack_require__(377);
+	var _Dialog = __webpack_require__(383);
 	
 	var _Dialog2 = _interopRequireDefault(_Dialog);
 	
-	var _getContainerRenderMixin = __webpack_require__(323);
+	var _getContainerRenderMixin = __webpack_require__(329);
 	
 	var _getContainerRenderMixin2 = _interopRequireDefault(_getContainerRenderMixin);
 	
@@ -2803,7 +2803,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 377:
+/***/ 383:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2828,11 +2828,11 @@ webpackJsonp([4],{
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _rcAnimate = __webpack_require__(311);
+	var _rcAnimate = __webpack_require__(317);
 	
 	var _rcAnimate2 = _interopRequireDefault(_rcAnimate);
 	
-	var _LazyRenderBox = __webpack_require__(378);
+	var _LazyRenderBox = __webpack_require__(384);
 	
 	var _LazyRenderBox2 = _interopRequireDefault(_LazyRenderBox);
 	
@@ -3247,7 +3247,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 378:
+/***/ 384:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3295,7 +3295,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 379:
+/***/ 385:
 2
 
 });
