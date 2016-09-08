@@ -137,35 +137,27 @@ const CalendarHeader = React.createClass({
             role="button"
             onClick={this.previousYear}
             title={locale.previousYear}
-          >
-            «
-          </a>)}
+          />)}
         {this.showIf(enablePrev && !showTimePicker,
           <a
             className={`${prefixCls}-prev-month-btn`}
             role="button"
             onClick={this.previousMonth}
             title={locale.previousMonth}
-          >
-            ‹
-          </a>)}
+          />)}
         {this.monthYearElement(showTimePicker)}
         {this.showIf(enableNext && !showTimePicker,
           <a
             className={`${prefixCls}-next-month-btn`}
             onClick={this.nextMonth}
             title={locale.nextMonth}
-          >
-            ›
-          </a>)}
+          />)}
         {this.showIf(enableNext && !showTimePicker,
           <a
             className={`${prefixCls}-next-year-btn`}
             onClick={this.nextYear}
             title={locale.nextYear}
-          >
-            »
-          </a>)}
+          />)}
       </div>
       {panel}
     </div>);

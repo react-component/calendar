@@ -53,11 +53,19 @@
     .@{prefixClass}-prev-month-btn {
       position: absolute;
       left: 25px;
+
+      &:after {
+        content: '‹'
+      }
     }
 
     .@{prefixClass}-next-month-btn {
       position: absolute;
       right: 25px;
+
+      &:after {
+        content: '›'
+      }
     }
   }
 
@@ -96,10 +104,18 @@
 
   &-next-year-btn {
     right: 0;
+
+    &:after {
+      content: '»'
+    }
   }
 
   &-prev-year-btn {
     left: 0;
+
+    &:after {
+      content: '«'
+    }
   }
 
   &-body {
