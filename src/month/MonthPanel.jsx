@@ -101,9 +101,7 @@ const MonthPanel = React.createClass({
               role="button"
               onClick={this.previousYear}
               title={locale.previousYear}
-            >
-              «
-            </a>
+            />
 
             <a
               className={`${prefixCls}-year-select`}
@@ -120,9 +118,7 @@ const MonthPanel = React.createClass({
               role="button"
               onClick={this.nextYear}
               title={locale.nextYear}
-            >
-              »
-            </a>
+            />
           </div>
           <div className={`${prefixCls}-body`}>
             <MonthTable

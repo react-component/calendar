@@ -1,6 +1,10 @@
 # History
 ----
 
+## 7.1.0 / 2016-09-10
+
+- use css pseudo after: https://github.com/react-component/calendar/pull/152
+
 ## 7.0.0 / 2016-08-06
 
 - goodbye gregorian-calendar, hello moment

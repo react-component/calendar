@@ -141,9 +141,7 @@ class YearPanel extends React.Component {
               role="button"
               onClick={this.previousDecade}
               title={locale.previousDecade}
-            >
-              «
-            </a>
+            />
             <a
               className={`${prefixCls}-decade-select`}
               role="button"
@@ -161,9 +159,7 @@ class YearPanel extends React.Component {
               role="button"
               onClick={this.nextDecade}
               title={locale.nextDecade}
-            >
-              »
-            </a>
+            />
           </div>
           <div className={`${prefixCls}-body`}>
             <table className={`${prefixCls}-table`} cellSpacing="0" role="grid">

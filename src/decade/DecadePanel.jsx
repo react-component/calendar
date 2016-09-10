@@ -103,9 +103,7 @@ class DecadePanel extends React.Component {
             role="button"
             onClick={this.previousCentury}
             title={locale.previousCentury}
-          >
-            «
-          </a>
+          />
 
           <div className={`${prefixCls}-century`}>
             {startYear}-{endYear}
@@ -115,9 +113,7 @@ class DecadePanel extends React.Component {
             role="button"
             onClick={this.nextCentury}
             title={locale.nextCentury}
-          >
-            »
-          </a>
+          />
         </div>
         <div className={`${prefixCls}-body`}>
           <table className={`${prefixCls}-table`} cellSpacing="0" role="grid">
