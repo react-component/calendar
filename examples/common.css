@@ -364,9 +364,15 @@
   position: absolute;
   left: 25px;
 }
+.rc-calendar-header .rc-calendar-prev-month-btn:after {
+  content: '‹';
+}
 .rc-calendar-header .rc-calendar-next-month-btn {
   position: absolute;
   right: 25px;
+}
+.rc-calendar-header .rc-calendar-next-month-btn:after {
+  content: '›';
 }
 .rc-calendar-year-select,
 .rc-calendar-month-select,
@@ -407,8 +413,14 @@
 .rc-calendar-next-year-btn {
   right: 0;
 }
+.rc-calendar-next-year-btn:after {
+  content: '»';
+}
 .rc-calendar-prev-year-btn {
   left: 0;
+}
+.rc-calendar-prev-year-btn:after {
+  content: '«';
 }
 .rc-calendar-body {
   padding: 9px 10px 10px;
@@ -687,12 +699,18 @@
   position: absolute;
   top: 0;
 }
+.rc-calendar-month-panel-next-year-btn:after {
+  content: '»';
+}
 .rc-calendar-month-panel-prev-year-btn {
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
   left: 0;
+}
+.rc-calendar-month-panel-prev-year-btn:after {
+  content: '«';
 }
 .rc-calendar-month-panel .rc-calendar-month-panel-year-select {
   width: 180px;
@@ -791,12 +809,18 @@
   position: absolute;
   top: 0;
 }
+.rc-calendar-year-panel-next-decade-btn:after {
+  content: '»';
+}
 .rc-calendar-year-panel-prev-decade-btn {
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
   left: 0;
+}
+.rc-calendar-year-panel-prev-decade-btn:after {
+  content: '«';
 }
 .rc-calendar-year-panel .rc-calendar-year-panel-decade-select {
   width: 180px;
@@ -905,12 +929,18 @@
   position: absolute;
   top: 0;
 }
+.rc-calendar-decade-panel-next-century-btn:after {
+  content: '»';
+}
 .rc-calendar-decade-panel-prev-century-btn {
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
   left: 0;
+}
+.rc-calendar-decade-panel-prev-century-btn:after {
+  content: '«';
 }
 .rc-calendar-decade-panel-next-century-btn {
   -webkit-user-select: none;

@@ -1000,45 +1000,29 @@ webpackJsonp([4],{
 	      _react2.default.createElement(
 	        'div',
 	        { style: { position: 'relative' } },
-	        this.showIf(enablePrev && !showTimePicker, _react2.default.createElement(
-	          'a',
-	          {
-	            className: prefixCls + '-prev-year-btn',
-	            role: 'button',
-	            onClick: this.previousYear,
-	            title: locale.previousYear
-	          },
-	          '«'
-	        )),
-	        this.showIf(enablePrev && !showTimePicker, _react2.default.createElement(
-	          'a',
-	          {
-	            className: prefixCls + '-prev-month-btn',
-	            role: 'button',
-	            onClick: this.previousMonth,
-	            title: locale.previousMonth
-	          },
-	          '‹'
-	        )),
+	        this.showIf(enablePrev && !showTimePicker, _react2.default.createElement('a', {
+	          className: prefixCls + '-prev-year-btn',
+	          role: 'button',
+	          onClick: this.previousYear,
+	          title: locale.previousYear
+	        })),
+	        this.showIf(enablePrev && !showTimePicker, _react2.default.createElement('a', {
+	          className: prefixCls + '-prev-month-btn',
+	          role: 'button',
+	          onClick: this.previousMonth,
+	          title: locale.previousMonth
+	        })),
 	        this.monthYearElement(showTimePicker),
-	        this.showIf(enableNext && !showTimePicker, _react2.default.createElement(
-	          'a',
-	          {
-	            className: prefixCls + '-next-month-btn',
-	            onClick: this.nextMonth,
-	            title: locale.nextMonth
-	          },
-	          '›'
-	        )),
-	        this.showIf(enableNext && !showTimePicker, _react2.default.createElement(
-	          'a',
-	          {
-	            className: prefixCls + '-next-year-btn',
-	            onClick: this.nextYear,
-	            title: locale.nextYear
-	          },
-	          '»'
-	        ))
+	        this.showIf(enableNext && !showTimePicker, _react2.default.createElement('a', {
+	          className: prefixCls + '-next-month-btn',
+	          onClick: this.nextMonth,
+	          title: locale.nextMonth
+	        })),
+	        this.showIf(enableNext && !showTimePicker, _react2.default.createElement('a', {
+	          className: prefixCls + '-next-year-btn',
+	          onClick: this.nextYear,
+	          title: locale.nextYear
+	        }))
 	      ),
 	      panel
 	    );
@@ -1163,16 +1147,12 @@ webpackJsonp([4],{
 	        _react2.default.createElement(
 	          'div',
 	          { className: prefixCls + '-header' },
-	          _react2.default.createElement(
-	            'a',
-	            {
-	              className: prefixCls + '-prev-year-btn',
-	              role: 'button',
-	              onClick: this.previousYear,
-	              title: locale.previousYear
-	            },
-	            '«'
-	          ),
+	          _react2.default.createElement('a', {
+	            className: prefixCls + '-prev-year-btn',
+	            role: 'button',
+	            onClick: this.previousYear,
+	            title: locale.previousYear
+	          }),
 	          _react2.default.createElement(
 	            'a',
 	            {
@@ -1192,16 +1172,12 @@ webpackJsonp([4],{
 	              'x'
 	            )
 	          ),
-	          _react2.default.createElement(
-	            'a',
-	            {
-	              className: prefixCls + '-next-year-btn',
-	              role: 'button',
-	              onClick: this.nextYear,
-	              title: locale.nextYear
-	            },
-	            '»'
-	          )
+	          _react2.default.createElement('a', {
+	            className: prefixCls + '-next-year-btn',
+	            role: 'button',
+	            onClick: this.nextYear,
+	            title: locale.nextYear
+	          })
 	        ),
 	        _react2.default.createElement(
 	          'div',
@@ -1415,16 +1391,12 @@ webpackJsonp([4],{
 	        _react2.default.createElement(
 	          'div',
 	          { className: prefixCls + '-header' },
-	          _react2.default.createElement(
-	            'a',
-	            {
-	              className: prefixCls + '-prev-decade-btn',
-	              role: 'button',
-	              onClick: this.previousDecade,
-	              title: locale.previousDecade
-	            },
-	            '«'
-	          ),
+	          _react2.default.createElement('a', {
+	            className: prefixCls + '-prev-decade-btn',
+	            role: 'button',
+	            onClick: this.previousDecade,
+	            title: locale.previousDecade
+	          }),
 	          _react2.default.createElement(
 	            'a',
 	            {
@@ -1446,16 +1418,12 @@ webpackJsonp([4],{
 	              'x'
 	            )
 	          ),
-	          _react2.default.createElement(
-	            'a',
-	            {
-	              className: prefixCls + '-next-decade-btn',
-	              role: 'button',
-	              onClick: this.nextDecade,
-	              title: locale.nextDecade
-	            },
-	            '»'
-	          )
+	          _react2.default.createElement('a', {
+	            className: prefixCls + '-next-decade-btn',
+	            role: 'button',
+	            onClick: this.nextDecade,
+	            title: locale.nextDecade
+	          })
 	        ),
 	        _react2.default.createElement(
 	          'div',
@@ -1643,16 +1611,12 @@ webpackJsonp([4],{
 	      _react2.default.createElement(
 	        'div',
 	        { className: prefixCls + '-header' },
-	        _react2.default.createElement(
-	          'a',
-	          {
-	            className: prefixCls + '-prev-century-btn',
-	            role: 'button',
-	            onClick: this.previousCentury,
-	            title: locale.previousCentury
-	          },
-	          '«'
-	        ),
+	        _react2.default.createElement('a', {
+	          className: prefixCls + '-prev-century-btn',
+	          role: 'button',
+	          onClick: this.previousCentury,
+	          title: locale.previousCentury
+	        }),
 	        _react2.default.createElement(
 	          'div',
 	          { className: prefixCls + '-century' },
@@ -1660,16 +1624,12 @@ webpackJsonp([4],{
 	          '-',
 	          endYear
 	        ),
-	        _react2.default.createElement(
-	          'a',
-	          {
-	            className: prefixCls + '-next-century-btn',
-	            role: 'button',
-	            onClick: this.nextCentury,
-	            title: locale.nextCentury
-	          },
-	          '»'
-	        )
+	        _react2.default.createElement('a', {
+	          className: prefixCls + '-next-century-btn',
+	          role: 'button',
+	          onClick: this.nextCentury,
+	          title: locale.nextCentury
+	        })
 	      ),
 	      _react2.default.createElement(
 	        'div',
