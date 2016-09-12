@@ -109,4 +109,34 @@ describe('RangeCalendar', () => {
     Simulate.click(day);
     expect(ReactDOM.findDOMNode(rightInput).value).to.be('2015-10-02');
   });
+
+  it('singleDayOnSelect works', (done) => {
+    let day;
+
+    function onSelect(d) {
+      expect(d[0].format(format)).to.be('2015-09-04');
+      expect(d[1].format(format)).to.be('2015-09-04');
+      done();
+    }
+
+    const now = moment([2015, 8, 29]);
+    ReactDOM.unmountComponentAtNode(container);
+    calendar = ReactDOM.render(<RangeCalendar
+      format={format}
+      onSelect={onSelect}
+      defaultValue={now}
+      singleDay
+      showWeekNumber
+    />, container);
+    const leftCalendar = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+      'rc-calendar-range-left')[0];
+    const leftInput = $(leftCalendar).find('.rc-calendar-input')[0];
+    const rightCalendar = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
+      'rc-calendar-range-right')[0];
+    const rightInput = $(rightCalendar).find('.rc-calendar-input')[0];
+    day = $(leftCalendar).find('.rc-calendar-date')[5]; // 9.4
+    Simulate.click(day);
+    expect(ReactDOM.findDOMNode(leftInput).value).to.be('2015-09-04');
+    expect(ReactDOM.findDOMNode(rightInput).value).to.be('2015-09-04');
+  });
 });
