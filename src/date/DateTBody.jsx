@@ -152,7 +152,9 @@ const DateTBody = React.createClass({
           }
         } else if (isSameDay(current, value)) {
           // keyboard change value, highlight works
-          selected = true;
+          if (selectedValue) {
+            selected = true;
+          }
         }
         if (isBeforeCurrentMonthYear) {
           cls += ` ${lastMonthDayClass}`;
