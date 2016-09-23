@@ -26,6 +26,12 @@ export default {
       onSelect: noop,
       onChange: noop,
       onClear: noop,
+      renderFooter() {
+        return null;
+      },
+      renderSidebar() {
+        return null;
+      },
     };
   },
 

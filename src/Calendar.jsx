@@ -69,6 +69,8 @@ const Calendar = React.createClass({
     dateInputPlaceholder: PropTypes.any,
     onClear: PropTypes.func,
     onChange: PropTypes.func,
+    renderFooter: PropTypes.func,
+    renderSidebar: PropTypes.func,
   },
 
   mixins: [CommonMixin, CalendarMixin],
@@ -227,56 +229,57 @@ const Calendar = React.createClass({
       />
     ) : null;
     const children = [
-      dateInputElement,
-      (<div
-        key="date-panel"
-        className={`${prefixCls}-date-panel`}
-      >
-        <CalendarHeader
-          locale={locale}
-          onValueChange={this.setValue}
-          value={value}
-          showTimePicker={showTimePicker}
-          prefixCls={prefixCls}
-        />
-        {timePicker && showTimePicker ?
-          (<div className={`${prefixCls}-time-picker`}>
-            <div className={`${prefixCls}-time-picker-panel`}>
-              {timePickerEle }
-            </div>
-          </div>)
-          : null}
-        <div className={`${prefixCls}-body`}>
-          <DateTable
+      props.renderSidebar(),
+      (<div className={`${prefixCls}-panel`} key="panel">
+        {dateInputElement}
+        <div className={`${prefixCls}-date-panel`}>
+          <CalendarHeader
             locale={locale}
+            onValueChange={this.setValue}
             value={value}
-            selectedValue={selectedValue}
+            showTimePicker={showTimePicker}
             prefixCls={prefixCls}
-            dateRender={props.dateRender}
-            onSelect={this.onDateTableSelect}
+          />
+          {timePicker && showTimePicker ?
+            (<div className={`${prefixCls}-time-picker`}>
+              <div className={`${prefixCls}-time-picker-panel`}>
+                {timePickerEle }
+              </div>
+            </div>)
+            : null}
+          <div className={`${prefixCls}-body`}>
+            <DateTable
+              locale={locale}
+              value={value}
+              selectedValue={selectedValue}
+              prefixCls={prefixCls}
+              dateRender={props.dateRender}
+              onSelect={this.onDateTableSelect}
+              disabledDate={disabledDate}
+              showWeekNumber={props.showWeekNumber}
+            />
+          </div>
+
+          <CalendarFooter
+            showOk={props.showOk}
+            renderFooter={props.renderFooter}
+            locale={locale}
+            prefixCls={prefixCls}
+            showToday={props.showToday}
+            disabledTime={disabledTime}
+            showTimePicker={showTimePicker}
+            showDateInput={props.showDateInput}
+            timePicker={timePicker}
+            selectedValue={selectedValue}
+            value={value}
             disabledDate={disabledDate}
-            showWeekNumber={props.showWeekNumber}
+            onOk={this.onOk}
+            onSelect={this.onSelect}
+            onToday={this.onToday}
+            onOpenTimePicker={this.openTimePicker}
+            onCloseTimePicker={this.closeTimePicker}
           />
         </div>
-
-        <CalendarFooter
-          showOk={props.showOk}
-          locale={locale}
-          prefixCls={prefixCls}
-          showToday={props.showToday}
-          disabledTime={disabledTime}
-          showTimePicker={showTimePicker}
-          showDateInput={props.showDateInput}
-          timePicker={timePicker}
-          selectedValue={selectedValue}
-          value={value}
-          disabledDate={disabledDate}
-          onOk={this.onOk}
-          onSelect={this.onSelect}
-          onToday={this.onToday}
-          onOpenTimePicker={this.openTimePicker}
-          onCloseTimePicker={this.closeTimePicker}
-        />
       </div>),
     ];
 

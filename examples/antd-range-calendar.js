@@ -107,7 +107,7 @@ const Test = React.createClass({
 
 ReactDOM.render(
   <div>
-    <h2>calendar (zh-cn)</h2>
+    <h2>calendar</h2>
     <div style={{ margin: 10 }}>
       <RangeCalendar
         showWeekNumber

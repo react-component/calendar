@@ -201,8 +201,6 @@ ReactDOM.render((<div
     margin: '20px auto',
   }}
 >
-  <h2>zh-cn</h2>
-
   <div>
     <div style={{ margin: 10 }}>
       <Calendar

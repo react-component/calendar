@@ -14,6 +14,7 @@ const CalendarPart = React.createClass({
     prefixCls: PropTypes.any,
     locale: PropTypes.any,
     selectedValue: PropTypes.any,
+    hoverValue: PropTypes.any,
     showTimePicker: PropTypes.bool,
     format: PropTypes.any,
     placeholder: PropTypes.any,
@@ -29,6 +30,7 @@ const CalendarPart = React.createClass({
       locale, selectedValue, format, placeholder,
       disabledDate, timePicker, disabledTime,
       timePickerDisabledTime, showTimePicker,
+      hoverValue,
     } = props;
     const disabledTimeConfig = disabledTime && timePicker ?
       getTimeConfig(selectedValue, disabledTime) : null;
@@ -85,6 +87,7 @@ const CalendarPart = React.createClass({
           <div className={`${prefixCls}-body`}>
             <DateTable
               {...newProps}
+              hoverValue={hoverValue}
               selectedValue={selectedValue}
               dateRender={props.dateRender}
               onSelect={props.onSelect}

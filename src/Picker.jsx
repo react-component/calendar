@@ -18,8 +18,7 @@ const Picker = React.createClass({
     disabled: PropTypes.bool,
     transitionName: PropTypes.string,
     onChange: PropTypes.func,
-    onOpen: PropTypes.func,
-    onClose: PropTypes.func,
+    onOpenChange: PropTypes.func,
     children: PropTypes.func,
     getCalendarContainer: PropTypes.func,
     calendar: PropTypes.element,
@@ -47,8 +46,7 @@ const Picker = React.createClass({
       placement: 'bottomLeft',
       defaultOpen: false,
       onChange: noop,
-      onOpen: noop,
-      onClose: noop,
+      onOpenChange: noop,
     };
   },
 
@@ -150,19 +148,14 @@ const Picker = React.createClass({
   },
 
   setOpen(open, callback) {
-    const { onOpen, onClose } = this.props;
+    const { onOpenChange } = this.props;
     if (this.state.open !== open) {
-      this.setState({
-        open,
-      }, callback);
-      const event = {
-        open,
-      };
-      if (open) {
-        onOpen(event);
-      } else {
-        onClose(event);
+      if (!('open' in this.props)) {
+        this.setState({
+          open,
+        }, callback);
       }
+      onOpenChange(open);
     }
   },
 

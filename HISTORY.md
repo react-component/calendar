@@ -1,6 +1,10 @@
 # History
 ----
 
+## 7.2.0 / 2016-09-23
+
+- support week calendar demo
+
 ## 7.1.0 / 2016-09-10
 
 - use css pseudo after: https://github.com/react-component/calendar/pull/152

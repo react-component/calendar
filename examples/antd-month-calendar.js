@@ -129,7 +129,6 @@ ReactDOM.render(
       margin: '0 auto',
     }}
   >
-    <h2>zh-cn</h2>
     <MonthCalendar
       locale={cn ? zhCN : enUS}
       style={{ zIndex: 1000 }}

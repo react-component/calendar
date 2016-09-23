@@ -99,6 +99,7 @@ const RangeCalendar = React.createClass({
     const value = normalizeAnchor(props, 1);
     return {
       selectedValue,
+      hoverValue: [],
       value,
       showTimePicker: false,
     };
@@ -124,7 +125,7 @@ const RangeCalendar = React.createClass({
     const originalValue = this.state.selectedValue;
     const selectedValue = originalValue.concat();
     let changed = false;
-    if (!selectedValue.length || selectedValue.length === 2 && !originalValue.hovering) {
+    if (!selectedValue.length || selectedValue.length === 2) {
       selectedValue.length = 1;
       selectedValue[0] = value;
       changed = true;
@@ -141,18 +142,15 @@ const RangeCalendar = React.createClass({
     }
   },
 
-  onDayHover(hoverValue) {
-    let selectedValue = this.state.selectedValue;
-    if (!selectedValue.length || selectedValue.length === 2 && !selectedValue.hovering) {
+  onDayHover(value) {
+    const { hoverValue } = this.state;
+    if (this.compare(value, hoverValue[0]) < 0) {
       return;
     }
-    if (this.compare(hoverValue, selectedValue[0]) < 0) {
-      return;
-    }
-    selectedValue = selectedValue.concat();
-    selectedValue[1] = hoverValue;
-    selectedValue.hovering = 1;
-    this.fireSelectValueChange(selectedValue);
+    hoverValue[1] = value;
+    this.setState({
+      hoverValue,
+    });
   },
 
   onToday() {
@@ -245,8 +243,16 @@ const RangeCalendar = React.createClass({
         selectedValue,
       });
     }
+    if (selectedValue.length === 1) {
+      this.setState({
+        hoverValue: selectedValue.concat(),
+      });
+    }
     this.props.onChange(selectedValue);
-    if (direct || selectedValue[0] && selectedValue[1] && !selectedValue.hovering) {
+    if (direct || selectedValue[0] && selectedValue[1]) {
+      this.setState({
+        hoverValue: [],
+      });
       this.props.onSelect(selectedValue);
     }
   },
@@ -270,7 +276,13 @@ const RangeCalendar = React.createClass({
     const props = this.props;
     const state = this.state;
     const { showTimePicker } = state;
-    const { prefixCls, dateInputPlaceholder, timePicker, showOk, locale, showClear } = props;
+    const {
+      prefixCls, dateInputPlaceholder,
+      timePicker, showOk, locale, showClear,
+    } = props;
+    const {
+      hoverValue,
+    } = state;
     const className = {
       [props.className]: !!props.className,
       [prefixCls]: 1,
@@ -306,76 +318,84 @@ const RangeCalendar = React.createClass({
     const endValue = this.getEndValue();
     const thisMonth = getTodayTime(startValue).month();
     const isTodayInView = thisMonth === startValue.month() ||
-            thisMonth === endValue.month();
+      thisMonth === endValue.month();
 
-    return (<div
-      ref="root"
-      className={classes}
-      style={props.style}
-      tabIndex="0"
-    >
-      {showClear ?
-        <a
-          className={`${prefixCls}-clear-btn`}
-          role="button"
-          title={locale.clear}
-          onClick={this.clear}
-        /> : null}
-      <div className={`${prefixCls}-date-panel`}>
-        <CalendarPart
-          {...props}
-          {...newProps}
-          direction="left"
-          format={this.getFormat()}
-          value={startValue}
-          placeholder={placeholder1}
-          onInputSelect={onInputSelect.bind(this, 'left')}
-          onValueChange={onValueChange.bind(this, 'left')}
-          timePicker={timePicker}
-          showTimePicker={showTimePicker}
-        />
-        <span className={`${prefixCls}-range-middle`}>~</span>
-        <CalendarPart
-          {...props}
-          {...newProps}
-          direction="right"
-          format={this.getFormat()}
-          timePickerDisabledTime={this.getEndDisableTime()}
-          placeholder={placeholder2}
-          value={endValue}
-          onInputSelect={onInputSelect.bind(this, 'right')}
-          onValueChange={onValueChange.bind(this, 'right')}
-          timePicker={timePicker}
-          showTimePicker={showTimePicker}
-        />
-      </div>
-      <div className={cls}>
-        <div className={`${prefixCls}-footer-btn`}>
-          <TodayButton
-            {...props}
-            disabled={isTodayInView}
-            value={state.value}
-            onToday={this.onToday}
-            text={locale.backToToday}
-          />
-          {!!props.timePicker ?
-            <TimePickerButton
+    return (
+      <div
+        ref="root"
+        className={classes}
+        style={props.style}
+        tabIndex="0"
+      >
+        {props.renderSidebar()}
+        <div className={`${prefixCls}-panel`}>
+          {showClear ?
+            <a
+              className={`${prefixCls}-clear-btn`}
+              role="button"
+              title={locale.clear}
+              onClick={this.clear}
+            /> : null}
+          <div className={`${prefixCls}-date-panel`}>
+            <CalendarPart
               {...props}
+              {...newProps}
+              hoverValue={hoverValue}
+              direction="left"
+              format={this.getFormat()}
+              value={startValue}
+              placeholder={placeholder1}
+              onInputSelect={onInputSelect.bind(this, 'left')}
+              onValueChange={onValueChange.bind(this, 'left')}
+              timePicker={timePicker}
               showTimePicker={showTimePicker}
-              onOpenTimePicker={this.onOpenTimePicker}
-              onCloseTimePicker={this.onCloseTimePicker}
-              timePickerDisabled={state.selectedValue.length === 1 || state.selectedValue.hovering}
-            /> : null}
-          {showOkButton ?
-            <OkButton
+            />
+            <span className={`${prefixCls}-range-middle`}>~</span>
+            <CalendarPart
               {...props}
-              value={state.value}
-              onOk={this.onOk}
-              okDisabled={state.selectedValue.length !== 2 || state.selectedValue.hovering}
-            /> : null}
+              {...newProps}
+              hoverValue={hoverValue}
+              direction="right"
+              format={this.getFormat()}
+              timePickerDisabledTime={this.getEndDisableTime()}
+              placeholder={placeholder2}
+              value={endValue}
+              onInputSelect={onInputSelect.bind(this, 'right')}
+              onValueChange={onValueChange.bind(this, 'right')}
+              timePicker={timePicker}
+              showTimePicker={showTimePicker}
+            />
+          </div>
+          <div className={cls}>
+            {props.renderFooter()}
+            <div className={`${prefixCls}-footer-btn`}>
+              <TodayButton
+                {...props}
+                disabled={isTodayInView}
+                value={state.value}
+                onToday={this.onToday}
+                text={locale.backToToday}
+              />
+              {!!props.timePicker ?
+                <TimePickerButton
+                  {...props}
+                  showTimePicker={showTimePicker}
+                  onOpenTimePicker={this.onOpenTimePicker}
+                  onCloseTimePicker={this.onCloseTimePicker}
+                  timePickerDisabled={state.selectedValue.length === 1 || !!state.hoverValue.length}
+                /> : null}
+              {showOkButton ?
+                <OkButton
+                  {...props}
+                  value={state.value}
+                  onOk={this.onOk}
+                  okDisabled={state.selectedValue.length !== 2 || !!state.hoverValue.length}
+                /> : null}
+            </div>
+          </div>
         </div>
       </div>
-    </div>);
+    );
   },
 });
 

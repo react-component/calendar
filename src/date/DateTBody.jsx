@@ -45,12 +45,14 @@ const DateTBody = React.createClass({
     prefixCls: PropTypes.string,
     selectedValue: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
     value: PropTypes.object,
+    hoverValue: PropTypes.any,
     showWeekNumber: PropTypes.bool,
   },
 
   getDefaultProps() {
     return {
       onDayHover: noop,
+      hoverValue: [],
     };
   },
 
@@ -59,6 +61,7 @@ const DateTBody = React.createClass({
     const {
       contentRender, prefixCls, selectedValue, value,
       showWeekNumber, dateRender, disabledDate,
+      hoverValue,
     } = props;
     let iIndex;
     let jIndex;
@@ -133,16 +136,17 @@ const DateTBody = React.createClass({
         const isAfterCurrentMonthYear = afterCurrentMonthYear(current, value);
 
         if (selectedValue && Array.isArray(selectedValue)) {
+          const rangeValue = hoverValue.length ? hoverValue : selectedValue;
           if (!isBeforeCurrentMonthYear && !isAfterCurrentMonthYear) {
-            const startValue = selectedValue[0];
-            const endValue = selectedValue[1];
+            const startValue = rangeValue[0];
+            const endValue = rangeValue[1];
             if (startValue) {
               if (isSameDay(current, startValue)) {
                 selected = true;
               }
             }
             if (startValue && endValue) {
-              if (isSameDay(current, endValue) && !selectedValue.hovering) {
+              if (isSameDay(current, endValue) && !hoverValue.length) {
                 selected = true;
               } else if (current.isAfter(startValue, 'day') &&
                 current.isBefore(endValue, 'day')) {
@@ -203,7 +207,8 @@ const DateTBody = React.createClass({
           <td
             key={passed}
             onClick={disabled ? noop : handleDayClick.bind(this, current)}
-            onMouseEnter={disabled ? noop : handleCellMouseEnter.bind(this, current)}
+            onMouseEnter={disabled || !hoverValue.length ?
+              noop : handleCellMouseEnter.bind(this, current)}
             role="gridcell"
             title={getTitleString(current)} className={cls}
           >
