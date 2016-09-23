@@ -255,11 +255,6 @@ webpackJsonp([0],{
 	    }
 	  },
 	  _react2.default.createElement(
-	    'h2',
-	    null,
-	    'zh-cn'
-	  ),
-	  _react2.default.createElement(
 	    'div',
 	    null,
 	    _react2.default.createElement(
@@ -448,7 +443,9 @@ webpackJsonp([0],{
 	    timePicker: _react.PropTypes.element,
 	    dateInputPlaceholder: _react.PropTypes.any,
 	    onClear: _react.PropTypes.func,
-	    onChange: _react.PropTypes.func
+	    onChange: _react.PropTypes.func,
+	    renderFooter: _react.PropTypes.func,
+	    renderSidebar: _react.PropTypes.func
 	  },
 	
 	  mixins: [_CommonMixin2.default, _CalendarMixin2.default],
@@ -583,14 +580,12 @@ webpackJsonp([0],{
 	
 	    var timePickerEle = timePicker && showTimePicker ? _react2.default.cloneElement(timePicker, (0, _extends3.default)({
 	      showHour: true,
-	      showSecond: true,
+	      showSecond: true
+	    }, disabledTimeConfig, timePicker.props, {
 	      onChange: this.onDateInputChange,
 	      defaultOpenValue: value,
-	      value: selectedValue,
-	      disabledHours: noop,
-	      disabledMinutes: noop,
-	      disabledSeconds: noop
-	    }, disabledTimeConfig)) : null;
+	      value: selectedValue
+	    })) : null;
 	    var dateInputElement = props.showDateInput ? _react2.default.createElement(_DateInput2.default, {
 	      ref: 'dateInput',
 	      format: this.getFormat(),
@@ -606,60 +601,63 @@ webpackJsonp([0],{
 	      selectedValue: selectedValue,
 	      onChange: this.onDateInputChange
 	    }) : null;
-	    var children = [dateInputElement, _react2.default.createElement(
+	    var children = [props.renderSidebar(), _react2.default.createElement(
 	      'div',
-	      {
-	        key: 'date-panel',
-	        className: prefixCls + '-date-panel'
-	      },
-	      _react2.default.createElement(_CalendarHeader2.default, {
-	        locale: locale,
-	        onValueChange: this.setValue,
-	        value: value,
-	        showTimePicker: showTimePicker,
-	        prefixCls: prefixCls
-	      }),
-	      timePicker && showTimePicker ? _react2.default.createElement(
-	        'div',
-	        { className: prefixCls + '-time-picker' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: prefixCls + '-time-picker-panel' },
-	          timePickerEle
-	        )
-	      ) : null,
+	      { className: prefixCls + '-panel', key: 'panel' },
+	      dateInputElement,
 	      _react2.default.createElement(
 	        'div',
-	        { className: prefixCls + '-body' },
-	        _react2.default.createElement(_DateTable2.default, {
+	        { className: prefixCls + '-date-panel' },
+	        _react2.default.createElement(_CalendarHeader2.default, {
 	          locale: locale,
+	          onValueChange: this.setValue,
 	          value: value,
-	          selectedValue: selectedValue,
+	          showTimePicker: showTimePicker,
+	          prefixCls: prefixCls
+	        }),
+	        timePicker && showTimePicker ? _react2.default.createElement(
+	          'div',
+	          { className: prefixCls + '-time-picker' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: prefixCls + '-time-picker-panel' },
+	            timePickerEle
+	          )
+	        ) : null,
+	        _react2.default.createElement(
+	          'div',
+	          { className: prefixCls + '-body' },
+	          _react2.default.createElement(_DateTable2.default, {
+	            locale: locale,
+	            value: value,
+	            selectedValue: selectedValue,
+	            prefixCls: prefixCls,
+	            dateRender: props.dateRender,
+	            onSelect: this.onDateTableSelect,
+	            disabledDate: disabledDate,
+	            showWeekNumber: props.showWeekNumber
+	          })
+	        ),
+	        _react2.default.createElement(_CalendarFooter2.default, {
+	          showOk: props.showOk,
+	          renderFooter: props.renderFooter,
+	          locale: locale,
 	          prefixCls: prefixCls,
-	          dateRender: props.dateRender,
-	          onSelect: this.onDateTableSelect,
+	          showToday: props.showToday,
+	          disabledTime: disabledTime,
+	          showTimePicker: showTimePicker,
+	          showDateInput: props.showDateInput,
+	          timePicker: timePicker,
+	          selectedValue: selectedValue,
+	          value: value,
 	          disabledDate: disabledDate,
-	          showWeekNumber: props.showWeekNumber
+	          onOk: this.onOk,
+	          onSelect: this.onSelect,
+	          onToday: this.onToday,
+	          onOpenTimePicker: this.openTimePicker,
+	          onCloseTimePicker: this.closeTimePicker
 	        })
-	      ),
-	      _react2.default.createElement(_CalendarFooter2.default, {
-	        showOk: props.showOk,
-	        locale: locale,
-	        prefixCls: prefixCls,
-	        showToday: props.showToday,
-	        disabledTime: disabledTime,
-	        showTimePicker: showTimePicker,
-	        showDateInput: props.showDateInput,
-	        timePicker: timePicker,
-	        selectedValue: selectedValue,
-	        value: value,
-	        disabledDate: disabledDate,
-	        onOk: this.onOk,
-	        onSelect: this.onSelect,
-	        onToday: this.onToday,
-	        onOpenTimePicker: this.openTimePicker,
-	        onCloseTimePicker: this.closeTimePicker
-	      })
+	      )
 	    )];
 	
 	    return this.renderRoot({
@@ -905,16 +903,6 @@ webpackJsonp([0],{
 	  return 'rc-calendar-' + date.year() + '-' + date.month() + '-' + date.date();
 	}
 	
-	function noop() {}
-	
-	function handleDayClick(current) {
-	  this.props.onSelect(current);
-	}
-	
-	function handleCellMouseEnter(current) {
-	  this.props.onDayHover(current);
-	}
-	
 	var DateTBody = _react2.default.createClass({
 	  displayName: 'DateTBody',
 	
@@ -925,12 +913,13 @@ webpackJsonp([0],{
 	    prefixCls: _react.PropTypes.string,
 	    selectedValue: _react.PropTypes.oneOfType([_react.PropTypes.object, _react.PropTypes.arrayOf(_react.PropTypes.object)]),
 	    value: _react.PropTypes.object,
+	    hoverValue: _react.PropTypes.any,
 	    showWeekNumber: _react.PropTypes.bool
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
-	      onDayHover: noop
+	      hoverValue: []
 	    };
 	  },
 	  render: function render() {
@@ -942,6 +931,7 @@ webpackJsonp([0],{
 	    var showWeekNumber = props.showWeekNumber;
 	    var dateRender = props.dateRender;
 	    var disabledDate = props.disabledDate;
+	    var hoverValue = props.hoverValue;
 	
 	    var iIndex = void 0;
 	    var jIndex = void 0;
@@ -1016,16 +1006,17 @@ webpackJsonp([0],{
 	        var isAfterCurrentMonthYear = afterCurrentMonthYear(current, value);
 	
 	        if (selectedValue && Array.isArray(selectedValue)) {
+	          var rangeValue = hoverValue.length ? hoverValue : selectedValue;
 	          if (!isBeforeCurrentMonthYear && !isAfterCurrentMonthYear) {
-	            var startValue = selectedValue[0];
-	            var endValue = selectedValue[1];
+	            var startValue = rangeValue[0];
+	            var endValue = rangeValue[1];
 	            if (startValue) {
 	              if (isSameDay(current, startValue)) {
 	                selected = true;
 	              }
 	            }
 	            if (startValue && endValue) {
-	              if (isSameDay(current, endValue) && !selectedValue.hovering) {
+	              if (isSameDay(current, endValue)) {
 	                selected = true;
 	              } else if (current.isAfter(startValue, 'day') && current.isBefore(endValue, 'day')) {
 	                cls += ' ' + inRangeClass;
@@ -1086,8 +1077,8 @@ webpackJsonp([0],{
 	          'td',
 	          {
 	            key: passed,
-	            onClick: disabled ? noop : handleDayClick.bind(this, current),
-	            onMouseEnter: disabled ? noop : handleCellMouseEnter.bind(this, current),
+	            onClick: disabled ? undefined : props.onSelect.bind(null, current),
+	            onMouseEnter: disabled ? undefined : props.onDayHover && props.onDayHover.bind(null, current) || undefined,
 	            role: 'gridcell',
 	            title: (0, _util.getTitleString)(current), className: cls
 	          },
@@ -2031,6 +2022,7 @@ webpackJsonp([0],{
 	    showOk: _react.PropTypes.bool,
 	    onSelect: _react.PropTypes.func,
 	    value: _react.PropTypes.object,
+	    renderFooter: _react.PropTypes.func,
 	    defaultValue: _react.PropTypes.object
 	  },
 	
@@ -2046,9 +2038,11 @@ webpackJsonp([0],{
 	    var prefixCls = props.prefixCls;
 	    var showOk = props.showOk;
 	    var timePicker = props.timePicker;
+	    var renderFooter = props.renderFooter;
 	
 	    var footerEl = null;
-	    if (props.showToday || timePicker) {
+	    var extraFooter = renderFooter();
+	    if (props.showToday || timePicker || extraFooter) {
 	      var _cx;
 	
 	      var nowEl = void 0;
@@ -2076,6 +2070,7 @@ webpackJsonp([0],{
 	      footerEl = _react2.default.createElement(
 	        'div',
 	        { className: cls },
+	        extraFooter,
 	        footerBtn
 	      );
 	    }
@@ -2511,6 +2506,7 @@ webpackJsonp([0],{
 	          ref: 'dateInput',
 	          className: prefixCls + '-input  ' + invalidClass,
 	          value: str,
+	          disabled: props.disabled,
 	          placeholder: placeholder,
 	          onChange: this.onInputChange
 	        })
@@ -2579,8 +2575,7 @@ webpackJsonp([0],{
 	    disabled: _react.PropTypes.bool,
 	    transitionName: _react.PropTypes.string,
 	    onChange: _react.PropTypes.func,
-	    onOpen: _react.PropTypes.func,
-	    onClose: _react.PropTypes.func,
+	    onOpenChange: _react.PropTypes.func,
 	    children: _react.PropTypes.func,
 	    getCalendarContainer: _react.PropTypes.func,
 	    calendar: _react.PropTypes.element,
@@ -2602,8 +2597,7 @@ webpackJsonp([0],{
 	      placement: 'bottomLeft',
 	      defaultOpen: false,
 	      onChange: noop,
-	      onOpen: noop,
-	      onClose: noop
+	      onOpenChange: noop
 	    };
 	  },
 	  getInitialState: function getInitialState() {
@@ -2687,7 +2681,7 @@ webpackJsonp([0],{
 	    var extraProps = {
 	      ref: this.saveCalendarRef,
 	      defaultValue: defaultValue || calendarProps.defaultValue,
-	      defaultSelectedValue: value,
+	      selectedValue: value,
 	      onKeyDown: this.onCalendarKeyDown,
 	      onOk: (0, _createChainedFunction2.default)(calendarProps.onOk, this.onCalendarOk),
 	      onSelect: (0, _createChainedFunction2.default)(calendarProps.onSelect, this.onCalendarSelect),
@@ -2697,22 +2691,15 @@ webpackJsonp([0],{
 	    return _react2.default.cloneElement(props.calendar, extraProps);
 	  },
 	  setOpen: function setOpen(open, callback) {
-	    var _props = this.props;
-	    var onOpen = _props.onOpen;
-	    var onClose = _props.onClose;
+	    var onOpenChange = this.props.onOpenChange;
 	
 	    if (this.state.open !== open) {
-	      this.setState({
-	        open: open
-	      }, callback);
-	      var event = {
-	        open: open
-	      };
-	      if (open) {
-	        onOpen(event);
-	      } else {
-	        onClose(event);
+	      if (!('open' in this.props)) {
+	        this.setState({
+	          open: open
+	        }, callback);
 	      }
+	      onOpenChange(open);
 	    }
 	  },
 	  open: function open(callback) {
@@ -2887,6 +2874,9 @@ webpackJsonp([0],{
 	      prefixCls: 'rc-time-picker-panel',
 	      onChange: noop,
 	      onClear: noop,
+	      disabledHours: noop,
+	      disabledMinutes: noop,
+	      disabledSeconds: noop,
 	      defaultOpenValue: (0, _moment2["default"])()
 	    };
 	  },

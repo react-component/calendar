@@ -327,7 +327,8 @@
   border: 1px solid #ccc;
   line-height: 1.5;
 }
-.rc-calendar-date-panel {
+.rc-calendar-date-panel,
+.rc-calendar-panel {
   position: relative;
   outline: none;
 }

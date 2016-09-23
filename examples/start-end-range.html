@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>antd-month-calendar.js - example - rc-calendar@7.2.0</title>
+  <title>start-end-range.js - example - rc-calendar@7.2.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -264,12 +264,12 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
     </div>
     <div class="example" id="__react-content"></div>
 
-    <div class="highlight"><pre><code language="undefined">/* eslint react/no-multi-comp:0, no-console:0 */
+    <div class="highlight"><pre><code language="undefined">/* eslint react/no-multi-comp:0, no-console:0, react/prop-types:0 */
 
 import 'rc-calendar/assets/index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MonthCalendar from 'rc-calendar/lib/MonthCalendar';
+import RangeCalendar from 'rc-calendar/lib/RangeCalendar';
 import DatePicker from 'rc-calendar/lib/Picker';
 
 import zhCN from 'rc-calendar/lib/locale/zh_CN';
@@ -279,7 +279,9 @@ import moment from 'moment';
 import 'moment/locale/zh-cn';
 import 'moment/locale/en-gb';
 
-const format = 'YYYY-MM';
+const format = 'YYYY-MM-DD';
+
+const fullFormat = 'YYYY-MM-DD dddd';
 const cn = location.search.indexOf('cn') !== -1;
 
 const now = moment();
@@ -289,126 +291,125 @@ if (cn) {
   now.locale('en-gb').utcOffset(0);
 }
 
-const defaultCalendarValue = now.clone();
-defaultCalendarValue.add(-1, 'month');
+const Picker = React.createClass({
+  render() {
+    const props = this.props;
+    const { showValue } = props;
+    const calendar = (
+      &lt;RangeCalendar
+        type={this.props.type}
+        locale={cn ? zhCN : enUS}
+        defaultValue={now}
+        format={format}
+        onChange={props.onChange}
+        disabledDate={props.disabledDate}
+      /&gt;);
+    return (
+      &lt;DatePicker
+        open={this.props.open}
+        onOpenChange={this.props.onOpenChange}
+        calendar={calendar}
+        value={props.value}
+      &gt;
+        {
+          () =&gt; {
+            return (
+              &lt;span&gt;
+                &lt;input
+                  placeholder="请选择日期"
+                  style={{ width: 250 }}
+                  readOnly
+                  value={showValue &amp;&amp; showValue.format(fullFormat) || ''}
+                /&gt;
+                &lt;/span&gt;
+            );
+          }
+        }
+      &lt;/DatePicker&gt;);
+  },
+});
 
 const Test = React.createClass({
-  propTypes: {
-    defaultValue: React.PropTypes.object,
-  },
   getInitialState() {
     return {
-      showTime: true,
-      disabled: false,
-      value: this.props.defaultValue,
+      startValue: null,
+      endValue: null,
+      startOpen: false,
+      endOpen: false,
     };
   },
 
-  onChange(value) {
-    console.log(`DatePicker change: ${value &amp;&amp; value.format(format)}`);
+  onStartOpenChange(startOpen) {
     this.setState({
-      value,
+      startOpen,
     });
   },
 
-  onShowTimeChange(e) {
+  onEndOpenChange(endOpen) {
     this.setState({
-      showTime: e.target.checked,
+      endOpen,
     });
   },
 
-  toggleDisabled() {
+  onStartChange(value) {
     this.setState({
-      disabled: !this.state.disabled,
+      startValue: value[0],
+      startOpen: false,
+      endOpen: true,
     });
+  },
+
+  onEndChange(value) {
+    this.setState({
+      endValue: value[1],
+    });
+  },
+
+  disabledStartDate(endValue) {
+    if (!endValue) {
+      return false;
+    }
+    const startValue = this.state.startValue;
+    if (!startValue) {
+      return false;
+    }
+    return endValue.diff(startValue, 'days') &lt; 0;
   },
 
   render() {
     const state = this.state;
-    const calendar = (&lt;MonthCalendar
-      locale={cn ? zhCN : enUS}
-      style={{ zIndex: 1000 }}
-    /&gt;);
-    return (&lt;div style={{ width: 240, margin: 20 }}&gt;
-      &lt;div style={{ marginBottom: 10 }}&gt;
-        &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
-        &lt;label&gt;
-          &lt;input
-            checked={state.disabled}
-            onChange={this.toggleDisabled}
-            type="checkbox"
-          /&gt; disabled
-        &lt;/label&gt;
-      &lt;/div&gt;
-      &lt;div style={{
-        boxSizing: 'border-box',
-        position: 'relative',
-        display: 'block',
-        lineHeight: 1.5,
-        marginBottom: 22,
-      }}
-      &gt;
-        &lt;DatePicker
-          animation="slide-up"
-          disabled={state.disabled}
-          calendar={calendar}
-          value={state.value}
-          onChange={this.onChange}
-        &gt;
-          {
-            ({ value }) =&gt; {
-              return (&lt;input
-                style={{ width: 200 }}
-                readOnly
-                disabled={state.disabled}
-                value={value &amp;&amp; value.format(format)}
-                placeholder="请选择日期"
-              /&gt;);
-            }
-          }
+    return (
+      &lt;div style={{ width: 240, margin: 20 }}&gt;
+        &lt;p&gt;
+          开始时间：
+          &lt;Picker
+            onOpenChange={this.onStartOpenChange}
+            type="start"
+            showValue={state.startValue}
+            open={this.state.startOpen}
+            value={[state.startValue, state.endValue]}
+            onChange={this.onStartChange}
+          /&gt;
+        &lt;/p&gt;
 
-        &lt;/DatePicker&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;);
+        &lt;p&gt;
+          结束时间：
+          &lt;Picker
+            onOpenChange={this.onEndOpenChange}
+            open={this.state.endOpen}
+            type="end"
+            showValue={state.endValue}
+            disabledDate={this.disabledStartDate}
+            value={[state.startValue, state.endValue]}
+            onChange={this.onEndChange}
+          /&gt;
+        &lt;/p&gt;
+      &lt;/div&gt;);
   },
 });
 
-function onStandaloneSelect(value) {
-  console.log('month-calendar select', (value &amp;&amp; value.format(format)));
-}
 
-function onStandaloneChange(value) {
-  console.log('month-calendar change', (value &amp;&amp; value.format(format)));
-}
-
-function disabledDate(value) {
-  return value.year() &gt; now.year() ||
-    value.year() === now.year() &amp;&amp; value.month() &gt; now.month();
-}
-
-ReactDOM.render(
-  (&lt;div
-    style={{
-      zIndex: 1000,
-      position: 'relative',
-      width: 600,
-      margin: '0 auto',
-    }}
-  &gt;
-    &lt;MonthCalendar
-      locale={cn ? zhCN : enUS}
-      style={{ zIndex: 1000 }}
-      disabledDate={disabledDate}
-      onSelect={onStandaloneSelect}
-      onChange={onStandaloneChange}
-      defaultValue={defaultCalendarValue}
-    /&gt;
-
-    &lt;div style={{ marginTop: 200 }}&gt;
-      &lt;Test defaultValue={now}/&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;)
-  , document.getElementById('__react-content'));
+ReactDOM.render(&lt;Test /&gt;, document.getElementById('__react-content'));
 </code></pre></div>
   </div>
   <a href="http://github.com/react-component/calendar">
@@ -419,7 +420,7 @@ ReactDOM.render(
   </a>
   
   <script src="common.js?nowrap"></script>
-  <script src="antd-month-calendar.js?nowrap"></script>
+  <script src="start-end-range.js?nowrap"></script>
 </body>
 
 </html>

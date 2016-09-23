@@ -830,8 +830,7 @@ webpackJsonp([1],{
 	    disabled: _react.PropTypes.bool,
 	    transitionName: _react.PropTypes.string,
 	    onChange: _react.PropTypes.func,
-	    onOpen: _react.PropTypes.func,
-	    onClose: _react.PropTypes.func,
+	    onOpenChange: _react.PropTypes.func,
 	    children: _react.PropTypes.func,
 	    getCalendarContainer: _react.PropTypes.func,
 	    calendar: _react.PropTypes.element,
@@ -853,8 +852,7 @@ webpackJsonp([1],{
 	      placement: 'bottomLeft',
 	      defaultOpen: false,
 	      onChange: noop,
-	      onOpen: noop,
-	      onClose: noop
+	      onOpenChange: noop
 	    };
 	  },
 	  getInitialState: function getInitialState() {
@@ -938,7 +936,7 @@ webpackJsonp([1],{
 	    var extraProps = {
 	      ref: this.saveCalendarRef,
 	      defaultValue: defaultValue || calendarProps.defaultValue,
-	      defaultSelectedValue: value,
+	      selectedValue: value,
 	      onKeyDown: this.onCalendarKeyDown,
 	      onOk: (0, _createChainedFunction2.default)(calendarProps.onOk, this.onCalendarOk),
 	      onSelect: (0, _createChainedFunction2.default)(calendarProps.onSelect, this.onCalendarSelect),
@@ -948,22 +946,15 @@ webpackJsonp([1],{
 	    return _react2.default.cloneElement(props.calendar, extraProps);
 	  },
 	  setOpen: function setOpen(open, callback) {
-	    var _props = this.props;
-	    var onOpen = _props.onOpen;
-	    var onClose = _props.onClose;
+	    var onOpenChange = this.props.onOpenChange;
 	
 	    if (this.state.open !== open) {
-	      this.setState({
-	        open: open
-	      }, callback);
-	      var event = {
-	        open: open
-	      };
-	      if (open) {
-	        onOpen(event);
-	      } else {
-	        onClose(event);
+	      if (!('open' in this.props)) {
+	        this.setState({
+	          open: open
+	        }, callback);
 	      }
+	      onOpenChange(open);
 	    }
 	  },
 	  open: function open(callback) {
@@ -1236,11 +1227,6 @@ webpackJsonp([1],{
 	      margin: '0 auto'
 	    }
 	  },
-	  _react2.default.createElement(
-	    'h2',
-	    null,
-	    'zh-cn'
-	  ),
 	  _react2.default.createElement(_MonthCalendar2.default, {
 	    locale: cn ? _zh_CN2.default : _en_US2.default,
 	    style: { zIndex: 1000 },

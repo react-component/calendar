@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>antd-range-calendar.js - example - rc-calendar@7.1.0</title>
+  <title>antd-range-calendar.js - example - rc-calendar@7.2.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -258,7 +258,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
   <div class="container">
     <div class="header">
-      <h1>rc-calendar@7.1.0</h1>
+      <h1>rc-calendar@7.2.0</h1>
 
       <p>React Calendar</p>
     </div>
@@ -347,15 +347,16 @@ const Test = React.createClass({
         timePicker={timePickerElement}
       /&gt;
     );
-    return (&lt;Picker
-      value={state.value}
-      onChange={this.onChange}
-      animation="slide-up"
-      calendar={calendar}
-    &gt;
-      {
-        ({ value }) =&gt; {
-          return (&lt;span&gt;
+    return (
+      &lt;Picker
+        value={state.value}
+        onChange={this.onChange}
+        animation="slide-up"
+        calendar={calendar}
+      &gt;
+        {
+          ({ value }) =&gt; {
+            return (&lt;span&gt;
                 &lt;input
                   placeholder="please select"
                   style={{ width: 350 }}
@@ -365,15 +366,15 @@ const Test = React.createClass({
                   value={isValidRange(value) &amp;&amp; `${format(value[0])} - ${format(value[1])}` || ''}
                 /&gt;
                 &lt;/span&gt;);
+          }
         }
-      }
-    &lt;/Picker&gt;);
+      &lt;/Picker&gt;);
   },
 });
 
 ReactDOM.render(
   &lt;div&gt;
-    &lt;h2&gt;calendar (zh-cn)&lt;/h2&gt;
+    &lt;h2&gt;calendar&lt;/h2&gt;
     &lt;div style={{ margin: 10 }}&gt;
       &lt;RangeCalendar
         showWeekNumber
@@ -389,7 +390,7 @@ ReactDOM.render(
         timePicker={timePickerElement}
       /&gt;
     &lt;/div&gt;
-    &lt;br/&gt;
+    &lt;br /&gt;
 
     &lt;div style={{ margin: 20 }}&gt;
       &lt;Test /&gt;

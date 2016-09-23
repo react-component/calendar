@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>antd-month-calendar.js - example - rc-calendar@7.2.0</title>
+  <title>week.js - example - rc-calendar@7.2.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -269,9 +269,8 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 import 'rc-calendar/assets/index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MonthCalendar from 'rc-calendar/lib/MonthCalendar';
+import Calendar from 'rc-calendar';
 import DatePicker from 'rc-calendar/lib/Picker';
-
 import zhCN from 'rc-calendar/lib/locale/zh_CN';
 import enUS from 'rc-calendar/lib/locale/en_US';
 
@@ -279,7 +278,7 @@ import moment from 'moment';
 import 'moment/locale/zh-cn';
 import 'moment/locale/en-gb';
 
-const format = 'YYYY-MM';
+const format = 'YYYY-Wo';
 const cn = location.search.indexOf('cn') !== -1;
 
 const now = moment();
@@ -289,57 +288,107 @@ if (cn) {
   now.locale('en-gb').utcOffset(0);
 }
 
-const defaultCalendarValue = now.clone();
-defaultCalendarValue.add(-1, 'month');
+const style = `
+.week-calendar {
+  width: 386px;
+}
+.week-calendar .rc-calendar-tbody &gt; tr:hover
+.rc-calendar-date {
+  background: #ebfaff;
+}
+
+.week-calendar .rc-calendar-tbody &gt; tr:hover
+.rc-calendar-selected-day .rc-calendar-date {
+    background: #3fc7fa;
+}
+
+.week-calendar .week-calendar-sidebar {
+  position:absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  width:100px;
+  border-right: 1px solid #ccc;
+}
+.week-calendar .rc-calendar-panel {
+  margin-left: 100px;
+}
+`;
 
 const Test = React.createClass({
   propTypes: {
     defaultValue: React.PropTypes.object,
+    defaultCalendarValue: React.PropTypes.object,
   },
+
   getInitialState() {
     return {
-      showTime: true,
-      disabled: false,
-      value: this.props.defaultValue,
+      value: undefined,
+      open: false,
     };
   },
 
   onChange(value) {
-    console.log(`DatePicker change: ${value &amp;&amp; value.format(format)}`);
+    console.log('DatePicker change: ', (value &amp;&amp; value.format(format)));
     this.setState({
       value,
     });
   },
 
-  onShowTimeChange(e) {
+  onOpenChange(open) {
     this.setState({
-      showTime: e.target.checked,
+      open,
     });
   },
 
-  toggleDisabled() {
+  dateRender(current) {
+    const selectedValue = this.state.value;
+    if (selectedValue &amp;&amp; current.year() === selectedValue.year() &amp;&amp;
+      current.week() === selectedValue.week()) {
+      return (&lt;div className="rc-calendar-selected-day"&gt;
+        &lt;div className="rc-calendar-date"&gt;
+          {current.date()}
+        &lt;/div&gt;
+      &lt;/div&gt;);
+    }
+    return (
+      &lt;div className="rc-calendar-date"&gt;
+        {current.date()}
+      &lt;/div&gt;);
+  },
+
+  lastWeek() {
+    const value = this.state.value || now;
+    value.add(-1, 'weeks');
     this.setState({
-      disabled: !this.state.disabled,
+      value,
+      open: false,
     });
+  },
+
+  renderSidebar() {
+    return (
+      &lt;div className="week-calendar-sidebar" key="sidebar"&gt;
+        &lt;button onClick={this.lastWeek} style={{ margin: 20 }}&gt;上一周&lt;/button&gt;
+      &lt;/div&gt;);
   },
 
   render() {
     const state = this.state;
-    const calendar = (&lt;MonthCalendar
-      locale={cn ? zhCN : enUS}
-      style={{ zIndex: 1000 }}
-    /&gt;);
-    return (&lt;div style={{ width: 240, margin: 20 }}&gt;
-      &lt;div style={{ marginBottom: 10 }}&gt;
-        &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
-        &lt;label&gt;
-          &lt;input
-            checked={state.disabled}
-            onChange={this.toggleDisabled}
-            type="checkbox"
-          /&gt; disabled
-        &lt;/label&gt;
-      &lt;/div&gt;
+    const calendar = (
+      &lt;Calendar
+        className="week-calendar"
+        showWeekNumber
+        renderSidebar={this.renderSidebar}
+        dateRender={this.dateRender}
+        locale={cn ? zhCN : enUS}
+        format={format}
+        style={{ zIndex: 1000 }}
+        dateInputPlaceholder="please input"
+        defaultValue={now}
+        showDateInput
+      /&gt;);
+    return (&lt;div style={{ width: 400, margin: 20 }}&gt;
       &lt;div style={{
         boxSizing: 'border-box',
         position: 'relative',
@@ -349,66 +398,49 @@ const Test = React.createClass({
       }}
       &gt;
         &lt;DatePicker
+          onOpenChange={this.onOpenChange}
+          open={this.state.open}
           animation="slide-up"
-          disabled={state.disabled}
           calendar={calendar}
           value={state.value}
           onChange={this.onChange}
         &gt;
           {
             ({ value }) =&gt; {
-              return (&lt;input
-                style={{ width: 200 }}
-                readOnly
-                disabled={state.disabled}
-                value={value &amp;&amp; value.format(format)}
-                placeholder="请选择日期"
-              /&gt;);
+              return (
+                &lt;span tabIndex="0"&gt;
+                &lt;input
+                  placeholder="please select week"
+                  style={{ width: 250 }}
+                  disabled={state.disabled}
+                  readOnly
+                  tabIndex="-1"
+                  className="ant-calendar-picker-input ant-input"
+                  value={value &amp;&amp; value.format(format) || ''}
+                /&gt;
+                &lt;/span&gt;
+              );
             }
           }
-
         &lt;/DatePicker&gt;
       &lt;/div&gt;
     &lt;/div&gt;);
   },
 });
 
-function onStandaloneSelect(value) {
-  console.log('month-calendar select', (value &amp;&amp; value.format(format)));
-}
-
-function onStandaloneChange(value) {
-  console.log('month-calendar change', (value &amp;&amp; value.format(format)));
-}
-
-function disabledDate(value) {
-  return value.year() &gt; now.year() ||
-    value.year() === now.year() &amp;&amp; value.month() &gt; now.month();
-}
-
-ReactDOM.render(
-  (&lt;div
-    style={{
-      zIndex: 1000,
-      position: 'relative',
-      width: 600,
-      margin: '0 auto',
-    }}
-  &gt;
-    &lt;MonthCalendar
-      locale={cn ? zhCN : enUS}
-      style={{ zIndex: 1000 }}
-      disabledDate={disabledDate}
-      onSelect={onStandaloneSelect}
-      onChange={onStandaloneChange}
-      defaultValue={defaultCalendarValue}
-    /&gt;
-
-    &lt;div style={{ marginTop: 200 }}&gt;
-      &lt;Test defaultValue={now}/&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;)
-  , document.getElementById('__react-content'));
+ReactDOM.render((&lt;div
+  style={{
+    zIndex: 1000,
+    position: 'relative',
+    width: 900,
+    margin: '20px auto',
+  }}
+&gt;
+  &lt;style dangerouslySetInnerHTML={{ __html: style }} /&gt;
+  &lt;div&gt;
+    &lt;Test /&gt;
+  &lt;/div&gt;
+&lt;/div&gt;), document.getElementById('__react-content'));
 </code></pre></div>
   </div>
   <a href="http://github.com/react-component/calendar">
@@ -419,7 +451,7 @@ ReactDOM.render(
   </a>
   
   <script src="common.js?nowrap"></script>
-  <script src="antd-month-calendar.js?nowrap"></script>
+  <script src="week.js?nowrap"></script>
 </body>
 
 </html>

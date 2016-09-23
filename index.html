@@ -7,7 +7,7 @@
   <meta charset="utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" rel="stylesheet"/>
-  <title>rc-calendar@7.1.0 - React Calendar</title>
+  <title>rc-calendar@7.2.0 - React Calendar</title>
   <style>
     @font-face {
       font-family: octicons-anchor;
@@ -737,7 +737,7 @@
 
 <body>
 <div class="header">
-  <h1>rc-calendar@7.1.0</h1>
+  <h1>rc-calendar@7.2.0</h1>
 </div>
 <div class="examples">
   <h3>EXAMPLES</h3>
@@ -754,7 +754,11 @@
       
       <li><a href="examples/getCalendarContainer.html">getCalendarContainer</a></li>
       
+      <li><a href="examples/start-end-range.html">start-end-range</a></li>
+      
       <li><a href="examples/start-end.html">start-end</a></li>
+      
+      <li><a href="examples/week.html">week</a></li>
       
     </ul>
   </div>
@@ -1007,6 +1011,12 @@ npm start</code></pre></div><h2>Example<a id="user-content-example" name="exampl
           <td></td>
           <td>range date input&#39;s placeholders</td>
         </tr>
+        <tr>
+          <td>type</td>
+          <td>enum(&#39;both&#39;,&#39;start&#39;, &#39;end&#39;)</td>
+          <td>both</td>
+          <td>whether fix start or end selected value. check start-end-range example</td>
+        </tr>
     </tbody>
 </table>
 
@@ -1148,17 +1158,12 @@ npm start</code></pre></div><h2>Example<a id="user-content-example" name="exampl
           <td>called when select a different value</td>
         </tr>
         <tr>
-          <td>onOpen</td>
-          <td>Function</td>
+          <td>onOpenChange</td>
+          <td>(open:boolean) =&gt; void</td>
           <td></td>
-          <td>called when open picker</td>
+          <td>called when open/close picker</td>
         </tr>
         <tr>
-          <td>onClose</td>
-          <td>Function</td>
-          <td></td>
-          <td>called when close picker</td>
-        </tr><br>        <tr>
           <td>open</td>
           <td>Boolean</td>
           <td></td>
@@ -1166,8 +1171,8 @@ npm start</code></pre></div><h2>Example<a id="user-content-example" name="exampl
         </tr>
         <tr>
           <td>getCalendarContainer</td>
-          <td>Function():Element</td>
-          <td>function(){return document.body;}</td>
+          <td>() =&gt; HTMLElement</td>
+          <td>() =&gt; {return document.body;}</td>
           <td>dom node where calendar to be rendered into</td>
         </tr>
     </tbody>

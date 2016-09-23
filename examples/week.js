@@ -1,9 +1,9 @@
-webpackJsonp([4],{
+webpackJsonp([7],{
 
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(380);
+	module.exports = __webpack_require__(388);
 
 
 /***/ },
@@ -2523,7 +2523,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 380:
+/***/ 388:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2546,12 +2546,6 @@ webpackJsonp([4],{
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _rcDialog = __webpack_require__(381);
-	
-	var _rcDialog2 = _interopRequireDefault(_rcDialog);
-	
-	__webpack_require__(385);
-	
 	var _zh_CN = __webpack_require__(330);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
@@ -2570,7 +2564,9 @@ webpackJsonp([4],{
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var format = 'YYYY-MM-DD';
+	/* eslint react/no-multi-comp:0, no-console:0 */
+	
+	var format = 'YYYY-Wo';
 	var cn = location.search.indexOf('cn') !== -1;
 	
 	var now = (0, _moment2.default)();
@@ -2580,675 +2576,150 @@ webpackJsonp([4],{
 	  now.locale('en-gb').utcOffset(0);
 	}
 	
-	var defaultCalendarValue = now.clone();
-	defaultCalendarValue.add(-1, 'month');
+	var style = '\n.week-calendar {\n  width: 386px;\n}\n.week-calendar .rc-calendar-tbody > tr:hover\n.rc-calendar-date {\n  background: #ebfaff;\n}\n\n.week-calendar .rc-calendar-tbody > tr:hover\n.rc-calendar-selected-day .rc-calendar-date {\n    background: #3fc7fa;\n}\n\n.week-calendar .week-calendar-sidebar {\n  position:absolute;\n  top:0;\n  left:0;\n  bottom:0;\n  width:100px;\n  border-right: 1px solid #ccc;\n}\n.week-calendar .rc-calendar-panel {\n  margin-left: 100px;\n}\n';
 	
 	var Test = _react2.default.createClass({
 	  displayName: 'Test',
+	
+	  propTypes: {
+	    defaultValue: _react2.default.PropTypes.object,
+	    defaultCalendarValue: _react2.default.PropTypes.object
+	  },
+	
 	  getInitialState: function getInitialState() {
 	    return {
-	      open: false,
-	      destroy: false
+	      value: undefined,
+	      open: false
 	    };
 	  },
-	  getCalendarContainer: function getCalendarContainer() {
-	    return this.refs.d || document.getElementById('d');
+	  onChange: function onChange(value) {
+	    console.log('DatePicker change: ', value && value.format(format));
+	    this.setState({
+	      value: value
+	    });
 	  },
-	  setVisible: function setVisible(open) {
+	  onOpenChange: function onOpenChange(open) {
 	    this.setState({
 	      open: open
 	    });
 	  },
-	  open: function open() {
-	    this.setVisible(true);
-	  },
-	  close: function close() {
-	    this.setVisible(false);
-	  },
-	  destroy: function destroy() {
-	    this.setState({
-	      destroy: true
-	    });
-	  },
-	  render: function render() {
-	    if (this.state.destroy) {
-	      return null;
+	  dateRender: function dateRender(current) {
+	    var selectedValue = this.state.value;
+	    if (selectedValue && current.year() === selectedValue.year() && current.week() === selectedValue.week()) {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'rc-calendar-selected-day' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'rc-calendar-date' },
+	          current.date()
+	        )
+	      );
 	    }
 	    return _react2.default.createElement(
 	      'div',
-	      null,
-	      _react2.default.createElement(
-	        'button',
-	        { onClick: this.open },
-	        'open'
-	      ),
-	      ' ',
-	      _react2.default.createElement(
-	        'button',
-	        { onClick: this.destroy },
-	        'destroy'
-	      ),
-	      _react2.default.createElement(
-	        _rcDialog2.default,
-	        { visible: this.state.open, onClose: this.close },
-	        _react2.default.createElement('div', { id: 'd', ref: 'd' }),
-	        _react2.default.createElement(
-	          'div',
-	          { style: { marginTop: 20 } },
-	          _react2.default.createElement(
-	            _Picker2.default,
-	            {
-	              getCalendarContainer: this.getCalendarContainer,
-	              calendar: _react2.default.createElement(_rcCalendar2.default, { locale: cn ? _zh_CN2.default : _en_US2.default })
-	            },
-	            function (_ref) {
-	              var value = _ref.value;
-	
-	              return _react2.default.createElement(
-	                'span',
-	                null,
-	                _react2.default.createElement('input', {
-	                  style: { width: 250 },
-	                  readOnly: true,
-	                  value: value && value.format(format) || ''
-	                })
-	              );
-	            }
-	          )
-	        )
-	      )
-	    );
-	  }
-	});
-	
-	_reactDom2.default.render(_react2.default.createElement(Test, null), document.getElementById('__react-content'));
-
-/***/ },
-
-/***/ 381:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	module.exports = __webpack_require__(382);
-
-/***/ },
-
-/***/ 382:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends2 = __webpack_require__(180);
-	
-	var _extends3 = _interopRequireDefault(_extends2);
-	
-	var _react = __webpack_require__(3);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _Dialog = __webpack_require__(383);
-	
-	var _Dialog2 = _interopRequireDefault(_Dialog);
-	
-	var _getContainerRenderMixin = __webpack_require__(329);
-	
-	var _getContainerRenderMixin2 = _interopRequireDefault(_getContainerRenderMixin);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-	
-	var DialogWrap = _react2["default"].createClass({
-	  displayName: 'DialogWrap',
-	
-	  propTypes: {
-	    visible: _react.PropTypes.bool
-	  },
-	  mixins: [(0, _getContainerRenderMixin2["default"])({
-	    isVisible: function isVisible(instance) {
-	      return instance.props.visible;
-	    },
-	
-	    autoDestroy: false,
-	    getComponent: function getComponent(instance, extra) {
-	      return _react2["default"].createElement(_Dialog2["default"], (0, _extends3["default"])({}, instance.props, extra, {
-	        key: 'dialog'
-	      }));
-	    }
-	  })],
-	
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      visible: false
-	    };
-	  },
-	  shouldComponentUpdate: function shouldComponentUpdate(_ref) {
-	    var visible = _ref.visible;
-	
-	    return !!(this.props.visible || visible);
-	  },
-	  componentWillUnmount: function componentWillUnmount() {
-	    if (this.props.visible) {
-	      this.renderComponent({
-	        onAfterClose: this.removeContainer,
-	        onClose: function onClose() {},
-	
-	        visible: false
-	      });
-	    } else {
-	      this.removeContainer();
-	    }
-	  },
-	  getElement: function getElement(part) {
-	    return this._component.getElement(part);
-	  },
-	  render: function render() {
-	    return null;
-	  }
-	});
-	
-	exports["default"] = DialogWrap;
-	module.exports = exports['default'];
-
-/***/ },
-
-/***/ 383:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends2 = __webpack_require__(180);
-	
-	var _extends3 = _interopRequireDefault(_extends2);
-	
-	var _react = __webpack_require__(3);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactDom = __webpack_require__(37);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
-	var _KeyCode = __webpack_require__(218);
-	
-	var _KeyCode2 = _interopRequireDefault(_KeyCode);
-	
-	var _rcAnimate = __webpack_require__(317);
-	
-	var _rcAnimate2 = _interopRequireDefault(_rcAnimate);
-	
-	var _LazyRenderBox = __webpack_require__(384);
-	
-	var _LazyRenderBox2 = _interopRequireDefault(_LazyRenderBox);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-	
-	var uuid = 0;
-	var openCount = 0;
-	
-	// Measure scrollbar width for padding body during modal show/hide
-	var scrollbarMeasure = {
-	  position: 'absolute',
-	  top: '-9999px',
-	  width: '50px',
-	  height: '50px',
-	  overflow: 'scroll'
-	};
-	
-	/* eslint react/no-is-mounted:0 */
-	
-	function noop() {}
-	
-	function getScroll(w, top) {
-	  var ret = w['page' + (top ? 'Y' : 'X') + 'Offset'];
-	  var method = 'scroll' + (top ? 'Top' : 'Left');
-	  if (typeof ret !== 'number') {
-	    var d = w.document;
-	    ret = d.documentElement[method];
-	    if (typeof ret !== 'number') {
-	      ret = d.body[method];
-	    }
-	  }
-	  return ret;
-	}
-	
-	function setTransformOrigin(node, value) {
-	  var style = node.style;
-	  ['Webkit', 'Moz', 'Ms', 'ms'].forEach(function (prefix) {
-	    style[prefix + 'TransformOrigin'] = value;
-	  });
-	  style['transformOrigin'] = value;
-	}
-	
-	function offset(el) {
-	  var rect = el.getBoundingClientRect();
-	  var pos = {
-	    left: rect.left,
-	    top: rect.top
-	  };
-	  var doc = el.ownerDocument;
-	  var w = doc.defaultView || doc.parentWindow;
-	  pos.left += getScroll(w);
-	  pos.top += getScroll(w, 1);
-	  return pos;
-	}
-	
-	var Dialog = _react2["default"].createClass({
-	  displayName: 'Dialog',
-	
-	  propTypes: {
-	    className: _react.PropTypes.string,
-	    keyboard: _react.PropTypes.bool,
-	    style: _react.PropTypes.object,
-	    mask: _react.PropTypes.bool,
-	    children: _react.PropTypes.any,
-	    onAfterClose: _react.PropTypes.func,
-	    onClose: _react.PropTypes.func,
-	    closable: _react.PropTypes.bool,
-	    maskClosable: _react.PropTypes.bool,
-	    visible: _react.PropTypes.bool,
-	    mousePosition: _react.PropTypes.object,
-	    wrapStyle: _react.PropTypes.object,
-	    prefixCls: _react.PropTypes.string,
-	    wrapClassName: _react.PropTypes.string
-	  },
-	
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      onAfterClose: noop,
-	      className: '',
-	      mask: true,
-	      visible: false,
-	      keyboard: true,
-	      closable: true,
-	      maskClosable: true,
-	      prefixCls: 'rc-dialog',
-	      onClose: noop
-	    };
-	  },
-	  componentWillMount: function componentWillMount() {
-	    this.titleId = 'rcDialogTitle' + uuid++;
-	  },
-	  componentDidMount: function componentDidMount() {
-	    this.componentDidUpdate({});
-	  },
-	  componentDidUpdate: function componentDidUpdate(prevProps) {
-	    var props = this.props;
-	    var mousePosition = this.props.mousePosition;
-	    if (props.visible) {
-	      // first show
-	      if (!prevProps.visible) {
-	        this.lastOutSideFocusNode = document.activeElement;
-	        this.addScrollingEffect();
-	        this.refs.wrap.focus();
-	        var dialogNode = _reactDom2["default"].findDOMNode(this.refs.dialog);
-	        if (mousePosition) {
-	          var elOffset = offset(dialogNode);
-	          setTransformOrigin(dialogNode, mousePosition.x - elOffset.left + 'px ' + (mousePosition.y - elOffset.top) + 'px');
-	        } else {
-	          setTransformOrigin(dialogNode, '');
-	        }
-	      }
-	    } else if (prevProps.visible) {
-	      if (props.mask && this.lastOutSideFocusNode) {
-	        try {
-	          this.lastOutSideFocusNode.focus();
-	        } catch (e) {
-	          this.lastOutSideFocusNode = null;
-	        }
-	        this.lastOutSideFocusNode = null;
-	      }
-	    }
-	  },
-	  onAnimateLeave: function onAnimateLeave() {
-	    // need demo?
-	    // https://github.com/react-component/dialog/pull/28
-	    if (this.refs.wrap) {
-	      this.refs.wrap.style.display = 'none';
-	    }
-	    this.removeScrollingEffect();
-	    this.props.onAfterClose();
-	  },
-	  onMaskClick: function onMaskClick(e) {
-	    if (e.target === e.currentTarget && this.props.closable && this.props.maskClosable) {
-	      this.close(e);
-	    }
-	  },
-	  onKeyDown: function onKeyDown(e) {
-	    var props = this.props;
-	    if (props.closable && props.keyboard) {
-	      if (e.keyCode === _KeyCode2["default"].ESC) {
-	        this.close(e);
-	      }
-	    }
-	    // keep focus inside dialog
-	    if (props.visible) {
-	      if (e.keyCode === _KeyCode2["default"].TAB) {
-	        var activeElement = document.activeElement;
-	        var dialogRoot = this.refs.wrap;
-	        var sentinel = this.refs.sentinel;
-	        if (e.shiftKey) {
-	          if (activeElement === dialogRoot) {
-	            sentinel.focus();
-	          }
-	        } else if (activeElement === this.refs.sentinel) {
-	          dialogRoot.focus();
-	        }
-	      }
-	    }
-	  },
-	  getDialogElement: function getDialogElement() {
-	    var props = this.props;
-	    var closable = props.closable;
-	    var prefixCls = props.prefixCls;
-	    var dest = {};
-	    if (props.width !== undefined) {
-	      dest.width = props.width;
-	    }
-	    if (props.height !== undefined) {
-	      dest.height = props.height;
-	    }
-	
-	    var footer = void 0;
-	    if (props.footer) {
-	      footer = _react2["default"].createElement(
-	        'div',
-	        { className: prefixCls + '-footer', ref: 'footer' },
-	        props.footer
-	      );
-	    }
-	
-	    var header = void 0;
-	    if (props.title) {
-	      header = _react2["default"].createElement(
-	        'div',
-	        { className: prefixCls + '-header', ref: 'header' },
-	        _react2["default"].createElement(
-	          'div',
-	          { className: prefixCls + '-title', id: this.titleId },
-	          props.title
-	        )
-	      );
-	    }
-	
-	    var closer = void 0;
-	    if (closable) {
-	      closer = _react2["default"].createElement(
-	        'button',
-	        {
-	          onClick: this.close,
-	          'aria-label': 'Close',
-	          className: prefixCls + '-close'
-	        },
-	        _react2["default"].createElement('span', { className: prefixCls + '-close-x' })
-	      );
-	    }
-	
-	    var style = (0, _extends3["default"])({}, props.style, dest);
-	    var transitionName = this.getTransitionName();
-	    var dialogElement = _react2["default"].createElement(
-	      _LazyRenderBox2["default"],
-	      {
-	        role: 'document',
-	        ref: 'dialog',
-	        style: style,
-	        className: prefixCls + ' ' + (props.className || ''),
-	        visible: props.visible
-	      },
-	      _react2["default"].createElement(
-	        'div',
-	        { className: prefixCls + '-content' },
-	        closer,
-	        header,
-	        _react2["default"].createElement(
-	          'div',
-	          { className: prefixCls + '-body', style: props.bodyStyle, ref: 'body' },
-	          props.children
-	        ),
-	        footer
-	      ),
-	      _react2["default"].createElement(
-	        'div',
-	        { tabIndex: '0', ref: 'sentinel', style: { width: 0, height: 0, overflow: 'hidden' } },
-	        'sentinel'
-	      )
-	    );
-	    return _react2["default"].createElement(
-	      _rcAnimate2["default"],
-	      {
-	        key: 'dialog',
-	        showProp: 'visible',
-	        onLeave: this.onAnimateLeave,
-	        transitionName: transitionName,
-	        component: '',
-	        transitionAppear: true
-	      },
-	      dialogElement
+	      { className: 'rc-calendar-date' },
+	      current.date()
 	    );
 	  },
-	  getZIndexStyle: function getZIndexStyle() {
-	    var style = {};
-	    var props = this.props;
-	    if (props.zIndex !== undefined) {
-	      style.zIndex = props.zIndex;
-	    }
-	    return style;
+	  lastWeek: function lastWeek() {
+	    var value = this.state.value || now;
+	    value.add(-1, 'weeks');
+	    this.setState({
+	      value: value,
+	      open: false
+	    });
 	  },
-	  getWrapStyle: function getWrapStyle() {
-	    return (0, _extends3["default"])({}, this.getZIndexStyle(), this.props.wrapStyle);
-	  },
-	  getMaskElement: function getMaskElement() {
-	    var props = this.props;
-	    var maskElement = void 0;
-	    if (props.mask) {
-	      var maskTransition = this.getMaskTransitionName();
-	      maskElement = _react2["default"].createElement(_LazyRenderBox2["default"], {
-	        style: this.getZIndexStyle(),
-	        key: 'mask',
-	        className: props.prefixCls + '-mask',
-	        hiddenClassName: props.prefixCls + '-mask-hidden',
-	        visible: props.visible
-	      });
-	      if (maskTransition) {
-	        maskElement = _react2["default"].createElement(
-	          _rcAnimate2["default"],
-	          {
-	            key: 'mask',
-	            showProp: 'visible',
-	            transitionAppear: true,
-	            component: '',
-	            transitionName: maskTransition
-	          },
-	          maskElement
-	        );
-	      }
-	    }
-	    return maskElement;
-	  },
-	  getMaskTransitionName: function getMaskTransitionName() {
-	    var props = this.props;
-	    var transitionName = props.maskTransitionName;
-	    var animation = props.maskAnimation;
-	    if (!transitionName && animation) {
-	      transitionName = props.prefixCls + '-' + animation;
-	    }
-	    return transitionName;
-	  },
-	  getTransitionName: function getTransitionName() {
-	    var props = this.props;
-	    var transitionName = props.transitionName;
-	    var animation = props.animation;
-	    if (!transitionName && animation) {
-	      transitionName = props.prefixCls + '-' + animation;
-	    }
-	    return transitionName;
-	  },
-	  getElement: function getElement(part) {
-	    return this.refs[part];
-	  },
-	  setScrollbar: function setScrollbar() {
-	    if (this.bodyIsOverflowing && this.scrollbarWidth) {
-	      document.body.style.paddingRight = this.scrollbarWidth + 'px';
-	    }
-	  },
-	  addScrollingEffect: function addScrollingEffect() {
-	    openCount++;
-	    if (openCount !== 1) {
-	      return;
-	    }
-	    this.checkScrollbar();
-	    this.setScrollbar();
-	    document.body.style.overflow = 'hidden';
-	    // this.adjustDialog();
-	  },
-	  removeScrollingEffect: function removeScrollingEffect() {
-	    openCount--;
-	    if (openCount !== 0) {
-	      return;
-	    }
-	    document.body.style.overflow = '';
-	    this.resetScrollbar();
-	    // this.resetAdjustments();
-	  },
-	  close: function close(e) {
-	    this.props.onClose(e);
-	  },
-	  checkScrollbar: function checkScrollbar() {
-	    var fullWindowWidth = window.innerWidth;
-	    if (!fullWindowWidth) {
-	      // workaround for missing window.innerWidth in IE8
-	      var documentElementRect = document.documentElement.getBoundingClientRect();
-	      fullWindowWidth = documentElementRect.right - Math.abs(documentElementRect.left);
-	    }
-	    this.bodyIsOverflowing = document.body.clientWidth < fullWindowWidth;
-	    if (this.bodyIsOverflowing) {
-	      this.scrollbarWidth = this.measureScrollbar();
-	    }
-	  },
-	  resetScrollbar: function resetScrollbar() {
-	    document.body.style.paddingRight = '';
-	  },
-	  measureScrollbar: function measureScrollbar() {
-	    if (this.scrollbarWidth !== undefined) {
-	      return this.scrollbarWidth;
-	    }
-	    var scrollDiv = document.createElement('div');
-	    for (var scrollProp in scrollbarMeasure) {
-	      if (scrollbarMeasure.hasOwnProperty(scrollProp)) {
-	        scrollDiv.style[scrollProp] = scrollbarMeasure[scrollProp];
-	      }
-	    }
-	    document.body.appendChild(scrollDiv);
-	    var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-	    document.body.removeChild(scrollDiv);
-	    this.scrollbarWidth = scrollbarWidth;
-	    return scrollbarWidth;
-	  },
-	  adjustDialog: function adjustDialog() {
-	    if (this.refs.wrap && this.scrollbarWidth) {
-	      var modalIsOverflowing = this.refs.wrap.scrollHeight > document.documentElement.clientHeight;
-	      this.refs.wrap.style.paddingLeft = (!this.bodyIsOverflowing && modalIsOverflowing ? this.scrollbarWidth : '') + 'px';
-	      this.refs.wrap.style.paddingRight = (this.bodyIsOverflowing && !modalIsOverflowing ? this.scrollbarWidth : '') + 'px';
-	    }
-	  },
-	  resetAdjustments: function resetAdjustments() {
-	    if (this.refs.wrap) {
-	      this.refs.wrap.style.paddingLeft = this.refs.wrap.style.paddingLeft = '';
-	    }
-	  },
-	  render: function render() {
-	    var props = this.props;
-	    var prefixCls = props.prefixCls;
-	    var style = this.getWrapStyle();
-	    // clear hide display
-	    // and only set display after async anim, not here for hide
-	    if (props.visible) {
-	      style.display = null;
-	    }
-	    return _react2["default"].createElement(
+	  renderSidebar: function renderSidebar() {
+	    return _react2.default.createElement(
 	      'div',
-	      null,
-	      this.getMaskElement(),
-	      _react2["default"].createElement(
+	      { className: 'week-calendar-sidebar', key: 'sidebar' },
+	      _react2.default.createElement(
+	        'button',
+	        { onClick: this.lastWeek, style: { margin: 20 } },
+	        '上一周'
+	      )
+	    );
+	  },
+	  render: function render() {
+	    var state = this.state;
+	    var calendar = _react2.default.createElement(_rcCalendar2.default, {
+	      className: 'week-calendar',
+	      showWeekNumber: true,
+	      renderSidebar: this.renderSidebar,
+	      dateRender: this.dateRender,
+	      locale: cn ? _zh_CN2.default : _en_US2.default,
+	      format: format,
+	      style: { zIndex: 1000 },
+	      dateInputPlaceholder: 'please input',
+	      defaultValue: now,
+	      showDateInput: true
+	    });
+	    return _react2.default.createElement(
+	      'div',
+	      { style: { width: 400, margin: 20 } },
+	      _react2.default.createElement(
 	        'div',
-	        {
-	          tabIndex: '-1',
-	          onKeyDown: this.onKeyDown,
-	          className: prefixCls + '-wrap ' + (props.wrapClassName || ''),
-	          ref: 'wrap',
-	          onClick: this.onMaskClick,
-	          role: 'dialog',
-	          'aria-labelledby': props.title ? this.titleId : null,
-	          style: style
+	        { style: {
+	            boxSizing: 'border-box',
+	            position: 'relative',
+	            display: 'block',
+	            lineHeight: 1.5,
+	            marginBottom: 22
+	          }
 	        },
-	        this.getDialogElement()
+	        _react2.default.createElement(
+	          _Picker2.default,
+	          {
+	            onOpenChange: this.onOpenChange,
+	            open: this.state.open,
+	            animation: 'slide-up',
+	            calendar: calendar,
+	            value: state.value,
+	            onChange: this.onChange
+	          },
+	          function (_ref) {
+	            var value = _ref.value;
+	
+	            return _react2.default.createElement(
+	              'span',
+	              { tabIndex: '0' },
+	              _react2.default.createElement('input', {
+	                placeholder: 'please select week',
+	                style: { width: 250 },
+	                disabled: state.disabled,
+	                readOnly: true,
+	                tabIndex: '-1',
+	                className: 'ant-calendar-picker-input ant-input',
+	                value: value && value.format(format) || ''
+	              })
+	            );
+	          }
+	        )
 	      )
 	    );
 	  }
 	});
 	
-	exports["default"] = Dialog;
-	module.exports = exports['default'];
-
-/***/ },
-
-/***/ 384:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends2 = __webpack_require__(180);
-	
-	var _extends3 = _interopRequireDefault(_extends2);
-	
-	var _react = __webpack_require__(3);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-	
-	var LazyRenderBox = _react2["default"].createClass({
-	  displayName: 'LazyRenderBox',
-	
-	  propTypes: {
-	    className: _react.PropTypes.string,
-	    visible: _react.PropTypes.bool,
-	    hiddenClassName: _react.PropTypes.string
-	  },
-	  shouldComponentUpdate: function shouldComponentUpdate(nextProps) {
-	    return nextProps.hiddenClassName || nextProps.visible;
-	  },
-	  render: function render() {
-	    var className = this.props.className;
-	    if (this.props.hiddenClassName && !this.props.visible) {
-	      className += ' ' + this.props.hiddenClassName;
+	_reactDom2.default.render(_react2.default.createElement(
+	  'div',
+	  {
+	    style: {
+	      zIndex: 1000,
+	      position: 'relative',
+	      width: 900,
+	      margin: '20px auto'
 	    }
-	    var props = (0, _extends3["default"])({}, this.props);
-	    delete props.hiddenClassName;
-	    delete props.visible;
-	    props.className = className;
-	    return _react2["default"].createElement('div', props);
-	  }
-	});
-	
-	exports["default"] = LazyRenderBox;
-	module.exports = exports['default'];
+	  },
+	  _react2.default.createElement('style', { dangerouslySetInnerHTML: { __html: style } }),
+	  _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(Test, null)
+	  )
+	), document.getElementById('__react-content'));
 
-/***/ },
-
-/***/ 385:
-2
+/***/ }
 
 });
-//# sourceMappingURL=getCalendarContainer.js.map
+//# sourceMappingURL=week.js.map

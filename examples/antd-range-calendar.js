@@ -239,16 +239,6 @@ webpackJsonp([2],{
 	  return 'rc-calendar-' + date.year() + '-' + date.month() + '-' + date.date();
 	}
 	
-	function noop() {}
-	
-	function handleDayClick(current) {
-	  this.props.onSelect(current);
-	}
-	
-	function handleCellMouseEnter(current) {
-	  this.props.onDayHover(current);
-	}
-	
 	var DateTBody = _react2.default.createClass({
 	  displayName: 'DateTBody',
 	
@@ -259,12 +249,13 @@ webpackJsonp([2],{
 	    prefixCls: _react.PropTypes.string,
 	    selectedValue: _react.PropTypes.oneOfType([_react.PropTypes.object, _react.PropTypes.arrayOf(_react.PropTypes.object)]),
 	    value: _react.PropTypes.object,
+	    hoverValue: _react.PropTypes.any,
 	    showWeekNumber: _react.PropTypes.bool
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
-	      onDayHover: noop
+	      hoverValue: []
 	    };
 	  },
 	  render: function render() {
@@ -276,6 +267,7 @@ webpackJsonp([2],{
 	    var showWeekNumber = props.showWeekNumber;
 	    var dateRender = props.dateRender;
 	    var disabledDate = props.disabledDate;
+	    var hoverValue = props.hoverValue;
 	
 	    var iIndex = void 0;
 	    var jIndex = void 0;
@@ -350,16 +342,17 @@ webpackJsonp([2],{
 	        var isAfterCurrentMonthYear = afterCurrentMonthYear(current, value);
 	
 	        if (selectedValue && Array.isArray(selectedValue)) {
+	          var rangeValue = hoverValue.length ? hoverValue : selectedValue;
 	          if (!isBeforeCurrentMonthYear && !isAfterCurrentMonthYear) {
-	            var startValue = selectedValue[0];
-	            var endValue = selectedValue[1];
+	            var startValue = rangeValue[0];
+	            var endValue = rangeValue[1];
 	            if (startValue) {
 	              if (isSameDay(current, startValue)) {
 	                selected = true;
 	              }
 	            }
 	            if (startValue && endValue) {
-	              if (isSameDay(current, endValue) && !selectedValue.hovering) {
+	              if (isSameDay(current, endValue)) {
 	                selected = true;
 	              } else if (current.isAfter(startValue, 'day') && current.isBefore(endValue, 'day')) {
 	                cls += ' ' + inRangeClass;
@@ -420,8 +413,8 @@ webpackJsonp([2],{
 	          'td',
 	          {
 	            key: passed,
-	            onClick: disabled ? noop : handleDayClick.bind(this, current),
-	            onMouseEnter: disabled ? noop : handleCellMouseEnter.bind(this, current),
+	            onClick: disabled ? undefined : props.onSelect.bind(null, current),
+	            onMouseEnter: disabled ? undefined : props.onDayHover && props.onDayHover.bind(null, current) || undefined,
 	            role: 'gridcell',
 	            title: (0, _util.getTitleString)(current), className: cls
 	          },
@@ -1589,6 +1582,7 @@ webpackJsonp([2],{
 	          ref: 'dateInput',
 	          className: prefixCls + '-input  ' + invalidClass,
 	          value: str,
+	          disabled: props.disabled,
 	          placeholder: placeholder,
 	          onChange: this.onInputChange
 	        })
@@ -1657,8 +1651,7 @@ webpackJsonp([2],{
 	    disabled: _react.PropTypes.bool,
 	    transitionName: _react.PropTypes.string,
 	    onChange: _react.PropTypes.func,
-	    onOpen: _react.PropTypes.func,
-	    onClose: _react.PropTypes.func,
+	    onOpenChange: _react.PropTypes.func,
 	    children: _react.PropTypes.func,
 	    getCalendarContainer: _react.PropTypes.func,
 	    calendar: _react.PropTypes.element,
@@ -1680,8 +1673,7 @@ webpackJsonp([2],{
 	      placement: 'bottomLeft',
 	      defaultOpen: false,
 	      onChange: noop,
-	      onOpen: noop,
-	      onClose: noop
+	      onOpenChange: noop
 	    };
 	  },
 	  getInitialState: function getInitialState() {
@@ -1765,7 +1757,7 @@ webpackJsonp([2],{
 	    var extraProps = {
 	      ref: this.saveCalendarRef,
 	      defaultValue: defaultValue || calendarProps.defaultValue,
-	      defaultSelectedValue: value,
+	      selectedValue: value,
 	      onKeyDown: this.onCalendarKeyDown,
 	      onOk: (0, _createChainedFunction2.default)(calendarProps.onOk, this.onCalendarOk),
 	      onSelect: (0, _createChainedFunction2.default)(calendarProps.onSelect, this.onCalendarSelect),
@@ -1775,22 +1767,15 @@ webpackJsonp([2],{
 	    return _react2.default.cloneElement(props.calendar, extraProps);
 	  },
 	  setOpen: function setOpen(open, callback) {
-	    var _props = this.props;
-	    var onOpen = _props.onOpen;
-	    var onClose = _props.onClose;
+	    var onOpenChange = this.props.onOpenChange;
 	
 	    if (this.state.open !== open) {
-	      this.setState({
-	        open: open
-	      }, callback);
-	      var event = {
-	        open: open
-	      };
-	      if (open) {
-	        onOpen(event);
-	      } else {
-	        onClose(event);
+	      if (!('open' in this.props)) {
+	        this.setState({
+	          open: open
+	        }, callback);
 	      }
+	      onOpenChange(open);
 	    }
 	  },
 	  open: function open(callback) {
@@ -1965,6 +1950,9 @@ webpackJsonp([2],{
 	      prefixCls: 'rc-time-picker-panel',
 	      onChange: noop,
 	      onClear: noop,
+	      disabledHours: noop,
+	      disabledMinutes: noop,
+	      disabledSeconds: noop,
 	      defaultOpenValue: (0, _moment2["default"])()
 	    };
 	  },
@@ -2712,7 +2700,7 @@ webpackJsonp([2],{
 	  _react2.default.createElement(
 	    'h2',
 	    null,
-	    'calendar (zh-cn)'
+	    'calendar'
 	  ),
 	  _react2.default.createElement(
 	    'div',
@@ -2846,13 +2834,8 @@ webpackJsonp([2],{
 	  var selectedValue = originalValue.concat();
 	  var index = direction === 'left' ? 0 : 1;
 	  selectedValue[index] = value;
-	  if (selectedValue[0] && selectedValue[1]) {
-	    if (this.compare(selectedValue[0], selectedValue[1]) > 0) {
-	      selectedValue[1 - index] = this.state.showTimePicker ? selectedValue[index] : undefined;
-	    }
-	  }
-	  if (this.state.showTimePicker && selectedValue[0] && !selectedValue[1]) {
-	    selectedValue[1] = selectedValue[0];
+	  if (this.compare(selectedValue[0], selectedValue[1]) > 0) {
+	    selectedValue[1 - index] = this.state.showTimePicker ? selectedValue[index] : undefined;
 	  }
 	  this.fireSelectValueChange(selectedValue);
 	}
@@ -2876,13 +2859,15 @@ webpackJsonp([2],{
 	    onSelect: _react.PropTypes.func,
 	    onValueChange: _react.PropTypes.func,
 	    format: _react.PropTypes.oneOfType([_react.PropTypes.object, _react.PropTypes.string]),
-	    onClear: _react.PropTypes.func
+	    onClear: _react.PropTypes.func,
+	    type: _react.PropTypes.any
 	  },
 	
 	  mixins: [_CommonMixin2.default],
 	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
+	      type: 'both',
 	      defaultSelectedValue: [],
 	      onValueChange: noop
 	    };
@@ -2893,6 +2878,7 @@ webpackJsonp([2],{
 	    var value = normalizeAnchor(props, 1);
 	    return {
 	      selectedValue: selectedValue,
+	      hoverValue: [],
 	      value: value,
 	      showTimePicker: false
 	    };
@@ -2912,38 +2898,88 @@ webpackJsonp([2],{
 	      this.setState(newState);
 	    }
 	  },
-	  onSelect: function onSelect(value) {
-	    var originalValue = this.state.selectedValue;
-	    var selectedValue = originalValue.concat();
-	    var changed = false;
-	    if (!selectedValue.length || selectedValue.length === 2 && !originalValue.hovering) {
-	      selectedValue.length = 1;
-	      selectedValue[0] = value;
-	      changed = true;
-	    } else if (this.compare(selectedValue[0], value) <= 0) {
-	      selectedValue[1] = value;
-	      changed = true;
-	    } else if (this.compare(selectedValue[0], value) > 0) {
-	      selectedValue.length = 1;
-	      selectedValue[0] = value;
-	      changed = true;
-	    }
-	    if (changed) {
-	      this.fireSelectValueChange(selectedValue);
+	  onDatePanelEnter: function onDatePanelEnter() {
+	    if (this.hasSelectedValue()) {
+	      this.setState({
+	        hoverValue: this.state.selectedValue.concat()
+	      });
 	    }
 	  },
-	  onDayHover: function onDayHover(hoverValue) {
+	  onDatePanelLeave: function onDatePanelLeave() {
+	    if (this.hasSelectedValue()) {
+	      this.setState({
+	        hoverValue: []
+	      });
+	    }
+	  },
+	  onSelect: function onSelect(value) {
+	    var _state = this.state;
+	    var hoverValue = _state.hoverValue;
+	    var selectedValue = _state.selectedValue;
+	
+	    var nextSelectedValue = void 0;
+	    var type = this.props.type;
+	
+	    var changed = false;
+	    if (!hoverValue[0] && !hoverValue[1] && type === 'both') {
+	      nextSelectedValue = [value];
+	      changed = true;
+	    } else if (type === 'start') {
+	      var endValue = selectedValue[1];
+	      if (!endValue || this.compare(endValue, value) < 0) {
+	        nextSelectedValue = [value];
+	      } else {
+	        nextSelectedValue = [value, endValue];
+	      }
+	      changed = true;
+	    } else {
+	      var startValue = void 0;
+	      startValue = type === 'end' ? selectedValue[0] : hoverValue[0];
+	      if (startValue && this.compare(startValue, value) <= 0) {
+	        nextSelectedValue = [startValue, value];
+	        changed = true;
+	      } else {
+	        nextSelectedValue = [value];
+	        changed = true;
+	      }
+	    }
+	
+	    if (changed) {
+	      this.fireSelectValueChange(nextSelectedValue);
+	    }
+	  },
+	  onDayHover: function onDayHover(value) {
+	    var hoverValue = this.state.hoverValue;
 	    var selectedValue = this.state.selectedValue;
-	    if (!selectedValue.length || selectedValue.length === 2 && !selectedValue.hovering) {
-	      return;
+	    var type = this.props.type;
+	
+	    if (type === 'start' && selectedValue[1]) {
+	      if (this.compare(value, selectedValue[1]) < 0) {
+	        hoverValue = [value, selectedValue[1]];
+	      } else {
+	        hoverValue = [value];
+	      }
+	      this.setState({
+	        hoverValue: hoverValue
+	      });
+	    } else if (type === 'end' && selectedValue[0]) {
+	      if (this.compare(value, selectedValue[0]) > 0) {
+	        hoverValue = [selectedValue[0], value];
+	      } else {
+	        hoverValue = [];
+	      }
+	      this.setState({
+	        hoverValue: hoverValue
+	      });
+	    } else {
+	      if (!hoverValue[0] || this.compare(value, hoverValue[0]) < 0) {
+	        return;
+	      }
+	      hoverValue[1] = value;
+	      this.setState({
+	        hoverValue: hoverValue
+	      });
 	    }
-	    if (this.compare(hoverValue, selectedValue[0]) < 0) {
-	      return;
-	    }
-	    selectedValue = selectedValue.concat();
-	    selectedValue[1] = hoverValue;
-	    selectedValue.hovering = 1;
-	    this.fireSelectValueChange(selectedValue);
 	  },
 	  onToday: function onToday() {
 	    this.setState({
@@ -2989,9 +3025,9 @@ webpackJsonp([2],{
 	
 	  // get disabled hours for second picker
 	  getEndDisableTime: function getEndDisableTime() {
-	    var _state = this.state;
-	    var selectedValue = _state.selectedValue;
-	    var value = _state.value;
+	    var _state2 = this.state;
+	    var selectedValue = _state2.selectedValue;
+	    var value = _state2.value;
 	
 	    var startValue = selectedValue && selectedValue[0] || value.clone();
 	    // if startTime and endTime is same day..
@@ -3029,6 +3065,11 @@ webpackJsonp([2],{
 	    }
 	    return null;
 	  },
+	  hasSelectedValue: function hasSelectedValue() {
+	    var selectedValue = this.state.selectedValue;
+	
+	    return !!selectedValue[1] && !!selectedValue[0];
+	  },
 	  compare: function compare(v1, v2) {
 	    if (this.props.timePicker) {
 	      return v1.diff(v2);
@@ -3041,8 +3082,16 @@ webpackJsonp([2],{
 	        selectedValue: selectedValue
 	      });
 	    }
+	    if (selectedValue[0] && !selectedValue[1]) {
+	      this.setState({
+	        hoverValue: selectedValue.concat()
+	      });
+	    }
 	    this.props.onChange(selectedValue);
-	    if (direct || selectedValue[0] && selectedValue[1] && !selectedValue.hovering) {
+	    if (direct || selectedValue[0] && selectedValue[1]) {
+	      this.setState({
+	        hoverValue: []
+	      });
 	      this.props.onSelect(selectedValue);
 	    }
 	  },
@@ -3071,13 +3120,16 @@ webpackJsonp([2],{
 	    var showOk = props.showOk;
 	    var locale = props.locale;
 	    var showClear = props.showClear;
+	    var type = props.type;
+	    var hoverValue = state.hoverValue;
+	    var selectedValue = state.selectedValue;
 	
 	    var className = (_className = {}, (0, _defineProperty3.default)(_className, props.className, !!props.className), (0, _defineProperty3.default)(_className, prefixCls, 1), (0, _defineProperty3.default)(_className, prefixCls + '-hidden', !props.visible), (0, _defineProperty3.default)(_className, prefixCls + '-range', 1), (0, _defineProperty3.default)(_className, prefixCls + '-week-number', props.showWeekNumber), _className);
 	    var classes = (0, _classnames3.default)(className);
 	    var newProps = {
 	      selectedValue: state.selectedValue,
 	      onSelect: this.onSelect,
-	      onDayHover: this.onDayHover
+	      onDayHover: type === 'start' && selectedValue[1] || type === 'end' && selectedValue[0] || !!hoverValue.length ? this.onDayHover : undefined
 	    };
 	
 	    var placeholder1 = void 0;
@@ -3109,65 +3161,77 @@ webpackJsonp([2],{
 	        style: props.style,
 	        tabIndex: '0'
 	      },
-	      showClear ? _react2.default.createElement('a', {
-	        className: prefixCls + '-clear-btn',
-	        role: 'button',
-	        title: locale.clear,
-	        onClick: this.clear
-	      }) : null,
+	      props.renderSidebar(),
 	      _react2.default.createElement(
 	        'div',
-	        { className: prefixCls + '-date-panel' },
-	        _react2.default.createElement(_CalendarPart2.default, (0, _extends3.default)({}, props, newProps, {
-	          direction: 'left',
-	          format: this.getFormat(),
-	          value: startValue,
-	          placeholder: placeholder1,
-	          onInputSelect: onInputSelect.bind(this, 'left'),
-	          onValueChange: onValueChange.bind(this, 'left'),
-	          timePicker: timePicker,
-	          showTimePicker: showTimePicker
-	        })),
-	        _react2.default.createElement(
-	          'span',
-	          { className: prefixCls + '-range-middle' },
-	          '~'
-	        ),
-	        _react2.default.createElement(_CalendarPart2.default, (0, _extends3.default)({}, props, newProps, {
-	          direction: 'right',
-	          format: this.getFormat(),
-	          timePickerDisabledTime: this.getEndDisableTime(),
-	          placeholder: placeholder2,
-	          value: endValue,
-	          onInputSelect: onInputSelect.bind(this, 'right'),
-	          onValueChange: onValueChange.bind(this, 'right'),
-	          timePicker: timePicker,
-	          showTimePicker: showTimePicker
-	        }))
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: cls },
+	        { className: prefixCls + '-panel' },
+	        showClear ? _react2.default.createElement('a', {
+	          className: prefixCls + '-clear-btn',
+	          role: 'button',
+	          title: locale.clear,
+	          onClick: this.clear
+	        }) : null,
 	        _react2.default.createElement(
 	          'div',
-	          { className: prefixCls + '-footer-btn' },
-	          _react2.default.createElement(_TodayButton2.default, (0, _extends3.default)({}, props, {
-	            disabled: isTodayInView,
-	            value: state.value,
-	            onToday: this.onToday,
-	            text: locale.backToToday
+	          {
+	            className: prefixCls + '-date-panel',
+	            onMouseLeave: type !== 'both' ? this.onDatePanelLeave : undefined,
+	            onMouseEnter: type !== 'both' ? this.onDatePanelEnter : undefined
+	          },
+	          _react2.default.createElement(_CalendarPart2.default, (0, _extends3.default)({}, props, newProps, {
+	            hoverValue: hoverValue,
+	            direction: 'left',
+	            format: this.getFormat(),
+	            value: startValue,
+	            placeholder: placeholder1,
+	            onInputSelect: onInputSelect.bind(this, 'left'),
+	            onValueChange: onValueChange.bind(this, 'left'),
+	            timePicker: timePicker,
+	            showTimePicker: showTimePicker
 	          })),
-	          !!props.timePicker ? _react2.default.createElement(_TimePickerButton2.default, (0, _extends3.default)({}, props, {
-	            showTimePicker: showTimePicker,
-	            onOpenTimePicker: this.onOpenTimePicker,
-	            onCloseTimePicker: this.onCloseTimePicker,
-	            timePickerDisabled: state.selectedValue.length === 1 || state.selectedValue.hovering
-	          })) : null,
-	          showOkButton ? _react2.default.createElement(_OkButton2.default, (0, _extends3.default)({}, props, {
-	            value: state.value,
-	            onOk: this.onOk,
-	            okDisabled: state.selectedValue.length !== 2 || state.selectedValue.hovering
-	          })) : null
+	          _react2.default.createElement(
+	            'span',
+	            { className: prefixCls + '-range-middle' },
+	            '~'
+	          ),
+	          _react2.default.createElement(_CalendarPart2.default, (0, _extends3.default)({}, props, newProps, {
+	            hoverValue: hoverValue,
+	            direction: 'right',
+	            format: this.getFormat(),
+	            timePickerDisabledTime: this.getEndDisableTime(),
+	            placeholder: placeholder2,
+	            value: endValue,
+	            onInputSelect: onInputSelect.bind(this, 'right'),
+	            onValueChange: onValueChange.bind(this, 'right'),
+	            timePicker: timePicker,
+	            showTimePicker: showTimePicker
+	          }))
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: cls },
+	          props.renderFooter(),
+	          _react2.default.createElement(
+	            'div',
+	            { className: prefixCls + '-footer-btn' },
+	            _react2.default.createElement(_TodayButton2.default, (0, _extends3.default)({}, props, {
+	              disabled: isTodayInView,
+	              value: state.value,
+	              onToday: this.onToday,
+	              text: locale.backToToday
+	            })),
+	            !!props.timePicker ? _react2.default.createElement(_TimePickerButton2.default, (0, _extends3.default)({}, props, {
+	              showTimePicker: showTimePicker,
+	              onOpenTimePicker: this.onOpenTimePicker,
+	              onCloseTimePicker: this.onCloseTimePicker,
+	              timePickerDisabled: !this.hasSelectedValue() || hoverValue.length
+	            })) : null,
+	            showOkButton ? _react2.default.createElement(_OkButton2.default, (0, _extends3.default)({}, props, {
+	              value: state.value,
+	              onOk: this.onOk,
+	              okDisabled: !this.hasSelectedValue() || hoverValue.length
+	            })) : null
+	          )
 	        )
 	      )
 	    );
@@ -3372,8 +3436,6 @@ webpackJsonp([2],{
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function noop() {}
-	
 	var CalendarPart = _react2.default.createClass({
 	  displayName: 'CalendarPart',
 	
@@ -3383,6 +3445,7 @@ webpackJsonp([2],{
 	    prefixCls: _react.PropTypes.any,
 	    locale: _react.PropTypes.any,
 	    selectedValue: _react.PropTypes.any,
+	    hoverValue: _react.PropTypes.any,
 	    showTimePicker: _react.PropTypes.bool,
 	    format: _react.PropTypes.any,
 	    placeholder: _react.PropTypes.any,
@@ -3405,6 +3468,7 @@ webpackJsonp([2],{
 	    var disabledTime = props.disabledTime;
 	    var timePickerDisabledTime = props.timePickerDisabledTime;
 	    var showTimePicker = props.showTimePicker;
+	    var hoverValue = props.hoverValue;
 	
 	    var disabledTimeConfig = disabledTime && timePicker ? (0, _index.getTimeConfig)(selectedValue, disabledTime) : null;
 	    var rangeClassName = prefixCls + '-range';
@@ -3418,19 +3482,18 @@ webpackJsonp([2],{
 	
 	    var timePickerEle = timePicker && _react2.default.cloneElement(timePicker, (0, _extends3.default)({
 	      showHour: true,
-	      showSecond: true,
+	      showSecond: true
+	    }, disabledTimeConfig, timePickerDisabledTime, timePicker.props, {
 	      onChange: props.onInputSelect,
 	      defaultOpenValue: value,
-	      value: selectedValue[index],
-	      disabledHours: noop,
-	      disabledMinutes: noop,
-	      disabledSeconds: noop
-	    }, disabledTimeConfig, timePickerDisabledTime));
+	      value: selectedValue[index]
+	    }));
 	
 	    return _react2.default.createElement(
 	      'div',
 	      { className: rangeClassName + '-part ' + rangeClassName + '-' + direction },
 	      _react2.default.createElement(_DateInput2.default, {
+	        disabled: !selectedValue[0] || !selectedValue[1],
 	        format: format,
 	        locale: locale,
 	        prefixCls: prefixCls,
@@ -3464,6 +3527,7 @@ webpackJsonp([2],{
 	          'div',
 	          { className: prefixCls + '-body' },
 	          _react2.default.createElement(_DateTable2.default, (0, _extends3.default)({}, newProps, {
+	            hoverValue: hoverValue,
 	            selectedValue: selectedValue,
 	            dateRender: props.dateRender,
 	            onSelect: props.onSelect,

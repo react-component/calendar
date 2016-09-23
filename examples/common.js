@@ -51,7 +51,7 @@
 /******/ 	// "0" means "already loaded"
 /******/ 	// Array means "loading", array contains callbacks
 /******/ 	var installedChunks = {
-/******/ 		6:0
+/******/ 		8:0
 /******/ 	};
 /******/
 /******/ 	// The require function
@@ -97,7 +97,7 @@
 /******/ 			script.charset = 'utf-8';
 /******/ 			script.async = true;
 /******/
-/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"antd-calendar","1":"antd-month-calendar","2":"antd-range-calendar","3":"full-calendar","4":"getCalendarContainer","5":"start-end"}[chunkId]||chunkId) + ".js";
+/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"antd-calendar","1":"antd-month-calendar","2":"antd-range-calendar","3":"full-calendar","4":"getCalendarContainer","5":"start-end","6":"start-end-range","7":"week"}[chunkId]||chunkId) + ".js";
 /******/ 			head.appendChild(script);
 /******/ 		}
 /******/ 	};
@@ -28229,7 +28229,13 @@
 	      className: '',
 	      onSelect: noop,
 	      onChange: noop,
-	      onClear: noop
+	      onClear: noop,
+	      renderFooter: function renderFooter() {
+	        return null;
+	      },
+	      renderSidebar: function renderSidebar() {
+	        return null;
+	      }
 	    };
 	  },
 	  shouldComponentUpdate: function shouldComponentUpdate(nextProps) {

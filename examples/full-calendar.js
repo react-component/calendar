@@ -239,16 +239,6 @@ webpackJsonp([3],{
 	  return 'rc-calendar-' + date.year() + '-' + date.month() + '-' + date.date();
 	}
 	
-	function noop() {}
-	
-	function handleDayClick(current) {
-	  this.props.onSelect(current);
-	}
-	
-	function handleCellMouseEnter(current) {
-	  this.props.onDayHover(current);
-	}
-	
 	var DateTBody = _react2.default.createClass({
 	  displayName: 'DateTBody',
 	
@@ -259,12 +249,13 @@ webpackJsonp([3],{
 	    prefixCls: _react.PropTypes.string,
 	    selectedValue: _react.PropTypes.oneOfType([_react.PropTypes.object, _react.PropTypes.arrayOf(_react.PropTypes.object)]),
 	    value: _react.PropTypes.object,
+	    hoverValue: _react.PropTypes.any,
 	    showWeekNumber: _react.PropTypes.bool
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
-	      onDayHover: noop
+	      hoverValue: []
 	    };
 	  },
 	  render: function render() {
@@ -276,6 +267,7 @@ webpackJsonp([3],{
 	    var showWeekNumber = props.showWeekNumber;
 	    var dateRender = props.dateRender;
 	    var disabledDate = props.disabledDate;
+	    var hoverValue = props.hoverValue;
 	
 	    var iIndex = void 0;
 	    var jIndex = void 0;
@@ -350,16 +342,17 @@ webpackJsonp([3],{
 	        var isAfterCurrentMonthYear = afterCurrentMonthYear(current, value);
 	
 	        if (selectedValue && Array.isArray(selectedValue)) {
+	          var rangeValue = hoverValue.length ? hoverValue : selectedValue;
 	          if (!isBeforeCurrentMonthYear && !isAfterCurrentMonthYear) {
-	            var startValue = selectedValue[0];
-	            var endValue = selectedValue[1];
+	            var startValue = rangeValue[0];
+	            var endValue = rangeValue[1];
 	            if (startValue) {
 	              if (isSameDay(current, startValue)) {
 	                selected = true;
 	              }
 	            }
 	            if (startValue && endValue) {
-	              if (isSameDay(current, endValue) && !selectedValue.hovering) {
+	              if (isSameDay(current, endValue)) {
 	                selected = true;
 	              } else if (current.isAfter(startValue, 'day') && current.isBefore(endValue, 'day')) {
 	                cls += ' ' + inRangeClass;
@@ -420,8 +413,8 @@ webpackJsonp([3],{
 	          'td',
 	          {
 	            key: passed,
-	            onClick: disabled ? noop : handleDayClick.bind(this, current),
-	            onMouseEnter: disabled ? noop : handleCellMouseEnter.bind(this, current),
+	            onClick: disabled ? undefined : props.onSelect.bind(null, current),
+	            onMouseEnter: disabled ? undefined : props.onDayHover && props.onDayHover.bind(null, current) || undefined,
 	            role: 'gridcell',
 	            title: (0, _util.getTitleString)(current), className: cls
 	          },
