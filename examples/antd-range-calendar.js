@@ -81,15 +81,16 @@ const Test = React.createClass({
         timePicker={timePickerElement}
       />
     );
-    return (<Picker
-      value={state.value}
-      onChange={this.onChange}
-      animation="slide-up"
-      calendar={calendar}
-    >
-      {
-        ({ value }) => {
-          return (<span>
+    return (
+      <Picker
+        value={state.value}
+        onChange={this.onChange}
+        animation="slide-up"
+        calendar={calendar}
+      >
+        {
+          ({ value }) => {
+            return (<span>
                 <input
                   placeholder="please select"
                   style={{ width: 350 }}
@@ -99,9 +100,9 @@ const Test = React.createClass({
                   value={isValidRange(value) && `${format(value[0])} - ${format(value[1])}` || ''}
                 />
                 </span>);
+          }
         }
-      }
-    </Picker>);
+      </Picker>);
   },
 });
 
@@ -123,7 +124,7 @@ ReactDOM.render(
         timePicker={timePickerElement}
       />
     </div>
-    <br/>
+    <br />
 
     <div style={{ margin: 20 }}>
       <Test />

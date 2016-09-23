@@ -3,7 +3,10 @@
 
 ## 7.2.0 / 2016-09-23
 
-- support week calendar demo
+- add week calendar example
+- support renderSidebar, renderFooter prop
+- add type prop to support start-end-range example
+- picker remove onClose, change onOpen to onOpenChange
 
 ## 7.1.0 / 2016-09-10
 

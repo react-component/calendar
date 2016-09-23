@@ -294,6 +294,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td></td>
           <td>range date input's placeholders</td>
         </tr>
+        <tr>
+          <td>type</td>
+          <td>enum('both','start', 'end')</td>
+          <td>both</td>
+          <td>whether fix start or end selected value. check start-end-range example</td>
+        </tr>
     </tbody>
 </table>
 
@@ -439,17 +445,11 @@ http://react-component.github.io/calendar/examples/index.html
           <td>called when select a different value</td>
         </tr>
         <tr>
-          <td>onOpen</td>
-          <td>Function</td>
+          <td>onOpenChange</td>
+          <td>(open:boolean) => void</td>
           <td></td>
-          <td>called when open picker</td>
+          <td>called when open/close picker</td>
         </tr>
-        <tr>
-          <td>onClose</td>
-          <td>Function</td>
-          <td></td>
-          <td>called when close picker</td>
-        </tr>                
         <tr>
           <td>open</td>
           <td>Boolean</td>
@@ -458,8 +458,8 @@ http://react-component.github.io/calendar/examples/index.html
         </tr>
         <tr>
           <td>getCalendarContainer</td>
-          <td>Function():Element</td>
-          <td>function(){return document.body;}</td>
+          <td>() => HTMLElement</td>
+          <td>() => {return document.body;}</td>
           <td>dom node where calendar to be rendered into</td>
         </tr>
     </tbody>

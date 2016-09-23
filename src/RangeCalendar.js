@@ -53,13 +53,8 @@ function onInputSelect(direction, value) {
   const selectedValue = originalValue.concat();
   const index = direction === 'left' ? 0 : 1;
   selectedValue[index] = value;
-  if (selectedValue[0] && selectedValue[1]) {
-    if (this.compare(selectedValue[0], selectedValue[1]) > 0) {
-      selectedValue[1 - index] = this.state.showTimePicker ? selectedValue[index] : undefined;
-    }
-  }
-  if (this.state.showTimePicker && selectedValue[0] && !selectedValue[1]) {
-    selectedValue[1] = selectedValue[0];
+  if (this.compare(selectedValue[0], selectedValue[1]) > 0) {
+    selectedValue[1 - index] = this.state.showTimePicker ? selectedValue[index] : undefined;
   }
   this.fireSelectValueChange(selectedValue);
 }
@@ -82,12 +77,14 @@ const RangeCalendar = React.createClass({
     onValueChange: PropTypes.func,
     format: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     onClear: PropTypes.func,
+    type: PropTypes.any,
   },
 
   mixins: [CommonMixin],
 
   getDefaultProps() {
     return {
+      type: 'both',
       defaultSelectedValue: [],
       onValueChange: noop,
     };
@@ -121,36 +118,86 @@ const RangeCalendar = React.createClass({
     }
   },
 
-  onSelect(value) {
-    const originalValue = this.state.selectedValue;
-    const selectedValue = originalValue.concat();
-    let changed = false;
-    if (!selectedValue.length || selectedValue.length === 2) {
-      selectedValue.length = 1;
-      selectedValue[0] = value;
-      changed = true;
-    } else if (this.compare(selectedValue[0], value) <= 0) {
-      selectedValue[1] = value;
-      changed = true;
-    } else if (this.compare(selectedValue[0], value) > 0) {
-      selectedValue.length = 1;
-      selectedValue[0] = value;
-      changed = true;
+  onDatePanelEnter() {
+    if (this.hasSelectedValue()) {
+      this.setState({
+        hoverValue: this.state.selectedValue.concat(),
+      });
     }
+  },
+
+  onDatePanelLeave() {
+    if (this.hasSelectedValue()) {
+      this.setState({
+        hoverValue: [],
+      });
+    }
+  },
+
+  onSelect(value) {
+    const { hoverValue, selectedValue } = this.state;
+    let nextSelectedValue;
+    const { type } = this.props;
+    let changed = false;
+    if (!hoverValue[0] && !hoverValue[1] && type === 'both') {
+      nextSelectedValue = [value];
+      changed = true;
+    } else if (type === 'start') {
+      const endValue = selectedValue[1];
+      if (!endValue || this.compare(endValue, value) < 0) {
+        nextSelectedValue = [value];
+      } else {
+        nextSelectedValue = [value, endValue];
+      }
+      changed = true;
+    } else {
+      let startValue;
+      startValue = type === 'end' ? selectedValue[0] : hoverValue[0];
+      if (startValue && this.compare(startValue, value) <= 0) {
+        nextSelectedValue = [startValue, value];
+        changed = true;
+      } else {
+        nextSelectedValue = [value];
+        changed = true;
+      }
+    }
+
     if (changed) {
-      this.fireSelectValueChange(selectedValue);
+      this.fireSelectValueChange(nextSelectedValue);
     }
   },
 
   onDayHover(value) {
-    const { hoverValue } = this.state;
-    if (this.compare(value, hoverValue[0]) < 0) {
-      return;
+    let { hoverValue } = this.state;
+    const { selectedValue } = this.state;
+    const { type } = this.props;
+    if (type === 'start' && selectedValue[1]) {
+      if (this.compare(value, selectedValue[1]) < 0) {
+        hoverValue = [value, selectedValue[1]];
+      } else {
+        hoverValue = [value];
+      }
+      this.setState({
+        hoverValue,
+      });
+    } else if (type === 'end' && selectedValue[0]) {
+      if (this.compare(value, selectedValue[0]) > 0) {
+        hoverValue = [selectedValue[0], value];
+      } else {
+        hoverValue = [];
+      }
+      this.setState({
+        hoverValue,
+      });
+    } else {
+      if (!hoverValue[0] || this.compare(value, hoverValue[0]) < 0) {
+        return;
+      }
+      hoverValue[1] = value;
+      this.setState({
+        hoverValue,
+      });
     }
-    hoverValue[1] = value;
-    this.setState({
-      hoverValue,
-    });
   },
 
   onToday() {
@@ -230,6 +277,12 @@ const RangeCalendar = React.createClass({
     }
     return null;
   },
+
+  hasSelectedValue() {
+    const { selectedValue } = this.state;
+    return !!selectedValue[1] && !!selectedValue[0];
+  },
+
   compare(v1, v2) {
     if (this.props.timePicker) {
       return v1.diff(v2);
@@ -243,7 +296,7 @@ const RangeCalendar = React.createClass({
         selectedValue,
       });
     }
-    if (selectedValue.length === 1) {
+    if (selectedValue[0] && !selectedValue[1]) {
       this.setState({
         hoverValue: selectedValue.concat(),
       });
@@ -279,9 +332,11 @@ const RangeCalendar = React.createClass({
     const {
       prefixCls, dateInputPlaceholder,
       timePicker, showOk, locale, showClear,
+      type,
     } = props;
     const {
       hoverValue,
+      selectedValue,
     } = state;
     const className = {
       [props.className]: !!props.className,
@@ -294,7 +349,9 @@ const RangeCalendar = React.createClass({
     const newProps = {
       selectedValue: state.selectedValue,
       onSelect: this.onSelect,
-      onDayHover: this.onDayHover,
+      onDayHover: type === 'start' && selectedValue[1] ||
+      type === 'end' && selectedValue[0] || !!hoverValue.length ?
+        this.onDayHover : undefined,
     };
 
     let placeholder1;
@@ -336,7 +393,11 @@ const RangeCalendar = React.createClass({
               title={locale.clear}
               onClick={this.clear}
             /> : null}
-          <div className={`${prefixCls}-date-panel`}>
+          <div
+            className={`${prefixCls}-date-panel`}
+            onMouseLeave={type !== 'both' ? this.onDatePanelLeave : undefined}
+            onMouseEnter={type !== 'both' ? this.onDatePanelEnter : undefined}
+          >
             <CalendarPart
               {...props}
               {...newProps}
@@ -382,14 +443,14 @@ const RangeCalendar = React.createClass({
                   showTimePicker={showTimePicker}
                   onOpenTimePicker={this.onOpenTimePicker}
                   onCloseTimePicker={this.onCloseTimePicker}
-                  timePickerDisabled={state.selectedValue.length === 1 || !!state.hoverValue.length}
+                  timePickerDisabled={!this.hasSelectedValue() || hoverValue.length}
                 /> : null}
               {showOkButton ?
                 <OkButton
                   {...props}
                   value={state.value}
                   onOk={this.onOk}
-                  okDisabled={state.selectedValue.length !== 2 || !!state.hoverValue.length}
+                  okDisabled={!this.hasSelectedValue() || hoverValue.length}
                 /> : null}
             </div>
           </div>

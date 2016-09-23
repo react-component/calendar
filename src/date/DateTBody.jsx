@@ -26,17 +26,6 @@ function getIdFromDate(date) {
   return `rc-calendar-${date.year()}-${date.month()}-${date.date()}`;
 }
 
-function noop() {
-}
-
-function handleDayClick(current) {
-  this.props.onSelect(current);
-}
-
-function handleCellMouseEnter(current) {
-  this.props.onDayHover(current);
-}
-
 const DateTBody = React.createClass({
   propTypes: {
     contentRender: PropTypes.func,
@@ -51,7 +40,6 @@ const DateTBody = React.createClass({
 
   getDefaultProps() {
     return {
-      onDayHover: noop,
       hoverValue: [],
     };
   },
@@ -146,7 +134,7 @@ const DateTBody = React.createClass({
               }
             }
             if (startValue && endValue) {
-              if (isSameDay(current, endValue) && !hoverValue.length) {
+              if (isSameDay(current, endValue)) {
                 selected = true;
               } else if (current.isAfter(startValue, 'day') &&
                 current.isBefore(endValue, 'day')) {
@@ -206,9 +194,9 @@ const DateTBody = React.createClass({
         dateCells.push(
           <td
             key={passed}
-            onClick={disabled ? noop : handleDayClick.bind(this, current)}
-            onMouseEnter={disabled || !hoverValue.length ?
-              noop : handleCellMouseEnter.bind(this, current)}
+            onClick={disabled ? undefined : props.onSelect.bind(null, current)}
+            onMouseEnter={disabled ?
+              undefined : props.onDayHover && props.onDayHover.bind(null, current) || undefined}
             role="gridcell"
             title={getTitleString(current)} className={cls}
           >

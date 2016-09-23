@@ -4,9 +4,6 @@ import DateTable from '../date/DateTable';
 import DateInput from '../date/DateInput';
 import { getTimeConfig } from '../util/index';
 
-function noop() {
-}
-
 const CalendarPart = React.createClass({
   propTypes: {
     value: PropTypes.any,
@@ -47,19 +44,18 @@ const CalendarPart = React.createClass({
       React.cloneElement(timePicker, {
         showHour: true,
         showSecond: true,
+        ...disabledTimeConfig,
+        ...timePickerDisabledTime,
+        ...timePicker.props,
         onChange: props.onInputSelect,
         defaultOpenValue: value,
         value: selectedValue[index],
-        disabledHours: noop,
-        disabledMinutes: noop,
-        disabledSeconds: noop,
-        ...disabledTimeConfig,
-        ...timePickerDisabledTime,
       });
 
     return (
       <div className={`${rangeClassName}-part ${rangeClassName}-${direction}`}>
         <DateInput
+          disabled={!selectedValue[0] || !selectedValue[1]}
           format={format}
           locale={locale}
           prefixCls={prefixCls}

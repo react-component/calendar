@@ -107,6 +107,7 @@ const DateInput = React.createClass({
           ref="dateInput"
           className={`${prefixCls}-input  ${invalidClass}`}
           value={str}
+          disabled={props.disabled}
           placeholder={placeholder}
           onChange={this.onInputChange}
         />
