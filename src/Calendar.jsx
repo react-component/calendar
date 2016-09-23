@@ -198,7 +198,7 @@ const Calendar = React.createClass({
     const disabledTimeConfig = disabledTime && timePicker ?
       getTimeConfig(selectedValue, disabledTime) : null;
 
-    const timePickerEle = timePicker && showTimePicker ? React.cloneElement(timePicker, {
+    const timePickerEle = timePicker && showTimePicker ? React.cloneElement(timePicker, Object.assign({}, {
       showHour: true,
       showSecond: true,
       onChange: this.onDateInputChange,
@@ -208,7 +208,7 @@ const Calendar = React.createClass({
       disabledMinutes: noop,
       disabledSeconds: noop,
       ...disabledTimeConfig,
-    }) : null;
+    }, timePicker.props)) : null;
     const dateInputElement = props.showDateInput ? (
       <DateInput
         ref="dateInput"
