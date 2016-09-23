@@ -111,6 +111,18 @@ http://react-component.github.io/calendar/examples/index.html
           <td>additional style of root dom node</td>
         </tr>
         <tr>
+          <td>renderSidebar</td>
+          <td>() => React.Node</td>
+          <td></td>
+          <td>side bar</td>
+        </tr>
+        <tr>
+          <td>renderFooter</td>
+          <td>() => React.Node</td>
+          <td></td>
+          <td>extra footer</td>
+        </tr>
+        <tr>
           <td>value</td>
           <td>moment</td>
           <td></td>
@@ -227,6 +239,18 @@ http://react-component.github.io/calendar/examples/index.html
           <td>Object</td>
           <td></td>
           <td>additional style of root dom node</td>
+        </tr>
+        <tr>
+          <td>renderSidebar</td>
+          <td>() => React.Node</td>
+          <td></td>
+          <td>side bar</td>
+        </tr>
+        <tr>
+          <td>renderFooter</td>
+          <td>() => React.Node</td>
+          <td></td>
+          <td>extra footer</td>
         </tr>
         <tr>
           <td>selectedValue</td>
