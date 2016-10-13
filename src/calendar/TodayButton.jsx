@@ -5,25 +5,20 @@ export default function TodayButton({
   prefixCls, locale, value, timePicker, disabled,
   disabledDate, disabledTime, onToday, text,
 }) {
-  let disabledToday = false;
-  let localeNow = text;
-  if (!localeNow && timePicker) {
-    localeNow = locale.now;
-  }
-  localeNow = localeNow || locale.today;
-  let disabledTodayClass = '';
-  if (disabledDate) {
-    disabledToday = !isAllowedDate(getTodayTime(value), disabledDate, disabledTime);
-    if (disabledToday || disabled) {
-      disabledTodayClass = `${prefixCls}-today-btn-disabled`;
-    }
-  }
-  return (<a
-    className={`${prefixCls}-today-btn ${disabledTodayClass}`}
-    role="button"
-    onClick={disabledToday || disabled ? null : onToday}
-    title={getTodayTimeStr(value)}
-  >
-    {localeNow}
-  </a>);
+  const localeNow = (!text && timePicker ? locale.now : text) || locale.today;
+  const disabledToday =
+          disabledDate && !isAllowedDate(getTodayTime(value), disabledDate, disabledTime);
+  const isDisabled = disabledToday || disabled;
+  const disabledTodayClass = isDisabled ?
+          `${prefixCls}-today-btn-disabled` : '';
+  return (
+    <a
+      className={`${prefixCls}-today-btn ${disabledTodayClass}`}
+      role="button"
+      onClick={isDisabled ? null : onToday}
+      title={getTodayTimeStr(value)}
+    >
+      {localeNow}
+    </a>
+  );
 }
