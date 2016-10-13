@@ -374,8 +374,10 @@ const RangeCalendar = React.createClass({
     const startValue = this.getStartValue();
     const endValue = this.getEndValue();
     const thisMonth = getTodayTime(startValue).month();
-    const isTodayInView = thisMonth === startValue.month() ||
-      thisMonth === endValue.month();
+    const thisYear = getTodayTime(startValue).year();
+    const isThisYear = thisYear === startValue.year() || this.year === endValue.year();
+    const isTodayInView = isThisYear && (thisMonth === startValue.month() ||
+      thisMonth === endValue.month());
 
     return (
       <div
