@@ -1830,25 +1830,16 @@ webpackJsonp([5],{
 	  var onToday = _ref.onToday;
 	  var text = _ref.text;
 	
-	  var disabledToday = false;
-	  var localeNow = text;
-	  if (!localeNow && timePicker) {
-	    localeNow = locale.now;
-	  }
-	  localeNow = localeNow || locale.today;
-	  var disabledTodayClass = '';
-	  if (disabledDate) {
-	    disabledToday = !(0, _util.isAllowedDate)((0, _util.getTodayTime)(value), disabledDate, disabledTime);
-	    if (disabledToday || disabled) {
-	      disabledTodayClass = prefixCls + '-today-btn-disabled';
-	    }
-	  }
+	  var localeNow = (!text && timePicker ? locale.now : text) || locale.today;
+	  var disabledToday = disabledDate && !(0, _util.isAllowedDate)((0, _util.getTodayTime)(value), disabledDate, disabledTime);
+	  var isDisabled = disabledToday || disabled;
+	  var disabledTodayClass = isDisabled ? prefixCls + '-today-btn-disabled' : '';
 	  return _react2.default.createElement(
 	    'a',
 	    {
 	      className: prefixCls + '-today-btn ' + disabledTodayClass,
 	      role: 'button',
-	      onClick: disabledToday || disabled ? null : onToday,
+	      onClick: isDisabled ? null : onToday,
 	      title: (0, _util.getTodayTimeStr)(value)
 	    },
 	    localeNow
