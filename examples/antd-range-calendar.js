@@ -51,10 +51,10 @@ function disabledDate(current) {
 function disabledTime(time, type) {
   if (type === 'left') {
     return {
-      disabledHours() { 
+      disabledHours() {
         const hours = newArray(0, 60);
         hours.splice(20, 4);
-        return hours; 
+        return hours;
       },
       disabledMinutes(h) {
         if (h === 20) {
@@ -64,14 +64,14 @@ function disabledTime(time, type) {
         }
         return [];
       },
-      disabledSeconds() { return [55, 56]},
-    }
-  } 
+      disabledSeconds() { return [55, 56]; },
+    };
+  }
   return {
-    disabledHours() { 
+    disabledHours() {
       const hours = newArray(0, 60);
       hours.splice(2, 6);
-      return hours; 
+      return hours;
     },
     disabledMinutes(h) {
       if (h === 20) {
@@ -81,8 +81,8 @@ function disabledTime(time, type) {
       }
       return [];
     },
-    disabledSeconds() { return [55, 56]},
-  }
+    disabledSeconds() { return [55, 56]; },
+  };
 }
 
 function format(v) {

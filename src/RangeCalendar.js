@@ -78,6 +78,7 @@ const RangeCalendar = React.createClass({
     format: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     onClear: PropTypes.func,
     type: PropTypes.any,
+    disabledTime: PropTypes.func,
   },
 
   mixins: [CommonMixin],
