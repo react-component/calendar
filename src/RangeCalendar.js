@@ -330,7 +330,7 @@ const RangeCalendar = React.createClass({
     const state = this.state;
     const { showTimePicker } = state;
     const {
-      prefixCls, dateInputPlaceholder,
+      prefixCls, dateInputPlaceholder, disabledTime,
       timePicker, showOk, locale, showClear,
       type,
     } = props;
@@ -403,6 +403,7 @@ const RangeCalendar = React.createClass({
               {...newProps}
               hoverValue={hoverValue}
               direction="left"
+              disabledTime={(time) => disabledTime(time, 'left')}
               format={this.getFormat()}
               value={startValue}
               placeholder={placeholder1}
@@ -425,6 +426,7 @@ const RangeCalendar = React.createClass({
               onValueChange={onValueChange.bind(this, 'right')}
               timePicker={timePicker}
               showTimePicker={showTimePicker}
+              disabledTime={(time) => disabledTime(time, 'right')}
             />
           </div>
           <div className={cls}>
