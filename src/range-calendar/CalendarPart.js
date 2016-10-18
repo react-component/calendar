@@ -44,9 +44,9 @@ const CalendarPart = React.createClass({
       React.cloneElement(timePicker, {
         showHour: true,
         showSecond: true,
+        ...timePicker.props,
         ...disabledTimeConfig,
         ...timePickerDisabledTime,
-        ...timePicker.props,
         onChange: props.onInputSelect,
         defaultOpenValue: value,
         value: selectedValue[index],

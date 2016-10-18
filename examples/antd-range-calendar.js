@@ -32,12 +32,57 @@ defaultCalendarValue.add(-1, 'month');
 
 const timePickerElement = <TimePickerPanel />;
 
+function newArray(start, end) {
+  const result = [];
+  for (let i = start; i < end; i++) {
+    result.push(i);
+  }
+  return result;
+}
+
 function disabledDate(current) {
   const date = moment();
   date.hour(0);
   date.minute(0);
   date.second(0);
   return current.isBefore(date);  // can not select days before today
+}
+
+function disabledTime(time, type) {
+  if (type === 'left') {
+    return {
+      disabledHours() {
+        const hours = newArray(0, 60);
+        hours.splice(20, 4);
+        return hours;
+      },
+      disabledMinutes(h) {
+        if (h === 20) {
+          return newArray(0, 31);
+        } else if (h === 23) {
+          return newArray(30, 60);
+        }
+        return [];
+      },
+      disabledSeconds() { return [55, 56]; },
+    };
+  }
+  return {
+    disabledHours() {
+      const hours = newArray(0, 60);
+      hours.splice(2, 6);
+      return hours;
+    },
+    disabledMinutes(h) {
+      if (h === 20) {
+        return newArray(0, 31);
+      } else if (h === 23) {
+        return newArray(30, 60);
+      }
+      return [];
+    },
+    disabledSeconds() { return [55, 56]; },
+  };
 }
 
 function format(v) {
@@ -77,7 +122,7 @@ const Test = React.createClass({
         dateInputPlaceholder={['start', 'end']}
         defaultValue={[now, now]}
         locale={cn ? zhCN : enUS}
-        disabledDate={disabledDate}
+        disabledTime={disabledTime}
         timePicker={timePickerElement}
       />
     );
@@ -122,6 +167,7 @@ ReactDOM.render(
         onSelect={onStandaloneSelect}
         disabledDate={disabledDate}
         timePicker={timePickerElement}
+        disabledTime={disabledTime}
       />
     </div>
     <br />
