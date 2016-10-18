@@ -7,7 +7,7 @@
   <meta charset="utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" rel="stylesheet"/>
-  <title>rc-calendar@7.2.1 - React Calendar</title>
+  <title>rc-calendar@7.3.0 - React Calendar</title>
   <style>
     @font-face {
       font-family: octicons-anchor;
@@ -737,7 +737,7 @@
 
 <body>
 <div class="header">
-  <h1>rc-calendar@7.2.1</h1>
+  <h1>rc-calendar@7.3.0</h1>
 </div>
 <div class="examples">
   <h3>EXAMPLES</h3>
@@ -1034,6 +1034,12 @@ npm start</code></pre></div><h2>Example<a id="user-content-example" name="exampl
           <td>String[]</td>
           <td></td>
           <td>range date input&#39;s placeholders</td>
+        </tr>
+        <tr>
+          <td>disabledTime</td>
+          <td>Function(current: moment[], type:&#39;start&#39;|&#39;end&#39;):Object</td>
+          <td></td>
+          <td>a function which return a object with member of disabledHours/disabledMinutes/disabledSeconds according to rc-time-picker</td>
         </tr>
         <tr>
           <td>type</td>

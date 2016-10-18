@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>antd-range-calendar.js - example - rc-calendar@7.2.1</title>
+  <title>antd-range-calendar.js - example - rc-calendar@7.3.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -258,7 +258,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
   <div class="container">
     <div class="header">
-      <h1>rc-calendar@7.2.1</h1>
+      <h1>rc-calendar@7.3.0</h1>
 
       <p>React Calendar</p>
     </div>
@@ -298,12 +298,62 @@ defaultCalendarValue.add(-1, 'month');
 
 const timePickerElement = &lt;TimePickerPanel /&gt;;
 
+function newArray(start, end) {
+  const result = [];
+  for (let i = start; i &lt; end; i++) {
+    result.push(i);
+  }
+  return result;
+}
+
 function disabledDate(current) {
   const date = moment();
   date.hour(0);
   date.minute(0);
   date.second(0);
   return current.isBefore(date);  // can not select days before today
+}
+
+function disabledTime(time, type) {
+  console.log('disabledTime', time, type);
+  if (type === 'start') {
+    return {
+      disabledHours() {
+        const hours = newArray(0, 60);
+        hours.splice(20, 4);
+        return hours;
+      },
+      disabledMinutes(h) {
+        if (h === 20) {
+          return newArray(0, 31);
+        } else if (h === 23) {
+          return newArray(30, 60);
+        }
+        return [];
+      },
+      disabledSeconds() {
+        return [55, 56];
+      },
+    };
+  }
+  return {
+    disabledHours() {
+      const hours = newArray(0, 60);
+      hours.splice(2, 6);
+      return hours;
+    },
+    disabledMinutes(h) {
+      if (h === 20) {
+        return newArray(0, 31);
+      } else if (h === 23) {
+        return newArray(30, 60);
+      }
+      return [];
+    },
+    disabledSeconds() {
+      return [55, 56];
+    },
+  };
 }
 
 function format(v) {
@@ -343,7 +393,7 @@ const Test = React.createClass({
         dateInputPlaceholder={['start', 'end']}
         defaultValue={[now, now]}
         locale={cn ? zhCN : enUS}
-        disabledDate={disabledDate}
+        disabledTime={disabledTime}
         timePicker={timePickerElement}
       /&gt;
     );
@@ -388,6 +438,7 @@ ReactDOM.render(
         onSelect={onStandaloneSelect}
         disabledDate={disabledDate}
         timePicker={timePickerElement}
+        disabledTime={disabledTime}
       /&gt;
     &lt;/div&gt;
     &lt;br /&gt;

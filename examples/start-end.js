@@ -294,7 +294,7 @@ webpackJsonp([5],{
 	    var selectedValue = state.selectedValue;
 	    var showTimePicker = state.showTimePicker;
 	
-	    var disabledTimeConfig = disabledTime && timePicker ? (0, _index.getTimeConfig)(selectedValue, disabledTime) : null;
+	    var disabledTimeConfig = showTimePicker && disabledTime && timePicker ? (0, _index.getTimeConfig)(selectedValue, disabledTime) : null;
 	
 	    var timePickerEle = timePicker && showTimePicker ? _react2.default.cloneElement(timePicker, (0, _extends3.default)({
 	      showHour: true,
@@ -1826,12 +1826,11 @@ webpackJsonp([5],{
 	  var timePicker = _ref.timePicker;
 	  var disabled = _ref.disabled;
 	  var disabledDate = _ref.disabledDate;
-	  var disabledTime = _ref.disabledTime;
 	  var onToday = _ref.onToday;
 	  var text = _ref.text;
 	
 	  var localeNow = (!text && timePicker ? locale.now : text) || locale.today;
-	  var disabledToday = disabledDate && !(0, _util.isAllowedDate)((0, _util.getTodayTime)(value), disabledDate, disabledTime);
+	  var disabledToday = disabledDate && !(0, _util.isAllowedDate)((0, _util.getTodayTime)(value), disabledDate);
 	  var isDisabled = disabledToday || disabled;
 	  var disabledTodayClass = isDisabled ? prefixCls + '-today-btn-disabled' : '';
 	  return _react2.default.createElement(
@@ -2051,14 +2050,14 @@ webpackJsonp([5],{
 	    );
 	  },
 	  setSelectedValue: function setSelectedValue(selectedValue, cause) {
-	    if (this.isAllowedDate(selectedValue)) {
-	      if (!('selectedValue' in this.props)) {
-	        this.setState({
-	          selectedValue: selectedValue
-	        });
-	      }
-	      this.props.onSelect(selectedValue, cause);
+	    // if (this.isAllowedDate(selectedValue)) {
+	    if (!('selectedValue' in this.props)) {
+	      this.setState({
+	        selectedValue: selectedValue
+	      });
 	    }
+	    this.props.onSelect(selectedValue, cause);
+	    // }
 	  },
 	  setValue: function setValue(value) {
 	    var originalValue = this.state.value;

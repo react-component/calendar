@@ -749,14 +749,14 @@ webpackJsonp([1],{
 	    );
 	  },
 	  setSelectedValue: function setSelectedValue(selectedValue, cause) {
-	    if (this.isAllowedDate(selectedValue)) {
-	      if (!('selectedValue' in this.props)) {
-	        this.setState({
-	          selectedValue: selectedValue
-	        });
-	      }
-	      this.props.onSelect(selectedValue, cause);
+	    // if (this.isAllowedDate(selectedValue)) {
+	    if (!('selectedValue' in this.props)) {
+	      this.setState({
+	        selectedValue: selectedValue
+	      });
 	    }
+	    this.props.onSelect(selectedValue, cause);
+	    // }
 	  },
 	  setValue: function setValue(value) {
 	    var originalValue = this.state.value;

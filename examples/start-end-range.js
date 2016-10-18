@@ -1324,12 +1324,11 @@ webpackJsonp([6],{
 	  var timePicker = _ref.timePicker;
 	  var disabled = _ref.disabled;
 	  var disabledDate = _ref.disabledDate;
-	  var disabledTime = _ref.disabledTime;
 	  var onToday = _ref.onToday;
 	  var text = _ref.text;
 	
 	  var localeNow = (!text && timePicker ? locale.now : text) || locale.today;
-	  var disabledToday = disabledDate && !(0, _util.isAllowedDate)((0, _util.getTodayTime)(value), disabledDate, disabledTime);
+	  var disabledToday = disabledDate && !(0, _util.isAllowedDate)((0, _util.getTodayTime)(value), disabledDate);
 	  var isDisabled = disabledToday || disabled;
 	  var disabledTodayClass = isDisabled ? prefixCls + '-today-btn-disabled' : '';
 	  return _react2.default.createElement(
@@ -2003,7 +2002,8 @@ webpackJsonp([6],{
 	    onValueChange: _react.PropTypes.func,
 	    format: _react.PropTypes.oneOfType([_react.PropTypes.object, _react.PropTypes.string]),
 	    onClear: _react.PropTypes.func,
-	    type: _react.PropTypes.any
+	    type: _react.PropTypes.any,
+	    disabledTime: _react.PropTypes.func
 	  },
 	
 	  mixins: [_CommonMixin2.default],
@@ -2012,7 +2012,8 @@ webpackJsonp([6],{
 	    return {
 	      type: 'both',
 	      defaultSelectedValue: [],
-	      onValueChange: noop
+	      onValueChange: noop,
+	      disabledTime: noop
 	    };
 	  },
 	  getInitialState: function getInitialState() {
@@ -2142,6 +2143,38 @@ webpackJsonp([6],{
 	  onOk: function onOk() {
 	    this.props.onOk(this.state.selectedValue);
 	  },
+	  onStartInputSelect: function onStartInputSelect() {
+	    for (var _len = arguments.length, oargs = Array(_len), _key = 0; _key < _len; _key++) {
+	      oargs[_key] = arguments[_key];
+	    }
+	
+	    var args = ['left'].concat(oargs);
+	    return onInputSelect.apply(this, args);
+	  },
+	  onEndInputSelect: function onEndInputSelect() {
+	    for (var _len2 = arguments.length, oargs = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+	      oargs[_key2] = arguments[_key2];
+	    }
+	
+	    var args = ['right'].concat(oargs);
+	    return onInputSelect.apply(this, args);
+	  },
+	  onStartValueChange: function onStartValueChange() {
+	    for (var _len3 = arguments.length, oargs = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+	      oargs[_key3] = arguments[_key3];
+	    }
+	
+	    var args = ['left'].concat(oargs);
+	    return onValueChange.apply(this, args);
+	  },
+	  onEndValueChange: function onEndValueChange() {
+	    for (var _len4 = arguments.length, oargs = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+	      oargs[_key4] = arguments[_key4];
+	    }
+	
+	    var args = ['right'].concat(oargs);
+	    return onValueChange.apply(this, args);
+	  },
 	  getStartValue: function getStartValue() {
 	    var value = this.state.value;
 	    var selectedValue = this.state.selectedValue;
@@ -2251,6 +2284,12 @@ webpackJsonp([6],{
 	    this.fireSelectValueChange([], true);
 	    this.props.onClear();
 	  },
+	  disabledStartTime: function disabledStartTime(time) {
+	    return this.props.disabledTime(time, 'start');
+	  },
+	  disabledEndTime: function disabledEndTime(time) {
+	    return this.props.disabledTime(time, 'end');
+	  },
 	  render: function render() {
 	    var _className, _classnames;
 	
@@ -2293,8 +2332,9 @@ webpackJsonp([6],{
 	
 	    var startValue = this.getStartValue();
 	    var endValue = this.getEndValue();
-	    var thisMonth = (0, _util.getTodayTime)(startValue).month();
-	    var thisYear = (0, _util.getTodayTime)(startValue).year();
+	    var todayTime = (0, _util.getTodayTime)(startValue);
+	    var thisMonth = todayTime.month();
+	    var thisYear = todayTime.year();
 	    var isThisYear = thisYear === startValue.year() || this.year === endValue.year();
 	    var isTodayInView = isThisYear && (thisMonth === startValue.month() || thisMonth === endValue.month());
 	
@@ -2326,11 +2366,12 @@ webpackJsonp([6],{
 	          _react2.default.createElement(_CalendarPart2.default, (0, _extends3.default)({}, props, newProps, {
 	            hoverValue: hoverValue,
 	            direction: 'left',
+	            disabledTime: this.disabledStartTime,
 	            format: this.getFormat(),
 	            value: startValue,
 	            placeholder: placeholder1,
-	            onInputSelect: onInputSelect.bind(this, 'left'),
-	            onValueChange: onValueChange.bind(this, 'left'),
+	            onInputSelect: this.onStartInputSelect,
+	            onValueChange: this.onStartValueChange,
 	            timePicker: timePicker,
 	            showTimePicker: showTimePicker
 	          })),
@@ -2346,10 +2387,11 @@ webpackJsonp([6],{
 	            timePickerDisabledTime: this.getEndDisableTime(),
 	            placeholder: placeholder2,
 	            value: endValue,
-	            onInputSelect: onInputSelect.bind(this, 'right'),
-	            onValueChange: onValueChange.bind(this, 'right'),
+	            onInputSelect: this.onEndInputSelect,
+	            onValueChange: this.onEndValueChange,
 	            timePicker: timePicker,
-	            showTimePicker: showTimePicker
+	            showTimePicker: showTimePicker,
+	            disabledTime: this.disabledEndTime
 	          }))
 	        ),
 	        _react2.default.createElement(
@@ -2597,6 +2639,7 @@ webpackJsonp([6],{
 	    disabledDate: _react.PropTypes.any,
 	    timePicker: _react.PropTypes.any,
 	    disabledTime: _react.PropTypes.any,
+	    onInputSelect: _react.PropTypes.func,
 	    timePickerDisabledTime: _react.PropTypes.object
 	  },
 	  render: function render() {
@@ -2614,8 +2657,9 @@ webpackJsonp([6],{
 	    var timePickerDisabledTime = props.timePickerDisabledTime;
 	    var showTimePicker = props.showTimePicker;
 	    var hoverValue = props.hoverValue;
+	    var onInputSelect = props.onInputSelect;
 	
-	    var disabledTimeConfig = disabledTime && timePicker ? (0, _index.getTimeConfig)(selectedValue, disabledTime) : null;
+	    var disabledTimeConfig = showTimePicker && disabledTime && timePicker ? (0, _index.getTimeConfig)(selectedValue, disabledTime) : null;
 	    var rangeClassName = prefixCls + '-range';
 	    var newProps = {
 	      locale: locale,
@@ -2624,12 +2668,11 @@ webpackJsonp([6],{
 	      showTimePicker: showTimePicker
 	    };
 	    var index = direction === 'left' ? 0 : 1;
-	
-	    var timePickerEle = timePicker && _react2.default.cloneElement(timePicker, (0, _extends3.default)({
+	    var timePickerEle = showTimePicker && timePicker && _react2.default.cloneElement(timePicker, (0, _extends3.default)({
 	      showHour: true,
 	      showSecond: true
-	    }, disabledTimeConfig, timePickerDisabledTime, timePicker.props, {
-	      onChange: props.onInputSelect,
+	    }, timePicker.props, disabledTimeConfig, timePickerDisabledTime, {
+	      onChange: onInputSelect,
 	      defaultOpenValue: value,
 	      value: selectedValue[index]
 	    }));
@@ -2649,7 +2692,7 @@ webpackJsonp([6],{
 	        value: value,
 	        showClear: false,
 	        selectedValue: selectedValue[index],
-	        onChange: props.onInputSelect
+	        onChange: onInputSelect
 	      }),
 	      _react2.default.createElement(
 	        'div',
