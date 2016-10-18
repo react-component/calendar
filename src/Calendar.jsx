@@ -197,7 +197,7 @@ const Calendar = React.createClass({
     } = props;
     const state = this.state;
     const { value, selectedValue, showTimePicker } = state;
-    const disabledTimeConfig = disabledTime && timePicker ?
+    const disabledTimeConfig = showTimePicker && disabledTime && timePicker ?
       getTimeConfig(selectedValue, disabledTime) : null;
 
     const timePickerEle = timePicker && showTimePicker ? React.cloneElement(timePicker, {

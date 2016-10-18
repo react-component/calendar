@@ -1,6 +1,10 @@
 # History
 ----
 
+## 7.3.0 / 2016-10-18
+
+- disabledTime support type param for range-calendar
+
 ## 7.2.0 / 2016-09-23
 
 - add week calendar example

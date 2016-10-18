@@ -18,6 +18,7 @@ const CalendarPart = React.createClass({
     disabledDate: PropTypes.any,
     timePicker: PropTypes.any,
     disabledTime: PropTypes.any,
+    onInputSelect: PropTypes.func,
     timePickerDisabledTime: PropTypes.object,
   },
   render() {
@@ -27,9 +28,9 @@ const CalendarPart = React.createClass({
       locale, selectedValue, format, placeholder,
       disabledDate, timePicker, disabledTime,
       timePickerDisabledTime, showTimePicker,
-      hoverValue,
+      hoverValue, onInputSelect,
     } = props;
-    const disabledTimeConfig = disabledTime && timePicker ?
+    const disabledTimeConfig = showTimePicker && disabledTime && timePicker ?
       getTimeConfig(selectedValue, disabledTime) : null;
     const rangeClassName = `${prefixCls}-range`;
     const newProps = {
@@ -39,15 +40,14 @@ const CalendarPart = React.createClass({
       showTimePicker,
     };
     const index = direction === 'left' ? 0 : 1;
-
-    const timePickerEle = timePicker &&
+    const timePickerEle = showTimePicker && timePicker &&
       React.cloneElement(timePicker, {
         showHour: true,
         showSecond: true,
         ...timePicker.props,
         ...disabledTimeConfig,
         ...timePickerDisabledTime,
-        onChange: props.onInputSelect,
+        onChange: onInputSelect,
         defaultOpenValue: value,
         value: selectedValue[index],
       });
@@ -66,7 +66,7 @@ const CalendarPart = React.createClass({
           value={value}
           showClear={false}
           selectedValue={selectedValue[index]}
-          onChange={props.onInputSelect}
+          onChange={onInputSelect}
         />
         <div style={{ outline: 'none' }}>
           <CalendarHeader

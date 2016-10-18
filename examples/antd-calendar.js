@@ -35,6 +35,7 @@ defaultCalendarValue.add(-1, 'month');
 const timePickerElement = <TimePickerPanel />;
 
 function disabledTime(date) {
+  console.log('disabledTime', date);
   if (date && (date.date() === 15)) {
     return {
       disabledHours() {
@@ -218,10 +219,10 @@ ReactDOM.render((<div
       />
     </div>
     <div style={{ float: 'left', width: 300 }}>
-      <Test defaultValue={now}/>
+      <Test defaultValue={now} />
     </div>
     <div style={{ float: 'right', width: 300 }}>
-      <Test defaultCalendarValue={defaultCalendarValue}/>
+      <Test defaultCalendarValue={defaultCalendarValue} />
     </div>
     <div style={{ clear: 'both' }}></div>
   </div>

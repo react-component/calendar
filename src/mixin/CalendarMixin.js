@@ -90,14 +90,14 @@ const CalendarMixin = {
   },
 
   setSelectedValue(selectedValue, cause) {
-    if (this.isAllowedDate(selectedValue)) {
-      if (!('selectedValue' in this.props)) {
-        this.setState({
-          selectedValue,
-        });
-      }
-      this.props.onSelect(selectedValue, cause);
+    // if (this.isAllowedDate(selectedValue)) {
+    if (!('selectedValue' in this.props)) {
+      this.setState({
+        selectedValue,
+      });
     }
+    this.props.onSelect(selectedValue, cause);
+    // }
   },
 
   setValue(value) {

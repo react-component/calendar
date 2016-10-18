@@ -3,11 +3,11 @@ import { getTodayTimeStr, getTodayTime, isAllowedDate } from '../util/';
 
 export default function TodayButton({
   prefixCls, locale, value, timePicker, disabled,
-  disabledDate, disabledTime, onToday, text,
+  disabledDate, onToday, text,
 }) {
   const localeNow = (!text && timePicker ? locale.now : text) || locale.today;
   const disabledToday =
-          disabledDate && !isAllowedDate(getTodayTime(value), disabledDate, disabledTime);
+          disabledDate && !isAllowedDate(getTodayTime(value), disabledDate);
   const isDisabled = disabledToday || disabled;
   const disabledTodayClass = isDisabled ?
           `${prefixCls}-today-btn-disabled` : '';

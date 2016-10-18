@@ -88,6 +88,7 @@ const RangeCalendar = React.createClass({
       type: 'both',
       defaultSelectedValue: [],
       onValueChange: noop,
+      disabledTime: noop,
     };
   },
 
@@ -221,6 +222,26 @@ const RangeCalendar = React.createClass({
     this.props.onOk(this.state.selectedValue);
   },
 
+  onStartInputSelect(...oargs) {
+    const args = ['left'].concat(oargs);
+    return onInputSelect.apply(this, args);
+  },
+
+  onEndInputSelect(...oargs) {
+    const args = ['right'].concat(oargs);
+    return onInputSelect.apply(this, args);
+  },
+
+  onStartValueChange(...oargs) {
+    const args = ['left'].concat(oargs);
+    return onValueChange.apply(this, args);
+  },
+
+  onEndValueChange(...oargs) {
+    const args = ['right'].concat(oargs);
+    return onValueChange.apply(this, args);
+  },
+
   getStartValue() {
     let value = this.state.value;
     const selectedValue = this.state.selectedValue;
@@ -326,12 +347,20 @@ const RangeCalendar = React.createClass({
     this.props.onClear();
   },
 
+  disabledStartTime(time) {
+    return this.props.disabledTime(time, 'start');
+  },
+
+  disabledEndTime(time) {
+    return this.props.disabledTime(time, 'end');
+  },
+
   render() {
     const props = this.props;
     const state = this.state;
     const { showTimePicker } = state;
     const {
-      prefixCls, dateInputPlaceholder, disabledTime,
+      prefixCls, dateInputPlaceholder,
       timePicker, showOk, locale, showClear,
       type,
     } = props;
@@ -374,8 +403,9 @@ const RangeCalendar = React.createClass({
 
     const startValue = this.getStartValue();
     const endValue = this.getEndValue();
-    const thisMonth = getTodayTime(startValue).month();
-    const thisYear = getTodayTime(startValue).year();
+    const todayTime = getTodayTime(startValue);
+    const thisMonth = todayTime.month();
+    const thisYear = todayTime.year();
     const isThisYear = thisYear === startValue.year() || this.year === endValue.year();
     const isTodayInView = isThisYear && (thisMonth === startValue.month() ||
       thisMonth === endValue.month());
@@ -406,12 +436,12 @@ const RangeCalendar = React.createClass({
               {...newProps}
               hoverValue={hoverValue}
               direction="left"
-              disabledTime={(time) => disabledTime(time, 'left')}
+              disabledTime={this.disabledStartTime}
               format={this.getFormat()}
               value={startValue}
               placeholder={placeholder1}
-              onInputSelect={onInputSelect.bind(this, 'left')}
-              onValueChange={onValueChange.bind(this, 'left')}
+              onInputSelect={this.onStartInputSelect}
+              onValueChange={this.onStartValueChange}
               timePicker={timePicker}
               showTimePicker={showTimePicker}
             />
@@ -425,11 +455,11 @@ const RangeCalendar = React.createClass({
               timePickerDisabledTime={this.getEndDisableTime()}
               placeholder={placeholder2}
               value={endValue}
-              onInputSelect={onInputSelect.bind(this, 'right')}
-              onValueChange={onValueChange.bind(this, 'right')}
+              onInputSelect={this.onEndInputSelect}
+              onValueChange={this.onEndValueChange}
               timePicker={timePicker}
               showTimePicker={showTimePicker}
-              disabledTime={(time) => disabledTime(time, 'right')}
+              disabledTime={this.disabledEndTime}
             />
           </div>
           <div className={cls}>

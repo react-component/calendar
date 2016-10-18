@@ -154,7 +154,7 @@ http://react-component.github.io/calendar/examples/index.html
         </tr>
         <tr>
           <td>disabledTime</td>
-          <td>Function(current:moment, partial:'left'|'right'):Object</td>
+          <td>Function(current:moment):Object</td>
           <td></td>
           <td>a function which return a object with member of disabledHours/disabledMinutes/disabledSeconds according to rc-time-picker</td>
         </tr>
@@ -317,6 +317,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>String[]</td>
           <td></td>
           <td>range date input's placeholders</td>
+        </tr>
+        <tr>
+          <td>disabledTime</td>
+          <td>Function(current: moment[], type:'start'|'end'):Object</td>
+          <td></td>
+          <td>a function which return a object with member of disabledHours/disabledMinutes/disabledSeconds according to rc-time-picker</td>
         </tr>
         <tr>
           <td>type</td>

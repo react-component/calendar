@@ -49,7 +49,8 @@ function disabledDate(current) {
 }
 
 function disabledTime(time, type) {
-  if (type === 'left') {
+  console.log('disabledTime', time, type);
+  if (type === 'start') {
     return {
       disabledHours() {
         const hours = newArray(0, 60);
@@ -64,7 +65,9 @@ function disabledTime(time, type) {
         }
         return [];
       },
-      disabledSeconds() { return [55, 56]; },
+      disabledSeconds() {
+        return [55, 56];
+      },
     };
   }
   return {
@@ -81,7 +84,9 @@ function disabledTime(time, type) {
       }
       return [];
     },
-    disabledSeconds() { return [55, 56]; },
+    disabledSeconds() {
+      return [55, 56];
+    },
   };
 }
 
