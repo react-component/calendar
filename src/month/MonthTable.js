@@ -98,9 +98,9 @@ class MonthTable extends Component {
             content = monthData.content;
           }
           cellEl = (
-            <div className={`${prefixCls}-month`}>
+            <a className={`${prefixCls}-month`}>
               {content}
-            </div>
+            </a>
           );
         }
         return (
