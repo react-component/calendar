@@ -28132,7 +28132,7 @@
 	            content = monthData.content;
 	          }
 	          cellEl = _react2.default.createElement(
-	            'div',
+	            'a',
 	            { className: prefixCls + '-month' },
 	            content
 	          );
