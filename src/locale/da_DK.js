@@ -1,9 +1,9 @@
 export default {
   today: 'I dag',
   now: 'Nu',
-  backToToday: 'Tilbage til i dag',
+  backToToday: 'Gå til i dag',
   ok: 'Ok',
-  clear: 'Annuler',
+  clear: 'Annuller',
   month: 'Måned',
   year: 'År',
   timeSelect: 'Vælg tidspunkt',
