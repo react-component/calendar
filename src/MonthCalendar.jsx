@@ -58,6 +58,7 @@ const MonthCalendar = React.createClass({
       disabledDate={props.disabledDate}
       style={{ position: 'relative' }}
       value={this.state.value}
+      contentRender={props.contentRender}
       rootPrefixCls={props.prefixCls}
       onChange={this.setValue}
       onSelect={this.onSelect}
