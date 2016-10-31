@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { PropTypes }from 'react';
 import MonthPanel from './month/MonthPanel';
 import CalendarMixin from './mixin/CalendarMixin';
 import CommonMixin from './mixin/CommonMixin';
 import KeyCode from 'rc-util/lib/KeyCode';
 
 const MonthCalendar = React.createClass({
+  propTypes: {
+    monthCellRender: PropTypes.func,
+    dateCellRender: PropTypes.func,
+  },
   mixins: [CommonMixin, CalendarMixin],
 
   onKeyDown(event) {
@@ -58,7 +62,8 @@ const MonthCalendar = React.createClass({
       disabledDate={props.disabledDate}
       style={{ position: 'relative' }}
       value={this.state.value}
-      contentRender={props.contentRender}
+      cellRender={props.monthCellRender}
+      contentRender={props.monthCellContentRender}
       rootPrefixCls={props.prefixCls}
       onChange={this.setValue}
       onSelect={this.onSelect}
