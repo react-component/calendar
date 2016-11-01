@@ -3,12 +3,12 @@ webpackJsonp([1],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(338);
+	module.exports = __webpack_require__(331);
 
 
 /***/ },
 
-/***/ 271:
+/***/ 268:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21,11 +21,11 @@ webpackJsonp([1],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _YearPanel = __webpack_require__(272);
+	var _YearPanel = __webpack_require__(269);
 	
 	var _YearPanel2 = _interopRequireDefault(_YearPanel);
 	
-	var _MonthTable = __webpack_require__(279);
+	var _MonthTable = __webpack_require__(276);
 	
 	var _MonthTable2 = _interopRequireDefault(_MonthTable);
 	
@@ -100,6 +100,8 @@ webpackJsonp([1],{
 	  render: function render() {
 	    var props = this.props;
 	    var value = this.state.value;
+	    var cellRender = props.cellRender;
+	    var contentRender = props.contentRender;
 	    var locale = props.locale;
 	    var year = value.year();
 	    var prefixCls = this.prefixCls;
@@ -161,6 +163,8 @@ webpackJsonp([1],{
 	            onSelect: this.setAndSelectValue,
 	            locale: locale,
 	            value: value,
+	            cellRender: cellRender,
+	            contentRender: contentRender,
 	            prefixCls: prefixCls
 	          })
 	        )
@@ -175,7 +179,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 272:
+/***/ 269:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -184,19 +188,19 @@ webpackJsonp([1],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(273);
+	var _defineProperty2 = __webpack_require__(270);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
-	var _classCallCheck2 = __webpack_require__(220);
+	var _classCallCheck2 = __webpack_require__(217);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(221);
+	var _possibleConstructorReturn2 = __webpack_require__(218);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(257);
+	var _inherits2 = __webpack_require__(254);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -204,11 +208,11 @@ webpackJsonp([1],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(277);
+	var _classnames = __webpack_require__(274);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _DecadePanel = __webpack_require__(278);
+	var _DecadePanel = __webpack_require__(275);
 	
 	var _DecadePanel2 = _interopRequireDefault(_DecadePanel);
 	
@@ -436,7 +440,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 278:
+/***/ 275:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -445,19 +449,19 @@ webpackJsonp([1],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(273);
+	var _defineProperty2 = __webpack_require__(270);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
-	var _classCallCheck2 = __webpack_require__(220);
+	var _classCallCheck2 = __webpack_require__(217);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(221);
+	var _possibleConstructorReturn2 = __webpack_require__(218);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(257);
+	var _inherits2 = __webpack_require__(254);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -465,7 +469,7 @@ webpackJsonp([1],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(277);
+	var _classnames = __webpack_require__(274);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -641,7 +645,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 285:
+/***/ 282:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -650,7 +654,7 @@ webpackJsonp([1],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(273);
+	var _defineProperty2 = __webpack_require__(270);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
@@ -658,15 +662,15 @@ webpackJsonp([1],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(277);
+	var _classnames = __webpack_require__(274);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _moment = __webpack_require__(267);
+	var _moment = __webpack_require__(264);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _index = __webpack_require__(269);
+	var _index = __webpack_require__(266);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -781,7 +785,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 289:
+/***/ 286:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -794,23 +798,23 @@ webpackJsonp([1],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(37);
+	var _reactDom = __webpack_require__(36);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _createChainedFunction = __webpack_require__(290);
+	var _createChainedFunction = __webpack_require__(287);
 	
 	var _createChainedFunction2 = _interopRequireDefault(_createChainedFunction);
 	
-	var _KeyCode = __webpack_require__(218);
+	var _KeyCode = __webpack_require__(215);
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _placements = __webpack_require__(291);
+	var _placements = __webpack_require__(288);
 	
 	var _placements2 = _interopRequireDefault(_placements);
 	
-	var _rcTrigger = __webpack_require__(292);
+	var _rcTrigger = __webpack_require__(289);
 	
 	var _rcTrigger2 = _interopRequireDefault(_rcTrigger);
 	
@@ -892,7 +896,7 @@ webpackJsonp([1],{
 	    }
 	  },
 	  onCalendarSelect: function onCalendarSelect(value) {
-	    var cause = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	    var cause = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
 	    var props = this.props;
 	    if (!('value' in props)) {
@@ -1013,7 +1017,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 291:
+/***/ 288:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1060,7 +1064,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 338:
+/***/ 331:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1071,33 +1075,33 @@ webpackJsonp([1],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(37);
+	var _reactDom = __webpack_require__(36);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _MonthCalendar = __webpack_require__(339);
+	var _MonthCalendar = __webpack_require__(332);
 	
 	var _MonthCalendar2 = _interopRequireDefault(_MonthCalendar);
 	
-	var _Picker = __webpack_require__(289);
+	var _Picker = __webpack_require__(286);
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _zh_CN = __webpack_require__(330);
+	var _zh_CN = __webpack_require__(323);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
-	var _en_US = __webpack_require__(287);
+	var _en_US = __webpack_require__(284);
 	
 	var _en_US2 = _interopRequireDefault(_en_US);
 	
-	var _moment = __webpack_require__(267);
+	var _moment = __webpack_require__(264);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	__webpack_require__(336);
+	__webpack_require__(329);
 	
-	__webpack_require__(337);
+	__webpack_require__(330);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -1157,7 +1161,7 @@ webpackJsonp([1],{
 	      _react2.default.createElement(
 	        'div',
 	        { style: { marginBottom: 10 } },
-	        '    ',
+	        '\xA0\xA0\xA0\xA0',
 	        _react2.default.createElement(
 	          'label',
 	          null,
@@ -1196,7 +1200,7 @@ webpackJsonp([1],{
 	              readOnly: true,
 	              disabled: state.disabled,
 	              value: value && value.format(format),
-	              placeholder: '请选择日期'
+	              placeholder: '\u8BF7\u9009\u62E9\u65E5\u671F'
 	            });
 	          }
 	        )
@@ -1217,6 +1221,11 @@ webpackJsonp([1],{
 	  return value.year() > now.year() || value.year() === now.year() && value.month() > now.month();
 	}
 	
+	function onMonthCellContentRender(value) {
+	  // console.log('month-calendar onMonthCellContentRender', (value && value.format(format)));
+	  return value.month() + 1 + '\u6708';
+	}
+	
 	_reactDom2.default.render(_react2.default.createElement(
 	  'div',
 	  {
@@ -1233,6 +1242,7 @@ webpackJsonp([1],{
 	    disabledDate: disabledDate,
 	    onSelect: onStandaloneSelect,
 	    onChange: onStandaloneChange,
+	    monthCellContentRender: onMonthCellContentRender,
 	    defaultValue: defaultCalendarValue
 	  }),
 	  _react2.default.createElement(
@@ -1244,7 +1254,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 339:
+/***/ 332:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1257,19 +1267,19 @@ webpackJsonp([1],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _MonthPanel = __webpack_require__(271);
+	var _MonthPanel = __webpack_require__(268);
 	
 	var _MonthPanel2 = _interopRequireDefault(_MonthPanel);
 	
-	var _CalendarMixin = __webpack_require__(285);
+	var _CalendarMixin = __webpack_require__(282);
 	
 	var _CalendarMixin2 = _interopRequireDefault(_CalendarMixin);
 	
-	var _CommonMixin = __webpack_require__(286);
+	var _CommonMixin = __webpack_require__(283);
 	
 	var _CommonMixin2 = _interopRequireDefault(_CommonMixin);
 	
-	var _KeyCode = __webpack_require__(218);
+	var _KeyCode = __webpack_require__(215);
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
@@ -1278,6 +1288,10 @@ webpackJsonp([1],{
 	var MonthCalendar = _react2.default.createClass({
 	  displayName: 'MonthCalendar',
 	
+	  propTypes: {
+	    monthCellRender: _react.PropTypes.func,
+	    dateCellRender: _react.PropTypes.func
+	  },
 	  mixins: [_CommonMixin2.default, _CalendarMixin2.default],
 	
 	  onKeyDown: function onKeyDown(event) {
@@ -1330,6 +1344,8 @@ webpackJsonp([1],{
 	      disabledDate: props.disabledDate,
 	      style: { position: 'relative' },
 	      value: this.state.value,
+	      cellRender: props.monthCellRender,
+	      contentRender: props.monthCellContentRender,
 	      rootPrefixCls: props.prefixCls,
 	      onChange: this.setValue,
 	      onSelect: this.onSelect

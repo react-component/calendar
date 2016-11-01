@@ -3,12 +3,12 @@ webpackJsonp([4],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(380);
+	module.exports = __webpack_require__(373);
 
 
 /***/ },
 
-/***/ 177:
+/***/ 174:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17,7 +17,7 @@ webpackJsonp([4],{
 	  value: true
 	});
 	
-	var _src = __webpack_require__(178);
+	var _src = __webpack_require__(175);
 	
 	var _src2 = _interopRequireDefault(_src);
 
@@ -28,7 +28,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 178:
+/***/ 175:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37,7 +37,7 @@ webpackJsonp([4],{
 	  value: true
 	});
 	
-	var _Calendar = __webpack_require__(179);
+	var _Calendar = __webpack_require__(176);
 	
 	var _Calendar2 = _interopRequireDefault(_Calendar);
 
@@ -48,7 +48,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 179:
+/***/ 176:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57,7 +57,7 @@ webpackJsonp([4],{
 	  value: true
 	});
 	
-	var _extends2 = __webpack_require__(180);
+	var _extends2 = __webpack_require__(177);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
@@ -65,39 +65,39 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(37);
+	var _reactDom = __webpack_require__(36);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _KeyCode = __webpack_require__(218);
+	var _KeyCode = __webpack_require__(215);
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _DateTable = __webpack_require__(219);
+	var _DateTable = __webpack_require__(216);
 	
 	var _DateTable2 = _interopRequireDefault(_DateTable);
 	
-	var _CalendarHeader = __webpack_require__(270);
+	var _CalendarHeader = __webpack_require__(267);
 	
 	var _CalendarHeader2 = _interopRequireDefault(_CalendarHeader);
 	
-	var _CalendarFooter = __webpack_require__(281);
+	var _CalendarFooter = __webpack_require__(278);
 	
 	var _CalendarFooter2 = _interopRequireDefault(_CalendarFooter);
 	
-	var _CalendarMixin = __webpack_require__(285);
+	var _CalendarMixin = __webpack_require__(282);
 	
 	var _CalendarMixin2 = _interopRequireDefault(_CalendarMixin);
 	
-	var _CommonMixin = __webpack_require__(286);
+	var _CommonMixin = __webpack_require__(283);
 	
 	var _CommonMixin2 = _interopRequireDefault(_CommonMixin);
 	
-	var _DateInput = __webpack_require__(288);
+	var _DateInput = __webpack_require__(285);
 	
 	var _DateInput2 = _interopRequireDefault(_DateInput);
 	
-	var _index = __webpack_require__(269);
+	var _index = __webpack_require__(266);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -390,7 +390,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 219:
+/***/ 216:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -399,15 +399,15 @@ webpackJsonp([4],{
 	  value: true
 	});
 	
-	var _classCallCheck2 = __webpack_require__(220);
+	var _classCallCheck2 = __webpack_require__(217);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(221);
+	var _possibleConstructorReturn2 = __webpack_require__(218);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(257);
+	var _inherits2 = __webpack_require__(254);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -415,11 +415,11 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _DateTHead = __webpack_require__(265);
+	var _DateTHead = __webpack_require__(262);
 	
 	var _DateTHead2 = _interopRequireDefault(_DateTHead);
 	
-	var _DateTBody = __webpack_require__(268);
+	var _DateTBody = __webpack_require__(265);
 	
 	var _DateTBody2 = _interopRequireDefault(_DateTBody);
 	
@@ -452,7 +452,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 265:
+/***/ 262:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -461,15 +461,15 @@ webpackJsonp([4],{
 	  value: true
 	});
 	
-	var _classCallCheck2 = __webpack_require__(220);
+	var _classCallCheck2 = __webpack_require__(217);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(221);
+	var _possibleConstructorReturn2 = __webpack_require__(218);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(257);
+	var _inherits2 = __webpack_require__(254);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -477,11 +477,11 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _DateConstants = __webpack_require__(266);
+	var _DateConstants = __webpack_require__(263);
 	
 	var _DateConstants2 = _interopRequireDefault(_DateConstants);
 	
-	var _moment = __webpack_require__(267);
+	var _moment = __webpack_require__(264);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
@@ -562,7 +562,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 266:
+/***/ 263:
 /***/ function(module, exports) {
 
 	"use strict";
@@ -578,7 +578,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 268:
+/***/ 265:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -591,11 +591,11 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _DateConstants = __webpack_require__(266);
+	var _DateConstants = __webpack_require__(263);
 	
 	var _DateConstants2 = _interopRequireDefault(_DateConstants);
 	
-	var _util = __webpack_require__(269);
+	var _util = __webpack_require__(266);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -828,7 +828,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 270:
+/***/ 267:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -841,15 +841,15 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _MonthPanel = __webpack_require__(271);
+	var _MonthPanel = __webpack_require__(268);
 	
 	var _MonthPanel2 = _interopRequireDefault(_MonthPanel);
 	
-	var _YearPanel = __webpack_require__(272);
+	var _YearPanel = __webpack_require__(269);
 	
 	var _YearPanel2 = _interopRequireDefault(_YearPanel);
 	
-	var _mapSelf = __webpack_require__(280);
+	var _mapSelf = __webpack_require__(277);
 	
 	var _mapSelf2 = _interopRequireDefault(_mapSelf);
 	
@@ -1030,7 +1030,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 271:
+/***/ 268:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1043,11 +1043,11 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _YearPanel = __webpack_require__(272);
+	var _YearPanel = __webpack_require__(269);
 	
 	var _YearPanel2 = _interopRequireDefault(_YearPanel);
 	
-	var _MonthTable = __webpack_require__(279);
+	var _MonthTable = __webpack_require__(276);
 	
 	var _MonthTable2 = _interopRequireDefault(_MonthTable);
 	
@@ -1122,6 +1122,8 @@ webpackJsonp([4],{
 	  render: function render() {
 	    var props = this.props;
 	    var value = this.state.value;
+	    var cellRender = props.cellRender;
+	    var contentRender = props.contentRender;
 	    var locale = props.locale;
 	    var year = value.year();
 	    var prefixCls = this.prefixCls;
@@ -1183,6 +1185,8 @@ webpackJsonp([4],{
 	            onSelect: this.setAndSelectValue,
 	            locale: locale,
 	            value: value,
+	            cellRender: cellRender,
+	            contentRender: contentRender,
 	            prefixCls: prefixCls
 	          })
 	        )
@@ -1197,7 +1201,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 272:
+/***/ 269:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1206,19 +1210,19 @@ webpackJsonp([4],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(273);
+	var _defineProperty2 = __webpack_require__(270);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
-	var _classCallCheck2 = __webpack_require__(220);
+	var _classCallCheck2 = __webpack_require__(217);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(221);
+	var _possibleConstructorReturn2 = __webpack_require__(218);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(257);
+	var _inherits2 = __webpack_require__(254);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -1226,11 +1230,11 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(277);
+	var _classnames = __webpack_require__(274);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _DecadePanel = __webpack_require__(278);
+	var _DecadePanel = __webpack_require__(275);
 	
 	var _DecadePanel2 = _interopRequireDefault(_DecadePanel);
 	
@@ -1458,7 +1462,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 278:
+/***/ 275:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1467,19 +1471,19 @@ webpackJsonp([4],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(273);
+	var _defineProperty2 = __webpack_require__(270);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
-	var _classCallCheck2 = __webpack_require__(220);
+	var _classCallCheck2 = __webpack_require__(217);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(221);
+	var _possibleConstructorReturn2 = __webpack_require__(218);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(257);
+	var _inherits2 = __webpack_require__(254);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -1487,7 +1491,7 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(277);
+	var _classnames = __webpack_require__(274);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -1663,7 +1667,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 280:
+/***/ 277:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1681,7 +1685,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 281:
+/***/ 278:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1690,11 +1694,11 @@ webpackJsonp([4],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(273);
+	var _defineProperty2 = __webpack_require__(270);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
-	var _extends2 = __webpack_require__(180);
+	var _extends2 = __webpack_require__(177);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
@@ -1702,27 +1706,27 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(37);
+	var _reactDom = __webpack_require__(36);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _mapSelf = __webpack_require__(280);
+	var _mapSelf = __webpack_require__(277);
 	
 	var _mapSelf2 = _interopRequireDefault(_mapSelf);
 	
-	var _classnames = __webpack_require__(277);
+	var _classnames = __webpack_require__(274);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _TodayButton = __webpack_require__(282);
+	var _TodayButton = __webpack_require__(279);
 	
 	var _TodayButton2 = _interopRequireDefault(_TodayButton);
 	
-	var _OkButton = __webpack_require__(283);
+	var _OkButton = __webpack_require__(280);
 	
 	var _OkButton2 = _interopRequireDefault(_OkButton);
 	
-	var _TimePickerButton = __webpack_require__(284);
+	var _TimePickerButton = __webpack_require__(281);
 	
 	var _TimePickerButton2 = _interopRequireDefault(_TimePickerButton);
 	
@@ -1801,7 +1805,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 282:
+/***/ 279:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1815,7 +1819,7 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _util = __webpack_require__(269);
+	var _util = __webpack_require__(266);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -1848,7 +1852,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 283:
+/***/ 280:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1888,7 +1892,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 284:
+/***/ 281:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1897,7 +1901,7 @@ webpackJsonp([4],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(273);
+	var _defineProperty2 = __webpack_require__(270);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
@@ -1907,7 +1911,7 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames2 = __webpack_require__(277);
+	var _classnames2 = __webpack_require__(274);
 	
 	var _classnames3 = _interopRequireDefault(_classnames2);
 	
@@ -1942,7 +1946,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 285:
+/***/ 282:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1951,7 +1955,7 @@ webpackJsonp([4],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(273);
+	var _defineProperty2 = __webpack_require__(270);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
@@ -1959,15 +1963,15 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(277);
+	var _classnames = __webpack_require__(274);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _moment = __webpack_require__(267);
+	var _moment = __webpack_require__(264);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _index = __webpack_require__(269);
+	var _index = __webpack_require__(266);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -2082,7 +2086,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 288:
+/***/ 285:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2095,11 +2099,11 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(37);
+	var _reactDom = __webpack_require__(36);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _moment = __webpack_require__(267);
+	var _moment = __webpack_require__(264);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
@@ -2234,7 +2238,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 289:
+/***/ 286:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2247,23 +2251,23 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(37);
+	var _reactDom = __webpack_require__(36);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _createChainedFunction = __webpack_require__(290);
+	var _createChainedFunction = __webpack_require__(287);
 	
 	var _createChainedFunction2 = _interopRequireDefault(_createChainedFunction);
 	
-	var _KeyCode = __webpack_require__(218);
+	var _KeyCode = __webpack_require__(215);
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _placements = __webpack_require__(291);
+	var _placements = __webpack_require__(288);
 	
 	var _placements2 = _interopRequireDefault(_placements);
 	
-	var _rcTrigger = __webpack_require__(292);
+	var _rcTrigger = __webpack_require__(289);
 	
 	var _rcTrigger2 = _interopRequireDefault(_rcTrigger);
 	
@@ -2345,7 +2349,7 @@ webpackJsonp([4],{
 	    }
 	  },
 	  onCalendarSelect: function onCalendarSelect(value) {
-	    var cause = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	    var cause = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
 	    var props = this.props;
 	    if (!('value' in props)) {
@@ -2466,7 +2470,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 291:
+/***/ 288:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2513,7 +2517,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 380:
+/***/ 373:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2524,39 +2528,39 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(37);
+	var _reactDom = __webpack_require__(36);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _rcCalendar = __webpack_require__(177);
+	var _rcCalendar = __webpack_require__(174);
 	
 	var _rcCalendar2 = _interopRequireDefault(_rcCalendar);
 	
-	var _Picker = __webpack_require__(289);
+	var _Picker = __webpack_require__(286);
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _rcDialog = __webpack_require__(381);
+	var _rcDialog = __webpack_require__(374);
 	
 	var _rcDialog2 = _interopRequireDefault(_rcDialog);
 	
-	__webpack_require__(385);
+	__webpack_require__(378);
 	
-	var _zh_CN = __webpack_require__(330);
+	var _zh_CN = __webpack_require__(323);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
-	var _en_US = __webpack_require__(287);
+	var _en_US = __webpack_require__(284);
 	
 	var _en_US2 = _interopRequireDefault(_en_US);
 	
-	var _moment = __webpack_require__(267);
+	var _moment = __webpack_require__(264);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	__webpack_require__(336);
+	__webpack_require__(329);
 	
-	__webpack_require__(337);
+	__webpack_require__(330);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -2612,7 +2616,7 @@ webpackJsonp([4],{
 	        { onClick: this.open },
 	        'open'
 	      ),
-	      ' ',
+	      '\xA0',
 	      _react2.default.createElement(
 	        'button',
 	        { onClick: this.destroy },
@@ -2655,25 +2659,16 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 381:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	module.exports = __webpack_require__(382);
-
-/***/ },
-
-/***/ 382:
+/***/ 374:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 	
-	var _extends2 = __webpack_require__(180);
+	var _extends2 = __webpack_require__(177);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
@@ -2681,80 +2676,73 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Dialog = __webpack_require__(383);
+	var _Dialog = __webpack_require__(375);
 	
 	var _Dialog2 = _interopRequireDefault(_Dialog);
 	
-	var _getContainerRenderMixin = __webpack_require__(329);
+	var _getContainerRenderMixin = __webpack_require__(322);
 	
 	var _getContainerRenderMixin2 = _interopRequireDefault(_getContainerRenderMixin);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	var DialogWrap = _react2["default"].createClass({
-	  displayName: 'DialogWrap',
+	    displayName: 'DialogWrap',
 	
-	  propTypes: {
-	    visible: _react.PropTypes.bool
-	  },
-	  mixins: [(0, _getContainerRenderMixin2["default"])({
-	    isVisible: function isVisible(instance) {
-	      return instance.props.visible;
+	    mixins: [(0, _getContainerRenderMixin2["default"])({
+	        isVisible: function isVisible(instance) {
+	            return instance.props.visible;
+	        },
+	
+	        autoDestroy: false,
+	        getComponent: function getComponent(instance, extra) {
+	            return _react2["default"].createElement(_Dialog2["default"], (0, _extends3["default"])({}, instance.props, extra, { key: 'dialog' }));
+	        }
+	    })],
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            visible: false
+	        };
 	    },
+	    shouldComponentUpdate: function shouldComponentUpdate(_ref) {
+	        var visible = _ref.visible;
 	
-	    autoDestroy: false,
-	    getComponent: function getComponent(instance, extra) {
-	      return _react2["default"].createElement(_Dialog2["default"], (0, _extends3["default"])({}, instance.props, extra, {
-	        key: 'dialog'
-	      }));
+	        return !!(this.props.visible || visible);
+	    },
+	    componentWillUnmount: function componentWillUnmount() {
+	        if (this.props.visible) {
+	            this.renderComponent({
+	                afterClose: this.removeContainer,
+	                onClose: function onClose() {},
+	
+	                visible: false
+	            });
+	        } else {
+	            this.removeContainer();
+	        }
+	    },
+	    getElement: function getElement(part) {
+	        return this._component.getElement(part);
+	    },
+	    render: function render() {
+	        return null;
 	    }
-	  })],
-	
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      visible: false
-	    };
-	  },
-	  shouldComponentUpdate: function shouldComponentUpdate(_ref) {
-	    var visible = _ref.visible;
-	
-	    return !!(this.props.visible || visible);
-	  },
-	  componentWillUnmount: function componentWillUnmount() {
-	    if (this.props.visible) {
-	      this.renderComponent({
-	        onAfterClose: this.removeContainer,
-	        onClose: function onClose() {},
-	
-	        visible: false
-	      });
-	    } else {
-	      this.removeContainer();
-	    }
-	  },
-	  getElement: function getElement(part) {
-	    return this._component.getElement(part);
-	  },
-	  render: function render() {
-	    return null;
-	  }
 	});
-	
 	exports["default"] = DialogWrap;
 	module.exports = exports['default'];
 
 /***/ },
 
-/***/ 383:
+/***/ 375:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 	
-	var _extends2 = __webpack_require__(180);
+	var _extends2 = __webpack_require__(177);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
@@ -2762,482 +2750,439 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(37);
+	var _reactDom = __webpack_require__(36);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _KeyCode = __webpack_require__(218);
+	var _KeyCode = __webpack_require__(215);
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _rcAnimate = __webpack_require__(317);
+	var _rcAnimate = __webpack_require__(309);
 	
 	var _rcAnimate2 = _interopRequireDefault(_rcAnimate);
 	
-	var _LazyRenderBox = __webpack_require__(384);
+	var _LazyRenderBox = __webpack_require__(376);
 	
 	var _LazyRenderBox2 = _interopRequireDefault(_LazyRenderBox);
+	
+	var _getScrollBarSize = __webpack_require__(377);
+	
+	var _getScrollBarSize2 = _interopRequireDefault(_getScrollBarSize);
+	
+	var _objectAssign = __webpack_require__(6);
+	
+	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	var uuid = 0;
 	var openCount = 0;
-	
-	// Measure scrollbar width for padding body during modal show/hide
-	var scrollbarMeasure = {
-	  position: 'absolute',
-	  top: '-9999px',
-	  width: '50px',
-	  height: '50px',
-	  overflow: 'scroll'
-	};
-	
 	/* eslint react/no-is-mounted:0 */
-	
 	function noop() {}
-	
 	function getScroll(w, top) {
-	  var ret = w['page' + (top ? 'Y' : 'X') + 'Offset'];
-	  var method = 'scroll' + (top ? 'Top' : 'Left');
-	  if (typeof ret !== 'number') {
-	    var d = w.document;
-	    ret = d.documentElement[method];
+	    var ret = w['page' + (top ? 'Y' : 'X') + 'Offset'];
+	    var method = 'scroll' + (top ? 'Top' : 'Left');
 	    if (typeof ret !== 'number') {
-	      ret = d.body[method];
+	        var d = w.document;
+	        ret = d.documentElement[method];
+	        if (typeof ret !== 'number') {
+	            ret = d.body[method];
+	        }
 	    }
-	  }
-	  return ret;
+	    return ret;
 	}
-	
 	function setTransformOrigin(node, value) {
-	  var style = node.style;
-	  ['Webkit', 'Moz', 'Ms', 'ms'].forEach(function (prefix) {
-	    style[prefix + 'TransformOrigin'] = value;
-	  });
-	  style['transformOrigin'] = value;
+	    var style = node.style;
+	    ['Webkit', 'Moz', 'Ms', 'ms'].forEach(function (prefix) {
+	        style[prefix + 'TransformOrigin'] = value;
+	    });
+	    style['transformOrigin'] = value;
 	}
-	
 	function offset(el) {
-	  var rect = el.getBoundingClientRect();
-	  var pos = {
-	    left: rect.left,
-	    top: rect.top
-	  };
-	  var doc = el.ownerDocument;
-	  var w = doc.defaultView || doc.parentWindow;
-	  pos.left += getScroll(w);
-	  pos.top += getScroll(w, 1);
-	  return pos;
-	}
-	
-	var Dialog = _react2["default"].createClass({
-	  displayName: 'Dialog',
-	
-	  propTypes: {
-	    className: _react.PropTypes.string,
-	    keyboard: _react.PropTypes.bool,
-	    style: _react.PropTypes.object,
-	    mask: _react.PropTypes.bool,
-	    children: _react.PropTypes.any,
-	    onAfterClose: _react.PropTypes.func,
-	    onClose: _react.PropTypes.func,
-	    closable: _react.PropTypes.bool,
-	    maskClosable: _react.PropTypes.bool,
-	    visible: _react.PropTypes.bool,
-	    mousePosition: _react.PropTypes.object,
-	    wrapStyle: _react.PropTypes.object,
-	    prefixCls: _react.PropTypes.string,
-	    wrapClassName: _react.PropTypes.string
-	  },
-	
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      onAfterClose: noop,
-	      className: '',
-	      mask: true,
-	      visible: false,
-	      keyboard: true,
-	      closable: true,
-	      maskClosable: true,
-	      prefixCls: 'rc-dialog',
-	      onClose: noop
+	    var rect = el.getBoundingClientRect();
+	    var pos = {
+	        left: rect.left,
+	        top: rect.top
 	    };
-	  },
-	  componentWillMount: function componentWillMount() {
-	    this.titleId = 'rcDialogTitle' + uuid++;
-	  },
-	  componentDidMount: function componentDidMount() {
-	    this.componentDidUpdate({});
-	  },
-	  componentDidUpdate: function componentDidUpdate(prevProps) {
-	    var props = this.props;
-	    var mousePosition = this.props.mousePosition;
-	    if (props.visible) {
-	      // first show
-	      if (!prevProps.visible) {
-	        this.lastOutSideFocusNode = document.activeElement;
-	        this.addScrollingEffect();
-	        this.refs.wrap.focus();
-	        var dialogNode = _reactDom2["default"].findDOMNode(this.refs.dialog);
-	        if (mousePosition) {
-	          var elOffset = offset(dialogNode);
-	          setTransformOrigin(dialogNode, mousePosition.x - elOffset.left + 'px ' + (mousePosition.y - elOffset.top) + 'px');
-	        } else {
-	          setTransformOrigin(dialogNode, '');
+	    var doc = el.ownerDocument;
+	    var w = doc.defaultView || doc.parentWindow;
+	    pos.left += getScroll(w);
+	    pos.top += getScroll(w, true);
+	    return pos;
+	}
+	var Dialog = _react2["default"].createClass({
+	    displayName: 'Dialog',
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            afterClose: noop,
+	            className: '',
+	            mask: true,
+	            visible: false,
+	            keyboard: true,
+	            closable: true,
+	            maskClosable: true,
+	            prefixCls: 'rc-dialog',
+	            onClose: noop
+	        };
+	    },
+	    componentWillMount: function componentWillMount() {
+	        this.titleId = 'rcDialogTitle' + uuid++;
+	    },
+	    componentDidMount: function componentDidMount() {
+	        this.componentDidUpdate({});
+	    },
+	    componentDidUpdate: function componentDidUpdate(prevProps) {
+	        var props = this.props;
+	        var mousePosition = this.props.mousePosition;
+	        if (props.visible) {
+	            // first show
+	            if (!prevProps.visible) {
+	                this.lastOutSideFocusNode = document.activeElement;
+	                this.addScrollingEffect();
+	                this.refs.wrap.focus();
+	                var dialogNode = _reactDom2["default"].findDOMNode(this.refs.dialog);
+	                if (mousePosition) {
+	                    var elOffset = offset(dialogNode);
+	                    setTransformOrigin(dialogNode, mousePosition.x - elOffset.left + 'px ' + (mousePosition.y - elOffset.top) + 'px');
+	                } else {
+	                    setTransformOrigin(dialogNode, '');
+	                }
+	            }
+	        } else if (prevProps.visible) {
+	            if (props.mask && this.lastOutSideFocusNode) {
+	                try {
+	                    this.lastOutSideFocusNode.focus();
+	                } catch (e) {
+	                    this.lastOutSideFocusNode = null;
+	                }
+	                this.lastOutSideFocusNode = null;
+	            }
 	        }
-	      }
-	    } else if (prevProps.visible) {
-	      if (props.mask && this.lastOutSideFocusNode) {
-	        try {
-	          this.lastOutSideFocusNode.focus();
-	        } catch (e) {
-	          this.lastOutSideFocusNode = null;
+	    },
+	    onAnimateLeave: function onAnimateLeave() {
+	        // need demo?
+	        // https://github.com/react-component/dialog/pull/28
+	        if (this.refs.wrap) {
+	            this.refs.wrap.style.display = 'none';
 	        }
-	        this.lastOutSideFocusNode = null;
-	      }
-	    }
-	  },
-	  onAnimateLeave: function onAnimateLeave() {
-	    // need demo?
-	    // https://github.com/react-component/dialog/pull/28
-	    if (this.refs.wrap) {
-	      this.refs.wrap.style.display = 'none';
-	    }
-	    this.removeScrollingEffect();
-	    this.props.onAfterClose();
-	  },
-	  onMaskClick: function onMaskClick(e) {
-	    if (e.target === e.currentTarget && this.props.closable && this.props.maskClosable) {
-	      this.close(e);
-	    }
-	  },
-	  onKeyDown: function onKeyDown(e) {
-	    var props = this.props;
-	    if (props.closable && props.keyboard) {
-	      if (e.keyCode === _KeyCode2["default"].ESC) {
-	        this.close(e);
-	      }
-	    }
-	    // keep focus inside dialog
-	    if (props.visible) {
-	      if (e.keyCode === _KeyCode2["default"].TAB) {
-	        var activeElement = document.activeElement;
-	        var dialogRoot = this.refs.wrap;
-	        var sentinel = this.refs.sentinel;
-	        if (e.shiftKey) {
-	          if (activeElement === dialogRoot) {
-	            sentinel.focus();
-	          }
-	        } else if (activeElement === this.refs.sentinel) {
-	          dialogRoot.focus();
+	        this.removeScrollingEffect();
+	        this.props.afterClose();
+	    },
+	    onMaskClick: function onMaskClick(e) {
+	        if (e.target === e.currentTarget && this.props.maskClosable) {
+	            this.close(e);
 	        }
-	      }
-	    }
-	  },
-	  getDialogElement: function getDialogElement() {
-	    var props = this.props;
-	    var closable = props.closable;
-	    var prefixCls = props.prefixCls;
-	    var dest = {};
-	    if (props.width !== undefined) {
-	      dest.width = props.width;
-	    }
-	    if (props.height !== undefined) {
-	      dest.height = props.height;
-	    }
-	
-	    var footer = void 0;
-	    if (props.footer) {
-	      footer = _react2["default"].createElement(
-	        'div',
-	        { className: prefixCls + '-footer', ref: 'footer' },
-	        props.footer
-	      );
-	    }
-	
-	    var header = void 0;
-	    if (props.title) {
-	      header = _react2["default"].createElement(
-	        'div',
-	        { className: prefixCls + '-header', ref: 'header' },
-	        _react2["default"].createElement(
-	          'div',
-	          { className: prefixCls + '-title', id: this.titleId },
-	          props.title
-	        )
-	      );
-	    }
-	
-	    var closer = void 0;
-	    if (closable) {
-	      closer = _react2["default"].createElement(
-	        'button',
-	        {
-	          onClick: this.close,
-	          'aria-label': 'Close',
-	          className: prefixCls + '-close'
-	        },
-	        _react2["default"].createElement('span', { className: prefixCls + '-close-x' })
-	      );
-	    }
-	
-	    var style = (0, _extends3["default"])({}, props.style, dest);
-	    var transitionName = this.getTransitionName();
-	    var dialogElement = _react2["default"].createElement(
-	      _LazyRenderBox2["default"],
-	      {
-	        role: 'document',
-	        ref: 'dialog',
-	        style: style,
-	        className: prefixCls + ' ' + (props.className || ''),
-	        visible: props.visible
-	      },
-	      _react2["default"].createElement(
-	        'div',
-	        { className: prefixCls + '-content' },
-	        closer,
-	        header,
-	        _react2["default"].createElement(
-	          'div',
-	          { className: prefixCls + '-body', style: props.bodyStyle, ref: 'body' },
-	          props.children
-	        ),
-	        footer
-	      ),
-	      _react2["default"].createElement(
-	        'div',
-	        { tabIndex: '0', ref: 'sentinel', style: { width: 0, height: 0, overflow: 'hidden' } },
-	        'sentinel'
-	      )
-	    );
-	    return _react2["default"].createElement(
-	      _rcAnimate2["default"],
-	      {
-	        key: 'dialog',
-	        showProp: 'visible',
-	        onLeave: this.onAnimateLeave,
-	        transitionName: transitionName,
-	        component: '',
-	        transitionAppear: true
-	      },
-	      dialogElement
-	    );
-	  },
-	  getZIndexStyle: function getZIndexStyle() {
-	    var style = {};
-	    var props = this.props;
-	    if (props.zIndex !== undefined) {
-	      style.zIndex = props.zIndex;
-	    }
-	    return style;
-	  },
-	  getWrapStyle: function getWrapStyle() {
-	    return (0, _extends3["default"])({}, this.getZIndexStyle(), this.props.wrapStyle);
-	  },
-	  getMaskElement: function getMaskElement() {
-	    var props = this.props;
-	    var maskElement = void 0;
-	    if (props.mask) {
-	      var maskTransition = this.getMaskTransitionName();
-	      maskElement = _react2["default"].createElement(_LazyRenderBox2["default"], {
-	        style: this.getZIndexStyle(),
-	        key: 'mask',
-	        className: props.prefixCls + '-mask',
-	        hiddenClassName: props.prefixCls + '-mask-hidden',
-	        visible: props.visible
-	      });
-	      if (maskTransition) {
-	        maskElement = _react2["default"].createElement(
-	          _rcAnimate2["default"],
-	          {
-	            key: 'mask',
-	            showProp: 'visible',
-	            transitionAppear: true,
-	            component: '',
-	            transitionName: maskTransition
-	          },
-	          maskElement
+	    },
+	    onKeyDown: function onKeyDown(e) {
+	        var props = this.props;
+	        if (props.keyboard && e.keyCode === _KeyCode2["default"].ESC) {
+	            this.close(e);
+	        }
+	        // keep focus inside dialog
+	        if (props.visible) {
+	            if (e.keyCode === _KeyCode2["default"].TAB) {
+	                var activeElement = document.activeElement;
+	                var dialogRoot = this.refs.wrap;
+	                var sentinel = this.refs.sentinel;
+	                if (e.shiftKey) {
+	                    if (activeElement === dialogRoot) {
+	                        sentinel.focus();
+	                    }
+	                } else if (activeElement === this.refs.sentinel) {
+	                    dialogRoot.focus();
+	                }
+	            }
+	        }
+	    },
+	    getDialogElement: function getDialogElement() {
+	        var props = this.props;
+	        var closable = props.closable;
+	        var prefixCls = props.prefixCls;
+	        var dest = {};
+	        if (props.width !== undefined) {
+	            dest.width = props.width;
+	        }
+	        if (props.height !== undefined) {
+	            dest.height = props.height;
+	        }
+	        var footer = void 0;
+	        if (props.footer) {
+	            footer = _react2["default"].createElement(
+	                'div',
+	                { className: prefixCls + '-footer', ref: 'footer' },
+	                props.footer
+	            );
+	        }
+	        var header = void 0;
+	        if (props.title) {
+	            header = _react2["default"].createElement(
+	                'div',
+	                { className: prefixCls + '-header', ref: 'header' },
+	                _react2["default"].createElement(
+	                    'div',
+	                    { className: prefixCls + '-title', id: this.titleId },
+	                    props.title
+	                )
+	            );
+	        }
+	        var closer = void 0;
+	        if (closable) {
+	            closer = _react2["default"].createElement(
+	                'button',
+	                { onClick: this.close, 'aria-label': 'Close', className: prefixCls + '-close' },
+	                _react2["default"].createElement('span', { className: prefixCls + '-close-x' })
+	            );
+	        }
+	        var style = (0, _objectAssign2["default"])({}, props.style, dest);
+	        var transitionName = this.getTransitionName();
+	        var dialogElement = _react2["default"].createElement(
+	            _LazyRenderBox2["default"],
+	            { role: 'document', ref: 'dialog', style: style, className: prefixCls + ' ' + (props.className || ''), visible: props.visible },
+	            _react2["default"].createElement(
+	                'div',
+	                { className: prefixCls + '-content' },
+	                closer,
+	                header,
+	                _react2["default"].createElement(
+	                    'div',
+	                    (0, _extends3["default"])({ className: prefixCls + '-body', style: props.bodyStyle, ref: 'body' }, props.bodyProps),
+	                    props.children
+	                ),
+	                footer
+	            ),
+	            _react2["default"].createElement(
+	                'div',
+	                { tabIndex: 0, ref: 'sentinel', style: { width: 0, height: 0, overflow: 'hidden' } },
+	                'sentinel'
+	            )
 	        );
-	      }
+	        return _react2["default"].createElement(
+	            _rcAnimate2["default"],
+	            { key: 'dialog', showProp: 'visible', onLeave: this.onAnimateLeave, transitionName: transitionName, component: '', transitionAppear: true },
+	            dialogElement
+	        );
+	    },
+	    getZIndexStyle: function getZIndexStyle() {
+	        var style = {};
+	        var props = this.props;
+	        if (props.zIndex !== undefined) {
+	            style.zIndex = props.zIndex;
+	        }
+	        return style;
+	    },
+	    getWrapStyle: function getWrapStyle() {
+	        return (0, _objectAssign2["default"])({}, this.getZIndexStyle(), this.props.wrapStyle);
+	    },
+	    getMaskStyle: function getMaskStyle() {
+	        return (0, _objectAssign2["default"])({}, this.getZIndexStyle(), this.props.maskStyle);
+	    },
+	    getMaskElement: function getMaskElement() {
+	        var props = this.props;
+	        var maskElement = void 0;
+	        if (props.mask) {
+	            var maskTransition = this.getMaskTransitionName();
+	            maskElement = _react2["default"].createElement(_LazyRenderBox2["default"], { style: this.getMaskStyle(), key: 'mask', className: props.prefixCls + '-mask', hiddenClassName: props.prefixCls + '-mask-hidden', visible: props.visible });
+	            if (maskTransition) {
+	                maskElement = _react2["default"].createElement(
+	                    _rcAnimate2["default"],
+	                    { key: 'mask', showProp: 'visible', transitionAppear: true, component: '', transitionName: maskTransition },
+	                    maskElement
+	                );
+	            }
+	        }
+	        return maskElement;
+	    },
+	    getMaskTransitionName: function getMaskTransitionName() {
+	        var props = this.props;
+	        var transitionName = props.maskTransitionName;
+	        var animation = props.maskAnimation;
+	        if (!transitionName && animation) {
+	            transitionName = props.prefixCls + '-' + animation;
+	        }
+	        return transitionName;
+	    },
+	    getTransitionName: function getTransitionName() {
+	        var props = this.props;
+	        var transitionName = props.transitionName;
+	        var animation = props.animation;
+	        if (!transitionName && animation) {
+	            transitionName = props.prefixCls + '-' + animation;
+	        }
+	        return transitionName;
+	    },
+	    getElement: function getElement(part) {
+	        return this.refs[part];
+	    },
+	    setScrollbar: function setScrollbar() {
+	        if (this.bodyIsOverflowing && this.scrollbarWidth !== undefined) {
+	            document.body.style.paddingRight = this.scrollbarWidth + 'px';
+	        }
+	    },
+	    addScrollingEffect: function addScrollingEffect() {
+	        openCount++;
+	        if (openCount !== 1) {
+	            return;
+	        }
+	        this.checkScrollbar();
+	        this.setScrollbar();
+	        document.body.style.overflow = 'hidden';
+	        // this.adjustDialog();
+	    },
+	    removeScrollingEffect: function removeScrollingEffect() {
+	        openCount--;
+	        if (openCount !== 0) {
+	            return;
+	        }
+	        document.body.style.overflow = '';
+	        this.resetScrollbar();
+	        // this.resetAdjustments();
+	    },
+	    close: function close(e) {
+	        this.props.onClose(e);
+	    },
+	    checkScrollbar: function checkScrollbar() {
+	        var fullWindowWidth = window.innerWidth;
+	        if (!fullWindowWidth) {
+	            var documentElementRect = document.documentElement.getBoundingClientRect();
+	            fullWindowWidth = documentElementRect.right - Math.abs(documentElementRect.left);
+	        }
+	        this.bodyIsOverflowing = document.body.clientWidth < fullWindowWidth;
+	        if (this.bodyIsOverflowing) {
+	            this.scrollbarWidth = (0, _getScrollBarSize2["default"])();
+	        }
+	    },
+	    resetScrollbar: function resetScrollbar() {
+	        document.body.style.paddingRight = '';
+	    },
+	    adjustDialog: function adjustDialog() {
+	        if (this.refs.wrap && this.scrollbarWidth !== undefined) {
+	            var modalIsOverflowing = this.refs.wrap.scrollHeight > document.documentElement.clientHeight;
+	            this.refs.wrap.style.paddingLeft = (!this.bodyIsOverflowing && modalIsOverflowing ? this.scrollbarWidth : '') + 'px';
+	            this.refs.wrap.style.paddingRight = (this.bodyIsOverflowing && !modalIsOverflowing ? this.scrollbarWidth : '') + 'px';
+	        }
+	    },
+	    resetAdjustments: function resetAdjustments() {
+	        if (this.refs.wrap) {
+	            this.refs.wrap.style.paddingLeft = this.refs.wrap.style.paddingLeft = '';
+	        }
+	    },
+	    render: function render() {
+	        var props = this.props;
+	        var prefixCls = props.prefixCls;
+	        var style = this.getWrapStyle();
+	        // clear hide display
+	        // and only set display after async anim, not here for hide
+	        if (props.visible) {
+	            style.display = null;
+	        }
+	        return _react2["default"].createElement(
+	            'div',
+	            null,
+	            this.getMaskElement(),
+	            _react2["default"].createElement(
+	                'div',
+	                (0, _extends3["default"])({ tabIndex: -1, onKeyDown: this.onKeyDown, className: prefixCls + '-wrap ' + (props.wrapClassName || ''), ref: 'wrap', onClick: this.onMaskClick, role: 'dialog', 'aria-labelledby': props.title ? this.titleId : null, style: style }, props.wrapProps),
+	                this.getDialogElement()
+	            )
+	        );
 	    }
-	    return maskElement;
-	  },
-	  getMaskTransitionName: function getMaskTransitionName() {
-	    var props = this.props;
-	    var transitionName = props.maskTransitionName;
-	    var animation = props.maskAnimation;
-	    if (!transitionName && animation) {
-	      transitionName = props.prefixCls + '-' + animation;
-	    }
-	    return transitionName;
-	  },
-	  getTransitionName: function getTransitionName() {
-	    var props = this.props;
-	    var transitionName = props.transitionName;
-	    var animation = props.animation;
-	    if (!transitionName && animation) {
-	      transitionName = props.prefixCls + '-' + animation;
-	    }
-	    return transitionName;
-	  },
-	  getElement: function getElement(part) {
-	    return this.refs[part];
-	  },
-	  setScrollbar: function setScrollbar() {
-	    if (this.bodyIsOverflowing && this.scrollbarWidth) {
-	      document.body.style.paddingRight = this.scrollbarWidth + 'px';
-	    }
-	  },
-	  addScrollingEffect: function addScrollingEffect() {
-	    openCount++;
-	    if (openCount !== 1) {
-	      return;
-	    }
-	    this.checkScrollbar();
-	    this.setScrollbar();
-	    document.body.style.overflow = 'hidden';
-	    // this.adjustDialog();
-	  },
-	  removeScrollingEffect: function removeScrollingEffect() {
-	    openCount--;
-	    if (openCount !== 0) {
-	      return;
-	    }
-	    document.body.style.overflow = '';
-	    this.resetScrollbar();
-	    // this.resetAdjustments();
-	  },
-	  close: function close(e) {
-	    this.props.onClose(e);
-	  },
-	  checkScrollbar: function checkScrollbar() {
-	    var fullWindowWidth = window.innerWidth;
-	    if (!fullWindowWidth) {
-	      // workaround for missing window.innerWidth in IE8
-	      var documentElementRect = document.documentElement.getBoundingClientRect();
-	      fullWindowWidth = documentElementRect.right - Math.abs(documentElementRect.left);
-	    }
-	    this.bodyIsOverflowing = document.body.clientWidth < fullWindowWidth;
-	    if (this.bodyIsOverflowing) {
-	      this.scrollbarWidth = this.measureScrollbar();
-	    }
-	  },
-	  resetScrollbar: function resetScrollbar() {
-	    document.body.style.paddingRight = '';
-	  },
-	  measureScrollbar: function measureScrollbar() {
-	    if (this.scrollbarWidth !== undefined) {
-	      return this.scrollbarWidth;
-	    }
-	    var scrollDiv = document.createElement('div');
-	    for (var scrollProp in scrollbarMeasure) {
-	      if (scrollbarMeasure.hasOwnProperty(scrollProp)) {
-	        scrollDiv.style[scrollProp] = scrollbarMeasure[scrollProp];
-	      }
-	    }
-	    document.body.appendChild(scrollDiv);
-	    var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-	    document.body.removeChild(scrollDiv);
-	    this.scrollbarWidth = scrollbarWidth;
-	    return scrollbarWidth;
-	  },
-	  adjustDialog: function adjustDialog() {
-	    if (this.refs.wrap && this.scrollbarWidth) {
-	      var modalIsOverflowing = this.refs.wrap.scrollHeight > document.documentElement.clientHeight;
-	      this.refs.wrap.style.paddingLeft = (!this.bodyIsOverflowing && modalIsOverflowing ? this.scrollbarWidth : '') + 'px';
-	      this.refs.wrap.style.paddingRight = (this.bodyIsOverflowing && !modalIsOverflowing ? this.scrollbarWidth : '') + 'px';
-	    }
-	  },
-	  resetAdjustments: function resetAdjustments() {
-	    if (this.refs.wrap) {
-	      this.refs.wrap.style.paddingLeft = this.refs.wrap.style.paddingLeft = '';
-	    }
-	  },
-	  render: function render() {
-	    var props = this.props;
-	    var prefixCls = props.prefixCls;
-	    var style = this.getWrapStyle();
-	    // clear hide display
-	    // and only set display after async anim, not here for hide
-	    if (props.visible) {
-	      style.display = null;
-	    }
-	    return _react2["default"].createElement(
-	      'div',
-	      null,
-	      this.getMaskElement(),
-	      _react2["default"].createElement(
-	        'div',
-	        {
-	          tabIndex: '-1',
-	          onKeyDown: this.onKeyDown,
-	          className: prefixCls + '-wrap ' + (props.wrapClassName || ''),
-	          ref: 'wrap',
-	          onClick: this.onMaskClick,
-	          role: 'dialog',
-	          'aria-labelledby': props.title ? this.titleId : null,
-	          style: style
-	        },
-	        this.getDialogElement()
-	      )
-	    );
-	  }
 	});
-	
 	exports["default"] = Dialog;
 	module.exports = exports['default'];
 
 /***/ },
 
-/***/ 384:
+/***/ 376:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
-	
-	var _extends2 = __webpack_require__(180);
-	
-	var _extends3 = _interopRequireDefault(_extends2);
 	
 	var _react = __webpack_require__(3);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _objectAssign = __webpack_require__(6);
+	
+	var _objectAssign2 = _interopRequireDefault(_objectAssign);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	var LazyRenderBox = _react2["default"].createClass({
-	  displayName: 'LazyRenderBox',
-	
-	  propTypes: {
-	    className: _react.PropTypes.string,
-	    visible: _react.PropTypes.bool,
-	    hiddenClassName: _react.PropTypes.string
-	  },
-	  shouldComponentUpdate: function shouldComponentUpdate(nextProps) {
-	    return nextProps.hiddenClassName || nextProps.visible;
-	  },
-	  render: function render() {
-	    var className = this.props.className;
-	    if (this.props.hiddenClassName && !this.props.visible) {
-	      className += ' ' + this.props.hiddenClassName;
+	    displayName: 'LazyRenderBox',
+	    shouldComponentUpdate: function shouldComponentUpdate(nextProps) {
+	        return !!nextProps.hiddenClassName || !!nextProps.visible;
+	    },
+	    render: function render() {
+	        var className = this.props.className;
+	        if (!!this.props.hiddenClassName && !this.props.visible) {
+	            className += ' ' + this.props.hiddenClassName;
+	        }
+	        var props = (0, _objectAssign2["default"])({}, this.props);
+	        delete props.hiddenClassName;
+	        delete props.visible;
+	        props.className = className;
+	        return _react2["default"].createElement('div', props);
 	    }
-	    var props = (0, _extends3["default"])({}, this.props);
-	    delete props.hiddenClassName;
-	    delete props.visible;
-	    props.className = className;
-	    return _react2["default"].createElement('div', props);
-	  }
 	});
-	
 	exports["default"] = LazyRenderBox;
 	module.exports = exports['default'];
 
 /***/ },
 
-/***/ 385:
+/***/ 377:
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	var cached = void 0;
+	
+	function getScrollBarSize(fresh) {
+	  if (fresh || cached === undefined) {
+	    var inner = document.createElement('div');
+	    inner.style.width = '100%';
+	    inner.style.height = '200px';
+	
+	    var outer = document.createElement('div');
+	    var outerStyle = outer.style;
+	
+	    outerStyle.position = 'absolute';
+	    outerStyle.top = 0;
+	    outerStyle.left = 0;
+	    outerStyle.pointerEvents = 'none';
+	    outerStyle.visibility = 'hidden';
+	    outerStyle.width = '200px';
+	    outerStyle.height = '150px';
+	    outerStyle.overflow = 'hidden';
+	
+	    outer.appendChild(inner);
+	
+	    document.body.appendChild(outer);
+	
+	    var widthContained = inner.offsetWidth;
+	    outer.style.overflow = 'scroll';
+	    var widthScroll = inner.offsetWidth;
+	
+	    if (widthContained === widthScroll) {
+	      widthScroll = outer.clientWidth;
+	    }
+	
+	    document.body.removeChild(outer);
+	
+	    cached = widthContained - widthScroll;
+	  }
+	  return cached;
+	}
+	
+	module.exports = getScrollBarSize;
+
+/***/ },
+
+/***/ 378:
 2
 
 });
