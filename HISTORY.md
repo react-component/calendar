@@ -1,6 +1,10 @@
 # History
 ----
 
+## 7.4.0 / 2016-11-01
+
+- add monthCellContentRender/cellContentRender for MonthCalendar
+
 ## 7.3.0 / 2016-10-18
 
 - disabledTime support type param for range-calendar

@@ -120,22 +120,9 @@ function disabledDate(value) {
     value.year() === now.year() && value.month() > now.month();
 }
 
-// usage:   monthCellRender={onMonthCellRender}
-function onMonthCellRender(value, locale){
-  const content = value.month() + 1;
-  const prefixCls = 'rc-calendar-month-panel';
-  const cellEl = (
-    <a className={`${prefixCls}-month`}>
-      {content}
-    </a>
-  );
-  console.log('month-calendar onMonthCellRender', (value && value.format(format)));
-  return cellEl;
-}
-
-function onMonthCellContentRender(value, locale){
-  console.log('month-calendar onMonthCellContentRender', (value && value.format(format)));
-  return value.month() + 1;
+function onMonthCellContentRender(value) {
+  // console.log('month-calendar onMonthCellContentRender', (value && value.format(format)));
+  return `${value.month() + 1}月`;
 }
 
 ReactDOM.render(
@@ -158,7 +145,7 @@ ReactDOM.render(
     />
 
     <div style={{ marginTop: 200 }}>
-      <Test defaultValue={now}/>
+      <Test defaultValue={now} />
     </div>
   </div>)
   , document.getElementById('__react-content'));

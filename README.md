@@ -394,6 +394,25 @@ http://react-component.github.io/calendar/examples/index.html
           <td>called when a date is selected from calendar</td>
         </tr>
         <tr>
+          <td>monthCellRender</td>
+          <td>function</td>
+          <td></td>
+          <td>Custom month cell render method</td>
+        </tr>
+        <tr>
+          <td>dateCellRender</td>
+          <td>function</td>
+          <td></td>
+          <td>Custom date cell render method</td>
+        </tr>
+        <tr>
+          <td>monthCellContentRender</td>
+          <td>function</td>
+          <td></td>
+          <td>Custom month cell content render method,the content will be appended to the cell.</td>
+        </tr>
+        <tr>
+        <tr>
           <td>onChange</td>
           <td>Function(date: moment)</td>
           <td></td>
