@@ -53,7 +53,7 @@ function onInputSelect(direction, value) {
   const selectedValue = originalValue.concat();
   const index = direction === 'left' ? 0 : 1;
   selectedValue[index] = value;
-  if (this.compare(selectedValue[0], selectedValue[1]) > 0) {
+  if (selectedValue[0] && this.compare(selectedValue[0], selectedValue[1]) > 0) {
     selectedValue[1 - index] = this.state.showTimePicker ? selectedValue[index] : undefined;
   }
   this.fireSelectValueChange(selectedValue);
@@ -318,6 +318,15 @@ const RangeCalendar = React.createClass({
         selectedValue,
       });
     }
+
+    // 尚未选择过时间，直接输入的话
+    if (!this.state.selectedValue[0] || !this.state.selectedValue[1]) {
+      this.setState({
+        selectedValue,
+        value: selectedValue[0],
+      });
+    }
+
     if (selectedValue[0] && !selectedValue[1]) {
       this.setState({
         hoverValue: selectedValue.concat(),

@@ -51,11 +51,9 @@ const CalendarPart = React.createClass({
         defaultOpenValue: value,
         value: selectedValue[index],
       });
-
     return (
       <div className={`${rangeClassName}-part ${rangeClassName}-${direction}`}>
         <DateInput
-          disabled={!selectedValue[0] || !selectedValue[1]}
           format={format}
           locale={locale}
           prefixCls={prefixCls}
