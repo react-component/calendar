@@ -2319,7 +2319,7 @@ webpackJsonp([6],{
 	    var hoverValue = state.hoverValue;
 	    var selectedValue = state.selectedValue;
 	
-	    var className = (_className = {}, (0, _defineProperty3.default)(_className, props.className, !!props.className), (0, _defineProperty3.default)(_className, prefixCls, 1), (0, _defineProperty3.default)(_className, prefixCls + '-hidden', !props.visible), (0, _defineProperty3.default)(_className, prefixCls + '-range', 1), (0, _defineProperty3.default)(_className, prefixCls + '-week-number', props.showWeekNumber), _className);
+	    var className = (_className = {}, (0, _defineProperty3.default)(_className, props.className, !!props.className), (0, _defineProperty3.default)(_className, prefixCls, 1), (0, _defineProperty3.default)(_className, prefixCls + '-hidden', !props.visible), (0, _defineProperty3.default)(_className, prefixCls + '-range', 1), (0, _defineProperty3.default)(_className, prefixCls + '-show-time-picker', showTimePicker), (0, _defineProperty3.default)(_className, prefixCls + '-week-number', props.showWeekNumber), _className);
 	    var classes = (0, _classnames3.default)(className);
 	    var newProps = {
 	      selectedValue: state.selectedValue,
