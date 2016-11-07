@@ -382,6 +382,7 @@ const RangeCalendar = React.createClass({
       [prefixCls]: 1,
       [`${prefixCls}-hidden`]: !props.visible,
       [`${prefixCls}-range`]: 1,
+      [`${prefixCls}-show-time-picker`]: showTimePicker,
       [`${prefixCls}-week-number`]: props.showWeekNumber,
     };
     const classes = classnames(className);
