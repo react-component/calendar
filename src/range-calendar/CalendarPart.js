@@ -20,6 +20,7 @@ const CalendarPart = React.createClass({
     disabledTime: PropTypes.any,
     onInputSelect: PropTypes.func,
     timePickerDisabledTime: PropTypes.object,
+    hideDisabledOptions: PropTypes.bool,
   },
   render() {
     const props = this.props;
@@ -28,7 +29,7 @@ const CalendarPart = React.createClass({
       locale, selectedValue, format, placeholder,
       disabledDate, timePicker, disabledTime,
       timePickerDisabledTime, showTimePicker,
-      hoverValue, onInputSelect,
+      hoverValue, onInputSelect, hideDisabledOptions,
     } = props;
     const disabledTimeConfig = showTimePicker && disabledTime && timePicker ?
       getTimeConfig(selectedValue, disabledTime) : null;
@@ -49,6 +50,7 @@ const CalendarPart = React.createClass({
         ...timePickerDisabledTime,
         onChange: onInputSelect,
         defaultOpenValue: value,
+        hideDisabledOptions,
         value: selectedValue[index],
       });
     return (
