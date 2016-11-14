@@ -582,7 +582,7 @@ webpackJsonp([0],{
 	    var timePickerEle = timePicker && showTimePicker ? _react2.default.cloneElement(timePicker, (0, _extends3.default)({
 	      showHour: true,
 	      showSecond: true
-	    }, disabledTimeConfig, timePicker.props, {
+	    }, timePicker.props, disabledTimeConfig, {
 	      onChange: this.onDateInputChange,
 	      defaultOpenValue: value,
 	      value: selectedValue
