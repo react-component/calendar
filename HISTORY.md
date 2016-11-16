@@ -1,6 +1,10 @@
 # History
 ----
 
+## 7.5.0 / 2016-11-16
+
+- add showToday for RangeCalendar
+
 ## 7.4.0 / 2016-11-01
 
 - add monthCellContentRender/cellContentRender for MonthCalendar

@@ -25,3 +25,4 @@ dist
 build
 lib
 coverage
+yarn.lock
