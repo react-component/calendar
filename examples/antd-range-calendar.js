@@ -2762,6 +2762,7 @@ webpackJsonp([2],{
 	    'div',
 	    { style: { margin: 10 } },
 	    _react2.default.createElement(_RangeCalendar2.default, {
+	      showToday: false,
 	      showWeekNumber: true,
 	      defaultValue: now,
 	      dateInputPlaceholder: ['start', 'end'],
@@ -2907,6 +2908,7 @@ webpackJsonp([2],{
 	    timePicker: _react.PropTypes.any,
 	    value: _react.PropTypes.any,
 	    showOk: _react.PropTypes.bool,
+	    showToday: _react.PropTypes.bool,
 	    selectedValue: _react.PropTypes.array,
 	    defaultSelectedValue: _react.PropTypes.array,
 	    onOk: _react.PropTypes.func,
@@ -2928,7 +2930,8 @@ webpackJsonp([2],{
 	      type: 'both',
 	      defaultSelectedValue: [],
 	      onValueChange: noop,
-	      disabledTime: noop
+	      disabledTime: noop,
+	      showToday: true
 	    };
 	  },
 	  getInitialState: function getInitialState() {
@@ -3226,6 +3229,7 @@ webpackJsonp([2],{
 	    var showOk = props.showOk;
 	    var locale = props.locale;
 	    var showClear = props.showClear;
+	    var showToday = props.showToday;
 	    var type = props.type;
 	    var hoverValue = state.hoverValue;
 	    var selectedValue = state.selectedValue;
@@ -3322,16 +3326,16 @@ webpackJsonp([2],{
 	          'div',
 	          { className: cls },
 	          props.renderFooter(),
-	          _react2.default.createElement(
+	          showToday || props.timePicker || showOkButton ? _react2.default.createElement(
 	            'div',
 	            { className: prefixCls + '-footer-btn' },
-	            _react2.default.createElement(_TodayButton2.default, (0, _extends3.default)({}, props, {
+	            showToday ? _react2.default.createElement(_TodayButton2.default, (0, _extends3.default)({}, props, {
 	              disabled: isTodayInView,
 	              value: state.value,
 	              onToday: this.onToday,
 	              text: locale.backToToday
-	            })),
-	            !!props.timePicker ? _react2.default.createElement(_TimePickerButton2.default, (0, _extends3.default)({}, props, {
+	            })) : null,
+	            props.timePicker ? _react2.default.createElement(_TimePickerButton2.default, (0, _extends3.default)({}, props, {
 	              showTimePicker: showTimePicker,
 	              onOpenTimePicker: this.onOpenTimePicker,
 	              onCloseTimePicker: this.onCloseTimePicker,
@@ -3342,7 +3346,7 @@ webpackJsonp([2],{
 	              onOk: this.onOk,
 	              okDisabled: !this.hasSelectedValue() || hoverValue.length
 	            })) : null
-	          )
+	          ) : null
 	        )
 	      )
 	    );
