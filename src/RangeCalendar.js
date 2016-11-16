@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import moment from 'moment';
 import classnames from 'classnames';
 import CalendarPart from './range-calendar/CalendarPart';
-import { syncTime, getTodayTime } from './util/';
+import { syncTime, getTodayTime, isAllowedDate } from './util/';
 import TodayButton from './calendar/TodayButton';
 import OkButton from './calendar/OkButton';
 import TimePickerButton from './calendar/TimePickerButton';
@@ -76,6 +76,7 @@ const RangeCalendar = React.createClass({
     onChange: PropTypes.func,
     onSelect: PropTypes.func,
     onValueChange: PropTypes.func,
+    disabledDate: PropTypes.func,
     format: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     onClear: PropTypes.func,
     type: PropTypes.any,
@@ -220,8 +221,12 @@ const RangeCalendar = React.createClass({
       showTimePicker: false,
     });
   },
+
   onOk() {
-    this.props.onOk(this.state.selectedValue);
+    const { selectedValue } = this.state;
+    if (this.isAllowedDateAndTime(selectedValue)) {
+      this.props.onOk(this.state.selectedValue);
+    }
   },
 
   onStartInputSelect(...oargs) {
@@ -300,6 +305,11 @@ const RangeCalendar = React.createClass({
       };
     }
     return null;
+  },
+
+  isAllowedDateAndTime(selectedValue) {
+    return isAllowedDate(selectedValue[0], this.props.disabledDate, this.disabledStartTime) &&
+    isAllowedDate(selectedValue[1], this.props.disabledDate, this.disabledEndTime);
   },
 
   hasSelectedValue() {
@@ -500,7 +510,9 @@ const RangeCalendar = React.createClass({
                     {...props}
                     value={state.value}
                     onOk={this.onOk}
-                    okDisabled={!this.hasSelectedValue() || hoverValue.length}
+                    okDisabled={!this.isAllowedDateAndTime(selectedValue) ||
+                      !this.hasSelectedValue() || hoverValue.length
+                    }
                   /> : null}
               </div>
             ) : null}

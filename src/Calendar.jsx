@@ -208,6 +208,7 @@ const Calendar = React.createClass({
       onChange: this.onDateInputChange,
       defaultOpenValue: value,
       value: selectedValue,
+      disabledTime,
     }) : null;
     const dateInputElement = props.showDateInput ? (
       <DateInput
@@ -271,6 +272,7 @@ const Calendar = React.createClass({
             selectedValue={selectedValue}
             value={value}
             disabledDate={disabledDate}
+            okDisabled={!this.isAllowedDate(selectedValue)}
             onOk={this.onOk}
             onSelect={this.onSelect}
             onToday={this.onToday}
