@@ -585,7 +585,8 @@ webpackJsonp([0],{
 	    }, timePicker.props, disabledTimeConfig, {
 	      onChange: this.onDateInputChange,
 	      defaultOpenValue: value,
-	      value: selectedValue
+	      value: selectedValue,
+	      disabledTime: disabledTime
 	    })) : null;
 	    var dateInputElement = props.showDateInput ? _react2.default.createElement(_DateInput2.default, {
 	      ref: 'dateInput',
@@ -652,6 +653,7 @@ webpackJsonp([0],{
 	          selectedValue: selectedValue,
 	          value: value,
 	          disabledDate: disabledDate,
+	          okDisabled: !this.isAllowedDate(selectedValue),
 	          onOk: this.onOk,
 	          onSelect: this.onSelect,
 	          onToday: this.onToday,

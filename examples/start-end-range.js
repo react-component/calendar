@@ -2005,6 +2005,7 @@ webpackJsonp([6],{
 	    onChange: _react.PropTypes.func,
 	    onSelect: _react.PropTypes.func,
 	    onValueChange: _react.PropTypes.func,
+	    disabledDate: _react.PropTypes.func,
 	    format: _react.PropTypes.oneOfType([_react.PropTypes.object, _react.PropTypes.string]),
 	    onClear: _react.PropTypes.func,
 	    type: _react.PropTypes.any,
@@ -2147,7 +2148,11 @@ webpackJsonp([6],{
 	    });
 	  },
 	  onOk: function onOk() {
-	    this.props.onOk(this.state.selectedValue);
+	    var selectedValue = this.state.selectedValue;
+	
+	    if (this.isAllowedDateAndTime(selectedValue)) {
+	      this.props.onOk(this.state.selectedValue);
+	    }
 	  },
 	  onStartInputSelect: function onStartInputSelect() {
 	    for (var _len = arguments.length, oargs = Array(_len), _key = 0; _key < _len; _key++) {
@@ -2246,6 +2251,9 @@ webpackJsonp([6],{
 	      if ((typeof _ret === 'undefined' ? 'undefined' : (0, _typeof3.default)(_ret)) === "object") return _ret.v;
 	    }
 	    return null;
+	  },
+	  isAllowedDateAndTime: function isAllowedDateAndTime(selectedValue) {
+	    return (0, _util.isAllowedDate)(selectedValue[0], this.props.disabledDate, this.disabledStartTime) && (0, _util.isAllowedDate)(selectedValue[1], this.props.disabledDate, this.disabledEndTime);
 	  },
 	  hasSelectedValue: function hasSelectedValue() {
 	    var selectedValue = this.state.selectedValue;
@@ -2432,7 +2440,7 @@ webpackJsonp([6],{
 	            showOkButton ? _react2.default.createElement(_OkButton2.default, (0, _extends3.default)({}, props, {
 	              value: state.value,
 	              onOk: this.onOk,
-	              okDisabled: !this.hasSelectedValue() || hoverValue.length
+	              okDisabled: !this.isAllowedDateAndTime(selectedValue) || !this.hasSelectedValue() || hoverValue.length
 	            })) : null
 	          ) : null
 	        )
@@ -2686,6 +2694,7 @@ webpackJsonp([6],{
 	    var index = direction === 'left' ? 0 : 1;
 	    var timePickerEle = showTimePicker && timePicker && _react2.default.cloneElement(timePicker, (0, _extends3.default)({
 	      showHour: true,
+	      showMinute: true,
 	      showSecond: true
 	    }, timePicker.props, disabledTimeConfig, timePickerDisabledTime, {
 	      onChange: onInputSelect,
