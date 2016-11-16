@@ -67,6 +67,7 @@ const RangeCalendar = React.createClass({
     timePicker: PropTypes.any,
     value: PropTypes.any,
     showOk: PropTypes.bool,
+    showToday: PropTypes.bool,
     selectedValue: PropTypes.array,
     defaultSelectedValue: PropTypes.array,
     onOk: PropTypes.func,
@@ -89,6 +90,7 @@ const RangeCalendar = React.createClass({
       defaultSelectedValue: [],
       onValueChange: noop,
       disabledTime: noop,
+      showToday: true,
     };
   },
 
@@ -371,7 +373,7 @@ const RangeCalendar = React.createClass({
     const {
       prefixCls, dateInputPlaceholder,
       timePicker, showOk, locale, showClear,
-      type,
+      showToday, type,
     } = props;
     const {
       hoverValue,
@@ -474,30 +476,34 @@ const RangeCalendar = React.createClass({
           </div>
           <div className={cls}>
             {props.renderFooter()}
-            <div className={`${prefixCls}-footer-btn`}>
-              <TodayButton
-                {...props}
-                disabled={isTodayInView}
-                value={state.value}
-                onToday={this.onToday}
-                text={locale.backToToday}
-              />
-              {!!props.timePicker ?
-                <TimePickerButton
-                  {...props}
-                  showTimePicker={showTimePicker}
-                  onOpenTimePicker={this.onOpenTimePicker}
-                  onCloseTimePicker={this.onCloseTimePicker}
-                  timePickerDisabled={!this.hasSelectedValue() || hoverValue.length}
-                /> : null}
-              {showOkButton ?
-                <OkButton
-                  {...props}
-                  value={state.value}
-                  onOk={this.onOk}
-                  okDisabled={!this.hasSelectedValue() || hoverValue.length}
-                /> : null}
-            </div>
+            {showToday || props.timePicker || showOkButton ? (
+              <div className={`${prefixCls}-footer-btn`}>
+                {showToday ? (
+                  <TodayButton
+                    {...props}
+                    disabled={isTodayInView}
+                    value={state.value}
+                    onToday={this.onToday}
+                    text={locale.backToToday}
+                  />
+                ) : null}
+                {props.timePicker ?
+                  <TimePickerButton
+                    {...props}
+                    showTimePicker={showTimePicker}
+                    onOpenTimePicker={this.onOpenTimePicker}
+                    onCloseTimePicker={this.onCloseTimePicker}
+                    timePickerDisabled={!this.hasSelectedValue() || hoverValue.length}
+                  /> : null}
+                {showOkButton ?
+                  <OkButton
+                    {...props}
+                    value={state.value}
+                    onOk={this.onOk}
+                    okDisabled={!this.hasSelectedValue() || hoverValue.length}
+                  /> : null}
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

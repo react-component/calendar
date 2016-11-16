@@ -161,6 +161,7 @@ ReactDOM.render(
     <h2>calendar</h2>
     <div style={{ margin: 10 }}>
       <RangeCalendar
+        showToday={false}
         showWeekNumber
         defaultValue={now}
         dateInputPlaceholder={['start', 'end']}

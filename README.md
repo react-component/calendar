@@ -289,6 +289,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>whether to show week number of year</td>
         </tr>
         <tr>
+          <td>showToday</td>
+          <td>Boolean</td>
+          <td>true</td>
+          <td>whether to show today button</td>
+        </tr>
+        <tr>
           <td>showOk</td>
           <td>Boolean</td>
           <td>auto</td>
