@@ -202,6 +202,7 @@ const Calendar = React.createClass({
 
     const timePickerEle = timePicker && showTimePicker ? React.cloneElement(timePicker, {
       showHour: true,
+      showMinute: true,
       showSecond: true,
       ...timePicker.props,
       ...disabledTimeConfig,
