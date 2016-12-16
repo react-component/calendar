@@ -19,39 +19,39 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(36);
+	var _reactDom = __webpack_require__(34);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _rcCalendar = __webpack_require__(174);
+	var _rcCalendar = __webpack_require__(180);
 	
 	var _rcCalendar2 = _interopRequireDefault(_rcCalendar);
 	
-	var _Picker = __webpack_require__(286);
+	var _Picker = __webpack_require__(292);
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _zh_CN = __webpack_require__(323);
+	var _zh_CN = __webpack_require__(329);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
-	var _en_US = __webpack_require__(284);
+	var _en_US = __webpack_require__(290);
 	
 	var _en_US2 = _interopRequireDefault(_en_US);
 	
-	__webpack_require__(324);
+	__webpack_require__(330);
 	
-	var _Panel = __webpack_require__(325);
+	var _Panel = __webpack_require__(331);
 	
 	var _Panel2 = _interopRequireDefault(_Panel);
 	
-	var _moment = __webpack_require__(264);
+	var _moment = __webpack_require__(270);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	__webpack_require__(329);
+	__webpack_require__(335);
 	
-	__webpack_require__(330);
+	__webpack_require__(336);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -291,7 +291,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 174:
+/***/ 180:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -300,7 +300,7 @@ webpackJsonp([0],{
 	  value: true
 	});
 	
-	var _src = __webpack_require__(175);
+	var _src = __webpack_require__(181);
 	
 	var _src2 = _interopRequireDefault(_src);
 
@@ -311,7 +311,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 175:
+/***/ 181:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -320,7 +320,7 @@ webpackJsonp([0],{
 	  value: true
 	});
 	
-	var _Calendar = __webpack_require__(176);
+	var _Calendar = __webpack_require__(182);
 	
 	var _Calendar2 = _interopRequireDefault(_Calendar);
 
@@ -331,7 +331,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 176:
+/***/ 182:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -340,7 +340,7 @@ webpackJsonp([0],{
 	  value: true
 	});
 	
-	var _extends2 = __webpack_require__(177);
+	var _extends2 = __webpack_require__(183);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
@@ -348,39 +348,39 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(36);
+	var _reactDom = __webpack_require__(34);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _KeyCode = __webpack_require__(215);
+	var _KeyCode = __webpack_require__(221);
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _DateTable = __webpack_require__(216);
+	var _DateTable = __webpack_require__(222);
 	
 	var _DateTable2 = _interopRequireDefault(_DateTable);
 	
-	var _CalendarHeader = __webpack_require__(267);
+	var _CalendarHeader = __webpack_require__(273);
 	
 	var _CalendarHeader2 = _interopRequireDefault(_CalendarHeader);
 	
-	var _CalendarFooter = __webpack_require__(278);
+	var _CalendarFooter = __webpack_require__(284);
 	
 	var _CalendarFooter2 = _interopRequireDefault(_CalendarFooter);
 	
-	var _CalendarMixin = __webpack_require__(282);
+	var _CalendarMixin = __webpack_require__(288);
 	
 	var _CalendarMixin2 = _interopRequireDefault(_CalendarMixin);
 	
-	var _CommonMixin = __webpack_require__(283);
+	var _CommonMixin = __webpack_require__(289);
 	
 	var _CommonMixin2 = _interopRequireDefault(_CommonMixin);
 	
-	var _DateInput = __webpack_require__(285);
+	var _DateInput = __webpack_require__(291);
 	
 	var _DateInput2 = _interopRequireDefault(_DateInput);
 	
-	var _index = __webpack_require__(266);
+	var _index = __webpack_require__(272);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -565,17 +565,17 @@ webpackJsonp([0],{
 	  },
 	  render: function render() {
 	    var props = this.props;
-	    var locale = props.locale;
-	    var prefixCls = props.prefixCls;
-	    var disabledDate = props.disabledDate;
-	    var dateInputPlaceholder = props.dateInputPlaceholder;
-	    var timePicker = props.timePicker;
-	    var disabledTime = props.disabledTime;
+	    var locale = props.locale,
+	        prefixCls = props.prefixCls,
+	        disabledDate = props.disabledDate,
+	        dateInputPlaceholder = props.dateInputPlaceholder,
+	        timePicker = props.timePicker,
+	        disabledTime = props.disabledTime;
 	
 	    var state = this.state;
-	    var value = state.value;
-	    var selectedValue = state.selectedValue;
-	    var showTimePicker = state.showTimePicker;
+	    var value = state.value,
+	        selectedValue = state.selectedValue,
+	        showTimePicker = state.showTimePicker;
 	
 	    var disabledTimeConfig = showTimePicker && disabledTime && timePicker ? (0, _index.getTimeConfig)(selectedValue, disabledTime) : null;
 	
@@ -675,7 +675,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 216:
+/***/ 222:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -684,15 +684,15 @@ webpackJsonp([0],{
 	  value: true
 	});
 	
-	var _classCallCheck2 = __webpack_require__(217);
+	var _classCallCheck2 = __webpack_require__(223);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(218);
+	var _possibleConstructorReturn2 = __webpack_require__(224);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(254);
+	var _inherits2 = __webpack_require__(260);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -700,11 +700,11 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _DateTHead = __webpack_require__(262);
+	var _DateTHead = __webpack_require__(268);
 	
 	var _DateTHead2 = _interopRequireDefault(_DateTHead);
 	
-	var _DateTBody = __webpack_require__(265);
+	var _DateTBody = __webpack_require__(271);
 	
 	var _DateTBody2 = _interopRequireDefault(_DateTBody);
 	
@@ -737,7 +737,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 262:
+/***/ 268:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -746,15 +746,15 @@ webpackJsonp([0],{
 	  value: true
 	});
 	
-	var _classCallCheck2 = __webpack_require__(217);
+	var _classCallCheck2 = __webpack_require__(223);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(218);
+	var _possibleConstructorReturn2 = __webpack_require__(224);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(254);
+	var _inherits2 = __webpack_require__(260);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -762,11 +762,11 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _DateConstants = __webpack_require__(263);
+	var _DateConstants = __webpack_require__(269);
 	
 	var _DateConstants2 = _interopRequireDefault(_DateConstants);
 	
-	var _moment = __webpack_require__(264);
+	var _moment = __webpack_require__(270);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
@@ -847,7 +847,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 263:
+/***/ 269:
 /***/ function(module, exports) {
 
 	"use strict";
@@ -863,7 +863,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 265:
+/***/ 271:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -876,11 +876,11 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _DateConstants = __webpack_require__(263);
+	var _DateConstants = __webpack_require__(269);
 	
 	var _DateConstants2 = _interopRequireDefault(_DateConstants);
 	
-	var _util = __webpack_require__(266);
+	var _util = __webpack_require__(272);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -927,14 +927,14 @@ webpackJsonp([0],{
 	  },
 	  render: function render() {
 	    var props = this.props;
-	    var contentRender = props.contentRender;
-	    var prefixCls = props.prefixCls;
-	    var selectedValue = props.selectedValue;
-	    var value = props.value;
-	    var showWeekNumber = props.showWeekNumber;
-	    var dateRender = props.dateRender;
-	    var disabledDate = props.disabledDate;
-	    var hoverValue = props.hoverValue;
+	    var contentRender = props.contentRender,
+	        prefixCls = props.prefixCls,
+	        selectedValue = props.selectedValue,
+	        value = props.value,
+	        showWeekNumber = props.showWeekNumber,
+	        dateRender = props.dateRender,
+	        disabledDate = props.disabledDate,
+	        hoverValue = props.hoverValue;
 	
 	    var iIndex = void 0;
 	    var jIndex = void 0;
@@ -946,6 +946,7 @@ webpackJsonp([0],{
 	    var dateClass = prefixCls + '-date';
 	    var todayClass = prefixCls + '-today';
 	    var selectedClass = prefixCls + '-selected-day';
+	    var selectedDateClass = prefixCls + '-selected-date'; // do not move with mouse operation
 	    var inRangeClass = prefixCls + '-in-range-cell';
 	    var lastMonthDayClass = prefixCls + '-last-month-cell';
 	    var nextMonthDayClass = prefixCls + '-next-month-btn-day';
@@ -973,6 +974,7 @@ webpackJsonp([0],{
 	    }
 	    var tableHtml = [];
 	    passed = 0;
+	
 	    for (iIndex = 0; iIndex < _DateConstants2.default.DATE_ROW_COUNT; iIndex++) {
 	      var weekNumberCell = void 0;
 	      var dateCells = [];
@@ -1030,6 +1032,11 @@ webpackJsonp([0],{
 	          // keyboard change value, highlight works
 	          selected = true;
 	        }
+	
+	        if (isSameDay(current, selectedValue)) {
+	          cls += ' ' + selectedDateClass;
+	        }
+	
 	        if (isBeforeCurrentMonthYear) {
 	          cls += ' ' + lastMonthDayClass;
 	        }
@@ -1113,7 +1120,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 267:
+/***/ 273:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1126,15 +1133,15 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _MonthPanel = __webpack_require__(268);
+	var _MonthPanel = __webpack_require__(274);
 	
 	var _MonthPanel2 = _interopRequireDefault(_MonthPanel);
 	
-	var _YearPanel = __webpack_require__(269);
+	var _YearPanel = __webpack_require__(275);
 	
 	var _YearPanel2 = _interopRequireDefault(_YearPanel);
 	
-	var _mapSelf = __webpack_require__(277);
+	var _mapSelf = __webpack_require__(283);
 	
 	var _mapSelf2 = _interopRequireDefault(_mapSelf);
 	
@@ -1252,12 +1259,12 @@ webpackJsonp([0],{
 	  },
 	  render: function render() {
 	    var props = this.props;
-	    var enableNext = props.enableNext;
-	    var enablePrev = props.enablePrev;
-	    var prefixCls = props.prefixCls;
-	    var locale = props.locale;
-	    var value = props.value;
-	    var showTimePicker = props.showTimePicker;
+	    var enableNext = props.enableNext,
+	        enablePrev = props.enablePrev,
+	        prefixCls = props.prefixCls,
+	        locale = props.locale,
+	        value = props.value,
+	        showTimePicker = props.showTimePicker;
 	
 	    var state = this.state;
 	    var PanelClass = null;
@@ -1315,7 +1322,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 268:
+/***/ 274:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1328,11 +1335,11 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _YearPanel = __webpack_require__(269);
+	var _YearPanel = __webpack_require__(275);
 	
 	var _YearPanel2 = _interopRequireDefault(_YearPanel);
 	
-	var _MonthTable = __webpack_require__(276);
+	var _MonthTable = __webpack_require__(282);
 	
 	var _MonthTable2 = _interopRequireDefault(_MonthTable);
 	
@@ -1486,7 +1493,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 269:
+/***/ 275:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1495,19 +1502,19 @@ webpackJsonp([0],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(270);
+	var _defineProperty2 = __webpack_require__(276);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
-	var _classCallCheck2 = __webpack_require__(217);
+	var _classCallCheck2 = __webpack_require__(223);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(218);
+	var _possibleConstructorReturn2 = __webpack_require__(224);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(254);
+	var _inherits2 = __webpack_require__(260);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -1515,11 +1522,11 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(274);
+	var _classnames = __webpack_require__(280);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _DecadePanel = __webpack_require__(275);
+	var _DecadePanel = __webpack_require__(281);
 	
 	var _DecadePanel2 = _interopRequireDefault(_DecadePanel);
 	
@@ -1747,7 +1754,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 275:
+/***/ 281:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1756,19 +1763,19 @@ webpackJsonp([0],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(270);
+	var _defineProperty2 = __webpack_require__(276);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
-	var _classCallCheck2 = __webpack_require__(217);
+	var _classCallCheck2 = __webpack_require__(223);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(218);
+	var _possibleConstructorReturn2 = __webpack_require__(224);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(254);
+	var _inherits2 = __webpack_require__(260);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -1776,7 +1783,7 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(274);
+	var _classnames = __webpack_require__(280);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -1952,7 +1959,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 277:
+/***/ 283:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1970,7 +1977,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 278:
+/***/ 284:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1979,11 +1986,11 @@ webpackJsonp([0],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(270);
+	var _defineProperty2 = __webpack_require__(276);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
-	var _extends2 = __webpack_require__(177);
+	var _extends2 = __webpack_require__(183);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
@@ -1991,27 +1998,27 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(36);
+	var _reactDom = __webpack_require__(34);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _mapSelf = __webpack_require__(277);
+	var _mapSelf = __webpack_require__(283);
 	
 	var _mapSelf2 = _interopRequireDefault(_mapSelf);
 	
-	var _classnames = __webpack_require__(274);
+	var _classnames = __webpack_require__(280);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _TodayButton = __webpack_require__(279);
+	var _TodayButton = __webpack_require__(285);
 	
 	var _TodayButton2 = _interopRequireDefault(_TodayButton);
 	
-	var _OkButton = __webpack_require__(280);
+	var _OkButton = __webpack_require__(286);
 	
 	var _OkButton2 = _interopRequireDefault(_OkButton);
 	
-	var _TimePickerButton = __webpack_require__(281);
+	var _TimePickerButton = __webpack_require__(287);
 	
 	var _TimePickerButton2 = _interopRequireDefault(_TimePickerButton);
 	
@@ -2041,11 +2048,11 @@ webpackJsonp([0],{
 	  },
 	  render: function render() {
 	    var props = this.props;
-	    var value = props.value;
-	    var prefixCls = props.prefixCls;
-	    var showOk = props.showOk;
-	    var timePicker = props.timePicker;
-	    var renderFooter = props.renderFooter;
+	    var value = props.value,
+	        prefixCls = props.prefixCls,
+	        showOk = props.showOk,
+	        timePicker = props.timePicker,
+	        renderFooter = props.renderFooter;
 	
 	    var footerEl = null;
 	    var extraFooter = renderFooter();
@@ -2090,7 +2097,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 279:
+/***/ 285:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2104,19 +2111,19 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _util = __webpack_require__(266);
+	var _util = __webpack_require__(272);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function TodayButton(_ref) {
-	  var prefixCls = _ref.prefixCls;
-	  var locale = _ref.locale;
-	  var value = _ref.value;
-	  var timePicker = _ref.timePicker;
-	  var disabled = _ref.disabled;
-	  var disabledDate = _ref.disabledDate;
-	  var onToday = _ref.onToday;
-	  var text = _ref.text;
+	  var prefixCls = _ref.prefixCls,
+	      locale = _ref.locale,
+	      value = _ref.value,
+	      timePicker = _ref.timePicker,
+	      disabled = _ref.disabled,
+	      disabledDate = _ref.disabledDate,
+	      onToday = _ref.onToday,
+	      text = _ref.text;
 	
 	  var localeNow = (!text && timePicker ? locale.now : text) || locale.today;
 	  var disabledToday = disabledDate && !(0, _util.isAllowedDate)((0, _util.getTodayTime)(value), disabledDate);
@@ -2137,7 +2144,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 280:
+/***/ 286:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2154,10 +2161,10 @@ webpackJsonp([0],{
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function OkButton(_ref) {
-	  var prefixCls = _ref.prefixCls;
-	  var locale = _ref.locale;
-	  var okDisabled = _ref.okDisabled;
-	  var onOk = _ref.onOk;
+	  var prefixCls = _ref.prefixCls,
+	      locale = _ref.locale,
+	      okDisabled = _ref.okDisabled,
+	      onOk = _ref.onOk;
 	
 	  var className = prefixCls + "-ok-btn";
 	  if (okDisabled) {
@@ -2177,7 +2184,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 281:
+/***/ 287:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2186,7 +2193,7 @@ webpackJsonp([0],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(270);
+	var _defineProperty2 = __webpack_require__(276);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
@@ -2196,7 +2203,7 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames2 = __webpack_require__(274);
+	var _classnames2 = __webpack_require__(280);
 	
 	var _classnames3 = _interopRequireDefault(_classnames2);
 	
@@ -2205,12 +2212,12 @@ webpackJsonp([0],{
 	function TimePickerButton(_ref) {
 	  var _classnames;
 	
-	  var prefixCls = _ref.prefixCls;
-	  var locale = _ref.locale;
-	  var showTimePicker = _ref.showTimePicker;
-	  var onOpenTimePicker = _ref.onOpenTimePicker;
-	  var onCloseTimePicker = _ref.onCloseTimePicker;
-	  var timePickerDisabled = _ref.timePickerDisabled;
+	  var prefixCls = _ref.prefixCls,
+	      locale = _ref.locale,
+	      showTimePicker = _ref.showTimePicker,
+	      onOpenTimePicker = _ref.onOpenTimePicker,
+	      onCloseTimePicker = _ref.onCloseTimePicker,
+	      timePickerDisabled = _ref.timePickerDisabled;
 	
 	  var className = (0, _classnames3.default)((_classnames = {}, (0, _defineProperty3.default)(_classnames, prefixCls + '-time-picker-btn', true), (0, _defineProperty3.default)(_classnames, prefixCls + '-time-picker-btn-disabled', timePickerDisabled), _classnames));
 	  var onClick = null;
@@ -2231,7 +2238,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 282:
+/***/ 288:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2240,7 +2247,7 @@ webpackJsonp([0],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(270);
+	var _defineProperty2 = __webpack_require__(276);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
@@ -2248,15 +2255,15 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(274);
+	var _classnames = __webpack_require__(280);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _moment = __webpack_require__(264);
+	var _moment = __webpack_require__(270);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _index = __webpack_require__(266);
+	var _index = __webpack_require__(272);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -2371,7 +2378,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 285:
+/***/ 291:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2384,11 +2391,11 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(36);
+	var _reactDom = __webpack_require__(34);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _moment = __webpack_require__(264);
+	var _moment = __webpack_require__(270);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
@@ -2433,10 +2440,10 @@ webpackJsonp([0],{
 	      str: str
 	    });
 	    var value = void 0;
-	    var _props = this.props;
-	    var disabledDate = _props.disabledDate;
-	    var format = _props.format;
-	    var onChange = _props.onChange;
+	    var _props = this.props,
+	        disabledDate = _props.disabledDate,
+	        format = _props.format,
+	        onChange = _props.onChange;
 	
 	    if (str) {
 	      var parsed = (0, _moment2.default)(str, format, true);
@@ -2485,12 +2492,12 @@ webpackJsonp([0],{
 	  },
 	  render: function render() {
 	    var props = this.props;
-	    var _state = this.state;
-	    var invalid = _state.invalid;
-	    var str = _state.str;
-	    var locale = props.locale;
-	    var prefixCls = props.prefixCls;
-	    var placeholder = props.placeholder;
+	    var _state = this.state,
+	        invalid = _state.invalid,
+	        str = _state.str;
+	    var locale = props.locale,
+	        prefixCls = props.prefixCls,
+	        placeholder = props.placeholder;
 	
 	    var invalidClass = invalid ? prefixCls + '-input-invalid' : '';
 	    return _react2.default.createElement(
@@ -2523,7 +2530,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 286:
+/***/ 292:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2536,23 +2543,23 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(36);
+	var _reactDom = __webpack_require__(34);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _createChainedFunction = __webpack_require__(287);
+	var _createChainedFunction = __webpack_require__(293);
 	
 	var _createChainedFunction2 = _interopRequireDefault(_createChainedFunction);
 	
-	var _KeyCode = __webpack_require__(215);
+	var _KeyCode = __webpack_require__(221);
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _placements = __webpack_require__(288);
+	var _placements = __webpack_require__(294);
 	
 	var _placements2 = _interopRequireDefault(_placements);
 	
-	var _rcTrigger = __webpack_require__(289);
+	var _rcTrigger = __webpack_require__(295);
 	
 	var _rcTrigger2 = _interopRequireDefault(_rcTrigger);
 	
@@ -2613,8 +2620,8 @@ webpackJsonp([0],{
 	    };
 	  },
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	    var value = nextProps.value;
-	    var open = nextProps.open;
+	    var value = nextProps.value,
+	        open = nextProps.open;
 	
 	    if ('value' in nextProps) {
 	      this.setState({
@@ -2717,15 +2724,15 @@ webpackJsonp([0],{
 	  },
 	  render: function render() {
 	    var props = this.props;
-	    var prefixCls = props.prefixCls;
-	    var placement = props.placement;
-	    var style = props.style;
-	    var getCalendarContainer = props.getCalendarContainer;
-	    var align = props.align;
-	    var animation = props.animation;
-	    var disabled = props.disabled;
-	    var transitionName = props.transitionName;
-	    var children = props.children;
+	    var prefixCls = props.prefixCls,
+	        placement = props.placement,
+	        style = props.style,
+	        getCalendarContainer = props.getCalendarContainer,
+	        align = props.align,
+	        animation = props.animation,
+	        disabled = props.disabled,
+	        transitionName = props.transitionName,
+	        children = props.children;
 	
 	    var state = this.state;
 	    return _react2.default.createElement(
@@ -2755,7 +2762,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 288:
+/***/ 294:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2802,10 +2809,10 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 324:
+/***/ 330:
 2,
 
-/***/ 325:
+/***/ 331:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2814,7 +2821,7 @@ webpackJsonp([0],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(270);
+	var _defineProperty2 = __webpack_require__(276);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
@@ -2822,19 +2829,19 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Header = __webpack_require__(326);
+	var _Header = __webpack_require__(332);
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _Combobox = __webpack_require__(327);
+	var _Combobox = __webpack_require__(333);
 	
 	var _Combobox2 = _interopRequireDefault(_Combobox);
 	
-	var _moment = __webpack_require__(264);
+	var _moment = __webpack_require__(270);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _classnames = __webpack_require__(274);
+	var _classnames = __webpack_require__(280);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -2871,8 +2878,10 @@ webpackJsonp([0],{
 	    onEsc: _react.PropTypes.func,
 	    allowEmpty: _react.PropTypes.bool,
 	    showHour: _react.PropTypes.bool,
+	    showMinute: _react.PropTypes.bool,
 	    showSecond: _react.PropTypes.bool,
-	    onClear: _react.PropTypes.func
+	    onClear: _react.PropTypes.func,
+	    addon: _react.PropTypes.func
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
@@ -2883,7 +2892,8 @@ webpackJsonp([0],{
 	      disabledHours: noop,
 	      disabledMinutes: noop,
 	      disabledSeconds: noop,
-	      defaultOpenValue: (0, _moment2["default"])()
+	      defaultOpenValue: (0, _moment2["default"])(),
+	      addon: noop
 	    };
 	  },
 	  getInitialState: function getInitialState() {
@@ -2910,27 +2920,32 @@ webpackJsonp([0],{
 	  onCurrentSelectPanelChange: function onCurrentSelectPanelChange(currentSelectPanel) {
 	    this.setState({ currentSelectPanel: currentSelectPanel });
 	  },
+	  close: function close() {
+	    this.props.onEsc();
+	  },
 	  render: function render() {
 	    var _classNames;
 	
-	    var _props = this.props;
-	    var prefixCls = _props.prefixCls;
-	    var className = _props.className;
-	    var placeholder = _props.placeholder;
-	    var disabledHours = _props.disabledHours;
-	    var disabledMinutes = _props.disabledMinutes;
-	    var disabledSeconds = _props.disabledSeconds;
-	    var hideDisabledOptions = _props.hideDisabledOptions;
-	    var allowEmpty = _props.allowEmpty;
-	    var showHour = _props.showHour;
-	    var showSecond = _props.showSecond;
-	    var format = _props.format;
-	    var defaultOpenValue = _props.defaultOpenValue;
-	    var clearText = _props.clearText;
-	    var onEsc = _props.onEsc;
-	    var _state = this.state;
-	    var value = _state.value;
-	    var currentSelectPanel = _state.currentSelectPanel;
+	    var _props = this.props,
+	        prefixCls = _props.prefixCls,
+	        className = _props.className,
+	        placeholder = _props.placeholder,
+	        disabledHours = _props.disabledHours,
+	        disabledMinutes = _props.disabledMinutes,
+	        disabledSeconds = _props.disabledSeconds,
+	        hideDisabledOptions = _props.hideDisabledOptions,
+	        allowEmpty = _props.allowEmpty,
+	        showHour = _props.showHour,
+	        showMinute = _props.showMinute,
+	        showSecond = _props.showSecond,
+	        format = _props.format,
+	        defaultOpenValue = _props.defaultOpenValue,
+	        clearText = _props.clearText,
+	        onEsc = _props.onEsc,
+	        addon = _props.addon;
+	    var _state = this.state,
+	        value = _state.value,
+	        currentSelectPanel = _state.currentSelectPanel;
 	
 	    var disabledHourOptions = disabledHours();
 	    var disabledMinuteOptions = disabledMinutes(value ? value.hour() : null);
@@ -2968,6 +2983,7 @@ webpackJsonp([0],{
 	        format: format,
 	        onChange: this.onChange,
 	        showHour: showHour,
+	        showMinute: showMinute,
 	        showSecond: showSecond,
 	        hourOptions: hourOptions,
 	        minuteOptions: minuteOptions,
@@ -2976,7 +2992,8 @@ webpackJsonp([0],{
 	        disabledMinutes: disabledMinutes,
 	        disabledSeconds: disabledSeconds,
 	        onCurrentSelectPanelChange: this.onCurrentSelectPanelChange
-	      })
+	      }),
+	      addon(this)
 	    );
 	  }
 	});
@@ -2986,7 +3003,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 326:
+/***/ 332:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2999,7 +3016,7 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _moment = __webpack_require__(264);
+	var _moment = __webpack_require__(270);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
@@ -3030,9 +3047,9 @@ webpackJsonp([0],{
 	  },
 	
 	  getInitialState: function getInitialState() {
-	    var _props = this.props;
-	    var value = _props.value;
-	    var format = _props.format;
+	    var _props = this.props,
+	        value = _props.value,
+	        format = _props.format;
 	
 	    return {
 	      str: value && value.format(format) || '',
@@ -3040,8 +3057,8 @@ webpackJsonp([0],{
 	    };
 	  },
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	    var value = nextProps.value;
-	    var format = nextProps.format;
+	    var value = nextProps.value,
+	        format = nextProps.format;
 	
 	    this.setState({
 	      str: value && value.format(format) || '',
@@ -3053,16 +3070,16 @@ webpackJsonp([0],{
 	    this.setState({
 	      str: str
 	    });
-	    var _props2 = this.props;
-	    var format = _props2.format;
-	    var hourOptions = _props2.hourOptions;
-	    var minuteOptions = _props2.minuteOptions;
-	    var secondOptions = _props2.secondOptions;
-	    var disabledHours = _props2.disabledHours;
-	    var disabledMinutes = _props2.disabledMinutes;
-	    var disabledSeconds = _props2.disabledSeconds;
-	    var onChange = _props2.onChange;
-	    var allowEmpty = _props2.allowEmpty;
+	    var _props2 = this.props,
+	        format = _props2.format,
+	        hourOptions = _props2.hourOptions,
+	        minuteOptions = _props2.minuteOptions,
+	        secondOptions = _props2.secondOptions,
+	        disabledHours = _props2.disabledHours,
+	        disabledMinutes = _props2.disabledMinutes,
+	        disabledSeconds = _props2.disabledSeconds,
+	        onChange = _props2.onChange,
+	        allowEmpty = _props2.allowEmpty;
 	
 	
 	    if (str) {
@@ -3131,9 +3148,9 @@ webpackJsonp([0],{
 	    this.props.onClear();
 	  },
 	  getClearButton: function getClearButton() {
-	    var _props3 = this.props;
-	    var prefixCls = _props3.prefixCls;
-	    var allowEmpty = _props3.allowEmpty;
+	    var _props3 = this.props,
+	        prefixCls = _props3.prefixCls,
+	        allowEmpty = _props3.allowEmpty;
 	
 	    if (!allowEmpty) {
 	      return null;
@@ -3149,12 +3166,12 @@ webpackJsonp([0],{
 	    return this.props.value || this.props.defaultOpenValue;
 	  },
 	  getInput: function getInput() {
-	    var _props4 = this.props;
-	    var prefixCls = _props4.prefixCls;
-	    var placeholder = _props4.placeholder;
-	    var _state = this.state;
-	    var invalid = _state.invalid;
-	    var str = _state.str;
+	    var _props4 = this.props,
+	        prefixCls = _props4.prefixCls,
+	        placeholder = _props4.placeholder;
+	    var _state = this.state,
+	        invalid = _state.invalid,
+	        str = _state.str;
 	
 	    var invalidClass = invalid ? prefixCls + '-input-invalid' : '';
 	    return _react2["default"].createElement('input', {
@@ -3183,7 +3200,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 327:
+/***/ 333:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3196,7 +3213,7 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Select = __webpack_require__(328);
+	var _Select = __webpack_require__(334);
 	
 	var _Select2 = _interopRequireDefault(_Select);
 	
@@ -3229,6 +3246,7 @@ webpackJsonp([0],{
 	    value: _react.PropTypes.object,
 	    onChange: _react.PropTypes.func,
 	    showHour: _react.PropTypes.bool,
+	    showMinute: _react.PropTypes.bool,
 	    showSecond: _react.PropTypes.bool,
 	    hourOptions: _react.PropTypes.array,
 	    minuteOptions: _react.PropTypes.array,
@@ -3240,9 +3258,9 @@ webpackJsonp([0],{
 	  },
 	
 	  onItemChange: function onItemChange(type, itemValue) {
-	    var _props = this.props;
-	    var onChange = _props.onChange;
-	    var defaultOpenValue = _props.defaultOpenValue;
+	    var _props = this.props,
+	        onChange = _props.onChange,
+	        defaultOpenValue = _props.defaultOpenValue;
 	
 	    var value = (this.props.value || defaultOpenValue).clone();
 	    if (type === 'hour') {
@@ -3258,11 +3276,11 @@ webpackJsonp([0],{
 	    this.props.onCurrentSelectPanelChange(range);
 	  },
 	  getHourSelect: function getHourSelect(hour) {
-	    var _props2 = this.props;
-	    var prefixCls = _props2.prefixCls;
-	    var hourOptions = _props2.hourOptions;
-	    var disabledHours = _props2.disabledHours;
-	    var showHour = _props2.showHour;
+	    var _props2 = this.props,
+	        prefixCls = _props2.prefixCls,
+	        hourOptions = _props2.hourOptions,
+	        disabledHours = _props2.disabledHours,
+	        showHour = _props2.showHour;
 	
 	    if (!showHour) {
 	      return null;
@@ -3281,12 +3299,16 @@ webpackJsonp([0],{
 	    });
 	  },
 	  getMinuteSelect: function getMinuteSelect(minute) {
-	    var _props3 = this.props;
-	    var prefixCls = _props3.prefixCls;
-	    var minuteOptions = _props3.minuteOptions;
-	    var disabledMinutes = _props3.disabledMinutes;
-	    var defaultOpenValue = _props3.defaultOpenValue;
+	    var _props3 = this.props,
+	        prefixCls = _props3.prefixCls,
+	        minuteOptions = _props3.minuteOptions,
+	        disabledMinutes = _props3.disabledMinutes,
+	        defaultOpenValue = _props3.defaultOpenValue,
+	        showMinute = _props3.showMinute;
 	
+	    if (!showMinute) {
+	      return null;
+	    }
 	    var value = this.props.value || defaultOpenValue;
 	    var disabledOptions = disabledMinutes(value.hour());
 	
@@ -3302,12 +3324,12 @@ webpackJsonp([0],{
 	    });
 	  },
 	  getSecondSelect: function getSecondSelect(second) {
-	    var _props4 = this.props;
-	    var prefixCls = _props4.prefixCls;
-	    var secondOptions = _props4.secondOptions;
-	    var disabledSeconds = _props4.disabledSeconds;
-	    var showSecond = _props4.showSecond;
-	    var defaultOpenValue = _props4.defaultOpenValue;
+	    var _props4 = this.props,
+	        prefixCls = _props4.prefixCls,
+	        secondOptions = _props4.secondOptions,
+	        disabledSeconds = _props4.disabledSeconds,
+	        showSecond = _props4.showSecond,
+	        defaultOpenValue = _props4.defaultOpenValue;
 	
 	    if (!showSecond) {
 	      return null;
@@ -3327,9 +3349,9 @@ webpackJsonp([0],{
 	    });
 	  },
 	  render: function render() {
-	    var _props5 = this.props;
-	    var prefixCls = _props5.prefixCls;
-	    var defaultOpenValue = _props5.defaultOpenValue;
+	    var _props5 = this.props,
+	        prefixCls = _props5.prefixCls,
+	        defaultOpenValue = _props5.defaultOpenValue;
 	
 	    var value = this.props.value || defaultOpenValue;
 	    return _react2["default"].createElement(
@@ -3347,7 +3369,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 328:
+/***/ 334:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3356,7 +3378,7 @@ webpackJsonp([0],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(270);
+	var _defineProperty2 = __webpack_require__(276);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
@@ -3364,11 +3386,11 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(36);
+	var _reactDom = __webpack_require__(34);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _classnames2 = __webpack_require__(274);
+	var _classnames2 = __webpack_require__(280);
 	
 	var _classnames3 = _interopRequireDefault(_classnames2);
 	
@@ -3416,19 +3438,19 @@ webpackJsonp([0],{
 	    }
 	  },
 	  onSelect: function onSelect(value) {
-	    var _props = this.props;
-	    var onSelect = _props.onSelect;
-	    var type = _props.type;
+	    var _props = this.props,
+	        onSelect = _props.onSelect,
+	        type = _props.type;
 	
 	    onSelect(type, value);
 	  },
 	  getOptions: function getOptions() {
 	    var _this = this;
 	
-	    var _props2 = this.props;
-	    var options = _props2.options;
-	    var selectedIndex = _props2.selectedIndex;
-	    var prefixCls = _props2.prefixCls;
+	    var _props2 = this.props,
+	        options = _props2.options,
+	        selectedIndex = _props2.selectedIndex,
+	        prefixCls = _props2.prefixCls;
 	
 	    return options.map(function (item, index) {
 	      var _classnames;
@@ -3454,6 +3476,9 @@ webpackJsonp([0],{
 	    // move to selected item
 	    var select = _reactDom2["default"].findDOMNode(this);
 	    var list = _reactDom2["default"].findDOMNode(this.refs.list);
+	    if (!list) {
+	      return;
+	    }
 	    var index = this.props.selectedIndex;
 	    if (index < 0) {
 	      index = 0;

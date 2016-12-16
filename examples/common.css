@@ -476,10 +476,13 @@
   cursor: pointer;
 }
 .rc-calendar-selected-day .rc-calendar-date {
+  background: #d9f4fe;
+}
+.rc-calendar-selected-date .rc-calendar-date {
   background: #3fc7fa;
   color: #fff;
 }
-.rc-calendar-selected-day .rc-calendar-date:hover {
+.rc-calendar-selected-date .rc-calendar-date:hover {
   background: #3fc7fa;
 }
 .rc-calendar-today .rc-calendar-date {

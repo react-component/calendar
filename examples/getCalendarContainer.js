@@ -3,12 +3,12 @@ webpackJsonp([4],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(373);
+	module.exports = __webpack_require__(382);
 
 
 /***/ },
 
-/***/ 174:
+/***/ 180:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17,7 +17,7 @@ webpackJsonp([4],{
 	  value: true
 	});
 	
-	var _src = __webpack_require__(175);
+	var _src = __webpack_require__(181);
 	
 	var _src2 = _interopRequireDefault(_src);
 
@@ -28,7 +28,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 175:
+/***/ 181:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37,7 +37,7 @@ webpackJsonp([4],{
 	  value: true
 	});
 	
-	var _Calendar = __webpack_require__(176);
+	var _Calendar = __webpack_require__(182);
 	
 	var _Calendar2 = _interopRequireDefault(_Calendar);
 
@@ -48,7 +48,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 176:
+/***/ 182:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57,7 +57,7 @@ webpackJsonp([4],{
 	  value: true
 	});
 	
-	var _extends2 = __webpack_require__(177);
+	var _extends2 = __webpack_require__(183);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
@@ -65,39 +65,39 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(36);
+	var _reactDom = __webpack_require__(34);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _KeyCode = __webpack_require__(215);
+	var _KeyCode = __webpack_require__(221);
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _DateTable = __webpack_require__(216);
+	var _DateTable = __webpack_require__(222);
 	
 	var _DateTable2 = _interopRequireDefault(_DateTable);
 	
-	var _CalendarHeader = __webpack_require__(267);
+	var _CalendarHeader = __webpack_require__(273);
 	
 	var _CalendarHeader2 = _interopRequireDefault(_CalendarHeader);
 	
-	var _CalendarFooter = __webpack_require__(278);
+	var _CalendarFooter = __webpack_require__(284);
 	
 	var _CalendarFooter2 = _interopRequireDefault(_CalendarFooter);
 	
-	var _CalendarMixin = __webpack_require__(282);
+	var _CalendarMixin = __webpack_require__(288);
 	
 	var _CalendarMixin2 = _interopRequireDefault(_CalendarMixin);
 	
-	var _CommonMixin = __webpack_require__(283);
+	var _CommonMixin = __webpack_require__(289);
 	
 	var _CommonMixin2 = _interopRequireDefault(_CommonMixin);
 	
-	var _DateInput = __webpack_require__(285);
+	var _DateInput = __webpack_require__(291);
 	
 	var _DateInput2 = _interopRequireDefault(_DateInput);
 	
-	var _index = __webpack_require__(266);
+	var _index = __webpack_require__(272);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -282,17 +282,17 @@ webpackJsonp([4],{
 	  },
 	  render: function render() {
 	    var props = this.props;
-	    var locale = props.locale;
-	    var prefixCls = props.prefixCls;
-	    var disabledDate = props.disabledDate;
-	    var dateInputPlaceholder = props.dateInputPlaceholder;
-	    var timePicker = props.timePicker;
-	    var disabledTime = props.disabledTime;
+	    var locale = props.locale,
+	        prefixCls = props.prefixCls,
+	        disabledDate = props.disabledDate,
+	        dateInputPlaceholder = props.dateInputPlaceholder,
+	        timePicker = props.timePicker,
+	        disabledTime = props.disabledTime;
 	
 	    var state = this.state;
-	    var value = state.value;
-	    var selectedValue = state.selectedValue;
-	    var showTimePicker = state.showTimePicker;
+	    var value = state.value,
+	        selectedValue = state.selectedValue,
+	        showTimePicker = state.showTimePicker;
 	
 	    var disabledTimeConfig = showTimePicker && disabledTime && timePicker ? (0, _index.getTimeConfig)(selectedValue, disabledTime) : null;
 	
@@ -392,7 +392,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 216:
+/***/ 222:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -401,15 +401,15 @@ webpackJsonp([4],{
 	  value: true
 	});
 	
-	var _classCallCheck2 = __webpack_require__(217);
+	var _classCallCheck2 = __webpack_require__(223);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(218);
+	var _possibleConstructorReturn2 = __webpack_require__(224);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(254);
+	var _inherits2 = __webpack_require__(260);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -417,11 +417,11 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _DateTHead = __webpack_require__(262);
+	var _DateTHead = __webpack_require__(268);
 	
 	var _DateTHead2 = _interopRequireDefault(_DateTHead);
 	
-	var _DateTBody = __webpack_require__(265);
+	var _DateTBody = __webpack_require__(271);
 	
 	var _DateTBody2 = _interopRequireDefault(_DateTBody);
 	
@@ -454,7 +454,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 262:
+/***/ 268:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -463,15 +463,15 @@ webpackJsonp([4],{
 	  value: true
 	});
 	
-	var _classCallCheck2 = __webpack_require__(217);
+	var _classCallCheck2 = __webpack_require__(223);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(218);
+	var _possibleConstructorReturn2 = __webpack_require__(224);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(254);
+	var _inherits2 = __webpack_require__(260);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -479,11 +479,11 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _DateConstants = __webpack_require__(263);
+	var _DateConstants = __webpack_require__(269);
 	
 	var _DateConstants2 = _interopRequireDefault(_DateConstants);
 	
-	var _moment = __webpack_require__(264);
+	var _moment = __webpack_require__(270);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
@@ -564,7 +564,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 263:
+/***/ 269:
 /***/ function(module, exports) {
 
 	"use strict";
@@ -580,7 +580,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 265:
+/***/ 271:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -593,11 +593,11 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _DateConstants = __webpack_require__(263);
+	var _DateConstants = __webpack_require__(269);
 	
 	var _DateConstants2 = _interopRequireDefault(_DateConstants);
 	
-	var _util = __webpack_require__(266);
+	var _util = __webpack_require__(272);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -644,14 +644,14 @@ webpackJsonp([4],{
 	  },
 	  render: function render() {
 	    var props = this.props;
-	    var contentRender = props.contentRender;
-	    var prefixCls = props.prefixCls;
-	    var selectedValue = props.selectedValue;
-	    var value = props.value;
-	    var showWeekNumber = props.showWeekNumber;
-	    var dateRender = props.dateRender;
-	    var disabledDate = props.disabledDate;
-	    var hoverValue = props.hoverValue;
+	    var contentRender = props.contentRender,
+	        prefixCls = props.prefixCls,
+	        selectedValue = props.selectedValue,
+	        value = props.value,
+	        showWeekNumber = props.showWeekNumber,
+	        dateRender = props.dateRender,
+	        disabledDate = props.disabledDate,
+	        hoverValue = props.hoverValue;
 	
 	    var iIndex = void 0;
 	    var jIndex = void 0;
@@ -663,6 +663,7 @@ webpackJsonp([4],{
 	    var dateClass = prefixCls + '-date';
 	    var todayClass = prefixCls + '-today';
 	    var selectedClass = prefixCls + '-selected-day';
+	    var selectedDateClass = prefixCls + '-selected-date'; // do not move with mouse operation
 	    var inRangeClass = prefixCls + '-in-range-cell';
 	    var lastMonthDayClass = prefixCls + '-last-month-cell';
 	    var nextMonthDayClass = prefixCls + '-next-month-btn-day';
@@ -690,6 +691,7 @@ webpackJsonp([4],{
 	    }
 	    var tableHtml = [];
 	    passed = 0;
+	
 	    for (iIndex = 0; iIndex < _DateConstants2.default.DATE_ROW_COUNT; iIndex++) {
 	      var weekNumberCell = void 0;
 	      var dateCells = [];
@@ -747,6 +749,11 @@ webpackJsonp([4],{
 	          // keyboard change value, highlight works
 	          selected = true;
 	        }
+	
+	        if (isSameDay(current, selectedValue)) {
+	          cls += ' ' + selectedDateClass;
+	        }
+	
 	        if (isBeforeCurrentMonthYear) {
 	          cls += ' ' + lastMonthDayClass;
 	        }
@@ -830,7 +837,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 267:
+/***/ 273:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -843,15 +850,15 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _MonthPanel = __webpack_require__(268);
+	var _MonthPanel = __webpack_require__(274);
 	
 	var _MonthPanel2 = _interopRequireDefault(_MonthPanel);
 	
-	var _YearPanel = __webpack_require__(269);
+	var _YearPanel = __webpack_require__(275);
 	
 	var _YearPanel2 = _interopRequireDefault(_YearPanel);
 	
-	var _mapSelf = __webpack_require__(277);
+	var _mapSelf = __webpack_require__(283);
 	
 	var _mapSelf2 = _interopRequireDefault(_mapSelf);
 	
@@ -969,12 +976,12 @@ webpackJsonp([4],{
 	  },
 	  render: function render() {
 	    var props = this.props;
-	    var enableNext = props.enableNext;
-	    var enablePrev = props.enablePrev;
-	    var prefixCls = props.prefixCls;
-	    var locale = props.locale;
-	    var value = props.value;
-	    var showTimePicker = props.showTimePicker;
+	    var enableNext = props.enableNext,
+	        enablePrev = props.enablePrev,
+	        prefixCls = props.prefixCls,
+	        locale = props.locale,
+	        value = props.value,
+	        showTimePicker = props.showTimePicker;
 	
 	    var state = this.state;
 	    var PanelClass = null;
@@ -1032,7 +1039,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 268:
+/***/ 274:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1045,11 +1052,11 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _YearPanel = __webpack_require__(269);
+	var _YearPanel = __webpack_require__(275);
 	
 	var _YearPanel2 = _interopRequireDefault(_YearPanel);
 	
-	var _MonthTable = __webpack_require__(276);
+	var _MonthTable = __webpack_require__(282);
 	
 	var _MonthTable2 = _interopRequireDefault(_MonthTable);
 	
@@ -1203,7 +1210,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 269:
+/***/ 275:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1212,19 +1219,19 @@ webpackJsonp([4],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(270);
+	var _defineProperty2 = __webpack_require__(276);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
-	var _classCallCheck2 = __webpack_require__(217);
+	var _classCallCheck2 = __webpack_require__(223);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(218);
+	var _possibleConstructorReturn2 = __webpack_require__(224);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(254);
+	var _inherits2 = __webpack_require__(260);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -1232,11 +1239,11 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(274);
+	var _classnames = __webpack_require__(280);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _DecadePanel = __webpack_require__(275);
+	var _DecadePanel = __webpack_require__(281);
 	
 	var _DecadePanel2 = _interopRequireDefault(_DecadePanel);
 	
@@ -1464,7 +1471,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 275:
+/***/ 281:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1473,19 +1480,19 @@ webpackJsonp([4],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(270);
+	var _defineProperty2 = __webpack_require__(276);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
-	var _classCallCheck2 = __webpack_require__(217);
+	var _classCallCheck2 = __webpack_require__(223);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(218);
+	var _possibleConstructorReturn2 = __webpack_require__(224);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(254);
+	var _inherits2 = __webpack_require__(260);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -1493,7 +1500,7 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(274);
+	var _classnames = __webpack_require__(280);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -1669,7 +1676,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 277:
+/***/ 283:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1687,7 +1694,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 278:
+/***/ 284:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1696,11 +1703,11 @@ webpackJsonp([4],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(270);
+	var _defineProperty2 = __webpack_require__(276);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
-	var _extends2 = __webpack_require__(177);
+	var _extends2 = __webpack_require__(183);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
@@ -1708,27 +1715,27 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(36);
+	var _reactDom = __webpack_require__(34);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _mapSelf = __webpack_require__(277);
+	var _mapSelf = __webpack_require__(283);
 	
 	var _mapSelf2 = _interopRequireDefault(_mapSelf);
 	
-	var _classnames = __webpack_require__(274);
+	var _classnames = __webpack_require__(280);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _TodayButton = __webpack_require__(279);
+	var _TodayButton = __webpack_require__(285);
 	
 	var _TodayButton2 = _interopRequireDefault(_TodayButton);
 	
-	var _OkButton = __webpack_require__(280);
+	var _OkButton = __webpack_require__(286);
 	
 	var _OkButton2 = _interopRequireDefault(_OkButton);
 	
-	var _TimePickerButton = __webpack_require__(281);
+	var _TimePickerButton = __webpack_require__(287);
 	
 	var _TimePickerButton2 = _interopRequireDefault(_TimePickerButton);
 	
@@ -1758,11 +1765,11 @@ webpackJsonp([4],{
 	  },
 	  render: function render() {
 	    var props = this.props;
-	    var value = props.value;
-	    var prefixCls = props.prefixCls;
-	    var showOk = props.showOk;
-	    var timePicker = props.timePicker;
-	    var renderFooter = props.renderFooter;
+	    var value = props.value,
+	        prefixCls = props.prefixCls,
+	        showOk = props.showOk,
+	        timePicker = props.timePicker,
+	        renderFooter = props.renderFooter;
 	
 	    var footerEl = null;
 	    var extraFooter = renderFooter();
@@ -1807,7 +1814,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 279:
+/***/ 285:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1821,19 +1828,19 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _util = __webpack_require__(266);
+	var _util = __webpack_require__(272);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function TodayButton(_ref) {
-	  var prefixCls = _ref.prefixCls;
-	  var locale = _ref.locale;
-	  var value = _ref.value;
-	  var timePicker = _ref.timePicker;
-	  var disabled = _ref.disabled;
-	  var disabledDate = _ref.disabledDate;
-	  var onToday = _ref.onToday;
-	  var text = _ref.text;
+	  var prefixCls = _ref.prefixCls,
+	      locale = _ref.locale,
+	      value = _ref.value,
+	      timePicker = _ref.timePicker,
+	      disabled = _ref.disabled,
+	      disabledDate = _ref.disabledDate,
+	      onToday = _ref.onToday,
+	      text = _ref.text;
 	
 	  var localeNow = (!text && timePicker ? locale.now : text) || locale.today;
 	  var disabledToday = disabledDate && !(0, _util.isAllowedDate)((0, _util.getTodayTime)(value), disabledDate);
@@ -1854,7 +1861,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 280:
+/***/ 286:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1871,10 +1878,10 @@ webpackJsonp([4],{
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function OkButton(_ref) {
-	  var prefixCls = _ref.prefixCls;
-	  var locale = _ref.locale;
-	  var okDisabled = _ref.okDisabled;
-	  var onOk = _ref.onOk;
+	  var prefixCls = _ref.prefixCls,
+	      locale = _ref.locale,
+	      okDisabled = _ref.okDisabled,
+	      onOk = _ref.onOk;
 	
 	  var className = prefixCls + "-ok-btn";
 	  if (okDisabled) {
@@ -1894,7 +1901,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 281:
+/***/ 287:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1903,7 +1910,7 @@ webpackJsonp([4],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(270);
+	var _defineProperty2 = __webpack_require__(276);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
@@ -1913,7 +1920,7 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames2 = __webpack_require__(274);
+	var _classnames2 = __webpack_require__(280);
 	
 	var _classnames3 = _interopRequireDefault(_classnames2);
 	
@@ -1922,12 +1929,12 @@ webpackJsonp([4],{
 	function TimePickerButton(_ref) {
 	  var _classnames;
 	
-	  var prefixCls = _ref.prefixCls;
-	  var locale = _ref.locale;
-	  var showTimePicker = _ref.showTimePicker;
-	  var onOpenTimePicker = _ref.onOpenTimePicker;
-	  var onCloseTimePicker = _ref.onCloseTimePicker;
-	  var timePickerDisabled = _ref.timePickerDisabled;
+	  var prefixCls = _ref.prefixCls,
+	      locale = _ref.locale,
+	      showTimePicker = _ref.showTimePicker,
+	      onOpenTimePicker = _ref.onOpenTimePicker,
+	      onCloseTimePicker = _ref.onCloseTimePicker,
+	      timePickerDisabled = _ref.timePickerDisabled;
 	
 	  var className = (0, _classnames3.default)((_classnames = {}, (0, _defineProperty3.default)(_classnames, prefixCls + '-time-picker-btn', true), (0, _defineProperty3.default)(_classnames, prefixCls + '-time-picker-btn-disabled', timePickerDisabled), _classnames));
 	  var onClick = null;
@@ -1948,7 +1955,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 282:
+/***/ 288:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1957,7 +1964,7 @@ webpackJsonp([4],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(270);
+	var _defineProperty2 = __webpack_require__(276);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
@@ -1965,15 +1972,15 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(274);
+	var _classnames = __webpack_require__(280);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _moment = __webpack_require__(264);
+	var _moment = __webpack_require__(270);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _index = __webpack_require__(266);
+	var _index = __webpack_require__(272);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -2088,7 +2095,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 285:
+/***/ 291:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2101,11 +2108,11 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(36);
+	var _reactDom = __webpack_require__(34);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _moment = __webpack_require__(264);
+	var _moment = __webpack_require__(270);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
@@ -2150,10 +2157,10 @@ webpackJsonp([4],{
 	      str: str
 	    });
 	    var value = void 0;
-	    var _props = this.props;
-	    var disabledDate = _props.disabledDate;
-	    var format = _props.format;
-	    var onChange = _props.onChange;
+	    var _props = this.props,
+	        disabledDate = _props.disabledDate,
+	        format = _props.format,
+	        onChange = _props.onChange;
 	
 	    if (str) {
 	      var parsed = (0, _moment2.default)(str, format, true);
@@ -2202,12 +2209,12 @@ webpackJsonp([4],{
 	  },
 	  render: function render() {
 	    var props = this.props;
-	    var _state = this.state;
-	    var invalid = _state.invalid;
-	    var str = _state.str;
-	    var locale = props.locale;
-	    var prefixCls = props.prefixCls;
-	    var placeholder = props.placeholder;
+	    var _state = this.state,
+	        invalid = _state.invalid,
+	        str = _state.str;
+	    var locale = props.locale,
+	        prefixCls = props.prefixCls,
+	        placeholder = props.placeholder;
 	
 	    var invalidClass = invalid ? prefixCls + '-input-invalid' : '';
 	    return _react2.default.createElement(
@@ -2240,7 +2247,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 286:
+/***/ 292:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2253,23 +2260,23 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(36);
+	var _reactDom = __webpack_require__(34);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _createChainedFunction = __webpack_require__(287);
+	var _createChainedFunction = __webpack_require__(293);
 	
 	var _createChainedFunction2 = _interopRequireDefault(_createChainedFunction);
 	
-	var _KeyCode = __webpack_require__(215);
+	var _KeyCode = __webpack_require__(221);
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _placements = __webpack_require__(288);
+	var _placements = __webpack_require__(294);
 	
 	var _placements2 = _interopRequireDefault(_placements);
 	
-	var _rcTrigger = __webpack_require__(289);
+	var _rcTrigger = __webpack_require__(295);
 	
 	var _rcTrigger2 = _interopRequireDefault(_rcTrigger);
 	
@@ -2330,8 +2337,8 @@ webpackJsonp([4],{
 	    };
 	  },
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	    var value = nextProps.value;
-	    var open = nextProps.open;
+	    var value = nextProps.value,
+	        open = nextProps.open;
 	
 	    if ('value' in nextProps) {
 	      this.setState({
@@ -2434,15 +2441,15 @@ webpackJsonp([4],{
 	  },
 	  render: function render() {
 	    var props = this.props;
-	    var prefixCls = props.prefixCls;
-	    var placement = props.placement;
-	    var style = props.style;
-	    var getCalendarContainer = props.getCalendarContainer;
-	    var align = props.align;
-	    var animation = props.animation;
-	    var disabled = props.disabled;
-	    var transitionName = props.transitionName;
-	    var children = props.children;
+	    var prefixCls = props.prefixCls,
+	        placement = props.placement,
+	        style = props.style,
+	        getCalendarContainer = props.getCalendarContainer,
+	        align = props.align,
+	        animation = props.animation,
+	        disabled = props.disabled,
+	        transitionName = props.transitionName,
+	        children = props.children;
 	
 	    var state = this.state;
 	    return _react2.default.createElement(
@@ -2472,7 +2479,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 288:
+/***/ 294:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2519,7 +2526,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 373:
+/***/ 382:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2530,39 +2537,39 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(36);
+	var _reactDom = __webpack_require__(34);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _rcCalendar = __webpack_require__(174);
+	var _rcCalendar = __webpack_require__(180);
 	
 	var _rcCalendar2 = _interopRequireDefault(_rcCalendar);
 	
-	var _Picker = __webpack_require__(286);
+	var _Picker = __webpack_require__(292);
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _rcDialog = __webpack_require__(374);
+	var _rcDialog = __webpack_require__(383);
 	
 	var _rcDialog2 = _interopRequireDefault(_rcDialog);
 	
-	__webpack_require__(378);
+	__webpack_require__(388);
 	
-	var _zh_CN = __webpack_require__(323);
+	var _zh_CN = __webpack_require__(329);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
-	var _en_US = __webpack_require__(284);
+	var _en_US = __webpack_require__(290);
 	
 	var _en_US2 = _interopRequireDefault(_en_US);
 	
-	var _moment = __webpack_require__(264);
+	var _moment = __webpack_require__(270);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	__webpack_require__(329);
+	__webpack_require__(335);
 	
-	__webpack_require__(330);
+	__webpack_require__(336);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -2661,7 +2668,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 374:
+/***/ 383:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2670,23 +2677,29 @@ webpackJsonp([4],{
 	    value: true
 	});
 	
-	var _extends2 = __webpack_require__(177);
-	
-	var _extends3 = _interopRequireDefault(_extends2);
-	
 	var _react = __webpack_require__(3);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Dialog = __webpack_require__(375);
+	var _Dialog = __webpack_require__(384);
 	
 	var _Dialog2 = _interopRequireDefault(_Dialog);
 	
-	var _getContainerRenderMixin = __webpack_require__(322);
+	var _getContainerRenderMixin = __webpack_require__(387);
 	
 	var _getContainerRenderMixin2 = _interopRequireDefault(_getContainerRenderMixin);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	var __assign = undefined && undefined.__assign || Object.assign || function (t) {
+	    for (var s, i = 1, n = arguments.length; i < n; i++) {
+	        s = arguments[i];
+	        for (var p in s) {
+	            if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+	        }
+	    }
+	    return t;
+	};
 	
 	var DialogWrap = _react2["default"].createClass({
 	    displayName: 'DialogWrap',
@@ -2698,7 +2711,7 @@ webpackJsonp([4],{
 	
 	        autoDestroy: false,
 	        getComponent: function getComponent(instance, extra) {
-	            return _react2["default"].createElement(_Dialog2["default"], (0, _extends3["default"])({}, instance.props, extra, { key: 'dialog' }));
+	            return _react2["default"].createElement(_Dialog2["default"], __assign({}, instance.props, extra, { key: "dialog" }));
 	        }
 	    })],
 	    getDefaultProps: function getDefaultProps() {
@@ -2735,7 +2748,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 375:
+/***/ 384:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2744,31 +2757,27 @@ webpackJsonp([4],{
 	    value: true
 	});
 	
-	var _extends2 = __webpack_require__(177);
-	
-	var _extends3 = _interopRequireDefault(_extends2);
-	
 	var _react = __webpack_require__(3);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(36);
+	var _reactDom = __webpack_require__(34);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _KeyCode = __webpack_require__(215);
+	var _KeyCode = __webpack_require__(221);
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _rcAnimate = __webpack_require__(309);
+	var _rcAnimate = __webpack_require__(315);
 	
 	var _rcAnimate2 = _interopRequireDefault(_rcAnimate);
 	
-	var _LazyRenderBox = __webpack_require__(376);
+	var _LazyRenderBox = __webpack_require__(385);
 	
 	var _LazyRenderBox2 = _interopRequireDefault(_LazyRenderBox);
 	
-	var _getScrollBarSize = __webpack_require__(377);
+	var _getScrollBarSize = __webpack_require__(386);
 	
 	var _getScrollBarSize2 = _interopRequireDefault(_getScrollBarSize);
 	
@@ -2777,6 +2786,16 @@ webpackJsonp([4],{
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	var __assign = undefined && undefined.__assign || Object.assign || function (t) {
+	    for (var s, i = 1, n = arguments.length; i < n; i++) {
+	        s = arguments[i];
+	        for (var p in s) {
+	            if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+	        }
+	    }
+	    return t;
+	};
 	
 	var uuid = 0;
 	var openCount = 0;
@@ -2840,6 +2859,7 @@ webpackJsonp([4],{
 	        if (props.visible) {
 	            // first show
 	            if (!prevProps.visible) {
+	                this.openTime = Date.now();
 	                this.lastOutSideFocusNode = document.activeElement;
 	                this.addScrollingEffect();
 	                this.refs.wrap.focus();
@@ -2862,6 +2882,11 @@ webpackJsonp([4],{
 	            }
 	        }
 	    },
+	    componentWillUnmount: function componentWillUnmount() {
+	        if (this.props.visible) {
+	            this.removeScrollingEffect();
+	        }
+	    },
 	    onAnimateLeave: function onAnimateLeave() {
 	        // need demo?
 	        // https://github.com/react-component/dialog/pull/28
@@ -2872,7 +2897,11 @@ webpackJsonp([4],{
 	        this.props.afterClose();
 	    },
 	    onMaskClick: function onMaskClick(e) {
-	        if (e.target === e.currentTarget && this.props.maskClosable) {
+	        // android trigger click on open (fastclick??)
+	        if (Date.now() - this.openTime < 300) {
+	            return;
+	        }
+	        if (e.target === e.currentTarget) {
 	            this.close(e);
 	        }
 	    },
@@ -2910,60 +2939,20 @@ webpackJsonp([4],{
 	        }
 	        var footer = void 0;
 	        if (props.footer) {
-	            footer = _react2["default"].createElement(
-	                'div',
-	                { className: prefixCls + '-footer', ref: 'footer' },
-	                props.footer
-	            );
+	            footer = _react2["default"].createElement("div", { className: prefixCls + '-footer', ref: "footer" }, props.footer);
 	        }
 	        var header = void 0;
 	        if (props.title) {
-	            header = _react2["default"].createElement(
-	                'div',
-	                { className: prefixCls + '-header', ref: 'header' },
-	                _react2["default"].createElement(
-	                    'div',
-	                    { className: prefixCls + '-title', id: this.titleId },
-	                    props.title
-	                )
-	            );
+	            header = _react2["default"].createElement("div", { className: prefixCls + '-header', ref: "header" }, _react2["default"].createElement("div", { className: prefixCls + '-title', id: this.titleId }, props.title));
 	        }
 	        var closer = void 0;
 	        if (closable) {
-	            closer = _react2["default"].createElement(
-	                'button',
-	                { onClick: this.close, 'aria-label': 'Close', className: prefixCls + '-close' },
-	                _react2["default"].createElement('span', { className: prefixCls + '-close-x' })
-	            );
+	            closer = _react2["default"].createElement("button", { onClick: this.close, "aria-label": "Close", className: prefixCls + '-close' }, _react2["default"].createElement("span", { className: prefixCls + '-close-x' }));
 	        }
 	        var style = (0, _objectAssign2["default"])({}, props.style, dest);
 	        var transitionName = this.getTransitionName();
-	        var dialogElement = _react2["default"].createElement(
-	            _LazyRenderBox2["default"],
-	            { role: 'document', ref: 'dialog', style: style, className: prefixCls + ' ' + (props.className || ''), visible: props.visible },
-	            _react2["default"].createElement(
-	                'div',
-	                { className: prefixCls + '-content' },
-	                closer,
-	                header,
-	                _react2["default"].createElement(
-	                    'div',
-	                    (0, _extends3["default"])({ className: prefixCls + '-body', style: props.bodyStyle, ref: 'body' }, props.bodyProps),
-	                    props.children
-	                ),
-	                footer
-	            ),
-	            _react2["default"].createElement(
-	                'div',
-	                { tabIndex: 0, ref: 'sentinel', style: { width: 0, height: 0, overflow: 'hidden' } },
-	                'sentinel'
-	            )
-	        );
-	        return _react2["default"].createElement(
-	            _rcAnimate2["default"],
-	            { key: 'dialog', showProp: 'visible', onLeave: this.onAnimateLeave, transitionName: transitionName, component: '', transitionAppear: true },
-	            dialogElement
-	        );
+	        var dialogElement = _react2["default"].createElement(_LazyRenderBox2["default"], { key: "dialog-element", role: "document", ref: "dialog", style: style, className: prefixCls + ' ' + (props.className || ''), visible: props.visible }, _react2["default"].createElement("div", { className: prefixCls + '-content' }, closer, header, _react2["default"].createElement("div", __assign({ className: prefixCls + '-body', style: props.bodyStyle, ref: "body" }, props.bodyProps), props.children), footer), _react2["default"].createElement("div", { tabIndex: 0, ref: "sentinel", style: { width: 0, height: 0, overflow: 'hidden' } }, "sentinel"));
+	        return _react2["default"].createElement(_rcAnimate2["default"], { key: "dialog", showProp: "visible", onLeave: this.onAnimateLeave, transitionName: transitionName, component: "", transitionAppear: true }, dialogElement);
 	    },
 	    getZIndexStyle: function getZIndexStyle() {
 	        var style = {};
@@ -2984,13 +2973,9 @@ webpackJsonp([4],{
 	        var maskElement = void 0;
 	        if (props.mask) {
 	            var maskTransition = this.getMaskTransitionName();
-	            maskElement = _react2["default"].createElement(_LazyRenderBox2["default"], { style: this.getMaskStyle(), key: 'mask', className: props.prefixCls + '-mask', hiddenClassName: props.prefixCls + '-mask-hidden', visible: props.visible });
+	            maskElement = _react2["default"].createElement(_LazyRenderBox2["default"], __assign({ style: this.getMaskStyle(), key: "mask", className: props.prefixCls + '-mask', hiddenClassName: props.prefixCls + '-mask-hidden', visible: props.visible }, props.maskProps));
 	            if (maskTransition) {
-	                maskElement = _react2["default"].createElement(
-	                    _rcAnimate2["default"],
-	                    { key: 'mask', showProp: 'visible', transitionAppear: true, component: '', transitionName: maskTransition },
-	                    maskElement
-	                );
+	                maskElement = _react2["default"].createElement(_rcAnimate2["default"], { key: "mask", showProp: "visible", transitionAppear: true, component: "", transitionName: maskTransition }, maskElement);
 	            }
 	        }
 	        return maskElement;
@@ -3071,23 +3056,16 @@ webpackJsonp([4],{
 	    },
 	    render: function render() {
 	        var props = this.props;
-	        var prefixCls = props.prefixCls;
+	        var prefixCls = props.prefixCls,
+	            maskClosable = props.maskClosable;
+	
 	        var style = this.getWrapStyle();
 	        // clear hide display
 	        // and only set display after async anim, not here for hide
 	        if (props.visible) {
 	            style.display = null;
 	        }
-	        return _react2["default"].createElement(
-	            'div',
-	            null,
-	            this.getMaskElement(),
-	            _react2["default"].createElement(
-	                'div',
-	                (0, _extends3["default"])({ tabIndex: -1, onKeyDown: this.onKeyDown, className: prefixCls + '-wrap ' + (props.wrapClassName || ''), ref: 'wrap', onClick: this.onMaskClick, role: 'dialog', 'aria-labelledby': props.title ? this.titleId : null, style: style }, props.wrapProps),
-	                this.getDialogElement()
-	            )
-	        );
+	        return _react2["default"].createElement("div", null, this.getMaskElement(), _react2["default"].createElement("div", __assign({ tabIndex: -1, onKeyDown: this.onKeyDown, className: prefixCls + '-wrap ' + (props.wrapClassName || ''), ref: "wrap", onClick: maskClosable ? this.onMaskClick : undefined, role: "dialog", "aria-labelledby": props.title ? this.titleId : null, style: style }, props.wrapProps), this.getDialogElement()));
 	    }
 	});
 	exports["default"] = Dialog;
@@ -3095,7 +3073,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 376:
+/***/ 385:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3114,6 +3092,16 @@ webpackJsonp([4],{
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
+	var __assign = undefined && undefined.__assign || Object.assign || function (t) {
+	    for (var s, i = 1, n = arguments.length; i < n; i++) {
+	        s = arguments[i];
+	        for (var p in s) {
+	            if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+	        }
+	    }
+	    return t;
+	};
+	
 	var LazyRenderBox = _react2["default"].createClass({
 	    displayName: 'LazyRenderBox',
 	    shouldComponentUpdate: function shouldComponentUpdate(nextProps) {
@@ -3128,7 +3116,7 @@ webpackJsonp([4],{
 	        delete props.hiddenClassName;
 	        delete props.visible;
 	        props.className = className;
-	        return _react2["default"].createElement('div', props);
+	        return _react2["default"].createElement("div", __assign({}, props));
 	    }
 	});
 	exports["default"] = LazyRenderBox;
@@ -3136,7 +3124,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 377:
+/***/ 386:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3184,7 +3172,107 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 378:
+/***/ 387:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	exports["default"] = getContainerRenderMixin;
+	
+	var _reactDom = __webpack_require__(34);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function defaultGetContainer() {
+	  var container = document.createElement('div');
+	  document.body.appendChild(container);
+	  return container;
+	}
+	
+	function getContainerRenderMixin(config) {
+	  var _config$autoMount = config.autoMount;
+	  var autoMount = _config$autoMount === undefined ? true : _config$autoMount;
+	  var _config$autoDestroy = config.autoDestroy;
+	  var autoDestroy = _config$autoDestroy === undefined ? true : _config$autoDestroy;
+	  var isVisible = config.isVisible;
+	  var getComponent = config.getComponent;
+	  var _config$getContainer = config.getContainer;
+	  var getContainer = _config$getContainer === undefined ? defaultGetContainer : _config$getContainer;
+	
+	
+	  var mixin = void 0;
+	
+	  function _renderComponent(instance, componentArg, ready) {
+	    if (!isVisible || instance._component || isVisible(instance)) {
+	      if (!instance._container) {
+	        instance._container = getContainer(instance);
+	      }
+	      _reactDom2["default"].unstable_renderSubtreeIntoContainer(instance, getComponent(instance, componentArg), instance._container, function callback() {
+	        instance._component = this;
+	        if (ready) {
+	          ready.call(this);
+	        }
+	      });
+	    }
+	  }
+	
+	  if (autoMount) {
+	    mixin = _extends({}, mixin, {
+	      componentDidMount: function componentDidMount() {
+	        _renderComponent(this);
+	      },
+	      componentDidUpdate: function componentDidUpdate() {
+	        _renderComponent(this);
+	      }
+	    });
+	  }
+	
+	  if (!autoMount || !autoDestroy) {
+	    mixin = _extends({}, mixin, {
+	      renderComponent: function renderComponent(componentArg, ready) {
+	        _renderComponent(this, componentArg, ready);
+	      }
+	    });
+	  }
+	
+	  function _removeContainer(instance) {
+	    if (instance._container) {
+	      var container = instance._container;
+	      _reactDom2["default"].unmountComponentAtNode(container);
+	      container.parentNode.removeChild(container);
+	      instance._container = null;
+	    }
+	  }
+	
+	  if (autoDestroy) {
+	    mixin = _extends({}, mixin, {
+	      componentWillUnmount: function componentWillUnmount() {
+	        _removeContainer(this);
+	      }
+	    });
+	  } else {
+	    mixin = _extends({}, mixin, {
+	      removeContainer: function removeContainer() {
+	        _removeContainer(this);
+	      }
+	    });
+	  }
+	
+	  return mixin;
+	}
+	module.exports = exports['default'];
+
+/***/ },
+
+/***/ 388:
 2
 
 });
