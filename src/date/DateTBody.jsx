@@ -61,6 +61,7 @@ const DateTBody = React.createClass({
     const dateClass = `${prefixCls}-date`;
     const todayClass = `${prefixCls}-today`;
     const selectedClass = `${prefixCls}-selected-day`;
+    const selectedDateClass = `${prefixCls}-selected-date`;  // do not move with mouse operation
     const inRangeClass = `${prefixCls}-in-range-cell`;
     const lastMonthDayClass = `${prefixCls}-last-month-cell`;
     const nextMonthDayClass = `${prefixCls}-next-month-btn-day`;
@@ -88,6 +89,7 @@ const DateTBody = React.createClass({
     }
     const tableHtml = [];
     passed = 0;
+
     for (iIndex = 0; iIndex < DateConstants.DATE_ROW_COUNT; iIndex++) {
       let weekNumberCell;
       const dateCells = [];
@@ -146,6 +148,11 @@ const DateTBody = React.createClass({
           // keyboard change value, highlight works
           selected = true;
         }
+
+        if (isSameDay(current, selectedValue)) {
+          cls += ` ${selectedDateClass}`;
+        }
+
         if (isBeforeCurrentMonthYear) {
           cls += ` ${lastMonthDayClass}`;
         }
