@@ -335,7 +335,7 @@ const RangeCalendar = React.createClass({
     if (!this.state.selectedValue[0] || !this.state.selectedValue[1]) {
       this.setState({
         selectedValue,
-        value: selectedValue[0],
+        value: selectedValue[0] || getNow(),
       });
     }
 
