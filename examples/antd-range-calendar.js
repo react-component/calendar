@@ -3214,7 +3214,7 @@ webpackJsonp([2],{
 	    if (!this.state.selectedValue[0] || !this.state.selectedValue[1]) {
 	      this.setState({
 	        selectedValue: selectedValue,
-	        value: selectedValue[0]
+	        value: selectedValue[0] || getNow()
 	      });
 	    }
 	
@@ -3311,7 +3311,7 @@ webpackJsonp([2],{
 	      _react2.default.createElement(
 	        'div',
 	        { className: prefixCls + '-panel' },
-	        showClear ? _react2.default.createElement('a', {
+	        showClear && selectedValue[0] && selectedValue[1] ? _react2.default.createElement('a', {
 	          className: prefixCls + '-clear-btn',
 	          role: 'button',
 	          title: locale.clear,
