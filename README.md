@@ -72,7 +72,7 @@ npm start
 
 ## Example
 
-http://localhost:8001/examples/
+http://localhost:8002/examples/
 
 online example:
 
@@ -299,6 +299,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>Boolean</td>
           <td>auto</td>
           <td>whether has ok button in footer</td>
+        </tr>
+        <tr>
+          <td>showClear</td>
+          <td>Boolean</td>
+          <td>false</td>
+          <td>whether has clear button in header</td>
         </tr>
         <tr>
           <td>timePicker</td>

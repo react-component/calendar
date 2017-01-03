@@ -335,7 +335,7 @@ const RangeCalendar = React.createClass({
     if (!this.state.selectedValue[0] || !this.state.selectedValue[1]) {
       this.setState({
         selectedValue,
-        value: selectedValue[0],
+        value: selectedValue[0] || getNow(),
       });
     }
 
@@ -441,7 +441,7 @@ const RangeCalendar = React.createClass({
       >
         {props.renderSidebar()}
         <div className={`${prefixCls}-panel`}>
-          {showClear ?
+          {showClear && selectedValue[0] && selectedValue[1] ?
             <a
               className={`${prefixCls}-clear-btn`}
               role="button"
