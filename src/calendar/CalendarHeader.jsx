@@ -60,7 +60,7 @@ const CalendarHeader = React.createClass({
       className={`${prefixCls}-year-select`}
       role="button"
       onClick={showTimePicker ? null : this.showYearPanel}
-      title={locale.monthSelect}
+      title={locale.yearSelect}
     >
       {value.format(locale.yearFormat)}
     </a>);
