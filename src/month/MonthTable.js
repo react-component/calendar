@@ -43,7 +43,7 @@ class MonthTable extends Component {
     const value = this.state.value;
     const current = value.clone();
     const months = [];
-    const localeData = value.localeData();
+    const localeData = this.props.locale.localeData || value.localeData();
     let index = 0;
     for (let rowIndex = 0; rowIndex < ROW; rowIndex++) {
       months[rowIndex] = [];

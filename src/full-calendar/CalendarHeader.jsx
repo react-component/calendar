@@ -42,7 +42,7 @@ class CalendarHeader extends Component {
 
   monthSelectElement(month) {
     const props = this.props;
-    const localeData = props.value.localeData();
+    const localeData = props.locale.localeData || props.value.localeData();
     const t = props.value.clone();
     const { prefixCls } = props;
     const options = [];

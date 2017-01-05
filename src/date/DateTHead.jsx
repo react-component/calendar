@@ -7,7 +7,7 @@ class DateTHead extends React.Component {
   render() {
     const props = this.props;
     const value = props.value;
-    const localeData = value.localeData();
+    const localeData = props.locale.localeData || value.localeData();
     const prefixCls = props.prefixCls;
     const veryShortWeekdays = [];
     const weekDays = [];
