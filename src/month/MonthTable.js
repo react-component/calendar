@@ -135,5 +135,6 @@ MonthTable.propTypes = {
   cellRender: PropTypes.func,
   prefixCls: PropTypes.string,
   value: PropTypes.object,
+  locale: PropTypes.object,
 };
 export default MonthTable;

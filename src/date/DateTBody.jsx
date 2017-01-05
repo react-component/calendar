@@ -36,6 +36,7 @@ const DateTBody = React.createClass({
     value: PropTypes.object,
     hoverValue: PropTypes.any,
     showWeekNumber: PropTypes.bool,
+    locale: PropTypes.object,
   },
 
   getDefaultProps() {
