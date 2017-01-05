@@ -50,7 +50,7 @@ const DateTBody = React.createClass({
     const {
       contentRender, prefixCls, selectedValue, value,
       showWeekNumber, dateRender, disabledDate,
-      hoverValue, locale
+      hoverValue, locale,
     } = props;
     let iIndex;
     let jIndex;
