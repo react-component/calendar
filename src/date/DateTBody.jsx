@@ -71,7 +71,7 @@ const DateTBody = React.createClass({
     const month1 = value.clone();
     month1.date(1);
     const day = month1.day();
-    const localeData = locale.localeData || value.localeData()
+    const localeData = locale.localeData || value.localeData();
     const lastMonthDiffDay = (day + 7 - localeData.firstDayOfWeek()) % 7;
     // calculate last month
     const lastMonth1 = month1.clone();
