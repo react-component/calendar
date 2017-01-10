@@ -69,14 +69,13 @@ class DecadePanel extends React.Component {
           [`${prefixCls}-last-century-cell`]: isLast,
           [`${prefixCls}-next-century-cell`]: isNext,
         };
-        let content;
+        const content = `${dStartDecade}-${dEndDecade}`;
         let clickHandler;
         if (isLast) {
           clickHandler = this.previousCentury;
         } else if (isNext) {
           clickHandler = this.nextCentury;
         } else {
-          content = `${dStartDecade}-${dEndDecade}`;
           clickHandler = chooseDecade.bind(this, dStartDecade);
         }
         return (<td
