@@ -1,6 +1,10 @@
 # History
 ----
 
+## 7.6.0 / 2017-01-11
+
+- remove arrow inside year and century panel
+
 ## 7.5.0 / 2016-11-16
 
 - add showToday for RangeCalendar
