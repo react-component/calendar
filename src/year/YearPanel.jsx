@@ -46,21 +46,13 @@ class YearPanel extends React.Component {
     const currentYear = value.year();
     const startYear = parseInt(currentYear / 10, 10) * 10;
     const previousYear = startYear - 1;
-    const endYear = startYear + 9;
     const years = [];
     let index = 0;
     for (let rowIndex = 0; rowIndex < ROW; rowIndex++) {
       years[rowIndex] = [];
       for (let colIndex = 0; colIndex < COL; colIndex++) {
         const year = previousYear + index;
-        let content;
-        if (year < startYear) {
-          content = '';
-        } else if (year > endYear) {
-          content = '';
-        } else {
-          content = String(year);
-        }
+        const content = String(year);
         years[rowIndex][colIndex] = {
           content,
           year,
