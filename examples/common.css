@@ -881,16 +881,7 @@
    -ms-user-select: none;
        user-select: none;
   -webkit-user-select: none;
-}
-.rc-calendar-year-panel-last-decade-cell .rc-calendar-year-panel-year:before,
-.rc-calendar-year-panel-next-decade-cell .rc-calendar-year-panel-year:before {
-  content: ">";
-  font-family: "iconfont" !important;
-}
-.rc-calendar-year-panel-last-decade-cell .rc-calendar-year-panel-year {
-  -webkit-transform: rotate(180deg);
-          transform: rotate(180deg);
-  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  color: rgba(0, 0, 0, 0.25);
 }
 .rc-calendar-decade-panel {
   left: 0;
@@ -994,16 +985,7 @@
    -ms-user-select: none;
        user-select: none;
   -webkit-user-select: none;
-}
-.rc-calendar-decade-panel-last-century-cell .rc-calendar-decade-panel-decade:before,
-.rc-calendar-decade-panel-next-century-cell .rc-calendar-decade-panel-decade:before {
-  content: ">";
-  font-family: "iconfont" !important;
-}
-.rc-calendar-decade-panel-last-century-cell .rc-calendar-decade-panel-decade {
-  -webkit-transform: rotate(180deg);
-          transform: rotate(180deg);
-  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  color: rgba(0, 0, 0, 0.25);
 }
 .rc-calendar-range {
   width: 502px;

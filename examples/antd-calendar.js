@@ -1206,7 +1206,7 @@ webpackJsonp([0],{
 	        className: prefixCls + '-year-select',
 	        role: 'button',
 	        onClick: showTimePicker ? null : this.showYearPanel,
-	        title: locale.monthSelect
+	        title: locale.yearSelect
 	      },
 	      value.format(locale.yearFormat)
 	    );
@@ -1583,21 +1583,13 @@ webpackJsonp([0],{
 	    var currentYear = value.year();
 	    var startYear = parseInt(currentYear / 10, 10) * 10;
 	    var previousYear = startYear - 1;
-	    var endYear = startYear + 9;
 	    var years = [];
 	    var index = 0;
 	    for (var rowIndex = 0; rowIndex < ROW; rowIndex++) {
 	      years[rowIndex] = [];
 	      for (var colIndex = 0; colIndex < COL; colIndex++) {
 	        var year = previousYear + index;
-	        var content = void 0;
-	        if (year < startYear) {
-	          content = '';
-	        } else if (year > endYear) {
-	          content = '';
-	        } else {
-	          content = String(year);
-	        }
+	        var content = String(year);
 	        years[rowIndex][colIndex] = {
 	          content: content,
 	          year: year,
@@ -1864,14 +1856,13 @@ webpackJsonp([0],{
 	        var isLast = dStartDecade < startYear;
 	        var isNext = dEndDecade > endYear;
 	        var classNameMap = (_classNameMap = {}, (0, _defineProperty3.default)(_classNameMap, prefixCls + '-cell', 1), (0, _defineProperty3.default)(_classNameMap, prefixCls + '-selected-cell', dStartDecade <= currentYear && currentYear <= dEndDecade), (0, _defineProperty3.default)(_classNameMap, prefixCls + '-last-century-cell', isLast), (0, _defineProperty3.default)(_classNameMap, prefixCls + '-next-century-cell', isNext), _classNameMap);
-	        var content = void 0;
+	        var content = dStartDecade + '-' + dEndDecade;
 	        var clickHandler = void 0;
 	        if (isLast) {
 	          clickHandler = _this2.previousCentury;
 	        } else if (isNext) {
 	          clickHandler = _this2.nextCentury;
 	        } else {
-	          content = dStartDecade + '-' + dEndDecade;
 	          clickHandler = chooseDecade.bind(_this2, dStartDecade);
 	        }
 	        return _react2.default.createElement(
