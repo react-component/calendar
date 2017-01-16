@@ -240,9 +240,11 @@ describe('Calendar', () => {
     it('month panel shows', (done) => {
       expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
         'rc-calendar-month-panel').length).to.be(0);
-      Simulate.click(TestUtils.findRenderedDOMComponentWithClass(calendar,
-        'rc-calendar-month-select'));
       async.series([(next) => {
+        Simulate.click(TestUtils.findRenderedDOMComponentWithClass(calendar,
+          'rc-calendar-month-select'));
+        setTimeout(next, 10);
+      }, (next) => {
         expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
           'rc-calendar-month-panel').length).to.be(1);
         expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
@@ -261,9 +263,11 @@ describe('Calendar', () => {
       let text;
       expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
         'rc-calendar-year-panel').length).to.be(0);
-      Simulate.click(TestUtils.findRenderedDOMComponentWithClass(calendar,
-        'rc-calendar-year-select'));
       async.series([(next) => {
+        Simulate.click(TestUtils.findRenderedDOMComponentWithClass(calendar,
+          'rc-calendar-year-select'));
+        setTimeout(next, 10);
+      }, (next) => {
         expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
           'rc-calendar-year-panel').length).to.be(1);
         expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
