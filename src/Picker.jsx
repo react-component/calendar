@@ -80,8 +80,10 @@ const Picker = React.createClass({
     }
   },
 
-  componentDidUpdate() {
-    this.focusCalendar();
+  componentDidUpdate(_, prevState) {
+    if (!prevState.open && this.state.open) {
+      this.focusCalendar();
+    }
   },
 
   onCalendarKeyDown(event) {
