@@ -880,6 +880,11 @@ webpackJsonp([1],{
 	      });
 	    }
 	  },
+	  componentDidUpdate: function componentDidUpdate(_, prevState) {
+	    if (!prevState.open && this.state.open) {
+	      this.focusCalendar();
+	    }
+	  },
 	  onCalendarKeyDown: function onCalendarKeyDown(event) {
 	    if (event.keyCode === _KeyCode2.default.ESC) {
 	      event.stopPropagation();
@@ -902,7 +907,7 @@ webpackJsonp([1],{
 	  },
 	  onKeyDown: function onKeyDown(event) {
 	    if (event.keyCode === _KeyCode2.default.DOWN && !this.state.open) {
-	      this.open(this.focusCalendar);
+	      this.open();
 	      event.preventDefault();
 	    }
 	  },
@@ -913,7 +918,7 @@ webpackJsonp([1],{
 	    this.close(this.focus);
 	  },
 	  onVisibleChange: function onVisibleChange(open) {
-	    this.setOpen(open, this.focusCalendar);
+	    this.setOpen(open);
 	  },
 	  getCalendarElement: function getCalendarElement() {
 	    var props = this.props;
