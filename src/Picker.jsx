@@ -80,6 +80,12 @@ const Picker = React.createClass({
     }
   },
 
+  componentDidUpdate(_, prevState) {
+    if (!prevState.open && this.state.open) {
+      this.focusCalendar();
+    }
+  },
+
   onCalendarKeyDown(event) {
     if (event.keyCode === KeyCode.ESC) {
       event.stopPropagation();
@@ -105,7 +111,7 @@ const Picker = React.createClass({
 
   onKeyDown(event) {
     if (event.keyCode === KeyCode.DOWN && !this.state.open) {
-      this.open(this.focusCalendar);
+      this.open();
       event.preventDefault();
     }
   },
@@ -119,7 +125,7 @@ const Picker = React.createClass({
   },
 
   onVisibleChange(open) {
-    this.setOpen(open, this.focusCalendar);
+    this.setOpen(open);
   },
 
   getCalendarElement() {
