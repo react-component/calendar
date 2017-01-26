@@ -257,6 +257,9 @@ const RangeCalendar = React.createClass({
       value = value.clone();
       syncTime(selectedValue[0], value);
     }
+    if (this.state.showTimePicker && selectedValue[0]) {
+      return selectedValue[0];
+    }
     return value;
   },
 
