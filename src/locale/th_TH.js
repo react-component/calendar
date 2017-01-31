@@ -16,7 +16,7 @@ export default {
   dayFormat: 'D',
   dateTimeFormat: 'D/M/YYYY HH:mm:ss',
   monthFormat: 'MMMM',
-  monthBeforeYear: false,
+  monthBeforeYear: true,
   previousMonth: 'เดือนก่อนหน้า (PageUp)',
   nextMonth: 'เดือนถัดไป (PageDown)',
   previousYear: 'ปีก่อนหน้า (Control + left)',
