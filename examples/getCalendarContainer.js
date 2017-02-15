@@ -3,7 +3,7 @@ webpackJsonp([4],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(382);
+	module.exports = __webpack_require__(383);
 
 
 /***/ },
@@ -2523,7 +2523,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 382:
+/***/ 383:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2546,13 +2546,13 @@ webpackJsonp([4],{
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _rcDialog = __webpack_require__(383);
+	var _rcDialog = __webpack_require__(384);
 	
 	var _rcDialog2 = _interopRequireDefault(_rcDialog);
 	
-	__webpack_require__(388);
+	__webpack_require__(389);
 	
-	var _zh_CN = __webpack_require__(329);
+	var _zh_CN = __webpack_require__(330);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -2564,9 +2564,9 @@ webpackJsonp([4],{
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	__webpack_require__(335);
-	
 	__webpack_require__(336);
+	
+	__webpack_require__(337);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -2665,7 +2665,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 383:
+/***/ 384:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2678,11 +2678,11 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Dialog = __webpack_require__(384);
+	var _Dialog = __webpack_require__(385);
 	
 	var _Dialog2 = _interopRequireDefault(_Dialog);
 	
-	var _getContainerRenderMixin = __webpack_require__(387);
+	var _getContainerRenderMixin = __webpack_require__(388);
 	
 	var _getContainerRenderMixin2 = _interopRequireDefault(_getContainerRenderMixin);
 	
@@ -2745,7 +2745,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 384:
+/***/ 385:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2766,15 +2766,15 @@ webpackJsonp([4],{
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _rcAnimate = __webpack_require__(315);
+	var _rcAnimate = __webpack_require__(316);
 	
 	var _rcAnimate2 = _interopRequireDefault(_rcAnimate);
 	
-	var _LazyRenderBox = __webpack_require__(385);
+	var _LazyRenderBox = __webpack_require__(386);
 	
 	var _LazyRenderBox2 = _interopRequireDefault(_LazyRenderBox);
 	
-	var _getScrollBarSize = __webpack_require__(386);
+	var _getScrollBarSize = __webpack_require__(387);
 	
 	var _getScrollBarSize2 = _interopRequireDefault(_getScrollBarSize);
 	
@@ -2845,6 +2845,7 @@ webpackJsonp([4],{
 	        };
 	    },
 	    componentWillMount: function componentWillMount() {
+	        this.inTransition = false;
 	        this.titleId = 'rcDialogTitle' + uuid++;
 	    },
 	    componentDidMount: function componentDidMount() {
@@ -2869,6 +2870,7 @@ webpackJsonp([4],{
 	                }
 	            }
 	        } else if (prevProps.visible) {
+	            this.inTransition = true;
 	            if (props.mask && this.lastOutSideFocusNode) {
 	                try {
 	                    this.lastOutSideFocusNode.focus();
@@ -2880,7 +2882,7 @@ webpackJsonp([4],{
 	        }
 	    },
 	    componentWillUnmount: function componentWillUnmount() {
-	        if (this.props.visible) {
+	        if (this.props.visible || this.inTransition) {
 	            this.removeScrollingEffect();
 	        }
 	    },
@@ -2890,6 +2892,7 @@ webpackJsonp([4],{
 	        if (this.refs.wrap) {
 	            this.refs.wrap.style.display = 'none';
 	        }
+	        this.inTransition = false;
 	        this.removeScrollingEffect();
 	        this.props.afterClose();
 	    },
@@ -3070,7 +3073,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 385:
+/***/ 386:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3121,7 +3124,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 386:
+/***/ 387:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3169,7 +3172,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 387:
+/***/ 388:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3269,7 +3272,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 388:
+/***/ 389:
 2
 
 });

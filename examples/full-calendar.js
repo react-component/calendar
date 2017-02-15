@@ -3,7 +3,7 @@ webpackJsonp([3],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(351);
+	module.exports = __webpack_require__(352);
 
 
 /***/ },
@@ -593,7 +593,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 351:
+/***/ 352:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -608,17 +608,17 @@ webpackJsonp([3],{
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _FullCalendar = __webpack_require__(352);
+	var _FullCalendar = __webpack_require__(353);
 	
 	var _FullCalendar2 = _interopRequireDefault(_FullCalendar);
 	
-	__webpack_require__(354);
+	__webpack_require__(355);
 	
-	var _rcSelect = __webpack_require__(355);
+	var _rcSelect = __webpack_require__(356);
 	
 	var _rcSelect2 = _interopRequireDefault(_rcSelect);
 	
-	var _zh_CN = __webpack_require__(329);
+	var _zh_CN = __webpack_require__(330);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -630,9 +630,9 @@ webpackJsonp([3],{
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	__webpack_require__(335);
-	
 	__webpack_require__(336);
+	
+	__webpack_require__(337);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -696,7 +696,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 352:
+/***/ 353:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -729,7 +729,7 @@ webpackJsonp([3],{
 	
 	var _CommonMixin2 = _interopRequireDefault(_CommonMixin);
 	
-	var _CalendarHeader = __webpack_require__(353);
+	var _CalendarHeader = __webpack_require__(354);
 	
 	var _CalendarHeader2 = _interopRequireDefault(_CalendarHeader);
 	
@@ -870,7 +870,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 353:
+/***/ 354:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1074,10 +1074,10 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 354:
+/***/ 355:
 2,
 
-/***/ 355:
+/***/ 356:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1087,7 +1087,7 @@ webpackJsonp([3],{
 	});
 	exports.OptGroup = exports.Option = undefined;
 	
-	var _Select = __webpack_require__(356);
+	var _Select = __webpack_require__(357);
 	
 	var _Select2 = _interopRequireDefault(_Select);
 	
@@ -1095,7 +1095,7 @@ webpackJsonp([3],{
 	
 	var _Option2 = _interopRequireDefault(_Option);
 	
-	var _OptGroup = __webpack_require__(358);
+	var _OptGroup = __webpack_require__(382);
 	
 	var _OptGroup2 = _interopRequireDefault(_OptGroup);
 	
@@ -1109,7 +1109,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 356:
+/***/ 357:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1134,29 +1134,25 @@ webpackJsonp([3],{
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _KeyCode = __webpack_require__(357);
+	var _KeyCode = __webpack_require__(358);
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _classnames = __webpack_require__(280);
+	var _classnames2 = __webpack_require__(280);
 	
-	var _classnames2 = _interopRequireDefault(_classnames);
+	var _classnames3 = _interopRequireDefault(_classnames2);
 	
-	var _OptGroup = __webpack_require__(358);
-	
-	var _OptGroup2 = _interopRequireDefault(_OptGroup);
-	
-	var _rcAnimate = __webpack_require__(315);
+	var _rcAnimate = __webpack_require__(316);
 	
 	var _rcAnimate2 = _interopRequireDefault(_rcAnimate);
 	
-	var _componentClasses = __webpack_require__(321);
+	var _componentClasses = __webpack_require__(322);
 	
 	var _componentClasses2 = _interopRequireDefault(_componentClasses);
 	
 	var _util = __webpack_require__(359);
 	
-	var _SelectTrigger = __webpack_require__(376);
+	var _SelectTrigger = __webpack_require__(360);
 	
 	var _SelectTrigger2 = _interopRequireDefault(_SelectTrigger);
 	
@@ -1217,7 +1213,8 @@ webpackJsonp([3],{
 	    defaultValue: _react.PropTypes.oneOfType([valueObjectShape, _react.PropTypes.arrayOf(valueObjectShape)]),
 	    dropdownStyle: _react.PropTypes.object,
 	    maxTagTextLength: _react.PropTypes.number,
-	    tokenSeparators: _react.PropTypes.arrayOf(_react.PropTypes.string)
+	    tokenSeparators: _react.PropTypes.arrayOf(_react.PropTypes.string),
+	    getInputElement: _react.PropTypes.func
 	  },
 	
 	  mixins: [_FilterMixin2["default"]],
@@ -1260,7 +1257,7 @@ webpackJsonp([3],{
 	    value = this.addTitleToValue(props, value);
 	    var inputValue = '';
 	    if (props.combobox) {
-	      inputValue = value.length ? String(value[0].key) : '';
+	      inputValue = value.length ? this.getLabelFromProps(props, value[0].key) : '';
 	    }
 	    this.saveInputRef = saveRef.bind(this, 'inputInstance');
 	    this.saveInputMirrorRef = saveRef.bind(this, 'inputMirrorInstance');
@@ -1298,10 +1295,7 @@ webpackJsonp([3],{
 	    this.adjustOpenState();
 	  },
 	  componentDidUpdate: function componentDidUpdate() {
-	    var state = this.state,
-	        props = this.props;
-	
-	    if (state.open && (0, _util.isMultipleOrTags)(props)) {
+	    if ((0, _util.isMultipleOrTags)(this.props)) {
 	      var inputNode = this.getInputDOMNode();
 	      var mirrorNode = this.getInputMirrorDOMNode();
 	      if (inputNode.value) {
@@ -1476,7 +1470,10 @@ webpackJsonp([3],{
 	      this.getInputDOMNode().focus();
 	    }
 	  },
-	  onOuterFocus: function onOuterFocus() {
+	  onOuterFocus: function onOuterFocus(e) {
+	    if (e.target === this.getInputDOMNode()) {
+	      return;
+	    }
 	    this.clearBlurTime();
 	    this._focused = true;
 	    this.updateFocusClassName();
@@ -1546,7 +1543,7 @@ webpackJsonp([3],{
 	    }
 	    var label = null;
 	    _react2["default"].Children.forEach(children, function (child) {
-	      if (child.type === _OptGroup2["default"]) {
+	      if (child.type.isSelectOptGroup) {
 	        var maybe = _this3.getLabelBySingleValue(child.props.children, value);
 	        if (maybe !== null) {
 	          label = maybe;
@@ -1565,7 +1562,7 @@ webpackJsonp([3],{
 	    }
 	    var value = null;
 	    _react2["default"].Children.forEach(children, function (child) {
-	      if (child.type === _OptGroup2["default"]) {
+	      if (child.type.isSelectOptGroup) {
 	        var maybe = _this4.getValueByLabel(child.props.children, label);
 	        if (maybe !== null) {
 	          value = maybe;
@@ -1646,16 +1643,18 @@ webpackJsonp([3],{
 	  },
 	  getInputElement: function getInputElement() {
 	    var props = this.props;
+	    var inputElement = props.getInputElement ? props.getInputElement() : _react2["default"].createElement('input', null);
+	    var inputCls = (0, _classnames3["default"])(inputElement.props.className, (0, _defineProperty3["default"])({}, props.prefixCls + '-search__field', true));
 	    return _react2["default"].createElement(
 	      'div',
 	      { className: props.prefixCls + '-search__field__wrap' },
-	      _react2["default"].createElement('input', {
+	      _react2["default"].cloneElement(inputElement, {
 	        ref: this.saveInputRef,
 	        onChange: this.onInputChange,
 	        onKeyDown: this.onInputKeyDown,
 	        value: this.state.inputValue,
 	        disabled: props.disabled,
-	        className: props.prefixCls + '-search__field'
+	        className: inputCls
 	      }),
 	      _react2["default"].createElement(
 	        'span',
@@ -1782,7 +1781,7 @@ webpackJsonp([3],{
 	      return v.key;
 	    });
 	    _react2["default"].Children.forEach(props.children, function (child) {
-	      if (child.type === _OptGroup2["default"]) {
+	      if (child.type.isSelectOptGroup) {
 	        nextValues = _this7.addTitleToValue(child.props, nextValues);
 	      } else {
 	        var value = (0, _util.getValuePropValue)(child);
@@ -2087,7 +2086,7 @@ webpackJsonp([3],{
 	          ref: 'root',
 	          onBlur: this.onOuterBlur,
 	          onFocus: this.onOuterFocus,
-	          className: (0, _classnames2["default"])(rootCls)
+	          className: (0, _classnames3["default"])(rootCls)
 	        },
 	        _react2["default"].createElement(
 	          'div',
@@ -2124,7 +2123,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 357:
+/***/ 358:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2654,49 +2653,6 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 358:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _classCallCheck2 = __webpack_require__(223);
-	
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-	
-	var _possibleConstructorReturn2 = __webpack_require__(224);
-	
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-	
-	var _inherits2 = __webpack_require__(260);
-	
-	var _inherits3 = _interopRequireDefault(_inherits2);
-	
-	var _react = __webpack_require__(3);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-	
-	var OptGroup = function (_React$Component) {
-	  (0, _inherits3["default"])(OptGroup, _React$Component);
-	
-	  function OptGroup() {
-	    (0, _classCallCheck3["default"])(this, OptGroup);
-	    return (0, _possibleConstructorReturn3["default"])(this, _React$Component.apply(this, arguments));
-	  }
-	
-	  return OptGroup;
-	}(_react2["default"].Component);
-	
-	exports["default"] = OptGroup;
-	module.exports = exports['default'];
-
-/***/ },
-
 /***/ 359:
 /***/ function(module, exports, __webpack_require__) {
 
@@ -2720,8 +2676,6 @@ webpackJsonp([3],{
 	exports.findFirstMenuItem = findFirstMenuItem;
 	exports.includesSeparators = includesSeparators;
 	exports.splitBySeparators = splitBySeparators;
-	
-	var _rcMenu = __webpack_require__(360);
 	
 	var _react = __webpack_require__(3);
 	
@@ -2805,7 +2759,7 @@ webpackJsonp([3],{
 	  }
 	  var selectedKeys = [];
 	  _react2["default"].Children.forEach(menuItems, function (item) {
-	    if (item.type === _rcMenu.ItemGroup) {
+	    if (item.type.isMenuItemGroup) {
 	      selectedKeys = selectedKeys.concat(getSelectKeys(item.props.children, value));
 	    } else {
 	      var itemValue = getValuePropValue(item);
@@ -2830,7 +2784,7 @@ webpackJsonp([3],{
 	function findFirstMenuItem(children) {
 	  for (var i = 0; i < children.length; i++) {
 	    var child = children[i];
-	    if (child.type === _rcMenu.ItemGroup) {
+	    if (child.type.isMenuItemGroup) {
 	      var found = findFirstMenuItem(child.props.children);
 	      if (found) {
 	        return found;
@@ -2873,25 +2827,431 @@ webpackJsonp([3],{
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	
+	var _defineProperty2 = __webpack_require__(276);
+	
+	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+	
+	var _objectWithoutProperties2 = __webpack_require__(327);
+	
+	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+	
+	var _extends2 = __webpack_require__(183);
+	
+	var _extends3 = _interopRequireDefault(_extends2);
+	
+	var _rcTrigger = __webpack_require__(295);
+	
+	var _rcTrigger2 = _interopRequireDefault(_rcTrigger);
+	
+	var _react = __webpack_require__(3);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _classnames = __webpack_require__(280);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _DropdownMenu = __webpack_require__(361);
+	
+	var _DropdownMenu2 = _interopRequireDefault(_DropdownMenu);
+	
+	var _reactDom = __webpack_require__(34);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _util = __webpack_require__(359);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	var BUILT_IN_PLACEMENTS = {
+	  bottomLeft: {
+	    points: ['tl', 'bl'],
+	    offset: [0, 4],
+	    overflow: {
+	      adjustX: 0,
+	      adjustY: 1
+	    }
+	  },
+	  topLeft: {
+	    points: ['bl', 'tl'],
+	    offset: [0, -4],
+	    overflow: {
+	      adjustX: 0,
+	      adjustY: 1
+	    }
+	  }
+	};
+	
+	var SelectTrigger = _react2["default"].createClass({
+	  displayName: 'SelectTrigger',
+	
+	  propTypes: {
+	    onPopupFocus: _react.PropTypes.func,
+	    dropdownMatchSelectWidth: _react.PropTypes.bool,
+	    dropdownAlign: _react.PropTypes.object,
+	    visible: _react.PropTypes.bool,
+	    disabled: _react.PropTypes.bool,
+	    showSearch: _react.PropTypes.bool,
+	    dropdownClassName: _react.PropTypes.string,
+	    multiple: _react.PropTypes.bool,
+	    inputValue: _react.PropTypes.string,
+	    filterOption: _react.PropTypes.any,
+	    options: _react.PropTypes.any,
+	    prefixCls: _react.PropTypes.string,
+	    popupClassName: _react.PropTypes.string,
+	    children: _react.PropTypes.any
+	  },
+	
+	  componentDidUpdate: function componentDidUpdate() {
+	    var _props = this.props,
+	        visible = _props.visible,
+	        dropdownMatchSelectWidth = _props.dropdownMatchSelectWidth;
+	
+	    if (visible) {
+	      var dropdownDOMNode = this.getPopupDOMNode();
+	      if (dropdownDOMNode) {
+	        var widthProp = dropdownMatchSelectWidth ? 'width' : 'minWidth';
+	        dropdownDOMNode.style[widthProp] = _reactDom2["default"].findDOMNode(this).offsetWidth + 'px';
+	      }
+	    }
+	  },
+	  getInnerMenu: function getInnerMenu() {
+	    return this.popupMenu && this.popupMenu.refs.menu;
+	  },
+	  getPopupDOMNode: function getPopupDOMNode() {
+	    return this.refs.trigger.getPopupDomNode();
+	  },
+	  getDropdownElement: function getDropdownElement(newProps) {
+	    var props = this.props;
+	    return _react2["default"].createElement(_DropdownMenu2["default"], (0, _extends3["default"])({
+	      ref: this.saveMenu
+	    }, newProps, {
+	      prefixCls: this.getDropdownPrefixCls(),
+	      onMenuSelect: props.onMenuSelect,
+	      onMenuDeselect: props.onMenuDeselect,
+	      value: props.value,
+	      defaultActiveFirstOption: props.defaultActiveFirstOption,
+	      dropdownMenuStyle: props.dropdownMenuStyle
+	    }));
+	  },
+	  getDropdownTransitionName: function getDropdownTransitionName() {
+	    var props = this.props;
+	    var transitionName = props.transitionName;
+	    if (!transitionName && props.animation) {
+	      transitionName = this.getDropdownPrefixCls() + '-' + props.animation;
+	    }
+	    return transitionName;
+	  },
+	  getDropdownPrefixCls: function getDropdownPrefixCls() {
+	    return this.props.prefixCls + '-dropdown';
+	  },
+	  saveMenu: function saveMenu(menu) {
+	    this.popupMenu = menu;
+	  },
+	  render: function render() {
+	    var _popupClassName;
+	
+	    var _props2 = this.props,
+	        onPopupFocus = _props2.onPopupFocus,
+	        props = (0, _objectWithoutProperties3["default"])(_props2, ['onPopupFocus']);
+	    var multiple = props.multiple,
+	        visible = props.visible,
+	        inputValue = props.inputValue,
+	        dropdownAlign = props.dropdownAlign,
+	        disabled = props.disabled,
+	        showSearch = props.showSearch,
+	        dropdownClassName = props.dropdownClassName;
+	
+	    var dropdownPrefixCls = this.getDropdownPrefixCls();
+	    var popupClassName = (_popupClassName = {}, (0, _defineProperty3["default"])(_popupClassName, dropdownClassName, !!dropdownClassName), (0, _defineProperty3["default"])(_popupClassName, dropdownPrefixCls + '--' + (multiple ? 'multiple' : 'single'), 1), _popupClassName);
+	    var popupElement = this.getDropdownElement({
+	      menuItems: props.options,
+	      onPopupFocus: onPopupFocus,
+	      multiple: multiple,
+	      inputValue: inputValue,
+	      visible: visible
+	    });
+	    var hideAction = void 0;
+	    if (disabled) {
+	      hideAction = [];
+	    } else if ((0, _util.isSingleMode)(props) && !showSearch) {
+	      hideAction = ['click'];
+	    } else {
+	      hideAction = ['blur'];
+	    }
+	    return _react2["default"].createElement(
+	      _rcTrigger2["default"],
+	      (0, _extends3["default"])({}, props, {
+	        showAction: disabled ? [] : ['click'],
+	        hideAction: hideAction,
+	        ref: 'trigger',
+	        popupPlacement: 'bottomLeft',
+	        builtinPlacements: BUILT_IN_PLACEMENTS,
+	        prefixCls: dropdownPrefixCls,
+	        popupTransitionName: this.getDropdownTransitionName(),
+	        onPopupVisibleChange: props.onDropdownVisibleChange,
+	        popup: popupElement,
+	        popupAlign: dropdownAlign,
+	        popupVisible: visible,
+	        getPopupContainer: props.getPopupContainer,
+	        popupClassName: (0, _classnames2["default"])(popupClassName),
+	        popupStyle: props.dropdownStyle
+	      }),
+	      props.children
+	    );
+	  }
+	});
+	
+	exports["default"] = SelectTrigger;
+	module.exports = exports['default'];
+
+/***/ },
+
+/***/ 361:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _typeof2 = __webpack_require__(225);
+	
+	var _typeof3 = _interopRequireDefault(_typeof2);
+	
+	var _extends2 = __webpack_require__(183);
+	
+	var _extends3 = _interopRequireDefault(_extends2);
+	
+	var _react = __webpack_require__(3);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(34);
+	
+	var _toArray = __webpack_require__(362);
+	
+	var _toArray2 = _interopRequireDefault(_toArray);
+	
+	var _rcMenu = __webpack_require__(363);
+	
+	var _rcMenu2 = _interopRequireDefault(_rcMenu);
+	
+	var _domScrollIntoView = __webpack_require__(366);
+	
+	var _domScrollIntoView2 = _interopRequireDefault(_domScrollIntoView);
+	
+	var _util = __webpack_require__(359);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	var DropdownMenu = _react2["default"].createClass({
+	  displayName: 'DropdownMenu',
+	
+	  propTypes: {
+	    defaultActiveFirstOption: _react.PropTypes.bool,
+	    value: _react.PropTypes.any,
+	    dropdownMenuStyle: _react.PropTypes.object,
+	    multiple: _react.PropTypes.bool,
+	    onPopupFocus: _react.PropTypes.func,
+	    onMenuDeSelect: _react.PropTypes.func,
+	    onMenuSelect: _react.PropTypes.func,
+	    prefixCls: _react.PropTypes.string,
+	    menuItems: _react.PropTypes.any,
+	    inputValue: _react.PropTypes.string,
+	    visible: _react.PropTypes.bool
+	  },
+	
+	  componentWillMount: function componentWillMount() {
+	    this.lastInputValue = this.props.inputValue;
+	  },
+	  componentDidMount: function componentDidMount() {
+	    this.scrollActiveItemToView();
+	    this.lastVisible = this.props.visible;
+	  },
+	  shouldComponentUpdate: function shouldComponentUpdate(nextProps) {
+	    if (!nextProps.visible) {
+	      this.lastVisible = false;
+	    }
+	    // freeze when hide
+	    return nextProps.visible;
+	  },
+	  componentDidUpdate: function componentDidUpdate(prevProps) {
+	    var props = this.props;
+	    if (!prevProps.visible && props.visible) {
+	      this.scrollActiveItemToView();
+	    }
+	    this.lastVisible = props.visible;
+	    this.lastInputValue = props.inputValue;
+	  },
+	  scrollActiveItemToView: function scrollActiveItemToView() {
+	    // scroll into view
+	    var itemComponent = (0, _reactDom.findDOMNode)(this.firstActiveItem);
+	    if (itemComponent) {
+	      (0, _domScrollIntoView2["default"])(itemComponent, (0, _reactDom.findDOMNode)(this.refs.menu), {
+	        onlyScrollIfNeeded: true
+	      });
+	    }
+	  },
+	  renderMenu: function renderMenu() {
+	    var _this = this;
+	
+	    var props = this.props;
+	    var menuItems = props.menuItems,
+	        defaultActiveFirstOption = props.defaultActiveFirstOption,
+	        value = props.value,
+	        prefixCls = props.prefixCls,
+	        multiple = props.multiple,
+	        onMenuSelect = props.onMenuSelect,
+	        inputValue = props.inputValue;
+	
+	    if (menuItems && menuItems.length) {
+	      var _ret = function () {
+	        var menuProps = {};
+	        if (multiple) {
+	          menuProps.onDeselect = props.onMenuDeselect;
+	          menuProps.onSelect = onMenuSelect;
+	        } else {
+	          menuProps.onClick = onMenuSelect;
+	        }
+	
+	        var selectedKeys = (0, _util.getSelectKeys)(menuItems, value);
+	        var activeKeyProps = {};
+	
+	        var clonedMenuItems = menuItems;
+	        if (selectedKeys.length) {
+	          (function () {
+	            if (props.visible && !_this.lastVisible) {
+	              activeKeyProps.activeKey = selectedKeys[0];
+	            }
+	            var foundFirst = false;
+	            // set firstActiveItem via cloning menus
+	            // for scroll into view
+	            var clone = function clone(item) {
+	              if (!foundFirst && selectedKeys.indexOf(item.key) !== -1) {
+	                foundFirst = true;
+	                return (0, _react.cloneElement)(item, {
+	                  ref: function ref(_ref) {
+	                    _this.firstActiveItem = _ref;
+	                  }
+	                });
+	              }
+	              return item;
+	            };
+	
+	            clonedMenuItems = menuItems.map(function (item) {
+	              if (item.type.isMenuItemGroup) {
+	                var children = (0, _toArray2["default"])(item.props.children).map(clone);
+	                return (0, _react.cloneElement)(item, {}, children);
+	              }
+	              return clone(item);
+	            });
+	          })();
+	        }
+	
+	        // clear activeKey when inputValue change
+	        if (inputValue !== _this.lastInputValue) {
+	          activeKeyProps.activeKey = '';
+	        }
+	
+	        return {
+	          v: _react2["default"].createElement(
+	            _rcMenu2["default"],
+	            (0, _extends3["default"])({
+	              ref: 'menu',
+	              style: _this.props.dropdownMenuStyle,
+	              defaultActiveFirst: defaultActiveFirstOption
+	            }, activeKeyProps, {
+	              multiple: multiple,
+	              focusable: false
+	            }, menuProps, {
+	              selectedKeys: selectedKeys,
+	              prefixCls: prefixCls + '-menu'
+	            }),
+	            clonedMenuItems
+	          )
+	        };
+	      }();
+	
+	      if ((typeof _ret === 'undefined' ? 'undefined' : (0, _typeof3["default"])(_ret)) === "object") return _ret.v;
+	    }
+	    return null;
+	  },
+	  render: function render() {
+	    var renderMenu = this.renderMenu();
+	    return renderMenu ? _react2["default"].createElement(
+	      'div',
+	      {
+	        style: { overflow: 'auto' },
+	        onFocus: this.props.onPopupFocus,
+	        onMouseDown: _util.preventDefaultEvent
+	      },
+	      renderMenu
+	    ) : null;
+	  }
+	});
+	
+	exports["default"] = DropdownMenu;
+	module.exports = exports['default'];
+
+/***/ },
+
+/***/ 362:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports["default"] = toArray;
+	
+	var _react = __webpack_require__(3);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function toArray(children) {
+	  var ret = [];
+	  _react2["default"].Children.forEach(children, function (c) {
+	    ret.push(c);
+	  });
+	  return ret;
+	}
+	module.exports = exports['default'];
+
+/***/ },
+
+/***/ 363:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	exports.Divider = exports.ItemGroup = exports.MenuItemGroup = exports.MenuItem = exports.Item = exports.SubMenu = undefined;
 	
-	var _Menu = __webpack_require__(361);
+	var _Menu = __webpack_require__(364);
 	
 	var _Menu2 = _interopRequireDefault(_Menu);
 	
-	var _SubMenu = __webpack_require__(368);
+	var _SubMenu = __webpack_require__(371);
 	
 	var _SubMenu2 = _interopRequireDefault(_SubMenu);
 	
-	var _MenuItem = __webpack_require__(373);
+	var _MenuItem = __webpack_require__(376);
 	
 	var _MenuItem2 = _interopRequireDefault(_MenuItem);
 	
-	var _MenuItemGroup = __webpack_require__(374);
+	var _MenuItemGroup = __webpack_require__(377);
 	
 	var _MenuItemGroup2 = _interopRequireDefault(_MenuItemGroup);
 	
-	var _Divider = __webpack_require__(375);
+	var _Divider = __webpack_require__(378);
 	
 	var _Divider2 = _interopRequireDefault(_Divider);
 	
@@ -2907,7 +3267,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 361:
+/***/ 364:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2924,11 +3284,11 @@ webpackJsonp([3],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _MenuMixin = __webpack_require__(362);
+	var _MenuMixin = __webpack_require__(365);
 	
 	var _MenuMixin2 = _interopRequireDefault(_MenuMixin);
 	
-	var _util = __webpack_require__(366);
+	var _util = __webpack_require__(369);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -2988,10 +3348,10 @@ webpackJsonp([3],{
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
 	    var props = {};
 	    if ('selectedKeys' in nextProps) {
-	      props.selectedKeys = nextProps.selectedKeys;
+	      props.selectedKeys = nextProps.selectedKeys || [];
 	    }
 	    if ('openKeys' in nextProps) {
-	      props.openKeys = nextProps.openKeys;
+	      props.openKeys = nextProps.openKeys || [];
 	    }
 	    this.setState(props);
 	  },
@@ -3164,7 +3524,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 362:
+/***/ 365:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3201,13 +3561,13 @@ webpackJsonp([3],{
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _domScrollIntoView = __webpack_require__(363);
+	var _domScrollIntoView = __webpack_require__(366);
 	
 	var _domScrollIntoView2 = _interopRequireDefault(_domScrollIntoView);
 	
-	var _util = __webpack_require__(366);
+	var _util = __webpack_require__(369);
 	
-	var _DOMWrap = __webpack_require__(367);
+	var _DOMWrap = __webpack_require__(370);
 	
 	var _DOMWrap2 = _interopRequireDefault(_DOMWrap);
 	
@@ -3520,21 +3880,21 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 363:
+/***/ 366:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	module.exports = __webpack_require__(364);
+	module.exports = __webpack_require__(367);
 
 /***/ },
 
-/***/ 364:
+/***/ 367:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var util = __webpack_require__(365);
+	var util = __webpack_require__(368);
 	
 	function scrollIntoView(elem, container, config) {
 	  config = config || {};
@@ -3664,7 +4024,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 365:
+/***/ 368:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4109,7 +4469,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 366:
+/***/ 369:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4174,7 +4534,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 367:
+/***/ 370:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4226,7 +4586,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 368:
+/***/ 371:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4243,7 +4603,7 @@ webpackJsonp([3],{
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
-	var _SubPopupMenu = __webpack_require__(369);
+	var _SubPopupMenu = __webpack_require__(372);
 	
 	var _SubPopupMenu2 = _interopRequireDefault(_SubPopupMenu);
 	
@@ -4259,7 +4619,7 @@ webpackJsonp([3],{
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _util = __webpack_require__(366);
+	var _util = __webpack_require__(369);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -4295,7 +4655,7 @@ webpackJsonp([3],{
 	    onTitleClick: _react.PropTypes.func
 	  },
 	
-	  mixins: [__webpack_require__(370)],
+	  mixins: [__webpack_require__(373)],
 	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
@@ -4691,7 +5051,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 369:
+/***/ 372:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4712,11 +5072,11 @@ webpackJsonp([3],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _MenuMixin = __webpack_require__(362);
+	var _MenuMixin = __webpack_require__(365);
 	
 	var _MenuMixin2 = _interopRequireDefault(_MenuMixin);
 	
-	var _rcAnimate = __webpack_require__(315);
+	var _rcAnimate = __webpack_require__(316);
 	
 	var _rcAnimate2 = _interopRequireDefault(_rcAnimate);
 	
@@ -4769,6 +5129,9 @@ webpackJsonp([3],{
 	    return this.props.openTransitionName;
 	  },
 	  renderMenuItem: function renderMenuItem(c, i, subIndex) {
+	    if (!c) {
+	      return null;
+	    }
 	    var props = this.props;
 	    var extraProps = {
 	      openKeys: props.openKeys,
@@ -4816,7 +5179,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 370:
+/***/ 373:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4829,11 +5192,11 @@ webpackJsonp([3],{
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _addEventListener = __webpack_require__(371);
+	var _addEventListener = __webpack_require__(374);
 	
 	var _addEventListener2 = _interopRequireDefault(_addEventListener);
 	
-	var _contains = __webpack_require__(372);
+	var _contains = __webpack_require__(375);
 	
 	var _contains2 = _interopRequireDefault(_contains);
 	
@@ -4904,10 +5267,10 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 371:
+/***/ 374:
 298,
 
-/***/ 372:
+/***/ 375:
 /***/ function(module, exports) {
 
 	"use strict";
@@ -4926,7 +5289,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 373:
+/***/ 376:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4951,7 +5314,7 @@ webpackJsonp([3],{
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _util = __webpack_require__(366);
+	var _util = __webpack_require__(369);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -5141,7 +5504,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 374:
+/***/ 377:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5210,7 +5573,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 375:
+/***/ 378:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5254,412 +5617,6 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 376:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _defineProperty2 = __webpack_require__(276);
-	
-	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
-	
-	var _objectWithoutProperties2 = __webpack_require__(326);
-	
-	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
-	
-	var _extends2 = __webpack_require__(183);
-	
-	var _extends3 = _interopRequireDefault(_extends2);
-	
-	var _rcTrigger = __webpack_require__(295);
-	
-	var _rcTrigger2 = _interopRequireDefault(_rcTrigger);
-	
-	var _react = __webpack_require__(3);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _classnames = __webpack_require__(280);
-	
-	var _classnames2 = _interopRequireDefault(_classnames);
-	
-	var _DropdownMenu = __webpack_require__(377);
-	
-	var _DropdownMenu2 = _interopRequireDefault(_DropdownMenu);
-	
-	var _reactDom = __webpack_require__(34);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
-	var _util = __webpack_require__(359);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-	
-	var BUILT_IN_PLACEMENTS = {
-	  bottomLeft: {
-	    points: ['tl', 'bl'],
-	    offset: [0, 4],
-	    overflow: {
-	      adjustX: 0,
-	      adjustY: 1
-	    }
-	  },
-	  topLeft: {
-	    points: ['bl', 'tl'],
-	    offset: [0, -4],
-	    overflow: {
-	      adjustX: 0,
-	      adjustY: 1
-	    }
-	  }
-	};
-	
-	var SelectTrigger = _react2["default"].createClass({
-	  displayName: 'SelectTrigger',
-	
-	  propTypes: {
-	    onPopupFocus: _react.PropTypes.func,
-	    dropdownMatchSelectWidth: _react.PropTypes.bool,
-	    dropdownAlign: _react.PropTypes.object,
-	    visible: _react.PropTypes.bool,
-	    disabled: _react.PropTypes.bool,
-	    showSearch: _react.PropTypes.bool,
-	    dropdownClassName: _react.PropTypes.string,
-	    multiple: _react.PropTypes.bool,
-	    inputValue: _react.PropTypes.string,
-	    filterOption: _react.PropTypes.any,
-	    options: _react.PropTypes.any,
-	    prefixCls: _react.PropTypes.string,
-	    popupClassName: _react.PropTypes.string,
-	    children: _react.PropTypes.any
-	  },
-	
-	  componentDidUpdate: function componentDidUpdate() {
-	    var _props = this.props,
-	        visible = _props.visible,
-	        dropdownMatchSelectWidth = _props.dropdownMatchSelectWidth;
-	
-	    if (visible) {
-	      var dropdownDOMNode = this.getPopupDOMNode();
-	      if (dropdownDOMNode) {
-	        var widthProp = dropdownMatchSelectWidth ? 'width' : 'minWidth';
-	        dropdownDOMNode.style[widthProp] = _reactDom2["default"].findDOMNode(this).offsetWidth + 'px';
-	      }
-	    }
-	  },
-	  getInnerMenu: function getInnerMenu() {
-	    return this.popupMenu && this.popupMenu.refs.menu;
-	  },
-	  getPopupDOMNode: function getPopupDOMNode() {
-	    return this.refs.trigger.getPopupDomNode();
-	  },
-	  getDropdownElement: function getDropdownElement(newProps) {
-	    var props = this.props;
-	    return _react2["default"].createElement(_DropdownMenu2["default"], (0, _extends3["default"])({
-	      ref: this.saveMenu
-	    }, newProps, {
-	      prefixCls: this.getDropdownPrefixCls(),
-	      onMenuSelect: props.onMenuSelect,
-	      onMenuDeselect: props.onMenuDeselect,
-	      value: props.value,
-	      defaultActiveFirstOption: props.defaultActiveFirstOption,
-	      dropdownMenuStyle: props.dropdownMenuStyle
-	    }));
-	  },
-	  getDropdownTransitionName: function getDropdownTransitionName() {
-	    var props = this.props;
-	    var transitionName = props.transitionName;
-	    if (!transitionName && props.animation) {
-	      transitionName = this.getDropdownPrefixCls() + '-' + props.animation;
-	    }
-	    return transitionName;
-	  },
-	  getDropdownPrefixCls: function getDropdownPrefixCls() {
-	    return this.props.prefixCls + '-dropdown';
-	  },
-	  saveMenu: function saveMenu(menu) {
-	    this.popupMenu = menu;
-	  },
-	  render: function render() {
-	    var _popupClassName;
-	
-	    var _props2 = this.props,
-	        onPopupFocus = _props2.onPopupFocus,
-	        props = (0, _objectWithoutProperties3["default"])(_props2, ['onPopupFocus']);
-	    var multiple = props.multiple,
-	        visible = props.visible,
-	        inputValue = props.inputValue,
-	        dropdownAlign = props.dropdownAlign,
-	        disabled = props.disabled,
-	        showSearch = props.showSearch,
-	        dropdownClassName = props.dropdownClassName;
-	
-	    var dropdownPrefixCls = this.getDropdownPrefixCls();
-	    var popupClassName = (_popupClassName = {}, (0, _defineProperty3["default"])(_popupClassName, dropdownClassName, !!dropdownClassName), (0, _defineProperty3["default"])(_popupClassName, dropdownPrefixCls + '--' + (multiple ? 'multiple' : 'single'), 1), _popupClassName);
-	    var popupElement = this.getDropdownElement({
-	      menuItems: props.options,
-	      onPopupFocus: onPopupFocus,
-	      multiple: multiple,
-	      inputValue: inputValue,
-	      visible: visible
-	    });
-	    var hideAction = void 0;
-	    if (disabled) {
-	      hideAction = [];
-	    } else if ((0, _util.isSingleMode)(props) && !showSearch) {
-	      hideAction = ['click'];
-	    } else {
-	      hideAction = ['blur'];
-	    }
-	    return _react2["default"].createElement(
-	      _rcTrigger2["default"],
-	      (0, _extends3["default"])({}, props, {
-	        showAction: disabled ? [] : ['click'],
-	        hideAction: hideAction,
-	        ref: 'trigger',
-	        popupPlacement: 'bottomLeft',
-	        builtinPlacements: BUILT_IN_PLACEMENTS,
-	        prefixCls: dropdownPrefixCls,
-	        popupTransitionName: this.getDropdownTransitionName(),
-	        onPopupVisibleChange: props.onDropdownVisibleChange,
-	        popup: popupElement,
-	        popupAlign: dropdownAlign,
-	        popupVisible: visible,
-	        getPopupContainer: props.getPopupContainer,
-	        popupClassName: (0, _classnames2["default"])(popupClassName),
-	        popupStyle: props.dropdownStyle
-	      }),
-	      props.children
-	    );
-	  }
-	});
-	
-	exports["default"] = SelectTrigger;
-	module.exports = exports['default'];
-
-/***/ },
-
-/***/ 377:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _typeof2 = __webpack_require__(225);
-	
-	var _typeof3 = _interopRequireDefault(_typeof2);
-	
-	var _extends2 = __webpack_require__(183);
-	
-	var _extends3 = _interopRequireDefault(_extends2);
-	
-	var _react = __webpack_require__(3);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactDom = __webpack_require__(34);
-	
-	var _toArray = __webpack_require__(378);
-	
-	var _toArray2 = _interopRequireDefault(_toArray);
-	
-	var _rcMenu = __webpack_require__(360);
-	
-	var _rcMenu2 = _interopRequireDefault(_rcMenu);
-	
-	var _domScrollIntoView = __webpack_require__(363);
-	
-	var _domScrollIntoView2 = _interopRequireDefault(_domScrollIntoView);
-	
-	var _util = __webpack_require__(359);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-	
-	var DropdownMenu = _react2["default"].createClass({
-	  displayName: 'DropdownMenu',
-	
-	  propTypes: {
-	    defaultActiveFirstOption: _react.PropTypes.bool,
-	    value: _react.PropTypes.any,
-	    dropdownMenuStyle: _react.PropTypes.object,
-	    multiple: _react.PropTypes.bool,
-	    onPopupFocus: _react.PropTypes.func,
-	    onMenuDeSelect: _react.PropTypes.func,
-	    onMenuSelect: _react.PropTypes.func,
-	    prefixCls: _react.PropTypes.string,
-	    menuItems: _react.PropTypes.any,
-	    inputValue: _react.PropTypes.string,
-	    visible: _react.PropTypes.bool
-	  },
-	
-	  componentWillMount: function componentWillMount() {
-	    this.lastInputValue = this.props.inputValue;
-	  },
-	  componentDidMount: function componentDidMount() {
-	    this.scrollActiveItemToView();
-	    this.lastVisible = this.props.visible;
-	  },
-	  shouldComponentUpdate: function shouldComponentUpdate(nextProps) {
-	    if (!nextProps.visible) {
-	      this.lastVisible = false;
-	    }
-	    // freeze when hide
-	    return nextProps.visible;
-	  },
-	  componentDidUpdate: function componentDidUpdate(prevProps) {
-	    var props = this.props;
-	    if (!prevProps.visible && props.visible) {
-	      this.scrollActiveItemToView();
-	    }
-	    this.lastVisible = props.visible;
-	    this.lastInputValue = props.inputValue;
-	  },
-	  scrollActiveItemToView: function scrollActiveItemToView() {
-	    // scroll into view
-	    var itemComponent = (0, _reactDom.findDOMNode)(this.firstActiveItem);
-	    if (itemComponent) {
-	      (0, _domScrollIntoView2["default"])(itemComponent, (0, _reactDom.findDOMNode)(this.refs.menu), {
-	        onlyScrollIfNeeded: true
-	      });
-	    }
-	  },
-	  renderMenu: function renderMenu() {
-	    var _this = this;
-	
-	    var props = this.props;
-	    var menuItems = props.menuItems,
-	        defaultActiveFirstOption = props.defaultActiveFirstOption,
-	        value = props.value,
-	        prefixCls = props.prefixCls,
-	        multiple = props.multiple,
-	        onMenuSelect = props.onMenuSelect,
-	        inputValue = props.inputValue;
-	
-	    if (menuItems && menuItems.length) {
-	      var _ret = function () {
-	        var menuProps = {};
-	        if (multiple) {
-	          menuProps.onDeselect = props.onMenuDeselect;
-	          menuProps.onSelect = onMenuSelect;
-	        } else {
-	          menuProps.onClick = onMenuSelect;
-	        }
-	
-	        var selectedKeys = (0, _util.getSelectKeys)(menuItems, value);
-	        var activeKeyProps = {};
-	
-	        var clonedMenuItems = menuItems;
-	        if (selectedKeys.length) {
-	          (function () {
-	            if (props.visible && !_this.lastVisible) {
-	              activeKeyProps.activeKey = selectedKeys[0];
-	            }
-	            var foundFirst = false;
-	            // set firstActiveItem via cloning menus
-	            // for scroll into view
-	            var clone = function clone(item) {
-	              if (!foundFirst && selectedKeys.indexOf(item.key) !== -1) {
-	                foundFirst = true;
-	                return (0, _react.cloneElement)(item, {
-	                  ref: function ref(_ref) {
-	                    _this.firstActiveItem = _ref;
-	                  }
-	                });
-	              }
-	              return item;
-	            };
-	
-	            clonedMenuItems = menuItems.map(function (item) {
-	              if (item.type === _rcMenu.ItemGroup) {
-	                var children = (0, _toArray2["default"])(item.props.children).map(clone);
-	                return (0, _react.cloneElement)(item, {}, children);
-	              }
-	              return clone(item);
-	            });
-	          })();
-	        }
-	
-	        // clear activeKey when inputValue change
-	        if (inputValue !== _this.lastInputValue) {
-	          activeKeyProps.activeKey = '';
-	        }
-	
-	        return {
-	          v: _react2["default"].createElement(
-	            _rcMenu2["default"],
-	            (0, _extends3["default"])({
-	              ref: 'menu',
-	              style: _this.props.dropdownMenuStyle,
-	              defaultActiveFirst: defaultActiveFirstOption
-	            }, activeKeyProps, {
-	              multiple: multiple,
-	              focusable: false
-	            }, menuProps, {
-	              selectedKeys: selectedKeys,
-	              prefixCls: prefixCls + '-menu'
-	            }),
-	            clonedMenuItems
-	          )
-	        };
-	      }();
-	
-	      if ((typeof _ret === 'undefined' ? 'undefined' : (0, _typeof3["default"])(_ret)) === "object") return _ret.v;
-	    }
-	    return null;
-	  },
-	  render: function render() {
-	    var renderMenu = this.renderMenu();
-	    return renderMenu ? _react2["default"].createElement(
-	      'div',
-	      {
-	        style: { overflow: 'auto' },
-	        onFocus: this.props.onPopupFocus,
-	        onMouseDown: _util.preventDefaultEvent
-	      },
-	      renderMenu
-	    ) : null;
-	  }
-	});
-	
-	exports["default"] = DropdownMenu;
-	module.exports = exports['default'];
-
-/***/ },
-
-/***/ 378:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports["default"] = toArray;
-	
-	var _react = __webpack_require__(3);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-	
-	function toArray(children) {
-	  var ret = [];
-	  _react2["default"].Children.forEach(children, function (c) {
-	    ret.push(c);
-	  });
-	  return ret;
-	}
-	module.exports = exports['default'];
-
-/***/ },
-
 /***/ 379:
 /***/ function(module, exports, __webpack_require__) {
 
@@ -5679,19 +5636,11 @@ webpackJsonp([3],{
 	
 	var _util = __webpack_require__(359);
 	
-	var _rcMenu = __webpack_require__(360);
+	var _rcMenu = __webpack_require__(363);
 	
 	var _warning = __webpack_require__(380);
 	
 	var _warning2 = _interopRequireDefault(_warning);
-	
-	var _OptGroup = __webpack_require__(358);
-	
-	var _OptGroup2 = _interopRequireDefault(_OptGroup);
-	
-	var _Option = __webpack_require__(381);
-	
-	var _Option2 = _interopRequireDefault(_Option);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -5721,7 +5670,7 @@ webpackJsonp([3],{
 	    var childrenKeys = [];
 	    var tags = props.tags;
 	    _react2["default"].Children.forEach(children, function (child) {
-	      if (child.type === _OptGroup2["default"]) {
+	      if (child.type.isSelectOptGroup) {
 	        var innerItems = _this.renderFilterOptionsFromChildren(child.props.children, false);
 	        if (innerItems.length) {
 	          var label = child.props.label;
@@ -5740,7 +5689,7 @@ webpackJsonp([3],{
 	        return;
 	      }
 	
-	      (0, _warning2["default"])(child.type === _Option2["default"], 'the children of `Select` should be `Select.Option` or `Select.OptGroup`, ' + ('instead of `' + (child.type.name || child.type.displayName || child.type) + '`.'));
+	      (0, _warning2["default"])(child.type.isSelectOption, 'the children of `Select` should be `Select.Option` or `Select.OptGroup`, ' + ('instead of `' + (child.type.name || child.type.displayName || child.type) + '`.'));
 	
 	      var childValue = (0, _util.getValuePropValue)(child);
 	      if (_this.filterOption(inputValue, child)) {
@@ -5921,7 +5870,52 @@ webpackJsonp([3],{
 	Option.propTypes = {
 	  value: _react2["default"].PropTypes.string
 	};
+	Option.isSelectOption = true;
 	exports["default"] = Option;
+	module.exports = exports['default'];
+
+/***/ },
+
+/***/ 382:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _classCallCheck2 = __webpack_require__(223);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _possibleConstructorReturn2 = __webpack_require__(224);
+	
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+	
+	var _inherits2 = __webpack_require__(260);
+	
+	var _inherits3 = _interopRequireDefault(_inherits2);
+	
+	var _react = __webpack_require__(3);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	var OptGroup = function (_React$Component) {
+	  (0, _inherits3["default"])(OptGroup, _React$Component);
+	
+	  function OptGroup() {
+	    (0, _classCallCheck3["default"])(this, OptGroup);
+	    return (0, _possibleConstructorReturn3["default"])(this, _React$Component.apply(this, arguments));
+	  }
+	
+	  return OptGroup;
+	}(_react2["default"].Component);
+	
+	OptGroup.isSelectOptGroup = true;
+	exports["default"] = OptGroup;
 	module.exports = exports['default'];
 
 /***/ }
