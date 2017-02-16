@@ -492,6 +492,10 @@ webpackJsonp([2],{
 	  this.props.onValueChange(next);
 	}
 	
+	function showIf(condition, el) {
+	  return condition ? el : null;
+	}
+	
 	var CalendarHeader = _react2.default.createClass({
 	  displayName: 'CalendarHeader',
 	
@@ -575,9 +579,6 @@ webpackJsonp([2],{
 	      (0, _mapSelf2.default)(my)
 	    );
 	  },
-	  showIf: function showIf(condition, el) {
-	    return condition ? el : null;
-	  },
 	  showMonthPanel: function showMonthPanel() {
 	    this.setState({
 	      showMonthPanel: 1,
@@ -621,25 +622,25 @@ webpackJsonp([2],{
 	      _react2.default.createElement(
 	        'div',
 	        { style: { position: 'relative' } },
-	        this.showIf(enablePrev && !showTimePicker, _react2.default.createElement('a', {
+	        showIf(enablePrev && !showTimePicker, _react2.default.createElement('a', {
 	          className: prefixCls + '-prev-year-btn',
 	          role: 'button',
 	          onClick: this.previousYear,
 	          title: locale.previousYear
 	        })),
-	        this.showIf(enablePrev && !showTimePicker, _react2.default.createElement('a', {
+	        showIf(enablePrev && !showTimePicker, _react2.default.createElement('a', {
 	          className: prefixCls + '-prev-month-btn',
 	          role: 'button',
 	          onClick: this.previousMonth,
 	          title: locale.previousMonth
 	        })),
 	        this.monthYearElement(showTimePicker),
-	        this.showIf(enableNext && !showTimePicker, _react2.default.createElement('a', {
+	        showIf(enableNext && !showTimePicker, _react2.default.createElement('a', {
 	          className: prefixCls + '-next-month-btn',
 	          onClick: this.nextMonth,
 	          title: locale.nextMonth
 	        })),
-	        this.showIf(enableNext && !showTimePicker, _react2.default.createElement('a', {
+	        showIf(enableNext && !showTimePicker, _react2.default.createElement('a', {
 	          className: prefixCls + '-next-year-btn',
 	          onClick: this.nextYear,
 	          title: locale.nextYear
@@ -2829,10 +2830,6 @@ webpackJsonp([2],{
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
-	var _typeof2 = __webpack_require__(225);
-	
-	var _typeof3 = _interopRequireDefault(_typeof2);
-	
 	var _react = __webpack_require__(3);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -3127,6 +3124,9 @@ webpackJsonp([2],{
 	      value = value.clone();
 	      (0, _util.syncTime)(selectedValue[0], value);
 	    }
+	    if (this.state.showTimePicker && selectedValue[0]) {
+	      return selectedValue[0];
+	    }
 	    return value;
 	  },
 	  getEndValue: function getEndValue() {
@@ -3153,35 +3153,29 @@ webpackJsonp([2],{
 	    // if startTime and endTime is same day..
 	    // the second time picker will not able to pick time before first time picker
 	    if (!selectedValue[1] || startValue.isSame(selectedValue[1], 'day')) {
-	      var _ret = function () {
-	        var hours = startValue.hour();
-	        var minutes = startValue.minute();
-	        var second = startValue.second();
-	        var _disabledHours = generateOptions(hours);
-	        var _disabledMinutes = generateOptions(minutes);
-	        var _disabledSeconds = generateOptions(second);
-	        return {
-	          v: {
-	            disabledHours: function disabledHours() {
-	              return _disabledHours;
-	            },
-	            disabledMinutes: function disabledMinutes(hour) {
-	              if (hour === hours) {
-	                return _disabledMinutes;
-	              }
-	              return [];
-	            },
-	            disabledSeconds: function disabledSeconds(hour, minute) {
-	              if (hour === hours && minute === minutes) {
-	                return _disabledSeconds;
-	              }
-	              return [];
-	            }
+	      var hours = startValue.hour();
+	      var minutes = startValue.minute();
+	      var second = startValue.second();
+	      var _disabledHours = generateOptions(hours);
+	      var _disabledMinutes = generateOptions(minutes);
+	      var _disabledSeconds = generateOptions(second);
+	      return {
+	        disabledHours: function disabledHours() {
+	          return _disabledHours;
+	        },
+	        disabledMinutes: function disabledMinutes(hour) {
+	          if (hour === hours) {
+	            return _disabledMinutes;
 	          }
-	        };
-	      }();
-	
-	      if ((typeof _ret === 'undefined' ? 'undefined' : (0, _typeof3.default)(_ret)) === "object") return _ret.v;
+	          return [];
+	        },
+	        disabledSeconds: function disabledSeconds(hour, minute) {
+	          if (hour === hours && minute === minutes) {
+	            return _disabledSeconds;
+	          }
+	          return [];
+	        }
+	      };
 	    }
 	    return null;
 	  },

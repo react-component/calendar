@@ -1471,7 +1471,7 @@ webpackJsonp([3],{
 	    }
 	  },
 	  onOuterFocus: function onOuterFocus(e) {
-	    if (e.target === this.getInputDOMNode()) {
+	    if (!(0, _util.isMultipleOrTagsOrCombobox)(this.props) && e.target === this.getInputDOMNode()) {
 	      return;
 	    }
 	    this.clearBlurTime();

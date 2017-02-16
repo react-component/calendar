@@ -1160,6 +1160,10 @@ webpackJsonp([0],{
 	  this.props.onValueChange(next);
 	}
 	
+	function showIf(condition, el) {
+	  return condition ? el : null;
+	}
+	
 	var CalendarHeader = _react2.default.createClass({
 	  displayName: 'CalendarHeader',
 	
@@ -1243,9 +1247,6 @@ webpackJsonp([0],{
 	      (0, _mapSelf2.default)(my)
 	    );
 	  },
-	  showIf: function showIf(condition, el) {
-	    return condition ? el : null;
-	  },
 	  showMonthPanel: function showMonthPanel() {
 	    this.setState({
 	      showMonthPanel: 1,
@@ -1289,25 +1290,25 @@ webpackJsonp([0],{
 	      _react2.default.createElement(
 	        'div',
 	        { style: { position: 'relative' } },
-	        this.showIf(enablePrev && !showTimePicker, _react2.default.createElement('a', {
+	        showIf(enablePrev && !showTimePicker, _react2.default.createElement('a', {
 	          className: prefixCls + '-prev-year-btn',
 	          role: 'button',
 	          onClick: this.previousYear,
 	          title: locale.previousYear
 	        })),
-	        this.showIf(enablePrev && !showTimePicker, _react2.default.createElement('a', {
+	        showIf(enablePrev && !showTimePicker, _react2.default.createElement('a', {
 	          className: prefixCls + '-prev-month-btn',
 	          role: 'button',
 	          onClick: this.previousMonth,
 	          title: locale.previousMonth
 	        })),
 	        this.monthYearElement(showTimePicker),
-	        this.showIf(enableNext && !showTimePicker, _react2.default.createElement('a', {
+	        showIf(enableNext && !showTimePicker, _react2.default.createElement('a', {
 	          className: prefixCls + '-next-month-btn',
 	          onClick: this.nextMonth,
 	          title: locale.nextMonth
 	        })),
-	        this.showIf(enableNext && !showTimePicker, _react2.default.createElement('a', {
+	        showIf(enableNext && !showTimePicker, _react2.default.createElement('a', {
 	          className: prefixCls + '-next-year-btn',
 	          onClick: this.nextYear,
 	          title: locale.nextYear
