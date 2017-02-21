@@ -13,9 +13,13 @@
   ],
   "files": [
     "lib",
-    "assets/*.css"
+    "assets/*.css",
+    "dist"
   ],
   "main": "lib/index",
+  "entry": {
+    "rc-calendar": ["./src/index.js", "./assets/index.less"]
+  },
   "homepage": "http://github.com/react-component/calendar",
   "author": "yiminghe@gmail.com",
   "repository": {
