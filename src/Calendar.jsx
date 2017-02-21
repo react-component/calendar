@@ -48,6 +48,7 @@ function goDay(direction) {
 
 const Calendar = React.createClass({
   propTypes: {
+    cellRender: PropTypes.func,
     disabledDate: PropTypes.func,
     disabledTime: PropTypes.any,
     value: PropTypes.object,
@@ -253,6 +254,7 @@ const Calendar = React.createClass({
               value={value}
               selectedValue={selectedValue}
               prefixCls={prefixCls}
+              cellRender={props.cellRender}
               dateRender={props.dateRender}
               onSelect={this.onDateTableSelect}
               disabledDate={disabledDate}

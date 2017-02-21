@@ -193,6 +193,14 @@ function onStandaloneChange(value) {
   console.log(value && value.format(format));
 }
 
+function customCellRender(td) {
+  return React.cloneElement(
+    td,
+    {
+      style: { boxShadow: '0 0 1px green' },
+    }
+  );
+}
 
 ReactDOM.render((<div
   style={{
@@ -216,6 +224,7 @@ ReactDOM.render((<div
         onChange={onStandaloneChange}
         disabledDate={disabledDate}
         onSelect={onStandaloneSelect}
+        cellRender={customCellRender}
       />
     </div>
     <div style={{ float: 'left', width: 300 }}>
