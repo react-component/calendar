@@ -194,12 +194,15 @@ function onStandaloneChange(value) {
 }
 
 function customCellRender(td) {
-  return React.cloneElement(
-    td,
-    {
-      style: { boxShadow: '0 0 1px green' },
-    }
-  );
+  // apply custom styles to <td> element
+  // return React.cloneElement(
+  //   td,
+  //   {
+  //     style: { boxShadow: '0 0 1px green' },
+  //   }
+  // );
+
+  return td;
 }
 
 ReactDOM.render((<div
