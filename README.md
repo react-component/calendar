@@ -111,6 +111,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>additional style of root dom node</td>
         </tr>
         <tr>
+          <td>dateRender</td>
+          <td>(current, value) => React.Node</td>
+          <td></td>
+          <td>date cell</td>
+        </tr>
+        <tr>
           <td>renderSidebar</td>
           <td>() => React.Node</td>
           <td></td>
