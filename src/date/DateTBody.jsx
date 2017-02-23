@@ -218,7 +218,7 @@ const DateTBody = React.createClass({
         <tr
           key={iIndex}
           role="row"
-          className={ isCurrentWeek && `${prefixCls}-current-week` }
+          className={isCurrentWeek && `${prefixCls}-current-week`}
         >
           {weekNumberCell}
           {dateCells}
