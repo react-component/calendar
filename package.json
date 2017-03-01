@@ -1,6 +1,6 @@
 {
   "name": "rc-calendar",
-  "version": "7.6.6",
+  "version": "7.6.7",
   "description": "React Calendar",
   "keywords": [
     "react",
@@ -18,7 +18,7 @@
   ],
   "main": "lib/index",
   "entry": {
-    "rc-calendar": ["./src/index.js", "./assets/index.less"]
+    "rc-calendar": ["./assets/index.less", "./src/index.js"]
   },
   "homepage": "http://github.com/react-component/calendar",
   "author": "yiminghe@gmail.com",
