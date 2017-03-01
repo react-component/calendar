@@ -31,7 +31,7 @@ webpackJsonp([0],{
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _zh_CN = __webpack_require__(330);
+	var _zh_CN = __webpack_require__(329);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -39,9 +39,9 @@ webpackJsonp([0],{
 	
 	var _en_US2 = _interopRequireDefault(_en_US);
 	
-	__webpack_require__(331);
+	__webpack_require__(330);
 	
-	var _Panel = __webpack_require__(332);
+	var _Panel = __webpack_require__(331);
 	
 	var _Panel2 = _interopRequireDefault(_Panel);
 	
@@ -49,9 +49,9 @@ webpackJsonp([0],{
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	__webpack_require__(336);
+	__webpack_require__(335);
 	
-	__webpack_require__(337);
+	__webpack_require__(336);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -977,6 +977,7 @@ webpackJsonp([0],{
 	    passed = 0;
 	
 	    for (iIndex = 0; iIndex < _DateConstants2.default.DATE_ROW_COUNT; iIndex++) {
+	      var isCurrentWeek = void 0;
 	      var weekNumberCell = void 0;
 	      var dateCells = [];
 	      if (showWeekNumber) {
@@ -1006,6 +1007,7 @@ webpackJsonp([0],{
 	
 	        if (isSameDay(current, today)) {
 	          cls += ' ' + todayClass;
+	          isCurrentWeek = true;
 	        }
 	
 	        var isBeforeCurrentMonthYear = beforeCurrentMonthYear(current, value);
@@ -1102,7 +1104,8 @@ webpackJsonp([0],{
 	        'tr',
 	        {
 	          key: iIndex,
-	          role: 'row'
+	          role: 'row',
+	          className: isCurrentWeek && prefixCls + '-current-week'
 	        },
 	        weekNumberCell,
 	        dateCells
@@ -2807,10 +2810,10 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 331:
+/***/ 330:
 2,
 
-/***/ 332:
+/***/ 331:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2827,11 +2830,11 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Header = __webpack_require__(333);
+	var _Header = __webpack_require__(332);
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _Combobox = __webpack_require__(334);
+	var _Combobox = __webpack_require__(333);
 	
 	var _Combobox2 = _interopRequireDefault(_Combobox);
 	
@@ -3001,7 +3004,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 333:
+/***/ 332:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3198,7 +3201,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 334:
+/***/ 333:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3211,7 +3214,7 @@ webpackJsonp([0],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Select = __webpack_require__(335);
+	var _Select = __webpack_require__(334);
 	
 	var _Select2 = _interopRequireDefault(_Select);
 	
@@ -3367,7 +3370,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 335:
+/***/ 334:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

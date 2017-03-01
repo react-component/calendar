@@ -3,7 +3,7 @@ webpackJsonp([4],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(383);
+	module.exports = __webpack_require__(382);
 
 
 /***/ },
@@ -694,6 +694,7 @@ webpackJsonp([4],{
 	    passed = 0;
 	
 	    for (iIndex = 0; iIndex < _DateConstants2.default.DATE_ROW_COUNT; iIndex++) {
+	      var isCurrentWeek = void 0;
 	      var weekNumberCell = void 0;
 	      var dateCells = [];
 	      if (showWeekNumber) {
@@ -723,6 +724,7 @@ webpackJsonp([4],{
 	
 	        if (isSameDay(current, today)) {
 	          cls += ' ' + todayClass;
+	          isCurrentWeek = true;
 	        }
 	
 	        var isBeforeCurrentMonthYear = beforeCurrentMonthYear(current, value);
@@ -819,7 +821,8 @@ webpackJsonp([4],{
 	        'tr',
 	        {
 	          key: iIndex,
-	          role: 'row'
+	          role: 'row',
+	          className: isCurrentWeek && prefixCls + '-current-week'
 	        },
 	        weekNumberCell,
 	        dateCells
@@ -2524,7 +2527,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 383:
+/***/ 382:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2547,13 +2550,13 @@ webpackJsonp([4],{
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _rcDialog = __webpack_require__(384);
+	var _rcDialog = __webpack_require__(383);
 	
 	var _rcDialog2 = _interopRequireDefault(_rcDialog);
 	
-	__webpack_require__(389);
+	__webpack_require__(388);
 	
-	var _zh_CN = __webpack_require__(330);
+	var _zh_CN = __webpack_require__(329);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -2565,9 +2568,9 @@ webpackJsonp([4],{
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	__webpack_require__(336);
+	__webpack_require__(335);
 	
-	__webpack_require__(337);
+	__webpack_require__(336);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -2666,7 +2669,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 384:
+/***/ 383:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2679,11 +2682,11 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Dialog = __webpack_require__(385);
+	var _Dialog = __webpack_require__(384);
 	
 	var _Dialog2 = _interopRequireDefault(_Dialog);
 	
-	var _getContainerRenderMixin = __webpack_require__(388);
+	var _getContainerRenderMixin = __webpack_require__(387);
 	
 	var _getContainerRenderMixin2 = _interopRequireDefault(_getContainerRenderMixin);
 	
@@ -2746,7 +2749,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 385:
+/***/ 384:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2767,15 +2770,15 @@ webpackJsonp([4],{
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _rcAnimate = __webpack_require__(316);
+	var _rcAnimate = __webpack_require__(315);
 	
 	var _rcAnimate2 = _interopRequireDefault(_rcAnimate);
 	
-	var _LazyRenderBox = __webpack_require__(386);
+	var _LazyRenderBox = __webpack_require__(385);
 	
 	var _LazyRenderBox2 = _interopRequireDefault(_LazyRenderBox);
 	
-	var _getScrollBarSize = __webpack_require__(387);
+	var _getScrollBarSize = __webpack_require__(386);
 	
 	var _getScrollBarSize2 = _interopRequireDefault(_getScrollBarSize);
 	
@@ -3074,7 +3077,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 386:
+/***/ 385:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3125,7 +3128,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 387:
+/***/ 386:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3173,7 +3176,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 388:
+/***/ 387:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3273,7 +3276,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 389:
+/***/ 388:
 2
 
 });

@@ -7,7 +7,7 @@
   <meta charset="utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" rel="stylesheet"/>
-  <title>rc-calendar@7.6.5 - React Calendar</title>
+  <title>rc-calendar@7.6.6 - React Calendar</title>
   <style>
     @font-face {
       font-family: octicons-anchor;
@@ -737,7 +737,7 @@
 
 <body>
 <div class="header">
-  <h1>rc-calendar@7.6.5</h1>
+  <h1>rc-calendar@7.6.6</h1>
 </div>
 <div class="examples">
   <h3>EXAMPLES</h3>
@@ -778,7 +778,7 @@
 <p><img src="https://img.alicdn.com/tps/TB1QYqPKVXXXXasXVXXXXXXXXXX-1196-712.png" width="288"/></p>
 <p><img src="https://img.alicdn.com/tps/TB1nAGDKVXXXXXvapXXXXXXXXXX-1206-730.png" width="500"/></p>
 <h2>Feature<a id="user-content-feature" name="feature" class="anchor" aria-hidden="true" href="#feature"><span class="octicon octicon-link"></span></a></h2><ul>
-<li>support ie8,ie8+,chrome,firefox,safari</li>
+<li>support ie9,ie9+,chrome,firefox,safari</li>
 <li>support date, month, year, decade select panel</li>
 <li>support week number</li>
 <li>support en_US and zh_CN locale(UI), use moment.ufcOffset to set timezone</li>
@@ -828,6 +828,12 @@ npm start</code></pre></div><h2>Example<a id="user-content-example" name="exampl
           <td>Object</td>
           <td></td>
           <td>additional style of root dom node</td>
+        </tr>
+        <tr>
+          <td>dateRender</td>
+          <td>(current, value) =&gt; React.Node</td>
+          <td></td>
+          <td>date cell</td>
         </tr>
         <tr>
           <td>renderSidebar</td>

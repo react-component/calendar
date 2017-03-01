@@ -3,7 +3,7 @@ webpackJsonp([7],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(392);
+	module.exports = __webpack_require__(391);
 
 
 /***/ },
@@ -694,6 +694,7 @@ webpackJsonp([7],{
 	    passed = 0;
 	
 	    for (iIndex = 0; iIndex < _DateConstants2.default.DATE_ROW_COUNT; iIndex++) {
+	      var isCurrentWeek = void 0;
 	      var weekNumberCell = void 0;
 	      var dateCells = [];
 	      if (showWeekNumber) {
@@ -723,6 +724,7 @@ webpackJsonp([7],{
 	
 	        if (isSameDay(current, today)) {
 	          cls += ' ' + todayClass;
+	          isCurrentWeek = true;
 	        }
 	
 	        var isBeforeCurrentMonthYear = beforeCurrentMonthYear(current, value);
@@ -819,7 +821,8 @@ webpackJsonp([7],{
 	        'tr',
 	        {
 	          key: iIndex,
-	          role: 'row'
+	          role: 'row',
+	          className: isCurrentWeek && prefixCls + '-current-week'
 	        },
 	        weekNumberCell,
 	        dateCells
@@ -2524,7 +2527,7 @@ webpackJsonp([7],{
 
 /***/ },
 
-/***/ 392:
+/***/ 391:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2547,7 +2550,7 @@ webpackJsonp([7],{
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _zh_CN = __webpack_require__(330);
+	var _zh_CN = __webpack_require__(329);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -2559,9 +2562,9 @@ webpackJsonp([7],{
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	__webpack_require__(336);
+	__webpack_require__(335);
 	
-	__webpack_require__(337);
+	__webpack_require__(336);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
