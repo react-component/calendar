@@ -91,6 +91,7 @@ const DateTBody = React.createClass({
     passed = 0;
 
     for (iIndex = 0; iIndex < DateConstants.DATE_ROW_COUNT; iIndex++) {
+      let isCurrentWeek;
       let weekNumberCell;
       const dateCells = [];
       if (showWeekNumber) {
@@ -120,6 +121,7 @@ const DateTBody = React.createClass({
 
         if (isSameDay(current, today)) {
           cls += ` ${todayClass}`;
+          isCurrentWeek = true;
         }
 
         const isBeforeCurrentMonthYear = beforeCurrentMonthYear(current, value);
@@ -216,6 +218,7 @@ const DateTBody = React.createClass({
         <tr
           key={iIndex}
           role="row"
+          className={isCurrentWeek && `${prefixCls}-current-week`}
         >
           {weekNumberCell}
           {dateCells}
