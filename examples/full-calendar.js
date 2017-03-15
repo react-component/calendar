@@ -1648,6 +1648,8 @@ webpackJsonp([3],{
 	    var props = this.props;
 	    var inputElement = props.getInputElement ? props.getInputElement() : _react2["default"].createElement('input', null);
 	    var inputCls = (0, _classnames3["default"])(inputElement.props.className, (0, _defineProperty3["default"])({}, props.prefixCls + '-search__field', true));
+	    // https://github.com/ant-design/ant-design/issues/4992#issuecomment-281542159
+	    // Add space to the end of the inputValue as the width measurement tolerance
 	    return _react2["default"].createElement(
 	      'div',
 	      { className: props.prefixCls + '-search__field__wrap' },
@@ -1665,7 +1667,8 @@ webpackJsonp([3],{
 	          ref: this.saveInputMirrorRef,
 	          className: props.prefixCls + '-search__field__mirror'
 	        },
-	        this.state.inputValue
+	        this.state.inputValue,
+	        '\xA0'
 	      )
 	    );
 	  },
@@ -1710,11 +1713,13 @@ webpackJsonp([3],{
 	  setInputValue: function setInputValue(inputValue) {
 	    var fireSearch = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 	
-	    this.setState({
-	      inputValue: inputValue
-	    });
-	    if (fireSearch) {
-	      this.props.onSearch(inputValue);
+	    if (inputValue !== this.state.inputValue) {
+	      this.setState({
+	        inputValue: inputValue
+	      });
+	      if (fireSearch) {
+	        this.props.onSearch(inputValue);
+	      }
 	    }
 	  },
 	  clearBlurTime: function clearBlurTime() {
@@ -3020,10 +3025,6 @@ webpackJsonp([3],{
 	  value: true
 	});
 	
-	var _typeof2 = __webpack_require__(225);
-	
-	var _typeof3 = _interopRequireDefault(_typeof2);
-	
 	var _extends2 = __webpack_require__(183);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
@@ -3111,74 +3112,66 @@ webpackJsonp([3],{
 	        inputValue = props.inputValue;
 	
 	    if (menuItems && menuItems.length) {
-	      var _ret = function () {
-	        var menuProps = {};
-	        if (multiple) {
-	          menuProps.onDeselect = props.onMenuDeselect;
-	          menuProps.onSelect = onMenuSelect;
-	        } else {
-	          menuProps.onClick = onMenuSelect;
+	      var menuProps = {};
+	      if (multiple) {
+	        menuProps.onDeselect = props.onMenuDeselect;
+	        menuProps.onSelect = onMenuSelect;
+	      } else {
+	        menuProps.onClick = onMenuSelect;
+	      }
+	
+	      var selectedKeys = (0, _util.getSelectKeys)(menuItems, value);
+	      var activeKeyProps = {};
+	
+	      var clonedMenuItems = menuItems;
+	      if (selectedKeys.length) {
+	        if (props.visible && !this.lastVisible) {
+	          activeKeyProps.activeKey = selectedKeys[0];
 	        }
-	
-	        var selectedKeys = (0, _util.getSelectKeys)(menuItems, value);
-	        var activeKeyProps = {};
-	
-	        var clonedMenuItems = menuItems;
-	        if (selectedKeys.length) {
-	          (function () {
-	            if (props.visible && !_this.lastVisible) {
-	              activeKeyProps.activeKey = selectedKeys[0];
-	            }
-	            var foundFirst = false;
-	            // set firstActiveItem via cloning menus
-	            // for scroll into view
-	            var clone = function clone(item) {
-	              if (!foundFirst && selectedKeys.indexOf(item.key) !== -1) {
-	                foundFirst = true;
-	                return (0, _react.cloneElement)(item, {
-	                  ref: function ref(_ref) {
-	                    _this.firstActiveItem = _ref;
-	                  }
-	                });
+	        var foundFirst = false;
+	        // set firstActiveItem via cloning menus
+	        // for scroll into view
+	        var clone = function clone(item) {
+	          if (!foundFirst && selectedKeys.indexOf(item.key) !== -1) {
+	            foundFirst = true;
+	            return (0, _react.cloneElement)(item, {
+	              ref: function ref(_ref) {
+	                _this.firstActiveItem = _ref;
 	              }
-	              return item;
-	            };
-	
-	            clonedMenuItems = menuItems.map(function (item) {
-	              if (item.type.isMenuItemGroup) {
-	                var children = (0, _toArray2["default"])(item.props.children).map(clone);
-	                return (0, _react.cloneElement)(item, {}, children);
-	              }
-	              return clone(item);
 	            });
-	          })();
-	        }
-	
-	        // clear activeKey when inputValue change
-	        if (inputValue !== _this.lastInputValue) {
-	          activeKeyProps.activeKey = '';
-	        }
-	
-	        return {
-	          v: _react2["default"].createElement(
-	            _rcMenu2["default"],
-	            (0, _extends3["default"])({
-	              ref: 'menu',
-	              style: _this.props.dropdownMenuStyle,
-	              defaultActiveFirst: defaultActiveFirstOption
-	            }, activeKeyProps, {
-	              multiple: multiple,
-	              focusable: false
-	            }, menuProps, {
-	              selectedKeys: selectedKeys,
-	              prefixCls: prefixCls + '-menu'
-	            }),
-	            clonedMenuItems
-	          )
+	          }
+	          return item;
 	        };
-	      }();
 	
-	      if ((typeof _ret === 'undefined' ? 'undefined' : (0, _typeof3["default"])(_ret)) === "object") return _ret.v;
+	        clonedMenuItems = menuItems.map(function (item) {
+	          if (item.type.isMenuItemGroup) {
+	            var children = (0, _toArray2["default"])(item.props.children).map(clone);
+	            return (0, _react.cloneElement)(item, {}, children);
+	          }
+	          return clone(item);
+	        });
+	      }
+	
+	      // clear activeKey when inputValue change
+	      if (inputValue !== this.lastInputValue) {
+	        activeKeyProps.activeKey = '';
+	      }
+	
+	      return _react2["default"].createElement(
+	        _rcMenu2["default"],
+	        (0, _extends3["default"])({
+	          ref: 'menu',
+	          style: this.props.dropdownMenuStyle,
+	          defaultActiveFirst: defaultActiveFirstOption
+	        }, activeKeyProps, {
+	          multiple: multiple,
+	          focusable: false
+	        }, menuProps, {
+	          selectedKeys: selectedKeys,
+	          prefixCls: prefixCls + '-menu'
+	        }),
+	        clonedMenuItems
+	      );
 	    }
 	    return null;
 	  },

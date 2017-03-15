@@ -99,7 +99,7 @@
   overflow: hidden;
   position: relative;
 }
-.rc-time-picker-panel-select:hover {
+.rc-time-picker-panel-select-active {
   overflow-y: auto;
 }
 .rc-time-picker-panel-select:first-child {

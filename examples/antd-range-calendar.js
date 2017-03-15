@@ -1954,6 +1954,7 @@ webpackJsonp([2],{
 	    showMinute: _react.PropTypes.bool,
 	    showSecond: _react.PropTypes.bool,
 	    onClear: _react.PropTypes.func,
+	    use12Hours: _react.PropTypes.bool,
 	    addon: _react.PropTypes.func
 	  },
 	
@@ -1966,6 +1967,7 @@ webpackJsonp([2],{
 	      disabledMinutes: noop,
 	      disabledSeconds: noop,
 	      defaultOpenValue: (0, _moment2["default"])(),
+	      use12Hours: false,
 	      addon: noop
 	    };
 	  },
@@ -2015,7 +2017,8 @@ webpackJsonp([2],{
 	        defaultOpenValue = _props.defaultOpenValue,
 	        clearText = _props.clearText,
 	        onEsc = _props.onEsc,
-	        addon = _props.addon;
+	        addon = _props.addon,
+	        use12Hours = _props.use12Hours;
 	    var _state = this.state,
 	        value = _state.value,
 	        currentSelectPanel = _state.currentSelectPanel;
@@ -2064,7 +2067,8 @@ webpackJsonp([2],{
 	        disabledHours: disabledHours,
 	        disabledMinutes: disabledMinutes,
 	        disabledSeconds: disabledSeconds,
-	        onCurrentSelectPanelChange: this.onCurrentSelectPanelChange
+	        onCurrentSelectPanelChange: this.onCurrentSelectPanelChange,
+	        use12Hours: use12Hours
 	      }),
 	      addon(this)
 	    );
@@ -2327,21 +2331,45 @@ webpackJsonp([2],{
 	    disabledHours: _react.PropTypes.func,
 	    disabledMinutes: _react.PropTypes.func,
 	    disabledSeconds: _react.PropTypes.func,
-	    onCurrentSelectPanelChange: _react.PropTypes.func
+	    onCurrentSelectPanelChange: _react.PropTypes.func,
+	    use12Hours: _react.PropTypes.bool
 	  },
 	
 	  onItemChange: function onItemChange(type, itemValue) {
 	    var _props = this.props,
 	        onChange = _props.onChange,
-	        defaultOpenValue = _props.defaultOpenValue;
+	        defaultOpenValue = _props.defaultOpenValue,
+	        use12Hours = _props.use12Hours;
 	
 	    var value = (this.props.value || defaultOpenValue).clone();
+	
 	    if (type === 'hour') {
-	      value.hour(itemValue);
+	      if (use12Hours) {
+	        if (this.isAM()) {
+	          value.hour(+itemValue % 12);
+	        } else {
+	          value.hour(+itemValue % 12 + 12);
+	        }
+	      } else {
+	        value.hour(+itemValue);
+	      }
 	    } else if (type === 'minute') {
-	      value.minute(itemValue);
+	      value.minute(+itemValue);
+	    } else if (type === 'ampm') {
+	      var ampm = itemValue.toUpperCase();
+	      if (use12Hours) {
+	        if (ampm === 'PM' && value.hour() < 12) {
+	          value.hour(value.hour() % 12 + 12);
+	        }
+	
+	        if (ampm === 'AM') {
+	          if (value.hour() >= 12) {
+	            value.hour(value.hour() - 12);
+	          }
+	        }
+	      }
 	    } else {
-	      value.second(itemValue);
+	      value.second(+itemValue);
 	    }
 	    onChange(value);
 	  },
@@ -2353,19 +2381,31 @@ webpackJsonp([2],{
 	        prefixCls = _props2.prefixCls,
 	        hourOptions = _props2.hourOptions,
 	        disabledHours = _props2.disabledHours,
-	        showHour = _props2.showHour;
+	        showHour = _props2.showHour,
+	        use12Hours = _props2.use12Hours;
 	
 	    if (!showHour) {
 	      return null;
 	    }
 	    var disabledOptions = disabledHours();
+	    var hourOptionsAdj = void 0;
+	    var hourAdj = void 0;
+	    if (use12Hours) {
+	      hourOptionsAdj = [12].concat(hourOptions.filter(function (h) {
+	        return h < 12 && h > 0;
+	      }));
+	      hourAdj = hour % 12 || 12;
+	    } else {
+	      hourOptionsAdj = hourOptions;
+	      hourAdj = hour;
+	    }
 	
 	    return _react2["default"].createElement(_Select2["default"], {
 	      prefixCls: prefixCls,
-	      options: hourOptions.map(function (option) {
+	      options: hourOptionsAdj.map(function (option) {
 	        return formatOption(option, disabledOptions);
 	      }),
-	      selectedIndex: hourOptions.indexOf(hour),
+	      selectedIndex: hourOptionsAdj.indexOf(hourAdj),
 	      type: 'hour',
 	      onSelect: this.onItemChange,
 	      onMouseEnter: this.onEnterSelectPanel.bind(this, 'hour')
@@ -2421,10 +2461,42 @@ webpackJsonp([2],{
 	      onMouseEnter: this.onEnterSelectPanel.bind(this, 'second')
 	    });
 	  },
-	  render: function render() {
+	  getAMPMSelect: function getAMPMSelect() {
 	    var _props5 = this.props,
 	        prefixCls = _props5.prefixCls,
-	        defaultOpenValue = _props5.defaultOpenValue;
+	        use12Hours = _props5.use12Hours,
+	        format = _props5.format;
+	
+	    if (!use12Hours) {
+	      return null;
+	    }
+	
+	    var AMPMOptions = ['am', 'pm'] // If format has A char, then we should uppercase AM/PM
+	    .map(function (c) {
+	      return format.match(/\sA/) ? c.toUpperCase() : c;
+	    }).map(function (c) {
+	      return { value: c };
+	    });
+	
+	    var selected = this.isAM() ? 0 : 1;
+	
+	    return _react2["default"].createElement(_Select2["default"], {
+	      prefixCls: prefixCls,
+	      options: AMPMOptions,
+	      selectedIndex: selected,
+	      type: 'ampm',
+	      onSelect: this.onItemChange,
+	      onMouseEnter: this.onEnterSelectPanel.bind(this, 'ampm')
+	    });
+	  },
+	  isAM: function isAM() {
+	    var value = this.props.value || this.props.defaultOpenValue;
+	    return value.hour() >= 0 && value.hour() < 12;
+	  },
+	  render: function render() {
+	    var _props6 = this.props,
+	        prefixCls = _props6.prefixCls,
+	        defaultOpenValue = _props6.defaultOpenValue;
 	
 	    var value = this.props.value || defaultOpenValue;
 	    return _react2["default"].createElement(
@@ -2432,7 +2504,8 @@ webpackJsonp([2],{
 	      { className: prefixCls + '-combobox' },
 	      this.getHourSelect(value.hour()),
 	      this.getMinuteSelect(value.minute()),
-	      this.getSecondSelect(value.second())
+	      this.getSecondSelect(value.second()),
+	      this.getAMPMSelect(value.hour())
 	    );
 	  }
 	});
@@ -2463,9 +2536,9 @@ webpackJsonp([2],{
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _classnames2 = __webpack_require__(280);
+	var _classnames3 = __webpack_require__(280);
 	
-	var _classnames3 = _interopRequireDefault(_classnames2);
+	var _classnames4 = _interopRequireDefault(_classnames3);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -2500,6 +2573,11 @@ webpackJsonp([2],{
 	    onMouseEnter: _react.PropTypes.func
 	  },
 	
+	  getInitialState: function getInitialState() {
+	    return {
+	      active: false
+	    };
+	  },
 	  componentDidMount: function componentDidMount() {
 	    // jump to selected option
 	    this.scrollToSelected(0);
@@ -2528,10 +2606,10 @@ webpackJsonp([2],{
 	    return options.map(function (item, index) {
 	      var _classnames;
 	
-	      var cls = (0, _classnames3["default"])((_classnames = {}, (0, _defineProperty3["default"])(_classnames, prefixCls + '-select-option-selected', selectedIndex === index), (0, _defineProperty3["default"])(_classnames, prefixCls + '-select-option-disabled', item.disabled), _classnames));
+	      var cls = (0, _classnames4["default"])((_classnames = {}, (0, _defineProperty3["default"])(_classnames, prefixCls + '-select-option-selected', selectedIndex === index), (0, _defineProperty3["default"])(_classnames, prefixCls + '-select-option-disabled', item.disabled), _classnames));
 	      var onclick = null;
 	      if (!item.disabled) {
-	        onclick = _this.onSelect.bind(_this, +item.value);
+	        onclick = _this.onSelect.bind(_this, item.value);
 	      }
 	      return _react2["default"].createElement(
 	        'li',
@@ -2560,19 +2638,30 @@ webpackJsonp([2],{
 	    var to = topOption.offsetTop;
 	    scrollTo(select, to, duration);
 	  },
+	  handleMouseEnter: function handleMouseEnter(e) {
+	    this.setState({ active: true });
+	    this.props.onMouseEnter(e);
+	  },
+	  handleMouseLeave: function handleMouseLeave() {
+	    this.setState({ active: false });
+	  },
 	  render: function render() {
+	    var _classnames2;
+	
 	    if (this.props.options.length === 0) {
 	      return null;
 	    }
 	
 	    var prefixCls = this.props.prefixCls;
 	
+	    var cls = (0, _classnames4["default"])((_classnames2 = {}, (0, _defineProperty3["default"])(_classnames2, prefixCls + '-select', 1), (0, _defineProperty3["default"])(_classnames2, prefixCls + '-select-active', this.state.active), _classnames2));
 	
 	    return _react2["default"].createElement(
 	      'div',
 	      {
-	        className: prefixCls + '-select',
-	        onMouseEnter: this.props.onMouseEnter
+	        className: cls,
+	        onMouseEnter: this.handleMouseEnter,
+	        onMouseLeave: this.handleMouseLeave
 	      },
 	      _react2["default"].createElement(
 	        'ul',
