@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import cx from 'classnames';
 import DateConstants from './DateConstants';
 import { getTitleString, getTodayTime } from '../util/';
 
@@ -93,6 +94,7 @@ const DateTBody = React.createClass({
     for (iIndex = 0; iIndex < DateConstants.DATE_ROW_COUNT; iIndex++) {
       let isCurrentWeek;
       let weekNumberCell;
+      let isSelectedWeek = false;
       const dateCells = [];
       if (showWeekNumber) {
         weekNumberCell = (
@@ -135,11 +137,13 @@ const DateTBody = React.createClass({
             if (startValue) {
               if (isSameDay(current, startValue)) {
                 selected = true;
+                isSelectedWeek = true;
               }
             }
             if (startValue && endValue) {
               if (isSameDay(current, endValue)) {
                 selected = true;
+                isSelectedWeek = true;
               } else if (current.isAfter(startValue, 'day') &&
                 current.isBefore(endValue, 'day')) {
                 cls += ` ${inRangeClass}`;
@@ -149,6 +153,7 @@ const DateTBody = React.createClass({
         } else if (isSameDay(current, value)) {
           // keyboard change value, highlight works
           selected = true;
+          isSelectedWeek = true;
         }
 
         if (isSameDay(current, selectedValue)) {
@@ -214,11 +219,16 @@ const DateTBody = React.createClass({
 
         passed++;
       }
+
+
       tableHtml.push(
         <tr
           key={iIndex}
           role="row"
-          className={isCurrentWeek && `${prefixCls}-current-week`}
+          className={cx({
+            [`${prefixCls}-current-week`]: isCurrentWeek,
+            [`${prefixCls}-selected-week`]: isSelectedWeek,
+          })}
         >
           {weekNumberCell}
           {dateCells}
