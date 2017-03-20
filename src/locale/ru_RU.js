@@ -6,6 +6,7 @@ export default {
   clear: 'Очистить',
   month: 'Месяц',
   year: 'Год',
+  timeSelect: 'Выберите время',
   monthSelect: 'Выберите месяц',
   yearSelect: 'Выберите год',
   decadeSelect: 'Выберите десятилетие',
