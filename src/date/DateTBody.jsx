@@ -36,6 +36,7 @@ const DateTBody = React.createClass({
     value: PropTypes.object,
     hoverValue: PropTypes.any,
     showWeekNumber: PropTypes.bool,
+    locale: PropTypes.object,
   },
 
   getDefaultProps() {
@@ -49,7 +50,7 @@ const DateTBody = React.createClass({
     const {
       contentRender, prefixCls, selectedValue, value,
       showWeekNumber, dateRender, disabledDate,
-      hoverValue,
+      hoverValue, locale,
     } = props;
     let iIndex;
     let jIndex;
@@ -71,7 +72,8 @@ const DateTBody = React.createClass({
     const month1 = value.clone();
     month1.date(1);
     const day = month1.day();
-    const lastMonthDiffDay = (day + 7 - value.localeData().firstDayOfWeek()) % 7;
+    const localeData = locale.localeData || value.localeData();
+    const lastMonthDiffDay = (day + 7 - localeData.firstDayOfWeek()) % 7;
     // calculate last month
     const lastMonth1 = month1.clone();
     lastMonth1.add(0 - lastMonthDiffDay, 'days');
