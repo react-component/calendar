@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
-import { getTodayTime } from '../util/index';
+import { getTodayTime, getMonthName } from '../util/index';
 
 const ROW = 4;
 const COL = 3;
@@ -43,13 +43,12 @@ class MonthTable extends Component {
     const value = this.state.value;
     const current = value.clone();
     const months = [];
-    const localeData = value.localeData();
     let index = 0;
     for (let rowIndex = 0; rowIndex < ROW; rowIndex++) {
       months[rowIndex] = [];
       for (let colIndex = 0; colIndex < COL; colIndex++) {
         current.month(index);
-        const content = localeData.monthsShort(current);
+        const content = getMonthName(current);
         months[rowIndex][colIndex] = {
           value: index,
           content,

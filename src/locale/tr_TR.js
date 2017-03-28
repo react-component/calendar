@@ -15,7 +15,6 @@ export default {
   dateFormat: 'M/D/YYYY',
   dayFormat: 'D',
   dateTimeFormat: 'M/D/YYYY HH:mm:ss',
-  monthFormat: 'MMMM',
   monthBeforeYear: true,
   previousMonth: 'Önceki Ay (PageUp)',
   nextMonth: 'Sonraki Ay (PageDown)',

@@ -14,7 +14,6 @@ export default {
   yearSelect: '选择年份',
   decadeSelect: '选择年代',
   yearFormat: 'YYYY年',
-  monthFormat: 'M月',
   dayFormat: 'D日',
   dateFormat: 'YYYY年M月D日',
   dateTimeFormat: 'YYYY年M月D日 HH时mm分ss秒',
