@@ -94,7 +94,7 @@ const DateTBody = React.createClass({
     for (iIndex = 0; iIndex < DateConstants.DATE_ROW_COUNT; iIndex++) {
       let isCurrentWeek;
       let weekNumberCell;
-      let isSelectedWeek = false;
+      let isActiveWeek = false;
       const dateCells = [];
       if (showWeekNumber) {
         weekNumberCell = (
@@ -137,13 +137,13 @@ const DateTBody = React.createClass({
             if (startValue) {
               if (isSameDay(current, startValue)) {
                 selected = true;
-                isSelectedWeek = true;
+                isActiveWeek = true;
               }
             }
             if (startValue && endValue) {
               if (isSameDay(current, endValue)) {
                 selected = true;
-                isSelectedWeek = true;
+                isActiveWeek = true;
               } else if (current.isAfter(startValue, 'day') &&
                 current.isBefore(endValue, 'day')) {
                 cls += ` ${inRangeClass}`;
@@ -153,7 +153,7 @@ const DateTBody = React.createClass({
         } else if (isSameDay(current, value)) {
           // keyboard change value, highlight works
           selected = true;
-          isSelectedWeek = true;
+          isActiveWeek = true;
         }
 
         if (isSameDay(current, selectedValue)) {
@@ -227,7 +227,7 @@ const DateTBody = React.createClass({
           role="row"
           className={cx({
             [`${prefixCls}-current-week`]: isCurrentWeek,
-            [`${prefixCls}-selected-week`]: isSelectedWeek,
+            [`${prefixCls}-active-week`]: isActiveWeek,
           })}
         >
           {weekNumberCell}
