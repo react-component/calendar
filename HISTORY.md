@@ -1,6 +1,11 @@
 # History
 ----
 
+## 7.8.0 / 2017-04-01
+
+- zh-TW locale
+- tr-TR locale
+
 ## 7.6.0 / 2017-01-11
 
 - remove arrow inside year and century panel
