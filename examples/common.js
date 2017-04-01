@@ -725,7 +725,7 @@
 
 /***/ },
 /* 8 */
-[391, 9],
+[392, 9],
 /* 9 */
 /***/ function(module, exports) {
 
@@ -6437,7 +6437,7 @@
 
 /***/ },
 /* 52 */
-[391, 37],
+[392, 37],
 /* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -17934,10 +17934,10 @@
 	 */
 	
 	function getUnboundedScrollPosition(scrollable) {
-	  if (scrollable === window) {
+	  if (scrollable.Window && scrollable instanceof scrollable.Window) {
 	    return {
-	      x: window.pageXOffset || document.documentElement.scrollLeft,
-	      y: window.pageYOffset || document.documentElement.scrollTop
+	      x: scrollable.pageXOffset || scrollable.document.documentElement.scrollLeft,
+	      y: scrollable.pageYOffset || scrollable.document.documentElement.scrollTop
 	    };
 	  }
 	  return {
@@ -18686,7 +18686,9 @@
 	 * @return {boolean} Whether or not the object is a DOM node.
 	 */
 	function isNode(object) {
-	  return !!(object && (typeof Node === 'function' ? object instanceof Node : typeof object === 'object' && typeof object.nodeType === 'number' && typeof object.nodeName === 'string'));
+	  var doc = object ? object.ownerDocument || object : document;
+	  var defaultView = doc.defaultView || window;
+	  return !!(object && (typeof defaultView.Node === 'function' ? object instanceof defaultView.Node : typeof object === 'object' && typeof object.nodeType === 'number' && typeof object.nodeName === 'string'));
 	}
 	
 	module.exports = isNode;
@@ -18716,15 +18718,19 @@
 	 *
 	 * The activeElement will be null only if the document or document body is not
 	 * yet defined.
+	 *
+	 * @param {?DOMDocument} doc Defaults to current document.
+	 * @return {?DOMElement}
 	 */
-	function getActiveElement() /*?DOMElement*/{
-	  if (typeof document === 'undefined') {
+	function getActiveElement(doc) /*?DOMElement*/{
+	  doc = doc || (typeof document !== 'undefined' ? document : undefined);
+	  if (typeof doc === 'undefined') {
 	    return null;
 	  }
 	  try {
-	    return document.activeElement || document.body;
+	    return doc.activeElement || doc.body;
 	  } catch (e) {
-	    return document.body;
+	    return doc.body;
 	  }
 	}
 	
@@ -23173,7 +23179,7 @@
 /***/ function(module, exports) {
 
 	//! moment.js
-	//! version : 2.18.0
+	//! version : 2.18.1
 	//! authors : Tim Wood, Iskren Chernev, Moment.js contributors
 	//! license : MIT
 	//! momentjs.com
@@ -23532,7 +23538,7 @@
 	    // number + (possibly) stuff coming from _dayOfMonthOrdinalParse.
 	    // TODO: Remove "ordinalParse" fallback in next major release.
 	    this._dayOfMonthOrdinalParseLenient = new RegExp(
-	        (this._dayOfMonthOrdinalParse.source || this._ordinalParse.source) +
+	        (this._dayOfMonthOrdinalParse.source || this._ordinalParse.source) +
 	            '|' + (/\d{1,2}/).source);
 	}
 	
@@ -27600,7 +27606,7 @@
 	// Side effect imports
 	
 	
-	hooks.version = '2.18.0';
+	hooks.version = '2.18.1';
 	
 	setHookCallback(createLocal);
 	
@@ -27642,6 +27648,113 @@
 /* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+	
+	exports.__esModule = true;
+	
+	var _defineProperty = __webpack_require__(273);
+	
+	var _defineProperty2 = _interopRequireDefault(_defineProperty);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = function (obj, key, value) {
+	  if (key in obj) {
+	    (0, _defineProperty2.default)(obj, key, {
+	      value: value,
+	      enumerable: true,
+	      configurable: true,
+	      writable: true
+	    });
+	  } else {
+	    obj[key] = value;
+	  }
+	
+	  return obj;
+	};
+
+/***/ },
+/* 273 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(274), __esModule: true };
+
+/***/ },
+/* 274 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(275);
+	var $Object = __webpack_require__(189).Object;
+	module.exports = function defineProperty(it, key, desc){
+	  return $Object.defineProperty(it, key, desc);
+	};
+
+/***/ },
+/* 275 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $export = __webpack_require__(187);
+	// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
+	$export($export.S + $export.F * !__webpack_require__(197), 'Object', {defineProperty: __webpack_require__(193).f});
+
+/***/ },
+/* 276 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+	/* global define */
+	
+	(function () {
+		'use strict';
+	
+		var hasOwn = {}.hasOwnProperty;
+	
+		function classNames () {
+			var classes = [];
+	
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+	
+				var argType = typeof arg;
+	
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
+				} else if (Array.isArray(arg)) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
+						}
+					}
+				}
+			}
+	
+			return classes.join(' ');
+		}
+	
+		if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else {
+			window.classNames = classNames;
+		}
+	}());
+
+
+/***/ },
+/* 277 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
@@ -27655,6 +27768,7 @@
 	exports.getTodayTime = getTodayTime;
 	exports.getTitleString = getTitleString;
 	exports.getTodayTimeStr = getTodayTimeStr;
+	exports.getMonthName = getMonthName;
 	exports.syncTime = syncTime;
 	exports.getTimeConfig = getTimeConfig;
 	exports.isTimeValidByConfig = isTimeValidByConfig;
@@ -27692,6 +27806,12 @@
 	function getTodayTimeStr(value) {
 	  var today = getTodayTime(value);
 	  return getTitleString(today);
+	}
+	
+	function getMonthName(month) {
+	  var locale = month.locale();
+	  var localeData = month.localeData();
+	  return localeData[locale === 'zh-cn' ? 'months' : 'monthsShort'](month);
 	}
 	
 	function syncTime(from, to) {
@@ -27748,116 +27868,9 @@
 	}
 
 /***/ },
-/* 273 */,
-/* 274 */,
-/* 275 */,
-/* 276 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	exports.__esModule = true;
-	
-	var _defineProperty = __webpack_require__(277);
-	
-	var _defineProperty2 = _interopRequireDefault(_defineProperty);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = function (obj, key, value) {
-	  if (key in obj) {
-	    (0, _defineProperty2.default)(obj, key, {
-	      value: value,
-	      enumerable: true,
-	      configurable: true,
-	      writable: true
-	    });
-	  } else {
-	    obj[key] = value;
-	  }
-	
-	  return obj;
-	};
-
-/***/ },
-/* 277 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(278), __esModule: true };
-
-/***/ },
-/* 278 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(279);
-	var $Object = __webpack_require__(189).Object;
-	module.exports = function defineProperty(it, key, desc){
-	  return $Object.defineProperty(it, key, desc);
-	};
-
-/***/ },
-/* 279 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var $export = __webpack_require__(187);
-	// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
-	$export($export.S + $export.F * !__webpack_require__(197), 'Object', {defineProperty: __webpack_require__(193).f});
-
-/***/ },
-/* 280 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	  Copyright (c) 2016 Jed Watson.
-	  Licensed under the MIT License (MIT), see
-	  http://jedwatson.github.io/classnames
-	*/
-	/* global define */
-	
-	(function () {
-		'use strict';
-	
-		var hasOwn = {}.hasOwnProperty;
-	
-		function classNames () {
-			var classes = [];
-	
-			for (var i = 0; i < arguments.length; i++) {
-				var arg = arguments[i];
-				if (!arg) continue;
-	
-				var argType = typeof arg;
-	
-				if (argType === 'string' || argType === 'number') {
-					classes.push(arg);
-				} else if (Array.isArray(arg)) {
-					classes.push(classNames.apply(null, arg));
-				} else if (argType === 'object') {
-					for (var key in arg) {
-						if (hasOwn.call(arg, key) && arg[key]) {
-							classes.push(key);
-						}
-					}
-				}
-			}
-	
-			return classes.join(' ');
-		}
-	
-		if (typeof module !== 'undefined' && module.exports) {
-			module.exports = classNames;
-		} else if (true) {
-			// register as 'classnames', consistent with npm package name
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
-				return classNames;
-			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-		} else {
-			window.classNames = classNames;
-		}
-	}());
-
-
-/***/ },
+/* 278 */,
+/* 279 */,
+/* 280 */,
 /* 281 */,
 /* 282 */
 /***/ function(module, exports, __webpack_require__) {
@@ -27868,7 +27881,7 @@
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(276);
+	var _defineProperty2 = __webpack_require__(272);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
@@ -27888,11 +27901,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(280);
+	var _classnames = __webpack_require__(276);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _index = __webpack_require__(272);
+	var _index = __webpack_require__(277);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -27940,13 +27953,12 @@
 	    var value = this.state.value;
 	    var current = value.clone();
 	    var months = [];
-	    var localeData = value.localeData();
 	    var index = 0;
 	    for (var rowIndex = 0; rowIndex < ROW; rowIndex++) {
 	      months[rowIndex] = [];
 	      for (var colIndex = 0; colIndex < COL; colIndex++) {
 	        current.month(index);
-	        var content = localeData.monthsShort(current);
+	        var content = (0, _index.getMonthName)(current);
 	        months[rowIndex][colIndex] = {
 	          value: index,
 	          content: content,
@@ -28155,7 +28167,6 @@
 	  dateFormat: 'M/D/YYYY',
 	  dayFormat: 'D',
 	  dateTimeFormat: 'M/D/YYYY HH:mm:ss',
-	  monthFormat: 'MMMM',
 	  monthBeforeYear: true,
 	  previousMonth: 'Previous month (PageUp)',
 	  nextMonth: 'Next month (PageDown)',
@@ -32207,7 +32218,6 @@
 	  yearSelect: '选择年份',
 	  decadeSelect: '选择年代',
 	  yearFormat: 'YYYY年',
-	  monthFormat: 'M月',
 	  dayFormat: 'D日',
 	  dateFormat: 'YYYY年M月D日',
 	  dateTimeFormat: 'YYYY年M月D日 HH时mm分ss秒',
@@ -32468,7 +32478,8 @@
 /* 388 */,
 /* 389 */,
 /* 390 */,
-/* 391 */
+/* 391 */,
+/* 392 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**

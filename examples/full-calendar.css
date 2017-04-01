@@ -56,6 +56,14 @@
   top: 0;
   color: #aaa;
 }
+.rc-select-selection__clear {
+  font-weight: bold;
+  position: absolute;
+  line-height: 28px;
+}
+.rc-select-selection__clear:after {
+  content: '×';
+}
 .rc-select-focused .rc-select-selection {
   border-color: #23c0fa;
   box-shadow: 0 0 2px rgba(45, 183, 245, 0.8);
@@ -90,14 +98,8 @@
   line-height: 28px;
 }
 .rc-select-selection--single .rc-select-selection__clear {
-  font-weight: bold;
-  position: absolute;
   top: 0;
   right: 20px;
-  line-height: 28px;
-}
-.rc-select-selection--single .rc-select-selection__clear:after {
-  content: '×';
 }
 .rc-select-disabled {
   color: #ccc;
@@ -177,6 +179,10 @@
 .rc-select-selection--multiple .rc-select-selection__rendered .rc-select-selection__choice {
   margin-top: 4px;
   line-height: 20px;
+}
+.rc-select-selection--multiple .rc-select-selection__clear {
+  top: 1px;
+  right: 8px;
 }
 .rc-select-enabled .rc-select-selection__choice {
   cursor: default;

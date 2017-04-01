@@ -205,15 +205,23 @@ webpackJsonp([3],{
 	  value: true
 	});
 	
+	var _defineProperty2 = __webpack_require__(272);
+	
+	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+	
 	var _react = __webpack_require__(3);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _classnames = __webpack_require__(276);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
 	
 	var _DateConstants = __webpack_require__(269);
 	
 	var _DateConstants2 = _interopRequireDefault(_DateConstants);
 	
-	var _util = __webpack_require__(272);
+	var _util = __webpack_require__(277);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -309,8 +317,11 @@ webpackJsonp([3],{
 	    passed = 0;
 	
 	    for (iIndex = 0; iIndex < _DateConstants2.default.DATE_ROW_COUNT; iIndex++) {
+	      var _cx;
+	
 	      var isCurrentWeek = void 0;
 	      var weekNumberCell = void 0;
+	      var isActiveWeek = false;
 	      var dateCells = [];
 	      if (showWeekNumber) {
 	        weekNumberCell = _react2.default.createElement(
@@ -353,11 +364,13 @@ webpackJsonp([3],{
 	            if (startValue) {
 	              if (isSameDay(current, startValue)) {
 	                selected = true;
+	                isActiveWeek = true;
 	              }
 	            }
 	            if (startValue && endValue) {
 	              if (isSameDay(current, endValue)) {
 	                selected = true;
+	                isActiveWeek = true;
 	              } else if (current.isAfter(startValue, 'day') && current.isBefore(endValue, 'day')) {
 	                cls += ' ' + inRangeClass;
 	              }
@@ -366,6 +379,7 @@ webpackJsonp([3],{
 	        } else if (isSameDay(current, value)) {
 	          // keyboard change value, highlight works
 	          selected = true;
+	          isActiveWeek = true;
 	        }
 	
 	        if (isSameDay(current, selectedValue)) {
@@ -432,12 +446,13 @@ webpackJsonp([3],{
 	
 	        passed++;
 	      }
+	
 	      tableHtml.push(_react2.default.createElement(
 	        'tr',
 	        {
 	          key: iIndex,
 	          role: 'row',
-	          className: isCurrentWeek && prefixCls + '-current-week'
+	          className: (0, _classnames2.default)((_cx = {}, (0, _defineProperty3.default)(_cx, prefixCls + '-current-week', isCurrentWeek), (0, _defineProperty3.default)(_cx, prefixCls + '-active-week', isActiveWeek), _cx))
 	        },
 	        weekNumberCell,
 	        dateCells
@@ -465,7 +480,7 @@ webpackJsonp([3],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(276);
+	var _defineProperty2 = __webpack_require__(272);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
@@ -473,7 +488,7 @@ webpackJsonp([3],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(280);
+	var _classnames = __webpack_require__(276);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -481,7 +496,7 @@ webpackJsonp([3],{
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _index = __webpack_require__(272);
+	var _index = __webpack_require__(277);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -898,6 +913,8 @@ webpackJsonp([3],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _util = __webpack_require__(277);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function noop() {}
@@ -957,7 +974,6 @@ webpackJsonp([3],{
 	
 	  CalendarHeader.prototype.monthSelectElement = function monthSelectElement(month) {
 	    var props = this.props;
-	    var localeData = props.value.localeData();
 	    var t = props.value.clone();
 	    var prefixCls = props.prefixCls;
 	
@@ -969,7 +985,7 @@ webpackJsonp([3],{
 	      options.push(_react2.default.createElement(
 	        Select.Option,
 	        { key: '' + index },
-	        localeData.monthsShort(t)
+	        (0, _util.getMonthName)(t)
 	      ));
 	    }
 	
@@ -1094,11 +1110,11 @@ webpackJsonp([3],{
 	
 	var _Select2 = _interopRequireDefault(_Select);
 	
-	var _Option = __webpack_require__(380);
+	var _Option = __webpack_require__(381);
 	
 	var _Option2 = _interopRequireDefault(_Option);
 	
-	var _OptGroup = __webpack_require__(381);
+	var _OptGroup = __webpack_require__(382);
 	
 	var _OptGroup2 = _interopRequireDefault(_OptGroup);
 	
@@ -1121,7 +1137,7 @@ webpackJsonp([3],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(276);
+	var _defineProperty2 = __webpack_require__(272);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
@@ -1141,7 +1157,7 @@ webpackJsonp([3],{
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _classnames2 = __webpack_require__(280);
+	var _classnames2 = __webpack_require__(276);
 	
 	var _classnames3 = _interopRequireDefault(_classnames2);
 	
@@ -1163,6 +1179,8 @@ webpackJsonp([3],{
 	
 	var _FilterMixin2 = _interopRequireDefault(_FilterMixin);
 	
+	var _PropTypes = __webpack_require__(380);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	function noop() {}
@@ -1175,50 +1193,10 @@ webpackJsonp([3],{
 	  this[name] = component;
 	}
 	
-	var valueObjectShape = void 0;
-	
-	if (_react.PropTypes) {
-	  valueObjectShape = _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.shape({
-	    key: _react.PropTypes.string,
-	    label: _react.PropTypes.node
-	  })]);
-	}
-	
 	var Select = _react2["default"].createClass({
 	  displayName: 'Select',
 	
-	  propTypes: {
-	    defaultActiveFirstOption: _react.PropTypes.bool,
-	    multiple: _react.PropTypes.bool,
-	    filterOption: _react.PropTypes.any,
-	    children: _react.PropTypes.any,
-	    showSearch: _react.PropTypes.bool,
-	    disabled: _react.PropTypes.bool,
-	    allowClear: _react.PropTypes.bool,
-	    showArrow: _react.PropTypes.bool,
-	    tags: _react.PropTypes.bool,
-	    prefixCls: _react.PropTypes.string,
-	    className: _react.PropTypes.string,
-	    transitionName: _react.PropTypes.string,
-	    optionLabelProp: _react.PropTypes.string,
-	    optionFilterProp: _react.PropTypes.string,
-	    animation: _react.PropTypes.string,
-	    choiceTransitionName: _react.PropTypes.string,
-	    onChange: _react.PropTypes.func,
-	    onBlur: _react.PropTypes.func,
-	    onFocus: _react.PropTypes.func,
-	    onSelect: _react.PropTypes.func,
-	    onSearch: _react.PropTypes.func,
-	    placeholder: _react.PropTypes.any,
-	    onDeselect: _react.PropTypes.func,
-	    labelInValue: _react.PropTypes.bool,
-	    value: _react.PropTypes.oneOfType([valueObjectShape, _react.PropTypes.arrayOf(valueObjectShape)]),
-	    defaultValue: _react.PropTypes.oneOfType([valueObjectShape, _react.PropTypes.arrayOf(valueObjectShape)]),
-	    dropdownStyle: _react.PropTypes.object,
-	    maxTagTextLength: _react.PropTypes.number,
-	    tokenSeparators: _react.PropTypes.arrayOf(_react.PropTypes.string),
-	    getInputElement: _react.PropTypes.func
-	  },
+	  propTypes: _PropTypes.SelectPropTypes,
 	
 	  mixins: [_FilterMixin2["default"]],
 	
@@ -1232,7 +1210,6 @@ webpackJsonp([3],{
 	      showSearch: true,
 	      allowClear: false,
 	      placeholder: '',
-	      defaultValue: [],
 	      onChange: noop,
 	      onFocus: noop,
 	      onBlur: noop,
@@ -2108,7 +2085,7 @@ webpackJsonp([3],{
 	            'aria-expanded': open
 	          }, extraSelectionProps),
 	          ctrlNode,
-	          allowClear && !multiple ? clear : null,
+	          allowClear ? clear : null,
 	          multiple || !props.showArrow ? null : _react2["default"].createElement(
 	            'span',
 	            (0, _extends3["default"])({
@@ -2836,7 +2813,7 @@ webpackJsonp([3],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(276);
+	var _defineProperty2 = __webpack_require__(272);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
@@ -2856,7 +2833,7 @@ webpackJsonp([3],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(280);
+	var _classnames = __webpack_require__(276);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -3529,7 +3506,7 @@ webpackJsonp([3],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(276);
+	var _defineProperty2 = __webpack_require__(272);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
@@ -3553,7 +3530,7 @@ webpackJsonp([3],{
 	
 	var _createChainedFunction2 = _interopRequireDefault(_createChainedFunction);
 	
-	var _classnames = __webpack_require__(280);
+	var _classnames = __webpack_require__(276);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -4591,7 +4568,7 @@ webpackJsonp([3],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(276);
+	var _defineProperty2 = __webpack_require__(272);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
@@ -4611,7 +4588,7 @@ webpackJsonp([3],{
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _classnames = __webpack_require__(280);
+	var _classnames = __webpack_require__(276);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -5306,7 +5283,7 @@ webpackJsonp([3],{
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _classnames = __webpack_require__(280);
+	var _classnames = __webpack_require__(276);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -5833,6 +5810,72 @@ webpackJsonp([3],{
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.SelectPropTypes = undefined;
+	
+	var _react = __webpack_require__(3);
+	
+	function valueType(props, propName, componentName) {
+	  var labelInValueShape = _react.PropTypes.shape({
+	    key: _react.PropTypes.string.isRequired,
+	    label: _react.PropTypes.string
+	  });
+	  if (props.labelInValue) {
+	    var validate = _react.PropTypes.oneOfType([_react.PropTypes.arrayOf(labelInValueShape), labelInValueShape]);
+	    var error = validate.apply(undefined, arguments);
+	    if (error) {
+	      return new Error('Invalid prop `' + propName + '` supplied to `' + componentName + '`, ' + ('when you set `labelInValue` to `true`, `' + propName + '` should in ') + 'shape of `{ key: string, label?: string }`.');
+	    }
+	  } else if (props.multiple && props[propName] === '') {
+	    return new Error('Invalid prop `' + propName + '` of type `string` supplied to `' + componentName + '`, ' + 'expected `array` when `multiple` is `true`.');
+	  } else {
+	    var _validate = _react.PropTypes.oneOfType([_react.PropTypes.arrayOf(_react.PropTypes.string), _react.PropTypes.string]);
+	    return _validate.apply(undefined, arguments);
+	  }
+	}
+	
+	var SelectPropTypes = exports.SelectPropTypes = {
+	  defaultActiveFirstOption: _react.PropTypes.bool,
+	  multiple: _react.PropTypes.bool,
+	  filterOption: _react.PropTypes.any,
+	  children: _react.PropTypes.any,
+	  showSearch: _react.PropTypes.bool,
+	  disabled: _react.PropTypes.bool,
+	  allowClear: _react.PropTypes.bool,
+	  showArrow: _react.PropTypes.bool,
+	  tags: _react.PropTypes.bool,
+	  prefixCls: _react.PropTypes.string,
+	  className: _react.PropTypes.string,
+	  transitionName: _react.PropTypes.string,
+	  optionLabelProp: _react.PropTypes.string,
+	  optionFilterProp: _react.PropTypes.string,
+	  animation: _react.PropTypes.string,
+	  choiceTransitionName: _react.PropTypes.string,
+	  onChange: _react.PropTypes.func,
+	  onBlur: _react.PropTypes.func,
+	  onFocus: _react.PropTypes.func,
+	  onSelect: _react.PropTypes.func,
+	  onSearch: _react.PropTypes.func,
+	  placeholder: _react.PropTypes.any,
+	  onDeselect: _react.PropTypes.func,
+	  labelInValue: _react.PropTypes.bool,
+	  value: valueType,
+	  defaultValue: valueType,
+	  dropdownStyle: _react.PropTypes.object,
+	  maxTagTextLength: _react.PropTypes.number,
+	  tokenSeparators: _react.PropTypes.arrayOf(_react.PropTypes.string),
+	  getInputElement: _react.PropTypes.func
+	};
+
+/***/ },
+
+/***/ 381:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	
 	var _classCallCheck2 = __webpack_require__(223);
 	
@@ -5872,7 +5915,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 381:
+/***/ 382:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
