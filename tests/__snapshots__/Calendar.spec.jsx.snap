@@ -131,6 +131,7 @@ exports[`Calendar render render render correctly 1`] = `
           <tbody
             class="rc-calendar-tbody">
             <tr
+              class=""
               role="row">
               <td
                 class="rc-calendar-cell rc-calendar-last-month-cell"
@@ -211,6 +212,7 @@ exports[`Calendar render render render correctly 1`] = `
               </td>
             </tr>
             <tr
+              class=""
               role="row">
               <td
                 class="rc-calendar-cell"
@@ -291,6 +293,7 @@ exports[`Calendar render render render correctly 1`] = `
               </td>
             </tr>
             <tr
+              class=""
               role="row">
               <td
                 class="rc-calendar-cell"
@@ -371,6 +374,7 @@ exports[`Calendar render render render correctly 1`] = `
               </td>
             </tr>
             <tr
+              class=""
               role="row">
               <td
                 class="rc-calendar-cell"
@@ -451,7 +455,7 @@ exports[`Calendar render render render correctly 1`] = `
               </td>
             </tr>
             <tr
-              class="rc-calendar-current-week"
+              class="rc-calendar-current-week rc-calendar-active-week"
               role="row">
               <td
                 class="rc-calendar-cell"
@@ -532,6 +536,7 @@ exports[`Calendar render render render correctly 1`] = `
               </td>
             </tr>
             <tr
+              class=""
               role="row">
               <td
                 class="rc-calendar-cell rc-calendar-next-month-btn-day"
@@ -764,6 +769,7 @@ exports[`Calendar render render render correctly 2`] = `
           <tbody
             class="rc-calendar-tbody">
             <tr
+              class=""
               role="row">
               <td
                 class="rc-calendar-cell rc-calendar-last-month-cell"
@@ -844,6 +850,7 @@ exports[`Calendar render render render correctly 2`] = `
               </td>
             </tr>
             <tr
+              class=""
               role="row">
               <td
                 class="rc-calendar-cell"
@@ -924,6 +931,7 @@ exports[`Calendar render render render correctly 2`] = `
               </td>
             </tr>
             <tr
+              class=""
               role="row">
               <td
                 class="rc-calendar-cell"
@@ -1004,6 +1012,7 @@ exports[`Calendar render render render correctly 2`] = `
               </td>
             </tr>
             <tr
+              class=""
               role="row">
               <td
                 class="rc-calendar-cell"
@@ -1084,7 +1093,7 @@ exports[`Calendar render render render correctly 2`] = `
               </td>
             </tr>
             <tr
-              class="rc-calendar-current-week"
+              class="rc-calendar-current-week rc-calendar-active-week"
               role="row">
               <td
                 class="rc-calendar-cell"
@@ -1165,6 +1174,7 @@ exports[`Calendar render render render correctly 2`] = `
               </td>
             </tr>
             <tr
+              class=""
               role="row">
               <td
                 class="rc-calendar-cell rc-calendar-next-month-btn-day"

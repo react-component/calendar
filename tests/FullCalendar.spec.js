@@ -15,7 +15,7 @@ describe('FullCalendar', () => {
         type="month"
         Select={Select}
         locale={zhCN}
-        defaultValue={moment('2017-03-29').locale('zh-cn')}
+        defaultValue={moment().locale('zh-cn')}
       />
     );
     expect(renderToJson(zhWrapper)).toMatchSnapshot();
@@ -25,7 +25,7 @@ describe('FullCalendar', () => {
         type="month"
         Select={Select}
         locale={enUS}
-        defaultValue={moment('2017-03-29').locale('en')}
+        defaultValue={moment().locale('en')}
       />
     );
     expect(renderToJson(enWrapper)).toMatchSnapshot();
