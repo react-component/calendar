@@ -25,7 +25,7 @@ describe('RangeCalendar', () => {
   });
 
   it('next month works', (done) => {
-    let month = calendar.state.value.month();
+    let month = calendar.state.value[1].month();
     if (month === 11) {
       month = -1;
     }
@@ -33,13 +33,13 @@ describe('RangeCalendar', () => {
       'rc-calendar-range-right')[0];
     Simulate.click($(rightCalendar).find('.rc-calendar-next-month-btn')[0]);
     setTimeout(() => {
-      expect(calendar.state.value.month()).to.be(month + 1);
+      expect(calendar.state.value[1].month()).to.be(month + 1);
       done();
     }, 10);
   });
 
   it('previous month works', (done) => {
-    let month = calendar.state.value.month();
+    let month = calendar.state.value[0].month();
     if (month === 0) {
       month = 12;
     }
@@ -47,29 +47,29 @@ describe('RangeCalendar', () => {
       'rc-calendar-range-left')[0];
     Simulate.click($(leftCalendar).find('.rc-calendar-prev-month-btn')[0]);
     setTimeout(() => {
-      expect(calendar.state.value.month()).to.be(month - 1);
+      expect(calendar.state.value[0].month()).to.be(month - 1);
       done();
     }, 10);
   });
 
   it('next year works', (done) => {
-    const year = calendar.state.value.year();
+    const year = calendar.state.value[1].year();
     const rightCalendar = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
       'rc-calendar-range-right')[0];
     Simulate.click($(rightCalendar).find('.rc-calendar-next-year-btn')[0]);
     setTimeout(() => {
-      expect(calendar.state.value.year()).to.be(year + 1);
+      expect(calendar.state.value[1].year()).to.be(year + 1);
       done();
     }, 10);
   });
 
   it('previous year works', (done) => {
-    const year = calendar.state.value.year();
+    const year = calendar.state.value[0].year();
     const leftCalendar = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
       'rc-calendar-range-left')[0];
     Simulate.click($(leftCalendar).find('.rc-calendar-prev-year-btn')[0]);
     setTimeout(() => {
-      expect(calendar.state.value.year()).to.be(year - 1);
+      expect(calendar.state.value[0].year()).to.be(year - 1);
       done();
     }, 10);
   });
@@ -93,7 +93,7 @@ describe('RangeCalendar', () => {
     calendar = ReactDOM.render(<RangeCalendar
       format={format}
       onSelect={onSelect}
-      defaultValue={now}
+      defaultValue={[now, now.clone().add(1, 'months')]}
       showWeekNumber
     />, container);
     const leftCalendar = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
