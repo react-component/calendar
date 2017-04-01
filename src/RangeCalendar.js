@@ -94,6 +94,8 @@ const RangeCalendar = React.createClass({
       hoverValue: [],
       value,
       showTimePicker: false,
+      isStartMonthYearPanelShow: false,
+      isEndMonthYearPanelShow: false,
     };
   },
 
@@ -241,6 +243,14 @@ const RangeCalendar = React.createClass({
     return this.fireValueChange(value);
   },
 
+  onStartPanelChange({ showMonthPanel, showYearPanel }) {
+    this.setState({ isStartMonthYearPanelShow: showMonthPanel || showYearPanel });
+  },
+
+  onEndPanelChange({ showMonthPanel, showYearPanel }) {
+    this.setState({ isEndMonthYearPanelShow: showMonthPanel || showYearPanel });
+  },
+
   getStartValue() {
     let value = this.state.value[0];
     const selectedValue = this.state.selectedValue;
@@ -375,7 +385,7 @@ const RangeCalendar = React.createClass({
   render() {
     const props = this.props;
     const state = this.state;
-    const { showTimePicker } = state;
+    const { showTimePicker, isStartMonthYearPanelShow, isEndMonthYearPanelShow } = state;
     const {
       prefixCls, dateInputPlaceholder,
       timePicker, showOk, locale, showClear,
@@ -427,7 +437,9 @@ const RangeCalendar = React.createClass({
     const isTodayInView =
             startValue.year() === thisYear && startValue.month() === thisMonth ||
             endValue.year() === thisYear && endValue.month() === thisMonth;
-    const isClosestMonths = startValue.month() + 1 === endValue.month();
+    const nextMonthOfStart = startValue.clone().add(1, 'months');
+    const isClosestMonths = nextMonthOfStart.year() === endValue.year() &&
+            nextMonthOfStart.month() === endValue.month();
     return (
       <div
         ref="root"
@@ -460,9 +472,11 @@ const RangeCalendar = React.createClass({
               placeholder={placeholder1}
               onInputSelect={this.onStartInputSelect}
               onValueChange={this.onStartValueChange}
+              onPanelChange={this.onStartPanelChange}
               timePicker={timePicker}
               showTimePicker={showTimePicker}
-              enableNext={!isClosestMonths}
+              enablePrev
+              enableNext={!isClosestMonths || isEndMonthYearPanelShow}
             />
             <span className={`${prefixCls}-range-middle`}>~</span>
             <CalendarPart
@@ -476,10 +490,12 @@ const RangeCalendar = React.createClass({
               value={endValue}
               onInputSelect={this.onEndInputSelect}
               onValueChange={this.onEndValueChange}
+              onPanelChange={this.onEndPanelChange}
               timePicker={timePicker}
               showTimePicker={showTimePicker}
               disabledTime={this.disabledEndTime}
-              enablePrev={!isClosestMonths}
+              enablePrev={!isClosestMonths || isStartMonthYearPanelShow}
+              enableNext
             />
           </div>
           <div className={cls}>

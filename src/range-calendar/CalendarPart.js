@@ -20,8 +20,8 @@ const CalendarPart = React.createClass({
     disabledTime: PropTypes.any,
     onInputSelect: PropTypes.func,
     timePickerDisabledTime: PropTypes.object,
-    enableNext: PropTypes.bool,
-    enablePrev: PropTypes.bool,
+    enableNext: PropTypes.any,
+    enablePrev: PropTypes.any,
   },
   render() {
     const props = this.props;
@@ -79,6 +79,7 @@ const CalendarPart = React.createClass({
             enableNext={enableNext}
             enablePrev={enablePrev}
             onValueChange={props.onValueChange}
+            onPanelChange={props.onPanelChange}
           />
           {showTimePicker ? <div className={`${prefixCls}-time-picker`}>
             <div className={`${prefixCls}-time-picker-panel`}>
