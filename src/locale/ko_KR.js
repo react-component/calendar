@@ -15,7 +15,6 @@ export default {
   dateFormat: 'YYYY-MM-DD',
   dayFormat: 'Do',
   dateTimeFormat: 'YYYY-MM-DD HH:mm:ss',
-  monthFormat: 'MMMM',
   monthBeforeYear: false,
   previousMonth: '이전 달 (PageUp)',
   nextMonth: '다음 달 (PageDown)',
