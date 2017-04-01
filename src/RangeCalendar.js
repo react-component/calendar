@@ -15,26 +15,16 @@ function getNow() {
   return moment();
 }
 
-function onValueChange(direction, current) {
-  let value;
-  value = current;
-  if (direction === 'right') {
-    value.add(-1, 'months');
-  }
-  this.fireValueChange(value);
+function isEmptyArray(arr) {
+  return Array.isArray(arr) && arr.length === 0;
 }
 
 function normalizeAnchor(props, init) {
-  const selectedValue = props.selectedValue || init && props.defaultSelectedValue || [];
-  let value = props.value;
-  if (Array.isArray(value)) {
-    value = value[0];
-  }
-  let defaultValue = props.defaultValue;
-  if (Array.isArray(defaultValue)) {
-    defaultValue = defaultValue[0];
-  }
-  return value || init && defaultValue || selectedValue[0] || init && getNow();
+  const selectedValue = props.selectedValue || init && props.defaultSelectedValue;
+  const value = props.value || init && props.defaultValue;
+  const normalizedValue = value || selectedValue;
+  return !isEmptyArray(normalizedValue) ?
+    normalizedValue : init && [getNow(), getNow().add(1, 'months')];
 }
 
 function generateOptions(length) {
@@ -206,9 +196,9 @@ const RangeCalendar = React.createClass({
   },
 
   onToday() {
-    this.setState({
-      value: getTodayTime(this.state.value),
-    });
+    const startValue = getTodayTime(this.state.value[0]);
+    const endValue = startValue.clone().add(1, 'months');
+    this.setState({ value: [startValue, endValue] });
   },
 
   onOpenTimePicker() {
@@ -239,18 +229,20 @@ const RangeCalendar = React.createClass({
     return onInputSelect.apply(this, args);
   },
 
-  onStartValueChange(...oargs) {
-    const args = ['left'].concat(oargs);
-    return onValueChange.apply(this, args);
+  onStartValueChange(leftValue) {
+    const value = [...this.state.value];
+    value[0] = leftValue;
+    return this.fireValueChange(value);
   },
 
-  onEndValueChange(...oargs) {
-    const args = ['right'].concat(oargs);
-    return onValueChange.apply(this, args);
+  onEndValueChange(rightValue) {
+    const value = [...this.state.value];
+    value[1] = rightValue;
+    return this.fireValueChange(value);
   },
 
   getStartValue() {
-    let value = this.state.value;
+    let value = this.state.value[0];
     const selectedValue = this.state.selectedValue;
     // keep selectedTime when select date
     if (selectedValue[0] && this.props.timePicker) {
@@ -264,8 +256,7 @@ const RangeCalendar = React.createClass({
   },
 
   getEndValue() {
-    const endValue = this.state.value.clone();
-    endValue.add(1, 'months');
+    const endValue = this.state.value[1].clone();
     const selectedValue = this.state.selectedValue;
     // keep selectedTime when select date
     if (selectedValue[1] && this.props.timePicker) {
@@ -279,7 +270,7 @@ const RangeCalendar = React.createClass({
   // get disabled hours for second picker
   getEndDisableTime() {
     const { selectedValue, value } = this.state;
-    const startValue = selectedValue && selectedValue[0] || value.clone();
+    const startValue = selectedValue && selectedValue[0] || value[0].clone();
     // if startTime and endTime is same day..
     // the second time picker will not able to pick time before first time picker
     if (!selectedValue[1] || startValue.isSame(selectedValue[1], 'day')) {
@@ -336,9 +327,11 @@ const RangeCalendar = React.createClass({
 
     // 尚未选择过时间，直接输入的话
     if (!this.state.selectedValue[0] || !this.state.selectedValue[1]) {
+      const startValue = selectedValue[0] || getNow();
+      const endValue = selectedValue[1] || startValue.clone().add(1, 'months');
       this.setState({
         selectedValue,
-        value: selectedValue[0] || getNow(),
+        value: [startValue, endValue],
       });
     }
 
@@ -431,10 +424,10 @@ const RangeCalendar = React.createClass({
     const todayTime = getTodayTime(startValue);
     const thisMonth = todayTime.month();
     const thisYear = todayTime.year();
-    const isThisYear = thisYear === startValue.year() || this.year === endValue.year();
-    const isTodayInView = isThisYear && (thisMonth === startValue.month() ||
-      thisMonth === endValue.month());
-
+    const isTodayInView =
+            startValue.year() === thisYear && startValue.month() === thisMonth ||
+            endValue.year() === thisYear && endValue.month() === thisMonth;
+    const isClosestMonths = startValue.month() + 1 === endValue.month();
     return (
       <div
         ref="root"
@@ -469,6 +462,7 @@ const RangeCalendar = React.createClass({
               onValueChange={this.onStartValueChange}
               timePicker={timePicker}
               showTimePicker={showTimePicker}
+              enableNext={!isClosestMonths}
             />
             <span className={`${prefixCls}-range-middle`}>~</span>
             <CalendarPart
@@ -485,6 +479,7 @@ const RangeCalendar = React.createClass({
               timePicker={timePicker}
               showTimePicker={showTimePicker}
               disabledTime={this.disabledEndTime}
+              enablePrev={!isClosestMonths}
             />
           </div>
           <div className={cls}>
@@ -495,7 +490,7 @@ const RangeCalendar = React.createClass({
                   <TodayButton
                     {...props}
                     disabled={isTodayInView}
-                    value={state.value}
+                    value={state.value[0]}
                     onToday={this.onToday}
                     text={locale.backToToday}
                   />
@@ -511,7 +506,6 @@ const RangeCalendar = React.createClass({
                 {showOkButton ?
                   <OkButton
                     {...props}
-                    value={state.value}
                     onOk={this.onOk}
                     okDisabled={!this.isAllowedDateAndTime(selectedValue) ||
                       !this.hasSelectedValue() || hoverValue.length

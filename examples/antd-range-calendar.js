@@ -125,7 +125,7 @@ const Test = React.createClass({
       <RangeCalendar
         showWeekNumber={false}
         dateInputPlaceholder={['start', 'end']}
-        defaultValue={[now, now]}
+        defaultValue={[now, now.clone().add(1, 'months')]}
         locale={cn ? zhCN : enUS}
         disabledTime={disabledTime}
         timePicker={timePickerElement}
@@ -163,7 +163,6 @@ ReactDOM.render(
       <RangeCalendar
         showToday={false}
         showWeekNumber
-        defaultValue={now}
         dateInputPlaceholder={['start', 'end']}
         locale={cn ? zhCN : enUS}
         showOk={false}
