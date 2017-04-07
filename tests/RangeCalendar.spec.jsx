@@ -1,10 +1,12 @@
-import expect from 'expect.js';
-import RangeCalendar from '../src/RangeCalendar';
+/* eslint-disable no-undef */
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
 import ReactDOM from 'react-dom';
-const Simulate = TestUtils.Simulate;
+import TestUtils from 'react-addons-test-utils';
 import moment from 'moment';
+import { mount } from 'enzyme';
+import RangeCalendar from '../src/RangeCalendar';
+
+const Simulate = TestUtils.Simulate;
 const format = ('YYYY-MM-DD');
 const $ = require('jquery');
 
@@ -24,67 +26,107 @@ describe('RangeCalendar', () => {
     });
   });
 
-  it('next month works', (done) => {
-    let month = calendar.state.value.month();
-    if (month === 11) {
-      month = -1;
-    }
-    const rightCalendar = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
-      'rc-calendar-range-right')[0];
-    Simulate.click($(rightCalendar).find('.rc-calendar-next-month-btn')[0]);
-    setTimeout(() => {
-      expect(calendar.state.value.month()).to.be(month + 1);
-      done();
-    }, 10);
+  it('next month works', () => {
+    const wrapper = mount(<RangeCalendar />);
+
+    const currentEndMonth = wrapper.state('value')[1].clone();
+    wrapper.find('.rc-calendar-range-right .rc-calendar-next-month-btn').simulate('click');
+    expect(currentEndMonth.add(1, 'month').isSame(wrapper.state('value')[1], 'month'))
+      .toBe(true);
+    expect(wrapper.find('.rc-calendar-range-right .rc-calendar-prev-month-btn').length).toBe(1);
+
+    const currentStartMonth = wrapper.state('value')[0].clone();
+    wrapper.find('.rc-calendar-range-left .rc-calendar-next-month-btn').simulate('click');
+    expect(currentStartMonth.add(1, 'month').isSame(wrapper.state('value')[0], 'month'))
+      .toBe(true);
+    expect(wrapper.find('.rc-calendar-range-left .rc-calendar-next-month-btn').length).toBe(0);
   });
 
-  it('previous month works', (done) => {
-    let month = calendar.state.value.month();
-    if (month === 0) {
-      month = 12;
-    }
-    const leftCalendar = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
-      'rc-calendar-range-left')[0];
-    Simulate.click($(leftCalendar).find('.rc-calendar-prev-month-btn')[0]);
-    setTimeout(() => {
-      expect(calendar.state.value.month()).to.be(month - 1);
-      done();
-    }, 10);
+  it('previous month works', () => {
+    const wrapper = mount(<RangeCalendar />);
+
+    const currentStartMonth = wrapper.state('value')[0].clone();
+    wrapper.find('.rc-calendar-range-left .rc-calendar-prev-month-btn').simulate('click');
+    expect(currentStartMonth.subtract(1, 'month').isSame(wrapper.state('value')[0], 'month'))
+      .toBe(true);
+    expect(wrapper.find('.rc-calendar-range-left .rc-calendar-next-month-btn').length).toBe(1);
+
+    const currentEndMonth = wrapper.state('value')[1].clone();
+    wrapper.find('.rc-calendar-range-right .rc-calendar-prev-month-btn').simulate('click');
+    expect(currentEndMonth.subtract(1, 'month').isSame(wrapper.state('value')[1], 'month'))
+      .toBe(true);
+    expect(wrapper.find('.rc-calendar-range-right .rc-calendar-prev-month-btn').length).toBe(0);
   });
 
-  it('next year works', (done) => {
-    const year = calendar.state.value.year();
-    const rightCalendar = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
-      'rc-calendar-range-right')[0];
-    Simulate.click($(rightCalendar).find('.rc-calendar-next-year-btn')[0]);
-    setTimeout(() => {
-      expect(calendar.state.value.year()).to.be(year + 1);
-      done();
-    }, 10);
+  it('next year works', () => {
+    const wrapper = mount(<RangeCalendar />);
+
+    const currentEndMonth = wrapper.state('value')[1].clone();
+    wrapper.find('.rc-calendar-range-right .rc-calendar-next-year-btn').simulate('click');
+    expect(currentEndMonth.add(1, 'year').isSame(wrapper.state('value')[1], 'month'))
+      .toBe(true);
+    expect(wrapper.find('.rc-calendar-range-right .rc-calendar-prev-year-btn').length).toBe(1);
+
+    const currentStartMonth = wrapper.state('value')[0].clone();
+    wrapper.find('.rc-calendar-range-left .rc-calendar-next-year-btn').simulate('click');
+    expect(currentStartMonth.add(1, 'year').isSame(wrapper.state('value')[0], 'month'))
+      .toBe(true);
+    expect(wrapper.find('.rc-calendar-range-left .rc-calendar-next-year-btn').length).toBe(0);
   });
 
-  it('previous year works', (done) => {
-    const year = calendar.state.value.year();
-    const leftCalendar = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
-      'rc-calendar-range-left')[0];
-    Simulate.click($(leftCalendar).find('.rc-calendar-prev-year-btn')[0]);
-    setTimeout(() => {
-      expect(calendar.state.value.year()).to.be(year - 1);
-      done();
-    }, 10);
+  it('previous year works', () => {
+    const wrapper = mount(<RangeCalendar />);
+
+    const currentStartMonth = wrapper.state('value')[0].clone();
+    wrapper.find('.rc-calendar-range-left .rc-calendar-prev-year-btn').simulate('click');
+    expect(currentStartMonth.subtract(1, 'year').isSame(wrapper.state('value')[0], 'month'))
+      .toBe(true);
+    expect(wrapper.find('.rc-calendar-range-left .rc-calendar-next-year-btn').length).toBe(1);
+
+    const currentEndMonth = wrapper.state('value')[1].clone();
+    wrapper.find('.rc-calendar-range-right .rc-calendar-prev-year-btn').simulate('click');
+    expect(currentEndMonth.subtract(1, 'year').isSame(wrapper.state('value')[1], 'month'))
+      .toBe(true);
+    expect(wrapper.find('.rc-calendar-range-right .rc-calendar-prev-year-btn').length).toBe(0);
+  });
+
+  it('left panel show next btns when right panel show year panel or month panel', () => {
+    let wrapper = null;
+    wrapper = mount(<RangeCalendar />);
+    wrapper.find('.rc-calendar-range-right .rc-calendar-month-select').simulate('click');
+    expect(wrapper.find('.rc-calendar-range-left .rc-calendar-next-year-btn').length).toBe(1);
+    expect(wrapper.find('.rc-calendar-range-left .rc-calendar-next-month-btn').length).toBe(1);
+
+    wrapper = mount(<RangeCalendar />);
+    wrapper.find('.rc-calendar-range-right .rc-calendar-year-select').simulate('click');
+    expect(wrapper.find('.rc-calendar-range-left .rc-calendar-next-year-btn').length).toBe(1);
+    expect(wrapper.find('.rc-calendar-range-left .rc-calendar-next-month-btn').length).toBe(1);
+  });
+
+  it('right panel show prev btns when left panel show year panel or month panel', () => {
+    let wrapper = null;
+    wrapper = mount(<RangeCalendar />);
+    wrapper.find('.rc-calendar-range-left .rc-calendar-month-select').simulate('click');
+    expect(wrapper.find('.rc-calendar-range-right .rc-calendar-next-year-btn').length).toBe(1);
+    expect(wrapper.find('.rc-calendar-range-right .rc-calendar-next-month-btn').length).toBe(1);
+
+    wrapper = mount(<RangeCalendar />);
+    wrapper.find('.rc-calendar-range-left .rc-calendar-year-select').simulate('click');
+    expect(wrapper.find('.rc-calendar-range-right .rc-calendar-next-year-btn').length).toBe(1);
+    expect(wrapper.find('.rc-calendar-range-right .rc-calendar-next-month-btn').length).toBe(1);
   });
 
   it('render works', () => {
     expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
-      'rc-calendar-cell').length).to.above(0);
+      'rc-calendar-cell').length).toBeGreaterThan(0);
   });
 
   it('onSelect works', (done) => {
     let day;
 
     function onSelect(d) {
-      expect(d[0].format(format)).to.be('2015-09-04');
-      expect(d[1].format(format)).to.be('2015-10-02');
+      expect(d[0].format(format)).toBe('2015-09-04');
+      expect(d[1].format(format)).toBe('2015-10-02');
       done();
     }
 
@@ -93,7 +135,7 @@ describe('RangeCalendar', () => {
     calendar = ReactDOM.render(<RangeCalendar
       format={format}
       onSelect={onSelect}
-      defaultValue={now}
+      defaultValue={[now, now.clone().add(1, 'months')]}
       showWeekNumber
     />, container);
     const leftCalendar = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
@@ -104,9 +146,9 @@ describe('RangeCalendar', () => {
     const rightInput = $(rightCalendar).find('.rc-calendar-input')[0];
     day = $(leftCalendar).find('.rc-calendar-date')[5]; // 9.4
     Simulate.click(day);
-    expect(ReactDOM.findDOMNode(leftInput).value).to.be('2015-09-04');
+    expect(ReactDOM.findDOMNode(leftInput).value).toBe('2015-09-04');
     day = $(rightCalendar).find('.rc-calendar-date')[5]; // 10.2
     Simulate.click(day);
-    expect(ReactDOM.findDOMNode(rightInput).value).to.be('2015-10-02');
+    expect(ReactDOM.findDOMNode(rightInput).value).toBe('2015-10-02');
   });
 });

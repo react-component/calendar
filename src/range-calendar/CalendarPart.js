@@ -6,12 +6,12 @@ import { getTimeConfig } from '../util/index';
 
 const CalendarPart = React.createClass({
   propTypes: {
+    prefixCls: PropTypes.string,
     value: PropTypes.any,
-    direction: PropTypes.any,
-    prefixCls: PropTypes.any,
-    locale: PropTypes.any,
-    selectedValue: PropTypes.any,
     hoverValue: PropTypes.any,
+    selectedValue: PropTypes.any,
+    direction: PropTypes.any,
+    locale: PropTypes.any,
     showTimePicker: PropTypes.bool,
     format: PropTypes.any,
     placeholder: PropTypes.any,
@@ -20,15 +20,21 @@ const CalendarPart = React.createClass({
     disabledTime: PropTypes.any,
     onInputSelect: PropTypes.func,
     timePickerDisabledTime: PropTypes.object,
+    enableNext: PropTypes.any,
+    enablePrev: PropTypes.any,
   },
   render() {
     const props = this.props;
     const {
-      value, direction, prefixCls,
-      locale, selectedValue, format, placeholder,
+      prefixCls,
+      value,
+      hoverValue,
+      selectedValue,
+      direction,
+      locale, format, placeholder,
       disabledDate, timePicker, disabledTime,
       timePickerDisabledTime, showTimePicker,
-      hoverValue, onInputSelect,
+      onInputSelect, enablePrev, enableNext,
     } = props;
     const disabledTimeConfig = showTimePicker && disabledTime && timePicker ?
       getTimeConfig(selectedValue, disabledTime) : null;
@@ -70,9 +76,10 @@ const CalendarPart = React.createClass({
         <div style={{ outline: 'none' }}>
           <CalendarHeader
             {...newProps}
-            enableNext={direction === 'right'}
-            enablePrev={direction === 'left'}
+            enableNext={enableNext}
+            enablePrev={enablePrev}
             onValueChange={props.onValueChange}
+            onPanelChange={props.onPanelChange}
           />
           {showTimePicker ? <div className={`${prefixCls}-time-picker`}>
             <div className={`${prefixCls}-time-picker-panel`}>

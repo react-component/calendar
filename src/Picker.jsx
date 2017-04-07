@@ -133,13 +133,7 @@ const Picker = React.createClass({
     const state = this.state;
     const calendarProps = props.calendar.props;
     const { value } = state;
-    let defaultValue;
-    // RangeCalendar
-    if (Array.isArray(value)) {
-      defaultValue = value[0];
-    } else {
-      defaultValue = value;
-    }
+    const defaultValue = value;
     const extraProps = {
       ref: this.saveCalendarRef,
       defaultValue: defaultValue || calendarProps.defaultValue,

@@ -21,19 +21,24 @@ function showIf(condition, el) {
 
 const CalendarHeader = React.createClass({
   propTypes: {
-    enablePrev: PropTypes.any,
-    enableNext: PropTypes.any,
     prefixCls: PropTypes.string,
-    showTimePicker: PropTypes.bool,
-    locale: PropTypes.object,
     value: PropTypes.object,
     onValueChange: PropTypes.func,
+    showTimePicker: PropTypes.bool,
+    showMonthPanel: PropTypes.bool,
+    showYearPanel: PropTypes.bool,
+    onPanelChange: PropTypes.func,
+    locale: PropTypes.object,
+    enablePrev: PropTypes.any,
+    enableNext: PropTypes.any,
   },
 
   getDefaultProps() {
     return {
       enableNext: 1,
       enablePrev: 1,
+      onPanelChange() {},
+      onValueChange() {},
     };
   },
 
@@ -42,15 +47,36 @@ const CalendarHeader = React.createClass({
     this.previousMonth = goMonth.bind(this, -1);
     this.nextYear = goYear.bind(this, 1);
     this.previousYear = goYear.bind(this, -1);
-    return {};
+    const { showMonthPanel, showYearPanel } = this.props;
+    return { showMonthPanel, showYearPanel };
+  },
+
+  componentWillReceiveProps() {
+    const props = this.props;
+    if ('showMonthpanel' in props) {
+      this.setState({ showMonthPanel: props.showMonthPanel });
+    }
+    if ('showYearpanel' in props) {
+      this.setState({ showYearPanel: props.showYearPanel });
+    }
   },
 
   onSelect(value) {
-    this.setState({
+    this.triggerPanelChange({
       showMonthPanel: 0,
       showYearPanel: 0,
     });
     this.props.onValueChange(value);
+  },
+
+  triggerPanelChange(panelStatus) {
+    if (!('showMonthPanel' in this.props)) {
+      this.setState({ showMonthPanel: panelStatus.showMonthPanel });
+    }
+    if (!('showYearPanel' in this.props)) {
+      this.setState({ showYearPanel: panelStatus.showYearPanel });
+    }
+    this.props.onPanelChange(panelStatus);
   },
 
   monthYearElement(showTimePicker) {
@@ -98,14 +124,14 @@ const CalendarHeader = React.createClass({
   },
 
   showMonthPanel() {
-    this.setState({
+    this.triggerPanelChange({
       showMonthPanel: 1,
       showYearPanel: 0,
     });
   },
 
   showYearPanel() {
-    this.setState({
+    this.triggerPanelChange({
       showMonthPanel: 0,
       showYearPanel: 1,
     });
