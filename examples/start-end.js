@@ -3,7 +3,7 @@ webpackJsonp([5],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(389);
+	module.exports = __webpack_require__(397);
 
 
 /***/ },
@@ -903,19 +903,24 @@ webpackJsonp([5],{
 	  displayName: 'CalendarHeader',
 	
 	  propTypes: {
-	    enablePrev: _react.PropTypes.any,
-	    enableNext: _react.PropTypes.any,
 	    prefixCls: _react.PropTypes.string,
-	    showTimePicker: _react.PropTypes.bool,
-	    locale: _react.PropTypes.object,
 	    value: _react.PropTypes.object,
-	    onValueChange: _react.PropTypes.func
+	    onValueChange: _react.PropTypes.func,
+	    showTimePicker: _react.PropTypes.bool,
+	    showMonthPanel: _react.PropTypes.bool,
+	    showYearPanel: _react.PropTypes.bool,
+	    onPanelChange: _react.PropTypes.func,
+	    locale: _react.PropTypes.object,
+	    enablePrev: _react.PropTypes.any,
+	    enableNext: _react.PropTypes.any
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
 	      enableNext: 1,
-	      enablePrev: 1
+	      enablePrev: 1,
+	      onPanelChange: function onPanelChange() {},
+	      onValueChange: function onValueChange() {}
 	    };
 	  },
 	  getInitialState: function getInitialState() {
@@ -923,14 +928,36 @@ webpackJsonp([5],{
 	    this.previousMonth = goMonth.bind(this, -1);
 	    this.nextYear = goYear.bind(this, 1);
 	    this.previousYear = goYear.bind(this, -1);
-	    return {};
+	    var _props = this.props,
+	        showMonthPanel = _props.showMonthPanel,
+	        showYearPanel = _props.showYearPanel;
+	
+	    return { showMonthPanel: showMonthPanel, showYearPanel: showYearPanel };
+	  },
+	  componentWillReceiveProps: function componentWillReceiveProps() {
+	    var props = this.props;
+	    if ('showMonthpanel' in props) {
+	      this.setState({ showMonthPanel: props.showMonthPanel });
+	    }
+	    if ('showYearpanel' in props) {
+	      this.setState({ showYearPanel: props.showYearPanel });
+	    }
 	  },
 	  onSelect: function onSelect(value) {
-	    this.setState({
+	    this.triggerPanelChange({
 	      showMonthPanel: 0,
 	      showYearPanel: 0
 	    });
 	    this.props.onValueChange(value);
+	  },
+	  triggerPanelChange: function triggerPanelChange(panelStatus) {
+	    if (!('showMonthPanel' in this.props)) {
+	      this.setState({ showMonthPanel: panelStatus.showMonthPanel });
+	    }
+	    if (!('showYearPanel' in this.props)) {
+	      this.setState({ showYearPanel: panelStatus.showYearPanel });
+	    }
+	    this.props.onPanelChange(panelStatus);
 	  },
 	  monthYearElement: function monthYearElement(showTimePicker) {
 	    var props = this.props;
@@ -984,13 +1011,13 @@ webpackJsonp([5],{
 	    );
 	  },
 	  showMonthPanel: function showMonthPanel() {
-	    this.setState({
+	    this.triggerPanelChange({
 	      showMonthPanel: 1,
 	      showYearPanel: 0
 	    });
 	  },
 	  showYearPanel: function showYearPanel() {
-	    this.setState({
+	    this.triggerPanelChange({
 	      showMonthPanel: 0,
 	      showYearPanel: 1
 	    });
@@ -2409,13 +2436,7 @@ webpackJsonp([5],{
 	    var calendarProps = props.calendar.props;
 	    var value = state.value;
 	
-	    var defaultValue = void 0;
-	    // RangeCalendar
-	    if (Array.isArray(value)) {
-	      defaultValue = value[0];
-	    } else {
-	      defaultValue = value;
-	    }
+	    var defaultValue = value;
 	    var extraProps = {
 	      ref: this.saveCalendarRef,
 	      defaultValue: defaultValue || calendarProps.defaultValue,
@@ -3338,7 +3359,7 @@ webpackJsonp([5],{
 
 /***/ },
 
-/***/ 389:
+/***/ 397:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

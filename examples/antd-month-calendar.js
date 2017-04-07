@@ -926,13 +926,7 @@ webpackJsonp([1],{
 	    var calendarProps = props.calendar.props;
 	    var value = state.value;
 	
-	    var defaultValue = void 0;
-	    // RangeCalendar
-	    if (Array.isArray(value)) {
-	      defaultValue = value[0];
-	    } else {
-	      defaultValue = value;
-	    }
+	    var defaultValue = value;
 	    var extraProps = {
 	      ref: this.saveCalendarRef,
 	      defaultValue: defaultValue || calendarProps.defaultValue,

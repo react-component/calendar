@@ -3,7 +3,7 @@ webpackJsonp([6],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(390);
+	module.exports = __webpack_require__(398);
 
 
 /***/ },
@@ -518,19 +518,24 @@ webpackJsonp([6],{
 	  displayName: 'CalendarHeader',
 	
 	  propTypes: {
-	    enablePrev: _react.PropTypes.any,
-	    enableNext: _react.PropTypes.any,
 	    prefixCls: _react.PropTypes.string,
-	    showTimePicker: _react.PropTypes.bool,
-	    locale: _react.PropTypes.object,
 	    value: _react.PropTypes.object,
-	    onValueChange: _react.PropTypes.func
+	    onValueChange: _react.PropTypes.func,
+	    showTimePicker: _react.PropTypes.bool,
+	    showMonthPanel: _react.PropTypes.bool,
+	    showYearPanel: _react.PropTypes.bool,
+	    onPanelChange: _react.PropTypes.func,
+	    locale: _react.PropTypes.object,
+	    enablePrev: _react.PropTypes.any,
+	    enableNext: _react.PropTypes.any
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
 	      enableNext: 1,
-	      enablePrev: 1
+	      enablePrev: 1,
+	      onPanelChange: function onPanelChange() {},
+	      onValueChange: function onValueChange() {}
 	    };
 	  },
 	  getInitialState: function getInitialState() {
@@ -538,14 +543,36 @@ webpackJsonp([6],{
 	    this.previousMonth = goMonth.bind(this, -1);
 	    this.nextYear = goYear.bind(this, 1);
 	    this.previousYear = goYear.bind(this, -1);
-	    return {};
+	    var _props = this.props,
+	        showMonthPanel = _props.showMonthPanel,
+	        showYearPanel = _props.showYearPanel;
+	
+	    return { showMonthPanel: showMonthPanel, showYearPanel: showYearPanel };
+	  },
+	  componentWillReceiveProps: function componentWillReceiveProps() {
+	    var props = this.props;
+	    if ('showMonthpanel' in props) {
+	      this.setState({ showMonthPanel: props.showMonthPanel });
+	    }
+	    if ('showYearpanel' in props) {
+	      this.setState({ showYearPanel: props.showYearPanel });
+	    }
 	  },
 	  onSelect: function onSelect(value) {
-	    this.setState({
+	    this.triggerPanelChange({
 	      showMonthPanel: 0,
 	      showYearPanel: 0
 	    });
 	    this.props.onValueChange(value);
+	  },
+	  triggerPanelChange: function triggerPanelChange(panelStatus) {
+	    if (!('showMonthPanel' in this.props)) {
+	      this.setState({ showMonthPanel: panelStatus.showMonthPanel });
+	    }
+	    if (!('showYearPanel' in this.props)) {
+	      this.setState({ showYearPanel: panelStatus.showYearPanel });
+	    }
+	    this.props.onPanelChange(panelStatus);
 	  },
 	  monthYearElement: function monthYearElement(showTimePicker) {
 	    var props = this.props;
@@ -599,13 +626,13 @@ webpackJsonp([6],{
 	    );
 	  },
 	  showMonthPanel: function showMonthPanel() {
-	    this.setState({
+	    this.triggerPanelChange({
 	      showMonthPanel: 1,
 	      showYearPanel: 0
 	    });
 	  },
 	  showYearPanel: function showYearPanel() {
-	    this.setState({
+	    this.triggerPanelChange({
 	      showMonthPanel: 0,
 	      showYearPanel: 1
 	    });
@@ -1764,13 +1791,7 @@ webpackJsonp([6],{
 	    var calendarProps = props.calendar.props;
 	    var value = state.value;
 	
-	    var defaultValue = void 0;
-	    // RangeCalendar
-	    if (Array.isArray(value)) {
-	      defaultValue = value[0];
-	    } else {
-	      defaultValue = value;
-	    }
+	    var defaultValue = value;
 	    var extraProps = {
 	      ref: this.saveCalendarRef,
 	      defaultValue: defaultValue || calendarProps.defaultValue,
@@ -1919,6 +1940,10 @@ webpackJsonp([6],{
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
+	var _toConsumableArray2 = __webpack_require__(350);
+	
+	var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+	
 	var _react = __webpack_require__(3);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -1931,7 +1956,7 @@ webpackJsonp([6],{
 	
 	var _classnames3 = _interopRequireDefault(_classnames2);
 	
-	var _CalendarPart = __webpack_require__(350);
+	var _CalendarPart = __webpack_require__(358);
 	
 	var _CalendarPart2 = _interopRequireDefault(_CalendarPart);
 	
@@ -1961,26 +1986,15 @@ webpackJsonp([6],{
 	  return (0, _moment2.default)();
 	}
 	
-	function onValueChange(direction, current) {
-	  var value = void 0;
-	  value = current;
-	  if (direction === 'right') {
-	    value.add(-1, 'months');
-	  }
-	  this.fireValueChange(value);
+	function isEmptyArray(arr) {
+	  return Array.isArray(arr) && arr.length === 0;
 	}
 	
 	function normalizeAnchor(props, init) {
-	  var selectedValue = props.selectedValue || init && props.defaultSelectedValue || [];
-	  var value = props.value;
-	  if (Array.isArray(value)) {
-	    value = value[0];
-	  }
-	  var defaultValue = props.defaultValue;
-	  if (Array.isArray(defaultValue)) {
-	    defaultValue = defaultValue[0];
-	  }
-	  return value || init && defaultValue || selectedValue[0] || init && getNow();
+	  var selectedValue = props.selectedValue || init && props.defaultSelectedValue;
+	  var value = props.value || init && props.defaultValue;
+	  var normalizedValue = value || selectedValue;
+	  return !isEmptyArray(normalizedValue) ? normalizedValue : init && [getNow(), getNow().add(1, 'months')];
 	}
 	
 	function generateOptions(length) {
@@ -2050,7 +2064,9 @@ webpackJsonp([6],{
 	      selectedValue: selectedValue,
 	      hoverValue: [],
 	      value: value,
-	      showTimePicker: false
+	      showTimePicker: false,
+	      isStartMonthYearPanelShow: false,
+	      isEndMonthYearPanelShow: false
 	    };
 	  },
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
@@ -2152,9 +2168,9 @@ webpackJsonp([6],{
 	    }
 	  },
 	  onToday: function onToday() {
-	    this.setState({
-	      value: (0, _util.getTodayTime)(this.state.value)
-	    });
+	    var startValue = (0, _util.getTodayTime)(this.state.value[0]);
+	    var endValue = startValue.clone().add(1, 'months');
+	    this.setState({ value: [startValue, endValue] });
 	  },
 	  onOpenTimePicker: function onOpenTimePicker() {
 	    this.setState({
@@ -2189,24 +2205,30 @@ webpackJsonp([6],{
 	    var args = ['right'].concat(oargs);
 	    return onInputSelect.apply(this, args);
 	  },
-	  onStartValueChange: function onStartValueChange() {
-	    for (var _len3 = arguments.length, oargs = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-	      oargs[_key3] = arguments[_key3];
-	    }
-	
-	    var args = ['left'].concat(oargs);
-	    return onValueChange.apply(this, args);
+	  onStartValueChange: function onStartValueChange(leftValue) {
+	    var value = [].concat((0, _toConsumableArray3.default)(this.state.value));
+	    value[0] = leftValue;
+	    return this.fireValueChange(value);
 	  },
-	  onEndValueChange: function onEndValueChange() {
-	    for (var _len4 = arguments.length, oargs = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
-	      oargs[_key4] = arguments[_key4];
-	    }
+	  onEndValueChange: function onEndValueChange(rightValue) {
+	    var value = [].concat((0, _toConsumableArray3.default)(this.state.value));
+	    value[1] = rightValue;
+	    return this.fireValueChange(value);
+	  },
+	  onStartPanelChange: function onStartPanelChange(_ref) {
+	    var showMonthPanel = _ref.showMonthPanel,
+	        showYearPanel = _ref.showYearPanel;
 	
-	    var args = ['right'].concat(oargs);
-	    return onValueChange.apply(this, args);
+	    this.setState({ isStartMonthYearPanelShow: showMonthPanel || showYearPanel });
+	  },
+	  onEndPanelChange: function onEndPanelChange(_ref2) {
+	    var showMonthPanel = _ref2.showMonthPanel,
+	        showYearPanel = _ref2.showYearPanel;
+	
+	    this.setState({ isEndMonthYearPanelShow: showMonthPanel || showYearPanel });
 	  },
 	  getStartValue: function getStartValue() {
-	    var value = this.state.value;
+	    var value = this.state.value[0];
 	    var selectedValue = this.state.selectedValue;
 	    // keep selectedTime when select date
 	    if (selectedValue[0] && this.props.timePicker) {
@@ -2219,8 +2241,7 @@ webpackJsonp([6],{
 	    return value;
 	  },
 	  getEndValue: function getEndValue() {
-	    var endValue = this.state.value.clone();
-	    endValue.add(1, 'months');
+	    var endValue = this.state.value[1].clone();
 	    var selectedValue = this.state.selectedValue;
 	    // keep selectedTime when select date
 	    if (selectedValue[1] && this.props.timePicker) {
@@ -2238,7 +2259,7 @@ webpackJsonp([6],{
 	        selectedValue = _state2.selectedValue,
 	        value = _state2.value;
 	
-	    var startValue = selectedValue && selectedValue[0] || value.clone();
+	    var startValue = selectedValue && selectedValue[0] || value[0].clone();
 	    // if startTime and endTime is same day..
 	    // the second time picker will not able to pick time before first time picker
 	    if (!selectedValue[1] || startValue.isSame(selectedValue[1], 'day')) {
@@ -2291,9 +2312,11 @@ webpackJsonp([6],{
 	
 	    // 尚未选择过时间，直接输入的话
 	    if (!this.state.selectedValue[0] || !this.state.selectedValue[1]) {
+	      var startValue = selectedValue[0] || getNow();
+	      var endValue = selectedValue[1] || startValue.clone().add(1, 'months');
 	      this.setState({
 	        selectedValue: selectedValue,
-	        value: selectedValue[0] || getNow()
+	        value: [startValue, endValue]
 	      });
 	    }
 	
@@ -2334,7 +2357,9 @@ webpackJsonp([6],{
 	
 	    var props = this.props;
 	    var state = this.state;
-	    var showTimePicker = state.showTimePicker;
+	    var showTimePicker = state.showTimePicker,
+	        isStartMonthYearPanelShow = state.isStartMonthYearPanelShow,
+	        isEndMonthYearPanelShow = state.isEndMonthYearPanelShow;
 	    var prefixCls = props.prefixCls,
 	        dateInputPlaceholder = props.dateInputPlaceholder,
 	        timePicker = props.timePicker,
@@ -2375,9 +2400,9 @@ webpackJsonp([6],{
 	    var todayTime = (0, _util.getTodayTime)(startValue);
 	    var thisMonth = todayTime.month();
 	    var thisYear = todayTime.year();
-	    var isThisYear = thisYear === startValue.year() || this.year === endValue.year();
-	    var isTodayInView = isThisYear && (thisMonth === startValue.month() || thisMonth === endValue.month());
-	
+	    var isTodayInView = startValue.year() === thisYear && startValue.month() === thisMonth || endValue.year() === thisYear && endValue.month() === thisMonth;
+	    var nextMonthOfStart = startValue.clone().add(1, 'months');
+	    var isClosestMonths = nextMonthOfStart.year() === endValue.year() && nextMonthOfStart.month() === endValue.month();
 	    return _react2.default.createElement(
 	      'div',
 	      {
@@ -2412,8 +2437,11 @@ webpackJsonp([6],{
 	            placeholder: placeholder1,
 	            onInputSelect: this.onStartInputSelect,
 	            onValueChange: this.onStartValueChange,
+	            onPanelChange: this.onStartPanelChange,
 	            timePicker: timePicker,
-	            showTimePicker: showTimePicker
+	            showTimePicker: showTimePicker,
+	            enablePrev: true,
+	            enableNext: !isClosestMonths || isEndMonthYearPanelShow
 	          })),
 	          _react2.default.createElement(
 	            'span',
@@ -2429,9 +2457,12 @@ webpackJsonp([6],{
 	            value: endValue,
 	            onInputSelect: this.onEndInputSelect,
 	            onValueChange: this.onEndValueChange,
+	            onPanelChange: this.onEndPanelChange,
 	            timePicker: timePicker,
 	            showTimePicker: showTimePicker,
-	            disabledTime: this.disabledEndTime
+	            disabledTime: this.disabledEndTime,
+	            enablePrev: !isClosestMonths || isStartMonthYearPanelShow,
+	            enableNext: true
 	          }))
 	        ),
 	        _react2.default.createElement(
@@ -2443,7 +2474,7 @@ webpackJsonp([6],{
 	            { className: prefixCls + '-footer-btn' },
 	            showToday ? _react2.default.createElement(_TodayButton2.default, (0, _extends3.default)({}, props, {
 	              disabled: isTodayInView,
-	              value: state.value,
+	              value: state.value[0],
 	              onToday: this.onToday,
 	              text: locale.backToToday
 	            })) : null,
@@ -2454,7 +2485,6 @@ webpackJsonp([6],{
 	              timePickerDisabled: !this.hasSelectedValue() || hoverValue.length
 	            })) : null,
 	            showOkButton ? _react2.default.createElement(_OkButton2.default, (0, _extends3.default)({}, props, {
-	              value: state.value,
 	              onOk: this.onOk,
 	              okDisabled: !this.isAllowedDateAndTime(selectedValue) || !this.hasSelectedValue() || hoverValue.length
 	            })) : null
@@ -2633,6 +2663,166 @@ webpackJsonp([6],{
 /***/ 350:
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+	
+	exports.__esModule = true;
+	
+	var _from = __webpack_require__(351);
+	
+	var _from2 = _interopRequireDefault(_from);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = function (arr) {
+	  if (Array.isArray(arr)) {
+	    for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+	      arr2[i] = arr[i];
+	    }
+	
+	    return arr2;
+	  } else {
+	    return (0, _from2.default)(arr);
+	  }
+	};
+
+/***/ },
+
+/***/ 351:
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(352), __esModule: true };
+
+/***/ },
+
+/***/ 352:
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(228);
+	__webpack_require__(353);
+	module.exports = __webpack_require__(189).Array.from;
+
+/***/ },
+
+/***/ 353:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var ctx            = __webpack_require__(190)
+	  , $export        = __webpack_require__(187)
+	  , toObject       = __webpack_require__(220)
+	  , call           = __webpack_require__(354)
+	  , isArrayIter    = __webpack_require__(355)
+	  , toLength       = __webpack_require__(211)
+	  , createProperty = __webpack_require__(356)
+	  , getIterFn      = __webpack_require__(349);
+	
+	$export($export.S + $export.F * !__webpack_require__(357)(function(iter){ Array.from(iter); }), 'Array', {
+	  // 22.1.2.1 Array.from(arrayLike, mapfn = undefined, thisArg = undefined)
+	  from: function from(arrayLike/*, mapfn = undefined, thisArg = undefined*/){
+	    var O       = toObject(arrayLike)
+	      , C       = typeof this == 'function' ? this : Array
+	      , aLen    = arguments.length
+	      , mapfn   = aLen > 1 ? arguments[1] : undefined
+	      , mapping = mapfn !== undefined
+	      , index   = 0
+	      , iterFn  = getIterFn(O)
+	      , length, result, step, iterator;
+	    if(mapping)mapfn = ctx(mapfn, aLen > 2 ? arguments[2] : undefined, 2);
+	    // if object isn't iterable or it's array with default iterator - use simple case
+	    if(iterFn != undefined && !(C == Array && isArrayIter(iterFn))){
+	      for(iterator = iterFn.call(O), result = new C; !(step = iterator.next()).done; index++){
+	        createProperty(result, index, mapping ? call(iterator, mapfn, [step.value, index], true) : step.value);
+	      }
+	    } else {
+	      length = toLength(O.length);
+	      for(result = new C(length); length > index; index++){
+	        createProperty(result, index, mapping ? mapfn(O[index], index) : O[index]);
+	      }
+	    }
+	    result.length = index;
+	    return result;
+	  }
+	});
+
+
+/***/ },
+
+/***/ 354:
+/***/ function(module, exports, __webpack_require__) {
+
+	// call something on iterator step with safe closing on error
+	var anObject = __webpack_require__(194);
+	module.exports = function(iterator, fn, value, entries){
+	  try {
+	    return entries ? fn(anObject(value)[0], value[1]) : fn(value);
+	  // 7.4.6 IteratorClose(iterator, completion)
+	  } catch(e){
+	    var ret = iterator['return'];
+	    if(ret !== undefined)anObject(ret.call(iterator));
+	    throw e;
+	  }
+	};
+
+/***/ },
+
+/***/ 355:
+/***/ function(module, exports, __webpack_require__) {
+
+	// check on default Array iterator
+	var Iterators  = __webpack_require__(233)
+	  , ITERATOR   = __webpack_require__(239)('iterator')
+	  , ArrayProto = Array.prototype;
+	
+	module.exports = function(it){
+	  return it !== undefined && (Iterators.Array === it || ArrayProto[ITERATOR] === it);
+	};
+
+/***/ },
+
+/***/ 356:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $defineProperty = __webpack_require__(193)
+	  , createDesc      = __webpack_require__(201);
+	
+	module.exports = function(object, index, value){
+	  if(index in object)$defineProperty.f(object, index, createDesc(0, value));
+	  else object[index] = value;
+	};
+
+/***/ },
+
+/***/ 357:
+/***/ function(module, exports, __webpack_require__) {
+
+	var ITERATOR     = __webpack_require__(239)('iterator')
+	  , SAFE_CLOSING = false;
+	
+	try {
+	  var riter = [7][ITERATOR]();
+	  riter['return'] = function(){ SAFE_CLOSING = true; };
+	  Array.from(riter, function(){ throw 2; });
+	} catch(e){ /* empty */ }
+	
+	module.exports = function(exec, skipClosing){
+	  if(!skipClosing && !SAFE_CLOSING)return false;
+	  var safe = false;
+	  try {
+	    var arr  = [7]
+	      , iter = arr[ITERATOR]();
+	    iter.next = function(){ return {done: safe = true}; };
+	    arr[ITERATOR] = function(){ return iter; };
+	    exec(arr);
+	  } catch(e){ /* empty */ }
+	  return safe;
+	};
+
+/***/ },
+
+/***/ 358:
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
@@ -2667,12 +2857,12 @@ webpackJsonp([6],{
 	  displayName: 'CalendarPart',
 	
 	  propTypes: {
+	    prefixCls: _react.PropTypes.string,
 	    value: _react.PropTypes.any,
-	    direction: _react.PropTypes.any,
-	    prefixCls: _react.PropTypes.any,
-	    locale: _react.PropTypes.any,
-	    selectedValue: _react.PropTypes.any,
 	    hoverValue: _react.PropTypes.any,
+	    selectedValue: _react.PropTypes.any,
+	    direction: _react.PropTypes.any,
+	    locale: _react.PropTypes.any,
 	    showTimePicker: _react.PropTypes.bool,
 	    format: _react.PropTypes.any,
 	    placeholder: _react.PropTypes.any,
@@ -2680,15 +2870,18 @@ webpackJsonp([6],{
 	    timePicker: _react.PropTypes.any,
 	    disabledTime: _react.PropTypes.any,
 	    onInputSelect: _react.PropTypes.func,
-	    timePickerDisabledTime: _react.PropTypes.object
+	    timePickerDisabledTime: _react.PropTypes.object,
+	    enableNext: _react.PropTypes.any,
+	    enablePrev: _react.PropTypes.any
 	  },
 	  render: function render() {
 	    var props = this.props;
-	    var value = props.value,
-	        direction = props.direction,
-	        prefixCls = props.prefixCls,
-	        locale = props.locale,
+	    var prefixCls = props.prefixCls,
+	        value = props.value,
+	        hoverValue = props.hoverValue,
 	        selectedValue = props.selectedValue,
+	        direction = props.direction,
+	        locale = props.locale,
 	        format = props.format,
 	        placeholder = props.placeholder,
 	        disabledDate = props.disabledDate,
@@ -2696,8 +2889,9 @@ webpackJsonp([6],{
 	        disabledTime = props.disabledTime,
 	        timePickerDisabledTime = props.timePickerDisabledTime,
 	        showTimePicker = props.showTimePicker,
-	        hoverValue = props.hoverValue,
-	        onInputSelect = props.onInputSelect;
+	        onInputSelect = props.onInputSelect,
+	        enablePrev = props.enablePrev,
+	        enableNext = props.enableNext;
 	
 	    var disabledTimeConfig = showTimePicker && disabledTime && timePicker ? (0, _index.getTimeConfig)(selectedValue, disabledTime) : null;
 	    var rangeClassName = prefixCls + '-range';
@@ -2737,9 +2931,10 @@ webpackJsonp([6],{
 	        'div',
 	        { style: { outline: 'none' } },
 	        _react2.default.createElement(_CalendarHeader2.default, (0, _extends3.default)({}, newProps, {
-	          enableNext: direction === 'right',
-	          enablePrev: direction === 'left',
-	          onValueChange: props.onValueChange
+	          enableNext: enableNext,
+	          enablePrev: enablePrev,
+	          onValueChange: props.onValueChange,
+	          onPanelChange: props.onPanelChange
 	        })),
 	        showTimePicker ? _react2.default.createElement(
 	          'div',
@@ -2773,7 +2968,7 @@ webpackJsonp([6],{
 
 /***/ },
 
-/***/ 390:
+/***/ 398:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

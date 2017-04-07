@@ -3,7 +3,7 @@ webpackJsonp([4],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(383);
+	module.exports = __webpack_require__(391);
 
 
 /***/ },
@@ -903,19 +903,24 @@ webpackJsonp([4],{
 	  displayName: 'CalendarHeader',
 	
 	  propTypes: {
-	    enablePrev: _react.PropTypes.any,
-	    enableNext: _react.PropTypes.any,
 	    prefixCls: _react.PropTypes.string,
-	    showTimePicker: _react.PropTypes.bool,
-	    locale: _react.PropTypes.object,
 	    value: _react.PropTypes.object,
-	    onValueChange: _react.PropTypes.func
+	    onValueChange: _react.PropTypes.func,
+	    showTimePicker: _react.PropTypes.bool,
+	    showMonthPanel: _react.PropTypes.bool,
+	    showYearPanel: _react.PropTypes.bool,
+	    onPanelChange: _react.PropTypes.func,
+	    locale: _react.PropTypes.object,
+	    enablePrev: _react.PropTypes.any,
+	    enableNext: _react.PropTypes.any
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
 	      enableNext: 1,
-	      enablePrev: 1
+	      enablePrev: 1,
+	      onPanelChange: function onPanelChange() {},
+	      onValueChange: function onValueChange() {}
 	    };
 	  },
 	  getInitialState: function getInitialState() {
@@ -923,14 +928,36 @@ webpackJsonp([4],{
 	    this.previousMonth = goMonth.bind(this, -1);
 	    this.nextYear = goYear.bind(this, 1);
 	    this.previousYear = goYear.bind(this, -1);
-	    return {};
+	    var _props = this.props,
+	        showMonthPanel = _props.showMonthPanel,
+	        showYearPanel = _props.showYearPanel;
+	
+	    return { showMonthPanel: showMonthPanel, showYearPanel: showYearPanel };
+	  },
+	  componentWillReceiveProps: function componentWillReceiveProps() {
+	    var props = this.props;
+	    if ('showMonthpanel' in props) {
+	      this.setState({ showMonthPanel: props.showMonthPanel });
+	    }
+	    if ('showYearpanel' in props) {
+	      this.setState({ showYearPanel: props.showYearPanel });
+	    }
 	  },
 	  onSelect: function onSelect(value) {
-	    this.setState({
+	    this.triggerPanelChange({
 	      showMonthPanel: 0,
 	      showYearPanel: 0
 	    });
 	    this.props.onValueChange(value);
+	  },
+	  triggerPanelChange: function triggerPanelChange(panelStatus) {
+	    if (!('showMonthPanel' in this.props)) {
+	      this.setState({ showMonthPanel: panelStatus.showMonthPanel });
+	    }
+	    if (!('showYearPanel' in this.props)) {
+	      this.setState({ showYearPanel: panelStatus.showYearPanel });
+	    }
+	    this.props.onPanelChange(panelStatus);
 	  },
 	  monthYearElement: function monthYearElement(showTimePicker) {
 	    var props = this.props;
@@ -984,13 +1011,13 @@ webpackJsonp([4],{
 	    );
 	  },
 	  showMonthPanel: function showMonthPanel() {
-	    this.setState({
+	    this.triggerPanelChange({
 	      showMonthPanel: 1,
 	      showYearPanel: 0
 	    });
 	  },
 	  showYearPanel: function showYearPanel() {
-	    this.setState({
+	    this.triggerPanelChange({
 	      showMonthPanel: 0,
 	      showYearPanel: 1
 	    });
@@ -2409,13 +2436,7 @@ webpackJsonp([4],{
 	    var calendarProps = props.calendar.props;
 	    var value = state.value;
 	
-	    var defaultValue = void 0;
-	    // RangeCalendar
-	    if (Array.isArray(value)) {
-	      defaultValue = value[0];
-	    } else {
-	      defaultValue = value;
-	    }
+	    var defaultValue = value;
 	    var extraProps = {
 	      ref: this.saveCalendarRef,
 	      defaultValue: defaultValue || calendarProps.defaultValue,
@@ -2543,7 +2564,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 357:
+/***/ 365:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3073,7 +3094,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 383:
+/***/ 391:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3096,11 +3117,11 @@ webpackJsonp([4],{
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _rcDialog = __webpack_require__(384);
+	var _rcDialog = __webpack_require__(392);
 	
 	var _rcDialog2 = _interopRequireDefault(_rcDialog);
 	
-	__webpack_require__(388);
+	__webpack_require__(396);
 	
 	var _zh_CN = __webpack_require__(329);
 	
@@ -3215,7 +3236,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 384:
+/***/ 392:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3228,7 +3249,7 @@ webpackJsonp([4],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Dialog = __webpack_require__(385);
+	var _Dialog = __webpack_require__(393);
 	
 	var _Dialog2 = _interopRequireDefault(_Dialog);
 	
@@ -3303,7 +3324,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 385:
+/***/ 393:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3320,7 +3341,7 @@ webpackJsonp([4],{
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _KeyCode = __webpack_require__(357);
+	var _KeyCode = __webpack_require__(365);
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
@@ -3328,11 +3349,11 @@ webpackJsonp([4],{
 	
 	var _rcAnimate2 = _interopRequireDefault(_rcAnimate);
 	
-	var _LazyRenderBox = __webpack_require__(386);
+	var _LazyRenderBox = __webpack_require__(394);
 	
 	var _LazyRenderBox2 = _interopRequireDefault(_LazyRenderBox);
 	
-	var _getScrollBarSize = __webpack_require__(387);
+	var _getScrollBarSize = __webpack_require__(395);
 	
 	var _getScrollBarSize2 = _interopRequireDefault(_getScrollBarSize);
 	
@@ -3631,7 +3652,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 386:
+/***/ 394:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3682,7 +3703,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 387:
+/***/ 395:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3733,7 +3754,7 @@ webpackJsonp([4],{
 
 /***/ },
 
-/***/ 388:
+/***/ 396:
 2
 
 });

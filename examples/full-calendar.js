@@ -3,7 +3,7 @@ webpackJsonp([3],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(351);
+	module.exports = __webpack_require__(359);
 
 
 /***/ },
@@ -611,7 +611,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 351:
+/***/ 359:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -626,13 +626,13 @@ webpackJsonp([3],{
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _FullCalendar = __webpack_require__(352);
+	var _FullCalendar = __webpack_require__(360);
 	
 	var _FullCalendar2 = _interopRequireDefault(_FullCalendar);
 	
-	__webpack_require__(354);
+	__webpack_require__(362);
 	
-	var _rcSelect = __webpack_require__(355);
+	var _rcSelect = __webpack_require__(363);
 	
 	var _rcSelect2 = _interopRequireDefault(_rcSelect);
 	
@@ -714,7 +714,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 352:
+/***/ 360:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -747,7 +747,7 @@ webpackJsonp([3],{
 	
 	var _CommonMixin2 = _interopRequireDefault(_CommonMixin);
 	
-	var _CalendarHeader = __webpack_require__(353);
+	var _CalendarHeader = __webpack_require__(361);
 	
 	var _CalendarHeader2 = _interopRequireDefault(_CalendarHeader);
 	
@@ -888,7 +888,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 353:
+/***/ 361:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1093,10 +1093,10 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 354:
+/***/ 362:
 2,
 
-/***/ 355:
+/***/ 363:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1106,15 +1106,15 @@ webpackJsonp([3],{
 	});
 	exports.OptGroup = exports.Option = undefined;
 	
-	var _Select = __webpack_require__(356);
+	var _Select = __webpack_require__(364);
 	
 	var _Select2 = _interopRequireDefault(_Select);
 	
-	var _Option = __webpack_require__(381);
+	var _Option = __webpack_require__(389);
 	
 	var _Option2 = _interopRequireDefault(_Option);
 	
-	var _OptGroup = __webpack_require__(382);
+	var _OptGroup = __webpack_require__(390);
 	
 	var _OptGroup2 = _interopRequireDefault(_OptGroup);
 	
@@ -1128,7 +1128,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 356:
+/***/ 364:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1153,7 +1153,7 @@ webpackJsonp([3],{
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _KeyCode = __webpack_require__(357);
+	var _KeyCode = __webpack_require__(365);
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
@@ -1169,17 +1169,17 @@ webpackJsonp([3],{
 	
 	var _componentClasses2 = _interopRequireDefault(_componentClasses);
 	
-	var _util = __webpack_require__(358);
+	var _util = __webpack_require__(366);
 	
-	var _SelectTrigger = __webpack_require__(359);
+	var _SelectTrigger = __webpack_require__(367);
 	
 	var _SelectTrigger2 = _interopRequireDefault(_SelectTrigger);
 	
-	var _FilterMixin = __webpack_require__(378);
+	var _FilterMixin = __webpack_require__(386);
 	
 	var _FilterMixin2 = _interopRequireDefault(_FilterMixin);
 	
-	var _PropTypes = __webpack_require__(380);
+	var _PropTypes = __webpack_require__(388);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -1191,6 +1191,24 @@ webpackJsonp([3],{
 	
 	function saveRef(name, component) {
 	  this[name] = component;
+	}
+	
+	function chaining() {
+	  for (var _len = arguments.length, fns = Array(_len), _key = 0; _key < _len; _key++) {
+	    fns[_key] = arguments[_key];
+	  }
+	
+	  return function () {
+	    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+	      args[_key2] = arguments[_key2];
+	    }
+	
+	    for (var i = 0; i < fns.length; i++) {
+	      if (fns[i] && typeof fns[i] === 'function') {
+	        fns[i].apply(this, args);
+	      }
+	    }
+	  };
 	}
 	
 	var Select = _react2["default"].createClass({
@@ -1633,7 +1651,7 @@ webpackJsonp([3],{
 	      _react2["default"].cloneElement(inputElement, {
 	        ref: this.saveInputRef,
 	        onChange: this.onInputChange,
-	        onKeyDown: this.onInputKeyDown,
+	        onKeyDown: chaining(this.onInputKeyDown, inputElement.props.onKeyDown),
 	        value: this.state.inputValue,
 	        disabled: props.disabled,
 	        className: inputCls
@@ -2108,7 +2126,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 357:
+/***/ 365:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2638,7 +2656,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 358:
+/***/ 366:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2676,7 +2694,10 @@ webpackJsonp([3],{
 	  if (child.key) {
 	    return child.key;
 	  }
-	  throw new Error('no key or value for ' + child);
+	  if (child.type && child.type.isSelectOptGroup && props.label) {
+	    return props.label;
+	  }
+	  throw new Error('no key or value or label(only for OptGroup) for ' + child);
 	}
 	
 	function getPropValue(child, prop) {
@@ -2804,7 +2825,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 359:
+/***/ 367:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2837,7 +2858,7 @@ webpackJsonp([3],{
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _DropdownMenu = __webpack_require__(360);
+	var _DropdownMenu = __webpack_require__(368);
 	
 	var _DropdownMenu2 = _interopRequireDefault(_DropdownMenu);
 	
@@ -2845,7 +2866,7 @@ webpackJsonp([3],{
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _util = __webpack_require__(358);
+	var _util = __webpack_require__(366);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -2993,7 +3014,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 360:
+/***/ 368:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3012,19 +3033,19 @@ webpackJsonp([3],{
 	
 	var _reactDom = __webpack_require__(34);
 	
-	var _toArray = __webpack_require__(361);
+	var _toArray = __webpack_require__(369);
 	
 	var _toArray2 = _interopRequireDefault(_toArray);
 	
-	var _rcMenu = __webpack_require__(362);
+	var _rcMenu = __webpack_require__(370);
 	
 	var _rcMenu2 = _interopRequireDefault(_rcMenu);
 	
-	var _domScrollIntoView = __webpack_require__(365);
+	var _domScrollIntoView = __webpack_require__(373);
 	
 	var _domScrollIntoView2 = _interopRequireDefault(_domScrollIntoView);
 	
-	var _util = __webpack_require__(358);
+	var _util = __webpack_require__(366);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -3171,7 +3192,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 361:
+/***/ 369:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3198,7 +3219,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 362:
+/***/ 370:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3208,23 +3229,23 @@ webpackJsonp([3],{
 	});
 	exports.Divider = exports.ItemGroup = exports.MenuItemGroup = exports.MenuItem = exports.Item = exports.SubMenu = undefined;
 	
-	var _Menu = __webpack_require__(363);
+	var _Menu = __webpack_require__(371);
 	
 	var _Menu2 = _interopRequireDefault(_Menu);
 	
-	var _SubMenu = __webpack_require__(370);
+	var _SubMenu = __webpack_require__(378);
 	
 	var _SubMenu2 = _interopRequireDefault(_SubMenu);
 	
-	var _MenuItem = __webpack_require__(375);
+	var _MenuItem = __webpack_require__(383);
 	
 	var _MenuItem2 = _interopRequireDefault(_MenuItem);
 	
-	var _MenuItemGroup = __webpack_require__(376);
+	var _MenuItemGroup = __webpack_require__(384);
 	
 	var _MenuItemGroup2 = _interopRequireDefault(_MenuItemGroup);
 	
-	var _Divider = __webpack_require__(377);
+	var _Divider = __webpack_require__(385);
 	
 	var _Divider2 = _interopRequireDefault(_Divider);
 	
@@ -3240,7 +3261,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 363:
+/***/ 371:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3257,11 +3278,11 @@ webpackJsonp([3],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _MenuMixin = __webpack_require__(364);
+	var _MenuMixin = __webpack_require__(372);
 	
 	var _MenuMixin2 = _interopRequireDefault(_MenuMixin);
 	
-	var _util = __webpack_require__(368);
+	var _util = __webpack_require__(376);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -3497,7 +3518,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 364:
+/***/ 372:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3534,13 +3555,13 @@ webpackJsonp([3],{
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _domScrollIntoView = __webpack_require__(365);
+	var _domScrollIntoView = __webpack_require__(373);
 	
 	var _domScrollIntoView2 = _interopRequireDefault(_domScrollIntoView);
 	
-	var _util = __webpack_require__(368);
+	var _util = __webpack_require__(376);
 	
-	var _DOMWrap = __webpack_require__(369);
+	var _DOMWrap = __webpack_require__(377);
 	
 	var _DOMWrap2 = _interopRequireDefault(_DOMWrap);
 	
@@ -3853,21 +3874,21 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 365:
+/***/ 373:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	module.exports = __webpack_require__(366);
+	module.exports = __webpack_require__(374);
 
 /***/ },
 
-/***/ 366:
+/***/ 374:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var util = __webpack_require__(367);
+	var util = __webpack_require__(375);
 	
 	function scrollIntoView(elem, container, config) {
 	  config = config || {};
@@ -3997,7 +4018,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 367:
+/***/ 375:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4442,7 +4463,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 368:
+/***/ 376:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4507,7 +4528,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 369:
+/***/ 377:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4559,7 +4580,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 370:
+/***/ 378:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4576,7 +4597,7 @@ webpackJsonp([3],{
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
-	var _SubPopupMenu = __webpack_require__(371);
+	var _SubPopupMenu = __webpack_require__(379);
 	
 	var _SubPopupMenu2 = _interopRequireDefault(_SubPopupMenu);
 	
@@ -4592,7 +4613,7 @@ webpackJsonp([3],{
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _util = __webpack_require__(368);
+	var _util = __webpack_require__(376);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -4628,7 +4649,7 @@ webpackJsonp([3],{
 	    onTitleClick: _react.PropTypes.func
 	  },
 	
-	  mixins: [__webpack_require__(372)],
+	  mixins: [__webpack_require__(380)],
 	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
@@ -5024,7 +5045,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 371:
+/***/ 379:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5045,7 +5066,7 @@ webpackJsonp([3],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _MenuMixin = __webpack_require__(364);
+	var _MenuMixin = __webpack_require__(372);
 	
 	var _MenuMixin2 = _interopRequireDefault(_MenuMixin);
 	
@@ -5152,7 +5173,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 372:
+/***/ 380:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5165,11 +5186,11 @@ webpackJsonp([3],{
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _addEventListener = __webpack_require__(373);
+	var _addEventListener = __webpack_require__(381);
 	
 	var _addEventListener2 = _interopRequireDefault(_addEventListener);
 	
-	var _contains = __webpack_require__(374);
+	var _contains = __webpack_require__(382);
 	
 	var _contains2 = _interopRequireDefault(_contains);
 	
@@ -5240,10 +5261,10 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 373:
+/***/ 381:
 298,
 
-/***/ 374:
+/***/ 382:
 /***/ function(module, exports) {
 
 	"use strict";
@@ -5262,7 +5283,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 375:
+/***/ 383:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5287,7 +5308,7 @@ webpackJsonp([3],{
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _util = __webpack_require__(368);
+	var _util = __webpack_require__(376);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -5477,7 +5498,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 376:
+/***/ 384:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5546,7 +5567,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 377:
+/***/ 385:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5590,7 +5611,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 378:
+/***/ 386:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5607,11 +5628,11 @@ webpackJsonp([3],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _util = __webpack_require__(358);
+	var _util = __webpack_require__(366);
 	
-	var _rcMenu = __webpack_require__(362);
+	var _rcMenu = __webpack_require__(370);
 	
-	var _warning = __webpack_require__(379);
+	var _warning = __webpack_require__(387);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
@@ -5623,13 +5644,15 @@ webpackJsonp([3],{
 	      return true;
 	    }
 	    var filterOption = this.props.filterOption;
+	
 	    if (!filterOption) {
 	      return true;
-	    }
-	    if (child.props.disabled) {
+	    } else if (child.props.disabled) {
 	      return false;
+	    } else if (typeof filterOption === 'function') {
+	      return filterOption.call(this, input, child);
 	    }
-	    return filterOption.call(this, input, child);
+	    return true;
 	  },
 	  renderFilterOptions: function renderFilterOptions(inputValue) {
 	    return this.renderFilterOptionsFromChildren(this.props.children, true, inputValue);
@@ -5734,7 +5757,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 379:
+/***/ 387:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -5802,7 +5825,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 380:
+/***/ 388:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5868,7 +5891,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 381:
+/***/ 389:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5915,7 +5938,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 382:
+/***/ 390:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
