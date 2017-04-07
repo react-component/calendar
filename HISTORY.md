@@ -1,6 +1,11 @@
 # History
 ----
 
+## 8.0.0 / 2017-04-07
+
+- Improve UX of RangeCalendar
+- A breaking change for hidden API
+
 ## 7.8.0 / 2017-04-01
 
 - zh-TW locale
