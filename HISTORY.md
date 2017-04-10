@@ -1,6 +1,10 @@
 # History
 ----
 
+## 8.1.0 / 2017-04-10
+
+- Add locale fi_FI
+
 ## 8.0.0 / 2017-04-07
 
 - Improve UX of RangeCalendar
