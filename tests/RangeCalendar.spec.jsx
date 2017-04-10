@@ -138,6 +138,17 @@ describe('RangeCalendar', () => {
       .toMatch('rc-calendar-month-panel-cell-disabled');
   });
 
+  it('left panel and right panel should not be the same month', () => {
+    const wrapper = mount(<RangeCalendar />);
+    wrapper.find('.rc-calendar-range-left .rc-calendar-today').simulate('click').simulate('click');
+    const selectedValue = wrapper.state('selectedValue');
+    expect(selectedValue[0].isSame(moment())).toBe(true);
+    expect(selectedValue[1].isSame(moment())).toBe(true);
+    const value = wrapper.state('value');
+    expect(value[0].isSame(moment())).toBe(true);
+    expect(value[1].isSame(moment().add(1, 'month'))).toBe(true);
+  });
+
   it('render works', () => {
     expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
       'rc-calendar-cell').length).toBeGreaterThan(0);

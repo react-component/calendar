@@ -16,13 +16,19 @@ function getNow() {
 }
 
 function isEmptyArray(arr) {
-  return Array.isArray(arr) && arr.length === 0;
+  return Array.isArray(arr) && (arr.length === 0 || arr.every(i => !i));
+}
+
+function getValueFromSelectedValue(selectedValue) {
+  const [start, end] = selectedValue;
+  const newEnd = end && end.isSame(start, 'month') ? end.clone().add(1, 'month') : end;
+  return [start, newEnd];
 }
 
 function normalizeAnchor(props, init) {
   const selectedValue = props.selectedValue || init && props.defaultSelectedValue;
   const value = props.value || init && props.defaultValue;
-  const normalizedValue = value || selectedValue;
+  const normalizedValue = value || getValueFromSelectedValue(selectedValue);
   return !isEmptyArray(normalizedValue) ?
     normalizedValue : init && [getNow(), getNow().add(1, 'months')];
 }
@@ -341,7 +347,7 @@ const RangeCalendar = React.createClass({
       const endValue = selectedValue[1] || startValue.clone().add(1, 'months');
       this.setState({
         selectedValue,
-        value: [startValue, endValue],
+        value: getValueFromSelectedValue([startValue, endValue]),
       });
     }
 
