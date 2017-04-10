@@ -1,22 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`FullCalendar render correctly 1`] = `
 <div
   class="rc-calendar rc-calendar-full"
-  tabindex="0">
+  tabindex="0"
+>
   <div
-    class="rc-calendar-full-header">
+    class="rc-calendar-full-header"
+  >
     <span
-      class="rc-calendar-full-header-switcher">
+      class="rc-calendar-full-header-switcher"
+    >
       <span
-        class="rc-calendar-full-header-switcher-normal">
+        class="rc-calendar-full-header-switcher-normal"
+      >
         月
       </span>
       <span
-        class="rc-calendar-full-header-switcher-focus">
+        class="rc-calendar-full-header-switcher-focus"
+      >
         年
       </span>
     </span>
     <div
-      class="rc-calendar-full-header-year-select rc-select rc-select-enabled">
+      class="rc-calendar-full-header-year-select rc-select rc-select-enabled"
+    >
       <div
         aria-autocomplete="list"
         aria-expanded="false"
@@ -24,149 +32,184 @@ exports[`FullCalendar render correctly 1`] = `
         class="rc-select-selection
                   rc-select-selection--single"
         role="combobox"
-        tabindex="0">
+        tabindex="0"
+      >
         <div
-          class="rc-select-selection__rendered">
+          class="rc-select-selection__rendered"
+        >
           <div
             class="rc-select-selection-selected-value"
             style="display:block;opacity:1;"
-            title="2017">
+            title="2017"
+          >
             2017
           </div>
         </div>
         <span
           class="rc-select-arrow"
           style="user-select:none;-webkit-user-select:none;"
-          unselectable="unselectable">
+          unselectable="unselectable"
+        >
           <b />
         </span>
       </div>
     </div>
   </div>
   <div
-    class="rc-calendar-calendar-body">
+    class="rc-calendar-calendar-body"
+  >
     <table
       cellspacing="0"
       class="rc-calendar-month-panel-table"
-      role="grid">
+      role="grid"
+    >
       <tbody
-        class="rc-calendar-month-panel-tbody">
+        class="rc-calendar-month-panel-tbody"
+      >
         <tr
-          role="row">
+          role="row"
+        >
           <td
             class="rc-calendar-month-panel-cell"
             role="gridcell"
-            title="一月">
+            title="一月"
+          >
             <a
-              class="rc-calendar-month-panel-month">
+              class="rc-calendar-month-panel-month"
+            >
               一月
             </a>
           </td>
           <td
             class="rc-calendar-month-panel-cell"
             role="gridcell"
-            title="二月">
+            title="二月"
+          >
             <a
-              class="rc-calendar-month-panel-month">
+              class="rc-calendar-month-panel-month"
+            >
               二月
             </a>
           </td>
           <td
             class="rc-calendar-month-panel-cell rc-calendar-month-panel-selected-cell rc-calendar-month-panel-current-cell"
             role="gridcell"
-            title="三月">
+            title="三月"
+          >
             <a
-              class="rc-calendar-month-panel-month">
+              class="rc-calendar-month-panel-month"
+            >
               三月
             </a>
           </td>
         </tr>
         <tr
-          role="row">
+          role="row"
+        >
           <td
             class="rc-calendar-month-panel-cell"
             role="gridcell"
-            title="四月">
+            title="四月"
+          >
             <a
-              class="rc-calendar-month-panel-month">
+              class="rc-calendar-month-panel-month"
+            >
               四月
             </a>
           </td>
           <td
             class="rc-calendar-month-panel-cell"
             role="gridcell"
-            title="五月">
+            title="五月"
+          >
             <a
-              class="rc-calendar-month-panel-month">
+              class="rc-calendar-month-panel-month"
+            >
               五月
             </a>
           </td>
           <td
             class="rc-calendar-month-panel-cell"
             role="gridcell"
-            title="六月">
+            title="六月"
+          >
             <a
-              class="rc-calendar-month-panel-month">
+              class="rc-calendar-month-panel-month"
+            >
               六月
             </a>
           </td>
         </tr>
         <tr
-          role="row">
+          role="row"
+        >
           <td
             class="rc-calendar-month-panel-cell"
             role="gridcell"
-            title="七月">
+            title="七月"
+          >
             <a
-              class="rc-calendar-month-panel-month">
+              class="rc-calendar-month-panel-month"
+            >
               七月
             </a>
           </td>
           <td
             class="rc-calendar-month-panel-cell"
             role="gridcell"
-            title="八月">
+            title="八月"
+          >
             <a
-              class="rc-calendar-month-panel-month">
+              class="rc-calendar-month-panel-month"
+            >
               八月
             </a>
           </td>
           <td
             class="rc-calendar-month-panel-cell"
             role="gridcell"
-            title="九月">
+            title="九月"
+          >
             <a
-              class="rc-calendar-month-panel-month">
+              class="rc-calendar-month-panel-month"
+            >
               九月
             </a>
           </td>
         </tr>
         <tr
-          role="row">
+          role="row"
+        >
           <td
             class="rc-calendar-month-panel-cell"
             role="gridcell"
-            title="十月">
+            title="十月"
+          >
             <a
-              class="rc-calendar-month-panel-month">
+              class="rc-calendar-month-panel-month"
+            >
               十月
             </a>
           </td>
           <td
             class="rc-calendar-month-panel-cell"
             role="gridcell"
-            title="十一月">
+            title="十一月"
+          >
             <a
-              class="rc-calendar-month-panel-month">
+              class="rc-calendar-month-panel-month"
+            >
               十一月
             </a>
           </td>
           <td
             class="rc-calendar-month-panel-cell"
             role="gridcell"
-            title="十二月">
+            title="十二月"
+          >
             <a
-              class="rc-calendar-month-panel-month">
+              class="rc-calendar-month-panel-month"
+            >
               十二月
             </a>
           </td>
@@ -180,22 +223,28 @@ exports[`FullCalendar render correctly 1`] = `
 exports[`FullCalendar render correctly 2`] = `
 <div
   class="rc-calendar rc-calendar-full"
-  tabindex="0">
+  tabindex="0"
+>
   <div
-    class="rc-calendar-full-header">
+    class="rc-calendar-full-header"
+  >
     <span
-      class="rc-calendar-full-header-switcher">
+      class="rc-calendar-full-header-switcher"
+    >
       <span
-        class="rc-calendar-full-header-switcher-normal">
+        class="rc-calendar-full-header-switcher-normal"
+      >
         Month
       </span>
       <span
-        class="rc-calendar-full-header-switcher-focus">
+        class="rc-calendar-full-header-switcher-focus"
+      >
         Year
       </span>
     </span>
     <div
-      class="rc-calendar-full-header-year-select rc-select rc-select-enabled">
+      class="rc-calendar-full-header-year-select rc-select rc-select-enabled"
+    >
       <div
         aria-autocomplete="list"
         aria-expanded="false"
@@ -203,149 +252,184 @@ exports[`FullCalendar render correctly 2`] = `
         class="rc-select-selection
                   rc-select-selection--single"
         role="combobox"
-        tabindex="0">
+        tabindex="0"
+      >
         <div
-          class="rc-select-selection__rendered">
+          class="rc-select-selection__rendered"
+        >
           <div
             class="rc-select-selection-selected-value"
             style="display:block;opacity:1;"
-            title="2017">
+            title="2017"
+          >
             2017
           </div>
         </div>
         <span
           class="rc-select-arrow"
           style="user-select:none;-webkit-user-select:none;"
-          unselectable="unselectable">
+          unselectable="unselectable"
+        >
           <b />
         </span>
       </div>
     </div>
   </div>
   <div
-    class="rc-calendar-calendar-body">
+    class="rc-calendar-calendar-body"
+  >
     <table
       cellspacing="0"
       class="rc-calendar-month-panel-table"
-      role="grid">
+      role="grid"
+    >
       <tbody
-        class="rc-calendar-month-panel-tbody">
+        class="rc-calendar-month-panel-tbody"
+      >
         <tr
-          role="row">
+          role="row"
+        >
           <td
             class="rc-calendar-month-panel-cell"
             role="gridcell"
-            title="Jan">
+            title="Jan"
+          >
             <a
-              class="rc-calendar-month-panel-month">
+              class="rc-calendar-month-panel-month"
+            >
               Jan
             </a>
           </td>
           <td
             class="rc-calendar-month-panel-cell"
             role="gridcell"
-            title="Feb">
+            title="Feb"
+          >
             <a
-              class="rc-calendar-month-panel-month">
+              class="rc-calendar-month-panel-month"
+            >
               Feb
             </a>
           </td>
           <td
             class="rc-calendar-month-panel-cell rc-calendar-month-panel-selected-cell rc-calendar-month-panel-current-cell"
             role="gridcell"
-            title="Mar">
+            title="Mar"
+          >
             <a
-              class="rc-calendar-month-panel-month">
+              class="rc-calendar-month-panel-month"
+            >
               Mar
             </a>
           </td>
         </tr>
         <tr
-          role="row">
+          role="row"
+        >
           <td
             class="rc-calendar-month-panel-cell"
             role="gridcell"
-            title="Apr">
+            title="Apr"
+          >
             <a
-              class="rc-calendar-month-panel-month">
+              class="rc-calendar-month-panel-month"
+            >
               Apr
             </a>
           </td>
           <td
             class="rc-calendar-month-panel-cell"
             role="gridcell"
-            title="May">
+            title="May"
+          >
             <a
-              class="rc-calendar-month-panel-month">
+              class="rc-calendar-month-panel-month"
+            >
               May
             </a>
           </td>
           <td
             class="rc-calendar-month-panel-cell"
             role="gridcell"
-            title="Jun">
+            title="Jun"
+          >
             <a
-              class="rc-calendar-month-panel-month">
+              class="rc-calendar-month-panel-month"
+            >
               Jun
             </a>
           </td>
         </tr>
         <tr
-          role="row">
+          role="row"
+        >
           <td
             class="rc-calendar-month-panel-cell"
             role="gridcell"
-            title="Jul">
+            title="Jul"
+          >
             <a
-              class="rc-calendar-month-panel-month">
+              class="rc-calendar-month-panel-month"
+            >
               Jul
             </a>
           </td>
           <td
             class="rc-calendar-month-panel-cell"
             role="gridcell"
-            title="Aug">
+            title="Aug"
+          >
             <a
-              class="rc-calendar-month-panel-month">
+              class="rc-calendar-month-panel-month"
+            >
               Aug
             </a>
           </td>
           <td
             class="rc-calendar-month-panel-cell"
             role="gridcell"
-            title="Sep">
+            title="Sep"
+          >
             <a
-              class="rc-calendar-month-panel-month">
+              class="rc-calendar-month-panel-month"
+            >
               Sep
             </a>
           </td>
         </tr>
         <tr
-          role="row">
+          role="row"
+        >
           <td
             class="rc-calendar-month-panel-cell"
             role="gridcell"
-            title="Oct">
+            title="Oct"
+          >
             <a
-              class="rc-calendar-month-panel-month">
+              class="rc-calendar-month-panel-month"
+            >
               Oct
             </a>
           </td>
           <td
             class="rc-calendar-month-panel-cell"
             role="gridcell"
-            title="Nov">
+            title="Nov"
+          >
             <a
-              class="rc-calendar-month-panel-month">
+              class="rc-calendar-month-panel-month"
+            >
               Nov
             </a>
           </td>
           <td
             class="rc-calendar-month-panel-cell"
             role="gridcell"
-            title="Dec">
+            title="Dec"
+          >
             <a
-              class="rc-calendar-month-panel-month">
+              class="rc-calendar-month-panel-month"
+            >
               Dec
             </a>
           </td>
