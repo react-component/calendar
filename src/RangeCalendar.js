@@ -382,6 +382,16 @@ const RangeCalendar = React.createClass({
     return this.props.disabledTime(time, 'end');
   },
 
+  disabledStartMonth(month) {
+    const { value } = this.state;
+    return month.isSameOrAfter(value[1], 'month');
+  },
+
+  disabledEndMonth(month) {
+    const { value } = this.state;
+    return month.isSameOrBefore(value[0], 'month');
+  },
+
   render() {
     const props = this.props;
     const state = this.state;
@@ -467,6 +477,7 @@ const RangeCalendar = React.createClass({
               hoverValue={hoverValue}
               direction="left"
               disabledTime={this.disabledStartTime}
+              disabledMonth={this.disabledStartMonth}
               format={this.getFormat()}
               value={startValue}
               placeholder={placeholder1}
@@ -494,6 +505,7 @@ const RangeCalendar = React.createClass({
               timePicker={timePicker}
               showTimePicker={showTimePicker}
               disabledTime={this.disabledEndTime}
+              disabledMonth={this.disabledEndMonth}
               enablePrev={!isClosestMonths || isStartMonthYearPanelShow}
               enableNext
             />

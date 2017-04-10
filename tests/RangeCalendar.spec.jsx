@@ -116,6 +116,28 @@ describe('RangeCalendar', () => {
     expect(wrapper.find('.rc-calendar-range-right .rc-calendar-next-month-btn').length).toBe(1);
   });
 
+  it('left panel cannot select month same or after right panel', () => {
+    const wrapper = mount(<RangeCalendar />);
+    wrapper.find('.rc-calendar-range-left .rc-calendar-month-select').simulate('click');
+    const monthCells = wrapper.find('.rc-calendar-range-left .rc-calendar-month-panel-cell');
+    const rightPanelMonth = wrapper.state('value')[1].month();
+    expect(monthCells.get(rightPanelMonth).className)
+      .toMatch('rc-calendar-month-panel-cell-disabled');
+    expect(monthCells.get(rightPanelMonth + 1).className)
+      .toMatch('rc-calendar-month-panel-cell-disabled');
+  });
+
+  it('right panel cannot select month same or before left panel', () => {
+    const wrapper = mount(<RangeCalendar />);
+    wrapper.find('.rc-calendar-range-right .rc-calendar-month-select').simulate('click');
+    const monthCells = wrapper.find('.rc-calendar-range-right .rc-calendar-month-panel-cell');
+    const leftPanelMonth = wrapper.state('value')[0].month();
+    expect(monthCells.get(leftPanelMonth).className)
+      .toMatch('rc-calendar-month-panel-cell-disabled');
+    expect(monthCells.get(leftPanelMonth - 1).className)
+      .toMatch('rc-calendar-month-panel-cell-disabled');
+  });
+
   it('render works', () => {
     expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
       'rc-calendar-cell').length).toBeGreaterThan(0);

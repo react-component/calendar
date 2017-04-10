@@ -80,6 +80,7 @@ const CalendarPart = React.createClass({
             enablePrev={enablePrev}
             onValueChange={props.onValueChange}
             onPanelChange={props.onPanelChange}
+            disabledMonth={props.disabledMonth}
           />
           {showTimePicker ? <div className={`${prefixCls}-time-picker`}>
             <div className={`${prefixCls}-time-picker-panel`}>

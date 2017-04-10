@@ -31,6 +31,7 @@ const CalendarHeader = React.createClass({
     locale: PropTypes.object,
     enablePrev: PropTypes.any,
     enableNext: PropTypes.any,
+    disabledMonth: PropTypes.func,
   },
 
   getDefaultProps() {
@@ -138,24 +139,39 @@ const CalendarHeader = React.createClass({
   },
 
   render() {
-    const props = this.props;
-    const { enableNext, enablePrev, prefixCls, locale, value, showTimePicker } = props;
-    const state = this.state;
-    let PanelClass = null;
+    const { props, state } = this;
+    const {
+      prefixCls,
+      locale,
+      value,
+      showTimePicker,
+      enableNext,
+      enablePrev,
+      disabledMonth,
+    } = props;
+
+    let panel = null;
     if (state.showMonthPanel) {
-      PanelClass = MonthPanel;
+      panel = (
+        <MonthPanel
+          locale={locale}
+          defaultValue={value}
+          rootPrefixCls={prefixCls}
+          onSelect={this.onSelect}
+          disabledDate={disabledMonth}
+        />
+      );
     } else if (state.showYearPanel) {
-      PanelClass = YearPanel;
+      panel = (
+        <YearPanel
+          locale={locale}
+          defaultValue={value}
+          rootPrefixCls={prefixCls}
+          onSelect={this.onSelect}
+        />
+      );
     }
-    let panel;
-    if (PanelClass) {
-      panel = (<PanelClass
-        locale={locale}
-        defaultValue={value}
-        rootPrefixCls={prefixCls}
-        onSelect={this.onSelect}
-      />);
-    }
+
     return (<div className={`${prefixCls}-header`}>
       <div style={{ position: 'relative' }}>
         {showIf(enablePrev && !showTimePicker,
