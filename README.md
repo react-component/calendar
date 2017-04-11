@@ -37,7 +37,7 @@ React Calendar
 * support ie9,ie9+,chrome,firefox,safari
 * support date, month, year, decade select panel
 * support week number
-* support en_US and zh_CN locale(UI), use moment.ufcOffset to set timezone
+* support en_US and zh_CN locale(UI), use moment.utcOffset to set timezone
 * support aria and keyboard accessibility
 
 ### Keyboard
