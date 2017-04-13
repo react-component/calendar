@@ -1,4 +1,6 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import createReactClass from 'create-react-class';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import classnames from 'classnames';
 import CalendarPart from './range-calendar/CalendarPart';
@@ -55,7 +57,7 @@ function onInputSelect(direction, value) {
   this.fireSelectValueChange(selectedValue);
 }
 
-const RangeCalendar = React.createClass({
+const RangeCalendar = createReactClass({
   propTypes: {
     prefixCls: PropTypes.string,
     dateInputPlaceholder: PropTypes.any,

@@ -1,11 +1,13 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import createReactClass from 'create-react-class';
+import PropTypes from 'prop-types';
 import DateTable from './date/DateTable';
 import MonthTable from './month/MonthTable';
 import CalendarMixin from './mixin/CalendarMixin';
 import CommonMixin from './mixin/CommonMixin';
 import CalendarHeader from './full-calendar/CalendarHeader';
 
-const FullCalendar = React.createClass({
+const FullCalendar = createReactClass({
   propTypes: {
     defaultType: PropTypes.string,
     type: PropTypes.string,

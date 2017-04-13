@@ -52,7 +52,9 @@
     "collectCoverageFrom": [
       "src/*"
     ],
-    "setupFiles": ["./tests/setup.js"]
+    "setupFiles": [
+      "./tests/setup.js"
+    ]
   },
   "devDependencies": {
     "async": "~0.9.0",
@@ -72,7 +74,8 @@
     "rc-tools": "5.x",
     "react": "15.x",
     "react-addons-test-utils": "15.x",
-    "react-dom": "15.x"
+    "react-dom": "15.x",
+    "react-test-renderer": "^15.5.4"
   },
   "pre-commit": [
     "lint"
@@ -80,7 +83,9 @@
   "dependencies": {
     "babel-runtime": "6.x",
     "classnames": "2.x",
+    "create-react-class": "^15.5.2",
     "moment": "2.x",
+    "prop-types": "^15.5.8",
     "rc-trigger": "1.x",
     "rc-util": "3.x"
   }

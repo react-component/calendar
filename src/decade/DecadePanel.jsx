@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 const ROW = 4;
 const COL = 3;
 import classnames from 'classnames';

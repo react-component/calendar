@@ -1,10 +1,12 @@
-import React, { PropTypes }from 'react';
+import React from 'react';
+import createReactClass from 'create-react-class';
+import PropTypes from 'prop-types';
 import MonthPanel from './month/MonthPanel';
 import CalendarMixin from './mixin/CalendarMixin';
 import CommonMixin from './mixin/CommonMixin';
 import KeyCode from 'rc-util/lib/KeyCode';
 
-const MonthCalendar = React.createClass({
+const MonthCalendar = createReactClass({
   propTypes: {
     monthCellRender: PropTypes.func,
     dateCellRender: PropTypes.func,

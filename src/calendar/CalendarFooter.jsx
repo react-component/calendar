@@ -1,12 +1,14 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
+import createReactClass from 'create-react-class';
+import PropTypes from 'prop-types';
 import toFragment from 'rc-util/lib/Children/mapSelf';
 import cx from 'classnames';
 import TodayButton from '../calendar/TodayButton';
 import OkButton from '../calendar/OkButton';
 import TimePickerButton from '../calendar/TimePickerButton';
 
-const CalendarFooter = React.createClass({
+const CalendarFooter = createReactClass({
   propTypes: {
     prefixCls: PropTypes.string,
     showDateInput: PropTypes.bool,
