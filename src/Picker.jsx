@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import createChainedFunction from 'rc-util/lib/createChainedFunction';
 import KeyCode from 'rc-util/lib/KeyCode';
@@ -13,7 +14,7 @@ function refFn(field, component) {
   this[field] = component;
 }
 
-const Picker = React.createClass({
+const Picker = createReactClass({
   propTypes: {
     animation: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     disabled: PropTypes.bool,

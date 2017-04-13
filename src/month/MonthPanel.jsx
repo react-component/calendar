@@ -1,4 +1,5 @@
 import React from 'react';
+import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import YearPanel from '../year/YearPanel';
 import MonthTable from './MonthTable';
@@ -13,7 +14,7 @@ function noop() {
 
 }
 
-const MonthPanel = React.createClass({
+const MonthPanel = createReactClass({
   propTypes: {
     onChange: PropTypes.func,
     disabledDate: PropTypes.func,

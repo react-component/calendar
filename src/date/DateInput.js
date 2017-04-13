@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
-const DateInput = React.createClass({
+const DateInput = createReactClass({
   propTypes: {
     prefixCls: PropTypes.string,
     timePicker: PropTypes.object,

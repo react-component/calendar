@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import KeyCode from 'rc-util/lib/KeyCode';
 import DateTable from './date/DateTable';
@@ -47,7 +48,7 @@ function goDay(direction) {
   return goTime.call(this, direction, 'days');
 }
 
-const Calendar = React.createClass({
+const Calendar = createReactClass({
   propTypes: {
     disabledDate: PropTypes.func,
     disabledTime: PropTypes.any,

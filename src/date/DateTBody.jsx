@@ -1,4 +1,5 @@
 import React from 'react';
+import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import DateConstants from './DateConstants';
@@ -28,7 +29,7 @@ function getIdFromDate(date) {
   return `rc-calendar-${date.year()}-${date.month()}-${date.date()}`;
 }
 
-const DateTBody = React.createClass({
+const DateTBody = createReactClass({
   propTypes: {
     contentRender: PropTypes.func,
     dateRender: PropTypes.func,

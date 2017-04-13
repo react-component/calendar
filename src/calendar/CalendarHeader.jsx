@@ -1,4 +1,5 @@
 import React from 'react';
+import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import MonthPanel from '../month/MonthPanel';
 import YearPanel from '../year/YearPanel';
@@ -20,7 +21,7 @@ function showIf(condition, el) {
   return condition ? el : null;
 }
 
-const CalendarHeader = React.createClass({
+const CalendarHeader = createReactClass({
   propTypes: {
     prefixCls: PropTypes.string,
     value: PropTypes.object,
