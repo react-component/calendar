@@ -1,5 +1,6 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import createChainedFunction from 'rc-util/lib/createChainedFunction';
 import KeyCode from 'rc-util/lib/KeyCode';
 import placements from './picker/placements';

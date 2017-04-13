@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import DateTable from './date/DateTable';
 import MonthTable from './month/MonthTable';
 import CalendarMixin from './mixin/CalendarMixin';

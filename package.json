@@ -81,6 +81,7 @@
     "babel-runtime": "6.x",
     "classnames": "2.x",
     "moment": "2.x",
+    "prop-types": "^15.5.8",
     "rc-trigger": "1.x",
     "rc-util": "3.x"
   }

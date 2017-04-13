@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import MonthPanel from '../month/MonthPanel';
 import YearPanel from '../year/YearPanel';
 import toFragment from 'rc-util/lib/Children/mapSelf';

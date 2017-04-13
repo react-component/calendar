@@ -1,5 +1,6 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import KeyCode from 'rc-util/lib/KeyCode';
 import DateTable from './date/DateTable';
 import CalendarHeader from './calendar/CalendarHeader';

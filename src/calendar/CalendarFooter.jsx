@@ -1,5 +1,6 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import toFragment from 'rc-util/lib/Children/mapSelf';
 import cx from 'classnames';
 import TodayButton from '../calendar/TodayButton';
