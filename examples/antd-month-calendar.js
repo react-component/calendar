@@ -1,15 +1,541 @@
 webpackJsonp([1],{
 
 /***/ 0:
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(340);
+	module.exports = __webpack_require__(345);
 
 
-/***/ },
+/***/ }),
 
-/***/ 282:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 229:
+/***/ (function(module, exports) {
+
+	'use strict';
+	
+	/**
+	 * @ignore
+	 * some key-codes definition and utils from closure-library
+	 * @author yiminghe@gmail.com
+	 */
+	
+	var KeyCode = {
+	  /**
+	   * MAC_ENTER
+	   */
+	  MAC_ENTER: 3,
+	  /**
+	   * BACKSPACE
+	   */
+	  BACKSPACE: 8,
+	  /**
+	   * TAB
+	   */
+	  TAB: 9,
+	  /**
+	   * NUMLOCK on FF/Safari Mac
+	   */
+	  NUM_CENTER: 12, // NUMLOCK on FF/Safari Mac
+	  /**
+	   * ENTER
+	   */
+	  ENTER: 13,
+	  /**
+	   * SHIFT
+	   */
+	  SHIFT: 16,
+	  /**
+	   * CTRL
+	   */
+	  CTRL: 17,
+	  /**
+	   * ALT
+	   */
+	  ALT: 18,
+	  /**
+	   * PAUSE
+	   */
+	  PAUSE: 19,
+	  /**
+	   * CAPS_LOCK
+	   */
+	  CAPS_LOCK: 20,
+	  /**
+	   * ESC
+	   */
+	  ESC: 27,
+	  /**
+	   * SPACE
+	   */
+	  SPACE: 32,
+	  /**
+	   * PAGE_UP
+	   */
+	  PAGE_UP: 33, // also NUM_NORTH_EAST
+	  /**
+	   * PAGE_DOWN
+	   */
+	  PAGE_DOWN: 34, // also NUM_SOUTH_EAST
+	  /**
+	   * END
+	   */
+	  END: 35, // also NUM_SOUTH_WEST
+	  /**
+	   * HOME
+	   */
+	  HOME: 36, // also NUM_NORTH_WEST
+	  /**
+	   * LEFT
+	   */
+	  LEFT: 37, // also NUM_WEST
+	  /**
+	   * UP
+	   */
+	  UP: 38, // also NUM_NORTH
+	  /**
+	   * RIGHT
+	   */
+	  RIGHT: 39, // also NUM_EAST
+	  /**
+	   * DOWN
+	   */
+	  DOWN: 40, // also NUM_SOUTH
+	  /**
+	   * PRINT_SCREEN
+	   */
+	  PRINT_SCREEN: 44,
+	  /**
+	   * INSERT
+	   */
+	  INSERT: 45, // also NUM_INSERT
+	  /**
+	   * DELETE
+	   */
+	  DELETE: 46, // also NUM_DELETE
+	  /**
+	   * ZERO
+	   */
+	  ZERO: 48,
+	  /**
+	   * ONE
+	   */
+	  ONE: 49,
+	  /**
+	   * TWO
+	   */
+	  TWO: 50,
+	  /**
+	   * THREE
+	   */
+	  THREE: 51,
+	  /**
+	   * FOUR
+	   */
+	  FOUR: 52,
+	  /**
+	   * FIVE
+	   */
+	  FIVE: 53,
+	  /**
+	   * SIX
+	   */
+	  SIX: 54,
+	  /**
+	   * SEVEN
+	   */
+	  SEVEN: 55,
+	  /**
+	   * EIGHT
+	   */
+	  EIGHT: 56,
+	  /**
+	   * NINE
+	   */
+	  NINE: 57,
+	  /**
+	   * QUESTION_MARK
+	   */
+	  QUESTION_MARK: 63, // needs localization
+	  /**
+	   * A
+	   */
+	  A: 65,
+	  /**
+	   * B
+	   */
+	  B: 66,
+	  /**
+	   * C
+	   */
+	  C: 67,
+	  /**
+	   * D
+	   */
+	  D: 68,
+	  /**
+	   * E
+	   */
+	  E: 69,
+	  /**
+	   * F
+	   */
+	  F: 70,
+	  /**
+	   * G
+	   */
+	  G: 71,
+	  /**
+	   * H
+	   */
+	  H: 72,
+	  /**
+	   * I
+	   */
+	  I: 73,
+	  /**
+	   * J
+	   */
+	  J: 74,
+	  /**
+	   * K
+	   */
+	  K: 75,
+	  /**
+	   * L
+	   */
+	  L: 76,
+	  /**
+	   * M
+	   */
+	  M: 77,
+	  /**
+	   * N
+	   */
+	  N: 78,
+	  /**
+	   * O
+	   */
+	  O: 79,
+	  /**
+	   * P
+	   */
+	  P: 80,
+	  /**
+	   * Q
+	   */
+	  Q: 81,
+	  /**
+	   * R
+	   */
+	  R: 82,
+	  /**
+	   * S
+	   */
+	  S: 83,
+	  /**
+	   * T
+	   */
+	  T: 84,
+	  /**
+	   * U
+	   */
+	  U: 85,
+	  /**
+	   * V
+	   */
+	  V: 86,
+	  /**
+	   * W
+	   */
+	  W: 87,
+	  /**
+	   * X
+	   */
+	  X: 88,
+	  /**
+	   * Y
+	   */
+	  Y: 89,
+	  /**
+	   * Z
+	   */
+	  Z: 90,
+	  /**
+	   * META
+	   */
+	  META: 91, // WIN_KEY_LEFT
+	  /**
+	   * WIN_KEY_RIGHT
+	   */
+	  WIN_KEY_RIGHT: 92,
+	  /**
+	   * CONTEXT_MENU
+	   */
+	  CONTEXT_MENU: 93,
+	  /**
+	   * NUM_ZERO
+	   */
+	  NUM_ZERO: 96,
+	  /**
+	   * NUM_ONE
+	   */
+	  NUM_ONE: 97,
+	  /**
+	   * NUM_TWO
+	   */
+	  NUM_TWO: 98,
+	  /**
+	   * NUM_THREE
+	   */
+	  NUM_THREE: 99,
+	  /**
+	   * NUM_FOUR
+	   */
+	  NUM_FOUR: 100,
+	  /**
+	   * NUM_FIVE
+	   */
+	  NUM_FIVE: 101,
+	  /**
+	   * NUM_SIX
+	   */
+	  NUM_SIX: 102,
+	  /**
+	   * NUM_SEVEN
+	   */
+	  NUM_SEVEN: 103,
+	  /**
+	   * NUM_EIGHT
+	   */
+	  NUM_EIGHT: 104,
+	  /**
+	   * NUM_NINE
+	   */
+	  NUM_NINE: 105,
+	  /**
+	   * NUM_MULTIPLY
+	   */
+	  NUM_MULTIPLY: 106,
+	  /**
+	   * NUM_PLUS
+	   */
+	  NUM_PLUS: 107,
+	  /**
+	   * NUM_MINUS
+	   */
+	  NUM_MINUS: 109,
+	  /**
+	   * NUM_PERIOD
+	   */
+	  NUM_PERIOD: 110,
+	  /**
+	   * NUM_DIVISION
+	   */
+	  NUM_DIVISION: 111,
+	  /**
+	   * F1
+	   */
+	  F1: 112,
+	  /**
+	   * F2
+	   */
+	  F2: 113,
+	  /**
+	   * F3
+	   */
+	  F3: 114,
+	  /**
+	   * F4
+	   */
+	  F4: 115,
+	  /**
+	   * F5
+	   */
+	  F5: 116,
+	  /**
+	   * F6
+	   */
+	  F6: 117,
+	  /**
+	   * F7
+	   */
+	  F7: 118,
+	  /**
+	   * F8
+	   */
+	  F8: 119,
+	  /**
+	   * F9
+	   */
+	  F9: 120,
+	  /**
+	   * F10
+	   */
+	  F10: 121,
+	  /**
+	   * F11
+	   */
+	  F11: 122,
+	  /**
+	   * F12
+	   */
+	  F12: 123,
+	  /**
+	   * NUMLOCK
+	   */
+	  NUMLOCK: 144,
+	  /**
+	   * SEMICOLON
+	   */
+	  SEMICOLON: 186, // needs localization
+	  /**
+	   * DASH
+	   */
+	  DASH: 189, // needs localization
+	  /**
+	   * EQUALS
+	   */
+	  EQUALS: 187, // needs localization
+	  /**
+	   * COMMA
+	   */
+	  COMMA: 188, // needs localization
+	  /**
+	   * PERIOD
+	   */
+	  PERIOD: 190, // needs localization
+	  /**
+	   * SLASH
+	   */
+	  SLASH: 191, // needs localization
+	  /**
+	   * APOSTROPHE
+	   */
+	  APOSTROPHE: 192, // needs localization
+	  /**
+	   * SINGLE_QUOTE
+	   */
+	  SINGLE_QUOTE: 222, // needs localization
+	  /**
+	   * OPEN_SQUARE_BRACKET
+	   */
+	  OPEN_SQUARE_BRACKET: 219, // needs localization
+	  /**
+	   * BACKSLASH
+	   */
+	  BACKSLASH: 220, // needs localization
+	  /**
+	   * CLOSE_SQUARE_BRACKET
+	   */
+	  CLOSE_SQUARE_BRACKET: 221, // needs localization
+	  /**
+	   * WIN_KEY
+	   */
+	  WIN_KEY: 224,
+	  /**
+	   * MAC_FF_META
+	   */
+	  MAC_FF_META: 224, // Firefox (Gecko) fires this for the meta key instead of 91
+	  /**
+	   * WIN_IME
+	   */
+	  WIN_IME: 229
+	};
+	
+	/*
+	 whether text and modified key is entered at the same time.
+	 */
+	KeyCode.isTextModifyingKeyEvent = function isTextModifyingKeyEvent(e) {
+	  var keyCode = e.keyCode;
+	  if (e.altKey && !e.ctrlKey || e.metaKey ||
+	  // Function keys don't generate text
+	  keyCode >= KeyCode.F1 && keyCode <= KeyCode.F12) {
+	    return false;
+	  }
+	
+	  // The following keys are quite harmless, even in combination with
+	  // CTRL, ALT or SHIFT.
+	  switch (keyCode) {
+	    case KeyCode.ALT:
+	    case KeyCode.CAPS_LOCK:
+	    case KeyCode.CONTEXT_MENU:
+	    case KeyCode.CTRL:
+	    case KeyCode.DOWN:
+	    case KeyCode.END:
+	    case KeyCode.ESC:
+	    case KeyCode.HOME:
+	    case KeyCode.INSERT:
+	    case KeyCode.LEFT:
+	    case KeyCode.MAC_FF_META:
+	    case KeyCode.META:
+	    case KeyCode.NUMLOCK:
+	    case KeyCode.NUM_CENTER:
+	    case KeyCode.PAGE_DOWN:
+	    case KeyCode.PAGE_UP:
+	    case KeyCode.PAUSE:
+	    case KeyCode.PRINT_SCREEN:
+	    case KeyCode.RIGHT:
+	    case KeyCode.SHIFT:
+	    case KeyCode.UP:
+	    case KeyCode.WIN_KEY:
+	    case KeyCode.WIN_KEY_RIGHT:
+	      return false;
+	    default:
+	      return true;
+	  }
+	};
+	
+	/*
+	 whether character is entered.
+	 */
+	KeyCode.isCharacterKey = function isCharacterKey(keyCode) {
+	  if (keyCode >= KeyCode.ZERO && keyCode <= KeyCode.NINE) {
+	    return true;
+	  }
+	
+	  if (keyCode >= KeyCode.NUM_ZERO && keyCode <= KeyCode.NUM_MULTIPLY) {
+	    return true;
+	  }
+	
+	  if (keyCode >= KeyCode.A && keyCode <= KeyCode.Z) {
+	    return true;
+	  }
+	
+	  // Safari sends zero key code for non-latin characters.
+	  if (window.navigation.userAgent.indexOf('WebKit') !== -1 && keyCode === 0) {
+	    return true;
+	  }
+	
+	  switch (keyCode) {
+	    case KeyCode.SPACE:
+	    case KeyCode.QUESTION_MARK:
+	    case KeyCode.NUM_PLUS:
+	    case KeyCode.NUM_MINUS:
+	    case KeyCode.NUM_PERIOD:
+	    case KeyCode.NUM_DIVISION:
+	    case KeyCode.SEMICOLON:
+	    case KeyCode.DASH:
+	    case KeyCode.EQUALS:
+	    case KeyCode.COMMA:
+	    case KeyCode.PERIOD:
+	    case KeyCode.SLASH:
+	    case KeyCode.APOSTROPHE:
+	    case KeyCode.SINGLE_QUOTE:
+	    case KeyCode.OPEN_SQUARE_BRACKET:
+	    case KeyCode.BACKSLASH:
+	    case KeyCode.CLOSE_SQUARE_BRACKET:
+	      return true;
+	    default:
+	      return false;
+	  }
+	};
+	
+	module.exports = KeyCode;
+
+/***/ }),
+
+/***/ 287:
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -21,11 +547,19 @@ webpackJsonp([1],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _YearPanel = __webpack_require__(283);
+	var _createReactClass = __webpack_require__(225);
+	
+	var _createReactClass2 = _interopRequireDefault(_createReactClass);
+	
+	var _propTypes = __webpack_require__(227);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _YearPanel = __webpack_require__(288);
 	
 	var _YearPanel2 = _interopRequireDefault(_YearPanel);
 	
-	var _MonthTable = __webpack_require__(285);
+	var _MonthTable = __webpack_require__(290);
 	
 	var _MonthTable2 = _interopRequireDefault(_MonthTable);
 	
@@ -39,13 +573,11 @@ webpackJsonp([1],{
 	
 	function noop() {}
 	
-	var MonthPanel = _react2.default.createClass({
-	  displayName: 'MonthPanel',
-	
+	var MonthPanel = (0, _createReactClass2.default)({
 	  propTypes: {
-	    onChange: _react.PropTypes.func,
-	    disabledDate: _react.PropTypes.func,
-	    onSelect: _react.PropTypes.func
+	    onChange: _propTypes2.default.func,
+	    disabledDate: _propTypes2.default.func,
+	    onSelect: _propTypes2.default.func
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
@@ -177,10 +709,10 @@ webpackJsonp([1],{
 	exports.default = MonthPanel;
 	module.exports = exports['default'];
 
-/***/ },
+/***/ }),
 
-/***/ 283:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 288:
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -188,19 +720,19 @@ webpackJsonp([1],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(275);
+	var _defineProperty2 = __webpack_require__(280);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
-	var _classCallCheck2 = __webpack_require__(226);
+	var _classCallCheck2 = __webpack_require__(231);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(227);
+	var _possibleConstructorReturn2 = __webpack_require__(232);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(263);
+	var _inherits2 = __webpack_require__(268);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -208,11 +740,15 @@ webpackJsonp([1],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(279);
+	var _propTypes = __webpack_require__(227);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _classnames = __webpack_require__(284);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _DecadePanel = __webpack_require__(284);
+	var _DecadePanel = __webpack_require__(289);
 	
 	var _DecadePanel2 = _interopRequireDefault(_DecadePanel);
 	
@@ -420,9 +956,9 @@ webpackJsonp([1],{
 	
 	
 	YearPanel.propTypes = {
-	  rootPrefixCls: _react.PropTypes.string,
-	  value: _react.PropTypes.object,
-	  defaultValue: _react.PropTypes.object
+	  rootPrefixCls: _propTypes2.default.string,
+	  value: _propTypes2.default.object,
+	  defaultValue: _propTypes2.default.object
 	};
 	
 	YearPanel.defaultProps = {
@@ -430,10 +966,10 @@ webpackJsonp([1],{
 	};
 	module.exports = exports['default'];
 
-/***/ },
+/***/ }),
 
-/***/ 284:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 289:
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -441,19 +977,19 @@ webpackJsonp([1],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(275);
+	var _defineProperty2 = __webpack_require__(280);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
-	var _classCallCheck2 = __webpack_require__(226);
+	var _classCallCheck2 = __webpack_require__(231);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(227);
+	var _possibleConstructorReturn2 = __webpack_require__(232);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(263);
+	var _inherits2 = __webpack_require__(268);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -461,7 +997,11 @@ webpackJsonp([1],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(279);
+	var _propTypes = __webpack_require__(227);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _classnames = __webpack_require__(284);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -623,10 +1163,10 @@ webpackJsonp([1],{
 	
 	
 	DecadePanel.propTypes = {
-	  locale: _react.PropTypes.object,
-	  value: _react.PropTypes.object,
-	  defaultValue: _react.PropTypes.object,
-	  rootPrefixCls: _react.PropTypes.string
+	  locale: _propTypes2.default.object,
+	  value: _propTypes2.default.object,
+	  defaultValue: _propTypes2.default.object,
+	  rootPrefixCls: _propTypes2.default.string
 	};
 	
 	DecadePanel.defaultProps = {
@@ -634,10 +1174,10 @@ webpackJsonp([1],{
 	};
 	module.exports = exports['default'];
 
-/***/ },
+/***/ }),
 
-/***/ 291:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 296:
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -645,7 +1185,7 @@ webpackJsonp([1],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(275);
+	var _defineProperty2 = __webpack_require__(280);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
@@ -653,15 +1193,19 @@ webpackJsonp([1],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(279);
+	var _propTypes = __webpack_require__(227);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _classnames = __webpack_require__(284);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _moment = __webpack_require__(273);
+	var _moment = __webpack_require__(278);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _index = __webpack_require__(280);
+	var _index = __webpack_require__(285);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -683,9 +1227,9 @@ webpackJsonp([1],{
 	
 	var CalendarMixin = {
 	  propTypes: {
-	    value: _react.PropTypes.object,
-	    defaultValue: _react.PropTypes.object,
-	    onKeyDown: _react.PropTypes.func
+	    value: _propTypes2.default.object,
+	    defaultValue: _propTypes2.default.object,
+	    onKeyDown: _propTypes2.default.func
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
@@ -774,10 +1318,10 @@ webpackJsonp([1],{
 	exports.default = CalendarMixin;
 	module.exports = exports['default'];
 
-/***/ },
+/***/ }),
 
-/***/ 295:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 300:
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -789,23 +1333,31 @@ webpackJsonp([1],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(37);
+	var _reactDom = __webpack_require__(38);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _createChainedFunction = __webpack_require__(296);
+	var _createReactClass = __webpack_require__(225);
+	
+	var _createReactClass2 = _interopRequireDefault(_createReactClass);
+	
+	var _propTypes = __webpack_require__(227);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _createChainedFunction = __webpack_require__(301);
 	
 	var _createChainedFunction2 = _interopRequireDefault(_createChainedFunction);
 	
-	var _KeyCode = __webpack_require__(224);
+	var _KeyCode = __webpack_require__(229);
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _placements = __webpack_require__(297);
+	var _placements = __webpack_require__(302);
 	
 	var _placements2 = _interopRequireDefault(_placements);
 	
-	var _rcTrigger = __webpack_require__(298);
+	var _rcTrigger = __webpack_require__(303);
 	
 	var _rcTrigger2 = _interopRequireDefault(_rcTrigger);
 	
@@ -817,26 +1369,24 @@ webpackJsonp([1],{
 	  this[field] = component;
 	}
 	
-	var Picker = _react2.default.createClass({
-	  displayName: 'Picker',
-	
+	var Picker = (0, _createReactClass2.default)({
 	  propTypes: {
-	    animation: _react.PropTypes.oneOfType([_react.PropTypes.func, _react.PropTypes.string]),
-	    disabled: _react.PropTypes.bool,
-	    transitionName: _react.PropTypes.string,
-	    onChange: _react.PropTypes.func,
-	    onOpenChange: _react.PropTypes.func,
-	    children: _react.PropTypes.func,
-	    getCalendarContainer: _react.PropTypes.func,
-	    calendar: _react.PropTypes.element,
-	    style: _react.PropTypes.object,
-	    open: _react.PropTypes.bool,
-	    defaultOpen: _react.PropTypes.bool,
-	    prefixCls: _react.PropTypes.string,
-	    placement: _react.PropTypes.any,
-	    value: _react.PropTypes.oneOfType([_react.PropTypes.object, _react.PropTypes.array]),
-	    defaultValue: _react.PropTypes.oneOfType([_react.PropTypes.object, _react.PropTypes.array]),
-	    align: _react.PropTypes.object
+	    animation: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.string]),
+	    disabled: _propTypes2.default.bool,
+	    transitionName: _propTypes2.default.string,
+	    onChange: _propTypes2.default.func,
+	    onOpenChange: _propTypes2.default.func,
+	    children: _propTypes2.default.func,
+	    getCalendarContainer: _propTypes2.default.func,
+	    calendar: _propTypes2.default.element,
+	    style: _propTypes2.default.object,
+	    open: _propTypes2.default.bool,
+	    defaultOpen: _propTypes2.default.bool,
+	    prefixCls: _propTypes2.default.string,
+	    placement: _propTypes2.default.any,
+	    value: _propTypes2.default.oneOfType([_propTypes2.default.object, _propTypes2.default.array]),
+	    defaultValue: _propTypes2.default.oneOfType([_propTypes2.default.object, _propTypes2.default.array]),
+	    align: _propTypes2.default.object
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
@@ -1005,10 +1555,38 @@ webpackJsonp([1],{
 	exports.default = Picker;
 	module.exports = exports['default'];
 
-/***/ },
+/***/ }),
 
-/***/ 297:
-/***/ function(module, exports) {
+/***/ 301:
+/***/ (function(module, exports) {
+
+	"use strict";
+	
+	/**
+	 * Safe chained function
+	 *
+	 * Will only create a new function if needed,
+	 * otherwise will pass back existing functions or null.
+	 *
+	 * @returns {function|null}
+	 */
+	function createChainedFunction() {
+	  var args = arguments;
+	  return function chainedFunction() {
+	    for (var i = 0; i < args.length; i++) {
+	      if (args[i] && args[i].apply) {
+	        args[i].apply(this, arguments);
+	      }
+	    }
+	  };
+	}
+	
+	module.exports = createChainedFunction;
+
+/***/ }),
+
+/***/ 302:
+/***/ (function(module, exports) {
 
 	'use strict';
 	
@@ -1052,10 +1630,10 @@ webpackJsonp([1],{
 	exports.default = placements;
 	module.exports = exports['default'];
 
-/***/ },
+/***/ }),
 
-/***/ 340:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 345:
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -1065,33 +1643,33 @@ webpackJsonp([1],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(37);
+	var _reactDom = __webpack_require__(38);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _MonthCalendar = __webpack_require__(341);
+	var _MonthCalendar = __webpack_require__(346);
 	
 	var _MonthCalendar2 = _interopRequireDefault(_MonthCalendar);
 	
-	var _Picker = __webpack_require__(295);
+	var _Picker = __webpack_require__(300);
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _zh_CN = __webpack_require__(332);
+	var _zh_CN = __webpack_require__(337);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
-	var _en_US = __webpack_require__(293);
+	var _en_US = __webpack_require__(298);
 	
 	var _en_US2 = _interopRequireDefault(_en_US);
 	
-	var _moment = __webpack_require__(273);
+	var _moment = __webpack_require__(278);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	__webpack_require__(338);
+	__webpack_require__(343);
 	
-	__webpack_require__(339);
+	__webpack_require__(344);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -1242,10 +1820,10 @@ webpackJsonp([1],{
 	  )
 	), document.getElementById('__react-content'));
 
-/***/ },
+/***/ }),
 
-/***/ 341:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 346:
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -1257,30 +1835,36 @@ webpackJsonp([1],{
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _MonthPanel = __webpack_require__(282);
+	var _createReactClass = __webpack_require__(225);
+	
+	var _createReactClass2 = _interopRequireDefault(_createReactClass);
+	
+	var _propTypes = __webpack_require__(227);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _MonthPanel = __webpack_require__(287);
 	
 	var _MonthPanel2 = _interopRequireDefault(_MonthPanel);
 	
-	var _CalendarMixin = __webpack_require__(291);
+	var _CalendarMixin = __webpack_require__(296);
 	
 	var _CalendarMixin2 = _interopRequireDefault(_CalendarMixin);
 	
-	var _CommonMixin = __webpack_require__(292);
+	var _CommonMixin = __webpack_require__(297);
 	
 	var _CommonMixin2 = _interopRequireDefault(_CommonMixin);
 	
-	var _KeyCode = __webpack_require__(224);
+	var _KeyCode = __webpack_require__(229);
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var MonthCalendar = _react2.default.createClass({
-	  displayName: 'MonthCalendar',
-	
+	var MonthCalendar = (0, _createReactClass2.default)({
 	  propTypes: {
-	    monthCellRender: _react.PropTypes.func,
-	    dateCellRender: _react.PropTypes.func
+	    monthCellRender: _propTypes2.default.func,
+	    dateCellRender: _propTypes2.default.func
 	  },
 	  mixins: [_CommonMixin2.default, _CalendarMixin2.default],
 	
@@ -1349,7 +1933,7 @@ webpackJsonp([1],{
 	exports.default = MonthCalendar;
 	module.exports = exports['default'];
 
-/***/ }
+/***/ })
 
 });
 //# sourceMappingURL=antd-month-calendar.js.map
