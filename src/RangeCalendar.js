@@ -274,13 +274,13 @@ const RangeCalendar = createReactClass({
   },
 
   getEndValue() {
-    const endValue = this.state.value[1].clone();
-    const selectedValue = this.state.selectedValue;
+    const { value, selectedValue, showTimePicker } = this.state;
+    const endValue = value[1] ? value[1].clone() : value[0].clone().add(1, 'month');
     // keep selectedTime when select date
     if (selectedValue[1] && this.props.timePicker) {
       syncTime(selectedValue[1], endValue);
     }
-    if (this.state.showTimePicker) {
+    if (showTimePicker) {
       return selectedValue[1] ? selectedValue[1] : this.getStartValue();
     }
     return endValue;
