@@ -50,7 +50,7 @@ const CalendarFooter = createReactClass({
       }
 
       let footerBtn;
-      if (nowEl || okBtn) {
+      if (nowEl || timePickerBtn || okBtn) {
         footerBtn = (<span className={`${prefixCls}-footer-btn`}>
           {toFragment([nowEl, timePickerBtn, okBtn])}
         </span>);
