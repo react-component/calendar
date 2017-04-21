@@ -32,7 +32,7 @@ function getFormat(time) {
 const defaultCalendarValue = now.clone();
 defaultCalendarValue.add(-1, 'month');
 
-const timePickerElement = <TimePickerPanel />;
+const timePickerElement = <TimePickerPanel defaultValue={moment('00:00:00', 'HH:mm:ss')} />;
 
 function disabledTime(date) {
   console.log('disabledTime', date);
