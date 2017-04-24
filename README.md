@@ -524,6 +524,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>current open state of picker. controlled prop</td>
         </tr>
         <tr>
+          <td>focusCalendarOnOpen</td>
+          <td>Boolean</td>
+          <td>true</td>
+          <td>set focus on calendar element when its opened</td>
+        </tr>
+        <tr>
           <td>getCalendarContainer</td>
           <td>() => HTMLElement</td>
           <td>() => {return document.body;}</td>

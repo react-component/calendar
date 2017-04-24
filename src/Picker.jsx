@@ -26,6 +26,7 @@ const Picker = createReactClass({
     calendar: PropTypes.element,
     style: PropTypes.object,
     open: PropTypes.bool,
+    focusCalendarOnOpen: PropTypes.bool,
     defaultOpen: PropTypes.bool,
     prefixCls: PropTypes.string,
     placement: PropTypes.any,
@@ -49,6 +50,7 @@ const Picker = createReactClass({
       defaultOpen: false,
       onChange: noop,
       onOpenChange: noop,
+      focusCalendarOnOpen: true,
     };
   },
 
@@ -83,7 +85,7 @@ const Picker = createReactClass({
   },
 
   componentDidUpdate(_, prevState) {
-    if (!prevState.open && this.state.open) {
+    if (!prevState.open && this.state.open && this.props.focusCalendarOnOpen) {
       this.focusCalendar();
     }
   },
