@@ -2399,7 +2399,7 @@ webpackJsonp([4],{
 	      }
 	
 	      var footerBtn = void 0;
-	      if (nowEl || okBtn) {
+	      if (nowEl || timePickerBtn || okBtn) {
 	        footerBtn = _react2.default.createElement(
 	          'span',
 	          { className: prefixCls + '-footer-btn' },

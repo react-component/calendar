@@ -2616,6 +2616,11 @@ webpackJsonp([2],{
 	    }
 	  };
 	
+	  // https://github.com/ant-design/ant-design/issues/5829
+	  Panel.prototype.close = function close() {
+	    this.props.onEsc();
+	  };
+	
 	  Panel.prototype.render = function render() {
 	    var _classNames;
 	
@@ -3988,13 +3993,17 @@ webpackJsonp([2],{
 	    return value;
 	  },
 	  getEndValue: function getEndValue() {
-	    var endValue = this.state.value[1].clone();
-	    var selectedValue = this.state.selectedValue;
+	    var _state2 = this.state,
+	        value = _state2.value,
+	        selectedValue = _state2.selectedValue,
+	        showTimePicker = _state2.showTimePicker;
+	
+	    var endValue = value[1] ? value[1].clone() : value[0].clone().add(1, 'month');
 	    // keep selectedTime when select date
 	    if (selectedValue[1] && this.props.timePicker) {
 	      (0, _util.syncTime)(selectedValue[1], endValue);
 	    }
-	    if (this.state.showTimePicker) {
+	    if (showTimePicker) {
 	      return selectedValue[1] ? selectedValue[1] : this.getStartValue();
 	    }
 	    return endValue;
@@ -4002,9 +4011,9 @@ webpackJsonp([2],{
 	
 	  // get disabled hours for second picker
 	  getEndDisableTime: function getEndDisableTime() {
-	    var _state2 = this.state,
-	        selectedValue = _state2.selectedValue,
-	        value = _state2.value;
+	    var _state3 = this.state,
+	        selectedValue = _state3.selectedValue,
+	        value = _state3.value;
 	
 	    var startValue = selectedValue && selectedValue[0] || value[0].clone();
 	    // if startTime and endTime is same day..

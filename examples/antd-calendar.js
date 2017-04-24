@@ -2682,7 +2682,7 @@ webpackJsonp([0],{
 	      }
 	
 	      var footerBtn = void 0;
-	      if (nowEl || okBtn) {
+	      if (nowEl || timePickerBtn || okBtn) {
 	        footerBtn = _react2.default.createElement(
 	          'span',
 	          { className: prefixCls + '-footer-btn' },
@@ -3558,6 +3558,11 @@ webpackJsonp([0],{
 	        value: value
 	      });
 	    }
+	  };
+	
+	  // https://github.com/ant-design/ant-design/issues/5829
+	  Panel.prototype.close = function close() {
+	    this.props.onEsc();
 	  };
 	
 	  Panel.prototype.render = function render() {
