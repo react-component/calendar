@@ -42,10 +42,7 @@
     "start": "rc-tools run server",
     "pub": "rc-tools run pub --babel-runtime",
     "lint": "rc-tools run lint",
-    "karma": "rc-tools run karma",
-    "saucelabs": "rc-tools run saucelabs",
     "test": "jest",
-    "chrome-test": "rc-tools run chrome-test",
     "coverage": "jest --coverage && cat ./coverage/lcov.info | coveralls"
   },
   "jest": {
@@ -58,12 +55,11 @@
   },
   "devDependencies": {
     "async": "~0.9.0",
+    "jest": "^19.0.0",
     "bootstrap": "~3.3.2",
     "coveralls": "^2.11.15",
     "enzyme": "^2.8.0",
     "enzyme-to-json": "^1.5.0",
-    "expect.js": "~0.3.1",
-    "jest": "^19.0.0",
     "jquery": "~1.11.3",
     "mockdate": "^2.0.1",
     "object-assign": "4.x",
@@ -71,11 +67,10 @@
     "rc-dialog": "^6.0.1",
     "rc-select": "^6.0.6",
     "rc-time-picker": "2.x",
-    "rc-tools": "5.x",
+    "rc-tools": "6.x",
     "react": "15.x",
-    "react-addons-test-utils": "15.x",
     "react-dom": "15.x",
-    "react-test-renderer": "^15.5.4"
+    "react-test-renderer": "15.x"
   },
   "pre-commit": [
     "lint"

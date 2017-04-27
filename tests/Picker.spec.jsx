@@ -1,10 +1,9 @@
-import expect from 'expect.js';
 import Calendar from '../index';
 import DatePicker from '../src/Picker';
 import RangeCalendar from '../src/RangeCalendar';
 import ReactDOM from 'react-dom';
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
+import TestUtils from 'react-dom/test-utils';
 const Simulate = TestUtils.Simulate;
 import async from 'async';
 import CalendarLocale from '../src/locale/en_US';
@@ -82,7 +81,7 @@ describe('DatePicker', () => {
         change = v;
       },
     });
-    expect(picker.state.open).not.to.be.ok();
+    expect(picker.state.open).toBeFalsy();
     const input = TestUtils.scryRenderedDOMComponentsWithClass(picker,
       'rc-calendar-picker-input')[0];
     async.series([(next) => {
@@ -90,19 +89,19 @@ describe('DatePicker', () => {
       setTimeout(next, 100);
     }, (next) => {
       expect(TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance,
-        'rc-calendar')[0]).to.be.ok();
-      expect(picker.state.open).to.be(true);
+        'rc-calendar')[0]).not.toBeFalsy();
+      expect(picker.state.open).toEqual(true);
       const day = TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance,
         'rc-calendar-date')[2];
       Simulate.click(day);
       setTimeout(next, 100);
     }, (next) => {
-      expect(change).to.be.ok();
-      expect(change.year()).to.be(2015);
-      expect(change.month()).to.be(5);
-      expect(change.date()).to.be(2);
-      expect(ReactDOM.findDOMNode(input).value).to.be('2015-06-02');
-      expect(picker.state.open).not.to.be.ok();
+      expect(change).not.toBeFalsy();
+      expect(change.year()).toEqual(2015);
+      expect(change.month()).toEqual(5);
+      expect(change.date()).toEqual(2);
+      expect(ReactDOM.findDOMNode(input).value).toEqual('2015-06-02');
+      expect(picker.state.open).toBeFalsy();
       next();
     }], () => {
       done();
@@ -119,7 +118,7 @@ describe('DatePicker', () => {
         change = v;
       },
     });
-    expect(picker.state.open).not.to.be.ok();
+    expect(picker.state.open).toBeFalsy();
     const input = TestUtils.scryRenderedDOMComponentsWithClass(picker,
       'rc-calendar-picker-input')[0];
     async.series([(next) => {
@@ -127,8 +126,8 @@ describe('DatePicker', () => {
       setTimeout(next, 10);
     }, (next) => {
       expect(TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance,
-        'rc-calendar')[0]).to.be.ok();
-      expect(picker.state.open).to.be(true);
+        'rc-calendar')[0]).not.toBeFalsy();
+      expect(picker.state.open).toEqual(true);
       const day1 = TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance,
         'rc-calendar-date')[2];
       Simulate.click(day1);
@@ -137,16 +136,16 @@ describe('DatePicker', () => {
       Simulate.click(day2);
       setTimeout(next, 10);
     }, (next) => {
-      expect(change).to.be.ok();
-      expect(change.length).to.be(2);
-      expect(change[0].year()).to.be(2015);
-      expect(change[0].month()).to.be(5);
-      expect(change[0].date()).to.be(2);
-      expect(change[1].year()).to.be(2015);
-      expect(change[1].month()).to.be(5);
-      expect(change[1].date()).to.be(3);
-      expect(input.value).to.be('2015-06-02 - 2015-06-03');
-      expect(picker.state.open).not.to.be.ok();
+      expect(change).not.toBeFalsy();
+      expect(change.length).toEqual(2);
+      expect(change[0].year()).toEqual(2015);
+      expect(change[0].month()).toEqual(5);
+      expect(change[0].date()).toEqual(2);
+      expect(change[1].year()).toEqual(2015);
+      expect(change[1].month()).toEqual(5);
+      expect(change[1].date()).toEqual(3);
+      expect(input.value).toEqual('2015-06-02 - 2015-06-03');
+      expect(picker.state.open).toBeFalsy();
       next();
     }], () => {
       done();
@@ -161,7 +160,7 @@ describe('DatePicker', () => {
           change = v;
         },
       });
-      expect(picker.state.open).not.to.be.ok();
+      expect(picker.state.open).toBeFalsy();
       const input = TestUtils.scryRenderedDOMComponentsWithClass(picker,
         'rc-calendar-picker-input')[0];
       async.series([(next) => {
@@ -169,19 +168,19 @@ describe('DatePicker', () => {
         setTimeout(next, 100);
       }, (next) => {
         expect(TestUtils.scryRenderedDOMComponentsWithClass(picker,
-          'rc-calendar')[0]).not.to.be.ok();
-        expect(picker.state.open).to.be(true);
+          'rc-calendar')[0]).toBeFalsy();
+        expect(picker.state.open).toEqual(true);
         const day = TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance,
           'rc-calendar-date')[2];
         Simulate.click(day);
         setTimeout(next, 100);
       }, (next) => {
-        expect(change).to.be.ok();
-        expect(change.year()).to.be(2015);
-        expect(change.month()).to.be(5);
-        expect(change.date()).to.be(2);
-        expect(ReactDOM.findDOMNode(input).value).to.be('2015-06-02');
-        expect(picker.state.open).not.to.be.ok();
+        expect(change).not.toBeFalsy();
+        expect(change.year()).toEqual(2015);
+        expect(change.month()).toEqual(5);
+        expect(change.date()).toEqual(2);
+        expect(ReactDOM.findDOMNode(input).value).toEqual('2015-06-02');
+        expect(picker.state.open).toBeFalsy();
         next();
       }], () => {
         done();
@@ -193,7 +192,7 @@ describe('DatePicker', () => {
         return done();
       }
       const picker = renderPicker();
-      expect(picker.state.open).not.to.be.ok();
+      expect(picker.state.open).toBeFalsy();
       const input = TestUtils.scryRenderedDOMComponentsWithClass(picker,
         'rc-calendar-picker-input')[0];
       async.series([(next) => {
@@ -201,20 +200,20 @@ describe('DatePicker', () => {
         setTimeout(next, 100);
       }, (next) => {
         expect(TestUtils.scryRenderedDOMComponentsWithClass(picker,
-          'rc-calendar')[0]).not.to.be.ok();
-        expect(picker.state.open).to.be(true);
+          'rc-calendar')[0]).toBeFalsy();
+        expect(picker.state.open).toEqual(true);
         if (document.querySelectorAll) {
-          expect(document.querySelectorAll('.rc-calendar-picker').length).not.to.be(0);
+          expect(document.querySelectorAll('.rc-calendar-picker').length).not.toEqual(0);
         }
         expect(TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance,
-          'rc-calendar-date')[0]).to.be.ok();
+          'rc-calendar-date')[0]).not.toBeFalsy();
         ReactDOM.unmountComponentAtNode(div);
         setTimeout(next, 100);
       }, (next) => {
         if (document.querySelectorAll) {
-          expect(document.querySelectorAll('.rc-calendar-picker').length).to.be(0);
+          expect(document.querySelectorAll('.rc-calendar-picker').length).toEqual(0);
         }
-        expect(picker.calendarInstance).not.to.be.ok();
+        expect(picker.calendarInstance).toBeFalsy();
         next();
       }], () => {
         done();
