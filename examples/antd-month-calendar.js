@@ -3,7 +3,7 @@ webpackJsonp([1],{
 /***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(345);
+	module.exports = __webpack_require__(346);
 
 
 /***/ }),
@@ -534,7 +534,7 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 287:
+/***/ 288:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -555,15 +555,15 @@ webpackJsonp([1],{
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _YearPanel = __webpack_require__(288);
+	var _YearPanel = __webpack_require__(289);
 	
 	var _YearPanel2 = _interopRequireDefault(_YearPanel);
 	
-	var _MonthTable = __webpack_require__(290);
+	var _MonthTable = __webpack_require__(291);
 	
 	var _MonthTable2 = _interopRequireDefault(_MonthTable);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	function goYear(direction) {
 	  var next = this.state.value.clone();
@@ -573,11 +573,11 @@ webpackJsonp([1],{
 	
 	function noop() {}
 	
-	var MonthPanel = (0, _createReactClass2.default)({
+	var MonthPanel = (0, _createReactClass2['default'])({
 	  propTypes: {
-	    onChange: _propTypes2.default.func,
-	    disabledDate: _propTypes2.default.func,
-	    onSelect: _propTypes2.default.func
+	    onChange: _propTypes2['default'].func,
+	    disabledDate: _propTypes2['default'].func,
+	    onSelect: _propTypes2['default'].func
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
@@ -639,29 +639,29 @@ webpackJsonp([1],{
 	    var prefixCls = this.prefixCls;
 	    var yearPanel = void 0;
 	    if (this.state.showYearPanel) {
-	      yearPanel = _react2.default.createElement(_YearPanel2.default, {
+	      yearPanel = _react2['default'].createElement(_YearPanel2['default'], {
 	        locale: locale,
 	        value: value,
 	        rootPrefixCls: props.rootPrefixCls,
 	        onSelect: this.onYearPanelSelect
 	      });
 	    }
-	    return _react2.default.createElement(
+	    return _react2['default'].createElement(
 	      'div',
 	      { className: prefixCls, style: props.style },
-	      _react2.default.createElement(
+	      _react2['default'].createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(
+	        _react2['default'].createElement(
 	          'div',
 	          { className: prefixCls + '-header' },
-	          _react2.default.createElement('a', {
+	          _react2['default'].createElement('a', {
 	            className: prefixCls + '-prev-year-btn',
 	            role: 'button',
 	            onClick: this.previousYear,
 	            title: locale.previousYear
 	          }),
-	          _react2.default.createElement(
+	          _react2['default'].createElement(
 	            'a',
 	            {
 	              className: prefixCls + '-year-select',
@@ -669,28 +669,28 @@ webpackJsonp([1],{
 	              onClick: this.showYearPanel,
 	              title: locale.yearSelect
 	            },
-	            _react2.default.createElement(
+	            _react2['default'].createElement(
 	              'span',
 	              { className: prefixCls + '-year-select-content' },
 	              year
 	            ),
-	            _react2.default.createElement(
+	            _react2['default'].createElement(
 	              'span',
 	              { className: prefixCls + '-year-select-arrow' },
 	              'x'
 	            )
 	          ),
-	          _react2.default.createElement('a', {
+	          _react2['default'].createElement('a', {
 	            className: prefixCls + '-next-year-btn',
 	            role: 'button',
 	            onClick: this.nextYear,
 	            title: locale.nextYear
 	          })
 	        ),
-	        _react2.default.createElement(
+	        _react2['default'].createElement(
 	          'div',
 	          { className: prefixCls + '-body' },
-	          _react2.default.createElement(_MonthTable2.default, {
+	          _react2['default'].createElement(_MonthTable2['default'], {
 	            disabledDate: props.disabledDate,
 	            onSelect: this.setAndSelectValue,
 	            locale: locale,
@@ -706,12 +706,12 @@ webpackJsonp([1],{
 	  }
 	});
 	
-	exports.default = MonthPanel;
+	exports['default'] = MonthPanel;
 	module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 288:
+/***/ 289:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -720,7 +720,7 @@ webpackJsonp([1],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(280);
+	var _defineProperty2 = __webpack_require__(284);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
@@ -728,11 +728,15 @@ webpackJsonp([1],{
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(232);
+	var _createClass2 = __webpack_require__(232);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	var _possibleConstructorReturn2 = __webpack_require__(236);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(268);
+	var _inherits2 = __webpack_require__(272);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -744,15 +748,15 @@ webpackJsonp([1],{
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _classnames = __webpack_require__(284);
+	var _classnames = __webpack_require__(285);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _DecadePanel = __webpack_require__(289);
+	var _DecadePanel = __webpack_require__(290);
 	
 	var _DecadePanel2 = _interopRequireDefault(_DecadePanel);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	var ROW = 4;
 	var COL = 3;
@@ -773,12 +777,12 @@ webpackJsonp([1],{
 	}
 	
 	var YearPanel = function (_React$Component) {
-	  (0, _inherits3.default)(YearPanel, _React$Component);
+	  (0, _inherits3['default'])(YearPanel, _React$Component);
 	
 	  function YearPanel(props) {
-	    (0, _classCallCheck3.default)(this, YearPanel);
+	    (0, _classCallCheck3['default'])(this, YearPanel);
 	
-	    var _this = (0, _possibleConstructorReturn3.default)(this, _React$Component.call(this, props));
+	    var _this = (0, _possibleConstructorReturn3['default'])(this, (YearPanel.__proto__ || Object.getPrototypeOf(YearPanel)).call(this, props));
 	
 	    _this.prefixCls = props.rootPrefixCls + '-year-panel';
 	    _this.state = {
@@ -792,173 +796,178 @@ webpackJsonp([1],{
 	    return _this;
 	  }
 	
-	  YearPanel.prototype.onDecadePanelSelect = function onDecadePanelSelect(current) {
-	    this.setState({
-	      value: current,
-	      showDecadePanel: 0
-	    });
-	  };
-	
-	  YearPanel.prototype.years = function years() {
-	    var value = this.state.value;
-	    var currentYear = value.year();
-	    var startYear = parseInt(currentYear / 10, 10) * 10;
-	    var previousYear = startYear - 1;
-	    var years = [];
-	    var index = 0;
-	    for (var rowIndex = 0; rowIndex < ROW; rowIndex++) {
-	      years[rowIndex] = [];
-	      for (var colIndex = 0; colIndex < COL; colIndex++) {
-	        var year = previousYear + index;
-	        var content = String(year);
-	        years[rowIndex][colIndex] = {
-	          content: content,
-	          year: year,
-	          title: content
-	        };
-	        index++;
-	      }
+	  (0, _createClass3['default'])(YearPanel, [{
+	    key: 'onDecadePanelSelect',
+	    value: function onDecadePanelSelect(current) {
+	      this.setState({
+	        value: current,
+	        showDecadePanel: 0
+	      });
 	    }
-	    return years;
-	  };
-	
-	  YearPanel.prototype.showDecadePanel = function showDecadePanel() {
-	    this.setState({
-	      showDecadePanel: 1
-	    });
-	  };
-	
-	  YearPanel.prototype.render = function render() {
-	    var _this2 = this;
-	
-	    var props = this.props;
-	    var value = this.state.value;
-	    var locale = props.locale;
-	    var years = this.years();
-	    var currentYear = value.year();
-	    var startYear = parseInt(currentYear / 10, 10) * 10;
-	    var endYear = startYear + 9;
-	    var prefixCls = this.prefixCls;
-	
-	    var yeasEls = years.map(function (row, index) {
-	      var tds = row.map(function (yearData) {
-	        var _classNameMap;
-	
-	        var classNameMap = (_classNameMap = {}, (0, _defineProperty3.default)(_classNameMap, prefixCls + '-cell', 1), (0, _defineProperty3.default)(_classNameMap, prefixCls + '-selected-cell', yearData.year === currentYear), (0, _defineProperty3.default)(_classNameMap, prefixCls + '-last-decade-cell', yearData.year < startYear), (0, _defineProperty3.default)(_classNameMap, prefixCls + '-next-decade-cell', yearData.year > endYear), _classNameMap);
-	        var clickHandler = void 0;
-	        if (yearData.year < startYear) {
-	          clickHandler = _this2.previousDecade;
-	        } else if (yearData.year > endYear) {
-	          clickHandler = _this2.nextDecade;
-	        } else {
-	          clickHandler = chooseYear.bind(_this2, yearData.year);
+	  }, {
+	    key: 'years',
+	    value: function years() {
+	      var value = this.state.value;
+	      var currentYear = value.year();
+	      var startYear = parseInt(currentYear / 10, 10) * 10;
+	      var previousYear = startYear - 1;
+	      var years = [];
+	      var index = 0;
+	      for (var rowIndex = 0; rowIndex < ROW; rowIndex++) {
+	        years[rowIndex] = [];
+	        for (var colIndex = 0; colIndex < COL; colIndex++) {
+	          var year = previousYear + index;
+	          var content = String(year);
+	          years[rowIndex][colIndex] = {
+	            content: content,
+	            year: year,
+	            title: content
+	          };
+	          index++;
 	        }
-	        return _react2.default.createElement(
-	          'td',
-	          {
-	            role: 'gridcell',
-	            title: yearData.title,
-	            key: yearData.content,
-	            onClick: clickHandler,
-	            className: (0, _classnames2.default)(classNameMap)
-	          },
-	          _react2.default.createElement(
-	            'a',
+	      }
+	      return years;
+	    }
+	  }, {
+	    key: 'showDecadePanel',
+	    value: function showDecadePanel() {
+	      this.setState({
+	        showDecadePanel: 1
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+	
+	      var props = this.props;
+	      var value = this.state.value;
+	      var locale = props.locale;
+	      var years = this.years();
+	      var currentYear = value.year();
+	      var startYear = parseInt(currentYear / 10, 10) * 10;
+	      var endYear = startYear + 9;
+	      var prefixCls = this.prefixCls;
+	
+	      var yeasEls = years.map(function (row, index) {
+	        var tds = row.map(function (yearData) {
+	          var _classNameMap;
+	
+	          var classNameMap = (_classNameMap = {}, (0, _defineProperty3['default'])(_classNameMap, prefixCls + '-cell', 1), (0, _defineProperty3['default'])(_classNameMap, prefixCls + '-selected-cell', yearData.year === currentYear), (0, _defineProperty3['default'])(_classNameMap, prefixCls + '-last-decade-cell', yearData.year < startYear), (0, _defineProperty3['default'])(_classNameMap, prefixCls + '-next-decade-cell', yearData.year > endYear), _classNameMap);
+	          var clickHandler = void 0;
+	          if (yearData.year < startYear) {
+	            clickHandler = _this2.previousDecade;
+	          } else if (yearData.year > endYear) {
+	            clickHandler = _this2.nextDecade;
+	          } else {
+	            clickHandler = chooseYear.bind(_this2, yearData.year);
+	          }
+	          return _react2['default'].createElement(
+	            'td',
 	            {
-	              className: prefixCls + '-year'
+	              role: 'gridcell',
+	              title: yearData.title,
+	              key: yearData.content,
+	              onClick: clickHandler,
+	              className: (0, _classnames2['default'])(classNameMap)
 	            },
-	            yearData.content
-	          )
+	            _react2['default'].createElement(
+	              'a',
+	              {
+	                className: prefixCls + '-year'
+	              },
+	              yearData.content
+	            )
+	          );
+	        });
+	        return _react2['default'].createElement(
+	          'tr',
+	          { key: index, role: 'row' },
+	          tds
 	        );
 	      });
-	      return _react2.default.createElement(
-	        'tr',
-	        { key: index, role: 'row' },
-	        tds
-	      );
-	    });
 	
-	    var decadePanel = void 0;
-	    if (this.state.showDecadePanel) {
-	      decadePanel = _react2.default.createElement(_DecadePanel2.default, {
-	        locale: locale,
-	        value: value,
-	        rootPrefixCls: props.rootPrefixCls,
-	        onSelect: this.onDecadePanelSelect
-	      });
-	    }
+	      var decadePanel = void 0;
+	      if (this.state.showDecadePanel) {
+	        decadePanel = _react2['default'].createElement(_DecadePanel2['default'], {
+	          locale: locale,
+	          value: value,
+	          rootPrefixCls: props.rootPrefixCls,
+	          onSelect: this.onDecadePanelSelect
+	        });
+	      }
 	
-	    return _react2.default.createElement(
-	      'div',
-	      { className: this.prefixCls },
-	      _react2.default.createElement(
+	      return _react2['default'].createElement(
 	        'div',
-	        null,
-	        _react2.default.createElement(
+	        { className: this.prefixCls },
+	        _react2['default'].createElement(
 	          'div',
-	          { className: prefixCls + '-header' },
-	          _react2.default.createElement('a', {
-	            className: prefixCls + '-prev-decade-btn',
-	            role: 'button',
-	            onClick: this.previousDecade,
-	            title: locale.previousDecade
-	          }),
-	          _react2.default.createElement(
-	            'a',
-	            {
-	              className: prefixCls + '-decade-select',
+	          null,
+	          _react2['default'].createElement(
+	            'div',
+	            { className: prefixCls + '-header' },
+	            _react2['default'].createElement('a', {
+	              className: prefixCls + '-prev-decade-btn',
 	              role: 'button',
-	              onClick: this.showDecadePanel,
-	              title: locale.decadeSelect
-	            },
-	            _react2.default.createElement(
-	              'span',
-	              { className: prefixCls + '-decade-select-content' },
-	              startYear,
-	              '-',
-	              endYear
+	              onClick: this.previousDecade,
+	              title: locale.previousDecade
+	            }),
+	            _react2['default'].createElement(
+	              'a',
+	              {
+	                className: prefixCls + '-decade-select',
+	                role: 'button',
+	                onClick: this.showDecadePanel,
+	                title: locale.decadeSelect
+	              },
+	              _react2['default'].createElement(
+	                'span',
+	                { className: prefixCls + '-decade-select-content' },
+	                startYear,
+	                '-',
+	                endYear
+	              ),
+	              _react2['default'].createElement(
+	                'span',
+	                { className: prefixCls + '-decade-select-arrow' },
+	                'x'
+	              )
 	            ),
-	            _react2.default.createElement(
-	              'span',
-	              { className: prefixCls + '-decade-select-arrow' },
-	              'x'
-	            )
+	            _react2['default'].createElement('a', {
+	              className: prefixCls + '-next-decade-btn',
+	              role: 'button',
+	              onClick: this.nextDecade,
+	              title: locale.nextDecade
+	            })
 	          ),
-	          _react2.default.createElement('a', {
-	            className: prefixCls + '-next-decade-btn',
-	            role: 'button',
-	            onClick: this.nextDecade,
-	            title: locale.nextDecade
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: prefixCls + '-body' },
-	          _react2.default.createElement(
-	            'table',
-	            { className: prefixCls + '-table', cellSpacing: '0', role: 'grid' },
-	            _react2.default.createElement(
-	              'tbody',
-	              { className: prefixCls + '-tbody' },
-	              yeasEls
+	          _react2['default'].createElement(
+	            'div',
+	            { className: prefixCls + '-body' },
+	            _react2['default'].createElement(
+	              'table',
+	              { className: prefixCls + '-table', cellSpacing: '0', role: 'grid' },
+	              _react2['default'].createElement(
+	                'tbody',
+	                { className: prefixCls + '-tbody' },
+	                yeasEls
+	              )
 	            )
 	          )
-	        )
-	      ),
-	      decadePanel
-	    );
-	  };
-	
+	        ),
+	        decadePanel
+	      );
+	    }
+	  }]);
 	  return YearPanel;
-	}(_react2.default.Component);
+	}(_react2['default'].Component);
 	
-	exports.default = YearPanel;
+	exports['default'] = YearPanel;
 	
 	
 	YearPanel.propTypes = {
-	  rootPrefixCls: _propTypes2.default.string,
-	  value: _propTypes2.default.object,
-	  defaultValue: _propTypes2.default.object
+	  rootPrefixCls: _propTypes2['default'].string,
+	  value: _propTypes2['default'].object,
+	  defaultValue: _propTypes2['default'].object
 	};
 	
 	YearPanel.defaultProps = {
@@ -968,7 +977,7 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 289:
+/***/ 290:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -977,7 +986,7 @@ webpackJsonp([1],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(280);
+	var _defineProperty2 = __webpack_require__(284);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
@@ -985,11 +994,15 @@ webpackJsonp([1],{
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(232);
+	var _createClass2 = __webpack_require__(232);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	var _possibleConstructorReturn2 = __webpack_require__(236);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(268);
+	var _inherits2 = __webpack_require__(272);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -1001,11 +1014,11 @@ webpackJsonp([1],{
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _classnames = __webpack_require__(284);
+	var _classnames = __webpack_require__(285);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	var ROW = 4;
 	var COL = 3;
@@ -1028,12 +1041,12 @@ webpackJsonp([1],{
 	}
 	
 	var DecadePanel = function (_React$Component) {
-	  (0, _inherits3.default)(DecadePanel, _React$Component);
+	  (0, _inherits3['default'])(DecadePanel, _React$Component);
 	
 	  function DecadePanel(props) {
-	    (0, _classCallCheck3.default)(this, DecadePanel);
+	    (0, _classCallCheck3['default'])(this, DecadePanel);
 	
-	    var _this = (0, _possibleConstructorReturn3.default)(this, _React$Component.call(this, props));
+	    var _this = (0, _possibleConstructorReturn3['default'])(this, (DecadePanel.__proto__ || Object.getPrototypeOf(DecadePanel)).call(this, props));
 	
 	    _this.state = {
 	      value: props.value || props.defaultValue
@@ -1046,127 +1059,129 @@ webpackJsonp([1],{
 	    return _this;
 	  }
 	
-	  DecadePanel.prototype.render = function render() {
-	    var _this2 = this;
+	  (0, _createClass3['default'])(DecadePanel, [{
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
 	
-	    var value = this.state.value;
-	    var locale = this.props.locale;
-	    var currentYear = value.year();
-	    var startYear = parseInt(currentYear / 100, 10) * 100;
-	    var preYear = startYear - 10;
-	    var endYear = startYear + 99;
-	    var decades = [];
-	    var index = 0;
-	    var prefixCls = this.prefixCls;
+	      var value = this.state.value;
+	      var locale = this.props.locale;
+	      var currentYear = value.year();
+	      var startYear = parseInt(currentYear / 100, 10) * 100;
+	      var preYear = startYear - 10;
+	      var endYear = startYear + 99;
+	      var decades = [];
+	      var index = 0;
+	      var prefixCls = this.prefixCls;
 	
-	    for (var rowIndex = 0; rowIndex < ROW; rowIndex++) {
-	      decades[rowIndex] = [];
-	      for (var colIndex = 0; colIndex < COL; colIndex++) {
-	        var startDecade = preYear + index * 10;
-	        var endDecade = preYear + index * 10 + 9;
-	        decades[rowIndex][colIndex] = {
-	          startDecade: startDecade,
-	          endDecade: endDecade
-	        };
-	        index++;
-	      }
-	    }
-	
-	    var decadesEls = decades.map(function (row, decadeIndex) {
-	      var tds = row.map(function (decadeData) {
-	        var _classNameMap;
-	
-	        var dStartDecade = decadeData.startDecade;
-	        var dEndDecade = decadeData.endDecade;
-	        var isLast = dStartDecade < startYear;
-	        var isNext = dEndDecade > endYear;
-	        var classNameMap = (_classNameMap = {}, (0, _defineProperty3.default)(_classNameMap, prefixCls + '-cell', 1), (0, _defineProperty3.default)(_classNameMap, prefixCls + '-selected-cell', dStartDecade <= currentYear && currentYear <= dEndDecade), (0, _defineProperty3.default)(_classNameMap, prefixCls + '-last-century-cell', isLast), (0, _defineProperty3.default)(_classNameMap, prefixCls + '-next-century-cell', isNext), _classNameMap);
-	        var content = dStartDecade + '-' + dEndDecade;
-	        var clickHandler = void 0;
-	        if (isLast) {
-	          clickHandler = _this2.previousCentury;
-	        } else if (isNext) {
-	          clickHandler = _this2.nextCentury;
-	        } else {
-	          clickHandler = chooseDecade.bind(_this2, dStartDecade);
+	      for (var rowIndex = 0; rowIndex < ROW; rowIndex++) {
+	        decades[rowIndex] = [];
+	        for (var colIndex = 0; colIndex < COL; colIndex++) {
+	          var startDecade = preYear + index * 10;
+	          var endDecade = preYear + index * 10 + 9;
+	          decades[rowIndex][colIndex] = {
+	            startDecade: startDecade,
+	            endDecade: endDecade
+	          };
+	          index++;
 	        }
-	        return _react2.default.createElement(
-	          'td',
-	          {
-	            key: dStartDecade,
-	            onClick: clickHandler,
-	            role: 'gridcell',
-	            className: (0, _classnames2.default)(classNameMap)
-	          },
-	          _react2.default.createElement(
-	            'a',
+	      }
+	
+	      var decadesEls = decades.map(function (row, decadeIndex) {
+	        var tds = row.map(function (decadeData) {
+	          var _classNameMap;
+	
+	          var dStartDecade = decadeData.startDecade;
+	          var dEndDecade = decadeData.endDecade;
+	          var isLast = dStartDecade < startYear;
+	          var isNext = dEndDecade > endYear;
+	          var classNameMap = (_classNameMap = {}, (0, _defineProperty3['default'])(_classNameMap, prefixCls + '-cell', 1), (0, _defineProperty3['default'])(_classNameMap, prefixCls + '-selected-cell', dStartDecade <= currentYear && currentYear <= dEndDecade), (0, _defineProperty3['default'])(_classNameMap, prefixCls + '-last-century-cell', isLast), (0, _defineProperty3['default'])(_classNameMap, prefixCls + '-next-century-cell', isNext), _classNameMap);
+	          var content = dStartDecade + '-' + dEndDecade;
+	          var clickHandler = void 0;
+	          if (isLast) {
+	            clickHandler = _this2.previousCentury;
+	          } else if (isNext) {
+	            clickHandler = _this2.nextCentury;
+	          } else {
+	            clickHandler = chooseDecade.bind(_this2, dStartDecade);
+	          }
+	          return _react2['default'].createElement(
+	            'td',
 	            {
-	              className: prefixCls + '-decade'
+	              key: dStartDecade,
+	              onClick: clickHandler,
+	              role: 'gridcell',
+	              className: (0, _classnames2['default'])(classNameMap)
 	            },
-	            content
-	          )
+	            _react2['default'].createElement(
+	              'a',
+	              {
+	                className: prefixCls + '-decade'
+	              },
+	              content
+	            )
+	          );
+	        });
+	        return _react2['default'].createElement(
+	          'tr',
+	          { key: decadeIndex, role: 'row' },
+	          tds
 	        );
 	      });
-	      return _react2.default.createElement(
-	        'tr',
-	        { key: decadeIndex, role: 'row' },
-	        tds
-	      );
-	    });
 	
-	    return _react2.default.createElement(
-	      'div',
-	      { className: this.prefixCls },
-	      _react2.default.createElement(
+	      return _react2['default'].createElement(
 	        'div',
-	        { className: prefixCls + '-header' },
-	        _react2.default.createElement('a', {
-	          className: prefixCls + '-prev-century-btn',
-	          role: 'button',
-	          onClick: this.previousCentury,
-	          title: locale.previousCentury
-	        }),
-	        _react2.default.createElement(
+	        { className: this.prefixCls },
+	        _react2['default'].createElement(
 	          'div',
-	          { className: prefixCls + '-century' },
-	          startYear,
-	          '-',
-	          endYear
+	          { className: prefixCls + '-header' },
+	          _react2['default'].createElement('a', {
+	            className: prefixCls + '-prev-century-btn',
+	            role: 'button',
+	            onClick: this.previousCentury,
+	            title: locale.previousCentury
+	          }),
+	          _react2['default'].createElement(
+	            'div',
+	            { className: prefixCls + '-century' },
+	            startYear,
+	            '-',
+	            endYear
+	          ),
+	          _react2['default'].createElement('a', {
+	            className: prefixCls + '-next-century-btn',
+	            role: 'button',
+	            onClick: this.nextCentury,
+	            title: locale.nextCentury
+	          })
 	        ),
-	        _react2.default.createElement('a', {
-	          className: prefixCls + '-next-century-btn',
-	          role: 'button',
-	          onClick: this.nextCentury,
-	          title: locale.nextCentury
-	        })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: prefixCls + '-body' },
-	        _react2.default.createElement(
-	          'table',
-	          { className: prefixCls + '-table', cellSpacing: '0', role: 'grid' },
-	          _react2.default.createElement(
-	            'tbody',
-	            { className: prefixCls + '-tbody' },
-	            decadesEls
+	        _react2['default'].createElement(
+	          'div',
+	          { className: prefixCls + '-body' },
+	          _react2['default'].createElement(
+	            'table',
+	            { className: prefixCls + '-table', cellSpacing: '0', role: 'grid' },
+	            _react2['default'].createElement(
+	              'tbody',
+	              { className: prefixCls + '-tbody' },
+	              decadesEls
+	            )
 	          )
 	        )
-	      )
-	    );
-	  };
-	
+	      );
+	    }
+	  }]);
 	  return DecadePanel;
-	}(_react2.default.Component);
+	}(_react2['default'].Component);
 	
-	exports.default = DecadePanel;
+	exports['default'] = DecadePanel;
 	
 	
 	DecadePanel.propTypes = {
-	  locale: _propTypes2.default.object,
-	  value: _propTypes2.default.object,
-	  defaultValue: _propTypes2.default.object,
-	  rootPrefixCls: _propTypes2.default.string
+	  locale: _propTypes2['default'].object,
+	  value: _propTypes2['default'].object,
+	  defaultValue: _propTypes2['default'].object,
+	  rootPrefixCls: _propTypes2['default'].string
 	};
 	
 	DecadePanel.defaultProps = {
@@ -1176,7 +1191,7 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 296:
+/***/ 297:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1185,7 +1200,7 @@ webpackJsonp([1],{
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(280);
+	var _defineProperty2 = __webpack_require__(284);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
@@ -1197,22 +1212,22 @@ webpackJsonp([1],{
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _classnames = __webpack_require__(284);
+	var _classnames = __webpack_require__(285);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _moment = __webpack_require__(278);
+	var _moment = __webpack_require__(282);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _index = __webpack_require__(285);
+	var _index = __webpack_require__(286);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	function noop() {}
 	
 	function getNow() {
-	  return (0, _moment2.default)();
+	  return (0, _moment2['default'])();
 	}
 	
 	function getNowByCurrentStateValue(value) {
@@ -1227,9 +1242,9 @@ webpackJsonp([1],{
 	
 	var CalendarMixin = {
 	  propTypes: {
-	    value: _propTypes2.default.object,
-	    defaultValue: _propTypes2.default.object,
-	    onKeyDown: _propTypes2.default.func
+	    value: _propTypes2['default'].object,
+	    defaultValue: _propTypes2['default'].object,
+	    onKeyDown: _propTypes2['default'].func
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
@@ -1273,13 +1288,13 @@ webpackJsonp([1],{
 	    var props = this.props;
 	    var prefixCls = props.prefixCls;
 	
-	    var className = (_className = {}, (0, _defineProperty3.default)(_className, prefixCls, 1), (0, _defineProperty3.default)(_className, prefixCls + '-hidden', !props.visible), (0, _defineProperty3.default)(_className, props.className, !!props.className), (0, _defineProperty3.default)(_className, newProps.className, !!newProps.className), _className);
+	    var className = (_className = {}, (0, _defineProperty3['default'])(_className, prefixCls, 1), (0, _defineProperty3['default'])(_className, prefixCls + '-hidden', !props.visible), (0, _defineProperty3['default'])(_className, props.className, !!props.className), (0, _defineProperty3['default'])(_className, newProps.className, !!newProps.className), _className);
 	
-	    return _react2.default.createElement(
+	    return _react2['default'].createElement(
 	      'div',
 	      {
 	        ref: 'root',
-	        className: '' + (0, _classnames2.default)(className),
+	        className: '' + (0, _classnames2['default'])(className),
 	        style: this.props.style,
 	        tabIndex: '0',
 	        onKeyDown: this.onKeyDown
@@ -1315,12 +1330,12 @@ webpackJsonp([1],{
 	  }
 	};
 	
-	exports.default = CalendarMixin;
+	exports['default'] = CalendarMixin;
 	module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 300:
+/***/ 301:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1345,7 +1360,7 @@ webpackJsonp([1],{
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _createChainedFunction = __webpack_require__(301);
+	var _createChainedFunction = __webpack_require__(302);
 	
 	var _createChainedFunction2 = _interopRequireDefault(_createChainedFunction);
 	
@@ -1353,15 +1368,15 @@ webpackJsonp([1],{
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _placements = __webpack_require__(302);
+	var _placements = __webpack_require__(303);
 	
 	var _placements2 = _interopRequireDefault(_placements);
 	
-	var _rcTrigger = __webpack_require__(303);
+	var _rcTrigger = __webpack_require__(304);
 	
 	var _rcTrigger2 = _interopRequireDefault(_rcTrigger);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	function noop() {}
 	
@@ -1369,24 +1384,24 @@ webpackJsonp([1],{
 	  this[field] = component;
 	}
 	
-	var Picker = (0, _createReactClass2.default)({
+	var Picker = (0, _createReactClass2['default'])({
 	  propTypes: {
-	    animation: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.string]),
-	    disabled: _propTypes2.default.bool,
-	    transitionName: _propTypes2.default.string,
-	    onChange: _propTypes2.default.func,
-	    onOpenChange: _propTypes2.default.func,
-	    children: _propTypes2.default.func,
-	    getCalendarContainer: _propTypes2.default.func,
-	    calendar: _propTypes2.default.element,
-	    style: _propTypes2.default.object,
-	    open: _propTypes2.default.bool,
-	    defaultOpen: _propTypes2.default.bool,
-	    prefixCls: _propTypes2.default.string,
-	    placement: _propTypes2.default.any,
-	    value: _propTypes2.default.oneOfType([_propTypes2.default.object, _propTypes2.default.array]),
-	    defaultValue: _propTypes2.default.oneOfType([_propTypes2.default.object, _propTypes2.default.array]),
-	    align: _propTypes2.default.object
+	    animation: _propTypes2['default'].oneOfType([_propTypes2['default'].func, _propTypes2['default'].string]),
+	    disabled: _propTypes2['default'].bool,
+	    transitionName: _propTypes2['default'].string,
+	    onChange: _propTypes2['default'].func,
+	    onOpenChange: _propTypes2['default'].func,
+	    children: _propTypes2['default'].func,
+	    getCalendarContainer: _propTypes2['default'].func,
+	    calendar: _propTypes2['default'].element,
+	    style: _propTypes2['default'].object,
+	    open: _propTypes2['default'].bool,
+	    defaultOpen: _propTypes2['default'].bool,
+	    prefixCls: _propTypes2['default'].string,
+	    placement: _propTypes2['default'].any,
+	    value: _propTypes2['default'].oneOfType([_propTypes2['default'].object, _propTypes2['default'].array]),
+	    defaultValue: _propTypes2['default'].oneOfType([_propTypes2['default'].object, _propTypes2['default'].array]),
+	    align: _propTypes2['default'].object
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
@@ -1432,11 +1447,15 @@ webpackJsonp([1],{
 	  },
 	  componentDidUpdate: function componentDidUpdate(_, prevState) {
 	    if (!prevState.open && this.state.open) {
-	      this.focusCalendar();
+	      // setTimeout is for making sure saveCalendarRef happen before focusCalendar
+	      this.focusTimeout = setTimeout(this.focusCalendar, 0, this);
 	    }
 	  },
+	  componentWillUnmount: function componentWillUnmount() {
+	    clearTimeout(this.focusTimeout);
+	  },
 	  onCalendarKeyDown: function onCalendarKeyDown(event) {
-	    if (event.keyCode === _KeyCode2.default.ESC) {
+	    if (event.keyCode === _KeyCode2['default'].ESC) {
 	      event.stopPropagation();
 	      this.close(this.focus);
 	    }
@@ -1456,7 +1475,7 @@ webpackJsonp([1],{
 	    props.onChange(value);
 	  },
 	  onKeyDown: function onKeyDown(event) {
-	    if (event.keyCode === _KeyCode2.default.DOWN && !this.state.open) {
+	    if (event.keyCode === _KeyCode2['default'].DOWN && !this.state.open) {
 	      this.open();
 	      event.preventDefault();
 	    }
@@ -1482,12 +1501,12 @@ webpackJsonp([1],{
 	      defaultValue: defaultValue || calendarProps.defaultValue,
 	      selectedValue: value,
 	      onKeyDown: this.onCalendarKeyDown,
-	      onOk: (0, _createChainedFunction2.default)(calendarProps.onOk, this.onCalendarOk),
-	      onSelect: (0, _createChainedFunction2.default)(calendarProps.onSelect, this.onCalendarSelect),
-	      onClear: (0, _createChainedFunction2.default)(calendarProps.onClear, this.onCalendarClear)
+	      onOk: (0, _createChainedFunction2['default'])(calendarProps.onOk, this.onCalendarOk),
+	      onSelect: (0, _createChainedFunction2['default'])(calendarProps.onSelect, this.onCalendarSelect),
+	      onClear: (0, _createChainedFunction2['default'])(calendarProps.onClear, this.onCalendarClear)
 	    };
 	
-	    return _react2.default.cloneElement(props.calendar, extraProps);
+	    return _react2['default'].cloneElement(props.calendar, extraProps);
 	  },
 	  setOpen: function setOpen(open, callback) {
 	    var onOpenChange = this.props.onOpenChange;
@@ -1509,7 +1528,7 @@ webpackJsonp([1],{
 	  },
 	  focus: function focus() {
 	    if (!this.state.open) {
-	      _reactDom2.default.findDOMNode(this).focus();
+	      _reactDom2['default'].findDOMNode(this).focus();
 	    }
 	  },
 	  focusCalendar: function focusCalendar() {
@@ -1530,12 +1549,12 @@ webpackJsonp([1],{
 	        children = props.children;
 	
 	    var state = this.state;
-	    return _react2.default.createElement(
-	      _rcTrigger2.default,
+	    return _react2['default'].createElement(
+	      _rcTrigger2['default'],
 	      {
 	        popup: this.getCalendarElement(),
 	        popupAlign: align,
-	        builtinPlacements: _placements2.default,
+	        builtinPlacements: _placements2['default'],
 	        popupPlacement: placement,
 	        action: disabled && !state.open ? [] : ['click'],
 	        destroyPopupOnHide: true,
@@ -1547,17 +1566,17 @@ webpackJsonp([1],{
 	        onPopupVisibleChange: this.onVisibleChange,
 	        prefixCls: prefixCls
 	      },
-	      _react2.default.cloneElement(children(state, props), { onKeyDown: this.onKeyDown })
+	      _react2['default'].cloneElement(children(state, props), { onKeyDown: this.onKeyDown })
 	    );
 	  }
 	});
 	
-	exports.default = Picker;
+	exports['default'] = Picker;
 	module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 301:
+/***/ 302:
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -1585,7 +1604,7 @@ webpackJsonp([1],{
 
 /***/ }),
 
-/***/ 302:
+/***/ 303:
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -1627,12 +1646,12 @@ webpackJsonp([1],{
 	  }
 	};
 	
-	exports.default = placements;
+	exports['default'] = placements;
 	module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 345:
+/***/ 346:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1647,38 +1666,38 @@ webpackJsonp([1],{
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _MonthCalendar = __webpack_require__(346);
+	var _MonthCalendar = __webpack_require__(347);
 	
 	var _MonthCalendar2 = _interopRequireDefault(_MonthCalendar);
 	
-	var _Picker = __webpack_require__(300);
+	var _Picker = __webpack_require__(301);
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _zh_CN = __webpack_require__(337);
+	var _zh_CN = __webpack_require__(338);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
-	var _en_US = __webpack_require__(298);
+	var _en_US = __webpack_require__(299);
 	
 	var _en_US2 = _interopRequireDefault(_en_US);
 	
-	var _moment = __webpack_require__(278);
+	var _moment = __webpack_require__(282);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	__webpack_require__(343);
-	
 	__webpack_require__(344);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	__webpack_require__(345);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	/* eslint react/no-multi-comp:0, no-console:0 */
 	
 	var format = 'YYYY-MM';
 	var cn = location.search.indexOf('cn') !== -1;
 	
-	var now = (0, _moment2.default)();
+	var now = (0, _moment2['default'])();
 	if (cn) {
 	  now.locale('zh-cn').utcOffset(8);
 	} else {
@@ -1688,11 +1707,11 @@ webpackJsonp([1],{
 	var defaultCalendarValue = now.clone();
 	defaultCalendarValue.add(-1, 'month');
 	
-	var Test = _react2.default.createClass({
+	var Test = _react2['default'].createClass({
 	  displayName: 'Test',
 	
 	  propTypes: {
-	    defaultValue: _react2.default.PropTypes.object
+	    defaultValue: _react2['default'].PropTypes.object
 	  },
 	  getInitialState: function getInitialState() {
 	    return {
@@ -1719,21 +1738,21 @@ webpackJsonp([1],{
 	  },
 	  render: function render() {
 	    var state = this.state;
-	    var calendar = _react2.default.createElement(_MonthCalendar2.default, {
-	      locale: cn ? _zh_CN2.default : _en_US2.default,
+	    var calendar = _react2['default'].createElement(_MonthCalendar2['default'], {
+	      locale: cn ? _zh_CN2['default'] : _en_US2['default'],
 	      style: { zIndex: 1000 }
 	    });
-	    return _react2.default.createElement(
+	    return _react2['default'].createElement(
 	      'div',
 	      { style: { width: 240, margin: 20 } },
-	      _react2.default.createElement(
+	      _react2['default'].createElement(
 	        'div',
 	        { style: { marginBottom: 10 } },
 	        '\xA0\xA0\xA0\xA0',
-	        _react2.default.createElement(
+	        _react2['default'].createElement(
 	          'label',
 	          null,
-	          _react2.default.createElement('input', {
+	          _react2['default'].createElement('input', {
 	            checked: state.disabled,
 	            onChange: this.toggleDisabled,
 	            type: 'checkbox'
@@ -1741,7 +1760,7 @@ webpackJsonp([1],{
 	          ' disabled'
 	        )
 	      ),
-	      _react2.default.createElement(
+	      _react2['default'].createElement(
 	        'div',
 	        { style: {
 	            boxSizing: 'border-box',
@@ -1751,8 +1770,8 @@ webpackJsonp([1],{
 	            marginBottom: 22
 	          }
 	        },
-	        _react2.default.createElement(
-	          _Picker2.default,
+	        _react2['default'].createElement(
+	          _Picker2['default'],
 	          {
 	            animation: 'slide-up',
 	            disabled: state.disabled,
@@ -1763,7 +1782,7 @@ webpackJsonp([1],{
 	          function (_ref) {
 	            var value = _ref.value;
 	
-	            return _react2.default.createElement('input', {
+	            return _react2['default'].createElement('input', {
 	              style: { width: 200 },
 	              readOnly: true,
 	              disabled: state.disabled,
@@ -1794,7 +1813,7 @@ webpackJsonp([1],{
 	  return value.month() + 1 + '\u6708';
 	}
 	
-	_reactDom2.default.render(_react2.default.createElement(
+	_reactDom2['default'].render(_react2['default'].createElement(
 	  'div',
 	  {
 	    style: {
@@ -1804,8 +1823,8 @@ webpackJsonp([1],{
 	      margin: '0 auto'
 	    }
 	  },
-	  _react2.default.createElement(_MonthCalendar2.default, {
-	    locale: cn ? _zh_CN2.default : _en_US2.default,
+	  _react2['default'].createElement(_MonthCalendar2['default'], {
+	    locale: cn ? _zh_CN2['default'] : _en_US2['default'],
 	    style: { zIndex: 1000 },
 	    disabledDate: disabledDate,
 	    onSelect: onStandaloneSelect,
@@ -1813,16 +1832,16 @@ webpackJsonp([1],{
 	    monthCellContentRender: onMonthCellContentRender,
 	    defaultValue: defaultCalendarValue
 	  }),
-	  _react2.default.createElement(
+	  _react2['default'].createElement(
 	    'div',
 	    { style: { marginTop: 200 } },
-	    _react2.default.createElement(Test, { defaultValue: now })
+	    _react2['default'].createElement(Test, { defaultValue: now })
 	  )
 	), document.getElementById('__react-content'));
 
 /***/ }),
 
-/***/ 346:
+/***/ 347:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1843,15 +1862,15 @@ webpackJsonp([1],{
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _MonthPanel = __webpack_require__(287);
+	var _MonthPanel = __webpack_require__(288);
 	
 	var _MonthPanel2 = _interopRequireDefault(_MonthPanel);
 	
-	var _CalendarMixin = __webpack_require__(296);
+	var _CalendarMixin = __webpack_require__(297);
 	
 	var _CalendarMixin2 = _interopRequireDefault(_CalendarMixin);
 	
-	var _CommonMixin = __webpack_require__(297);
+	var _CommonMixin = __webpack_require__(298);
 	
 	var _CommonMixin2 = _interopRequireDefault(_CommonMixin);
 	
@@ -1859,14 +1878,14 @@ webpackJsonp([1],{
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var MonthCalendar = (0, _createReactClass2.default)({
+	var MonthCalendar = (0, _createReactClass2['default'])({
 	  propTypes: {
-	    monthCellRender: _propTypes2.default.func,
-	    dateCellRender: _propTypes2.default.func
+	    monthCellRender: _propTypes2['default'].func,
+	    dateCellRender: _propTypes2['default'].func
 	  },
-	  mixins: [_CommonMixin2.default, _CalendarMixin2.default],
+	  mixins: [_CommonMixin2['default'], _CalendarMixin2['default']],
 	
 	  onKeyDown: function onKeyDown(event) {
 	    var keyCode = event.keyCode;
@@ -1874,15 +1893,15 @@ webpackJsonp([1],{
 	    var stateValue = this.state.value;
 	    var value = stateValue;
 	    switch (keyCode) {
-	      case _KeyCode2.default.DOWN:
+	      case _KeyCode2['default'].DOWN:
 	        value = stateValue.clone();
 	        value.add(3, 'months');
 	        break;
-	      case _KeyCode2.default.UP:
+	      case _KeyCode2['default'].UP:
 	        value = stateValue.clone();
 	        value.add(-3, 'months');
 	        break;
-	      case _KeyCode2.default.LEFT:
+	      case _KeyCode2['default'].LEFT:
 	        value = stateValue.clone();
 	        if (ctrlKey) {
 	          value.add(-1, 'years');
@@ -1890,7 +1909,7 @@ webpackJsonp([1],{
 	          value.add(-1, 'months');
 	        }
 	        break;
-	      case _KeyCode2.default.RIGHT:
+	      case _KeyCode2['default'].RIGHT:
 	        value = stateValue.clone();
 	        if (ctrlKey) {
 	          value.add(1, 'years');
@@ -1898,7 +1917,7 @@ webpackJsonp([1],{
 	          value.add(1, 'months');
 	        }
 	        break;
-	      case _KeyCode2.default.ENTER:
+	      case _KeyCode2['default'].ENTER:
 	        this.onSelect(stateValue);
 	        event.preventDefault();
 	        return 1;
@@ -1913,7 +1932,7 @@ webpackJsonp([1],{
 	  },
 	  render: function render() {
 	    var props = this.props;
-	    var children = _react2.default.createElement(_MonthPanel2.default, {
+	    var children = _react2['default'].createElement(_MonthPanel2['default'], {
 	      locale: props.locale,
 	      disabledDate: props.disabledDate,
 	      style: { position: 'relative' },
@@ -1930,7 +1949,7 @@ webpackJsonp([1],{
 	  }
 	});
 	
-	exports.default = MonthCalendar;
+	exports['default'] = MonthCalendar;
 	module.exports = exports['default'];
 
 /***/ })
