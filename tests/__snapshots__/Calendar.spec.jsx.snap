@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Calendar render render render correctly 1`] = `
+exports[`Calendar render render correctly 1`] = `
 <div
   class="rc-calendar"
   tabindex="0"
@@ -765,7 +765,7 @@ exports[`Calendar render render render correctly 1`] = `
 </div>
 `;
 
-exports[`Calendar render render render correctly 2`] = `
+exports[`Calendar render render correctly 2`] = `
 <div
   class="rc-calendar"
   tabindex="0"

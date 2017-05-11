@@ -9,7 +9,7 @@ import CalendarFooter from './calendar/CalendarFooter';
 import CalendarMixin from './mixin/CalendarMixin';
 import CommonMixin from './mixin/CommonMixin';
 import DateInput from './date/DateInput';
-import { getTimeConfig, getTodayTime } from './util/index';
+import { getTimeConfig, getTodayTime, syncTime } from './util';
 
 function noop() {
 }
@@ -88,6 +88,7 @@ const Calendar = createReactClass({
   getInitialState() {
     return {
       showTimePicker: false,
+      isUserSetTime: false, // Flag to memoize whether user had set time
     };
   },
   onKeyDown(event) {
@@ -163,11 +164,20 @@ const Calendar = createReactClass({
   },
 
   onDateInputChange(value) {
+    this.setState({ isUserSetTime: true });
     this.onSelect(value, {
       source: 'dateInput',
     });
   },
   onDateTableSelect(value) {
+    const { timePicker } = this.props;
+    const { isUserSetTime } = this.state;
+    if (timePicker && !isUserSetTime) {
+      const timePickerDefaultValue = timePicker.props.defaultValue;
+      if (timePickerDefaultValue) {
+        syncTime(timePickerDefaultValue, value);
+      }
+    }
     this.onSelect(value);
   },
   onToday() {
@@ -209,7 +219,7 @@ const Calendar = createReactClass({
       ...timePicker.props,
       ...disabledTimeConfig,
       onChange: this.onDateInputChange,
-      defaultOpenValue: value,
+      defaultOpenValue: timePicker.props.defaultValue,
       value: selectedValue,
       disabledTime,
     }) : null;

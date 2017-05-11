@@ -4,9 +4,10 @@ import ReactDOM from 'react-dom';
 import TestUtils from 'react-dom/test-utils';
 import keyCode from 'rc-util/lib/KeyCode';
 import moment from 'moment';
-import { render } from 'enzyme';
+import { mount, render } from 'enzyme';
 import { renderToJson } from 'enzyme-to-json';
 import async from 'async';
+import TimePickerPanel from 'rc-time-picker/lib/Panel';
 import Calendar from '../index';
 import zhCN from '../src/locale/zh_CN';
 import enUS from '../src/locale/en_US';
@@ -25,24 +26,51 @@ describe('Calendar', () => {
   });
 
   describe('render', () => {
-    describe('render', () => {
-      it('render correctly', () => {
-        const zhWrapper = render(
-          <Calendar locale={zhCN} defaultValue={moment('2017-03-29').locale('zh-cn')} />
-        );
-        expect(renderToJson(zhWrapper)).toMatchSnapshot();
+    it('render correctly', () => {
+      const zhWrapper = render(
+        <Calendar locale={zhCN} defaultValue={moment('2017-03-29').locale('zh-cn')} />
+      );
+      expect(renderToJson(zhWrapper)).toMatchSnapshot();
 
-        const enWrapper = render(
-          <Calendar locale={enUS} defaultValue={moment('2017-03-29').locale('en')} />
-        );
-        expect(renderToJson(enWrapper)).toMatchSnapshot();
-      });
+      const enWrapper = render(
+        <Calendar locale={enUS} defaultValue={moment('2017-03-29').locale('en')} />
+      );
+      expect(renderToJson(enWrapper)).toMatchSnapshot();
+    });
 
-      it('render showToday false', () => {
-        calendar = ReactDOM.render(<Calendar showToday={false}/>, container);
-        expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
-          'rc-calendar-today-btn').length).toBe(0);
-      });
+    it('render showToday false correctly', () => {
+      const wrapper = mount(<Calendar showToday={false}/>, container);
+      expect(wrapper.find('.rc-calendar-today-btn').length).toBe(0);
+    });
+  });
+
+  describe('timePicker', () => {
+    it('set defaultOpenValue if timePicker.props.defaultValue is set', () => {
+      const timePicker = <TimePickerPanel defaultValue={moment('00:00:00', 'HH:mm:ss')} />;
+      const wrapper = mount(<Calendar timePicker={timePicker} />);
+      wrapper.find('.rc-calendar-time-picker-btn').simulate('click');
+      const selectedValues = wrapper.find('.rc-time-picker-panel-select-option-selected');
+      for (let i = 0; i < selectedValues.length; i += 1) {
+        expect(selectedValues.get(i).innerHTML).toBe('00');
+      }
+    });
+
+    it('use timePicker\'s time', () => {
+      const timePicker = <TimePickerPanel defaultValue={moment('00:00:00', 'HH:mm:ss')} />;
+      const wrapper = mount(<Calendar timePicker={timePicker} />);
+
+      wrapper.find('.rc-calendar-today').simulate('click');
+      // use timePicker's defaultValue if users haven't select a time
+      expect(wrapper.find('.rc-calendar-input').get(0).value).toBe('3/29/2017 00:00:00');
+
+      wrapper.find('.rc-calendar-time-picker-btn').simulate('click');
+      wrapper.find('.rc-time-picker-panel-select ul').at(0).find('li').at(6).simulate('click');
+      // update time to timePicker's time
+      expect(wrapper.find('.rc-calendar-input').get(0).value).toBe('3/29/2017 06:00:00');
+
+      wrapper.find('.rc-calendar-cell').at(10).simulate('click');
+      // still use timePicker's time
+      expect(wrapper.find('.rc-calendar-input').get(0).value).toBe('3/8/2017 06:00:00');
     });
   });
 

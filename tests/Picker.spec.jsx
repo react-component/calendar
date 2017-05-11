@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import Calendar from '../index';
 import DatePicker from '../src/Picker';
 import RangeCalendar from '../src/RangeCalendar';
