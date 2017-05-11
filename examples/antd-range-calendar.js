@@ -30,7 +30,11 @@ if (cn) {
 const defaultCalendarValue = now.clone();
 defaultCalendarValue.add(-1, 'month');
 
-const timePickerElement = <TimePickerPanel />;
+const timePickerElement = (
+  <TimePickerPanel
+    defaultValue={[moment('00:00:00', 'HH:mm:ss'), moment('23:59:59', 'HH:mm:ss')]}
+  />
+);
 
 function newArray(start, end) {
   const result = [];

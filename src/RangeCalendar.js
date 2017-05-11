@@ -83,6 +83,11 @@ const RangeCalendar = createReactClass({
 
   mixins: [CommonMixin],
 
+  // Flag to memoize whether user had set time
+  // NOTE: we cannot use state, for setState is async
+  isUserSetStartTime: false,
+  isUserSetEndTime: false,
+
   getDefaultProps() {
     return {
       type: 'both',
@@ -230,11 +235,13 @@ const RangeCalendar = createReactClass({
   },
 
   onStartInputSelect(...oargs) {
+    this.isUserSetStartTime = true;
     const args = ['left'].concat(oargs);
     return onInputSelect.apply(this, args);
   },
 
   onEndInputSelect(...oargs) {
+    this.isUserSetEndTime = true;
     const args = ['right'].concat(oargs);
     return onInputSelect.apply(this, args);
   },
@@ -337,6 +344,18 @@ const RangeCalendar = createReactClass({
   },
 
   fireSelectValueChange(selectedValue, direct) {
+    const { isUserSetStartTime, isUserSetEndTime } = this;
+    const { timePicker } = this.props;
+    if (timePicker && timePicker.props.defaultValue) {
+      const timePickerDefaultValue = timePicker.props.defaultValue;
+      if (selectedValue[0] && !isUserSetStartTime) {
+        syncTime(timePickerDefaultValue[0], selectedValue[0]);
+      }
+      if (selectedValue[1] && !isUserSetEndTime) {
+        syncTime(timePickerDefaultValue[1], selectedValue[1]);
+      }
+    }
+
     if (!('selectedValue' in this.props)) {
       this.setState({
         selectedValue,
