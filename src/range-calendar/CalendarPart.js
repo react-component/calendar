@@ -38,7 +38,8 @@ const CalendarPart = createReactClass({
       timePickerDisabledTime, showTimePicker,
       onInputSelect, enablePrev, enableNext,
     } = props;
-    const disabledTimeConfig = showTimePicker && disabledTime && timePicker ?
+    const shouldShowTimePicker = showTimePicker && timePicker;
+    const disabledTimeConfig = shouldShowTimePicker && disabledTime ?
       getTimeConfig(selectedValue, disabledTime) : null;
     const rangeClassName = `${prefixCls}-range`;
     const newProps = {
@@ -48,7 +49,7 @@ const CalendarPart = createReactClass({
       showTimePicker,
     };
     const index = direction === 'left' ? 0 : 1;
-    const timePickerEle = showTimePicker && timePicker &&
+    const timePickerEle = shouldShowTimePicker &&
       React.cloneElement(timePicker, {
         showHour: true,
         showMinute: true,
