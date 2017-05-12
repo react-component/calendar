@@ -34,6 +34,7 @@ export function getMonthName(month) {
 }
 
 export function syncTime(from, to) {
+  if (!moment.isMoment(from) || !moment.isMoment(to)) return;
   to.hour(from.hour());
   to.minute(from.minute());
   to.second(from.second());

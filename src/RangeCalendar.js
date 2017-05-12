@@ -83,11 +83,6 @@ const RangeCalendar = createReactClass({
 
   mixins: [CommonMixin],
 
-  // Flag to memoize whether user had set time
-  // NOTE: we cannot use state, for setState is async
-  isUserSetStartTime: false,
-  isUserSetEndTime: false,
-
   getDefaultProps() {
     return {
       type: 'both',
@@ -104,6 +99,7 @@ const RangeCalendar = createReactClass({
     const value = normalizeAnchor(props, 1);
     return {
       selectedValue,
+      prevSelectedValue: selectedValue,
       hoverValue: [],
       value,
       showTimePicker: false,
@@ -124,6 +120,7 @@ const RangeCalendar = createReactClass({
     }
     if ('selectedValue' in nextProps) {
       newState.selectedValue = nextProps.selectedValue;
+      newState.prevSelectedValue = nextProps.selectedValue;
       this.setState(newState);
     }
   },
@@ -145,14 +142,16 @@ const RangeCalendar = createReactClass({
   },
 
   onSelect(value) {
-    const { hoverValue, selectedValue } = this.state;
+    const { hoverValue, selectedValue, prevSelectedValue } = this.state;
     let nextSelectedValue;
     const { type } = this.props;
     let changed = false;
     if (!hoverValue[0] && !hoverValue[1] && type === 'both') {
+      syncTime(prevSelectedValue[0], value);
       nextSelectedValue = [value];
       changed = true;
     } else if (type === 'start') {
+      syncTime(prevSelectedValue[0], value);
       const endValue = selectedValue[1];
       if (!endValue || this.compare(endValue, value) < 0) {
         nextSelectedValue = [value];
@@ -164,9 +163,11 @@ const RangeCalendar = createReactClass({
       let startValue;
       startValue = type === 'end' ? selectedValue[0] : hoverValue[0];
       if (startValue && this.compare(startValue, value) <= 0) {
+        syncTime(prevSelectedValue[1], value);
         nextSelectedValue = [startValue, value];
         changed = true;
       } else {
+        syncTime(prevSelectedValue[0], value);
         nextSelectedValue = [value];
         changed = true;
       }
@@ -235,13 +236,11 @@ const RangeCalendar = createReactClass({
   },
 
   onStartInputSelect(...oargs) {
-    this.isUserSetStartTime = true;
     const args = ['left'].concat(oargs);
     return onInputSelect.apply(this, args);
   },
 
   onEndInputSelect(...oargs) {
-    this.isUserSetEndTime = true;
     const args = ['right'].concat(oargs);
     return onInputSelect.apply(this, args);
   },
@@ -344,14 +343,14 @@ const RangeCalendar = createReactClass({
   },
 
   fireSelectValueChange(selectedValue, direct) {
-    const { isUserSetStartTime, isUserSetEndTime } = this;
     const { timePicker } = this.props;
+    const { prevSelectedValue } = this.state;
     if (timePicker && timePicker.props.defaultValue) {
       const timePickerDefaultValue = timePicker.props.defaultValue;
-      if (selectedValue[0] && !isUserSetStartTime) {
+      if (!prevSelectedValue[0] && selectedValue[0]) {
         syncTime(timePickerDefaultValue[0], selectedValue[0]);
       }
-      if (selectedValue[1] && !isUserSetEndTime) {
+      if (!prevSelectedValue[1] && selectedValue[1]) {
         syncTime(timePickerDefaultValue[1], selectedValue[1]);
       }
     }
@@ -381,6 +380,7 @@ const RangeCalendar = createReactClass({
     if (direct || selectedValue[0] && selectedValue[1]) {
       this.setState({
         hoverValue: [],
+        prevSelectedValue: selectedValue,
       });
       this.props.onSelect(selectedValue);
     }
