@@ -120,6 +120,13 @@ describe('RangeCalendar', () => {
       .toMatch('rc-calendar-month-panel-cell-disabled');
   });
 
+  it('left panel and right panel should not be the same month even we try to set it', () => {
+    const wrapper = mount(<RangeCalendar value={[moment(), moment()]} />);
+    const value = wrapper.state('value');
+    expect(value[0].isSame(moment())).toBe(true);
+    expect(value[1].isSame(moment().add(1, 'month'))).toBe(true);
+  });
+
   it('left panel and right panel should not be the same month', () => {
     const wrapper = mount(<RangeCalendar />);
     wrapper.find('.rc-calendar-range-left .rc-calendar-today').simulate('click').simulate('click');

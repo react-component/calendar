@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import classnames from 'classnames';
 import CalendarPart from './range-calendar/CalendarPart';
-import { syncTime, getTodayTime, isAllowedDate } from './util/';
 import TodayButton from './calendar/TodayButton';
 import OkButton from './calendar/OkButton';
 import TimePickerButton from './calendar/TimePickerButton';
 import CommonMixin from './mixin/CommonMixin';
+import { syncTime, getTodayTime, isAllowedDate } from './util/';
 
 function noop() {
 }
@@ -30,7 +30,9 @@ function getValueFromSelectedValue(selectedValue) {
 function normalizeAnchor(props, init) {
   const selectedValue = props.selectedValue || init && props.defaultSelectedValue;
   const value = props.value || init && props.defaultValue;
-  const normalizedValue = value || getValueFromSelectedValue(selectedValue);
+  const normalizedValue = value ?
+          getValueFromSelectedValue(value) :
+          getValueFromSelectedValue(selectedValue);
   return !isEmptyArray(normalizedValue) ?
     normalizedValue : init && [getNow(), getNow().add(1, 'months')];
 }
