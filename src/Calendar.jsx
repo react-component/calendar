@@ -88,7 +88,6 @@ const Calendar = createReactClass({
   getInitialState() {
     return {
       showTimePicker: false,
-      isUserSetTime: false, // Flag to memoize whether user had set time
     };
   },
   onKeyDown(event) {
@@ -164,15 +163,14 @@ const Calendar = createReactClass({
   },
 
   onDateInputChange(value) {
-    this.setState({ isUserSetTime: true });
     this.onSelect(value, {
       source: 'dateInput',
     });
   },
   onDateTableSelect(value) {
     const { timePicker } = this.props;
-    const { isUserSetTime } = this.state;
-    if (timePicker && !isUserSetTime) {
+    const { selectedValue } = this.state;
+    if (!selectedValue && timePicker) {
       const timePickerDefaultValue = timePicker.props.defaultValue;
       if (timePickerDefaultValue) {
         syncTime(timePickerDefaultValue, value);

@@ -55,6 +55,18 @@ describe('Calendar', () => {
       }
     });
 
+    it('follow Calendar[selectedValue|defaultSelectedValue] when it is set', () => {
+      const timePicker = <TimePickerPanel defaultValue={moment('00:00:00', 'HH:mm:ss')} />;
+      const wrapper = mount(
+        <Calendar timePicker={timePicker} defaultSelectedValue={moment('01:01:01', 'HH:mm:ss')} />
+      );
+      wrapper.find('.rc-calendar-time-picker-btn').simulate('click');
+      const selectedValues = wrapper.find('.rc-time-picker-panel-select-option-selected');
+      for (let i = 0; i < selectedValues.length; i += 1) {
+        expect(selectedValues.get(i).innerHTML).toBe('01');
+      }
+    });
+
     it('use timePicker\'s time', () => {
       const timePicker = <TimePickerPanel defaultValue={moment('00:00:00', 'HH:mm:ss')} />;
       const wrapper = mount(<Calendar timePicker={timePicker} />);
