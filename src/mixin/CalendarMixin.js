@@ -108,9 +108,11 @@ const CalendarMixin = {
         value,
       });
     }
-    if (originalValue && value && !originalValue.isSame(value) ||
-      (!originalValue && value) ||
-      (originalValue && !value)) {
+    if (
+      originalValue && value && !originalValue.isSame(value) ||
+        (!originalValue && value) ||
+        (originalValue && !value)
+    ) {
       this.props.onChange(value);
     }
   },

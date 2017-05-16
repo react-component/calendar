@@ -1,10 +1,10 @@
 import React from 'react';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
+import KeyCode from 'rc-util/lib/KeyCode';
 import MonthPanel from './month/MonthPanel';
 import CalendarMixin from './mixin/CalendarMixin';
 import CommonMixin from './mixin/CommonMixin';
-import KeyCode from 'rc-util/lib/KeyCode';
 
 const MonthCalendar = createReactClass({
   propTypes: {
@@ -59,17 +59,19 @@ const MonthCalendar = createReactClass({
 
   render() {
     const props = this.props;
-    const children = (<MonthPanel
-      locale={props.locale}
-      disabledDate={props.disabledDate}
-      style={{ position: 'relative' }}
-      value={this.state.value}
-      cellRender={props.monthCellRender}
-      contentRender={props.monthCellContentRender}
-      rootPrefixCls={props.prefixCls}
-      onChange={this.setValue}
-      onSelect={this.onSelect}
-    />);
+    const children = (
+      <MonthPanel
+        locale={props.locale}
+        disabledDate={props.disabledDate}
+        style={{ position: 'relative' }}
+        value={this.state.value}
+        cellRender={props.monthCellRender}
+        contentRender={props.monthCellContentRender}
+        rootPrefixCls={props.prefixCls}
+        onChange={this.setValue}
+        onSelect={this.onSelect}
+      />
+    );
     return this.renderRoot({
       children,
     });
