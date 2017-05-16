@@ -62,7 +62,7 @@
   line-height: 28px;
 }
 .rc-select-selection__clear:after {
-  content: '×';
+  content: '\D7';
 }
 .rc-select-focused .rc-select-selection {
   border-color: #23c0fa;
@@ -305,7 +305,7 @@
   transition: opacity .3s, transform .3s, -webkit-transform .3s;
 }
 .rc-select .rc-select-selection__choice__remove:before {
-  content: '×';
+  content: '\D7';
 }
 .rc-select .rc-select-selection__choice__remove:hover {
   color: #333;
