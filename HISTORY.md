@@ -1,6 +1,11 @@
 # History
 ----
 
+## 8.2.0 / 2017-05-16
+
+- Time of `Calendar[timePicker]` & `RangeCalendar[timePicker]` could be set now
+- Fix that two panels of RangeCalendar should not be the same month
+
 ## 8.1.0 / 2017-04-10
 
 - Add locale fi_FI
