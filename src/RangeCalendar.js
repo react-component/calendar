@@ -90,6 +90,7 @@ const RangeCalendar = createReactClass({
       type: 'both',
       defaultSelectedValue: [],
       onValueChange: noop,
+      onHoverChange: noop,
       disabledTime: noop,
       showToday: true,
     };
@@ -102,7 +103,7 @@ const RangeCalendar = createReactClass({
     return {
       selectedValue,
       prevSelectedValue: selectedValue,
-      hoverValue: [],
+      hoverValue: props.hoverValue || [],
       value,
       showTimePicker: false,
       isStartMonthYearPanelShow: false,
@@ -120,6 +121,9 @@ const RangeCalendar = createReactClass({
       }
       this.setState(newState);
     }
+    if ('hoverValue' in nextProps) {
+      this.setState({ hoverValue: nextProps.hoverValue });
+    }
     if ('selectedValue' in nextProps) {
       newState.selectedValue = nextProps.selectedValue;
       newState.prevSelectedValue = nextProps.selectedValue;
@@ -129,17 +133,13 @@ const RangeCalendar = createReactClass({
 
   onDatePanelEnter() {
     if (this.hasSelectedValue()) {
-      this.setState({
-        hoverValue: this.state.selectedValue.concat(),
-      });
+      this.fireHoverValueChange(this.state.selectedValue.concat());
     }
   },
 
   onDatePanelLeave() {
     if (this.hasSelectedValue()) {
-      this.setState({
-        hoverValue: [],
-      });
+      this.fireHoverValueChange([]);
     }
   },
 
@@ -190,27 +190,19 @@ const RangeCalendar = createReactClass({
       } else {
         hoverValue = [value];
       }
-      this.setState({
-        hoverValue,
-      });
     } else if (type === 'end' && selectedValue[0]) {
       if (this.compare(value, selectedValue[0]) > 0) {
         hoverValue = [selectedValue[0], value];
       } else {
         hoverValue = [];
       }
-      this.setState({
-        hoverValue,
-      });
     } else {
       if (!hoverValue[0] || this.compare(value, hoverValue[0]) < 0) {
         return;
       }
       hoverValue[1] = value;
-      this.setState({
-        hoverValue,
-      });
     }
+    this.fireHoverValueChange(hoverValue);
   },
 
   onToday() {
@@ -374,16 +366,12 @@ const RangeCalendar = createReactClass({
     }
 
     if (selectedValue[0] && !selectedValue[1]) {
-      this.setState({
-        hoverValue: selectedValue.concat(),
-      });
+      this.fireHoverValueChange(selectedValue.concat());
     }
     this.props.onChange(selectedValue);
     if (direct || selectedValue[0] && selectedValue[1]) {
-      this.setState({
-        hoverValue: [],
-        prevSelectedValue: selectedValue,
-      });
+      this.setState({ prevSelectedValue: selectedValue });
+      this.fireHoverValueChange([]);
       this.props.onSelect(selectedValue);
     }
   },
@@ -396,6 +384,14 @@ const RangeCalendar = createReactClass({
       });
     }
     props.onValueChange(value);
+  },
+
+  fireHoverValueChange(hoverValue) {
+    const props = this.props;
+    if (!('hoverValue' in props)) {
+      this.setState({ hoverValue });
+    }
+    props.onHoverChange(hoverValue);
   },
 
   clear() {

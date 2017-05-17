@@ -26,11 +26,22 @@ if (cn) {
 }
 
 const Picker = React.createClass({
+  getInitialState() {
+    return {
+      hoverValue: [],
+    };
+  },
+  onHoverChange(hoverValue) {
+    console.log(hoverValue);
+    this.setState({ hoverValue });
+  },
   render() {
     const props = this.props;
     const { showValue } = props;
     const calendar = (
       <RangeCalendar
+        hoverValue={this.state.hoverValue}
+        onHoverChange={this.onHoverChange}
         type={this.props.type}
         locale={cn ? zhCN : enUS}
         defaultValue={now}

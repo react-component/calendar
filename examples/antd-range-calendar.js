@@ -116,6 +116,7 @@ const Test = React.createClass({
   getInitialState() {
     return {
       value: [],
+      hoverValue: [],
     };
   },
 
@@ -123,10 +124,17 @@ const Test = React.createClass({
     this.setState({ value });
   },
 
+  onHoverChange(hoverValue) {
+    console.log(hoverValue);
+    this.setState({ hoverValue });
+  },
+
   render() {
     const state = this.state;
     const calendar = (
       <RangeCalendar
+        hoverValue={state.hoverValue}
+        onHoverChange={this.onHoverChange}
         showWeekNumber={false}
         dateInputPlaceholder={['start', 'end']}
         defaultValue={[now, now.clone().add(1, 'months')]}
