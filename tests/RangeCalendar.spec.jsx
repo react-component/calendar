@@ -1,13 +1,24 @@
 /* eslint-disable no-undef, max-len */
 import React from 'react';
 import moment from 'moment';
-import { mount } from 'enzyme';
+import { mount, render } from 'enzyme';
+import { renderToJson } from 'enzyme-to-json';
 import TimePickerPanel from 'rc-time-picker/lib/Panel';
 import RangeCalendar from '../src/RangeCalendar';
 
 const format = ('YYYY-MM-DD');
 
 describe('RangeCalendar', () => {
+  it('render works', () => {
+    const wrapper = mount(<RangeCalendar />);
+    expect(wrapper.find('.rc-calendar-cell').length).toBeGreaterThan(0);
+  });
+
+  it('render hoverValue correctly', () => {
+    const wrapper = render(<RangeCalendar hoverValue={[moment(), moment().add(1, 'months')]} />);
+    expect(renderToJson(wrapper)).toMatchSnapshot();
+  });
+
   it('next month works', () => {
     const wrapper = mount(<RangeCalendar />);
 
@@ -138,11 +149,6 @@ describe('RangeCalendar', () => {
     expect(value[1].isSame(moment().add(1, 'month'))).toBe(true);
   });
 
-  it('render works', () => {
-    const wrapper = mount(<RangeCalendar />);
-    expect(wrapper.find('.rc-calendar-cell').length).toBeGreaterThan(0);
-  });
-
   it('onSelect works', () => {
     function onSelect(d) {
       expect(d[0].format(format)).toBe('2015-09-04');
@@ -163,6 +169,18 @@ describe('RangeCalendar', () => {
     expect(wrapper.find('.rc-calendar-input').get(0).value).toBe('2015-09-04');
     wrapper.find('.rc-calendar-range-right .rc-calendar-date').at(5).simulate('click'); // 10.2
     expect(wrapper.find('.rc-calendar-input').get(1).value).toBe('2015-10-02');
+  });
+
+  it('onHoverChange works', () => {
+    let hoverValue = null;
+    function onHoverChange(hv) {
+      hoverValue = hv;
+    }
+    const wrapper = mount(<RangeCalendar onHoverChange={onHoverChange} />);
+    wrapper.find('.rc-calendar-range-left .rc-calendar-cell').at(10).simulate('click');
+    wrapper.find('.rc-calendar-range-left .rc-calendar-cell').at(20).simulate('mouseEnter');
+    expect(hoverValue[0].format(format)).toBe('2017-03-08');
+    expect(hoverValue[1].format(format)).toBe('2017-03-18');
   });
 
   describe('timePicker', () => {
