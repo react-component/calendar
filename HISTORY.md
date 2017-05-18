@@ -1,6 +1,10 @@
 # History
 ----
 
+## 8.3.0 / 2017-05-18
+
+- expose hoverValue as controlled property and onHoverChange
+
 ## 8.2.0 / 2017-05-16
 
 - Time of `Calendar[timePicker]` & `RangeCalendar[timePicker]` could be set now
