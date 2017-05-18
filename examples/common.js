@@ -22522,6 +22522,10 @@ var Trigger = (0, _createReactClass2["default"])({
       }
     });
 
+    // We must listen to `mousedown` or `touchstart`, edge case:
+    // https://github.com/ant-design/ant-design/issues/5804
+    // https://github.com/react-component/calendar/issues/250
+    // https://github.com/react-component/trigger/issues/50
     if (state.popupVisible) {
       var currentDocument = void 0;
       if (!this.clickOutsideHandler && this.isClickToHide()) {
@@ -22785,8 +22789,8 @@ var Trigger = (0, _createReactClass2["default"])({
     return action.indexOf('focus') !== -1 || hideAction.indexOf('blur') !== -1;
   },
   forcePopupAlign: function forcePopupAlign() {
-    if (this.state.popupVisible && this.popupInstance && this.popupInstance.alignInstance) {
-      this.popupInstance.alignInstance.forceAlign();
+    if (this.state.popupVisible && this._component && this._component.alignInstance) {
+      this._component.alignInstance.forceAlign();
     }
   },
   fireEvents: function fireEvents(type, e) {

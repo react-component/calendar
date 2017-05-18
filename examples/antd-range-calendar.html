@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>antd-range-calendar.js - example - rc-calendar@8.2.0</title>
+  <title>antd-range-calendar.js - example - rc-calendar@8.3.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -263,7 +263,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
   <div class="container">
     <div class="header">
-      <h1>rc-calendar@8.2.0</h1>
+      <h1>rc-calendar@8.3.0</h1>
 
       <p>React Calendar</p>
     </div>
@@ -387,6 +387,7 @@ const Test = React.createClass({
   getInitialState() {
     return {
       value: [],
+      hoverValue: [],
     };
   },
 
@@ -394,10 +395,17 @@ const Test = React.createClass({
     this.setState({ value });
   },
 
+  onHoverChange(hoverValue) {
+    console.log(hoverValue);
+    this.setState({ hoverValue });
+  },
+
   render() {
     const state = this.state;
     const calendar = (
       &lt;RangeCalendar
+        hoverValue={state.hoverValue}
+        onHoverChange={this.onHoverChange}
         showWeekNumber={false}
         dateInputPlaceholder={['start', 'end']}
         defaultValue={[now, now.clone().add(1, 'months')]}
