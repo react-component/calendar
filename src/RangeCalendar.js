@@ -13,10 +13,6 @@ import { syncTime, getTodayTime, isAllowedDate } from './util/';
 function noop() {
 }
 
-function getNow() {
-  return moment();
-}
-
 function isEmptyArray(arr) {
   return Array.isArray(arr) && (arr.length === 0 || arr.every(i => !i));
 }
@@ -34,7 +30,7 @@ function normalizeAnchor(props, init) {
           getValueFromSelectedValue(value) :
           getValueFromSelectedValue(selectedValue);
   return !isEmptyArray(normalizedValue) ?
-    normalizedValue : init && [getNow(), getNow().add(1, 'months')];
+    normalizedValue : init && [moment(), moment().add(1, 'months')];
 }
 
 function generateOptions(length) {
@@ -105,6 +101,7 @@ const RangeCalendar = createReactClass({
     return {
       selectedValue,
       prevSelectedValue: selectedValue,
+      firstSelectedValue: null,
       hoverValue: props.hoverValue || [],
       value,
       showTimePicker: false,
@@ -146,63 +143,55 @@ const RangeCalendar = createReactClass({
   },
 
   onSelect(value) {
-    const { hoverValue, selectedValue, prevSelectedValue } = this.state;
-    let nextSelectedValue;
     const { type } = this.props;
-    let changed = false;
-    if (!hoverValue[0] && !hoverValue[1] && type === 'both') {
-      syncTime(prevSelectedValue[0], value);
-      nextSelectedValue = [value];
-      changed = true;
+    const { selectedValue, prevSelectedValue, firstSelectedValue } = this.state;
+    let nextSelectedValue;
+    if (type === 'both') {
+      if (!firstSelectedValue) {
+        syncTime(prevSelectedValue[0], value);
+        nextSelectedValue = [value];
+      } else if (this.compare(firstSelectedValue, value) < 0) {
+        syncTime(prevSelectedValue[1], value);
+        nextSelectedValue = [firstSelectedValue, value];
+      } else {
+        syncTime(prevSelectedValue[0], value);
+        nextSelectedValue = [value, firstSelectedValue];
+      }
     } else if (type === 'start') {
       syncTime(prevSelectedValue[0], value);
       const endValue = selectedValue[1];
-      if (!endValue || this.compare(endValue, value) < 0) {
-        nextSelectedValue = [value];
-      } else {
-        nextSelectedValue = [value, endValue];
-      }
-      changed = true;
-    } else {
-      let startValue;
-      startValue = type === 'end' ? selectedValue[0] : hoverValue[0];
+      nextSelectedValue = endValue && this.compare(endValue, value) > 0 ?
+        [value, endValue] : [value];
+    } else { // type === 'end'
+      const startValue = selectedValue[0];
       if (startValue && this.compare(startValue, value) <= 0) {
         syncTime(prevSelectedValue[1], value);
         nextSelectedValue = [startValue, value];
-        changed = true;
       } else {
         syncTime(prevSelectedValue[0], value);
         nextSelectedValue = [value];
-        changed = true;
       }
     }
 
-    if (changed) {
-      this.fireSelectValueChange(nextSelectedValue);
-    }
+    this.fireSelectValueChange(nextSelectedValue);
   },
 
   onDayHover(value) {
-    let { hoverValue } = this.state;
-    const { selectedValue } = this.state;
+    let hoverValue = [];
+    const { selectedValue, firstSelectedValue } = this.state;
     const { type } = this.props;
     if (type === 'start' && selectedValue[1]) {
-      if (this.compare(value, selectedValue[1]) < 0) {
-        hoverValue = [value, selectedValue[1]];
-      } else {
-        hoverValue = [value];
-      }
+      hoverValue = this.compare(value, selectedValue[1]) < 0 ?
+        [value, selectedValue[1]] : [value];
     } else if (type === 'end' && selectedValue[0]) {
-      if (this.compare(value, selectedValue[0]) > 0) {
-        hoverValue = [selectedValue[0], value];
-      } else {
-        hoverValue = [];
-      }
+      hoverValue = this.compare(value, selectedValue[0]) > 0 ?
+        [selectedValue[0], value] : [];
     } else {
-      if (!hoverValue[0] || this.compare(value, hoverValue[0]) < 0) {
+      if (!firstSelectedValue) {
         return;
       }
-      hoverValue[1] = value;
+      hoverValue = this.compare(value, firstSelectedValue) < 0 ?
+        [value, firstSelectedValue] : [firstSelectedValue, value];
     }
     this.fireHoverValueChange(hoverValue);
   },
@@ -359,7 +348,7 @@ const RangeCalendar = createReactClass({
 
     // 尚未选择过时间，直接输入的话
     if (!this.state.selectedValue[0] || !this.state.selectedValue[1]) {
-      const startValue = selectedValue[0] || getNow();
+      const startValue = selectedValue[0] || moment();
       const endValue = selectedValue[1] || startValue.clone().add(1, 'months');
       this.setState({
         selectedValue,
@@ -368,11 +357,15 @@ const RangeCalendar = createReactClass({
     }
 
     if (selectedValue[0] && !selectedValue[1]) {
+      this.setState({ firstSelectedValue: selectedValue[0] });
       this.fireHoverValueChange(selectedValue.concat());
     }
     this.props.onChange(selectedValue);
     if (direct || selectedValue[0] && selectedValue[1]) {
-      this.setState({ prevSelectedValue: selectedValue });
+      this.setState({
+        prevSelectedValue: selectedValue,
+        firstSelectedValue: null,
+      });
       this.fireHoverValueChange([]);
       this.props.onSelect(selectedValue);
     }
