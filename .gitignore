@@ -24,6 +24,7 @@ dist
 *.css
 build
 lib
+es
 coverage
 yarn.lock
 .vscode
