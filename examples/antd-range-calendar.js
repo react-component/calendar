@@ -112,6 +112,25 @@ function onStandaloneSelect(value) {
   console.log(format(value[0]), format(value[1]));
 }
 
+function getShowDateFromValue(value: moment.Moment[]): moment.Moment[] | undefined {
+  const [start, end] = value;
+  // value could be an empty array, then we should not reset showDate
+  if (!start && !end) {
+    return;
+  }
+  const newEnd = end && end.isSame(start, 'month') ? end.clone().add(1, 'month') : end;
+  return [start, newEnd];
+}
+
+
+function pickerValueAdapter(value?: moment.Moment | moment.Moment[]): moment.Moment[] | undefined {
+  if (!value) { return; }
+  if (Array.isArray(value)) {
+    return value;
+  }
+  return [value, value.clone().add(1, 'month')];
+}
+
 const Test = React.createClass({
   getInitialState() {
     return {
@@ -121,7 +140,7 @@ const Test = React.createClass({
   },
 
   onChange(value) {
-    this.setState({ value });
+    this.setState({ value, showDate: getShowDateFromValue(value) });
   },
 
   onHoverChange(hoverValue) {
@@ -141,6 +160,7 @@ const Test = React.createClass({
         locale={cn ? zhCN : enUS}
         disabledTime={disabledTime}
         timePicker={timePickerElement}
+        value={state.showDate || pickerValueAdapter(moment())}
       />
     );
     return (
