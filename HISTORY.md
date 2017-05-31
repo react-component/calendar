@@ -1,6 +1,11 @@
 # History
 ----
 
+## 8.4.0 / 2017-05-31
+
+- Supporting Bulgarian.
+- UX: can select end date first, and then start date.
+
 ## 8.3.0 / 2017-05-18
 
 - expose hoverValue as controlled property and onHoverChange
