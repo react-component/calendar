@@ -65,11 +65,13 @@ const CalendarHeader = createReactClass({
   },
 
   onSelect(value) {
-    this.triggerPanelChange({
-      showMonthPanel: 0,
-      showYearPanel: 0,
-    });
-    this.props.onValueChange(value);
+    setTimeout(() => {
+      this.triggerPanelChange({
+        showMonthPanel: 0,
+        showYearPanel: 0,
+      });
+      this.props.onValueChange(value);
+    }, 0);
   },
 
   triggerPanelChange(panelStatus) {
