@@ -18,7 +18,7 @@ webpackJsonp([1],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_create_react_class___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_create_react_class__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prop_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_moment__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_moment__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_moment__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_classnames__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_classnames__);
@@ -46,10 +46,6 @@ webpackJsonp([1],{
 
 function noop() {}
 
-function getNow() {
-  return __WEBPACK_IMPORTED_MODULE_7_moment___default()();
-}
-
 function isEmptyArray(arr) {
   return Array.isArray(arr) && (arr.length === 0 || arr.every(function (i) {
     return !i;
@@ -69,7 +65,7 @@ function normalizeAnchor(props, init) {
   var selectedValue = props.selectedValue || init && props.defaultSelectedValue;
   var value = props.value || init && props.defaultValue;
   var normalizedValue = value ? getValueFromSelectedValue(value) : getValueFromSelectedValue(selectedValue);
-  return !isEmptyArray(normalizedValue) ? normalizedValue : init && [getNow(), getNow().add(1, 'months')];
+  return !isEmptyArray(normalizedValue) ? normalizedValue : init && [__WEBPACK_IMPORTED_MODULE_7_moment___default()(), __WEBPACK_IMPORTED_MODULE_7_moment___default()().add(1, 'months')];
 }
 
 function generateOptions(length) {
@@ -139,6 +135,7 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_5_create_react_class___default()({
     return {
       selectedValue: selectedValue,
       prevSelectedValue: selectedValue,
+      firstSelectedValue: null,
       hoverValue: props.hoverValue || [],
       value: value,
       showTimePicker: false,
@@ -176,68 +173,58 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_5_create_react_class___default()({
     }
   },
   onSelect: function onSelect(value) {
+    var type = this.props.type;
     var _state = this.state,
-        hoverValue = _state.hoverValue,
         selectedValue = _state.selectedValue,
-        prevSelectedValue = _state.prevSelectedValue;
+        prevSelectedValue = _state.prevSelectedValue,
+        firstSelectedValue = _state.firstSelectedValue;
 
     var nextSelectedValue = void 0;
-    var type = this.props.type;
-
-    var changed = false;
-    if (!hoverValue[0] && !hoverValue[1] && type === 'both') {
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_14__util___["a" /* syncTime */])(prevSelectedValue[0], value);
-      nextSelectedValue = [value];
-      changed = true;
+    if (type === 'both') {
+      if (!firstSelectedValue) {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_14__util___["a" /* syncTime */])(prevSelectedValue[0], value);
+        nextSelectedValue = [value];
+      } else if (this.compare(firstSelectedValue, value) < 0) {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_14__util___["a" /* syncTime */])(prevSelectedValue[1], value);
+        nextSelectedValue = [firstSelectedValue, value];
+      } else {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_14__util___["a" /* syncTime */])(prevSelectedValue[0], value);
+        nextSelectedValue = [value, firstSelectedValue];
+      }
     } else if (type === 'start') {
       __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_14__util___["a" /* syncTime */])(prevSelectedValue[0], value);
       var endValue = selectedValue[1];
-      if (!endValue || this.compare(endValue, value) < 0) {
-        nextSelectedValue = [value];
-      } else {
-        nextSelectedValue = [value, endValue];
-      }
-      changed = true;
+      nextSelectedValue = endValue && this.compare(endValue, value) > 0 ? [value, endValue] : [value];
     } else {
-      var startValue = void 0;
-      startValue = type === 'end' ? selectedValue[0] : hoverValue[0];
+      // type === 'end'
+      var startValue = selectedValue[0];
       if (startValue && this.compare(startValue, value) <= 0) {
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_14__util___["a" /* syncTime */])(prevSelectedValue[1], value);
         nextSelectedValue = [startValue, value];
-        changed = true;
       } else {
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_14__util___["a" /* syncTime */])(prevSelectedValue[0], value);
         nextSelectedValue = [value];
-        changed = true;
       }
     }
 
-    if (changed) {
-      this.fireSelectValueChange(nextSelectedValue);
-    }
+    this.fireSelectValueChange(nextSelectedValue);
   },
   onDayHover: function onDayHover(value) {
-    var hoverValue = this.state.hoverValue;
-    var selectedValue = this.state.selectedValue;
+    var hoverValue = [];
+    var _state2 = this.state,
+        selectedValue = _state2.selectedValue,
+        firstSelectedValue = _state2.firstSelectedValue;
     var type = this.props.type;
 
     if (type === 'start' && selectedValue[1]) {
-      if (this.compare(value, selectedValue[1]) < 0) {
-        hoverValue = [value, selectedValue[1]];
-      } else {
-        hoverValue = [value];
-      }
+      hoverValue = this.compare(value, selectedValue[1]) < 0 ? [value, selectedValue[1]] : [value];
     } else if (type === 'end' && selectedValue[0]) {
-      if (this.compare(value, selectedValue[0]) > 0) {
-        hoverValue = [selectedValue[0], value];
-      } else {
-        hoverValue = [];
-      }
+      hoverValue = this.compare(value, selectedValue[0]) > 0 ? [selectedValue[0], value] : [];
     } else {
-      if (!hoverValue[0] || this.compare(value, hoverValue[0]) < 0) {
+      if (!firstSelectedValue) {
         return;
       }
-      hoverValue[1] = value;
+      hoverValue = this.compare(value, firstSelectedValue) < 0 ? [value, firstSelectedValue] : [firstSelectedValue, value];
     }
     this.fireHoverValueChange(hoverValue);
   },
@@ -315,10 +302,10 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_5_create_react_class___default()({
     return value;
   },
   getEndValue: function getEndValue() {
-    var _state2 = this.state,
-        value = _state2.value,
-        selectedValue = _state2.selectedValue,
-        showTimePicker = _state2.showTimePicker;
+    var _state3 = this.state,
+        value = _state3.value,
+        selectedValue = _state3.selectedValue,
+        showTimePicker = _state3.showTimePicker;
 
     var endValue = value[1] ? value[1].clone() : value[0].clone().add(1, 'month');
     // keep selectedTime when select date
@@ -333,9 +320,9 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_5_create_react_class___default()({
 
   // get disabled hours for second picker
   getEndDisableTime: function getEndDisableTime() {
-    var _state3 = this.state,
-        selectedValue = _state3.selectedValue,
-        value = _state3.value;
+    var _state4 = this.state,
+        selectedValue = _state4.selectedValue,
+        value = _state4.value;
 
     var startValue = selectedValue && selectedValue[0] || value[0].clone();
     // if startTime and endTime is same day..
@@ -403,7 +390,7 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_5_create_react_class___default()({
 
     // 尚未选择过时间，直接输入的话
     if (!this.state.selectedValue[0] || !this.state.selectedValue[1]) {
-      var startValue = selectedValue[0] || getNow();
+      var startValue = selectedValue[0] || __WEBPACK_IMPORTED_MODULE_7_moment___default()();
       var endValue = selectedValue[1] || startValue.clone().add(1, 'months');
       this.setState({
         selectedValue: selectedValue,
@@ -412,11 +399,15 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_5_create_react_class___default()({
     }
 
     if (selectedValue[0] && !selectedValue[1]) {
+      this.setState({ firstSelectedValue: selectedValue[0] });
       this.fireHoverValueChange(selectedValue.concat());
     }
     this.props.onChange(selectedValue);
     if (direct || selectedValue[0] && selectedValue[1]) {
-      this.setState({ prevSelectedValue: selectedValue });
+      this.setState({
+        prevSelectedValue: selectedValue,
+        firstSelectedValue: null
+      });
       this.fireHoverValueChange([]);
       this.props.onSelect(selectedValue);
     }
@@ -1045,7 +1036,7 @@ $export($export.S + $export.F * !__webpack_require__(124)(function(iter){ Array.
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_createClass__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_createClass__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_createClass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_createClass__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_possibleConstructorReturn__);
@@ -1286,7 +1277,7 @@ YearPanel.defaultProps = {
 
 /***/ }),
 
-/***/ 214:
+/***/ 215:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1301,7 +1292,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rc_calendar_src_Picker__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rc_calendar_src_locale_zh_CN__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rc_calendar_src_locale_en_US__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_moment__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_moment__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_moment__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_moment_locale_zh_cn__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_moment_locale_zh_cn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_moment_locale_zh_cn__);
@@ -1992,7 +1983,7 @@ var DateTBody = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__);
@@ -2001,7 +1992,7 @@ var DateTBody = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DateConstants__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_moment__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_moment__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_moment__);
 
 
@@ -2095,7 +2086,7 @@ var DateTHead = function (_React$Component) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__);
@@ -2152,7 +2143,7 @@ var DateTable = function (_React$Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_createClass__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_createClass__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_createClass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_createClass__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_possibleConstructorReturn__);
@@ -2901,7 +2892,7 @@ function TodayButton(_ref) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_create_react_class___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_create_react_class__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_moment__);
 
 
@@ -3038,7 +3029,7 @@ var DateInput = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
 /***/ 411:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(214);
+module.exports = __webpack_require__(215);
 
 
 /***/ }),

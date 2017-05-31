@@ -19,7 +19,7 @@ webpackJsonp([3],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_createClass__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_createClass__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_createClass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_createClass__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_possibleConstructorReturn__);
@@ -260,7 +260,7 @@ YearPanel.defaultProps = {
 
 /***/ }),
 
-/***/ 215:
+/***/ 216:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -281,7 +281,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_time_picker_assets_index_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_rc_time_picker_assets_index_css__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rc_time_picker_lib_Panel__ = __webpack_require__(87);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rc_time_picker_lib_Panel___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_rc_time_picker_lib_Panel__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_moment__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_moment__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_moment__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_moment_locale_zh_cn__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_moment_locale_zh_cn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_moment_locale_zh_cn__);
@@ -962,7 +962,7 @@ var DateTBody = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__);
@@ -971,7 +971,7 @@ var DateTBody = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DateConstants__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_moment__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_moment__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_moment__);
 
 
@@ -1065,7 +1065,7 @@ var DateTHead = function (_React$Component) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__);
@@ -1122,7 +1122,7 @@ var DateTable = function (_React$Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_createClass__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_createClass__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_createClass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_createClass__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_possibleConstructorReturn__);
@@ -1871,7 +1871,7 @@ function TodayButton(_ref) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_create_react_class___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_create_react_class__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_moment__);
 
 
@@ -2017,7 +2017,7 @@ var DateInput = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_classnames__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_moment__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__util_index__ = __webpack_require__(15);
 
@@ -2140,7 +2140,7 @@ var CalendarMixin = {
 /***/ 412:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(215);
+module.exports = __webpack_require__(216);
 
 
 /***/ }),
@@ -2627,6 +2627,10 @@ var _classCallCheck2 = __webpack_require__(6);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
+var _createClass2 = __webpack_require__(11);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
 var _possibleConstructorReturn2 = __webpack_require__(8);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
@@ -2647,7 +2651,7 @@ var _Select = __webpack_require__(88);
 
 var _Select2 = _interopRequireDefault(_Select);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var formatOption = function formatOption(option, disabledOptions) {
   var value = '' + option;
@@ -2667,18 +2671,20 @@ var formatOption = function formatOption(option, disabledOptions) {
 };
 
 var Combobox = function (_Component) {
-  (0, _inherits3["default"])(Combobox, _Component);
+  (0, _inherits3['default'])(Combobox, _Component);
 
   function Combobox() {
+    var _ref;
+
     var _temp, _this, _ret;
 
-    (0, _classCallCheck3["default"])(this, Combobox);
+    (0, _classCallCheck3['default'])(this, Combobox);
 
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3["default"])(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.onItemChange = function (type, itemValue) {
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3['default'])(this, (_ref = Combobox.__proto__ || Object.getPrototypeOf(Combobox)).call.apply(_ref, [this].concat(args))), _this), _this.onItemChange = function (type, itemValue) {
       var _this$props = _this.props,
           onChange = _this$props.onChange,
           defaultOpenValue = _this$props.defaultOpenValue,
@@ -2717,169 +2723,176 @@ var Combobox = function (_Component) {
       onChange(value);
     }, _this.onEnterSelectPanel = function (range) {
       _this.props.onCurrentSelectPanelChange(range);
-    }, _temp), (0, _possibleConstructorReturn3["default"])(_this, _ret);
+    }, _temp), (0, _possibleConstructorReturn3['default'])(_this, _ret);
   }
 
-  Combobox.prototype.getHourSelect = function getHourSelect(hour) {
-    var _props = this.props,
-        prefixCls = _props.prefixCls,
-        hourOptions = _props.hourOptions,
-        disabledHours = _props.disabledHours,
-        showHour = _props.showHour,
-        use12Hours = _props.use12Hours;
+  (0, _createClass3['default'])(Combobox, [{
+    key: 'getHourSelect',
+    value: function getHourSelect(hour) {
+      var _props = this.props,
+          prefixCls = _props.prefixCls,
+          hourOptions = _props.hourOptions,
+          disabledHours = _props.disabledHours,
+          showHour = _props.showHour,
+          use12Hours = _props.use12Hours;
 
-    if (!showHour) {
-      return null;
+      if (!showHour) {
+        return null;
+      }
+      var disabledOptions = disabledHours();
+      var hourOptionsAdj = void 0;
+      var hourAdj = void 0;
+      if (use12Hours) {
+        hourOptionsAdj = [12].concat(hourOptions.filter(function (h) {
+          return h < 12 && h > 0;
+        }));
+        hourAdj = hour % 12 || 12;
+      } else {
+        hourOptionsAdj = hourOptions;
+        hourAdj = hour;
+      }
+
+      return _react2['default'].createElement(_Select2['default'], {
+        prefixCls: prefixCls,
+        options: hourOptionsAdj.map(function (option) {
+          return formatOption(option, disabledOptions);
+        }),
+        selectedIndex: hourOptionsAdj.indexOf(hourAdj),
+        type: 'hour',
+        onSelect: this.onItemChange,
+        onMouseEnter: this.onEnterSelectPanel.bind(this, 'hour')
+      });
     }
-    var disabledOptions = disabledHours();
-    var hourOptionsAdj = void 0;
-    var hourAdj = void 0;
-    if (use12Hours) {
-      hourOptionsAdj = [12].concat(hourOptions.filter(function (h) {
-        return h < 12 && h > 0;
-      }));
-      hourAdj = hour % 12 || 12;
-    } else {
-      hourOptionsAdj = hourOptions;
-      hourAdj = hour;
+  }, {
+    key: 'getMinuteSelect',
+    value: function getMinuteSelect(minute) {
+      var _props2 = this.props,
+          prefixCls = _props2.prefixCls,
+          minuteOptions = _props2.minuteOptions,
+          disabledMinutes = _props2.disabledMinutes,
+          defaultOpenValue = _props2.defaultOpenValue,
+          showMinute = _props2.showMinute;
+
+      if (!showMinute) {
+        return null;
+      }
+      var value = this.props.value || defaultOpenValue;
+      var disabledOptions = disabledMinutes(value.hour());
+
+      return _react2['default'].createElement(_Select2['default'], {
+        prefixCls: prefixCls,
+        options: minuteOptions.map(function (option) {
+          return formatOption(option, disabledOptions);
+        }),
+        selectedIndex: minuteOptions.indexOf(minute),
+        type: 'minute',
+        onSelect: this.onItemChange,
+        onMouseEnter: this.onEnterSelectPanel.bind(this, 'minute')
+      });
     }
+  }, {
+    key: 'getSecondSelect',
+    value: function getSecondSelect(second) {
+      var _props3 = this.props,
+          prefixCls = _props3.prefixCls,
+          secondOptions = _props3.secondOptions,
+          disabledSeconds = _props3.disabledSeconds,
+          showSecond = _props3.showSecond,
+          defaultOpenValue = _props3.defaultOpenValue;
 
-    return _react2["default"].createElement(_Select2["default"], {
-      prefixCls: prefixCls,
-      options: hourOptionsAdj.map(function (option) {
-        return formatOption(option, disabledOptions);
-      }),
-      selectedIndex: hourOptionsAdj.indexOf(hourAdj),
-      type: 'hour',
-      onSelect: this.onItemChange,
-      onMouseEnter: this.onEnterSelectPanel.bind(this, 'hour')
-    });
-  };
+      if (!showSecond) {
+        return null;
+      }
+      var value = this.props.value || defaultOpenValue;
+      var disabledOptions = disabledSeconds(value.hour(), value.minute());
 
-  Combobox.prototype.getMinuteSelect = function getMinuteSelect(minute) {
-    var _props2 = this.props,
-        prefixCls = _props2.prefixCls,
-        minuteOptions = _props2.minuteOptions,
-        disabledMinutes = _props2.disabledMinutes,
-        defaultOpenValue = _props2.defaultOpenValue,
-        showMinute = _props2.showMinute;
-
-    if (!showMinute) {
-      return null;
+      return _react2['default'].createElement(_Select2['default'], {
+        prefixCls: prefixCls,
+        options: secondOptions.map(function (option) {
+          return formatOption(option, disabledOptions);
+        }),
+        selectedIndex: secondOptions.indexOf(second),
+        type: 'second',
+        onSelect: this.onItemChange,
+        onMouseEnter: this.onEnterSelectPanel.bind(this, 'second')
+      });
     }
-    var value = this.props.value || defaultOpenValue;
-    var disabledOptions = disabledMinutes(value.hour());
+  }, {
+    key: 'getAMPMSelect',
+    value: function getAMPMSelect() {
+      var _props4 = this.props,
+          prefixCls = _props4.prefixCls,
+          use12Hours = _props4.use12Hours,
+          format = _props4.format;
 
-    return _react2["default"].createElement(_Select2["default"], {
-      prefixCls: prefixCls,
-      options: minuteOptions.map(function (option) {
-        return formatOption(option, disabledOptions);
-      }),
-      selectedIndex: minuteOptions.indexOf(minute),
-      type: 'minute',
-      onSelect: this.onItemChange,
-      onMouseEnter: this.onEnterSelectPanel.bind(this, 'minute')
-    });
-  };
+      if (!use12Hours) {
+        return null;
+      }
 
-  Combobox.prototype.getSecondSelect = function getSecondSelect(second) {
-    var _props3 = this.props,
-        prefixCls = _props3.prefixCls,
-        secondOptions = _props3.secondOptions,
-        disabledSeconds = _props3.disabledSeconds,
-        showSecond = _props3.showSecond,
-        defaultOpenValue = _props3.defaultOpenValue;
+      var AMPMOptions = ['am', 'pm'] // If format has A char, then we should uppercase AM/PM
+      .map(function (c) {
+        return format.match(/\sA/) ? c.toUpperCase() : c;
+      }).map(function (c) {
+        return { value: c };
+      });
 
-    if (!showSecond) {
-      return null;
+      var selected = this.isAM() ? 0 : 1;
+
+      return _react2['default'].createElement(_Select2['default'], {
+        prefixCls: prefixCls,
+        options: AMPMOptions,
+        selectedIndex: selected,
+        type: 'ampm',
+        onSelect: this.onItemChange,
+        onMouseEnter: this.onEnterSelectPanel.bind(this, 'ampm')
+      });
     }
-    var value = this.props.value || defaultOpenValue;
-    var disabledOptions = disabledSeconds(value.hour(), value.minute());
-
-    return _react2["default"].createElement(_Select2["default"], {
-      prefixCls: prefixCls,
-      options: secondOptions.map(function (option) {
-        return formatOption(option, disabledOptions);
-      }),
-      selectedIndex: secondOptions.indexOf(second),
-      type: 'second',
-      onSelect: this.onItemChange,
-      onMouseEnter: this.onEnterSelectPanel.bind(this, 'second')
-    });
-  };
-
-  Combobox.prototype.getAMPMSelect = function getAMPMSelect() {
-    var _props4 = this.props,
-        prefixCls = _props4.prefixCls,
-        use12Hours = _props4.use12Hours,
-        format = _props4.format;
-
-    if (!use12Hours) {
-      return null;
+  }, {
+    key: 'isAM',
+    value: function isAM() {
+      var value = this.props.value || this.props.defaultOpenValue;
+      return value.hour() >= 0 && value.hour() < 12;
     }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props5 = this.props,
+          prefixCls = _props5.prefixCls,
+          defaultOpenValue = _props5.defaultOpenValue;
 
-    var AMPMOptions = ['am', 'pm'] // If format has A char, then we should uppercase AM/PM
-    .map(function (c) {
-      return format.match(/\sA/) ? c.toUpperCase() : c;
-    }).map(function (c) {
-      return { value: c };
-    });
-
-    var selected = this.isAM() ? 0 : 1;
-
-    return _react2["default"].createElement(_Select2["default"], {
-      prefixCls: prefixCls,
-      options: AMPMOptions,
-      selectedIndex: selected,
-      type: 'ampm',
-      onSelect: this.onItemChange,
-      onMouseEnter: this.onEnterSelectPanel.bind(this, 'ampm')
-    });
-  };
-
-  Combobox.prototype.isAM = function isAM() {
-    var value = this.props.value || this.props.defaultOpenValue;
-    return value.hour() >= 0 && value.hour() < 12;
-  };
-
-  Combobox.prototype.render = function render() {
-    var _props5 = this.props,
-        prefixCls = _props5.prefixCls,
-        defaultOpenValue = _props5.defaultOpenValue;
-
-    var value = this.props.value || defaultOpenValue;
-    return _react2["default"].createElement(
-      'div',
-      { className: prefixCls + '-combobox' },
-      this.getHourSelect(value.hour()),
-      this.getMinuteSelect(value.minute()),
-      this.getSecondSelect(value.second()),
-      this.getAMPMSelect(value.hour())
-    );
-  };
-
+      var value = this.props.value || defaultOpenValue;
+      return _react2['default'].createElement(
+        'div',
+        { className: prefixCls + '-combobox' },
+        this.getHourSelect(value.hour()),
+        this.getMinuteSelect(value.minute()),
+        this.getSecondSelect(value.second()),
+        this.getAMPMSelect(value.hour())
+      );
+    }
+  }]);
   return Combobox;
 }(_react.Component);
 
 Combobox.propTypes = {
-  format: _propTypes2["default"].string,
-  defaultOpenValue: _propTypes2["default"].object,
-  prefixCls: _propTypes2["default"].string,
-  value: _propTypes2["default"].object,
-  onChange: _propTypes2["default"].func,
-  showHour: _propTypes2["default"].bool,
-  showMinute: _propTypes2["default"].bool,
-  showSecond: _propTypes2["default"].bool,
-  hourOptions: _propTypes2["default"].array,
-  minuteOptions: _propTypes2["default"].array,
-  secondOptions: _propTypes2["default"].array,
-  disabledHours: _propTypes2["default"].func,
-  disabledMinutes: _propTypes2["default"].func,
-  disabledSeconds: _propTypes2["default"].func,
-  onCurrentSelectPanelChange: _propTypes2["default"].func,
-  use12Hours: _propTypes2["default"].bool
+  format: _propTypes2['default'].string,
+  defaultOpenValue: _propTypes2['default'].object,
+  prefixCls: _propTypes2['default'].string,
+  value: _propTypes2['default'].object,
+  onChange: _propTypes2['default'].func,
+  showHour: _propTypes2['default'].bool,
+  showMinute: _propTypes2['default'].bool,
+  showSecond: _propTypes2['default'].bool,
+  hourOptions: _propTypes2['default'].array,
+  minuteOptions: _propTypes2['default'].array,
+  secondOptions: _propTypes2['default'].array,
+  disabledHours: _propTypes2['default'].func,
+  disabledMinutes: _propTypes2['default'].func,
+  disabledSeconds: _propTypes2['default'].func,
+  onCurrentSelectPanelChange: _propTypes2['default'].func,
+  use12Hours: _propTypes2['default'].bool
 };
-exports["default"] = Combobox;
+exports['default'] = Combobox;
 module.exports = exports['default'];
 
 /***/ }),
@@ -2898,6 +2911,10 @@ var _classCallCheck2 = __webpack_require__(6);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
+var _createClass2 = __webpack_require__(11);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
 var _possibleConstructorReturn2 = __webpack_require__(8);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
@@ -2914,19 +2931,19 @@ var _propTypes = __webpack_require__(1);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _moment = __webpack_require__(12);
+var _moment = __webpack_require__(13);
 
 var _moment2 = _interopRequireDefault(_moment);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var Header = function (_Component) {
-  (0, _inherits3["default"])(Header, _Component);
+  (0, _inherits3['default'])(Header, _Component);
 
   function Header(props) {
-    (0, _classCallCheck3["default"])(this, Header);
+    (0, _classCallCheck3['default'])(this, Header);
 
-    var _this = (0, _possibleConstructorReturn3["default"])(this, _Component.call(this, props));
+    var _this = (0, _possibleConstructorReturn3['default'])(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this, props));
 
     _initialiseProps.call(_this);
 
@@ -2940,88 +2957,94 @@ var Header = function (_Component) {
     return _this;
   }
 
-  Header.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-    var value = nextProps.value,
-        format = nextProps.format;
+  (0, _createClass3['default'])(Header, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      var value = nextProps.value,
+          format = nextProps.format;
 
-    this.setState({
-      str: value && value.format(format) || '',
-      invalid: false
-    });
-  };
-
-  Header.prototype.getClearButton = function getClearButton() {
-    var _props = this.props,
-        prefixCls = _props.prefixCls,
-        allowEmpty = _props.allowEmpty;
-
-    if (!allowEmpty) {
-      return null;
+      this.setState({
+        str: value && value.format(format) || '',
+        invalid: false
+      });
     }
-    return _react2["default"].createElement('a', {
-      className: prefixCls + '-clear-btn',
-      role: 'button',
-      title: this.props.clearText,
-      onMouseDown: this.onClear
-    });
-  };
+  }, {
+    key: 'getClearButton',
+    value: function getClearButton() {
+      var _props = this.props,
+          prefixCls = _props.prefixCls,
+          allowEmpty = _props.allowEmpty;
 
-  Header.prototype.getProtoValue = function getProtoValue() {
-    return this.props.value || this.props.defaultOpenValue;
-  };
+      if (!allowEmpty) {
+        return null;
+      }
+      return _react2['default'].createElement('a', {
+        className: prefixCls + '-clear-btn',
+        role: 'button',
+        title: this.props.clearText,
+        onMouseDown: this.onClear
+      });
+    }
+  }, {
+    key: 'getProtoValue',
+    value: function getProtoValue() {
+      return this.props.value || this.props.defaultOpenValue;
+    }
+  }, {
+    key: 'getInput',
+    value: function getInput() {
+      var _props2 = this.props,
+          prefixCls = _props2.prefixCls,
+          placeholder = _props2.placeholder;
+      var _state = this.state,
+          invalid = _state.invalid,
+          str = _state.str;
 
-  Header.prototype.getInput = function getInput() {
-    var _props2 = this.props,
-        prefixCls = _props2.prefixCls,
-        placeholder = _props2.placeholder;
-    var _state = this.state,
-        invalid = _state.invalid,
-        str = _state.str;
+      var invalidClass = invalid ? prefixCls + '-input-invalid' : '';
+      return _react2['default'].createElement('input', {
+        className: prefixCls + '-input  ' + invalidClass,
+        ref: 'input',
+        onKeyDown: this.onKeyDown,
+        value: str,
+        placeholder: placeholder,
+        onChange: this.onInputChange
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var prefixCls = this.props.prefixCls;
 
-    var invalidClass = invalid ? prefixCls + '-input-invalid' : '';
-    return _react2["default"].createElement('input', {
-      className: prefixCls + '-input  ' + invalidClass,
-      ref: 'input',
-      onKeyDown: this.onKeyDown,
-      value: str,
-      placeholder: placeholder,
-      onChange: this.onInputChange
-    });
-  };
-
-  Header.prototype.render = function render() {
-    var prefixCls = this.props.prefixCls;
-
-    return _react2["default"].createElement(
-      'div',
-      { className: prefixCls + '-input-wrap' },
-      this.getInput(),
-      this.getClearButton()
-    );
-  };
-
+      return _react2['default'].createElement(
+        'div',
+        { className: prefixCls + '-input-wrap' },
+        this.getInput(),
+        this.getClearButton()
+      );
+    }
+  }]);
   return Header;
 }(_react.Component);
 
 Header.propTypes = {
-  format: _propTypes2["default"].string,
-  prefixCls: _propTypes2["default"].string,
-  disabledDate: _propTypes2["default"].func,
-  placeholder: _propTypes2["default"].string,
-  clearText: _propTypes2["default"].string,
-  value: _propTypes2["default"].object,
-  hourOptions: _propTypes2["default"].array,
-  minuteOptions: _propTypes2["default"].array,
-  secondOptions: _propTypes2["default"].array,
-  disabledHours: _propTypes2["default"].func,
-  disabledMinutes: _propTypes2["default"].func,
-  disabledSeconds: _propTypes2["default"].func,
-  onChange: _propTypes2["default"].func,
-  onClear: _propTypes2["default"].func,
-  onEsc: _propTypes2["default"].func,
-  allowEmpty: _propTypes2["default"].bool,
-  defaultOpenValue: _propTypes2["default"].object,
-  currentSelectPanel: _propTypes2["default"].string
+  format: _propTypes2['default'].string,
+  prefixCls: _propTypes2['default'].string,
+  disabledDate: _propTypes2['default'].func,
+  placeholder: _propTypes2['default'].string,
+  clearText: _propTypes2['default'].string,
+  value: _propTypes2['default'].object,
+  hourOptions: _propTypes2['default'].array,
+  minuteOptions: _propTypes2['default'].array,
+  secondOptions: _propTypes2['default'].array,
+  disabledHours: _propTypes2['default'].func,
+  disabledMinutes: _propTypes2['default'].func,
+  disabledSeconds: _propTypes2['default'].func,
+  onChange: _propTypes2['default'].func,
+  onClear: _propTypes2['default'].func,
+  onEsc: _propTypes2['default'].func,
+  allowEmpty: _propTypes2['default'].bool,
+  defaultOpenValue: _propTypes2['default'].object,
+  currentSelectPanel: _propTypes2['default'].string
 };
 
 var _initialiseProps = function _initialiseProps() {
@@ -3047,7 +3070,7 @@ var _initialiseProps = function _initialiseProps() {
     if (str) {
       var originalValue = _this2.props.value;
       var value = _this2.getProtoValue().clone();
-      var parsed = (0, _moment2["default"])(str, format, true);
+      var parsed = (0, _moment2['default'])(str, format, true);
       if (!parsed.isValid()) {
         _this2.setState({
           invalid: true
@@ -3113,7 +3136,7 @@ var _initialiseProps = function _initialiseProps() {
   };
 };
 
-exports["default"] = Header;
+exports['default'] = Header;
 module.exports = exports['default'];
 
 /***/ }),
@@ -3135,6 +3158,10 @@ var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 var _classCallCheck2 = __webpack_require__(6);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(11);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
 
 var _possibleConstructorReturn2 = __webpack_require__(8);
 
@@ -3160,7 +3187,7 @@ var _Combobox = __webpack_require__(85);
 
 var _Combobox2 = _interopRequireDefault(_Combobox);
 
-var _moment = __webpack_require__(12);
+var _moment = __webpack_require__(13);
 
 var _moment2 = _interopRequireDefault(_moment);
 
@@ -3168,7 +3195,7 @@ var _classnames = __webpack_require__(5);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 function noop() {}
 
@@ -3183,12 +3210,12 @@ function generateOptions(length, disabledOptions, hideDisabledOptions) {
 }
 
 var Panel = function (_Component) {
-  (0, _inherits3["default"])(Panel, _Component);
+  (0, _inherits3['default'])(Panel, _Component);
 
   function Panel(props) {
-    (0, _classCallCheck3["default"])(this, Panel);
+    (0, _classCallCheck3['default'])(this, Panel);
 
-    var _this = (0, _possibleConstructorReturn3["default"])(this, _Component.call(this, props));
+    var _this = (0, _possibleConstructorReturn3['default'])(this, (Panel.__proto__ || Object.getPrototypeOf(Panel)).call(this, props));
 
     _this.onChange = function (newValue) {
       _this.setState({ value: newValue });
@@ -3206,121 +3233,127 @@ var Panel = function (_Component) {
     return _this;
   }
 
-  Panel.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-    var value = nextProps.value;
-    if (value) {
-      this.setState({
-        value: value
-      });
+  (0, _createClass3['default'])(Panel, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      var value = nextProps.value;
+      if (value) {
+        this.setState({
+          value: value
+        });
+      }
     }
-  };
+  }, {
+    key: 'close',
 
-  // https://github.com/ant-design/ant-design/issues/5829
-  Panel.prototype.close = function close() {
-    this.props.onEsc();
-  };
 
-  Panel.prototype.render = function render() {
-    var _classNames;
+    // https://github.com/ant-design/ant-design/issues/5829
+    value: function close() {
+      this.props.onEsc();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _classNames;
 
-    var _props = this.props,
-        prefixCls = _props.prefixCls,
-        className = _props.className,
-        placeholder = _props.placeholder,
-        disabledHours = _props.disabledHours,
-        disabledMinutes = _props.disabledMinutes,
-        disabledSeconds = _props.disabledSeconds,
-        hideDisabledOptions = _props.hideDisabledOptions,
-        allowEmpty = _props.allowEmpty,
-        showHour = _props.showHour,
-        showMinute = _props.showMinute,
-        showSecond = _props.showSecond,
-        format = _props.format,
-        defaultOpenValue = _props.defaultOpenValue,
-        clearText = _props.clearText,
-        onEsc = _props.onEsc,
-        addon = _props.addon,
-        use12Hours = _props.use12Hours,
-        onClear = _props.onClear;
-    var _state = this.state,
-        value = _state.value,
-        currentSelectPanel = _state.currentSelectPanel;
+      var _props = this.props,
+          prefixCls = _props.prefixCls,
+          className = _props.className,
+          placeholder = _props.placeholder,
+          disabledHours = _props.disabledHours,
+          disabledMinutes = _props.disabledMinutes,
+          disabledSeconds = _props.disabledSeconds,
+          hideDisabledOptions = _props.hideDisabledOptions,
+          allowEmpty = _props.allowEmpty,
+          showHour = _props.showHour,
+          showMinute = _props.showMinute,
+          showSecond = _props.showSecond,
+          format = _props.format,
+          defaultOpenValue = _props.defaultOpenValue,
+          clearText = _props.clearText,
+          onEsc = _props.onEsc,
+          addon = _props.addon,
+          use12Hours = _props.use12Hours,
+          onClear = _props.onClear;
+      var _state = this.state,
+          value = _state.value,
+          currentSelectPanel = _state.currentSelectPanel;
 
-    var disabledHourOptions = disabledHours();
-    var disabledMinuteOptions = disabledMinutes(value ? value.hour() : null);
-    var disabledSecondOptions = disabledSeconds(value ? value.hour() : null, value ? value.minute() : null);
-    var hourOptions = generateOptions(24, disabledHourOptions, hideDisabledOptions);
-    var minuteOptions = generateOptions(60, disabledMinuteOptions, hideDisabledOptions);
-    var secondOptions = generateOptions(60, disabledSecondOptions, hideDisabledOptions);
+      var disabledHourOptions = disabledHours();
+      var disabledMinuteOptions = disabledMinutes(value ? value.hour() : null);
+      var disabledSecondOptions = disabledSeconds(value ? value.hour() : null, value ? value.minute() : null);
+      var hourOptions = generateOptions(24, disabledHourOptions, hideDisabledOptions);
+      var minuteOptions = generateOptions(60, disabledMinuteOptions, hideDisabledOptions);
+      var secondOptions = generateOptions(60, disabledSecondOptions, hideDisabledOptions);
 
-    return _react2["default"].createElement(
-      'div',
-      { className: (0, _classnames2["default"])((_classNames = {}, (0, _defineProperty3["default"])(_classNames, prefixCls + '-inner', true), (0, _defineProperty3["default"])(_classNames, className, !!className), _classNames)) },
-      _react2["default"].createElement(_Header2["default"], {
-        clearText: clearText,
-        prefixCls: prefixCls,
-        defaultOpenValue: defaultOpenValue,
-        value: value,
-        currentSelectPanel: currentSelectPanel,
-        onEsc: onEsc,
-        format: format,
-        placeholder: placeholder,
-        hourOptions: hourOptions,
-        minuteOptions: minuteOptions,
-        secondOptions: secondOptions,
-        disabledHours: disabledHours,
-        disabledMinutes: disabledMinutes,
-        disabledSeconds: disabledSeconds,
-        onChange: this.onChange,
-        onClear: onClear,
-        allowEmpty: allowEmpty
-      }),
-      _react2["default"].createElement(_Combobox2["default"], {
-        prefixCls: prefixCls,
-        value: value,
-        defaultOpenValue: defaultOpenValue,
-        format: format,
-        onChange: this.onChange,
-        showHour: showHour,
-        showMinute: showMinute,
-        showSecond: showSecond,
-        hourOptions: hourOptions,
-        minuteOptions: minuteOptions,
-        secondOptions: secondOptions,
-        disabledHours: disabledHours,
-        disabledMinutes: disabledMinutes,
-        disabledSeconds: disabledSeconds,
-        onCurrentSelectPanelChange: this.onCurrentSelectPanelChange,
-        use12Hours: use12Hours
-      }),
-      addon(this)
-    );
-  };
-
+      return _react2['default'].createElement(
+        'div',
+        { className: (0, _classnames2['default'])((_classNames = {}, (0, _defineProperty3['default'])(_classNames, prefixCls + '-inner', true), (0, _defineProperty3['default'])(_classNames, className, !!className), _classNames)) },
+        _react2['default'].createElement(_Header2['default'], {
+          clearText: clearText,
+          prefixCls: prefixCls,
+          defaultOpenValue: defaultOpenValue,
+          value: value,
+          currentSelectPanel: currentSelectPanel,
+          onEsc: onEsc,
+          format: format,
+          placeholder: placeholder,
+          hourOptions: hourOptions,
+          minuteOptions: minuteOptions,
+          secondOptions: secondOptions,
+          disabledHours: disabledHours,
+          disabledMinutes: disabledMinutes,
+          disabledSeconds: disabledSeconds,
+          onChange: this.onChange,
+          onClear: onClear,
+          allowEmpty: allowEmpty
+        }),
+        _react2['default'].createElement(_Combobox2['default'], {
+          prefixCls: prefixCls,
+          value: value,
+          defaultOpenValue: defaultOpenValue,
+          format: format,
+          onChange: this.onChange,
+          showHour: showHour,
+          showMinute: showMinute,
+          showSecond: showSecond,
+          hourOptions: hourOptions,
+          minuteOptions: minuteOptions,
+          secondOptions: secondOptions,
+          disabledHours: disabledHours,
+          disabledMinutes: disabledMinutes,
+          disabledSeconds: disabledSeconds,
+          onCurrentSelectPanelChange: this.onCurrentSelectPanelChange,
+          use12Hours: use12Hours
+        }),
+        addon(this)
+      );
+    }
+  }]);
   return Panel;
 }(_react.Component);
 
 Panel.propTypes = {
-  clearText: _propTypes2["default"].string,
-  prefixCls: _propTypes2["default"].string,
-  className: _propTypes2["default"].string,
-  defaultOpenValue: _propTypes2["default"].object,
-  value: _propTypes2["default"].object,
-  placeholder: _propTypes2["default"].string,
-  format: _propTypes2["default"].string,
-  disabledHours: _propTypes2["default"].func,
-  disabledMinutes: _propTypes2["default"].func,
-  disabledSeconds: _propTypes2["default"].func,
-  hideDisabledOptions: _propTypes2["default"].bool,
-  onChange: _propTypes2["default"].func,
-  onEsc: _propTypes2["default"].func,
-  allowEmpty: _propTypes2["default"].bool,
-  showHour: _propTypes2["default"].bool,
-  showMinute: _propTypes2["default"].bool,
-  showSecond: _propTypes2["default"].bool,
-  onClear: _propTypes2["default"].func,
-  use12Hours: _propTypes2["default"].bool,
-  addon: _propTypes2["default"].func
+  clearText: _propTypes2['default'].string,
+  prefixCls: _propTypes2['default'].string,
+  className: _propTypes2['default'].string,
+  defaultOpenValue: _propTypes2['default'].object,
+  value: _propTypes2['default'].object,
+  placeholder: _propTypes2['default'].string,
+  format: _propTypes2['default'].string,
+  disabledHours: _propTypes2['default'].func,
+  disabledMinutes: _propTypes2['default'].func,
+  disabledSeconds: _propTypes2['default'].func,
+  hideDisabledOptions: _propTypes2['default'].bool,
+  onChange: _propTypes2['default'].func,
+  onEsc: _propTypes2['default'].func,
+  allowEmpty: _propTypes2['default'].bool,
+  showHour: _propTypes2['default'].bool,
+  showMinute: _propTypes2['default'].bool,
+  showSecond: _propTypes2['default'].bool,
+  onClear: _propTypes2['default'].func,
+  use12Hours: _propTypes2['default'].bool,
+  addon: _propTypes2['default'].func
 };
 Panel.defaultProps = {
   prefixCls: 'rc-time-picker-panel',
@@ -3329,11 +3362,11 @@ Panel.defaultProps = {
   disabledHours: noop,
   disabledMinutes: noop,
   disabledSeconds: noop,
-  defaultOpenValue: (0, _moment2["default"])(),
+  defaultOpenValue: (0, _moment2['default'])(),
   use12Hours: false,
   addon: noop
 };
-exports["default"] = Panel;
+exports['default'] = Panel;
 module.exports = exports['default'];
 
 /***/ }),
@@ -3355,6 +3388,10 @@ var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 var _classCallCheck2 = __webpack_require__(6);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(11);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
 
 var _possibleConstructorReturn2 = __webpack_require__(8);
 
@@ -3380,7 +3417,7 @@ var _classnames3 = __webpack_require__(5);
 
 var _classnames4 = _interopRequireDefault(_classnames3);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var scrollTo = function scrollTo(element, to, duration) {
   var requestAnimationFrame = window.requestAnimationFrame || function requestAnimationFrameTimeout() {
@@ -3402,18 +3439,20 @@ var scrollTo = function scrollTo(element, to, duration) {
 };
 
 var Select = function (_Component) {
-  (0, _inherits3["default"])(Select, _Component);
+  (0, _inherits3['default'])(Select, _Component);
 
   function Select() {
+    var _ref;
+
     var _temp, _this, _ret;
 
-    (0, _classCallCheck3["default"])(this, Select);
+    (0, _classCallCheck3['default'])(this, Select);
 
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3["default"])(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3['default'])(this, (_ref = Select.__proto__ || Object.getPrototypeOf(Select)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       active: false
     }, _this.onSelect = function (value) {
       var _this$props = _this.props,
@@ -3426,104 +3465,110 @@ var Select = function (_Component) {
       _this.props.onMouseEnter(e);
     }, _this.handleMouseLeave = function () {
       _this.setState({ active: false });
-    }, _temp), (0, _possibleConstructorReturn3["default"])(_this, _ret);
+    }, _temp), (0, _possibleConstructorReturn3['default'])(_this, _ret);
   }
 
-  Select.prototype.componentDidMount = function componentDidMount() {
-    // jump to selected option
-    this.scrollToSelected(0);
-  };
-
-  Select.prototype.componentDidUpdate = function componentDidUpdate(prevProps) {
-    // smooth scroll to selected option
-    if (prevProps.selectedIndex !== this.props.selectedIndex) {
-      this.scrollToSelected(120);
+  (0, _createClass3['default'])(Select, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      // jump to selected option
+      this.scrollToSelected(0);
     }
-  };
-
-  Select.prototype.getOptions = function getOptions() {
-    var _this2 = this;
-
-    var _props = this.props,
-        options = _props.options,
-        selectedIndex = _props.selectedIndex,
-        prefixCls = _props.prefixCls;
-
-    return options.map(function (item, index) {
-      var _classnames;
-
-      var cls = (0, _classnames4["default"])((_classnames = {}, (0, _defineProperty3["default"])(_classnames, prefixCls + '-select-option-selected', selectedIndex === index), (0, _defineProperty3["default"])(_classnames, prefixCls + '-select-option-disabled', item.disabled), _classnames));
-      var onclick = null;
-      if (!item.disabled) {
-        onclick = _this2.onSelect.bind(_this2, item.value);
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps) {
+      // smooth scroll to selected option
+      if (prevProps.selectedIndex !== this.props.selectedIndex) {
+        this.scrollToSelected(120);
       }
-      return _react2["default"].createElement(
-        'li',
+    }
+  }, {
+    key: 'getOptions',
+    value: function getOptions() {
+      var _this2 = this;
+
+      var _props = this.props,
+          options = _props.options,
+          selectedIndex = _props.selectedIndex,
+          prefixCls = _props.prefixCls;
+
+      return options.map(function (item, index) {
+        var _classnames;
+
+        var cls = (0, _classnames4['default'])((_classnames = {}, (0, _defineProperty3['default'])(_classnames, prefixCls + '-select-option-selected', selectedIndex === index), (0, _defineProperty3['default'])(_classnames, prefixCls + '-select-option-disabled', item.disabled), _classnames));
+        var onclick = null;
+        if (!item.disabled) {
+          onclick = _this2.onSelect.bind(_this2, item.value);
+        }
+        return _react2['default'].createElement(
+          'li',
+          {
+            className: cls,
+            key: index,
+            onClick: onclick,
+            disabled: item.disabled
+          },
+          item.value
+        );
+      });
+    }
+  }, {
+    key: 'scrollToSelected',
+    value: function scrollToSelected(duration) {
+      // move to selected item
+      var select = _reactDom2['default'].findDOMNode(this);
+      var list = _reactDom2['default'].findDOMNode(this.refs.list);
+      if (!list) {
+        return;
+      }
+      var index = this.props.selectedIndex;
+      if (index < 0) {
+        index = 0;
+      }
+      var topOption = list.children[index];
+      var to = topOption.offsetTop;
+      scrollTo(select, to, duration);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _classnames2;
+
+      if (this.props.options.length === 0) {
+        return null;
+      }
+
+      var prefixCls = this.props.prefixCls;
+
+      var cls = (0, _classnames4['default'])((_classnames2 = {}, (0, _defineProperty3['default'])(_classnames2, prefixCls + '-select', 1), (0, _defineProperty3['default'])(_classnames2, prefixCls + '-select-active', this.state.active), _classnames2));
+
+      return _react2['default'].createElement(
+        'div',
         {
           className: cls,
-          key: index,
-          onClick: onclick,
-          disabled: item.disabled
+          onMouseEnter: this.handleMouseEnter,
+          onMouseLeave: this.handleMouseLeave
         },
-        item.value
+        _react2['default'].createElement(
+          'ul',
+          { ref: 'list' },
+          this.getOptions()
+        )
       );
-    });
-  };
-
-  Select.prototype.scrollToSelected = function scrollToSelected(duration) {
-    // move to selected item
-    var select = _reactDom2["default"].findDOMNode(this);
-    var list = _reactDom2["default"].findDOMNode(this.refs.list);
-    if (!list) {
-      return;
     }
-    var index = this.props.selectedIndex;
-    if (index < 0) {
-      index = 0;
-    }
-    var topOption = list.children[index];
-    var to = topOption.offsetTop;
-    scrollTo(select, to, duration);
-  };
-
-  Select.prototype.render = function render() {
-    var _classnames2;
-
-    if (this.props.options.length === 0) {
-      return null;
-    }
-
-    var prefixCls = this.props.prefixCls;
-
-    var cls = (0, _classnames4["default"])((_classnames2 = {}, (0, _defineProperty3["default"])(_classnames2, prefixCls + '-select', 1), (0, _defineProperty3["default"])(_classnames2, prefixCls + '-select-active', this.state.active), _classnames2));
-
-    return _react2["default"].createElement(
-      'div',
-      {
-        className: cls,
-        onMouseEnter: this.handleMouseEnter,
-        onMouseLeave: this.handleMouseLeave
-      },
-      _react2["default"].createElement(
-        'ul',
-        { ref: 'list' },
-        this.getOptions()
-      )
-    );
-  };
-
+  }]);
   return Select;
 }(_react.Component);
 
 Select.propTypes = {
-  prefixCls: _propTypes2["default"].string,
-  options: _propTypes2["default"].array,
-  selectedIndex: _propTypes2["default"].number,
-  type: _propTypes2["default"].string,
-  onSelect: _propTypes2["default"].func,
-  onMouseEnter: _propTypes2["default"].func
+  prefixCls: _propTypes2['default'].string,
+  options: _propTypes2['default'].array,
+  selectedIndex: _propTypes2['default'].number,
+  type: _propTypes2['default'].string,
+  onSelect: _propTypes2['default'].func,
+  onMouseEnter: _propTypes2['default'].func
 };
-exports["default"] = Select;
+exports['default'] = Select;
 module.exports = exports['default'];
 
 /***/ })
