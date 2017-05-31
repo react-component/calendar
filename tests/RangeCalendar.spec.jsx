@@ -171,6 +171,31 @@ describe('RangeCalendar', () => {
     expect(wrapper.find('.rc-calendar-input').get(1).value).toBe('2015-10-02');
   });
 
+  it('onSelect works reversely', () => {
+    function onSelect(d) {
+      expect(d[0].format(format)).toBe('2015-09-04');
+      expect(d[1].format(format)).toBe('2015-09-14');
+    }
+
+    const now = moment([2015, 8, 29]);
+
+    const wrapper = mount(
+      <RangeCalendar
+        format={format}
+        onSelect={onSelect}
+        defaultValue={[now, now.clone().add(1, 'months')]}
+        showWeekNumber
+      />
+    );
+
+    wrapper.find('.rc-calendar-range-left .rc-calendar-date').at(15).simulate('click'); // 9.14
+    expect(wrapper.find('.rc-calendar-input').get(0).value).toBe('2015-09-14');
+
+    wrapper.find('.rc-calendar-range-left .rc-calendar-date').at(5).simulate('click'); // 9.4
+    expect(wrapper.find('.rc-calendar-input').get(0).value).toBe('2015-09-04');
+    expect(wrapper.find('.rc-calendar-input').get(1).value).toBe('2015-09-14');
+  });
+
   it('onHoverChange works', () => {
     let hoverValue = null;
     function onHoverChange(hv) {

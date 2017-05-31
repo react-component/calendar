@@ -54,7 +54,10 @@
     ],
     "setupFiles": [
       "./tests/setup.js"
-    ]
+    ],
+    "transform": {
+      "\\.jsx?$": "./node_modules/rc-tools/scripts/jestPreprocessor.js"
+    }
   },
   "devDependencies": {
     "async": "~0.9.0",

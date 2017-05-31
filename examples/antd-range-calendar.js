@@ -121,11 +121,11 @@ const Test = React.createClass({
   },
 
   onChange(value) {
+    console.log('onChange', value);
     this.setState({ value });
   },
 
   onHoverChange(hoverValue) {
-    console.log(hoverValue);
     this.setState({ hoverValue });
   },
 
