@@ -32,6 +32,7 @@ function getIdFromDate(date) {
 const DateTBody = createReactClass({
   propTypes: {
     contentRender: PropTypes.func,
+    cellRender: PropTypes.func,
     dateRender: PropTypes.func,
     disabledDate: PropTypes.func,
     prefixCls: PropTypes.string,
@@ -51,7 +52,7 @@ const DateTBody = createReactClass({
     const props = this.props;
     const {
       contentRender, prefixCls, selectedValue, value,
-      showWeekNumber, dateRender, disabledDate,
+      showWeekNumber, cellRender, dateRender, disabledDate,
       hoverValue,
     } = props;
     let iIndex;
@@ -207,7 +208,7 @@ const DateTBody = createReactClass({
             </div>);
         }
 
-        dateCells.push(
+        const cell = (
           <td
             key={passed}
             onClick={disabled ? undefined : props.onSelect.bind(null, current)}
@@ -217,7 +218,14 @@ const DateTBody = createReactClass({
             title={getTitleString(current)} className={cls}
           >
             {dateHtml}
-          </td>);
+          </td>
+        );
+
+        if (cellRender) {
+          dateCells.push(cellRender(cell));
+        } else {
+          dateCells.push(cell);
+        }
 
         passed++;
       }
