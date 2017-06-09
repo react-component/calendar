@@ -17,6 +17,7 @@ const MonthCalendar = createReactClass({
     const keyCode = event.keyCode;
     const ctrlKey = event.ctrlKey || event.metaKey;
     const stateValue = this.state.value;
+    const { disabledDate } = this.props;
     let value = stateValue;
     switch (keyCode) {
       case KeyCode.DOWN:
@@ -44,7 +45,9 @@ const MonthCalendar = createReactClass({
         }
         break;
       case KeyCode.ENTER:
-        this.onSelect(stateValue);
+        if (!disabledDate || !disabledDate(stateValue)) {
+          this.onSelect(stateValue);
+        }
         event.preventDefault();
         return 1;
       default:
