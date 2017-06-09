@@ -97,6 +97,8 @@ const Calendar = createReactClass({
     const keyCode = event.keyCode;
     // mac
     const ctrlKey = event.ctrlKey || event.metaKey;
+    const { disabledDate } = this.props;
+    const { value } = this.state;
     switch (keyCode) {
       case KeyCode.DOWN:
         goWeek.call(this, 1);
@@ -139,9 +141,11 @@ const Calendar = createReactClass({
         event.preventDefault();
         return 1;
       case KeyCode.ENTER:
-        this.onSelect(this.state.value, {
-          source: 'keyboard',
-        });
+        if (!disabledDate || !disabledDate(value)) {
+          this.onSelect(value, {
+            source: 'keyboard',
+          });
+        }
         event.preventDefault();
         return 1;
       default:

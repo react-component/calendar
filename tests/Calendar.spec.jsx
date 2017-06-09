@@ -218,6 +218,51 @@ describe('Calendar', () => {
           done();
         }, 10);
       });
+
+      it('enter to select works', () => {
+        const onSelect = jest.fn();
+        let today;
+        calendar = ReactDOM.render(
+          <Calendar onSelect={onSelect} />,
+          container
+        );
+        today = calendar.state.value;
+
+        Simulate.keyDown(ReactDOM.findDOMNode(calendar), {
+          keyCode: keyCode.ENTER,
+        });
+        expect(onSelect).toHaveBeenCalledWith(today, {
+          source: 'keyboard',
+        });
+      });
+
+      it('enter not to select disabled date', () => {
+        const onSelect = jest.fn();
+        function disabledDate(current) {
+          if (!current) {
+            return false;
+          }
+          const date = moment();
+          date.hour(0);
+          date.minute(0);
+          date.second(0);
+          return current.valueOf() < date.valueOf();
+        }
+
+        calendar = ReactDOM.render(
+          <Calendar onSelect={onSelect} disabledDate={disabledDate} />,
+          container
+        );
+
+        Simulate.keyDown(ReactDOM.findDOMNode(calendar), {
+          keyCode: keyCode.LEFT,
+        });
+        Simulate.keyDown(ReactDOM.findDOMNode(calendar), {
+          keyCode: keyCode.ENTER,
+        });
+
+        expect(onSelect).not.toHaveBeenCalled();
+      });
     });
 
     it('next month works', (done) => {
@@ -266,11 +311,6 @@ describe('Calendar', () => {
         expect(calendar.state.value.year()).toBe(year - 1);
         done();
       }, 10);
-    });
-
-    it('render works', () => {
-      expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
-        'rc-calendar-cell').length).toBeGreaterThan(0);
     });
 
     it('onSelect works', (done) => {
