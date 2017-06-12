@@ -24,6 +24,7 @@ const CalendarPart = createReactClass({
     timePickerDisabledTime: PropTypes.object,
     enableNext: PropTypes.any,
     enablePrev: PropTypes.any,
+    dateTitleFormat: PropTypes.string,
   },
   render() {
     const props = this.props;
@@ -33,7 +34,7 @@ const CalendarPart = createReactClass({
       hoverValue,
       selectedValue,
       direction,
-      locale, format, placeholder,
+      dateTitleFormat, locale, format, placeholder,
       disabledDate, timePicker, disabledTime,
       timePickerDisabledTime, showTimePicker,
       onInputSelect, enablePrev, enableNext,
@@ -93,6 +94,7 @@ const CalendarPart = createReactClass({
           <div className={`${prefixCls}-body`}>
             <DateTable
               {...newProps}
+              dateTitleFormat={dateTitleFormat}
               hoverValue={hoverValue}
               selectedValue={selectedValue}
               dateRender={props.dateRender}
