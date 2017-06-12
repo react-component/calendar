@@ -207,7 +207,7 @@ const Calendar = createReactClass({
     const {
       locale, prefixCls, disabledDate,
       dateInputPlaceholder, timePicker,
-      disabledTime,
+      disabledTime, dateTitleFormat,
     } = props;
     const state = this.state;
     const { value, selectedValue, showTimePicker } = state;
@@ -263,6 +263,7 @@ const Calendar = createReactClass({
             : null}
           <div className={`${prefixCls}-body`}>
             <DateTable
+              dateTitleFormat={dateTitleFormat}
               locale={locale}
               value={value}
               selectedValue={selectedValue}

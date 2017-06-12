@@ -18,13 +18,9 @@ export function getTodayTime(value) {
   return today;
 }
 
-export function getTitleString(value) {
-  return value.format('L');
-}
-
 export function getTodayTimeStr(value) {
   const today = getTodayTime(value);
-  return getTitleString(today);
+  return today.format('L');
 }
 
 export function getMonthName(month) {

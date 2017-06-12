@@ -9,6 +9,7 @@ import CalendarHeader from './full-calendar/CalendarHeader';
 
 const FullCalendar = createReactClass({
   propTypes: {
+    dateTitleFormat: PropTypes.string,
     defaultType: PropTypes.string,
     type: PropTypes.string,
     prefixCls: PropTypes.string,
@@ -77,6 +78,7 @@ const FullCalendar = createReactClass({
       headerComponent,
       headerRender,
       disabledDate,
+      dateTitleFormat,
     } = props;
     const { value, type } = this.state;
 
@@ -109,6 +111,7 @@ const FullCalendar = createReactClass({
         onSelect={this.onSelect}
         value={value}
         disabledDate={disabledDate}
+        dateTitleFormat={dateTitleFormat}
       />
     ) : (
       <MonthTable
