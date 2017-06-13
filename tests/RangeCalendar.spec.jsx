@@ -243,5 +243,18 @@ describe('RangeCalendar', () => {
       wrapper.find('.rc-calendar-range-left .rc-calendar-cell').at(20).simulate('click');
       expect(wrapper.find('.rc-calendar-input').get(1).value).toBe('3/18/2017 06:59:59');
     });
+
+    it('works fine when select reversely', () => {
+      // see: https://github.com/ant-design/ant-design/issues/6440
+      const timePicker = <TimePickerPanel defaultValue={[moment('00:00:00', 'HH:mm:ss'), moment('23:59:59', 'HH:mm:ss')]} />;
+      const wrapper = mount(<RangeCalendar timePicker={timePicker} />);
+      wrapper.find('.rc-calendar-cell').at(20).simulate('click');
+      wrapper.find('.rc-calendar-cell').at(10).simulate('click');
+      // It can only be re-produced at second time.
+      wrapper.find('.rc-calendar-cell').at(20).simulate('click');
+      wrapper.find('.rc-calendar-cell').at(10).simulate('click');
+      expect(wrapper.find('.rc-calendar-input').get(0).value).toBe('3/8/2017 00:00:00');
+      expect(wrapper.find('.rc-calendar-input').get(1).value).toBe('3/18/2017 23:59:59');
+    });
   });
 });

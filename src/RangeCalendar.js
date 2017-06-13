@@ -155,6 +155,7 @@ const RangeCalendar = createReactClass({
         nextSelectedValue = [firstSelectedValue, value];
       } else {
         syncTime(prevSelectedValue[0], value);
+        syncTime(prevSelectedValue[1], firstSelectedValue);
         nextSelectedValue = [value, firstSelectedValue];
       }
     } else if (type === 'start') {
