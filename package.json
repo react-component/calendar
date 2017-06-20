@@ -1,6 +1,6 @@
 {
   "name": "rc-calendar",
-  "version": "8.4.4",
+  "version": "8.4.5",
   "description": "React Calendar",
   "keywords": [
     "react",
@@ -88,6 +88,6 @@
     "moment": "2.x",
     "prop-types": "^15.5.8",
     "rc-trigger": "1.x",
-    "rc-util": "4.x"
+    "rc-util": "^4.0.4"
   }
 }
