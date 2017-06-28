@@ -1,30 +1,32 @@
 /* eslint react/no-multi-comp:0, no-console:0 */
 
-import 'rc-calendar/assets/index.less';
-import RangeCalendar from 'rc-calendar/src/RangeCalendar';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Picker from 'rc-calendar/src/Picker';
-
-import 'rc-time-picker/assets/index.css';
-
+import RangeCalendar from 'rc-calendar/src/RangeCalendar';
 import zhCN from 'rc-calendar/src/locale/zh_CN';
 import enUS from 'rc-calendar/src/locale/en_US';
-import 'rc-time-picker/assets/index.css';
 import TimePickerPanel from 'rc-time-picker/lib/Panel';
+import 'rc-calendar/assets/index.less';
+import 'rc-time-picker/assets/index.css';
 
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 import 'moment/locale/en-gb';
 
-const formatStr = 'YYYY-MM-DD HH:mm:ss';
 const cn = location.search.indexOf('cn') !== -1;
+
+if (cn) {
+  moment.locale('zh-cn');
+} else {
+  moment.locale('en-gb');
+}
 
 const now = moment();
 if (cn) {
-  now.locale('zh-cn').utcOffset(8);
+  now.utcOffset(8);
 } else {
-  now.locale('en-gb').utcOffset(0);
+  now.utcOffset(0);
 }
 
 const defaultCalendarValue = now.clone();
@@ -94,6 +96,7 @@ function disabledTime(time, type) {
   };
 }
 
+const formatStr = 'YYYY-MM-DD HH:mm:ss';
 function format(v) {
   return v ? v.format(formatStr) : '';
 }
