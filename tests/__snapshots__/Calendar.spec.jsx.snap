@@ -59,7 +59,7 @@ exports[`Calendar render render correctly 1`] = `
               role="button"
               title="选择月份"
             >
-              三月
+              3月
             </a>
           </span>
           <a
@@ -817,7 +817,7 @@ exports[`Calendar render render correctly 2`] = `
               role="button"
               title="Choose a month"
             >
-              March
+              Mar
             </a>
             <a
               class="rc-calendar-year-select"

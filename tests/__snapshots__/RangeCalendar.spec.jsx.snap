@@ -53,7 +53,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   role="button"
                   title="Choose a month"
                 >
-                  March
+                  Mar
                 </a>
                 <a
                   class="rc-calendar-year-select"
@@ -777,7 +777,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   role="button"
                   title="Choose a month"
                 >
-                  April
+                  Apr
                 </a>
                 <a
                   class="rc-calendar-year-select"
