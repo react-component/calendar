@@ -196,6 +196,17 @@ describe('RangeCalendar', () => {
     expect(wrapper.find('.rc-calendar-input').get(1).value).toBe('2015-09-14');
   });
 
+  it('onBlur works', () => {
+    let blurWasCalled = false;
+    const onBlur = () => {
+      blurWasCalled = true;
+    };
+    const wrapper = mount(<RangeCalendar onBlur={onBlur()} />);
+    wrapper.find('.rc-calendar-range').simulate('focus');
+    wrapper.find('.rc-calendar-range').simulate('blur');
+    expect(blurWasCalled).toEqual(true);
+  });
+
   it('onHoverChange works', () => {
     let hoverValue = null;
     function onHoverChange(hv) {
