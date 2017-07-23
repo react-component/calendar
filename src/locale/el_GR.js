@@ -10,7 +10,7 @@ export default {
   dateSelect: 'Επιλογή ημερομηνίας',
   monthSelect: 'Επιλογή μήνα',
   yearSelect: 'Επιλογή έτους',
-  decadeSelect: 'Choose a decade',
+  decadeSelect: 'Επιλογή δεκαετίας',
   yearFormat: 'YYYY',
   dateFormat: 'D/M/YYYY',
   dayFormat: 'D',
