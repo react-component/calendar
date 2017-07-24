@@ -4590,7 +4590,7 @@ function chaining() {
       args[_key2] = arguments[_key2];
     }
 
-    for (var i = 0; i < fns.length; i++) {
+        for (var i = 0; i < fns.length; i++) {
       if (fns[i] && typeof fns[i] === 'function') {
         fns[i].apply(this, args);
       }
@@ -5032,7 +5032,7 @@ var Select = __WEBPACK_IMPORTED_MODULE_4_create_react_class___default()({
   },
   getInputElement: function getInputElement() {
     var props = this.props;
-    var inputElement = props.getInputElement ? props.getInputElement() : __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement('input', null);
+    var inputElement = props.getInputElement ? props.getInputElement() : __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement('input', { id: props.id });
     var inputCls = __WEBPACK_IMPORTED_MODULE_6_classnames___default()(inputElement.props.className, __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()({}, props.prefixCls + '-search__field', true));
             return __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
       'div',
@@ -5279,11 +5279,8 @@ var Select = __WEBPACK_IMPORTED_MODULE_4_create_react_class___default()({
     }
     var open = this.state.open;
 
-    if (typeof document !== 'undefined' && this.getInputDOMNode() && document.activeElement === this.getInputDOMNode()) {
-      open = true;
-    }
     var options = [];
-    if (open) {
+        if (open || this.hiddenForNoOptions) {
       options = this.renderFilterOptions();
     }
     this._options = options;
@@ -5291,6 +5288,11 @@ var Select = __WEBPACK_IMPORTED_MODULE_4_create_react_class___default()({
     if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_9__util__["h" /* isMultipleOrTagsOrCombobox */])(this.props) || !this.props.showSearch) {
       if (open && !options.length) {
         open = false;
+        this.hiddenForNoOptions = true;
+      }
+            if (this.hiddenForNoOptions && options.length) {
+        open = true;
+        this.hiddenForNoOptions = false;
       }
     }
     this.state.open = open;
