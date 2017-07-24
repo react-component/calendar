@@ -79,6 +79,7 @@ const RangeCalendar = createReactClass({
     type: PropTypes.any,
     disabledDate: PropTypes.func,
     disabledTime: PropTypes.func,
+    onBlur: PropTypes.func,
   },
 
   mixins: [CommonMixin],
@@ -90,6 +91,7 @@ const RangeCalendar = createReactClass({
       onValueChange: noop,
       onHoverChange: noop,
       disabledTime: noop,
+      onBlur: noop,
       showToday: true,
     };
   },
@@ -476,6 +478,7 @@ const RangeCalendar = createReactClass({
         ref="root"
         className={classes}
         style={props.style}
+        onBlur={() => props.onBlur()}
         tabIndex="0"
       >
         {props.renderSidebar()}

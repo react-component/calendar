@@ -331,6 +331,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>called when a date range is changed inside calendar (next year/next month/keyboard)</td>
         </tr>
         <tr>
+          <td>onBlur</td>
+          <td>Function()</td>
+          <td></td>
+          <td>called when the component loses focus</td>
+        </tr>
+        <tr>
           <td>dateInputPlaceholder</td>
           <td>String[]</td>
           <td></td>
