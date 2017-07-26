@@ -202,6 +202,9 @@ const Calendar = createReactClass({
       showTimePicker: false,
     });
   },
+  saveDateInput(dateInput) {
+    this.dateInputInstance = dateInput;
+  },
   render() {
     const props = this.props;
     const {
@@ -227,7 +230,7 @@ const Calendar = createReactClass({
     }) : null;
     const dateInputElement = props.showDateInput ? (
       <DateInput
-        ref="dateInput"
+        ref={this.saveDateInput}
         format={this.getFormat()}
         key="date-input"
         value={value}

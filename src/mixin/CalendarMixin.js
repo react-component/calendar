@@ -66,6 +66,10 @@ const CalendarMixin = {
     this.setSelectedValue(value, cause);
   },
 
+  saveRoot(root) {
+    this.rootInstance = root;
+  },
+
   renderRoot(newProps) {
     const props = this.props;
     const prefixCls = props.prefixCls;
@@ -79,7 +83,7 @@ const CalendarMixin = {
 
     return (
       <div
-        ref="root"
+        ref={this.saveRoot}
         className={`${classnames(className)}`}
         style={this.props.style}
         tabIndex="0"

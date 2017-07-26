@@ -53,8 +53,8 @@ export default {
   },
 
   focus() {
-    if (this.refs.root) {
-      this.refs.root.focus();
+    if (this.rootInstance) {
+      this.rootInstance.focus();
     }
   },
 };
