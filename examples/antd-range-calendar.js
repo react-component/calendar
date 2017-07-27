@@ -505,7 +505,7 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_5_create_react_class___default()({
     return __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
       'div',
       {
-        ref: 'root',
+        ref: this.saveRoot,
         className: classes,
         style: props.style,
         tabIndex: '0'
@@ -1282,7 +1282,7 @@ YearPanel.defaultProps = {
 
 /***/ }),
 
-/***/ 213:
+/***/ 214:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3051,7 +3051,12 @@ var DateInput = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
     return __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.findDOMNode(this);
   },
   focus: function focus() {
-    this.refs.dateInput.focus();
+    if (this.dateInputInstance) {
+      this.dateInputInstance.focus();
+    }
+  },
+  saveDateInput: function saveDateInput(dateInput) {
+    this.dateInputInstance = dateInput;
   },
   render: function render() {
     var props = this.props;
@@ -3070,7 +3075,7 @@ var DateInput = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
         'div',
         { className: prefixCls + '-date-input-wrap' },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', {
-          ref: 'dateInput',
+          ref: this.saveDateInput,
           className: prefixCls + '-input ' + invalidClass,
           value: str,
           disabled: props.disabled,
@@ -3095,7 +3100,7 @@ var DateInput = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
 /***/ 409:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(213);
+module.exports = __webpack_require__(214);
 
 
 /***/ }),

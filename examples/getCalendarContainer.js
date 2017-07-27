@@ -785,7 +785,7 @@ YearPanel.defaultProps = {
 
 /***/ }),
 
-/***/ 215:
+/***/ 216:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -798,8 +798,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rc_calendar__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rc_calendar_src_Picker__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rc_dialog__ = __webpack_require__(296);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rc_dialog_assets_index_css__ = __webpack_require__(272);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rc_dialog__ = __webpack_require__(297);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rc_dialog_assets_index_css__ = __webpack_require__(273);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rc_dialog_assets_index_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rc_dialog_assets_index_css__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_calendar_src_locale_zh_CN__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_calendar_src_locale_en_US__ = __webpack_require__(44);
@@ -1443,7 +1443,7 @@ var DateTBody = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
 
 /***/ }),
 
-/***/ 272:
+/***/ 273:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
@@ -1608,7 +1608,7 @@ var DateTable = function (_React$Component) {
 
 /***/ }),
 
-/***/ 295:
+/***/ 296:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1626,7 +1626,7 @@ var DateTable = function (_React$Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rc_util_es_KeyCode__ = __webpack_require__(141);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_animate__ = __webpack_require__(99);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__LazyRenderBox__ = __webpack_require__(297);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__LazyRenderBox__ = __webpack_require__(298);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rc_util_lib_getScrollBarSize__ = __webpack_require__(322);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rc_util_lib_getScrollBarSize___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_rc_util_lib_getScrollBarSize__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_object_assign__ = __webpack_require__(17);
@@ -1943,7 +1943,7 @@ Dialog.defaultProps = {
 
 /***/ }),
 
-/***/ 296:
+/***/ 297:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1951,7 +1951,7 @@ Dialog.defaultProps = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_create_react_class__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_create_react_class___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_create_react_class__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Dialog__ = __webpack_require__(295);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Dialog__ = __webpack_require__(296);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rc_util_es_getContainerRenderMixin__ = __webpack_require__(319);
 var __assign = this && this.__assign || Object.assign || function (t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -2019,7 +2019,7 @@ var DialogWrap = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
 
 /***/ }),
 
-/***/ 297:
+/***/ 298:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3093,7 +3093,12 @@ var DateInput = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
     return __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.findDOMNode(this);
   },
   focus: function focus() {
-    this.refs.dateInput.focus();
+    if (this.dateInputInstance) {
+      this.dateInputInstance.focus();
+    }
+  },
+  saveDateInput: function saveDateInput(dateInput) {
+    this.dateInputInstance = dateInput;
   },
   render: function render() {
     var props = this.props;
@@ -3112,7 +3117,7 @@ var DateInput = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
         'div',
         { className: prefixCls + '-date-input-wrap' },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', {
-          ref: 'dateInput',
+          ref: this.saveDateInput,
           className: prefixCls + '-input ' + invalidClass,
           value: str,
           disabled: props.disabled,
@@ -3225,7 +3230,7 @@ var CalendarMixin = {
     return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
       'div',
       {
-        ref: 'root',
+        ref: this.saveRoot,
         className: '' + __WEBPACK_IMPORTED_MODULE_3_classnames___default()(className),
         style: this.props.style,
         tabIndex: '0',
@@ -3269,7 +3274,7 @@ var CalendarMixin = {
 /***/ 411:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(215);
+module.exports = __webpack_require__(216);
 
 
 /***/ }),
@@ -3541,7 +3546,6 @@ var Calendar = __WEBPACK_IMPORTED_MODULE_3_create_react_class___default()({
       disabledTime: disabledTime
     })) : null;
     var dateInputElement = props.showDateInput ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_11__date_DateInput__["a" /* default */], {
-      ref: 'dateInput',
       format: this.getFormat(),
       key: 'date-input',
       value: value,

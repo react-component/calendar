@@ -260,7 +260,7 @@ YearPanel.defaultProps = {
 
 /***/ }),
 
-/***/ 217:
+/***/ 218:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1973,7 +1973,12 @@ var DateInput = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
     return __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.findDOMNode(this);
   },
   focus: function focus() {
-    this.refs.dateInput.focus();
+    if (this.dateInputInstance) {
+      this.dateInputInstance.focus();
+    }
+  },
+  saveDateInput: function saveDateInput(dateInput) {
+    this.dateInputInstance = dateInput;
   },
   render: function render() {
     var props = this.props;
@@ -1992,7 +1997,7 @@ var DateInput = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
         'div',
         { className: prefixCls + '-date-input-wrap' },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', {
-          ref: 'dateInput',
+          ref: this.saveDateInput,
           className: prefixCls + '-input ' + invalidClass,
           value: str,
           disabled: props.disabled,
@@ -2105,7 +2110,7 @@ var CalendarMixin = {
     return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
       'div',
       {
-        ref: 'root',
+        ref: this.saveRoot,
         className: '' + __WEBPACK_IMPORTED_MODULE_3_classnames___default()(className),
         style: this.props.style,
         tabIndex: '0',
@@ -2149,7 +2154,7 @@ var CalendarMixin = {
 /***/ 413:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(217);
+module.exports = __webpack_require__(218);
 
 
 /***/ }),
@@ -2421,7 +2426,6 @@ var Calendar = __WEBPACK_IMPORTED_MODULE_3_create_react_class___default()({
       disabledTime: disabledTime
     })) : null;
     var dateInputElement = props.showDateInput ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_11__date_DateInput__["a" /* default */], {
-      ref: 'dateInput',
       format: this.getFormat(),
       key: 'date-input',
       value: value,
