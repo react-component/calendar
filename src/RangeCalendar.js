@@ -473,7 +473,7 @@ const RangeCalendar = createReactClass({
             nextMonthOfStart.month() === endValue.month();
     return (
       <div
-        ref="root"
+        ref={this.saveRoot}
         className={classes}
         style={props.style}
         tabIndex="0"

@@ -227,7 +227,6 @@ const Calendar = createReactClass({
     }) : null;
     const dateInputElement = props.showDateInput ? (
       <DateInput
-        ref="dateInput"
         format={this.getFormat()}
         key="date-input"
         value={value}
