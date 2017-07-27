@@ -57,4 +57,8 @@ export default {
       this.rootInstance.focus();
     }
   },
+
+  saveRoot(root) {
+    this.rootInstance = root;
+  },
 };

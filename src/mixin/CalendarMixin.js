@@ -66,10 +66,6 @@ const CalendarMixin = {
     this.setSelectedValue(value, cause);
   },
 
-  saveRoot(root) {
-    this.rootInstance = root;
-  },
-
   renderRoot(newProps) {
     const props = this.props;
     const prefixCls = props.prefixCls;
