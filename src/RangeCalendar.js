@@ -243,12 +243,12 @@ const RangeCalendar = createReactClass({
     return this.fireValueChange(value);
   },
 
-  onStartPanelChange({ showMonthPanel, showYearPanel }) {
-    this.setState({ isStartMonthYearPanelShow: showMonthPanel || showYearPanel });
+  onStartPanelChange(mode) {
+    this.setState({ isStartMonthYearPanelShow: mode === 'month' || mode === 'year' });
   },
 
-  onEndPanelChange({ showMonthPanel, showYearPanel }) {
-    this.setState({ isEndMonthYearPanelShow: showMonthPanel || showYearPanel });
+  onEndPanelChange(mode) {
+    this.setState({ isEndMonthYearPanelShow: mode === 'month' || mode === 'year' });
   },
 
   getStartValue() {
