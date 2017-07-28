@@ -2,7 +2,7 @@
 ----
 
 ## 9.0.0 / 2017-07-27
-- Replace react string refs with function way [https://github.com/react-component/calendar/pull/282](#282)
+- Replace react string refs with function way [#282](https://github.com/react-component/calendar/pull/282)
 
 ## 8.4.0 / 2017-05-31
 
