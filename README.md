@@ -212,6 +212,18 @@ http://react-component.github.io/calendar/examples/index.html
           <td></td>
           <td>date input's placeholder</td>
         </tr>
+        <tr>
+          <td>mode</td>
+          <td>enum('time', 'date', 'month', 'year', 'decade')</td>
+          <td>'date'</td>
+          <td>controll which kind of panel should be shown</td>
+        </tr>
+        <tr>
+          <td>onPanelChange</td>
+          <td>Function(date: moment, mode)</td>
+          <td></td>
+          <td>called when panel changed</td>
+        </tr>
     </tbody>
 </table>
 
@@ -347,6 +359,18 @@ http://react-component.github.io/calendar/examples/index.html
           <td>enum('both','start', 'end')</td>
           <td>both</td>
           <td>whether fix start or end selected value. check start-end-range example</td>
+        </tr>
+        <tr>
+          <td>mode</td>
+          <td>enum('date', 'month', 'year', 'decade')[]</td>
+          <td>['date', 'date']</td>
+          <td>controll which kind of panels should be shown</td>
+        </tr>
+        <tr>
+          <td>onPanelChange</td>
+          <td>Function(date: moment[], mode)</td>
+          <td></td>
+          <td>called when panels changed</td>
         </tr>
     </tbody>
 </table>

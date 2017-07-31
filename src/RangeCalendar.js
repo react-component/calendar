@@ -255,7 +255,7 @@ const RangeCalendar = createReactClass({
         mode: newMode,
       });
     }
-    props.onPanelChange(newMode);
+    props.onPanelChange(state.value, newMode);
   },
 
   onEndPanelChange(mode) {
@@ -266,7 +266,7 @@ const RangeCalendar = createReactClass({
         mode: newMode,
       });
     }
-    props.onPanelChange(newMode);
+    props.onPanelChange(state.value, newMode);
   },
 
   getStartValue() {

@@ -279,7 +279,7 @@ describe('RangeCalendar', () => {
       class ControlledRangeCalendar extends React.Component {
         state = { mode: ['date', 'date'] };
 
-        handlePanelChange = (mode) => {
+        handlePanelChange = (value, mode) => {
           this.setState({ mode });
         }
 

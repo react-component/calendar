@@ -56,7 +56,7 @@ const Calendar = createReactClass({
     defaultValue: PropTypes.object,
     value: PropTypes.object,
     selectedValue: PropTypes.object,
-    mode: PropTypes.oneOf(['date', 'month', 'year', 'decade']),
+    mode: PropTypes.oneOf(['time', 'date', 'month', 'year', 'decade']),
     locale: PropTypes.object,
     showDateInput: PropTypes.bool,
     showWeekNumber: PropTypes.bool,
@@ -90,7 +90,6 @@ const Calendar = createReactClass({
   getInitialState() {
     return {
       mode: this.props.mode || 'date',
-      showTimePicker: false,
     };
   },
   componentWillReceiveProps(nextProps) {
@@ -198,24 +197,20 @@ const Calendar = createReactClass({
     });
   },
   onPanelChange(mode) {
-    const { props } = this;
+    const { props, state } = this;
     if (!('mode' in props)) {
       this.setState({ mode });
     }
-    props.onPanelChange(mode);
+    props.onPanelChange(state.value, mode);
   },
   getRootDOMNode() {
     return ReactDOM.findDOMNode(this);
   },
   openTimePicker() {
-    this.setState({
-      showTimePicker: true,
-    });
+    this.onPanelChange('time');
   },
   closeTimePicker() {
-    this.setState({
-      showTimePicker: false,
-    });
+    this.onPanelChange('date');
   },
   render() {
     const props = this.props;
@@ -225,7 +220,8 @@ const Calendar = createReactClass({
       disabledTime,
     } = props;
     const state = this.state;
-    const { value, selectedValue, mode, showTimePicker } = state;
+    const { value, selectedValue, mode } = state;
+    const showTimePicker = mode === 'time';
     const disabledTimeConfig = showTimePicker && disabledTime && timePicker ?
       getTimeConfig(selectedValue, disabledTime) : null;
 

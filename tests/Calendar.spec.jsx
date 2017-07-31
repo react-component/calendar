@@ -102,18 +102,30 @@ describe('Calendar', () => {
     });
 
     it('support controlled mode', () => {
+      const timePicker = <TimePickerPanel defaultValue={moment('00:00:00', 'HH:mm:ss')} />;
       class ControlledCalendar extends React.Component {
         state = { mode: 'date' };
 
-        handlePanelChange = (mode) => {
+        handlePanelChange = (value, mode) => {
           this.setState({ mode });
         }
 
         render() {
-          return <Calendar mode={this.state.mode} onPanelChange={this.handlePanelChange} />;
+          return (
+            <Calendar
+              mode={this.state.mode}
+              onPanelChange={this.handlePanelChange}
+              timePicker={timePicker}
+            />
+          );
         }
       }
       const wrapper = mount(<ControlledCalendar />);
+
+      wrapper.find('.rc-calendar-time-picker-btn').simulate('click');
+      expect(wrapper.find('.rc-calendar-time-picker').length).toBe(1);
+      wrapper.find('.rc-calendar-time-picker-btn').simulate('click');
+      expect(wrapper.find('.rc-calendar-time-picker').length).toBe(0);
 
       wrapper.find('.rc-calendar-month-select').simulate('click');
       expect(wrapper.find('.rc-calendar-month-panel').length).toBe(1);

@@ -49,7 +49,7 @@ const CalendarHeader = createReactClass({
     this.previousMonth = goMonth.bind(this, -1);
     this.nextYear = goYear.bind(this, 1);
     this.previousYear = goYear.bind(this, -1);
-    return null;
+    return { yearPanelReferer: null };
   },
 
   onMonthSelect(value) {
@@ -58,8 +58,8 @@ const CalendarHeader = createReactClass({
   },
 
   onYearSelect(value) {
-    const referer = this.yearPanelReferer;
-    this.yearPanelReferer = null;
+    const referer = this.state.yearPanelReferer;
+    this.setState({ yearPanelReferer: null });
     this.props.onPanelChange(referer);
     this.props.onValueChange(value);
   },
@@ -118,7 +118,7 @@ const CalendarHeader = createReactClass({
   },
 
   showYearPanel(referer) {
-    this.yearPanelReferer = referer;
+    this.setState({ yearPanelReferer: referer });
     this.props.onPanelChange('year');
   },
 
