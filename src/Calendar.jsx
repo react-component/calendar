@@ -56,7 +56,7 @@ const Calendar = createReactClass({
     defaultValue: PropTypes.object,
     value: PropTypes.object,
     selectedValue: PropTypes.object,
-    mode: PropTypes.oneOf(['data', 'month', 'year', 'decade']),
+    mode: PropTypes.oneOf(['date', 'month', 'year', 'decade']),
     locale: PropTypes.object,
     showDateInput: PropTypes.bool,
     showWeekNumber: PropTypes.bool,
@@ -92,6 +92,11 @@ const Calendar = createReactClass({
       mode: this.props.mode || 'date',
       showTimePicker: false,
     };
+  },
+  componentWillReceiveProps(nextProps) {
+    if ('mode' in nextProps) {
+      this.setState({ mode: nextProps.mode });
+    }
   },
   onKeyDown(event) {
     if (event.target.nodeName.toLowerCase() === 'input') {

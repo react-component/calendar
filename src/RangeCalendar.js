@@ -61,6 +61,7 @@ const RangeCalendar = createReactClass({
     defaultValue: PropTypes.any,
     value: PropTypes.any,
     hoverValue: PropTypes.any,
+    mode: PropTypes.arrayOf(PropTypes.oneOf(['date', 'month', 'year', 'decade'])),
     timePicker: PropTypes.any,
     showOk: PropTypes.bool,
     showToday: PropTypes.bool,
@@ -127,6 +128,9 @@ const RangeCalendar = createReactClass({
       newState.selectedValue = nextProps.selectedValue;
       newState.prevSelectedValue = nextProps.selectedValue;
       this.setState(newState);
+    }
+    if ('mode' in nextProps) {
+      this.setState({ mode: nextProps.mode });
     }
   },
 

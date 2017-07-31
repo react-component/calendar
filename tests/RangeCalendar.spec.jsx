@@ -257,4 +257,69 @@ describe('RangeCalendar', () => {
       expect(wrapper.find('.rc-calendar-input').get(1).value).toBe('3/18/2017 23:59:59');
     });
   });
+
+  describe('controlled panels', () => {
+    it('render controlled panels correctly', () => {
+      const RangeMonthPicker = mount(<RangeCalendar mode={['month', 'month']} />);
+      expect(renderToJson(RangeMonthPicker.render())).toMatchSnapshot();
+      RangeMonthPicker.find('.rc-calendar-month-panel-year-select').at(0).simulate('click');
+      RangeMonthPicker.find('.rc-calendar-month-panel-year-select').at(1).simulate('click');
+      expect(RangeMonthPicker.find('.rc-calendar-year-panel').length).toBe(0);
+      expect(RangeMonthPicker.find('.rc-calendar-month-panel').length).toBe(2);
+
+      const RangeYearPicker = mount(<RangeCalendar mode={['year', 'year']} />);
+      expect(renderToJson(RangeYearPicker.render())).toMatchSnapshot();
+      RangeYearPicker.find('.rc-calendar-year-panel-decade-select').at(0).simulate('click');
+      RangeYearPicker.find('.rc-calendar-year-panel-decade-select').at(1).simulate('click');
+      expect(RangeYearPicker.find('.rc-calendar-decade-panel').length).toBe(0);
+      expect(RangeYearPicker.find('.rc-calendar-year-panel').length).toBe(2);
+    });
+
+    it('support controlled mode', () => {
+      class ControlledRangeCalendar extends React.Component {
+        state = { mode: ['date', 'date'] };
+
+        handlePanelChange = (mode) => {
+          this.setState({ mode });
+        }
+
+        render() {
+          return <RangeCalendar mode={this.state.mode} onPanelChange={this.handlePanelChange} />;
+        }
+      }
+      const wrapper = mount(<ControlledRangeCalendar />);
+
+      wrapper.find('.rc-calendar-month-select').at(0).simulate('click');
+      wrapper.find('.rc-calendar-month-select').at(1).simulate('click');
+      expect(wrapper.find('.rc-calendar-month-panel').length).toBe(2);
+      wrapper.find('.rc-calendar-month-panel-year-select').at(0).simulate('click');
+      wrapper.find('.rc-calendar-month-panel-year-select').at(0).simulate('click');
+      expect(wrapper.find('.rc-calendar-year-panel').length).toBe(2);
+      wrapper.find('.rc-calendar-year-panel-decade-select').at(0).simulate('click');
+      wrapper.find('.rc-calendar-year-panel-decade-select').at(0).simulate('click');
+      expect(wrapper.find('.rc-calendar-decade-panel').length).toBe(2);
+      wrapper.find('.rc-calendar-decade-panel-selected-cell').at(0).simulate('click');
+      wrapper.find('.rc-calendar-decade-panel-selected-cell').at(0).simulate('click');
+      expect(wrapper.find('.rc-calendar-decade-panel').length).toBe(0);
+      wrapper.find('.rc-calendar-year-panel-selected-cell').at(0).simulate('click');
+      wrapper.find('.rc-calendar-year-panel-selected-cell').at(0).simulate('click');
+      expect(wrapper.find('.rc-calendar-year-panel').length).toBe(0);
+      wrapper.find('.rc-calendar-month-panel-selected-cell').at(0).simulate('click');
+      wrapper.find('.rc-calendar-month-panel-selected-cell').at(0).simulate('click');
+      expect(wrapper.find('.rc-calendar-month-panel').length).toBe(0);
+
+      wrapper.find('.rc-calendar-year-select').at(0).simulate('click');
+      wrapper.find('.rc-calendar-year-select').at(1).simulate('click');
+      expect(wrapper.find('.rc-calendar-year-panel').length).toBe(2);
+      wrapper.find('.rc-calendar-year-panel-decade-select').at(0).simulate('click');
+      wrapper.find('.rc-calendar-year-panel-decade-select').at(0).simulate('click');
+      expect(wrapper.find('.rc-calendar-decade-panel').length).toBe(2);
+      wrapper.find('.rc-calendar-decade-panel-selected-cell').at(0).simulate('click');
+      wrapper.find('.rc-calendar-decade-panel-selected-cell').at(0).simulate('click');
+      expect(wrapper.find('.rc-calendar-decade-panel').length).toBe(0);
+      wrapper.find('.rc-calendar-year-panel-selected-cell').at(0).simulate('click');
+      wrapper.find('.rc-calendar-year-panel-selected-cell').at(0).simulate('click');
+      expect(wrapper.find('.rc-calendar-year-panel').length).toBe(0);
+    });
+  });
 });
