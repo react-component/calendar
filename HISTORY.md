@@ -1,6 +1,9 @@
 # History
 ----
 
+## 9.1.0 / 2017-07-27
+- Support control panel [#284](https://github.com/react-component/calendar/pull/284)
+
 ## 9.0.0 / 2017-07-27
 - Replace react string refs with function way [#282](https://github.com/react-component/calendar/pull/282)
 

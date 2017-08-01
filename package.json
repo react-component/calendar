@@ -1,6 +1,6 @@
 {
   "name": "rc-calendar",
-  "version": "9.0.0",
+  "version": "9.1.0",
   "description": "React Calendar",
   "keywords": [
     "react",
@@ -19,12 +19,6 @@
   ],
   "main": "lib/index",
   "module": "es/index",
-  "entry": {
-    "rc-calendar": [
-      "./assets/index.less",
-      "./src/index.js"
-    ]
-  },
   "homepage": "http://github.com/react-component/calendar",
   "author": "yiminghe@gmail.com",
   "repository": {
@@ -36,7 +30,13 @@
   },
   "licenses": "MIT",
   "config": {
-    "port": 8002
+    "port": 8002,
+    "entry": {
+      "rc-calendar": [
+        "./assets/index.less",
+        "./src/index.js"
+      ]
+    }
   },
   "scripts": {
     "build": "rc-tools run build",
