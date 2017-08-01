@@ -1,5 +1,34 @@
 webpackJsonp([8],{
 
+/***/ 22:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports['default'] = mapSelf;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function mirror(o) {
+  return o;
+}
+
+function mapSelf(children) {
+  // return ReactFragment
+  return _react2['default'].Children.map(children, mirror);
+}
+module.exports = exports['default'];
+
+/***/ }),
+
 /***/ 235:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13,13 +42,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rc_calendar_src_MonthCalendar__ = __webpack_require__(247);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rc_calendar_src_Picker__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rc_calendar_src_locale_zh_CN__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rc_calendar_src_locale_zh_CN__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rc_calendar_src_locale_en_US__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_moment__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_moment_locale_zh_cn__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_moment_locale_zh_cn__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_moment_locale_zh_cn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_moment_locale_zh_cn__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_moment_locale_en_gb__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_moment_locale_en_gb__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_moment_locale_en_gb___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_moment_locale_en_gb__);
 /* eslint react/no-multi-comp:0, no-console:0 */
 
@@ -195,13 +224,9 @@ __WEBPACK_IMPORTED_MODULE_2_react_dom___default.a.render(__WEBPACK_IMPORTED_MODU
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rc_util_lib_KeyCode__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rc_util_lib_KeyCode___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rc_util_lib_KeyCode__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__month_MonthPanel__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__year_YearPanel__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__decade_DecadePanel__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__mixin_CalendarMixin__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__mixin_CommonMixin__ = __webpack_require__(47);
-
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__calendar_CalendarHeader__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mixin_CalendarMixin__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__mixin_CommonMixin__ = __webpack_require__(47);
 
 
 
@@ -217,7 +242,7 @@ var MonthCalendar = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
     monthCellRender: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.func,
     dateCellRender: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.func
   },
-  mixins: [__WEBPACK_IMPORTED_MODULE_8__mixin_CommonMixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_7__mixin_CalendarMixin__["a" /* default */]],
+  mixins: [__WEBPACK_IMPORTED_MODULE_6__mixin_CommonMixin__["a" /* default */], __WEBPACK_IMPORTED_MODULE_5__mixin_CalendarMixin__["a" /* default */]],
 
   getInitialState: function getInitialState() {
     return { mode: 'month' };
@@ -269,19 +294,10 @@ var MonthCalendar = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
       return 1;
     }
   },
-  handleYearPanelShow: function handleYearPanelShow() {
-    this.setState({ mode: 'year' });
-  },
-  handleYearSelect: function handleYearSelect() {
-    this.setState({ mode: 'month' });
-    this.onSelect.apply(this, arguments);
-  },
-  handleDecadePanelShow: function handleDecadePanelShow() {
-    this.setState({ mode: 'decade' });
-  },
-  handleDecadeSelect: function handleDecadeSelect() {
-    this.setState({ mode: 'year' });
-    this.onSelect.apply(this, arguments);
+  handlePanelChange: function handlePanelChange(_, mode) {
+    if (mode !== 'date') {
+      this.setState({ mode: mode });
+    }
   },
   render: function render() {
     var props = this.props,
@@ -289,39 +305,20 @@ var MonthCalendar = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
     var mode = state.mode,
         value = state.value;
 
-    var children = [__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__month_MonthPanel__["a" /* default */], {
-      key: 'month',
-      locale: props.locale,
-      disabledDate: props.disabledDate,
-      style: { position: 'relative' },
+    var children = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__calendar_CalendarHeader__["a" /* default */], {
+      prefixCls: props.prefixCls,
+      mode: mode,
       value: value,
-      cellRender: props.monthCellRender,
-      contentRender: props.monthCellContentRender,
-      rootPrefixCls: props.prefixCls,
-      onChange: this.setValue,
-      onSelect: this.onSelect,
-      onYearPanelShow: this.handleYearPanelShow
-    })];
-    if (mode === 'year') {
-      children.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__year_YearPanel__["a" /* default */], {
-        key: 'year',
-        locale: props.locale,
-        defaultValue: value,
-        rootPrefixCls: props.prefixCls,
-        onSelect: this.handleYearSelect,
-        onDecadePanelShow: this.handleDecadePanelShow
-      }));
-    }
-    if (mode === 'decade') {
-      children.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__decade_DecadePanel__["a" /* default */], {
-        key: 'decade',
-        locale: props.locale,
-        defaultValue: value,
-        rootPrefixCls: props.prefixCls,
-        onSelect: this.handleDecadeSelect
-      }));
-    }
+      locale: props.locale,
+      disabledMonth: props.disabledDate,
+      monthCellRender: props.monthCellRender,
+      monthCellContentRender: props.monthCellContentRender,
+      onMonthSelect: this.onSelect,
+      onValueChange: this.setValue,
+      onPanelChange: this.handlePanelChange
+    });
     return this.renderRoot({
+      className: props.prefixCls + '-month-calendar',
       children: children
     });
   }
@@ -331,7 +328,246 @@ var MonthCalendar = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
 
 /***/ }),
 
-/***/ 28:
+/***/ 25:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_create_react_class__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_create_react_class___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_create_react_class__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rc_util_lib_Children_mapSelf__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rc_util_lib_Children_mapSelf___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rc_util_lib_Children_mapSelf__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__month_MonthPanel__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__year_YearPanel__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__decade_DecadePanel__ = __webpack_require__(29);
+
+
+
+
+
+
+
+
+function goMonth(direction) {
+  var next = this.props.value.clone();
+  next.add(direction, 'months');
+  this.props.onValueChange(next);
+}
+
+function goYear(direction) {
+  var next = this.props.value.clone();
+  next.add(direction, 'years');
+  this.props.onValueChange(next);
+}
+
+function showIf(condition, el) {
+  return condition ? el : null;
+}
+
+var CalendarHeader = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
+  displayName: 'CalendarHeader',
+
+  propTypes: {
+    prefixCls: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.string,
+    value: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.object,
+    onValueChange: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.func,
+    showTimePicker: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.bool,
+    onPanelChange: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.func,
+    locale: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.object,
+    enablePrev: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.any,
+    enableNext: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.any,
+    disabledMonth: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.func
+  },
+
+  getDefaultProps: function getDefaultProps() {
+    return {
+      enableNext: 1,
+      enablePrev: 1,
+      onPanelChange: function onPanelChange() {},
+      onValueChange: function onValueChange() {}
+    };
+  },
+  getInitialState: function getInitialState() {
+    this.nextMonth = goMonth.bind(this, 1);
+    this.previousMonth = goMonth.bind(this, -1);
+    this.nextYear = goYear.bind(this, 1);
+    this.previousYear = goYear.bind(this, -1);
+    return { yearPanelReferer: null };
+  },
+  onMonthSelect: function onMonthSelect(value) {
+    this.props.onPanelChange(value, 'date');
+    if (this.props.onMonthSelect) {
+      this.props.onMonthSelect(value);
+    } else {
+      this.props.onValueChange(value);
+    }
+  },
+  onYearSelect: function onYearSelect(value) {
+    var referer = this.state.yearPanelReferer;
+    this.setState({ yearPanelReferer: null });
+    this.props.onPanelChange(value, referer);
+    this.props.onValueChange(value);
+  },
+  onDecadeSelect: function onDecadeSelect(value) {
+    this.props.onPanelChange(value, 'year');
+    this.props.onValueChange(value);
+  },
+  monthYearElement: function monthYearElement(showTimePicker) {
+    var _this = this;
+
+    var props = this.props;
+    var prefixCls = props.prefixCls;
+    var locale = props.locale;
+    var value = props.value;
+    var localeData = value.localeData();
+    var monthBeforeYear = locale.monthBeforeYear;
+    var selectClassName = prefixCls + '-' + (monthBeforeYear ? 'my-select' : 'ym-select');
+    var year = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'a',
+      {
+        className: prefixCls + '-year-select',
+        role: 'button',
+        onClick: showTimePicker ? null : function () {
+          return _this.showYearPanel('date');
+        },
+        title: locale.yearSelect
+      },
+      value.format(locale.yearFormat)
+    );
+    var month = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'a',
+      {
+        className: prefixCls + '-month-select',
+        role: 'button',
+        onClick: showTimePicker ? null : this.showMonthPanel,
+        title: locale.monthSelect
+      },
+      localeData.monthsShort(value)
+    );
+    var day = void 0;
+    if (showTimePicker) {
+      day = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'a',
+        {
+          className: prefixCls + '-day-select',
+          role: 'button'
+        },
+        value.format(locale.dayFormat)
+      );
+    }
+    var my = [];
+    if (monthBeforeYear) {
+      my = [month, day, year];
+    } else {
+      my = [year, month, day];
+    }
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'span',
+      { className: selectClassName },
+      __WEBPACK_IMPORTED_MODULE_3_rc_util_lib_Children_mapSelf___default()(my)
+    );
+  },
+  showMonthPanel: function showMonthPanel() {
+    // null means that users' interaction doesn't change value
+    this.props.onPanelChange(null, 'month');
+  },
+  showYearPanel: function showYearPanel(referer) {
+    this.setState({ yearPanelReferer: referer });
+    this.props.onPanelChange(null, 'year');
+  },
+  showDecadePanel: function showDecadePanel() {
+    this.props.onPanelChange(null, 'decade');
+  },
+  render: function render() {
+    var _this2 = this;
+
+    var props = this.props;
+    var prefixCls = props.prefixCls,
+        locale = props.locale,
+        mode = props.mode,
+        value = props.value,
+        showTimePicker = props.showTimePicker,
+        enableNext = props.enableNext,
+        enablePrev = props.enablePrev,
+        disabledMonth = props.disabledMonth;
+
+
+    var panel = null;
+    if (mode === 'month') {
+      panel = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__month_MonthPanel__["a" /* default */], {
+        locale: locale,
+        defaultValue: value,
+        rootPrefixCls: prefixCls,
+        onSelect: this.onMonthSelect,
+        onYearPanelShow: function onYearPanelShow() {
+          return _this2.showYearPanel('month');
+        },
+        disabledDate: disabledMonth,
+        cellRender: props.monthCellRender,
+        contentRender: props.monthCellContentRender
+      });
+    }
+    if (mode === 'year') {
+      panel = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__year_YearPanel__["a" /* default */], {
+        locale: locale,
+        defaultValue: value,
+        rootPrefixCls: prefixCls,
+        onSelect: this.onYearSelect,
+        onDecadePanelShow: this.showDecadePanel
+      });
+    }
+    if (mode === 'decade') {
+      panel = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__decade_DecadePanel__["a" /* default */], {
+        locale: locale,
+        defaultValue: value,
+        rootPrefixCls: prefixCls,
+        onSelect: this.onDecadeSelect
+      });
+    }
+
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'div',
+      { className: prefixCls + '-header' },
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { style: { position: 'relative' } },
+        showIf(enablePrev && !showTimePicker, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', {
+          className: prefixCls + '-prev-year-btn',
+          role: 'button',
+          onClick: this.previousYear,
+          title: locale.previousYear
+        })),
+        showIf(enablePrev && !showTimePicker, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', {
+          className: prefixCls + '-prev-month-btn',
+          role: 'button',
+          onClick: this.previousMonth,
+          title: locale.previousMonth
+        })),
+        this.monthYearElement(showTimePicker),
+        showIf(enableNext && !showTimePicker, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', {
+          className: prefixCls + '-next-month-btn',
+          onClick: this.nextMonth,
+          title: locale.nextMonth
+        })),
+        showIf(enableNext && !showTimePicker, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', {
+          className: prefixCls + '-next-year-btn',
+          onClick: this.nextYear,
+          title: locale.nextYear
+        }))
+      ),
+      panel
+    );
+  }
+});
+
+/* harmony default export */ __webpack_exports__["a"] = (CalendarHeader);
+
+/***/ }),
+
+/***/ 29:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -529,7 +765,7 @@ DecadePanel.defaultProps = {
 
 /***/ }),
 
-/***/ 29:
+/***/ 30:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -562,7 +798,7 @@ DecadePanel.defaultProps = {
 
 /***/ }),
 
-/***/ 30:
+/***/ 31:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -704,7 +940,7 @@ var MonthPanel = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
 
 /***/ }),
 
-/***/ 31:
+/***/ 32:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -922,7 +1158,7 @@ YearPanel.defaultProps = {
 
 /***/ }),
 
-/***/ 32:
+/***/ 33:
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -995,7 +1231,7 @@ return enGb;
 
 /***/ }),
 
-/***/ 33:
+/***/ 34:
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
