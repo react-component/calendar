@@ -6,6 +6,16 @@ import moment from 'moment';
 import MonthCalendar from '../src/MonthCalendar';
 
 describe('MonthCalendar', () => {
+  it('year or decade panel work correctly', () => {
+    const format = 'YYYY-MM';
+    const wrapper = mount(<MonthCalendar />);
+    wrapper.find('.rc-calendar-month-panel-year-select').simulate('click');
+    wrapper.find('.rc-calendar-year-panel-decade-select').simulate('click');
+    wrapper.find('.rc-calendar-decade-panel-selected-cell').simulate('click');
+    wrapper.find('.rc-calendar-year-panel-selected-cell').simulate('click');
+    wrapper.find('.rc-calendar-month-panel-selected-cell').simulate('click');
+    expect(wrapper.state('selectedValue').format(format)).toBe('2010-03');
+  });
   describe('keyboard', () => {
     it('enter to select works', () => {
       const onSelect = jest.fn();
