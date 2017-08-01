@@ -261,7 +261,7 @@ const RangeCalendar = createReactClass({
     return this.fireValueChange(value);
   },
 
-  onStartPanelChange(mode) {
+  onStartPanelChange(value, mode) {
     const { props, state } = this;
     const newMode = [mode, state.mode[1]];
     if (!('mode' in props)) {
@@ -269,10 +269,11 @@ const RangeCalendar = createReactClass({
         mode: newMode,
       });
     }
-    props.onPanelChange(state.value, newMode);
+    const newValue = [value || state.value[0], state.value[1]];
+    props.onPanelChange(newValue, newMode);
   },
 
-  onEndPanelChange(mode) {
+  onEndPanelChange(value, mode) {
     const { props, state } = this;
     const newMode = [state.mode[0], mode];
     if (!('mode' in props)) {
@@ -280,7 +281,8 @@ const RangeCalendar = createReactClass({
         mode: newMode,
       });
     }
-    props.onPanelChange(state.value, newMode);
+    const newValue = [state.value[0], value || state.value[1]];
+    props.onPanelChange(newValue, newMode);
   },
 
   getStartValue() {

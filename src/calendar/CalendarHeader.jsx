@@ -53,19 +53,19 @@ const CalendarHeader = createReactClass({
   },
 
   onMonthSelect(value) {
-    this.props.onPanelChange('date');
+    this.props.onPanelChange(value, 'date');
     this.props.onValueChange(value);
   },
 
   onYearSelect(value) {
     const referer = this.state.yearPanelReferer;
     this.setState({ yearPanelReferer: null });
-    this.props.onPanelChange(referer);
+    this.props.onPanelChange(value, referer);
     this.props.onValueChange(value);
   },
 
   onDecadeSelect(value) {
-    this.props.onPanelChange('year');
+    this.props.onPanelChange(value, 'year');
     this.props.onValueChange(value);
   },
 
@@ -114,16 +114,17 @@ const CalendarHeader = createReactClass({
   },
 
   showMonthPanel() {
-    this.props.onPanelChange('month');
+    // null means that users' interaction doesn't change value
+    this.props.onPanelChange(null, 'month');
   },
 
   showYearPanel(referer) {
     this.setState({ yearPanelReferer: referer });
-    this.props.onPanelChange('year');
+    this.props.onPanelChange(null, 'year');
   },
 
   showDecadePanel() {
-    this.props.onPanelChange('decade');
+    this.props.onPanelChange(null, 'decade');
   },
 
   render() {

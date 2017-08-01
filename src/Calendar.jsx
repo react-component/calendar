@@ -196,21 +196,21 @@ const Calendar = createReactClass({
       source: 'todayButton',
     });
   },
-  onPanelChange(mode) {
+  onPanelChange(value, mode) {
     const { props, state } = this;
     if (!('mode' in props)) {
       this.setState({ mode });
     }
-    props.onPanelChange(state.value, mode);
+    props.onPanelChange(value || state.value, mode);
   },
   getRootDOMNode() {
     return ReactDOM.findDOMNode(this);
   },
   openTimePicker() {
-    this.onPanelChange('time');
+    this.onPanelChange(null, 'time');
   },
   closeTimePicker() {
-    this.onPanelChange('date');
+    this.onPanelChange(null, 'date');
   },
   render() {
     const { props, state } = this;

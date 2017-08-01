@@ -276,10 +276,12 @@ describe('RangeCalendar', () => {
     });
 
     it('support controlled mode', () => {
+      let value = null;
       class ControlledRangeCalendar extends React.Component {
         state = { mode: ['date', 'date'] };
 
-        handlePanelChange = (value, mode) => {
+        handlePanelChange = (v, mode) => {
+          value = v;
           this.setState({ mode });
         }
 
@@ -298,6 +300,7 @@ describe('RangeCalendar', () => {
       wrapper.find('.rc-calendar-year-panel-decade-select').at(0).simulate('click');
       wrapper.find('.rc-calendar-year-panel-decade-select').at(0).simulate('click');
       expect(wrapper.find('.rc-calendar-decade-panel').length).toBe(2);
+      expect(value[0].isSame(moment(), 'day'), expect(value[1].isSame(moment().add(1, 'month'), 'day')));
       wrapper.find('.rc-calendar-decade-panel-selected-cell').at(0).simulate('click');
       wrapper.find('.rc-calendar-decade-panel-selected-cell').at(0).simulate('click');
       expect(wrapper.find('.rc-calendar-decade-panel').length).toBe(0);
@@ -307,6 +310,7 @@ describe('RangeCalendar', () => {
       wrapper.find('.rc-calendar-month-panel-selected-cell').at(0).simulate('click');
       wrapper.find('.rc-calendar-month-panel-selected-cell').at(0).simulate('click');
       expect(wrapper.find('.rc-calendar-month-panel').length).toBe(0);
+      expect(value[0].isSame(moment('2010-03-29'), 'day'), expect(value[1].isSame(moment('2010-04-29'), 'day')));
 
       wrapper.find('.rc-calendar-year-select').at(0).simulate('click');
       wrapper.find('.rc-calendar-year-select').at(1).simulate('click');
