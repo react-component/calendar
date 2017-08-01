@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>start-end.js - example - rc-calendar@9.1.0</title>
+  <title>control-panel.js - example - rc-calendar@9.1.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -257,7 +257,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
     document.writeln('<script src="https://as.alipayobjects.com/g/component/es6-promise/3.2.2/es6-promise.min.js"'+'>'+'<'+'/'+'script>');
   }
   </script>
-  <link rel="stylesheet" href="../common.css" /><link rel="stylesheet" href="start-end.css" />
+  <link rel="stylesheet" href="../common.css" /><link rel="stylesheet" href="control-panel.css" />
 </head>
 
 <body>
@@ -269,152 +269,90 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
     </div>
     <div class="example" id="__react-content"></div>
 
-    <div class="highlight"><pre><code language="undefined">/* eslint react/no-multi-comp:0, no-console:0 */
-
+    <div class="highlight"><pre><code language="undefined">/* eslint react/no-multi-comp:0, no-console:0, no-unused-vars:0 */
 import 'rc-calendar/assets/index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Calendar from 'rc-calendar';
-import DatePicker from 'rc-calendar/lib/Picker';
+import Calendar from 'rc-calendar/src';
+import RangeCalendar from 'rc-calendar/lib/RangeCalendar';
 
-import zhCN from 'rc-calendar/lib/locale/zh_CN';
-import enUS from 'rc-calendar/lib/locale/en_US';
-import 'rc-time-picker/assets/index.css';
-import TimePickerPanel from 'rc-time-picker/lib/Panel';
+import Select, { Option } from 'rc-select';
+import 'rc-select/assets/index.css';
 
-import moment from 'moment';
-import 'moment/locale/zh-cn';
-import 'moment/locale/en-gb';
-
-const format = 'YYYY-MM-DD HH:mm:ss';
-const cn = location.search.indexOf('cn') !== -1;
-
-const now = moment();
-if (cn) {
-  now.locale('zh-cn').utcOffset(8);
-} else {
-  now.locale('en-gb').utcOffset(0);
-}
-
-function getFormat(time) {
-  return time ? format : 'YYYY-MM-DD';
-}
-
-
-const defaultCalendarValue = now.clone();
-defaultCalendarValue.add(-1, 'month');
-
-const timePickerElement = &lt;TimePickerPanel /&gt;;
-
-
-const SHOW_TIME = true;
-
-const Picker = React.createClass({
-  getDefaultProps() {
-    return {
-      showTime: SHOW_TIME,
-      disabled: false,
-    };
-  },
-  render() {
-    const props = this.props;
-    const calendar = (&lt;Calendar
-      locale={cn ? zhCN : enUS}
-      defaultValue={now}
-      timePicker={props.showTime ? timePickerElement : null}
-      disabledDate={props.disabledDate}
-    /&gt;);
-    return (&lt;DatePicker
-      animation="slide-up"
-      disabled={props.disabled}
-      calendar={calendar}
-      value={props.value}
-      onChange={props.onChange}
-    &gt;
-      {
-        ({ value }) =&gt; {
-          return (
-            &lt;span&gt;
-                &lt;input
-                  placeholder="请选择日期"
-                  style={{ width: 250 }}
-                  disabled={props.disabled}
-                  readOnly
-                  value={value &amp;&amp; value.format(getFormat(props.showTime)) || ''}
-                /&gt;
-                &lt;/span&gt;
-          );
-        }
-      }
-    &lt;/DatePicker&gt;);
-  },
-});
-
-const Test = React.createClass({
+const App = React.createClass({
   getInitialState() {
     return {
-      startValue: null,
-      endValue: null,
+      mode: 'month',
+      rangeStartMode: 'date',
+      rangeEndMode: 'date',
     };
   },
-
-  onChange(field, value) {
-    console.log('onChange', field, value &amp;&amp; value.format(getFormat(SHOW_TIME)));
-    this.setState({
-      [field]: value,
-    });
+  onModeChange(key) {
+    return function _handleChange(e) {
+      let mode;
+      if (e &amp;&amp; e.target) {
+        mode = e.target.value;
+      } else {
+        mode = e;
+      }
+      console.log('change to: ', mode);
+      this.setState({
+        [key]: mode,
+      });
+    }.bind(this);
   },
-
-  disabledEndDate(endValue) {
-    if (!endValue) {
-      return false;
-    }
-    const startValue = this.state.startValue;
-    if (!startValue) {
-      return false;
-    }
-    return SHOW_TIME ? endValue.isBefore(startValue) :
-    endValue.diff(startValue, 'days') &lt;= 0;
+  handlePanelChange(...args) {
+    console.log('on panel change', ...args);
   },
-
-  disabledStartDate(startValue) {
-    if (!startValue) {
-      return false;
-    }
-    const endValue = this.state.endValue;
-    if (!endValue) {
-      return false;
-    }
-    return SHOW_TIME ? endValue.isBefore(startValue) :
-    endValue.diff(startValue, 'days') &lt;= 0;
+  handleRangePanelChange(...args) {
+    console.log('on range panel change', ...args);
   },
-
   render() {
-    const state = this.state;
-    return (&lt;div style={{ width: 240, margin: 20 }}&gt;
-      &lt;p&gt;
-        开始时间：
-        &lt;Picker
-          disabledDate={this.disabledStartDate}
-          value={state.startValue}
-          onChange={this.onChange.bind(this, 'startValue')}
+    return (
+      &lt;div style={{ zIndex: 1000, position: 'relative' }}&gt;
+        &lt;h2&gt;controle Calendar panel&lt;/h2&gt;
+        &lt;select
+          value={this.state.mode}
+          style={{ width: 500 }}
+          onChange={this.onModeChange('mode')}
+        &gt;
+          {['time', 'date', 'month', 'year', 'decade'].map(item =&gt; (
+            &lt;option value={item} key={item}&gt;{item}&lt;/option&gt;
+          ))}
+        &lt;/select&gt;
+        &lt;Calendar
+          mode={this.state.mode}
+          onPanelChange={this.handlePanelChange}
         /&gt;
-      &lt;/p&gt;
-
-      &lt;p&gt;
-        结束时间：
-        &lt;Picker
-          disabledDate={this.disabledEndDate}
-          value={state.endValue}
-          onChange={this.onChange.bind(this, 'endValue')}
+        &lt;h2&gt;controle RangeCalendar panel&lt;/h2&gt;
+        &lt;select
+          value={this.state.rangeStartMode}
+          style={{ width: 500 }}
+          onChange={this.onModeChange('rangeStartMode')}
+        &gt;
+          {['date', 'month', 'year', 'decade'].map(item =&gt; (
+            &lt;option value={item} key={item}&gt;{item}&lt;/option&gt;
+          ))}
+        &lt;/select&gt;
+        &lt;select
+          value={this.state.rangeEndMode}
+          style={{ width: 500 }}
+          onChange={this.onModeChange('rangeEndMode')}
+        &gt;
+          {['date', 'month', 'year', 'decade'].map(item =&gt; (
+            &lt;option value={item} key={item}&gt;{item}&lt;/option&gt;
+          ))}
+        &lt;/select&gt;
+        &lt;RangeCalendar
+          mode={[this.state.rangeStartMode, this.state.rangeEndMode]}
+          onPanelChange={this.handleRangePanelChange}
         /&gt;
-      &lt;/p&gt;
-    &lt;/div&gt;);
+      &lt;/div&gt;
+    );
   },
 });
 
-
-ReactDOM.render(&lt;Test /&gt;, document.getElementById('__react-content'));
+ReactDOM.render(&lt;App /&gt;, document.getElementById('__react-content'));
 </code></pre></div>
   </div>
   <a href="http://github.com/react-component/calendar">
@@ -425,7 +363,7 @@ ReactDOM.render(&lt;Test /&gt;, document.getElementById('__react-content'));
   </a>
   <script>FastClick.attach(document.body);</script>
   <script src="../common.js?nowrap"></script>
-  <script src="start-end.js?nowrap"></script>
+  <script src="control-panel.js?nowrap"></script>
 </body>
 
 </html>
