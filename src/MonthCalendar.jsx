@@ -2,9 +2,7 @@ import React from 'react';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import KeyCode from 'rc-util/lib/KeyCode';
-import MonthPanel from './month/MonthPanel';
-import YearPanel from './year/YearPanel';
-import DecadePanel from './decade/DecadePanel';
+import CalendarHeader from './calendar/CalendarHeader';
 import CalendarMixin from './mixin/CalendarMixin';
 import CommonMixin from './mixin/CommonMixin';
 
@@ -66,66 +64,31 @@ const MonthCalendar = createReactClass({
     }
   },
 
-  handleYearPanelShow() {
-    this.setState({ mode: 'year' });
-  },
-
-  handleYearSelect(...args) {
-    this.setState({ mode: 'month' });
-    this.onSelect(...args);
-  },
-
-  handleDecadePanelShow() {
-    this.setState({ mode: 'decade' });
-  },
-
-  handleDecadeSelect(...args) {
-    this.setState({ mode: 'year' });
-    this.onSelect(...args);
+  handlePanelChange(_, mode) {
+    if (mode !== 'date') {
+      this.setState({ mode });
+    }
   },
 
   render() {
     const { props, state } = this;
     const { mode, value } = state;
-    const children = [
-      <MonthPanel
-        key="month"
-        locale={props.locale}
-        disabledDate={props.disabledDate}
-        style={{ position: 'relative' }}
+    const children = (
+      <CalendarHeader
+        prefixCls={props.prefixCls}
+        mode={mode}
         value={value}
-        cellRender={props.monthCellRender}
-        contentRender={props.monthCellContentRender}
-        rootPrefixCls={props.prefixCls}
-        onChange={this.setValue}
-        onSelect={this.onSelect}
-        onYearPanelShow={this.handleYearPanelShow}
-      />,
-    ];
-    if (mode === 'year') {
-      children.push(
-        <YearPanel
-          key="year"
-          locale={props.locale}
-          defaultValue={value}
-          rootPrefixCls={props.prefixCls}
-          onSelect={this.handleYearSelect}
-          onDecadePanelShow={this.handleDecadePanelShow}
-        />
-      );
-    }
-    if (mode === 'decade') {
-      children.push(
-        <DecadePanel
-          key="decade"
-          locale={props.locale}
-          defaultValue={value}
-          rootPrefixCls={props.prefixCls}
-          onSelect={this.handleDecadeSelect}
-        />
-      );
-    }
+        locale={props.locale}
+        disabledMonth={props.disabledDate}
+        monthCellRender={props.monthCellRender}
+        monthCellContentRender={props.monthCellContentRender}
+        onMonthSelect={this.onSelect}
+        onValueChange={this.setValue}
+        onPanelChange={this.handlePanelChange}
+      />
+    );
     return this.renderRoot({
+      className: `${props.prefixCls}-month-calendar`,
       children,
     });
   },

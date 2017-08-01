@@ -54,7 +54,11 @@ const CalendarHeader = createReactClass({
 
   onMonthSelect(value) {
     this.props.onPanelChange(value, 'date');
-    this.props.onValueChange(value);
+    if (this.props.onMonthSelect) {
+      this.props.onMonthSelect(value);
+    } else {
+      this.props.onValueChange(value);
+    }
   },
 
   onYearSelect(value) {
@@ -150,6 +154,8 @@ const CalendarHeader = createReactClass({
           onSelect={this.onMonthSelect}
           onYearPanelShow={() => this.showYearPanel('month')}
           disabledDate={disabledMonth}
+          cellRender={props.monthCellRender}
+          contentRender={props.monthCellContentRender}
         />
       );
     }
