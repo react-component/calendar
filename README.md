@@ -372,6 +372,18 @@ http://react-component.github.io/calendar/examples/index.html
           <td></td>
           <td>called when panels changed</td>
         </tr>
+        <tr>
+          <td>hoverValue</td>
+          <td>moment[]</td>
+          <td></td>
+          <td>controll hover value</td>
+        </tr>
+        <tr>
+          <td>onHoverChange</td>
+          <td>Function(hoverValue: moment[])</td>
+          <td></td>
+          <td>called when hover value change</td>
+        </tr>
     </tbody>
 </table>
 
