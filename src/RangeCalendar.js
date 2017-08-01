@@ -16,6 +16,19 @@ function isEmptyArray(arr) {
   return Array.isArray(arr) && (arr.length === 0 || arr.every(i => !i));
 }
 
+function isArraysEqual(a, b) {
+  if (a === b) return true;
+  if (a === null || typeof a === 'undefined' || b === null || typeof b === 'undefined') {
+    return false;
+  }
+  if (a.length !== b.length) return false;
+
+  for (let i = 0; i < a.length; ++i) {
+    if (a[i] !== b[i]) return false;
+  }
+  return true;
+}
+
 function getValueFromSelectedValue(selectedValue) {
   const [start, end] = selectedValue;
   const newEnd = end && end.isSame(start, 'month') ? end.clone().add(1, 'month') : end;
@@ -112,6 +125,7 @@ const RangeCalendar = createReactClass({
   },
 
   componentWillReceiveProps(nextProps) {
+    const { state } = this;
     const newState = {};
     if ('value' in nextProps) {
       if (nextProps.value) {
@@ -121,7 +135,7 @@ const RangeCalendar = createReactClass({
       }
       this.setState(newState);
     }
-    if ('hoverValue' in nextProps) {
+    if ('hoverValue' in nextProps && !isArraysEqual(state.hoverValue, nextProps.hoverValue)) {
       this.setState({ hoverValue: nextProps.hoverValue });
     }
     if ('selectedValue' in nextProps) {
@@ -129,7 +143,7 @@ const RangeCalendar = createReactClass({
       newState.prevSelectedValue = nextProps.selectedValue;
       this.setState(newState);
     }
-    if ('mode' in nextProps) {
+    if ('mode' in nextProps && !isArraysEqual(state.mode, nextProps.mode)) {
       this.setState({ mode: nextProps.mode });
     }
   },
@@ -335,7 +349,7 @@ const RangeCalendar = createReactClass({
   },
 
   isMonthYearPanelShow(mode) {
-    return ['month', 'year', 'decade'].includes(mode);
+    return ['month', 'year', 'decade'].indexOf(mode) > -1;
   },
 
   hasSelectedValue() {
@@ -436,8 +450,7 @@ const RangeCalendar = createReactClass({
   },
 
   render() {
-    const props = this.props;
-    const state = this.state;
+    const { props, state } = this;
     const {
       prefixCls, dateInputPlaceholder,
       timePicker, showOk, locale, showClear,

@@ -93,7 +93,7 @@ const Calendar = createReactClass({
     };
   },
   componentWillReceiveProps(nextProps) {
-    if ('mode' in nextProps) {
+    if ('mode' in nextProps && this.state.mode !== nextProps.mode) {
       this.setState({ mode: nextProps.mode });
     }
   },
@@ -213,13 +213,12 @@ const Calendar = createReactClass({
     this.onPanelChange('date');
   },
   render() {
-    const props = this.props;
+    const { props, state } = this;
     const {
       locale, prefixCls, disabledDate,
       dateInputPlaceholder, timePicker,
       disabledTime,
     } = props;
-    const state = this.state;
     const { value, selectedValue, mode } = state;
     const showTimePicker = mode === 'time';
     const disabledTimeConfig = showTimePicker && disabledTime && timePicker ?
