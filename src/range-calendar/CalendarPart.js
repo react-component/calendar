@@ -32,6 +32,7 @@ const CalendarPart = createReactClass({
       value,
       hoverValue,
       selectedValue,
+      mode,
       direction,
       locale, format, placeholder,
       disabledDate, timePicker, disabledTime,
@@ -79,6 +80,7 @@ const CalendarPart = createReactClass({
         <div style={{ outline: 'none' }}>
           <CalendarHeader
             {...newProps}
+            mode={mode}
             enableNext={enableNext}
             enablePrev={enablePrev}
             onValueChange={props.onValueChange}

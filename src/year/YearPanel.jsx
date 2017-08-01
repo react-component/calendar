@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import DecadePanel from '../decade/DecadePanel';
 const ROW = 4;
 const COL = 3;
 
@@ -30,16 +29,6 @@ class YearPanel extends React.Component {
     };
     this.nextDecade = goYear.bind(this, 10);
     this.previousDecade = goYear.bind(this, -10);
-    ['showDecadePanel', 'onDecadePanelSelect'].forEach(method => {
-      this[method] = this[method].bind(this);
-    });
-  }
-
-  onDecadePanelSelect(current) {
-    this.setState({
-      value: current,
-      showDecadePanel: 0,
-    });
   }
 
   years() {
@@ -64,13 +53,6 @@ class YearPanel extends React.Component {
     }
     return years;
   }
-
-  showDecadePanel() {
-    this.setState({
-      showDecadePanel: 1,
-    });
-  }
-
   render() {
     const props = this.props;
     const value = this.state.value;
@@ -115,16 +97,6 @@ class YearPanel extends React.Component {
       return (<tr key={index} role="row">{tds}</tr>);
     });
 
-    let decadePanel;
-    if (this.state.showDecadePanel) {
-      decadePanel = (<DecadePanel
-        locale={locale}
-        value={value}
-        rootPrefixCls={props.rootPrefixCls}
-        onSelect={this.onDecadePanelSelect}
-      />);
-    }
-
     return (
       <div className={this.prefixCls}>
         <div>
@@ -138,7 +110,7 @@ class YearPanel extends React.Component {
             <a
               className={`${prefixCls}-decade-select`}
               role="button"
-              onClick={this.showDecadePanel}
+              onClick={props.onDecadePanelShow}
               title={locale.decadeSelect}
             >
               <span className={`${prefixCls}-decade-select-content`}>
@@ -162,7 +134,6 @@ class YearPanel extends React.Component {
             </table>
           </div>
         </div>
-        {decadePanel}
       </div>);
   }
 }
