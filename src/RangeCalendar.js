@@ -113,11 +113,7 @@ const RangeCalendar = createReactClass({
   componentWillReceiveProps(nextProps) {
     const newState = {};
     if ('value' in nextProps) {
-      if (nextProps.value) {
-        newState.value = nextProps.value;
-      } else {
-        newState.value = normalizeAnchor(nextProps, 0);
-      }
+      newState.value = normalizeAnchor(nextProps, 0);
       this.setState(newState);
     }
     if ('hoverValue' in nextProps) {

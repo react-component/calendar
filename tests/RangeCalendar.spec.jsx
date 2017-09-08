@@ -256,5 +256,15 @@ describe('RangeCalendar', () => {
       expect(wrapper.find('.rc-calendar-input').get(0).value).toBe('3/8/2017 00:00:00');
       expect(wrapper.find('.rc-calendar-input').get(1).value).toBe('3/18/2017 23:59:59');
     });
+
+    it('controlled value works correctly', () => {
+      const wrapper = mount(<RangeCalendar value={[moment(), moment()]} />);
+      const initialValue = wrapper.state('value');
+      expect(initialValue[0].add(1, 'month').isSame(initialValue[1], 'month')).toBe(true);
+
+      wrapper.setProps({ value: [moment(), moment()] });
+      const updatedValue = wrapper.state('value');
+      expect(updatedValue[0].add(1, 'month').isSame(updatedValue[1], 'month')).toBe(true);
+    });
   });
 });
