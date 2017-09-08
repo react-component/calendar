@@ -1059,8 +1059,7 @@
   left: 36px;
 }
 .rc-calendar-range .rc-calendar-year-panel,
-.rc-calendar-range .rc-calendar-month-panel,
-.rc-calendar-range .rc-calendar-decade-panel {
+.rc-calendar-range .rc-calendar-month-panel {
   top: 35px;
 }
 .rc-calendar-range .rc-calendar-month-panel .rc-calendar-year-panel {
@@ -1176,9 +1175,6 @@
 .rc-calendar-fullscreen .rc-calendar-month-panel-selected-cell .rc-calendar-month-panel-month {
   border-top-color: #3FC7FA;
   color: #3FC7FA;
-}
-.rc-calendar-month-calendar {
-  height: 308px;
 }
 
 /*# sourceMappingURL=common.css.map*/
