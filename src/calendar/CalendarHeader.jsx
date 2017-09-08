@@ -95,7 +95,7 @@ const CalendarHeader = createReactClass({
       onClick={showTimePicker ? null : this.showMonthPanel}
       title={locale.monthSelect}
     >
-      {localeData.monthsShort(value)}
+      {localeData.months(value)}
     </a>);
     let day;
     if (showTimePicker) {
