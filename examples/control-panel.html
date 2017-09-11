@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>antd-month-calendar.js - example - rc-calendar@9.1.5</title>
+  <title>control-panel.js - example - rc-calendar@9.1.5</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -257,7 +257,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
     document.writeln('<script src="https://as.alipayobjects.com/g/component/es6-promise/3.2.2/es6-promise.min.js"'+'>'+'<'+'/'+'script>');
   }
   </script>
-  <link rel="stylesheet" href="../common.css" />
+  <link rel="stylesheet" href="../common.css" /><link rel="stylesheet" href="control-panel.css" />
 </head>
 
 <body>
@@ -269,157 +269,90 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
     </div>
     <div class="example" id="__react-content"></div>
 
-    <div class="highlight"><pre><code language="undefined">/* eslint react/no-multi-comp:0, no-console:0 */
-
+    <div class="highlight"><pre><code language="undefined">/* eslint react/no-multi-comp:0, no-console:0, no-unused-vars:0 */
 import 'rc-calendar/assets/index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MonthCalendar from 'rc-calendar/lib/MonthCalendar';
-import DatePicker from 'rc-calendar/lib/Picker';
+import Calendar from 'rc-calendar/src';
+import RangeCalendar from 'rc-calendar/lib/RangeCalendar';
 
-import zhCN from 'rc-calendar/lib/locale/zh_CN';
-import enUS from 'rc-calendar/lib/locale/en_US';
+import Select, { Option } from 'rc-select';
+import 'rc-select/assets/index.css';
 
-import moment from 'moment';
-import 'moment/locale/zh-cn';
-import 'moment/locale/en-gb';
-
-const format = 'YYYY-MM';
-const cn = location.search.indexOf('cn') !== -1;
-
-const now = moment();
-if (cn) {
-  now.locale('zh-cn').utcOffset(8);
-} else {
-  now.locale('en-gb').utcOffset(0);
-}
-
-const defaultCalendarValue = now.clone();
-defaultCalendarValue.add(-1, 'month');
-
-const Test = React.createClass({
-  propTypes: {
-    defaultValue: React.PropTypes.object,
-  },
+const App = React.createClass({
   getInitialState() {
     return {
-      showTime: true,
-      disabled: false,
-      value: this.props.defaultValue,
+      mode: 'month',
+      rangeStartMode: 'date',
+      rangeEndMode: 'date',
     };
   },
-
-  onChange(value) {
-    console.log(`DatePicker change: ${value &amp;&amp; value.format(format)}`);
-    this.setState({
-      value,
-    });
+  onModeChange(key) {
+    return function _handleChange(e) {
+      let mode;
+      if (e &amp;&amp; e.target) {
+        mode = e.target.value;
+      } else {
+        mode = e;
+      }
+      console.log('change to: ', mode);
+      this.setState({
+        [key]: mode,
+      });
+    }.bind(this);
   },
-
-  onShowTimeChange(e) {
-    this.setState({
-      showTime: e.target.checked,
-    });
+  handlePanelChange(...args) {
+    console.log('on panel change', ...args);
   },
-
-  toggleDisabled() {
-    this.setState({
-      disabled: !this.state.disabled,
-    });
+  handleRangePanelChange(...args) {
+    console.log('on range panel change', ...args);
   },
-
   render() {
-    const state = this.state;
-    const calendar = (&lt;MonthCalendar
-      locale={cn ? zhCN : enUS}
-      style={{ zIndex: 1000 }}
-    /&gt;);
-    return (&lt;div style={{ width: 240, margin: 20 }}&gt;
-      &lt;div style={{ marginBottom: 10 }}&gt;
-        &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
-        &lt;label&gt;
-          &lt;input
-            checked={state.disabled}
-            onChange={this.toggleDisabled}
-            type="checkbox"
-          /&gt; disabled
-        &lt;/label&gt;
-      &lt;/div&gt;
-      &lt;div style={{
-        boxSizing: 'border-box',
-        position: 'relative',
-        display: 'block',
-        lineHeight: 1.5,
-        marginBottom: 22,
-      }}
-      &gt;
-        &lt;DatePicker
-          animation="slide-up"
-          disabled={state.disabled}
-          calendar={calendar}
-          value={state.value}
-          onChange={this.onChange}
+    return (
+      &lt;div style={{ zIndex: 1000, position: 'relative' }}&gt;
+        &lt;h2&gt;controle Calendar panel&lt;/h2&gt;
+        &lt;select
+          value={this.state.mode}
+          style={{ width: 500 }}
+          onChange={this.onModeChange('mode')}
         &gt;
-          {
-            ({ value }) =&gt; {
-              return (&lt;input
-                style={{ width: 200 }}
-                readOnly
-                disabled={state.disabled}
-                value={value &amp;&amp; value.format(format)}
-                placeholder="请选择日期"
-              /&gt;);
-            }
-          }
-
-        &lt;/DatePicker&gt;
+          {['time', 'date', 'month', 'year', 'decade'].map(item =&gt; (
+            &lt;option value={item} key={item}&gt;{item}&lt;/option&gt;
+          ))}
+        &lt;/select&gt;
+        &lt;Calendar
+          mode={this.state.mode}
+          onPanelChange={this.handlePanelChange}
+        /&gt;
+        &lt;h2&gt;controle RangeCalendar panel&lt;/h2&gt;
+        &lt;select
+          value={this.state.rangeStartMode}
+          style={{ width: 500 }}
+          onChange={this.onModeChange('rangeStartMode')}
+        &gt;
+          {['date', 'month', 'year', 'decade'].map(item =&gt; (
+            &lt;option value={item} key={item}&gt;{item}&lt;/option&gt;
+          ))}
+        &lt;/select&gt;
+        &lt;select
+          value={this.state.rangeEndMode}
+          style={{ width: 500 }}
+          onChange={this.onModeChange('rangeEndMode')}
+        &gt;
+          {['date', 'month', 'year', 'decade'].map(item =&gt; (
+            &lt;option value={item} key={item}&gt;{item}&lt;/option&gt;
+          ))}
+        &lt;/select&gt;
+        &lt;RangeCalendar
+          mode={[this.state.rangeStartMode, this.state.rangeEndMode]}
+          onPanelChange={this.handleRangePanelChange}
+        /&gt;
       &lt;/div&gt;
-    &lt;/div&gt;);
+    );
   },
 });
 
-function onStandaloneSelect(value) {
-  console.log('month-calendar select', (value &amp;&amp; value.format(format)));
-}
-
-function onStandaloneChange(value) {
-  console.log('month-calendar change', (value &amp;&amp; value.format(format)));
-}
-
-function disabledDate(value) {
-  return value.year() &gt; now.year() ||
-    value.year() === now.year() &amp;&amp; value.month() &gt; now.month();
-}
-
-function onMonthCellContentRender(value) {
-  // console.log('month-calendar onMonthCellContentRender', (value &amp;&amp; value.format(format)));
-  return `${value.month() + 1}月`;
-}
-
-ReactDOM.render(
-  (&lt;div
-    style={{
-      zIndex: 1000,
-      position: 'relative',
-      width: 600,
-      margin: '0 auto',
-    }}
-  &gt;
-    &lt;MonthCalendar
-      locale={cn ? zhCN : enUS}
-      style={{ zIndex: 1000 }}
-      disabledDate={disabledDate}
-      onSelect={onStandaloneSelect}
-      onChange={onStandaloneChange}
-      monthCellContentRender={onMonthCellContentRender}
-      defaultValue={defaultCalendarValue}
-    /&gt;
-
-    &lt;div style={{ marginTop: 200 }}&gt;
-      &lt;Test defaultValue={now} /&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;)
-  , document.getElementById('__react-content'));
+ReactDOM.render(&lt;App /&gt;, document.getElementById('__react-content'));
 </code></pre></div>
   </div>
   <a href="http://github.com/react-component/calendar">
@@ -430,7 +363,7 @@ ReactDOM.render(
   </a>
   <script>FastClick.attach(document.body);</script>
   <script src="../common.js?nowrap"></script>
-  <script src="antd-month-calendar.js?nowrap"></script>
+  <script src="control-panel.js?nowrap"></script>
 </body>
 
 </html>
