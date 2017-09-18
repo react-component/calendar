@@ -7,7 +7,7 @@
   <meta charset="utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" rel="stylesheet"/>
-  <title>rc-calendar@9.0.3 - React Calendar</title>
+  <title>rc-calendar@9.1.6 - React Calendar</title>
   <style>
     @font-face {
       font-family: octicons-anchor;
@@ -737,7 +737,7 @@
 
 <body>
 <div class="header">
-  <h1>rc-calendar@9.0.3</h1>
+  <h1>rc-calendar@9.1.6</h1>
 </div>
 <div class="examples">
   <h3>EXAMPLES</h3>
@@ -749,6 +749,8 @@
       <li><a href="examples/antd-month-calendar.html">antd-month-calendar</a></li>
       
       <li><a href="examples/antd-range-calendar.html">antd-range-calendar</a></li>
+      
+      <li><a href="examples/control-panel.html">control-panel</a></li>
       
       <li><a href="examples/full-calendar.html">full-calendar</a></li>
       
@@ -931,6 +933,18 @@ npm start</code></pre></div><h2>Example<a id="user-content-example" name="exampl
           <td></td>
           <td>date input&#39;s placeholder</td>
         </tr>
+        <tr>
+          <td>mode</td>
+          <td>enum(&#39;time&#39;, &#39;date&#39;, &#39;month&#39;, &#39;year&#39;, &#39;decade&#39;)</td>
+          <td>&#39;date&#39;</td>
+          <td>controll which kind of panel should be shown</td>
+        </tr>
+        <tr>
+          <td>onPanelChange</td>
+          <td>Function(date: moment, mode)</td>
+          <td></td>
+          <td>called when panel changed</td>
+        </tr>
     </tbody>
 </table>
 
@@ -1064,6 +1078,30 @@ npm start</code></pre></div><h2>Example<a id="user-content-example" name="exampl
           <td>enum(&#39;both&#39;,&#39;start&#39;, &#39;end&#39;)</td>
           <td>both</td>
           <td>whether fix start or end selected value. check start-end-range example</td>
+        </tr>
+        <tr>
+          <td>mode</td>
+          <td>enum(&#39;date&#39;, &#39;month&#39;, &#39;year&#39;, &#39;decade&#39;)[]</td>
+          <td>[&#39;date&#39;, &#39;date&#39;]</td>
+          <td>controll which kind of panels should be shown</td>
+        </tr>
+        <tr>
+          <td>onPanelChange</td>
+          <td>Function(date: moment[], mode)</td>
+          <td></td>
+          <td>called when panels changed</td>
+        </tr>
+        <tr>
+          <td>hoverValue</td>
+          <td>moment[]</td>
+          <td></td>
+          <td>controll hover value</td>
+        </tr>
+        <tr>
+          <td>onHoverChange</td>
+          <td>Function(hoverValue: moment[])</td>
+          <td></td>
+          <td>called when hover value change</td>
         </tr>
     </tbody>
 </table>
