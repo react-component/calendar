@@ -224,17 +224,27 @@ const Calendar = createReactClass({
     const disabledTimeConfig = showTimePicker && disabledTime && timePicker ?
       getTimeConfig(selectedValue, disabledTime) : null;
 
-    const timePickerEle = timePicker && showTimePicker ? React.cloneElement(timePicker, {
-      showHour: true,
-      showSecond: true,
-      showMinute: true,
-      ...timePicker.props,
-      ...disabledTimeConfig,
-      onChange: this.onDateInputChange,
-      defaultOpenValue: timePicker.props.defaultValue,
-      value: selectedValue,
-      disabledTime,
-    }) : null;
+    let timePickerEle = null;
+
+    if (timePicker && showTimePicker) {
+      const timePickerProps = {
+        showHour: true,
+        showSecond: true,
+        showMinute: true,
+        ...timePicker.props,
+        ...disabledTimeConfig,
+        onChange: this.onDateInputChange,
+        value: selectedValue,
+        disabledTime,
+      };
+
+      if (timePicker.props.defaultValue !== undefined) {
+        timePickerProps.defaultOpenValue = timePicker.props.defaultValue;
+      }
+
+      timePickerEle = React.cloneElement(timePicker, timePickerProps);
+    }
+
     const dateInputElement = props.showDateInput ? (
       <DateInput
         format={this.getFormat()}
