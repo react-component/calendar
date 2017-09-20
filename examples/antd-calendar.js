@@ -3354,7 +3354,7 @@ var CalendarMixin = {
 
 /***/ }),
 
-/***/ 406:
+/***/ 407:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(232);
@@ -3897,5 +3897,5 @@ var CalendarFooter = __WEBPACK_IMPORTED_MODULE_4_create_react_class___default()(
 
 /***/ })
 
-},[406]);
+},[407]);
 //# sourceMappingURL=antd-calendar.js.map
