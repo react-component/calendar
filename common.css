@@ -730,11 +730,14 @@
 }
 .rc-calendar-month-panel-body {
   padding: 9px 10px 10px;
+  position: absolute;
+  top: 34px;
+  bottom: 0;
 }
 .rc-calendar-month-panel-table {
   table-layout: fixed;
   width: 100%;
-  height: 255px;
+  height: 100%;
   border-collapse: separate;
 }
 .rc-calendar-month-panel-cell {
@@ -840,11 +843,14 @@
 }
 .rc-calendar-year-panel-body {
   padding: 9px 10px 10px;
+  position: absolute;
+  bottom: 0;
+  top: 34px;
 }
 .rc-calendar-year-panel-table {
   table-layout: fixed;
   width: 100%;
-  height: 255px;
+  height: 100%;
   border-collapse: separate;
 }
 .rc-calendar-year-panel-cell {
@@ -945,11 +951,14 @@
 }
 .rc-calendar-decade-panel-body {
   padding: 9px 10px 10px;
+  position: absolute;
+  bottom: 0;
+  top: 34px;
 }
 .rc-calendar-decade-panel-table {
   table-layout: fixed;
   width: 100%;
-  height: 255px;
+  height: 100%;
   border-collapse: separate;
 }
 .rc-calendar-decade-panel-cell {
@@ -1059,7 +1068,8 @@
   left: 36px;
 }
 .rc-calendar-range .rc-calendar-year-panel,
-.rc-calendar-range .rc-calendar-month-panel {
+.rc-calendar-range .rc-calendar-month-panel,
+.rc-calendar-range .rc-calendar-decade-panel {
   top: 35px;
 }
 .rc-calendar-range .rc-calendar-month-panel .rc-calendar-year-panel {
@@ -1175,6 +1185,9 @@
 .rc-calendar-fullscreen .rc-calendar-month-panel-selected-cell .rc-calendar-month-panel-month {
   border-top-color: #3FC7FA;
   color: #3FC7FA;
+}
+.rc-calendar-month-calendar {
+  height: 308px;
 }
 
 /*# sourceMappingURL=common.css.map*/
