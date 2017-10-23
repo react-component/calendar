@@ -62,7 +62,7 @@ const Picker = createReactClass({
     }
     const value = props.value || props.defaultValue;
     this.saveCalendarRef = refFn.bind(this, 'calendarInstance');
-    this.saveDateInputRef = refFn.bind(this, 'dateInputInstance'); 
+    this.saveDateInputRef = refFn.bind(this, 'dateInputInstance');
     return {
       open,
       value,
@@ -126,8 +126,8 @@ const Picker = createReactClass({
       this.open();
       event.preventDefault();
     }
-  },  
-  
+  },
+
   onCalendarOk() {
     this.close(this.focus);
   },

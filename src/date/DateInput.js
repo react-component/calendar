@@ -94,7 +94,7 @@ const DateInput = createReactClass({
   getRootDOMNode() {
     return ReactDOM.findDOMNode(this);
   },
-  
+
   render() {
     const props = this.props;
     const { invalid, str } = this.state;

@@ -99,7 +99,10 @@ const Calendar = createReactClass({
   },
   onKeyDown(event) {
     if (event.target.nodeName.toLowerCase() === 'input') {
-      if (event.keyCode !== KeyCode.ESC && event.keyCode !== KeyCode.ENTER && event.keyCode !== KeyCode.TAB) {
+      if (
+        event.keyCode !== KeyCode.ESC &&
+        event.keyCode !== KeyCode.ENTER &&
+        event.keyCode !== KeyCode.TAB) {
         return undefined;
       }
     }
