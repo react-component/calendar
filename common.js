@@ -7577,6 +7577,8 @@ function returnDocument() {
   return window.document;
 }
 
+var isMobile = typeof navigator !== 'undefined' && !!navigator.userAgent.match(/(Android|iPhone|iPad|iPod|iOS|UCWEB)/i);
+
 var ALL_HANDLERS = ['onClick', 'onMouseDown', 'onTouchStart', 'onMouseEnter', 'onMouseLeave', 'onFocus', 'onBlur'];
 
 var Trigger = __WEBPACK_IMPORTED_MODULE_4_create_react_class___default()({
@@ -7708,9 +7710,9 @@ var Trigger = __WEBPACK_IMPORTED_MODULE_4_create_react_class___default()({
         currentDocument = props.getDocument();
         this.clickOutsideHandler = __WEBPACK_IMPORTED_MODULE_6_rc_util_lib_Dom_addEventListener___default()(currentDocument, 'mousedown', this.onDocumentClick);
       }
-            if (!this.touchOutsideHandler) {
+                              if (!this.touchOutsideHandler && isMobile) {
         currentDocument = currentDocument || props.getDocument();
-        this.touchOutsideHandler = __WEBPACK_IMPORTED_MODULE_6_rc_util_lib_Dom_addEventListener___default()(currentDocument, 'touchstart', this.onDocumentClick);
+        this.touchOutsideHandler = __WEBPACK_IMPORTED_MODULE_6_rc_util_lib_Dom_addEventListener___default()(currentDocument, 'click', this.onDocumentClick);
       }
       return;
     }

@@ -1837,12 +1837,17 @@ var DateInput = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
     };
   },
   componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+    this.cachedSelectionStart = this.dateInputInstance.selectionStart;
+    this.cachedSelectionEnd = this.dateInputInstance.selectionEnd;
     // when popup show, click body will call this, bug!
     var selectedValue = nextProps.selectedValue;
     this.setState({
       str: selectedValue && selectedValue.format(nextProps.format) || '',
       invalid: false
     });
+  },
+  componentDidUpdate: function componentDidUpdate() {
+    this.dateInputInstance.setSelectionRange(this.cachedSelectionStart, this.cachedSelectionEnd);
   },
   onInputChange: function onInputChange(event) {
     var str = event.target.value;

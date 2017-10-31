@@ -4684,7 +4684,14 @@ var SelectTrigger = function (_React$Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = __WEBPACK_IMPORTED_MODULE_5_babel_runtime_helpers_possibleConstructorReturn___default()(this, (_ref = SelectTrigger.__proto__ || Object.getPrototypeOf(SelectTrigger)).call.apply(_ref, [this].concat(args))), _this), _this.getInnerMenu = function () {
+    return _ret = (_temp = (_this = __WEBPACK_IMPORTED_MODULE_5_babel_runtime_helpers_possibleConstructorReturn___default()(this, (_ref = SelectTrigger.__proto__ || Object.getPrototypeOf(SelectTrigger)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      dropdownWidth: null
+    }, _this.setDropdownWidth = function () {
+      var width = __WEBPACK_IMPORTED_MODULE_12_react_dom___default.a.findDOMNode(_this).offsetWidth;
+      if (width !== _this.state.dropdownWidth) {
+        _this.setState({ dropdownWidth: width });
+      }
+    }, _this.getInnerMenu = function () {
       return _this.popupMenu && _this.popupMenu.refs.menu;
     }, _this.getPopupDOMNode = function () {
       return _this.refs.trigger.getPopupDomNode();
@@ -4716,28 +4723,23 @@ var SelectTrigger = function (_React$Component) {
   }
 
   __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_createClass___default()(SelectTrigger, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.setDropdownWidth();
+    }
+  }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
-      var _props = this.props,
-          visible = _props.visible,
-          dropdownMatchSelectWidth = _props.dropdownMatchSelectWidth;
-
-      if (visible) {
-        var dropdownDOMNode = this.getPopupDOMNode();
-        if (dropdownDOMNode) {
-          var widthProp = dropdownMatchSelectWidth ? 'width' : 'minWidth';
-          dropdownDOMNode.style[widthProp] = __WEBPACK_IMPORTED_MODULE_12_react_dom___default.a.findDOMNode(this).offsetWidth + 'px';
-        }
-      }
+      this.setDropdownWidth();
     }
   }, {
     key: 'render',
     value: function render() {
       var _popupClassName;
 
-      var _props2 = this.props,
-          onPopupFocus = _props2.onPopupFocus,
-          props = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_objectWithoutProperties___default()(_props2, ['onPopupFocus']);
+      var _props = this.props,
+          onPopupFocus = _props.onPopupFocus,
+          props = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_objectWithoutProperties___default()(_props, ['onPopupFocus']);
 
       var multiple = props.multiple,
           visible = props.visible,
@@ -4745,7 +4747,9 @@ var SelectTrigger = function (_React$Component) {
           dropdownAlign = props.dropdownAlign,
           disabled = props.disabled,
           showSearch = props.showSearch,
-          dropdownClassName = props.dropdownClassName;
+          dropdownClassName = props.dropdownClassName,
+          dropdownStyle = props.dropdownStyle,
+          dropdownMatchSelectWidth = props.dropdownMatchSelectWidth;
 
       var dropdownPrefixCls = this.getDropdownPrefixCls();
       var popupClassName = (_popupClassName = {}, __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_popupClassName, dropdownClassName, !!dropdownClassName), __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_defineProperty___default()(_popupClassName, dropdownPrefixCls + '--' + (multiple ? 'multiple' : 'single'), 1), _popupClassName);
@@ -4764,6 +4768,12 @@ var SelectTrigger = function (_React$Component) {
       } else {
         hideAction = ['blur'];
       }
+      var popupStyle = __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends___default()({}, dropdownStyle);
+      var widthProp = dropdownMatchSelectWidth ? 'width' : 'minWidth';
+      if (this.state.dropdownWidth) {
+        popupStyle[widthProp] = this.state.dropdownWidth + 'px';
+      }
+
       return __WEBPACK_IMPORTED_MODULE_8_react___default.a.createElement(
         __WEBPACK_IMPORTED_MODULE_7_rc_trigger__["a" /* default */],
         __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_extends___default()({}, props, {
@@ -4780,7 +4790,7 @@ var SelectTrigger = function (_React$Component) {
           popupVisible: visible,
           getPopupContainer: props.getPopupContainer,
           popupClassName: __WEBPACK_IMPORTED_MODULE_10_classnames___default()(popupClassName),
-          popupStyle: props.dropdownStyle
+          popupStyle: popupStyle
         }),
         props.children
       );
@@ -6515,12 +6525,17 @@ var DateInput = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
     };
   },
   componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+    this.cachedSelectionStart = this.dateInputInstance.selectionStart;
+    this.cachedSelectionEnd = this.dateInputInstance.selectionEnd;
     // when popup show, click body will call this, bug!
     var selectedValue = nextProps.selectedValue;
     this.setState({
       str: selectedValue && selectedValue.format(nextProps.format) || '',
       invalid: false
     });
+  },
+  componentDidUpdate: function componentDidUpdate() {
+    this.dateInputInstance.setSelectionRange(this.cachedSelectionStart, this.cachedSelectionEnd);
   },
   onInputChange: function onInputChange(event) {
     var str = event.target.value;
@@ -7508,14 +7523,9 @@ function includesSeparators(string, separators) {
 
 function splitBySeparators(string, separators) {
   var reg = new RegExp('[' + separators.join() + ']');
-  var array = string.split(reg);
-  while (array[0] === '') {
-    array.shift();
-  }
-  while (array[array.length - 1] === '') {
-    array.pop();
-  }
-  return array;
+  return string.split(reg).filter(function (token) {
+    return token;
+  });
 }
 
 function defaultFilterFn(input, child) {
