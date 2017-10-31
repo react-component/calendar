@@ -29,11 +29,15 @@ const DateInput = createReactClass({
   },
 
   componentWillReceiveProps(nextProps) {
+    const cachedSelectionStart = this.dateInputInstance.selectionStart;
+    const cachedSelectionEnd = this.dateInputInstance.selectionEnd;
     // when popup show, click body will call this, bug!
     const selectedValue = nextProps.selectedValue;
     this.setState({
       str: selectedValue && selectedValue.format(nextProps.format) || '',
       invalid: false,
+    }, () => {
+      this.dateInputInstance.setSelectionRange(cachedSelectionStart, cachedSelectionEnd);
     });
   },
 
