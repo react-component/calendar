@@ -65,6 +65,8 @@ const DateTBody = createReactClass({
     const todayClass = `${prefixCls}-today`;
     const selectedClass = `${prefixCls}-selected-day`;
     const selectedDateClass = `${prefixCls}-selected-date`;  // do not move with mouse operation
+    const selectedStartDateClass = `${prefixCls}-selected-start-date`;
+    const selectedEndDateClass = `${prefixCls}-selected-end-date`;
     const inRangeClass = `${prefixCls}-in-range-cell`;
     const lastMonthDayClass = `${prefixCls}-last-month-cell`;
     const nextMonthDayClass = `${prefixCls}-next-month-btn-day`;
@@ -140,12 +142,14 @@ const DateTBody = createReactClass({
               if (isSameDay(current, startValue)) {
                 selected = true;
                 isActiveWeek = true;
+                cls += ` ${selectedStartDateClass}`;
               }
             }
             if (startValue && endValue) {
               if (isSameDay(current, endValue)) {
                 selected = true;
                 isActiveWeek = true;
+                cls += ` ${selectedEndDateClass}`;
               } else if (current.isAfter(startValue, 'day') &&
                 current.isBefore(endValue, 'day')) {
                 cls += ` ${inRangeClass}`;
