@@ -4403,7 +4403,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                     </div>
                   </td>
                   <td
-                    class="rc-calendar-cell rc-calendar-today rc-calendar-selected-date rc-calendar-selected-day"
+                    class="rc-calendar-cell rc-calendar-today rc-calendar-selected-start-date rc-calendar-selected-date rc-calendar-selected-day"
                     role="gridcell"
                     title="03/29/2017"
                   >
@@ -5174,7 +5174,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                     </div>
                   </td>
                   <td
-                    class="rc-calendar-cell rc-calendar-selected-day"
+                    class="rc-calendar-cell rc-calendar-selected-end-date rc-calendar-selected-day"
                     role="gridcell"
                     title="04/29/2017"
                   >
