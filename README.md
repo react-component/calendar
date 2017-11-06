@@ -13,7 +13,7 @@ React Calendar
 [npm-url]: http://npmjs.org/package/rc-calendar
 [travis-image]: https://img.shields.io/travis/react-component/calendar.svg?style=flat-square
 [travis-url]: https://travis-ci.org/react-component/calendar
-[codecov-image]: https://img.shields.io/codecov/c/github/ant-design/ant-design/master.svg?style=flat-square
+[codecov-image]: https://img.shields.io/codecov/c/github/react-component/calendar/master.svg?style=flat-square
 [codecov-url]: https://codecov.io/gh/react-component/calendar/branch/master
 [gemnasium-image]: http://img.shields.io/gemnasium/react-component/calendar.svg?style=flat-square
 [gemnasium-url]: https://gemnasium.com/react-component/calendar
