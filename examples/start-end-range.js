@@ -25,16 +25,16 @@ if (cn) {
   now.locale('en-gb').utcOffset(0);
 }
 
-const Picker = React.createClass({
-  getInitialState() {
-    return {
-      hoverValue: [],
-    };
-  },
-  onHoverChange(hoverValue) {
+class Picker extends React.Component {
+  state = {
+    hoverValue: [],
+  };
+
+  onHoverChange = (hoverValue) => {
     console.log(hoverValue);
     this.setState({ hoverValue });
-  },
+  }
+
   render() {
     const props = this.props;
     const { showValue } = props;
@@ -71,46 +71,44 @@ const Picker = React.createClass({
           }
         }
       </DatePicker>);
-  },
-});
+  }
+}
 
-const Test = React.createClass({
-  getInitialState() {
-    return {
-      startValue: null,
-      endValue: null,
-      startOpen: false,
-      endOpen: false,
-    };
-  },
+class Demo extends React.Component {
+  state = {
+    startValue: null,
+    endValue: null,
+    startOpen: false,
+    endOpen: false,
+  };
 
-  onStartOpenChange(startOpen) {
+  onStartOpenChange = (startOpen) => {
     this.setState({
       startOpen,
     });
-  },
+  }
 
-  onEndOpenChange(endOpen) {
+  onEndOpenChange = (endOpen) => {
     this.setState({
       endOpen,
     });
-  },
+  }
 
-  onStartChange(value) {
+  onStartChange = (value) => {
     this.setState({
       startValue: value[0],
       startOpen: false,
       endOpen: true,
     });
-  },
+  }
 
-  onEndChange(value) {
+  onEndChange = (value) => {
     this.setState({
       endValue: value[1],
     });
-  },
+  }
 
-  disabledStartDate(endValue) {
+  disabledStartDate = (endValue) => {
     if (!endValue) {
       return false;
     }
@@ -119,7 +117,7 @@ const Test = React.createClass({
       return false;
     }
     return endValue.diff(startValue, 'days') < 0;
-  },
+  }
 
   render() {
     const state = this.state;
@@ -150,8 +148,8 @@ const Test = React.createClass({
           />
         </p>
       </div>);
-  },
-});
+  }
+}
 
 
-ReactDOM.render(<Test />, document.getElementById('__react-content'));
+ReactDOM.render(<Demo />, document.getElementById('__react-content'));

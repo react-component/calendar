@@ -115,22 +115,20 @@ function onStandaloneSelect(value) {
   console.log(format(value[0]), format(value[1]));
 }
 
-const Test = React.createClass({
-  getInitialState() {
-    return {
-      value: [],
-      hoverValue: [],
-    };
-  },
+class Demo extends React.Component {
+  state = {
+    value: [],
+    hoverValue: [],
+  }
 
-  onChange(value) {
+  onChange = (value) => {
     console.log('onChange', value);
     this.setState({ value });
-  },
+  }
 
-  onHoverChange(hoverValue) {
+  onHoverChange = (hoverValue) => {
     this.setState({ hoverValue });
-  },
+  }
 
   render() {
     const state = this.state;
@@ -168,8 +166,8 @@ const Test = React.createClass({
           }
         }
       </Picker>);
-  },
-});
+  }
+}
 
 ReactDOM.render(
   <div>
@@ -193,6 +191,6 @@ ReactDOM.render(
     <br />
 
     <div style={{ margin: 20 }}>
-      <Test />
+      <Demo />
     </div>
   </div>, document.getElementById('__react-content'));

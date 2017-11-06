@@ -32,17 +32,17 @@ function onSelect(value) {
   console.log('select', value.format(format));
 }
 
-const App = React.createClass({
-  getInitialState() {
-    return {
-      type: 'month',
-    };
-  },
-  onTypeChange(type) {
+class Demo extends React.Component {
+  state = {
+    type: 'month',
+  };
+
+  onTypeChange = (type) => {
     this.setState({
       type,
     });
-  },
+  }
+
   render() {
     return (
       <div style={{ zIndex: 1000, position: 'relative' }}>
@@ -66,7 +66,7 @@ const App = React.createClass({
         />
       </div>
     );
-  },
-});
+  }
+}
 
-ReactDOM.render(<App />, document.getElementById('__react-content'));
+ReactDOM.render(<Demo />, document.getElementById('__react-content'));

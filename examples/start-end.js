@@ -38,13 +38,12 @@ const timePickerElement = <TimePickerPanel />;
 
 const SHOW_TIME = true;
 
-const Picker = React.createClass({
-  getDefaultProps() {
-    return {
-      showTime: SHOW_TIME,
-      disabled: false,
-    };
-  },
+class Picker extends React.Component {
+  state = {
+    showTime: SHOW_TIME,
+    disabled: false,
+  };
+
   render() {
     const props = this.props;
     const calendar = (<Calendar
@@ -76,25 +75,23 @@ const Picker = React.createClass({
         }
       }
     </DatePicker>);
-  },
-});
+  }
+}
 
-const Test = React.createClass({
-  getInitialState() {
-    return {
-      startValue: null,
-      endValue: null,
-    };
-  },
+class Demo extends React.Component {
+  state = {
+    startValue: null,
+    endValue: null,
+  };
 
-  onChange(field, value) {
+  onChange = (field, value) => {
     console.log('onChange', field, value && value.format(getFormat(SHOW_TIME)));
     this.setState({
       [field]: value,
     });
-  },
+  }
 
-  disabledEndDate(endValue) {
+  disabledEndDate = (endValue) => {
     if (!endValue) {
       return false;
     }
@@ -104,9 +101,9 @@ const Test = React.createClass({
     }
     return SHOW_TIME ? endValue.isBefore(startValue) :
     endValue.diff(startValue, 'days') <= 0;
-  },
+  }
 
-  disabledStartDate(startValue) {
+  disabledStartDate = (startValue) => {
     if (!startValue) {
       return false;
     }
@@ -116,7 +113,7 @@ const Test = React.createClass({
     }
     return SHOW_TIME ? endValue.isBefore(startValue) :
     endValue.diff(startValue, 'days') <= 0;
-  },
+  }
 
   render() {
     const state = this.state;
@@ -139,8 +136,8 @@ const Test = React.createClass({
         />
       </p>
     </div>);
-  },
-});
+  }
+}
 
 
-ReactDOM.render(<Test />, document.getElementById('__react-content'));
+ReactDOM.render(<Demo />, document.getElementById('__react-content'));

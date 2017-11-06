@@ -3,6 +3,7 @@
 import 'rc-calendar/assets/index.less';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import Calendar from 'rc-calendar';
 import DatePicker from 'rc-calendar/src/Picker';
 import zhCN from 'rc-calendar/src/locale/zh_CN';
@@ -49,33 +50,31 @@ const style = `
 }
 `;
 
-const Test = React.createClass({
-  propTypes: {
-    defaultValue: React.PropTypes.object,
-    defaultCalendarValue: React.PropTypes.object,
-  },
+class Demo extends React.Component {
+  static propTypes = {
+    defaultValue: PropTypes.object,
+    defaultCalendarValue: PropTypes.object,
+  }
 
-  getInitialState() {
-    return {
-      value: undefined,
-      open: false,
-    };
-  },
+  state = {
+    value: undefined,
+    open: false,
+  };
 
-  onChange(value) {
+  onChange = (value) => {
     console.log('DatePicker change: ', (value && value.format(format)));
     this.setState({
       value,
     });
-  },
+  }
 
-  onOpenChange(open) {
+  onOpenChange = (open) => {
     this.setState({
       open,
     });
-  },
+  }
 
-  dateRender(current) {
+  dateRender = (current) => {
     const selectedValue = this.state.value;
     if (selectedValue && current.year() === selectedValue.year() &&
       current.week() === selectedValue.week()) {
@@ -89,23 +88,23 @@ const Test = React.createClass({
       <div className="rc-calendar-date">
         {current.date()}
       </div>);
-  },
+  }
 
-  lastWeek() {
+  lastWeek = () => {
     const value = this.state.value || now;
     value.add(-1, 'weeks');
     this.setState({
       value,
       open: false,
     });
-  },
+  }
 
   renderSidebar() {
     return (
       <div className="week-calendar-sidebar" key="sidebar">
         <button onClick={this.lastWeek} style={{ margin: 20 }}>上一周</button>
       </div>);
-  },
+  }
 
   render() {
     const state = this.state;
@@ -159,8 +158,8 @@ const Test = React.createClass({
         </DatePicker>
       </div>
     </div>);
-  },
-});
+  }
+}
 
 ReactDOM.render((<div
   style={{
@@ -172,6 +171,6 @@ ReactDOM.render((<div
 >
   <style dangerouslySetInnerHTML={{ __html: style }} />
   <div>
-    <Test />
+    <Demo />
   </div>
 </div>), document.getElementById('__react-content'));

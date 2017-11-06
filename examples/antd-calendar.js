@@ -3,6 +3,7 @@
 import 'rc-calendar/assets/index.less';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import Calendar from 'rc-calendar';
 import DatePicker from 'rc-calendar/src/Picker';
 import zhCN from 'rc-calendar/src/locale/zh_CN';
@@ -63,45 +64,47 @@ function disabledDate(current) {
   return current.valueOf() < date.valueOf();  // can not select days before today
 }
 
-const Test = React.createClass({
-  propTypes: {
-    defaultValue: React.PropTypes.object,
-    defaultCalendarValue: React.PropTypes.object,
-  },
+class Demo extends React.Component {
+  static propTypes = {
+    defaultValue: PropTypes.object,
+    defaultCalendarValue: PropTypes.object,
+  }
 
-  getInitialState() {
-    return {
+  constructor(props) {
+    super(props);
+
+    this.state = {
       showTime: true,
       showDateInput: true,
       disabled: false,
-      value: this.props.defaultValue,
+      value: props.defaultValue,
     };
-  },
+  }
 
-  onChange(value) {
+  onChange = (value) => {
     console.log('DatePicker change: ', (value && value.format(format)));
     this.setState({
       value,
     });
-  },
+  }
 
-  onShowTimeChange(e) {
+  onShowTimeChange = (e) => {
     this.setState({
       showTime: e.target.checked,
     });
-  },
+  }
 
-  onShowDateInputChange(e) {
+  onShowDateInputChange = (e) => {
     this.setState({
       showDateInput: e.target.checked,
     });
-  },
+  }
 
-  toggleDisabled() {
+  toggleDisabled = () => {
     this.setState({
       disabled: !this.state.disabled,
     });
-  },
+  }
 
   render() {
     const state = this.state;
@@ -180,8 +183,8 @@ const Test = React.createClass({
         </DatePicker>
       </div>
     </div>);
-  },
-});
+  }
+}
 
 function onStandaloneSelect(value) {
   console.log('onStandaloneSelect');
@@ -219,10 +222,10 @@ ReactDOM.render((<div
       />
     </div>
     <div style={{ float: 'left', width: 300 }}>
-      <Test defaultValue={now} />
+      <Demo defaultValue={now} />
     </div>
     <div style={{ float: 'right', width: 300 }}>
-      <Test defaultCalendarValue={defaultCalendarValue} />
+      <Demo defaultCalendarValue={defaultCalendarValue} />
     </div>
     <div style={{ clear: 'both' }}></div>
   </div>

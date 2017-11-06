@@ -8,15 +8,14 @@ import RangeCalendar from 'rc-calendar/src/RangeCalendar';
 import Select, { Option } from 'rc-select';
 import 'rc-select/assets/index.css';
 
-const App = React.createClass({
-  getInitialState() {
-    return {
-      mode: 'month',
-      rangeStartMode: 'date',
-      rangeEndMode: 'date',
-    };
-  },
-  onModeChange(key) {
+class Demo extends React.Component {
+  state = {
+    mode: 'month',
+    rangeStartMode: 'date',
+    rangeEndMode: 'date',
+  };
+
+  onModeChange = (key) => {
     return function _handleChange(e) {
       let mode;
       if (e && e.target) {
@@ -29,13 +28,16 @@ const App = React.createClass({
         [key]: mode,
       });
     }.bind(this);
-  },
-  handlePanelChange(...args) {
+  }
+
+  handlePanelChange = (...args) => {
     console.log('on panel change', ...args);
-  },
-  handleRangePanelChange(...args) {
+  }
+
+  handleRangePanelChange = (...args) => {
     console.log('on range panel change', ...args);
-  },
+  }
+
   render() {
     return (
       <div style={{ zIndex: 1000, position: 'relative' }}>
@@ -78,7 +80,7 @@ const App = React.createClass({
         />
       </div>
     );
-  },
-});
+  }
+}
 
-ReactDOM.render(<App />, document.getElementById('__react-content'));
+ReactDOM.render(<Demo />, document.getElementById('__react-content'));
