@@ -5,7 +5,7 @@ React Calendar
 
 [![NPM version][npm-image]][npm-url]
 [![build status][travis-image]][travis-url]
-[![Test coverage][coveralls-image]][coveralls-url]
+[![Test coverage][codecov-image]][codecov-url]
 [![gemnasium deps][gemnasium-image]][gemnasium-url]
 [![npm download][download-image]][download-url]
 
@@ -13,8 +13,8 @@ React Calendar
 [npm-url]: http://npmjs.org/package/rc-calendar
 [travis-image]: https://img.shields.io/travis/react-component/calendar.svg?style=flat-square
 [travis-url]: https://travis-ci.org/react-component/calendar
-[coveralls-image]: https://img.shields.io/coveralls/react-component/calendar.svg?style=flat-square
-[coveralls-url]: https://coveralls.io/r/react-component/calendar?branch=master
+[codecov-image]: https://img.shields.io/codecov/c/github/ant-design/ant-design/master.svg?style=flat-square
+[codecov-url]: https://codecov.io/gh/react-component/calendar/branch/master
 [gemnasium-image]: http://img.shields.io/gemnasium/react-component/calendar.svg?style=flat-square
 [gemnasium-url]: https://gemnasium.com/react-component/calendar
 [node-image]: https://img.shields.io/badge/node.js-%3E=_0.10-green.svg?style=flat-square
