@@ -1,6 +1,10 @@
 # History
 ----
 
+## 9.2.0 / 2017-11-06
+
+- React 16 support
+
 ## 9.1.0 / 2017-07-27
 - Support control panel [#284](https://github.com/react-component/calendar/pull/284)
 
