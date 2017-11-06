@@ -2,7 +2,6 @@
 import React from 'react';
 import Select from 'rc-select';
 import { render } from 'enzyme';
-import { renderToJson } from 'enzyme-to-json';
 import moment from 'moment';
 import FullCalendar from '../src/FullCalendar';
 import zhCN from '../src/locale/zh_CN';
@@ -18,7 +17,7 @@ describe('FullCalendar', () => {
         defaultValue={moment().locale('zh-cn')}
       />
     );
-    expect(renderToJson(zhWrapper)).toMatchSnapshot();
+    expect(zhWrapper).toMatchSnapshot();
 
     const enWrapper = render(
       <FullCalendar
@@ -28,6 +27,6 @@ describe('FullCalendar', () => {
         defaultValue={moment().locale('en')}
       />
     );
-    expect(renderToJson(enWrapper)).toMatchSnapshot();
+    expect(enWrapper).toMatchSnapshot();
   });
 });

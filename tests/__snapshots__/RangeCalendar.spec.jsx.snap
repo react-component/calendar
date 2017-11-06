@@ -1998,9 +1998,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                     <span
                       class="rc-calendar-year-panel-decade-select-content"
                     >
-                      2010
-                      -
-                      2019
+                      2010-2019
                     </span>
                     <span
                       class="rc-calendar-year-panel-decade-select-arrow"
@@ -2940,9 +2938,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                     <span
                       class="rc-calendar-year-panel-decade-select-content"
                     >
-                      2010
-                      -
-                      2019
+                      2010-2019
                     </span>
                     <span
                       class="rc-calendar-year-panel-decade-select-arrow"
@@ -3843,13 +3839,13 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
           </div>
         </div>
         <div
-          style="outline:none;"
+          style="outline:none"
         >
           <div
             class="rc-calendar-header"
           >
             <div
-              style="position:relative;"
+              style="position:relative"
             >
               <a
                 class="rc-calendar-prev-year-btn"
@@ -4577,13 +4573,13 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
           </div>
         </div>
         <div
-          style="outline:none;"
+          style="outline:none"
         >
           <div
             class="rc-calendar-header"
           >
             <div
-              style="position:relative;"
+              style="position:relative"
             >
               <span
                 class="rc-calendar-my-select"

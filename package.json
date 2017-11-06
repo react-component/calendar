@@ -55,6 +55,9 @@
     "setupFiles": [
       "./tests/setup.js"
     ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
     "transform": {
       "\\.jsx?$": "./node_modules/rc-tools/scripts/jestPreprocessor.js"
     }
@@ -63,18 +66,19 @@
     "async": "~2.5.0",
     "bootstrap": "~3.3.2",
     "coveralls": "^2.11.15",
-    "enzyme": "^2.8.0",
-    "enzyme-to-json": "^1.5.0",
-    "jest": "^20.0.4",
+    "enzyme": "^3.1.0",
+    "enzyme-adapter-react-16": "^1.0.2",
+    "enzyme-to-json": "^3.1.4",
+    "jest": "^21.2.1",
     "mockdate": "^2.0.1",
     "pre-commit": "1.x",
-    "rc-dialog": "^6.0.1",
-    "rc-select": "^6.0.6",
-    "rc-time-picker": "2.x",
+    "rc-dialog": "^7.0.0",
+    "rc-select": "^7.1.0",
+    "rc-time-picker": "^3.1.0",
     "rc-tools": "^6.2.2",
-    "react": "15.x",
-    "react-dom": "15.x",
-    "react-test-renderer": "15.x"
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-test-renderer": "^16.0.0"
   },
   "pre-commit": [
     "lint"
@@ -85,7 +89,7 @@
     "create-react-class": "^15.5.2",
     "moment": "2.x",
     "prop-types": "^15.5.8",
-    "rc-trigger": "1.x",
-    "rc-util": "^4.0.4"
+    "rc-trigger": "^2.2.0",
+    "rc-util": "^4.1.1"
   }
 }

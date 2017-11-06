@@ -30,7 +30,7 @@ exports[`FullCalendar render correctly 1`] = `
         aria-expanded="false"
         aria-haspopup="true"
         class="rc-select-selection
-                  rc-select-selection--single"
+            rc-select-selection--single"
         role="combobox"
         tabindex="0"
       >
@@ -39,7 +39,7 @@ exports[`FullCalendar render correctly 1`] = `
         >
           <div
             class="rc-select-selection-selected-value"
-            style="display:block;opacity:1;"
+            style="display:block;opacity:1"
             title="2017"
           >
             2017
@@ -47,7 +47,7 @@ exports[`FullCalendar render correctly 1`] = `
         </div>
         <span
           class="rc-select-arrow"
-          style="user-select:none;-webkit-user-select:none;"
+          style="user-select:none;-webkit-user-select:none"
           unselectable="unselectable"
         >
           <b />
@@ -250,7 +250,7 @@ exports[`FullCalendar render correctly 2`] = `
         aria-expanded="false"
         aria-haspopup="true"
         class="rc-select-selection
-                  rc-select-selection--single"
+            rc-select-selection--single"
         role="combobox"
         tabindex="0"
       >
@@ -259,7 +259,7 @@ exports[`FullCalendar render correctly 2`] = `
         >
           <div
             class="rc-select-selection-selected-value"
-            style="display:block;opacity:1;"
+            style="display:block;opacity:1"
             title="2017"
           >
             2017
@@ -267,7 +267,7 @@ exports[`FullCalendar render correctly 2`] = `
         </div>
         <span
           class="rc-select-arrow"
-          style="user-select:none;-webkit-user-select:none;"
+          style="user-select:none;-webkit-user-select:none"
           unselectable="unselectable"
         >
           <b />

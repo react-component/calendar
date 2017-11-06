@@ -1054,9 +1054,7 @@ exports[`Calendar controlled panels render controlled panels correctly 2`] = `
                 <span
                   class="rc-calendar-year-panel-decade-select-content"
                 >
-                  2010
-                  -
-                  2019
+                  2010-2019
                 </span>
                 <span
                   class="rc-calendar-year-panel-decade-select-arrow"
@@ -1960,7 +1958,7 @@ exports[`Calendar render render correctly 1`] = `
         class="rc-calendar-header"
       >
         <div
-          style="position:relative;"
+          style="position:relative"
         >
           <a
             class="rc-calendar-prev-year-btn"
@@ -2725,7 +2723,7 @@ exports[`Calendar render render correctly 2`] = `
         class="rc-calendar-header"
       >
         <div
-          style="position:relative;"
+          style="position:relative"
         >
           <a
             class="rc-calendar-prev-year-btn"

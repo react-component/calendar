@@ -1,20 +1,15 @@
-/* eslint-disable no-undef */
+import React from 'react';
+import moment from 'moment';
+import { mount } from 'enzyme';
 import Calendar from '../index';
 import DatePicker from '../src/Picker';
 import RangeCalendar from '../src/RangeCalendar';
-import ReactDOM from 'react-dom';
-import React from 'react';
-import TestUtils from 'react-dom/test-utils';
-const Simulate = TestUtils.Simulate;
-import async from 'async';
 import CalendarLocale from '../src/locale/en_US';
-import moment from 'moment';
+
 const format = ('YYYY-MM-DD');
 const VALUE = moment([2015, 5, 1]);
 
 describe('DatePicker', () => {
-  let div;
-
   function noop() {
   }
 
@@ -38,7 +33,7 @@ describe('DatePicker', () => {
   }
 
   function renderPicker(props) {
-    return ReactDOM.render(<DatePicker
+    return mount(<DatePicker
       calendar={
         <Calendar
           locale={CalendarLocale}
@@ -48,11 +43,11 @@ describe('DatePicker', () => {
       {...props}
     >
       {renderOne}
-    </DatePicker>, div);
+    </DatePicker>);
   }
 
   function renderRangePicker(props) {
-    return ReactDOM.render(<DatePicker
+    return mount(<DatePicker
       calendar={
         <RangeCalendar
           locale={CalendarLocale}
@@ -62,163 +57,72 @@ describe('DatePicker', () => {
       {...props}
     >
       {renderRange}
-    </DatePicker>, div);
+    </DatePicker>);
   }
 
-  beforeEach(() => {
-    div = document.createElement('div');
-    document.body.appendChild(div);
-  });
-
-  afterEach(() => {
-    ReactDOM.unmountComponentAtNode(div);
-    document.body.removeChild(div);
-  });
-
-  it('popup correctly', (done) => {
+  it('popup correctly', () => {
     let change;
     const picker = renderPicker({
       onChange(v) {
         change = v;
       },
     });
-    expect(picker.state.open).toBeFalsy();
-    const input = TestUtils.scryRenderedDOMComponentsWithClass(picker,
-      'rc-calendar-picker-input')[0];
-    async.series([(next) => {
-      Simulate.click(input);
-      setTimeout(next, 100);
-    }, (next) => {
-      expect(TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance,
-        'rc-calendar')[0]).not.toBeFalsy();
-      expect(picker.state.open).toEqual(true);
-      const day = TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance,
-        'rc-calendar-date')[2];
-      Simulate.click(day);
-      setTimeout(next, 100);
-    }, (next) => {
-      expect(change).not.toBeFalsy();
-      expect(change.year()).toEqual(2015);
-      expect(change.month()).toEqual(5);
-      expect(change.date()).toEqual(2);
-      expect(ReactDOM.findDOMNode(input).value).toEqual('2015-06-02');
-      expect(picker.state.open).toBeFalsy();
-      next();
-    }], () => {
-      done();
-    });
+    expect(picker.state().open).toBeFalsy();
+    const input = picker.find('.rc-calendar-picker-input').hostNodes().first();
+    input.simulate('click');
+    expect(picker.find('.rc-calendar').hostNodes().first()).not.toBeFalsy();
+    expect(picker.state().open).toEqual(true);
+    const day = picker.find('.rc-calendar-date').hostNodes().at(2);
+    day.simulate('click');
+    expect(change).not.toBeFalsy();
+    expect(change.year()).toEqual(2015);
+    expect(change.month()).toEqual(5);
+    expect(change.date()).toEqual(2);
+    expect(input.getDOMNode().value).toEqual('2015-06-02');
+    expect(picker.state().open).toBeFalsy();
   });
 
-  it('popup range calendar correctly', (done) => {
-    if (navigator.userAgent.toLowerCase().indexOf('phantomjs') !== -1) {
-      return done();
-    }
+  it('popup range calendar correctly', () => {
     let change;
     const picker = renderRangePicker({
       onChange(v) {
         change = v;
       },
     });
-    expect(picker.state.open).toBeFalsy();
-    const input = TestUtils.scryRenderedDOMComponentsWithClass(picker,
-      'rc-calendar-picker-input')[0];
-    async.series([(next) => {
-      Simulate.click(input);
-      setTimeout(next, 10);
-    }, (next) => {
-      expect(TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance,
-        'rc-calendar')[0]).not.toBeFalsy();
-      expect(picker.state.open).toEqual(true);
-      const day1 = TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance,
-        'rc-calendar-date')[2];
-      Simulate.click(day1);
-      const day2 = TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance,
-        'rc-calendar-date')[3];
-      Simulate.click(day2);
-      setTimeout(next, 10);
-    }, (next) => {
-      expect(change).not.toBeFalsy();
-      expect(change.length).toEqual(2);
-      expect(change[0].year()).toEqual(2015);
-      expect(change[0].month()).toEqual(5);
-      expect(change[0].date()).toEqual(2);
-      expect(change[1].year()).toEqual(2015);
-      expect(change[1].month()).toEqual(5);
-      expect(change[1].date()).toEqual(3);
-      expect(input.value).toEqual('2015-06-02 - 2015-06-03');
-      expect(picker.state.open).toBeFalsy();
-      next();
-    }], () => {
-      done();
-    });
+    expect(picker.state().open).toBeFalsy();
+    const input = picker.find('.rc-calendar-picker-input').hostNodes().first();
+    input.simulate('click');
+    expect(picker.find('.rc-calendar').hostNodes().first()).not.toBeFalsy();
+    expect(picker.state().open).toEqual(true);
+    const day1 = picker.find('.rc-calendar-date').hostNodes().at(2);
+    const day2 = picker.find('.rc-calendar-date').hostNodes().at(3);
+    day1.simulate('click');
+    day2.simulate('click');
+    expect(change).not.toBeFalsy();
+    expect(change.length).toEqual(2);
+    expect(change[0].year()).toEqual(2015);
+    expect(change[0].month()).toEqual(5);
+    expect(change[0].date()).toEqual(2);
+    expect(change[1].year()).toEqual(2015);
+    expect(change[1].month()).toEqual(5);
+    expect(change[1].date()).toEqual(3);
+    expect(input.getDOMNode().value).toEqual('2015-06-02 - 2015-06-03');
+    expect(picker.state().open).toBeFalsy();
   });
 
   describe('render calendar to body', () => {
-    it('support correctly', (done) => {
-      let change;
-      const picker = renderPicker({
-        onChange(v) {
-          change = v;
-        },
-      });
-      expect(picker.state.open).toBeFalsy();
-      const input = TestUtils.scryRenderedDOMComponentsWithClass(picker,
-        'rc-calendar-picker-input')[0];
-      async.series([(next) => {
-        Simulate.click(input);
-        setTimeout(next, 100);
-      }, (next) => {
-        expect(TestUtils.scryRenderedDOMComponentsWithClass(picker,
-          'rc-calendar')[0]).toBeFalsy();
-        expect(picker.state.open).toEqual(true);
-        const day = TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance,
-          'rc-calendar-date')[2];
-        Simulate.click(day);
-        setTimeout(next, 100);
-      }, (next) => {
-        expect(change).not.toBeFalsy();
-        expect(change.year()).toEqual(2015);
-        expect(change.month()).toEqual(5);
-        expect(change.date()).toEqual(2);
-        expect(ReactDOM.findDOMNode(input).value).toEqual('2015-06-02');
-        expect(picker.state.open).toBeFalsy();
-        next();
-      }], () => {
-        done();
-      });
-    });
-
-    it('destroy correctly', (done) => {
-      if (navigator.userAgent.toLowerCase().indexOf('phantomjs') !== -1) {
-        return done();
-      }
+    it('destroy correctly', () => {
       const picker = renderPicker();
-      expect(picker.state.open).toBeFalsy();
-      const input = TestUtils.scryRenderedDOMComponentsWithClass(picker,
-        'rc-calendar-picker-input')[0];
-      async.series([(next) => {
-        Simulate.click(input);
-        setTimeout(next, 100);
-      }, (next) => {
-        expect(TestUtils.scryRenderedDOMComponentsWithClass(picker,
-          'rc-calendar')[0]).toBeFalsy();
-        expect(picker.state.open).toEqual(true);
-        if (document.querySelectorAll) {
-          expect(document.querySelectorAll('.rc-calendar-picker').length).not.toEqual(0);
-        }
-        expect(TestUtils.scryRenderedDOMComponentsWithClass(picker.calendarInstance,
-          'rc-calendar-date')[0]).not.toBeFalsy();
-        ReactDOM.unmountComponentAtNode(div);
-        setTimeout(next, 100);
-      }, (next) => {
-        if (document.querySelectorAll) {
-          expect(document.querySelectorAll('.rc-calendar-picker').length).toEqual(0);
-        }
-        expect(picker.calendarInstance).toBeFalsy();
-        next();
-      }], () => {
-        done();
-      });
+      expect(picker.state().open).toBeFalsy();
+      const input = picker.find('.rc-calendar-picker-input').hostNodes().first();
+      input.simulate('click');
+      expect(picker.find('.rc-calendar').hostNodes().first()).not.toBeFalsy();
+      expect(picker.state().open).toEqual(true);
+      expect(picker.find('.rc-calendar-picker').length).not.toEqual(0);
+      expect(picker.find('.rc-calendar-date').hostNodes().at(0)).not.toBeFalsy();
+      picker.unmount();
+      expect(document.querySelectorAll('.rc-calendar-picker').length).toEqual(0);
+      expect(picker.calendarInstance).toBeFalsy();
     });
   });
 });
