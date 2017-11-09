@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>full-calendar.js - example - rc-calendar@9.1.12</title>
+  <title>full-calendar.js - example - rc-calendar@9.2.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -263,7 +263,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
   <div class="container">
     <div class="header">
-      <h1>rc-calendar@9.1.12</h1>
+      <h1>rc-calendar@9.2.0</h1>
 
       <p>React Calendar</p>
     </div>
@@ -303,17 +303,17 @@ defaultCalendarValue.add(-<span class="hljs-number">1</span>, <span class="hljs-
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'select'</span>, value.format(format));
 }
 
-<span class="hljs-keyword">const</span> App = React.createClass({
-  getInitialState() {
-    <span class="hljs-keyword">return</span> {
-      type: <span class="hljs-string">'month'</span>,
-    };
-  },
-  onTypeChange(type) {
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>{
+  state = {
+    type: <span class="hljs-string">'month'</span>,
+  };
+
+  onTypeChange = (type) =&gt; {
     <span class="hljs-keyword">this</span>.setState({
       type,
     });
-  },
+  }
+
   render() {
     <span class="hljs-keyword">return</span> (
       <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span> <span class="hljs-attribute">zIndex:</span> <span class="hljs-attribute">1000</span>, <span class="hljs-attribute">position:</span> '<span class="hljs-attribute">relative</span>' }}&gt;</span>
@@ -337,10 +337,10 @@ defaultCalendarValue.add(-<span class="hljs-number">1</span>, <span class="hljs-
         /&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
     )</span>;
-  },
-});
+  }
+}
 
-ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">App</span> /&gt;</span>, document.getElementById('__react-content'));
+ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Demo</span> /&gt;</span>, document.getElementById('__react-content'));
 </span></code></pre></div>
   </div>
   <a href="http://github.com/react-component/calendar">

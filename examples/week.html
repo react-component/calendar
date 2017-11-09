@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>week.js - example - rc-calendar@9.1.12</title>
+  <title>week.js - example - rc-calendar@9.2.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -263,7 +263,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
   <div class="container">
     <div class="header">
-      <h1>rc-calendar@9.1.12</h1>
+      <h1>rc-calendar@9.2.0</h1>
 
       <p>React Calendar</p>
     </div>
@@ -274,6 +274,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 import 'rc-calendar/assets/index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import Calendar from 'rc-calendar';
 import DatePicker from 'rc-calendar/lib/Picker';
 import zhCN from 'rc-calendar/lib/locale/zh_CN';
@@ -320,33 +321,31 @@ const style = `
 }
 `;
 
-const Test = React.createClass({
-  propTypes: {
-    defaultValue: React.PropTypes.object,
-    defaultCalendarValue: React.PropTypes.object,
-  },
+class Demo extends React.Component {
+  static propTypes = {
+    defaultValue: PropTypes.object,
+    defaultCalendarValue: PropTypes.object,
+  }
 
-  getInitialState() {
-    return {
-      value: undefined,
-      open: false,
-    };
-  },
+  state = {
+    value: undefined,
+    open: false,
+  };
 
-  onChange(value) {
+  onChange = (value) =&gt; {
     console.log('DatePicker change: ', (value &amp;&amp; value.format(format)));
     this.setState({
       value,
     });
-  },
+  }
 
-  onOpenChange(open) {
+  onOpenChange = (open) =&gt; {
     this.setState({
       open,
     });
-  },
+  }
 
-  dateRender(current) {
+  dateRender = (current) =&gt; {
     const selectedValue = this.state.value;
     if (selectedValue &amp;&amp; current.year() === selectedValue.year() &amp;&amp;
       current.week() === selectedValue.week()) {
@@ -360,23 +359,23 @@ const Test = React.createClass({
       &lt;div className="rc-calendar-date"&gt;
         {current.date()}
       &lt;/div&gt;);
-  },
+  }
 
-  lastWeek() {
+  lastWeek = () =&gt; {
     const value = this.state.value || now;
     value.add(-1, 'weeks');
     this.setState({
       value,
       open: false,
     });
-  },
+  }
 
   renderSidebar() {
     return (
       &lt;div className="week-calendar-sidebar" key="sidebar"&gt;
         &lt;button onClick={this.lastWeek} style={{ margin: 20 }}&gt;上一周&lt;/button&gt;
       &lt;/div&gt;);
-  },
+  }
 
   render() {
     const state = this.state;
@@ -430,8 +429,8 @@ const Test = React.createClass({
         &lt;/DatePicker&gt;
       &lt;/div&gt;
     &lt;/div&gt;);
-  },
-});
+  }
+}
 
 ReactDOM.render((&lt;div
   style={{
@@ -443,7 +442,7 @@ ReactDOM.render((&lt;div
 &gt;
   &lt;style dangerouslySetInnerHTML={{ __html: style }} /&gt;
   &lt;div&gt;
-    &lt;Test /&gt;
+    &lt;Demo /&gt;
   &lt;/div&gt;
 &lt;/div&gt;), document.getElementById('__react-content'));
 </code></pre></div>

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>control-panel.js - example - rc-calendar@9.1.12</title>
+  <title>control-panel.js - example - rc-calendar@9.2.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -263,7 +263,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
   <div class="container">
     <div class="header">
-      <h1>rc-calendar@9.1.12</h1>
+      <h1>rc-calendar@9.2.0</h1>
 
       <p>React Calendar</p>
     </div>
@@ -279,15 +279,14 @@ import RangeCalendar from 'rc-calendar/lib/RangeCalendar';
 import Select, { Option } from 'rc-select';
 import 'rc-select/assets/index.css';
 
-const App = React.createClass({
-  getInitialState() {
-    return {
-      mode: 'month',
-      rangeStartMode: 'date',
-      rangeEndMode: 'date',
-    };
-  },
-  onModeChange(key) {
+class Demo extends React.Component {
+  state = {
+    mode: 'month',
+    rangeStartMode: 'date',
+    rangeEndMode: 'date',
+  };
+
+  onModeChange = (key) =&gt; {
     return function _handleChange(e) {
       let mode;
       if (e &amp;&amp; e.target) {
@@ -300,13 +299,16 @@ const App = React.createClass({
         [key]: mode,
       });
     }.bind(this);
-  },
-  handlePanelChange(...args) {
+  }
+
+  handlePanelChange = (...args) =&gt; {
     console.log('on panel change', ...args);
-  },
-  handleRangePanelChange(...args) {
+  }
+
+  handleRangePanelChange = (...args) =&gt; {
     console.log('on range panel change', ...args);
-  },
+  }
+
   render() {
     return (
       &lt;div style={{ zIndex: 1000, position: 'relative' }}&gt;
@@ -349,10 +351,10 @@ const App = React.createClass({
         /&gt;
       &lt;/div&gt;
     );
-  },
-});
+  }
+}
 
-ReactDOM.render(&lt;App /&gt;, document.getElementById('__react-content'));
+ReactDOM.render(&lt;Demo /&gt;, document.getElementById('__react-content'));
 </code></pre></div>
   </div>
   <a href="http://github.com/react-component/calendar">

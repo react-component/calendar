@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>start-end-range.js - example - rc-calendar@9.1.12</title>
+  <title>start-end-range.js - example - rc-calendar@9.2.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -263,7 +263,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
   <div class="container">
     <div class="header">
-      <h1>rc-calendar@9.1.12</h1>
+      <h1>rc-calendar@9.2.0</h1>
 
       <p>React Calendar</p>
     </div>
@@ -296,16 +296,16 @@ if (cn) {
   now.locale('en-gb').utcOffset(0);
 }
 
-const Picker = React.createClass({
-  getInitialState() {
-    return {
-      hoverValue: [],
-    };
-  },
-  onHoverChange(hoverValue) {
+class Picker extends React.Component {
+  state = {
+    hoverValue: [],
+  };
+
+  onHoverChange = (hoverValue) =&gt; {
     console.log(hoverValue);
     this.setState({ hoverValue });
-  },
+  }
+
   render() {
     const props = this.props;
     const { showValue } = props;
@@ -342,46 +342,44 @@ const Picker = React.createClass({
           }
         }
       &lt;/DatePicker&gt;);
-  },
-});
+  }
+}
 
-const Test = React.createClass({
-  getInitialState() {
-    return {
-      startValue: null,
-      endValue: null,
-      startOpen: false,
-      endOpen: false,
-    };
-  },
+class Demo extends React.Component {
+  state = {
+    startValue: null,
+    endValue: null,
+    startOpen: false,
+    endOpen: false,
+  };
 
-  onStartOpenChange(startOpen) {
+  onStartOpenChange = (startOpen) =&gt; {
     this.setState({
       startOpen,
     });
-  },
+  }
 
-  onEndOpenChange(endOpen) {
+  onEndOpenChange = (endOpen) =&gt; {
     this.setState({
       endOpen,
     });
-  },
+  }
 
-  onStartChange(value) {
+  onStartChange = (value) =&gt; {
     this.setState({
       startValue: value[0],
       startOpen: false,
       endOpen: true,
     });
-  },
+  }
 
-  onEndChange(value) {
+  onEndChange = (value) =&gt; {
     this.setState({
       endValue: value[1],
     });
-  },
+  }
 
-  disabledStartDate(endValue) {
+  disabledStartDate = (endValue) =&gt; {
     if (!endValue) {
       return false;
     }
@@ -390,7 +388,7 @@ const Test = React.createClass({
       return false;
     }
     return endValue.diff(startValue, 'days') &lt; 0;
-  },
+  }
 
   render() {
     const state = this.state;
@@ -421,11 +419,11 @@ const Test = React.createClass({
           /&gt;
         &lt;/p&gt;
       &lt;/div&gt;);
-  },
-});
+  }
+}
 
 
-ReactDOM.render(&lt;Test /&gt;, document.getElementById('__react-content'));
+ReactDOM.render(&lt;Demo /&gt;, document.getElementById('__react-content'));
 </code></pre></div>
   </div>
   <a href="http://github.com/react-component/calendar">

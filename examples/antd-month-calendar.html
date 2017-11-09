@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>antd-month-calendar.js - example - rc-calendar@9.1.12</title>
+  <title>antd-month-calendar.js - example - rc-calendar@9.2.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -263,7 +263,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
   <div class="container">
     <div class="header">
-      <h1>rc-calendar@9.1.12</h1>
+      <h1>rc-calendar@9.2.0</h1>
 
       <p>React Calendar</p>
     </div>
@@ -274,6 +274,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 import 'rc-calendar/assets/index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import MonthCalendar from 'rc-calendar/lib/MonthCalendar';
 import DatePicker from 'rc-calendar/lib/Picker';
 
@@ -297,36 +298,39 @@ if (cn) {
 const defaultCalendarValue = now.clone();
 defaultCalendarValue.add(-1, 'month');
 
-const Test = React.createClass({
-  propTypes: {
-    defaultValue: React.PropTypes.object,
-  },
-  getInitialState() {
-    return {
+class Demo extends React.Component {
+  static propTypes = {
+    defaultValue: PropTypes.object,
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
       showTime: true,
       disabled: false,
-      value: this.props.defaultValue,
+      value: props.defaultValue,
     };
-  },
+  }
 
-  onChange(value) {
+  onChange = (value) =&gt; {
     console.log(`DatePicker change: ${value &amp;&amp; value.format(format)}`);
     this.setState({
       value,
     });
-  },
+  }
 
-  onShowTimeChange(e) {
+  onShowTimeChange = (e) =&gt; {
     this.setState({
       showTime: e.target.checked,
     });
-  },
+  }
 
-  toggleDisabled() {
+  toggleDisabled = () =&gt; {
     this.setState({
       disabled: !this.state.disabled,
     });
-  },
+  }
 
   render() {
     const state = this.state;
@@ -375,8 +379,8 @@ const Test = React.createClass({
         &lt;/DatePicker&gt;
       &lt;/div&gt;
     &lt;/div&gt;);
-  },
-});
+  }
+}
 
 function onStandaloneSelect(value) {
   console.log('month-calendar select', (value &amp;&amp; value.format(format)));
@@ -416,7 +420,7 @@ ReactDOM.render(
     /&gt;
 
     &lt;div style={{ marginTop: 200 }}&gt;
-      &lt;Test defaultValue={now} /&gt;
+      &lt;Demo defaultValue={now} /&gt;
     &lt;/div&gt;
   &lt;/div&gt;)
   , document.getElementById('__react-content'));

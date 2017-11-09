@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>start-end.js - example - rc-calendar@9.1.12</title>
+  <title>start-end.js - example - rc-calendar@9.2.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -263,7 +263,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
   <div class="container">
     <div class="header">
-      <h1>rc-calendar@9.1.12</h1>
+      <h1>rc-calendar@9.2.0</h1>
 
       <p>React Calendar</p>
     </div>
@@ -309,13 +309,12 @@ const timePickerElement = &lt;TimePickerPanel /&gt;;
 
 const SHOW_TIME = true;
 
-const Picker = React.createClass({
-  getDefaultProps() {
-    return {
-      showTime: SHOW_TIME,
-      disabled: false,
-    };
-  },
+class Picker extends React.Component {
+  state = {
+    showTime: SHOW_TIME,
+    disabled: false,
+  };
+
   render() {
     const props = this.props;
     const calendar = (&lt;Calendar
@@ -347,25 +346,23 @@ const Picker = React.createClass({
         }
       }
     &lt;/DatePicker&gt;);
-  },
-});
+  }
+}
 
-const Test = React.createClass({
-  getInitialState() {
-    return {
-      startValue: null,
-      endValue: null,
-    };
-  },
+class Demo extends React.Component {
+  state = {
+    startValue: null,
+    endValue: null,
+  };
 
-  onChange(field, value) {
+  onChange = (field, value) =&gt; {
     console.log('onChange', field, value &amp;&amp; value.format(getFormat(SHOW_TIME)));
     this.setState({
       [field]: value,
     });
-  },
+  }
 
-  disabledEndDate(endValue) {
+  disabledEndDate = (endValue) =&gt; {
     if (!endValue) {
       return false;
     }
@@ -375,9 +372,9 @@ const Test = React.createClass({
     }
     return SHOW_TIME ? endValue.isBefore(startValue) :
     endValue.diff(startValue, 'days') &lt;= 0;
-  },
+  }
 
-  disabledStartDate(startValue) {
+  disabledStartDate = (startValue) =&gt; {
     if (!startValue) {
       return false;
     }
@@ -387,7 +384,7 @@ const Test = React.createClass({
     }
     return SHOW_TIME ? endValue.isBefore(startValue) :
     endValue.diff(startValue, 'days') &lt;= 0;
-  },
+  }
 
   render() {
     const state = this.state;
@@ -410,11 +407,11 @@ const Test = React.createClass({
         /&gt;
       &lt;/p&gt;
     &lt;/div&gt;);
-  },
-});
+  }
+}
 
 
-ReactDOM.render(&lt;Test /&gt;, document.getElementById('__react-content'));
+ReactDOM.render(&lt;Demo /&gt;, document.getElementById('__react-content'));
 </code></pre></div>
   </div>
   <a href="http://github.com/react-component/calendar">
