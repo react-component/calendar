@@ -774,6 +774,10 @@
   background: #3fc7fa;
   color: #fff;
 }
+.rc-calendar-month-header-wrap {
+  position: relative;
+  height: 308px;
+}
 .rc-calendar-year-panel {
   left: 0;
   top: 0;
@@ -1185,9 +1189,6 @@
 .rc-calendar-fullscreen .rc-calendar-month-panel-selected-cell .rc-calendar-month-panel-month {
   border-top-color: #3FC7FA;
   color: #3FC7FA;
-}
-.rc-calendar-month-calendar {
-  height: 308px;
 }
 
 /*# sourceMappingURL=common.css.map*/
