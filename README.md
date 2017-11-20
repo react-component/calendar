@@ -472,6 +472,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td></td>
           <td>called when a date is changed inside calendar (next year/next month/keyboard)</td>
         </tr>
+        <tr>
+          <td>renderFooter</td>
+          <td>() => React.Node</td>
+          <td></td>
+          <td>extra footer</td>
+        </tr>
     </tbody>
 </table>
 
