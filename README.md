@@ -216,7 +216,7 @@ http://react-component.github.io/calendar/examples/index.html
           <td>mode</td>
           <td>enum('time', 'date', 'month', 'year', 'decade')</td>
           <td>'date'</td>
-          <td>controll which kind of panel should be shown</td>
+          <td>control which kind of panel should be shown</td>
         </tr>
         <tr>
           <td>onPanelChange</td>
@@ -364,7 +364,7 @@ http://react-component.github.io/calendar/examples/index.html
           <td>mode</td>
           <td>enum('date', 'month', 'year', 'decade')[]</td>
           <td>['date', 'date']</td>
-          <td>controll which kind of panels should be shown</td>
+          <td>control which kind of panels should be shown</td>
         </tr>
         <tr>
           <td>onPanelChange</td>
@@ -376,7 +376,7 @@ http://react-component.github.io/calendar/examples/index.html
           <td>hoverValue</td>
           <td>moment[]</td>
           <td></td>
-          <td>controll hover value</td>
+          <td>control hover value</td>
         </tr>
         <tr>
           <td>onHoverChange</td>
