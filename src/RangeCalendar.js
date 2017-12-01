@@ -313,6 +313,7 @@ const RangeCalendar = createReactClass({
   getEndDisableTime() {
     const { selectedValue, value } = this.state;
     const { disabledTime } = this.props;
+    const userSettingDisabledTime = disabledTime(null, 'end') || {};
     const startValue = selectedValue && selectedValue[0] || value[0].clone();
     // if startTime and endTime is same day..
     // the second time picker will not able to pick time before first time picker
@@ -320,7 +321,6 @@ const RangeCalendar = createReactClass({
       const hours = startValue.hour();
       const minutes = startValue.minute();
       const second = startValue.second();
-      const userSettingDisabledTime = disabledTime ? disabledTime(null, 'end') : {};
       let { disabledHours, disabledMinutes, disabledSeconds } = userSettingDisabledTime;
       disabledHours = generateOptions(hours, disabledHours);
       disabledMinutes = generateOptions(minutes, disabledMinutes);
@@ -343,7 +343,7 @@ const RangeCalendar = createReactClass({
         },
       };
     }
-    return disabledTime ? disabledTime(null, 'end') : null;
+    return userSettingDisabledTime;
   },
 
   isAllowedDateAndTime(selectedValue) {
