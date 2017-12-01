@@ -243,6 +243,82 @@ describe('RangeCalendar', () => {
       expect(wrapper.find('.rc-calendar-input').at(1).getDOMNode().value).toBe('3/18/2017 06:59:59');
     });
 
+    it('should combine disabledTime', () => {
+      function newArray(start, end) {
+        const result = [];
+        for (let i = start; i < end; i++) {
+          result.push(i);
+        }
+        return result;
+      }
+      function disabledTime(time, type) {
+        console.log('disabledTime', time, type);
+        if (type === 'start') {
+          return {
+            disabledHours() {
+              const hours = newArray(0, 60);
+              hours.splice(20, 4);
+              return hours;
+            },
+            disabledMinutes(h) {
+              if (h === 20) {
+                return newArray(0, 31);
+              } else if (h === 23) {
+                return newArray(30, 60);
+              }
+              return [];
+            },
+            disabledSeconds() {
+              return [55, 56];
+            },
+          };
+        }
+        return {
+          disabledHours() {
+            const hours = newArray(0, 60);
+            hours.splice(2, 6);
+            return hours;
+          },
+          disabledMinutes(h) {
+            if (h === 20) {
+              return newArray(0, 31);
+            } else if (h === 23) {
+              return newArray(30, 60);
+            }
+            return [];
+          },
+          disabledSeconds() {
+            return [55, 56];
+          },
+        };
+      }
+      const timePicker = <TimePickerPanel defaultValue={[moment('00:00:00', 'HH:mm:ss'), moment('23:59:59', 'HH:mm:ss')]} />;
+      const wrapper = mount(<RangeCalendar timePicker={timePicker} disabledTime={disabledTime}/>);
+
+      wrapper.find('.rc-calendar-today').at(0).simulate('click').simulate('click');
+      wrapper.find('.rc-calendar-today').at(0).simulate('click').simulate('click');
+      // use timePicker's defaultValue if users haven't select a time
+      expect(wrapper.find('.rc-calendar-input').at(0).getDOMNode().value).toBe('3/29/2017 00:00:00');
+      expect(wrapper.find('.rc-calendar-input').at(1).getDOMNode().value).toBe('3/29/2017 23:59:59');
+
+      wrapper.find('.rc-calendar-time-picker-btn').simulate('click');
+
+      // update time to timePicker's time
+      wrapper.find('.rc-calendar-range-left .rc-time-picker-panel-select ul').at(0).find('li').at(23).simulate('click');
+      expect(wrapper.find('.rc-calendar-input').at(0).getDOMNode().value).toBe('3/29/2017 23:00:00');
+      wrapper.find('.rc-calendar-range-left .rc-time-picker-panel-select ul').at(1).find('li').at(25).simulate('click');
+      expect(wrapper.find('.rc-calendar-input').at(0).getDOMNode().value).toBe('3/29/2017 23:25:00');
+      wrapper.find('.rc-calendar-range-left .rc-time-picker-panel-select ul').at(2).find('li').at(3).simulate('click');
+      expect(wrapper.find('.rc-calendar-input').at(0).getDOMNode().value).toBe('3/29/2017 23:25:03');
+
+      wrapper.find('.rc-calendar-range-right .rc-time-picker-panel-select ul').at(1).find('li').at(25).simulate('click');
+      expect(wrapper.find('.rc-calendar-input').at(1).getDOMNode().value).toBe('3/29/2017 23:25:59');
+
+      const disabledTimeElements = wrapper.find('.rc-calendar-range-right .rc-time-picker-panel-select ul').at(2).find('.rc-time-picker-panel-select-option-disabled');
+      const disabledTimeValus = disabledTimeElements.map(item => item.text());
+      expect(disabledTimeValus).toEqual(['00', '01', '02', '55', '56']);
+    });
+
     it('works fine when select reversely', () => {
       // see: https://github.com/ant-design/ant-design/issues/6440
       const timePicker = <TimePickerPanel defaultValue={[moment('00:00:00', 'HH:mm:ss'), moment('23:59:59', 'HH:mm:ss')]} />;
