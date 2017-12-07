@@ -23,7 +23,7 @@ describe('Calendar', () => {
       );
       expect(enWrapper).toMatchSnapshot();
 
-      const customEnUSLocalWithMonthFormat = { ...enUS, monthFormat: 'MMMM' };
+      const customEnUSLocalWithMonthFormat = { ...enUS, monthYearHeader: { monthFormat: 'MMMM' } };
       const enWrapperWithMonthFormatWrapper = render(
         <Calendar
           locale={customEnUSLocalWithMonthFormat}
