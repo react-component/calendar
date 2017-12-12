@@ -87,17 +87,14 @@ class TbCalendar extends React.Component {
                     {
                         ({ value }) => {
                             return (
-                                <span tabIndex="0">
-                                <input
-                                    placeholder="please select"
-                                    style={{ width: 250 }}
-                                    disabled={state.disabled}
-                                    readOnly
-                                    tabIndex="-1"
-                                    className="ant-calendar-picker-input ant-input"
-                                    value={value && value.format(self.props.format) || ''}
-                                />
-                                </span>
+                                <div  className="form_datetime">
+                                    <input className="form-control form-control-inline"
+                                        type="text"
+                                        value={value && value.format(self.props.format) || ''}
+                                        inline
+                                    />
+                                    <label className="icon-th add-on fa fa-calendar"></label>
+                                </div>
                             );
                         }
                     }
