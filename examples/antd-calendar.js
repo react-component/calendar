@@ -10,10 +10,16 @@ import zhCN from 'rc-calendar/src/locale/zh_CN';
 import enUS from 'rc-calendar/src/locale/en_US';
 import 'rc-time-picker/assets/index.css';
 import TimePickerPanel from 'rc-time-picker/lib/Panel';
+import TimePickerPanel2 from './TimePicker';
+import TimeFooter from './TimeFooter';
+
 
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 import 'moment/locale/en-gb';
+import "./my-calendar.css"
+
+import TbCalendar from "../src/TbCalendar";
 
 const format = 'YYYY-MM-DD HH:mm:ss';
 const cn = location.search.indexOf('cn') !== -1;
@@ -36,7 +42,7 @@ defaultCalendarValue.add(-1, 'month');
 const timePickerElement = <TimePickerPanel defaultValue={moment('00:00:00', 'HH:mm:ss')} />;
 
 function disabledTime(date) {
-  console.log('disabledTime', date);
+  // console.log('disabledTime', date);
   if (date && (date.date() === 15)) {
     return {
       disabledHours() {
@@ -78,7 +84,9 @@ class Demo extends React.Component {
       showDateInput: true,
       disabled: false,
       value: props.defaultValue,
+      timePosition: "hour" //hour min second
     };
+    this.onChangeTimePosition = this.onChangeTimePosition.bind(this);
   }
 
   onChange = (value) => {
@@ -106,48 +114,43 @@ class Demo extends React.Component {
     });
   }
 
+  onChangeTimePosition(timePosition,onCloseTimePicker)
+  {
+    this.setState({"timePosition":timePosition,"onCloseTimePicker":onCloseTimePicker});
+  }
+
+
+
   render() {
     const state = this.state;
+
+    const timePickerElement2 = <TimePickerPanel2 {...state} />;
+    const timePickerElement = <TimePickerPanel />;
+
+    const self = this;
+
+    const renderFooter2 = (argumes) => {
+      console.info("argumes",argumes)
+      return (
+        <TimeFooter {...argumes} onChangeTimePosition={this.onChangeTimePosition} />
+        )
+    }
+
+
+
     const calendar = (<Calendar
-      locale={cn ? zhCN : enUS}
+      locale={zhCN}
       style={{ zIndex: 1000 }}
       dateInputPlaceholder="please input"
       formatter={getFormat(state.showTime)}
       disabledTime={state.showTime ? disabledTime : null}
-      timePicker={state.showTime ? timePickerElement : null}
+      timePicker={timePickerElement2}
       defaultValue={this.props.defaultCalendarValue}
       showDateInput={state.showDateInput}
       disabledDate={disabledDate}
+      renderFooter={renderFooter2}
     />);
     return (<div style={{ width: 400, margin: 20 }}>
-      <div style={{ marginBottom: 10 }}>
-        <label>
-          <input
-            type="checkbox"
-            checked={state.showTime}
-            onChange={this.onShowTimeChange}
-          />
-          showTime
-        </label>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <label>
-          <input
-            type="checkbox"
-            checked={state.showDateInput}
-            onChange={this.onShowDateInputChange}
-          />
-          showDateInput
-        </label>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <label>
-          <input
-            checked={state.disabled}
-            onChange={this.toggleDisabled}
-            type="checkbox"
-          />
-          disabled
-        </label>
-      </div>
       <div style={{
         boxSizing: 'border-box',
         position: 'relative',
@@ -206,27 +209,8 @@ ReactDOM.render((<div
   }}
 >
   <div>
-    <div style={{ margin: 10 }}>
-      <Calendar
-        showWeekNumber={false}
-        locale={cn ? zhCN : enUS}
-        defaultValue={now}
-        disabledTime={disabledTime}
-        showToday
-        formatter={getFormat(true)}
-        showOk={false}
-        timePicker={timePickerElement}
-        onChange={onStandaloneChange}
-        disabledDate={disabledDate}
-        onSelect={onStandaloneSelect}
-      />
-    </div>
     <div style={{ float: 'left', width: 300 }}>
-      <Demo defaultValue={now} />
+      <TbCalendar showTime={true} defaultValue="2017-12-31 12:01:02" format="YYYY-MM-DD HH:mm:ss"/>
     </div>
-    <div style={{ float: 'right', width: 300 }}>
-      <Demo defaultCalendarValue={defaultCalendarValue} />
-    </div>
-    <div style={{ clear: 'both' }}></div>
   </div>
 </div>), document.getElementById('__react-content'));
