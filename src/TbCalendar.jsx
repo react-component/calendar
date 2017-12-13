@@ -1,15 +1,13 @@
-import 'rc-calendar/assets/index.less';
 import React from 'react';
+import '../assets/index.less';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import Calendar from 'rc-calendar';
-import DatePicker from 'rc-calendar/src/Picker';
-import zhCN from 'rc-calendar/src/locale/zh_CN';
-import 'rc-time-picker/assets/index.css';
+import Calendar from './Calendar';
+import DatePicker from './Picker';
+import zhCN from './locale/zh_CN';
+import '../assets/time-assets/index.less';
 import TbTimePicker from './taobao-calendar-warp/TimePicker';
 import TbTimeFooter from './taobao-calendar-warp/TimeFooter';
-
-
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 import "./taobao-calendar-warp/my-calendar.css"
