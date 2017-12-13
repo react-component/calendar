@@ -1,6 +1,6 @@
 {
-  "name": "rc-calendar",
-  "version": "9.3.1",
+  "name": "rc-calendar-tb",
+  "version": "9.3.1-tbtime",
   "description": "React Calendar",
   "keywords": [
     "react",
