@@ -144,6 +144,7 @@ const CalendarHeader = createReactClass({
       disabledMonth,
     } = props;
 
+
     let panel = null;
     if (mode === 'month') {
       panel = (
@@ -180,6 +181,7 @@ const CalendarHeader = createReactClass({
         />
       );
     }
+
 
     return (<div className={`${prefixCls}-header`}>
       <div style={{ position: 'relative' }}>

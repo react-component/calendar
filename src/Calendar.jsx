@@ -314,6 +314,7 @@ const Calendar = createReactClass({
             onToday={this.onToday}
             onOpenTimePicker={this.openTimePicker}
             onCloseTimePicker={this.closeTimePicker}
+            onChange={this.onDateInputChange}
           />
         </div>
       </div>),
