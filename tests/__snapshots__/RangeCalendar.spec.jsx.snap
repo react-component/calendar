@@ -372,7 +372,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell rc-calendar-last-month-cell"
                     role="gridcell"
-                    title="02/26/2017"
+                    title="February 26, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -385,7 +385,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell rc-calendar-last-month-cell"
                     role="gridcell"
-                    title="02/27/2017"
+                    title="February 27, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -398,7 +398,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell rc-calendar-last-month-cell"
                     role="gridcell"
-                    title="02/28/2017"
+                    title="February 28, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -411,7 +411,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/01/2017"
+                    title="March 1, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -424,7 +424,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/02/2017"
+                    title="March 2, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -437,7 +437,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/03/2017"
+                    title="March 3, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -450,7 +450,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/04/2017"
+                    title="March 4, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -468,7 +468,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/05/2017"
+                    title="March 5, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -481,7 +481,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/06/2017"
+                    title="March 6, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -494,7 +494,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/07/2017"
+                    title="March 7, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -507,7 +507,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/08/2017"
+                    title="March 8, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -520,7 +520,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/09/2017"
+                    title="March 9, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -533,7 +533,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/10/2017"
+                    title="March 10, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -546,7 +546,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/11/2017"
+                    title="March 11, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -564,7 +564,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/12/2017"
+                    title="March 12, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -577,7 +577,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/13/2017"
+                    title="March 13, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -590,7 +590,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/14/2017"
+                    title="March 14, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -603,7 +603,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/15/2017"
+                    title="March 15, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -616,7 +616,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/16/2017"
+                    title="March 16, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -629,7 +629,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/17/2017"
+                    title="March 17, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -642,7 +642,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/18/2017"
+                    title="March 18, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -660,7 +660,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/19/2017"
+                    title="March 19, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -673,7 +673,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/20/2017"
+                    title="March 20, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -686,7 +686,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/21/2017"
+                    title="March 21, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -699,7 +699,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/22/2017"
+                    title="March 22, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -712,7 +712,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/23/2017"
+                    title="March 23, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -725,7 +725,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/24/2017"
+                    title="March 24, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -738,7 +738,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/25/2017"
+                    title="March 25, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -756,7 +756,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/26/2017"
+                    title="March 26, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -769,7 +769,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/27/2017"
+                    title="March 27, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -782,7 +782,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/28/2017"
+                    title="March 28, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -795,7 +795,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell rc-calendar-today rc-calendar-selected-date"
                     role="gridcell"
-                    title="03/29/2017"
+                    title="March 29, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -808,7 +808,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/30/2017"
+                    title="March 30, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -821,7 +821,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/31/2017"
+                    title="March 31, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -834,7 +834,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="04/01/2017"
+                    title="April 1, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -852,7 +852,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="04/02/2017"
+                    title="April 2, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -865,7 +865,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="04/03/2017"
+                    title="April 3, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -878,7 +878,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="04/04/2017"
+                    title="April 4, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -891,7 +891,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="04/05/2017"
+                    title="April 5, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -904,7 +904,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="04/06/2017"
+                    title="April 6, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -917,7 +917,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="04/07/2017"
+                    title="April 7, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -930,7 +930,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="04/08/2017"
+                    title="April 8, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1312,7 +1312,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell rc-calendar-last-month-cell"
                     role="gridcell"
-                    title="03/26/2017"
+                    title="March 26, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1325,7 +1325,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell rc-calendar-last-month-cell"
                     role="gridcell"
-                    title="03/27/2017"
+                    title="March 27, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1338,7 +1338,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell rc-calendar-last-month-cell"
                     role="gridcell"
-                    title="03/28/2017"
+                    title="March 28, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1351,7 +1351,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell rc-calendar-today rc-calendar-selected-date rc-calendar-last-month-cell"
                     role="gridcell"
-                    title="03/29/2017"
+                    title="March 29, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1364,7 +1364,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell rc-calendar-last-month-cell"
                     role="gridcell"
-                    title="03/30/2017"
+                    title="March 30, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1377,7 +1377,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell rc-calendar-last-month-cell"
                     role="gridcell"
-                    title="03/31/2017"
+                    title="March 31, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1390,7 +1390,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/01/2017"
+                    title="April 1, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1408,7 +1408,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/02/2017"
+                    title="April 2, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1421,7 +1421,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/03/2017"
+                    title="April 3, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1434,7 +1434,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/04/2017"
+                    title="April 4, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1447,7 +1447,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/05/2017"
+                    title="April 5, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1460,7 +1460,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/06/2017"
+                    title="April 6, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1473,7 +1473,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/07/2017"
+                    title="April 7, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1486,7 +1486,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/08/2017"
+                    title="April 8, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1504,7 +1504,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/09/2017"
+                    title="April 9, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1517,7 +1517,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/10/2017"
+                    title="April 10, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1530,7 +1530,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/11/2017"
+                    title="April 11, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1543,7 +1543,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/12/2017"
+                    title="April 12, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1556,7 +1556,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/13/2017"
+                    title="April 13, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1569,7 +1569,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/14/2017"
+                    title="April 14, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1582,7 +1582,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/15/2017"
+                    title="April 15, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1600,7 +1600,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/16/2017"
+                    title="April 16, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1613,7 +1613,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/17/2017"
+                    title="April 17, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1626,7 +1626,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/18/2017"
+                    title="April 18, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1639,7 +1639,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/19/2017"
+                    title="April 19, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1652,7 +1652,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/20/2017"
+                    title="April 20, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1665,7 +1665,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/21/2017"
+                    title="April 21, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1678,7 +1678,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/22/2017"
+                    title="April 22, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1696,7 +1696,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/23/2017"
+                    title="April 23, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1709,7 +1709,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/24/2017"
+                    title="April 24, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1722,7 +1722,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/25/2017"
+                    title="April 25, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1735,7 +1735,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/26/2017"
+                    title="April 26, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1748,7 +1748,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/27/2017"
+                    title="April 27, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1761,7 +1761,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/28/2017"
+                    title="April 28, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1774,7 +1774,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/29/2017"
+                    title="April 29, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1792,7 +1792,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/30/2017"
+                    title="April 30, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1805,7 +1805,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="05/01/2017"
+                    title="May 1, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1818,7 +1818,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="05/02/2017"
+                    title="May 2, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1831,7 +1831,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="05/03/2017"
+                    title="May 3, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1844,7 +1844,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="05/04/2017"
+                    title="May 4, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1857,7 +1857,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="05/05/2017"
+                    title="May 5, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1870,7 +1870,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="05/06/2017"
+                    title="May 6, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -1896,7 +1896,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
         <a
           class="rc-calendar-today-btn rc-calendar-today-btn-disabled"
           role="button"
-          title="03/29/2017"
+          title="March 29, 2017"
         >
           Back to today
         </a>
@@ -2278,7 +2278,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell rc-calendar-last-month-cell"
                     role="gridcell"
-                    title="02/26/2017"
+                    title="February 26, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2291,7 +2291,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell rc-calendar-last-month-cell"
                     role="gridcell"
-                    title="02/27/2017"
+                    title="February 27, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2304,7 +2304,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell rc-calendar-last-month-cell"
                     role="gridcell"
-                    title="02/28/2017"
+                    title="February 28, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2317,7 +2317,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/01/2017"
+                    title="March 1, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2330,7 +2330,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/02/2017"
+                    title="March 2, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2343,7 +2343,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/03/2017"
+                    title="March 3, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2356,7 +2356,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/04/2017"
+                    title="March 4, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2374,7 +2374,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/05/2017"
+                    title="March 5, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2387,7 +2387,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/06/2017"
+                    title="March 6, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2400,7 +2400,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/07/2017"
+                    title="March 7, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2413,7 +2413,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/08/2017"
+                    title="March 8, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2426,7 +2426,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/09/2017"
+                    title="March 9, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2439,7 +2439,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/10/2017"
+                    title="March 10, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2452,7 +2452,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/11/2017"
+                    title="March 11, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2470,7 +2470,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/12/2017"
+                    title="March 12, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2483,7 +2483,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/13/2017"
+                    title="March 13, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2496,7 +2496,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/14/2017"
+                    title="March 14, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2509,7 +2509,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/15/2017"
+                    title="March 15, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2522,7 +2522,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/16/2017"
+                    title="March 16, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2535,7 +2535,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/17/2017"
+                    title="March 17, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2548,7 +2548,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/18/2017"
+                    title="March 18, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2566,7 +2566,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/19/2017"
+                    title="March 19, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2579,7 +2579,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/20/2017"
+                    title="March 20, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2592,7 +2592,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/21/2017"
+                    title="March 21, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2605,7 +2605,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/22/2017"
+                    title="March 22, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2618,7 +2618,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/23/2017"
+                    title="March 23, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2631,7 +2631,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/24/2017"
+                    title="March 24, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2644,7 +2644,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/25/2017"
+                    title="March 25, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2662,7 +2662,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/26/2017"
+                    title="March 26, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2675,7 +2675,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/27/2017"
+                    title="March 27, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2688,7 +2688,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/28/2017"
+                    title="March 28, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2701,7 +2701,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell rc-calendar-today rc-calendar-selected-date"
                     role="gridcell"
-                    title="03/29/2017"
+                    title="March 29, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2714,7 +2714,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/30/2017"
+                    title="March 30, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2727,7 +2727,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/31/2017"
+                    title="March 31, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2740,7 +2740,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="04/01/2017"
+                    title="April 1, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2758,7 +2758,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="04/02/2017"
+                    title="April 2, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2771,7 +2771,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="04/03/2017"
+                    title="April 3, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2784,7 +2784,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="04/04/2017"
+                    title="April 4, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2797,7 +2797,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="04/05/2017"
+                    title="April 5, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2810,7 +2810,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="04/06/2017"
+                    title="April 6, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2823,7 +2823,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="04/07/2017"
+                    title="April 7, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -2836,7 +2836,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="04/08/2017"
+                    title="April 8, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3218,7 +3218,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell rc-calendar-last-month-cell"
                     role="gridcell"
-                    title="03/26/2017"
+                    title="March 26, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3231,7 +3231,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell rc-calendar-last-month-cell"
                     role="gridcell"
-                    title="03/27/2017"
+                    title="March 27, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3244,7 +3244,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell rc-calendar-last-month-cell"
                     role="gridcell"
-                    title="03/28/2017"
+                    title="March 28, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3257,7 +3257,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell rc-calendar-today rc-calendar-selected-date rc-calendar-last-month-cell"
                     role="gridcell"
-                    title="03/29/2017"
+                    title="March 29, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3270,7 +3270,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell rc-calendar-last-month-cell"
                     role="gridcell"
-                    title="03/30/2017"
+                    title="March 30, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3283,7 +3283,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell rc-calendar-last-month-cell"
                     role="gridcell"
-                    title="03/31/2017"
+                    title="March 31, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3296,7 +3296,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/01/2017"
+                    title="April 1, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3314,7 +3314,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/02/2017"
+                    title="April 2, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3327,7 +3327,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/03/2017"
+                    title="April 3, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3340,7 +3340,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/04/2017"
+                    title="April 4, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3353,7 +3353,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/05/2017"
+                    title="April 5, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3366,7 +3366,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/06/2017"
+                    title="April 6, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3379,7 +3379,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/07/2017"
+                    title="April 7, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3392,7 +3392,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/08/2017"
+                    title="April 8, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3410,7 +3410,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/09/2017"
+                    title="April 9, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3423,7 +3423,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/10/2017"
+                    title="April 10, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3436,7 +3436,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/11/2017"
+                    title="April 11, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3449,7 +3449,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/12/2017"
+                    title="April 12, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3462,7 +3462,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/13/2017"
+                    title="April 13, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3475,7 +3475,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/14/2017"
+                    title="April 14, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3488,7 +3488,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/15/2017"
+                    title="April 15, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3506,7 +3506,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/16/2017"
+                    title="April 16, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3519,7 +3519,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/17/2017"
+                    title="April 17, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3532,7 +3532,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/18/2017"
+                    title="April 18, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3545,7 +3545,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/19/2017"
+                    title="April 19, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3558,7 +3558,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/20/2017"
+                    title="April 20, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3571,7 +3571,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/21/2017"
+                    title="April 21, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3584,7 +3584,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/22/2017"
+                    title="April 22, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3602,7 +3602,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/23/2017"
+                    title="April 23, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3615,7 +3615,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/24/2017"
+                    title="April 24, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3628,7 +3628,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/25/2017"
+                    title="April 25, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3641,7 +3641,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/26/2017"
+                    title="April 26, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3654,7 +3654,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/27/2017"
+                    title="April 27, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3667,7 +3667,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/28/2017"
+                    title="April 28, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3680,7 +3680,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/29/2017"
+                    title="April 29, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3698,7 +3698,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/30/2017"
+                    title="April 30, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3711,7 +3711,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="05/01/2017"
+                    title="May 1, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3724,7 +3724,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="05/02/2017"
+                    title="May 2, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3737,7 +3737,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="05/03/2017"
+                    title="May 3, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3750,7 +3750,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="05/04/2017"
+                    title="May 4, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3763,7 +3763,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="05/05/2017"
+                    title="May 5, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3776,7 +3776,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="05/06/2017"
+                    title="May 6, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3802,7 +3802,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
         <a
           class="rc-calendar-today-btn rc-calendar-today-btn-disabled"
           role="button"
-          title="03/29/2017"
+          title="March 29, 2017"
         >
           Back to today
         </a>
@@ -3978,7 +3978,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-last-month-cell"
                     role="gridcell"
-                    title="02/26/2017"
+                    title="February 26, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -3991,7 +3991,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-last-month-cell"
                     role="gridcell"
-                    title="02/27/2017"
+                    title="February 27, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4004,7 +4004,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-last-month-cell"
                     role="gridcell"
-                    title="02/28/2017"
+                    title="February 28, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4017,7 +4017,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/01/2017"
+                    title="March 1, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4030,7 +4030,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/02/2017"
+                    title="March 2, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4043,7 +4043,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/03/2017"
+                    title="March 3, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4056,7 +4056,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/04/2017"
+                    title="March 4, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4074,7 +4074,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/05/2017"
+                    title="March 5, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4087,7 +4087,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/06/2017"
+                    title="March 6, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4100,7 +4100,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/07/2017"
+                    title="March 7, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4113,7 +4113,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/08/2017"
+                    title="March 8, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4126,7 +4126,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/09/2017"
+                    title="March 9, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4139,7 +4139,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/10/2017"
+                    title="March 10, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4152,7 +4152,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/11/2017"
+                    title="March 11, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4170,7 +4170,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/12/2017"
+                    title="March 12, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4183,7 +4183,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/13/2017"
+                    title="March 13, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4196,7 +4196,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/14/2017"
+                    title="March 14, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4209,7 +4209,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/15/2017"
+                    title="March 15, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4222,7 +4222,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/16/2017"
+                    title="March 16, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4235,7 +4235,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/17/2017"
+                    title="March 17, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4248,7 +4248,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/18/2017"
+                    title="March 18, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4266,7 +4266,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/19/2017"
+                    title="March 19, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4279,7 +4279,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/20/2017"
+                    title="March 20, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4292,7 +4292,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/21/2017"
+                    title="March 21, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4305,7 +4305,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/22/2017"
+                    title="March 22, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4318,7 +4318,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/23/2017"
+                    title="March 23, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4331,7 +4331,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/24/2017"
+                    title="March 24, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4344,7 +4344,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/25/2017"
+                    title="March 25, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4362,7 +4362,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/26/2017"
+                    title="March 26, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4375,7 +4375,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/27/2017"
+                    title="March 27, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4388,7 +4388,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="03/28/2017"
+                    title="March 28, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4401,7 +4401,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-today rc-calendar-selected-start-date rc-calendar-selected-date rc-calendar-selected-day"
                     role="gridcell"
-                    title="03/29/2017"
+                    title="March 29, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4414,7 +4414,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-in-range-cell"
                     role="gridcell"
-                    title="03/30/2017"
+                    title="March 30, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4427,7 +4427,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-in-range-cell"
                     role="gridcell"
-                    title="03/31/2017"
+                    title="March 31, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4440,7 +4440,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="04/01/2017"
+                    title="April 1, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4458,7 +4458,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="04/02/2017"
+                    title="April 2, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4471,7 +4471,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="04/03/2017"
+                    title="April 3, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4484,7 +4484,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="04/04/2017"
+                    title="April 4, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4497,7 +4497,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="04/05/2017"
+                    title="April 5, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4510,7 +4510,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="04/06/2017"
+                    title="April 6, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4523,7 +4523,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="04/07/2017"
+                    title="April 7, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4536,7 +4536,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="04/08/2017"
+                    title="April 8, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4710,7 +4710,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-last-month-cell"
                     role="gridcell"
-                    title="03/26/2017"
+                    title="March 26, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4723,7 +4723,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-last-month-cell"
                     role="gridcell"
-                    title="03/27/2017"
+                    title="March 27, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4736,7 +4736,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-last-month-cell"
                     role="gridcell"
-                    title="03/28/2017"
+                    title="March 28, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4749,7 +4749,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-today rc-calendar-selected-date rc-calendar-last-month-cell"
                     role="gridcell"
-                    title="03/29/2017"
+                    title="March 29, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4762,7 +4762,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-last-month-cell"
                     role="gridcell"
-                    title="03/30/2017"
+                    title="March 30, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4775,7 +4775,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-last-month-cell"
                     role="gridcell"
-                    title="03/31/2017"
+                    title="March 31, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4788,7 +4788,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-in-range-cell"
                     role="gridcell"
-                    title="04/01/2017"
+                    title="April 1, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4806,7 +4806,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-in-range-cell"
                     role="gridcell"
-                    title="04/02/2017"
+                    title="April 2, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4819,7 +4819,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-in-range-cell"
                     role="gridcell"
-                    title="04/03/2017"
+                    title="April 3, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4832,7 +4832,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-in-range-cell"
                     role="gridcell"
-                    title="04/04/2017"
+                    title="April 4, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4845,7 +4845,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-in-range-cell"
                     role="gridcell"
-                    title="04/05/2017"
+                    title="April 5, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4858,7 +4858,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-in-range-cell"
                     role="gridcell"
-                    title="04/06/2017"
+                    title="April 6, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4871,7 +4871,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-in-range-cell"
                     role="gridcell"
-                    title="04/07/2017"
+                    title="April 7, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4884,7 +4884,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-in-range-cell"
                     role="gridcell"
-                    title="04/08/2017"
+                    title="April 8, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4902,7 +4902,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-in-range-cell"
                     role="gridcell"
-                    title="04/09/2017"
+                    title="April 9, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4915,7 +4915,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-in-range-cell"
                     role="gridcell"
-                    title="04/10/2017"
+                    title="April 10, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4928,7 +4928,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-in-range-cell"
                     role="gridcell"
-                    title="04/11/2017"
+                    title="April 11, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4941,7 +4941,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-in-range-cell"
                     role="gridcell"
-                    title="04/12/2017"
+                    title="April 12, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4954,7 +4954,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-in-range-cell"
                     role="gridcell"
-                    title="04/13/2017"
+                    title="April 13, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4967,7 +4967,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-in-range-cell"
                     role="gridcell"
-                    title="04/14/2017"
+                    title="April 14, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4980,7 +4980,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-in-range-cell"
                     role="gridcell"
-                    title="04/15/2017"
+                    title="April 15, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -4998,7 +4998,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-in-range-cell"
                     role="gridcell"
-                    title="04/16/2017"
+                    title="April 16, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -5011,7 +5011,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-in-range-cell"
                     role="gridcell"
-                    title="04/17/2017"
+                    title="April 17, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -5024,7 +5024,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-in-range-cell"
                     role="gridcell"
-                    title="04/18/2017"
+                    title="April 18, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -5037,7 +5037,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-in-range-cell"
                     role="gridcell"
-                    title="04/19/2017"
+                    title="April 19, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -5050,7 +5050,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-in-range-cell"
                     role="gridcell"
-                    title="04/20/2017"
+                    title="April 20, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -5063,7 +5063,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-in-range-cell"
                     role="gridcell"
-                    title="04/21/2017"
+                    title="April 21, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -5076,7 +5076,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-in-range-cell"
                     role="gridcell"
-                    title="04/22/2017"
+                    title="April 22, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -5094,7 +5094,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-in-range-cell"
                     role="gridcell"
-                    title="04/23/2017"
+                    title="April 23, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -5107,7 +5107,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-in-range-cell"
                     role="gridcell"
-                    title="04/24/2017"
+                    title="April 24, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -5120,7 +5120,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-in-range-cell"
                     role="gridcell"
-                    title="04/25/2017"
+                    title="April 25, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -5133,7 +5133,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-in-range-cell"
                     role="gridcell"
-                    title="04/26/2017"
+                    title="April 26, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -5146,7 +5146,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-in-range-cell"
                     role="gridcell"
-                    title="04/27/2017"
+                    title="April 27, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -5159,7 +5159,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-in-range-cell"
                     role="gridcell"
-                    title="04/28/2017"
+                    title="April 28, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -5172,7 +5172,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-selected-end-date rc-calendar-selected-day"
                     role="gridcell"
-                    title="04/29/2017"
+                    title="April 29, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -5190,7 +5190,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell"
                     role="gridcell"
-                    title="04/30/2017"
+                    title="April 30, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -5203,7 +5203,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="05/01/2017"
+                    title="May 1, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -5216,7 +5216,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="05/02/2017"
+                    title="May 2, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -5229,7 +5229,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="05/03/2017"
+                    title="May 3, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -5242,7 +5242,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="05/04/2017"
+                    title="May 4, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -5255,7 +5255,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="05/05/2017"
+                    title="May 5, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -5268,7 +5268,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   <td
                     class="rc-calendar-cell rc-calendar-next-month-btn-day"
                     role="gridcell"
-                    title="05/06/2017"
+                    title="May 6, 2017"
                   >
                     <div
                       aria-disabled="false"
@@ -5294,7 +5294,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
         <a
           class="rc-calendar-today-btn rc-calendar-today-btn-disabled"
           role="button"
-          title="03/29/2017"
+          title="March 29, 2017"
         >
           Back to today
         </a>
