@@ -19,7 +19,7 @@ export function getTodayTime(value) {
 }
 
 export function getTitleString(value) {
-  return value.format('L');
+  return value.format('LL');
 }
 
 export function getTodayTimeStr(value) {
