@@ -20,7 +20,7 @@ webpackJsonp([1],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_util_es_Children_toArray__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_classnames__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_classnames__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rc_animate__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rc_animate__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_component_classes__ = __webpack_require__(97);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_component_classes___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_component_classes__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_rc_menu__ = __webpack_require__(73);
@@ -209,7 +209,7 @@ var Select = function (_React$Component) {
     if (!Object(__WEBPACK_IMPORTED_MODULE_13__util__["m" /* isMultipleOrTagsOrCombobox */])(props)) {
       extraSelectionProps = {
         onKeyDown: this.onKeyDown,
-        tabIndex: 0
+        tabIndex: props.disabled ? -1 : 0
       };
     }
     var rootCls = (_rootCls = {}, _rootCls[className] = !!className, _rootCls[prefixCls] = 1, _rootCls[prefixCls + '-open'] = open, _rootCls[prefixCls + '-focused'] = open || !!this._focused, _rootCls[prefixCls + '-combobox'] = Object(__WEBPACK_IMPORTED_MODULE_13__util__["k" /* isCombobox */])(props), _rootCls[prefixCls + '-disabled'] = disabled, _rootCls[prefixCls + '-enabled'] = !disabled, _rootCls[prefixCls + '-allow-clear'] = !!props.allowClear, _rootCls);
@@ -301,6 +301,7 @@ Select.defaultProps = {
   onSelect: noop,
   onSearch: noop,
   onDeselect: noop,
+  onInputKeyDown: noop,
   showArrow: true,
   dropdownMatchSelectWidth: true,
   dropdownStyle: {},
@@ -706,7 +707,7 @@ var _initialiseProps = function _initialiseProps() {
       __WEBPACK_IMPORTED_MODULE_4_react___default.a.cloneElement(inputElement, {
         ref: Object(__WEBPACK_IMPORTED_MODULE_13__util__["p" /* saveRef */])(_this2, 'inputRef'),
         onChange: _this2.onInputChange,
-        onKeyDown: chaining(_this2.onInputKeyDown, inputElement.props.onKeyDown),
+        onKeyDown: chaining(_this2.onInputKeyDown, inputElement.props.onKeyDown, _this2.props.onInputKeyDown),
         value: _this2.state.inputValue,
         disabled: props.disabled,
         className: inputCls
@@ -818,10 +819,10 @@ var _initialiseProps = function _initialiseProps() {
 
     if (!filterFn) {
       return true;
-    } else if (child.props.disabled) {
-      return false;
     } else if (typeof filterFn === 'function') {
       return filterFn.call(_this2, input, child);
+    } else if (child.props.disabled) {
+      return false;
     }
     return true;
   };
@@ -1399,20 +1400,6 @@ var Menu = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
       props.openKeys = nextProps.openKeys || [];
     }
     this.setState(props);
-  },
-  onDestroy: function onDestroy(key) {
-    var state = this.state;
-    var props = this.props;
-    var selectedKeys = state.selectedKeys;
-    var openKeys = state.openKeys;
-    var index = selectedKeys.indexOf(key);
-    if (!('selectedKeys' in props) && index !== -1) {
-      selectedKeys.splice(index, 1);
-    }
-    index = openKeys.indexOf(key);
-    if (!('openKeys' in props) && index !== -1) {
-      openKeys.splice(index, 1);
-    }
   },
   onSelect: function onSelect(selectInfo) {
     var props = this.props;
@@ -2637,7 +2624,7 @@ SubMenu.isSubMenu = 1;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_create_react_class__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_create_react_class___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_create_react_class__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rc_animate__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rc_animate__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__MenuMixin__ = __webpack_require__(74);
 
 
@@ -4597,14 +4584,14 @@ var zhCn = moment.defineLocale('zh-cn', {
     longDateFormat : {
         LT : 'HH:mm',
         LTS : 'HH:mm:ss',
-        L : 'YYYY年MMMD日',
-        LL : 'YYYY年MMMD日',
-        LLL : 'YYYY年MMMD日Ah点mm分',
-        LLLL : 'YYYY年MMMD日ddddAh点mm分',
-        l : 'YYYY年MMMD日',
-        ll : 'YYYY年MMMD日',
-        lll : 'YYYY年MMMD日 HH:mm',
-        llll : 'YYYY年MMMD日dddd HH:mm'
+        L : 'YYYY/MM/DD',
+        LL : 'YYYY年M月D日',
+        LLL : 'YYYY年M月D日Ah点mm分',
+        LLLL : 'YYYY年M月D日ddddAh点mm分',
+        l : 'YYYY/M/D',
+        ll : 'YYYY年M月D日',
+        lll : 'YYYY年M月D日 HH:mm',
+        llll : 'YYYY年M月D日dddd HH:mm'
     },
     meridiemParse: /凌晨|早上|上午|中午|下午|晚上/,
     meridiemHour: function (hour, meridiem) {
@@ -4665,6 +4652,7 @@ var zhCn = moment.defineLocale('zh-cn', {
         future : '%s内',
         past : '%s前',
         s : '几秒',
+        ss : '%d 秒',
         m : '1 分钟',
         mm : '%d 分钟',
         h : '1 小时',
@@ -4730,6 +4718,7 @@ var enGb = moment.defineLocale('en-gb', {
         future : 'in %s',
         past : '%s ago',
         s : 'a few seconds',
+        ss : '%d seconds',
         m : 'a minute',
         mm : '%d minutes',
         h : 'an hour',
@@ -5115,7 +5104,11 @@ function splitBySeparators(string, separators) {
 }
 
 function defaultFilterFn(input, child) {
-  return String(getPropValue(child, this.props.optionFilterProp)).indexOf(input) > -1;
+  if (child.props.disabled) {
+    return false;
+  }
+  var value = String(getPropValue(child, this.props.optionFilterProp));
+  return value.toLowerCase().indexOf(input.toLowerCase()) > -1;
 }
 
 function validateOptionValue(value, props) {
@@ -5414,7 +5407,6 @@ var MenuMixin = {
       forceSubMenuRender: props.forceSubMenuRender,
       onOpenChange: this.onOpenChange,
       onDeselect: this.onDeselect,
-      onDestroy: this.onDestroy,
       onSelect: this.onSelect
     }, extraProps);
     if (props.mode === 'inline') {
@@ -5564,6 +5556,7 @@ var SelectPropTypes = {
   onPopupScroll: __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.func,
   onMouseEnter: __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.func,
   onMouseLeave: __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.func,
+  onInputKeyDown: __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.func,
   placeholder: __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.any,
   onDeselect: __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.func,
   labelInValue: __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.bool,
