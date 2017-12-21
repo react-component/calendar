@@ -219,6 +219,8 @@ ReactDOM.render((<div
         onChange={onStandaloneChange}
         disabledDate={disabledDate}
         onSelect={onStandaloneSelect}
+        //calendarType='iso'
+        //firstDayOfWeek={2}
       />
     </div>
     <div style={{ float: 'left', width: 300 }}>

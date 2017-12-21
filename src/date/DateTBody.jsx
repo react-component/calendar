@@ -29,6 +29,18 @@ function getIdFromDate(date) {
   return `rc-calendar-${date.year()}-${date.month()}-${date.date()}`;
 }
 
+function inNextMonthIsoWeek(date) {
+  if (date.date() < 21) {
+    return false;
+  }
+  const dateHolder = date.clone();
+  const nextMonth1stIsoWeek = dateHolder
+    .add(1, 'M')
+    .date(1)
+    .isoWeek();
+  return date.isoWeek() === nextMonth1stIsoWeek;
+}
+
 const DateTBody = createReactClass({
   propTypes: {
     contentRender: PropTypes.func,
@@ -52,7 +64,7 @@ const DateTBody = createReactClass({
     const {
       contentRender, prefixCls, selectedValue, value,
       showWeekNumber, dateRender, disabledDate,
-      hoverValue,
+      hoverValue, calendarType,
     } = props;
     let iIndex;
     let jIndex;
@@ -73,15 +85,55 @@ const DateTBody = createReactClass({
     const disabledClass = `${prefixCls}-disabled-cell`;
     const firstDisableClass = `${prefixCls}-disabled-cell-first-of-row`;
     const lastDisableClass = `${prefixCls}-disabled-cell-last-of-row`;
+
+    //figure out which month to render -- only for iso-canlendar
+    let isInNextMonthStart = false;
+    console.log(this.props)
+    if (calendarType === DateConstants.ISO_CALENDAR) {
+      
+      isInNextMonthStart =
+        selectedValue !== undefined
+          ? inNextMonthIsoWeek(selectedValue)
+          : inNextMonthIsoWeek(value);
+    }
+
+    // firstDayOfWeek is Monday for ISO calendar
+    // use firstDayOfWeek if presented in props
+    const firstDayOfWeek =
+      calendarType === DateConstants.ISO_CALENDAR ? 1 : props.firstDayOfWeek;
+
     const month1 = value.clone();
-    month1.date(1);
+    // current month 1st
+    // calendar should not flip when entering/clicking a date that belongs to previous month -- only for iso-canlendar
+    isInNextMonthStart ? month1.add(1, 'M').date(1) : month1.date(1);
+
     const day = month1.day();
-    const lastMonthDiffDay = (day + 7 - value.localeData().firstDayOfWeek()) % 7;
+    const lastMonthDiffDay =
+      (day + 7 - (firstDayOfWeek === undefined 
+        ? value.localeData().firstDayOfWeek()
+        : firstDayOfWeek)) % 7;
     // calculate last month
     const lastMonth1 = month1.clone();
     lastMonth1.add(0 - lastMonthDiffDay, 'days');
+
+    const currMonth1st = month1.clone();
+    const nextMonth1st = currMonth1st.add(1, 'months');
+
+    const daysInCurrMonth = nextMonth1st.diff(month1, 'days');
+    const totalDays =
+      daysInCurrMonth +
+      lastMonthDiffDay -
+      (nextMonth1st.day() === 0 ? 6 : nextMonth1st.day() - 1);
+
+    const weeks =
+      calendarType === DateConstants.ISO_CALENDAR
+        ? totalDays / 7
+        : DateConstants.DATE_ROW_COUNT;
+
+    
+
     let passed = 0;
-    for (iIndex = 0; iIndex < DateConstants.DATE_ROW_COUNT; iIndex++) {
+    for (iIndex = 0; iIndex < weeks; iIndex++) {
       for (jIndex = 0; jIndex < DateConstants.DATE_COL_COUNT; jIndex++) {
         current = lastMonth1;
         if (passed) {
@@ -94,8 +146,8 @@ const DateTBody = createReactClass({
     }
     const tableHtml = [];
     passed = 0;
-
-    for (iIndex = 0; iIndex < DateConstants.DATE_ROW_COUNT; iIndex++) {
+    
+    for (iIndex = 0; iIndex < weeks; iIndex++) {
       let isCurrentWeek;
       let weekNumberCell;
       let isActiveWeek = false;
@@ -166,10 +218,16 @@ const DateTBody = createReactClass({
           cls += ` ${selectedDateClass}`;
         }
 
-        if (isBeforeCurrentMonthYear) {
+        if (
+          isBeforeCurrentMonthYear &&
+          calendarType !== DateConstants.ISO_CALENDAR
+        ) {
           cls += ` ${lastMonthDayClass}`;
         }
-        if (isAfterCurrentMonthYear) {
+        if (
+          isAfterCurrentMonthYear &&
+          calendarType !== DateConstants.ISO_CALENDAR
+        ) {
           cls += ` ${nextMonthDayClass}`;
         }
 
@@ -240,9 +298,9 @@ const DateTBody = createReactClass({
           {dateCells}
         </tr>);
     }
-    return (<tbody className={`${prefixCls}-tbody`}>
-    {tableHtml}
-    </tbody>);
+  return (<tbody className={`${prefixCls}-tbody`}>
+  {tableHtml}
+  </tbody>);
   },
 });
 

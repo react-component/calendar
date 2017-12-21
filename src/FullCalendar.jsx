@@ -77,6 +77,8 @@ const FullCalendar = createReactClass({
       headerComponent,
       headerRender,
       disabledDate,
+      calendarType,
+      firstDayOfWeek,
     } = props;
     const { value, type } = this.state;
 
@@ -109,6 +111,8 @@ const FullCalendar = createReactClass({
         onSelect={this.onSelect}
         value={value}
         disabledDate={disabledDate}
+        calenderType={calendarType}
+        firstDayOfWeek={firstDayOfWeek}
       />
     ) : (
       <MonthTable
