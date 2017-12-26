@@ -1,6 +1,10 @@
 # History
 ----
 
+## 9.4.0 / 2017-12-26
+
+- Add Uyghur
+
 ## 9.2.0 / 2017-11-06
 
 - React 16 support
