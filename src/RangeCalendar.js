@@ -77,6 +77,7 @@ const RangeCalendar = createReactClass({
     value: PropTypes.any,
     hoverValue: PropTypes.any,
     mode: PropTypes.arrayOf(PropTypes.oneOf(['date', 'month', 'year', 'decade'])),
+    showDateInput: PropTypes.bool,
     timePicker: PropTypes.any,
     showOk: PropTypes.bool,
     showToday: PropTypes.bool,
@@ -108,6 +109,7 @@ const RangeCalendar = createReactClass({
       onPanelChange: noop,
       disabledTime: noop,
       showToday: true,
+      showDateInput: true,
     };
   },
 
@@ -545,6 +547,7 @@ const RangeCalendar = createReactClass({
               onInputSelect={this.onStartInputSelect}
               onValueChange={this.onStartValueChange}
               onPanelChange={this.onStartPanelChange}
+              showDateInput={this.props.showDateInput}
               timePicker={timePicker}
               showTimePicker={showTimePicker}
               enablePrev
@@ -564,6 +567,7 @@ const RangeCalendar = createReactClass({
               onInputSelect={this.onEndInputSelect}
               onValueChange={this.onEndValueChange}
               onPanelChange={this.onEndPanelChange}
+              showDateInput={this.props.showDateInput}
               timePicker={timePicker}
               showTimePicker={showTimePicker}
               disabledTime={this.disabledEndTime}

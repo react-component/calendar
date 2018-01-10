@@ -355,6 +355,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>a function which return a object with member of disabledHours/disabledMinutes/disabledSeconds according to rc-time-picker</td>
         </tr>
         <tr>
+          <td>showDateInput</td>
+          <td>Boolean</td>
+          <td>true</td>
+          <td>whether to show date inputs on top of calendar panels</td>
+        </tr>
+        <tr>
           <td>type</td>
           <td>enum('both','start', 'end')</td>
           <td>both</td>
