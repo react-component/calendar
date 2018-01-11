@@ -46,7 +46,7 @@ function normalizeAnchor(props, init) {
 }
 
 function generateOptions(length, extraOptionGen) {
-  const arr = extraOptionGen ? extraOptionGen() : [];
+  const arr = extraOptionGen ? extraOptionGen().concat() : [];
   for (let value = 0; value < length; value++) {
     if (arr.indexOf(value) === -1) {
       arr.push(value);
@@ -313,7 +313,7 @@ const RangeCalendar = createReactClass({
   getEndDisableTime() {
     const { selectedValue, value } = this.state;
     const { disabledTime } = this.props;
-    const userSettingDisabledTime = disabledTime(null, 'end') || {};
+    const userSettingDisabledTime = disabledTime(selectedValue, 'end') || {};
     const startValue = selectedValue && selectedValue[0] || value[0].clone();
     // if startTime and endTime is same day..
     // the second time picker will not able to pick time before first time picker
@@ -322,6 +322,8 @@ const RangeCalendar = createReactClass({
       const minutes = startValue.minute();
       const second = startValue.second();
       let { disabledHours, disabledMinutes, disabledSeconds } = userSettingDisabledTime;
+      let oldDisabledMinutes = disabledMinutes ? disabledMinutes() : [];
+      let olddisabledSeconds = disabledSeconds ? disabledSeconds() : [];
       disabledHours = generateOptions(hours, disabledHours);
       disabledMinutes = generateOptions(minutes, disabledMinutes);
       disabledSeconds = generateOptions(second, disabledSeconds);
@@ -333,13 +335,13 @@ const RangeCalendar = createReactClass({
           if (hour === hours) {
             return disabledMinutes;
           }
-          return [];
+          return oldDisabledMinutes;
         },
         disabledSeconds(hour, minute) {
           if (hour === hours && minute === minutes) {
             return disabledSeconds;
           }
-          return [];
+          return olddisabledSeconds;
         },
       };
     }
