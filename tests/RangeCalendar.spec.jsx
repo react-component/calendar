@@ -412,4 +412,9 @@ describe('RangeCalendar', () => {
       expect(updatedValue[0].add(1, 'month').isSame(updatedValue[1], 'month')).toBe(true);
     });
   });
+
+  it('can hide date inputs with showDateInput={false}', () => {
+    const wrapper = render(<RangeCalendar showDateInput={false} />);
+    expect(wrapper).toMatchSnapshot();
+  });
 });
