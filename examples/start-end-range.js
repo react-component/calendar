@@ -2292,6 +2292,7 @@ function onInputSelect(direction, value) {
   if (selectedValue[0] && this.compare(selectedValue[0], selectedValue[1]) > 0) {
     selectedValue[1 - index] = this.state.showTimePicker ? selectedValue[index] : undefined;
   }
+  this.props.onInputSelect(selectedValue);
   this.fireSelectValueChange(selectedValue);
 }
 
@@ -2305,6 +2306,7 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
     value: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
     hoverValue: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
     mode: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.arrayOf(__WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.oneOf(['date', 'month', 'year', 'decade'])),
+    showDateInput: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.bool,
     timePicker: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
     showOk: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.bool,
     showToday: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.bool,
@@ -2335,7 +2337,9 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
       onHoverChange: noop,
       onPanelChange: noop,
       disabledTime: noop,
-      showToday: true
+      onInputSelect: noop,
+      showToday: true,
+      showDateInput: true
     };
   },
   getInitialState: function getInitialState() {
@@ -2767,6 +2771,7 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
             onInputSelect: this.onStartInputSelect,
             onValueChange: this.onStartValueChange,
             onPanelChange: this.onStartPanelChange,
+            showDateInput: this.props.showDateInput,
             timePicker: timePicker,
             showTimePicker: showTimePicker,
             enablePrev: true,
@@ -2788,6 +2793,7 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
             onInputSelect: this.onEndInputSelect,
             onValueChange: this.onEndValueChange,
             onPanelChange: this.onEndPanelChange,
+            showDateInput: this.props.showDateInput,
             timePicker: timePicker,
             showTimePicker: showTimePicker,
             disabledTime: this.disabledEndTime,
@@ -2865,6 +2871,7 @@ var CalendarPart = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
     selectedValue: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
     direction: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
     locale: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
+    showDateInput: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.bool,
     showTimePicker: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.bool,
     format: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
     placeholder: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
@@ -2915,22 +2922,25 @@ var CalendarPart = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
       defaultOpenValue: value,
       value: selectedValue[index]
     }));
+
+    var dateInputElement = props.showDateInput && __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__date_DateInput__["a" /* default */], {
+      format: format,
+      locale: locale,
+      prefixCls: prefixCls,
+      timePicker: timePicker,
+      disabledDate: disabledDate,
+      placeholder: placeholder,
+      disabledTime: disabledTime,
+      value: value,
+      showClear: false,
+      selectedValue: selectedValue[index],
+      onChange: onInputSelect
+    });
+
     return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
       'div',
       { className: rangeClassName + '-part ' + rangeClassName + '-' + direction },
-      __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__date_DateInput__["a" /* default */], {
-        format: format,
-        locale: locale,
-        prefixCls: prefixCls,
-        timePicker: timePicker,
-        disabledDate: disabledDate,
-        placeholder: placeholder,
-        disabledTime: disabledTime,
-        value: value,
-        showClear: false,
-        selectedValue: selectedValue[index],
-        onChange: onInputSelect
-      }),
+      dateInputElement,
       __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
         'div',
         { style: { outline: 'none' } },

@@ -7,7 +7,7 @@
   <meta charset="utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" rel="stylesheet"/>
-  <title>rc-calendar@9.4.0 - React Calendar</title>
+  <title>rc-calendar@9.5.0 - React Calendar</title>
   <style>
     @font-face {
       font-family: octicons-anchor;
@@ -737,7 +737,7 @@
 
 <body>
 <div class="header">
-  <h1>rc-calendar@9.4.0</h1>
+  <h1>rc-calendar@9.5.0</h1>
 </div>
 <div class="examples">
   <h3>EXAMPLES</h3>
@@ -1056,6 +1056,12 @@ npm start</code></pre></div><h2>Example<a id="user-content-example" name="exampl
           <td>called when a date range is selected from calendar</td>
         </tr>
         <tr>
+          <td>onInputSelect</td>
+          <td>Function(date: moment[])</td>
+          <td></td>
+          <td>called when a valid date entered in input</td>
+        </tr>
+        <tr>
           <td>onChange</td>
           <td>Function(date: moment[])</td>
           <td></td>
@@ -1072,6 +1078,12 @@ npm start</code></pre></div><h2>Example<a id="user-content-example" name="exampl
           <td>Function(current: moment[], type:&#39;start&#39;|&#39;end&#39;):Object</td>
           <td></td>
           <td>a function which return a object with member of disabledHours/disabledMinutes/disabledSeconds according to rc-time-picker</td>
+        </tr>
+        <tr>
+          <td>showDateInput</td>
+          <td>Boolean</td>
+          <td>true</td>
+          <td>whether to show date inputs on top of calendar panels</td>
         </tr>
         <tr>
           <td>type</td>
