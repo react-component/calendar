@@ -417,4 +417,25 @@ describe('RangeCalendar', () => {
     const wrapper = render(<RangeCalendar showDateInput={false} />);
     expect(wrapper).toMatchSnapshot();
   });
+
+  describe('onInputSelect', () => {
+    it('trigger when date is valid', () => {
+      const handleInputSelect = jest.fn();
+      const wrapper = mount(<RangeCalendar format={format} onInputSelect={handleInputSelect} />);
+      wrapper.find('input').first().simulate('change', { target: { value: '2013-01-01' } });
+      expect(
+        handleInputSelect.mock.calls[0][0].length
+      ).toBe(1);
+      expect(
+        handleInputSelect.mock.calls[0][0][0].isSame('2013-01-01')
+      ).toBe(true);
+    });
+
+    it('not trigger when date is not valid', () => {
+      const handleInputSelect = jest.fn();
+      const wrapper = mount(<RangeCalendar format={format} onInputSelect={handleInputSelect} />);
+      wrapper.find('input').first().simulate('change', { target: { value: '2013-01-0' } });
+      expect(handleInputSelect).not.toBeCalled();
+    });
+  });
 });

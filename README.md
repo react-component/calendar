@@ -337,6 +337,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>called when a date range is selected from calendar</td>
         </tr>
         <tr>
+          <td>onInputSelect</td>
+          <td>Function(date: moment[])</td>
+          <td></td>
+          <td>called when a valid date entered in input</td>
+        </tr>
+        <tr>
           <td>onChange</td>
           <td>Function(date: moment[])</td>
           <td></td>
