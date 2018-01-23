@@ -329,8 +329,9 @@ describe('RangeCalendar', () => {
       wrapper.find('.rc-calendar-cell').at(10).simulate('click');
       expect(wrapper.find('.rc-calendar-input').at(0).getDOMNode().value).toBe('3/8/2017 00:00:00');
       expect(wrapper.find('.rc-calendar-input').at(1).getDOMNode().value).toBe('3/18/2017 23:59:59');
-
-    it('disabledTime when same day and same hour or same minute',()=>{
+    });
+    
+    it('disabledTime when same day and different hour or different minute',()=>{
       //see: https://github.com/ant-design/ant-design/issues/8915
       function newArray(start, end) {
         const result = [];
@@ -395,7 +396,14 @@ describe('RangeCalendar', () => {
       //disabledMinutes
       wrapper.find('.rc-calendar-range-right .rc-time-picker-panel-select ul').at(1).find('li').at(35).simulate('click');
       expect(wrapper.find('.rc-calendar-input').at(1).getDOMNode().value).toBe('3/29/2017 11:04:05');
- 
+      //different minutes for disabledSeconds
+      wrapper.find('.rc-calendar-range-left .rc-time-picker-panel-select ul').at(1).find('li').at(3).simulate('click');
+      wrapper.find('.rc-calendar-range-right .rc-time-picker-panel-select ul').at(2).find('li').at(55).simulate('click');
+      expect(wrapper.find('.rc-calendar-input').at(1).getDOMNode().value).toBe('3/29/2017 11:04:05');
+      //different hour for disabledMinutes
+      wrapper.find('.rc-calendar-range-left .rc-time-picker-panel-select ul').at(0).find('li').at(10).simulate('click');
+      wrapper.find('.rc-calendar-range-right .rc-time-picker-panel-select ul').at(1).find('li').at(35).simulate('click');
+      expect(wrapper.find('.rc-calendar-input').at(1).getDOMNode().value).toBe('3/29/2017 11:04:05');
     });
   });
 
