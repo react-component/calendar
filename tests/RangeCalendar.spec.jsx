@@ -330,9 +330,9 @@ describe('RangeCalendar', () => {
       expect(wrapper.find('.rc-calendar-input').at(0).getDOMNode().value).toBe('3/8/2017 00:00:00');
       expect(wrapper.find('.rc-calendar-input').at(1).getDOMNode().value).toBe('3/18/2017 23:59:59');
     });
-    
-    it('disabledTime when same day and different hour or different minute',()=>{
-      //see: https://github.com/ant-design/ant-design/issues/8915
+
+    it('disabledTime when same day and different hour or different minute', () => {
+      // see: https://github.com/ant-design/ant-design/issues/8915
       function newArray(start, end) {
         const result = [];
         for (let i = start; i < end; i++) {
@@ -346,7 +346,7 @@ describe('RangeCalendar', () => {
             disabledHours() {
               return [];
             },
-            disabledMinutes(h) {
+            disabledMinutes() {
               return newArray(30, 60);
             },
             disabledSeconds() {
@@ -358,7 +358,7 @@ describe('RangeCalendar', () => {
           disabledHours() {
             return [];
           },
-          disabledMinutes(h) {
+          disabledMinutes() {
             return newArray(30, 60);
           },
           disabledSeconds() {
@@ -368,39 +368,38 @@ describe('RangeCalendar', () => {
       }
       const timePicker = <TimePickerPanel defaultValue={[moment('00:00:00', 'HH:mm:ss'), moment('23:59:59', 'HH:mm:ss')]} />;
       const wrapper = mount(<RangeCalendar timePicker={timePicker} disabledTime={disabledTime} />);
-      //update same day
+      // update same day
       wrapper.find('.rc-calendar-today').at(0).simulate('click').simulate('click');
       wrapper.find('.rc-calendar-today').at(0).simulate('click').simulate('click');
       expect(wrapper.find('.rc-calendar-input').at(0).getDOMNode().value).toBe('3/29/2017 00:00:00');
       expect(wrapper.find('.rc-calendar-input').at(1).getDOMNode().value).toBe('3/29/2017 23:59:59');
       wrapper.find('.rc-calendar-time-picker-btn').simulate('click');
-      //update same hour
+      // update same hour
       wrapper.find('.rc-calendar-range-left .rc-time-picker-panel-select ul').at(0).find('li').at(11).simulate('click');
       wrapper.find('.rc-calendar-range-left .rc-time-picker-panel-select ul').at(1).find('li').at(4).simulate('click');
       wrapper.find('.rc-calendar-range-left .rc-time-picker-panel-select ul').at(2).find('li').at(4).simulate('click');
       expect(wrapper.find('.rc-calendar-input').at(0).getDOMNode().value).toBe('3/29/2017 11:04:04');
- 
       wrapper.find('.rc-calendar-range-right .rc-time-picker-panel-select ul').at(0).find('li').at(11).simulate('click');
       wrapper.find('.rc-calendar-range-right .rc-time-picker-panel-select ul').at(1).find('li').at(4).simulate('click');
       wrapper.find('.rc-calendar-range-right .rc-time-picker-panel-select ul').at(2).find('li').at(5).simulate('click');
       expect(wrapper.find('.rc-calendar-input').at(1).getDOMNode().value).toBe('3/29/2017 11:04:05');
-      //disabled early seconds
+      // disabled early seconds
       wrapper.find('.rc-calendar-range-right .rc-time-picker-panel-select ul').at(2).find('li').at(2).simulate('click');
       expect(wrapper.find('.rc-calendar-input').at(1).getDOMNode().value).toBe('3/29/2017 11:04:05');
-      //disabledSeconds
+      // disabledSeconds
       wrapper.find('.rc-calendar-range-right .rc-time-picker-panel-select ul').at(2).find('li').at(55).simulate('click');
       expect(wrapper.find('.rc-calendar-input').at(1).getDOMNode().value).toBe('3/29/2017 11:04:05');
-      //disabled early minutes  
+      // disabled early minutes
       wrapper.find('.rc-calendar-range-right .rc-time-picker-panel-select ul').at(1).find('li').at(1).simulate('click');
       expect(wrapper.find('.rc-calendar-input').at(1).getDOMNode().value).toBe('3/29/2017 11:04:05');
-      //disabledMinutes
+      // disabledMinutes
       wrapper.find('.rc-calendar-range-right .rc-time-picker-panel-select ul').at(1).find('li').at(35).simulate('click');
       expect(wrapper.find('.rc-calendar-input').at(1).getDOMNode().value).toBe('3/29/2017 11:04:05');
-      //different minutes for disabledSeconds
+      // different minutes for disabledSeconds
       wrapper.find('.rc-calendar-range-left .rc-time-picker-panel-select ul').at(1).find('li').at(3).simulate('click');
       wrapper.find('.rc-calendar-range-right .rc-time-picker-panel-select ul').at(2).find('li').at(55).simulate('click');
       expect(wrapper.find('.rc-calendar-input').at(1).getDOMNode().value).toBe('3/29/2017 11:04:05');
-      //different hour for disabledMinutes
+      // different hour for disabledMinutes
       wrapper.find('.rc-calendar-range-left .rc-time-picker-panel-select ul').at(0).find('li').at(10).simulate('click');
       wrapper.find('.rc-calendar-range-right .rc-time-picker-panel-select ul').at(1).find('li').at(35).simulate('click');
       expect(wrapper.find('.rc-calendar-input').at(1).getDOMNode().value).toBe('3/29/2017 11:04:05');
