@@ -50,7 +50,7 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "src/*"
+      "src/**/*.{js,jsx}"
     ],
     "setupFiles": [
       "./tests/setup.js"
