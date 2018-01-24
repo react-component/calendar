@@ -4,7 +4,7 @@ import keyCode from 'rc-util/lib/KeyCode';
 import moment from 'moment';
 import { mount, render } from 'enzyme';
 import TimePickerPanel from 'rc-time-picker/lib/Panel';
-import Calendar from '../index';
+import Calendar from '../src/Calendar';
 import zhCN from '../src/locale/zh_CN';
 import enUS from '../src/locale/en_US';
 
