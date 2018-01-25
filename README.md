@@ -201,6 +201,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>called when a date is selected from calendar</td>
         </tr>
         <tr>
+          <td>onClear</td>
+          <td>Function()</td>
+          <td></td>
+          <td>called when a date is cleared from calendar</td>
+        </tr>
+        <tr>
           <td>onChange</td>
           <td>Function(date: moment)</td>
           <td></td>
@@ -341,6 +347,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>Function(date: moment[])</td>
           <td></td>
           <td>called when a valid date entered in input</td>
+        </tr>
+        <tr>
+          <td>onClear</td>
+          <td>Function()</td>
+          <td></td>
+          <td>called when a date range is cleared from calendar</td>
         </tr>
         <tr>
           <td>onChange</td>
