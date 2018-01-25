@@ -438,4 +438,47 @@ describe('RangeCalendar', () => {
       expect(handleInputSelect).not.toBeCalled();
     });
   });
+
+  it('controlled hoverValue changes', () => {
+    const start = moment();
+    const end = moment().add(2, 'day');
+    const wrapper = mount(<RangeCalendar hoverValue={[start, end]} />);
+    const nextEnd = end.clone().add(2, 'day');
+    wrapper.setProps({ hoverValue: [start, nextEnd] });
+    expect(wrapper.state().hoverValue[1]).toBe(nextEnd);
+  });
+
+  it('controlled selectedValue changes', () => {
+    const start = moment();
+    const end = moment().add(2, 'day');
+    const wrapper = mount(<RangeCalendar selectedValue={[start, end]} />);
+    const nextEnd = end.clone().add(2, 'day');
+    wrapper.setProps({ selectedValue: [start, nextEnd] });
+    expect(wrapper.state().selectedValue[1]).toBe(nextEnd);
+    expect(wrapper.state().prevSelectedValue[1]).toBe(nextEnd);
+  });
+
+  describe('onHoverChange', () => {
+    let handleHoverChange;
+    let start;
+    let end;
+    let wrapper;
+
+    beforeEach(() => {
+      handleHoverChange = jest.fn();
+      start = moment();
+      end = moment().add(2, 'day');
+      wrapper = mount(<RangeCalendar type="start" onHoverChange={handleHoverChange} selectedValue={[start, end]} />);
+    });
+
+    it('mouseEnter', () => {
+      wrapper.find('.rc-calendar-date-panel').simulate('mouseEnter');
+      expect(handleHoverChange).toHaveBeenCalledWith([start, end]);
+    });
+
+    it('mouseHover', () => {
+      wrapper.find('.rc-calendar-date-panel').simulate('mouseLeave');
+      expect(handleHoverChange).toHaveBeenCalledWith([]);
+    });
+  });
 });
