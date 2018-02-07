@@ -201,6 +201,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>called when a date is selected from calendar</td>
         </tr>
         <tr>
+          <td>onClear</td>
+          <td>Function()</td>
+          <td></td>
+          <td>called when a date is cleared from calendar</td>
+        </tr>
+        <tr>
           <td>onChange</td>
           <td>Function(date: moment)</td>
           <td></td>
@@ -216,7 +222,7 @@ http://react-component.github.io/calendar/examples/index.html
           <td>mode</td>
           <td>enum('time', 'date', 'month', 'year', 'decade')</td>
           <td>'date'</td>
-          <td>controll which kind of panel should be shown</td>
+          <td>control which kind of panel should be shown</td>
         </tr>
         <tr>
           <td>onPanelChange</td>
@@ -337,6 +343,18 @@ http://react-component.github.io/calendar/examples/index.html
           <td>called when a date range is selected from calendar</td>
         </tr>
         <tr>
+          <td>onInputSelect</td>
+          <td>Function(date: moment[])</td>
+          <td></td>
+          <td>called when a valid date entered in input</td>
+        </tr>
+        <tr>
+          <td>onClear</td>
+          <td>Function()</td>
+          <td></td>
+          <td>called when a date range is cleared from calendar</td>
+        </tr>
+        <tr>
           <td>onChange</td>
           <td>Function(date: moment[])</td>
           <td></td>
@@ -355,6 +373,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>a function which return a object with member of disabledHours/disabledMinutes/disabledSeconds according to rc-time-picker</td>
         </tr>
         <tr>
+          <td>showDateInput</td>
+          <td>Boolean</td>
+          <td>true</td>
+          <td>whether to show date inputs on top of calendar panels</td>
+        </tr>
+        <tr>
           <td>type</td>
           <td>enum('both','start', 'end')</td>
           <td>both</td>
@@ -364,7 +388,7 @@ http://react-component.github.io/calendar/examples/index.html
           <td>mode</td>
           <td>enum('date', 'month', 'year', 'decade')[]</td>
           <td>['date', 'date']</td>
-          <td>controll which kind of panels should be shown</td>
+          <td>control which kind of panels should be shown</td>
         </tr>
         <tr>
           <td>onPanelChange</td>
@@ -376,7 +400,7 @@ http://react-component.github.io/calendar/examples/index.html
           <td>hoverValue</td>
           <td>moment[]</td>
           <td></td>
-          <td>controll hover value</td>
+          <td>control hover value</td>
         </tr>
         <tr>
           <td>onHoverChange</td>
@@ -471,6 +495,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>Function(date: moment)</td>
           <td></td>
           <td>called when a date is changed inside calendar (next year/next month/keyboard)</td>
+        </tr>
+        <tr>
+          <td>renderFooter</td>
+          <td>() => React.Node</td>
+          <td></td>
+          <td>extra footer</td>
         </tr>
     </tbody>
 </table>

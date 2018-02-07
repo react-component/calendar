@@ -45,10 +45,12 @@ function normalizeAnchor(props, init) {
     normalizedValue : init && [moment(), moment().add(1, 'months')];
 }
 
-function generateOptions(length) {
-  const arr = [];
+function generateOptions(length, extraOptionGen) {
+  const arr = extraOptionGen ? extraOptionGen().concat() : [];
   for (let value = 0; value < length; value++) {
-    arr.push(value);
+    if (arr.indexOf(value) === -1) {
+      arr.push(value);
+    }
   }
   return arr;
 }
@@ -64,6 +66,7 @@ function onInputSelect(direction, value) {
   if (selectedValue[0] && this.compare(selectedValue[0], selectedValue[1]) > 0) {
     selectedValue[1 - index] = this.state.showTimePicker ? selectedValue[index] : undefined;
   }
+  this.props.onInputSelect(selectedValue);
   this.fireSelectValueChange(selectedValue);
 }
 
@@ -75,6 +78,7 @@ const RangeCalendar = createReactClass({
     value: PropTypes.any,
     hoverValue: PropTypes.any,
     mode: PropTypes.arrayOf(PropTypes.oneOf(['date', 'month', 'year', 'decade'])),
+    showDateInput: PropTypes.bool,
     timePicker: PropTypes.any,
     showOk: PropTypes.bool,
     showToday: PropTypes.bool,
@@ -105,7 +109,9 @@ const RangeCalendar = createReactClass({
       onHoverChange: noop,
       onPanelChange: noop,
       disabledTime: noop,
+      onInputSelect: noop,
       showToday: true,
+      showDateInput: true,
     };
   },
 
@@ -310,6 +316,8 @@ const RangeCalendar = createReactClass({
   // get disabled hours for second picker
   getEndDisableTime() {
     const { selectedValue, value } = this.state;
+    const { disabledTime } = this.props;
+    const userSettingDisabledTime = disabledTime(selectedValue, 'end') || {};
     const startValue = selectedValue && selectedValue[0] || value[0].clone();
     // if startTime and endTime is same day..
     // the second time picker will not able to pick time before first time picker
@@ -317,9 +325,12 @@ const RangeCalendar = createReactClass({
       const hours = startValue.hour();
       const minutes = startValue.minute();
       const second = startValue.second();
-      const disabledHours = generateOptions(hours);
-      const disabledMinutes = generateOptions(minutes);
-      const disabledSeconds = generateOptions(second);
+      let { disabledHours, disabledMinutes, disabledSeconds } = userSettingDisabledTime;
+      const oldDisabledMinutes = disabledMinutes ? disabledMinutes() : [];
+      const olddisabledSeconds = disabledSeconds ? disabledSeconds() : [];
+      disabledHours = generateOptions(hours, disabledHours);
+      disabledMinutes = generateOptions(minutes, disabledMinutes);
+      disabledSeconds = generateOptions(second, disabledSeconds);
       return {
         disabledHours() {
           return disabledHours;
@@ -328,17 +339,17 @@ const RangeCalendar = createReactClass({
           if (hour === hours) {
             return disabledMinutes;
           }
-          return [];
+          return oldDisabledMinutes;
         },
         disabledSeconds(hour, minute) {
           if (hour === hours && minute === minutes) {
             return disabledSeconds;
           }
-          return [];
+          return olddisabledSeconds;
         },
       };
     }
-    return null;
+    return userSettingDisabledTime;
   },
 
   isAllowedDateAndTime(selectedValue) {
@@ -540,6 +551,7 @@ const RangeCalendar = createReactClass({
               onInputSelect={this.onStartInputSelect}
               onValueChange={this.onStartValueChange}
               onPanelChange={this.onStartPanelChange}
+              showDateInput={this.props.showDateInput}
               timePicker={timePicker}
               showTimePicker={showTimePicker}
               enablePrev
@@ -559,6 +571,7 @@ const RangeCalendar = createReactClass({
               onInputSelect={this.onEndInputSelect}
               onValueChange={this.onEndValueChange}
               onPanelChange={this.onEndPanelChange}
+              showDateInput={this.props.showDateInput}
               timePicker={timePicker}
               showTimePicker={showTimePicker}
               disabledTime={this.disabledEndTime}

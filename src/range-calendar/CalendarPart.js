@@ -14,6 +14,7 @@ const CalendarPart = createReactClass({
     selectedValue: PropTypes.any,
     direction: PropTypes.any,
     locale: PropTypes.any,
+    showDateInput: PropTypes.bool,
     showTimePicker: PropTypes.bool,
     format: PropTypes.any,
     placeholder: PropTypes.any,
@@ -62,21 +63,25 @@ const CalendarPart = createReactClass({
         defaultOpenValue: value,
         value: selectedValue[index],
       });
+
+    const dateInputElement = props.showDateInput &&
+      <DateInput
+        format={format}
+        locale={locale}
+        prefixCls={prefixCls}
+        timePicker={timePicker}
+        disabledDate={disabledDate}
+        placeholder={placeholder}
+        disabledTime={disabledTime}
+        value={value}
+        showClear={false}
+        selectedValue={selectedValue[index]}
+        onChange={onInputSelect}
+      />;
+
     return (
       <div className={`${rangeClassName}-part ${rangeClassName}-${direction}`}>
-        <DateInput
-          format={format}
-          locale={locale}
-          prefixCls={prefixCls}
-          timePicker={timePicker}
-          disabledDate={disabledDate}
-          placeholder={placeholder}
-          disabledTime={disabledTime}
-          value={value}
-          showClear={false}
-          selectedValue={selectedValue[index]}
-          onChange={onInputSelect}
-        />
+        {dateInputElement}
         <div style={{ outline: 'none' }}>
           <CalendarHeader
             {...newProps}

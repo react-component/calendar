@@ -3,6 +3,7 @@ import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import KeyCode from 'rc-util/lib/KeyCode';
 import CalendarHeader from './calendar/CalendarHeader';
+import CalendarFooter from './calendar/CalendarFooter';
 import CalendarMixin from './mixin/CalendarMixin';
 import CommonMixin from './mixin/CommonMixin';
 
@@ -74,18 +75,26 @@ const MonthCalendar = createReactClass({
     const { props, state } = this;
     const { mode, value } = state;
     const children = (
-      <CalendarHeader
-        prefixCls={props.prefixCls}
-        mode={mode}
-        value={value}
-        locale={props.locale}
-        disabledMonth={props.disabledDate}
-        monthCellRender={props.monthCellRender}
-        monthCellContentRender={props.monthCellContentRender}
-        onMonthSelect={this.onSelect}
-        onValueChange={this.setValue}
-        onPanelChange={this.handlePanelChange}
-      />
+      <div className={`${props.prefixCls}-month-calendar-content`}>
+        <div className={`${props.prefixCls}-month-header-wrap`}>
+          <CalendarHeader
+            prefixCls={props.prefixCls}
+            mode={mode}
+            value={value}
+            locale={props.locale}
+            disabledMonth={props.disabledDate}
+            monthCellRender={props.monthCellRender}
+            monthCellContentRender={props.monthCellContentRender}
+            onMonthSelect={this.onSelect}
+            onValueChange={this.setValue}
+            onPanelChange={this.handlePanelChange}
+          />
+        </div>
+        <CalendarFooter
+          prefixCls={props.prefixCls}
+          renderFooter={props.renderFooter}
+        />
+      </div>
     );
     return this.renderRoot({
       className: `${props.prefixCls}-month-calendar`,

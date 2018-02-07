@@ -4,7 +4,7 @@ import keyCode from 'rc-util/lib/KeyCode';
 import moment from 'moment';
 import { mount, render } from 'enzyme';
 import TimePickerPanel from 'rc-time-picker/lib/Panel';
-import Calendar from '../index';
+import Calendar from '../src/Calendar';
 import zhCN from '../src/locale/zh_CN';
 import enUS from '../src/locale/en_US';
 
@@ -165,6 +165,49 @@ describe('Calendar', () => {
     });
 
     describe('keyboard works', () => {
+      it('ignore event from input', () => {
+        const original = calendar.state().value;
+        const expected = original.clone();
+        input.simulate('keyDown', { keyCode: keyCode.LEFT });
+        expect(calendar.state().value.date()).toBe(expected.date());
+      });
+
+      it('triggers onKeyDown', () => {
+        const handleKeyDown = jest.fn();
+        calendar = mount(<Calendar showToday showWeekNumber onKeyDown={handleKeyDown} />);
+        const original = calendar.state().value;
+        const expected = original.clone();
+        calendar.simulate('keyDown', { keyCode: keyCode.A });
+        expect(calendar.state().value.date()).toBe(expected.date());
+        expect(handleKeyDown).toHaveBeenCalledWith(expect.anything());
+      });
+
+      it('left works', () => {
+        const original = calendar.state().value;
+        const expected = original.clone();
+        expected.add(-1, 'day');
+
+        calendar.simulate('keyDown', { keyCode: keyCode.LEFT });
+        expect(calendar.state().value.date()).toBe(expected.date());
+        expect(input.getDOMNode().value).toBe('');
+      });
+
+
+      it('right works', () => {
+        const original = calendar.state().value;
+        const expected = original.clone();
+        expected.add(1, 'day');
+        calendar.simulate('keyDown', { keyCode: keyCode.RIGHT });
+        expect(calendar.state().value.date()).toBe(expected.date());
+        expect(input.getDOMNode().value).toBe('');
+      });
+
+      it('up works', () => {
+        const original = calendar.state().value;
+        const expected = original.clone();
+        expected.add(-7, 'day');
+      });
+
       it('left works', () => {
         const original = calendar.state().value;
         const expected = original.clone();
@@ -243,6 +286,28 @@ describe('Calendar', () => {
         });
         expect(calendar.state().value.year()).toBe(expected.year());
         expect(input.getDOMNode().value).toBe('');
+      });
+
+      it('HOME works', () => {
+        const original = calendar.state().value;
+        const expected = original.clone().startOf('month');
+        calendar.setState({ value: original.add(2, 'day') });
+
+        calendar.simulate('keyDown', {
+          keyCode: keyCode.HOME,
+        });
+        expect(calendar.state().value.date()).toBe(expected.date());
+      });
+
+      it('END works', () => {
+        const original = calendar.state().value;
+        const expected = original.clone().endOf('month');
+        calendar.setState({ value: original.add(2, 'day') });
+
+        calendar.simulate('keyDown', {
+          keyCode: keyCode.END,
+        });
+        expect(calendar.state().value.date()).toBe(expected.date());
       });
 
       it('enter to select works', () => {
@@ -417,5 +482,51 @@ describe('Calendar', () => {
       expect(onSelect.mock.calls[0][0].format(format)).toBe(expected);
       expect(onChange.mock.calls[0][0].format(format)).toBe(expected);
     });
+  });
+
+  it('handle clear', () => {
+    const now = moment();
+    const calendar = mount(
+      <Calendar defaultSelectedValue={now} />
+    );
+    calendar.find('.rc-calendar-clear-btn').simulate('click');
+    expect(calendar.state().selectedValue).toBe(null);
+    expect(now.isSame(calendar.state().value)).toBe(true);
+  });
+
+  describe('onOk', () => {
+    it('triggers onOk', () => {
+      const selected = moment().add(1, 'day');
+      const handleOk = jest.fn();
+      const calendar = mount(
+        <Calendar showOk defaultSelectedValue={selected} onOk={handleOk} />
+      );
+      calendar.find('.rc-calendar-ok-btn').simulate('click');
+      expect(handleOk).toHaveBeenCalledWith(selected);
+    });
+
+    it('does not triggers onOk if selected date is disabled', () => {
+      const selected = moment().add(1, 'day');
+      const handleOk = jest.fn();
+      const calendar = mount(
+        <Calendar
+          showOk
+          defaultSelectedValue={selected}
+          onOk={handleOk}
+          disabledDate={() => true}
+        />
+      );
+      calendar.find('.rc-calendar-ok-btn').simulate('click');
+      expect(handleOk).not.toBeCalled();
+    });
+  });
+
+  it('today button', () => {
+    const selected = moment().add(1, 'day').utcOffset(480);
+    const calendar = mount(
+      <Calendar defaultSelectedValue={selected} />
+    );
+    calendar.find('.rc-calendar-today-btn').simulate('click');
+    expect(moment().isSame(calendar.state().selectedValue)).toBe(true);
   });
 });

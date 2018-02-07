@@ -17,9 +17,15 @@ describe('MonthCalendar', () => {
     expect(wrapper.state('selectedValue').format(format)).toBe('2010-03');
   });
   describe('keyboard', () => {
+    let wrapper;
+    beforeEach(() => {
+      const selected = moment().add(2, 'month');
+      wrapper = mount(<MonthCalendar defaultValue={selected} />);
+    });
+
     it('enter to select works', () => {
       const onSelect = jest.fn();
-      const wrapper = mount(<MonthCalendar onSelect={onSelect} />);
+      wrapper = mount(<MonthCalendar onSelect={onSelect} />);
       wrapper.simulate('keydown', {
         keyCode: keyCode.ENTER,
       });
@@ -36,7 +42,7 @@ describe('MonthCalendar', () => {
         return current.month() < date.month();
       }
 
-      const wrapper = mount(<MonthCalendar onSelect={onSelect} disabledDate={disabledDate} />);
+      wrapper = mount(<MonthCalendar onSelect={onSelect} disabledDate={disabledDate} />);
       wrapper.simulate('keydown', {
         keyCode: keyCode.LEFT,
       });
@@ -44,6 +50,60 @@ describe('MonthCalendar', () => {
         keyCode: keyCode.ENTER,
       });
       expect(onSelect).not.toHaveBeenCalled();
+    });
+
+    it('DOWN', () => {
+      wrapper.simulate('keydown', {
+        keyCode: keyCode.DOWN,
+      });
+      expect(wrapper.state().value.month()).toBe(7);
+    });
+
+    it('UP', () => {
+      wrapper.simulate('keydown', {
+        keyCode: keyCode.UP,
+      });
+      expect(wrapper.state().value.month()).toBe(1);
+    });
+
+    it('LEFT', () => {
+      wrapper.simulate('keydown', {
+        keyCode: keyCode.LEFT,
+      });
+      expect(wrapper.state().value.month()).toBe(3);
+    });
+
+    it('RIGHT', () => {
+      wrapper.simulate('keydown', {
+        keyCode: keyCode.RIGHT,
+      });
+      expect(wrapper.state().value.month()).toBe(5);
+    });
+
+    it('CTRL + LEFT', () => {
+      wrapper.simulate('keydown', {
+        keyCode: keyCode.LEFT,
+        ctrlKey: 1,
+      });
+      expect(wrapper.state().value.month()).toBe(4);
+      expect(wrapper.state().value.year()).toBe(2016);
+    });
+
+    it('CTRL + RIGHT', () => {
+      wrapper.simulate('keydown', {
+        keyCode: keyCode.RIGHT,
+        ctrlKey: 1,
+      });
+      expect(wrapper.state().value.month()).toBe(4);
+      expect(wrapper.state().value.year()).toBe(2018);
+    });
+
+    it('ignore other keys', () => {
+      wrapper.simulate('keydown', {
+        keyCode: keyCode.A,
+      });
+      expect(wrapper.state().value.month()).toBe(4);
+      expect(wrapper.state().value.year()).toBe(2017);
     });
   });
 });

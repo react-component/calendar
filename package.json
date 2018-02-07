@@ -1,6 +1,6 @@
 {
   "name": "rc-calendar",
-  "version": "9.2.0",
+  "version": "9.5.0",
   "description": "React Calendar",
   "keywords": [
     "react",
@@ -50,7 +50,7 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "src/*"
+      "src/**/*.{js,jsx}"
     ],
     "setupFiles": [
       "./tests/setup.js"
@@ -65,16 +65,16 @@
   "devDependencies": {
     "async": "~2.5.0",
     "bootstrap": "~3.3.2",
-    "enzyme": "^3.1.0",
-    "enzyme-adapter-react-16": "^1.0.2",
-    "enzyme-to-json": "^3.1.4",
-    "jest": "^21.2.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.1",
+    "jest": "^22.1.4",
     "mockdate": "^2.0.1",
     "pre-commit": "1.x",
     "rc-dialog": "^7.0.0",
     "rc-select": "^7.1.0",
     "rc-time-picker": "^3.1.0",
-    "rc-tools": "^6.2.2",
+    "rc-tools": "^7.0.3",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-test-renderer": "^16.0.0"
