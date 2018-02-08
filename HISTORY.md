@@ -1,5 +1,10 @@
 # History
 ----
+
+## 9.6.0 / 2018-02-08
+
+- Add Picker[dropdownClassName]
+
 ## 9.5.0 / 2017-12-26
 
 - Add Kurdish

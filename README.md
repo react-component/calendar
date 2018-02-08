@@ -595,6 +595,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>() => {return document.body;}</td>
           <td>dom node where calendar to be rendered into</td>
         </tr>
+        <tr>
+          <td>dropdownClassName</td>
+          <td>string</td>
+          <td></td>
+          <td>additional className applied to dropdown</td>
+        </tr>
     </tbody>
 </table>
 
