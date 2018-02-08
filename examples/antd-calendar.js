@@ -2337,7 +2337,7 @@ var Picker = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
     }
   },
   focusCalendar: function focusCalendar() {
-    if (this.state.open && this.calendarInstance !== null) {
+    if (this.state.open && !!this.calendarInstance) {
       this.calendarInstance.focus();
     }
   },
@@ -2350,6 +2350,7 @@ var Picker = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
         align = props.align,
         animation = props.animation,
         disabled = props.disabled,
+        dropdownClassName = props.dropdownClassName,
         transitionName = props.transitionName,
         children = props.children;
 
@@ -2369,7 +2370,8 @@ var Picker = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
         popupTransitionName: transitionName,
         popupVisible: state.open,
         onPopupVisibleChange: this.onVisibleChange,
-        prefixCls: prefixCls
+        prefixCls: prefixCls,
+        popupClassName: dropdownClassName
       },
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.cloneElement(children(state, props), { onKeyDown: this.onKeyDown })
     );

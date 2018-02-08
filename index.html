@@ -7,7 +7,7 @@
   <meta charset="utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" rel="stylesheet"/>
-  <title>rc-calendar@9.5.0 - React Calendar</title>
+  <title>rc-calendar@9.6.0 - React Calendar</title>
   <style>
     @font-face {
       font-family: octicons-anchor;
@@ -737,7 +737,7 @@
 
 <body>
 <div class="header">
-  <h1>rc-calendar@9.5.0</h1>
+  <h1>rc-calendar@9.6.0</h1>
 </div>
 <div class="examples">
   <h3>EXAMPLES</h3>
@@ -922,6 +922,12 @@ npm start</code></pre></div><h2>Example<a id="user-content-example" name="exampl
           <td>called when a date is selected from calendar</td>
         </tr>
         <tr>
+          <td>onClear</td>
+          <td>Function()</td>
+          <td></td>
+          <td>called when a date is cleared from calendar</td>
+        </tr>
+        <tr>
           <td>onChange</td>
           <td>Function(date: moment)</td>
           <td></td>
@@ -1060,6 +1066,12 @@ npm start</code></pre></div><h2>Example<a id="user-content-example" name="exampl
           <td>Function(date: moment[])</td>
           <td></td>
           <td>called when a valid date entered in input</td>
+        </tr>
+        <tr>
+          <td>onClear</td>
+          <td>Function()</td>
+          <td></td>
+          <td>called when a date range is cleared from calendar</td>
         </tr>
         <tr>
           <td>onChange</td>
@@ -1297,6 +1309,12 @@ npm start</code></pre></div><h2>Example<a id="user-content-example" name="exampl
           <td>() =&gt; HTMLElement</td>
           <td>() =&gt; {return document.body;}</td>
           <td>dom node where calendar to be rendered into</td>
+        </tr>
+        <tr>
+          <td>dropdownClassName</td>
+          <td>string</td>
+          <td></td>
+          <td>additional className applied to dropdown</td>
         </tr>
     </tbody>
 </table>

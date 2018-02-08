@@ -1228,7 +1228,7 @@ var _initialiseProps = function _initialiseProps() {
       var selectedValueNodes = [];
       var limitedCountValue = value;
       var maxTagPlaceholderEl = void 0;
-      if (maxTagCount && value.length > maxTagCount) {
+      if (maxTagCount !== undefined && value.length > maxTagCount) {
         limitedCountValue = limitedCountValue.slice(0, maxTagCount);
         var omittedValues = _this2.getVLForOnChange(value.slice(maxTagCount, value.length));
         var content = '+ ' + (value.length - maxTagCount) + ' ...';
@@ -1408,14 +1408,16 @@ var Menu = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
     };
   },
   componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-    var props = {};
     if ('selectedKeys' in nextProps) {
-      props.selectedKeys = nextProps.selectedKeys || [];
+      this.setState({
+        selectedKeys: nextProps.selectedKeys || []
+      });
     }
     if ('openKeys' in nextProps) {
-      props.openKeys = nextProps.openKeys || [];
+      this.setState({
+        openKeys: nextProps.openKeys || []
+      });
     }
-    this.setState(props);
   },
   onSelect: function onSelect(selectInfo) {
     var props = this.props;

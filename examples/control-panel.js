@@ -1228,7 +1228,7 @@ var _initialiseProps = function _initialiseProps() {
       var selectedValueNodes = [];
       var limitedCountValue = value;
       var maxTagPlaceholderEl = void 0;
-      if (maxTagCount && value.length > maxTagCount) {
+      if (maxTagCount !== undefined && value.length > maxTagCount) {
         limitedCountValue = limitedCountValue.slice(0, maxTagCount);
         var omittedValues = _this2.getVLForOnChange(value.slice(maxTagCount, value.length));
         var content = '+ ' + (value.length - maxTagCount) + ' ...';
@@ -1408,14 +1408,16 @@ var Menu = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
     };
   },
   componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-    var props = {};
     if ('selectedKeys' in nextProps) {
-      props.selectedKeys = nextProps.selectedKeys || [];
+      this.setState({
+        selectedKeys: nextProps.selectedKeys || []
+      });
     }
     if ('openKeys' in nextProps) {
-      props.openKeys = nextProps.openKeys || [];
+      this.setState({
+        openKeys: nextProps.openKeys || []
+      });
     }
-    this.setState(props);
   },
   onSelect: function onSelect(selectInfo) {
     var props = this.props;
@@ -6211,7 +6213,7 @@ function normalizeAnchor(props, init) {
 }
 
 function generateOptions(length, extraOptionGen) {
-  var arr = extraOptionGen ? extraOptionGen() : [];
+  var arr = extraOptionGen ? extraOptionGen().concat() : [];
   for (var value = 0; value < length; value++) {
     if (arr.indexOf(value) === -1) {
       arr.push(value);
@@ -6493,7 +6495,7 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
         value = _state4.value;
     var disabledTime = this.props.disabledTime;
 
-    var userSettingDisabledTime = disabledTime(null, 'end') || {};
+    var userSettingDisabledTime = disabledTime(selectedValue, 'end') || {};
     var startValue = selectedValue && selectedValue[0] || value[0].clone();
     // if startTime and endTime is same day..
     // the second time picker will not able to pick time before first time picker
@@ -6505,6 +6507,8 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
           _disabledMinutes = userSettingDisabledTime.disabledMinutes,
           _disabledSeconds = userSettingDisabledTime.disabledSeconds;
 
+      var oldDisabledMinutes = _disabledMinutes ? _disabledMinutes() : [];
+      var olddisabledSeconds = _disabledSeconds ? _disabledSeconds() : [];
       _disabledHours = generateOptions(hours, _disabledHours);
       _disabledMinutes = generateOptions(minutes, _disabledMinutes);
       _disabledSeconds = generateOptions(second, _disabledSeconds);
@@ -6516,13 +6520,13 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
           if (hour === hours) {
             return _disabledMinutes;
           }
-          return [];
+          return oldDisabledMinutes;
         },
         disabledSeconds: function disabledSeconds(hour, minute) {
           if (hour === hours && minute === minutes) {
             return _disabledSeconds;
           }
-          return [];
+          return olddisabledSeconds;
         }
       };
     }
