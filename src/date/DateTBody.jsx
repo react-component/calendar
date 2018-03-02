@@ -29,6 +29,19 @@ function getIdFromDate(date) {
   return `rc-calendar-${date.year()}-${date.month()}-${date.date()}`;
 }
 
+const LeapDate = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+const NonLeapDate = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+function isLastDayOfMonth(date) {
+  const year = date.year();
+  const month = date.month();
+  let isLeap = false;
+  if (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0)) {
+    isLeap = true;
+  }
+  return date.date() === (isLeap ? LeapDate[month] : NonLeapDate[month]);
+}
+
 const DateTBody = createReactClass({
   propTypes: {
     contentRender: PropTypes.func,
@@ -73,6 +86,7 @@ const DateTBody = createReactClass({
     const disabledClass = `${prefixCls}-disabled-cell`;
     const firstDisableClass = `${prefixCls}-disabled-cell-first-of-row`;
     const lastDisableClass = `${prefixCls}-disabled-cell-last-of-row`;
+    const lastDayOfMonthClass = `${prefixCls}-last-day-of-month`;
     const month1 = value.clone();
     month1.date(1);
     const day = month1.day();
@@ -162,6 +176,10 @@ const DateTBody = createReactClass({
           isActiveWeek = true;
         }
 
+        if (isLastDayOfMonth(current)) {
+          cls += ` ${lastDayOfMonthClass}`;
+        }
+
         if (isSameDay(current, selectedValue)) {
           cls += ` ${selectedDateClass}`;
         }
@@ -241,7 +259,7 @@ const DateTBody = createReactClass({
         </tr>);
     }
     return (<tbody className={`${prefixCls}-tbody`}>
-    {tableHtml}
+      {tableHtml}
     </tbody>);
   },
 });
