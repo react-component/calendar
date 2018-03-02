@@ -178,7 +178,7 @@ exports[`RangeCalendar can hide date inputs with showDateInput={false} 1`] = `
                     </div>
                   </td>
                   <td
-                    class="rc-calendar-cell rc-calendar-last-month-cell"
+                    class="rc-calendar-cell rc-calendar-last-month-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="February 28, 2017"
                   >
@@ -601,7 +601,7 @@ exports[`RangeCalendar can hide date inputs with showDateInput={false} 1`] = `
                     </div>
                   </td>
                   <td
-                    class="rc-calendar-cell"
+                    class="rc-calendar-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="March 31, 2017"
                   >
@@ -937,7 +937,7 @@ exports[`RangeCalendar can hide date inputs with showDateInput={false} 1`] = `
                     </div>
                   </td>
                   <td
-                    class="rc-calendar-cell rc-calendar-last-month-cell"
+                    class="rc-calendar-cell rc-calendar-last-month-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="March 31, 2017"
                   >
@@ -1352,7 +1352,7 @@ exports[`RangeCalendar can hide date inputs with showDateInput={false} 1`] = `
                   role="row"
                 >
                   <td
-                    class="rc-calendar-cell"
+                    class="rc-calendar-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="April 30, 2017"
                   >
@@ -1864,7 +1864,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                     </div>
                   </td>
                   <td
-                    class="rc-calendar-cell rc-calendar-last-month-cell"
+                    class="rc-calendar-cell rc-calendar-last-month-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="February 28, 2017"
                   >
@@ -2287,7 +2287,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                     </div>
                   </td>
                   <td
-                    class="rc-calendar-cell"
+                    class="rc-calendar-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="March 31, 2017"
                   >
@@ -2843,7 +2843,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                     </div>
                   </td>
                   <td
-                    class="rc-calendar-cell rc-calendar-last-month-cell"
+                    class="rc-calendar-cell rc-calendar-last-month-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="March 31, 2017"
                   >
@@ -3258,7 +3258,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   role="row"
                 >
                   <td
-                    class="rc-calendar-cell"
+                    class="rc-calendar-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="April 30, 2017"
                   >
@@ -3770,7 +3770,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                     </div>
                   </td>
                   <td
-                    class="rc-calendar-cell rc-calendar-last-month-cell"
+                    class="rc-calendar-cell rc-calendar-last-month-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="February 28, 2017"
                   >
@@ -4193,7 +4193,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                     </div>
                   </td>
                   <td
-                    class="rc-calendar-cell"
+                    class="rc-calendar-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="March 31, 2017"
                   >
@@ -4749,7 +4749,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                     </div>
                   </td>
                   <td
-                    class="rc-calendar-cell rc-calendar-last-month-cell"
+                    class="rc-calendar-cell rc-calendar-last-month-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="March 31, 2017"
                   >
@@ -5164,7 +5164,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   role="row"
                 >
                   <td
-                    class="rc-calendar-cell"
+                    class="rc-calendar-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="April 30, 2017"
                   >
@@ -5470,7 +5470,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                     </div>
                   </td>
                   <td
-                    class="rc-calendar-cell rc-calendar-last-month-cell"
+                    class="rc-calendar-cell rc-calendar-last-month-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="February 28, 2017"
                   >
@@ -5893,7 +5893,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                     </div>
                   </td>
                   <td
-                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    class="rc-calendar-cell rc-calendar-in-range-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="March 31, 2017"
                   >
@@ -6241,7 +6241,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                     </div>
                   </td>
                   <td
-                    class="rc-calendar-cell rc-calendar-last-month-cell"
+                    class="rc-calendar-cell rc-calendar-last-month-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="March 31, 2017"
                   >
@@ -6656,7 +6656,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   role="row"
                 >
                   <td
-                    class="rc-calendar-cell"
+                    class="rc-calendar-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="April 30, 2017"
                   >

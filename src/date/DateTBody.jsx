@@ -175,11 +175,7 @@ const DateTBody = createReactClass({
           selected = true;
           isActiveWeek = true;
         }
-
-        if (isLastDayOfMonth(current)) {
-          cls += ` ${lastDayOfMonthClass}`;
-        }
-
+        
         if (isSameDay(current, selectedValue)) {
           cls += ` ${selectedDateClass}`;
         }
@@ -189,6 +185,10 @@ const DateTBody = createReactClass({
         }
         if (isAfterCurrentMonthYear) {
           cls += ` ${nextMonthDayClass}`;
+        }
+
+        if (isLastDayOfMonth(current)) {
+          cls += ` ${lastDayOfMonthClass}`;
         }
 
         if (disabledDate) {
