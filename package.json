@@ -87,6 +87,7 @@
     "classnames": "2.x",
     "create-react-class": "^15.5.2",
     "moment": "2.x",
+    "moment-jalaali": "^0.7.2",
     "prop-types": "^15.5.8",
     "rc-trigger": "^2.2.0",
     "rc-util": "^4.1.1"

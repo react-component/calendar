@@ -49,7 +49,7 @@ class MonthTable extends Component {
       months[rowIndex] = [];
       for (let colIndex = 0; colIndex < COL; colIndex++) {
         current.month(index);
-        const content = getMonthName(current);
+        const content = getMonthName(current, this.props.calendarType);
         months[rowIndex][colIndex] = {
           value: index,
           content,

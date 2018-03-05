@@ -2,6 +2,7 @@ import React from 'react';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import MonthTable from './MonthTable';
+import { getYearString } from '../util/index';
 
 function goYear(direction) {
   const next = this.state.value.clone();
@@ -89,7 +90,9 @@ const MonthPanel = createReactClass({
               onClick={props.onYearPanelShow}
               title={locale.yearSelect}
             >
-              <span className={`${prefixCls}-year-select-content`}>{year}</span>
+              <span className={`${prefixCls}-year-select-content`}>
+                {getYearString(year, props.calendarType)}
+              </span>
               <span className={`${prefixCls}-year-select-arrow`}>x</span>
             </a>
 
@@ -109,6 +112,7 @@ const MonthPanel = createReactClass({
               cellRender={cellRender}
               contentRender={contentRender}
               prefixCls={prefixCls}
+              calendarType={props.calendarType}
             />
           </div>
         </div>

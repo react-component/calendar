@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getYearString } from '../util/index';
 const ROW = 4;
 const COL = 3;
 import classnames from 'classnames';
@@ -37,6 +38,7 @@ class DecadePanel extends React.Component {
   render() {
     const value = this.state.value;
     const locale = this.props.locale;
+    const calendarType = this.props.calendarType;
     const currentYear = value.year();
     const startYear = parseInt(currentYear / 100, 10) * 100;
     const preYear = startYear - 10;
@@ -70,7 +72,8 @@ class DecadePanel extends React.Component {
           [`${prefixCls}-last-century-cell`]: isLast,
           [`${prefixCls}-next-century-cell`]: isNext,
         };
-        const content = `${dStartDecade}-${dEndDecade}`;
+        const content =
+          `${getYearString(dStartDecade, calendarType)}-${getYearString(dEndDecade, calendarType)}`;
         let clickHandler;
         if (isLast) {
           clickHandler = this.previousCentury;
@@ -106,7 +109,9 @@ class DecadePanel extends React.Component {
           />
 
           <div className={`${prefixCls}-century`}>
-            {startYear}-{endYear}
+            {getYearString(startYear, this.props.calendarType)}
+            -
+            {getYearString(endYear, this.props.calendarType)}
           </div>
           <a
             className={`${prefixCls}-next-century-btn`}

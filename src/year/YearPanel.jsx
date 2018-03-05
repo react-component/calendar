@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { getYearString } from '../util/index';
 const ROW = 4;
 const COL = 3;
 
@@ -44,9 +45,9 @@ class YearPanel extends React.Component {
         const year = previousYear + index;
         const content = String(year);
         years[rowIndex][colIndex] = {
-          content,
+          content: getYearString(content, this.props.calendarType),
           year,
-          title: content,
+          title: getYearString(content, this.props.calendarType),
         };
         index++;
       }
@@ -114,7 +115,9 @@ class YearPanel extends React.Component {
               title={locale.decadeSelect}
             >
               <span className={`${prefixCls}-decade-select-content`}>
-                {startYear}-{endYear}
+                {getYearString(startYear, props.calendarType)}
+                -
+                {getYearString(endYear, props.calendarType)}
               </span>
               <span className={`${prefixCls}-decade-select-arrow`}>x</span>
             </a>

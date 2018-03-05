@@ -1,4 +1,8 @@
-import moment from 'moment';
+import moment from 'moment-jalaali';
+moment.loadPersian({
+  usePersianDigits: true,
+  dialect: 'persian-modern',
+});
 
 const defaultDisabledTime = {
   disabledHours() {
@@ -18,8 +22,8 @@ export function getTodayTime(value) {
   return today;
 }
 
-export function getTitleString(value) {
-  return value.format('LL');
+export function getTitleString(value, calendarType) {
+  return calendarType === 'jalali' ? value.format('jYYYY/jM/jD') : value.format('YYYY/M/D');
 }
 
 export function getTodayTimeStr(value) {
@@ -27,10 +31,17 @@ export function getTodayTimeStr(value) {
   return getTitleString(today);
 }
 
-export function getMonthName(month) {
+export function getMonthName(month, calendarType) {
   const locale = month.locale();
   const localeData = month.localeData();
-  return localeData[locale === 'zh-cn' ? 'months' : 'monthsShort'](month);
+  let monthName;
+  if (calendarType === 'jalali') {
+    monthName = localeData[locale === 'fa' ? 'jMonths' : 'monthsShort'](month);
+  } else {
+    monthName = localeData[(locale === 'fa' || locale === 'zh-cn')
+      ? 'months' : 'monthsShort'](month);
+  }
+  return monthName;
 }
 
 export function syncTime(from, to) {
@@ -88,4 +99,22 @@ export function isAllowedDate(value, disabledDate, disabledTime) {
     }
   }
   return true;
+}
+
+export function getYearString(year, calendarType) {
+  const yearMoment = moment(year.toString());
+  return calendarType === 'jalali' ? yearMoment.format('jYYYY') : yearMoment.format('YYYY');
+}
+
+export function getYearValue(year, calendarType) {
+  return calendarType === 'jalali' ? year.jYear() : year.year();
+}
+
+export function getMonthValue(month) {
+  const locale = month.locale();
+  return locale === 'fa' ? month.jMonth() : month.month();
+}
+
+export function getDateString(value, calendarType) {
+  return calendarType === 'jalali' ? value.format('jD') : value.format('D');
 }

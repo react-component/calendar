@@ -3,26 +3,32 @@ import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import DateConstants from './DateConstants';
-import { getTitleString, getTodayTime } from '../util/';
+import {
+  getTitleString,
+  getTodayTime,
+  getDateString,
+  getYearValue,
+  getMonthValue,
+} from '../util/';
 
 function isSameDay(one, two) {
   return one && two && one.isSame(two, 'day');
 }
 
 function beforeCurrentMonthYear(current, today) {
-  if (current.year() < today.year()) {
+  if (getYearValue(current) < getYearValue(today)) {
     return 1;
   }
-  return current.year() === today.year() &&
-    current.month() < today.month();
+  return getYearValue(current) === getYearValue(today) &&
+    getMonthValue(current) < getMonthValue(today);
 }
 
 function afterCurrentMonthYear(current, today) {
-  if (current.year() > today.year()) {
+  if (getYearValue(current) > getYearValue(today)) {
     return 1;
   }
-  return current.year() === today.year() &&
-    current.month() > today.month();
+  return getYearValue(current) === getYearValue(today) &&
+    getMonthValue(current) > getMonthValue(today);
 }
 
 function getIdFromDate(date) {
@@ -50,9 +56,9 @@ const DateTBody = createReactClass({
   render() {
     const props = this.props;
     const {
-      contentRender, prefixCls, selectedValue, value,
+      prefixCls, selectedValue, value,
       showWeekNumber, dateRender, disabledDate,
-      hoverValue,
+      hoverValue, calendarType,
     } = props;
     let iIndex;
     let jIndex;
@@ -74,7 +80,11 @@ const DateTBody = createReactClass({
     const firstDisableClass = `${prefixCls}-disabled-cell-first-of-row`;
     const lastDisableClass = `${prefixCls}-disabled-cell-last-of-row`;
     const month1 = value.clone();
-    month1.date(1);
+    if (calendarType === 'jalali') {
+      month1.jDate(1);
+    } else {
+      month1.date(1);
+    }
     const day = month1.day();
     const lastMonthDiffDay = (day + 7 - value.localeData().firstDayOfWeek()) % 7;
     // calculate last month
@@ -199,7 +209,6 @@ const DateTBody = createReactClass({
         if (dateRender) {
           dateHtml = dateRender(current, value);
         } else {
-          const content = contentRender ? contentRender(current, value) : current.date();
           dateHtml = (
             <div
               key={getIdFromDate(current)}
@@ -207,7 +216,7 @@ const DateTBody = createReactClass({
               aria-selected={selected}
               aria-disabled={disabled}
             >
-              {content}
+              {getDateString(current, calendarType)}
             </div>);
         }
 
@@ -218,7 +227,7 @@ const DateTBody = createReactClass({
             onMouseEnter={disabled ?
               undefined : props.onDayHover && props.onDayHover.bind(null, current) || undefined}
             role="gridcell"
-            title={getTitleString(current)} className={cls}
+            title={getTitleString(current, calendarType)} className={cls}
           >
             {dateHtml}
           </td>);

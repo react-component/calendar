@@ -8,9 +8,19 @@ class DateTable extends React.Component {
   render() {
     const props = this.props;
     const prefixCls = props.prefixCls;
-    return (<table className = {`${prefixCls}-table`} cellSpacing="0" role="grid">
-      <DateTHead {...props}/>
-      <DateTBody {...props}/>
-    </table>);
+    let directionCls = '';
+    if (props.calendarType === 'jalali') {
+      directionCls = `${prefixCls}-table__rtl`;
+    }
+    return (
+      <table
+        className={`${prefixCls}-table ${directionCls}`}
+        cellSpacing="0"
+        role="grid"
+      >
+        <DateTHead {...props}/>
+        <DateTBody {...props}/>
+      </table>
+    );
   }
 }
