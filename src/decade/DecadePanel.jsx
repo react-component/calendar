@@ -136,6 +136,7 @@ DecadePanel.propTypes = {
   value: PropTypes.object,
   defaultValue: PropTypes.object,
   rootPrefixCls: PropTypes.string,
+  calendarType: PropTypes.any,
 };
 
 DecadePanel.defaultProps = {

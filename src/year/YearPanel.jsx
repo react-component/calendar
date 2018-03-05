@@ -145,6 +145,7 @@ YearPanel.propTypes = {
   rootPrefixCls: PropTypes.string,
   value: PropTypes.object,
   defaultValue: PropTypes.object,
+  calendarType: PropTypes.any,
 };
 
 YearPanel.defaultProps = {

@@ -135,5 +135,6 @@ MonthTable.propTypes = {
   cellRender: PropTypes.func,
   prefixCls: PropTypes.string,
   value: PropTypes.object,
+  calendarType: PropTypes.any,
 };
 export default MonthTable;
