@@ -174,7 +174,7 @@ const DateTBody = createReactClass({
         if (isAfterCurrentMonthYear) {
           cls += ` ${nextMonthDayClass}`;
         }
-        
+
         if (current.clone().endOf('month').date() === current.date()) {
           cls += ` ${lastDayOfMonthClass}`;
         }
