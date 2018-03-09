@@ -29,19 +29,6 @@ function getIdFromDate(date) {
   return `rc-calendar-${date.year()}-${date.month()}-${date.date()}`;
 }
 
-const LeapDate = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-const NonLeapDate = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
-function isLastDayOfMonth(date) {
-  const year = date.year();
-  const month = date.month();
-  let isLeap = false;
-  if (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0)) {
-    isLeap = true;
-  }
-  return date.date() === (isLeap ? LeapDate[month] : NonLeapDate[month]);
-}
-
 const DateTBody = createReactClass({
   propTypes: {
     contentRender: PropTypes.func,
@@ -187,8 +174,8 @@ const DateTBody = createReactClass({
         if (isAfterCurrentMonthYear) {
           cls += ` ${nextMonthDayClass}`;
         }
-
-        if (isLastDayOfMonth(current)) {
+        
+        if (current.clone().endOf('month').date() === current.date()) {
           cls += ` ${lastDayOfMonthClass}`;
         }
 
