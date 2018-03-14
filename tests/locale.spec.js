@@ -24,6 +24,7 @@ const locales = {
   ja_JP: require('../src/locale/ja_JP'),
   ko_KR: require('../src/locale/ko_KR'),
   ku_IQ: require('../src/locale/ku_IQ'),
+  my_MM: require('../src/locale/my_MM'),
   nb_NO: require('../src/locale/nb_NO'),
   nl_BE: require('../src/locale/nl_BE'),
   nl_NL: require('../src/locale/nl_NL'),
