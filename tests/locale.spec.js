@@ -19,6 +19,7 @@ const locales = {
   fr_BE: require('../src/locale/fr_BE'),
   fr_FR: require('../src/locale/fr_FR'),
   hu_HU: require('../src/locale/hu_HU'),
+  id_ID: require('../src/locale/id_ID'),
   is_IS: require('../src/locale/is_IS'),
   it_IT: require('../src/locale/it_IT'),
   ja_JP: require('../src/locale/ja_JP'),
