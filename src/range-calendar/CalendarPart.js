@@ -1,3 +1,4 @@
+import _extends from 'babel-runtime/helpers/extends';
 import React from 'react';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
@@ -5,13 +6,18 @@ import CalendarHeader from '../calendar/CalendarHeader';
 import DateTable from '../date/DateTable';
 import DateInput from '../date/DateInput';
 import { getTimeConfig } from '../util/index';
+import moment from 'moment';
+import Toggle from 'react-toggle';
 
-const CalendarPart = createReactClass({
+var CalendarPart = createReactClass({
+  displayName: 'CalendarPart',
+
   propTypes: {
     prefixCls: PropTypes.string,
     value: PropTypes.any,
     hoverValue: PropTypes.any,
     selectedValue: PropTypes.any,
+    comparedSelectedValue: PropTypes.any,
     direction: PropTypes.any,
     locale: PropTypes.any,
     showDateInput: PropTypes.bool,
@@ -25,93 +31,148 @@ const CalendarPart = createReactClass({
     timePickerDisabledTime: PropTypes.object,
     enableNext: PropTypes.any,
     enablePrev: PropTypes.any,
+    comparedOptions: PropTypes.array,
+    comparedOption: PropTypes.string,
+    onComparedOptionChange: PropTypes.func,
+    isCompared: PropTypes.bool,
+    handleToggleChange: PropTypes.func
   },
-  render() {
-    const props = this.props;
-    const {
-      prefixCls,
-      value,
-      hoverValue,
-      selectedValue,
-      mode,
-      direction,
-      locale, format, placeholder,
-      disabledDate, timePicker, disabledTime,
-      timePickerDisabledTime, showTimePicker,
-      onInputSelect, enablePrev, enableNext,
-    } = props;
-    const shouldShowTimePicker = showTimePicker && timePicker;
-    const disabledTimeConfig = shouldShowTimePicker && disabledTime ?
-      getTimeConfig(selectedValue, disabledTime) : null;
-    const rangeClassName = `${prefixCls}-range`;
-    const newProps = {
-      locale,
-      value,
-      prefixCls,
-      showTimePicker,
+  handleToggleChange: function handleToggleChange(event){
+    this.props.handleToggleChange(event.target.checked);
+  },
+  render: function render() {
+    var props = this.props;
+    var prefixCls = props.prefixCls,
+        value = props.value,
+        hoverValue = props.hoverValue,
+        selectedValue = props.selectedValue,
+        mode = props.mode,
+        direction = props.direction,
+        locale = props.locale,
+        format = props.format,
+        placeholder = props.placeholder,
+        disabledDate = props.disabledDate,
+        timePicker = props.timePicker,
+        disabledTime = props.disabledTime,
+        timePickerDisabledTime = props.timePickerDisabledTime,
+        showTimePicker = props.showTimePicker,
+        onInputSelect = props.onInputSelect,
+        enablePrev = props.enablePrev,
+        enableNext = props.enableNext;
+
+    var shouldShowTimePicker = showTimePicker && timePicker;
+    var disabledTimeConfig = shouldShowTimePicker && disabledTime ? getTimeConfig(selectedValue, disabledTime) : null;
+    var rangeClassName = prefixCls + '-range';
+    var newProps = {
+      locale: locale,
+      value: value,
+      prefixCls: prefixCls,
+      showTimePicker: showTimePicker
     };
-    const index = direction === 'left' ? 0 : 1;
-    const timePickerEle = shouldShowTimePicker &&
-      React.cloneElement(timePicker, {
-        showHour: true,
-        showMinute: true,
-        showSecond: true,
-        ...timePicker.props,
-        ...disabledTimeConfig,
-        ...timePickerDisabledTime,
-        onChange: onInputSelect,
-        defaultOpenValue: value,
-        value: selectedValue[index],
-      });
+    var comparedValue = value;
 
-    const dateInputElement = props.showDateInput &&
-      <DateInput
-        format={format}
-        locale={locale}
-        prefixCls={prefixCls}
-        timePicker={timePicker}
-        disabledDate={disabledDate}
-        placeholder={placeholder}
-        disabledTime={disabledTime}
-        value={value}
-        showClear={false}
-        selectedValue={selectedValue[index]}
-        onChange={onInputSelect}
-      />;
+    var index = direction === 'left' ? 0 : 1;
+    var timePickerEle = shouldShowTimePicker && React.cloneElement(timePicker, _extends({
+      showHour: true,
+      showMinute: true,
+      showSecond: true
+    }, timePicker.props, disabledTimeConfig, timePickerDisabledTime, {
+      onChange: onInputSelect,
+      defaultOpenValue: value,
+      value: selectedValue[index]
+    }));
 
-    return (
-      <div className={`${rangeClassName}-part ${rangeClassName}-${direction}`}>
-        {dateInputElement}
-        <div style={{ outline: 'none' }}>
-          <CalendarHeader
-            {...newProps}
-            mode={mode}
-            enableNext={enableNext}
-            enablePrev={enablePrev}
-            onValueChange={props.onValueChange}
-            onPanelChange={props.onPanelChange}
-            disabledMonth={props.disabledMonth}
-          />
-          {showTimePicker ? <div className={`${prefixCls}-time-picker`}>
-            <div className={`${prefixCls}-time-picker-panel`}>
-              {timePickerEle}
-            </div>
-          </div> : null}
-          <div className={`${prefixCls}-body`}>
-            <DateTable
-              {...newProps}
-              hoverValue={hoverValue}
-              selectedValue={selectedValue}
-              dateRender={props.dateRender}
-              onSelect={props.onSelect}
-              onDayHover={props.onDayHover}
-              disabledDate={disabledDate}
-              showWeekNumber={props.showWeekNumber}
-            />
-          </div>
-        </div>
-      </div>);
-  },
+    var comparedDateInputElement = props.showDateInput && React.createElement(DateInput, {
+      format: format,
+      locale: locale,
+      prefixCls: prefixCls,
+      timePicker: timePicker,
+      disabledDate: disabledDate,
+      placeholder: placeholder,
+      disabledTime: disabledTime,
+      value: comparedValue, //value, // comparedValue,
+      showClear: false,
+      selectedValue: this.props.comparedSelectedValue[index], // selectedValue[index],// comparedSelectedValue[index],
+      comparedOptions: this.props.comparedOptions,
+      onComparedOptionChange: this.props.onComparedOptionChange,
+      comparedOption: this.props.comparedOption,
+      onChange: onInputSelect,
+      header: direction =='left' ? 'Early range': null
+    });
+    var dateInputElement = props.showDateInput && React.createElement(DateInput, {
+      format: format,
+      locale: locale,
+      prefixCls: prefixCls,
+      timePicker: timePicker,
+      disabledDate: disabledDate,
+      placeholder: placeholder,
+      disabledTime: disabledTime,
+      value: value,
+      showClear: false,
+      selectedValue: selectedValue[index],
+      comparedOptions: this.props.comparedOptions,
+      onComparedOptionChange: this.props.onComparedOptionChange,
+      comparedOption: this.props.comparedOption,
+      onChange: onInputSelect,
+      header: direction =='left' ? 'Current range': null
+    });
+    var comparedToggle = React.createElement('div',
+      {className: prefixCls+'-compared-toggle'},
+      React.createElement(
+        'span',
+        {className: prefixCls+'-compared-toggle-label'},
+        'Compared'
+      ),
+      React.createElement(
+      Toggle,
+      {
+        defaultChecked: this.props.isCompared, //this.state.cheeseIsReady,
+        onChange: this.handleToggleChange
+      })
+    );
+
+    return React.createElement(
+      'div',
+      { className: rangeClassName + '-part ' + rangeClassName + '-' + direction },
+      this.props.isCompared? comparedDateInputElement: null,
+      dateInputElement,
+      direction =='left'? null: comparedToggle,
+      React.createElement(
+        'div',
+        { style: { outline: 'none' } },
+        React.createElement(CalendarHeader, _extends({}, newProps, {
+          mode: mode,
+          enableNext: enableNext,
+          enablePrev: enablePrev,
+          onValueChange: props.onValueChange,
+          onPanelChange: props.onPanelChange,
+          disabledMonth: props.disabledMonth
+        })),
+        showTimePicker ? React.createElement(
+          'div',
+          { className: prefixCls + '-time-picker' },
+          React.createElement(
+            'div',
+            { className: prefixCls + '-time-picker-panel' },
+            timePickerEle
+          )
+        ) : null,
+        React.createElement(
+          'div',
+          { className: prefixCls + '-body' },
+          React.createElement(DateTable, _extends({}, newProps, {
+            hoverValue: hoverValue,
+            selectedValue: selectedValue,
+            dateRender: props.dateRender,
+            onSelect: props.onSelect,
+            onDayHover: props.onDayHover,
+            disabledDate: disabledDate,
+            showWeekNumber: props.showWeekNumber
+          }))
+        )
+      )
+    );
+  }
 });
 
 export default CalendarPart;
