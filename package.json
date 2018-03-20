@@ -77,6 +77,8 @@
     "rc-tools": "^7.0.3",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-dropdown": "1.4.0",
+    "underscore": "*",
     "react-test-renderer": "^16.0.0"
   },
   "pre-commit": [
