@@ -33,6 +33,7 @@ const locales = {
   ru_RU: require('../src/locale/ru_RU'),
   sk_SK: require('../src/locale/sk_SK'),
   sr_RS: require('../src/locale/sr_RS'),
+  sl_SI: require('../src/locale/sl_SI'),
   sv_SE: require('../src/locale/sv_SE'),
   th_TH: require('../src/locale/th_TH'),
   tr_TR: require('../src/locale/tr_TR'),
