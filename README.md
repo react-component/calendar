@@ -219,6 +219,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>date input's placeholder</td>
         </tr>
         <tr>
+          <td>disableDateInput</td>
+          <td>Boolean</td>
+          <td>false</td>
+          <td>disable range date input</td>
+        </tr>
+        <tr>
           <td>mode</td>
           <td>enum('time', 'date', 'month', 'year', 'decade')</td>
           <td>'date'</td>
@@ -365,6 +371,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>String[]</td>
           <td></td>
           <td>range date input's placeholders</td>
+        </tr>
+        <tr>
+          <td>disableDateInput</td>
+          <td>Boolean</td>
+          <td>false</td>
+          <td>disable range date input</td>
         </tr>
         <tr>
           <td>disabledTime</td>
