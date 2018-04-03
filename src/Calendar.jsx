@@ -67,6 +67,7 @@ const Calendar = createReactClass({
     onKeyDown: PropTypes.func,
     timePicker: PropTypes.element,
     dateInputPlaceholder: PropTypes.any,
+    disableDateInput: PropTypes.bool,
     onClear: PropTypes.func,
     onChange: PropTypes.func,
     onPanelChange: PropTypes.func,
@@ -217,7 +218,7 @@ const Calendar = createReactClass({
     const {
       locale, prefixCls, disabledDate,
       dateInputPlaceholder, timePicker,
-      disabledTime,
+      disabledTime, disableDateInput,
     } = props;
     const { value, selectedValue, mode } = state;
     const showTimePicker = mode === 'time';
@@ -255,6 +256,7 @@ const Calendar = createReactClass({
         showClear
         disabledTime={disabledTime}
         disabledDate={disabledDate}
+        disabled={disableDateInput}
         onClear={this.onClear}
         prefixCls={prefixCls}
         selectedValue={selectedValue}
