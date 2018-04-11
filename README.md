@@ -271,6 +271,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>prefixCls of this component</td>
         </tr>
         <tr>
+          <td>separator</td>
+          <td>String</td>
+          <td>~</td>
+          <td>the text rendered between two range values</td>
+        </tr>
+        <tr>
           <td>className</td>
           <td>String</td>
           <td></td>
