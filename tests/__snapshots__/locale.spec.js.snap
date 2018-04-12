@@ -22382,7 +22382,7 @@ exports[`locales renders sl_SI correctly 1`] = `
                 </div>
               </td>
               <td
-                class="rc-calendar-cell rc-calendar-last-month-cell"
+                class="rc-calendar-cell rc-calendar-last-month-cell rc-calendar-last-day-of-month"
                 role="gridcell"
                 title="February 28, 2017"
               >
@@ -22805,7 +22805,7 @@ exports[`locales renders sl_SI correctly 1`] = `
                 </div>
               </td>
               <td
-                class="rc-calendar-cell"
+                class="rc-calendar-cell rc-calendar-last-day-of-month"
                 role="gridcell"
                 title="March 31, 2017"
               >
