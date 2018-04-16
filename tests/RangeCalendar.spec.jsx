@@ -130,6 +130,25 @@ describe('RangeCalendar', () => {
       .toMatch('rc-calendar-month-panel-cell-disabled');
   });
 
+  it('should support disabledDate', () => {
+    const wrapper = mount(<RangeCalendar disabledDate={() => true} />);
+    wrapper.find('.rc-calendar-range-left .rc-calendar-month-select').simulate('click');
+    const leftCells = wrapper.find('.rc-calendar-range-left .rc-calendar-month-panel-cell');
+    const leftPanelMonth = wrapper.state('value')[0].month();
+    expect(leftCells.get(leftPanelMonth).props.className)
+      .toMatch('rc-calendar-month-panel-cell-disabled');
+    expect(leftCells.get(leftPanelMonth - 1).props.className)
+      .toMatch('rc-calendar-month-panel-cell-disabled');
+
+    wrapper.find('.rc-calendar-range-right .rc-calendar-month-select').simulate('click');
+    const rightCells = wrapper.find('.rc-calendar-range-right .rc-calendar-month-panel-cell');
+    const rightPanelMonth = wrapper.state('value')[1].month();
+    expect(rightCells.get(rightPanelMonth).props.className)
+      .toMatch('rc-calendar-month-panel-cell-disabled');
+    expect(rightCells.get(rightPanelMonth + 1).props.className)
+      .toMatch('rc-calendar-month-panel-cell-disabled');
+  });
+
   it('left panel and right panel should not be the same month even we try to set it', () => {
     const wrapper = mount(<RangeCalendar value={[moment(), moment()]} />);
     const value = wrapper.state('value');

@@ -108,6 +108,7 @@ const RangeCalendar = createReactClass({
       onValueChange: noop,
       onHoverChange: noop,
       onPanelChange: noop,
+      disabledDate: noop,
       disabledTime: noop,
       onInputSelect: noop,
       showToday: true,
@@ -448,14 +449,14 @@ const RangeCalendar = createReactClass({
     return this.props.disabledTime(time, 'end');
   },
 
-  disabledStartMonth(month) {
+  disabledStartMonth(date) {
     const { value } = this.state;
-    return month.isSameOrAfter(value[1], 'month');
+    return date.isSameOrAfter(value[1], 'month') || this.props.disabledDate(date);
   },
 
-  disabledEndMonth(month) {
+  disabledEndMonth(date) {
     const { value } = this.state;
-    return month.isSameOrBefore(value[0], 'month');
+    return date.isSameOrBefore(value[0], 'month') || this.props.disabledDate(date);
   },
 
   render() {
