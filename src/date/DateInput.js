@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import KeyCode from 'rc-util/lib/KeyCode';
 
 const DateInput = createReactClass({
   propTypes: {
@@ -18,6 +19,12 @@ const DateInput = createReactClass({
     placeholder: PropTypes.string,
     onSelect: PropTypes.func,
     selectedValue: PropTypes.object,
+  },
+
+  getDefaultProps() {
+    return {
+      onSelect() {},
+    };
   },
 
   getInitialState() {
@@ -46,50 +53,59 @@ const DateInput = createReactClass({
   },
 
   onInputChange(event) {
+    const { onChange, disabledDate } = this.props;
     const str = event.target.value;
-    this.setState({
-      str,
-    });
-    let value;
-    const { disabledDate, format, onChange } = this.props;
-    if (str) {
-      const parsed = moment(str, format, true);
-      if (!parsed.isValid()) {
-        this.setState({
-          invalid: true,
-        });
-        return;
-      }
-      value = this.props.value.clone();
-      value
-        .year(parsed.year())
-        .month(parsed.month())
-        .date(parsed.date())
-        .hour(parsed.hour())
-        .minute(parsed.minute())
-        .second(parsed.second());
+    const value = this.getInputValue(str);
+    let invalid = false;
 
-      if (value && (!disabledDate || !disabledDate(value))) {
-        const originalValue = this.props.selectedValue;
-        if (originalValue && value) {
-          if (!originalValue.isSame(value)) {
-            onChange(value);
-          }
-        } else if (originalValue !== value) {
+    if (!str) {
+      onChange(null);
+    } else if (value && (!disabledDate || !disabledDate(value))) {
+      const originalValue = this.props.selectedValue;
+      if (originalValue && value) {
+        if (!originalValue.isSame(value)) {
           onChange(value);
         }
-      } else {
-        this.setState({
-          invalid: true,
-        });
-        return;
+      } else if (originalValue !== value) {
+        onChange(value);
       }
     } else {
-      onChange(null);
+      invalid = true;
     }
-    this.setState({
-      invalid: false,
-    });
+
+    this.setState({ str, invalid });
+  },
+
+  onInputKeyDown(e) {
+    const { onSelect, disabledDate } = this.props;
+    const { str } = this.state;
+    if (e.keyCode === KeyCode.ENTER) {
+      const value = this.getInputValue(str);
+      if (value && (!disabledDate || !disabledDate(value))) {
+        onSelect(value, {
+          source: 'keyboard',
+        });
+      }
+    }
+  },
+
+  getInputValue(str) {
+    const { format } = this.props;
+    const parsed = moment(str, format, true);
+    if (!parsed.isValid()) {
+      return null;
+    }
+
+    const value = this.props.value.clone();
+    value
+      .year(parsed.year())
+      .month(parsed.month())
+      .date(parsed.date())
+      .hour(parsed.hour())
+      .minute(parsed.minute())
+      .second(parsed.second());
+
+    return value;
   },
 
   onClear() {
@@ -127,6 +143,7 @@ const DateInput = createReactClass({
           disabled={props.disabled}
           placeholder={placeholder}
           onChange={this.onInputChange}
+          onKeyDown={this.onInputKeyDown}
         />
       </div>
       {props.showClear ? <a

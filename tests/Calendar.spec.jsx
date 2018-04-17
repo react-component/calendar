@@ -482,6 +482,36 @@ describe('Calendar', () => {
       expect(onSelect.mock.calls[0][0].format(format)).toBe(expected);
       expect(onChange.mock.calls[0][0].format(format)).toBe(expected);
     });
+
+    it('keydown Enter will fire onSelect with valid value', () => {
+      const valid = '2017-01-01';
+      const onSelect = jest.fn();
+
+      const calendar = mount(<Calendar
+        format={format}
+        onSelect={onSelect}
+      />);
+      const input = calendar.find('.rc-calendar-input').hostNodes().at(0);
+      input.simulate('change', { target: { value: valid } });
+      input.simulate('keyDown', { keyCode: keyCode.ENTER });
+
+      expect(onSelect).toHaveBeenCalled();
+    });
+
+    it('keydown Enter will not fire onSelect with invalid value', () => {
+      const invalid = '2017-0';
+      const onSelect = jest.fn();
+
+      const calendar = mount(<Calendar
+        format={format}
+        showToday
+        onSelect={onSelect}
+      />);
+      const input = calendar.find('.rc-calendar-input').hostNodes().at(0);
+      input.simulate('change', { target: { value: invalid } });
+      input.simulate('keyDown', { keyCode: keyCode.ENTER });
+      expect(onSelect).not.toHaveBeenCalled();
+    });
   });
 
   it('handle clear', () => {

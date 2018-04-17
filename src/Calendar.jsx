@@ -259,6 +259,7 @@ const Calendar = createReactClass({
         prefixCls={prefixCls}
         selectedValue={selectedValue}
         onChange={this.onDateInputChange}
+        onSelect={this.onSelect}
       />
     ) : null;
     const children = [
