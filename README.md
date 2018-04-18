@@ -230,6 +230,30 @@ http://react-component.github.io/calendar/examples/index.html
           <td></td>
           <td>called when panel changed</td>
         </tr>
+        <tr>
+          <td>prevMonthIcon</td>
+          <td>React.Node</td>
+          <td></td>
+          <td>to use an own arrow icon</td>
+        </tr>
+        <tr>
+          <td>nextMonthIcon</td>
+          <td>React.Node</td>
+          <td></td>
+          <td>to use an own arrow icon</td>
+        </tr>
+        <tr>
+          <td>prevYearIcon</td>
+          <td>React.Node</td>
+          <td></td>
+          <td>to use an own arrow icon</td>
+        </tr>
+        <tr>
+          <td>nextYearIcon</td>
+          <td>React.Node</td>
+          <td></td>
+          <td>to use an own arrow icon</td>
+        </tr>
     </tbody>
 </table>
 

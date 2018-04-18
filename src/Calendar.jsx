@@ -74,6 +74,10 @@ const Calendar = createReactClass({
     disabledTime: PropTypes.any,
     renderFooter: PropTypes.func,
     renderSidebar: PropTypes.func,
+    prevMonthIcon: PropTypes.node,
+    nextMonthIcon: PropTypes.node,
+    prevYearIcon: PropTypes.node,
+    nextYearIcon: PropTypes.node,
   },
 
   mixins: [CommonMixin, CalendarMixin],
@@ -218,6 +222,10 @@ const Calendar = createReactClass({
       locale, prefixCls, disabledDate,
       dateInputPlaceholder, timePicker,
       disabledTime,
+      prevMonthIcon,
+      nextMonthIcon,
+      prevYearIcon,
+      nextYearIcon,
     } = props;
     const { value, selectedValue, mode } = state;
     const showTimePicker = mode === 'time';
@@ -274,6 +282,10 @@ const Calendar = createReactClass({
             onPanelChange={this.onPanelChange}
             showTimePicker={showTimePicker}
             prefixCls={prefixCls}
+            prevMonthIcon={prevMonthIcon}
+            nextMonthIcon={nextMonthIcon}
+            prevYearIcon={prevYearIcon}
+            nextYearIcon={nextYearIcon}
           />
           {timePicker && showTimePicker ?
             (<div className={`${prefixCls}-time-picker`}>
