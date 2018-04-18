@@ -230,6 +230,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td></td>
           <td>called when panel changed</td>
         </tr>
+        <tr>
+          <td>disableMonthsInPast</td>
+          <td>Boolean</td>
+          <td>false</td>
+          <td>whether to disable the year and month arrows on the left that link to dates in the past</td>
+        </tr>
     </tbody>
 </table>
 
