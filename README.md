@@ -230,6 +230,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td></td>
           <td>called when panel changed</td>
         </tr>
+        <tr>
+          <td>highlightToday</td>
+          <td>Boolean</td>
+          <td>true</td>
+          <td>whether to highlight the current day</td>
+        </tr>
     </tbody>
 </table>
 

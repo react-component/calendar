@@ -97,6 +97,7 @@ const RangeCalendar = createReactClass({
     type: PropTypes.any,
     disabledDate: PropTypes.func,
     disabledTime: PropTypes.func,
+    highlightToday: PropTypes.bool,
   },
 
   mixins: [CommonMixin],
@@ -112,6 +113,7 @@ const RangeCalendar = createReactClass({
       onInputSelect: noop,
       showToday: true,
       showDateInput: true,
+      highlightToday: true,
     };
   },
 
