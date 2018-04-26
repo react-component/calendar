@@ -647,7 +647,7 @@ exports[`locales renders ar_EG correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -1412,7 +1412,7 @@ exports[`locales renders bg_BG correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -2177,7 +2177,7 @@ exports[`locales renders ca_ES correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -2942,7 +2942,7 @@ exports[`locales renders cs_CZ correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -3707,7 +3707,7 @@ exports[`locales renders da_DK correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -4472,7 +4472,7 @@ exports[`locales renders de_DE correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -5237,7 +5237,7 @@ exports[`locales renders el_GR correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -6002,7 +6002,7 @@ exports[`locales renders en_GB correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -6767,7 +6767,7 @@ exports[`locales renders en_US correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -7532,7 +7532,7 @@ exports[`locales renders es_ES correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -8297,7 +8297,7 @@ exports[`locales renders et_EE correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -9062,7 +9062,7 @@ exports[`locales renders fa_IR correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -9827,7 +9827,7 @@ exports[`locales renders fi_FI correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -10592,7 +10592,7 @@ exports[`locales renders fr_BE correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -11357,7 +11357,7 @@ exports[`locales renders fr_FR correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -12122,7 +12122,7 @@ exports[`locales renders hu_HU correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -12887,7 +12887,7 @@ exports[`locales renders is_IS correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -13652,7 +13652,7 @@ exports[`locales renders it_IT correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -14417,7 +14417,7 @@ exports[`locales renders ja_JP correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -15182,7 +15182,7 @@ exports[`locales renders ko_KR correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -15947,7 +15947,7 @@ exports[`locales renders ku_IQ correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -16712,7 +16712,7 @@ exports[`locales renders nb_NO correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -17477,7 +17477,7 @@ exports[`locales renders nl_BE correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -18242,7 +18242,7 @@ exports[`locales renders nl_NL correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -19007,7 +19007,7 @@ exports[`locales renders pl_PL correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -19772,7 +19772,7 @@ exports[`locales renders pt_BR correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -20537,7 +20537,7 @@ exports[`locales renders pt_PT correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -21302,7 +21302,7 @@ exports[`locales renders ru_RU correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -22067,7 +22067,7 @@ exports[`locales renders sk_SK correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -22832,7 +22832,7 @@ exports[`locales renders sr_RS correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -23597,7 +23597,7 @@ exports[`locales renders sv_SE correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -24362,7 +24362,7 @@ exports[`locales renders th_TH correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -25127,7 +25127,7 @@ exports[`locales renders tr_TR correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -25892,7 +25892,7 @@ exports[`locales renders ug_CN correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -26657,7 +26657,7 @@ exports[`locales renders uk_UA correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -27422,7 +27422,7 @@ exports[`locales renders zh_CN correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -28187,7 +28187,7 @@ exports[`locales renders zh_TW correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td

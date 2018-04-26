@@ -583,7 +583,7 @@ exports[`FullCalendar renders custom header correctly 1`] = `
           </td>
         </tr>
         <tr
-          class=""
+          class="rc-calendar-next-month-row"
           role="row"
         >
           <td
@@ -1346,7 +1346,7 @@ exports[`FullCalendar renders date mode correctly 1`] = `
           </td>
         </tr>
         <tr
-          class=""
+          class="rc-calendar-next-month-row"
           role="row"
         >
           <td
@@ -2109,7 +2109,7 @@ exports[`FullCalendar renders fullscreen correctly 1`] = `
           </td>
         </tr>
         <tr
-          class=""
+          class="rc-calendar-next-month-row"
           role="row"
         >
           <td
@@ -3092,7 +3092,7 @@ exports[`FullCalendar type renders defaultType correctly 1`] = `
           </td>
         </tr>
         <tr
-          class=""
+          class="rc-calendar-next-month-row"
           role="row"
         >
           <td

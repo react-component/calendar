@@ -628,7 +628,7 @@ exports[`RangeCalendar can hide date inputs with showDateInput={false} 1`] = `
                   </td>
                 </tr>
                 <tr
-                  class=""
+                  class="rc-calendar-next-month-row"
                   role="row"
                 >
                   <td
@@ -2314,7 +2314,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   </td>
                 </tr>
                 <tr
-                  class=""
+                  class="rc-calendar-next-month-row"
                   role="row"
                 >
                   <td
@@ -4220,7 +4220,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   </td>
                 </tr>
                 <tr
-                  class=""
+                  class="rc-calendar-next-month-row"
                   role="row"
                 >
                   <td
@@ -5920,7 +5920,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   </td>
                 </tr>
                 <tr
-                  class=""
+                  class="rc-calendar-next-month-row"
                   role="row"
                 >
                   <td
