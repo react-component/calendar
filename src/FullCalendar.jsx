@@ -107,7 +107,7 @@ const FullCalendar = createReactClass({
         locale={locale}
         prefixCls={prefixCls}
         onSelect={this.onSelect}
-        value={value}
+        displayedValue={value}
         disabledDate={disabledDate}
       />
     ) : (

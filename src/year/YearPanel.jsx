@@ -5,18 +5,15 @@ const ROW = 4;
 const COL = 3;
 
 function goYear(direction) {
-  const value = this.state.value.clone();
-  value.add(direction, 'year');
-  this.setState({
-    value,
-  });
+  const next = this.props.displayedValue.clone();
+  next.add(direction, 'year');
+  this.props.setDisplayedValue(next);
 }
 
 function chooseYear(year) {
-  const value = this.state.value.clone();
-  value.year(year);
-  value.month(this.state.value.month());
-  this.props.onSelect(value);
+  const next = this.props.displayedValue.clone();
+  next.year(year);
+  this.props.onSelect(next);
 }
 
 export default
@@ -32,8 +29,8 @@ class YearPanel extends React.Component {
   }
 
   years() {
-    const value = this.state.value;
-    const currentYear = value.year();
+    const displayedValue = this.props.displayedValue;
+    const currentYear = displayedValue.year();
     const startYear = parseInt(currentYear / 10, 10) * 10;
     const previousYear = startYear - 1;
     const years = [];
@@ -55,10 +52,10 @@ class YearPanel extends React.Component {
   }
   render() {
     const props = this.props;
-    const value = this.state.value;
+    const displayedValue = props.displayedValue;
     const locale = props.locale;
     const years = this.years();
-    const currentYear = value.year();
+    const currentYear = displayedValue.year();
     const startYear = parseInt(currentYear / 10, 10) * 10;
     const endYear = startYear + 9;
     const prefixCls = this.prefixCls;
@@ -142,6 +139,7 @@ YearPanel.propTypes = {
   rootPrefixCls: PropTypes.string,
   value: PropTypes.object,
   defaultValue: PropTypes.object,
+  displayedValue: PropTypes.object,
 };
 
 YearPanel.defaultProps = {

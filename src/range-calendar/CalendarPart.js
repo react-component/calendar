@@ -47,6 +47,7 @@ const CalendarPart = createReactClass({
     const newProps = {
       locale,
       value,
+      displayedValue: value,
       prefixCls,
       showTimePicker,
     };
@@ -88,7 +89,7 @@ const CalendarPart = createReactClass({
             mode={mode}
             enableNext={enableNext}
             enablePrev={enablePrev}
-            onValueChange={props.onValueChange}
+            setDisplayedValue={props.onValueChange}
             onPanelChange={props.onPanelChange}
             disabledMonth={props.disabledMonth}
           />

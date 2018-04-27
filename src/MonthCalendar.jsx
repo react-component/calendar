@@ -21,20 +21,20 @@ const MonthCalendar = createReactClass({
   onKeyDown(event) {
     const keyCode = event.keyCode;
     const ctrlKey = event.ctrlKey || event.metaKey;
-    const stateValue = this.state.value;
     const { disabledDate } = this.props;
-    let value = stateValue;
+    const { displayedValue } = this.state;
+    let value = displayedValue;
     switch (keyCode) {
       case KeyCode.DOWN:
-        value = stateValue.clone();
+        value = displayedValue.clone();
         value.add(3, 'months');
         break;
       case KeyCode.UP:
-        value = stateValue.clone();
+        value = displayedValue.clone();
         value.add(-3, 'months');
         break;
       case KeyCode.LEFT:
-        value = stateValue.clone();
+        value = displayedValue.clone();
         if (ctrlKey) {
           value.add(-1, 'years');
         } else {
@@ -42,7 +42,7 @@ const MonthCalendar = createReactClass({
         }
         break;
       case KeyCode.RIGHT:
-        value = stateValue.clone();
+        value = displayedValue.clone();
         if (ctrlKey) {
           value.add(1, 'years');
         } else {
@@ -50,16 +50,16 @@ const MonthCalendar = createReactClass({
         }
         break;
       case KeyCode.ENTER:
-        if (!disabledDate || !disabledDate(stateValue)) {
-          this.onSelect(stateValue);
+        if (!disabledDate || !disabledDate(displayedValue)) {
+          this.onSelect(displayedValue);
         }
         event.preventDefault();
         return 1;
       default:
         return undefined;
     }
-    if (value !== stateValue) {
-      this.setValue(value);
+    if (value !== displayedValue) {
+      this.setDisplayedValue(value);
       event.preventDefault();
       return 1;
     }
@@ -73,7 +73,7 @@ const MonthCalendar = createReactClass({
 
   render() {
     const { props, state } = this;
-    const { mode, value } = state;
+    const { mode, value, displayedValue } = state;
     const children = (
       <div className={`${props.prefixCls}-month-calendar-content`}>
         <div className={`${props.prefixCls}-month-header-wrap`}>
@@ -81,6 +81,7 @@ const MonthCalendar = createReactClass({
             prefixCls={props.prefixCls}
             mode={mode}
             value={value}
+            displayedValue={displayedValue}
             locale={props.locale}
             disabledMonth={props.disabledDate}
             monthCellRender={props.monthCellRender}
@@ -88,6 +89,7 @@ const MonthCalendar = createReactClass({
             onMonthSelect={this.onSelect}
             onValueChange={this.setValue}
             onPanelChange={this.handlePanelChange}
+            setDisplayedValue={this.setDisplayedValue}
           />
         </div>
         <CalendarFooter

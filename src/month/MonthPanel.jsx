@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import MonthTable from './MonthTable';
 
 function goYear(direction) {
-  const next = this.state.value.clone();
+  const next = this.props.displayedValue.clone();
   next.add(direction, 'year');
-  this.setAndChangeValue(next);
+  this.props.setDisplayedValue(next);
 }
 
 function noop() {
@@ -66,11 +66,11 @@ const MonthPanel = createReactClass({
 
   render() {
     const props = this.props;
-    const value = this.state.value;
+    const displayedValue = props.displayedValue;
     const cellRender = props.cellRender;
     const contentRender = props.contentRender;
     const locale = props.locale;
-    const year = value.year();
+    const year = displayedValue.year();
     const prefixCls = this.prefixCls;
     return (
       <div className={prefixCls} style={props.style}>
@@ -105,7 +105,7 @@ const MonthPanel = createReactClass({
               disabledDate={props.disabledDate}
               onSelect={this.setAndSelectValue}
               locale={locale}
-              value={value}
+              value={displayedValue}
               cellRender={cellRender}
               contentRender={contentRender}
               prefixCls={prefixCls}
