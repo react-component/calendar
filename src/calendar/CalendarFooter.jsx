@@ -51,17 +51,18 @@ const CalendarFooter = createReactClass({
 
       let footerBtn;
       if (nowEl || timePickerBtn || okBtn) {
-        footerBtn = (<span className={`${prefixCls}-footer-btn`}>
-          {toFragment([nowEl, timePickerBtn, okBtn])}
-        </span>);
+        footerBtn = (
+          <span className={`${prefixCls}-footer-btn`}>
+            {extraFooter}
+            {toFragment([nowEl, timePickerBtn, okBtn])}
+          </span>
+        );
       }
-      const cls = cx({
-        [`${prefixCls}-footer`]: true,
+      const cls = cx(`${prefixCls}-footer`, {
         [`${prefixCls}-footer-show-ok`]: okBtn,
       });
       footerEl = (
         <div className={cls}>
-          {extraFooter}
           {footerBtn}
         </div>);
     }
