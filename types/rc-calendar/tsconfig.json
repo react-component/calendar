@@ -1,23 +1,23 @@
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "lib": [
-            "es6"
-        ],
-        "noImplicitAny": true,
-        "noImplicitThis": true,
-        "strictNullChecks": true,
-        "baseUrl": "../",
-        "typeRoots": [
-            "../"
-        ],
-        "types": [],
-        "noEmit": true,
-        "forceConsistentCasingInFileNames": true,
-        "jsx": "preserve"
-    },
-    "files": [
-        "index.d.ts",
-        "rc-calendar-tests.tsx"
-    ]
+  "compilerOptions": {
+    "baseUrl": "../",
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "preserve",
+    "lib": [
+      "es6"
+    ],
+    "module": "commonjs",
+    "noEmit": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "typeRoots": [
+      "../"
+    ],
+    "types": []
+  },
+  "files": [
+    "index.d.ts",
+    "rc-calendar-tests.tsx"
+  ]
 }

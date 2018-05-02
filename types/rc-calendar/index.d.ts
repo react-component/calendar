@@ -9,30 +9,30 @@ import { Moment } from 'moment';
 export type Mode = 'time' | 'date' | 'month' | 'year' | 'decade';
 
 export interface Props {
-    prefixCls?: string;
-    className?: string;
-    style?: object;
-    defaultValue?: Moment;
-    value?: Moment;
-    selectedValue?: object;
-    mode?: Mode;
-    locale?: object;
-    showDateInput?: boolean;
-    showWeekNumber?: boolean;
-    showToday?: boolean;
-    showOk?: boolean;
-    onSelect?: (date: Moment) => void;
-    onOk?: () => void;
-    onKeyDown?: () => void;
-    timePicker?: React.ReactNode;
-    dateInputPlaceholder?: any;
-    onClear?: () => void;
-    onChange?: (date: Moment) => void;
-    onPanelChange?: (date: Moment, mode: Mode) => void;
-    disabledDate?: (current: Moment) => boolean;
-    disabledTime?: (current: Moment) => object;
-    renderFooter?: () => React.ReactNode;
-    renderSidebar?: () => React.ReactNode;
+  prefixCls?: string;
+  className?: string;
+  style?: React.CSSProperties;
+  defaultValue?: Moment;
+  value?: Moment;
+  selectedValue?: Moment;
+  mode?: Mode;
+  locale?: object;
+  showDateInput?: boolean;
+  showWeekNumber?: boolean;
+  showToday?: boolean;
+  showOk?: boolean;
+  onSelect?: (date: Moment) => void;
+  onOk?: () => void;
+  onKeyDown?: () => void;
+  timePicker?: React.ReactNode;
+  dateInputPlaceholder?: string;
+  onClear?: () => void;
+  onChange?: (date: Moment) => void;
+  onPanelChange?: (date: Moment, mode: Mode) => void;
+  disabledDate?: (current: Moment) => boolean;
+  disabledTime?: (current: Moment) => object;
+  renderFooter?: () => React.ReactNode;
+  renderSidebar?: () => React.ReactNode;
 }
 
 export default class ReactCalendar extends React.Component<Props> {}
