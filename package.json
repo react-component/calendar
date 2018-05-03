@@ -15,7 +15,8 @@
     "lib",
     "es",
     "assets/*.css",
-    "dist"
+    "dist",
+    "index.d.ts"
   ],
   "main": "lib/index",
   "module": "es/index",
@@ -46,7 +47,7 @@
     "pub": "rc-tools run pub --babel-runtime",
     "lint": "rc-tools run lint",
     "test": "jest",
-    "types": "tslint -c types/rc-calendar/tslint.json types/**/*.ts{,x} && tsc -p types/rc-calendar",
+    "types": "tslint *.ts{,x} && tsc",
     "coverage": "jest --coverage"
   },
   "jest": {
@@ -96,5 +97,5 @@
     "rc-trigger": "^2.2.0",
     "rc-util": "^4.1.1"
   },
-  "types": "types/rc-calendar/index.d.ts"
+  "types": "index.d.ts"
 }

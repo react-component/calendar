@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as moment from 'moment';
-import Calendar from 'rc-calendar';
+import Calendar from './';
 
 const action = (date: moment.Moment) => {
   date.subtract(1);
