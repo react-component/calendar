@@ -55,7 +55,7 @@ const Picker = createReactClass({
   getInitialState() {
     const props = this.props;
     let open;
-    if ('open' in props) {
+    if ('open' in props && props.open !== undefined) {
       open = props.open;
     } else {
       open = props.defaultOpen;
@@ -157,7 +157,7 @@ const Picker = createReactClass({
   setOpen(open, callback) {
     const { onOpenChange } = this.props;
     if (this.state.open !== open) {
-      if (!('open' in this.props)) {
+      if (!('open' in this.props) || this.props.open === undefined) {
         this.setState({
           open,
         }, callback);
