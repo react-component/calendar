@@ -29,7 +29,7 @@ export interface Props {
   onClear?: () => void;
   onChange?: (date: Moment) => void;
   onPanelChange?: (date: Moment, mode: Mode) => void;
-  disabledDate?: (current: Moment) => boolean;
+  disabledDate?: (current: Moment, value: Moment, hoverValue: Moment) => boolean;
   disabledTime?: (current: Moment) => object;
   renderFooter?: () => React.ReactNode;
   renderSidebar?: () => React.ReactNode;
