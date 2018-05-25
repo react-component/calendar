@@ -196,7 +196,7 @@ var CalendarHeader = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()(
         onClick: showTimePicker ? null : this.showMonthPanel,
         title: locale.monthSelect
       },
-      localeData.monthsShort(value)
+      locale.monthFormat ? value.format(locale.monthFormat) : localeData.monthsShort(value)
     );
     var day = void 0;
     if (showTimePicker) {
@@ -618,6 +618,7 @@ var DateTBody = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
     var disabledClass = prefixCls + '-disabled-cell';
     var firstDisableClass = prefixCls + '-disabled-cell-first-of-row';
     var lastDisableClass = prefixCls + '-disabled-cell-last-of-row';
+    var lastDayOfMonthClass = prefixCls + '-last-day-of-month';
     var month1 = value.clone();
     month1.date(1);
     var day = month1.day();
@@ -715,8 +716,13 @@ var DateTBody = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
         if (isBeforeCurrentMonthYear) {
           cls += ' ' + lastMonthDayClass;
         }
+
         if (isAfterCurrentMonthYear) {
           cls += ' ' + nextMonthDayClass;
+        }
+
+        if (current.clone().endOf('month').date() === current.date()) {
+          cls += ' ' + lastDayOfMonthClass;
         }
 
         if (disabledDate) {
@@ -1742,7 +1748,7 @@ var Dialog = function (_React$Component) {
             var style = __WEBPACK_IMPORTED_MODULE_10_object_assign___default()({}, props.style, dest);
             var transitionName = _this.getTransitionName();
             var dialogElement = __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__LazyRenderBox__["a" /* default */], { key: "dialog-element", role: "document", ref: _this.saveRef('dialog'), style: style, className: prefixCls + ' ' + (props.className || ''), visible: props.visible }, __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement("div", { className: prefixCls + '-content' }, closer, header, __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement("div", __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({ className: prefixCls + '-body', style: props.bodyStyle, ref: "body" }, props.bodyProps), props.children), footer), __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement("div", { tabIndex: 0, ref: _this.saveRef('sentinel'), style: { width: 0, height: 0, overflow: 'hidden' } }, "sentinel"));
-            return __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7_rc_animate__["a" /* default */], { key: "dialog", showProp: "visible", onLeave: _this.onAnimateLeave, transitionName: transitionName, component: "", transitionAppear: true }, props.visible || !props.destroyOnClose ? dialogElement : null);
+            return __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7_rc_animate__["a" /* default */], { key: "dialog", showProp: "visible", onLeave: _this.onAnimateLeave, transitionName: transitionName, component: "", transitionAppear: true }, dialogElement);
         };
         _this.getZIndexStyle = function () {
             var style = {};
@@ -1925,7 +1931,6 @@ Dialog.defaultProps = {
     keyboard: true,
     closable: true,
     maskClosable: true,
-    destroyOnClose: false,
     prefixCls: 'rc-dialog'
 };
 
@@ -2050,6 +2055,7 @@ function getScrollBarSize(fresh) {
   ok: '确定',
   timeSelect: '选择时间',
   dateSelect: '选择日期',
+  weekSelect: '选择周',
   clear: '清除',
   month: '月',
   year: '年',

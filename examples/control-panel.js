@@ -1030,95 +1030,22 @@ var _initialiseProps = function _initialiseProps() {
     _this2.state.open = open;
   };
 
-  this.renderFilterOptions = function () {
-    var inputValue = _this2.state.inputValue;
-    var _props3 = _this2.props,
-        children = _props3.children,
-        tags = _props3.tags,
-        filterOption = _props3.filterOption,
-        notFoundContent = _props3.notFoundContent;
-
-    var menuItems = [];
-    var childrenKeys = [];
-    var options = _this2.renderFilterOptionsFromChildren(children, childrenKeys, menuItems);
-    if (tags) {
-      // tags value must be string
-      var value = _this2.state.value || [];
-      value = value.filter(function (singleValue) {
-        return childrenKeys.indexOf(singleValue.key) === -1 && (!inputValue || String(singleValue.key).indexOf(String(inputValue)) > -1);
-      });
-      value.forEach(function (singleValue) {
-        var key = singleValue.key;
-        var menuItem = __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
-          __WEBPACK_IMPORTED_MODULE_11_rc_menu__["a" /* Item */],
-          {
-            style: __WEBPACK_IMPORTED_MODULE_13__util__["b" /* UNSELECTABLE_STYLE */],
-            attribute: __WEBPACK_IMPORTED_MODULE_13__util__["a" /* UNSELECTABLE_ATTRIBUTE */],
-            value: key,
-            key: key
-          },
-          key
-        );
-        options.push(menuItem);
-        menuItems.push(menuItem);
-      });
-      if (inputValue) {
-        var notFindInputItem = menuItems.every(function (option) {
-          // this.filterOption return true has two meaning,
-          // 1, some one exists after filtering
-          // 2, filterOption is set to false
-          // condition 2 does not mean the option has same value with inputValue
-          var filterFn = function filterFn() {
-            return Object(__WEBPACK_IMPORTED_MODULE_13__util__["i" /* getValuePropValue */])(option) === inputValue;
-          };
-          if (filterOption !== false) {
-            return !_this2.filterOption.call(_this2, inputValue, option, filterFn);
-          }
-          return !filterFn();
-        });
-        if (notFindInputItem) {
-          options.unshift(__WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
-            __WEBPACK_IMPORTED_MODULE_11_rc_menu__["a" /* Item */],
-            {
-              style: __WEBPACK_IMPORTED_MODULE_13__util__["b" /* UNSELECTABLE_STYLE */],
-              attribute: __WEBPACK_IMPORTED_MODULE_13__util__["a" /* UNSELECTABLE_ATTRIBUTE */],
-              value: inputValue,
-              key: inputValue
-            },
-            inputValue
-          ));
-        }
-      }
-    }
-
-    if (!options.length && notFoundContent) {
-      options = [__WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
-        __WEBPACK_IMPORTED_MODULE_11_rc_menu__["a" /* Item */],
-        {
-          style: __WEBPACK_IMPORTED_MODULE_13__util__["b" /* UNSELECTABLE_STYLE */],
-          attribute: __WEBPACK_IMPORTED_MODULE_13__util__["a" /* UNSELECTABLE_ATTRIBUTE */],
-          disabled: true,
-          value: 'NOT_FOUND',
-          key: 'NOT_FOUND'
-        },
-        notFoundContent
-      )];
-    }
-    return options;
+  this.renderFilterOptions = function (inputValue) {
+    return _this2.renderFilterOptionsFromChildren(_this2.props.children, true, inputValue);
   };
 
-  this.renderFilterOptionsFromChildren = function (children, childrenKeys, menuItems) {
+  this.renderFilterOptionsFromChildren = function (children, showNotFound, iv) {
     var sel = [];
     var props = _this2.props;
-    var inputValue = _this2.state.inputValue;
-
+    var inputValue = iv === undefined ? _this2.state.inputValue : iv;
+    var childrenKeys = [];
     var tags = props.tags;
     __WEBPACK_IMPORTED_MODULE_4_react___default.a.Children.forEach(children, function (child) {
       if (!child) {
         return;
       }
       if (child.type.isSelectOptGroup) {
-        var innerItems = _this2.renderFilterOptionsFromChildren(child.props.children, childrenKeys, menuItems);
+        var innerItems = _this2.renderFilterOptionsFromChildren(child.props.children, false);
         if (innerItems.length) {
           var label = child.props.label;
           var key = child.key;
@@ -1143,20 +1070,77 @@ var _initialiseProps = function _initialiseProps() {
       Object(__WEBPACK_IMPORTED_MODULE_13__util__["s" /* validateOptionValue */])(childValue, _this2.props);
 
       if (_this2.filterOption(inputValue, child)) {
-        var menuItem = __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_11_rc_menu__["a" /* Item */], __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({
+        sel.push(__WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_11_rc_menu__["a" /* Item */], __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({
           style: __WEBPACK_IMPORTED_MODULE_13__util__["b" /* UNSELECTABLE_STYLE */],
           attribute: __WEBPACK_IMPORTED_MODULE_13__util__["a" /* UNSELECTABLE_ATTRIBUTE */],
           value: childValue,
           key: childValue
-        }, child.props));
-        sel.push(menuItem);
-        menuItems.push(menuItem);
+        }, child.props)));
       }
       if (tags && !child.props.disabled) {
         childrenKeys.push(childValue);
       }
     });
-
+    if (tags) {
+      // tags value must be string
+      var value = _this2.state.value || [];
+      value = value.filter(function (singleValue) {
+        return childrenKeys.indexOf(singleValue.key) === -1 && (!inputValue || String(singleValue.key).indexOf(String(inputValue)) > -1);
+      });
+      sel = sel.concat(value.map(function (singleValue) {
+        var key = singleValue.key;
+        return __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_11_rc_menu__["a" /* Item */],
+          {
+            style: __WEBPACK_IMPORTED_MODULE_13__util__["b" /* UNSELECTABLE_STYLE */],
+            attribute: __WEBPACK_IMPORTED_MODULE_13__util__["a" /* UNSELECTABLE_ATTRIBUTE */],
+            value: key,
+            key: key
+          },
+          key
+        );
+      }));
+      if (inputValue) {
+        var notFindInputItem = sel.every(function (option) {
+          // this.filterOption return true has two meaning,
+          // 1, some one exists after filtering
+          // 2, filterOption is set to false
+          // condition 2 does not mean the option has same value with inputValue
+          var filterFn = function filterFn() {
+            return Object(__WEBPACK_IMPORTED_MODULE_13__util__["i" /* getValuePropValue */])(option) === inputValue;
+          };
+          if (_this2.props.filterOption !== false) {
+            return !_this2.filterOption.call(_this2, inputValue, option, filterFn);
+          }
+          return !filterFn();
+        });
+        if (notFindInputItem) {
+          sel.unshift(__WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_11_rc_menu__["a" /* Item */],
+            {
+              style: __WEBPACK_IMPORTED_MODULE_13__util__["b" /* UNSELECTABLE_STYLE */],
+              attribute: __WEBPACK_IMPORTED_MODULE_13__util__["a" /* UNSELECTABLE_ATTRIBUTE */],
+              value: inputValue,
+              key: inputValue
+            },
+            inputValue
+          ));
+        }
+      }
+    }
+    if (!sel.length && showNotFound && props.notFoundContent) {
+      sel = [__WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
+        __WEBPACK_IMPORTED_MODULE_11_rc_menu__["a" /* Item */],
+        {
+          style: __WEBPACK_IMPORTED_MODULE_13__util__["b" /* UNSELECTABLE_STYLE */],
+          attribute: __WEBPACK_IMPORTED_MODULE_13__util__["a" /* UNSELECTABLE_ATTRIBUTE */],
+          disabled: true,
+          value: 'NOT_FOUND',
+          key: 'NOT_FOUND'
+        },
+        props.notFoundContent
+      )];
+    }
     return sel;
   };
 
@@ -1228,7 +1212,7 @@ var _initialiseProps = function _initialiseProps() {
       var selectedValueNodes = [];
       var limitedCountValue = value;
       var maxTagPlaceholderEl = void 0;
-      if (maxTagCount !== undefined && value.length > maxTagCount) {
+      if (maxTagCount && value.length > maxTagCount) {
         limitedCountValue = limitedCountValue.slice(0, maxTagCount);
         var omittedValues = _this2.getVLForOnChange(value.slice(maxTagCount, value.length));
         var content = '+ ' + (value.length - maxTagCount) + ' ...';
@@ -1387,7 +1371,7 @@ var Menu = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
       onDeselect: __WEBPACK_IMPORTED_MODULE_4__util__["d" /* noop */],
       defaultSelectedKeys: [],
       defaultOpenKeys: [],
-      subMenuOpenDelay: 0.1,
+      subMenuOpenDelay: 0,
       subMenuCloseDelay: 0.1,
       triggerSubMenuAction: 'hover'
     };
@@ -1408,16 +1392,14 @@ var Menu = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
     };
   },
   componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+    var props = {};
     if ('selectedKeys' in nextProps) {
-      this.setState({
-        selectedKeys: nextProps.selectedKeys || []
-      });
+      props.selectedKeys = nextProps.selectedKeys || [];
     }
     if ('openKeys' in nextProps) {
-      this.setState({
-        openKeys: nextProps.openKeys || []
-      });
+      props.openKeys = nextProps.openKeys || [];
     }
+    this.setState(props);
   },
   onSelect: function onSelect(selectInfo) {
     var props = this.props;
@@ -1443,7 +1425,7 @@ var Menu = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
   onClick: function onClick(e) {
     this.props.onClick(e);
   },
-  onOpenChange: function onOpenChange(event) {
+  onOpenChange: function onOpenChange(e_) {
     var props = this.props;
     var openKeys = this.state.openKeys.concat();
     var changed = false;
@@ -1463,11 +1445,11 @@ var Menu = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
       }
       changed = changed || oneChanged;
     };
-    if (Array.isArray(event)) {
+    if (Array.isArray(e_)) {
       // batch change call
-      event.forEach(processSingle);
+      e_.forEach(processSingle);
     } else {
-      processSingle(event);
+      processSingle(e_);
     }
     if (changed) {
       if (!('openKeys' in this.props)) {
@@ -2272,7 +2254,7 @@ var SubMenu = __WEBPACK_IMPORTED_MODULE_4_create_react_class___default()({
     if (mode !== 'horizontal' || !parentMenu.isRootMenu || !this.isOpen()) {
       return;
     }
-    this.minWidthTimeout = setTimeout(function () {
+    setTimeout(function () {
       if (!_this.subMenuTitle || !_this.menuInstance) {
         return;
       }
@@ -2286,16 +2268,14 @@ var SubMenu = __WEBPACK_IMPORTED_MODULE_4_create_react_class___default()({
   componentWillUnmount: function componentWillUnmount() {
     var _props2 = this.props,
         onDestroy = _props2.onDestroy,
-        eventKey = _props2.eventKey;
+        eventKey = _props2.eventKey,
+        parentMenu = _props2.parentMenu;
 
     if (onDestroy) {
       onDestroy(eventKey);
     }
-    if (this.minWidthTimeout) {
-      clearTimeout(this.minWidthTimeout);
-    }
-    if (this.mouseenterTimeout) {
-      clearTimeout(this.mouseenterTimeout);
+    if (parentMenu.subMenuInstance === this) {
+      this.clearSubMenuTimers();
     }
   },
   onDestroy: function onDestroy(key) {
@@ -2354,6 +2334,7 @@ var SubMenu = __WEBPACK_IMPORTED_MODULE_4_create_react_class___default()({
         key = _props3.eventKey,
         onMouseEnter = _props3.onMouseEnter;
 
+    this.clearSubMenuLeaveTimer();
     this.setState({
       defaultActiveFirst: false
     });
@@ -2369,10 +2350,15 @@ var SubMenu = __WEBPACK_IMPORTED_MODULE_4_create_react_class___default()({
         onMouseLeave = _props4.onMouseLeave;
 
     parentMenu.subMenuInstance = this;
-    onMouseLeave({
-      key: eventKey,
-      domEvent: e
-    });
+    parentMenu.subMenuLeaveFn = function () {
+      // trigger mouseleave
+      onMouseLeave({
+        key: eventKey,
+        domEvent: e
+      });
+    };
+    // prevent popup menu and submenu gap
+    parentMenu.subMenuLeaveTimer = setTimeout(parentMenu.subMenuLeaveFn, 100);
   },
   onTitleMouseEnter: function onTitleMouseEnter(domEvent) {
     var _props5 = this.props,
@@ -2380,6 +2366,7 @@ var SubMenu = __WEBPACK_IMPORTED_MODULE_4_create_react_class___default()({
         onItemHover = _props5.onItemHover,
         onTitleMouseEnter = _props5.onTitleMouseEnter;
 
+    this.clearSubMenuTitleLeaveTimer();
     onItemHover({
       key: key,
       hover: true
@@ -2397,14 +2384,17 @@ var SubMenu = __WEBPACK_IMPORTED_MODULE_4_create_react_class___default()({
         onTitleMouseLeave = _props6.onTitleMouseLeave;
 
     parentMenu.subMenuInstance = this;
-    onItemHover({
-      key: eventKey,
-      hover: false
-    });
-    onTitleMouseLeave({
-      key: eventKey,
-      domEvent: e
-    });
+    parentMenu.subMenuTitleLeaveFn = function () {
+      onItemHover({
+        key: eventKey,
+        hover: false
+      });
+      onTitleMouseLeave({
+        key: eventKey,
+        domEvent: e
+      });
+    };
+    parentMenu.subMenuTitleLeaveTimer = setTimeout(parentMenu.subMenuTitleLeaveFn, 100);
   },
   onTitleClick: function onTitleClick(e) {
     var props = this.props;
@@ -2454,24 +2444,32 @@ var SubMenu = __WEBPACK_IMPORTED_MODULE_4_create_react_class___default()({
     });
   },
   triggerOpenChange: function triggerOpenChange(open, type) {
-    var _this2 = this;
-
     var key = this.props.eventKey;
-    var openChange = function openChange() {
-      _this2.onOpenChange({
-        key: key,
-        item: _this2,
-        trigger: type,
-        open: open
-      });
-    };
-    if (type === 'mouseenter') {
-      // make sure mouseenter happen after other menu item's mouseleave
-      this.mouseenterTimeout = setTimeout(function () {
-        openChange();
-      }, 0);
-    } else {
-      openChange();
+    this.onOpenChange({
+      key: key,
+      item: this,
+      trigger: type,
+      open: open
+    });
+  },
+  clearSubMenuTimers: function clearSubMenuTimers() {
+    this.clearSubMenuLeaveTimer();
+    this.clearSubMenuTitleLeaveTimer();
+  },
+  clearSubMenuTitleLeaveTimer: function clearSubMenuTitleLeaveTimer() {
+    var parentMenu = this.props.parentMenu;
+    if (parentMenu.subMenuTitleLeaveTimer) {
+      clearTimeout(parentMenu.subMenuTitleLeaveTimer);
+      parentMenu.subMenuTitleLeaveTimer = null;
+      parentMenu.subMenuTitleLeaveFn = null;
+    }
+  },
+  clearSubMenuLeaveTimer: function clearSubMenuLeaveTimer() {
+    var parentMenu = this.props.parentMenu;
+    if (parentMenu.subMenuLeaveTimer) {
+      clearTimeout(parentMenu.subMenuLeaveTimer);
+      parentMenu.subMenuLeaveTimer = null;
+      parentMenu.subMenuLeaveFn = null;
     }
   },
   isChildrenSelected: function isChildrenSelected() {
@@ -2845,9 +2843,13 @@ var MenuItem = __WEBPACK_IMPORTED_MODULE_3_create_react_class___default()({
   onMouseEnter: function onMouseEnter(e) {
     var _props2 = this.props,
         eventKey = _props2.eventKey,
+        parentMenu = _props2.parentMenu,
         onItemHover = _props2.onItemHover,
         onMouseEnter = _props2.onMouseEnter;
 
+    if (parentMenu.subMenuInstance) {
+      parentMenu.subMenuInstance.clearSubMenuTimers();
+    }
     onItemHover({
       key: eventKey,
       hover: true
@@ -3808,7 +3810,7 @@ var CalendarHeader = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()(
         onClick: showTimePicker ? null : this.showMonthPanel,
         title: locale.monthSelect
       },
-      localeData.monthsShort(value)
+      locale.monthFormat ? value.format(locale.monthFormat) : localeData.monthsShort(value)
     );
     var day = void 0;
     if (showTimePicker) {
@@ -4230,6 +4232,7 @@ var DateTBody = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
     var disabledClass = prefixCls + '-disabled-cell';
     var firstDisableClass = prefixCls + '-disabled-cell-first-of-row';
     var lastDisableClass = prefixCls + '-disabled-cell-last-of-row';
+    var lastDayOfMonthClass = prefixCls + '-last-day-of-month';
     var month1 = value.clone();
     month1.date(1);
     var day = month1.day();
@@ -4327,8 +4330,13 @@ var DateTBody = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
         if (isBeforeCurrentMonthYear) {
           cls += ' ' + lastMonthDayClass;
         }
+
         if (isAfterCurrentMonthYear) {
           cls += ' ' + nextMonthDayClass;
+        }
+
+        if (current.clone().endOf('month').date() === current.date()) {
+          cls += ' ' + lastDayOfMonthClass;
         }
 
         if (disabledDate) {

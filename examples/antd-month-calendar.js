@@ -136,7 +136,7 @@ var CalendarHeader = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()(
         onClick: showTimePicker ? null : this.showMonthPanel,
         title: locale.monthSelect
       },
-      localeData.monthsShort(value)
+      locale.monthFormat ? value.format(locale.monthFormat) : localeData.monthsShort(value)
     );
     var day = void 0;
     if (showTimePicker) {
@@ -1264,6 +1264,7 @@ DecadePanel.defaultProps = {
   ok: '确定',
   timeSelect: '选择时间',
   dateSelect: '选择日期',
+  weekSelect: '选择周',
   clear: '清除',
   month: '月',
   year: '年',

@@ -503,7 +503,7 @@ var CalendarHeader = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()(
         onClick: showTimePicker ? null : this.showMonthPanel,
         title: locale.monthSelect
       },
-      localeData.monthsShort(value)
+      locale.monthFormat ? value.format(locale.monthFormat) : localeData.monthsShort(value)
     );
     var day = void 0;
     if (showTimePicker) {
@@ -925,6 +925,7 @@ var DateTBody = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
     var disabledClass = prefixCls + '-disabled-cell';
     var firstDisableClass = prefixCls + '-disabled-cell-first-of-row';
     var lastDisableClass = prefixCls + '-disabled-cell-last-of-row';
+    var lastDayOfMonthClass = prefixCls + '-last-day-of-month';
     var month1 = value.clone();
     month1.date(1);
     var day = month1.day();
@@ -1022,8 +1023,13 @@ var DateTBody = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
         if (isBeforeCurrentMonthYear) {
           cls += ' ' + lastMonthDayClass;
         }
+
         if (isAfterCurrentMonthYear) {
           cls += ' ' + nextMonthDayClass;
+        }
+
+        if (current.clone().endOf('month').date() === current.date()) {
+          cls += ' ' + lastDayOfMonthClass;
         }
 
         if (disabledDate) {
@@ -1653,6 +1659,7 @@ DecadePanel.defaultProps = {
   ok: '确定',
   timeSelect: '选择时间',
   dateSelect: '选择日期',
+  weekSelect: '选择周',
   clear: '清除',
   month: '月',
   year: '年',
