@@ -3,12 +3,14 @@ import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import classnames from 'classnames';
+import KeyCode from 'rc-util/lib/KeyCode';
 import CalendarPart from './range-calendar/CalendarPart';
 import TodayButton from './calendar/TodayButton';
 import OkButton from './calendar/OkButton';
 import TimePickerButton from './calendar/TimePickerButton';
 import CommonMixin from './mixin/CommonMixin';
-import { syncTime, getTodayTime, isAllowedDate } from './util/';
+import { syncTime, getTodayTime, isAllowedDate } from './util';
+import { goTime } from './util/toTime';
 
 function noop() {}
 
@@ -197,9 +199,102 @@ const RangeCalendar = createReactClass({
     this.fireSelectValueChange(nextSelectedValue);
   },
 
+  onKeyDown(event) {
+    const { keyCode } = event;
+    const ctrlKey = event.ctrlKey || event.metaKey;
+
+    const { selectedValue, hoverValue, firstSelectedValue } = this.state;
+    const { onKeyDown, disabledDate } = this.props;
+
+    // Update last time of the picker
+    const updateHoverPoint = (func) => {
+      if ('value' in this.props || 'selectedValue' in this.props) {
+        return;
+      }
+
+      if (selectedValue.length === 0 || selectedValue.length === 2) {
+        const nextHoverTime = func(hoverValue[0] || selectedValue[0] || moment());
+        this.fireHoverValueChange([nextHoverTime]);
+      } else {
+        if (hoverValue.length === 1) {
+          const currentHoverTime = hoverValue[0].clone();
+          this.onDayHover(func(currentHoverTime));
+        } else {
+          const currentHoverTime = hoverValue[0].isSame(firstSelectedValue, 'day') ?
+            hoverValue[1] : hoverValue[0];
+          this.onDayHover(func(currentHoverTime));
+        }
+      }
+
+      event.preventDefault();
+    };
+
+    switch (keyCode) {
+      case KeyCode.DOWN:
+        updateHoverPoint((time) => goTime(time, 1, 'weeks'));
+        return;
+      case KeyCode.UP:
+        updateHoverPoint((time) => goTime(time, -1, 'weeks'));
+        return;
+      case KeyCode.LEFT:
+        if (ctrlKey) {
+          updateHoverPoint((time) => goTime(time, -1, 'years'));
+        } else {
+          updateHoverPoint((time) => goTime(time, -1, 'days'));
+        }
+        return;
+      case KeyCode.RIGHT:
+        if (ctrlKey) {
+          updateHoverPoint((time) => goTime(time, 1, 'years'));
+        } else {
+          updateHoverPoint((time) => goTime(time, 1, 'days'));
+        }
+        return;
+      // case KeyCode.HOME:
+      //   this.setValue(
+      //     goStartMonth(this.state.value),
+      //   );
+      //   event.preventDefault();
+      //   return 1;
+      // case KeyCode.END:
+      //   this.setValue(
+      //     goEndMonth(this.state.value),
+      //   );
+      //   event.preventDefault();
+      //   return 1;
+      // case KeyCode.PAGE_DOWN:
+      //   this.goTime(1, 'month');
+      //   event.preventDefault();
+      //   return 1;
+      // case KeyCode.PAGE_UP:
+      //   this.goTime(-1, 'month');
+      //   event.preventDefault();
+      //   return 1;
+      case KeyCode.ENTER: {
+        let lastValue;
+        if (hoverValue.length === 1) {
+          lastValue = hoverValue[0];
+        } else {
+          lastValue = hoverValue[0].isSame(firstSelectedValue, 'day') ?
+            hoverValue[1] : hoverValue[0];
+        }
+        if (!disabledDate || !disabledDate(lastValue)) {
+          this.onSelect(lastValue);
+        }
+        event.preventDefault();
+        return;
+      }
+      default:
+        if (onKeyDown) {
+          onKeyDown(event);
+        }
+    }
+  },
+
   onDayHover(value) {
     let hoverValue = [];
     const { selectedValue, firstSelectedValue } = this.state;
+
     const { type } = this.props;
     if (type === 'start' && selectedValue[1]) {
       hoverValue = this.compare(value, selectedValue[1]) < 0 ?
@@ -209,6 +304,9 @@ const RangeCalendar = createReactClass({
         [selectedValue[0], value] : [];
     } else {
       if (!firstSelectedValue) {
+        if (this.state.hoverValue.length) {
+          this.setState({ hoverValue: [] });
+        }
         return;
       }
       hoverValue = this.compare(value, firstSelectedValue) < 0 ?
@@ -516,6 +614,11 @@ const RangeCalendar = createReactClass({
     const nextMonthOfStart = startValue.clone().add(1, 'months');
     const isClosestMonths = nextMonthOfStart.year() === endValue.year() &&
             nextMonthOfStart.month() === endValue.month();
+
+    // console.warn('Render:', selectedValue.map(t => t.format('YYYY-MM-DD')).join(', '));
+    // console.log('start:', startValue.format('YYYY-MM-DD'));
+    // console.log('end:', endValue.format('YYYY-MM-DD'));
+
     return (
       <div
         ref={this.saveRoot}
@@ -536,6 +639,8 @@ const RangeCalendar = createReactClass({
             className={`${prefixCls}-date-panel`}
             onMouseLeave={type !== 'both' ? this.onDatePanelLeave : undefined}
             onMouseEnter={type !== 'both' ? this.onDatePanelEnter : undefined}
+            tabIndex={0}
+            onKeyDown={this.onKeyDown}
           >
             <CalendarPart
               {...props}
