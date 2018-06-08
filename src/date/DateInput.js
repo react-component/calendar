@@ -8,7 +8,7 @@ const DateInput = createReactClass({
   propTypes: {
     prefixCls: PropTypes.string,
     timePicker: PropTypes.object,
-    value: PropTypes.object,
+    value: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
     disabledTime: PropTypes.any,
     format: PropTypes.string,
     locale: PropTypes.object,
@@ -17,13 +17,13 @@ const DateInput = createReactClass({
     onClear: PropTypes.func,
     placeholder: PropTypes.string,
     onSelect: PropTypes.func,
-    selectedValue: PropTypes.object,
+    selectedValue: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
+    multiple: PropTypes.bool,
   },
 
   getInitialState() {
-    const selectedValue = this.props.selectedValue;
     return {
-      str: selectedValue && selectedValue.format(this.props.format) || '',
+      str: this.formatStr(this.props),
       invalid: false,
     };
   },
@@ -32,9 +32,8 @@ const DateInput = createReactClass({
     this.cachedSelectionStart = this.dateInputInstance.selectionStart;
     this.cachedSelectionEnd = this.dateInputInstance.selectionEnd;
     // when popup show, click body will call this, bug!
-    const selectedValue = nextProps.selectedValue;
     this.setState({
-      str: selectedValue && selectedValue.format(nextProps.format) || '',
+      str: this.formatStr(nextProps),
       invalid: false,
     });
   },
@@ -45,7 +44,29 @@ const DateInput = createReactClass({
     }
   },
 
+  formatStr(props) {
+    let str;
+
+    const {
+      selectedValue,
+      multiple,
+      format,
+    } = props;
+
+    if (multiple) {
+      str = selectedValue && selectedValue.length && selectedValue.map((singleValue) => {
+        return singleValue.format(format) || '';
+      }).join(', ') || '';
+    } else {
+      str = selectedValue && selectedValue.format(format) || '';
+    }
+
+    return str;
+  },
+
   onInputChange(event) {
+    if (this.props.multiple) return;
+
     const str = event.target.value;
     this.setState({
       str,

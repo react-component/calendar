@@ -7,15 +7,15 @@ import YearPanel from '../year/YearPanel';
 import DecadePanel from '../decade/DecadePanel';
 
 function goMonth(direction) {
-  const next = this.props.value.clone();
+  const next = this.props.displayedValue.clone();
   next.add(direction, 'months');
-  this.props.onValueChange(next);
+  this.props.setDisplayedValue(next);
 }
 
 function goYear(direction) {
-  const next = this.props.value.clone();
+  const next = this.props.displayedValue.clone();
   next.add(direction, 'years');
-  this.props.onValueChange(next);
+  this.props.setDisplayedValue(next);
 }
 
 function showIf(condition, el) {
@@ -25,7 +25,8 @@ function showIf(condition, el) {
 const CalendarHeader = createReactClass({
   propTypes: {
     prefixCls: PropTypes.string,
-    value: PropTypes.object,
+    value: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
+    displayedValue: PropTypes.object,
     onValueChange: PropTypes.func,
     showTimePicker: PropTypes.bool,
     onPanelChange: PropTypes.func,
@@ -33,6 +34,7 @@ const CalendarHeader = createReactClass({
     enablePrev: PropTypes.any,
     enableNext: PropTypes.any,
     disabledMonth: PropTypes.func,
+    multiple: PropTypes.bool,
   },
 
   getDefaultProps() {
@@ -57,7 +59,7 @@ const CalendarHeader = createReactClass({
     if (this.props.onMonthSelect) {
       this.props.onMonthSelect(value);
     } else {
-      this.props.onValueChange(value);
+      this.props.setDisplayedValue(value);
     }
   },
 
@@ -65,29 +67,47 @@ const CalendarHeader = createReactClass({
     const referer = this.state.yearPanelReferer;
     this.setState({ yearPanelReferer: null });
     this.props.onPanelChange(value, referer);
-    this.props.onValueChange(value);
+    this.props.setDisplayedValue(value);
   },
 
   onDecadeSelect(value) {
     this.props.onPanelChange(value, 'year');
-    this.props.onValueChange(value);
+    this.props.setDisplayedValue(value);
   },
 
   monthYearElement(showTimePicker) {
     const props = this.props;
     const prefixCls = props.prefixCls;
     const locale = props.locale;
-    const value = props.value;
-    const localeData = value.localeData();
+    const displayedValue = props.displayedValue;
+    const localeData = displayedValue.localeData();
     const monthBeforeYear = locale.monthBeforeYear;
     const selectClassName = `${prefixCls}-${monthBeforeYear ? 'my-select' : 'ym-select'}`;
+
+    if (props.onMonthSelect) {
+      return (
+        <a
+          className={`${prefixCls}-month-select`}
+          onClick={() => {
+            props.onMonthSelect(displayedValue);
+          }}
+          onMouseEnter={() => {
+            props.onMonthMouseEnter(displayedValue);
+          }}
+          onMouseLeave={props.onMonthMouseLeave}
+        >
+          {localeData.months(displayedValue)} {displayedValue.format(locale.yearFormat)}
+        </a>
+      );
+    }
+
     const year = (<a
       className={`${prefixCls}-year-select`}
       role="button"
       onClick={showTimePicker ? null : () => this.showYearPanel('date')}
       title={locale.yearSelect}
     >
-      {value.format(locale.yearFormat)}
+      {displayedValue.format(locale.yearFormat)}
     </a>);
     const month = (<a
       className={`${prefixCls}-month-select`}
@@ -95,7 +115,10 @@ const CalendarHeader = createReactClass({
       onClick={showTimePicker ? null : this.showMonthPanel}
       title={locale.monthSelect}
     >
-      {locale.monthFormat ? value.format(locale.monthFormat) : localeData.monthsShort(value)}
+      {locale.monthFormat ?
+        displayedValue.format(locale.monthFormat) :
+        localeData.monthsShort(displayedValue)
+      }
     </a>);
     let day;
     if (showTimePicker) {
@@ -103,7 +126,7 @@ const CalendarHeader = createReactClass({
         className={`${prefixCls}-day-select`}
         role="button"
       >
-        {value.format(locale.dayFormat)}
+        {displayedValue.format(locale.dayFormat)}
       </a>);
     }
     let my = [];
@@ -112,9 +135,11 @@ const CalendarHeader = createReactClass({
     } else {
       my = [year, month, day];
     }
-    return (<span className={selectClassName}>
-    {toFragment(my)}
-    </span>);
+    return (
+      <span className={selectClassName}>
+        {toFragment(my)}
+      </span>
+    );
   },
 
   showMonthPanel() {
@@ -138,6 +163,7 @@ const CalendarHeader = createReactClass({
       locale,
       mode,
       value,
+      displayedValue,
       showTimePicker,
       enableNext,
       enablePrev,
@@ -150,12 +176,14 @@ const CalendarHeader = createReactClass({
         <MonthPanel
           locale={locale}
           defaultValue={value}
+          displayedValue={displayedValue}
           rootPrefixCls={prefixCls}
           onSelect={this.onMonthSelect}
           onYearPanelShow={() => this.showYearPanel('month')}
           disabledDate={disabledMonth}
           cellRender={props.monthCellRender}
           contentRender={props.monthCellContentRender}
+          setDisplayedValue={props.setDisplayedValue}
         />
       );
     }
@@ -164,9 +192,11 @@ const CalendarHeader = createReactClass({
         <YearPanel
           locale={locale}
           defaultValue={value}
+          displayedValue={displayedValue}
           rootPrefixCls={prefixCls}
           onSelect={this.onYearSelect}
           onDecadePanelShow={this.showDecadePanel}
+          setDisplayedValue={props.setDisplayedValue}
         />
       );
     }
@@ -175,8 +205,10 @@ const CalendarHeader = createReactClass({
         <DecadePanel
           locale={locale}
           defaultValue={value}
+          displayedValue={displayedValue}
           rootPrefixCls={prefixCls}
           onSelect={this.onDecadeSelect}
+          setDisplayedValue={props.setDisplayedValue}
         />
       );
     }

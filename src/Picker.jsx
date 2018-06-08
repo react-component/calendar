@@ -108,9 +108,12 @@ const Picker = createReactClass({
       });
     }
     if (
-      cause.source === 'keyboard' ||
-      (!props.calendar.props.timePicker && cause.source !== 'dateInput') ||
-      cause.source === 'todayButton') {
+      !props.multiple && (
+        cause.source === 'keyboard' ||
+        (!props.calendar.props.timePicker && cause.source !== 'dateInput') ||
+        cause.source === 'todayButton'
+      )
+    ) {
       this.close(this.focus);
     }
     props.onChange(value);

@@ -408,6 +408,24 @@ http://react-component.github.io/calendar/examples/index.html
           <td></td>
           <td>called when hover value change</td>
         </tr>
+        <tr>
+          <td>multiple</td>
+          <td>Boolean</td>
+          <td>false</td>
+          <td>make it possible to select multiple values</td>
+        </tr>
+        <tr>
+          <td>selectWeekDays</td>
+          <td>Boolean</td>
+          <td>false</td>
+          <td>make it possible to select all days of one weekday, e.g. all sundays</td>
+        </tr>
+        <tr>
+          <td>selectMonths</td>
+          <td>Boolean</td>
+          <td>false</td>
+          <td>make it possible to select an entire month</td>
+        </tr>
     </tbody>
 </table>
 

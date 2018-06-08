@@ -11,20 +11,20 @@ function getNow() {
   return moment();
 }
 
-function getNowByCurrentStateValue(value) {
+function getNowByCurrentStateValue(displayedValue, multiple) {
   let ret;
-  if (value) {
-    ret = getTodayTime(value);
+  if (displayedValue) {
+    ret = getTodayTime(displayedValue);
   } else {
     ret = getNow();
   }
-  return ret;
+  return multiple ? [ret] : ret;
 }
 
 const CalendarMixin = {
   propTypes: {
-    value: PropTypes.object,
-    defaultValue: PropTypes.object,
+    value: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
+    defaultValue: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
     onKeyDown: PropTypes.func,
   },
 
@@ -36,10 +36,19 @@ const CalendarMixin = {
 
   getInitialState() {
     const props = this.props;
-    const value = props.value || props.defaultValue || getNow();
+    const value = props.value || props.defaultValue || (props.multiple ? [getNow()] : getNow());
+    let displayedValue;
+
+    if (props.multiple) {
+      displayedValue = value[0];
+    } else {
+      displayedValue = value;
+    }
+
     return {
       value,
       selectedValue: props.selectedValue || props.defaultSelectedValue,
+      displayedValue,
     };
   },
 
@@ -47,7 +56,10 @@ const CalendarMixin = {
     let { value } = nextProps;
     const { selectedValue } = nextProps;
     if ('value' in nextProps) {
-      value = value || nextProps.defaultValue || getNowByCurrentStateValue(this.state.value);
+      value =
+        value ||
+        nextProps.defaultValue ||
+        getNowByCurrentStateValue(this.state.displayedValue, this.props.multiple);
       this.setState({
         value,
       });
@@ -60,10 +72,17 @@ const CalendarMixin = {
   },
 
   onSelect(value, cause) {
+    let newValue = value;
     if (value) {
-      this.setValue(value);
+      if (this.props.multiple) {
+        newValue = this.updateMultiSelectValue(value);
+      } else {
+        this.setValue(value);
+      }
+
+      this.setDisplayedValue(value);
     }
-    this.setSelectedValue(value, cause);
+    this.setSelectedValue(newValue, cause);
   },
 
   renderRoot(newProps) {
@@ -117,9 +136,92 @@ const CalendarMixin = {
     }
   },
 
-  isAllowedDate(value) {
+  setDisplayedValue(value) {
+    this.setState({
+      displayedValue: value,
+    });
+  },
+
+  sortValues(values) {
+    if (values && values.length) {
+      values.sort((a, b) => a - b);
+    }
+  },
+
+  updateMultiSelectValue(value) {
+    const originalValue = this.state.selectedValue || [];
+    let newValue = originalValue.slice(0);
+    let foundIndex;
+
+    originalValue.forEach((singleValue, index) => {
+      if (singleValue.isSame(value, 'day')) {
+        foundIndex = index;
+      }
+    });
+
+    if (foundIndex !== undefined) {
+      newValue.splice(foundIndex, 1);
+    } else {
+      newValue.push(value);
+    }
+
+    if (newValue.length) {
+      this.sortValues(newValue);
+    } else {
+      newValue = null;
+    }
+
+    this.props.onChange(newValue);
+    return newValue;
+  },
+
+  addOrRemoveMultipleValues(values) {
+    const originalValue = this.state.selectedValue || [];
+    let newValue = originalValue.slice(0);
+
+    if (values.add) {
+      const originalDayStrings = originalValue.map((day) => day.format('YYYYMMDD'));
+
+      values.add.forEach((day) => {
+        const dayString = day.format('YYYYMMDD');
+        if (!originalDayStrings.includes(dayString)) {
+          newValue.push(day);
+        }
+      });
+    }
+
+    if (values.remove) {
+      const removeDaysStrings = values.remove.map((day) => day.format('YYYYMMDD'));
+
+      newValue = newValue.filter((day) => {
+        return !removeDaysStrings.includes(day.format('YYYYMMDD'));
+      });
+    }
+
+    if (newValue.length) {
+      this.sortValues(newValue);
+    } else {
+      newValue = null;
+    }
+
+    this.props.onChange(newValue);
+    return newValue;
+  },
+
+  isAllowedDate(value, multiple) {
     const disabledDate = this.props.disabledDate;
     const disabledTime = this.props.disabledTime;
+
+    if (multiple && value && value.length) {
+      value.forEach((singleValue) => {
+        if (!isAllowedDate(singleValue, disabledDate, disabledTime)) {
+          return false;
+        }
+      });
+
+      return true;
+    }
+
     return isAllowedDate(value, disabledDate, disabledTime);
   },
 };
