@@ -12,11 +12,13 @@ export default function TimePickerButton({
   if (!timePickerDisabled) {
     onClick = showTimePicker ? onCloseTimePicker : onOpenTimePicker;
   }
-  return (<a
-    className={className}
-    role="button"
-    onClick={onClick}
-  >
-    {showTimePicker ? locale.dateSelect : locale.timeSelect}
-  </a>);
+  return (
+    <a
+      className={className}
+      role="button"
+      onClick={onClick}
+    >
+      {showTimePicker ? locale.dateSelect : locale.timeSelect}
+    </a>
+  );
 }

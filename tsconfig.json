@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "preserve",
+    "lib": [
+      "es6"
+    ],
+    "module": "commonjs",
+    "noEmit": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true
+  },
+  "files": [
+    "index.d.ts",
+    "rc-calendar-tests.tsx"
+  ]
+}
