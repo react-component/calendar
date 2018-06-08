@@ -10,7 +10,7 @@ import OkButton from './calendar/OkButton';
 import TimePickerButton from './calendar/TimePickerButton';
 import CommonMixin from './mixin/CommonMixin';
 import { syncTime, getTodayTime, isAllowedDate } from './util';
-import { goTime } from './util/toTime';
+import { goTime, goStartMonth, goEndMonth, includesTime } from './util/toTime';
 
 function noop() {}
 
@@ -203,30 +203,68 @@ const RangeCalendar = createReactClass({
     const { keyCode } = event;
     const ctrlKey = event.ctrlKey || event.metaKey;
 
-    const { selectedValue, hoverValue, firstSelectedValue } = this.state;
+    const {
+      selectedValue, hoverValue, firstSelectedValue,
+      value, // Value is used for `CalendarPart` current page
+    } = this.state;
     const { onKeyDown, disabledDate } = this.props;
 
     // Update last time of the picker
     const updateHoverPoint = (func) => {
+      // onStartValueChange(leftValue) {
       if ('value' in this.props || 'selectedValue' in this.props) {
-        return;
+        return null;
       }
 
+      // Change hover to make focus in UI
+      let currentHoverTime;
+      let nextHoverTime;
+      let nextHoverValue;
+
       if (selectedValue.length === 0 || selectedValue.length === 2) {
-        const nextHoverTime = func(hoverValue[0] || selectedValue[0] || moment());
-        this.fireHoverValueChange([nextHoverTime]);
+        currentHoverTime = hoverValue[0] || selectedValue[0] || value[0] || moment();
+        nextHoverTime = func(currentHoverTime);
+        nextHoverValue = [nextHoverTime];
+        this.fireHoverValueChange(nextHoverValue);
       } else {
         if (hoverValue.length === 1) {
-          const currentHoverTime = hoverValue[0].clone();
-          this.onDayHover(func(currentHoverTime));
+          currentHoverTime = hoverValue[0].clone();
+          nextHoverTime = func(currentHoverTime);
+          nextHoverValue = this.onDayHover(nextHoverTime);
         } else {
-          const currentHoverTime = hoverValue[0].isSame(firstSelectedValue, 'day') ?
+          currentHoverTime = hoverValue[0].isSame(firstSelectedValue, 'day') ?
             hoverValue[1] : hoverValue[0];
-          this.onDayHover(func(currentHoverTime));
+          nextHoverTime = func(currentHoverTime);
+          nextHoverValue = this.onDayHover(nextHoverTime);
+        }
+      }
+
+      // Find origin hover time on value index
+      if (nextHoverValue.length >= 2) {
+        const miss = nextHoverValue.some(ht => !includesTime(value, ht, 'month'));
+        if (miss) {
+          const newValue = nextHoverValue.slice()
+            .sort((t1, t2) => t1.valueOf() - t2.valueOf());
+          if (newValue[0].isSame(newValue[1], 'month')) {
+            newValue[1] = newValue[0].clone().add(1, 'month');
+          }
+          this.fireValueChange(newValue);
+        }
+      } else if (nextHoverValue.length === 1) {
+        // If only one value, let's keep the origin panel
+        let oriValueIndex = value.findIndex(time => time.isSame(currentHoverTime, 'month'));
+        if (oriValueIndex === -1) oriValueIndex = 0;
+
+        if (value.every(time => !time.isSame(nextHoverTime, 'month'))) {
+          const newValue = value.slice();
+          newValue[oriValueIndex] = nextHoverTime.clone();
+          this.fireValueChange(newValue);
         }
       }
 
       event.preventDefault();
+
+      return nextHoverTime;
     };
 
     switch (keyCode) {
@@ -250,35 +288,29 @@ const RangeCalendar = createReactClass({
           updateHoverPoint((time) => goTime(time, 1, 'days'));
         }
         return;
-      // case KeyCode.HOME:
-      //   this.setValue(
-      //     goStartMonth(this.state.value),
-      //   );
-      //   event.preventDefault();
-      //   return 1;
-      // case KeyCode.END:
-      //   this.setValue(
-      //     goEndMonth(this.state.value),
-      //   );
-      //   event.preventDefault();
-      //   return 1;
-      // case KeyCode.PAGE_DOWN:
-      //   this.goTime(1, 'month');
-      //   event.preventDefault();
-      //   return 1;
-      // case KeyCode.PAGE_UP:
-      //   this.goTime(-1, 'month');
-      //   event.preventDefault();
-      //   return 1;
+      case KeyCode.HOME:
+        updateHoverPoint((time) => goStartMonth(time));
+        return;
+      case KeyCode.END:
+        updateHoverPoint((time) => goEndMonth(time));
+        return;
+      case KeyCode.PAGE_DOWN:
+        updateHoverPoint((time) => goTime(time, 1, 'month'));
+        return;
+      case KeyCode.PAGE_UP:
+        updateHoverPoint((time) => goTime(time, -1, 'month'));
+        return;
       case KeyCode.ENTER: {
         let lastValue;
-        if (hoverValue.length === 1) {
+        if (hoverValue.length === 0) {
+          lastValue = updateHoverPoint(time => time);
+        } else if (hoverValue.length === 1) {
           lastValue = hoverValue[0];
         } else {
           lastValue = hoverValue[0].isSame(firstSelectedValue, 'day') ?
             hoverValue[1] : hoverValue[0];
         }
-        if (!disabledDate || !disabledDate(lastValue)) {
+        if (lastValue && (!disabledDate || !disabledDate(lastValue))) {
           this.onSelect(lastValue);
         }
         event.preventDefault();
@@ -307,12 +339,14 @@ const RangeCalendar = createReactClass({
         if (this.state.hoverValue.length) {
           this.setState({ hoverValue: [] });
         }
-        return;
+        return hoverValue;
       }
       hoverValue = this.compare(value, firstSelectedValue) < 0 ?
         [value, firstSelectedValue] : [firstSelectedValue, value];
     }
     this.fireHoverValueChange(hoverValue);
+
+    return hoverValue;
   },
 
   onToday() {
