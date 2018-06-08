@@ -55,7 +55,7 @@ function disabledDate(current) {
 }
 
 function disabledTime(time, type) {
-  // console.log('disabledTime', time, type);
+  console.log('disabledTime', time, type);
   if (type === 'start') {
     return {
       disabledHours() {
