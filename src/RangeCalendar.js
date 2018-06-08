@@ -200,6 +200,10 @@ const RangeCalendar = createReactClass({
   },
 
   onKeyDown(event) {
+    if (event.target.nodeName.toLowerCase() === 'input') {
+      return;
+    }
+
     const { keyCode } = event;
     const ctrlKey = event.ctrlKey || event.metaKey;
 
@@ -211,11 +215,6 @@ const RangeCalendar = createReactClass({
 
     // Update last time of the picker
     const updateHoverPoint = (func) => {
-      // onStartValueChange(leftValue) {
-      if ('value' in this.props || 'selectedValue' in this.props) {
-        return null;
-      }
-
       // Change hover to make focus in UI
       let currentHoverTime;
       let nextHoverTime;
@@ -659,6 +658,7 @@ const RangeCalendar = createReactClass({
         className={classes}
         style={props.style}
         tabIndex="0"
+        onKeyDown={this.onKeyDown}
       >
         {props.renderSidebar()}
         <div className={`${prefixCls}-panel`}>
@@ -673,8 +673,6 @@ const RangeCalendar = createReactClass({
             className={`${prefixCls}-date-panel`}
             onMouseLeave={type !== 'both' ? this.onDatePanelLeave : undefined}
             onMouseEnter={type !== 'both' ? this.onDatePanelEnter : undefined}
-            tabIndex={0}
-            onKeyDown={this.onKeyDown}
           >
             <CalendarPart
               {...props}
