@@ -10,7 +10,6 @@ exports[`RangeCalendar can hide date inputs with showDateInput={false} 1`] = `
   >
     <div
       class="rc-calendar-date-panel"
-      tabindex="0"
     >
       <div
         class="rc-calendar-range-part rc-calendar-range-left"
@@ -1479,7 +1478,6 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
   >
     <div
       class="rc-calendar-date-panel"
-      tabindex="0"
     >
       <div
         class="rc-calendar-range-part rc-calendar-range-left"
@@ -3386,7 +3384,6 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
   >
     <div
       class="rc-calendar-date-panel"
-      tabindex="0"
     >
       <div
         class="rc-calendar-range-part rc-calendar-range-left"
@@ -5293,7 +5290,6 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
   >
     <div
       class="rc-calendar-date-panel"
-      tabindex="0"
     >
       <div
         class="rc-calendar-range-part rc-calendar-range-left"
