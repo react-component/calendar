@@ -2,6 +2,7 @@
 import React from 'react';
 import moment from 'moment';
 import { mount, render } from 'enzyme';
+import keyCode from 'rc-util/lib/KeyCode';
 import TimePickerPanel from 'rc-time-picker/lib/Panel';
 import RangeCalendar from '../src/RangeCalendar';
 
@@ -554,5 +555,78 @@ describe('RangeCalendar', () => {
       wrapper.find('.rc-calendar-date-panel').simulate('mouseLeave');
       expect(handleHoverChange).toHaveBeenCalledWith([]);
     });
+  });
+
+  it('key control', () => {
+    const onChange = jest.fn();
+    const onSelect = jest.fn();
+    const wrapper = mount(
+      <RangeCalendar
+        defaultSelectedValue={[moment('2000-09-03', format), moment('2000-11-28', format)]}
+        onChange={onChange}
+        onSelect={onSelect}
+      />
+    );
+    expect(wrapper.render()).toMatchSnapshot();
+
+    const keyDown = (code, info) => {
+      wrapper.find('.rc-calendar').simulate('keyDown', {
+        ...info,
+        keyCode: code,
+      });
+    };
+
+    const keySimulateCheck = (code, month, date, info) => {
+      keyDown(code, info);
+
+      expect(wrapper.find('.rc-calendar-range-left .rc-calendar-month-select').text())
+        .toEqual(String(month));
+      expect(wrapper.find('.rc-calendar-selected-start-date .rc-calendar-date').text())
+        .toEqual(String(date));
+    };
+
+    // 09-03 down 09-10
+    keySimulateCheck(keyCode.DOWN, 'Sep', 10);
+
+    // 09-03 left 09-09
+    keySimulateCheck(keyCode.LEFT, 'Sep', 9);
+
+    // 09-09 right 09-10
+    keySimulateCheck(keyCode.RIGHT, 'Sep', 10);
+
+    // 09-10 home 09-01
+    keySimulateCheck(keyCode.HOME, 'Sep', 1);
+
+    // 09-10 end 09-30
+    keySimulateCheck(keyCode.END, 'Sep', 30);
+
+    // 09-30 page up 08-30
+    keySimulateCheck(keyCode.PAGE_UP, 'Aug', 30);
+
+    // 08-30 page down 09-30
+    keySimulateCheck(keyCode.PAGE_DOWN, 'Sep', 30);
+
+    keyDown(keyCode.ENTER);
+
+    expect(onChange.mock.calls[0][0][0].format(format)).toEqual('2000-09-30');
+
+    // 2000-09-30 ctrl+right 2001-09-30
+    keySimulateCheck(keyCode.RIGHT, 'Sep', 30, {
+      ctrlKey: true,
+    });
+    expect(wrapper.find('.rc-calendar-range-right .rc-calendar-year-select').text())
+      .toEqual('2001');
+
+    // 2001-09-30 ctrl+right 2000-09-30
+    keySimulateCheck(keyCode.LEFT, 'Sep', 30, {
+      ctrlKey: true,
+    });
+
+    keyDown(keyCode.ENTER);
+    expect(onChange.mock.calls[1][0][0].format(format)).toEqual('2000-09-30');
+    expect(onChange.mock.calls[1][0][1].format(format)).toEqual('2000-09-30');
+
+    expect(onSelect.mock.calls[0][0][0].format(format)).toEqual('2000-09-30');
+    expect(onSelect.mock.calls[0][0][1].format(format)).toEqual('2000-09-30');
   });
 });
