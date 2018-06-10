@@ -220,7 +220,7 @@ const RangeCalendar = createReactClass({
       let nextHoverTime;
       let nextHoverValue;
 
-      if (selectedValue.length === 0 || selectedValue.length === 2) {
+      if (!firstSelectedValue) {
         currentHoverTime = hoverValue[0] || selectedValue[0] || value[0] || moment();
         nextHoverTime = func(currentHoverTime);
         nextHoverValue = [nextHoverTime];
