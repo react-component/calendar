@@ -197,6 +197,7 @@ const Calendar = createReactClass({
       dateInputPlaceholder, timePicker,
       disabledTime,
     } = props;
+    const showFooter = props.showFooter || true;
     const { value, selectedValue, mode } = state;
     const showTimePicker = mode === 'time';
     const disabledTimeConfig = showTimePicker && disabledTime && timePicker ?
@@ -273,7 +274,7 @@ const Calendar = createReactClass({
               contentRender={props.contentRender}
             />
           </div>
-          {props.showFooter ?
+          {showFooter ?
           <CalendarFooter
             showOk={props.showOk}
             renderFooter={props.renderFooter}
