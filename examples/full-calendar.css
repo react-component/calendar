@@ -82,6 +82,7 @@
   position: relative;
 }
 .rc-select-selection--single .rc-select-selection-selected-value {
+  pointer-events: none;
   position: absolute;
   left: 0;
   top: 0;
@@ -189,8 +190,7 @@
 }
 .rc-select-enabled .rc-select-selection__choice:hover .rc-select-selection__choice__remove {
   opacity: 1;
-  -webkit-transform: scale(1);
-          transform: scale(1);
+  transform: scale(1);
 }
 .rc-select-enabled .rc-select-selection__choice:hover .rc-select-selection__choice__content {
   margin-left: -8px;
@@ -221,71 +221,39 @@
 .rc-select .rc-select-selection__choice-zoom-enter,
 .rc-select .rc-select-selection__choice-zoom-appear,
 .rc-select .rc-select-selection__choice-zoom-leave {
-  -webkit-animation-duration: .3s;
-          animation-duration: .3s;
-  -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
-  -webkit-transform-origin: 0 0;
-          transform-origin: 0 0;
+  animation-duration: .3s;
+  animation-fill-mode: both;
+  transform-origin: 0 0;
   opacity: 0;
-  -webkit-animation-play-state: paused;
-          animation-play-state: paused;
-  -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-          animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation-play-state: paused;
+  animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .rc-select .rc-select-selection__choice-zoom-leave {
   opacity: 1;
-  -webkit-animation-timing-function: cubic-bezier(0.6, -0.28, 0.735, 0.045);
-          animation-timing-function: cubic-bezier(0.6, -0.28, 0.735, 0.045);
+  animation-timing-function: cubic-bezier(0.6, -0.28, 0.735, 0.045);
 }
 .rc-select .rc-select-selection__choice-zoom-enter.rc-select-selection__choice-zoom-enter-active,
 .rc-select .rc-select-selection__choice-zoom-appear.rc-select-selection__choice-zoom-appear-active {
-  -webkit-animation-play-state: running;
-          animation-play-state: running;
-  -webkit-animation-name: rcSelectChoiceZoomIn;
-          animation-name: rcSelectChoiceZoomIn;
+  animation-play-state: running;
+  animation-name: rcSelectChoiceZoomIn;
 }
 .rc-select .rc-select-selection__choice-zoom-leave.rc-select-selection__choice-zoom-leave-active {
-  -webkit-animation-play-state: running;
-          animation-play-state: running;
-  -webkit-animation-name: rcSelectChoiceZoomOut;
-          animation-name: rcSelectChoiceZoomOut;
-}
-@-webkit-keyframes rcSelectChoiceZoomIn {
-  0% {
-    -webkit-transform: scale(0.6);
-            transform: scale(0.6);
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-    opacity: 1;
-  }
+  animation-play-state: running;
+  animation-name: rcSelectChoiceZoomOut;
 }
 @keyframes rcSelectChoiceZoomIn {
   0% {
-    -webkit-transform: scale(0.6);
-            transform: scale(0.6);
+    transform: scale(0.6);
     opacity: 0;
   }
   100% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
     opacity: 1;
-  }
-}
-@-webkit-keyframes rcSelectChoiceZoomOut {
-  to {
-    -webkit-transform: scale(0);
-            transform: scale(0);
-    opacity: 0;
   }
 }
 @keyframes rcSelectChoiceZoomOut {
   to {
-    -webkit-transform: scale(0);
-            transform: scale(0);
+    transform: scale(0);
     opacity: 0;
   }
 }
@@ -296,13 +264,10 @@
   padding: 0 0 0 8px;
   position: absolute;
   opacity: 0;
-  -webkit-transform: scale(0);
-          transform: scale(0);
+  transform: scale(0);
   top: 0;
   right: 2px;
-  transition: opacity .3s, -webkit-transform .3s;
   transition: opacity .3s, transform .3s;
-  transition: opacity .3s, transform .3s, -webkit-transform .3s;
 }
 .rc-select .rc-select-selection__choice__remove:before {
   content: '\D7';
@@ -381,183 +346,85 @@ li.rc-select-dropdown-menu-item-divider {
 }
 .rc-select-dropdown-slide-up-enter,
 .rc-select-dropdown-slide-up-appear {
-  -webkit-animation-duration: .3s;
-          animation-duration: .3s;
-  -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
-  -webkit-transform-origin: 0 0;
-          transform-origin: 0 0;
+  animation-duration: .3s;
+  animation-fill-mode: both;
+  transform-origin: 0 0;
   opacity: 0;
-  -webkit-animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
-          animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
-  -webkit-animation-play-state: paused;
-          animation-play-state: paused;
+  animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
+  animation-play-state: paused;
 }
 .rc-select-dropdown-slide-up-leave {
-  -webkit-animation-duration: .3s;
-          animation-duration: .3s;
-  -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
-  -webkit-transform-origin: 0 0;
-          transform-origin: 0 0;
+  animation-duration: .3s;
+  animation-fill-mode: both;
+  transform-origin: 0 0;
   opacity: 1;
-  -webkit-animation-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.34);
-          animation-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.34);
-  -webkit-animation-play-state: paused;
-          animation-play-state: paused;
+  animation-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.34);
+  animation-play-state: paused;
 }
 .rc-select-dropdown-slide-up-enter.rc-select-dropdown-slide-up-enter-active.rc-select-dropdown-placement-bottomLeft,
 .rc-select-dropdown-slide-up-appear.rc-select-dropdown-slide-up-appear-active.rc-select-dropdown-placement-bottomLeft {
-  -webkit-animation-name: rcSelectDropdownSlideUpIn;
-          animation-name: rcSelectDropdownSlideUpIn;
-  -webkit-animation-play-state: running;
-          animation-play-state: running;
+  animation-name: rcSelectDropdownSlideUpIn;
+  animation-play-state: running;
 }
 .rc-select-dropdown-slide-up-leave.rc-select-dropdown-slide-up-leave-active.rc-select-dropdown-placement-bottomLeft {
-  -webkit-animation-name: rcSelectDropdownSlideUpOut;
-          animation-name: rcSelectDropdownSlideUpOut;
-  -webkit-animation-play-state: running;
-          animation-play-state: running;
+  animation-name: rcSelectDropdownSlideUpOut;
+  animation-play-state: running;
 }
 .rc-select-dropdown-slide-up-enter.rc-select-dropdown-slide-up-enter-active.rc-select-dropdown-placement-topLeft,
 .rc-select-dropdown-slide-up-appear.rc-select-dropdown-slide-up-appear-active.rc-select-dropdown-placement-topLeft {
-  -webkit-animation-name: rcSelectDropdownSlideDownIn;
-          animation-name: rcSelectDropdownSlideDownIn;
-  -webkit-animation-play-state: running;
-          animation-play-state: running;
+  animation-name: rcSelectDropdownSlideDownIn;
+  animation-play-state: running;
 }
 .rc-select-dropdown-slide-up-leave.rc-select-dropdown-slide-up-leave-active.rc-select-dropdown-placement-topLeft {
-  -webkit-animation-name: rcSelectDropdownSlideDownOut;
-          animation-name: rcSelectDropdownSlideDownOut;
-  -webkit-animation-play-state: running;
-          animation-play-state: running;
-}
-@-webkit-keyframes rcSelectDropdownSlideUpIn {
-  0% {
-    opacity: 0;
-    -webkit-transform-origin: 0% 0%;
-            transform-origin: 0% 0%;
-    -webkit-transform: scaleY(0);
-            transform: scaleY(0);
-  }
-  100% {
-    opacity: 1;
-    -webkit-transform-origin: 0% 0%;
-            transform-origin: 0% 0%;
-    -webkit-transform: scaleY(1);
-            transform: scaleY(1);
-  }
+  animation-name: rcSelectDropdownSlideDownOut;
+  animation-play-state: running;
 }
 @keyframes rcSelectDropdownSlideUpIn {
   0% {
     opacity: 0;
-    -webkit-transform-origin: 0% 0%;
-            transform-origin: 0% 0%;
-    -webkit-transform: scaleY(0);
-            transform: scaleY(0);
+    transform-origin: 0% 0%;
+    transform: scaleY(0);
   }
   100% {
     opacity: 1;
-    -webkit-transform-origin: 0% 0%;
-            transform-origin: 0% 0%;
-    -webkit-transform: scaleY(1);
-            transform: scaleY(1);
-  }
-}
-@-webkit-keyframes rcSelectDropdownSlideUpOut {
-  0% {
-    opacity: 1;
-    -webkit-transform-origin: 0% 0%;
-            transform-origin: 0% 0%;
-    -webkit-transform: scaleY(1);
-            transform: scaleY(1);
-  }
-  100% {
-    opacity: 0;
-    -webkit-transform-origin: 0% 0%;
-            transform-origin: 0% 0%;
-    -webkit-transform: scaleY(0);
-            transform: scaleY(0);
+    transform-origin: 0% 0%;
+    transform: scaleY(1);
   }
 }
 @keyframes rcSelectDropdownSlideUpOut {
   0% {
     opacity: 1;
-    -webkit-transform-origin: 0% 0%;
-            transform-origin: 0% 0%;
-    -webkit-transform: scaleY(1);
-            transform: scaleY(1);
+    transform-origin: 0% 0%;
+    transform: scaleY(1);
   }
   100% {
     opacity: 0;
-    -webkit-transform-origin: 0% 0%;
-            transform-origin: 0% 0%;
-    -webkit-transform: scaleY(0);
-            transform: scaleY(0);
-  }
-}
-@-webkit-keyframes rcSelectDropdownSlideDownIn {
-  0% {
-    opacity: 0;
-    -webkit-transform-origin: 0% 100%;
-            transform-origin: 0% 100%;
-    -webkit-transform: scaleY(0);
-            transform: scaleY(0);
-  }
-  100% {
-    opacity: 1;
-    -webkit-transform-origin: 0% 100%;
-            transform-origin: 0% 100%;
-    -webkit-transform: scaleY(1);
-            transform: scaleY(1);
+    transform-origin: 0% 0%;
+    transform: scaleY(0);
   }
 }
 @keyframes rcSelectDropdownSlideDownIn {
   0% {
     opacity: 0;
-    -webkit-transform-origin: 0% 100%;
-            transform-origin: 0% 100%;
-    -webkit-transform: scaleY(0);
-            transform: scaleY(0);
+    transform-origin: 0% 100%;
+    transform: scaleY(0);
   }
   100% {
     opacity: 1;
-    -webkit-transform-origin: 0% 100%;
-            transform-origin: 0% 100%;
-    -webkit-transform: scaleY(1);
-            transform: scaleY(1);
-  }
-}
-@-webkit-keyframes rcSelectDropdownSlideDownOut {
-  0% {
-    opacity: 1;
-    -webkit-transform-origin: 0% 100%;
-            transform-origin: 0% 100%;
-    -webkit-transform: scaleY(1);
-            transform: scaleY(1);
-  }
-  100% {
-    opacity: 0;
-    -webkit-transform-origin: 0% 100%;
-            transform-origin: 0% 100%;
-    -webkit-transform: scaleY(0);
-            transform: scaleY(0);
+    transform-origin: 0% 100%;
+    transform: scaleY(1);
   }
 }
 @keyframes rcSelectDropdownSlideDownOut {
   0% {
     opacity: 1;
-    -webkit-transform-origin: 0% 100%;
-            transform-origin: 0% 100%;
-    -webkit-transform: scaleY(1);
-            transform: scaleY(1);
+    transform-origin: 0% 100%;
+    transform: scaleY(1);
   }
   100% {
     opacity: 0;
-    -webkit-transform-origin: 0% 100%;
-            transform-origin: 0% 100%;
-    -webkit-transform: scaleY(0);
-            transform: scaleY(0);
+    transform-origin: 0% 100%;
+    transform: scaleY(0);
   }
 }
 .rc-select-open .rc-select-arrow b {

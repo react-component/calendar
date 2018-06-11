@@ -110,205 +110,102 @@
   display: none;
 }
 .rc-calendar-picker-slide-up-enter {
-  -webkit-animation-duration: .3s;
-          animation-duration: .3s;
-  -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
-  -webkit-transform-origin: 0 0;
-          transform-origin: 0 0;
+  animation-duration: .3s;
+  animation-fill-mode: both;
+  transform-origin: 0 0;
   display: block !important;
   opacity: 0;
-  -webkit-animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
-          animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
-  -webkit-animation-play-state: paused;
-          animation-play-state: paused;
+  animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
+  animation-play-state: paused;
 }
 .rc-calendar-picker-slide-up-appear {
-  -webkit-animation-duration: .3s;
-          animation-duration: .3s;
-  -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
-  -webkit-transform-origin: 0 0;
-          transform-origin: 0 0;
+  animation-duration: .3s;
+  animation-fill-mode: both;
+  transform-origin: 0 0;
   display: block !important;
   opacity: 0;
-  -webkit-animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
-          animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
-  -webkit-animation-play-state: paused;
-          animation-play-state: paused;
+  animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
+  animation-play-state: paused;
 }
 .rc-calendar-picker-slide-up-leave {
-  -webkit-animation-duration: .3s;
-          animation-duration: .3s;
-  -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
-  -webkit-transform-origin: 0 0;
-          transform-origin: 0 0;
+  animation-duration: .3s;
+  animation-fill-mode: both;
+  transform-origin: 0 0;
   display: block !important;
   opacity: 1;
-  -webkit-animation-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.34);
-          animation-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.34);
-  -webkit-animation-play-state: paused;
-          animation-play-state: paused;
+  animation-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.34);
+  animation-play-state: paused;
 }
 .rc-calendar-picker-slide-up-enter.rc-calendar-picker-slide-up-enter-active.rc-calendar-picker-placement-bottomLeft,
 .rc-calendar-picker-slide-up-enter.rc-calendar-picker-slide-up-enter-active.rc-calendar-picker-placement-bottomRight,
 .rc-calendar-picker-slide-up-appear.rc-calendar-picker-slide-up-appear-active.rc-calendar-picker-placement-bottomLeft,
 .rc-calendar-picker-slide-up-appear.rc-calendar-picker-slide-up-appear-active.rc-calendar-picker-placement-bottomRight {
-  -webkit-animation-name: rcDropdownSlideUpIn;
-          animation-name: rcDropdownSlideUpIn;
-  -webkit-animation-play-state: running;
-          animation-play-state: running;
+  animation-name: rcDropdownSlideUpIn;
+  animation-play-state: running;
 }
 .rc-calendar-picker-slide-up-enter.rc-calendar-picker-slide-up-enter-active.rc-calendar-picker-placement-topLeft,
 .rc-calendar-picker-slide-up-enter.rc-calendar-picker-slide-up-enter-active.rc-calendar-picker-placement-topRight,
 .rc-calendar-picker-slide-up-appear.rc-calendar-picker-slide-up-appear-active.rc-calendar-picker-placement-topLeft,
 .rc-calendar-picker-slide-up-appear.rc-calendar-picker-slide-up-appear-active.rc-calendar-picker-placement-topRight {
-  -webkit-animation-name: rcDropdownSlideDownIn;
-          animation-name: rcDropdownSlideDownIn;
-  -webkit-animation-play-state: running;
-          animation-play-state: running;
+  animation-name: rcDropdownSlideDownIn;
+  animation-play-state: running;
 }
 .rc-calendar-picker-slide-up-leave.rc-calendar-picker-slide-up-leave-active.rc-calendar-picker-placement-bottomLeft,
 .rc-calendar-picker-slide-up-leave.rc-calendar-picker-slide-up-leave-active.rc-calendar-picker-placement-bottomRight {
-  -webkit-animation-name: rcDropdownSlideUpOut;
-          animation-name: rcDropdownSlideUpOut;
-  -webkit-animation-play-state: running;
-          animation-play-state: running;
+  animation-name: rcDropdownSlideUpOut;
+  animation-play-state: running;
 }
 .rc-calendar-picker-slide-up-leave.rc-calendar-picker-slide-up-leave-active.rc-calendar-picker-placement-topLeft,
 .rc-calendar-picker-slide-up-leave.rc-calendar-picker-slide-up-leave-active.rc-calendar-picker-placement-topRight {
-  -webkit-animation-name: rcDropdownSlideDownOut;
-          animation-name: rcDropdownSlideDownOut;
-  -webkit-animation-play-state: running;
-          animation-play-state: running;
-}
-@-webkit-keyframes rcDropdownSlideUpIn {
-  0% {
-    opacity: 0;
-    -webkit-transform-origin: 0% 0%;
-            transform-origin: 0% 0%;
-    -webkit-transform: scaleY(0);
-            transform: scaleY(0);
-  }
-  100% {
-    opacity: 1;
-    -webkit-transform-origin: 0% 0%;
-            transform-origin: 0% 0%;
-    -webkit-transform: scaleY(1);
-            transform: scaleY(1);
-  }
+  animation-name: rcDropdownSlideDownOut;
+  animation-play-state: running;
 }
 @keyframes rcDropdownSlideUpIn {
   0% {
     opacity: 0;
-    -webkit-transform-origin: 0% 0%;
-            transform-origin: 0% 0%;
-    -webkit-transform: scaleY(0);
-            transform: scaleY(0);
+    transform-origin: 0% 0%;
+    transform: scaleY(0);
   }
   100% {
     opacity: 1;
-    -webkit-transform-origin: 0% 0%;
-            transform-origin: 0% 0%;
-    -webkit-transform: scaleY(1);
-            transform: scaleY(1);
-  }
-}
-@-webkit-keyframes rcDropdownSlideUpOut {
-  0% {
-    opacity: 1;
-    -webkit-transform-origin: 0% 0%;
-            transform-origin: 0% 0%;
-    -webkit-transform: scaleY(1);
-            transform: scaleY(1);
-  }
-  100% {
-    opacity: 0;
-    -webkit-transform-origin: 0% 0%;
-            transform-origin: 0% 0%;
-    -webkit-transform: scaleY(0);
-            transform: scaleY(0);
+    transform-origin: 0% 0%;
+    transform: scaleY(1);
   }
 }
 @keyframes rcDropdownSlideUpOut {
   0% {
     opacity: 1;
-    -webkit-transform-origin: 0% 0%;
-            transform-origin: 0% 0%;
-    -webkit-transform: scaleY(1);
-            transform: scaleY(1);
+    transform-origin: 0% 0%;
+    transform: scaleY(1);
   }
   100% {
     opacity: 0;
-    -webkit-transform-origin: 0% 0%;
-            transform-origin: 0% 0%;
-    -webkit-transform: scaleY(0);
-            transform: scaleY(0);
-  }
-}
-@-webkit-keyframes rcDropdownSlideDownIn {
-  0% {
-    opacity: 0;
-    -webkit-transform-origin: 100% 100%;
-            transform-origin: 100% 100%;
-    -webkit-transform: scaleY(0);
-            transform: scaleY(0);
-  }
-  100% {
-    opacity: 1;
-    -webkit-transform-origin: 100% 100%;
-            transform-origin: 100% 100%;
-    -webkit-transform: scaleY(1);
-            transform: scaleY(1);
+    transform-origin: 0% 0%;
+    transform: scaleY(0);
   }
 }
 @keyframes rcDropdownSlideDownIn {
   0% {
     opacity: 0;
-    -webkit-transform-origin: 100% 100%;
-            transform-origin: 100% 100%;
-    -webkit-transform: scaleY(0);
-            transform: scaleY(0);
+    transform-origin: 100% 100%;
+    transform: scaleY(0);
   }
   100% {
     opacity: 1;
-    -webkit-transform-origin: 100% 100%;
-            transform-origin: 100% 100%;
-    -webkit-transform: scaleY(1);
-            transform: scaleY(1);
-  }
-}
-@-webkit-keyframes rcDropdownSlideDownOut {
-  0% {
-    opacity: 1;
-    -webkit-transform-origin: 100% 100%;
-            transform-origin: 100% 100%;
-    -webkit-transform: scaleY(1);
-            transform: scaleY(1);
-  }
-  100% {
-    opacity: 0;
-    -webkit-transform-origin: 100% 100%;
-            transform-origin: 100% 100%;
-    -webkit-transform: scaleY(0);
-            transform: scaleY(0);
+    transform-origin: 100% 100%;
+    transform: scaleY(1);
   }
 }
 @keyframes rcDropdownSlideDownOut {
   0% {
     opacity: 1;
-    -webkit-transform-origin: 100% 100%;
-            transform-origin: 100% 100%;
-    -webkit-transform: scaleY(1);
-            transform: scaleY(1);
+    transform-origin: 100% 100%;
+    transform: scaleY(1);
   }
   100% {
     opacity: 0;
-    -webkit-transform-origin: 100% 100%;
-            transform-origin: 100% 100%;
-    -webkit-transform: scaleY(0);
-            transform: scaleY(0);
+    transform-origin: 100% 100%;
+    transform: scaleY(0);
   }
 }
 .rc-calendar {
@@ -585,8 +482,7 @@
   background-color: #ffffff;
   color: #666;
   line-height: 1.5;
-  -webkit-transform: border 0.3s cubic-bezier(0.35, 0, 0.25, 1), background 0.3s cubic-bezier(0.35, 0, 0.25, 1), box-shadow 0.3s cubic-bezier(0.35, 0, 0.25, 1);
-          transform: border 0.3s cubic-bezier(0.35, 0, 0.25, 1), background 0.3s cubic-bezier(0.35, 0, 0.25, 1), box-shadow 0.3s cubic-bezier(0.35, 0, 0.25, 1);
+  transform: border 0.3s cubic-bezier(0.35, 0, 0.25, 1), background 0.3s cubic-bezier(0.35, 0, 0.25, 1), box-shadow 0.3s cubic-bezier(0.35, 0, 0.25, 1);
   width: 40px;
 }
 .rc-calendar-time-input:hover {

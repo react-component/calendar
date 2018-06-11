@@ -63,89 +63,50 @@
 }
 .rc-dialog-footer {
   border-top: 1px solid #e9e9e9;
-  padding: 10px 20px 10px 10px;
+  padding: 10px 20px;
   text-align: right;
   border-radius: 0 0 5px 5px;
 }
 .rc-dialog-zoom-enter,
 .rc-dialog-zoom-appear {
   opacity: 0;
-  -webkit-animation-duration: 0.3s;
-          animation-duration: 0.3s;
-  -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
-  -webkit-animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
-          animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
-  -webkit-animation-play-state: paused;
-          animation-play-state: paused;
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
+  animation-play-state: paused;
 }
 .rc-dialog-zoom-leave {
-  -webkit-animation-duration: 0.3s;
-          animation-duration: 0.3s;
-  -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
-  -webkit-animation-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.34);
-          animation-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.34);
-  -webkit-animation-play-state: paused;
-          animation-play-state: paused;
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.34);
+  animation-play-state: paused;
 }
 .rc-dialog-zoom-enter.rc-dialog-zoom-enter-active,
 .rc-dialog-zoom-appear.rc-dialog-zoom-appear-active {
-  -webkit-animation-name: rcDialogZoomIn;
-          animation-name: rcDialogZoomIn;
-  -webkit-animation-play-state: running;
-          animation-play-state: running;
+  animation-name: rcDialogZoomIn;
+  animation-play-state: running;
 }
 .rc-dialog-zoom-leave.rc-dialog-zoom-leave-active {
-  -webkit-animation-name: rcDialogZoomOut;
-          animation-name: rcDialogZoomOut;
-  -webkit-animation-play-state: running;
-          animation-play-state: running;
-}
-@-webkit-keyframes rcDialogZoomIn {
-  0% {
-    opacity: 0;
-    -webkit-transform: scale(0, 0);
-            transform: scale(0, 0);
-  }
-  100% {
-    opacity: 1;
-    -webkit-transform: scale(1, 1);
-            transform: scale(1, 1);
-  }
+  animation-name: rcDialogZoomOut;
+  animation-play-state: running;
 }
 @keyframes rcDialogZoomIn {
   0% {
     opacity: 0;
-    -webkit-transform: scale(0, 0);
-            transform: scale(0, 0);
+    transform: scale(0, 0);
   }
   100% {
     opacity: 1;
-    -webkit-transform: scale(1, 1);
-            transform: scale(1, 1);
-  }
-}
-@-webkit-keyframes rcDialogZoomOut {
-  0% {
-    -webkit-transform: scale(1, 1);
-            transform: scale(1, 1);
-  }
-  100% {
-    opacity: 0;
-    -webkit-transform: scale(0, 0);
-            transform: scale(0, 0);
+    transform: scale(1, 1);
   }
 }
 @keyframes rcDialogZoomOut {
   0% {
-    -webkit-transform: scale(1, 1);
-            transform: scale(1, 1);
+    transform: scale(1, 1);
   }
   100% {
     opacity: 0;
-    -webkit-transform: scale(0, 0);
-            transform: scale(0, 0);
+    transform: scale(0, 0);
   }
 }
 @media (min-width: 768px) {
@@ -172,45 +133,25 @@
 .rc-dialog-fade-enter,
 .rc-dialog-fade-appear {
   opacity: 0;
-  -webkit-animation-duration: 0.3s;
-          animation-duration: 0.3s;
-  -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
-  -webkit-animation-timing-function: cubic-bezier(0.55, 0, 0.55, 0.2);
-          animation-timing-function: cubic-bezier(0.55, 0, 0.55, 0.2);
-  -webkit-animation-play-state: paused;
-          animation-play-state: paused;
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.55, 0, 0.55, 0.2);
+  animation-play-state: paused;
 }
 .rc-dialog-fade-leave {
-  -webkit-animation-duration: 0.3s;
-          animation-duration: 0.3s;
-  -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
-  -webkit-animation-timing-function: cubic-bezier(0.55, 0, 0.55, 0.2);
-          animation-timing-function: cubic-bezier(0.55, 0, 0.55, 0.2);
-  -webkit-animation-play-state: paused;
-          animation-play-state: paused;
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.55, 0, 0.55, 0.2);
+  animation-play-state: paused;
 }
 .rc-dialog-fade-enter.rc-dialog-fade-enter-active,
 .rc-dialog-fade-appear.rc-dialog-fade-appear-active {
-  -webkit-animation-name: rcDialogFadeIn;
-          animation-name: rcDialogFadeIn;
-  -webkit-animation-play-state: running;
-          animation-play-state: running;
+  animation-name: rcDialogFadeIn;
+  animation-play-state: running;
 }
 .rc-dialog-fade-leave.rc-dialog-fade-leave-active {
-  -webkit-animation-name: rcDialogFadeOut;
-          animation-name: rcDialogFadeOut;
-  -webkit-animation-play-state: running;
-          animation-play-state: running;
-}
-@-webkit-keyframes rcDialogFadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+  animation-name: rcDialogFadeOut;
+  animation-play-state: running;
 }
 @keyframes rcDialogFadeIn {
   0% {
@@ -218,14 +159,6 @@
   }
   100% {
     opacity: 1;
-  }
-}
-@-webkit-keyframes rcDialogFadeOut {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
   }
 }
 @keyframes rcDialogFadeOut {
