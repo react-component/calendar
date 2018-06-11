@@ -189,6 +189,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>whether has ok button in footer</td>
         </tr>
         <tr>
+          <td>showClear</td>
+          <td>Boolean</td>
+          <td>true</td>
+          <td>whether has clear button in DateInput</td>
+        </tr>
+        <tr>
           <td>timePicker</td>
           <td>React Element</td>
           <td></td>
