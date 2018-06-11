@@ -80,7 +80,9 @@ const CalendarPart = createReactClass({
       />;
 
     return (
-      <div className={`${rangeClassName}-part ${rangeClassName}-${direction}`}>
+      <div
+        className={`${rangeClassName}-part ${rangeClassName}-${direction}`}
+      >
         {dateInputElement}
         <div style={{ outline: 'none' }}>
           <CalendarHeader
