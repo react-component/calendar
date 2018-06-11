@@ -197,6 +197,7 @@ const Calendar = createReactClass({
       dateInputPlaceholder, timePicker,
       disabledTime,
     } = props;
+    const showFooter = props.showFooter || true;
     const { value, selectedValue, mode } = state;
     const showTimePicker = mode === 'time';
     const disabledTimeConfig = showTimePicker && disabledTime && timePicker ?
@@ -270,9 +271,10 @@ const Calendar = createReactClass({
               onSelect={this.onDateTableSelect}
               disabledDate={disabledDate}
               showWeekNumber={props.showWeekNumber}
+              contentRender={props.contentRender}
             />
           </div>
-
+          {showFooter ?
           <CalendarFooter
             showOk={props.showOk}
             renderFooter={props.renderFooter}
@@ -293,6 +295,7 @@ const Calendar = createReactClass({
             onOpenTimePicker={this.openTimePicker}
             onCloseTimePicker={this.closeTimePicker}
           />
+          : null}
         </div>
       </div>),
     ];
