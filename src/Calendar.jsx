@@ -36,6 +36,7 @@ const Calendar = createReactClass({
     dateInputPlaceholder: PropTypes.any,
     onClear: PropTypes.func,
     onChange: PropTypes.func,
+    onCellSelect: PropTypes.func,
     onPanelChange: PropTypes.func,
     disabledDate: PropTypes.func,
     disabledTime: PropTypes.any,
