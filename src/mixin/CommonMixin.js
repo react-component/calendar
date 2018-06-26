@@ -13,6 +13,7 @@ export default {
     onSelect: PropTypes.func,
     prefixCls: PropTypes.string,
     onChange: PropTypes.func,
+    onCellSelect: PropTypes.func,
     onOk: PropTypes.func,
   },
 
@@ -25,6 +26,7 @@ export default {
       className: '',
       onSelect: noop,
       onChange: noop,
+      onCellSelect: noop,
       onClear: noop,
       renderFooter() {
         return null;
