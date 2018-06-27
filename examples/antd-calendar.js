@@ -78,6 +78,7 @@ class Demo extends React.Component {
       showDateInput: true,
       disabled: false,
       value: props.defaultValue,
+      disableDateInput: false,
     };
   }
 
@@ -106,6 +107,12 @@ class Demo extends React.Component {
     });
   }
 
+  toggleDisableDateInput = () => {
+    this.setState({
+      disableDateInput: !this.state.disableDateInput,
+    });
+  }
+
   render() {
     const state = this.state;
     const calendar = (<Calendar
@@ -113,6 +120,7 @@ class Demo extends React.Component {
       style={{ zIndex: 1000 }}
       dateInputPlaceholder="please input"
       formatter={getFormat(state.showTime)}
+      disableDateInput={state.disableDateInput}
       disabledTime={state.showTime ? disabledTime : null}
       timePicker={state.showTime ? timePickerElement : null}
       defaultValue={this.props.defaultCalendarValue}
@@ -146,6 +154,15 @@ class Demo extends React.Component {
             type="checkbox"
           />
           disabled
+        </label>
+        <br />
+        <label>
+          <input
+            checked={state.disableDateInput}
+            onChange={this.toggleDisableDateInput}
+            type="checkbox"
+          />
+          disableDateInput
         </label>
       </div>
       <div style={{
@@ -212,6 +229,7 @@ ReactDOM.render((<div
         locale={cn ? zhCN : enUS}
         defaultValue={now}
         disabledTime={disabledTime}
+        disableDateInput
         showToday
         formatter={getFormat(true)}
         showOk={false}
