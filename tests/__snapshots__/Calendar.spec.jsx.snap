@@ -23,7 +23,13 @@ exports[`Calendar controlled panels render controlled panels correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Clear"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -986,7 +992,13 @@ exports[`Calendar controlled panels render controlled panels correctly 2`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Clear"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -1949,7 +1961,13 @@ exports[`Calendar render render correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="清除"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -2714,7 +2732,13 @@ exports[`Calendar render render correctly 2`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Clear"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -3479,7 +3503,13 @@ exports[`Calendar render render correctly 3`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Clear"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"

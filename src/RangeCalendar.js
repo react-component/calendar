@@ -99,6 +99,7 @@ const RangeCalendar = createReactClass({
     type: PropTypes.any,
     disabledDate: PropTypes.func,
     disabledTime: PropTypes.func,
+    clearIcon: PropTypes.node,
   },
 
   mixins: [CommonMixin],
@@ -114,6 +115,7 @@ const RangeCalendar = createReactClass({
       onInputSelect: noop,
       showToday: true,
       showDateInput: true,
+      clearIcon: 'x',
     };
   },
 
@@ -594,7 +596,7 @@ const RangeCalendar = createReactClass({
     const {
       prefixCls, dateInputPlaceholder,
       timePicker, showOk, locale, showClear,
-      showToday, type,
+      showToday, type, clearIcon,
     } = props;
     const {
       hoverValue,
@@ -668,7 +670,9 @@ const RangeCalendar = createReactClass({
               role="button"
               title={locale.clear}
               onClick={this.clear}
-            /> : null}
+            >
+              <span className={`${prefixCls}-clear-btn-icon`}>{clearIcon}</span>
+            </a> : null}
           <div
             className={`${prefixCls}-date-panel`}
             onMouseLeave={type !== 'both' ? this.onDatePanelLeave : undefined}
@@ -693,6 +697,7 @@ const RangeCalendar = createReactClass({
               showTimePicker={showTimePicker}
               enablePrev
               enableNext={!isClosestMonths || this.isMonthYearPanelShow(mode[1])}
+              clearIcon={clearIcon}
             />
             <span className={`${prefixCls}-range-middle`}>~</span>
             <CalendarPart
@@ -715,6 +720,7 @@ const RangeCalendar = createReactClass({
               disabledMonth={this.disabledEndMonth}
               enablePrev={!isClosestMonths || this.isMonthYearPanelShow(mode[0])}
               enableNext
+              clearIcon={clearIcon}
             />
           </div>
           <div className={cls}>

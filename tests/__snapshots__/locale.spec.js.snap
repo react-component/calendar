@@ -23,7 +23,13 @@ exports[`locales renders ar_EG correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="مسح"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -788,7 +794,13 @@ exports[`locales renders bg_BG correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Изчистване"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -1553,7 +1565,13 @@ exports[`locales renders ca_ES correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Netejar"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -2318,7 +2336,13 @@ exports[`locales renders cs_CZ correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Vymazat"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -3083,7 +3107,13 @@ exports[`locales renders da_DK correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Annuller"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -3848,7 +3878,13 @@ exports[`locales renders de_DE correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Zurücksetzen"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -4613,7 +4649,13 @@ exports[`locales renders el_GR correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Καθαρισμός"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -5378,7 +5420,13 @@ exports[`locales renders en_GB correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Clear"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -6143,7 +6191,13 @@ exports[`locales renders en_US correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Clear"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -6908,7 +6962,13 @@ exports[`locales renders es_ES correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Limpiar"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -7673,7 +7733,13 @@ exports[`locales renders et_EE correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Tühista"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -8438,7 +8504,13 @@ exports[`locales renders fa_IR correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="پاک کردن"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -9203,7 +9275,13 @@ exports[`locales renders fi_FI correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Tyhjennä"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -9968,7 +10046,13 @@ exports[`locales renders fr_BE correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Rétablir"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -10733,7 +10817,13 @@ exports[`locales renders fr_FR correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Rétablir"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -11498,7 +11588,13 @@ exports[`locales renders hu_HU correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Törlés"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -12263,7 +12359,13 @@ exports[`locales renders is_IS correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Hreinsa"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -13028,7 +13130,13 @@ exports[`locales renders it_IT correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Chiaro"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -13793,7 +13901,13 @@ exports[`locales renders ja_JP correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="クリア"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -14558,7 +14672,13 @@ exports[`locales renders ko_KR correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="지우기"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -15323,7 +15443,13 @@ exports[`locales renders ku_IQ correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Paqij bike"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -16088,7 +16214,13 @@ exports[`locales renders nb_NO correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Annuller"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -16853,7 +16985,13 @@ exports[`locales renders nl_BE correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Reset"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -17618,7 +17756,13 @@ exports[`locales renders nl_NL correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Reset"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -18383,7 +18527,13 @@ exports[`locales renders pl_PL correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Wyczyść"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -19148,7 +19298,13 @@ exports[`locales renders pt_BR correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Limpar"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -19913,7 +20069,13 @@ exports[`locales renders pt_PT correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Limpar"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -20678,7 +20840,13 @@ exports[`locales renders ru_RU correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Очистить"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -21443,7 +21611,13 @@ exports[`locales renders sk_SK correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Vymazať"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -22208,7 +22382,13 @@ exports[`locales renders sl_SI correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Počisti"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -22973,7 +23153,13 @@ exports[`locales renders sr_RS correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Obriši"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -23738,7 +23924,13 @@ exports[`locales renders sv_SE correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Avbryt"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -24503,7 +24695,13 @@ exports[`locales renders th_TH correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="ลบล้าง"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -25268,7 +25466,13 @@ exports[`locales renders tr_TR correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Temizle"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -26033,7 +26237,13 @@ exports[`locales renders ug_CN correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="تازىلاش"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -26798,7 +27008,13 @@ exports[`locales renders uk_UA correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="Очистити"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -27563,7 +27779,13 @@ exports[`locales renders zh_CN correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="清除"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -28328,7 +28550,13 @@ exports[`locales renders zh_TW correctly 1`] = `
         class="rc-calendar-clear-btn"
         role="button"
         title="清除"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn-icon"
+        >
+          x
+        </span>
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
