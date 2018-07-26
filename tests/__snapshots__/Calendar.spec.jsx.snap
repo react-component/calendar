@@ -20,15 +20,12 @@ exports[`Calendar controlled panels render controlled panels correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Clear"
       >
         <span
-          class="rc-calendar-clear-btn-icon"
-        >
-          x
-        </span>
+          class="rc-calendar-clear-btn"
+        />
       </a>
     </div>
     <div
@@ -989,15 +986,12 @@ exports[`Calendar controlled panels render controlled panels correctly 2`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Clear"
       >
         <span
-          class="rc-calendar-clear-btn-icon"
-        >
-          x
-        </span>
+          class="rc-calendar-clear-btn"
+        />
       </a>
     </div>
     <div
@@ -1958,15 +1952,12 @@ exports[`Calendar render render correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="清除"
       >
         <span
-          class="rc-calendar-clear-btn-icon"
-        >
-          x
-        </span>
+          class="rc-calendar-clear-btn"
+        />
       </a>
     </div>
     <div
@@ -2729,15 +2720,12 @@ exports[`Calendar render render correctly 2`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Clear"
       >
         <span
-          class="rc-calendar-clear-btn-icon"
-        >
-          x
-        </span>
+          class="rc-calendar-clear-btn"
+        />
       </a>
     </div>
     <div
@@ -3500,15 +3488,12 @@ exports[`Calendar render render correctly 3`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Clear"
       >
         <span
-          class="rc-calendar-clear-btn-icon"
-        >
-          x
-        </span>
+          class="rc-calendar-clear-btn"
+        />
       </a>
     </div>
     <div

@@ -115,7 +115,6 @@ const RangeCalendar = createReactClass({
       onInputSelect: noop,
       showToday: true,
       showDateInput: true,
-      clearIcon: 'x',
     };
   },
 
@@ -666,12 +665,11 @@ const RangeCalendar = createReactClass({
         <div className={`${prefixCls}-panel`}>
           {showClear && selectedValue[0] && selectedValue[1] ?
             <a
-              className={`${prefixCls}-clear-btn`}
               role="button"
               title={locale.clear}
               onClick={this.clear}
             >
-              <span className={`${prefixCls}-clear-btn-icon`}>{clearIcon}</span>
+              {clearIcon || <span className={`${prefixCls}-clear-btn`}/>}
             </a> : null}
           <div
             className={`${prefixCls}-date-panel`}

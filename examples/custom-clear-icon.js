@@ -5,133 +5,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Calendar from 'rc-calendar';
 import RangeCalendar from 'rc-calendar/src/RangeCalendar';
-import zhCN from 'rc-calendar/src/locale/zh_CN';
-import enUS from 'rc-calendar/src/locale/en_US';
 import 'rc-time-picker/assets/index.css';
-import TimePickerPanel from 'rc-time-picker/lib/Panel';
 
-import moment from 'moment';
 import 'moment/locale/zh-cn';
 import 'moment/locale/en-gb';
-
-const format = 'YYYY-MM-DD HH:mm:ss';
-const cn = location.search.indexOf('cn') !== -1;
-
-const now = moment();
-if (cn) {
-  now.locale('zh-cn').utcOffset(8);
-} else {
-  now.locale('en-gb').utcOffset(0);
-}
-
-function disabledDate(current) {
-  const date = moment();
-  date.hour(0);
-  date.minute(0);
-  date.second(0);
-  return current.isBefore(date);  // can not select days before today
-}
-
-function getFormat(time) {
-  return time ? format : 'YYYY-MM-DD';
-}
-
-
-const defaultCalendarValue = now.clone();
-defaultCalendarValue.add(-1, 'month');
-
-const timePickerElement = <TimePickerPanel defaultValue={moment('00:00:00', 'HH:mm:ss')} />;
-
-function disabledTime(date) {
-  console.log('disabledTime', date);
-  if (date && (date.date() === 15)) {
-    return {
-      disabledHours() {
-        return [3, 4];
-      },
-    };
-  }
-  return {
-    disabledHours() {
-      return [1, 2];
-    },
-  };
-}
-
-function newArray(start, end) {
-  const result = [];
-  for (let i = start; i < end; i++) {
-    result.push(i);
-  }
-  return result;
-}
-
-const formatStrRange = 'YYYY-MM-DD HH:mm:ss';
-function formatRange(v) {
-  return v ? v.format(formatStrRange) : '';
-}
-
-function disabledTimeRange(time, type) {
-  console.log('disabledTime', time, type);
-  if (type === 'start') {
-    return {
-      disabledHours() {
-        const hours = newArray(0, 60);
-        hours.splice(20, 4);
-        return hours;
-      },
-      disabledMinutes(h) {
-        if (h === 20) {
-          return newArray(0, 31);
-        } else if (h === 23) {
-          return newArray(30, 60);
-        }
-        return [];
-      },
-      disabledSeconds() {
-        return [55, 56];
-      },
-    };
-  }
-  return {
-    disabledHours() {
-      const hours = newArray(0, 60);
-      hours.splice(2, 6);
-      return hours;
-    },
-    disabledMinutes(h) {
-      if (h === 20) {
-        return newArray(0, 31);
-      } else if (h === 23) {
-        return newArray(30, 60);
-      }
-      return [];
-    },
-    disabledSeconds() {
-      return [55, 56];
-    },
-  };
-}
-
-function onStandaloneSelect(value) {
-  console.log('onStandaloneSelect');
-  console.log(value && value.format(format));
-}
-
-function onStandaloneChange(value) {
-  console.log('onStandaloneChange');
-  console.log(value && value.format(format));
-}
-
-function onStandaloneRangeChange(value) {
-  console.log('onChange');
-  console.log(value[0] && formatRange(value[0]), value[1] && formatRange(value[1]));
-}
-
-function onStandaloneRangeSelect(value) {
-  console.log('onSelect');
-  console.log(formatRange(value[0]), formatRange(value[1]));
-}
 
 const svgPath = 'M909.1 209.3l-56.4 44.1C775.8 155.1 656.2 92 521.9 92 ' +
   '290 92 102.3 279.5 102 511.5 101.7 743.7 289.8 932 521.9 932c181.3 0' +
@@ -146,15 +23,34 @@ const svgPath = 'M909.1 209.3l-56.4 44.1C775.8 155.1 656.2 92 521.9 92 ' +
   '-7.7l0.8-180.9c-0.1-6.6-7.8-10.3-13-6.2z';
 
 const svg = (
-  <svg
-    viewBox="0 0 1024 1024"
-    width="1em"
-    height="1em"
-    fill="currentColor"
-    style={{ verticalAlign: '-.25em' }}
+  <i style={{
+    fontStyle: 'normal',
+    zIndex: '9999',
+    position: 'absolute',
+    right: '6px',
+    cursor: 'pointer',
+    overflow: 'hidden',
+    width: '20px',
+    height: '20px',
+    textAlign: 'center',
+    lineHeight: '1',
+    top: '10px',
+    margin: '0',
+    fontSize: '12px',
+    color: '#aaa',
+    display: 'inline-block',
+  }}
   >
-    <path d={svgPath} p-id="5827"></path>
-  </svg>
+    <svg
+      viewBox="0 0 1024 1024"
+      width="1em"
+      height="1em"
+      fill="currentColor"
+      style={{ verticalAlign: '-.125em' }}
+    >
+      <path d={svgPath} p-id="5827"></path>
+    </svg>
+  </i>
 );
 
 ReactDOM.render((<div
@@ -168,35 +64,13 @@ ReactDOM.render((<div
   <div>
     <div style={{ margin: 10 }}>
       <Calendar
-        showWeekNumber={false}
-        locale={cn ? zhCN : enUS}
-        defaultValue={now}
-        disabledTime={disabledTime}
-        showToday
-        formatter={getFormat(true)}
-        showOk={false}
-        timePicker={timePickerElement}
-        onChange={onStandaloneChange}
-        disabledDate={disabledDate}
-        onSelect={onStandaloneSelect}
         clearIcon={svg}
       />
     </div>
     <div style={{ clear: 'both' }}></div>
     RangeCalendar
     <RangeCalendar
-      showToday={false}
-      showWeekNumber
-      dateInputPlaceholder={['start', 'end']}
-      locale={cn ? zhCN : enUS}
-      showOk={false}
       showClear
-      format={formatStrRange}
-      onChange={onStandaloneRangeChange}
-      onSelect={onStandaloneRangeSelect}
-      disabledDate={disabledDate}
-      timePicker={timePickerElement}
-      disabledTime={disabledTimeRange}
       clearIcon={svg}
     />
   </div>

@@ -53,7 +53,6 @@ const Calendar = createReactClass({
       timePicker: null,
       onOk: noop,
       onPanelChange: noop,
-      clearIcon: 'x',
     };
   },
   getInitialState() {

@@ -90,7 +90,8 @@
     margin: 0;
   }
 
-  &-clear-btn-icon {
+  &-clear-btn:after {
+    content: "x";
     font-size: 12px;
     color: #aaa;
     display: inline-block;
@@ -99,7 +100,7 @@
     transition: color 0.3s ease;
   }
 
-  &-clear-btn-icon:hover {
+  &-clear-btn:hover:after {
     color: #666;
   }
 }

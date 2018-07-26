@@ -131,12 +131,11 @@ const DateInput = createReactClass({
         />
       </div>
       {props.showClear ? <a
-        className={`${prefixCls}-clear-btn`}
         role="button"
         title={locale.clear}
         onClick={this.onClear}
       >
-        <span className={`${prefixCls}-clear-btn-icon`}>{clearIcon}</span>
+        {clearIcon || <span className={`${prefixCls}-clear-btn`}/>}
       </a> : null}
     </div>);
   },
