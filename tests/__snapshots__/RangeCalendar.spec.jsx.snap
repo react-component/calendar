@@ -178,7 +178,7 @@ exports[`RangeCalendar can hide date inputs with showDateInput={false} 1`] = `
                     </div>
                   </td>
                   <td
-                    class="rc-calendar-cell rc-calendar-last-month-cell"
+                    class="rc-calendar-cell rc-calendar-last-month-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="February 28, 2017"
                   >
@@ -601,7 +601,7 @@ exports[`RangeCalendar can hide date inputs with showDateInput={false} 1`] = `
                     </div>
                   </td>
                   <td
-                    class="rc-calendar-cell"
+                    class="rc-calendar-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="March 31, 2017"
                   >
@@ -937,7 +937,7 @@ exports[`RangeCalendar can hide date inputs with showDateInput={false} 1`] = `
                     </div>
                   </td>
                   <td
-                    class="rc-calendar-cell rc-calendar-last-month-cell"
+                    class="rc-calendar-cell rc-calendar-last-month-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="March 31, 2017"
                   >
@@ -1352,7 +1352,7 @@ exports[`RangeCalendar can hide date inputs with showDateInput={false} 1`] = `
                   role="row"
                 >
                   <td
-                    class="rc-calendar-cell"
+                    class="rc-calendar-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="April 30, 2017"
                   >
@@ -1864,7 +1864,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                     </div>
                   </td>
                   <td
-                    class="rc-calendar-cell rc-calendar-last-month-cell"
+                    class="rc-calendar-cell rc-calendar-last-month-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="February 28, 2017"
                   >
@@ -2287,7 +2287,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                     </div>
                   </td>
                   <td
-                    class="rc-calendar-cell"
+                    class="rc-calendar-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="March 31, 2017"
                   >
@@ -2843,7 +2843,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                     </div>
                   </td>
                   <td
-                    class="rc-calendar-cell rc-calendar-last-month-cell"
+                    class="rc-calendar-cell rc-calendar-last-month-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="March 31, 2017"
                   >
@@ -3258,7 +3258,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                   role="row"
                 >
                   <td
-                    class="rc-calendar-cell"
+                    class="rc-calendar-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="April 30, 2017"
                   >
@@ -3770,7 +3770,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                     </div>
                   </td>
                   <td
-                    class="rc-calendar-cell rc-calendar-last-month-cell"
+                    class="rc-calendar-cell rc-calendar-last-month-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="February 28, 2017"
                   >
@@ -4193,7 +4193,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                     </div>
                   </td>
                   <td
-                    class="rc-calendar-cell"
+                    class="rc-calendar-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="March 31, 2017"
                   >
@@ -4749,7 +4749,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                     </div>
                   </td>
                   <td
-                    class="rc-calendar-cell rc-calendar-last-month-cell"
+                    class="rc-calendar-cell rc-calendar-last-month-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="March 31, 2017"
                   >
@@ -5164,7 +5164,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
                   role="row"
                 >
                   <td
-                    class="rc-calendar-cell"
+                    class="rc-calendar-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="April 30, 2017"
                   >
@@ -5269,6 +5269,1516 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 2`] 
       >
         <a
           class="rc-calendar-today-btn rc-calendar-today-btn-disabled"
+          role="button"
+          title="March 29, 2017"
+        >
+          Back to today
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`RangeCalendar key control 1`] = `
+<div
+  class="rc-calendar rc-calendar-range"
+  tabindex="0"
+>
+  <div
+    class="rc-calendar-panel"
+  >
+    <div
+      class="rc-calendar-date-panel"
+    >
+      <div
+        class="rc-calendar-range-part rc-calendar-range-left"
+      >
+        <div
+          class="rc-calendar-input-wrap"
+        >
+          <div
+            class="rc-calendar-date-input-wrap"
+          >
+            <input
+              class="rc-calendar-input "
+              value="9/3/2000"
+            />
+          </div>
+        </div>
+        <div
+          style="outline: none;"
+        >
+          <div
+            class="rc-calendar-header"
+          >
+            <div
+              style="position: relative;"
+            >
+              <a
+                class="rc-calendar-prev-year-btn"
+                role="button"
+                title="Last year (Control + left)"
+              />
+              <a
+                class="rc-calendar-prev-month-btn"
+                role="button"
+                title="Previous month (PageUp)"
+              />
+              <span
+                class="rc-calendar-my-select"
+              >
+                <a
+                  class="rc-calendar-month-select"
+                  role="button"
+                  title="Choose a month"
+                >
+                  Sep
+                </a>
+                <a
+                  class="rc-calendar-year-select"
+                  role="button"
+                  title="Choose a year"
+                >
+                  2000
+                </a>
+              </span>
+              <a
+                class="rc-calendar-next-month-btn"
+                title="Next month (PageDown)"
+              />
+              <a
+                class="rc-calendar-next-year-btn"
+                title="Next year (Control + right)"
+              />
+            </div>
+          </div>
+          <div
+            class="rc-calendar-body"
+          >
+            <table
+              cellspacing="0"
+              class="rc-calendar-table"
+              role="grid"
+            >
+              <thead>
+                <tr
+                  role="row"
+                >
+                  <th
+                    class="rc-calendar-column-header"
+                    role="columnheader"
+                    title="Sun"
+                  >
+                    <span
+                      class="rc-calendar-column-header-inner"
+                    >
+                      Su
+                    </span>
+                  </th>
+                  <th
+                    class="rc-calendar-column-header"
+                    role="columnheader"
+                    title="Mon"
+                  >
+                    <span
+                      class="rc-calendar-column-header-inner"
+                    >
+                      Mo
+                    </span>
+                  </th>
+                  <th
+                    class="rc-calendar-column-header"
+                    role="columnheader"
+                    title="Tue"
+                  >
+                    <span
+                      class="rc-calendar-column-header-inner"
+                    >
+                      Tu
+                    </span>
+                  </th>
+                  <th
+                    class="rc-calendar-column-header"
+                    role="columnheader"
+                    title="Wed"
+                  >
+                    <span
+                      class="rc-calendar-column-header-inner"
+                    >
+                      We
+                    </span>
+                  </th>
+                  <th
+                    class="rc-calendar-column-header"
+                    role="columnheader"
+                    title="Thu"
+                  >
+                    <span
+                      class="rc-calendar-column-header-inner"
+                    >
+                      Th
+                    </span>
+                  </th>
+                  <th
+                    class="rc-calendar-column-header"
+                    role="columnheader"
+                    title="Fri"
+                  >
+                    <span
+                      class="rc-calendar-column-header-inner"
+                    >
+                      Fr
+                    </span>
+                  </th>
+                  <th
+                    class="rc-calendar-column-header"
+                    role="columnheader"
+                    title="Sat"
+                  >
+                    <span
+                      class="rc-calendar-column-header-inner"
+                    >
+                      Sa
+                    </span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                class="rc-calendar-tbody"
+              >
+                <tr
+                  class=""
+                  role="row"
+                >
+                  <td
+                    class="rc-calendar-cell rc-calendar-last-month-cell"
+                    role="gridcell"
+                    title="August 27, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      27
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-last-month-cell"
+                    role="gridcell"
+                    title="August 28, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      28
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-last-month-cell"
+                    role="gridcell"
+                    title="August 29, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      29
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-last-month-cell"
+                    role="gridcell"
+                    title="August 30, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      30
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-last-month-cell rc-calendar-last-day-of-month"
+                    role="gridcell"
+                    title="August 31, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      31
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell"
+                    role="gridcell"
+                    title="September 1, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      1
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell"
+                    role="gridcell"
+                    title="September 2, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      2
+                    </div>
+                  </td>
+                </tr>
+                <tr
+                  class="rc-calendar-active-week"
+                  role="row"
+                >
+                  <td
+                    class="rc-calendar-cell rc-calendar-selected-start-date rc-calendar-selected-day"
+                    role="gridcell"
+                    title="September 3, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="true"
+                      class="rc-calendar-date"
+                    >
+                      3
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="September 4, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      4
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="September 5, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      5
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="September 6, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      6
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="September 7, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      7
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="September 8, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      8
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="September 9, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      9
+                    </div>
+                  </td>
+                </tr>
+                <tr
+                  class=""
+                  role="row"
+                >
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="September 10, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      10
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="September 11, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      11
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="September 12, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      12
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="September 13, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      13
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="September 14, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      14
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="September 15, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      15
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="September 16, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      16
+                    </div>
+                  </td>
+                </tr>
+                <tr
+                  class=""
+                  role="row"
+                >
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="September 17, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      17
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="September 18, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      18
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="September 19, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      19
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="September 20, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      20
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="September 21, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      21
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="September 22, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      22
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="September 23, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      23
+                    </div>
+                  </td>
+                </tr>
+                <tr
+                  class=""
+                  role="row"
+                >
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="September 24, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      24
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="September 25, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      25
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="September 26, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      26
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="September 27, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      27
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="September 28, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      28
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="September 29, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      29
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell rc-calendar-last-day-of-month"
+                    role="gridcell"
+                    title="September 30, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      30
+                    </div>
+                  </td>
+                </tr>
+                <tr
+                  class=""
+                  role="row"
+                >
+                  <td
+                    class="rc-calendar-cell rc-calendar-next-month-btn-day"
+                    role="gridcell"
+                    title="October 1, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      1
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-next-month-btn-day"
+                    role="gridcell"
+                    title="October 2, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      2
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-next-month-btn-day"
+                    role="gridcell"
+                    title="October 3, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      3
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-next-month-btn-day"
+                    role="gridcell"
+                    title="October 4, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      4
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-next-month-btn-day"
+                    role="gridcell"
+                    title="October 5, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      5
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-next-month-btn-day"
+                    role="gridcell"
+                    title="October 6, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      6
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-next-month-btn-day"
+                    role="gridcell"
+                    title="October 7, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      7
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <span
+        class="rc-calendar-range-middle"
+      >
+        ~
+      </span>
+      <div
+        class="rc-calendar-range-part rc-calendar-range-right"
+      >
+        <div
+          class="rc-calendar-input-wrap"
+        >
+          <div
+            class="rc-calendar-date-input-wrap"
+          >
+            <input
+              class="rc-calendar-input "
+              value="11/28/2000"
+            />
+          </div>
+        </div>
+        <div
+          style="outline: none;"
+        >
+          <div
+            class="rc-calendar-header"
+          >
+            <div
+              style="position: relative;"
+            >
+              <a
+                class="rc-calendar-prev-year-btn"
+                role="button"
+                title="Last year (Control + left)"
+              />
+              <a
+                class="rc-calendar-prev-month-btn"
+                role="button"
+                title="Previous month (PageUp)"
+              />
+              <span
+                class="rc-calendar-my-select"
+              >
+                <a
+                  class="rc-calendar-month-select"
+                  role="button"
+                  title="Choose a month"
+                >
+                  Nov
+                </a>
+                <a
+                  class="rc-calendar-year-select"
+                  role="button"
+                  title="Choose a year"
+                >
+                  2000
+                </a>
+              </span>
+              <a
+                class="rc-calendar-next-month-btn"
+                title="Next month (PageDown)"
+              />
+              <a
+                class="rc-calendar-next-year-btn"
+                title="Next year (Control + right)"
+              />
+            </div>
+          </div>
+          <div
+            class="rc-calendar-body"
+          >
+            <table
+              cellspacing="0"
+              class="rc-calendar-table"
+              role="grid"
+            >
+              <thead>
+                <tr
+                  role="row"
+                >
+                  <th
+                    class="rc-calendar-column-header"
+                    role="columnheader"
+                    title="Sun"
+                  >
+                    <span
+                      class="rc-calendar-column-header-inner"
+                    >
+                      Su
+                    </span>
+                  </th>
+                  <th
+                    class="rc-calendar-column-header"
+                    role="columnheader"
+                    title="Mon"
+                  >
+                    <span
+                      class="rc-calendar-column-header-inner"
+                    >
+                      Mo
+                    </span>
+                  </th>
+                  <th
+                    class="rc-calendar-column-header"
+                    role="columnheader"
+                    title="Tue"
+                  >
+                    <span
+                      class="rc-calendar-column-header-inner"
+                    >
+                      Tu
+                    </span>
+                  </th>
+                  <th
+                    class="rc-calendar-column-header"
+                    role="columnheader"
+                    title="Wed"
+                  >
+                    <span
+                      class="rc-calendar-column-header-inner"
+                    >
+                      We
+                    </span>
+                  </th>
+                  <th
+                    class="rc-calendar-column-header"
+                    role="columnheader"
+                    title="Thu"
+                  >
+                    <span
+                      class="rc-calendar-column-header-inner"
+                    >
+                      Th
+                    </span>
+                  </th>
+                  <th
+                    class="rc-calendar-column-header"
+                    role="columnheader"
+                    title="Fri"
+                  >
+                    <span
+                      class="rc-calendar-column-header-inner"
+                    >
+                      Fr
+                    </span>
+                  </th>
+                  <th
+                    class="rc-calendar-column-header"
+                    role="columnheader"
+                    title="Sat"
+                  >
+                    <span
+                      class="rc-calendar-column-header-inner"
+                    >
+                      Sa
+                    </span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                class="rc-calendar-tbody"
+              >
+                <tr
+                  class=""
+                  role="row"
+                >
+                  <td
+                    class="rc-calendar-cell rc-calendar-last-month-cell"
+                    role="gridcell"
+                    title="October 29, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      29
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-last-month-cell"
+                    role="gridcell"
+                    title="October 30, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      30
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-last-month-cell rc-calendar-last-day-of-month"
+                    role="gridcell"
+                    title="October 31, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      31
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="November 1, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      1
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="November 2, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      2
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="November 3, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      3
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="November 4, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      4
+                    </div>
+                  </td>
+                </tr>
+                <tr
+                  class=""
+                  role="row"
+                >
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="November 5, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      5
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="November 6, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      6
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="November 7, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      7
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="November 8, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      8
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="November 9, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      9
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="November 10, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      10
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="November 11, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      11
+                    </div>
+                  </td>
+                </tr>
+                <tr
+                  class=""
+                  role="row"
+                >
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="November 12, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      12
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="November 13, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      13
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="November 14, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      14
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="November 15, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      15
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="November 16, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      16
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="November 17, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      17
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="November 18, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      18
+                    </div>
+                  </td>
+                </tr>
+                <tr
+                  class=""
+                  role="row"
+                >
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="November 19, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      19
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="November 20, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      20
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="November 21, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      21
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="November 22, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      22
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="November 23, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      23
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="November 24, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      24
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="November 25, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      25
+                    </div>
+                  </td>
+                </tr>
+                <tr
+                  class="rc-calendar-active-week"
+                  role="row"
+                >
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="November 26, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      26
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    role="gridcell"
+                    title="November 27, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      27
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-selected-end-date rc-calendar-selected-day"
+                    role="gridcell"
+                    title="November 28, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="true"
+                      class="rc-calendar-date"
+                    >
+                      28
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell"
+                    role="gridcell"
+                    title="November 29, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      29
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-last-day-of-month"
+                    role="gridcell"
+                    title="November 30, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      30
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-next-month-btn-day"
+                    role="gridcell"
+                    title="December 1, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      1
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-next-month-btn-day"
+                    role="gridcell"
+                    title="December 2, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      2
+                    </div>
+                  </td>
+                </tr>
+                <tr
+                  class=""
+                  role="row"
+                >
+                  <td
+                    class="rc-calendar-cell rc-calendar-next-month-btn-day"
+                    role="gridcell"
+                    title="December 3, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      3
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-next-month-btn-day"
+                    role="gridcell"
+                    title="December 4, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      4
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-next-month-btn-day"
+                    role="gridcell"
+                    title="December 5, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      5
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-next-month-btn-day"
+                    role="gridcell"
+                    title="December 6, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      6
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-next-month-btn-day"
+                    role="gridcell"
+                    title="December 7, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      7
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-next-month-btn-day"
+                    role="gridcell"
+                    title="December 8, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      8
+                    </div>
+                  </td>
+                  <td
+                    class="rc-calendar-cell rc-calendar-next-month-btn-day"
+                    role="gridcell"
+                    title="December 9, 2000"
+                  >
+                    <div
+                      aria-disabled="false"
+                      aria-selected="false"
+                      class="rc-calendar-date"
+                    >
+                      9
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="rc-calendar-footer rc-calendar-range-bottom"
+    >
+      <div
+        class="rc-calendar-footer-btn"
+      >
+        <a
+          class="rc-calendar-today-btn "
           role="button"
           title="March 29, 2017"
         >
@@ -5470,7 +6980,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                     </div>
                   </td>
                   <td
-                    class="rc-calendar-cell rc-calendar-last-month-cell"
+                    class="rc-calendar-cell rc-calendar-last-month-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="February 28, 2017"
                   >
@@ -5893,7 +7403,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                     </div>
                   </td>
                   <td
-                    class="rc-calendar-cell rc-calendar-in-range-cell"
+                    class="rc-calendar-cell rc-calendar-in-range-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="March 31, 2017"
                   >
@@ -6241,7 +7751,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                     </div>
                   </td>
                   <td
-                    class="rc-calendar-cell rc-calendar-last-month-cell"
+                    class="rc-calendar-cell rc-calendar-last-month-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="March 31, 2017"
                   >
@@ -6656,7 +8166,7 @@ exports[`RangeCalendar render hoverValue correctly 1`] = `
                   role="row"
                 >
                   <td
-                    class="rc-calendar-cell"
+                    class="rc-calendar-cell rc-calendar-last-day-of-month"
                     role="gridcell"
                     title="April 30, 2017"
                   >

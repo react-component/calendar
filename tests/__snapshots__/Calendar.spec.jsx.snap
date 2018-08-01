@@ -395,7 +395,7 @@ exports[`Calendar controlled panels render controlled panels correctly 1`] = `
                 </div>
               </td>
               <td
-                class="rc-calendar-cell rc-calendar-last-month-cell"
+                class="rc-calendar-cell rc-calendar-last-month-cell rc-calendar-last-day-of-month"
                 role="gridcell"
                 title="February 28, 2017"
               >
@@ -818,7 +818,7 @@ exports[`Calendar controlled panels render controlled panels correctly 1`] = `
                 </div>
               </td>
               <td
-                class="rc-calendar-cell"
+                class="rc-calendar-cell rc-calendar-last-day-of-month"
                 role="gridcell"
                 title="March 31, 2017"
               >
@@ -1358,7 +1358,7 @@ exports[`Calendar controlled panels render controlled panels correctly 2`] = `
                 </div>
               </td>
               <td
-                class="rc-calendar-cell rc-calendar-last-month-cell"
+                class="rc-calendar-cell rc-calendar-last-month-cell rc-calendar-last-day-of-month"
                 role="gridcell"
                 title="February 28, 2017"
               >
@@ -1781,7 +1781,7 @@ exports[`Calendar controlled panels render controlled panels correctly 2`] = `
                 </div>
               </td>
               <td
-                class="rc-calendar-cell"
+                class="rc-calendar-cell rc-calendar-last-day-of-month"
                 role="gridcell"
                 title="March 31, 2017"
               >
@@ -2110,7 +2110,7 @@ exports[`Calendar render render correctly 1`] = `
                 </div>
               </td>
               <td
-                class="rc-calendar-cell rc-calendar-last-month-cell"
+                class="rc-calendar-cell rc-calendar-last-month-cell rc-calendar-last-day-of-month"
                 role="gridcell"
                 title="2017年2月28日"
               >
@@ -2533,7 +2533,7 @@ exports[`Calendar render render correctly 1`] = `
                 </div>
               </td>
               <td
-                class="rc-calendar-cell"
+                class="rc-calendar-cell rc-calendar-last-day-of-month"
                 role="gridcell"
                 title="2017年3月31日"
               >
@@ -2888,7 +2888,7 @@ exports[`Calendar render render correctly 2`] = `
                 </div>
               </td>
               <td
-                class="rc-calendar-cell rc-calendar-last-month-cell"
+                class="rc-calendar-cell rc-calendar-last-month-cell rc-calendar-last-day-of-month"
                 role="gridcell"
                 title="February 28, 2017"
               >
@@ -3311,7 +3311,7 @@ exports[`Calendar render render correctly 2`] = `
                 </div>
               </td>
               <td
-                class="rc-calendar-cell"
+                class="rc-calendar-cell rc-calendar-last-day-of-month"
                 role="gridcell"
                 title="March 31, 2017"
               >
@@ -3653,7 +3653,7 @@ exports[`Calendar render render correctly 3`] = `
                 </div>
               </td>
               <td
-                class="rc-calendar-cell rc-calendar-last-month-cell"
+                class="rc-calendar-cell rc-calendar-last-month-cell rc-calendar-last-day-of-month"
                 role="gridcell"
                 title="February 28, 2017"
               >
@@ -4076,7 +4076,7 @@ exports[`Calendar render render correctly 3`] = `
                 </div>
               </td>
               <td
-                class="rc-calendar-cell"
+                class="rc-calendar-cell rc-calendar-last-day-of-month"
                 role="gridcell"
                 title="March 31, 2017"
               >

@@ -1,6 +1,6 @@
 {
   "name": "rc-calendar",
-  "version": "9.6.0",
+  "version": "9.6.2",
   "description": "React Calendar",
   "keywords": [
     "react",
@@ -15,7 +15,8 @@
     "lib",
     "es",
     "assets/*.css",
-    "dist"
+    "dist",
+    "index.d.ts"
   ],
   "main": "lib/index",
   "module": "es/index",
@@ -46,6 +47,7 @@
     "pub": "rc-tools run pub --babel-runtime",
     "lint": "rc-tools run lint",
     "test": "jest",
+    "types": "tslint *.ts{,x} && tsc",
     "coverage": "jest --coverage"
   },
   "jest": {
@@ -60,11 +62,14 @@
     ],
     "transform": {
       "\\.jsx?$": "./node_modules/rc-tools/scripts/jestPreprocessor.js"
-    }
+    },
+    "testURL": "http://localhost"
   },
   "devDependencies": {
+    "@types/react": "^16.3.13",
     "async": "~2.5.0",
     "bootstrap": "~3.3.2",
+    "dtslint": "^0.3.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.3.1",
@@ -77,7 +82,9 @@
     "rc-tools": "^7.0.3",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-test-renderer": "^16.0.0"
+    "react-test-renderer": "^16.0.0",
+    "tslint": "^5.9.1",
+    "typescript": "^2.8.3"
   },
   "pre-commit": [
     "lint"
@@ -91,5 +98,6 @@
     "prop-types": "^15.5.8",
     "rc-trigger": "^2.2.0",
     "rc-util": "^4.1.1"
-  }
+  },
+  "types": "index.d.ts"
 }
