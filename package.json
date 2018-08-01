@@ -62,7 +62,8 @@
     ],
     "transform": {
       "\\.jsx?$": "./node_modules/rc-tools/scripts/jestPreprocessor.js"
-    }
+    },
+    "testURL": "http://localhost"
   },
   "devDependencies": {
     "@types/react": "^16.3.13",
