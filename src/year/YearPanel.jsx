@@ -20,7 +20,7 @@ function chooseYear(year) {
 }
 
 export default
-class YearPanel extends React.Component {
+  class YearPanel extends React.Component {
   constructor(props) {
     super(props);
     this.prefixCls = `${props.rootPrefixCls}-year-panel`;
@@ -56,7 +56,7 @@ class YearPanel extends React.Component {
   render() {
     const props = this.props;
     const value = this.state.value;
-    const locale = props.locale;
+    const { locale, customIcon } = props;
     const years = this.years();
     const currentYear = value.year();
     const startYear = parseInt(currentYear / 10, 10) * 10;
@@ -97,6 +97,11 @@ class YearPanel extends React.Component {
       return (<tr key={index} role="row">{tds}</tr>);
     });
 
+    const renderCustomIcon = (type) => {
+      return typeof customIcon === 'function' ?
+        React.createElement(customIcon, { type }) : null;
+    };
+
     return (
       <div className={this.prefixCls}>
         <div>
@@ -106,7 +111,7 @@ class YearPanel extends React.Component {
               role="button"
               onClick={this.previousDecade}
               title={locale.previousDecade}
-            />
+            >{renderCustomIcon('prev-jump') || '«'}</a>
             <a
               className={`${prefixCls}-decade-select`}
               role="button"
@@ -124,12 +129,12 @@ class YearPanel extends React.Component {
               role="button"
               onClick={this.nextDecade}
               title={locale.nextDecade}
-            />
+            >{renderCustomIcon('next-jump') || '»'}</a>
           </div>
           <div className={`${prefixCls}-body`}>
             <table className={`${prefixCls}-table`} cellSpacing="0" role="grid">
               <tbody className={`${prefixCls}-tbody`}>
-              {yeasEls}
+                {yeasEls}
               </tbody>
             </table>
           </div>
@@ -142,6 +147,7 @@ YearPanel.propTypes = {
   rootPrefixCls: PropTypes.string,
   value: PropTypes.object,
   defaultValue: PropTypes.object,
+  customIcon: PropTypes.func,
 };
 
 YearPanel.defaultProps = {

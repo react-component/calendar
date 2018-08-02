@@ -21,7 +21,7 @@ function chooseDecade(year, event) {
 }
 
 export default
-class DecadePanel extends React.Component {
+  class DecadePanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,7 +36,7 @@ class DecadePanel extends React.Component {
 
   render() {
     const value = this.state.value;
-    const locale = this.props.locale;
+    const { locale, customIcon } = this.props;
     const currentYear = value.year();
     const startYear = parseInt(currentYear / 100, 10) * 100;
     const preYear = startYear - 10;
@@ -95,6 +95,11 @@ class DecadePanel extends React.Component {
       return (<tr key={decadeIndex} role="row">{tds}</tr>);
     });
 
+    const renderCustomIcon = (type) => {
+      return typeof customIcon === 'function' ?
+        React.createElement(customIcon, { type }) : null;
+    };
+
     return (
       <div className={this.prefixCls}>
         <div className={`${prefixCls}-header`}>
@@ -103,7 +108,7 @@ class DecadePanel extends React.Component {
             role="button"
             onClick={this.previousCentury}
             title={locale.previousCentury}
-          />
+          >{renderCustomIcon('prev-jump') || '«'}</a>
 
           <div className={`${prefixCls}-century`}>
             {startYear}-{endYear}
@@ -113,12 +118,12 @@ class DecadePanel extends React.Component {
             role="button"
             onClick={this.nextCentury}
             title={locale.nextCentury}
-          />
+          >{renderCustomIcon('next-jump') || '»'}</a>
         </div>
         <div className={`${prefixCls}-body`}>
           <table className={`${prefixCls}-table`} cellSpacing="0" role="grid">
             <tbody className={`${prefixCls}-tbody`}>
-            {decadesEls}
+              {decadesEls}
             </tbody>
           </table>
         </div>
@@ -131,6 +136,7 @@ DecadePanel.propTypes = {
   value: PropTypes.object,
   defaultValue: PropTypes.object,
   rootPrefixCls: PropTypes.string,
+  customIcon: PropTypes.func,
 };
 
 DecadePanel.defaultProps = {
