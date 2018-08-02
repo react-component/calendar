@@ -85,6 +85,18 @@ describe('Calendar', () => {
         wrapper.find('.rc-calendar-input').at(0).getDOMNode().value
       ).toBe('3/8/2017 06:00:00');
     });
+    it('timePicker date have no changes when hover', () => {
+      const timePicker = <TimePickerPanel defaultValue={moment('00:00:00', 'HH:mm:ss')} />;
+      const wrapper = mount(<Calendar timePicker={timePicker} />);
+      wrapper.find('.rc-calendar-time-picker-btn').simulate('click');
+      const dateBtns = wrapper.find('.rc-calendar-my-select a');
+      const btnClassName = 'rc-calendar-time-status';
+      for (let i = 0; i < dateBtns.length; i += 1) {
+        dateBtns.at(i).simulate('mouseEnter');
+        expect(dateBtns.get(i).props.title).toBeFalsy();
+        expect(dateBtns.get(i).props.className).toEqual(expect.stringContaining(btnClassName));
+      }
+    });
   });
 
   describe('controlled panels', () => {
