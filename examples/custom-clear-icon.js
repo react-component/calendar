@@ -22,35 +22,6 @@ const clearPath = 'M909.1 209.3l-56.4 44.1C775.8 155.1 656.2 92 521.9 92 ' +
   ' 31.4l-60.2 47c-5.3 4.1-3.5 12.5 3 14.1l175.6 43c5 1.2 9.9-2.6 9.9' +
   '-7.7l0.8-180.9c-0.1-6.6-7.8-10.3-13-6.2z';
 
-const getSvgIcon = (path, reverse, type) => {
-  const paths = Array.isArray(path) ? path : [path];
-  const renderPaths = paths.map((p, i) => {
-    return (
-      <path key={i} d={p} />
-    );
-  });
-  return (
-    <i className={`custom-icon-${type}`} style={{
-      fontSize: '14px',
-      color: '#666',
-    }}
-    >
-      <svg
-        viewBox="0 0 1024 1024"
-        width="1em"
-        height="1em"
-        fill="currentColor"
-        style={{
-          verticalAlign: '-.125em',
-          transform: `rotate(${reverse && 180 || 0}deg)`,
-        }}
-      >
-        {renderPaths}
-      </svg>
-    </i>
-  );
-};
-
 const svg = (
   <i style={{
     fontStyle: 'normal',
