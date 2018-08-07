@@ -39,8 +39,8 @@ const CalendarHeader = createReactClass({
     return {
       enableNext: 1,
       enablePrev: 1,
-      onPanelChange() {},
-      onValueChange() {},
+      onPanelChange() { },
+      onValueChange() { },
     };
   },
 
@@ -113,7 +113,7 @@ const CalendarHeader = createReactClass({
       my = [year, month, day];
     }
     return (<span className={selectClassName}>
-    {toFragment(my)}
+      {toFragment(my)}
     </span>);
   },
 

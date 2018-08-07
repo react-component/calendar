@@ -41,6 +41,7 @@ const Calendar = createReactClass({
     disabledTime: PropTypes.any,
     renderFooter: PropTypes.func,
     renderSidebar: PropTypes.func,
+    clearIcon: PropTypes.node,
   },
 
   mixins: [CommonMixin, CalendarMixin],
@@ -195,7 +196,7 @@ const Calendar = createReactClass({
     const {
       locale, prefixCls, disabledDate,
       dateInputPlaceholder, timePicker,
-      disabledTime,
+      disabledTime, clearIcon,
     } = props;
     const { value, selectedValue, mode } = state;
     const showTimePicker = mode === 'time';
@@ -237,6 +238,7 @@ const Calendar = createReactClass({
         prefixCls={prefixCls}
         selectedValue={selectedValue}
         onChange={this.onDateInputChange}
+        clearIcon={clearIcon}
       />
     ) : null;
     const children = [
@@ -256,7 +258,7 @@ const Calendar = createReactClass({
           {timePicker && showTimePicker ?
             (<div className={`${prefixCls}-time-picker`}>
               <div className={`${prefixCls}-time-picker-panel`}>
-                {timePickerEle }
+                {timePickerEle}
               </div>
             </div>)
             : null}

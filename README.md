@@ -230,6 +230,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td></td>
           <td>called when panel changed</td>
         </tr>
+        <tr>
+          <td>clearIcon</td>
+          <td>ReactNode</td>
+          <td></td>
+          <td>specific the clear icon.</td>
+        </tr>
     </tbody>
 </table>
 
@@ -407,6 +413,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>Function(hoverValue: moment[])</td>
           <td></td>
           <td>called when hover value change</td>
+        </tr>
+        <tr>
+          <td>clearIcon</td>
+          <td>ReactNode</td>
+          <td></td>
+          <td>specific the clear icon.</td>
         </tr>
     </tbody>
 </table>

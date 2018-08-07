@@ -12,7 +12,7 @@ import CommonMixin from './mixin/CommonMixin';
 import { syncTime, getTodayTime, isAllowedDate } from './util';
 import { goTime, goStartMonth, goEndMonth, includesTime } from './util/toTime';
 
-function noop() {}
+function noop() { }
 
 function isEmptyArray(arr) {
   return Array.isArray(arr) && (arr.length === 0 || arr.every(i => !i));
@@ -41,8 +41,8 @@ function normalizeAnchor(props, init) {
   const selectedValue = props.selectedValue || init && props.defaultSelectedValue;
   const value = props.value || init && props.defaultValue;
   const normalizedValue = value ?
-          getValueFromSelectedValue(value) :
-          getValueFromSelectedValue(selectedValue);
+    getValueFromSelectedValue(value) :
+    getValueFromSelectedValue(selectedValue);
   return !isEmptyArray(normalizedValue) ?
     normalizedValue : init && [moment(), moment().add(1, 'months')];
 }
@@ -99,6 +99,7 @@ const RangeCalendar = createReactClass({
     type: PropTypes.any,
     disabledDate: PropTypes.func,
     disabledTime: PropTypes.func,
+    clearIcon: PropTypes.node,
   },
 
   mixins: [CommonMixin],
@@ -485,7 +486,7 @@ const RangeCalendar = createReactClass({
 
   isAllowedDateAndTime(selectedValue) {
     return isAllowedDate(selectedValue[0], this.props.disabledDate, this.disabledStartTime) &&
-    isAllowedDate(selectedValue[1], this.props.disabledDate, this.disabledEndTime);
+      isAllowedDate(selectedValue[1], this.props.disabledDate, this.disabledEndTime);
   },
 
   isMonthYearPanelShow(mode) {
@@ -594,7 +595,7 @@ const RangeCalendar = createReactClass({
     const {
       prefixCls, dateInputPlaceholder,
       timePicker, showOk, locale, showClear,
-      showToday, type,
+      showToday, type, clearIcon,
     } = props;
     const {
       hoverValue,
@@ -615,7 +616,7 @@ const RangeCalendar = createReactClass({
       selectedValue: state.selectedValue,
       onSelect: this.onSelect,
       onDayHover: type === 'start' && selectedValue[1] ||
-      type === 'end' && selectedValue[0] || !!hoverValue.length ?
+        type === 'end' && selectedValue[0] || !!hoverValue.length ?
         this.onDayHover : undefined,
     };
 
@@ -642,11 +643,11 @@ const RangeCalendar = createReactClass({
     const thisMonth = todayTime.month();
     const thisYear = todayTime.year();
     const isTodayInView =
-            startValue.year() === thisYear && startValue.month() === thisMonth ||
-            endValue.year() === thisYear && endValue.month() === thisMonth;
+      startValue.year() === thisYear && startValue.month() === thisMonth ||
+      endValue.year() === thisYear && endValue.month() === thisMonth;
     const nextMonthOfStart = startValue.clone().add(1, 'months');
     const isClosestMonths = nextMonthOfStart.year() === endValue.year() &&
-            nextMonthOfStart.month() === endValue.month();
+      nextMonthOfStart.month() === endValue.month();
 
     // console.warn('Render:', selectedValue.map(t => t.format('YYYY-MM-DD')).join(', '));
     // console.log('start:', startValue.format('YYYY-MM-DD'));
@@ -664,11 +665,12 @@ const RangeCalendar = createReactClass({
         <div className={`${prefixCls}-panel`}>
           {showClear && selectedValue[0] && selectedValue[1] ?
             <a
-              className={`${prefixCls}-clear-btn`}
               role="button"
               title={locale.clear}
               onClick={this.clear}
-            /> : null}
+            >
+              {clearIcon || <span className={`${prefixCls}-clear-btn`} />}
+            </a> : null}
           <div
             className={`${prefixCls}-date-panel`}
             onMouseLeave={type !== 'both' ? this.onDatePanelLeave : undefined}
@@ -693,6 +695,7 @@ const RangeCalendar = createReactClass({
               showTimePicker={showTimePicker}
               enablePrev
               enableNext={!isClosestMonths || this.isMonthYearPanelShow(mode[1])}
+              clearIcon={clearIcon}
             />
             <span className={`${prefixCls}-range-middle`}>~</span>
             <CalendarPart
@@ -715,6 +718,7 @@ const RangeCalendar = createReactClass({
               disabledMonth={this.disabledEndMonth}
               enablePrev={!isClosestMonths || this.isMonthYearPanelShow(mode[0])}
               enableNext
+              clearIcon={clearIcon}
             />
           </div>
           <div className={cls}>
