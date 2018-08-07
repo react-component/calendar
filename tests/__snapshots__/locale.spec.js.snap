@@ -41,16 +41,12 @@ exports[`locales renders ar_EG correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="العام السابق (Control + left)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="الشهر السابق (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -72,15 +68,11 @@ exports[`locales renders ar_EG correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="الشهر التالى(PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="العام التالى (Control + right)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -817,16 +809,12 @@ exports[`locales renders bg_BG correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="Последна година (Control + left)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="Предишен месец (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -848,15 +836,11 @@ exports[`locales renders bg_BG correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="Следващ месец (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="Следваща година (Control + right)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -1593,16 +1577,12 @@ exports[`locales renders ca_ES correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="Any anterior (Control + left)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="Mes anterior (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -1624,15 +1604,11 @@ exports[`locales renders ca_ES correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="Mes següent (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="Mes següent (Control + right)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -2369,16 +2345,12 @@ exports[`locales renders cs_CZ correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="Předchozí rok (Control + left)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="Předchozí měsíc (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -2400,15 +2372,11 @@ exports[`locales renders cs_CZ correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="Následující (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="Následující rok (Control + right)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -3145,16 +3113,12 @@ exports[`locales renders da_DK correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="Forrige år (Control + left)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="Forrige måned(PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -3176,15 +3140,11 @@ exports[`locales renders da_DK correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="Næste måned (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="Næste r (Control + right)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -3921,16 +3881,12 @@ exports[`locales renders de_DE correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="Vorheriges Jahr (Ctrl + left)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="Vorheriger Monat (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -3952,15 +3908,11 @@ exports[`locales renders de_DE correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="Nächster Monat (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="Nächstes Jahr (Ctrl + right)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -4697,16 +4649,12 @@ exports[`locales renders el_GR correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="Προηγούμενο έτος (Control + αριστερά)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="Προηγούμενος μήνας (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -4728,15 +4676,11 @@ exports[`locales renders el_GR correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="Επόμενος μήνας (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="Επόμενο έτος (Control + δεξιά)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -5473,16 +5417,12 @@ exports[`locales renders en_GB correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="Last year (Control + left)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="Previous month (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -5504,15 +5444,11 @@ exports[`locales renders en_GB correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="Next month (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="Next year (Control + right)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -6249,16 +6185,12 @@ exports[`locales renders en_US correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="Last year (Control + left)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="Previous month (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -6280,15 +6212,11 @@ exports[`locales renders en_US correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="Next month (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="Next year (Control + right)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -7025,16 +6953,12 @@ exports[`locales renders es_ES correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="Año anterior (Control + left)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="Mes anterior (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -7056,15 +6980,11 @@ exports[`locales renders es_ES correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="Mes siguiente (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="Año siguiente (Control + right)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -7801,16 +7721,12 @@ exports[`locales renders et_EE correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="Eelmine aasta (Control + left)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="Eelmine kuu (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -7832,15 +7748,11 @@ exports[`locales renders et_EE correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="Järgmine kuu (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="Järgmine aasta (Control + right)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -8577,16 +8489,12 @@ exports[`locales renders fa_IR correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="سال قبل (Control + left)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="ماه قبل (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -8608,15 +8516,11 @@ exports[`locales renders fa_IR correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="ماه بعد (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="سال بعد (Control + right)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -9353,16 +9257,12 @@ exports[`locales renders fi_FI correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="Edellinen vuosi (Control + left)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="Edellinen kuukausi (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -9384,15 +9284,11 @@ exports[`locales renders fi_FI correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="Seuraava kuukausi (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="Seuraava vuosi (Control + right)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -10129,16 +10025,12 @@ exports[`locales renders fr_BE correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="Année précédente (Ctrl + gauche)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="Mois précédent (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -10160,15 +10052,11 @@ exports[`locales renders fr_BE correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="Mois suivant (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="Année prochaine (Ctrl + droite)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -10905,16 +10793,12 @@ exports[`locales renders fr_FR correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="Année précédente (Ctrl + gauche)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="Mois précédent (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -10936,15 +10820,11 @@ exports[`locales renders fr_FR correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="Mois suivant (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="Année prochaine (Ctrl + droite)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -11681,16 +11561,12 @@ exports[`locales renders hu_HU correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="Múlt év (Control + left)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="Előző hónap (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -11712,15 +11588,11 @@ exports[`locales renders hu_HU correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="Következő hónap (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="Jövő év (Control + right)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -12457,16 +12329,12 @@ exports[`locales renders is_IS correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="Fyrra ár (Control + left)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="Fyrri mánuður (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -12488,15 +12356,11 @@ exports[`locales renders is_IS correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="Næsti mánuður (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="Næsta ár (Control + right)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -13233,16 +13097,12 @@ exports[`locales renders it_IT correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="L'anno scorso (Control + sinistra)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="Il mese scorso (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -13264,15 +13124,11 @@ exports[`locales renders it_IT correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="Il prossimo mese (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="L'anno prossimo (Control + destra)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -14009,16 +13865,12 @@ exports[`locales renders ja_JP correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="前年 (Controlを押しながら左キー)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="前月 (ページアップキー)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-ym-select"
           >
@@ -14040,15 +13892,11 @@ exports[`locales renders ja_JP correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="翌月 (ページダウンキー)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="翌年 (Controlを押しながら右キー)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -14785,16 +14633,12 @@ exports[`locales renders ko_KR correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="이전 해 (Control + left)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="이전 달 (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-ym-select"
           >
@@ -14816,15 +14660,11 @@ exports[`locales renders ko_KR correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="다음 달 (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="다음 해 (Control + right)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -15561,16 +15401,12 @@ exports[`locales renders ku_IQ correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="Sala peş (Control + şep)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="Meha peş (PageUp))"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -15592,15 +15428,11 @@ exports[`locales renders ku_IQ correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="Meha paş (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="Sala paş (Control + rast)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -16337,16 +16169,12 @@ exports[`locales renders nb_NO correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="Forrige år (Control + left)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="Forrige måned(PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -16368,15 +16196,11 @@ exports[`locales renders nb_NO correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="Neste måned (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="Neste år (Control + right)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -17113,16 +16937,12 @@ exports[`locales renders nl_BE correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="Vorig jaar (Control + left)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="Vorige maand (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -17144,15 +16964,11 @@ exports[`locales renders nl_BE correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="Volgende maand (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="Volgend jaar (Control + right)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -17889,16 +17705,12 @@ exports[`locales renders nl_NL correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="Vorig jaar (Control + left)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="Vorige maand (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -17920,15 +17732,11 @@ exports[`locales renders nl_NL correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="Volgende maand (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="Volgend jaar (Control + right)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -18665,16 +18473,12 @@ exports[`locales renders pl_PL correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="Ostatni rok (Ctrl + left)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="Poprzedni miesiąc (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -18696,15 +18500,11 @@ exports[`locales renders pl_PL correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="Następny miesiąc (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="Następny rok (Ctrl + right)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -19441,16 +19241,12 @@ exports[`locales renders pt_BR correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="Ano anterior (Control + esquerda)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="Mês anterior (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-ym-select"
           >
@@ -19472,15 +19268,11 @@ exports[`locales renders pt_BR correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="Próximo mês (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="Próximo ano (Control + direita)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -20217,16 +20009,12 @@ exports[`locales renders pt_PT correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="Ano anterior (Control + left)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="Mês anterior (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -20248,15 +20036,11 @@ exports[`locales renders pt_PT correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="Mês seguinte (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="Ano seguinte (Control + right)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -20993,16 +20777,12 @@ exports[`locales renders ru_RU correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="Предыдущий год (Control + left)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="Предыдущий месяц (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -21024,15 +20804,11 @@ exports[`locales renders ru_RU correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="Следующий месяц (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="Следующий год (Control + right)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -21769,16 +21545,12 @@ exports[`locales renders sk_SK correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="Predchádzajúci rok (Control + left)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="Predchádzajúci mesiac (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -21800,15 +21572,11 @@ exports[`locales renders sk_SK correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="Nasledujúci mesiac (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="Nasledujúci rok (Control + right)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -22545,16 +22313,12 @@ exports[`locales renders sl_SI correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="Prejšnje leto (Control + left)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="Prejšnji mesec (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -22576,15 +22340,11 @@ exports[`locales renders sl_SI correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="Naslednji mesec (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="Naslednje leto (Control + right)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -23321,16 +23081,12 @@ exports[`locales renders sr_RS correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="Prethodna godina (Control + left)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="Prethodni mesec (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -23352,15 +23108,11 @@ exports[`locales renders sr_RS correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="Sledeći mesec (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="Sledeća godina (Control + right)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -24097,16 +23849,12 @@ exports[`locales renders sv_SE correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="Föreg år (Control + left)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="Förra månaden (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -24128,15 +23876,11 @@ exports[`locales renders sv_SE correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="Nästa månad (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="Nästa år (Control + right)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -24873,16 +24617,12 @@ exports[`locales renders th_TH correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="ปีก่อนหน้า (Control + left)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="เดือนก่อนหน้า (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -24904,15 +24644,11 @@ exports[`locales renders th_TH correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="เดือนถัดไป (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="ปีถัดไป (Control + right)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -25649,16 +25385,12 @@ exports[`locales renders tr_TR correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="Önceki Yıl (Control + Sol)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="Önceki Ay (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -25680,15 +25412,11 @@ exports[`locales renders tr_TR correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="Sonraki Ay (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="Sonraki Yıl (Control + Sağ)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -26425,16 +26153,12 @@ exports[`locales renders ug_CN correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="ئالدىنقى يىلى (Controlبىلەن يۆنىلىش كونۇپكىسى)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="ئالدىنقى ئاي(ئالدىنقى بەت )"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-ym-select"
           >
@@ -26456,15 +26180,11 @@ exports[`locales renders ug_CN correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="كېلەركى ئاي (كېلەركى بەت)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="كېلەركى يىلى (Controlبىلەن يۆنىلىش كونۇپكىسى)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -27201,16 +26921,12 @@ exports[`locales renders uk_UA correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="Попередній рік (Control + left)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="Попередній місяць (PageUp)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-my-select"
           >
@@ -27232,15 +26948,11 @@ exports[`locales renders uk_UA correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="Наступний місяць (PageDown)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="Наступний рік (Control + right)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -27977,16 +27689,12 @@ exports[`locales renders zh_CN correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="上一年 (Control键加左方向键)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="上个月 (翻页上键)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-ym-select"
           >
@@ -28008,15 +27716,11 @@ exports[`locales renders zh_CN correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="下个月 (翻页下键)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="下一年 (Control键加右方向键)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
@@ -28753,16 +28457,12 @@ exports[`locales renders zh_TW correctly 1`] = `
             class="rc-calendar-prev-year-btn"
             role="button"
             title="上一年 (Control鍵加左方向鍵)"
-          >
-            «
-          </a>
+          />
           <a
             class="rc-calendar-prev-month-btn"
             role="button"
             title="上個月 (翻頁上鍵)"
-          >
-            ‹
-          </a>
+          />
           <span
             class="rc-calendar-ym-select"
           >
@@ -28784,15 +28484,11 @@ exports[`locales renders zh_TW correctly 1`] = `
           <a
             class="rc-calendar-next-month-btn"
             title="下個月 (翻頁下鍵)"
-          >
-            ›
-          </a>
+          />
           <a
             class="rc-calendar-next-year-btn"
             title="下一年 (Control鍵加右方向鍵)"
-          >
-            »
-          </a>
+          />
         </div>
       </div>
       <div
