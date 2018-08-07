@@ -43,11 +43,18 @@
 }
 
 .@{prefixClass}-month-panel-next-year-btn {
+  &:after {
+    content: '»'
+  }
 }
 
 .@{prefixClass}-month-panel-prev-year-btn {
   user-select: none;
   left: 0;
+
+  &:after {
+    content: '«'
+  }
 }
 
 .@{prefixClass}-month-panel .@{prefixClass}-month-panel-year-select {

@@ -18,7 +18,6 @@ const MonthPanel = createReactClass({
     onChange: PropTypes.func,
     disabledDate: PropTypes.func,
     onSelect: PropTypes.func,
-    customIcon: PropTypes.func,
   },
 
   getDefaultProps() {
@@ -70,16 +69,9 @@ const MonthPanel = createReactClass({
     const value = this.state.value;
     const cellRender = props.cellRender;
     const contentRender = props.contentRender;
-    const { locale, customIcon } = props;
+    const { locale } = props;
     const year = value.year();
     const prefixCls = this.prefixCls;
-
-    console.log(customIcon);
-
-    const renderCustomIcon = (type) => {
-      return typeof customIcon === 'function' ?
-        React.createElement(customIcon, { type }) : null;
-    };
 
     return (
       <div className={prefixCls} style={props.style}>
@@ -90,7 +82,7 @@ const MonthPanel = createReactClass({
               role="button"
               onClick={this.previousYear}
               title={locale.previousYear}
-            >{renderCustomIcon('prev-jump') || '«'}</a>
+            />
 
             <a
               className={`${prefixCls}-year-select`}
@@ -107,7 +99,7 @@ const MonthPanel = createReactClass({
               role="button"
               onClick={this.nextYear}
               title={locale.nextYear}
-            >{renderCustomIcon('next-jump') || '»'}</a>
+            />
           </div>
           <div className={`${prefixCls}-body`}>
             <MonthTable

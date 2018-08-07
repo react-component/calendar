@@ -33,7 +33,6 @@ const CalendarHeader = createReactClass({
     enablePrev: PropTypes.any,
     enableNext: PropTypes.any,
     disabledMonth: PropTypes.func,
-    customIcon: PropTypes.func,
   },
 
   getDefaultProps() {
@@ -143,7 +142,6 @@ const CalendarHeader = createReactClass({
       enableNext,
       enablePrev,
       disabledMonth,
-      customIcon,
     } = props;
 
     let panel = null;
@@ -158,7 +156,6 @@ const CalendarHeader = createReactClass({
           disabledDate={disabledMonth}
           cellRender={props.monthCellRender}
           contentRender={props.monthCellContentRender}
-          customIcon={customIcon}
         />
       );
     }
@@ -170,7 +167,6 @@ const CalendarHeader = createReactClass({
           rootPrefixCls={prefixCls}
           onSelect={this.onYearSelect}
           onDecadePanelShow={this.showDecadePanel}
-          customIcon={customIcon}
         />
       );
     }
@@ -181,15 +177,9 @@ const CalendarHeader = createReactClass({
           defaultValue={value}
           rootPrefixCls={prefixCls}
           onSelect={this.onDecadeSelect}
-          customIcon={customIcon}
         />
       );
     }
-
-    const renderCustomIcon = (type) => {
-      return typeof customIcon === 'function' ?
-        React.createElement(customIcon, { type }) : null;
-    };
 
     return (<div className={`${prefixCls}-header`}>
       <div style={{ position: 'relative' }}>
@@ -199,27 +189,27 @@ const CalendarHeader = createReactClass({
             role="button"
             onClick={this.previousYear}
             title={locale.previousYear}
-          >{renderCustomIcon('prev-year') || '«'}</a>)}
+          />)}
         {showIf(enablePrev && !showTimePicker,
           <a
             className={`${prefixCls}-prev-month-btn`}
             role="button"
             onClick={this.previousMonth}
             title={locale.previousMonth}
-          >{renderCustomIcon('prev-month') || '‹'}</a>)}
+          />)}
         {this.monthYearElement(showTimePicker)}
         {showIf(enableNext && !showTimePicker,
           <a
             className={`${prefixCls}-next-month-btn`}
             onClick={this.nextMonth}
             title={locale.nextMonth}
-          >{renderCustomIcon('next-month') || '›'}</a>)}
+          />)}
         {showIf(enableNext && !showTimePicker,
           <a
             className={`${prefixCls}-next-year-btn`}
             onClick={this.nextYear}
             title={locale.nextYear}
-          >{renderCustomIcon('next-year') || '»'}</a>)}
+          />)}
       </div>
       {panel}
     </div>);

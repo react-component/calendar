@@ -236,12 +236,6 @@ http://react-component.github.io/calendar/examples/index.html
           <td></td>
           <td>specific the clear icon.</td>
         </tr>
-        <tr>
-          <td>customIcon</td>
-          <td>(props: { type: 'prev-year' | 'prev-month' | 'next-month' | 'next-year' }) => ReactNode</td>
-          <td></td>
-          <td>specific the custom clear icon.</td>
-        </tr>
     </tbody>
 </table>
 
@@ -425,12 +419,6 @@ http://react-component.github.io/calendar/examples/index.html
           <td>ReactNode</td>
           <td></td>
           <td>specific the clear icon.</td>
-        </tr>
-        <tr>
-          <td>customIcon</td>
-          <td>(props: { type: 'prev-year' | 'prev-month' | 'next-month' | 'next-year' }) => ReactNode</td>
-          <td></td>
-          <td>specific the custom clear icon.</td>
         </tr>
     </tbody>
 </table>

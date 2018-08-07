@@ -36,7 +36,7 @@ export default
 
   render() {
     const value = this.state.value;
-    const { locale, customIcon } = this.props;
+    const { locale } = this.props;
     const currentYear = value.year();
     const startYear = parseInt(currentYear / 100, 10) * 100;
     const preYear = startYear - 10;
@@ -95,11 +95,6 @@ export default
       return (<tr key={decadeIndex} role="row">{tds}</tr>);
     });
 
-    const renderCustomIcon = (type) => {
-      return typeof customIcon === 'function' ?
-        React.createElement(customIcon, { type }) : null;
-    };
-
     return (
       <div className={this.prefixCls}>
         <div className={`${prefixCls}-header`}>
@@ -108,7 +103,7 @@ export default
             role="button"
             onClick={this.previousCentury}
             title={locale.previousCentury}
-          >{renderCustomIcon('prev-jump') || '«'}</a>
+          />
 
           <div className={`${prefixCls}-century`}>
             {startYear}-{endYear}
@@ -118,7 +113,7 @@ export default
             role="button"
             onClick={this.nextCentury}
             title={locale.nextCentury}
-          >{renderCustomIcon('next-jump') || '»'}</a>
+          />
         </div>
         <div className={`${prefixCls}-body`}>
           <table className={`${prefixCls}-table`} cellSpacing="0" role="grid">
@@ -136,7 +131,6 @@ DecadePanel.propTypes = {
   value: PropTypes.object,
   defaultValue: PropTypes.object,
   rootPrefixCls: PropTypes.string,
-  customIcon: PropTypes.func,
 };
 
 DecadePanel.defaultProps = {
