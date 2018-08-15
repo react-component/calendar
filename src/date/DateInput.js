@@ -104,16 +104,6 @@ const DateInput = createReactClass({
     return ReactDOM.findDOMNode(this);
   },
 
-  focus() {
-    if (this.dateInputInstance) {
-      this.dateInputInstance.focus();
-    }
-  },
-
-  saveDateInput(dateInput) {
-    this.dateInputInstance = dateInput;
-  },
-
   render() {
     const props = this.props;
     const { invalid, str } = this.state;
@@ -122,7 +112,7 @@ const DateInput = createReactClass({
     return (<div className={`${prefixCls}-input-wrap`}>
       <div className={`${prefixCls}-date-input-wrap`}>
         <input
-          ref={this.saveDateInput}
+          ref={props.dateInputRef}
           className={`${prefixCls}-input ${invalidClass}`}
           value={str}
           disabled={props.disabled}

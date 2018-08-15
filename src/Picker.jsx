@@ -62,6 +62,7 @@ const Picker = createReactClass({
     }
     const value = props.value || props.defaultValue;
     this.saveCalendarRef = refFn.bind(this, 'calendarInstance');
+    this.saveDateInputRef = refFn.bind(this, 'dateInputInstance');
     return {
       open,
       value,
@@ -84,8 +85,12 @@ const Picker = createReactClass({
 
   componentDidUpdate(_, prevState) {
     if (!prevState.open && this.state.open) {
-      // setTimeout is for making sure saveCalendarRef happen before focusCalendar
-      this.focusTimeout = setTimeout(this.focusCalendar, 0, this);
+      // setTimeout is for making sure saveRef happen before focus
+      if (!this.props.calendar.props.showDateInput) {
+        this.focusTimeout = setTimeout(this.focusCalendar, 0, this);
+      } else {
+        this.focusTimeout = setTimeout(this.focusDateInput, 0, this);
+      }
     }
   },
 
@@ -94,7 +99,7 @@ const Picker = createReactClass({
   },
 
   onCalendarKeyDown(event) {
-    if (event.keyCode === KeyCode.ESC) {
+    if (event.keyCode === KeyCode.ESC || event.keyCode === KeyCode.TAB) {
       event.stopPropagation();
       this.close(this.focus);
     }
@@ -117,7 +122,7 @@ const Picker = createReactClass({
   },
 
   onKeyDown(event) {
-    if (event.keyCode === KeyCode.DOWN && !this.state.open) {
+    if (event.keyCode === KeyCode.DOWN && !this.state.open && !this.props.disabled) {
       this.open();
       event.preventDefault();
     }
@@ -143,6 +148,7 @@ const Picker = createReactClass({
     const defaultValue = value;
     const extraProps = {
       ref: this.saveCalendarRef,
+      dateInputRef: this.saveDateInputRef,
       defaultValue: defaultValue || calendarProps.defaultValue,
       selectedValue: value,
       onKeyDown: this.onCalendarKeyDown,
@@ -183,6 +189,15 @@ const Picker = createReactClass({
   focusCalendar() {
     if (this.state.open && !!this.calendarInstance) {
       this.calendarInstance.focus();
+    }
+  },
+
+  focusDateInput() {
+    if (this.state.open && this.dateInputInstance !== null) {
+      this.dateInputInstance.focus();
+      if (this.state.value !== null) {
+        this.dateInputInstance.select();
+      }
     }
   },
 

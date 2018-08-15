@@ -67,7 +67,12 @@ const Calendar = createReactClass({
   },
   onKeyDown(event) {
     if (event.target.nodeName.toLowerCase() === 'input') {
-      return undefined;
+      if (
+        event.keyCode !== KeyCode.ESC &&
+        event.keyCode !== KeyCode.ENTER &&
+        event.keyCode !== KeyCode.TAB) {
+        return undefined;
+      }
     }
     const keyCode = event.keyCode;
     // mac
@@ -226,6 +231,7 @@ const Calendar = createReactClass({
 
     const dateInputElement = props.showDateInput ? (
       <DateInput
+        dateInputRef={props.dateInputRef}
         format={this.getFormat()}
         key="date-input"
         value={value}
