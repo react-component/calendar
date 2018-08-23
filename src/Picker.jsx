@@ -16,6 +16,7 @@ function refFn(field, component) {
 
 const Picker = createReactClass({
   propTypes: {
+    shouldFocus: PropTypes.bool,
     animation: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     disabled: PropTypes.bool,
     transitionName: PropTypes.string,
@@ -42,6 +43,7 @@ const Picker = createReactClass({
 
   getDefaultProps() {
     return {
+      shouldFocus: true,
       prefixCls: 'rc-calendar-picker',
       style: {},
       align: {},
@@ -85,7 +87,9 @@ const Picker = createReactClass({
   componentDidUpdate(_, prevState) {
     if (!prevState.open && this.state.open) {
       // setTimeout is for making sure saveCalendarRef happen before focusCalendar
-      this.focusTimeout = setTimeout(this.focusCalendar, 0, this);
+      if(this.props.shouldFocus){
+        this.focusTimeout = setTimeout(this.focusCalendar, 0, this);
+      }
     }
   },
 
