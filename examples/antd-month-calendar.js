@@ -6125,7 +6125,7 @@ var CalendarFooter = __WEBPACK_IMPORTED_MODULE_3_create_react_class___default()(
       }
 
       var footerBtn = void 0;
-      if (nowEl || timePickerBtn || okBtn) {
+      if (nowEl || timePickerBtn || okBtn || extraFooter) {
         footerBtn = __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
           'span',
           { className: prefixCls + '-footer-btn' },
@@ -6762,7 +6762,10 @@ __WEBPACK_IMPORTED_MODULE_5_react_dom___default.a.render(__WEBPACK_IMPORTED_MODU
     onSelect: onStandaloneSelect,
     onChange: onStandaloneChange,
     monthCellContentRender: onMonthCellContentRender,
-    defaultValue: defaultCalendarValue
+    defaultValue: defaultCalendarValue,
+    renderFooter: function renderFooter() {
+      return 'extra footer';
+    }
   }),
   __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
     'div',
