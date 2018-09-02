@@ -50,7 +50,7 @@ const CalendarFooter = createReactClass({
       }
 
       let footerBtn;
-      if (nowEl || timePickerBtn || okBtn) {
+      if (nowEl || timePickerBtn || okBtn || extraFooter) {
         footerBtn = (
           <span className={`${prefixCls}-footer-btn`}>
             {extraFooter}
