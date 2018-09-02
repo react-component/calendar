@@ -7531,6 +7531,8 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
     // console.log('start:', startValue.format('YYYY-MM-DD'));
     // console.log('end:', endValue.format('YYYY-MM-DD'));
 
+    var extraFooter = props.renderFooter();
+
     return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
       'div',
       {
@@ -7608,10 +7610,10 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
           'div',
           { className: cls },
-          props.renderFooter(),
-          showToday || props.timePicker || showOkButton ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+          showToday || props.timePicker || showOkButton || extraFooter ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
             'div',
             { className: prefixCls + '-footer-btn' },
+            extraFooter,
             showToday ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__calendar_TodayButton__["a" /* default */], __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, props, {
               disabled: isTodayInView,
               value: state.value[0],
@@ -9140,7 +9142,14 @@ __WEBPACK_IMPORTED_MODULE_4_react_dom___default.a.render(__WEBPACK_IMPORTED_MODU
       onSelect: onStandaloneSelect,
       disabledDate: disabledDate,
       timePicker: timePickerElement,
-      disabledTime: disabledTime
+      disabledTime: disabledTime,
+      renderFooter: function renderFooter() {
+        return __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
+          'span',
+          null,
+          'extra footer'
+        );
+      }
     })
   ),
   __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement('br', null),
