@@ -39,8 +39,6 @@
 }
 .rc-calendar-time-picker-panel .rc-time-picker-panel-select {
   width: 84px;
-}
-.rc-calendar-time-picker-panel .rc-time-picker-panel-select ul {
   max-height: 217px;
 }
 .rc-calendar-time-picker-panel .rc-time-picker-panel-select li {
@@ -286,6 +284,12 @@
 .rc-calendar-day-select:hover {
   cursor: pointer;
   color: #23c0fa;
+}
+.rc-calendar-year-select.rc-calendar-time-status:hover,
+.rc-calendar-month-select.rc-calendar-time-status:hover,
+.rc-calendar-day-select.rc-calendar-time-status:hover {
+  cursor: pointer;
+  color: #666;
 }
 .rc-calendar-prev-month-btn,
 .rc-calendar-next-month-btn,

@@ -1775,25 +1775,26 @@ var CalendarHeader = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()(
     var localeData = value.localeData();
     var monthBeforeYear = locale.monthBeforeYear;
     var selectClassName = prefixCls + '-' + (monthBeforeYear ? 'my-select' : 'ym-select');
+    var timeClassName = showTimePicker ? ' ' + prefixCls + '-time-status' : '';
     var year = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'a',
       {
-        className: prefixCls + '-year-select',
+        className: prefixCls + '-year-select' + timeClassName,
         role: 'button',
         onClick: showTimePicker ? null : function () {
           return _this.showYearPanel('date');
         },
-        title: locale.yearSelect
+        title: showTimePicker ? null : locale.yearSelect
       },
       value.format(locale.yearFormat)
     );
     var month = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'a',
       {
-        className: prefixCls + '-month-select',
+        className: prefixCls + '-month-select' + timeClassName,
         role: 'button',
         onClick: showTimePicker ? null : this.showMonthPanel,
-        title: locale.monthSelect
+        title: showTimePicker ? null : locale.monthSelect
       },
       locale.monthFormat ? value.format(locale.monthFormat) : localeData.monthsShort(value)
     );
@@ -1802,7 +1803,7 @@ var CalendarHeader = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()(
       day = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'a',
         {
-          className: prefixCls + '-day-select',
+          className: prefixCls + '-day-select' + timeClassName,
           role: 'button'
         },
         value.format(locale.dayFormat)
@@ -1849,7 +1850,7 @@ var CalendarHeader = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()(
     if (mode === 'month') {
       panel = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__month_MonthPanel__["a" /* default */], {
         locale: locale,
-        defaultValue: value,
+        value: value,
         rootPrefixCls: prefixCls,
         onSelect: this.onMonthSelect,
         onYearPanelShow: function onYearPanelShow() {
@@ -1863,7 +1864,7 @@ var CalendarHeader = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()(
     if (mode === 'year') {
       panel = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__year_YearPanel__["a" /* default */], {
         locale: locale,
-        defaultValue: value,
+        value: value,
         rootPrefixCls: prefixCls,
         onSelect: this.onYearSelect,
         onDecadePanelShow: this.showDecadePanel
@@ -1872,7 +1873,7 @@ var CalendarHeader = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()(
     if (mode === 'decade') {
       panel = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__decade_DecadePanel__["a" /* default */], {
         locale: locale,
-        defaultValue: value,
+        value: value,
         rootPrefixCls: prefixCls,
         onSelect: this.onDecadeSelect
       });
@@ -6748,14 +6749,14 @@ var CalendarFooter = __WEBPACK_IMPORTED_MODULE_3_create_react_class___default()(
         footerBtn = __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
           'span',
           { className: prefixCls + '-footer-btn' },
+          extraFooter,
           Object(__WEBPACK_IMPORTED_MODULE_5_rc_util_es_Children_mapSelf__["a" /* default */])([nowEl, timePickerBtn, okBtn])
         );
       }
-      var cls = __WEBPACK_IMPORTED_MODULE_6_classnames___default()((_cx = {}, _cx[prefixCls + '-footer'] = true, _cx[prefixCls + '-footer-show-ok'] = okBtn, _cx));
+      var cls = __WEBPACK_IMPORTED_MODULE_6_classnames___default()(prefixCls + '-footer', (_cx = {}, _cx[prefixCls + '-footer-show-ok'] = okBtn, _cx));
       footerEl = __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
         'div',
         { className: cls },
-        extraFooter,
         footerBtn
       );
     }
@@ -7109,6 +7110,7 @@ var Calendar = __WEBPACK_IMPORTED_MODULE_3_create_react_class___default()({
     onPanelChange: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.func,
     disabledDate: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.func,
     disabledTime: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.any,
+    dateRender: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.func,
     renderFooter: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.func,
     renderSidebar: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.func,
     clearIcon: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.node
@@ -7562,7 +7564,8 @@ var Panel = function (_Component) {
           hourStep = _props.hourStep,
           minuteStep = _props.minuteStep,
           secondStep = _props.secondStep,
-          inputReadOnly = _props.inputReadOnly;
+          inputReadOnly = _props.inputReadOnly,
+          clearIcon = _props.clearIcon;
       var _state = this.state,
           value = _state.value,
           currentSelectPanel = _state.currentSelectPanel;
@@ -7597,7 +7600,8 @@ var Panel = function (_Component) {
           allowEmpty: allowEmpty,
           focusOnOpen: focusOnOpen,
           onKeyDown: onKeyDown,
-          inputReadOnly: inputReadOnly
+          inputReadOnly: inputReadOnly,
+          clearIcon: clearIcon
         }),
         __WEBPACK_IMPORTED_MODULE_5_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__Combobox__["a" /* default */], {
           prefixCls: prefixCls,
@@ -7652,7 +7656,8 @@ Panel.propTypes = {
   secondStep: __WEBPACK_IMPORTED_MODULE_6_prop_types___default.a.number,
   addon: __WEBPACK_IMPORTED_MODULE_6_prop_types___default.a.func,
   focusOnOpen: __WEBPACK_IMPORTED_MODULE_6_prop_types___default.a.bool,
-  onKeyDown: __WEBPACK_IMPORTED_MODULE_6_prop_types___default.a.func
+  onKeyDown: __WEBPACK_IMPORTED_MODULE_6_prop_types___default.a.func,
+  clearIcon: __WEBPACK_IMPORTED_MODULE_6_prop_types___default.a.node
 };
 Panel.defaultProps = {
   prefixCls: 'rc-time-picker-panel',
@@ -7748,17 +7753,22 @@ var Header = function (_Component) {
     value: function getClearButton() {
       var _props = this.props,
           prefixCls = _props.prefixCls,
-          allowEmpty = _props.allowEmpty;
+          allowEmpty = _props.allowEmpty,
+          clearIcon = _props.clearIcon;
 
       if (!allowEmpty) {
         return null;
       }
-      return __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('a', {
-        className: prefixCls + '-clear-btn',
-        role: 'button',
-        title: this.props.clearText,
-        onMouseDown: this.onClear
-      });
+      return __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
+        'a',
+        {
+          role: 'button',
+          className: prefixCls + '-clear-btn',
+          title: this.props.clearText,
+          onMouseDown: this.onClear
+        },
+        clearIcon || __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('i', { className: prefixCls + '-clear-btn-icon' })
+      );
     }
   }, {
     key: 'getProtoValue',
@@ -7825,7 +7835,8 @@ Header.propTypes = {
   defaultOpenValue: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object,
   currentSelectPanel: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.string,
   focusOnOpen: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.bool,
-  onKeyDown: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func
+  onKeyDown: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func,
+  clearIcon: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.node
 };
 Header.defaultProps = {
   inputReadOnly: false
@@ -8521,14 +8532,15 @@ Select.propTypes = {
 /* 246 */,
 /* 247 */,
 /* 248 */,
-/* 249 */
+/* 249 */,
+/* 250 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(250);
+module.exports = __webpack_require__(251);
 
 
 /***/ }),
-/* 250 */
+/* 251 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8730,5 +8742,5 @@ var Demo = function (_React$Component2) {
 __WEBPACK_IMPORTED_MODULE_5_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(Demo, null), document.getElementById('__react-content'));
 
 /***/ })
-],[249]);
+],[250]);
 //# sourceMappingURL=start-end.js.map
