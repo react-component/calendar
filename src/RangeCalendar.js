@@ -653,6 +653,8 @@ const RangeCalendar = createReactClass({
     // console.log('start:', startValue.format('YYYY-MM-DD'));
     // console.log('end:', endValue.format('YYYY-MM-DD'));
 
+    const extraFooter = props.renderFooter();
+
     return (
       <div
         ref={this.saveRoot}
@@ -722,9 +724,9 @@ const RangeCalendar = createReactClass({
             />
           </div>
           <div className={cls}>
-            {props.renderFooter()}
-            {showToday || props.timePicker || showOkButton ? (
+            {(showToday || props.timePicker || showOkButton || extraFooter) ? (
               <div className={`${prefixCls}-footer-btn`}>
+                {extraFooter}
                 {showToday ? (
                   <TodayButton
                     {...props}
