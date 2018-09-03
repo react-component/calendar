@@ -7949,8 +7949,7 @@ var Panel = function (_Component) {
           hourStep = _props.hourStep,
           minuteStep = _props.minuteStep,
           secondStep = _props.secondStep,
-          inputReadOnly = _props.inputReadOnly,
-          clearIcon = _props.clearIcon;
+          inputReadOnly = _props.inputReadOnly;
       var _state = this.state,
           value = _state.value,
           currentSelectPanel = _state.currentSelectPanel;
@@ -7985,8 +7984,7 @@ var Panel = function (_Component) {
           allowEmpty: allowEmpty,
           focusOnOpen: focusOnOpen,
           onKeyDown: onKeyDown,
-          inputReadOnly: inputReadOnly,
-          clearIcon: clearIcon
+          inputReadOnly: inputReadOnly
         }),
         __WEBPACK_IMPORTED_MODULE_5_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__Combobox__["a" /* default */], {
           prefixCls: prefixCls,
@@ -8041,8 +8039,7 @@ Panel.propTypes = {
   secondStep: __WEBPACK_IMPORTED_MODULE_6_prop_types___default.a.number,
   addon: __WEBPACK_IMPORTED_MODULE_6_prop_types___default.a.func,
   focusOnOpen: __WEBPACK_IMPORTED_MODULE_6_prop_types___default.a.bool,
-  onKeyDown: __WEBPACK_IMPORTED_MODULE_6_prop_types___default.a.func,
-  clearIcon: __WEBPACK_IMPORTED_MODULE_6_prop_types___default.a.node
+  onKeyDown: __WEBPACK_IMPORTED_MODULE_6_prop_types___default.a.func
 };
 Panel.defaultProps = {
   prefixCls: 'rc-time-picker-panel',
@@ -8138,22 +8135,17 @@ var Header = function (_Component) {
     value: function getClearButton() {
       var _props = this.props,
           prefixCls = _props.prefixCls,
-          allowEmpty = _props.allowEmpty,
-          clearIcon = _props.clearIcon;
+          allowEmpty = _props.allowEmpty;
 
       if (!allowEmpty) {
         return null;
       }
-      return __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
-        'a',
-        {
-          role: 'button',
-          className: prefixCls + '-clear-btn',
-          title: this.props.clearText,
-          onMouseDown: this.onClear
-        },
-        clearIcon || __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('i', { className: prefixCls + '-clear-btn-icon' })
-      );
+      return __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('a', {
+        className: prefixCls + '-clear-btn',
+        role: 'button',
+        title: this.props.clearText,
+        onMouseDown: this.onClear
+      });
     }
   }, {
     key: 'getProtoValue',
@@ -8220,8 +8212,7 @@ Header.propTypes = {
   defaultOpenValue: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object,
   currentSelectPanel: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.string,
   focusOnOpen: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.bool,
-  onKeyDown: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func,
-  clearIcon: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.node
+  onKeyDown: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func
 };
 Header.defaultProps = {
   inputReadOnly: false
@@ -8898,15 +8889,14 @@ Select.propTypes = {
 /* 227 */,
 /* 228 */,
 /* 229 */,
-/* 230 */,
-/* 231 */
+/* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(232);
+module.exports = __webpack_require__(231);
 
 
 /***/ }),
-/* 232 */
+/* 231 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9161,5 +9151,5 @@ __WEBPACK_IMPORTED_MODULE_4_react_dom___default.a.render(__WEBPACK_IMPORTED_MODU
 ), document.getElementById('__react-content'));
 
 /***/ })
-],[231]);
+],[230]);
 //# sourceMappingURL=antd-range-calendar.js.map

@@ -7555,15 +7555,14 @@ var Calendar = __WEBPACK_IMPORTED_MODULE_3_create_react_class___default()({
 /* 248 */,
 /* 249 */,
 /* 250 */,
-/* 251 */,
-/* 252 */
+/* 251 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(253);
+module.exports = __webpack_require__(252);
 
 
 /***/ }),
-/* 253 */
+/* 252 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7773,5 +7772,5 @@ __WEBPACK_IMPORTED_MODULE_5_react_dom___default.a.render(__WEBPACK_IMPORTED_MODU
 ), document.getElementById('__react-content'));
 
 /***/ })
-],[252]);
+],[251]);
 //# sourceMappingURL=week.js.map

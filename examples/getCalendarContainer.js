@@ -7544,15 +7544,14 @@ var Calendar = __WEBPACK_IMPORTED_MODULE_3_create_react_class___default()({
 /* 237 */,
 /* 238 */,
 /* 239 */,
-/* 240 */,
-/* 241 */
+/* 240 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(242);
+module.exports = __webpack_require__(241);
 
 
 /***/ }),
-/* 242 */
+/* 241 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7571,8 +7570,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rc_calendar__ = __webpack_require__(88);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_calendar_src_Picker__ = __webpack_require__(81);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_dialog__ = __webpack_require__(243);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rc_dialog_assets_index_css__ = __webpack_require__(247);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_dialog__ = __webpack_require__(242);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rc_dialog_assets_index_css__ = __webpack_require__(246);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rc_dialog_assets_index_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_rc_dialog_assets_index_css__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_rc_calendar_src_locale_zh_CN__ = __webpack_require__(77);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_rc_calendar_src_locale_en_US__ = __webpack_require__(89);
@@ -7709,7 +7708,7 @@ var Demo = function (_React$Component) {
 __WEBPACK_IMPORTED_MODULE_5_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(Demo, null), document.getElementById('__react-content'));
 
 /***/ }),
-/* 243 */
+/* 242 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7725,7 +7724,7 @@ __WEBPACK_IMPORTED_MODULE_5_react_dom___default.a.render(__WEBPACK_IMPORTED_MODU
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_dom__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Dialog__ = __webpack_require__(244);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Dialog__ = __webpack_require__(243);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_util_es_ContainerRender__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_util_es_Portal__ = __webpack_require__(39);
 
@@ -7827,7 +7826,7 @@ DialogWrap.defaultProps = {
 /* harmony default export */ __webpack_exports__["a"] = (DialogWrap);
 
 /***/ }),
-/* 244 */
+/* 243 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7846,8 +7845,8 @@ DialogWrap.defaultProps = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rc_util_es_KeyCode__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_util_es_Dom_contains__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_animate__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__LazyRenderBox__ = __webpack_require__(245);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_rc_util_es_getScrollBarSize__ = __webpack_require__(246);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__LazyRenderBox__ = __webpack_require__(244);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_rc_util_es_getScrollBarSize__ = __webpack_require__(245);
 
 
 
@@ -7928,9 +7927,7 @@ var Dialog = function (_React$Component) {
         _this.onKeyDown = function (e) {
             var props = _this.props;
             if (props.keyboard && e.keyCode === __WEBPACK_IMPORTED_MODULE_6_rc_util_es_KeyCode__["a" /* default */].ESC) {
-                e.stopPropagation();
                 _this.close(e);
-                return;
             }
             // keep focus inside dialog
             if (props.visible) {
@@ -7968,7 +7965,7 @@ var Dialog = function (_React$Component) {
             }
             var closer = void 0;
             if (closable) {
-                closer = __WEBPACK_IMPORTED_MODULE_4_react__["createElement"]("button", { onClick: _this.close, "aria-label": "Close", className: prefixCls + '-close' }, props.closeIcon || __WEBPACK_IMPORTED_MODULE_4_react__["createElement"]("span", { className: prefixCls + '-close-x' }));
+                closer = __WEBPACK_IMPORTED_MODULE_4_react__["createElement"]("button", { onClick: _this.close, "aria-label": "Close", className: prefixCls + '-close' }, __WEBPACK_IMPORTED_MODULE_4_react__["createElement"]("span", { className: prefixCls + '-close-x' }));
             }
             var style = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, props.style, dest);
             var transitionName = _this.getTransitionName();
@@ -8168,7 +8165,7 @@ Dialog.defaultProps = {
 };
 
 /***/ }),
-/* 245 */
+/* 244 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8219,7 +8216,7 @@ var LazyRenderBox = function (_React$Component) {
 /* harmony default export */ __webpack_exports__["a"] = (LazyRenderBox);
 
 /***/ }),
-/* 246 */
+/* 245 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8264,11 +8261,11 @@ function getScrollBarSize(fresh) {
 }
 
 /***/ }),
-/* 247 */
+/* 246 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ })
-],[241]);
+],[240]);
 //# sourceMappingURL=getCalendarContainer.js.map

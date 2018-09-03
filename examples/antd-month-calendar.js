@@ -6557,15 +6557,14 @@ var placements = {
 /* 224 */,
 /* 225 */,
 /* 226 */,
-/* 227 */,
-/* 228 */
+/* 227 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(229);
+module.exports = __webpack_require__(228);
 
 
 /***/ }),
-/* 229 */
+/* 228 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6584,7 +6583,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prop_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_calendar_src_MonthCalendar__ = __webpack_require__(230);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_calendar_src_MonthCalendar__ = __webpack_require__(229);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_calendar_src_Picker__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rc_calendar_src_locale_zh_CN__ = __webpack_require__(77);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_rc_calendar_src_locale_en_US__ = __webpack_require__(89);
@@ -6775,7 +6774,7 @@ __WEBPACK_IMPORTED_MODULE_5_react_dom___default.a.render(__WEBPACK_IMPORTED_MODU
 ), document.getElementById('__react-content'));
 
 /***/ }),
-/* 230 */
+/* 229 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6903,5 +6902,5 @@ var MonthCalendar = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
 /* harmony default export */ __webpack_exports__["a"] = (MonthCalendar);
 
 /***/ })
-],[228]);
+],[227]);
 //# sourceMappingURL=antd-month-calendar.js.map
