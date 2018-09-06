@@ -45,7 +45,7 @@ function normalizeAnchor(props, init) {
     getValueFromSelectedValue(selectedValue);
 
   let panelValue = [moment(), moment().add(1, 'months')];
-  if(props.backwardsSelection){
+  if (props.backwardsSelection) {
       panelValue = [moment().subtract(1, 'months'), moment()];
   }
   return !isEmptyArray(normalizedValue) ?
