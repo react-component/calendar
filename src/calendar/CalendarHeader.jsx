@@ -150,7 +150,7 @@ const CalendarHeader = createReactClass({
       panel = (
         <MonthPanel
           locale={locale}
-          value={value}
+          defaultValue={value}
           rootPrefixCls={prefixCls}
           onSelect={this.onMonthSelect}
           onYearPanelShow={() => this.showYearPanel('month')}
@@ -164,7 +164,7 @@ const CalendarHeader = createReactClass({
       panel = (
         <YearPanel
           locale={locale}
-          value={value}
+          defaultValue={value}
           rootPrefixCls={prefixCls}
           onSelect={this.onYearSelect}
           onDecadePanelShow={this.showDecadePanel}
@@ -175,7 +175,7 @@ const CalendarHeader = createReactClass({
       panel = (
         <DecadePanel
           locale={locale}
-          value={value}
+          defaultValue={value}
           rootPrefixCls={prefixCls}
           onSelect={this.onDecadeSelect}
         />
