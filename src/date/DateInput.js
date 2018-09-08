@@ -119,25 +119,29 @@ const DateInput = createReactClass({
     const { invalid, str } = this.state;
     const { locale, prefixCls, placeholder, clearIcon } = props;
     const invalidClass = invalid ? `${prefixCls}-input-invalid` : '';
-    return (<div className={`${prefixCls}-input-wrap`}>
-      <div className={`${prefixCls}-date-input-wrap`}>
-        <input
-          ref={this.saveDateInput}
-          className={`${prefixCls}-input ${invalidClass}`}
-          value={str}
-          disabled={props.disabled}
-          placeholder={placeholder}
-          onChange={this.onInputChange}
-        />
+    return (
+      <div className={`${prefixCls}-input-wrap`}>
+        <div className={`${prefixCls}-date-input-wrap`}>
+          <input
+            ref={this.saveDateInput}
+            className={`${prefixCls}-input ${invalidClass}`}
+            value={str}
+            disabled={props.disabled}
+            placeholder={placeholder}
+            onChange={this.onInputChange}
+          />
+        </div>
+        {props.showClear ? (
+          <a
+            role="button"
+            title={locale.clear}
+            onClick={this.onClear}
+          >
+            {clearIcon || <span className={`${prefixCls}-clear-btn`}/>}
+          </a>
+        ) : null}
       </div>
-      {props.showClear ? <a
-        role="button"
-        title={locale.clear}
-        onClick={this.onClear}
-      >
-        {clearIcon || <span className={`${prefixCls}-clear-btn`}/>}
-      </a> : null}
-    </div>);
+    );
   },
 });
 
