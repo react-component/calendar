@@ -39,6 +39,7 @@ const locales = {
   tr_TR: require('../src/locale/tr_TR'),
   ug_CN: require('../src/locale/ug_CN'),
   uk_UA: require('../src/locale/uk_UA'),
+  vi_VN: require('../src/locale/vi_VN'),
   zh_CN: require('../src/locale/zh_CN'),
   zh_TW: require('../src/locale/zh_TW'),
 };
