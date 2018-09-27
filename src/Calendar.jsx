@@ -43,6 +43,7 @@ const Calendar = createReactClass({
     renderFooter: PropTypes.func,
     renderSidebar: PropTypes.func,
     clearIcon: PropTypes.node,
+    multiple: PropTypes.bool,
   },
 
   mixins: [CommonMixin, CalendarMixin],
@@ -51,6 +52,7 @@ const Calendar = createReactClass({
     return {
       showToday: true,
       showDateInput: true,
+      multiple: false,
       timePicker: null,
       onOk: noop,
       onPanelChange: noop,
@@ -191,15 +193,17 @@ const Calendar = createReactClass({
       goTime(this.state.value, direction, unit),
     );
   },
-
+  onShowTimeChange(currentShowTime) {
+    this.setState({ currentShowTime });
+  },
   render() {
     const { props, state } = this;
     const {
       locale, prefixCls, disabledDate,
       dateInputPlaceholder, timePicker,
-      disabledTime, clearIcon,
+      disabledTime, clearIcon, multiple,
     } = props;
-    const { value, selectedValue, mode } = state;
+    const { value, selectedValue, mode, currentShowTime } = state;
     const showTimePicker = mode === 'time';
     const disabledTimeConfig = showTimePicker && disabledTime && timePicker ?
       getTimeConfig(selectedValue, disabledTime) : null;
@@ -224,8 +228,7 @@ const Calendar = createReactClass({
 
       timePickerEle = React.cloneElement(timePicker, timePickerProps);
     }
-
-    const dateInputElement = props.showDateInput ? (
+    const dateInputElement = props.showDateInput && !multiple ? (
       <DateInput
         format={this.getFormat()}
         key="date-input"
@@ -251,6 +254,9 @@ const Calendar = createReactClass({
             locale={locale}
             mode={mode}
             value={value}
+            multiple={multiple}
+            currentShowTime={currentShowTime}
+            onShowTimeChange={this.onShowTimeChange}
             onValueChange={this.setValue}
             onPanelChange={this.onPanelChange}
             showTimePicker={showTimePicker}
@@ -267,6 +273,8 @@ const Calendar = createReactClass({
             <DateTable
               locale={locale}
               value={value}
+              multiple={multiple}
+              currentShowTime={currentShowTime}
               selectedValue={selectedValue}
               prefixCls={prefixCls}
               dateRender={props.dateRender}
@@ -288,6 +296,8 @@ const Calendar = createReactClass({
             timePicker={timePicker}
             selectedValue={selectedValue}
             value={value}
+            multiple={multiple}
+            currentShowTime={currentShowTime}
             disabledDate={disabledDate}
             okDisabled={!this.isAllowedDate(selectedValue)}
             onOk={this.onOk}

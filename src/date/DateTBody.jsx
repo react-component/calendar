@@ -36,9 +36,10 @@ const DateTBody = createReactClass({
     disabledDate: PropTypes.func,
     prefixCls: PropTypes.string,
     selectedValue: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
-    value: PropTypes.object,
+    value: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
     hoverValue: PropTypes.any,
     showWeekNumber: PropTypes.bool,
+    multiple: PropTypes.bool,
   },
 
   getDefaultProps() {
@@ -52,13 +53,13 @@ const DateTBody = createReactClass({
     const {
       contentRender, prefixCls, selectedValue, value,
       showWeekNumber, dateRender, disabledDate,
-      hoverValue,
+      hoverValue, multiple, currentShowTime,
     } = props;
     let iIndex;
     let jIndex;
     let current;
     const dateTable = [];
-    const today = getTodayTime(value);
+    const today = getTodayTime(multiple ? currentShowTime : value);
     const cellClass = `${prefixCls}-cell`;
     const weekNumberCellClass = `${prefixCls}-week-number-cell`;
     const dateClass = `${prefixCls}-date`;
@@ -74,15 +75,15 @@ const DateTBody = createReactClass({
     const firstDisableClass = `${prefixCls}-disabled-cell-first-of-row`;
     const lastDisableClass = `${prefixCls}-disabled-cell-last-of-row`;
     const lastDayOfMonthClass = `${prefixCls}-last-day-of-month`;
-    const month1 = value.clone();
+    const month1 = (multiple ? currentShowTime : value).clone();
     month1.date(1);
     const day = month1.day();
-    const lastMonthDiffDay = (day + 7 - value.localeData().firstDayOfWeek()) % 7;
+    const firstDayOfWeek = (multiple ? currentShowTime : value).localeData().firstDayOfWeek();
+    const lastMonthDiffDay = (day + 7 - firstDayOfWeek) % 7;
     // calculate last month
     const lastMonth1 = month1.clone();
     lastMonth1.add(0 - lastMonthDiffDay, 'days');
     let passed = 0;
-
     for (iIndex = 0; iIndex < DateConstants.DATE_ROW_COUNT; iIndex++) {
       for (jIndex = 0; jIndex < DateConstants.DATE_COL_COUNT; jIndex++) {
         current = lastMonth1;
@@ -132,29 +133,41 @@ const DateTBody = createReactClass({
           isCurrentWeek = true;
         }
 
-        const isBeforeCurrentMonthYear = beforeCurrentMonthYear(current, value);
-        const isAfterCurrentMonthYear = afterCurrentMonthYear(current, value);
+        const isBeforeCurrentMonthYear = beforeCurrentMonthYear(current,
+          (multiple ? currentShowTime : value));
+        const isAfterCurrentMonthYear = afterCurrentMonthYear(current,
+          (multiple ? currentShowTime : value));
 
         if (selectedValue && Array.isArray(selectedValue)) {
-          const rangeValue = hoverValue.length ? hoverValue : selectedValue;
-          if (!isBeforeCurrentMonthYear && !isAfterCurrentMonthYear) {
-            const startValue = rangeValue[0];
-            const endValue = rangeValue[1];
-            if (startValue) {
-              if (isSameDay(current, startValue)) {
+          if (multiple) {
+            for (let i = 0; i < selectedValue.length; i++) {
+              if (isSameDay(current, selectedValue[i])) {
                 selected = true;
                 isActiveWeek = true;
-                cls += ` ${selectedStartDateClass}`;
+                break;
               }
             }
-            if (startValue && endValue) {
-              if (isSameDay(current, endValue)) {
-                selected = true;
-                isActiveWeek = true;
-                cls += ` ${selectedEndDateClass}`;
-              } else if (current.isAfter(startValue, 'day') &&
-                current.isBefore(endValue, 'day')) {
-                cls += ` ${inRangeClass}`;
+          } else {
+            const rangeValue = hoverValue.length ? hoverValue : selectedValue;
+            if (!isBeforeCurrentMonthYear && !isAfterCurrentMonthYear) {
+              const startValue = rangeValue[0];
+              const endValue = rangeValue[1];
+              if (startValue) {
+                if (isSameDay(current, startValue)) {
+                  selected = true;
+                  isActiveWeek = true;
+                  cls += ` ${selectedStartDateClass}`;
+                }
+              }
+              if (startValue && endValue) {
+                if (isSameDay(current, endValue)) {
+                  selected = true;
+                  isActiveWeek = true;
+                  cls += ` ${selectedEndDateClass}`;
+                } else if (current.isAfter(startValue, 'day') &&
+                  current.isBefore(endValue, 'day')) {
+                  cls += ` ${inRangeClass}`;
+                }
               }
             }
           }
@@ -163,9 +176,17 @@ const DateTBody = createReactClass({
           selected = true;
           isActiveWeek = true;
         }
-
-        if (isSameDay(current, selectedValue)) {
-          cls += ` ${selectedDateClass}`;
+        if (multiple && selectedValue) {
+          for (let i = 0; i < selectedValue.length; i++) {
+            if (isSameDay(current, selectedValue[i])) {
+              cls += ` ${selectedDateClass}`;
+              break;
+            }
+          }
+        } else {
+          if (isSameDay(current, selectedValue)) {
+            cls += ` ${selectedDateClass}`;
+          }
         }
 
         if (isBeforeCurrentMonthYear) {

@@ -21,6 +21,24 @@ function getNowByCurrentStateValue(value) {
   return ret;
 }
 
+function toggleTimes(items = [], newItem) {
+  let isSame = false;
+  let index = -1;
+  for (let i = 0; i < items.length; i++) {
+    if (items[i].isSame(newItem, 'day')) {
+      isSame = true;
+      index = i;
+      break;
+    }
+  }
+  if (isSame) {
+    items.splice(index, 1);
+  } else {
+    items.push(newItem);
+  }
+  return items;
+}
+
 const CalendarMixin = {
   propTypes: {
     value: PropTypes.object,
@@ -36,9 +54,18 @@ const CalendarMixin = {
 
   getInitialState() {
     const props = this.props;
-    const value = props.value || props.defaultValue || getNow();
+    const value = props.value || props.defaultValue || (props.multiple ? [] : getNow());
+    let currentShowTime = value;
+    if (props.multiple) {
+      if (value.length > 0) {
+        currentShowTime = value[value.length - 1];
+      } else {
+        currentShowTime = getNow();
+      }
+    }
     return {
       value,
+      currentShowTime,
       selectedValue: props.selectedValue || props.defaultSelectedValue,
     };
   },
@@ -91,37 +118,58 @@ const CalendarMixin = {
   },
 
   setSelectedValue(selectedValue, cause) {
-    // if (this.isAllowedDate(selectedValue)) {
-    if (!('selectedValue' in this.props)) {
-      this.setState({
-        selectedValue,
-      });
+    const { multiple } = this.props;
+    if (multiple) {
+      const values = toggleTimes(this.state.selectedValue, selectedValue);
+      this.setState({ selectedValue: values });
+      this.props.onSelect(values, cause);
+    } else {
+      if (!('selectedValue' in this.props)) {
+        this.setState({
+          selectedValue,
+        });
+      }
+      this.props.onSelect(selectedValue, cause);
     }
-    this.props.onSelect(selectedValue, cause);
-    // }
   },
 
   setValue(value) {
     const originalValue = this.state.value;
-    if (!('value' in this.props)) {
-      this.setState({
-        value,
-      });
-    }
-    if (
-      originalValue && value && !originalValue.isSame(value) ||
+    const { multiple } = this.props;
+    if (multiple) {
+      const values = toggleTimes(this.state.value, value);
+      this.setState({ value: values });
+      this.props.onChange(values);
+    } else {
+      if (!('value' in this.props)) {
+        this.setState({
+          value,
+          currentShowTime: value,
+        });
+      }
+      if (
+        originalValue && value && !originalValue.isSame(value) ||
         (!originalValue && value) ||
         (originalValue && !value)
-    ) {
-      this.props.onChange(value);
+      ) {
+        this.props.onChange(value);
+      }
     }
   },
-
   isAllowedDate(value) {
     const disabledDate = this.props.disabledDate;
     const disabledTime = this.props.disabledTime;
+    if (this.props.multiple && value) {
+      for (let i = 0; i < value.length; i++) {
+        if (!isAllowedDate(value[i], disabledDate, disabledTime)) {
+          return false;
+        }
+      }
+      return true;
+    }
     return isAllowedDate(value, disabledDate, disabledTime);
   },
+
 };
 
 export default CalendarMixin;

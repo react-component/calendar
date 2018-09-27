@@ -3,10 +3,10 @@ import DateConstants from './DateConstants';
 import moment from 'moment';
 
 export default
-class DateTHead extends React.Component {
+  class DateTHead extends React.Component {
   render() {
     const props = this.props;
-    const value = props.value;
+    const value = props.multiple ? props.currentShowTime : props.value;
     const localeData = value.localeData();
     const prefixCls = props.prefixCls;
     const veryShortWeekdays = [];
@@ -39,15 +39,15 @@ class DateTHead extends React.Component {
           className={`${prefixCls}-column-header`}
         >
           <span className={`${prefixCls}-column-header-inner`}>
-          {veryShortWeekdays[xindex]}
+            {veryShortWeekdays[xindex]}
           </span>
         </th>);
     });
     return (<thead>
-    <tr role="row">
-      {showWeekNumberEl}
-      {weekDaysEls}
-    </tr>
+      <tr role="row">
+        {showWeekNumberEl}
+        {weekDaysEls}
+      </tr>
     </thead>);
   }
 }

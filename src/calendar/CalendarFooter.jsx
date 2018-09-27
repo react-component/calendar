@@ -17,7 +17,8 @@ const CalendarFooter = createReactClass({
     selectedValue: PropTypes.any,
     showOk: PropTypes.bool,
     onSelect: PropTypes.func,
-    value: PropTypes.object,
+    value: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
+    multiple: PropTypes.bool,
     renderFooter: PropTypes.func,
     defaultValue: PropTypes.object,
   },
@@ -32,12 +33,12 @@ const CalendarFooter = createReactClass({
 
   render() {
     const props = this.props;
-    const { value, prefixCls, showOk, timePicker, renderFooter } = props;
+    const { value, prefixCls, showOk, timePicker, renderFooter, multiple } = props;
     let footerEl = null;
     const extraFooter = renderFooter();
     if (props.showToday || timePicker || extraFooter) {
       let nowEl;
-      if (props.showToday) {
+      if (props.showToday && !multiple) {
         nowEl = <TodayButton {...props} value={value} />;
       }
       let okBtn;
@@ -45,7 +46,7 @@ const CalendarFooter = createReactClass({
         okBtn = <OkButton {...props} />;
       }
       let timePickerBtn;
-      if (!!props.timePicker) {
+      if (!!props.timePicker && !multiple) {
         timePickerBtn = <TimePickerButton {...props} />;
       }
 

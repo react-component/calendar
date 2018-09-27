@@ -7,15 +7,25 @@ import YearPanel from '../year/YearPanel';
 import DecadePanel from '../decade/DecadePanel';
 
 function goMonth(direction) {
-  const next = this.props.value.clone();
+  const { multiple, currentShowTime, value } = this.props;
+  const next = (multiple ? currentShowTime : value).clone();
   next.add(direction, 'months');
-  this.props.onValueChange(next);
+  if (multiple) {
+    this.props.onShowTimeChange(next);
+  } else {
+    this.props.onValueChange(next);
+  }
 }
 
 function goYear(direction) {
-  const next = this.props.value.clone();
+  const { multiple, currentShowTime, value } = this.props;
+  const next = (multiple ? currentShowTime : value).clone();
   next.add(direction, 'years');
-  this.props.onValueChange(next);
+  if (multiple) {
+    this.props.onShowTimeChange(next);
+  } else {
+    this.props.onValueChange(next);
+  }
 }
 
 function showIf(condition, el) {
@@ -25,7 +35,10 @@ function showIf(condition, el) {
 const CalendarHeader = createReactClass({
   propTypes: {
     prefixCls: PropTypes.string,
-    value: PropTypes.object,
+    value: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
+    multiple: PropTypes.bool,
+    currentShowTime: PropTypes.object,
+    onShowTimeChange: PropTypes.func,
     onValueChange: PropTypes.func,
     showTimePicker: PropTypes.bool,
     onPanelChange: PropTypes.func,
@@ -41,6 +54,7 @@ const CalendarHeader = createReactClass({
       enablePrev: 1,
       onPanelChange() { },
       onValueChange() { },
+      onShowTimeChange() { },
     };
   },
 
@@ -57,7 +71,11 @@ const CalendarHeader = createReactClass({
     if (this.props.onMonthSelect) {
       this.props.onMonthSelect(value);
     } else {
-      this.props.onValueChange(value);
+      if (this.props.multiple) {
+        this.props.onShowTimeChange(value);
+      } else {
+        this.props.onValueChange(value);
+      }
     }
   },
 
@@ -65,23 +83,32 @@ const CalendarHeader = createReactClass({
     const referer = this.state.yearPanelReferer;
     this.setState({ yearPanelReferer: null });
     this.props.onPanelChange(value, referer);
-    this.props.onValueChange(value);
+    if (this.props.multiple) {
+      this.props.onShowTimeChange(value);
+    } else {
+      this.props.onValueChange(value);
+    }
   },
 
   onDecadeSelect(value) {
     this.props.onPanelChange(value, 'year');
-    this.props.onValueChange(value);
+    if (this.props.multiple) {
+      this.props.onShowTimeChange(value);
+    } else {
+      this.props.onValueChange(value);
+    }
   },
 
   monthYearElement(showTimePicker) {
     const props = this.props;
     const prefixCls = props.prefixCls;
     const locale = props.locale;
-    const value = props.value;
+    const value = props.multiple ? props.currentShowTime : props.value;
     const localeData = value.localeData();
     const monthBeforeYear = locale.monthBeforeYear;
     const selectClassName = `${prefixCls}-${monthBeforeYear ? 'my-select' : 'ym-select'}`;
     const timeClassName = showTimePicker ? ` ${prefixCls}-time-status` : '';
+
     const year = (<a
       className={`${prefixCls}-year-select${timeClassName}`}
       role="button"
@@ -143,6 +170,8 @@ const CalendarHeader = createReactClass({
       enableNext,
       enablePrev,
       disabledMonth,
+      multiple,
+      currentShowTime,
     } = props;
 
     let panel = null;
@@ -150,7 +179,7 @@ const CalendarHeader = createReactClass({
       panel = (
         <MonthPanel
           locale={locale}
-          defaultValue={value}
+          defaultValue={multiple ? currentShowTime : value}
           rootPrefixCls={prefixCls}
           onSelect={this.onMonthSelect}
           onYearPanelShow={() => this.showYearPanel('month')}
@@ -164,7 +193,7 @@ const CalendarHeader = createReactClass({
       panel = (
         <YearPanel
           locale={locale}
-          defaultValue={value}
+          defaultValue={multiple ? currentShowTime : value}
           rootPrefixCls={prefixCls}
           onSelect={this.onYearSelect}
           onDecadePanelShow={this.showDecadePanel}
@@ -175,7 +204,7 @@ const CalendarHeader = createReactClass({
       panel = (
         <DecadePanel
           locale={locale}
-          defaultValue={value}
+          defaultValue={multiple ? currentShowTime : value}
           rootPrefixCls={prefixCls}
           onSelect={this.onDecadeSelect}
         />
