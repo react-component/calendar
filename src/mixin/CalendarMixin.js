@@ -22,6 +22,7 @@ function getNowByCurrentStateValue(value) {
 }
 
 function toggleTimes(items = [], newItem) {
+  items = [...items];
   let isSame = false;
   let index = -1;
   for (let i = 0; i < items.length; i++) {

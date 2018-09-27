@@ -65,8 +65,14 @@ function disabledDate(current) {
 
 class Demo extends React.Component {
   static propTypes = {
-    defaultValue: PropTypes.object,
-    defaultCalendarValue: PropTypes.object,
+    defaultValue: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.array,
+    ]),
+    defaultCalendarValue: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.array,
+    ]),
   }
 
   constructor(props) {
@@ -81,15 +87,9 @@ class Demo extends React.Component {
   }
 
   onChange = (value) => {
-    console.log('DatePicker change: ', (value && value.format(format)));
+    console.log('DatePicker change: ', value && value.map(item => item.format(format)));
     this.setState({
       value,
-    });
-  }
-
-  onShowTimeChange = (e) => {
-    this.setState({
-      showTime: e.target.checked,
     });
   }
 
@@ -110,25 +110,13 @@ class Demo extends React.Component {
     const calendar = (<Calendar
       locale={cn ? zhCN : enUS}
       style={{ zIndex: 1000 }}
-      dateInputPlaceholder="please input"
       formatter={getFormat(state.showTime)}
-      disabledTime={state.showTime ? disabledTime : null}
-      timePicker={state.showTime ? timePickerElement : null}
       defaultValue={this.props.defaultCalendarValue}
-      showDateInput={state.showDateInput}
       disabledDate={disabledDate}
+      multiple
     />);
     return (<div style={{ width: 400, margin: 20 }}>
       <div style={{ marginBottom: 10 }}>
-        <label>
-          <input
-            type="checkbox"
-            checked={state.showTime}
-            onChange={this.onShowTimeChange}
-          />
-          showTime
-        </label>
-        &nbsp;&nbsp;&nbsp;&nbsp;
         <label>
           <input
             checked={state.disabled}
@@ -158,14 +146,14 @@ class Demo extends React.Component {
             ({ value }) => {
               return (
                 <span tabIndex="0">
-                  <input
+                  <textarea
                     placeholder="please select"
                     style={{ width: 250 }}
                     disabled={state.disabled}
                     readOnly
                     tabIndex="-1"
                     className="ant-calendar-picker-input ant-input"
-                    value={value && value.format(getFormat(state.showTime)) || ''}
+                    value={value && value.map(item => item.format(getFormat(false))) || ''}
                   />
                 </span>
               );

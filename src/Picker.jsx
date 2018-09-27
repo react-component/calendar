@@ -29,6 +29,7 @@ const Picker = createReactClass({
     defaultOpen: PropTypes.bool,
     prefixCls: PropTypes.string,
     placement: PropTypes.any,
+    multiple: PropTypes.bool,
     value: PropTypes.oneOfType([
       PropTypes.object,
       PropTypes.array,
@@ -109,7 +110,7 @@ const Picker = createReactClass({
     }
     if (
       cause.source === 'keyboard' ||
-      (!props.calendar.props.timePicker && cause.source !== 'dateInput') ||
+      (!props.calendar.props.timePicker && cause.source !== 'dateInput' && !props.multiple) ||
       cause.source === 'todayButton') {
       this.close(this.focus);
     }
