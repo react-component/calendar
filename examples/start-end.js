@@ -40,8 +40,6 @@ const SHOW_TIME = true;
 
 class Picker extends React.Component {
   state = {
-    showTime: SHOW_TIME,
-    disabled: false,
   };
 
   render() {
@@ -63,14 +61,14 @@ class Picker extends React.Component {
         ({ value }) => {
           return (
             <span>
-                <input
-                  placeholder="请选择日期"
-                  style={{ width: 250 }}
-                  disabled={props.disabled}
-                  readOnly
-                  value={value && value.format(getFormat(props.showTime)) || ''}
-                />
-                </span>
+              <input
+                placeholder="请选择日期"
+                style={{ width: 250 }}
+                disabled={props.disabled}
+                readOnly
+                value={value && value.format(getFormat(props.showTime)) || ''}
+              />
+            </span>
           );
         }
       }
@@ -100,7 +98,7 @@ class Demo extends React.Component {
       return false;
     }
     return SHOW_TIME ? endValue.isBefore(startValue) :
-    endValue.diff(startValue, 'days') <= 0;
+      endValue.diff(startValue, 'days') <= 0;
   }
 
   disabledStartDate = (startValue) => {
@@ -112,7 +110,7 @@ class Demo extends React.Component {
       return false;
     }
     return SHOW_TIME ? endValue.isBefore(startValue) :
-    endValue.diff(startValue, 'days') <= 0;
+      endValue.diff(startValue, 'days') <= 0;
   }
 
   render() {

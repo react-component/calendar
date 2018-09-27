@@ -154,15 +154,14 @@ class Demo extends React.Component {
         {
           ({ value }) => {
             return (<span>
-                <input
-                  placeholder="please select"
-                  style={{ width: 350 }}
-                  disabled={state.disabled}
-                  readOnly
-                  className="ant-calendar-picker-input ant-input"
-                  value={isValidRange(value) && `${format(value[0])} - ${format(value[1])}` || ''}
-                />
-                </span>);
+              <input
+                placeholder="please select"
+                style={{ width: 350 }}
+                readOnly
+                className="ant-calendar-picker-input ant-input"
+                value={isValidRange(value) && `${format(value[0])} - ${format(value[1])}` || ''}
+              />
+            </span>);
           }
         }
       </Picker>);

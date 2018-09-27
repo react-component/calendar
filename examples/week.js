@@ -142,15 +142,14 @@ class Demo extends React.Component {
             ({ value }) => {
               return (
                 <span tabIndex="0">
-                <input
-                  placeholder="please select week"
-                  style={{ width: 250 }}
-                  disabled={state.disabled}
-                  readOnly
-                  tabIndex="-1"
-                  className="ant-calendar-picker-input ant-input"
-                  value={value && value.format(format) || ''}
-                />
+                  <input
+                    placeholder="please select week"
+                    style={{ width: 250 }}
+                    readOnly
+                    tabIndex="-1"
+                    className="ant-calendar-picker-input ant-input"
+                    value={value && value.format(format) || ''}
+                  />
                 </span>
               );
             }

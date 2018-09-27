@@ -36,7 +36,6 @@ class Demo extends React.Component {
     super(props);
 
     this.state = {
-      showTime: true,
       disabled: false,
       value: props.defaultValue,
     };
@@ -46,12 +45,6 @@ class Demo extends React.Component {
     console.log(`DatePicker change: ${value && value.format(format)}`);
     this.setState({
       value,
-    });
-  }
-
-  onShowTimeChange = (e) => {
-    this.setState({
-      showTime: e.target.checked,
     });
   }
 
