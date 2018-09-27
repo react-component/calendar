@@ -42,8 +42,8 @@ function toggleTimes(items = [], newItem) {
 
 const CalendarMixin = {
   propTypes: {
-    value: PropTypes.object,
-    defaultValue: PropTypes.object,
+    value: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
+    defaultValue: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
     onKeyDown: PropTypes.func,
   },
 

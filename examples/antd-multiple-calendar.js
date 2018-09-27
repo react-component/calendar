@@ -80,7 +80,6 @@ class Demo extends React.Component {
 
     this.state = {
       showTime: true,
-      showDateInput: true,
       disabled: false,
       value: props.defaultValue,
     };
@@ -90,12 +89,6 @@ class Demo extends React.Component {
     console.log('DatePicker change: ', value && value.map(item => item.format(format)));
     this.setState({
       value,
-    });
-  }
-
-  onShowDateInputChange = (e) => {
-    this.setState({
-      showDateInput: e.target.checked,
     });
   }
 

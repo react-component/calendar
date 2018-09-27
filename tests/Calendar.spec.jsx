@@ -34,7 +34,7 @@ describe('Calendar', () => {
     });
 
     it('render showToday false correctly', () => {
-      const wrapper = mount(<Calendar showToday={false}/>);
+      const wrapper = mount(<Calendar showToday={false} />);
       expect(wrapper.find('.rc-calendar-today-btn').length).toBe(0);
     });
   });
@@ -172,7 +172,7 @@ describe('Calendar', () => {
     let calendar;
     let input;
     beforeEach(() => {
-      calendar = mount(<Calendar showToday showWeekNumber/>);
+      calendar = mount(<Calendar showToday showWeekNumber />);
       input = calendar.find('.rc-calendar-input').hostNodes().at(0);
     });
 
@@ -540,5 +540,16 @@ describe('Calendar', () => {
     );
     calendar.find('.rc-calendar-today-btn').simulate('click');
     expect(moment().isSame(calendar.state().selectedValue)).toBe(true);
+  });
+
+  describe('multiple', () => {
+    it('select and cancel select date', () => {
+      const calendar = mount(<Calendar multiple />);
+      calendar.find('.rc-calendar-today').simulate('click');
+      expect(moment().isSame(calendar.state().selectedValue[0])).toBe(true);
+      calendar.find('.rc-calendar-today').simulate('click');
+      expect(calendar.state().selectedValue.length).toBe(0);
+      expect(calendar.state().value.length).toBe(0);
+    });
   });
 });

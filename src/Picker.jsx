@@ -32,11 +32,11 @@ const Picker = createReactClass({
     multiple: PropTypes.bool,
     value: PropTypes.oneOfType([
       PropTypes.object,
-      PropTypes.array,
+      PropTypes.arrayOf(PropTypes.object),
     ]),
     defaultValue: PropTypes.oneOfType([
       PropTypes.object,
-      PropTypes.array,
+      PropTypes.arrayOf(PropTypes.object),
     ]),
     align: PropTypes.object,
   },
