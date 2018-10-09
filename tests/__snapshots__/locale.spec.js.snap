@@ -13077,7 +13077,7 @@ exports[`locales renders it_IT correctly 1`] = `
       </div>
       <a
         role="button"
-        title="Chiaro"
+        title="Cancella"
       >
         <span
           class="rc-calendar-clear-btn"
@@ -13109,14 +13109,14 @@ exports[`locales renders it_IT correctly 1`] = `
             <a
               class="rc-calendar-month-select"
               role="button"
-              title="Seleziona la data"
+              title="Seleziona il mese"
             >
               Mar
             </a>
             <a
               class="rc-calendar-year-select"
               role="button"
-              title="Scegli un anno"
+              title="Seleziona l'anno"
             >
               2017
             </a>
