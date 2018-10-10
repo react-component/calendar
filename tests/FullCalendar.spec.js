@@ -93,4 +93,16 @@ describe('FullCalendar', () => {
     expect(selected.isSame(wrapper.state().selectedValue)).toBe(true);
     expect(selected.isSame(wrapper.state().value)).toBe(true);
   });
+
+  it('default today', () => {
+    const today = moment().add(1, 'day');
+    const wrapper = mount(
+      <FullCalendar
+        type="month"
+        Select={Select}
+        defaultToday={today}
+      />
+    );
+    expect(today.isSame(wrapper.state().value)).toBe(true);
+  });
 });

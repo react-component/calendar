@@ -58,11 +58,11 @@ class Demo extends React.Component {
           style={{ margin: 10 }}
           Select={Select}
           fullscreen
-          defaultValue={now}
           onSelect={onSelect}
           type={this.state.type}
           onTypeChange={this.onTypeChange}
           locale={cn ? zhCN : enUS}
+          defaultToday={moment('20181010', 'YYYYMMDD').locale(cn ? 'zh-CN' : 'en-US')}
         />
       </div>
     );

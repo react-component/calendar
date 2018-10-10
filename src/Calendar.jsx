@@ -43,6 +43,7 @@ const Calendar = createReactClass({
     renderFooter: PropTypes.func,
     renderSidebar: PropTypes.func,
     clearIcon: PropTypes.node,
+    defaultToday: PropTypes.object,
   },
 
   mixins: [CommonMixin, CalendarMixin],
@@ -273,6 +274,7 @@ const Calendar = createReactClass({
               onSelect={this.onDateTableSelect}
               disabledDate={disabledDate}
               showWeekNumber={props.showWeekNumber}
+              defaultToday={props.defaultToday}
             />
           </div>
 
