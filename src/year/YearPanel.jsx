@@ -16,6 +16,9 @@ function chooseYear(year) {
   const value = this.state.value.clone();
   value.year(year);
   value.month(this.state.value.month());
+  this.setState({
+    value,
+  });
   this.props.onSelect(value);
 }
 
@@ -29,6 +32,19 @@ export default
     };
     this.nextDecade = goYear.bind(this, 10);
     this.previousDecade = goYear.bind(this, -10);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if ('value' in nextProps) {
+      this.setState({
+        value: nextProps.value,
+      });
+    }
+  }
+
+  setAndSelectValue(value) {
+    this.setValue(value);
+    this.props.onSelect(value);
   }
 
   years() {
@@ -65,8 +81,15 @@ export default
 
     const yeasEls = years.map((row, index) => {
       const tds = row.map(yearData => {
+        let disabled = false;
+        if (props.disabledDate) {
+          const testValue = value.clone();
+          testValue.year(yearData.year);
+          disabled = props.disabledDate(testValue);
+        }
         const classNameMap = {
           [`${prefixCls}-cell`]: 1,
+          [`${prefixCls}-cell-disabled`]: disabled,
           [`${prefixCls}-selected-cell`]: yearData.year === currentYear,
           [`${prefixCls}-last-decade-cell`]: yearData.year < startYear,
           [`${prefixCls}-next-decade-cell`]: yearData.year > endYear,
@@ -84,7 +107,7 @@ export default
             role="gridcell"
             title={yearData.title}
             key={yearData.content}
-            onClick={clickHandler}
+            onClick={disabled ? null : clickHandler}
             className={classnames(classNameMap)}
           >
             <a
@@ -143,6 +166,8 @@ YearPanel.propTypes = {
   rootPrefixCls: PropTypes.string,
   value: PropTypes.object,
   defaultValue: PropTypes.object,
+  disabledDate: PropTypes.func,
+  onSelect: PropTypes.func,
 };
 
 YearPanel.defaultProps = {
