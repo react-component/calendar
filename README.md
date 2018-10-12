@@ -379,6 +379,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>called when a date range is changed inside calendar (next year/next month/keyboard)</td>
         </tr>
         <tr>
+          <td>onOk</td>
+          <td>Function(date: moment)</td>
+          <td></td>
+          <td>called when ok button is pressed, only if it's visible</td>
+        </tr>
+        <tr>
           <td>dateInputPlaceholder</td>
           <td>String[]</td>
           <td></td>
