@@ -62,9 +62,9 @@ const CalendarHeader = createReactClass({
   },
 
   onYearSelect(value) {
-    // const referer = this.state.yearPanelReferer;
+    const referer = this.state.yearPanelReferer;
     this.setState({ yearPanelReferer: null });
-    this.props.onPanelChange(value, 'month');
+    this.props.onPanelChange(value, referer || 'month');
     if (this.props.onYearSelect) {
       this.props.onYearSelect(value);
     } else {
