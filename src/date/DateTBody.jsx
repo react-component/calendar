@@ -135,36 +135,38 @@ const DateTBody = createReactClass({
         const isBeforeCurrentMonthYear = beforeCurrentMonthYear(current, value);
         const isAfterCurrentMonthYear = afterCurrentMonthYear(current, value);
 
-        if (selectedValue && Array.isArray(selectedValue)) {
-          const rangeValue = hoverValue.length ? hoverValue : selectedValue;
-          if (!isBeforeCurrentMonthYear && !isAfterCurrentMonthYear) {
-            const startValue = rangeValue[0];
-            const endValue = rangeValue[1];
-            if (startValue) {
-              if (isSameDay(current, startValue)) {
-                selected = true;
-                isActiveWeek = true;
-                cls += ` ${selectedStartDateClass}`;
-              }
-            }
-            if (startValue && endValue) {
-              if (isSameDay(current, endValue)) {
-                selected = true;
-                isActiveWeek = true;
-                cls += ` ${selectedEndDateClass}`;
-              } else if (current.isAfter(startValue, 'day') &&
-                current.isBefore(endValue, 'day')) {
-                cls += ` ${inRangeClass}`;
-              }
-            }
-          }
-        } else if (isSameDay(current, value)) {
-          // keyboard change value, highlight works
-          selected = true;
-          isActiveWeek = true;
-        }
+		if (selectedValue) {
+			if (Array.isArray(selectedValue)) {
+			  const rangeValue = hoverValue.length ? hoverValue : selectedValue;
+			  if (!isBeforeCurrentMonthYear && !isAfterCurrentMonthYear) {
+				const startValue = rangeValue[0];
+				const endValue = rangeValue[1];
+				if (startValue) {
+				  if (isSameDay(current, startValue)) {
+					selected = true;
+					isActiveWeek = true;
+					cls += ` ${selectedStartDateClass}`;
+				  }
+				}
+				if (startValue && endValue) {
+				  if (isSameDay(current, endValue)) {
+					selected = true;
+					isActiveWeek = true;
+					cls += ` ${selectedEndDateClass}`;
+				  } else if (current.isAfter(startValue, 'day') &&
+					current.isBefore(endValue, 'day')) {
+					cls += ` ${inRangeClass}`;
+				  }
+				}
+			  }
+			} else if (isSameDay(current, selectedValue)) {
+			  // keyboard change value, highlight works
+			  selected = true;
+			  isActiveWeek = true;
+			}
+		}
 
-        if (isSameDay(current, selectedValue)) {
+        if (selected) {
           cls += ` ${selectedDateClass}`;
         }
 
