@@ -8138,7 +8138,7 @@ var Calendar = __WEBPACK_IMPORTED_MODULE_3_create_react_class___default()({
           selectedValue: selectedValue,
           value: value,
           disabledDate: disabledDate,
-          okDisabled: !this.isAllowedDate(selectedValue),
+          okDisabled: props.showOk && !this.isAllowedDate(selectedValue),
           onOk: this.onOk,
           onSelect: this.onSelect,
           onToday: this.onToday,
