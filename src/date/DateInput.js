@@ -17,6 +17,7 @@ const DateInput = createReactClass({
     onClear: PropTypes.func,
     placeholder: PropTypes.string,
     onSelect: PropTypes.func,
+    clearIcon: PropTypes.node,
     selectedValue: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
     multiple: PropTypes.bool,
   },
@@ -39,7 +40,8 @@ const DateInput = createReactClass({
   },
 
   componentDidUpdate() {
-    if (!this.state.invalid) {
+    if (!this.state.invalid &&
+        !(this.cachedSelectionStart === 0 && this.cachedSelectionEnd === 0)) {
       this.dateInputInstance.setSelectionRange(this.cachedSelectionStart, this.cachedSelectionEnd);
     }
   },
@@ -137,26 +139,31 @@ const DateInput = createReactClass({
   render() {
     const props = this.props;
     const { invalid, str } = this.state;
-    const { locale, prefixCls, placeholder } = props;
+    const { locale, prefixCls, placeholder, clearIcon } = props;
     const invalidClass = invalid ? `${prefixCls}-input-invalid` : '';
-    return (<div className={`${prefixCls}-input-wrap`}>
-      <div className={`${prefixCls}-date-input-wrap`}>
-        <input
-          ref={this.saveDateInput}
-          className={`${prefixCls}-input ${invalidClass}`}
-          value={str}
-          disabled={props.disabled}
-          placeholder={placeholder}
-          onChange={this.onInputChange}
-        />
+    return (
+      <div className={`${prefixCls}-input-wrap`}>
+        <div className={`${prefixCls}-date-input-wrap`}>
+          <input
+            ref={this.saveDateInput}
+            className={`${prefixCls}-input ${invalidClass}`}
+            value={str}
+            disabled={props.disabled}
+            placeholder={placeholder}
+            onChange={this.onInputChange}
+          />
+        </div>
+        {props.showClear ? (
+          <a
+            role="button"
+            title={locale.clear}
+            onClick={this.onClear}
+          >
+            {clearIcon || <span className={`${prefixCls}-clear-btn`}/>}
+          </a>
+        ) : null}
       </div>
-      {props.showClear ? <a
-        className={`${prefixCls}-clear-btn`}
-        role="button"
-        title={locale.clear}
-        onClick={this.onClear}
-      /> : null}
-    </div>);
+    );
   },
 });
 

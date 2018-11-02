@@ -18,7 +18,7 @@ function chooseDecade(year, event) {
 }
 
 export default
-class DecadePanel extends React.Component {
+  class DecadePanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,7 +34,7 @@ class DecadePanel extends React.Component {
   render() {
     const props = this.props;
     const displayedValue = props.displayedValue;
-    const locale = props.locale;
+    const { locale } = this.props;
     const currentYear = displayedValue.year();
     const startYear = parseInt(currentYear / 100, 10) * 100;
     const preYear = startYear - 10;
@@ -116,7 +116,7 @@ class DecadePanel extends React.Component {
         <div className={`${prefixCls}-body`}>
           <table className={`${prefixCls}-table`} cellSpacing="0" role="grid">
             <tbody className={`${prefixCls}-tbody`}>
-            {decadesEls}
+              {decadesEls}
             </tbody>
           </table>
         </div>

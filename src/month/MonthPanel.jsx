@@ -69,9 +69,10 @@ const MonthPanel = createReactClass({
     const displayedValue = props.displayedValue;
     const cellRender = props.cellRender;
     const contentRender = props.contentRender;
-    const locale = props.locale;
+    const { locale } = props;
     const year = displayedValue.year();
     const prefixCls = this.prefixCls;
+
     return (
       <div className={prefixCls} style={props.style}>
         <div>

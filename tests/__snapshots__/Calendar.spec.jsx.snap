@@ -20,10 +20,13 @@ exports[`Calendar controlled panels render controlled panels correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Clear"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -983,10 +986,13 @@ exports[`Calendar controlled panels render controlled panels correctly 2`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Clear"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -2051,7 +2057,7 @@ exports[`Calendar date ranges selecting all sundays works 1`] = `
         showClear={true}
         value={
           Array [
-            "2017-03-28T22:00:00.000Z",
+            "2017-03-28T23:00:00.000Z",
           ]
         }
       >
@@ -2068,18 +2074,21 @@ exports[`Calendar date ranges selecting all sundays works 1`] = `
             />
           </div>
           <a
-            className="rc-calendar-clear-btn"
             onClick={[Function]}
             role="button"
             title="Clear"
-          />
+          >
+            <span
+              className="rc-calendar-clear-btn"
+            />
+          </a>
         </div>
       </DateInput>
       <div
         className="rc-calendar-date-panel"
       >
         <CalendarHeader
-          displayedValue={"2017-03-28T22:00:00.000Z"}
+          displayedValue={"2017-03-28T23:00:00.000Z"}
           enableNext={1}
           enablePrev={1}
           locale={
@@ -2121,7 +2130,7 @@ exports[`Calendar date ranges selecting all sundays works 1`] = `
           showTimePicker={false}
           value={
             Array [
-              "2017-03-28T22:00:00.000Z",
+              "2017-03-28T23:00:00.000Z",
             ]
           }
         >
@@ -2187,7 +2196,7 @@ exports[`Calendar date ranges selecting all sundays works 1`] = `
         >
           <DateTable
             disabledDate={[Function]}
-            displayedValue={"2017-03-28T22:00:00.000Z"}
+            displayedValue={"2017-03-28T23:00:00.000Z"}
             locale={
               Object {
                 "backToToday": "Back to today",
@@ -2234,7 +2243,7 @@ exports[`Calendar date ranges selecting all sundays works 1`] = `
             }
             value={
               Array [
-                "2017-03-28T22:00:00.000Z",
+                "2017-03-28T23:00:00.000Z",
               ]
             }
           >
@@ -2245,7 +2254,7 @@ exports[`Calendar date ranges selecting all sundays works 1`] = `
             >
               <DateTHead
                 disabledDate={[Function]}
-                displayedValue={"2017-03-28T22:00:00.000Z"}
+                displayedValue={"2017-03-28T23:00:00.000Z"}
                 locale={
                   Object {
                     "backToToday": "Back to today",
@@ -2292,7 +2301,7 @@ exports[`Calendar date ranges selecting all sundays works 1`] = `
                 }
                 value={
                   Array [
-                    "2017-03-28T22:00:00.000Z",
+                    "2017-03-28T23:00:00.000Z",
                   ]
                 }
               >
@@ -2410,7 +2419,7 @@ exports[`Calendar date ranges selecting all sundays works 1`] = `
               </DateTHead>
               <DateTBody
                 disabledDate={[Function]}
-                displayedValue={"2017-03-28T22:00:00.000Z"}
+                displayedValue={"2017-03-28T23:00:00.000Z"}
                 hoverValue={Array []}
                 locale={
                   Object {
@@ -2458,7 +2467,7 @@ exports[`Calendar date ranges selecting all sundays works 1`] = `
                 }
                 value={
                   Array [
-                    "2017-03-28T22:00:00.000Z",
+                    "2017-03-28T23:00:00.000Z",
                   ]
                 }
               >
@@ -3180,7 +3189,7 @@ exports[`Calendar date ranges selecting all sundays works 1`] = `
         </div>
         <CalendarFooter
           disabledDate={[Function]}
-          displayedValue={"2017-03-28T22:00:00.000Z"}
+          displayedValue={"2017-03-28T23:00:00.000Z"}
           locale={
             Object {
               "backToToday": "Back to today",
@@ -3234,7 +3243,7 @@ exports[`Calendar date ranges selecting all sundays works 1`] = `
           timePicker={null}
           value={
             Array [
-              "2017-03-28T22:00:00.000Z",
+              "2017-03-28T23:00:00.000Z",
             ]
           }
         >
@@ -3246,7 +3255,7 @@ exports[`Calendar date ranges selecting all sundays works 1`] = `
             >
               <TodayButton
                 disabledDate={[Function]}
-                displayedValue={"2017-03-28T22:00:00.000Z"}
+                displayedValue={"2017-03-28T23:00:00.000Z"}
                 key=".0"
                 locale={
                   Object {
@@ -3301,7 +3310,7 @@ exports[`Calendar date ranges selecting all sundays works 1`] = `
                 timePicker={null}
                 value={
                   Array [
-                    "2017-03-28T22:00:00.000Z",
+                    "2017-03-28T23:00:00.000Z",
                   ]
                 }
               >
@@ -3502,7 +3511,7 @@ exports[`Calendar date ranges selecting the entire month works 1`] = `
         showClear={true}
         value={
           Array [
-            "2017-03-28T22:00:00.000Z",
+            "2017-03-28T23:00:00.000Z",
           ]
         }
       >
@@ -3519,18 +3528,21 @@ exports[`Calendar date ranges selecting the entire month works 1`] = `
             />
           </div>
           <a
-            className="rc-calendar-clear-btn"
             onClick={[Function]}
             role="button"
             title="Clear"
-          />
+          >
+            <span
+              className="rc-calendar-clear-btn"
+            />
+          </a>
         </div>
       </DateInput>
       <div
         className="rc-calendar-date-panel"
       >
         <CalendarHeader
-          displayedValue={"2017-03-28T22:00:00.000Z"}
+          displayedValue={"2017-03-28T23:00:00.000Z"}
           enableNext={1}
           enablePrev={1}
           locale={
@@ -3575,7 +3587,7 @@ exports[`Calendar date ranges selecting the entire month works 1`] = `
           showTimePicker={false}
           value={
             Array [
-              "2017-03-28T22:00:00.000Z",
+              "2017-03-28T23:00:00.000Z",
             ]
           }
         >
@@ -3629,7 +3641,7 @@ exports[`Calendar date ranges selecting the entire month works 1`] = `
         >
           <DateTable
             disabledDate={[Function]}
-            displayedValue={"2017-03-28T22:00:00.000Z"}
+            displayedValue={"2017-03-28T23:00:00.000Z"}
             locale={
               Object {
                 "backToToday": "Back to today",
@@ -3700,7 +3712,7 @@ exports[`Calendar date ranges selecting the entire month works 1`] = `
             }
             value={
               Array [
-                "2017-03-28T22:00:00.000Z",
+                "2017-03-28T23:00:00.000Z",
               ]
             }
           >
@@ -3711,7 +3723,7 @@ exports[`Calendar date ranges selecting the entire month works 1`] = `
             >
               <DateTHead
                 disabledDate={[Function]}
-                displayedValue={"2017-03-28T22:00:00.000Z"}
+                displayedValue={"2017-03-28T23:00:00.000Z"}
                 locale={
                   Object {
                     "backToToday": "Back to today",
@@ -3782,7 +3794,7 @@ exports[`Calendar date ranges selecting the entire month works 1`] = `
                 }
                 value={
                   Array [
-                    "2017-03-28T22:00:00.000Z",
+                    "2017-03-28T23:00:00.000Z",
                   ]
                 }
               >
@@ -3879,7 +3891,7 @@ exports[`Calendar date ranges selecting the entire month works 1`] = `
               </DateTHead>
               <DateTBody
                 disabledDate={[Function]}
-                displayedValue={"2017-03-28T22:00:00.000Z"}
+                displayedValue={"2017-03-28T23:00:00.000Z"}
                 hoverValue={Array []}
                 locale={
                   Object {
@@ -3951,7 +3963,7 @@ exports[`Calendar date ranges selecting the entire month works 1`] = `
                 }
                 value={
                   Array [
-                    "2017-03-28T22:00:00.000Z",
+                    "2017-03-28T23:00:00.000Z",
                   ]
                 }
               >
@@ -4673,7 +4685,7 @@ exports[`Calendar date ranges selecting the entire month works 1`] = `
         </div>
         <CalendarFooter
           disabledDate={[Function]}
-          displayedValue={"2017-03-28T22:00:00.000Z"}
+          displayedValue={"2017-03-28T23:00:00.000Z"}
           locale={
             Object {
               "backToToday": "Back to today",
@@ -4754,7 +4766,7 @@ exports[`Calendar date ranges selecting the entire month works 1`] = `
           timePicker={null}
           value={
             Array [
-              "2017-03-28T22:00:00.000Z",
+              "2017-03-28T23:00:00.000Z",
             ]
           }
         >
@@ -4766,7 +4778,7 @@ exports[`Calendar date ranges selecting the entire month works 1`] = `
             >
               <TodayButton
                 disabledDate={[Function]}
-                displayedValue={"2017-03-28T22:00:00.000Z"}
+                displayedValue={"2017-03-28T23:00:00.000Z"}
                 key=".0"
                 locale={
                   Object {
@@ -4848,7 +4860,7 @@ exports[`Calendar date ranges selecting the entire month works 1`] = `
                 timePicker={null}
                 value={
                   Array [
-                    "2017-03-28T22:00:00.000Z",
+                    "2017-03-28T23:00:00.000Z",
                   ]
                 }
               >
@@ -4890,10 +4902,13 @@ exports[`Calendar render render correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="清除"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -5655,10 +5670,13 @@ exports[`Calendar render render correctly 2`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Clear"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -6420,10 +6438,13 @@ exports[`Calendar render render correctly 3`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Clear"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -7185,10 +7206,13 @@ exports[`Calendar render render correctly with multiple selected dates for defau
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Clear"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
@@ -7950,10 +7974,13 @@ exports[`Calendar render render correctly with multiple selected dates for selec
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Clear"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
