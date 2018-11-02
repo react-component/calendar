@@ -133,7 +133,7 @@ exports[`FullCalendar renders custom header correctly 1`] = `
             </div>
           </td>
           <td
-            class="rc-calendar-cell rc-calendar-last-month-cell"
+            class="rc-calendar-cell rc-calendar-last-month-cell rc-calendar-last-day-of-month"
             role="gridcell"
             title="February 28, 2017"
           >
@@ -556,7 +556,7 @@ exports[`FullCalendar renders custom header correctly 1`] = `
             </div>
           </td>
           <td
-            class="rc-calendar-cell"
+            class="rc-calendar-cell rc-calendar-last-day-of-month"
             role="gridcell"
             title="March 31, 2017"
           >
@@ -896,7 +896,7 @@ exports[`FullCalendar renders date mode correctly 1`] = `
             </div>
           </td>
           <td
-            class="rc-calendar-cell rc-calendar-last-month-cell"
+            class="rc-calendar-cell rc-calendar-last-month-cell rc-calendar-last-day-of-month"
             role="gridcell"
             title="February 28, 2017"
           >
@@ -1319,7 +1319,7 @@ exports[`FullCalendar renders date mode correctly 1`] = `
             </div>
           </td>
           <td
-            class="rc-calendar-cell"
+            class="rc-calendar-cell rc-calendar-last-day-of-month"
             role="gridcell"
             title="March 31, 2017"
           >
@@ -1659,7 +1659,7 @@ exports[`FullCalendar renders fullscreen correctly 1`] = `
             </div>
           </td>
           <td
-            class="rc-calendar-cell rc-calendar-last-month-cell"
+            class="rc-calendar-cell rc-calendar-last-month-cell rc-calendar-last-day-of-month"
             role="gridcell"
             title="February 28, 2017"
           >
@@ -2082,7 +2082,7 @@ exports[`FullCalendar renders fullscreen correctly 1`] = `
             </div>
           </td>
           <td
-            class="rc-calendar-cell"
+            class="rc-calendar-cell rc-calendar-last-day-of-month"
             role="gridcell"
             title="March 31, 2017"
           >
@@ -2642,7 +2642,7 @@ exports[`FullCalendar type renders defaultType correctly 1`] = `
             </div>
           </td>
           <td
-            class="rc-calendar-cell rc-calendar-last-month-cell"
+            class="rc-calendar-cell rc-calendar-last-month-cell rc-calendar-last-day-of-month"
             role="gridcell"
             title="February 28, 2017"
           >
@@ -3065,7 +3065,7 @@ exports[`FullCalendar type renders defaultType correctly 1`] = `
             </div>
           </td>
           <td
-            class="rc-calendar-cell"
+            class="rc-calendar-cell rc-calendar-last-day-of-month"
             role="gridcell"
             title="March 31, 2017"
           >
