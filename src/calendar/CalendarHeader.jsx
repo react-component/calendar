@@ -43,8 +43,8 @@ const CalendarHeader = createReactClass({
     return {
       enableNext: 1,
       enablePrev: 1,
-      onPanelChange() {},
-      onValueChange() {},
+      onPanelChange() { },
+      onValueChange() { },
     };
   },
 
@@ -85,26 +85,27 @@ const CalendarHeader = createReactClass({
     const localeData = value.localeData();
     const monthBeforeYear = locale.monthBeforeYear;
     const selectClassName = `${prefixCls}-${monthBeforeYear ? 'my-select' : 'ym-select'}`;
+    const timeClassName = showTimePicker ? ` ${prefixCls}-time-status` : '';
     const year = (<a
-      className={`${prefixCls}-year-select`}
+      className={`${prefixCls}-year-select${timeClassName}`}
       role="button"
       onClick={showTimePicker ? null : () => this.showYearPanel('date')}
-      title={locale.yearSelect}
+      title={showTimePicker ? null : locale.yearSelect}
     >
       {value.format(locale.yearFormat)}
     </a>);
     const month = (<a
-      className={`${prefixCls}-month-select`}
+      className={`${prefixCls}-month-select${timeClassName}`}
       role="button"
       onClick={showTimePicker ? null : this.showMonthPanel}
-      title={locale.monthSelect}
+      title={showTimePicker ? null : locale.monthSelect}
     >
-      {localeData.monthsShort(value)}
+      {locale.monthFormat ? value.format(locale.monthFormat) : localeData.monthsShort(value)}
     </a>);
     let day;
     if (showTimePicker) {
       day = (<a
-        className={`${prefixCls}-day-select`}
+        className={`${prefixCls}-day-select${timeClassName}`}
         role="button"
       >
         {value.format(locale.dayFormat)}
@@ -117,7 +118,7 @@ const CalendarHeader = createReactClass({
       my = [year, month, day];
     }
     return (<span className={selectClassName}>
-    {toFragment(my)}
+      {toFragment(my)}
     </span>);
   },
 
