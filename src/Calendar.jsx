@@ -202,7 +202,6 @@ const Calendar = createReactClass({
       locale, prefixCls, disabledDate,
       dateInputPlaceholder, timePicker,
       disabledTime, clearIcon,
-      disabledTime,
       prevMonthIcon,
       nextMonthIcon,
       prevYearIcon,
