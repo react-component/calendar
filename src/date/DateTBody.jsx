@@ -74,6 +74,7 @@ const DateTBody = createReactClass({
     const disabledClass = `${prefixCls}-disabled-cell`;
     const firstDisableClass = `${prefixCls}-disabled-cell-first-of-row`;
     const lastDisableClass = `${prefixCls}-disabled-cell-last-of-row`;
+    const lastDayOfMonthClass = `${prefixCls}-last-day-of-month`;
     const month1 = value.clone();
     month1.date(1);
     const day = month1.day();
@@ -82,6 +83,7 @@ const DateTBody = createReactClass({
     const lastMonth1 = month1.clone();
     lastMonth1.add(0 - lastMonthDiffDay, 'days');
     let passed = 0;
+
     for (iIndex = 0; iIndex < DateConstants.DATE_ROW_COUNT; iIndex++) {
       for (jIndex = 0; jIndex < DateConstants.DATE_COL_COUNT; jIndex++) {
         current = lastMonth1;
@@ -172,8 +174,13 @@ const DateTBody = createReactClass({
         if (isBeforeCurrentMonthYear) {
           cls += ` ${lastMonthDayClass}`;
         }
+
         if (isAfterCurrentMonthYear) {
           cls += ` ${nextMonthDayClass}`;
+        }
+
+        if (current.clone().endOf('month').date() === current.date()) {
+          cls += ` ${lastDayOfMonthClass}`;
         }
 
         if (disabledDate) {
@@ -221,7 +228,8 @@ const DateTBody = createReactClass({
             onMouseEnter={disabled ?
               undefined : props.onDayHover && props.onDayHover.bind(null, current) || undefined}
             role="gridcell"
-            title={getTitleString(current)} className={cls}
+            title={getTitleString(current)}
+            className={cls}
           >
             {dateHtml}
           </td>);
@@ -244,7 +252,7 @@ const DateTBody = createReactClass({
         </tr>);
     }
     return (<tbody className={`${prefixCls}-tbody`}>
-    {tableHtml}
+      {tableHtml}
     </tbody>);
   },
 });

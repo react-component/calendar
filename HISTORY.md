@@ -1,6 +1,10 @@
 # History
 ----
 
+## 9.7.0 / 2018-08-07
+
+- Add clearIcon.
+
 ## 9.6.0 / 2018-02-08
 
 - Add Picker[dropdownClassName]
