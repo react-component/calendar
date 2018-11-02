@@ -8,6 +8,8 @@ React Calendar
 [![Test coverage][codecov-image]][codecov-url]
 [![gemnasium deps][gemnasium-image]][gemnasium-url]
 [![npm download][download-image]][download-url]
+[![Code Quality: Javascript][lgtm-badge]][lgtm-badge-url]
+[![Total alerts][lgtm-alerts]][lgtm-alerts-url]
 
 [npm-image]: http://img.shields.io/npm/v/rc-calendar.svg?style=flat-square
 [npm-url]: http://npmjs.org/package/rc-calendar
@@ -21,6 +23,10 @@ React Calendar
 [node-url]: http://nodejs.org/download/
 [download-image]: https://img.shields.io/npm/dm/rc-calendar.svg?style=flat-square
 [download-url]: https://npmjs.org/package/rc-calendar
+[lgtm-badge]: https://img.shields.io/lgtm/grade/javascript/g/react-component/calendar.svg?logo=lgtm&logoWidth=18
+[lgtm-badge-url]: https://lgtm.com/projects/g/react-component/calendar/context:javascript
+[lgtm-alerts]: https://img.shields.io/lgtm/alerts/g/react-component/calendar.svg?logo=lgtm&logoWidth=18
+[lgtm-alerts-url]: https://lgtm.com/projects/g/react-component/calendar/alerts
 
 ## Screenshots
 
@@ -231,6 +237,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>called when panel changed</td>
         </tr>
         <tr>
+          <td>clearIcon</td>
+          <td>ReactNode</td>
+          <td></td>
+          <td>specific the clear icon.</td>
+        </tr>
+        <tr>
           <td>disableMonthsInPast</td>
           <td>Boolean</td>
           <td>false</td>
@@ -413,6 +425,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>Function(hoverValue: moment[])</td>
           <td></td>
           <td>called when hover value change</td>
+        </tr>
+        <tr>
+          <td>clearIcon</td>
+          <td>ReactNode</td>
+          <td></td>
+          <td>specific the clear icon.</td>
         </tr>
     </tbody>
 </table>

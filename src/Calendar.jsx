@@ -11,42 +11,9 @@ import CalendarMixin from './mixin/CalendarMixin';
 import CommonMixin from './mixin/CommonMixin';
 import DateInput from './date/DateInput';
 import { getTimeConfig, getTodayTime, syncTime } from './util';
+import { goStartMonth, goEndMonth, goTime } from './util/toTime';
 
 function noop() {
-}
-
-function goStartMonth() {
-  const next = this.state.value.clone();
-  next.startOf('month');
-  this.setValue(next);
-}
-
-function goEndMonth() {
-  const next = this.state.value.clone();
-  next.endOf('month');
-  this.setValue(next);
-}
-
-function goTime(direction, unit) {
-  const next = this.state.value.clone();
-  next.add(direction, unit);
-  this.setValue(next);
-}
-
-function goMonth(direction) {
-  return goTime.call(this, direction, 'months');
-}
-
-function goYear(direction) {
-  return goTime.call(this, direction, 'years');
-}
-
-function goWeek(direction) {
-  return goTime.call(this, direction, 'weeks');
-}
-
-function goDay(direction) {
-  return goTime.call(this, direction, 'days');
 }
 
 const Calendar = createReactClass({
@@ -73,8 +40,10 @@ const Calendar = createReactClass({
     onPanelChange: PropTypes.func,
     disabledDate: PropTypes.func,
     disabledTime: PropTypes.any,
+    dateRender: PropTypes.func,
     renderFooter: PropTypes.func,
     renderSidebar: PropTypes.func,
+    clearIcon: PropTypes.node,
     disableMonthsInPast: PropTypes.bool,
   },
 
@@ -110,43 +79,47 @@ const Calendar = createReactClass({
     const { value } = this.state;
     switch (keyCode) {
       case KeyCode.DOWN:
-        goWeek.call(this, 1);
+        this.goTime(1, 'weeks');
         event.preventDefault();
         return 1;
       case KeyCode.UP:
-        goWeek.call(this, -1);
+        this.goTime(-1, 'weeks');
         event.preventDefault();
         return 1;
       case KeyCode.LEFT:
         if (ctrlKey) {
-          goYear.call(this, -1);
+          this.goTime(-1, 'years');
         } else {
-          goDay.call(this, -1);
+          this.goTime(-1, 'days');
         }
         event.preventDefault();
         return 1;
       case KeyCode.RIGHT:
         if (ctrlKey) {
-          goYear.call(this, 1);
+          this.goTime(1, 'years');
         } else {
-          goDay.call(this, 1);
+          this.goTime(1, 'days');
         }
         event.preventDefault();
         return 1;
       case KeyCode.HOME:
-        goStartMonth.call(this);
+        this.setValue(
+          goStartMonth(this.state.value),
+        );
         event.preventDefault();
         return 1;
       case KeyCode.END:
-        goEndMonth.call(this);
+        this.setValue(
+          goEndMonth(this.state.value),
+        );
         event.preventDefault();
         return 1;
       case KeyCode.PAGE_DOWN:
-        goMonth.call(this, 1);
+        this.goTime(1, 'month');
         event.preventDefault();
         return 1;
       case KeyCode.PAGE_UP:
-        goMonth.call(this, -1);
+        this.goTime(-1, 'month');
         event.preventDefault();
         return 1;
       case KeyCode.ENTER:
@@ -214,12 +187,19 @@ const Calendar = createReactClass({
   closeTimePicker() {
     this.onPanelChange(null, 'date');
   },
+
+  goTime(direction, unit) {
+    this.setValue(
+      goTime(this.state.value, direction, unit),
+    );
+  },
+
   render() {
     const { props, state } = this;
     const {
       locale, prefixCls, disabledDate,
       dateInputPlaceholder, timePicker,
-      disabledTime,
+      disabledTime, clearIcon,
       disableMonthsInPast,
     } = props;
     const { value, selectedValue, mode } = state;
@@ -272,6 +252,7 @@ const Calendar = createReactClass({
         prefixCls={prefixCls}
         selectedValue={selectedValue}
         onChange={this.onDateInputChange}
+        clearIcon={clearIcon}
       />
     ) : null;
     const children = [
@@ -293,7 +274,7 @@ const Calendar = createReactClass({
           {timePicker && showTimePicker ?
             (<div className={`${prefixCls}-time-picker`}>
               <div className={`${prefixCls}-time-picker-panel`}>
-                {timePickerEle }
+                {timePickerEle}
               </div>
             </div>)
             : null}
