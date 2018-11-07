@@ -1611,7 +1611,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                           </a>
                         </td>
                         <td
-                          class="rc-calendar-month-panel-cell rc-calendar-month-panel-selected-cell rc-calendar-month-panel-current-cell"
+                          class="rc-calendar-month-panel-cell rc-calendar-month-panel-selected-cell rc-calendar-month-panel-selected-date rc-calendar-month-panel-current-cell"
                           role="gridcell"
                           title="Mar"
                         >
@@ -2566,7 +2566,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                         role="row"
                       >
                         <td
-                          class="rc-calendar-month-panel-cell rc-calendar-month-panel-selected-cell"
+                          class="rc-calendar-month-panel-cell rc-calendar-month-panel-selected-cell rc-calendar-month-panel-selected-date"
                           role="gridcell"
                           title="Apr"
                         >
