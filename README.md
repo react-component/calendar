@@ -8,6 +8,8 @@ React Calendar
 [![Test coverage][codecov-image]][codecov-url]
 [![gemnasium deps][gemnasium-image]][gemnasium-url]
 [![npm download][download-image]][download-url]
+[![Code Quality: Javascript][lgtm-badge]][lgtm-badge-url]
+[![Total alerts][lgtm-alerts]][lgtm-alerts-url]
 
 [npm-image]: http://img.shields.io/npm/v/rc-calendar.svg?style=flat-square
 [npm-url]: http://npmjs.org/package/rc-calendar
@@ -21,6 +23,10 @@ React Calendar
 [node-url]: http://nodejs.org/download/
 [download-image]: https://img.shields.io/npm/dm/rc-calendar.svg?style=flat-square
 [download-url]: https://npmjs.org/package/rc-calendar
+[lgtm-badge]: https://img.shields.io/lgtm/grade/javascript/g/react-component/calendar.svg?logo=lgtm&logoWidth=18
+[lgtm-badge-url]: https://lgtm.com/projects/g/react-component/calendar/context:javascript
+[lgtm-alerts]: https://img.shields.io/lgtm/alerts/g/react-component/calendar.svg?logo=lgtm&logoWidth=18
+[lgtm-alerts-url]: https://lgtm.com/projects/g/react-component/calendar/alerts
 
 ## Screenshots
 
@@ -201,10 +207,22 @@ http://react-component.github.io/calendar/examples/index.html
           <td>called when a date is selected from calendar</td>
         </tr>
         <tr>
+          <td>onClear</td>
+          <td>Function()</td>
+          <td></td>
+          <td>called when a date is cleared from calendar</td>
+        </tr>
+        <tr>
           <td>onChange</td>
           <td>Function(date: moment)</td>
           <td></td>
           <td>called when a date is changed inside calendar (next year/next month/keyboard)</td>
+        </tr>
+        <tr>
+          <td>onOk</td>
+          <td>Function(date: moment)</td>
+          <td></td>
+          <td>called when ok button is pressed, only if it's visible</td>
         </tr>
         <tr>
           <td>dateInputPlaceholder</td>
@@ -223,6 +241,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>Function(date: moment, mode)</td>
           <td></td>
           <td>called when panel changed</td>
+        </tr>
+        <tr>
+          <td>clearIcon</td>
+          <td>ReactNode</td>
+          <td></td>
+          <td>specific the clear icon.</td>
         </tr>
     </tbody>
 </table>
@@ -337,10 +361,28 @@ http://react-component.github.io/calendar/examples/index.html
           <td>called when a date range is selected from calendar</td>
         </tr>
         <tr>
+          <td>onInputSelect</td>
+          <td>Function(date: moment[])</td>
+          <td></td>
+          <td>called when a valid date entered in input</td>
+        </tr>
+        <tr>
+          <td>onClear</td>
+          <td>Function()</td>
+          <td></td>
+          <td>called when a date range is cleared from calendar</td>
+        </tr>
+        <tr>
           <td>onChange</td>
           <td>Function(date: moment[])</td>
           <td></td>
           <td>called when a date range is changed inside calendar (next year/next month/keyboard)</td>
+        </tr>
+        <tr>
+          <td>onOk</td>
+          <td>Function(date: moment)</td>
+          <td></td>
+          <td>called when ok button is pressed, only if it's visible</td>
         </tr>
         <tr>
           <td>dateInputPlaceholder</td>
@@ -353,6 +395,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>Function(current: moment[], type:'start'|'end'):Object</td>
           <td></td>
           <td>a function which return a object with member of disabledHours/disabledMinutes/disabledSeconds according to rc-time-picker</td>
+        </tr>
+        <tr>
+          <td>showDateInput</td>
+          <td>Boolean</td>
+          <td>true</td>
+          <td>whether to show date inputs on top of calendar panels</td>
         </tr>
         <tr>
           <td>type</td>
@@ -383,6 +431,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>Function(hoverValue: moment[])</td>
           <td></td>
           <td>called when hover value change</td>
+        </tr>
+        <tr>
+          <td>clearIcon</td>
+          <td>ReactNode</td>
+          <td></td>
+          <td>specific the clear icon.</td>
         </tr>
     </tbody>
 </table>
@@ -570,6 +624,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>() => HTMLElement</td>
           <td>() => {return document.body;}</td>
           <td>dom node where calendar to be rendered into</td>
+        </tr>
+        <tr>
+          <td>dropdownClassName</td>
+          <td>string</td>
+          <td></td>
+          <td>additional className applied to dropdown</td>
         </tr>
     </tbody>
 </table>

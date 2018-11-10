@@ -1,6 +1,18 @@
 # History
 ----
 
+## 9.7.0 / 2018-08-07
+
+- Add clearIcon.
+
+## 9.6.0 / 2018-02-08
+
+- Add Picker[dropdownClassName]
+
+## 9.5.0 / 2017-12-26
+
+- Add Kurdish
+
 ## 9.4.0 / 2017-12-26
 
 - Add Uyghur

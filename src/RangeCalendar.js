@@ -3,14 +3,16 @@ import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import classnames from 'classnames';
+import KeyCode from 'rc-util/lib/KeyCode';
 import CalendarPart from './range-calendar/CalendarPart';
 import TodayButton from './calendar/TodayButton';
 import OkButton from './calendar/OkButton';
 import TimePickerButton from './calendar/TimePickerButton';
 import CommonMixin from './mixin/CommonMixin';
-import { syncTime, getTodayTime, isAllowedDate } from './util/';
+import { syncTime, getTodayTime, isAllowedDate } from './util';
+import { goTime, goStartMonth, goEndMonth, includesTime } from './util/toTime';
 
-function noop() {}
+function noop() { }
 
 function isEmptyArray(arr) {
   return Array.isArray(arr) && (arr.length === 0 || arr.every(i => !i));
@@ -39,8 +41,8 @@ function normalizeAnchor(props, init) {
   const selectedValue = props.selectedValue || init && props.defaultSelectedValue;
   const value = props.value || init && props.defaultValue;
   const normalizedValue = value ?
-          getValueFromSelectedValue(value) :
-          getValueFromSelectedValue(selectedValue);
+    getValueFromSelectedValue(value) :
+    getValueFromSelectedValue(selectedValue);
   return !isEmptyArray(normalizedValue) ?
     normalizedValue : init && [moment(), moment().add(1, 'months')];
 }
@@ -66,6 +68,7 @@ function onInputSelect(direction, value) {
   if (selectedValue[0] && this.compare(selectedValue[0], selectedValue[1]) > 0) {
     selectedValue[1 - index] = this.state.showTimePicker ? selectedValue[index] : undefined;
   }
+  this.props.onInputSelect(selectedValue);
   this.fireSelectValueChange(selectedValue);
 }
 
@@ -77,6 +80,7 @@ const RangeCalendar = createReactClass({
     value: PropTypes.any,
     hoverValue: PropTypes.any,
     mode: PropTypes.arrayOf(PropTypes.oneOf(['date', 'month', 'year', 'decade'])),
+    showDateInput: PropTypes.bool,
     timePicker: PropTypes.any,
     showOk: PropTypes.bool,
     showToday: PropTypes.bool,
@@ -95,6 +99,7 @@ const RangeCalendar = createReactClass({
     type: PropTypes.any,
     disabledDate: PropTypes.func,
     disabledTime: PropTypes.func,
+    clearIcon: PropTypes.node,
   },
 
   mixins: [CommonMixin],
@@ -107,7 +112,9 @@ const RangeCalendar = createReactClass({
       onHoverChange: noop,
       onPanelChange: noop,
       disabledTime: noop,
+      onInputSelect: noop,
       showToday: true,
+      showDateInput: true,
     };
   },
 
@@ -193,9 +200,133 @@ const RangeCalendar = createReactClass({
     this.fireSelectValueChange(nextSelectedValue);
   },
 
+  onKeyDown(event) {
+    if (event.target.nodeName.toLowerCase() === 'input') {
+      return;
+    }
+
+    const { keyCode } = event;
+    const ctrlKey = event.ctrlKey || event.metaKey;
+
+    const {
+      selectedValue, hoverValue, firstSelectedValue,
+      value, // Value is used for `CalendarPart` current page
+    } = this.state;
+    const { onKeyDown, disabledDate } = this.props;
+
+    // Update last time of the picker
+    const updateHoverPoint = (func) => {
+      // Change hover to make focus in UI
+      let currentHoverTime;
+      let nextHoverTime;
+      let nextHoverValue;
+
+      if (!firstSelectedValue) {
+        currentHoverTime = hoverValue[0] || selectedValue[0] || value[0] || moment();
+        nextHoverTime = func(currentHoverTime);
+        nextHoverValue = [nextHoverTime];
+        this.fireHoverValueChange(nextHoverValue);
+      } else {
+        if (hoverValue.length === 1) {
+          currentHoverTime = hoverValue[0].clone();
+          nextHoverTime = func(currentHoverTime);
+          nextHoverValue = this.onDayHover(nextHoverTime);
+        } else {
+          currentHoverTime = hoverValue[0].isSame(firstSelectedValue, 'day') ?
+            hoverValue[1] : hoverValue[0];
+          nextHoverTime = func(currentHoverTime);
+          nextHoverValue = this.onDayHover(nextHoverTime);
+        }
+      }
+
+      // Find origin hover time on value index
+      if (nextHoverValue.length >= 2) {
+        const miss = nextHoverValue.some(ht => !includesTime(value, ht, 'month'));
+        if (miss) {
+          const newValue = nextHoverValue.slice()
+            .sort((t1, t2) => t1.valueOf() - t2.valueOf());
+          if (newValue[0].isSame(newValue[1], 'month')) {
+            newValue[1] = newValue[0].clone().add(1, 'month');
+          }
+          this.fireValueChange(newValue);
+        }
+      } else if (nextHoverValue.length === 1) {
+        // If only one value, let's keep the origin panel
+        let oriValueIndex = value.findIndex(time => time.isSame(currentHoverTime, 'month'));
+        if (oriValueIndex === -1) oriValueIndex = 0;
+
+        if (value.every(time => !time.isSame(nextHoverTime, 'month'))) {
+          const newValue = value.slice();
+          newValue[oriValueIndex] = nextHoverTime.clone();
+          this.fireValueChange(newValue);
+        }
+      }
+
+      event.preventDefault();
+
+      return nextHoverTime;
+    };
+
+    switch (keyCode) {
+      case KeyCode.DOWN:
+        updateHoverPoint((time) => goTime(time, 1, 'weeks'));
+        return;
+      case KeyCode.UP:
+        updateHoverPoint((time) => goTime(time, -1, 'weeks'));
+        return;
+      case KeyCode.LEFT:
+        if (ctrlKey) {
+          updateHoverPoint((time) => goTime(time, -1, 'years'));
+        } else {
+          updateHoverPoint((time) => goTime(time, -1, 'days'));
+        }
+        return;
+      case KeyCode.RIGHT:
+        if (ctrlKey) {
+          updateHoverPoint((time) => goTime(time, 1, 'years'));
+        } else {
+          updateHoverPoint((time) => goTime(time, 1, 'days'));
+        }
+        return;
+      case KeyCode.HOME:
+        updateHoverPoint((time) => goStartMonth(time));
+        return;
+      case KeyCode.END:
+        updateHoverPoint((time) => goEndMonth(time));
+        return;
+      case KeyCode.PAGE_DOWN:
+        updateHoverPoint((time) => goTime(time, 1, 'month'));
+        return;
+      case KeyCode.PAGE_UP:
+        updateHoverPoint((time) => goTime(time, -1, 'month'));
+        return;
+      case KeyCode.ENTER: {
+        let lastValue;
+        if (hoverValue.length === 0) {
+          lastValue = updateHoverPoint(time => time);
+        } else if (hoverValue.length === 1) {
+          lastValue = hoverValue[0];
+        } else {
+          lastValue = hoverValue[0].isSame(firstSelectedValue, 'day') ?
+            hoverValue[1] : hoverValue[0];
+        }
+        if (lastValue && (!disabledDate || !disabledDate(lastValue))) {
+          this.onSelect(lastValue);
+        }
+        event.preventDefault();
+        return;
+      }
+      default:
+        if (onKeyDown) {
+          onKeyDown(event);
+        }
+    }
+  },
+
   onDayHover(value) {
     let hoverValue = [];
     const { selectedValue, firstSelectedValue } = this.state;
+
     const { type } = this.props;
     if (type === 'start' && selectedValue[1]) {
       hoverValue = this.compare(value, selectedValue[1]) < 0 ?
@@ -205,12 +336,17 @@ const RangeCalendar = createReactClass({
         [selectedValue[0], value] : [];
     } else {
       if (!firstSelectedValue) {
-        return;
+        if (this.state.hoverValue.length) {
+          this.setState({ hoverValue: [] });
+        }
+        return hoverValue;
       }
       hoverValue = this.compare(value, firstSelectedValue) < 0 ?
         [value, firstSelectedValue] : [firstSelectedValue, value];
     }
     this.fireHoverValueChange(hoverValue);
+
+    return hoverValue;
   },
 
   onToday() {
@@ -350,7 +486,7 @@ const RangeCalendar = createReactClass({
 
   isAllowedDateAndTime(selectedValue) {
     return isAllowedDate(selectedValue[0], this.props.disabledDate, this.disabledStartTime) &&
-    isAllowedDate(selectedValue[1], this.props.disabledDate, this.disabledEndTime);
+      isAllowedDate(selectedValue[1], this.props.disabledDate, this.disabledEndTime);
   },
 
   isMonthYearPanelShow(mode) {
@@ -459,7 +595,7 @@ const RangeCalendar = createReactClass({
     const {
       prefixCls, dateInputPlaceholder,
       timePicker, showOk, locale, showClear,
-      showToday, type,
+      showToday, type, clearIcon,
     } = props;
     const {
       hoverValue,
@@ -480,7 +616,7 @@ const RangeCalendar = createReactClass({
       selectedValue: state.selectedValue,
       onSelect: this.onSelect,
       onDayHover: type === 'start' && selectedValue[1] ||
-      type === 'end' && selectedValue[0] || !!hoverValue.length ?
+        type === 'end' && selectedValue[0] || !!hoverValue.length ?
         this.onDayHover : undefined,
     };
 
@@ -507,27 +643,36 @@ const RangeCalendar = createReactClass({
     const thisMonth = todayTime.month();
     const thisYear = todayTime.year();
     const isTodayInView =
-            startValue.year() === thisYear && startValue.month() === thisMonth ||
-            endValue.year() === thisYear && endValue.month() === thisMonth;
+      startValue.year() === thisYear && startValue.month() === thisMonth ||
+      endValue.year() === thisYear && endValue.month() === thisMonth;
     const nextMonthOfStart = startValue.clone().add(1, 'months');
     const isClosestMonths = nextMonthOfStart.year() === endValue.year() &&
-            nextMonthOfStart.month() === endValue.month();
+      nextMonthOfStart.month() === endValue.month();
+
+    // console.warn('Render:', selectedValue.map(t => t.format('YYYY-MM-DD')).join(', '));
+    // console.log('start:', startValue.format('YYYY-MM-DD'));
+    // console.log('end:', endValue.format('YYYY-MM-DD'));
+
+    const extraFooter = props.renderFooter();
+
     return (
       <div
         ref={this.saveRoot}
         className={classes}
         style={props.style}
         tabIndex="0"
+        onKeyDown={this.onKeyDown}
       >
         {props.renderSidebar()}
         <div className={`${prefixCls}-panel`}>
           {showClear && selectedValue[0] && selectedValue[1] ?
             <a
-              className={`${prefixCls}-clear-btn`}
               role="button"
               title={locale.clear}
               onClick={this.clear}
-            /> : null}
+            >
+              {clearIcon || <span className={`${prefixCls}-clear-btn`} />}
+            </a> : null}
           <div
             className={`${prefixCls}-date-panel`}
             onMouseLeave={type !== 'both' ? this.onDatePanelLeave : undefined}
@@ -547,10 +692,12 @@ const RangeCalendar = createReactClass({
               onInputSelect={this.onStartInputSelect}
               onValueChange={this.onStartValueChange}
               onPanelChange={this.onStartPanelChange}
+              showDateInput={this.props.showDateInput}
               timePicker={timePicker}
               showTimePicker={showTimePicker}
               enablePrev
               enableNext={!isClosestMonths || this.isMonthYearPanelShow(mode[1])}
+              clearIcon={clearIcon}
             />
             <span className={`${prefixCls}-range-middle`}>~</span>
             <CalendarPart
@@ -566,18 +713,20 @@ const RangeCalendar = createReactClass({
               onInputSelect={this.onEndInputSelect}
               onValueChange={this.onEndValueChange}
               onPanelChange={this.onEndPanelChange}
+              showDateInput={this.props.showDateInput}
               timePicker={timePicker}
               showTimePicker={showTimePicker}
               disabledTime={this.disabledEndTime}
               disabledMonth={this.disabledEndMonth}
               enablePrev={!isClosestMonths || this.isMonthYearPanelShow(mode[0])}
               enableNext
+              clearIcon={clearIcon}
             />
           </div>
           <div className={cls}>
-            {props.renderFooter()}
-            {showToday || props.timePicker || showOkButton ? (
+            {(showToday || props.timePicker || showOkButton || extraFooter) ? (
               <div className={`${prefixCls}-footer-btn`}>
+                {extraFooter}
                 {showToday ? (
                   <TodayButton
                     {...props}

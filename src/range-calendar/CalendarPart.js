@@ -14,6 +14,7 @@ const CalendarPart = createReactClass({
     selectedValue: PropTypes.any,
     direction: PropTypes.any,
     locale: PropTypes.any,
+    showDateInput: PropTypes.bool,
     showTimePicker: PropTypes.bool,
     format: PropTypes.any,
     placeholder: PropTypes.any,
@@ -24,6 +25,7 @@ const CalendarPart = createReactClass({
     timePickerDisabledTime: PropTypes.object,
     enableNext: PropTypes.any,
     enablePrev: PropTypes.any,
+    clearIcon: PropTypes.node,
   },
   render() {
     const props = this.props;
@@ -38,6 +40,7 @@ const CalendarPart = createReactClass({
       disabledDate, timePicker, disabledTime,
       timePickerDisabledTime, showTimePicker,
       onInputSelect, enablePrev, enableNext,
+      clearIcon,
     } = props;
     const shouldShowTimePicker = showTimePicker && timePicker;
     const disabledTimeConfig = shouldShowTimePicker && disabledTime ?
@@ -62,21 +65,28 @@ const CalendarPart = createReactClass({
         defaultOpenValue: value,
         value: selectedValue[index],
       });
+
+    const dateInputElement = props.showDateInput &&
+      <DateInput
+        format={format}
+        locale={locale}
+        prefixCls={prefixCls}
+        timePicker={timePicker}
+        disabledDate={disabledDate}
+        placeholder={placeholder}
+        disabledTime={disabledTime}
+        value={value}
+        showClear={false}
+        selectedValue={selectedValue[index]}
+        onChange={onInputSelect}
+        clearIcon={clearIcon}
+      />;
+
     return (
-      <div className={`${rangeClassName}-part ${rangeClassName}-${direction}`}>
-        <DateInput
-          format={format}
-          locale={locale}
-          prefixCls={prefixCls}
-          timePicker={timePicker}
-          disabledDate={disabledDate}
-          placeholder={placeholder}
-          disabledTime={disabledTime}
-          value={value}
-          showClear={false}
-          selectedValue={selectedValue[index]}
-          onChange={onInputSelect}
-        />
+      <div
+        className={`${rangeClassName}-part ${rangeClassName}-${direction}`}
+      >
+        {dateInputElement}
         <div style={{ outline: 'none' }}>
           <CalendarHeader
             {...newProps}

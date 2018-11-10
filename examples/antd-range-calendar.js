@@ -186,6 +186,7 @@ ReactDOM.render(
         disabledDate={disabledDate}
         timePicker={timePickerElement}
         disabledTime={disabledTime}
+        renderFooter={() => <span>extra footer</span>}
       />
     </div>
     <br />

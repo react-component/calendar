@@ -2,6 +2,7 @@
 import React from 'react';
 import moment from 'moment';
 import { mount, render } from 'enzyme';
+import keyCode from 'rc-util/lib/KeyCode';
 import TimePickerPanel from 'rc-time-picker/lib/Panel';
 import RangeCalendar from '../src/RangeCalendar';
 
@@ -485,5 +486,147 @@ describe('RangeCalendar', () => {
       const updatedValue = wrapper.state('value');
       expect(updatedValue[0].add(1, 'month').isSame(updatedValue[1], 'month')).toBe(true);
     });
+  });
+
+  it('can hide date inputs with showDateInput={false}', () => {
+    const wrapper = render(<RangeCalendar showDateInput={false} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  describe('onInputSelect', () => {
+    it('trigger when date is valid', () => {
+      const handleInputSelect = jest.fn();
+      const wrapper = mount(<RangeCalendar format={format} onInputSelect={handleInputSelect} />);
+      wrapper.find('input').first().simulate('change', { target: { value: '2013-01-01' } });
+      expect(
+        handleInputSelect.mock.calls[0][0].length
+      ).toBe(1);
+      expect(
+        handleInputSelect.mock.calls[0][0][0].isSame('2013-01-01')
+      ).toBe(true);
+    });
+
+    it('not trigger when date is not valid', () => {
+      const handleInputSelect = jest.fn();
+      const wrapper = mount(<RangeCalendar format={format} onInputSelect={handleInputSelect} />);
+      wrapper.find('input').first().simulate('change', { target: { value: '2013-01-0' } });
+      expect(handleInputSelect).not.toBeCalled();
+    });
+  });
+
+  it('controlled hoverValue changes', () => {
+    const start = moment();
+    const end = moment().add(2, 'day');
+    const wrapper = mount(<RangeCalendar hoverValue={[start, end]} />);
+    const nextEnd = end.clone().add(2, 'day');
+    wrapper.setProps({ hoverValue: [start, nextEnd] });
+    expect(wrapper.state().hoverValue[1]).toBe(nextEnd);
+  });
+
+  it('controlled selectedValue changes', () => {
+    const start = moment();
+    const end = moment().add(2, 'day');
+    const wrapper = mount(<RangeCalendar selectedValue={[start, end]} />);
+    const nextEnd = end.clone().add(2, 'day');
+    wrapper.setProps({ selectedValue: [start, nextEnd] });
+    expect(wrapper.state().selectedValue[1]).toBe(nextEnd);
+    expect(wrapper.state().prevSelectedValue[1]).toBe(nextEnd);
+  });
+
+  describe('onHoverChange', () => {
+    let handleHoverChange;
+    let start;
+    let end;
+    let wrapper;
+
+    beforeEach(() => {
+      handleHoverChange = jest.fn();
+      start = moment();
+      end = moment().add(2, 'day');
+      wrapper = mount(<RangeCalendar type="start" onHoverChange={handleHoverChange} selectedValue={[start, end]} />);
+    });
+
+    it('mouseEnter', () => {
+      wrapper.find('.rc-calendar-date-panel').simulate('mouseEnter');
+      expect(handleHoverChange).toHaveBeenCalledWith([start, end]);
+    });
+
+    it('mouseHover', () => {
+      wrapper.find('.rc-calendar-date-panel').simulate('mouseLeave');
+      expect(handleHoverChange).toHaveBeenCalledWith([]);
+    });
+  });
+
+  it('key control', () => {
+    const onChange = jest.fn();
+    const onSelect = jest.fn();
+    const wrapper = mount(
+      <RangeCalendar
+        defaultSelectedValue={[moment('2000-09-03', format), moment('2000-11-28', format)]}
+        onChange={onChange}
+        onSelect={onSelect}
+      />
+    );
+    expect(wrapper.render()).toMatchSnapshot();
+
+    const keyDown = (code, info) => {
+      wrapper.find('.rc-calendar').simulate('keyDown', {
+        ...info,
+        keyCode: code,
+      });
+    };
+
+    const keySimulateCheck = (code, month, date, info) => {
+      keyDown(code, info);
+
+      expect(wrapper.find('.rc-calendar-range-left .rc-calendar-month-select').text())
+        .toEqual(String(month));
+      expect(wrapper.find('.rc-calendar-selected-start-date .rc-calendar-date').text())
+        .toEqual(String(date));
+    };
+
+    // 09-03 down 09-10
+    keySimulateCheck(keyCode.DOWN, 'Sep', 10);
+
+    // 09-03 left 09-09
+    keySimulateCheck(keyCode.LEFT, 'Sep', 9);
+
+    // 09-09 right 09-10
+    keySimulateCheck(keyCode.RIGHT, 'Sep', 10);
+
+    // 09-10 home 09-01
+    keySimulateCheck(keyCode.HOME, 'Sep', 1);
+
+    // 09-10 end 09-30
+    keySimulateCheck(keyCode.END, 'Sep', 30);
+
+    // 09-30 page up 08-30
+    keySimulateCheck(keyCode.PAGE_UP, 'Aug', 30);
+
+    // 08-30 page down 09-30
+    keySimulateCheck(keyCode.PAGE_DOWN, 'Sep', 30);
+
+    keyDown(keyCode.ENTER);
+
+    expect(onChange.mock.calls[0][0][0].format(format)).toEqual('2000-09-30');
+
+    // 2000-09-30 ctrl+right 2001-09-30
+    keySimulateCheck(keyCode.RIGHT, 'Sep', 30, {
+      ctrlKey: true,
+    });
+    expect(wrapper.find('.rc-calendar-range-right .rc-calendar-year-select').text())
+      .toEqual('2001');
+
+    // 2001-09-30 ctrl+right 2000-09-30
+    keySimulateCheck(keyCode.LEFT, 'Sep', 30, {
+      ctrlKey: true,
+    });
+
+    keyDown(keyCode.ENTER);
+    expect(onChange.mock.calls[1][0][0].format(format)).toEqual('2000-09-30');
+    expect(onChange.mock.calls[1][0][1].format(format)).toEqual('2000-09-30');
+
+    expect(onSelect.mock.calls[0][0][0].format(format)).toEqual('2000-09-30');
+    expect(onSelect.mock.calls[0][0][1].format(format)).toEqual('2000-09-30');
   });
 });

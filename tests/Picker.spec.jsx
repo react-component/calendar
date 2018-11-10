@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { mount } from 'enzyme';
+import keyCode from 'rc-util/lib/KeyCode';
 import Calendar from '../index';
 import DatePicker from '../src/Picker';
 import RangeCalendar from '../src/RangeCalendar';
@@ -33,17 +34,21 @@ describe('DatePicker', () => {
   }
 
   function renderPicker(props) {
-    return mount(<DatePicker
-      calendar={
-        <Calendar
-          locale={CalendarLocale}
-        />
-      }
-      defaultValue={VALUE}
-      {...props}
-    >
-      {renderOne}
-    </DatePicker>);
+    return mount(
+      <DatePicker
+        calendar={
+          <Calendar
+            locale={CalendarLocale}
+            showOk
+            showClear
+          />
+        }
+        defaultValue={VALUE}
+        {...props}
+      >
+        {renderOne}
+      </DatePicker>
+    );
   }
 
   function renderRangePicker(props) {
@@ -124,5 +129,59 @@ describe('DatePicker', () => {
       expect(document.querySelectorAll('.rc-calendar-picker').length).toEqual(0);
       expect(picker.calendarInstance).toBeFalsy();
     });
+  });
+
+  it('controlled value', () => {
+    const value = moment().add(1, 'day');
+    const picker = renderPicker({ value });
+    expect(picker.state().value).toBe(value);
+    const nextValue = value.clone().add(1, 'day');
+    picker.setProps({ value: nextValue });
+    expect(picker.state().value).toBe(nextValue);
+  });
+
+  it('controlled open', () => {
+    const picker = renderPicker({ open: false });
+    expect(picker.state().open).toBe(false);
+    picker.setProps({ open: true });
+    expect(picker.state().open).toBe(true);
+  });
+
+  it('triggers onOpenChange', () => {
+    const handleOpenChange = jest.fn();
+    const picker = renderPicker({ onOpenChange: handleOpenChange });
+    picker.find('.rc-calendar-picker-input').simulate('click');
+    expect(handleOpenChange).toHaveBeenCalledWith(true);
+  });
+
+  it('close by ESC key', () => {
+    const picker = renderPicker();
+    picker.find('.rc-calendar-picker-input').simulate('click');
+    picker.find('.rc-calendar').simulate('keyDown', {
+      keyCode: keyCode.ESC,
+    });
+    expect(picker.state().open).toBe(false);
+  });
+
+  it('open by DOWN key', () => {
+    const picker = renderPicker();
+    picker.find('.rc-calendar-picker-input').simulate('keyDown', {
+      keyCode: keyCode.DOWN,
+    });
+    expect(picker.state().open).toBe(true);
+  });
+
+  it('close on ok', () => {
+    const picker = renderPicker({ value: moment() });
+    picker.find('.rc-calendar-picker-input').simulate('click');
+    picker.find('.rc-calendar-ok-btn').simulate('click');
+    expect(picker.state().open).toBe(false);
+  });
+
+  it('close on clear', () => {
+    const picker = renderPicker({ value: moment() });
+    picker.find('.rc-calendar-picker-input').simulate('click');
+    picker.find('.rc-calendar-clear-btn').simulate('click');
+    expect(picker.state().open).toBe(false);
   });
 });
