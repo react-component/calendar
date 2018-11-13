@@ -10,7 +10,10 @@ import OkButton from './calendar/OkButton';
 import TimePickerButton from './calendar/TimePickerButton';
 import CommonMixin from './mixin/CommonMixin';
 import { syncTime, getTodayTime, isAllowedDate } from './util';
-import { goTime, goStartMonth, goEndMonth, includesTime } from './util/toTime';
+import {
+  goTime, goStartMonth,
+  goEndMonth, includesTime,
+  goStartYear, goEndYear } from './util/toTime';
 
 function noop() { }
 
@@ -31,9 +34,19 @@ function isArraysEqual(a, b) {
   return true;
 }
 
-function getValueFromSelectedValue(selectedValue) {
+function getDefaultUnit(showPanel) {
+  const unitMap = {
+    date: 'months',
+    month: 'years',
+  };
+  return unitMap[showPanel] || 'months';
+}
+
+
+function getValueFromSelectedValue(selectedValue, showPanel) {
   const [start, end] = selectedValue;
-  const newEnd = end && end.isSame(start, 'month') ? end.clone().add(1, 'month') : end;
+  const newEnd = end && end.isSame(start, getDefaultUnit(showPanel)) ?
+    end.clone().add(1, getDefaultUnit(showPanel)) : end;
   return [start, newEnd];
 }
 
@@ -41,10 +54,11 @@ function normalizeAnchor(props, init) {
   const selectedValue = props.selectedValue || init && props.defaultSelectedValue;
   const value = props.value || init && props.defaultValue;
   const normalizedValue = value ?
-    getValueFromSelectedValue(value) :
-    getValueFromSelectedValue(selectedValue);
+    getValueFromSelectedValue(value, props.showPanel) :
+    getValueFromSelectedValue(selectedValue, props.showPanel);
+  const addUnit = getDefaultUnit(props.showPanel);
   return !isEmptyArray(normalizedValue) ?
-    normalizedValue : init && [moment(), moment().add(1, 'months')];
+    normalizedValue : init && [moment(), moment().add(1, addUnit)];
 }
 
 function generateOptions(length, extraOptionGen) {
@@ -100,6 +114,7 @@ const RangeCalendar = createReactClass({
     disabledDate: PropTypes.func,
     disabledTime: PropTypes.func,
     clearIcon: PropTypes.node,
+    showPanel: PropTypes.oneOf(['date', 'month']),
   },
 
   mixins: [CommonMixin],
@@ -115,6 +130,7 @@ const RangeCalendar = createReactClass({
       onInputSelect: noop,
       showToday: true,
       showDateInput: true,
+      showPanel: 'date',
     };
   },
 
@@ -122,6 +138,8 @@ const RangeCalendar = createReactClass({
     const props = this.props;
     const selectedValue = props.selectedValue || props.defaultSelectedValue;
     const value = normalizeAnchor(props, 1);
+    const defaultMode = (props.showPanel && props.showPanel === 'month') ?
+      ['month', 'month'] : ['date', 'date'];
     return {
       selectedValue,
       prevSelectedValue: selectedValue,
@@ -129,7 +147,7 @@ const RangeCalendar = createReactClass({
       hoverValue: props.hoverValue || [],
       value,
       showTimePicker: false,
-      mode: props.mode || ['date', 'date'],
+      mode: props.mode || defaultMode,
     };
   },
 
@@ -212,7 +230,7 @@ const RangeCalendar = createReactClass({
       selectedValue, hoverValue, firstSelectedValue,
       value, // Value is used for `CalendarPart` current page
     } = this.state;
-    const { onKeyDown, disabledDate } = this.props;
+    const { onKeyDown, disabledDate, showPanel } = this.props;
 
     // Update last time of the picker
     const updateHoverPoint = (func) => {
@@ -241,21 +259,23 @@ const RangeCalendar = createReactClass({
 
       // Find origin hover time on value index
       if (nextHoverValue.length >= 2) {
-        const miss = nextHoverValue.some(ht => !includesTime(value, ht, 'month'));
+        const miss = nextHoverValue.some(ht => !includesTime(value, ht, getDefaultUnit(showPanel)));
         if (miss) {
           const newValue = nextHoverValue.slice()
             .sort((t1, t2) => t1.valueOf() - t2.valueOf());
-          if (newValue[0].isSame(newValue[1], 'month')) {
-            newValue[1] = newValue[0].clone().add(1, 'month');
+          if (newValue[0].isSame(newValue[1], getDefaultUnit(showPanel))) {
+            newValue[1] = newValue[0].clone().add(1, getDefaultUnit(showPanel));
           }
           this.fireValueChange(newValue);
         }
       } else if (nextHoverValue.length === 1) {
         // If only one value, let's keep the origin panel
-        let oriValueIndex = value.findIndex(time => time.isSame(currentHoverTime, 'month'));
+        let oriValueIndex = value.findIndex(time => {
+          time.isSame(currentHoverTime, getDefaultUnit(showPanel));
+        });
         if (oriValueIndex === -1) oriValueIndex = 0;
 
-        if (value.every(time => !time.isSame(nextHoverTime, 'month'))) {
+        if (value.every(time => !time.isSame(nextHoverTime, getDefaultUnit(showPanel)))) {
           const newValue = value.slice();
           newValue[oriValueIndex] = nextHoverTime.clone();
           this.fireValueChange(newValue);
@@ -269,36 +289,68 @@ const RangeCalendar = createReactClass({
 
     switch (keyCode) {
       case KeyCode.DOWN:
-        updateHoverPoint((time) => goTime(time, 1, 'weeks'));
+        if (showPanel === 'month') {
+          updateHoverPoint((time) => goTime(time, 3, 'month'));
+        } else {
+          updateHoverPoint((time) => goTime(time, 1, 'weeks'));
+        }
         return;
       case KeyCode.UP:
-        updateHoverPoint((time) => goTime(time, -1, 'weeks'));
+        if (showPanel === 'month') {
+          updateHoverPoint((time) => goTime(time, -3, 'month'));
+        } else {
+          updateHoverPoint((time) => goTime(time, -1, 'weeks'));
+        }
         return;
       case KeyCode.LEFT:
         if (ctrlKey) {
           updateHoverPoint((time) => goTime(time, -1, 'years'));
         } else {
-          updateHoverPoint((time) => goTime(time, -1, 'days'));
+          if (showPanel === 'month') {
+            updateHoverPoint((time) => goTime(time, -1, 'month'));
+          } else {
+            updateHoverPoint((time) => goTime(time, -1, 'days'));
+          }
         }
         return;
       case KeyCode.RIGHT:
         if (ctrlKey) {
           updateHoverPoint((time) => goTime(time, 1, 'years'));
         } else {
-          updateHoverPoint((time) => goTime(time, 1, 'days'));
+          if (showPanel === 'month') {
+            updateHoverPoint((time) => goTime(time, 1, 'month'));
+          } else {
+            updateHoverPoint((time) => goTime(time, 1, 'days'));
+          }
         }
         return;
       case KeyCode.HOME:
-        updateHoverPoint((time) => goStartMonth(time));
+        if (showPanel === 'month') {
+          updateHoverPoint((time) => goStartYear(time));
+        } else {
+          updateHoverPoint((time) => goStartMonth(time));
+        }
         return;
       case KeyCode.END:
-        updateHoverPoint((time) => goEndMonth(time));
+        if (showPanel === 'month') {
+          updateHoverPoint((time) => goEndYear(time));
+        } else {
+          updateHoverPoint((time) => goEndMonth(time));
+        }
         return;
       case KeyCode.PAGE_DOWN:
-        updateHoverPoint((time) => goTime(time, 1, 'month'));
+        if (showPanel === 'month') {
+          updateHoverPoint((time) => goTime(time, 1, 'year'));
+        } else {
+          updateHoverPoint((time) => goTime(time, 1, 'month'));
+        }
         return;
       case KeyCode.PAGE_UP:
-        updateHoverPoint((time) => goTime(time, -1, 'month'));
+        if (showPanel === 'month') {
+          updateHoverPoint((time) => goTime(time, -1, 'year'));
+        } else {
+          updateHoverPoint((time) => goTime(time, -1, 'month'));
+        }
         return;
       case KeyCode.ENTER: {
         let lastValue;
@@ -435,7 +487,8 @@ const RangeCalendar = createReactClass({
 
   getEndValue() {
     const { value, selectedValue, showTimePicker } = this.state;
-    const endValue = value[1] ? value[1].clone() : value[0].clone().add(1, 'month');
+    const endValue = value[1] ? value[1].clone() :
+      value[0].clone().add(1, getDefaultUnit(this.props.showPanel));
     // keep selectedTime when select date
     if (selectedValue[1] && this.props.timePicker) {
       syncTime(selectedValue[1], endValue);
@@ -489,7 +542,10 @@ const RangeCalendar = createReactClass({
       isAllowedDate(selectedValue[1], this.props.disabledDate, this.disabledEndTime);
   },
 
-  isMonthYearPanelShow(mode) {
+  isMonthYearPanelShow(mode, showPanel) {
+    if (showPanel === 'month') {
+      return ['year', 'decade'].indexOf(mode) > -1;
+    }
     return ['month', 'year', 'decade'].indexOf(mode) > -1;
   },
 
@@ -527,13 +583,13 @@ const RangeCalendar = createReactClass({
     // 尚未选择过时间，直接输入的话
     if (!this.state.selectedValue[0] || !this.state.selectedValue[1]) {
       const startValue = selectedValue[0] || moment();
-      const endValue = selectedValue[1] || startValue.clone().add(1, 'months');
+      const endValue = selectedValue[1] ||
+        startValue.clone().add(1, getDefaultUnit(this.props.showPanel));
       this.setState({
         selectedValue,
-        value: getValueFromSelectedValue([startValue, endValue]),
+        value: getValueFromSelectedValue([startValue, endValue], this.props.showPanel),
       });
     }
-
     if (selectedValue[0] && !selectedValue[1]) {
       this.setState({ firstSelectedValue: selectedValue[0] });
       this.fireHoverValueChange(selectedValue.concat());
@@ -552,6 +608,12 @@ const RangeCalendar = createReactClass({
   fireValueChange(value) {
     const props = this.props;
     if (!('value' in props)) {
+      // 月选择器年份不能相同，由于十年选择器没有限制，会返回年份段第一个年份，需要判断后加一年
+      if (value[0] && value[1]) {
+        if (props.showPanel === 'month' && value[1].isSame(value[0], 'year')) {
+          value[1].add(1, 'year');
+        }
+      }
       this.setState({
         value,
       });
@@ -589,13 +651,22 @@ const RangeCalendar = createReactClass({
     const { value } = this.state;
     return month.isSameOrBefore(value[0], 'month');
   },
+  disabledStartYear(year) {
+    const { value } = this.state;
+    return year.isSameOrAfter(value[1], 'year');
+  },
+
+  disabledEndYear(year) {
+    const { value } = this.state;
+    return year.isSameOrBefore(value[0], 'year');
+  },
 
   render() {
     const { props, state } = this;
     const {
       prefixCls, dateInputPlaceholder,
       timePicker, showOk, locale, showClear,
-      showToday, type, clearIcon,
+      showToday, type, clearIcon, showPanel,
     } = props;
     const {
       hoverValue,
@@ -645,9 +716,16 @@ const RangeCalendar = createReactClass({
     const isTodayInView =
       startValue.year() === thisYear && startValue.month() === thisMonth ||
       endValue.year() === thisYear && endValue.month() === thisMonth;
-    const nextMonthOfStart = startValue.clone().add(1, 'months');
-    const isClosestMonths = nextMonthOfStart.year() === endValue.year() &&
-      nextMonthOfStart.month() === endValue.month();
+
+    const nextMonthOfStart = startValue.clone().add(1, getDefaultUnit(showPanel));
+    let isClosestMonths = false;
+    if (showPanel === 'date') {
+      isClosestMonths = nextMonthOfStart.year() === endValue.year() &&
+        nextMonthOfStart.month() === endValue.month();
+    } else if (showPanel === 'month') {
+      isClosestMonths = nextMonthOfStart.year() === endValue.year();
+    }
+
 
     // console.warn('Render:', selectedValue.map(t => t.format('YYYY-MM-DD')).join(', '));
     // console.log('start:', startValue.format('YYYY-MM-DD'));
@@ -685,6 +763,7 @@ const RangeCalendar = createReactClass({
               direction="left"
               disabledTime={this.disabledStartTime}
               disabledMonth={this.disabledStartMonth}
+              disabledYear={showPanel === 'month' ? this.disabledStartYear : null}
               format={this.getFormat()}
               value={startValue}
               mode={mode[0]}
@@ -696,8 +775,9 @@ const RangeCalendar = createReactClass({
               timePicker={timePicker}
               showTimePicker={showTimePicker}
               enablePrev
-              enableNext={!isClosestMonths || this.isMonthYearPanelShow(mode[1])}
+              enableNext={!isClosestMonths || this.isMonthYearPanelShow(mode[1], showPanel)}
               clearIcon={clearIcon}
+              showPanel={showPanel}
             />
             <span className={`${prefixCls}-range-middle`}>~</span>
             <CalendarPart
@@ -718,9 +798,11 @@ const RangeCalendar = createReactClass({
               showTimePicker={showTimePicker}
               disabledTime={this.disabledEndTime}
               disabledMonth={this.disabledEndMonth}
-              enablePrev={!isClosestMonths || this.isMonthYearPanelShow(mode[0])}
+              disabledYear={showPanel === 'month' ? this.disabledEndYear : null}
+              enablePrev={!isClosestMonths || this.isMonthYearPanelShow(mode[0], showPanel)}
               enableNext
               clearIcon={clearIcon}
+              showPanel={showPanel}
             />
           </div>
           <div className={cls}>

@@ -67,19 +67,39 @@ class MonthTable extends Component {
     const today = getTodayTime(value);
     const months = this.months();
     const currentMonth = value.month();
-    const { prefixCls, locale, contentRender, cellRender } = props;
+    const { prefixCls, locale, contentRender, cellRender, hoverValue, selectedValue } = props;
+    const rangeValue = (hoverValue && hoverValue.length) ? hoverValue : selectedValue;
     const monthsEls = months.map((month, index) => {
       const tds = month.map(monthData => {
         let disabled = false;
+        const testValue = value.clone().month(monthData.value);
         if (props.disabledDate) {
-          const testValue = value.clone();
-          testValue.month(monthData.value);
           disabled = props.disabledDate(testValue);
         }
+
+        let isSelected = false;
+        let isInRange = false;
+        if (rangeValue && Array.isArray(rangeValue)) {
+          const startValue = rangeValue[0];
+          const endValue = rangeValue[1];
+
+          if (startValue && endValue) {
+            isSelected = testValue.isSame(startValue, 'month') ||
+              testValue.isSame(endValue, 'month');
+            isInRange = testValue.isAfter(startValue, 'month') &&
+              testValue.isBefore(endValue, 'month');
+          } else {
+            isSelected = testValue.isSame(startValue, 'month');
+          }
+        } else {
+          isSelected = monthData.value === currentMonth;
+        }
+
         const classNameMap = {
           [`${prefixCls}-cell`]: 1,
+          [`${prefixCls}-in-range-cell`]: isInRange,
           [`${prefixCls}-cell-disabled`]: disabled,
-          [`${prefixCls}-selected-cell`]: monthData.value === currentMonth,
+          [`${prefixCls}-selected-cell`]: isSelected,
           [`${prefixCls}-current-cell`]: today.year() === value.year() &&
           monthData.value === today.month(),
         };
@@ -103,6 +123,7 @@ class MonthTable extends Component {
             </a>
           );
         }
+        const firstDay = value.clone().month(monthData.value).startOf('day');
         return (
           <td
             role="gridcell"
@@ -110,6 +131,8 @@ class MonthTable extends Component {
             onClick={disabled ? null : chooseMonth.bind(this, monthData.value)}
             title={monthData.title}
             className={classnames(classNameMap)}
+            onMouseEnter={disabled ? undefined :
+              (props.onMonthHover && props.onMonthHover.bind(null, firstDay) || undefined)}
           >
             {cellEl}
           </td>);

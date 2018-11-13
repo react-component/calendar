@@ -105,7 +105,18 @@
     cursor: pointer;
   }
 }
-
+.@{prefixClass}-year-panel-cell-disabled {
+  .@{prefixClass}-year-panel-year{
+    user-select: none;
+    -webkit-user-select: none;
+    color: rgba(0, 0, 0, 0.25);
+    &:hover {
+      background: white;
+      color: rgba(0, 0, 0, 0.25);
+      cursor: not-allowed;
+    }
+  }
+}
 .@{prefixClass}-year-panel-selected-cell .@{prefixClass}-year-panel-year {
   background: #3fc7fa;
   color: #fff;

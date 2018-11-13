@@ -6,6 +6,14 @@ export function goEndMonth(time) {
   return time.clone().endOf('month');
 }
 
+export function goStartYear(time) {
+  return time.clone().startOf('year');
+}
+
+export function goEndYear(time) {
+  return time.clone().endOf('year');
+}
+
 export function goTime(time, direction, unit) {
   return time.clone().add(direction, unit);
 }

@@ -187,6 +187,24 @@ ReactDOM.render(
         timePicker={timePickerElement}
         disabledTime={disabledTime}
         renderFooter={() => <span>extra footer</span>}
+        defaultValue={[now, now.clone().add(1, 'months')]}
+      />
+    </div>
+    <br />
+    <h2>calendar month</h2>
+    <div style={{ margin: 10 }}>
+      <RangeCalendar
+        showPanel="month"
+        showTime={false}
+        showToday={false}
+        locale={cn ? zhCN : enUS}
+        showOk={false}
+        showClear
+        format={formatStr}
+        onChange={onStandaloneChange}
+        onSelect={onStandaloneSelect}
+        disabledTime={disabledTime}
+        renderFooter={() => <span>extra footer</span>}
       />
     </div>
     <br />
