@@ -28,7 +28,6 @@ const DateInput = createReactClass({
       str: formatDate(selectedValue, this.props.format),
       invalid: false,
       hasFocus: false,
-      parsedFormat: undefined,
     };
   },
 
