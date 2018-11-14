@@ -184,4 +184,13 @@ describe('DatePicker', () => {
     picker.find('.rc-calendar-clear-btn').simulate('click');
     expect(picker.state().open).toBe(false);
   });
+
+  it('auto focuses the calendar input when opening', () => {
+    jest.useFakeTimers();
+    const picker = renderPicker({ value: moment() });
+    picker.find('.rc-calendar-picker-input').simulate('click');
+    jest.runAllTimers();
+    expect(document.activeElement).toBeDefined();
+    expect(document.activeElement.classList).toContain('rc-calendar-input');
+  });
 });

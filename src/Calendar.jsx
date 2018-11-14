@@ -192,6 +192,10 @@ const Calendar = createReactClass({
     );
   },
 
+  saveDateInput(dateInput) {
+    this.saveFocusElement(dateInput ? dateInput.dateInputInstance : undefined);
+  },
+
   render() {
     const { props, state } = this;
     const {
@@ -240,6 +244,7 @@ const Calendar = createReactClass({
         selectedValue={selectedValue}
         onChange={this.onDateInputChange}
         clearIcon={clearIcon}
+        ref={this.saveDateInput}
       />
     ) : null;
     const children = [

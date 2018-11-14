@@ -53,9 +53,15 @@ export default {
   },
 
   focus() {
-    if (this.rootInstance) {
+    if (this.focusElement) {
+      this.focusElement.focus();
+    } else if (this.rootInstance) {
       this.rootInstance.focus();
     }
+  },
+
+  saveFocusElement(focusElement) {
+    this.focusElement = focusElement;
   },
 
   saveRoot(root) {
