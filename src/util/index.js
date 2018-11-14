@@ -89,3 +89,15 @@ export function isAllowedDate(value, disabledDate, disabledTime) {
   }
   return true;
 }
+
+export function formatDate(value, format) {
+  if (!value) {
+    return '';
+  }
+
+  if (Array.isArray(format)) {
+    format = format.length ? format[0] : undefined;
+  }
+
+  return value.format(format);
+}

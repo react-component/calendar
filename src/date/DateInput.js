@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import { formatDate } from '../util';
 
 const DateInput = createReactClass({
   propTypes: {
@@ -10,7 +11,7 @@ const DateInput = createReactClass({
     timePicker: PropTypes.object,
     value: PropTypes.object,
     disabledTime: PropTypes.any,
-    format: PropTypes.string,
+    format: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
     locale: PropTypes.object,
     disabledDate: PropTypes.func,
     onChange: PropTypes.func,
@@ -24,8 +25,10 @@ const DateInput = createReactClass({
   getInitialState() {
     const selectedValue = this.props.selectedValue;
     return {
-      str: selectedValue && selectedValue.format(this.props.format) || '',
+      str: formatDate(selectedValue, this.props.format),
       invalid: false,
+      hasFocus: false,
+      parsedFormat: undefined,
     };
   },
 
@@ -34,10 +37,12 @@ const DateInput = createReactClass({
     this.cachedSelectionEnd = this.dateInputInstance.selectionEnd;
     // when popup show, click body will call this, bug!
     const selectedValue = nextProps.selectedValue;
-    this.setState({
-      str: selectedValue && selectedValue.format(nextProps.format) || '',
-      invalid: false,
-    });
+    if (!this.state.hasFocus) {
+      this.setState({
+        str: formatDate(selectedValue, nextProps.format),
+        invalid: false,
+      });
+    }
   },
 
   componentDidUpdate() {
@@ -115,6 +120,14 @@ const DateInput = createReactClass({
     this.dateInputInstance = dateInput;
   },
 
+  onFocus() {
+    this.setState({ hasFocus: true });
+  },
+
+  onBlur() {
+    this.setState({ hasFocus: false, str: formatDate(this.props.value, this.props.format) });
+  },
+
   render() {
     const props = this.props;
     const { invalid, str } = this.state;
@@ -130,6 +143,8 @@ const DateInput = createReactClass({
             disabled={props.disabled}
             placeholder={placeholder}
             onChange={this.onInputChange}
+            onFocus={this.onFocus}
+            onBlur={this.onBlur}
           />
         </div>
         {props.showClear ? (
