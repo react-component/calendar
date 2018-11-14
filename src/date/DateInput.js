@@ -124,7 +124,10 @@ const DateInput = createReactClass({
   },
 
   onBlur() {
-    this.setState({ hasFocus: false, str: formatDate(this.props.value, this.props.format) });
+    this.setState((prevState, prevProps) => ({
+      hasFocus: false,
+      str: formatDate(prevProps.value, prevProps.format),
+    }));
   },
 
   render() {
