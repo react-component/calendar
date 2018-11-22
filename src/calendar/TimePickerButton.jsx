@@ -3,10 +3,10 @@ import classnames from 'classnames';
 
 export default function TimePickerButton({
   prefixCls, locale, showTimePicker,
-  onOpenTimePicker, onCloseTimePicker, timePickerDisabled }) {
+  onOpenTimePicker, onCloseTimePicker, timePickerDisabled, selectedValue }) {
   const className = classnames({
     [`${prefixCls}-time-picker-btn`]: true,
-    [`${prefixCls}-time-picker-btn-disabled`]: timePickerDisabled,
+    [`${prefixCls}-time-picker-btn-disabled`]: !selectedValue || timePickerDisabled,
   });
   let onClick = null;
   if (!timePickerDisabled) {
