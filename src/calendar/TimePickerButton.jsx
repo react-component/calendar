@@ -9,7 +9,7 @@ export default function TimePickerButton({
     [`${prefixCls}-time-picker-btn-disabled`]: !selectedValue || timePickerDisabled,
   });
   let onClick = null;
-  if (!timePickerDisabled) {
+  if (!timePickerDisabled && selectedValue) {
     onClick = showTimePicker ? onCloseTimePicker : onOpenTimePicker;
   }
   return (

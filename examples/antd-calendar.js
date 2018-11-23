@@ -36,7 +36,6 @@ defaultCalendarValue.add(-1, 'month');
 const timePickerElement = <TimePickerPanel defaultValue={moment('00:00:00', 'HH:mm:ss')} />;
 
 function disabledTime(date) {
-  console.log('disabledTime', date);
   if (date && (date.date() === 15)) {
     return {
       disabledHours() {
@@ -57,11 +56,7 @@ function disabledDate(current) {
     // allow empty select
     return false;
   }
-  const date = moment();
-  date.hour(0);
-  date.minute(0);
-  date.second(0);
-  return current.valueOf() < date.valueOf();  // can not select days before today
+  return current && current < moment().endOf('day');
 }
 
 class Demo extends React.Component {
@@ -223,7 +218,7 @@ ReactDOM.render((<div
       />
     </div>
     <div style={{ float: 'left', width: 300 }}>
-      <Demo defaultValue={now} />
+      <Demo />
     </div>
     <div style={{ float: 'right', width: 300 }}>
       <Demo defaultCalendarValue={defaultCalendarValue} />
