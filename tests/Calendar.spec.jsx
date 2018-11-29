@@ -87,7 +87,7 @@ describe('Calendar', () => {
     });
     it('timePicker date have no changes when hover', () => {
       const timePicker = <TimePickerPanel defaultValue={moment('00:00:00', 'HH:mm:ss')} />;
-      const wrapper = mount(<Calendar timePicker={timePicker} />);
+      const wrapper = mount(<Calendar timePicker={timePicker} selectedValue={moment()} />);
       wrapper.find('.rc-calendar-time-picker-btn').simulate('click');
       const dateBtns = wrapper.find('.rc-calendar-my-select a');
       const btnClassName = 'rc-calendar-time-status';
@@ -138,7 +138,7 @@ describe('Calendar', () => {
       const wrapper = mount(<ControlledCalendar />);
 
       wrapper.find('.rc-calendar-time-picker-btn').simulate('click');
-      expect(wrapper.find('.rc-calendar-time-picker').length).toBe(1);
+      expect(wrapper.find('.rc-calendar-time-picker').length).toBe(0);
       wrapper.find('.rc-calendar-time-picker-btn').simulate('click');
       expect(wrapper.find('.rc-calendar-time-picker').length).toBe(0);
 

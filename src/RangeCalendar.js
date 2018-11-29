@@ -742,6 +742,7 @@ const RangeCalendar = createReactClass({
                     showTimePicker={showTimePicker}
                     onOpenTimePicker={this.onOpenTimePicker}
                     onCloseTimePicker={this.onCloseTimePicker}
+                    selectedValue
                     timePickerDisabled={!this.hasSelectedValue() || hoverValue.length}
                   /> : null}
                 {showOkButton ?
