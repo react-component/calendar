@@ -96,7 +96,7 @@ export function formatDate(value, format) {
   }
 
   if (Array.isArray(format)) {
-    format = format.length ? format[0] : undefined;
+    format = format[0];
   }
 
   return value.format(format);
