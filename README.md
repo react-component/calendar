@@ -154,9 +154,10 @@ http://react-component.github.io/calendar/examples/index.html
         </tr>
         <tr>
           <td>format</td>
-          <td>String</td>
+          <td>String | String[]</td>
           <td>depends on whether you set timePicker and your locale</td>
-          <td>use to format/parse date(without time) value to/from input</td>
+          <td>use to format/parse date(without time) value to/from input.  
+          When an array is provided, all values are used for parsing and first value for display.</td>
         </tr>
         <tr>
           <td>disabledDate</td>

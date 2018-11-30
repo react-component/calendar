@@ -112,7 +112,7 @@ class Demo extends React.Component {
       locale={cn ? zhCN : enUS}
       style={{ zIndex: 1000 }}
       dateInputPlaceholder="please input"
-      formatter={getFormat(state.showTime)}
+      format={getFormat(state.showTime)}
       disabledTime={state.showTime ? disabledTime : null}
       timePicker={state.showTime ? timePickerElement : null}
       defaultValue={this.props.defaultCalendarValue}
@@ -158,7 +158,6 @@ class Demo extends React.Component {
       >
         <DatePicker
           animation="slide-up"
-          disabled={state.disabled}
           calendar={calendar}
           value={state.value}
           onChange={this.onChange}
@@ -182,6 +181,44 @@ class Demo extends React.Component {
           }
         </DatePicker>
       </div>
+    </div>);
+  }
+}
+
+const multiFormats = ['DD/MM/YYYY', 'DD/MM/YY', 'DDMMYY', 'D/M/YY'];
+
+class DemoMultiFormat extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      value: now,
+    };
+  }
+
+  onChange = (value) => {
+    console.log('Calendar change: ', (value && value.format(format)));
+    this.setState({
+      value,
+    });
+  }
+
+  render() {
+    const state = this.state;
+    return (<div style={{ width: 400, margin: 20 }}>
+      <div style={{ marginBottom: 10 }}>
+        Accepts multiple input formats
+        <br/>
+        <small>{multiFormats.join(', ')}</small>
+      </div>
+      <Calendar
+        locale={cn ? zhCN : enUS}
+        style={{ zIndex: 1000 }}
+        dateInputPlaceholder="please input"
+        format={multiFormats}
+        value={state.value}
+        onChange={this.onChange}
+      />
     </div>);
   }
 }
@@ -213,7 +250,7 @@ ReactDOM.render((<div
         defaultValue={now}
         disabledTime={disabledTime}
         showToday
-        formatter={getFormat(true)}
+        format={getFormat(true)}
         showOk={false}
         timePicker={timePickerElement}
         onChange={onStandaloneChange}
@@ -229,5 +266,8 @@ ReactDOM.render((<div
       <Demo defaultCalendarValue={defaultCalendarValue} />
     </div>
     <div style={{ clear: 'both' }}></div>
+    <div>
+      <DemoMultiFormat />
+    </div>
   </div>
 </div>), document.getElementById('__react-content'));
