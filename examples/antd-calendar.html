@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>antd-calendar.js - example - rc-calendar@9.7.11</title>
+  <title>antd-calendar.js - example - rc-calendar@9.8.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -263,7 +263,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
   <div class="container">
     <div class="header">
-      <h1>rc-calendar@9.7.11</h1>
+      <h1>rc-calendar@9.8.0</h1>
 
       <p>React Calendar</p>
     </div>
@@ -383,7 +383,7 @@ class Demo extends React.Component {
       locale={cn ? zhCN : enUS}
       style={{ zIndex: 1000 }}
       dateInputPlaceholder="please input"
-      formatter={getFormat(state.showTime)}
+      format={getFormat(state.showTime)}
       disabledTime={state.showTime ? disabledTime : null}
       timePicker={state.showTime ? timePickerElement : null}
       defaultValue={this.props.defaultCalendarValue}
@@ -429,7 +429,6 @@ class Demo extends React.Component {
       &gt;
         &lt;DatePicker
           animation="slide-up"
-          disabled={state.disabled}
           calendar={calendar}
           value={state.value}
           onChange={this.onChange}
@@ -453,6 +452,44 @@ class Demo extends React.Component {
           }
         &lt;/DatePicker&gt;
       &lt;/div&gt;
+    &lt;/div&gt;);
+  }
+}
+
+const multiFormats = ['DD/MM/YYYY', 'DD/MM/YY', 'DDMMYY', 'D/M/YY'];
+
+class DemoMultiFormat extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      value: now,
+    };
+  }
+
+  onChange = (value) =&gt; {
+    console.log('Calendar change: ', (value &amp;&amp; value.format(format)));
+    this.setState({
+      value,
+    });
+  }
+
+  render() {
+    const state = this.state;
+    return (&lt;div style={{ width: 400, margin: 20 }}&gt;
+      &lt;div style={{ marginBottom: 10 }}&gt;
+        Accepts multiple input formats
+        &lt;br/&gt;
+        &lt;small&gt;{multiFormats.join(', ')}&lt;/small&gt;
+      &lt;/div&gt;
+      &lt;Calendar
+        locale={cn ? zhCN : enUS}
+        style={{ zIndex: 1000 }}
+        dateInputPlaceholder="please input"
+        format={multiFormats}
+        value={state.value}
+        onChange={this.onChange}
+      /&gt;
     &lt;/div&gt;);
   }
 }
@@ -484,7 +521,7 @@ ReactDOM.render((&lt;div
         defaultValue={now}
         disabledTime={disabledTime}
         showToday
-        formatter={getFormat(true)}
+        format={getFormat(true)}
         showOk={false}
         timePicker={timePickerElement}
         onChange={onStandaloneChange}
@@ -500,6 +537,9 @@ ReactDOM.render((&lt;div
       &lt;Demo defaultCalendarValue={defaultCalendarValue} /&gt;
     &lt;/div&gt;
     &lt;div style={{ clear: 'both' }}&gt;&lt;/div&gt;
+    &lt;div&gt;
+      &lt;DemoMultiFormat /&gt;
+    &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;), document.getElementById('__react-content'));
 </code></pre></div>
