@@ -1,6 +1,10 @@
 # History
 ----
 
+## 9.8.0 / 2018-11-30
+
+- DateInput support multiple date format
+
 ## 9.7.0 / 2018-08-07
 
 - Add clearIcon.
