@@ -60,6 +60,7 @@ const DateInput = createReactClass({
       onChange(null);
       this.setState({
         invalid: false,
+        str,
       });
       return;
     }
@@ -69,6 +70,7 @@ const DateInput = createReactClass({
     if (!parsed.isValid()) {
       this.setState({
         invalid: true,
+        str,
       });
       return;
     }
@@ -85,6 +87,7 @@ const DateInput = createReactClass({
     if (!value || (disabledDate && disabledDate(value))) {
       this.setState({
         invalid: true,
+        str,
       });
       return;
     }
@@ -92,6 +95,9 @@ const DateInput = createReactClass({
     if (selectedValue !== value || (
       selectedValue && value && !selectedValue.isSame(value)
     )) {
+      this.setState({
+        str,
+      });
       onChange(value);
     }
   },
