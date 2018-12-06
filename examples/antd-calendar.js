@@ -4199,7 +4199,7 @@ var DateInput = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
     }
   },
   componentDidUpdate: function componentDidUpdate() {
-    if (!this.state.invalid && !(this.cachedSelectionStart === 0 && this.cachedSelectionEnd === 0)) {
+    if (this.state.hasFocus && !this.state.invalid && !(this.cachedSelectionStart === 0 && this.cachedSelectionEnd === 0)) {
       this.dateInputInstance.setSelectionRange(this.cachedSelectionStart, this.cachedSelectionEnd);
     }
   },
@@ -8578,14 +8578,15 @@ Select.propTypes = {
 /* 166 */,
 /* 167 */,
 /* 168 */,
-/* 169 */
+/* 169 */,
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(170);
+module.exports = __webpack_require__(171);
 
 
 /***/ }),
-/* 170 */
+/* 171 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8943,5 +8944,5 @@ __WEBPACK_IMPORTED_MODULE_5_react_dom___default.a.render(__WEBPACK_IMPORTED_MODU
 ), document.getElementById('__react-content'));
 
 /***/ })
-],[169]);
+],[170]);
 //# sourceMappingURL=antd-calendar.js.map

@@ -4199,7 +4199,7 @@ var DateInput = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
     }
   },
   componentDidUpdate: function componentDidUpdate() {
-    if (!this.state.invalid && !(this.cachedSelectionStart === 0 && this.cachedSelectionEnd === 0)) {
+    if (this.state.hasFocus && !this.state.invalid && !(this.cachedSelectionStart === 0 && this.cachedSelectionEnd === 0)) {
       this.dateInputInstance.setSelectionRange(this.cachedSelectionStart, this.cachedSelectionEnd);
     }
   },
@@ -7678,14 +7678,15 @@ var Calendar = __WEBPACK_IMPORTED_MODULE_3_create_react_class___default()({
 /* 245 */,
 /* 246 */,
 /* 247 */,
-/* 248 */
+/* 248 */,
+/* 249 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(249);
+module.exports = __webpack_require__(250);
 
 
 /***/ }),
-/* 249 */
+/* 250 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7895,5 +7896,5 @@ __WEBPACK_IMPORTED_MODULE_5_react_dom___default.a.render(__WEBPACK_IMPORTED_MODU
 ), document.getElementById('__react-content'));
 
 /***/ })
-],[248]);
+],[249]);
 //# sourceMappingURL=week.js.map

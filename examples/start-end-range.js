@@ -4199,7 +4199,7 @@ var DateInput = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
     }
   },
   componentDidUpdate: function componentDidUpdate() {
-    if (!this.state.invalid && !(this.cachedSelectionStart === 0 && this.cachedSelectionEnd === 0)) {
+    if (this.state.hasFocus && !this.state.invalid && !(this.cachedSelectionStart === 0 && this.cachedSelectionEnd === 0)) {
       this.dateInputInstance.setSelectionRange(this.cachedSelectionStart, this.cachedSelectionEnd);
     }
   },
@@ -8059,14 +8059,15 @@ var CalendarPart = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
 /* 241 */,
 /* 242 */,
 /* 243 */,
-/* 244 */
+/* 244 */,
+/* 245 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(245);
+module.exports = __webpack_require__(246);
 
 
 /***/ }),
-/* 245 */
+/* 246 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8271,5 +8272,5 @@ var Demo = function (_React$Component2) {
 __WEBPACK_IMPORTED_MODULE_5_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(Demo, null), document.getElementById('__react-content'));
 
 /***/ })
-],[244]);
+],[245]);
 //# sourceMappingURL=start-end-range.js.map
