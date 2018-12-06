@@ -24,6 +24,7 @@ const FullCalendar = createReactClass({
     headerRender: PropTypes.func,
     showHeader: PropTypes.bool,
     disabledDate: PropTypes.func,
+    highlightToday: PropTypes.bool,
   },
   mixins: [CommonMixin, CalendarMixin],
   getDefaultProps() {
@@ -32,6 +33,7 @@ const FullCalendar = createReactClass({
       fullscreen: false,
       showTypeSwitch: true,
       showHeader: true,
+      highlightToday: true,
       onTypeChange() {
       },
     };
@@ -109,6 +111,7 @@ const FullCalendar = createReactClass({
         onSelect={this.onSelect}
         value={value}
         disabledDate={disabledDate}
+        highlightToday={props.highlightToday}
       />
     ) : (
       <MonthTable

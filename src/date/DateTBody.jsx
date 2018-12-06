@@ -53,6 +53,7 @@ const DateTBody = createReactClass({
       contentRender, prefixCls, selectedValue, value,
       showWeekNumber, dateRender, disabledDate,
       hoverValue,
+      highlightToday,
     } = props;
     let iIndex;
     let jIndex;
@@ -128,7 +129,9 @@ const DateTBody = createReactClass({
         let selected = false;
 
         if (isSameDay(current, today)) {
-          cls += ` ${todayClass}`;
+          if (highlightToday) {
+            cls += ` ${todayClass}`;
+          }
           isCurrentWeek = true;
         }
 

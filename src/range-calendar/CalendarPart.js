@@ -112,6 +112,7 @@ const CalendarPart = createReactClass({
               onDayHover={props.onDayHover}
               disabledDate={disabledDate}
               showWeekNumber={props.showWeekNumber}
+              highlightToday={props.highlightToday}
             />
           </div>
         </div>
