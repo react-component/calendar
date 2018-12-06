@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import CalendarHeader from '../calendar/CalendarHeader';
 import DateTable from '../date/DateTable';
 import DateInput from '../date/DateInput';
+import MonthTable from '../month/MonthTable';
 import { getTimeConfig } from '../util/index';
 
 const CalendarPart = createReactClass({
@@ -82,6 +83,7 @@ const CalendarPart = createReactClass({
         clearIcon={clearIcon}
       />;
 
+
     return (
       <div
         className={`${rangeClassName}-part ${rangeClassName}-${direction}`}
@@ -96,6 +98,8 @@ const CalendarPart = createReactClass({
             onValueChange={props.onValueChange}
             onPanelChange={props.onPanelChange}
             disabledMonth={props.disabledMonth}
+            disabledYear={props.disabledYear}
+            showPanel={props.showPanel}
           />
           {showTimePicker ? <div className={`${prefixCls}-time-picker`}>
             <div className={`${prefixCls}-time-picker-panel`}>
@@ -103,7 +107,7 @@ const CalendarPart = createReactClass({
             </div>
           </div> : null}
           <div className={`${prefixCls}-body`}>
-            <DateTable
+            {props.showPanel === 'date' ? <DateTable
               {...newProps}
               hoverValue={hoverValue}
               selectedValue={selectedValue}
@@ -112,7 +116,16 @@ const CalendarPart = createReactClass({
               onDayHover={props.onDayHover}
               disabledDate={disabledDate}
               showWeekNumber={props.showWeekNumber}
-            />
+            /> : <MonthTable
+              {...newProps}
+              prefixCls={`${prefixCls}-month-panel`}
+              selectedValue={selectedValue}
+              dateRender={props.dateRender}
+              onSelect={props.onSelect}
+              onMonthHover={props.onDayHover}
+              hoverValue={hoverValue}
+              disabledDate={disabledDate}
+            />}
           </div>
         </div>
       </div>);

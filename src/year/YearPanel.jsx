@@ -65,8 +65,13 @@ export default
 
     const yeasEls = years.map((row, index) => {
       const tds = row.map(yearData => {
+        let disabled = false;
+        if (props.disabledDate) {
+          disabled = props.disabledDate(value.clone().year(yearData.year));
+        }
         const classNameMap = {
           [`${prefixCls}-cell`]: 1,
+          [`${prefixCls}-cell-disabled`]: disabled,
           [`${prefixCls}-selected-cell`]: yearData.year === currentYear,
           [`${prefixCls}-last-decade-cell`]: yearData.year < startYear,
           [`${prefixCls}-next-decade-cell`]: yearData.year > endYear,
@@ -84,7 +89,7 @@ export default
             role="gridcell"
             title={yearData.title}
             key={yearData.content}
-            onClick={clickHandler}
+            onClick={disabled ? null : clickHandler}
             className={classnames(classNameMap)}
           >
             <a
