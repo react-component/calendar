@@ -53,49 +53,47 @@ const DateInput = createReactClass({
 
   onInputChange(event) {
     const str = event.target.value;
-    this.setState({
-      str,
-    });
-    let value;
-    const { disabledDate, format, onChange } = this.props;
-    if (str) {
-      const parsed = moment(str, format, true);
-      if (!parsed.isValid()) {
-        this.setState({
-          invalid: true,
-        });
-        return;
-      }
-      value = this.props.value.clone();
-      value
-        .year(parsed.year())
-        .month(parsed.month())
-        .date(parsed.date())
-        .hour(parsed.hour())
-        .minute(parsed.minute())
-        .second(parsed.second());
+    const { disabledDate, format, onChange, selectedValue } = this.props;
 
-      if (value && (!disabledDate || !disabledDate(value))) {
-        const originalValue = this.props.selectedValue;
-        if (originalValue && value) {
-          if (!originalValue.isSame(value)) {
-            onChange(value);
-          }
-        } else if (originalValue !== value) {
-          onChange(value);
-        }
-      } else {
-        this.setState({
-          invalid: true,
-        });
-        return;
-      }
-    } else {
+    // 没有内容，合法并直接退出
+    if (!str) {
       onChange(null);
+      this.setState({
+        invalid: false,
+      });
+      return;
     }
-    this.setState({
-      invalid: false,
-    });
+
+    // 不合法直接退出
+    const parsed = moment(str, format, true);
+    if (!parsed.isValid()) {
+      this.setState({
+        invalid: true,
+      });
+      return;
+    }
+
+    const value = this.props.value.clone();
+    value
+      .year(parsed.year())
+      .month(parsed.month())
+      .date(parsed.date())
+      .hour(parsed.hour())
+      .minute(parsed.minute())
+      .second(parsed.second());
+
+    if (!value || (disabledDate && disabledDate(value))) {
+      this.setState({
+        invalid: true,
+      });
+      return;
+    }
+
+    if (selectedValue !== value || (
+      selectedValue && value && !selectedValue.isSame(value)
+    )) {
+      onChange(value);
+    }
   },
 
   onClear() {
