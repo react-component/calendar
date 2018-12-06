@@ -45,7 +45,7 @@ const DateInput = createReactClass({
   },
 
   componentDidUpdate() {
-    if (!this.state.invalid &&
+    if (this.state.hasFocus && !this.state.invalid &&
         !(this.cachedSelectionStart === 0 && this.cachedSelectionEnd === 0)) {
       this.dateInputInstance.setSelectionRange(this.cachedSelectionStart, this.cachedSelectionEnd);
     }
