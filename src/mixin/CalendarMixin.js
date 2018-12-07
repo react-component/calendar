@@ -103,6 +103,7 @@ const CalendarMixin = {
 
   setValue(value) {
     const originalValue = this.state.value;
+    this.props.onCellSelect(value);
     if (!('value' in this.props)) {
       this.setState({
         value,
