@@ -197,24 +197,26 @@ const Picker = createReactClass({
       transitionName, children,
     } = props;
     const state = this.state;
-    return (<Trigger
-      popup={this.getCalendarElement()}
-      popupAlign={align}
-      builtinPlacements={placements}
-      popupPlacement={placement}
-      action={(disabled && !state.open) ? [] : ['click']}
-      destroyPopupOnHide
-      getPopupContainer={getCalendarContainer}
-      popupStyle={style}
-      popupAnimation={animation}
-      popupTransitionName={transitionName}
-      popupVisible={state.open}
-      onPopupVisibleChange={this.onVisibleChange}
-      prefixCls={prefixCls}
-      popupClassName={dropdownClassName}
-    >
-      {React.cloneElement(children(state, props), { onKeyDown: this.onKeyDown })}
-    </Trigger>);
+    return (
+      <Trigger
+        popup={this.getCalendarElement()}
+        popupAlign={align}
+        builtinPlacements={placements}
+        popupPlacement={placement}
+        action={(disabled && !state.open) ? [] : ['click']}
+        destroyPopupOnHide
+        getPopupContainer={getCalendarContainer}
+        popupStyle={style}
+        popupAnimation={animation}
+        popupTransitionName={transitionName}
+        popupVisible={state.open}
+        onPopupVisibleChange={this.onVisibleChange}
+        prefixCls={prefixCls}
+        popupClassName={dropdownClassName}
+      >
+        {React.cloneElement(children(state, props), { onKeyDown: this.onKeyDown })}
+      </Trigger>
+    );
   },
 });
 
