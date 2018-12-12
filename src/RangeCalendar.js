@@ -43,8 +43,13 @@ function normalizeAnchor(props, init) {
   const normalizedValue = value ?
     getValueFromSelectedValue(value) :
     getValueFromSelectedValue(selectedValue);
+
+  let panelValue = [moment(), moment().add(1, 'months')];
+  if (props.backwardsSelection) {
+    panelValue = [moment().subtract(1, 'months'), moment()];
+  }
   return !isEmptyArray(normalizedValue) ?
-    normalizedValue : init && [moment(), moment().add(1, 'months')];
+    normalizedValue : init && panelValue;
 }
 
 function generateOptions(length, extraOptionGen) {
@@ -100,6 +105,7 @@ const RangeCalendar = createReactClass({
     disabledDate: PropTypes.func,
     disabledTime: PropTypes.func,
     clearIcon: PropTypes.node,
+    backwardsSelection: PropTypes.bool,
   },
 
   mixins: [CommonMixin],
@@ -115,6 +121,7 @@ const RangeCalendar = createReactClass({
       onInputSelect: noop,
       showToday: true,
       showDateInput: true,
+      backwardsSelection: false,
     };
   },
 
