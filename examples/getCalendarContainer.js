@@ -4205,47 +4205,50 @@ var DateInput = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
   },
   onInputChange: function onInputChange(event) {
     var str = event.target.value;
-    this.setState({
-      str: str
-    });
-    var value = void 0;
     var _props = this.props,
         disabledDate = _props.disabledDate,
         format = _props.format,
-        onChange = _props.onChange;
+        onChange = _props.onChange,
+        selectedValue = _props.selectedValue;
 
-    if (str) {
-      var parsed = __WEBPACK_IMPORTED_MODULE_4_moment___default()(str, format, true);
-      if (!parsed.isValid()) {
-        this.setState({
-          invalid: true
-        });
-        return;
-      }
-      value = this.props.value.clone();
-      value.year(parsed.year()).month(parsed.month()).date(parsed.date()).hour(parsed.hour()).minute(parsed.minute()).second(parsed.second());
+    // 没有内容，合法并直接退出
 
-      if (value && (!disabledDate || !disabledDate(value))) {
-        var originalValue = this.props.selectedValue;
-        if (originalValue && value) {
-          if (!originalValue.isSame(value)) {
-            onChange(value);
-          }
-        } else if (originalValue !== value) {
-          onChange(value);
-        }
-      } else {
-        this.setState({
-          invalid: true
-        });
-        return;
-      }
-    } else {
+    if (!str) {
       onChange(null);
+      this.setState({
+        invalid: false,
+        str: str
+      });
+      return;
     }
-    this.setState({
-      invalid: false
-    });
+
+    // 不合法直接退出
+    var parsed = __WEBPACK_IMPORTED_MODULE_4_moment___default()(str, format, true);
+    if (!parsed.isValid()) {
+      this.setState({
+        invalid: true,
+        str: str
+      });
+      return;
+    }
+
+    var value = this.props.value.clone();
+    value.year(parsed.year()).month(parsed.month()).date(parsed.date()).hour(parsed.hour()).minute(parsed.minute()).second(parsed.second());
+
+    if (!value || disabledDate && disabledDate(value)) {
+      this.setState({
+        invalid: true,
+        str: str
+      });
+      return;
+    }
+
+    if (selectedValue !== value || selectedValue && value && !selectedValue.isSame(value)) {
+      this.setState({
+        str: str
+      });
+      onChange(value);
+    }
   },
   onClear: function onClear() {
     this.setState({
@@ -7488,7 +7491,7 @@ var Calendar = __WEBPACK_IMPORTED_MODULE_3_create_react_class___default()({
           selectedValue: selectedValue,
           value: value,
           disabledDate: disabledDate,
-          okDisabled: props.showOk && !this.isAllowedDate(selectedValue),
+          okDisabled: props.showOk !== false && (!selectedValue || !this.isAllowedDate(selectedValue)),
           onOk: this.onOk,
           onSelect: this.onSelect,
           onToday: this.onToday,
@@ -7898,9 +7901,10 @@ var DialogWrap = function (_React$Component) {
     }
 
     DialogWrap.prototype.shouldComponentUpdate = function shouldComponentUpdate(_ref) {
-        var visible = _ref.visible;
+        var visible = _ref.visible,
+            forceRender = _ref.forceRender;
 
-        return !!(this.props.visible || visible);
+        return !!(this.props.visible || visible) || this.props.forceRender || forceRender;
     };
 
     DialogWrap.prototype.componentWillUnmount = function componentWillUnmount() {
@@ -7922,11 +7926,13 @@ var DialogWrap = function (_React$Component) {
     DialogWrap.prototype.render = function render() {
         var _this2 = this;
 
-        var visible = this.props.visible;
+        var _props = this.props,
+            visible = _props.visible,
+            forceRender = _props.forceRender;
 
         var portal = null;
         if (!IS_REACT_16) {
-            return __WEBPACK_IMPORTED_MODULE_4_react__["createElement"](__WEBPACK_IMPORTED_MODULE_7_rc_util_es_ContainerRender__["a" /* default */], { parent: this, visible: visible, autoDestroy: false, getComponent: this.getComponent, getContainer: this.getContainer }, function (_ref2) {
+            return __WEBPACK_IMPORTED_MODULE_4_react__["createElement"](__WEBPACK_IMPORTED_MODULE_7_rc_util_es_ContainerRender__["a" /* default */], { parent: this, visible: visible, autoDestroy: false, getComponent: this.getComponent, getContainer: this.getContainer, forceRender: forceRender }, function (_ref2) {
                 var renderComponent = _ref2.renderComponent,
                     removeContainer = _ref2.removeContainer;
 
@@ -7935,7 +7941,7 @@ var DialogWrap = function (_React$Component) {
                 return null;
             });
         }
-        if (visible || this._component) {
+        if (visible || forceRender || this._component) {
             portal = __WEBPACK_IMPORTED_MODULE_4_react__["createElement"](__WEBPACK_IMPORTED_MODULE_8_rc_util_es_Portal__["a" /* default */], { getContainer: this.getContainer }, this.getComponent());
         }
         return portal;
@@ -7945,7 +7951,8 @@ var DialogWrap = function (_React$Component) {
 }(__WEBPACK_IMPORTED_MODULE_4_react__["Component"]);
 
 DialogWrap.defaultProps = {
-    visible: false
+    visible: false,
+    forceRender: false
 };
 /* harmony default export */ __webpack_exports__["a"] = (DialogWrap);
 
@@ -8216,6 +8223,10 @@ var Dialog = function (_React$Component) {
 
     Dialog.prototype.componentDidMount = function componentDidMount() {
         this.componentDidUpdate({});
+        // if forceRender is true, set element style display to be none;
+        if (this.props.forceRender && this.wrap) {
+            this.wrap.style.display = 'none';
+        }
     };
 
     Dialog.prototype.componentDidUpdate = function componentDidUpdate(prevProps) {

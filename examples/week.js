@@ -4205,47 +4205,50 @@ var DateInput = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
   },
   onInputChange: function onInputChange(event) {
     var str = event.target.value;
-    this.setState({
-      str: str
-    });
-    var value = void 0;
     var _props = this.props,
         disabledDate = _props.disabledDate,
         format = _props.format,
-        onChange = _props.onChange;
+        onChange = _props.onChange,
+        selectedValue = _props.selectedValue;
 
-    if (str) {
-      var parsed = __WEBPACK_IMPORTED_MODULE_4_moment___default()(str, format, true);
-      if (!parsed.isValid()) {
-        this.setState({
-          invalid: true
-        });
-        return;
-      }
-      value = this.props.value.clone();
-      value.year(parsed.year()).month(parsed.month()).date(parsed.date()).hour(parsed.hour()).minute(parsed.minute()).second(parsed.second());
+    // 没有内容，合法并直接退出
 
-      if (value && (!disabledDate || !disabledDate(value))) {
-        var originalValue = this.props.selectedValue;
-        if (originalValue && value) {
-          if (!originalValue.isSame(value)) {
-            onChange(value);
-          }
-        } else if (originalValue !== value) {
-          onChange(value);
-        }
-      } else {
-        this.setState({
-          invalid: true
-        });
-        return;
-      }
-    } else {
+    if (!str) {
       onChange(null);
+      this.setState({
+        invalid: false,
+        str: str
+      });
+      return;
     }
-    this.setState({
-      invalid: false
-    });
+
+    // 不合法直接退出
+    var parsed = __WEBPACK_IMPORTED_MODULE_4_moment___default()(str, format, true);
+    if (!parsed.isValid()) {
+      this.setState({
+        invalid: true,
+        str: str
+      });
+      return;
+    }
+
+    var value = this.props.value.clone();
+    value.year(parsed.year()).month(parsed.month()).date(parsed.date()).hour(parsed.hour()).minute(parsed.minute()).second(parsed.second());
+
+    if (!value || disabledDate && disabledDate(value)) {
+      this.setState({
+        invalid: true,
+        str: str
+      });
+      return;
+    }
+
+    if (selectedValue !== value || selectedValue && value && !selectedValue.isSame(value)) {
+      this.setState({
+        str: str
+      });
+      onChange(value);
+    }
   },
   onClear: function onClear() {
     this.setState({
@@ -7488,7 +7491,7 @@ var Calendar = __WEBPACK_IMPORTED_MODULE_3_create_react_class___default()({
           selectedValue: selectedValue,
           value: value,
           disabledDate: disabledDate,
-          okDisabled: props.showOk && !this.isAllowedDate(selectedValue),
+          okDisabled: props.showOk !== false && (!selectedValue || !this.isAllowedDate(selectedValue)),
           onOk: this.onOk,
           onSelect: this.onSelect,
           onToday: this.onToday,
