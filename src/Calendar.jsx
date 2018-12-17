@@ -289,7 +289,9 @@ const Calendar = createReactClass({
             selectedValue={selectedValue}
             value={value}
             disabledDate={disabledDate}
-            okDisabled={props.showOk && !this.isAllowedDate(selectedValue)}
+            okDisabled={
+              props.showOk !== false && (!selectedValue || !this.isAllowedDate(selectedValue))
+            }
             onOk={this.onOk}
             onSelect={this.onSelect}
             onToday={this.onToday}

@@ -563,6 +563,16 @@ describe('Calendar', () => {
       expect(handleOk).toHaveBeenCalledWith(selected);
     });
 
+    it('Ok Button disabled', () => {
+      const calendar = mount(
+        <Calendar showOk />
+      );
+
+      expect(
+        calendar.find('OkButton').props().okDisabled
+      ).toBe(true);
+    });
+
     it('does not triggers onOk if selected date is disabled', () => {
       const selected = moment().add(1, 'day');
       const handleOk = jest.fn();
