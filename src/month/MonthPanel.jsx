@@ -69,7 +69,7 @@ const MonthPanel = createReactClass({
     const value = this.state.value;
     const cellRender = props.cellRender;
     const contentRender = props.contentRender;
-    const { locale } = props;
+    const { locale, defaultValue: propValue } = props;
     const year = value.year();
     const prefixCls = this.prefixCls;
 
@@ -107,6 +107,7 @@ const MonthPanel = createReactClass({
               onSelect={this.setAndSelectValue}
               locale={locale}
               value={value}
+              selectedValue={propValue}
               cellRender={cellRender}
               contentRender={contentRender}
               prefixCls={prefixCls}
