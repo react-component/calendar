@@ -4,7 +4,8 @@ import 'rc-calendar/assets/index.less';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import MonthCalendar from 'rc-calendar/src/MonthCalendar';
+// import MonthCalendar from 'rc-calendar/src/MonthCalendar';
+import QuarterCalendar from '../src/QuarterCalendar';
 import DatePicker from 'rc-calendar/src/Picker';
 
 import zhCN from 'rc-calendar/src/locale/zh_CN';
@@ -14,7 +15,7 @@ import moment from 'moment';
 import 'moment/locale/zh-cn';
 import 'moment/locale/en-gb';
 
-const format = 'YYYY-MM';
+const format = 'YYYY-Qo';
 const cn = location.search.indexOf('cn') !== -1;
 
 const now = moment();
@@ -25,7 +26,7 @@ if (cn) {
 }
 
 const defaultCalendarValue = now.clone();
-defaultCalendarValue.add(-1, 'month');
+defaultCalendarValue.add(-1, 'quarter');
 
 class Demo extends React.Component {
   static propTypes = {
@@ -64,7 +65,7 @@ class Demo extends React.Component {
   render() {
     const state = this.state;
     console.log(cn);
-    const calendar = (<MonthCalendar
+    const calendar = (<QuarterCalendar
       locale={cn ? zhCN : enUS}
       style={{ zIndex: 1000 }}
     />);
@@ -113,21 +114,21 @@ class Demo extends React.Component {
 }
 
 function onStandaloneSelect(value) {
-  console.log('month-calendar select', (value && value.format(format)));
+  console.log('quarter-calendar select', (value && value.format(format)));
 }
 
 function onStandaloneChange(value) {
-  console.log('month-calendar change', (value && value.format(format)));
+  console.log('quarter-calendar change', (value && value.format(format)));
 }
 
 function disabledDate(value) {
   return value.year() > now.year() ||
-    value.year() === now.year() && value.month() > now.month();
+    value.year() === now.year() && value.quarter() > now.quarter();
 }
 
-function onMonthCellContentRender(value) {
+function onQuarterCellContentRender(value) {
   // console.log('month-calendar onMonthCellContentRender', (value && value.format(format)));
-  return `${value.month() + 1}月`;
+  return `${value.quarter()}季度`;
 }
 
 ReactDOM.render(
@@ -139,13 +140,13 @@ ReactDOM.render(
       margin: '0 auto',
     }}
   >
-    <MonthCalendar
+    <QuarterCalendar
       locale={cn ? zhCN : enUS}
       style={{ zIndex: 1000 }}
       disabledDate={disabledDate}
       onSelect={onStandaloneSelect}
       onChange={onStandaloneChange}
-      monthCellContentRender={onMonthCellContentRender}
+      quarterCellContentRender={onQuarterCellContentRender}
       defaultValue={defaultCalendarValue}
       renderFooter={() => 'extra footer'}
     />
