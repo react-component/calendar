@@ -25,6 +25,7 @@ const CalendarMixin = {
   propTypes: {
     value: PropTypes.object,
     defaultValue: PropTypes.object,
+    defaultToday: PropTypes.object,
     onKeyDown: PropTypes.func,
   },
 
@@ -36,7 +37,7 @@ const CalendarMixin = {
 
   getInitialState() {
     const props = this.props;
-    const value = props.value || props.defaultValue || getNow();
+    const value = props.value || props.defaultValue || props.defaultToday || getNow();
     return {
       value,
       selectedValue: props.selectedValue || props.defaultSelectedValue,
@@ -47,7 +48,8 @@ const CalendarMixin = {
     let { value } = nextProps;
     const { selectedValue } = nextProps;
     if ('value' in nextProps) {
-      value = value || nextProps.defaultValue || getNowByCurrentStateValue(this.state.value);
+      value = value || nextProps.defaultValue || nextProps.defaultToday
+        || getNowByCurrentStateValue(this.state.value);
       this.setState({
         value,
       });

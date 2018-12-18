@@ -24,6 +24,7 @@ const FullCalendar = createReactClass({
     headerRender: PropTypes.func,
     showHeader: PropTypes.bool,
     disabledDate: PropTypes.func,
+    defaultToday: PropTypes.object,
   },
   mixins: [CommonMixin, CalendarMixin],
   getDefaultProps() {
@@ -77,6 +78,7 @@ const FullCalendar = createReactClass({
       headerComponent,
       headerRender,
       disabledDate,
+      defaultToday,
     } = props;
     const { value, type } = this.state;
 
@@ -109,6 +111,7 @@ const FullCalendar = createReactClass({
         onSelect={this.onSelect}
         value={value}
         disabledDate={disabledDate}
+        defaultToday={defaultToday}
       />
     ) : (
       <MonthTable
@@ -119,6 +122,7 @@ const FullCalendar = createReactClass({
         prefixCls={`${prefixCls}-month-panel`}
         value={value}
         disabledDate={disabledDate}
+        defaultToday={defaultToday}
       />
     );
 

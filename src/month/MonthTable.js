@@ -63,11 +63,11 @@ class MonthTable extends Component {
 
   render() {
     const props = this.props;
+    const { prefixCls, locale, contentRender, cellRender, defaultToday } = props;
     const value = this.state.value;
-    const today = getTodayTime(value);
+    const today = defaultToday || getTodayTime(value);
     const months = this.months();
     const currentMonth = value.month();
-    const { prefixCls, locale, contentRender, cellRender } = props;
     const monthsEls = months.map((month, index) => {
       const tds = month.map(monthData => {
         let disabled = false;
