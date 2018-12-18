@@ -233,7 +233,7 @@ http://react-component.github.io/calendar/examples/index.html
         </tr>
         <tr>
           <td>mode</td>
-          <td>enum('time', 'date', 'month', 'year', 'decade')</td>
+          <td>enum('time', 'date', 'month', 'quarter', 'year', 'decade')</td>
           <td>'date'</td>
           <td>control which kind of panel should be shown</td>
         </tr>
@@ -411,7 +411,7 @@ http://react-component.github.io/calendar/examples/index.html
         </tr>
         <tr>
           <td>mode</td>
-          <td>enum('date', 'month', 'year', 'decade')[]</td>
+          <td>enum('date', 'month', 'quarter', 'year', 'decade')[]</td>
           <td>['date', 'date']</td>
           <td>control which kind of panels should be shown</td>
         </tr>
@@ -519,6 +519,100 @@ http://react-component.github.io/calendar/examples/index.html
           <td>function</td>
           <td></td>
           <td>Custom month cell content render method,the content will be appended to the cell.</td>
+        </tr>
+        <tr>
+        <tr>
+          <td>onChange</td>
+          <td>Function(date: moment)</td>
+          <td></td>
+          <td>called when a date is changed inside calendar (next year/next month/keyboard)</td>
+        </tr>
+        <tr>
+          <td>renderFooter</td>
+          <td>() => React.Node</td>
+          <td></td>
+          <td>extra footer</td>
+        </tr>
+    </tbody>
+</table>
+
+### rc-calendar/lib/QuarterCalendar props
+
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th style="width: 100px;">name</th>
+        <th style="width: 50px;">type</th>
+        <th style="width: 50px;">default</th>
+        <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>prefixCls</td>
+          <td>String</td>
+          <td></td>
+          <td>prefixCls of this component</td>
+        </tr>
+        <tr>
+          <td>className</td>
+          <td>String</td>
+          <td></td>
+          <td>additional css class of root dom node</td>
+        </tr>
+        <tr>
+          <td>style</td>
+          <td>Object</td>
+          <td></td>
+          <td>additional style of root dom node</td>
+        </tr>
+        <tr>
+          <td>value</td>
+          <td>moment</td>
+          <td></td>
+          <td>current value like input's value</td>
+        </tr>
+        <tr>
+          <td>defaultValue</td>
+          <td>moment</td>
+          <td></td>
+          <td>defaultValue like input's defaultValue</td>
+        </tr>
+        <tr>
+          <td>locale</td>
+          <td>Object</td>
+          <td>import from 'rc-calendar/lib/locale/en_US'</td>
+          <td>calendar locale</td>
+        </tr>
+        <tr>
+          <td>disabledDate</td>
+          <td>Function(current:moment):Boolean</td>
+          <td></td>
+          <td>whether to disable select of current quarter</td>
+        </tr>
+        <tr>
+          <td>onSelect</td>
+          <td>Function(date: moment)</td>
+          <td></td>
+          <td>called when a date is selected from calendar</td>
+        </tr>
+        <tr>
+          <td>quarterCellRender</td>
+          <td>function</td>
+          <td></td>
+          <td>Custom quarter cell render method</td>
+        </tr>
+        <tr>
+          <td>dateCellRender</td>
+          <td>function</td>
+          <td></td>
+          <td>Custom date cell render method</td>
+        </tr>
+        <tr>
+          <td>quarterCellContentRender</td>
+          <td>function</td>
+          <td></td>
+          <td>Custom quarter cell content render method,the content will be appended to the cell.</td>
         </tr>
         <tr>
         <tr>
