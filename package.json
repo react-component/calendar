@@ -69,7 +69,7 @@
     "@types/react": "^16.3.13",
     "async": "~2.5.0",
     "bootstrap": "~3.3.2",
-    "dtslint": "^0.3.0",
+    "dtslint": "^0.4.2",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.3.1",
