@@ -14,6 +14,16 @@ describe('RangeCalendar', () => {
     expect(wrapper.find('.rc-calendar-cell').length).toBeGreaterThan(0);
   });
 
+  it('default sperator', () => {
+    const wrapper = render(<RangeCalendar />);
+    expect(wrapper.find('.rc-calendar-range-middle').text()).toBe('~');
+  });
+
+  it('custom sperator', () => {
+    const wrapper = render(<RangeCalendar seperator="至" />);
+    expect(wrapper.find('.rc-calendar-range-middle').text()).toBe('至');
+  });
+
   it('render hoverValue correctly', () => {
     const wrapper = render(<RangeCalendar hoverValue={[moment(), moment().add(1, 'months')]} />);
     expect(wrapper).toMatchSnapshot();
