@@ -571,6 +571,13 @@
   position: absolute;
   outline: none;
 }
+.rc-calendar-month-panel > div {
+  height: 100%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+}
 .rc-calendar-month-panel-hidden {
   display: none;
 }
@@ -629,10 +636,13 @@
   right: 0;
 }
 .rc-calendar-month-panel-body {
+  -ms-flex: 1;
+      flex: 1;
   padding: 9px 10px 10px;
-  position: absolute;
-  top: 34px;
-  bottom: 0;
+}
+.rc-calendar-month-panel-footer {
+  border-top: 1px solid #ccc;
+  line-height: 38px;
 }
 .rc-calendar-month-panel-table {
   table-layout: fixed;
@@ -687,6 +697,13 @@
   z-index: 10;
   position: absolute;
   outline: none;
+}
+.rc-calendar-year-panel > div {
+  height: 100%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
 }
 .rc-calendar-year-panel-hidden {
   display: none;
@@ -746,10 +763,13 @@
   right: 0;
 }
 .rc-calendar-year-panel-body {
+  -ms-flex: 1;
+      flex: 1;
   padding: 9px 10px 10px;
-  position: absolute;
-  bottom: 0;
-  top: 34px;
+}
+.rc-calendar-year-panel-footer {
+  border-top: 1px solid #ccc;
+  line-height: 38px;
 }
 .rc-calendar-year-panel-table {
   table-layout: fixed;
@@ -801,6 +821,10 @@
   z-index: 10;
   position: absolute;
   outline: none;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
 }
 .rc-calendar-decade-panel-hidden {
   display: none;
@@ -854,10 +878,13 @@
   right: 0;
 }
 .rc-calendar-decade-panel-body {
+  -ms-flex: 1;
+      flex: 1;
   padding: 9px 10px 10px;
-  position: absolute;
-  bottom: 0;
-  top: 34px;
+}
+.rc-calendar-decade-panel-footer {
+  border-top: 1px solid #ccc;
+  line-height: 38px;
 }
 .rc-calendar-decade-panel-table {
   table-layout: fixed;

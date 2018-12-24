@@ -1670,7 +1670,8 @@ var CalendarHeader = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()(
     locale: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.object,
     enablePrev: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.any,
     enableNext: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.any,
-    disabledMonth: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.func
+    disabledMonth: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.func,
+    renderFooter: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.func
   },
 
   getDefaultProps: function getDefaultProps() {
@@ -1784,7 +1785,8 @@ var CalendarHeader = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()(
         showTimePicker = props.showTimePicker,
         enableNext = props.enableNext,
         enablePrev = props.enablePrev,
-        disabledMonth = props.disabledMonth;
+        disabledMonth = props.disabledMonth,
+        renderFooter = props.renderFooter;
 
 
     var panel = null;
@@ -1799,7 +1801,8 @@ var CalendarHeader = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()(
         },
         disabledDate: disabledMonth,
         cellRender: props.monthCellRender,
-        contentRender: props.monthCellContentRender
+        contentRender: props.monthCellContentRender,
+        renderFooter: renderFooter
       });
     }
     if (mode === 'year') {
@@ -1808,7 +1811,8 @@ var CalendarHeader = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()(
         defaultValue: value,
         rootPrefixCls: prefixCls,
         onSelect: this.onYearSelect,
-        onDecadePanelShow: this.showDecadePanel
+        onDecadePanelShow: this.showDecadePanel,
+        renderFooter: renderFooter
       });
     }
     if (mode === 'decade') {
@@ -1816,7 +1820,8 @@ var CalendarHeader = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()(
         locale: locale,
         defaultValue: value,
         rootPrefixCls: prefixCls,
-        onSelect: this.onDecadeSelect
+        onSelect: this.onDecadeSelect,
+        renderFooter: renderFooter
       });
     }
 
@@ -3200,7 +3205,8 @@ var MonthPanel = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
   propTypes: {
     onChange: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.func,
     disabledDate: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.func,
-    onSelect: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.func
+    onSelect: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.func,
+    renderFooter: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.func
   },
 
   getDefaultProps: function getDefaultProps() {
@@ -3244,12 +3250,15 @@ var MonthPanel = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
   render: function render() {
     var props = this.props;
     var value = this.state.value;
-    var cellRender = props.cellRender;
-    var contentRender = props.contentRender;
-    var locale = props.locale;
+    var locale = props.locale,
+        cellRender = props.cellRender,
+        contentRender = props.contentRender,
+        renderFooter = props.renderFooter;
 
     var year = value.year();
     var prefixCls = this.prefixCls;
+
+    var footer = renderFooter && renderFooter('month');
 
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
@@ -3304,6 +3313,11 @@ var MonthPanel = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
             contentRender: contentRender,
             prefixCls: prefixCls
           })
+        ),
+        footer && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: prefixCls + '-footer' },
+          footer
         )
       )
     );
@@ -3398,7 +3412,8 @@ var YearPanel = function (_React$Component) {
 
     var props = this.props;
     var value = this.state.value;
-    var locale = props.locale;
+    var locale = props.locale,
+        renderFooter = props.renderFooter;
 
     var years = this.years();
     var currentYear = value.year();
@@ -3443,6 +3458,8 @@ var YearPanel = function (_React$Component) {
         tds
       );
     });
+
+    var footer = renderFooter && renderFooter('year');
 
     return __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
       'div',
@@ -3499,6 +3516,11 @@ var YearPanel = function (_React$Component) {
               yeasEls
             )
           )
+        ),
+        footer && __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
+          'div',
+          { className: prefixCls + '-footer' },
+          footer
         )
       )
     );
@@ -3513,7 +3535,8 @@ var YearPanel = function (_React$Component) {
 YearPanel.propTypes = {
   rootPrefixCls: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.string,
   value: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.object,
-  defaultValue: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.object
+  defaultValue: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.object,
+  renderFooter: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.func
 };
 
 YearPanel.defaultProps = {
@@ -3585,7 +3608,9 @@ var DecadePanel = function (_React$Component) {
     var _this2 = this;
 
     var value = this.state.value;
-    var locale = this.props.locale;
+    var _props = this.props,
+        locale = _props.locale,
+        renderFooter = _props.renderFooter;
 
     var currentYear = value.year();
     var startYear = parseInt(currentYear / 100, 10) * 100;
@@ -3607,6 +3632,8 @@ var DecadePanel = function (_React$Component) {
         index++;
       }
     }
+
+    var footer = renderFooter && renderFooter('decade');
 
     var decadesEls = decades.map(function (row, decadeIndex) {
       var tds = row.map(function (decadeData) {
@@ -3688,6 +3715,11 @@ var DecadePanel = function (_React$Component) {
             decadesEls
           )
         )
+      ),
+      footer && __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
+        'div',
+        { className: prefixCls + '-footer' },
+        footer
       )
     );
   };
@@ -3702,7 +3734,8 @@ DecadePanel.propTypes = {
   locale: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.object,
   value: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.object,
   defaultValue: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.object,
-  rootPrefixCls: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.string
+  rootPrefixCls: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.string,
+  renderFooter: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.func
 };
 
 DecadePanel.defaultProps = {
@@ -6196,7 +6229,8 @@ var CalendarFooter = __WEBPACK_IMPORTED_MODULE_3_create_react_class___default()(
     onSelect: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.func,
     value: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.object,
     renderFooter: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.func,
-    defaultValue: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.object
+    defaultValue: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.object,
+    mode: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.string
   },
 
   onSelect: function onSelect(value) {
@@ -6211,10 +6245,11 @@ var CalendarFooter = __WEBPACK_IMPORTED_MODULE_3_create_react_class___default()(
         prefixCls = props.prefixCls,
         showOk = props.showOk,
         timePicker = props.timePicker,
-        renderFooter = props.renderFooter;
+        renderFooter = props.renderFooter,
+        mode = props.mode;
 
     var footerEl = null;
-    var extraFooter = renderFooter();
+    var extraFooter = renderFooter(mode);
     if (props.showToday || timePicker || extraFooter) {
       var _cx;
 
