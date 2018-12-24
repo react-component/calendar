@@ -33,6 +33,7 @@ const CalendarHeader = createReactClass({
     enablePrev: PropTypes.any,
     enableNext: PropTypes.any,
     disabledMonth: PropTypes.func,
+    renderFooter: PropTypes.func,
   },
 
   getDefaultProps() {
@@ -143,6 +144,7 @@ const CalendarHeader = createReactClass({
       enableNext,
       enablePrev,
       disabledMonth,
+      renderFooter,
     } = props;
 
     let panel = null;
@@ -157,6 +159,7 @@ const CalendarHeader = createReactClass({
           disabledDate={disabledMonth}
           cellRender={props.monthCellRender}
           contentRender={props.monthCellContentRender}
+          renderFooter={renderFooter}
         />
       );
     }
@@ -168,6 +171,7 @@ const CalendarHeader = createReactClass({
           rootPrefixCls={prefixCls}
           onSelect={this.onYearSelect}
           onDecadePanelShow={this.showDecadePanel}
+          renderFooter={renderFooter}
         />
       );
     }
@@ -178,6 +182,7 @@ const CalendarHeader = createReactClass({
           defaultValue={value}
           rootPrefixCls={prefixCls}
           onSelect={this.onDecadeSelect}
+          renderFooter={renderFooter}
         />
       );
     }

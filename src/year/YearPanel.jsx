@@ -56,7 +56,7 @@ export default
   render() {
     const props = this.props;
     const value = this.state.value;
-    const { locale } = props;
+    const { locale, renderFooter } = props;
     const years = this.years();
     const currentYear = value.year();
     const startYear = parseInt(currentYear / 10, 10) * 10;
@@ -97,6 +97,7 @@ export default
       return (<tr key={index} role="row">{tds}</tr>);
     });
 
+    const footer = renderFooter && renderFooter('year');
 
     return (
       <div className={this.prefixCls}>
@@ -134,6 +135,11 @@ export default
               </tbody>
             </table>
           </div>
+
+          {footer && (
+            <div className={`${prefixCls}-footer`}>
+              {footer}
+            </div>)}
         </div>
       </div>);
   }
@@ -143,6 +149,7 @@ YearPanel.propTypes = {
   rootPrefixCls: PropTypes.string,
   value: PropTypes.object,
   defaultValue: PropTypes.object,
+  renderFooter: PropTypes.func,
 };
 
 YearPanel.defaultProps = {
