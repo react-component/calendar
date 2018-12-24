@@ -256,7 +256,7 @@ ReactDOM.render((<div
         onChange={onStandaloneChange}
         disabledDate={disabledDate}
         onSelect={onStandaloneSelect}
-        renderFooter={() => 'extra footer'}
+        renderFooter={(mode) => (<span>{mode} extra footer</span>)}
       />
     </div>
     <div style={{ float: 'left', width: 300 }}>

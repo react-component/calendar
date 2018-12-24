@@ -472,6 +472,38 @@ describe('Calendar', () => {
       expect(calendar.find('.rc-calendar-decade-panel').hostNodes().length).toBe(1);
       expect(calendar.find('.rc-calendar-decade-panel-decade').hostNodes().length).toBe(12);
     });
+
+    it('extra footer works', () => {
+      const renderFooter = (mode) => (<span className="extra-node">{mode}</span>);
+
+      calendar = mount(
+        <Calendar
+          format={format}
+          showToday
+          showWeekNumber
+          renderFooter={renderFooter}
+        />
+      );
+
+      let extraNode = calendar.find('.extra-node');
+      expect(extraNode.length).toBe(1);
+      expect(extraNode.text()).toBe('date');
+
+      calendar.find('.rc-calendar-month-select').hostNodes().simulate('click');
+      extraNode = calendar.find('.rc-calendar-month-panel .extra-node');
+      expect(extraNode.length).toBe(1);
+      expect(extraNode.text()).toBe('month');
+
+      calendar.find('.rc-calendar-year-select').hostNodes().simulate('click');
+      extraNode = calendar.find('.rc-calendar-year-panel .extra-node');
+      expect(extraNode.length).toBe(1);
+      expect(extraNode.text()).toBe('year');
+
+      calendar.find('.rc-calendar-year-panel-decade-select').hostNodes().simulate('click');
+      extraNode = calendar.find('.rc-calendar-decade-panel .extra-node');
+      expect(extraNode.length).toBe(1);
+      expect(extraNode.text()).toBe('decade');
+    });
   });
 
 

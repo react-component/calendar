@@ -36,7 +36,7 @@ export default
 
   render() {
     const value = this.state.value;
-    const { locale } = this.props;
+    const { locale, renderFooter } = this.props;
     const currentYear = value.year();
     const startYear = parseInt(currentYear / 100, 10) * 100;
     const preYear = startYear - 10;
@@ -57,6 +57,8 @@ export default
         index++;
       }
     }
+
+    const footer = renderFooter && renderFooter('decade');
 
     const decadesEls = decades.map((row, decadeIndex) => {
       const tds = row.map(decadeData => {
@@ -122,6 +124,11 @@ export default
             </tbody>
           </table>
         </div>
+
+        {footer && (
+          <div className={`${prefixCls}-footer`}>
+            {footer}
+          </div>)}
       </div>);
   }
 }
@@ -131,6 +138,7 @@ DecadePanel.propTypes = {
   value: PropTypes.object,
   defaultValue: PropTypes.object,
   rootPrefixCls: PropTypes.string,
+  renderFooter: PropTypes.func,
 };
 
 DecadePanel.defaultProps = {

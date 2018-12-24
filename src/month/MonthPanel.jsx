@@ -18,6 +18,7 @@ const MonthPanel = createReactClass({
     onChange: PropTypes.func,
     disabledDate: PropTypes.func,
     onSelect: PropTypes.func,
+    renderFooter: PropTypes.func,
   },
 
   getDefaultProps() {
@@ -67,11 +68,11 @@ const MonthPanel = createReactClass({
   render() {
     const props = this.props;
     const value = this.state.value;
-    const cellRender = props.cellRender;
-    const contentRender = props.contentRender;
-    const { locale } = props;
+    const { locale, cellRender, contentRender, renderFooter } = props;
     const year = value.year();
     const prefixCls = this.prefixCls;
+
+    const footer = renderFooter && renderFooter('month');
 
     return (
       <div className={prefixCls} style={props.style}>
@@ -112,6 +113,10 @@ const MonthPanel = createReactClass({
               prefixCls={prefixCls}
             />
           </div>
+          {footer && (
+            <div className={`${prefixCls}-footer`}>
+              {footer}
+            </div>)}
         </div>
       </div>);
   },

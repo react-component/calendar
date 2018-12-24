@@ -197,7 +197,7 @@ const Calendar = createReactClass({
     const {
       locale, prefixCls, disabledDate,
       dateInputPlaceholder, timePicker,
-      disabledTime, clearIcon,
+      disabledTime, clearIcon, renderFooter,
     } = props;
     const { value, selectedValue, mode } = state;
     const showTimePicker = mode === 'time';
@@ -253,6 +253,7 @@ const Calendar = createReactClass({
             value={value}
             onValueChange={this.setValue}
             onPanelChange={this.onPanelChange}
+            renderFooter={renderFooter}
             showTimePicker={showTimePicker}
             prefixCls={prefixCls}
           />
@@ -278,6 +279,7 @@ const Calendar = createReactClass({
 
           <CalendarFooter
             showOk={props.showOk}
+            mode={mode}
             renderFooter={props.renderFooter}
             locale={locale}
             prefixCls={prefixCls}

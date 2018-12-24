@@ -20,6 +20,7 @@ const CalendarFooter = createReactClass({
     value: PropTypes.object,
     renderFooter: PropTypes.func,
     defaultValue: PropTypes.object,
+    mode: PropTypes.string,
   },
 
   onSelect(value) {
@@ -32,9 +33,9 @@ const CalendarFooter = createReactClass({
 
   render() {
     const props = this.props;
-    const { value, prefixCls, showOk, timePicker, renderFooter } = props;
+    const { value, prefixCls, showOk, timePicker, renderFooter, mode } = props;
     let footerEl = null;
-    const extraFooter = renderFooter();
+    const extraFooter = renderFooter(mode);
     if (props.showToday || timePicker || extraFooter) {
       let nowEl;
       if (props.showToday) {
