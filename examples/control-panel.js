@@ -7275,6 +7275,7 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
   propTypes: {
     prefixCls: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.string,
     dateInputPlaceholder: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
+    seperator: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.string,
     defaultValue: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
     value: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
     hoverValue: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
@@ -7306,6 +7307,7 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
   getDefaultProps: function getDefaultProps() {
     return {
       type: 'both',
+      seperator: '~',
       defaultSelectedValue: [],
       onValueChange: noop,
       onHoverChange: noop,
@@ -7831,6 +7833,7 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
         state = this.state;
     var prefixCls = props.prefixCls,
         dateInputPlaceholder = props.dateInputPlaceholder,
+        seperator = props.seperator,
         timePicker = props.timePicker,
         showOk = props.showOk,
         locale = props.locale,
@@ -7931,7 +7934,7 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
             'span',
             { className: prefixCls + '-range-middle' },
-            '~'
+            seperator
           ),
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__range_calendar_CalendarPart__["a" /* default */], __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, props, newProps, {
             hoverValue: hoverValue,
