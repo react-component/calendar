@@ -20,7 +20,7 @@ describe('RangeCalendar', () => {
   });
 
   it('custom sperator', () => {
-    const wrapper = render(<RangeCalendar seperator="至" />);
+    const wrapper = render(<RangeCalendar separator="至" />);
     expect(wrapper.find('.rc-calendar-range-middle').text()).toBe('至');
   });
 
