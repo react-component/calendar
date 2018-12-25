@@ -439,6 +439,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td></td>
           <td>specific the clear icon.</td>
         </tr>
+        <tr>
+          <td>seperator</td>
+          <td>String</td>
+          <td>~</td>
+          <td>specify the custom seperator</td>
+        </tr>
     </tbody>
 </table>
 
