@@ -163,12 +163,10 @@ const Calendar = createReactClass({
     this.onSelect(value);
   },
   onToday() {
-    const { state: { value }, props: { defaultValue } } = this;
-    let currentValue = value;
-    if (defaultValue) {
-      currentValue = defaultValue;
-    }
-    const now = getTodayTime(currentValue);
+    const { value } = this.state;
+    const now = getTodayTime(value);
+    console.log('now');
+    console.log(now);
     this.onSelect(now, {
       source: 'todayButton',
     });
@@ -197,8 +195,12 @@ const Calendar = createReactClass({
   },
 
   render() {
-    console.log(this.props);
     console.log('this is calendar');
+    console.log(this.props);
+    console.log('this is defaultValue');
+    console.log(this.props.defaultValue.format('YYYY-MM-DD'));
+    console.log('this is value');
+    console.log(this.props.value);
     const { props, state } = this;
     const {
       locale, prefixCls, disabledDate,

@@ -72,8 +72,6 @@ var MonthCalendar = createReactClass({
     }
   },
   render: function render() {
-    console.log('this is month calendar');
-    console.log(this.props);
     var props = this.props,
         state = this.state;
     var mode = state.mode,

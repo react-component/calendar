@@ -161,14 +161,11 @@ var Calendar = createReactClass({
     this.onSelect(value);
   },
   onToday: function onToday() {
-    var value = this.state.value,
-        defaultValue = this.props.defaultValue;
+    var value = this.state.value;
 
-    var currentValue = value;
-    if (defaultValue) {
-      currentValue = defaultValue;
-    }
-    var now = getTodayTime(currentValue);
+    var now = getTodayTime(value);
+    console.log('now');
+    console.log(now);
     this.onSelect(now, {
       source: 'todayButton'
     });
@@ -195,8 +192,12 @@ var Calendar = createReactClass({
     this.setValue(_goTime(this.state.value, direction, unit));
   },
   render: function render() {
-    console.log(this.props);
     console.log('this is calendar');
+    console.log(this.props);
+    console.log('this is defaultValue');
+    console.log(props.defaultValue.format('YYYY-MM-DD'));
+    console.log('this is value');
+    console.log(props.value);
     var props = this.props,
         state = this.state;
     var locale = props.locale,
