@@ -195,9 +195,9 @@ var Calendar = createReactClass({
     console.log('this is calendar');
     console.log(this.props);
     console.log('this is defaultValue');
-    console.log(props.defaultValue.format('YYYY-MM-DD'));
+    console.log(this.props.defaultValue.format('YYYY-MM-DD'));
     console.log('this is value');
-    console.log(props.value);
+    console.log(this.props.value);
     var props = this.props,
         state = this.state;
     var locale = props.locale,
