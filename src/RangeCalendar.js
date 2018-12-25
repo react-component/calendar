@@ -76,7 +76,7 @@ const RangeCalendar = createReactClass({
   propTypes: {
     prefixCls: PropTypes.string,
     dateInputPlaceholder: PropTypes.any,
-    seperator: PropTypes.string,
+    separator: PropTypes.string,
     defaultValue: PropTypes.any,
     value: PropTypes.any,
     hoverValue: PropTypes.any,
@@ -108,7 +108,7 @@ const RangeCalendar = createReactClass({
   getDefaultProps() {
     return {
       type: 'both',
-      seperator: '~',
+      separator: '~',
       defaultSelectedValue: [],
       onValueChange: noop,
       onHoverChange: noop,
@@ -595,7 +595,7 @@ const RangeCalendar = createReactClass({
   render() {
     const { props, state } = this;
     const {
-      prefixCls, dateInputPlaceholder, seperator,
+      prefixCls, dateInputPlaceholder, separator,
       timePicker, showOk, locale, showClear,
       showToday, type, clearIcon,
     } = props;
@@ -701,7 +701,7 @@ const RangeCalendar = createReactClass({
               enableNext={!isClosestMonths || this.isMonthYearPanelShow(mode[1])}
               clearIcon={clearIcon}
             />
-            <span className={`${prefixCls}-range-middle`}>{seperator}</span>
+            <span className={`${prefixCls}-range-middle`}>{separator}</span>
             <CalendarPart
               {...props}
               {...newProps}

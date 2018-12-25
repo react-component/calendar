@@ -440,10 +440,10 @@ http://react-component.github.io/calendar/examples/index.html
           <td>specify the clear icon.</td>
         </tr>
         <tr>
-          <td>seperator</td>
+          <td>separator</td>
           <td>String</td>
           <td>~</td>
-          <td>specify the custom seperator</td>
+          <td>specify the custom separator</td>
         </tr>
     </tbody>
 </table>
