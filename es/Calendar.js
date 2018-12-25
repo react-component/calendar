@@ -161,9 +161,14 @@ var Calendar = createReactClass({
     this.onSelect(value);
   },
   onToday: function onToday() {
-    var value = this.state.value;
+    var value = this.state.value,
+        defaultValue = this.props.defaultValue;
 
-    var now = getTodayTime(value);
+    var currentValue = value;
+    if (defaultValue) {
+      currentValue = defaultValue;
+    }
+    var now = getTodayTime(currentValue);
     this.onSelect(now, {
       source: 'todayButton'
     });
