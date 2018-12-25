@@ -196,6 +196,7 @@ var Calendar = createReactClass({
   },
   render: function render() {
     console.log(this.props);
+    console.log('this is calendar');
     var props = this.props,
         state = this.state;
     var locale = props.locale,

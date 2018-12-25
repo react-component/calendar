@@ -168,6 +168,8 @@ var Picker = createReactClass({
     }
   },
   render: function render() {
+    console.log('this is picker');
+    console.log(this.props);
     var props = this.props;
     var prefixCls = props.prefixCls,
         placement = props.placement,

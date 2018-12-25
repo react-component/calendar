@@ -68,6 +68,8 @@ const FullCalendar = createReactClass({
     this.props.onTypeChange(type);
   },
   render() {
+    console.log('this is fulll cal');
+    console.log(this.props);
     const props = this.props;
     const {
       locale,

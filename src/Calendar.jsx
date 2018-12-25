@@ -198,6 +198,7 @@ const Calendar = createReactClass({
 
   render() {
     console.log(this.props);
+    console.log('this is calendar');
     const { props, state } = this;
     const {
       locale, prefixCls, disabledDate,
