@@ -190,6 +190,7 @@ var Calendar = createReactClass({
     this.setValue(_goTime(this.state.value, direction, unit));
   },
   render: function render() {
+    console.log(this.props);
     var props = this.props,
         state = this.state;
     var locale = props.locale,
