@@ -166,15 +166,15 @@ class Demo extends React.Component {
             ({ value }) => {
               return (
                 <span tabIndex="0">
-                <input
-                  placeholder="please select"
-                  style={{ width: 250 }}
-                  disabled={state.disabled}
-                  readOnly
-                  tabIndex="-1"
-                  className="ant-calendar-picker-input ant-input"
-                  value={value && value.format(getFormat(state.showTime)) || ''}
-                />
+                  <input
+                    placeholder="please select"
+                    style={{ width: 250 }}
+                    disabled={state.disabled}
+                    readOnly
+                    tabIndex="-1"
+                    className="ant-calendar-picker-input ant-input"
+                    value={value && value.format(getFormat(state.showTime)) || ''}
+                  />
                 </span>
               );
             }
@@ -208,7 +208,7 @@ class DemoMultiFormat extends React.Component {
     return (<div style={{ width: 400, margin: 20 }}>
       <div style={{ marginBottom: 10 }}>
         Accepts multiple input formats
-        <br/>
+        <br />
         <small>{multiFormats.join(', ')}</small>
       </div>
       <Calendar
@@ -218,6 +218,7 @@ class DemoMultiFormat extends React.Component {
         format={multiFormats}
         value={state.value}
         onChange={this.onChange}
+        focusablePanel
       />
     </div>);
   }

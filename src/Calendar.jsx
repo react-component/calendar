@@ -43,6 +43,7 @@ const Calendar = createReactClass({
     renderFooter: PropTypes.func,
     renderSidebar: PropTypes.func,
     clearIcon: PropTypes.node,
+    focusablePanel: PropTypes.bool,
   },
 
   mixins: [CommonMixin, CalendarMixin],
@@ -251,7 +252,10 @@ const Calendar = createReactClass({
       props.renderSidebar(),
       (<div className={`${prefixCls}-panel`} key="panel">
         {dateInputElement}
-        <div className={`${prefixCls}-date-panel`}>
+        <div
+          tabIndex={this.props.focusablePanel ? 0 : undefined}
+          className={`${prefixCls}-date-panel`}
+        >
           <CalendarHeader
             locale={locale}
             mode={mode}
