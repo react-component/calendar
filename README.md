@@ -437,7 +437,7 @@ http://react-component.github.io/calendar/examples/index.html
           <td>clearIcon</td>
           <td>ReactNode</td>
           <td></td>
-          <td>specific the clear icon.</td>
+          <td>specify the clear icon.</td>
         </tr>
         <tr>
           <td>seperator</td>
