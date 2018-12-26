@@ -29,11 +29,11 @@ describe('DatePicker', () => {
       onChange={noop}
       readOnly
       value={value && `${value[0] &&
-      value[0].format(format)} - ${value[1] && value[1].format(format)}`}
+        value[0].format(format)} - ${value[1] && value[1].format(format)}`}
     />);
   }
 
-  function renderPicker(props) {
+  function renderPicker(props, calendarProps) {
     return mount(
       <DatePicker
         calendar={
@@ -41,6 +41,7 @@ describe('DatePicker', () => {
             locale={CalendarLocale}
             showOk
             showClear
+            {...calendarProps}
           />
         }
         defaultValue={VALUE}
@@ -192,5 +193,14 @@ describe('DatePicker', () => {
     jest.runAllTimers();
     expect(document.activeElement).toBeDefined();
     expect(document.activeElement.classList).toContain('rc-calendar-input');
+  });
+
+  it('auto focuses the calendar div when date input is not shown', () => {
+    jest.useFakeTimers();
+    const picker = renderPicker({ value: moment() }, { showDateInput: false });
+    picker.find('.rc-calendar-picker-input').simulate('click');
+    jest.runAllTimers();
+    expect(document.activeElement).toBeDefined();
+    expect(document.activeElement.classList).toContain('rc-calendar');
   });
 });
