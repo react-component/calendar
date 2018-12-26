@@ -14,11 +14,11 @@ var defaultDisabledTime = {
 };
 
 export function getTodayTime(value) {
-  console.log('value in get today time');
-  console.log(value);
+  var currentDate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
   var today = moment();
   today.locale(value.locale()).utcOffset(value.utcOffset());
-  return today;
+  return currentDate || today;
 }
 
 export function getTitleString(value) {

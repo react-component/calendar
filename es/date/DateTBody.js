@@ -37,6 +37,7 @@ var DateTBody = createReactClass({
     prefixCls: PropTypes.string,
     selectedValue: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
     value: PropTypes.object,
+    currentDate: PropTypes.object,
     hoverValue: PropTypes.any,
     showWeekNumber: PropTypes.bool
   },
@@ -55,13 +56,14 @@ var DateTBody = createReactClass({
         showWeekNumber = props.showWeekNumber,
         dateRender = props.dateRender,
         disabledDate = props.disabledDate,
-        hoverValue = props.hoverValue;
+        hoverValue = props.hoverValue,
+        currentDate = props.currentDate;
 
     var iIndex = void 0;
     var jIndex = void 0;
     var current = void 0;
     var dateTable = [];
-    var today = getTodayTime(value);
+    var today = getTodayTime(value, currentDate);
     var cellClass = prefixCls + '-cell';
     var weekNumberCellClass = prefixCls + '-week-number-cell';
     var dateClass = prefixCls + '-date';

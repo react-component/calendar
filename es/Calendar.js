@@ -24,6 +24,7 @@ var Calendar = createReactClass({
     style: PropTypes.object,
     defaultValue: PropTypes.object,
     value: PropTypes.object,
+    currentDate: PropTypes.object,
     selectedValue: PropTypes.object,
     mode: PropTypes.oneOf(['time', 'date', 'month', 'year', 'decade']),
     locale: PropTypes.object,
@@ -162,10 +163,9 @@ var Calendar = createReactClass({
   },
   onToday: function onToday() {
     var value = this.state.value;
+    var currentDate = this.props.currentDate;
 
-    var now = getTodayTime(value);
-    console.log('now');
-    console.log(now);
+    var now = getTodayTime(value, currentDate);
     this.onSelect(now, {
       source: 'todayButton'
     });
@@ -192,12 +192,6 @@ var Calendar = createReactClass({
     this.setValue(_goTime(this.state.value, direction, unit));
   },
   render: function render() {
-    console.log('this is calendar');
-    console.log(this.props);
-    console.log('this is defaultValue');
-    console.log(this.props.defaultValue.format('YYYY-MM-DD'));
-    console.log('this is value');
-    console.log(this.props.value);
     var props = this.props,
         state = this.state;
     var locale = props.locale,
@@ -206,7 +200,8 @@ var Calendar = createReactClass({
         dateInputPlaceholder = props.dateInputPlaceholder,
         timePicker = props.timePicker,
         disabledTime = props.disabledTime,
-        clearIcon = props.clearIcon;
+        clearIcon = props.clearIcon,
+        currentDate = props.currentDate;
     var value = state.value,
         selectedValue = state.selectedValue,
         mode = state.mode;
@@ -278,6 +273,7 @@ var Calendar = createReactClass({
           'div',
           { className: prefixCls + '-body' },
           React.createElement(DateTable, {
+            currentDate: currentDate,
             locale: locale,
             value: value,
             selectedValue: selectedValue,
@@ -299,7 +295,7 @@ var Calendar = createReactClass({
           showDateInput: props.showDateInput,
           timePicker: timePicker,
           selectedValue: selectedValue,
-          value: value,
+          value: this.props.defaultValue || value,
           disabledDate: disabledDate,
           okDisabled: props.showOk && !this.isAllowedDate(selectedValue),
           onOk: this.onOk,
