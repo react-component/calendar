@@ -20,14 +20,14 @@
   ],
   "main": "lib/index",
   "module": "es/index",
-  "homepage": "http://github.com/react-component/calendar",
+  "homepage": "http://github.com/semeness/calendar",
   "author": "yiminghe@gmail.com",
   "repository": {
     "type": "git",
-    "url": "git@github.com:react-component/calendar.git"
+    "url": "git@github.com:semeness/calendar.git"
   },
   "bugs": {
-    "url": "http://github.com/react-component/calendar/issues"
+    "url": "http://github.com/semeness/calendar/issues"
   },
   "licenses": "MIT",
   "config": {

@@ -23,8 +23,6 @@ node_modules
 dist
 *.css
 build
-lib
-es
 coverage
 yarn.lock
 .vscode
