@@ -21,6 +21,7 @@ var CalendarFooter = createReactClass({
     showOk: PropTypes.bool,
     onSelect: PropTypes.func,
     value: PropTypes.object,
+    currentDate: PropTypes.object,
     renderFooter: PropTypes.func,
     defaultValue: PropTypes.object
   },

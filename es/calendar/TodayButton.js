@@ -5,6 +5,7 @@ export default function TodayButton(_ref) {
   var prefixCls = _ref.prefixCls,
       locale = _ref.locale,
       value = _ref.value,
+      currentDate = _ref.currentDate,
       timePicker = _ref.timePicker,
       disabled = _ref.disabled,
       disabledDate = _ref.disabledDate,
@@ -12,7 +13,7 @@ export default function TodayButton(_ref) {
       text = _ref.text;
 
   var localeNow = (!text && timePicker ? locale.now : text) || locale.today;
-  var disabledToday = disabledDate && !isAllowedDate(getTodayTime(value), disabledDate);
+  var disabledToday = disabledDate && !isAllowedDate(getTodayTime(value, currentDate), disabledDate);
   var isDisabled = disabledToday || disabled;
   var disabledTodayClass = isDisabled ? prefixCls + '-today-btn-disabled' : '';
   return React.createElement(
@@ -21,7 +22,7 @@ export default function TodayButton(_ref) {
       className: prefixCls + '-today-btn ' + disabledTodayClass,
       role: 'button',
       onClick: isDisabled ? null : onToday,
-      title: getTodayTimeStr(value)
+      title: getTodayTimeStr(value, currentDate)
     },
     localeNow
   );

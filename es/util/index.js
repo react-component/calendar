@@ -26,7 +26,9 @@ export function getTitleString(value) {
 }
 
 export function getTodayTimeStr(value) {
-  var today = getTodayTime(value);
+  var currentDate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+  var today = getTodayTime(value, currentDate);
   return getTitleString(today);
 }
 

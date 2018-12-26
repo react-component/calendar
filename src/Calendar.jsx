@@ -22,7 +22,6 @@ const Calendar = createReactClass({
     style: PropTypes.object,
     defaultValue: PropTypes.object,
     value: PropTypes.object,
-    currentDate: PropTypes.object,
     selectedValue: PropTypes.object,
     mode: PropTypes.oneOf(['time', 'date', 'month', 'year', 'decade']),
     locale: PropTypes.object,
@@ -165,8 +164,8 @@ const Calendar = createReactClass({
   },
   onToday() {
     const { value } = this.state;
-    const { currentDate } = this.props;
-    const now = getTodayTime(value, currentDate);
+    const { defaultValue } = this.props;
+    const now = getTodayTime(value, defaultValue);
     this.onSelect(now, {
       source: 'todayButton',
     });
@@ -199,7 +198,7 @@ const Calendar = createReactClass({
     const {
       locale, prefixCls, disabledDate,
       dateInputPlaceholder, timePicker,
-      disabledTime, clearIcon, currentDate,
+      disabledTime, clearIcon, defaultValue,
     } = props;
     const { value, selectedValue, mode } = state;
     const showTimePicker = mode === 'time';
@@ -267,7 +266,7 @@ const Calendar = createReactClass({
             : null}
           <div className={`${prefixCls}-body`}>
             <DateTable
-              currentDate={currentDate}
+              currentDate={defaultValue}
               locale={locale}
               value={value}
               selectedValue={selectedValue}
@@ -280,6 +279,7 @@ const Calendar = createReactClass({
           </div>
 
           <CalendarFooter
+            currentDate={defaultValue}
             showOk={props.showOk}
             renderFooter={props.renderFooter}
             locale={locale}

@@ -22,8 +22,8 @@ export function getTitleString(value) {
   return value.format('LL');
 }
 
-export function getTodayTimeStr(value) {
-  const today = getTodayTime(value);
+export function getTodayTimeStr(value, currentDate = null) {
+  const today = getTodayTime(value, currentDate);
   return getTitleString(today);
 }
 
