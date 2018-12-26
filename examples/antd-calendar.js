@@ -218,7 +218,7 @@ class DemoMultiFormat extends React.Component {
         format={multiFormats}
         value={state.value}
         onChange={this.onChange}
-        focusablePanel
+        focusablePanel={false}
       />
     </div>);
   }

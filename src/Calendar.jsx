@@ -55,6 +55,7 @@ const Calendar = createReactClass({
       timePicker: null,
       onOk: noop,
       onPanelChange: noop,
+      focusablePanel: true,
     };
   },
   getInitialState() {
