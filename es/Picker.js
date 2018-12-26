@@ -129,7 +129,7 @@ var Picker = createReactClass({
     var defaultValue = value;
     var extraProps = {
       ref: this.saveCalendarRef,
-      defaultValue: defaultValue || calendarProps.defaultValue,
+      defaultValue: calendarProps.defaultValue || defaultValue,
       selectedValue: value,
       onKeyDown: this.onCalendarKeyDown,
       onOk: createChainedFunction(calendarProps.onOk, this.onCalendarOk),
