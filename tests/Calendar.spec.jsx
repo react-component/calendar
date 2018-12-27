@@ -70,20 +70,20 @@ describe('Calendar', () => {
       // use timePicker's defaultValue if users haven't select a time
       expect(
         wrapper.find('.rc-calendar-input').at(0).getDOMNode().value
-      ).toBe('3/29/2017 00:00:00');
+      ).toBe('2017-03-29 00:00:00');
 
       wrapper.find('.rc-calendar-time-picker-btn').simulate('click');
       wrapper.find('.rc-time-picker-panel-select ul').at(0).find('li').at(6).simulate('click');
       // update time to timePicker's time
       expect(
         wrapper.find('.rc-calendar-input').at(0).getDOMNode().value
-      ).toBe('3/29/2017 06:00:00');
+      ).toBe('2017-03-29 06:00:00');
 
       wrapper.find('.rc-calendar-cell').at(10).simulate('click');
       // still use timePicker's time
       expect(
         wrapper.find('.rc-calendar-input').at(0).getDOMNode().value
-      ).toBe('3/8/2017 06:00:00');
+      ).toBe('2017-03-08 06:00:00');
     });
     it('timePicker date have no changes when hover', () => {
       const timePicker = <TimePickerPanel defaultValue={moment('00:00:00', 'HH:mm:ss')} />;
