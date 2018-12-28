@@ -181,14 +181,14 @@ const DateTBody = createReactClass({
         }
 
         if (disabledDate) {
-          if (disabledDate(current, value)) {
+          if (disabledDate(current, value, hoverValue)) {
             disabled = true;
 
-            if (!last || !disabledDate(last, value)) {
+            if (!last || !disabledDate(last, value, hoverValue)) {
               cls += ` ${firstDisableClass}`;
             }
 
-            if (!next || !disabledDate(next, value)) {
+            if (!next || !disabledDate(next, value, hoverValue)) {
               cls += ` ${lastDisableClass}`;
             }
           }
