@@ -69,16 +69,6 @@ export default class DateInput extends React.Component {
     this.props.onClear(null);
   }
 
-  getRootDOMNode = () => {
-    return ReactDOM.findDOMNode(this);
-  }
-
-  focus = () => {
-    if (dateInputInstance) {
-      dateInputInstance.focus();
-    }
-  }
-
   onInputChange = (event) => {
     const str = event.target.value;
     const { disabledDate, format, onChange, selectedValue } = this.props;
@@ -130,10 +120,6 @@ export default class DateInput extends React.Component {
     }
   }
 
-  saveDateInput = (dateInput) => {
-    dateInputInstance = dateInput;
-  }
-
   onFocus = () => {
     this.setState({ hasFocus: true });
   }
@@ -143,6 +129,20 @@ export default class DateInput extends React.Component {
       hasFocus: false,
       str: formatDate(prevProps.value, prevProps.format),
     }));
+  }
+
+  getRootDOMNode = () => {
+    return ReactDOM.findDOMNode(this);
+  }
+
+  focus = () => {
+    if (dateInputInstance) {
+      dateInputInstance.focus();
+    }
+  }
+
+  saveDateInput = (dateInput) => {
+    dateInputInstance = dateInput;
   }
 
   render() {
