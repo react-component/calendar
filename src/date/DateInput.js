@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { formatDate } from '../util';
 
-let cachedSelectionStart, cachedSelectionEnd, dateInputInstance;
+let cachedSelectionStart;
+let cachedSelectionEnd;
+let dateInputInstance;
 
 export default class DateInput extends React.Component {
   static propTypes = {
@@ -31,13 +33,13 @@ export default class DateInput extends React.Component {
       str: formatDate(selectedValue, this.props.format),
       invalid: false,
       hasFocus: false,
-    }
+    };
   }
 
   static getDerivedStateFromProps(nextProps, state) {
     let newState = {};
 
-    if(dateInputInstance) {
+    if (dateInputInstance) {
       cachedSelectionStart = dateInputInstance.selectionStart;
       cachedSelectionEnd = dateInputInstance.selectionEnd;
     }
@@ -57,6 +59,23 @@ export default class DateInput extends React.Component {
     if (this.state.hasFocus && !this.state.invalid &&
         !(cachedSelectionStart === 0 && cachedSelectionEnd === 0)) {
       dateInputInstance.setSelectionRange(cachedSelectionStart, cachedSelectionEnd);
+    }
+  }
+
+  onClear = () => {
+    this.setState({
+      str: '',
+    });
+    this.props.onClear(null);
+  }
+
+  getRootDOMNode = () => {
+    return ReactDOM.findDOMNode(this);
+  }
+
+  focus = () => {
+    if (dateInputInstance) {
+      dateInputInstance.focus();
     }
   }
 
@@ -111,23 +130,6 @@ export default class DateInput extends React.Component {
     }
   }
 
-  onClear = () => {
-    this.setState({
-      str: '',
-    });
-    this.props.onClear(null);
-  }
-
-  getRootDOMNode = () => {
-    return ReactDOM.findDOMNode(this);
-  }
-
-  focus = () => {
-    if (dateInputInstance) {
-      dateInputInstance.focus();
-    }
-  }
-
   saveDateInput = (dateInput) => {
     dateInputInstance = dateInput;
   }
@@ -174,4 +176,4 @@ export default class DateInput extends React.Component {
       </div>
     );
   }
-};
+}

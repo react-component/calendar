@@ -30,9 +30,9 @@ export const defaultProp = {
   renderSidebar() {
     return null;
   },
-}
+};
 
-export const CommonMixinWrapper = ComposeComponent => class extends ComposeComponent {
+export const commonMixinWrapper = ComposeComponent => class extends ComposeComponent {
   static displayName = 'CommonMixinWrapper';
 
   shouldComponentUpdate(nextProps) {

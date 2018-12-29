@@ -7,7 +7,7 @@ import CalendarPart from './range-calendar/CalendarPart';
 import TodayButton from './calendar/TodayButton';
 import OkButton from './calendar/OkButton';
 import TimePickerButton from './calendar/TimePickerButton';
-import { CommonMixinWrapper, propType, defaultProp } from './mixin/CommonMixin';
+import { commonMixinWrapper, propType, defaultProp } from './mixin/CommonMixin';
 import { syncTime, getTodayTime, isAllowedDate } from './util';
 import { goTime, goStartMonth, goEndMonth, includesTime } from './util/toTime';
 
@@ -101,6 +101,7 @@ class RangeCalendar extends React.Component {
     disabledDate: PropTypes.func,
     disabledTime: PropTypes.func,
     clearIcon: PropTypes.node,
+    onKeyDown: PropTypes.func,
   }
 
   static defaultProps = {
@@ -130,24 +131,6 @@ class RangeCalendar extends React.Component {
       showTimePicker: false,
       mode: props.mode || ['date', 'date'],
     };
-  }
-
-  static getDerivedStateFromProps(nextProps, state) {
-    let newState = {};
-    if ('value' in nextProps) {
-      newState.value = normalizeAnchor(nextProps, 0);
-    }
-    if ('hoverValue' in nextProps && !isArraysEqual(state.hoverValue, nextProps.hoverValue)) {
-      newState.hoverValue = nextProps.hoverValue;
-    }
-    if ('selectedValue' in nextProps) {
-      newState.selectedValue = nextProps.selectedValue;
-      newState.prevSelectedValue = nextProps.selectedValue;
-    }
-    if ('mode' in nextProps && !isArraysEqual(state.mode, nextProps.mode)) {
-      newState = { mode: nextProps.mode };
-    }
-    return newState;
   }
 
   onDatePanelEnter = () => {
@@ -415,6 +398,24 @@ class RangeCalendar extends React.Component {
     }
     const newValue = [state.value[0], value || state.value[1]];
     props.onPanelChange(newValue, newMode);
+  }
+
+  static getDerivedStateFromProps(nextProps, state) {
+    let newState = {};
+    if ('value' in nextProps) {
+      newState.value = normalizeAnchor(nextProps, 0);
+    }
+    if ('hoverValue' in nextProps && !isArraysEqual(state.hoverValue, nextProps.hoverValue)) {
+      newState.hoverValue = nextProps.hoverValue;
+    }
+    if ('selectedValue' in nextProps) {
+      newState.selectedValue = nextProps.selectedValue;
+      newState.prevSelectedValue = nextProps.selectedValue;
+    }
+    if ('mode' in nextProps && !isArraysEqual(state.mode, nextProps.mode)) {
+      newState = { mode: nextProps.mode };
+    }
+    return newState;
   }
 
   getStartValue = () => {
@@ -758,6 +759,6 @@ class RangeCalendar extends React.Component {
       </div>
     );
   }
-};
+}
 
-export default CommonMixinWrapper(RangeCalendar);
+export default commonMixinWrapper(RangeCalendar);

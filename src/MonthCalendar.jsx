@@ -4,11 +4,11 @@ import KeyCode from 'rc-util/lib/KeyCode';
 import CalendarHeader from './calendar/CalendarHeader';
 import CalendarFooter from './calendar/CalendarFooter';
 import {
-  CalendarMixinWrapper,
+  calendarMixinWrapper,
   calendarMixinPropTypes,
   calendarMixinDefaultProps,
 } from './mixin/CalendarMixin';
-import { CommonMixinWrapper, propType, defaultProp } from './mixin/CommonMixin';
+import { commonMixinWrapper, propType, defaultProp } from './mixin/CommonMixin';
 import moment from 'moment';
 
 class MonthCalendar extends React.Component {
@@ -17,6 +17,11 @@ class MonthCalendar extends React.Component {
     ...propType,
     monthCellRender: PropTypes.func,
     dateCellRender: PropTypes.func,
+    value: PropTypes.object,
+    defaultValue: PropTypes.object,
+    selectedValue: PropTypes.object,
+    defaultSelectedValue: PropTypes.object,
+    disabledDate: PropTypes.object,
   }
 
   static defaultProps = Object.assign({}, defaultProp, calendarMixinDefaultProps);
@@ -28,7 +33,7 @@ class MonthCalendar extends React.Component {
       mode: 'month',
       value: props.value || props.defaultValue || moment(),
       selectedValue: props.selectedValue || props.defaultSelectedValue,
-    }
+    };
   }
 
   onKeyDown = (event) => {
@@ -114,6 +119,6 @@ class MonthCalendar extends React.Component {
       children,
     });
   }
-};
+}
 
-export default CalendarMixinWrapper(CommonMixinWrapper(MonthCalendar));
+export default calendarMixinWrapper(commonMixinWrapper(MonthCalendar));

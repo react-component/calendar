@@ -249,4 +249,4 @@ export default class DateTBody extends React.Component {
       {tableHtml}
     </tbody>);
   }
-};
+}

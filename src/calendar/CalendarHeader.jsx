@@ -33,6 +33,7 @@ export default class CalendarHeader extends React.Component {
     enableNext: PropTypes.any,
     disabledMonth: PropTypes.func,
     renderFooter: PropTypes.func,
+    onMonthSelect: PropTypes.func,
   }
 
   static defaultProps = {
@@ -220,4 +221,4 @@ export default class CalendarHeader extends React.Component {
       {panel}
     </div>);
   }
-};
+}

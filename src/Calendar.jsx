@@ -6,12 +6,12 @@ import DateTable from './date/DateTable';
 import CalendarHeader from './calendar/CalendarHeader';
 import CalendarFooter from './calendar/CalendarFooter';
 import {
-  CalendarMixinWrapper,
+  calendarMixinWrapper,
   calendarMixinPropTypes,
   calendarMixinDefaultProps,
   getNowByCurrentStateValue,
 } from './mixin/CalendarMixin';
-import { CommonMixinWrapper, propType, defaultProp } from './mixin/CommonMixin';
+import { commonMixinWrapper, propType, defaultProp } from './mixin/CommonMixin';
 import DateInput from './date/DateInput';
 import { getTimeConfig, getTodayTime, syncTime } from './util';
 import { goStartMonth, goEndMonth, goTime } from './util/toTime';
@@ -349,4 +349,4 @@ class Calendar extends React.Component {
   }
 }
 
-export default CalendarMixinWrapper(CommonMixinWrapper(Calendar));
+export default calendarMixinWrapper(commonMixinWrapper(Calendar));

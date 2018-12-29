@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import DateTable from './date/DateTable';
 import MonthTable from './month/MonthTable';
 import {
-  CalendarMixinWrapper,
+  calendarMixinWrapper,
   calendarMixinPropTypes,
   calendarMixinDefaultProps,
   getNowByCurrentStateValue,
 } from './mixin/CalendarMixin';
-import { CommonMixinWrapper, propType, defaultProp } from './mixin/CommonMixin';
+import { commonMixinWrapper, propType, defaultProp } from './mixin/CommonMixin';
 import CalendarHeader from './full-calendar/CalendarHeader';
 import moment from 'moment';
 
@@ -31,6 +31,10 @@ class FullCalendar extends React.Component {
     headerRender: PropTypes.func,
     showHeader: PropTypes.bool,
     disabledDate: PropTypes.func,
+    value: PropTypes.object,
+    defaultValue: PropTypes.object,
+    selectedValue: PropTypes.object,
+    defaultSelectedValue: PropTypes.object,
   }
 
   static defaultProps = {
@@ -58,7 +62,13 @@ class FullCalendar extends React.Component {
       type,
       value: props.value || props.defaultValue || moment(),
       selectedValue: props.selectedValue || props.defaultSelectedValue,
-    }
+    };
+  }
+
+  onMonthSelect = (value) => {
+    this.onSelect(value, {
+      target: 'month',
+    });
   }
 
   static getDerivedStateFromProps(nextProps, state) {
@@ -68,7 +78,7 @@ class FullCalendar extends React.Component {
     if ('type' in nextProps) {
       newState = {
         type: nextProps.type,
-      }
+      };
     }
     if ('value' in nextProps) {
       newState.value = value || nextProps.defaultValue || getNowByCurrentStateValue(state.value);
@@ -78,12 +88,6 @@ class FullCalendar extends React.Component {
     }
 
     return newState;
-  }
-
-  onMonthSelect = (value) => {
-    this.onSelect(value, {
-      target: 'month',
-    });
   }
 
   setType = (type) => {
@@ -169,6 +173,6 @@ class FullCalendar extends React.Component {
       className: className.join(' '),
     });
   }
-};
+}
 
-export default CalendarMixinWrapper(CommonMixinWrapper(FullCalendar));
+export default calendarMixinWrapper(commonMixinWrapper(FullCalendar));

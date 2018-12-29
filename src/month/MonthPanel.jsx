@@ -18,6 +18,9 @@ export default class MonthPanel extends React.Component {
     disabledDate: PropTypes.func,
     onSelect: PropTypes.func,
     renderFooter: PropTypes.func,
+    rootPrefixCls: PropTypes.string,
+    value: PropTypes.object,
+    defaultValue: PropTypes.object,
   }
 
   static defaultProps = {
@@ -34,10 +37,10 @@ export default class MonthPanel extends React.Component {
 
     this.state = {
       value: props.value || props.defaultValue,
-    }
+    };
   }
 
-  static getDerivedStateFromProps(nextProps, state) {
+  static getDerivedStateFromProps(nextProps) {
     let newState = {};
 
     if ('value' in nextProps) {
@@ -122,4 +125,4 @@ export default class MonthPanel extends React.Component {
         </div>
       </div>);
   }
-};
+}

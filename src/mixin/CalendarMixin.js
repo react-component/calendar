@@ -12,7 +12,7 @@ export function getNowByCurrentStateValue(value) {
   if (value) {
     ret = getTodayTime(value);
   } else {
-    ret = getNow();
+    ret = moment();
   }
   return ret;
 }
@@ -25,35 +25,10 @@ export const calendarMixinPropTypes = {
 
 export const calendarMixinDefaultProps = {
   onKeyDown: noop,
-}
+};
 
-export const CalendarMixinWrapper = ComposeComponent => class extends ComposeComponent {
+export const calendarMixinWrapper = ComposeComponent => class extends ComposeComponent {
   static displayName = 'CalendarMixinWrapper';
-
-  // constructor(props) {
-  //   super(props);
-
-  //   this.state = {
-  //     value: props.value || props.defaultValue || moment(),
-  //     selectedValue: props.selectedValue || props.defaultSelectedValue,
-  //   }
-  // }
-
-  // static getDerivedStateFromProps(nextProps, state) {
-  //   let newState = {};
-  //   let { value } = nextProps;
-  //   const { selectedValue } = nextProps;
-
-  //   if ('value' in nextProps) {
-  //     value = value || nextProps.defaultValue || getNowByCurrentStateValue(state.value);
-  //     newState.value = value;
-  //   }
-  //   if ('selectedValue' in nextProps) {
-  //     newState.selectedValue = selectedValue;
-  //   }
-
-  //   return newState;
-  // }
 
   onSelect = (value, cause) => {
     if (value) {
@@ -93,7 +68,9 @@ export const CalendarMixinWrapper = ComposeComponent => class extends ComposeCom
         selectedValue,
       });
     }
-    this.props.onSelect && this.props.onSelect(selectedValue, cause);
+    if (this.props.onSelect) {
+      this.props.onSelect(selectedValue, cause);
+    }
     // }
   }
 

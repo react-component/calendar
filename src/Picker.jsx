@@ -40,13 +40,13 @@ export default class Picker extends React.Component {
   }
 
   static defaultProps = {
-      prefixCls: 'rc-calendar-picker',
-      style: {},
-      align: {},
-      placement: 'bottomLeft',
-      defaultOpen: false,
-      onChange: noop,
-      onOpenChange: noop,
+    prefixCls: 'rc-calendar-picker',
+    style: {},
+    align: {},
+    placement: 'bottomLeft',
+    defaultOpen: false,
+    onChange: noop,
+    onOpenChange: noop,
   }
 
   constructor(props) {
@@ -65,22 +65,6 @@ export default class Picker extends React.Component {
       open,
       value,
     };
-  }
-
-  static getDerivedStateFromProps(nextProps) {
-    let newState = {};
-    const { value, open } = nextProps;
-    if ('value' in nextProps) {
-      newState = {
-        value,
-      }
-    }
-    if (open !== undefined) {
-      newState = {
-        open,
-      };
-    }
-    return newState;
   }
 
   componentDidUpdate(_, prevState) {
@@ -134,6 +118,22 @@ export default class Picker extends React.Component {
 
   onVisibleChange = (open) => {
     this.setOpen(open);
+  }
+
+  static getDerivedStateFromProps(nextProps) {
+    let newState = {};
+    const { value, open } = nextProps;
+    if ('value' in nextProps) {
+      newState = {
+        value,
+      };
+    }
+    if (open !== undefined) {
+      newState = {
+        open,
+      };
+    }
+    return newState;
   }
 
   getCalendarElement = () => {
@@ -219,4 +219,4 @@ export default class Picker extends React.Component {
       </Trigger>
     );
   }
-};
+}

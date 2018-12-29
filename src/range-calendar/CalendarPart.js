@@ -117,4 +117,4 @@ export default class CalendarPart extends React.Component {
         </div>
       </div>);
   }
-};
+}
