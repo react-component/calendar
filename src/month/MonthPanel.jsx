@@ -1,5 +1,4 @@
 import React from 'react';
-import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import MonthTable from './MonthTable';
 
@@ -13,57 +12,63 @@ function noop() {
 
 }
 
-const MonthPanel = createReactClass({
-  propTypes: {
+export default class MonthPanel extends React.Component {
+  static propTypes = {
     onChange: PropTypes.func,
     disabledDate: PropTypes.func,
     onSelect: PropTypes.func,
     renderFooter: PropTypes.func,
-  },
+    rootPrefixCls: PropTypes.string,
+    value: PropTypes.object,
+    defaultValue: PropTypes.object,
+  }
 
-  getDefaultProps() {
-    return {
-      onChange: noop,
-      onSelect: noop,
-    };
-  },
+  static defaultProps = {
+    onChange: noop,
+    onSelect: noop,
+  }
 
-  getInitialState() {
-    const props = this.props;
-    // bind methods
+  constructor(props) {
+    super(props);
+
     this.nextYear = goYear.bind(this, 1);
     this.previousYear = goYear.bind(this, -1);
     this.prefixCls = `${props.rootPrefixCls}-month-panel`;
-    return {
+
+    this.state = {
       value: props.value || props.defaultValue,
     };
-  },
+  }
 
-  componentWillReceiveProps(nextProps) {
+  static getDerivedStateFromProps(nextProps) {
+    let newState = {};
+
     if ('value' in nextProps) {
-      this.setState({
+      newState = {
         value: nextProps.value,
-      });
+      };
     }
-  },
 
-  setAndChangeValue(value) {
+    return newState;
+  }
+
+  setAndChangeValue = (value) => {
     this.setValue(value);
     this.props.onChange(value);
-  },
+  }
 
-  setAndSelectValue(value) {
+  setAndSelectValue = (value) => {
     this.setValue(value);
     this.props.onSelect(value);
-  },
+  }
 
-  setValue(value) {
+  setValue = (value) => {
     if (!('value' in this.props)) {
       this.setState({
         value,
       });
     }
-  },
+  }
 
   render() {
     const props = this.props;
@@ -119,7 +124,5 @@ const MonthPanel = createReactClass({
             </div>)}
         </div>
       </div>);
-  },
-});
-
-export default MonthPanel;
+  }
+}

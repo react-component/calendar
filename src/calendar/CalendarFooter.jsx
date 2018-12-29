@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import toFragment from 'rc-util/lib/Children/mapSelf';
 import cx from 'classnames';
@@ -8,8 +7,8 @@ import TodayButton from '../calendar/TodayButton';
 import OkButton from '../calendar/OkButton';
 import TimePickerButton from '../calendar/TimePickerButton';
 
-const CalendarFooter = createReactClass({
-  propTypes: {
+export default class CalendarFooter extends React.Component {
+  static propTypes = {
     prefixCls: PropTypes.string,
     showDateInput: PropTypes.bool,
     disabledTime: PropTypes.any,
@@ -21,21 +20,21 @@ const CalendarFooter = createReactClass({
     renderFooter: PropTypes.func,
     defaultValue: PropTypes.object,
     mode: PropTypes.string,
-  },
+  }
 
   onSelect(value) {
     this.props.onSelect(value);
-  },
+  }
 
   getRootDOMNode() {
     return ReactDOM.findDOMNode(this);
-  },
+  }
 
   render() {
     const props = this.props;
     const { value, prefixCls, showOk, timePicker, renderFooter, mode } = props;
     let footerEl = null;
-    const extraFooter = renderFooter(mode);
+    const extraFooter = renderFooter && renderFooter(mode);
     if (props.showToday || timePicker || extraFooter) {
       let nowEl;
       if (props.showToday) {
@@ -69,7 +68,5 @@ const CalendarFooter = createReactClass({
       );
     }
     return footerEl;
-  },
-});
-
-export default CalendarFooter;
+  }
+}
