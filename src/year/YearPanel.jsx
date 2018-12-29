@@ -19,8 +19,7 @@ function chooseYear(year) {
   this.props.onSelect(value);
 }
 
-export default
-  class YearPanel extends React.Component {
+export default class YearPanel extends React.Component {
   constructor(props) {
     super(props);
     this.prefixCls = `${props.rootPrefixCls}-year-panel`;

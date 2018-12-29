@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { formatDate } from '../util';
 
-const DateInput = createReactClass({
-  propTypes: {
+let cachedSelectionStart, cachedSelectionEnd, dateInputInstance;
+
+export default class DateInput extends React.Component {
+  static propTypes = {
     prefixCls: PropTypes.string,
     timePicker: PropTypes.object,
     value: PropTypes.object,
@@ -20,38 +21,46 @@ const DateInput = createReactClass({
     onSelect: PropTypes.func,
     selectedValue: PropTypes.object,
     clearIcon: PropTypes.node,
-  },
+  }
 
-  getInitialState() {
-    const selectedValue = this.props.selectedValue;
-    return {
+  constructor(props) {
+    super(props);
+    const selectedValue = props.selectedValue;
+
+    this.state = {
       str: formatDate(selectedValue, this.props.format),
       invalid: false,
       hasFocus: false,
-    };
-  },
+    }
+  }
 
-  componentWillReceiveProps(nextProps) {
-    this.cachedSelectionStart = this.dateInputInstance.selectionStart;
-    this.cachedSelectionEnd = this.dateInputInstance.selectionEnd;
+  static getDerivedStateFromProps(nextProps, state) {
+    let newState = {};
+
+    if(dateInputInstance) {
+      cachedSelectionStart = dateInputInstance.selectionStart;
+      cachedSelectionEnd = dateInputInstance.selectionEnd;
+    }
     // when popup show, click body will call this, bug!
     const selectedValue = nextProps.selectedValue;
-    if (!this.state.hasFocus) {
-      this.setState({
+    if (!state.hasFocus) {
+      newState = {
         str: formatDate(selectedValue, nextProps.format),
         invalid: false,
-      });
+      };
     }
-  },
+
+    return newState;
+  }
 
   componentDidUpdate() {
     if (this.state.hasFocus && !this.state.invalid &&
-        !(this.cachedSelectionStart === 0 && this.cachedSelectionEnd === 0)) {
-      this.dateInputInstance.setSelectionRange(this.cachedSelectionStart, this.cachedSelectionEnd);
+        !(cachedSelectionStart === 0 && cachedSelectionEnd === 0)) {
+      dateInputInstance.setSelectionRange(cachedSelectionStart, cachedSelectionEnd);
     }
-  },
+  }
 
-  onInputChange(event) {
+  onInputChange = (event) => {
     const str = event.target.value;
     const { disabledDate, format, onChange, selectedValue } = this.props;
 
@@ -100,39 +109,39 @@ const DateInput = createReactClass({
       });
       onChange(value);
     }
-  },
+  }
 
-  onClear() {
+  onClear = () => {
     this.setState({
       str: '',
     });
     this.props.onClear(null);
-  },
+  }
 
-  getRootDOMNode() {
+  getRootDOMNode = () => {
     return ReactDOM.findDOMNode(this);
-  },
+  }
 
-  focus() {
-    if (this.dateInputInstance) {
-      this.dateInputInstance.focus();
+  focus = () => {
+    if (dateInputInstance) {
+      dateInputInstance.focus();
     }
-  },
+  }
 
-  saveDateInput(dateInput) {
-    this.dateInputInstance = dateInput;
-  },
+  saveDateInput = (dateInput) => {
+    dateInputInstance = dateInput;
+  }
 
-  onFocus() {
+  onFocus = () => {
     this.setState({ hasFocus: true });
-  },
+  }
 
-  onBlur() {
+  onBlur = () => {
     this.setState((prevState, prevProps) => ({
       hasFocus: false,
       str: formatDate(prevProps.value, prevProps.format),
     }));
-  },
+  }
 
   render() {
     const props = this.props;
@@ -164,7 +173,5 @@ const DateInput = createReactClass({
         ) : null}
       </div>
     );
-  },
-});
-
-export default DateInput;
+  }
+};

@@ -1,5 +1,4 @@
 import React from 'react';
-import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import DateConstants from './DateConstants';
@@ -29,8 +28,8 @@ function getIdFromDate(date) {
   return `rc-calendar-${date.year()}-${date.month()}-${date.date()}`;
 }
 
-const DateTBody = createReactClass({
-  propTypes: {
+export default class DateTBody extends React.Component {
+  static propTypes = {
     contentRender: PropTypes.func,
     dateRender: PropTypes.func,
     disabledDate: PropTypes.func,
@@ -39,13 +38,11 @@ const DateTBody = createReactClass({
     value: PropTypes.object,
     hoverValue: PropTypes.any,
     showWeekNumber: PropTypes.bool,
-  },
+  }
 
-  getDefaultProps() {
-    return {
-      hoverValue: [],
-    };
-  },
+  static defaultProps = {
+    hoverValue: [],
+  }
 
   render() {
     const props = this.props;
@@ -251,7 +248,5 @@ const DateTBody = createReactClass({
     return (<tbody className={`${prefixCls}-tbody`}>
       {tableHtml}
     </tbody>);
-  },
-});
-
-export default DateTBody;
+  }
+};

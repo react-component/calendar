@@ -20,8 +20,7 @@ function chooseDecade(year, event) {
   event.preventDefault();
 }
 
-export default
-  class DecadePanel extends React.Component {
+export default class DecadePanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

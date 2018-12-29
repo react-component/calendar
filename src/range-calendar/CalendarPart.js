@@ -1,13 +1,12 @@
 import React from 'react';
-import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import CalendarHeader from '../calendar/CalendarHeader';
 import DateTable from '../date/DateTable';
 import DateInput from '../date/DateInput';
 import { getTimeConfig } from '../util/index';
 
-const CalendarPart = createReactClass({
-  propTypes: {
+export default class CalendarPart extends React.Component {
+  static propTypes = {
     prefixCls: PropTypes.string,
     value: PropTypes.any,
     hoverValue: PropTypes.any,
@@ -26,7 +25,8 @@ const CalendarPart = createReactClass({
     enableNext: PropTypes.any,
     enablePrev: PropTypes.any,
     clearIcon: PropTypes.node,
-  },
+  }
+
   render() {
     const props = this.props;
     const {
@@ -116,7 +116,5 @@ const CalendarPart = createReactClass({
           </div>
         </div>
       </div>);
-  },
-});
-
-export default CalendarPart;
+  }
+};

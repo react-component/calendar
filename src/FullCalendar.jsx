@@ -1,14 +1,21 @@
 import React from 'react';
-import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import DateTable from './date/DateTable';
 import MonthTable from './month/MonthTable';
-import CalendarMixin from './mixin/CalendarMixin';
-import CommonMixin from './mixin/CommonMixin';
+import {
+  CalendarMixinWrapper,
+  calendarMixinPropTypes,
+  calendarMixinDefaultProps,
+  getNowByCurrentStateValue,
+} from './mixin/CalendarMixin';
+import { CommonMixinWrapper, propType, defaultProp } from './mixin/CommonMixin';
 import CalendarHeader from './full-calendar/CalendarHeader';
+import moment from 'moment';
 
-const FullCalendar = createReactClass({
-  propTypes: {
+class FullCalendar extends React.Component {
+  static propTypes = {
+    ...calendarMixinPropTypes,
+    ...propType,
     defaultType: PropTypes.string,
     type: PropTypes.string,
     prefixCls: PropTypes.string,
@@ -24,49 +31,70 @@ const FullCalendar = createReactClass({
     headerRender: PropTypes.func,
     showHeader: PropTypes.bool,
     disabledDate: PropTypes.func,
-  },
-  mixins: [CommonMixin, CalendarMixin],
-  getDefaultProps() {
-    return {
-      defaultType: 'date',
-      fullscreen: false,
-      showTypeSwitch: true,
-      showHeader: true,
-      onTypeChange() {
-      },
-    };
-  },
-  getInitialState() {
+  }
+
+  static defaultProps = {
+    ...calendarMixinDefaultProps,
+    ...defaultProp,
+    defaultType: 'date',
+    fullscreen: false,
+    showTypeSwitch: true,
+    showHeader: true,
+    onTypeChange() {
+    },
+  }
+
+  constructor(props) {
+    super(props);
+
     let type;
-    if ('type' in this.props) {
-      type = this.props.type;
+    if ('type' in props) {
+      type = props.type;
     } else {
-      type = this.props.defaultType;
+      type = props.defaultType;
     }
-    return {
+
+    this.state = {
       type,
-    };
-  },
-  componentWillReceiveProps(nextProps) {
-    if ('type' in nextProps) {
-      this.setState({
-        type: nextProps.type,
-      });
+      value: props.value || props.defaultValue || moment(),
+      selectedValue: props.selectedValue || props.defaultSelectedValue,
     }
-  },
-  onMonthSelect(value) {
+  }
+
+  static getDerivedStateFromProps(nextProps, state) {
+    let newState = {};
+    const { value, selectedValue } = nextProps;
+
+    if ('type' in nextProps) {
+      newState = {
+        type: nextProps.type,
+      }
+    }
+    if ('value' in nextProps) {
+      newState.value = value || nextProps.defaultValue || getNowByCurrentStateValue(state.value);
+    }
+    if ('selectedValue' in nextProps) {
+      newState.selectedValue = selectedValue;
+    }
+
+    return newState;
+  }
+
+  onMonthSelect = (value) => {
     this.onSelect(value, {
       target: 'month',
     });
-  },
-  setType(type) {
+  }
+
+  setType = (type) => {
     if (!('type' in this.props)) {
       this.setState({
         type,
       });
     }
     this.props.onTypeChange(type);
-  },
+  }
+
   render() {
     const props = this.props;
     const {
@@ -140,7 +168,7 @@ const FullCalendar = createReactClass({
       children,
       className: className.join(' '),
     });
-  },
-});
+  }
+};
 
-export default FullCalendar;
+export default CalendarMixinWrapper(CommonMixinWrapper(FullCalendar));

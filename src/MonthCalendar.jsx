@@ -1,24 +1,37 @@
 import React from 'react';
-import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import KeyCode from 'rc-util/lib/KeyCode';
 import CalendarHeader from './calendar/CalendarHeader';
 import CalendarFooter from './calendar/CalendarFooter';
-import CalendarMixin from './mixin/CalendarMixin';
-import CommonMixin from './mixin/CommonMixin';
+import {
+  CalendarMixinWrapper,
+  calendarMixinPropTypes,
+  calendarMixinDefaultProps,
+} from './mixin/CalendarMixin';
+import { CommonMixinWrapper, propType, defaultProp } from './mixin/CommonMixin';
+import moment from 'moment';
 
-const MonthCalendar = createReactClass({
-  propTypes: {
+class MonthCalendar extends React.Component {
+  static propTypes = {
+    ...calendarMixinPropTypes,
+    ...propType,
     monthCellRender: PropTypes.func,
     dateCellRender: PropTypes.func,
-  },
-  mixins: [CommonMixin, CalendarMixin],
+  }
 
-  getInitialState() {
-    return { mode: 'month' };
-  },
+  static defaultProps = Object.assign({}, defaultProp, calendarMixinDefaultProps);
 
-  onKeyDown(event) {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      mode: 'month',
+      value: props.value || props.defaultValue || moment(),
+      selectedValue: props.selectedValue || props.defaultSelectedValue,
+    }
+  }
+
+  onKeyDown = (event) => {
     const keyCode = event.keyCode;
     const ctrlKey = event.ctrlKey || event.metaKey;
     const stateValue = this.state.value;
@@ -63,13 +76,13 @@ const MonthCalendar = createReactClass({
       event.preventDefault();
       return 1;
     }
-  },
+  }
 
-  handlePanelChange(_, mode) {
+  handlePanelChange = (_, mode) => {
     if (mode !== 'date') {
       this.setState({ mode });
     }
-  },
+  }
 
   render() {
     const { props, state } = this;
@@ -100,7 +113,7 @@ const MonthCalendar = createReactClass({
       className: `${props.prefixCls}-month-calendar`,
       children,
     });
-  },
-});
+  }
+};
 
-export default MonthCalendar;
+export default CalendarMixinWrapper(CommonMixinWrapper(MonthCalendar));
