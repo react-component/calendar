@@ -36,25 +36,6 @@ export default class DateInput extends React.Component {
     };
   }
 
-  static getDerivedStateFromProps(nextProps, state) {
-    let newState = {};
-
-    if (dateInputInstance) {
-      cachedSelectionStart = dateInputInstance.selectionStart;
-      cachedSelectionEnd = dateInputInstance.selectionEnd;
-    }
-    // when popup show, click body will call this, bug!
-    const selectedValue = nextProps.selectedValue;
-    if (!state.hasFocus) {
-      newState = {
-        str: formatDate(selectedValue, nextProps.format),
-        invalid: false,
-      };
-    }
-
-    return newState;
-  }
-
   componentDidUpdate() {
     if (this.state.hasFocus && !this.state.invalid &&
         !(cachedSelectionStart === 0 && cachedSelectionEnd === 0)) {
@@ -129,6 +110,25 @@ export default class DateInput extends React.Component {
       hasFocus: false,
       str: formatDate(prevProps.value, prevProps.format),
     }));
+  }
+
+  static getDerivedStateFromProps(nextProps, state) {
+    let newState = {};
+
+    if (dateInputInstance) {
+      cachedSelectionStart = dateInputInstance.selectionStart;
+      cachedSelectionEnd = dateInputInstance.selectionEnd;
+    }
+    // when popup show, click body will call this, bug!
+    const selectedValue = nextProps.selectedValue;
+    if (!state.hasFocus) {
+      newState = {
+        str: formatDate(selectedValue, nextProps.format),
+        invalid: false,
+      };
+    }
+
+    return newState;
   }
 
   getRootDOMNode = () => {
