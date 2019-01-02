@@ -1,6 +1,10 @@
 # History
 ----
 
+## 9.10.0 / 2019-01-02
+
+- add `focusablePanel` prop.
+
 ## 9.9.0 / 2018-12-23
 
 - `renderFooter(mode)` support all modes.
