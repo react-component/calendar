@@ -2,8 +2,7 @@ import React from 'react';
 import DateConstants from './DateConstants';
 import moment from 'moment';
 
-export default
-class DateTHead extends React.Component {
+export default class DateTHead extends React.Component {
   render() {
     const props = this.props;
     const value = props.value;

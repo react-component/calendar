@@ -4,42 +4,42 @@ import enUs from '../locale/en_US';
 function noop() {
 }
 
-export default {
-  propTypes: {
-    className: PropTypes.string,
-    locale: PropTypes.object,
-    style: PropTypes.object,
-    visible: PropTypes.bool,
-    onSelect: PropTypes.func,
-    prefixCls: PropTypes.string,
-    onChange: PropTypes.func,
-    onOk: PropTypes.func,
-  },
+export const propType = {
+  className: PropTypes.string,
+  locale: PropTypes.object,
+  style: PropTypes.object,
+  visible: PropTypes.bool,
+  onSelect: PropTypes.func,
+  prefixCls: PropTypes.string,
+  onChange: PropTypes.func,
+  onOk: PropTypes.func,
+};
 
-  getDefaultProps() {
-    return {
-      locale: enUs,
-      style: {},
-      visible: true,
-      prefixCls: 'rc-calendar',
-      className: '',
-      onSelect: noop,
-      onChange: noop,
-      onClear: noop,
-      renderFooter() {
-        return null;
-      },
-      renderSidebar() {
-        return null;
-      },
-    };
+export const defaultProp = {
+  locale: enUs,
+  style: {},
+  visible: true,
+  prefixCls: 'rc-calendar',
+  className: '',
+  onSelect: noop,
+  onChange: noop,
+  onClear: noop,
+  renderFooter() {
+    return null;
   },
+  renderSidebar() {
+    return null;
+  },
+};
+
+export const commonMixinWrapper = ComposeComponent => class extends ComposeComponent {
+  static displayName = 'CommonMixinWrapper';
 
   shouldComponentUpdate(nextProps) {
     return this.props.visible || nextProps.visible;
-  },
+  }
 
-  getFormat() {
+  getFormat = () => {
     let { format } = this.props;
     const { locale, timePicker } = this.props;
     if (!format) {
@@ -50,21 +50,21 @@ export default {
       }
     }
     return format;
-  },
+  }
 
-  focus() {
+  focus = () => {
     if (this.focusElement) {
       this.focusElement.focus();
     } else if (this.rootInstance) {
       this.rootInstance.focus();
     }
-  },
+  }
 
-  saveFocusElement(focusElement) {
+  saveFocusElement = (focusElement) => {
     this.focusElement = focusElement;
-  },
+  }
 
-  saveRoot(root) {
+  saveRoot = (root) => {
     this.rootInstance = root;
-  },
+  }
 };

@@ -130,7 +130,7 @@ http://react-component.github.io/calendar/examples/index.html
         </tr>
         <tr>
           <td>renderFooter</td>
-          <td>() => React.Node</td>
+          <td>(mode) => React.Node</td>
           <td></td>
           <td>extra footer</td>
         </tr>
