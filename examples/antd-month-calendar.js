@@ -6428,14 +6428,10 @@ var Picker = function (_React$Component) {
         open = nextProps.open;
 
     if ('value' in nextProps) {
-      newState = {
-        value: value
-      };
+      newState.value = value;
     }
     if (open !== undefined) {
-      newState = {
-        open: open
-      };
+      newState.open = open;
     }
     return newState;
   };
