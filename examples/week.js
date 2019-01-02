@@ -4249,7 +4249,7 @@ var DateInput = function (_React$Component) {
   }
 
   DateInput.prototype.componentDidUpdate = function componentDidUpdate() {
-    if (this.state.hasFocus && !this.state.invalid && !(cachedSelectionStart === 0 && cachedSelectionEnd === 0)) {
+    if (dateInputInstance && this.state.hasFocus && !this.state.invalid && !(cachedSelectionStart === 0 && cachedSelectionEnd === 0)) {
       dateInputInstance.setSelectionRange(cachedSelectionStart, cachedSelectionEnd);
     }
   };
