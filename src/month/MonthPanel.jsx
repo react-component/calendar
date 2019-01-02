@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { polyfill } from 'react-lifecycles-compat';
 import MonthTable from './MonthTable';
 
 function goYear(direction) {
@@ -12,7 +13,7 @@ function noop() {
 
 }
 
-export default class MonthPanel extends React.Component {
+class MonthPanel extends React.Component {
   static propTypes = {
     onChange: PropTypes.func,
     disabledDate: PropTypes.func,
@@ -126,3 +127,7 @@ export default class MonthPanel extends React.Component {
       </div>);
   }
 }
+
+polyfill(MonthPanel);
+
+export default MonthPanel;

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import { polyfill } from 'react-lifecycles-compat';
 import moment from 'moment';
 import { formatDate } from '../util';
 
@@ -8,7 +9,7 @@ let cachedSelectionStart;
 let cachedSelectionEnd;
 let dateInputInstance;
 
-export default class DateInput extends React.Component {
+class DateInput extends React.Component {
   static propTypes = {
     prefixCls: PropTypes.string,
     timePicker: PropTypes.object,
@@ -181,3 +182,7 @@ export default class DateInput extends React.Component {
     );
   }
 }
+
+polyfill(DateInput);
+
+export default DateInput;

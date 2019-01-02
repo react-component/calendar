@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import classnames from 'classnames';
+import { polyfill } from 'react-lifecycles-compat';
 import KeyCode from 'rc-util/lib/KeyCode';
 import CalendarPart from './range-calendar/CalendarPart';
 import TodayButton from './calendar/TodayButton';
@@ -760,5 +761,7 @@ class RangeCalendar extends React.Component {
     );
   }
 }
+
+polyfill(RangeCalendar);
 
 export default commonMixinWrapper(RangeCalendar);

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { polyfill } from 'react-lifecycles-compat';
 import DateTable from './date/DateTable';
 import MonthTable from './month/MonthTable';
 import {
@@ -174,5 +175,7 @@ class FullCalendar extends React.Component {
     });
   }
 }
+
+polyfill(FullCalendar);
 
 export default calendarMixinWrapper(commonMixinWrapper(FullCalendar));

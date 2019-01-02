@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import { polyfill } from 'react-lifecycles-compat';
 import createChainedFunction from 'rc-util/lib/createChainedFunction';
 import KeyCode from 'rc-util/lib/KeyCode';
 import placements from './picker/placements';
@@ -13,7 +14,7 @@ function refFn(field, component) {
   this[field] = component;
 }
 
-export default class Picker extends React.Component {
+class Picker extends React.Component {
   static propTypes = {
     animation: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     disabled: PropTypes.bool,
@@ -216,3 +217,7 @@ export default class Picker extends React.Component {
     );
   }
 }
+
+polyfill(Picker);
+
+export default Picker;
