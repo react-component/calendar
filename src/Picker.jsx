@@ -121,17 +121,13 @@ export default class Picker extends React.Component {
   }
 
   static getDerivedStateFromProps(nextProps) {
-    let newState = {};
+    const newState = {};
     const { value, open } = nextProps;
     if ('value' in nextProps) {
-      newState = {
-        value,
-      };
+      newState.value = value;
     }
     if (open !== undefined) {
-      newState = {
-        open,
-      };
+      newState.open = open;
     }
     return newState;
   }
