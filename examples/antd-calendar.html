@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>antd-calendar.js - example - rc-calendar@9.9.2</title>
+  <title>antd-calendar.js - example - rc-calendar@9.10.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -263,7 +263,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
   <div class="container">
     <div class="header">
-      <h1>rc-calendar@9.9.2</h1>
+      <h1>rc-calendar@9.10.0</h1>
 
       <p>React Calendar</p>
     </div>
@@ -437,15 +437,15 @@ class Demo extends React.Component {
             ({ value }) =&gt; {
               return (
                 &lt;span tabIndex="0"&gt;
-                &lt;input
-                  placeholder="please select"
-                  style={{ width: 250 }}
-                  disabled={state.disabled}
-                  readOnly
-                  tabIndex="-1"
-                  className="ant-calendar-picker-input ant-input"
-                  value={value &amp;&amp; value.format(getFormat(state.showTime)) || ''}
-                /&gt;
+                  &lt;input
+                    placeholder="please select"
+                    style={{ width: 250 }}
+                    disabled={state.disabled}
+                    readOnly
+                    tabIndex="-1"
+                    className="ant-calendar-picker-input ant-input"
+                    value={value &amp;&amp; value.format(getFormat(state.showTime)) || ''}
+                  /&gt;
                 &lt;/span&gt;
               );
             }
@@ -479,7 +479,7 @@ class DemoMultiFormat extends React.Component {
     return (&lt;div style={{ width: 400, margin: 20 }}&gt;
       &lt;div style={{ marginBottom: 10 }}&gt;
         Accepts multiple input formats
-        &lt;br/&gt;
+        &lt;br /&gt;
         &lt;small&gt;{multiFormats.join(', ')}&lt;/small&gt;
       &lt;/div&gt;
       &lt;Calendar
@@ -489,6 +489,7 @@ class DemoMultiFormat extends React.Component {
         format={multiFormats}
         value={state.value}
         onChange={this.onChange}
+        focusablePanel={false}
       /&gt;
     &lt;/div&gt;);
   }

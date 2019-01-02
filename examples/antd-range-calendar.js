@@ -7,12 +7,11 @@ webpackJsonp([5],[
 /* 5 */,
 /* 6 */,
 /* 7 */,
-/* 8 */,
-/* 9 */
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__propertyUtils__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__propertyUtils__ = __webpack_require__(56);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 
@@ -598,9 +597,9 @@ mix(utils, domUtils);
 /* harmony default export */ __webpack_exports__["a"] = (utils);
 
 /***/ }),
+/* 9 */,
 /* 10 */,
-/* 11 */,
-/* 12 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -608,7 +607,7 @@ mix(utils, domUtils);
 
 exports.__esModule = true;
 
-var _defineProperty = __webpack_require__(16);
+var _defineProperty = __webpack_require__(15);
 
 var _defineProperty2 = _interopRequireDefault(_defineProperty);
 
@@ -633,8 +632,8 @@ exports.default = function () {
 }();
 
 /***/ }),
-/* 13 */,
-/* 14 */
+/* 12 */,
+/* 13 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -644,12 +643,12 @@ exports.default = function () {
 });
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = addEventListenerWrap;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_add_dom_event_listener__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_add_dom_event_listener__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_add_dom_event_listener___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_add_dom_event_listener__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
@@ -665,20 +664,20 @@ function addEventListenerWrap(target, eventType, cb, option) {
 }
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = { "default": __webpack_require__(50), __esModule: true };
+module.exports = { "default": __webpack_require__(49), __esModule: true };
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = getAlignFromPlacement;
 /* harmony export (immutable) */ __webpack_exports__["b"] = getAlignPopupClassName;
 /* harmony export (immutable) */ __webpack_exports__["c"] = saveRef;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
 
 function isPointsEq(a1, a2, isAlignPoint) {
@@ -710,15 +709,15 @@ function saveRef(name, component) {
 }
 
 /***/ }),
-/* 18 */
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getVisibleRectForElement__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__adjustForViewport__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__getRegion__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__getElFuturePos__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getVisibleRectForElement__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__adjustForViewport__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__getRegion__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__getElFuturePos__ = __webpack_require__(59);
 /**
  * align dom node flexibly
  * @author yiminghe@gmail.com
@@ -917,13 +916,13 @@ function doAlign(el, tgtRegion, align, isTgtRegionVisible) {
  **/
 
 /***/ }),
-/* 19 */
+/* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getOffsetParent__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__isAncestorFixed__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getOffsetParent__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__isAncestorFixed__ = __webpack_require__(57);
 
 
 
@@ -1014,11 +1013,11 @@ function getVisibleRectForElement(element) {
 /* harmony default export */ __webpack_exports__["a"] = (getVisibleRectForElement);
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__(8);
 
 
 /**
@@ -1066,11 +1065,11 @@ function getOffsetParent(element) {
 /* harmony default export */ __webpack_exports__["a"] = (getOffsetParent);
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__(8);
 
 
 function getRegion(node) {
@@ -1098,7 +1097,7 @@ function getRegion(node) {
 /* harmony default export */ __webpack_exports__["a"] = (getRegion);
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, exports) {
 
 module.exports = function(arr, obj){
@@ -1110,7 +1109,7 @@ module.exports = function(arr, obj){
 };
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1137,21 +1136,21 @@ var util = {
 /* harmony default export */ __webpack_exports__["a"] = (util);
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_objectWithoutProperties__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_objectWithoutProperties___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_objectWithoutProperties__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_prop_types__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_prop_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_prop_types__);
 
 
@@ -1203,7 +1202,7 @@ LazyRenderBox.propTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (LazyRenderBox);
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1222,29 +1221,29 @@ function mapSelf(children) {
 }
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty__ = __webpack_require__(63);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_classCallCheck__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_classCallCheck__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_classCallCheck__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_createClass__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_createClass__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_createClass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_createClass__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_possibleConstructorReturn__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_babel_runtime_helpers_inherits__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_babel_runtime_helpers_inherits__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_babel_runtime_helpers_inherits__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_prop_types__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_prop_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ChildrenUtils__ = __webpack_require__(65);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__AnimateChild__ = __webpack_require__(66);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__util_animate__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ChildrenUtils__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__AnimateChild__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__util_animate__ = __webpack_require__(22);
 
 
 
@@ -1598,20 +1597,21 @@ var _initialiseProps = function _initialiseProps() {
 /* harmony default export */ __webpack_exports__["a"] = (Animate);
 
 /***/ }),
+/* 26 */,
 /* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__DateTHead__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DateTBody__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__DateTHead__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DateTBody__ = __webpack_require__(39);
 
 
 
@@ -1650,16 +1650,22 @@ var DateTable = function (_React$Component) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_create_react_class__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_create_react_class___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_create_react_class__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rc_util_es_Children_mapSelf__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__month_MonthPanel__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__year_YearPanel__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__decade_DecadePanel__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_prop_types__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rc_util_es_Children_mapSelf__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__month_MonthPanel__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__year_YearPanel__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__decade_DecadePanel__ = __webpack_require__(42);
+
+
 
 
 
@@ -1684,123 +1690,26 @@ function showIf(condition, el) {
   return condition ? el : null;
 }
 
-var CalendarHeader = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
-  displayName: 'CalendarHeader',
+var CalendarHeader = function (_React$Component) {
+  __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits___default()(CalendarHeader, _React$Component);
 
-  propTypes: {
-    prefixCls: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.string,
-    value: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.object,
-    onValueChange: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.func,
-    showTimePicker: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.bool,
-    onPanelChange: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.func,
-    locale: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.object,
-    enablePrev: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.any,
-    enableNext: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.any,
-    disabledMonth: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.func,
-    renderFooter: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.func
-  },
+  function CalendarHeader(props) {
+    __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default()(this, CalendarHeader);
 
-  getDefaultProps: function getDefaultProps() {
-    return {
-      enableNext: 1,
-      enablePrev: 1,
-      onPanelChange: function onPanelChange() {},
-      onValueChange: function onValueChange() {}
-    };
-  },
-  getInitialState: function getInitialState() {
-    this.nextMonth = goMonth.bind(this, 1);
-    this.previousMonth = goMonth.bind(this, -1);
-    this.nextYear = goYear.bind(this, 1);
-    this.previousYear = goYear.bind(this, -1);
-    return { yearPanelReferer: null };
-  },
-  onMonthSelect: function onMonthSelect(value) {
-    this.props.onPanelChange(value, 'date');
-    if (this.props.onMonthSelect) {
-      this.props.onMonthSelect(value);
-    } else {
-      this.props.onValueChange(value);
-    }
-  },
-  onYearSelect: function onYearSelect(value) {
-    var referer = this.state.yearPanelReferer;
-    this.setState({ yearPanelReferer: null });
-    this.props.onPanelChange(value, referer);
-    this.props.onValueChange(value);
-  },
-  onDecadeSelect: function onDecadeSelect(value) {
-    this.props.onPanelChange(value, 'year');
-    this.props.onValueChange(value);
-  },
-  monthYearElement: function monthYearElement(showTimePicker) {
-    var _this = this;
+    var _this = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn___default()(this, _React$Component.call(this, props));
 
-    var props = this.props;
-    var prefixCls = props.prefixCls;
-    var locale = props.locale;
-    var value = props.value;
-    var localeData = value.localeData();
-    var monthBeforeYear = locale.monthBeforeYear;
-    var selectClassName = prefixCls + '-' + (monthBeforeYear ? 'my-select' : 'ym-select');
-    var timeClassName = showTimePicker ? ' ' + prefixCls + '-time-status' : '';
-    var year = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'a',
-      {
-        className: prefixCls + '-year-select' + timeClassName,
-        role: 'button',
-        onClick: showTimePicker ? null : function () {
-          return _this.showYearPanel('date');
-        },
-        title: showTimePicker ? null : locale.yearSelect
-      },
-      value.format(locale.yearFormat)
-    );
-    var month = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'a',
-      {
-        className: prefixCls + '-month-select' + timeClassName,
-        role: 'button',
-        onClick: showTimePicker ? null : this.showMonthPanel,
-        title: showTimePicker ? null : locale.monthSelect
-      },
-      locale.monthFormat ? value.format(locale.monthFormat) : localeData.monthsShort(value)
-    );
-    var day = void 0;
-    if (showTimePicker) {
-      day = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'a',
-        {
-          className: prefixCls + '-day-select' + timeClassName,
-          role: 'button'
-        },
-        value.format(locale.dayFormat)
-      );
-    }
-    var my = [];
-    if (monthBeforeYear) {
-      my = [month, day, year];
-    } else {
-      my = [year, month, day];
-    }
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      'span',
-      { className: selectClassName },
-      Object(__WEBPACK_IMPORTED_MODULE_3_rc_util_es_Children_mapSelf__["a" /* default */])(my)
-    );
-  },
-  showMonthPanel: function showMonthPanel() {
-    // null means that users' interaction doesn't change value
-    this.props.onPanelChange(null, 'month');
-  },
-  showYearPanel: function showYearPanel(referer) {
-    this.setState({ yearPanelReferer: referer });
-    this.props.onPanelChange(null, 'year');
-  },
-  showDecadePanel: function showDecadePanel() {
-    this.props.onPanelChange(null, 'decade');
-  },
-  render: function render() {
+    _initialiseProps.call(_this);
+
+    _this.nextMonth = goMonth.bind(_this, 1);
+    _this.previousMonth = goMonth.bind(_this, -1);
+    _this.nextYear = goYear.bind(_this, 1);
+    _this.previousYear = goYear.bind(_this, -1);
+
+    _this.state = { yearPanelReferer: null };
+    return _this;
+  }
+
+  CalendarHeader.prototype.render = function render() {
     var _this2 = this;
 
     var props = this.props;
@@ -1817,7 +1726,7 @@ var CalendarHeader = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()(
 
     var panel = null;
     if (mode === 'month') {
-      panel = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__month_MonthPanel__["a" /* default */], {
+      panel = __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__month_MonthPanel__["a" /* default */], {
         locale: locale,
         defaultValue: value,
         rootPrefixCls: prefixCls,
@@ -1832,7 +1741,7 @@ var CalendarHeader = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()(
       });
     }
     if (mode === 'year') {
-      panel = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__year_YearPanel__["a" /* default */], {
+      panel = __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__year_YearPanel__["a" /* default */], {
         locale: locale,
         defaultValue: value,
         rootPrefixCls: prefixCls,
@@ -1842,7 +1751,7 @@ var CalendarHeader = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()(
       });
     }
     if (mode === 'decade') {
-      panel = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__decade_DecadePanel__["a" /* default */], {
+      panel = __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__decade_DecadePanel__["a" /* default */], {
         locale: locale,
         defaultValue: value,
         rootPrefixCls: prefixCls,
@@ -1851,31 +1760,31 @@ var CalendarHeader = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()(
       });
     }
 
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    return __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
       'div',
       { className: prefixCls + '-header' },
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
         'div',
         { style: { position: 'relative' } },
-        showIf(enablePrev && !showTimePicker, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', {
+        showIf(enablePrev && !showTimePicker, __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement('a', {
           className: prefixCls + '-prev-year-btn',
           role: 'button',
           onClick: this.previousYear,
           title: locale.previousYear
         })),
-        showIf(enablePrev && !showTimePicker, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', {
+        showIf(enablePrev && !showTimePicker, __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement('a', {
           className: prefixCls + '-prev-month-btn',
           role: 'button',
           onClick: this.previousMonth,
           title: locale.previousMonth
         })),
         this.monthYearElement(showTimePicker),
-        showIf(enableNext && !showTimePicker, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', {
+        showIf(enableNext && !showTimePicker, __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement('a', {
           className: prefixCls + '-next-month-btn',
           onClick: this.nextMonth,
           title: locale.nextMonth
         })),
-        showIf(enableNext && !showTimePicker, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', {
+        showIf(enableNext && !showTimePicker, __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement('a', {
           className: prefixCls + '-next-year-btn',
           onClick: this.nextYear,
           title: locale.nextYear
@@ -1883,8 +1792,124 @@ var CalendarHeader = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()(
       ),
       panel
     );
-  }
-});
+  };
+
+  return CalendarHeader;
+}(__WEBPACK_IMPORTED_MODULE_3_react___default.a.Component);
+
+CalendarHeader.propTypes = {
+  prefixCls: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.string,
+  value: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.object,
+  onValueChange: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.func,
+  showTimePicker: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.bool,
+  onPanelChange: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.func,
+  locale: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.object,
+  enablePrev: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.any,
+  enableNext: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.any,
+  disabledMonth: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.func,
+  renderFooter: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.func,
+  onMonthSelect: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.func
+};
+CalendarHeader.defaultProps = {
+  enableNext: 1,
+  enablePrev: 1,
+  onPanelChange: function onPanelChange() {},
+  onValueChange: function onValueChange() {}
+};
+
+var _initialiseProps = function _initialiseProps() {
+  var _this3 = this;
+
+  this.onMonthSelect = function (value) {
+    _this3.props.onPanelChange(value, 'date');
+    if (_this3.props.onMonthSelect) {
+      _this3.props.onMonthSelect(value);
+    } else {
+      _this3.props.onValueChange(value);
+    }
+  };
+
+  this.onYearSelect = function (value) {
+    var referer = _this3.state.yearPanelReferer;
+    _this3.setState({ yearPanelReferer: null });
+    _this3.props.onPanelChange(value, referer);
+    _this3.props.onValueChange(value);
+  };
+
+  this.onDecadeSelect = function (value) {
+    _this3.props.onPanelChange(value, 'year');
+    _this3.props.onValueChange(value);
+  };
+
+  this.monthYearElement = function (showTimePicker) {
+    var props = _this3.props;
+    var prefixCls = props.prefixCls;
+    var locale = props.locale;
+    var value = props.value;
+    var localeData = value.localeData();
+    var monthBeforeYear = locale.monthBeforeYear;
+    var selectClassName = prefixCls + '-' + (monthBeforeYear ? 'my-select' : 'ym-select');
+    var timeClassName = showTimePicker ? ' ' + prefixCls + '-time-status' : '';
+    var year = __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
+      'a',
+      {
+        className: prefixCls + '-year-select' + timeClassName,
+        role: 'button',
+        onClick: showTimePicker ? null : function () {
+          return _this3.showYearPanel('date');
+        },
+        title: showTimePicker ? null : locale.yearSelect
+      },
+      value.format(locale.yearFormat)
+    );
+    var month = __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
+      'a',
+      {
+        className: prefixCls + '-month-select' + timeClassName,
+        role: 'button',
+        onClick: showTimePicker ? null : _this3.showMonthPanel,
+        title: showTimePicker ? null : locale.monthSelect
+      },
+      locale.monthFormat ? value.format(locale.monthFormat) : localeData.monthsShort(value)
+    );
+    var day = void 0;
+    if (showTimePicker) {
+      day = __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
+        'a',
+        {
+          className: prefixCls + '-day-select' + timeClassName,
+          role: 'button'
+        },
+        value.format(locale.dayFormat)
+      );
+    }
+    var my = [];
+    if (monthBeforeYear) {
+      my = [month, day, year];
+    } else {
+      my = [year, month, day];
+    }
+    return __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
+      'span',
+      { className: selectClassName },
+      Object(__WEBPACK_IMPORTED_MODULE_5_rc_util_es_Children_mapSelf__["a" /* default */])(my)
+    );
+  };
+
+  this.showMonthPanel = function () {
+    // null means that users' interaction doesn't change value
+    _this3.props.onPanelChange(null, 'month');
+  };
+
+  this.showYearPanel = function (referer) {
+    _this3.setState({ yearPanelReferer: referer });
+    _this3.props.onPanelChange(null, 'year');
+  };
+
+  this.showDecadePanel = function () {
+    _this3.props.onPanelChange(null, 'decade');
+  };
+};
 
 /* harmony default export */ __webpack_exports__["a"] = (CalendarHeader);
 
@@ -1896,7 +1921,7 @@ var CalendarHeader = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()(
 /* harmony export (immutable) */ __webpack_exports__["a"] = TodayButton;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__util___ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__util___ = __webpack_require__(10);
 
 
 
@@ -1965,7 +1990,7 @@ function OkButton(_ref) {
 /* harmony export (immutable) */ __webpack_exports__["a"] = TimePickerButton;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_classnames__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_classnames__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_classnames__);
 
 
@@ -2001,28 +2026,28 @@ function TimePickerButton(_ref) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_prop_types__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_prop_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react_dom__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_util_es_Dom_contains__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_util_es_Dom_addEventListener__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_util_es_Dom_addEventListener__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rc_util_es_ContainerRender__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_rc_util_es_Portal__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_classnames__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_classnames__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_classnames__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__utils__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__Popup__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__utils__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__Popup__ = __webpack_require__(51);
 
 
 
@@ -2763,9 +2788,9 @@ var _initialiseProps = function _initialiseProps() {
  */
 
 try {
-  var index = __webpack_require__(22);
+  var index = __webpack_require__(21);
 } catch (err) {
-  var index = __webpack_require__(22);
+  var index = __webpack_require__(21);
 }
 
 /**
@@ -2995,19 +3020,19 @@ function contains(root, n) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_dom__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prop_types__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prop_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_prop_types__);
 
 
@@ -3114,19 +3139,19 @@ ContainerRender.defaultProps = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_dom__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prop_types__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prop_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_prop_types__);
 
 
@@ -3198,21 +3223,20 @@ Portal.propTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (Portal);
 
 /***/ }),
-/* 38 */,
-/* 39 */
+/* 38 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__DateConstants__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_moment__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__DateConstants__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_moment__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_moment__);
 
 
@@ -3295,20 +3319,26 @@ var DateTHead = function (_React$Component) {
 /* harmony default export */ __webpack_exports__["a"] = (DateTHead);
 
 /***/ }),
-/* 40 */
+/* 39 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_create_react_class__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_create_react_class___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_create_react_class__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_classnames__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__DateConstants__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__util___ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_prop_types__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_classnames__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_classnames__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__DateConstants__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__util___ = __webpack_require__(10);
+
+
 
 
 
@@ -3338,26 +3368,16 @@ function getIdFromDate(date) {
   return 'rc-calendar-' + date.year() + '-' + date.month() + '-' + date.date();
 }
 
-var DateTBody = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
-  displayName: 'DateTBody',
+var DateTBody = function (_React$Component) {
+  __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits___default()(DateTBody, _React$Component);
 
-  propTypes: {
-    contentRender: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.func,
-    dateRender: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.func,
-    disabledDate: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.func,
-    prefixCls: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.string,
-    selectedValue: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.object, __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.arrayOf(__WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.object)]),
-    value: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.object,
-    hoverValue: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.any,
-    showWeekNumber: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.bool
-  },
+  function DateTBody() {
+    __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default()(this, DateTBody);
 
-  getDefaultProps: function getDefaultProps() {
-    return {
-      hoverValue: []
-    };
-  },
-  render: function render() {
+    return __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn___default()(this, _React$Component.apply(this, arguments));
+  }
+
+  DateTBody.prototype.render = function render() {
     var props = this.props;
     var contentRender = props.contentRender,
         prefixCls = props.prefixCls,
@@ -3372,7 +3392,7 @@ var DateTBody = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
     var jIndex = void 0;
     var current = void 0;
     var dateTable = [];
-    var today = Object(__WEBPACK_IMPORTED_MODULE_5__util___["e" /* getTodayTime */])(value);
+    var today = Object(__WEBPACK_IMPORTED_MODULE_7__util___["e" /* getTodayTime */])(value);
     var cellClass = prefixCls + '-cell';
     var weekNumberCellClass = prefixCls + '-week-number-cell';
     var dateClass = prefixCls + '-date';
@@ -3397,8 +3417,8 @@ var DateTBody = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
     lastMonth1.add(0 - lastMonthDiffDay, 'days');
     var passed = 0;
 
-    for (iIndex = 0; iIndex < __WEBPACK_IMPORTED_MODULE_4__DateConstants__["a" /* default */].DATE_ROW_COUNT; iIndex++) {
-      for (jIndex = 0; jIndex < __WEBPACK_IMPORTED_MODULE_4__DateConstants__["a" /* default */].DATE_COL_COUNT; jIndex++) {
+    for (iIndex = 0; iIndex < __WEBPACK_IMPORTED_MODULE_6__DateConstants__["a" /* default */].DATE_ROW_COUNT; iIndex++) {
+      for (jIndex = 0; jIndex < __WEBPACK_IMPORTED_MODULE_6__DateConstants__["a" /* default */].DATE_COL_COUNT; jIndex++) {
         current = lastMonth1;
         if (passed) {
           current = current.clone();
@@ -3411,7 +3431,7 @@ var DateTBody = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
     var tableHtml = [];
     passed = 0;
 
-    for (iIndex = 0; iIndex < __WEBPACK_IMPORTED_MODULE_4__DateConstants__["a" /* default */].DATE_ROW_COUNT; iIndex++) {
+    for (iIndex = 0; iIndex < __WEBPACK_IMPORTED_MODULE_6__DateConstants__["a" /* default */].DATE_ROW_COUNT; iIndex++) {
       var _cx;
 
       var isCurrentWeek = void 0;
@@ -3419,7 +3439,7 @@ var DateTBody = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
       var isActiveWeek = false;
       var dateCells = [];
       if (showWeekNumber) {
-        weekNumberCell = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        weekNumberCell = __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
           'td',
           {
             key: dateTable[passed].week(),
@@ -3429,11 +3449,11 @@ var DateTBody = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
           dateTable[passed].week()
         );
       }
-      for (jIndex = 0; jIndex < __WEBPACK_IMPORTED_MODULE_4__DateConstants__["a" /* default */].DATE_COL_COUNT; jIndex++) {
+      for (jIndex = 0; jIndex < __WEBPACK_IMPORTED_MODULE_6__DateConstants__["a" /* default */].DATE_COL_COUNT; jIndex++) {
         var next = null;
         var last = null;
         current = dateTable[passed];
-        if (jIndex < __WEBPACK_IMPORTED_MODULE_4__DateConstants__["a" /* default */].DATE_COL_COUNT - 1) {
+        if (jIndex < __WEBPACK_IMPORTED_MODULE_6__DateConstants__["a" /* default */].DATE_COL_COUNT - 1) {
           next = dateTable[passed + 1];
         }
         if (jIndex > 0) {
@@ -3522,7 +3542,7 @@ var DateTBody = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
           dateHtml = dateRender(current, value);
         } else {
           var content = contentRender ? contentRender(current, value) : current.date();
-          dateHtml = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          dateHtml = __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
             'div',
             {
               key: getIdFromDate(current),
@@ -3534,14 +3554,14 @@ var DateTBody = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
           );
         }
 
-        dateCells.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        dateCells.push(__WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
           'td',
           {
             key: passed,
             onClick: disabled ? undefined : props.onSelect.bind(null, current),
             onMouseEnter: disabled ? undefined : props.onDayHover && props.onDayHover.bind(null, current) || undefined,
             role: 'gridcell',
-            title: Object(__WEBPACK_IMPORTED_MODULE_5__util___["d" /* getTitleString */])(current),
+            title: Object(__WEBPACK_IMPORTED_MODULE_7__util___["d" /* getTitleString */])(current),
             className: cls
           },
           dateHtml
@@ -3550,39 +3570,60 @@ var DateTBody = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
         passed++;
       }
 
-      tableHtml.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      tableHtml.push(__WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
         'tr',
         {
           key: iIndex,
           role: 'row',
-          className: __WEBPACK_IMPORTED_MODULE_3_classnames___default()((_cx = {}, _cx[prefixCls + '-current-week'] = isCurrentWeek, _cx[prefixCls + '-active-week'] = isActiveWeek, _cx))
+          className: __WEBPACK_IMPORTED_MODULE_5_classnames___default()((_cx = {}, _cx[prefixCls + '-current-week'] = isCurrentWeek, _cx[prefixCls + '-active-week'] = isActiveWeek, _cx))
         },
         weekNumberCell,
         dateCells
       ));
     }
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    return __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
       'tbody',
       { className: prefixCls + '-tbody' },
       tableHtml
     );
-  }
-});
+  };
 
+  return DateTBody;
+}(__WEBPACK_IMPORTED_MODULE_3_react___default.a.Component);
+
+DateTBody.propTypes = {
+  contentRender: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.func,
+  dateRender: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.func,
+  disabledDate: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.func,
+  prefixCls: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.string,
+  selectedValue: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.object, __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.arrayOf(__WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.object)]),
+  value: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.object,
+  hoverValue: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.any,
+  showWeekNumber: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.bool
+};
+DateTBody.defaultProps = {
+  hoverValue: []
+};
 /* harmony default export */ __webpack_exports__["a"] = (DateTBody);
 
 /***/ }),
-/* 41 */
+/* 40 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_create_react_class__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_create_react_class___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_create_react_class__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MonthTable__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_prop_types__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__MonthTable__ = __webpack_require__(88);
+
+
 
 
 
@@ -3596,55 +3637,55 @@ function goYear(direction) {
 
 function noop() {}
 
-var MonthPanel = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
-  displayName: 'MonthPanel',
+var MonthPanel = function (_React$Component) {
+  __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits___default()(MonthPanel, _React$Component);
 
-  propTypes: {
-    onChange: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.func,
-    disabledDate: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.func,
-    onSelect: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.func,
-    renderFooter: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.func
-  },
+  function MonthPanel(props) {
+    __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default()(this, MonthPanel);
 
-  getDefaultProps: function getDefaultProps() {
-    return {
-      onChange: noop,
-      onSelect: noop
+    var _this = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn___default()(this, _React$Component.call(this, props));
+
+    _this.setAndChangeValue = function (value) {
+      _this.setValue(value);
+      _this.props.onChange(value);
     };
-  },
-  getInitialState: function getInitialState() {
-    var props = this.props;
-    // bind methods
-    this.nextYear = goYear.bind(this, 1);
-    this.previousYear = goYear.bind(this, -1);
-    this.prefixCls = props.rootPrefixCls + '-month-panel';
-    return {
+
+    _this.setAndSelectValue = function (value) {
+      _this.setValue(value);
+      _this.props.onSelect(value);
+    };
+
+    _this.setValue = function (value) {
+      if (!('value' in _this.props)) {
+        _this.setState({
+          value: value
+        });
+      }
+    };
+
+    _this.nextYear = goYear.bind(_this, 1);
+    _this.previousYear = goYear.bind(_this, -1);
+    _this.prefixCls = props.rootPrefixCls + '-month-panel';
+
+    _this.state = {
       value: props.value || props.defaultValue
     };
-  },
-  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+    return _this;
+  }
+
+  MonthPanel.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps) {
+    var newState = {};
+
     if ('value' in nextProps) {
-      this.setState({
+      newState = {
         value: nextProps.value
-      });
+      };
     }
-  },
-  setAndChangeValue: function setAndChangeValue(value) {
-    this.setValue(value);
-    this.props.onChange(value);
-  },
-  setAndSelectValue: function setAndSelectValue(value) {
-    this.setValue(value);
-    this.props.onSelect(value);
-  },
-  setValue: function setValue(value) {
-    if (!('value' in this.props)) {
-      this.setState({
-        value: value
-      });
-    }
-  },
-  render: function render() {
+
+    return newState;
+  };
+
+  MonthPanel.prototype.render = function render() {
     var props = this.props;
     var value = this.state.value;
     var locale = props.locale,
@@ -3657,22 +3698,22 @@ var MonthPanel = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
 
     var footer = renderFooter && renderFooter('month');
 
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    return __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
       'div',
       { className: prefixCls, style: props.style },
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
         'div',
         null,
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
           'div',
           { className: prefixCls + '-header' },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', {
+          __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement('a', {
             className: prefixCls + '-prev-year-btn',
             role: 'button',
             onClick: this.previousYear,
             title: locale.previousYear
           }),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
             'a',
             {
               className: prefixCls + '-year-select',
@@ -3680,28 +3721,28 @@ var MonthPanel = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
               onClick: props.onYearPanelShow,
               title: locale.yearSelect
             },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
               'span',
               { className: prefixCls + '-year-select-content' },
               year
             ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
               'span',
               { className: prefixCls + '-year-select-arrow' },
               'x'
             )
           ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('a', {
+          __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement('a', {
             className: prefixCls + '-next-year-btn',
             role: 'button',
             onClick: this.nextYear,
             title: locale.nextYear
           })
         ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
           'div',
           { className: prefixCls + '-body' },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__MonthTable__["a" /* default */], {
+          __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__MonthTable__["a" /* default */], {
             disabledDate: props.disabledDate,
             onSelect: this.setAndSelectValue,
             locale: locale,
@@ -3711,34 +3752,49 @@ var MonthPanel = __WEBPACK_IMPORTED_MODULE_1_create_react_class___default()({
             prefixCls: prefixCls
           })
         ),
-        footer && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        footer && __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
           'div',
           { className: prefixCls + '-footer' },
           footer
         )
       )
     );
-  }
-});
+  };
 
+  return MonthPanel;
+}(__WEBPACK_IMPORTED_MODULE_3_react___default.a.Component);
+
+MonthPanel.propTypes = {
+  onChange: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.func,
+  disabledDate: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.func,
+  onSelect: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.func,
+  renderFooter: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.func,
+  rootPrefixCls: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.string,
+  value: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.object,
+  defaultValue: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.object
+};
+MonthPanel.defaultProps = {
+  onChange: noop,
+  onSelect: noop
+};
 /* harmony default export */ __webpack_exports__["a"] = (MonthPanel);
 
 /***/ }),
-/* 42 */
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_classnames__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_classnames__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_classnames__);
 
 
@@ -3941,21 +3997,21 @@ YearPanel.defaultProps = {
 };
 
 /***/ }),
-/* 43 */
+/* 42 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_classnames__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_classnames__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_classnames__);
 
 
@@ -4140,21 +4196,25 @@ DecadePanel.defaultProps = {
 };
 
 /***/ }),
-/* 44 */
+/* 43 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_create_react_class__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_create_react_class___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_create_react_class__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__util__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_prop_types__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_prop_types__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_moment__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__util__ = __webpack_require__(10);
 
 
 
@@ -4162,126 +4222,62 @@ DecadePanel.defaultProps = {
 
 
 
-var DateInput = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
-  displayName: 'DateInput',
 
-  propTypes: {
-    prefixCls: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.string,
-    timePicker: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.object,
-    value: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.object,
-    disabledTime: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
-    format: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.string, __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.arrayOf(__WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.string)]),
-    locale: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.object,
-    disabledDate: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.func,
-    onChange: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.func,
-    onClear: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.func,
-    placeholder: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.string,
-    onSelect: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.func,
-    selectedValue: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.object,
-    clearIcon: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.node
-  },
 
-  getInitialState: function getInitialState() {
-    var selectedValue = this.props.selectedValue;
-    return {
-      str: Object(__WEBPACK_IMPORTED_MODULE_5__util__["a" /* formatDate */])(selectedValue, this.props.format),
+var cachedSelectionStart = void 0;
+var cachedSelectionEnd = void 0;
+var dateInputInstance = void 0;
+
+var DateInput = function (_React$Component) {
+  __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits___default()(DateInput, _React$Component);
+
+  function DateInput(props) {
+    __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default()(this, DateInput);
+
+    var _this = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn___default()(this, _React$Component.call(this, props));
+
+    _initialiseProps.call(_this);
+
+    var selectedValue = props.selectedValue;
+
+    _this.state = {
+      str: Object(__WEBPACK_IMPORTED_MODULE_7__util__["a" /* formatDate */])(selectedValue, _this.props.format),
       invalid: false,
       hasFocus: false
     };
-  },
-  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-    this.cachedSelectionStart = this.dateInputInstance.selectionStart;
-    this.cachedSelectionEnd = this.dateInputInstance.selectionEnd;
+    return _this;
+  }
+
+  DateInput.prototype.componentDidUpdate = function componentDidUpdate() {
+    if (this.state.hasFocus && !this.state.invalid && !(cachedSelectionStart === 0 && cachedSelectionEnd === 0)) {
+      dateInputInstance.setSelectionRange(cachedSelectionStart, cachedSelectionEnd);
+    }
+  };
+
+  DateInput.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, state) {
+    var newState = {};
+
+    if (dateInputInstance) {
+      cachedSelectionStart = dateInputInstance.selectionStart;
+      cachedSelectionEnd = dateInputInstance.selectionEnd;
+    }
     // when popup show, click body will call this, bug!
     var selectedValue = nextProps.selectedValue;
-    if (!this.state.hasFocus) {
-      this.setState({
-        str: Object(__WEBPACK_IMPORTED_MODULE_5__util__["a" /* formatDate */])(selectedValue, nextProps.format),
+    if (!state.hasFocus) {
+      newState = {
+        str: Object(__WEBPACK_IMPORTED_MODULE_7__util__["a" /* formatDate */])(selectedValue, nextProps.format),
         invalid: false
-      });
-    }
-  },
-  componentDidUpdate: function componentDidUpdate() {
-    if (this.state.hasFocus && !this.state.invalid && !(this.cachedSelectionStart === 0 && this.cachedSelectionEnd === 0)) {
-      this.dateInputInstance.setSelectionRange(this.cachedSelectionStart, this.cachedSelectionEnd);
-    }
-  },
-  onInputChange: function onInputChange(event) {
-    var str = event.target.value;
-    var _props = this.props,
-        disabledDate = _props.disabledDate,
-        format = _props.format,
-        onChange = _props.onChange,
-        selectedValue = _props.selectedValue;
-
-    // 没有内容，合法并直接退出
-
-    if (!str) {
-      onChange(null);
-      this.setState({
-        invalid: false,
-        str: str
-      });
-      return;
-    }
-
-    // 不合法直接退出
-    var parsed = __WEBPACK_IMPORTED_MODULE_4_moment___default()(str, format, true);
-    if (!parsed.isValid()) {
-      this.setState({
-        invalid: true,
-        str: str
-      });
-      return;
-    }
-
-    var value = this.props.value.clone();
-    value.year(parsed.year()).month(parsed.month()).date(parsed.date()).hour(parsed.hour()).minute(parsed.minute()).second(parsed.second());
-
-    if (!value || disabledDate && disabledDate(value)) {
-      this.setState({
-        invalid: true,
-        str: str
-      });
-      return;
-    }
-
-    if (selectedValue !== value || selectedValue && value && !selectedValue.isSame(value)) {
-      this.setState({
-        str: str
-      });
-      onChange(value);
-    }
-  },
-  onClear: function onClear() {
-    this.setState({
-      str: ''
-    });
-    this.props.onClear(null);
-  },
-  getRootDOMNode: function getRootDOMNode() {
-    return __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.findDOMNode(this);
-  },
-  focus: function focus() {
-    if (this.dateInputInstance) {
-      this.dateInputInstance.focus();
-    }
-  },
-  saveDateInput: function saveDateInput(dateInput) {
-    this.dateInputInstance = dateInput;
-  },
-  onFocus: function onFocus() {
-    this.setState({ hasFocus: true });
-  },
-  onBlur: function onBlur() {
-    this.setState(function (prevState, prevProps) {
-      return {
-        hasFocus: false,
-        str: Object(__WEBPACK_IMPORTED_MODULE_5__util__["a" /* formatDate */])(prevProps.value, prevProps.format)
       };
-    });
-  },
-  render: function render() {
+    }
+
+    return newState;
+  };
+
+  DateInput.getInstance = function getInstance() {
+    return dateInputInstance;
+  };
+
+  DateInput.prototype.render = function render() {
     var props = this.props;
     var _state = this.state,
         invalid = _state.invalid,
@@ -4292,13 +4288,13 @@ var DateInput = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
         clearIcon = props.clearIcon;
 
     var invalidClass = invalid ? prefixCls + '-input-invalid' : '';
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    return __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
       'div',
       { className: prefixCls + '-input-wrap' },
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
         'div',
         { className: prefixCls + '-date-input-wrap' },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', {
+        __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement('input', {
           ref: this.saveDateInput,
           className: prefixCls + '-input ' + invalidClass,
           value: str,
@@ -4309,23 +4305,127 @@ var DateInput = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
           onBlur: this.onBlur
         })
       ),
-      props.showClear ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      props.showClear ? __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
         'a',
         {
           role: 'button',
           title: locale.clear,
           onClick: this.onClear
         },
-        clearIcon || __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: prefixCls + '-clear-btn' })
+        clearIcon || __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement('span', { className: prefixCls + '-clear-btn' })
       ) : null
     );
-  }
-});
+  };
+
+  return DateInput;
+}(__WEBPACK_IMPORTED_MODULE_3_react___default.a.Component);
+
+DateInput.propTypes = {
+  prefixCls: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.string,
+  timePicker: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object,
+  value: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object,
+  disabledTime: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.any,
+  format: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.string, __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.arrayOf(__WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.string)]),
+  locale: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object,
+  disabledDate: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func,
+  onChange: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func,
+  onClear: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func,
+  placeholder: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.string,
+  onSelect: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func,
+  selectedValue: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object,
+  clearIcon: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.node
+};
+
+var _initialiseProps = function _initialiseProps() {
+  var _this2 = this;
+
+  this.onClear = function () {
+    _this2.setState({
+      str: ''
+    });
+    _this2.props.onClear(null);
+  };
+
+  this.onInputChange = function (event) {
+    var str = event.target.value;
+    var _props = _this2.props,
+        disabledDate = _props.disabledDate,
+        format = _props.format,
+        onChange = _props.onChange,
+        selectedValue = _props.selectedValue;
+
+    // 没有内容，合法并直接退出
+
+    if (!str) {
+      onChange(null);
+      _this2.setState({
+        invalid: false,
+        str: str
+      });
+      return;
+    }
+
+    // 不合法直接退出
+    var parsed = __WEBPACK_IMPORTED_MODULE_6_moment___default()(str, format, true);
+    if (!parsed.isValid()) {
+      _this2.setState({
+        invalid: true,
+        str: str
+      });
+      return;
+    }
+
+    var value = _this2.props.value.clone();
+    value.year(parsed.year()).month(parsed.month()).date(parsed.date()).hour(parsed.hour()).minute(parsed.minute()).second(parsed.second());
+
+    if (!value || disabledDate && disabledDate(value)) {
+      _this2.setState({
+        invalid: true,
+        str: str
+      });
+      return;
+    }
+
+    if (selectedValue !== value || selectedValue && value && !selectedValue.isSame(value)) {
+      _this2.setState({
+        str: str
+      });
+      onChange(value);
+    }
+  };
+
+  this.onFocus = function () {
+    _this2.setState({ hasFocus: true });
+  };
+
+  this.onBlur = function () {
+    _this2.setState(function (prevState, prevProps) {
+      return {
+        hasFocus: false,
+        str: Object(__WEBPACK_IMPORTED_MODULE_7__util__["a" /* formatDate */])(prevProps.value, prevProps.format)
+      };
+    });
+  };
+
+  this.getRootDOMNode = function () {
+    return __WEBPACK_IMPORTED_MODULE_4_react_dom___default.a.findDOMNode(_this2);
+  };
+
+  this.focus = function () {
+    if (dateInputInstance) {
+      dateInputInstance.focus();
+    }
+  };
+
+  this.saveDateInput = function (dateInput) {
+    dateInputInstance = dateInput;
+  };
+};
 
 /* harmony default export */ __webpack_exports__["a"] = (DateInput);
 
 /***/ }),
-/* 45 */
+/* 44 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4356,7 +4456,7 @@ function includesTime() {
 }
 
 /***/ }),
-/* 46 */
+/* 45 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4385,7 +4485,7 @@ function createChainedFunction() {
 }
 
 /***/ }),
-/* 47 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4398,7 +4498,7 @@ exports['default'] = addEventListener;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _EventObject = __webpack_require__(48);
+var _EventObject = __webpack_require__(47);
 
 var _EventObject2 = _interopRequireDefault(_EventObject);
 
@@ -4442,7 +4542,7 @@ function addEventListener(target, eventType, callback, option) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 48 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4460,11 +4560,11 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _EventBaseObject = __webpack_require__(49);
+var _EventBaseObject = __webpack_require__(48);
 
 var _EventBaseObject2 = _interopRequireDefault(_EventBaseObject);
 
-var _objectAssign = __webpack_require__(75);
+var _objectAssign = __webpack_require__(72);
 
 var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
@@ -4726,7 +4826,7 @@ exports['default'] = DomEventObject;
 module.exports = exports['default'];
 
 /***/ }),
-/* 49 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4795,49 +4895,49 @@ exports["default"] = EventBaseObject;
 module.exports = exports["default"];
 
 /***/ }),
-/* 50 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(51);
-var $Object = __webpack_require__(72).Object;
+__webpack_require__(50);
+var $Object = __webpack_require__(71).Object;
 module.exports = function defineProperty(it, key, desc) {
   return $Object.defineProperty(it, key, desc);
 };
 
 
 /***/ }),
-/* 51 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var $export = __webpack_require__(78);
+var $export = __webpack_require__(77);
 // 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
 $export($export.S + $export.F * !__webpack_require__(74), 'Object', { defineProperty: __webpack_require__(73).f });
 
 
 /***/ }),
-/* 52 */
+/* 51 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_prop_types__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_prop_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react_dom__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_align__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_animate__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__PopupInner__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__LazyRenderBox__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__utils__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_align__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_animate__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__PopupInner__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__LazyRenderBox__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__utils__ = __webpack_require__(16);
 
 
 
@@ -5182,36 +5282,36 @@ var _initialiseProps = function _initialiseProps() {
 /* harmony default export */ __webpack_exports__["a"] = (Popup);
 
 /***/ }),
-/* 53 */
+/* 52 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Align__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Align__ = __webpack_require__(53);
 // export this package's api
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0__Align__["a" /* default */]);
 
 /***/ }),
-/* 54 */
+/* 53 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_dom__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_dom_align__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_util_es_Dom_addEventListener__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__util__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_dom_align__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_util_es_Dom_addEventListener__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__util__ = __webpack_require__(62);
 
 
 
@@ -5398,12 +5498,12 @@ Align.defaultProps = {
 /* harmony default export */ __webpack_exports__["a"] = (Align);
 
 /***/ }),
-/* 55 */
+/* 54 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__align_alignElement__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__align_alignPoint__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__align_alignElement__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__align_alignPoint__ = __webpack_require__(61);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__align_alignElement__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__align_alignPoint__["a"]; });
 
@@ -5414,14 +5514,14 @@ Align.defaultProps = {
 /* unused harmony default export */ var _unused_webpack_default_export = (__WEBPACK_IMPORTED_MODULE_0__align_alignElement__["a" /* default */]);
 
 /***/ }),
-/* 56 */
+/* 55 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__align__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getOffsetParent__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__getVisibleRectForElement__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__getRegion__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__align__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getOffsetParent__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__getVisibleRectForElement__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__getRegion__ = __webpack_require__(20);
 
 
 
@@ -5450,7 +5550,7 @@ alignElement.__getVisibleRectForElement = __WEBPACK_IMPORTED_MODULE_2__getVisibl
 /* harmony default export */ __webpack_exports__["a"] = (alignElement);
 
 /***/ }),
-/* 57 */
+/* 56 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5561,12 +5661,12 @@ function setTransformXY(node, xy) {
 }
 
 /***/ }),
-/* 58 */
+/* 57 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = isAncestorFixed;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__(8);
 
 
 function isAncestorFixed(element) {
@@ -5587,11 +5687,11 @@ function isAncestorFixed(element) {
 }
 
 /***/ }),
-/* 59 */
+/* 58 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__(8);
 
 
 function adjustForViewport(elFuturePos, elRegion, visibleRect, overflow) {
@@ -5638,11 +5738,11 @@ function adjustForViewport(elFuturePos, elRegion, visibleRect, overflow) {
 /* harmony default export */ __webpack_exports__["a"] = (adjustForViewport);
 
 /***/ }),
-/* 60 */
+/* 59 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getAlignOffset__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getAlignOffset__ = __webpack_require__(60);
 
 
 function getElFuturePos(elRegion, refNodeRegion, points, offset, targetOffset) {
@@ -5659,7 +5759,7 @@ function getElFuturePos(elRegion, refNodeRegion, points, offset, targetOffset) {
 /* harmony default export */ __webpack_exports__["a"] = (getElFuturePos);
 
 /***/ }),
-/* 61 */
+/* 60 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5697,12 +5797,12 @@ function getAlignOffset(region, align) {
 /* harmony default export */ __webpack_exports__["a"] = (getAlignOffset);
 
 /***/ }),
-/* 62 */
+/* 61 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__align__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__align__ = __webpack_require__(17);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 
@@ -5755,7 +5855,7 @@ function alignPoint(el, tgtPoint, align) {
 /* harmony default export */ __webpack_exports__["a"] = (alignPoint);
 
 /***/ }),
-/* 63 */
+/* 62 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5802,7 +5902,7 @@ function isWindow(obj) {
 }
 
 /***/ }),
-/* 64 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5810,7 +5910,7 @@ function isWindow(obj) {
 
 exports.__esModule = true;
 
-var _defineProperty = __webpack_require__(16);
+var _defineProperty = __webpack_require__(15);
 
 var _defineProperty2 = _interopRequireDefault(_defineProperty);
 
@@ -5832,7 +5932,7 @@ exports.default = function (obj, key, value) {
 };
 
 /***/ }),
-/* 65 */
+/* 64 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5947,26 +6047,26 @@ function mergeChildren(prev, next) {
 }
 
 /***/ }),
-/* 66 */
+/* 65 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_dom__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prop_types__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prop_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_css_animation__ = __webpack_require__(67);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__util_animate__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_css_animation__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__util_animate__ = __webpack_require__(22);
 
 
 
@@ -6080,14 +6180,14 @@ AnimateChild.propTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (AnimateChild);
 
 /***/ }),
-/* 67 */
+/* 66 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return isCssAnimationSupported; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof__ = __webpack_require__(84);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Event__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Event__ = __webpack_require__(67);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_component_classes__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_component_classes___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_component_classes__);
 
@@ -6267,7 +6367,7 @@ cssAnimation.isCssAnimationSupported = isCssAnimationSupported;
 /* harmony default export */ __webpack_exports__["a"] = (cssAnimation);
 
 /***/ }),
-/* 68 */
+/* 67 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6402,21 +6502,21 @@ var TransitionEvents = {
 /* harmony default export */ __webpack_exports__["a"] = (TransitionEvents);
 
 /***/ }),
-/* 69 */
+/* 68 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__LazyRenderBox__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__LazyRenderBox__ = __webpack_require__(23);
 
 
 
@@ -6475,13 +6575,13 @@ PopupInner.propTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (PopupInner);
 
 /***/ }),
-/* 70 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(10)) :
+    true ? factory(__webpack_require__(9)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -6589,13 +6689,13 @@ PopupInner.propTypes = {
 
 
 /***/ }),
-/* 71 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
 
 ;(function (global, factory) {
-    true ? factory(__webpack_require__(10)) :
+    true ? factory(__webpack_require__(9)) :
    typeof define === 'function' && define.amd ? define(['../moment'], factory) :
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
@@ -6660,12 +6760,12 @@ PopupInner.propTypes = {
 
 
 /***/ }),
+/* 71 */,
 /* 72 */,
 /* 73 */,
 /* 74 */,
 /* 75 */,
-/* 76 */,
-/* 77 */
+/* 76 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6698,24 +6798,31 @@ PopupInner.propTypes = {
 });
 
 /***/ }),
+/* 77 */,
 /* 78 */,
 /* 79 */,
 /* 80 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_create_react_class__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_create_react_class___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_create_react_class__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rc_util_es_createChainedFunction__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rc_util_es_KeyCode__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__picker_placements__ = __webpack_require__(81);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_trigger__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_prop_types__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_prop_types__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rc_util_es_createChainedFunction__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_util_es_KeyCode__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__picker_placements__ = __webpack_require__(81);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rc_trigger__ = __webpack_require__(32);
+
+
 
 
 
@@ -6731,41 +6838,16 @@ function refFn(field, component) {
   this[field] = component;
 }
 
-var Picker = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
-  displayName: 'Picker',
+var Picker = function (_React$Component) {
+  __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits___default()(Picker, _React$Component);
 
-  propTypes: {
-    animation: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.func, __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.string]),
-    disabled: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.bool,
-    transitionName: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.string,
-    onChange: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.func,
-    onOpenChange: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.func,
-    children: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.func,
-    getCalendarContainer: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.func,
-    calendar: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.element,
-    style: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.object,
-    open: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.bool,
-    defaultOpen: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.bool,
-    prefixCls: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.string,
-    placement: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
-    value: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.object, __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.array]),
-    defaultValue: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.object, __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.array]),
-    align: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.object
-  },
+  function Picker(props) {
+    __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default()(this, Picker);
 
-  getDefaultProps: function getDefaultProps() {
-    return {
-      prefixCls: 'rc-calendar-picker',
-      style: {},
-      align: {},
-      placement: 'bottomLeft',
-      defaultOpen: false,
-      onChange: noop,
-      onOpenChange: noop
-    };
-  },
-  getInitialState: function getInitialState() {
-    var props = this.props;
+    var _this = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn___default()(this, _React$Component.call(this, props));
+
+    _initialiseProps.call(_this);
+
     var open = void 0;
     if ('open' in props) {
       open = props.open;
@@ -6773,119 +6855,45 @@ var Picker = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
       open = props.defaultOpen;
     }
     var value = props.value || props.defaultValue;
-    this.saveCalendarRef = refFn.bind(this, 'calendarInstance');
-    return {
+    _this.saveCalendarRef = refFn.bind(_this, 'calendarInstance');
+
+    _this.state = {
       open: open,
       value: value
     };
-  },
-  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-    var value = nextProps.value,
-        open = nextProps.open;
+    return _this;
+  }
 
-    if ('value' in nextProps) {
-      this.setState({
-        value: value
-      });
-    }
-    if (open !== undefined) {
-      this.setState({
-        open: open
-      });
-    }
-  },
-  componentDidUpdate: function componentDidUpdate(_, prevState) {
+  Picker.prototype.componentDidUpdate = function componentDidUpdate(_, prevState) {
     if (!prevState.open && this.state.open) {
       // setTimeout is for making sure saveCalendarRef happen before focusCalendar
       this.focusTimeout = setTimeout(this.focusCalendar, 0, this);
     }
-  },
-  componentWillUnmount: function componentWillUnmount() {
+  };
+
+  Picker.prototype.componentWillUnmount = function componentWillUnmount() {
     clearTimeout(this.focusTimeout);
-  },
-  onCalendarKeyDown: function onCalendarKeyDown(event) {
-    if (event.keyCode === __WEBPACK_IMPORTED_MODULE_5_rc_util_es_KeyCode__["a" /* default */].ESC) {
-      event.stopPropagation();
-      this.close(this.focus);
-    }
-  },
-  onCalendarSelect: function onCalendarSelect(value) {
-    var cause = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  };
 
-    var props = this.props;
-    if (!('value' in props)) {
-      this.setState({
+  Picker.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps) {
+    var newState = {};
+    var value = nextProps.value,
+        open = nextProps.open;
+
+    if ('value' in nextProps) {
+      newState = {
         value: value
-      });
+      };
     }
-    if (cause.source === 'keyboard' || !props.calendar.props.timePicker && cause.source !== 'dateInput' || cause.source === 'todayButton') {
-      this.close(this.focus);
+    if (open !== undefined) {
+      newState = {
+        open: open
+      };
     }
-    props.onChange(value);
-  },
-  onKeyDown: function onKeyDown(event) {
-    if (event.keyCode === __WEBPACK_IMPORTED_MODULE_5_rc_util_es_KeyCode__["a" /* default */].DOWN && !this.state.open) {
-      this.open();
-      event.preventDefault();
-    }
-  },
-  onCalendarOk: function onCalendarOk() {
-    this.close(this.focus);
-  },
-  onCalendarClear: function onCalendarClear() {
-    this.close(this.focus);
-  },
-  onVisibleChange: function onVisibleChange(open) {
-    this.setOpen(open);
-  },
-  getCalendarElement: function getCalendarElement() {
-    var props = this.props;
-    var state = this.state;
-    var calendarProps = props.calendar.props;
-    var value = state.value;
+    return newState;
+  };
 
-    var defaultValue = value;
-    var extraProps = {
-      ref: this.saveCalendarRef,
-      defaultValue: defaultValue || calendarProps.defaultValue,
-      selectedValue: value,
-      onKeyDown: this.onCalendarKeyDown,
-      onOk: Object(__WEBPACK_IMPORTED_MODULE_4_rc_util_es_createChainedFunction__["a" /* default */])(calendarProps.onOk, this.onCalendarOk),
-      onSelect: Object(__WEBPACK_IMPORTED_MODULE_4_rc_util_es_createChainedFunction__["a" /* default */])(calendarProps.onSelect, this.onCalendarSelect),
-      onClear: Object(__WEBPACK_IMPORTED_MODULE_4_rc_util_es_createChainedFunction__["a" /* default */])(calendarProps.onClear, this.onCalendarClear)
-    };
-
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.cloneElement(props.calendar, extraProps);
-  },
-  setOpen: function setOpen(open, callback) {
-    var onOpenChange = this.props.onOpenChange;
-
-    if (this.state.open !== open) {
-      if (!('open' in this.props)) {
-        this.setState({
-          open: open
-        }, callback);
-      }
-      onOpenChange(open);
-    }
-  },
-  open: function open(callback) {
-    this.setOpen(true, callback);
-  },
-  close: function close(callback) {
-    this.setOpen(false, callback);
-  },
-  focus: function focus() {
-    if (!this.state.open) {
-      __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.findDOMNode(this).focus();
-    }
-  },
-  focusCalendar: function focusCalendar() {
-    if (this.state.open && !!this.calendarInstance) {
-      this.calendarInstance.focus();
-    }
-  },
-  render: function render() {
+  Picker.prototype.render = function render() {
     var props = this.props;
     var prefixCls = props.prefixCls,
         placement = props.placement,
@@ -6899,12 +6907,12 @@ var Picker = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
         children = props.children;
 
     var state = this.state;
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-      __WEBPACK_IMPORTED_MODULE_7_rc_trigger__["a" /* default */],
+    return __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
+      __WEBPACK_IMPORTED_MODULE_9_rc_trigger__["a" /* default */],
       {
         popup: this.getCalendarElement(),
         popupAlign: align,
-        builtinPlacements: __WEBPACK_IMPORTED_MODULE_6__picker_placements__["a" /* default */],
+        builtinPlacements: __WEBPACK_IMPORTED_MODULE_8__picker_placements__["a" /* default */],
         popupPlacement: placement,
         action: disabled && !state.open ? [] : ['click'],
         destroyPopupOnHide: true,
@@ -6917,10 +6925,138 @@ var Picker = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
         prefixCls: prefixCls,
         popupClassName: dropdownClassName
       },
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.cloneElement(children(state, props), { onKeyDown: this.onKeyDown })
+      __WEBPACK_IMPORTED_MODULE_3_react___default.a.cloneElement(children(state, props), { onKeyDown: this.onKeyDown })
     );
-  }
-});
+  };
+
+  return Picker;
+}(__WEBPACK_IMPORTED_MODULE_3_react___default.a.Component);
+
+Picker.propTypes = {
+  animation: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func, __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.string]),
+  disabled: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.bool,
+  transitionName: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.string,
+  onChange: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func,
+  onOpenChange: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func,
+  children: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func,
+  getCalendarContainer: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func,
+  calendar: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.element,
+  style: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object,
+  open: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.bool,
+  defaultOpen: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.bool,
+  prefixCls: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.string,
+  placement: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.any,
+  value: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object, __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.array]),
+  defaultValue: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object, __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.array]),
+  align: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object
+};
+Picker.defaultProps = {
+  prefixCls: 'rc-calendar-picker',
+  style: {},
+  align: {},
+  placement: 'bottomLeft',
+  defaultOpen: false,
+  onChange: noop,
+  onOpenChange: noop
+};
+
+var _initialiseProps = function _initialiseProps() {
+  var _this2 = this;
+
+  this.onCalendarKeyDown = function (event) {
+    if (event.keyCode === __WEBPACK_IMPORTED_MODULE_7_rc_util_es_KeyCode__["a" /* default */].ESC) {
+      event.stopPropagation();
+      _this2.close(_this2.focus);
+    }
+  };
+
+  this.onCalendarSelect = function (value) {
+    var cause = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+    var props = _this2.props;
+    if (!('value' in props)) {
+      _this2.setState({
+        value: value
+      });
+    }
+    if (cause.source === 'keyboard' || !props.calendar.props.timePicker && cause.source !== 'dateInput' || cause.source === 'todayButton') {
+      _this2.close(_this2.focus);
+    }
+    props.onChange(value);
+  };
+
+  this.onKeyDown = function (event) {
+    if (event.keyCode === __WEBPACK_IMPORTED_MODULE_7_rc_util_es_KeyCode__["a" /* default */].DOWN && !_this2.state.open) {
+      _this2.open();
+      event.preventDefault();
+    }
+  };
+
+  this.onCalendarOk = function () {
+    _this2.close(_this2.focus);
+  };
+
+  this.onCalendarClear = function () {
+    _this2.close(_this2.focus);
+  };
+
+  this.onVisibleChange = function (open) {
+    _this2.setOpen(open);
+  };
+
+  this.getCalendarElement = function () {
+    var props = _this2.props;
+    var state = _this2.state;
+    var calendarProps = props.calendar.props;
+    var value = state.value;
+
+    var defaultValue = value;
+    var extraProps = {
+      ref: _this2.saveCalendarRef,
+      defaultValue: defaultValue || calendarProps.defaultValue,
+      selectedValue: value,
+      onKeyDown: _this2.onCalendarKeyDown,
+      onOk: Object(__WEBPACK_IMPORTED_MODULE_6_rc_util_es_createChainedFunction__["a" /* default */])(calendarProps.onOk, _this2.onCalendarOk),
+      onSelect: Object(__WEBPACK_IMPORTED_MODULE_6_rc_util_es_createChainedFunction__["a" /* default */])(calendarProps.onSelect, _this2.onCalendarSelect),
+      onClear: Object(__WEBPACK_IMPORTED_MODULE_6_rc_util_es_createChainedFunction__["a" /* default */])(calendarProps.onClear, _this2.onCalendarClear)
+    };
+
+    return __WEBPACK_IMPORTED_MODULE_3_react___default.a.cloneElement(props.calendar, extraProps);
+  };
+
+  this.setOpen = function (open, callback) {
+    var onOpenChange = _this2.props.onOpenChange;
+
+    if (_this2.state.open !== open) {
+      if (!('open' in _this2.props)) {
+        _this2.setState({
+          open: open
+        }, callback);
+      }
+      onOpenChange(open);
+    }
+  };
+
+  this.open = function (callback) {
+    _this2.setOpen(true, callback);
+  };
+
+  this.close = function (callback) {
+    _this2.setOpen(false, callback);
+  };
+
+  this.focus = function () {
+    if (!_this2.state.open) {
+      __WEBPACK_IMPORTED_MODULE_4_react_dom___default.a.findDOMNode(_this2).focus();
+    }
+  };
+
+  this.focusCalendar = function () {
+    if (_this2.state.open && !!_this2.calendarInstance) {
+      _this2.calendarInstance.focus();
+    }
+  };
+};
 
 /* harmony default export */ __webpack_exports__["a"] = (Picker);
 
@@ -6978,36 +7114,43 @@ var placements = {
 /* 91 */,
 /* 92 */,
 /* 93 */,
-/* 94 */
+/* 94 */,
+/* 95 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_create_react_class__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_create_react_class___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_create_react_class__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_classnames__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_classnames__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rc_util_es_KeyCode__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__range_calendar_CalendarPart__ = __webpack_require__(96);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__calendar_TodayButton__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__calendar_OkButton__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__calendar_TimePickerButton__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__mixin_CommonMixin__ = __webpack_require__(82);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__util__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__util_toTime__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_prop_types__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_prop_types__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_moment__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_classnames__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_classnames__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_util_es_KeyCode__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__range_calendar_CalendarPart__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__calendar_TodayButton__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__calendar_OkButton__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__calendar_TimePickerButton__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__mixin_CommonMixin__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__util__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__util_toTime__ = __webpack_require__(44);
+
+
 
 
 
@@ -7056,7 +7199,7 @@ function normalizeAnchor(props, init) {
   var selectedValue = props.selectedValue || init && props.defaultSelectedValue;
   var value = props.value || init && props.defaultValue;
   var normalizedValue = value ? getValueFromSelectedValue(value) : getValueFromSelectedValue(selectedValue);
-  return !isEmptyArray(normalizedValue) ? normalizedValue : init && [__WEBPACK_IMPORTED_MODULE_4_moment___default()(), __WEBPACK_IMPORTED_MODULE_4_moment___default()().add(1, 'months')];
+  return !isEmptyArray(normalizedValue) ? normalizedValue : init && [__WEBPACK_IMPORTED_MODULE_6_moment___default()(), __WEBPACK_IMPORTED_MODULE_6_moment___default()().add(1, 'months')];
 }
 
 function generateOptions(length, extraOptionGen) {
@@ -7084,60 +7227,19 @@ function onInputSelect(direction, value) {
   this.fireSelectValueChange(selectedValue);
 }
 
-var RangeCalendar = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
-  displayName: 'RangeCalendar',
+var RangeCalendar = function (_React$Component) {
+  __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits___default()(RangeCalendar, _React$Component);
 
-  propTypes: {
-    prefixCls: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.string,
-    dateInputPlaceholder: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
-    seperator: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.string,
-    defaultValue: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
-    value: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
-    hoverValue: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
-    mode: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.arrayOf(__WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.oneOf(['date', 'month', 'year', 'decade'])),
-    showDateInput: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.bool,
-    timePicker: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
-    showOk: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.bool,
-    showToday: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.bool,
-    defaultSelectedValue: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.array,
-    selectedValue: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.array,
-    onOk: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.func,
-    showClear: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.bool,
-    locale: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.object,
-    onChange: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.func,
-    onSelect: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.func,
-    onValueChange: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.func,
-    onHoverChange: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.func,
-    onPanelChange: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.func,
-    format: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.object, __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.string]),
-    onClear: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.func,
-    type: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
-    disabledDate: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.func,
-    disabledTime: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.func,
-    clearIcon: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.node
-  },
+  function RangeCalendar(props) {
+    __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default()(this, RangeCalendar);
 
-  mixins: [__WEBPACK_IMPORTED_MODULE_11__mixin_CommonMixin__["a" /* default */]],
+    var _this = __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default()(this, _React$Component.call(this, props));
 
-  getDefaultProps: function getDefaultProps() {
-    return {
-      type: 'both',
-      seperator: '~',
-      defaultSelectedValue: [],
-      onValueChange: noop,
-      onHoverChange: noop,
-      onPanelChange: noop,
-      disabledTime: noop,
-      onInputSelect: noop,
-      showToday: true,
-      showDateInput: true
-    };
-  },
-  getInitialState: function getInitialState() {
-    var props = this.props;
+    _initialiseProps.call(_this);
+
     var selectedValue = props.selectedValue || props.defaultSelectedValue;
     var value = normalizeAnchor(props, 1);
-    return {
+    _this.state = {
       selectedValue: selectedValue,
       prevSelectedValue: selectedValue,
       firstSelectedValue: null,
@@ -7146,40 +7248,254 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
       showTimePicker: false,
       mode: props.mode || ['date', 'date']
     };
-  },
-  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-    var state = this.state;
+    return _this;
+  }
 
+  RangeCalendar.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, state) {
     var newState = {};
     if ('value' in nextProps) {
       newState.value = normalizeAnchor(nextProps, 0);
-      this.setState(newState);
     }
     if ('hoverValue' in nextProps && !isArraysEqual(state.hoverValue, nextProps.hoverValue)) {
-      this.setState({ hoverValue: nextProps.hoverValue });
+      newState.hoverValue = nextProps.hoverValue;
     }
     if ('selectedValue' in nextProps) {
       newState.selectedValue = nextProps.selectedValue;
       newState.prevSelectedValue = nextProps.selectedValue;
-      this.setState(newState);
     }
     if ('mode' in nextProps && !isArraysEqual(state.mode, nextProps.mode)) {
-      this.setState({ mode: nextProps.mode });
+      newState = { mode: nextProps.mode };
     }
-  },
-  onDatePanelEnter: function onDatePanelEnter() {
-    if (this.hasSelectedValue()) {
-      this.fireHoverValueChange(this.state.selectedValue.concat());
+    return newState;
+  };
+
+  // get disabled hours for second picker
+
+
+  RangeCalendar.prototype.render = function render() {
+    var _className, _classnames;
+
+    var props = this.props,
+        state = this.state;
+    var prefixCls = props.prefixCls,
+        dateInputPlaceholder = props.dateInputPlaceholder,
+        seperator = props.seperator,
+        timePicker = props.timePicker,
+        showOk = props.showOk,
+        locale = props.locale,
+        showClear = props.showClear,
+        showToday = props.showToday,
+        type = props.type,
+        clearIcon = props.clearIcon;
+    var hoverValue = state.hoverValue,
+        selectedValue = state.selectedValue,
+        mode = state.mode,
+        showTimePicker = state.showTimePicker;
+
+    var className = (_className = {}, _className[props.className] = !!props.className, _className[prefixCls] = 1, _className[prefixCls + '-hidden'] = !props.visible, _className[prefixCls + '-range'] = 1, _className[prefixCls + '-show-time-picker'] = showTimePicker, _className[prefixCls + '-week-number'] = props.showWeekNumber, _className);
+    var classes = __WEBPACK_IMPORTED_MODULE_7_classnames___default()(className);
+    var newProps = {
+      selectedValue: state.selectedValue,
+      onSelect: this.onSelect,
+      onDayHover: type === 'start' && selectedValue[1] || type === 'end' && selectedValue[0] || !!hoverValue.length ? this.onDayHover : undefined
+    };
+
+    var placeholder1 = void 0;
+    var placeholder2 = void 0;
+
+    if (dateInputPlaceholder) {
+      if (Array.isArray(dateInputPlaceholder)) {
+        placeholder1 = dateInputPlaceholder[0];
+        placeholder2 = dateInputPlaceholder[1];
+      } else {
+        placeholder1 = placeholder2 = dateInputPlaceholder;
+      }
     }
-  },
-  onDatePanelLeave: function onDatePanelLeave() {
-    if (this.hasSelectedValue()) {
-      this.fireHoverValueChange([]);
+    var showOkButton = showOk === true || showOk !== false && !!timePicker;
+    var cls = __WEBPACK_IMPORTED_MODULE_7_classnames___default()((_classnames = {}, _classnames[prefixCls + '-footer'] = true, _classnames[prefixCls + '-range-bottom'] = true, _classnames[prefixCls + '-footer-show-ok'] = showOkButton, _classnames));
+
+    var startValue = this.getStartValue();
+    var endValue = this.getEndValue();
+    var todayTime = Object(__WEBPACK_IMPORTED_MODULE_14__util__["e" /* getTodayTime */])(startValue);
+    var thisMonth = todayTime.month();
+    var thisYear = todayTime.year();
+    var isTodayInView = startValue.year() === thisYear && startValue.month() === thisMonth || endValue.year() === thisYear && endValue.month() === thisMonth;
+    var nextMonthOfStart = startValue.clone().add(1, 'months');
+    var isClosestMonths = nextMonthOfStart.year() === endValue.year() && nextMonthOfStart.month() === endValue.month();
+
+    // console.warn('Render:', selectedValue.map(t => t.format('YYYY-MM-DD')).join(', '));
+    // console.log('start:', startValue.format('YYYY-MM-DD'));
+    // console.log('end:', endValue.format('YYYY-MM-DD'));
+
+    var extraFooter = props.renderFooter();
+
+    return __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
+      'div',
+      {
+        ref: this.saveRoot,
+        className: classes,
+        style: props.style,
+        tabIndex: '0',
+        onKeyDown: this.onKeyDown
+      },
+      props.renderSidebar(),
+      __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
+        'div',
+        { className: prefixCls + '-panel' },
+        showClear && selectedValue[0] && selectedValue[1] ? __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
+          'a',
+          {
+            role: 'button',
+            title: locale.clear,
+            onClick: this.clear
+          },
+          clearIcon || __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('span', { className: prefixCls + '-clear-btn' })
+        ) : null,
+        __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
+          'div',
+          {
+            className: prefixCls + '-date-panel',
+            onMouseLeave: type !== 'both' ? this.onDatePanelLeave : undefined,
+            onMouseEnter: type !== 'both' ? this.onDatePanelEnter : undefined
+          },
+          __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__range_calendar_CalendarPart__["a" /* default */], __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, props, newProps, {
+            hoverValue: hoverValue,
+            direction: 'left',
+            disabledTime: this.disabledStartTime,
+            disabledMonth: this.disabledStartMonth,
+            format: this.getFormat(),
+            value: startValue,
+            mode: mode[0],
+            placeholder: placeholder1,
+            onInputSelect: this.onStartInputSelect,
+            onValueChange: this.onStartValueChange,
+            onPanelChange: this.onStartPanelChange,
+            showDateInput: this.props.showDateInput,
+            timePicker: timePicker,
+            showTimePicker: showTimePicker,
+            enablePrev: true,
+            enableNext: !isClosestMonths || this.isMonthYearPanelShow(mode[1]),
+            clearIcon: clearIcon
+          })),
+          __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
+            'span',
+            { className: prefixCls + '-range-middle' },
+            seperator
+          ),
+          __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__range_calendar_CalendarPart__["a" /* default */], __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, props, newProps, {
+            hoverValue: hoverValue,
+            direction: 'right',
+            format: this.getFormat(),
+            timePickerDisabledTime: this.getEndDisableTime(),
+            placeholder: placeholder2,
+            value: endValue,
+            mode: mode[1],
+            onInputSelect: this.onEndInputSelect,
+            onValueChange: this.onEndValueChange,
+            onPanelChange: this.onEndPanelChange,
+            showDateInput: this.props.showDateInput,
+            timePicker: timePicker,
+            showTimePicker: showTimePicker,
+            disabledTime: this.disabledEndTime,
+            disabledMonth: this.disabledEndMonth,
+            enablePrev: !isClosestMonths || this.isMonthYearPanelShow(mode[0]),
+            enableNext: true,
+            clearIcon: clearIcon
+          }))
+        ),
+        __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
+          'div',
+          { className: cls },
+          showToday || props.timePicker || showOkButton || extraFooter ? __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
+            'div',
+            { className: prefixCls + '-footer-btn' },
+            extraFooter,
+            showToday ? __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__calendar_TodayButton__["a" /* default */], __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, props, {
+              disabled: isTodayInView,
+              value: state.value[0],
+              onToday: this.onToday,
+              text: locale.backToToday
+            })) : null,
+            props.timePicker ? __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_12__calendar_TimePickerButton__["a" /* default */], __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, props, {
+              showTimePicker: showTimePicker,
+              onOpenTimePicker: this.onOpenTimePicker,
+              onCloseTimePicker: this.onCloseTimePicker,
+              timePickerDisabled: !this.hasSelectedValue() || hoverValue.length
+            })) : null,
+            showOkButton ? __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_11__calendar_OkButton__["a" /* default */], __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, props, {
+              onOk: this.onOk,
+              okDisabled: !this.isAllowedDateAndTime(selectedValue) || !this.hasSelectedValue() || hoverValue.length
+            })) : null
+          ) : null
+        )
+      )
+    );
+  };
+
+  return RangeCalendar;
+}(__WEBPACK_IMPORTED_MODULE_4_react___default.a.Component);
+
+RangeCalendar.propTypes = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, __WEBPACK_IMPORTED_MODULE_13__mixin_CommonMixin__["c" /* propType */], {
+  prefixCls: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.string,
+  dateInputPlaceholder: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.any,
+  seperator: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.string,
+  defaultValue: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.any,
+  value: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.any,
+  hoverValue: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.any,
+  mode: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.arrayOf(__WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.oneOf(['date', 'month', 'year', 'decade'])),
+  showDateInput: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.bool,
+  timePicker: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.any,
+  showOk: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.bool,
+  showToday: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.bool,
+  defaultSelectedValue: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.array,
+  selectedValue: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.array,
+  onOk: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func,
+  showClear: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.bool,
+  locale: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object,
+  onChange: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func,
+  onSelect: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func,
+  onValueChange: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func,
+  onHoverChange: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func,
+  onPanelChange: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func,
+  format: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object, __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.string]),
+  onClear: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func,
+  type: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.any,
+  disabledDate: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func,
+  disabledTime: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func,
+  clearIcon: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.node,
+  onKeyDown: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func
+});
+RangeCalendar.defaultProps = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, __WEBPACK_IMPORTED_MODULE_13__mixin_CommonMixin__["b" /* defaultProp */], {
+  type: 'both',
+  seperator: '~',
+  defaultSelectedValue: [],
+  onValueChange: noop,
+  onHoverChange: noop,
+  onPanelChange: noop,
+  disabledTime: noop,
+  onInputSelect: noop,
+  showToday: true,
+  showDateInput: true
+});
+
+var _initialiseProps = function _initialiseProps() {
+  var _this2 = this;
+
+  this.onDatePanelEnter = function () {
+    if (_this2.hasSelectedValue()) {
+      _this2.fireHoverValueChange(_this2.state.selectedValue.concat());
     }
-  },
-  onSelect: function onSelect(value) {
-    var type = this.props.type;
-    var _state = this.state,
+  };
+
+  this.onDatePanelLeave = function () {
+    if (_this2.hasSelectedValue()) {
+      _this2.fireHoverValueChange([]);
+    }
+  };
+
+  this.onSelect = function (value) {
+    var type = _this2.props.type;
+    var _state = _this2.state,
         selectedValue = _state.selectedValue,
         prevSelectedValue = _state.prevSelectedValue,
         firstSelectedValue = _state.firstSelectedValue;
@@ -7187,37 +7503,36 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
     var nextSelectedValue = void 0;
     if (type === 'both') {
       if (!firstSelectedValue) {
-        Object(__WEBPACK_IMPORTED_MODULE_12__util__["h" /* syncTime */])(prevSelectedValue[0], value);
+        Object(__WEBPACK_IMPORTED_MODULE_14__util__["h" /* syncTime */])(prevSelectedValue[0], value);
         nextSelectedValue = [value];
-      } else if (this.compare(firstSelectedValue, value) < 0) {
-        Object(__WEBPACK_IMPORTED_MODULE_12__util__["h" /* syncTime */])(prevSelectedValue[1], value);
+      } else if (_this2.compare(firstSelectedValue, value) < 0) {
+        Object(__WEBPACK_IMPORTED_MODULE_14__util__["h" /* syncTime */])(prevSelectedValue[1], value);
         nextSelectedValue = [firstSelectedValue, value];
       } else {
-        Object(__WEBPACK_IMPORTED_MODULE_12__util__["h" /* syncTime */])(prevSelectedValue[0], value);
-        Object(__WEBPACK_IMPORTED_MODULE_12__util__["h" /* syncTime */])(prevSelectedValue[1], firstSelectedValue);
+        Object(__WEBPACK_IMPORTED_MODULE_14__util__["h" /* syncTime */])(prevSelectedValue[0], value);
+        Object(__WEBPACK_IMPORTED_MODULE_14__util__["h" /* syncTime */])(prevSelectedValue[1], firstSelectedValue);
         nextSelectedValue = [value, firstSelectedValue];
       }
     } else if (type === 'start') {
-      Object(__WEBPACK_IMPORTED_MODULE_12__util__["h" /* syncTime */])(prevSelectedValue[0], value);
+      Object(__WEBPACK_IMPORTED_MODULE_14__util__["h" /* syncTime */])(prevSelectedValue[0], value);
       var endValue = selectedValue[1];
-      nextSelectedValue = endValue && this.compare(endValue, value) > 0 ? [value, endValue] : [value];
+      nextSelectedValue = endValue && _this2.compare(endValue, value) > 0 ? [value, endValue] : [value];
     } else {
       // type === 'end'
       var startValue = selectedValue[0];
-      if (startValue && this.compare(startValue, value) <= 0) {
-        Object(__WEBPACK_IMPORTED_MODULE_12__util__["h" /* syncTime */])(prevSelectedValue[1], value);
+      if (startValue && _this2.compare(startValue, value) <= 0) {
+        Object(__WEBPACK_IMPORTED_MODULE_14__util__["h" /* syncTime */])(prevSelectedValue[1], value);
         nextSelectedValue = [startValue, value];
       } else {
-        Object(__WEBPACK_IMPORTED_MODULE_12__util__["h" /* syncTime */])(prevSelectedValue[0], value);
+        Object(__WEBPACK_IMPORTED_MODULE_14__util__["h" /* syncTime */])(prevSelectedValue[0], value);
         nextSelectedValue = [value];
       }
     }
 
-    this.fireSelectValueChange(nextSelectedValue);
-  },
-  onKeyDown: function onKeyDown(event) {
-    var _this = this;
+    _this2.fireSelectValueChange(nextSelectedValue);
+  };
 
+  this.onKeyDown = function (event) {
     if (event.target.nodeName.toLowerCase() === 'input') {
       return;
     }
@@ -7226,12 +7541,12 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
 
     var ctrlKey = event.ctrlKey || event.metaKey;
 
-    var _state2 = this.state,
+    var _state2 = _this2.state,
         selectedValue = _state2.selectedValue,
         hoverValue = _state2.hoverValue,
         firstSelectedValue = _state2.firstSelectedValue,
         value = _state2.value;
-    var _props = this.props,
+    var _props = _this2.props,
         onKeyDown = _props.onKeyDown,
         disabledDate = _props.disabledDate;
 
@@ -7244,26 +7559,26 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
       var nextHoverValue = void 0;
 
       if (!firstSelectedValue) {
-        currentHoverTime = hoverValue[0] || selectedValue[0] || value[0] || __WEBPACK_IMPORTED_MODULE_4_moment___default()();
+        currentHoverTime = hoverValue[0] || selectedValue[0] || value[0] || __WEBPACK_IMPORTED_MODULE_6_moment___default()();
         nextHoverTime = func(currentHoverTime);
         nextHoverValue = [nextHoverTime];
-        _this.fireHoverValueChange(nextHoverValue);
+        _this2.fireHoverValueChange(nextHoverValue);
       } else {
         if (hoverValue.length === 1) {
           currentHoverTime = hoverValue[0].clone();
           nextHoverTime = func(currentHoverTime);
-          nextHoverValue = _this.onDayHover(nextHoverTime);
+          nextHoverValue = _this2.onDayHover(nextHoverTime);
         } else {
           currentHoverTime = hoverValue[0].isSame(firstSelectedValue, 'day') ? hoverValue[1] : hoverValue[0];
           nextHoverTime = func(currentHoverTime);
-          nextHoverValue = _this.onDayHover(nextHoverTime);
+          nextHoverValue = _this2.onDayHover(nextHoverTime);
         }
       }
 
       // Find origin hover time on value index
       if (nextHoverValue.length >= 2) {
         var miss = nextHoverValue.some(function (ht) {
-          return !Object(__WEBPACK_IMPORTED_MODULE_13__util_toTime__["d" /* includesTime */])(value, ht, 'month');
+          return !Object(__WEBPACK_IMPORTED_MODULE_15__util_toTime__["d" /* includesTime */])(value, ht, 'month');
         });
         if (miss) {
           var newValue = nextHoverValue.slice().sort(function (t1, t2) {
@@ -7272,7 +7587,7 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
           if (newValue[0].isSame(newValue[1], 'month')) {
             newValue[1] = newValue[0].clone().add(1, 'month');
           }
-          _this.fireValueChange(newValue);
+          _this2.fireValueChange(newValue);
         }
       } else if (nextHoverValue.length === 1) {
         // If only one value, let's keep the origin panel
@@ -7286,7 +7601,7 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
         })) {
           var _newValue = value.slice();
           _newValue[oriValueIndex] = nextHoverTime.clone();
-          _this.fireValueChange(_newValue);
+          _this2.fireValueChange(_newValue);
         }
       }
 
@@ -7296,59 +7611,59 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
     };
 
     switch (keyCode) {
-      case __WEBPACK_IMPORTED_MODULE_6_rc_util_es_KeyCode__["a" /* default */].DOWN:
+      case __WEBPACK_IMPORTED_MODULE_8_rc_util_es_KeyCode__["a" /* default */].DOWN:
         updateHoverPoint(function (time) {
-          return Object(__WEBPACK_IMPORTED_MODULE_13__util_toTime__["c" /* goTime */])(time, 1, 'weeks');
+          return Object(__WEBPACK_IMPORTED_MODULE_15__util_toTime__["c" /* goTime */])(time, 1, 'weeks');
         });
         return;
-      case __WEBPACK_IMPORTED_MODULE_6_rc_util_es_KeyCode__["a" /* default */].UP:
+      case __WEBPACK_IMPORTED_MODULE_8_rc_util_es_KeyCode__["a" /* default */].UP:
         updateHoverPoint(function (time) {
-          return Object(__WEBPACK_IMPORTED_MODULE_13__util_toTime__["c" /* goTime */])(time, -1, 'weeks');
+          return Object(__WEBPACK_IMPORTED_MODULE_15__util_toTime__["c" /* goTime */])(time, -1, 'weeks');
         });
         return;
-      case __WEBPACK_IMPORTED_MODULE_6_rc_util_es_KeyCode__["a" /* default */].LEFT:
+      case __WEBPACK_IMPORTED_MODULE_8_rc_util_es_KeyCode__["a" /* default */].LEFT:
         if (ctrlKey) {
           updateHoverPoint(function (time) {
-            return Object(__WEBPACK_IMPORTED_MODULE_13__util_toTime__["c" /* goTime */])(time, -1, 'years');
+            return Object(__WEBPACK_IMPORTED_MODULE_15__util_toTime__["c" /* goTime */])(time, -1, 'years');
           });
         } else {
           updateHoverPoint(function (time) {
-            return Object(__WEBPACK_IMPORTED_MODULE_13__util_toTime__["c" /* goTime */])(time, -1, 'days');
+            return Object(__WEBPACK_IMPORTED_MODULE_15__util_toTime__["c" /* goTime */])(time, -1, 'days');
           });
         }
         return;
-      case __WEBPACK_IMPORTED_MODULE_6_rc_util_es_KeyCode__["a" /* default */].RIGHT:
+      case __WEBPACK_IMPORTED_MODULE_8_rc_util_es_KeyCode__["a" /* default */].RIGHT:
         if (ctrlKey) {
           updateHoverPoint(function (time) {
-            return Object(__WEBPACK_IMPORTED_MODULE_13__util_toTime__["c" /* goTime */])(time, 1, 'years');
+            return Object(__WEBPACK_IMPORTED_MODULE_15__util_toTime__["c" /* goTime */])(time, 1, 'years');
           });
         } else {
           updateHoverPoint(function (time) {
-            return Object(__WEBPACK_IMPORTED_MODULE_13__util_toTime__["c" /* goTime */])(time, 1, 'days');
+            return Object(__WEBPACK_IMPORTED_MODULE_15__util_toTime__["c" /* goTime */])(time, 1, 'days');
           });
         }
         return;
-      case __WEBPACK_IMPORTED_MODULE_6_rc_util_es_KeyCode__["a" /* default */].HOME:
+      case __WEBPACK_IMPORTED_MODULE_8_rc_util_es_KeyCode__["a" /* default */].HOME:
         updateHoverPoint(function (time) {
-          return Object(__WEBPACK_IMPORTED_MODULE_13__util_toTime__["b" /* goStartMonth */])(time);
+          return Object(__WEBPACK_IMPORTED_MODULE_15__util_toTime__["b" /* goStartMonth */])(time);
         });
         return;
-      case __WEBPACK_IMPORTED_MODULE_6_rc_util_es_KeyCode__["a" /* default */].END:
+      case __WEBPACK_IMPORTED_MODULE_8_rc_util_es_KeyCode__["a" /* default */].END:
         updateHoverPoint(function (time) {
-          return Object(__WEBPACK_IMPORTED_MODULE_13__util_toTime__["a" /* goEndMonth */])(time);
+          return Object(__WEBPACK_IMPORTED_MODULE_15__util_toTime__["a" /* goEndMonth */])(time);
         });
         return;
-      case __WEBPACK_IMPORTED_MODULE_6_rc_util_es_KeyCode__["a" /* default */].PAGE_DOWN:
+      case __WEBPACK_IMPORTED_MODULE_8_rc_util_es_KeyCode__["a" /* default */].PAGE_DOWN:
         updateHoverPoint(function (time) {
-          return Object(__WEBPACK_IMPORTED_MODULE_13__util_toTime__["c" /* goTime */])(time, 1, 'month');
+          return Object(__WEBPACK_IMPORTED_MODULE_15__util_toTime__["c" /* goTime */])(time, 1, 'month');
         });
         return;
-      case __WEBPACK_IMPORTED_MODULE_6_rc_util_es_KeyCode__["a" /* default */].PAGE_UP:
+      case __WEBPACK_IMPORTED_MODULE_8_rc_util_es_KeyCode__["a" /* default */].PAGE_UP:
         updateHoverPoint(function (time) {
-          return Object(__WEBPACK_IMPORTED_MODULE_13__util_toTime__["c" /* goTime */])(time, -1, 'month');
+          return Object(__WEBPACK_IMPORTED_MODULE_15__util_toTime__["c" /* goTime */])(time, -1, 'month');
         });
         return;
-      case __WEBPACK_IMPORTED_MODULE_6_rc_util_es_KeyCode__["a" /* default */].ENTER:
+      case __WEBPACK_IMPORTED_MODULE_8_rc_util_es_KeyCode__["a" /* default */].ENTER:
         {
           var lastValue = void 0;
           if (hoverValue.length === 0) {
@@ -7361,7 +7676,7 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
             lastValue = hoverValue[0].isSame(firstSelectedValue, 'day') ? hoverValue[1] : hoverValue[0];
           }
           if (lastValue && (!disabledDate || !disabledDate(lastValue))) {
-            this.onSelect(lastValue);
+            _this2.onSelect(lastValue);
           }
           event.preventDefault();
           return;
@@ -7371,141 +7686,153 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
           onKeyDown(event);
         }
     }
-  },
-  onDayHover: function onDayHover(value) {
+  };
+
+  this.onDayHover = function (value) {
     var hoverValue = [];
-    var _state3 = this.state,
+    var _state3 = _this2.state,
         selectedValue = _state3.selectedValue,
         firstSelectedValue = _state3.firstSelectedValue;
-    var type = this.props.type;
+    var type = _this2.props.type;
 
     if (type === 'start' && selectedValue[1]) {
-      hoverValue = this.compare(value, selectedValue[1]) < 0 ? [value, selectedValue[1]] : [value];
+      hoverValue = _this2.compare(value, selectedValue[1]) < 0 ? [value, selectedValue[1]] : [value];
     } else if (type === 'end' && selectedValue[0]) {
-      hoverValue = this.compare(value, selectedValue[0]) > 0 ? [selectedValue[0], value] : [];
+      hoverValue = _this2.compare(value, selectedValue[0]) > 0 ? [selectedValue[0], value] : [];
     } else {
       if (!firstSelectedValue) {
-        if (this.state.hoverValue.length) {
-          this.setState({ hoverValue: [] });
+        if (_this2.state.hoverValue.length) {
+          _this2.setState({ hoverValue: [] });
         }
         return hoverValue;
       }
-      hoverValue = this.compare(value, firstSelectedValue) < 0 ? [value, firstSelectedValue] : [firstSelectedValue, value];
+      hoverValue = _this2.compare(value, firstSelectedValue) < 0 ? [value, firstSelectedValue] : [firstSelectedValue, value];
     }
-    this.fireHoverValueChange(hoverValue);
+    _this2.fireHoverValueChange(hoverValue);
 
     return hoverValue;
-  },
-  onToday: function onToday() {
-    var startValue = Object(__WEBPACK_IMPORTED_MODULE_12__util__["e" /* getTodayTime */])(this.state.value[0]);
+  };
+
+  this.onToday = function () {
+    var startValue = Object(__WEBPACK_IMPORTED_MODULE_14__util__["e" /* getTodayTime */])(_this2.state.value[0]);
     var endValue = startValue.clone().add(1, 'months');
-    this.setState({ value: [startValue, endValue] });
-  },
-  onOpenTimePicker: function onOpenTimePicker() {
-    this.setState({
+    _this2.setState({ value: [startValue, endValue] });
+  };
+
+  this.onOpenTimePicker = function () {
+    _this2.setState({
       showTimePicker: true
     });
-  },
-  onCloseTimePicker: function onCloseTimePicker() {
-    this.setState({
+  };
+
+  this.onCloseTimePicker = function () {
+    _this2.setState({
       showTimePicker: false
     });
-  },
-  onOk: function onOk() {
-    var selectedValue = this.state.selectedValue;
+  };
 
-    if (this.isAllowedDateAndTime(selectedValue)) {
-      this.props.onOk(this.state.selectedValue);
+  this.onOk = function () {
+    var selectedValue = _this2.state.selectedValue;
+
+    if (_this2.isAllowedDateAndTime(selectedValue)) {
+      _this2.props.onOk(_this2.state.selectedValue);
     }
-  },
-  onStartInputSelect: function onStartInputSelect() {
+  };
+
+  this.onStartInputSelect = function () {
     for (var _len = arguments.length, oargs = Array(_len), _key = 0; _key < _len; _key++) {
       oargs[_key] = arguments[_key];
     }
 
     var args = ['left'].concat(oargs);
-    return onInputSelect.apply(this, args);
-  },
-  onEndInputSelect: function onEndInputSelect() {
+    return onInputSelect.apply(_this2, args);
+  };
+
+  this.onEndInputSelect = function () {
     for (var _len2 = arguments.length, oargs = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
       oargs[_key2] = arguments[_key2];
     }
 
     var args = ['right'].concat(oargs);
-    return onInputSelect.apply(this, args);
-  },
-  onStartValueChange: function onStartValueChange(leftValue) {
-    var value = [].concat(this.state.value);
+    return onInputSelect.apply(_this2, args);
+  };
+
+  this.onStartValueChange = function (leftValue) {
+    var value = [].concat(_this2.state.value);
     value[0] = leftValue;
-    return this.fireValueChange(value);
-  },
-  onEndValueChange: function onEndValueChange(rightValue) {
-    var value = [].concat(this.state.value);
+    return _this2.fireValueChange(value);
+  };
+
+  this.onEndValueChange = function (rightValue) {
+    var value = [].concat(_this2.state.value);
     value[1] = rightValue;
-    return this.fireValueChange(value);
-  },
-  onStartPanelChange: function onStartPanelChange(value, mode) {
-    var props = this.props,
-        state = this.state;
+    return _this2.fireValueChange(value);
+  };
+
+  this.onStartPanelChange = function (value, mode) {
+    var props = _this2.props,
+        state = _this2.state;
 
     var newMode = [mode, state.mode[1]];
     if (!('mode' in props)) {
-      this.setState({
+      _this2.setState({
         mode: newMode
       });
     }
     var newValue = [value || state.value[0], state.value[1]];
     props.onPanelChange(newValue, newMode);
-  },
-  onEndPanelChange: function onEndPanelChange(value, mode) {
-    var props = this.props,
-        state = this.state;
+  };
+
+  this.onEndPanelChange = function (value, mode) {
+    var props = _this2.props,
+        state = _this2.state;
 
     var newMode = [state.mode[0], mode];
     if (!('mode' in props)) {
-      this.setState({
+      _this2.setState({
         mode: newMode
       });
     }
     var newValue = [state.value[0], value || state.value[1]];
     props.onPanelChange(newValue, newMode);
-  },
-  getStartValue: function getStartValue() {
-    var value = this.state.value[0];
-    var selectedValue = this.state.selectedValue;
+  };
+
+  this.getStartValue = function () {
+    var value = _this2.state.value[0];
+    var selectedValue = _this2.state.selectedValue;
     // keep selectedTime when select date
-    if (selectedValue[0] && this.props.timePicker) {
+    if (selectedValue[0] && _this2.props.timePicker) {
       value = value.clone();
-      Object(__WEBPACK_IMPORTED_MODULE_12__util__["h" /* syncTime */])(selectedValue[0], value);
+      Object(__WEBPACK_IMPORTED_MODULE_14__util__["h" /* syncTime */])(selectedValue[0], value);
     }
-    if (this.state.showTimePicker && selectedValue[0]) {
+    if (_this2.state.showTimePicker && selectedValue[0]) {
       return selectedValue[0];
     }
     return value;
-  },
-  getEndValue: function getEndValue() {
-    var _state4 = this.state,
+  };
+
+  this.getEndValue = function () {
+    var _state4 = _this2.state,
         value = _state4.value,
         selectedValue = _state4.selectedValue,
         showTimePicker = _state4.showTimePicker;
 
     var endValue = value[1] ? value[1].clone() : value[0].clone().add(1, 'month');
     // keep selectedTime when select date
-    if (selectedValue[1] && this.props.timePicker) {
-      Object(__WEBPACK_IMPORTED_MODULE_12__util__["h" /* syncTime */])(selectedValue[1], endValue);
+    if (selectedValue[1] && _this2.props.timePicker) {
+      Object(__WEBPACK_IMPORTED_MODULE_14__util__["h" /* syncTime */])(selectedValue[1], endValue);
     }
     if (showTimePicker) {
-      return selectedValue[1] ? selectedValue[1] : this.getStartValue();
+      return selectedValue[1] ? selectedValue[1] : _this2.getStartValue();
     }
     return endValue;
-  },
+  };
 
-  // get disabled hours for second picker
-  getEndDisableTime: function getEndDisableTime() {
-    var _state5 = this.state,
+  this.getEndDisableTime = function () {
+    var _state5 = _this2.state,
         selectedValue = _state5.selectedValue,
         value = _state5.value;
-    var disabledTime = this.props.disabledTime;
+    var disabledTime = _this2.props.disabledTime;
 
     var userSettingDisabledTime = disabledTime(selectedValue, 'end') || {};
     var startValue = selectedValue && selectedValue[0] || value[0].clone();
@@ -7543,284 +7870,141 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
       };
     }
     return userSettingDisabledTime;
-  },
-  isAllowedDateAndTime: function isAllowedDateAndTime(selectedValue) {
-    return Object(__WEBPACK_IMPORTED_MODULE_12__util__["g" /* isAllowedDate */])(selectedValue[0], this.props.disabledDate, this.disabledStartTime) && Object(__WEBPACK_IMPORTED_MODULE_12__util__["g" /* isAllowedDate */])(selectedValue[1], this.props.disabledDate, this.disabledEndTime);
-  },
-  isMonthYearPanelShow: function isMonthYearPanelShow(mode) {
+  };
+
+  this.isAllowedDateAndTime = function (selectedValue) {
+    return Object(__WEBPACK_IMPORTED_MODULE_14__util__["g" /* isAllowedDate */])(selectedValue[0], _this2.props.disabledDate, _this2.disabledStartTime) && Object(__WEBPACK_IMPORTED_MODULE_14__util__["g" /* isAllowedDate */])(selectedValue[1], _this2.props.disabledDate, _this2.disabledEndTime);
+  };
+
+  this.isMonthYearPanelShow = function (mode) {
     return ['month', 'year', 'decade'].indexOf(mode) > -1;
-  },
-  hasSelectedValue: function hasSelectedValue() {
-    var selectedValue = this.state.selectedValue;
+  };
+
+  this.hasSelectedValue = function () {
+    var selectedValue = _this2.state.selectedValue;
 
     return !!selectedValue[1] && !!selectedValue[0];
-  },
-  compare: function compare(v1, v2) {
-    if (this.props.timePicker) {
+  };
+
+  this.compare = function (v1, v2) {
+    if (_this2.props.timePicker) {
       return v1.diff(v2);
     }
     return v1.diff(v2, 'days');
-  },
-  fireSelectValueChange: function fireSelectValueChange(selectedValue, direct) {
-    var timePicker = this.props.timePicker;
-    var prevSelectedValue = this.state.prevSelectedValue;
+  };
+
+  this.fireSelectValueChange = function (selectedValue, direct) {
+    var timePicker = _this2.props.timePicker;
+    var prevSelectedValue = _this2.state.prevSelectedValue;
 
     if (timePicker && timePicker.props.defaultValue) {
       var timePickerDefaultValue = timePicker.props.defaultValue;
       if (!prevSelectedValue[0] && selectedValue[0]) {
-        Object(__WEBPACK_IMPORTED_MODULE_12__util__["h" /* syncTime */])(timePickerDefaultValue[0], selectedValue[0]);
+        Object(__WEBPACK_IMPORTED_MODULE_14__util__["h" /* syncTime */])(timePickerDefaultValue[0], selectedValue[0]);
       }
       if (!prevSelectedValue[1] && selectedValue[1]) {
-        Object(__WEBPACK_IMPORTED_MODULE_12__util__["h" /* syncTime */])(timePickerDefaultValue[1], selectedValue[1]);
+        Object(__WEBPACK_IMPORTED_MODULE_14__util__["h" /* syncTime */])(timePickerDefaultValue[1], selectedValue[1]);
       }
     }
 
-    if (!('selectedValue' in this.props)) {
-      this.setState({
+    if (!('selectedValue' in _this2.props)) {
+      _this2.setState({
         selectedValue: selectedValue
       });
     }
 
     // 尚未选择过时间，直接输入的话
-    if (!this.state.selectedValue[0] || !this.state.selectedValue[1]) {
-      var startValue = selectedValue[0] || __WEBPACK_IMPORTED_MODULE_4_moment___default()();
+    if (!_this2.state.selectedValue[0] || !_this2.state.selectedValue[1]) {
+      var startValue = selectedValue[0] || __WEBPACK_IMPORTED_MODULE_6_moment___default()();
       var endValue = selectedValue[1] || startValue.clone().add(1, 'months');
-      this.setState({
+      _this2.setState({
         selectedValue: selectedValue,
         value: getValueFromSelectedValue([startValue, endValue])
       });
     }
 
     if (selectedValue[0] && !selectedValue[1]) {
-      this.setState({ firstSelectedValue: selectedValue[0] });
-      this.fireHoverValueChange(selectedValue.concat());
+      _this2.setState({ firstSelectedValue: selectedValue[0] });
+      _this2.fireHoverValueChange(selectedValue.concat());
     }
-    this.props.onChange(selectedValue);
+    _this2.props.onChange(selectedValue);
     if (direct || selectedValue[0] && selectedValue[1]) {
-      this.setState({
+      _this2.setState({
         prevSelectedValue: selectedValue,
         firstSelectedValue: null
       });
-      this.fireHoverValueChange([]);
-      this.props.onSelect(selectedValue);
+      _this2.fireHoverValueChange([]);
+      _this2.props.onSelect(selectedValue);
     }
-  },
-  fireValueChange: function fireValueChange(value) {
-    var props = this.props;
+  };
+
+  this.fireValueChange = function (value) {
+    var props = _this2.props;
     if (!('value' in props)) {
-      this.setState({
+      _this2.setState({
         value: value
       });
     }
     props.onValueChange(value);
-  },
-  fireHoverValueChange: function fireHoverValueChange(hoverValue) {
-    var props = this.props;
+  };
+
+  this.fireHoverValueChange = function (hoverValue) {
+    var props = _this2.props;
     if (!('hoverValue' in props)) {
-      this.setState({ hoverValue: hoverValue });
+      _this2.setState({ hoverValue: hoverValue });
     }
     props.onHoverChange(hoverValue);
-  },
-  clear: function clear() {
-    this.fireSelectValueChange([], true);
-    this.props.onClear();
-  },
-  disabledStartTime: function disabledStartTime(time) {
-    return this.props.disabledTime(time, 'start');
-  },
-  disabledEndTime: function disabledEndTime(time) {
-    return this.props.disabledTime(time, 'end');
-  },
-  disabledStartMonth: function disabledStartMonth(month) {
-    var value = this.state.value;
+  };
+
+  this.clear = function () {
+    _this2.fireSelectValueChange([], true);
+    _this2.props.onClear();
+  };
+
+  this.disabledStartTime = function (time) {
+    return _this2.props.disabledTime(time, 'start');
+  };
+
+  this.disabledEndTime = function (time) {
+    return _this2.props.disabledTime(time, 'end');
+  };
+
+  this.disabledStartMonth = function (month) {
+    var value = _this2.state.value;
 
     return month.isSameOrAfter(value[1], 'month');
-  },
-  disabledEndMonth: function disabledEndMonth(month) {
-    var value = this.state.value;
+  };
+
+  this.disabledEndMonth = function (month) {
+    var value = _this2.state.value;
 
     return month.isSameOrBefore(value[0], 'month');
-  },
-  render: function render() {
-    var _className, _classnames;
+  };
+};
 
-    var props = this.props,
-        state = this.state;
-    var prefixCls = props.prefixCls,
-        dateInputPlaceholder = props.dateInputPlaceholder,
-        seperator = props.seperator,
-        timePicker = props.timePicker,
-        showOk = props.showOk,
-        locale = props.locale,
-        showClear = props.showClear,
-        showToday = props.showToday,
-        type = props.type,
-        clearIcon = props.clearIcon;
-    var hoverValue = state.hoverValue,
-        selectedValue = state.selectedValue,
-        mode = state.mode,
-        showTimePicker = state.showTimePicker;
-
-    var className = (_className = {}, _className[props.className] = !!props.className, _className[prefixCls] = 1, _className[prefixCls + '-hidden'] = !props.visible, _className[prefixCls + '-range'] = 1, _className[prefixCls + '-show-time-picker'] = showTimePicker, _className[prefixCls + '-week-number'] = props.showWeekNumber, _className);
-    var classes = __WEBPACK_IMPORTED_MODULE_5_classnames___default()(className);
-    var newProps = {
-      selectedValue: state.selectedValue,
-      onSelect: this.onSelect,
-      onDayHover: type === 'start' && selectedValue[1] || type === 'end' && selectedValue[0] || !!hoverValue.length ? this.onDayHover : undefined
-    };
-
-    var placeholder1 = void 0;
-    var placeholder2 = void 0;
-
-    if (dateInputPlaceholder) {
-      if (Array.isArray(dateInputPlaceholder)) {
-        placeholder1 = dateInputPlaceholder[0];
-        placeholder2 = dateInputPlaceholder[1];
-      } else {
-        placeholder1 = placeholder2 = dateInputPlaceholder;
-      }
-    }
-    var showOkButton = showOk === true || showOk !== false && !!timePicker;
-    var cls = __WEBPACK_IMPORTED_MODULE_5_classnames___default()((_classnames = {}, _classnames[prefixCls + '-footer'] = true, _classnames[prefixCls + '-range-bottom'] = true, _classnames[prefixCls + '-footer-show-ok'] = showOkButton, _classnames));
-
-    var startValue = this.getStartValue();
-    var endValue = this.getEndValue();
-    var todayTime = Object(__WEBPACK_IMPORTED_MODULE_12__util__["e" /* getTodayTime */])(startValue);
-    var thisMonth = todayTime.month();
-    var thisYear = todayTime.year();
-    var isTodayInView = startValue.year() === thisYear && startValue.month() === thisMonth || endValue.year() === thisYear && endValue.month() === thisMonth;
-    var nextMonthOfStart = startValue.clone().add(1, 'months');
-    var isClosestMonths = nextMonthOfStart.year() === endValue.year() && nextMonthOfStart.month() === endValue.month();
-
-    // console.warn('Render:', selectedValue.map(t => t.format('YYYY-MM-DD')).join(', '));
-    // console.log('start:', startValue.format('YYYY-MM-DD'));
-    // console.log('end:', endValue.format('YYYY-MM-DD'));
-
-    var extraFooter = props.renderFooter();
-
-    return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-      'div',
-      {
-        ref: this.saveRoot,
-        className: classes,
-        style: props.style,
-        tabIndex: '0',
-        onKeyDown: this.onKeyDown
-      },
-      props.renderSidebar(),
-      __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-        'div',
-        { className: prefixCls + '-panel' },
-        showClear && selectedValue[0] && selectedValue[1] ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-          'a',
-          {
-            role: 'button',
-            title: locale.clear,
-            onClick: this.clear
-          },
-          clearIcon || __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('span', { className: prefixCls + '-clear-btn' })
-        ) : null,
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-          'div',
-          {
-            className: prefixCls + '-date-panel',
-            onMouseLeave: type !== 'both' ? this.onDatePanelLeave : undefined,
-            onMouseEnter: type !== 'both' ? this.onDatePanelEnter : undefined
-          },
-          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__range_calendar_CalendarPart__["a" /* default */], __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, props, newProps, {
-            hoverValue: hoverValue,
-            direction: 'left',
-            disabledTime: this.disabledStartTime,
-            disabledMonth: this.disabledStartMonth,
-            format: this.getFormat(),
-            value: startValue,
-            mode: mode[0],
-            placeholder: placeholder1,
-            onInputSelect: this.onStartInputSelect,
-            onValueChange: this.onStartValueChange,
-            onPanelChange: this.onStartPanelChange,
-            showDateInput: this.props.showDateInput,
-            timePicker: timePicker,
-            showTimePicker: showTimePicker,
-            enablePrev: true,
-            enableNext: !isClosestMonths || this.isMonthYearPanelShow(mode[1]),
-            clearIcon: clearIcon
-          })),
-          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-            'span',
-            { className: prefixCls + '-range-middle' },
-            seperator
-          ),
-          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__range_calendar_CalendarPart__["a" /* default */], __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, props, newProps, {
-            hoverValue: hoverValue,
-            direction: 'right',
-            format: this.getFormat(),
-            timePickerDisabledTime: this.getEndDisableTime(),
-            placeholder: placeholder2,
-            value: endValue,
-            mode: mode[1],
-            onInputSelect: this.onEndInputSelect,
-            onValueChange: this.onEndValueChange,
-            onPanelChange: this.onEndPanelChange,
-            showDateInput: this.props.showDateInput,
-            timePicker: timePicker,
-            showTimePicker: showTimePicker,
-            disabledTime: this.disabledEndTime,
-            disabledMonth: this.disabledEndMonth,
-            enablePrev: !isClosestMonths || this.isMonthYearPanelShow(mode[0]),
-            enableNext: true,
-            clearIcon: clearIcon
-          }))
-        ),
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-          'div',
-          { className: cls },
-          showToday || props.timePicker || showOkButton || extraFooter ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-            'div',
-            { className: prefixCls + '-footer-btn' },
-            extraFooter,
-            showToday ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__calendar_TodayButton__["a" /* default */], __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, props, {
-              disabled: isTodayInView,
-              value: state.value[0],
-              onToday: this.onToday,
-              text: locale.backToToday
-            })) : null,
-            props.timePicker ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__calendar_TimePickerButton__["a" /* default */], __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, props, {
-              showTimePicker: showTimePicker,
-              onOpenTimePicker: this.onOpenTimePicker,
-              onCloseTimePicker: this.onCloseTimePicker,
-              timePickerDisabled: !this.hasSelectedValue() || hoverValue.length
-            })) : null,
-            showOkButton ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__calendar_OkButton__["a" /* default */], __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, props, {
-              onOk: this.onOk,
-              okDisabled: !this.isAllowedDateAndTime(selectedValue) || !this.hasSelectedValue() || hoverValue.length
-            })) : null
-          ) : null
-        )
-      )
-    );
-  }
-});
-
-/* harmony default export */ __webpack_exports__["a"] = (RangeCalendar);
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_13__mixin_CommonMixin__["a" /* commonMixinWrapper */])(RangeCalendar));
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_create_react_class__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_create_react_class___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_create_react_class__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__calendar_CalendarHeader__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__date_DateTable__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__date_DateInput__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__util_index__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_prop_types__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_prop_types__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__calendar_CalendarHeader__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__date_DateTable__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__date_DateInput__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__util_index__ = __webpack_require__(10);
 
 
 
@@ -7830,30 +8014,18 @@ var RangeCalendar = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
 
 
 
-var CalendarPart = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
-  displayName: 'CalendarPart',
 
-  propTypes: {
-    prefixCls: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.string,
-    value: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
-    hoverValue: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
-    selectedValue: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
-    direction: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
-    locale: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
-    showDateInput: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.bool,
-    showTimePicker: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.bool,
-    format: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
-    placeholder: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
-    disabledDate: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
-    timePicker: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
-    disabledTime: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
-    onInputSelect: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.func,
-    timePickerDisabledTime: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.object,
-    enableNext: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
-    enablePrev: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.any,
-    clearIcon: __WEBPACK_IMPORTED_MODULE_3_prop_types___default.a.node
-  },
-  render: function render() {
+
+var CalendarPart = function (_React$Component) {
+  __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits___default()(CalendarPart, _React$Component);
+
+  function CalendarPart() {
+    __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default()(this, CalendarPart);
+
+    return __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default()(this, _React$Component.apply(this, arguments));
+  }
+
+  CalendarPart.prototype.render = function render() {
     var props = this.props;
     var prefixCls = props.prefixCls,
         value = props.value,
@@ -7875,7 +8047,7 @@ var CalendarPart = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
         clearIcon = props.clearIcon;
 
     var shouldShowTimePicker = showTimePicker && timePicker;
-    var disabledTimeConfig = shouldShowTimePicker && disabledTime ? Object(__WEBPACK_IMPORTED_MODULE_7__util_index__["c" /* getTimeConfig */])(selectedValue, disabledTime) : null;
+    var disabledTimeConfig = shouldShowTimePicker && disabledTime ? Object(__WEBPACK_IMPORTED_MODULE_9__util_index__["c" /* getTimeConfig */])(selectedValue, disabledTime) : null;
     var rangeClassName = prefixCls + '-range';
     var newProps = {
       locale: locale,
@@ -7884,7 +8056,7 @@ var CalendarPart = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
       showTimePicker: showTimePicker
     };
     var index = direction === 'left' ? 0 : 1;
-    var timePickerEle = shouldShowTimePicker && __WEBPACK_IMPORTED_MODULE_1_react___default.a.cloneElement(timePicker, __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({
+    var timePickerEle = shouldShowTimePicker && __WEBPACK_IMPORTED_MODULE_4_react___default.a.cloneElement(timePicker, __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({
       showHour: true,
       showMinute: true,
       showSecond: true
@@ -7894,7 +8066,7 @@ var CalendarPart = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
       value: selectedValue[index]
     }));
 
-    var dateInputElement = props.showDateInput && __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__date_DateInput__["a" /* default */], {
+    var dateInputElement = props.showDateInput && __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__date_DateInput__["a" /* default */], {
       format: format,
       locale: locale,
       prefixCls: prefixCls,
@@ -7909,16 +8081,16 @@ var CalendarPart = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
       clearIcon: clearIcon
     });
 
-    return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+    return __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
       'div',
       {
         className: rangeClassName + '-part ' + rangeClassName + '-' + direction
       },
       dateInputElement,
-      __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+      __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
         'div',
         { style: { outline: 'none' } },
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__calendar_CalendarHeader__["a" /* default */], __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, newProps, {
+        __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__calendar_CalendarHeader__["a" /* default */], __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, newProps, {
           mode: mode,
           enableNext: enableNext,
           enablePrev: enablePrev,
@@ -7926,19 +8098,19 @@ var CalendarPart = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
           onPanelChange: props.onPanelChange,
           disabledMonth: props.disabledMonth
         })),
-        showTimePicker ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+        showTimePicker ? __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
           'div',
           { className: prefixCls + '-time-picker' },
-          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
             'div',
             { className: prefixCls + '-time-picker-panel' },
             timePickerEle
           )
         ) : null,
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+        __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
           'div',
           { className: prefixCls + '-body' },
-          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__date_DateTable__["a" /* default */], __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, newProps, {
+          __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__date_DateTable__["a" /* default */], __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, newProps, {
             hoverValue: hoverValue,
             selectedValue: selectedValue,
             dateRender: props.dateRender,
@@ -7950,33 +8122,55 @@ var CalendarPart = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
         )
       )
     );
-  }
-});
+  };
 
+  return CalendarPart;
+}(__WEBPACK_IMPORTED_MODULE_4_react___default.a.Component);
+
+CalendarPart.propTypes = {
+  prefixCls: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.string,
+  value: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.any,
+  hoverValue: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.any,
+  selectedValue: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.any,
+  direction: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.any,
+  locale: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.any,
+  showDateInput: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.bool,
+  showTimePicker: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.bool,
+  format: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.any,
+  placeholder: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.any,
+  disabledDate: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.any,
+  timePicker: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.any,
+  disabledTime: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.any,
+  onInputSelect: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func,
+  timePickerDisabledTime: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object,
+  enableNext: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.any,
+  enablePrev: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.any,
+  clearIcon: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.node
+};
 /* harmony default export */ __webpack_exports__["a"] = (CalendarPart);
 
 /***/ }),
-/* 97 */,
 /* 98 */,
 /* 99 */,
 /* 100 */,
 /* 101 */,
 /* 102 */,
 /* 103 */,
-/* 104 */
+/* 104 */,
+/* 105 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_classnames__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Header__ = __webpack_require__(105);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Combobox__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Header__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Combobox__ = __webpack_require__(107);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -8256,15 +8450,15 @@ _defineProperty(Panel, "defaultProps", {
 /* harmony default export */ __webpack_exports__["a"] = (Panel);
 
 /***/ }),
-/* 105 */
+/* 106 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -8542,15 +8736,15 @@ _defineProperty(Header, "defaultProps", {
 /* harmony default export */ __webpack_exports__["a"] = (Header);
 
 /***/ }),
-/* 106 */
+/* 107 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Select__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Select__ = __webpack_require__(108);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -8846,17 +9040,17 @@ _defineProperty(Combobox, "propTypes", {
 /* harmony default export */ __webpack_exports__["a"] = (Combobox);
 
 /***/ }),
-/* 107 */
+/* 108 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_dom__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_classnames__);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -9054,7 +9248,6 @@ _defineProperty(Select, "propTypes", {
 /* harmony default export */ __webpack_exports__["a"] = (Select);
 
 /***/ }),
-/* 108 */,
 /* 109 */,
 /* 110 */,
 /* 111 */,
@@ -9186,30 +9379,30 @@ module.exports = __webpack_require__(229);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rc_calendar_src_Picker__ = __webpack_require__(80);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rc_calendar_src_RangeCalendar__ = __webpack_require__(95);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_calendar_src_locale_zh_CN__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_calendar_src_locale_en_US__ = __webpack_require__(89);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rc_time_picker_es_Panel__ = __webpack_require__(104);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_rc_calendar_assets_index_less__ = __webpack_require__(86);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rc_calendar_src_RangeCalendar__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_calendar_src_locale_zh_CN__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_calendar_src_locale_en_US__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rc_time_picker_es_Panel__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_rc_calendar_assets_index_less__ = __webpack_require__(87);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_rc_calendar_assets_index_less___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_rc_calendar_assets_index_less__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_rc_time_picker_assets_index_css__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_rc_time_picker_assets_index_css__ = __webpack_require__(95);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_rc_time_picker_assets_index_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_rc_time_picker_assets_index_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_moment__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_moment__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_moment_locale_zh_cn__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_moment_locale_zh_cn__ = __webpack_require__(69);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_moment_locale_zh_cn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13_moment_locale_zh_cn__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_moment_locale_en_gb__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_moment_locale_en_gb__ = __webpack_require__(70);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_moment_locale_en_gb___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14_moment_locale_en_gb__);
 
 
