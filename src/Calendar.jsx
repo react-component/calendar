@@ -51,6 +51,7 @@ class Calendar extends React.Component {
     renderFooter: PropTypes.func,
     renderSidebar: PropTypes.func,
     clearIcon: PropTypes.node,
+    focusablePanel: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -61,7 +62,9 @@ class Calendar extends React.Component {
     timePicker: null,
     onOk: noop,
     onPanelChange: noop,
+    focusablePanel: true,
   }
+
 
   constructor(props) {
     super(props);
@@ -71,6 +74,12 @@ class Calendar extends React.Component {
       value: props.value || props.defaultValue || moment(),
       selectedValue: props.selectedValue || props.defaultSelectedValue,
     };
+  }
+
+  componentDidMount() {
+    if (this.props.showDateInput) {
+      this.saveFocusElement(DateInput.getInstance());
+    }
   }
 
   onPanelChange = (value, mode) => {
@@ -279,13 +288,17 @@ class Calendar extends React.Component {
         clearIcon={clearIcon}
       />
     ) : null;
+
     const children = [];
     if (props.renderSidebar) {
       children.push(props.renderSidebar());
     }
     children.push(<div className={`${prefixCls}-panel`} key="panel">
       {dateInputElement}
-      <div className={`${prefixCls}-date-panel`}>
+      <div
+        tabIndex={this.props.focusablePanel ? 0 : undefined}
+        className={`${prefixCls}-date-panel`}
+      >
         <CalendarHeader
           locale={locale}
           mode={mode}

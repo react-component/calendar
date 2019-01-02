@@ -38,7 +38,7 @@ export default class DateInput extends React.Component {
 
   componentDidUpdate() {
     if (this.state.hasFocus && !this.state.invalid &&
-        !(cachedSelectionStart === 0 && cachedSelectionEnd === 0)) {
+      !(cachedSelectionStart === 0 && cachedSelectionEnd === 0)) {
       dateInputInstance.setSelectionRange(cachedSelectionStart, cachedSelectionEnd);
     }
   }
@@ -131,6 +131,10 @@ export default class DateInput extends React.Component {
     return newState;
   }
 
+  static getInstance() {
+    return dateInputInstance;
+  }
+
   getRootDOMNode = () => {
     return ReactDOM.findDOMNode(this);
   }
@@ -170,7 +174,7 @@ export default class DateInput extends React.Component {
             title={locale.clear}
             onClick={this.onClear}
           >
-            {clearIcon || <span className={`${prefixCls}-clear-btn`}/>}
+            {clearIcon || <span className={`${prefixCls}-clear-btn`} />}
           </a>
         ) : null}
       </div>
