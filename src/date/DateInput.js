@@ -37,7 +37,7 @@ export default class DateInput extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.state.hasFocus && !this.state.invalid &&
+    if (dateInputInstance && this.state.hasFocus && !this.state.invalid &&
       !(cachedSelectionStart === 0 && cachedSelectionEnd === 0)) {
       dateInputInstance.setSelectionRange(cachedSelectionStart, cachedSelectionEnd);
     }
