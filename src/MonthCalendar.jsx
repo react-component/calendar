@@ -21,7 +21,7 @@ class MonthCalendar extends React.Component {
     defaultValue: PropTypes.object,
     selectedValue: PropTypes.object,
     defaultSelectedValue: PropTypes.object,
-    disabledDate: PropTypes.object,
+    disabledDate: PropTypes.func,
   }
 
   static defaultProps = Object.assign({}, defaultProp, calendarMixinDefaultProps);
