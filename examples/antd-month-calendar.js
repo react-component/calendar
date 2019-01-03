@@ -7167,7 +7167,7 @@ MonthCalendar.propTypes = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_exte
   defaultValue: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object,
   selectedValue: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object,
   defaultSelectedValue: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object,
-  disabledDate: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object
+  disabledDate: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func
 });
 MonthCalendar.defaultProps = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, __WEBPACK_IMPORTED_MODULE_10__mixin_CommonMixin__["b" /* defaultProp */], __WEBPACK_IMPORTED_MODULE_9__mixin_CalendarMixin__["a" /* calendarMixinDefaultProps */]);
 
