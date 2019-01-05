@@ -17,6 +17,7 @@ export interface Props {
   selectedValue?: Moment;
   mode?: Mode;
   locale?: object;
+  format?: string;
   showDateInput?: boolean;
   showWeekNumber?: boolean;
   showToday?: boolean;
