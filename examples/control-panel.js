@@ -4219,10 +4219,12 @@ DecadePanel.defaultProps = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_prop_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react_lifecycles_compat__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_moment__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__util__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rc_util_es_KeyCode__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react_lifecycles_compat__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_moment__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__util__ = __webpack_require__(10);
+
 
 
 
@@ -4250,7 +4252,7 @@ var DateInput = function (_React$Component) {
     var selectedValue = props.selectedValue;
 
     _this.state = {
-      str: Object(__WEBPACK_IMPORTED_MODULE_8__util__["a" /* formatDate */])(selectedValue, _this.props.format),
+      str: Object(__WEBPACK_IMPORTED_MODULE_9__util__["a" /* formatDate */])(selectedValue, _this.props.format),
       invalid: false,
       hasFocus: false
     };
@@ -4274,7 +4276,7 @@ var DateInput = function (_React$Component) {
     var selectedValue = nextProps.selectedValue;
     if (!state.hasFocus) {
       newState = {
-        str: Object(__WEBPACK_IMPORTED_MODULE_8__util__["a" /* formatDate */])(selectedValue, nextProps.format),
+        str: Object(__WEBPACK_IMPORTED_MODULE_9__util__["a" /* formatDate */])(selectedValue, nextProps.format),
         invalid: false
       };
     }
@@ -4310,6 +4312,7 @@ var DateInput = function (_React$Component) {
           disabled: props.disabled,
           placeholder: placeholder,
           onChange: this.onInputChange,
+          onKeyDown: this.onKeyDown,
           onFocus: this.onFocus,
           onBlur: this.onBlur
         })
@@ -4375,7 +4378,7 @@ var _initialiseProps = function _initialiseProps() {
     }
 
     // 不合法直接退出
-    var parsed = __WEBPACK_IMPORTED_MODULE_7_moment___default()(str, format, true);
+    var parsed = __WEBPACK_IMPORTED_MODULE_8_moment___default()(str, format, true);
     if (!parsed.isValid()) {
       _this2.setState({
         invalid: true,
@@ -4397,6 +4400,7 @@ var _initialiseProps = function _initialiseProps() {
 
     if (selectedValue !== value || selectedValue && value && !selectedValue.isSame(value)) {
       _this2.setState({
+        invalid: false,
         str: str
       });
       onChange(value);
@@ -4411,9 +4415,20 @@ var _initialiseProps = function _initialiseProps() {
     _this2.setState(function (prevState, prevProps) {
       return {
         hasFocus: false,
-        str: Object(__WEBPACK_IMPORTED_MODULE_8__util__["a" /* formatDate */])(prevProps.value, prevProps.format)
+        str: Object(__WEBPACK_IMPORTED_MODULE_9__util__["a" /* formatDate */])(prevProps.value, prevProps.format)
       };
     });
+  };
+
+  this.onKeyDown = function (_ref) {
+    var keyCode = _ref.keyCode;
+    var _props2 = _this2.props,
+        onSelect = _props2.onSelect,
+        value = _props2.value;
+
+    if (keyCode === __WEBPACK_IMPORTED_MODULE_6_rc_util_es_KeyCode__["a" /* default */].ENTER && onSelect) {
+      onSelect(value.clone());
+    }
   };
 
   this.getRootDOMNode = function () {
@@ -4431,7 +4446,7 @@ var _initialiseProps = function _initialiseProps() {
   };
 };
 
-Object(__WEBPACK_IMPORTED_MODULE_6_react_lifecycles_compat__["polyfill"])(DateInput);
+Object(__WEBPACK_IMPORTED_MODULE_7_react_lifecycles_compat__["polyfill"])(DateInput);
 
 /* harmony default export */ __webpack_exports__["a"] = (DateInput);
 
@@ -7033,6 +7048,7 @@ var Calendar = function (_React$Component) {
       prefixCls: prefixCls,
       selectedValue: selectedValue,
       onChange: this.onDateInputChange,
+      onSelect: this.onDateInputSelect,
       clearIcon: clearIcon
     }) : null;
 
@@ -7252,9 +7268,9 @@ var _initialiseProps = function _initialiseProps() {
     });
   };
 
-  this.onDateInputChange = function (value) {
+  this.onDateInputSelect = function (value) {
     _this2.onSelect(value, {
-      source: 'dateInput'
+      source: 'dateInputSelect'
     });
   };
 

@@ -6530,14 +6530,14 @@ var _initialiseProps = function _initialiseProps() {
         value: value
       });
     }
-    if (cause.source === 'keyboard' || !props.calendar.props.timePicker && cause.source !== 'dateInput' || cause.source === 'todayButton') {
+    if (cause.source === 'keyboard' || cause.source === 'dateInputSelect' || !props.calendar.props.timePicker && cause.source !== 'dateInput' || cause.source === 'todayButton') {
       _this2.close(_this2.focus);
     }
     props.onChange(value);
   };
 
   this.onKeyDown = function (event) {
-    if (event.keyCode === __WEBPACK_IMPORTED_MODULE_8_rc_util_es_KeyCode__["a" /* default */].DOWN && !_this2.state.open) {
+    if (!_this2.state.open && (event.keyCode === __WEBPACK_IMPORTED_MODULE_8_rc_util_es_KeyCode__["a" /* default */].DOWN || event.keyCode === __WEBPACK_IMPORTED_MODULE_8_rc_util_es_KeyCode__["a" /* default */].ENTER)) {
       _this2.open();
       event.preventDefault();
     }
