@@ -95,6 +95,7 @@ class Picker extends React.Component {
     }
     if (
       cause.source === 'keyboard' ||
+      cause.source === 'dateInputSelect' ||
       (!props.calendar.props.timePicker && cause.source !== 'dateInput') ||
       cause.source === 'todayButton') {
       this.close(this.focus);
@@ -103,7 +104,7 @@ class Picker extends React.Component {
   }
 
   onKeyDown = (event) => {
-    if (event.keyCode === KeyCode.DOWN && !this.state.open) {
+    if (!this.state.open && (event.keyCode === KeyCode.DOWN || event.keyCode === KeyCode.ENTER)) {
       this.open();
       event.preventDefault();
     }

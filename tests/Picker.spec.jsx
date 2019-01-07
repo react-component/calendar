@@ -164,12 +164,19 @@ describe('DatePicker', () => {
     expect(picker.state().open).toBe(false);
   });
 
-  it('open by DOWN key', () => {
-    const picker = renderPicker();
-    picker.find('.rc-calendar-picker-input').simulate('keyDown', {
-      keyCode: keyCode.DOWN,
+  describe('open by key', () => {
+    [
+      { name: 'Down', key: keyCode.DOWN },
+      { name: 'Enter', key: keyCode.ENTER },
+    ].forEach(({ name, key }) => {
+      it(`open by ${name} key`, () => {
+        const picker = renderPicker();
+        picker.find('.rc-calendar-picker-input').simulate('keyDown', {
+          keyCode: key,
+        });
+        expect(picker.state().open).toBe(true);
+      });
     });
-    expect(picker.state().open).toBe(true);
   });
 
   it('close on ok', () => {
@@ -183,6 +190,15 @@ describe('DatePicker', () => {
     const picker = renderPicker({ value: moment() });
     picker.find('.rc-calendar-picker-input').simulate('click');
     picker.find('.rc-calendar-clear-btn').simulate('click');
+    expect(picker.state().open).toBe(false);
+  });
+
+  it('close on enter of DateInput', () => {
+    const picker = renderPicker({ value: moment() });
+    picker.find('.rc-calendar-picker-input').simulate('click');
+    picker.find('.rc-calendar-input').simulate('keyDown', {
+      keyCode: keyCode.ENTER,
+    });
     expect(picker.state().open).toBe(false);
   });
 

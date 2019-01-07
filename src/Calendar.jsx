@@ -177,9 +177,9 @@ class Calendar extends React.Component {
     });
   }
 
-  onDateInputChange = (value) => {
+  onDateInputSelect = (value) => {
     this.onSelect(value, {
-      source: 'dateInput',
+      source: 'dateInputSelect',
     });
   }
 
@@ -286,6 +286,7 @@ class Calendar extends React.Component {
         prefixCls={prefixCls}
         selectedValue={selectedValue}
         onChange={this.onDateInputChange}
+        onSelect={this.onDateInputSelect}
         clearIcon={clearIcon}
       />
     ) : null;

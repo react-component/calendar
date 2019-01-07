@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import KeyCode from 'rc-util/lib/KeyCode';
 import { polyfill } from 'react-lifecycles-compat';
 import moment from 'moment';
 import { formatDate } from '../util';
@@ -96,6 +97,7 @@ class DateInput extends React.Component {
       selectedValue && value && !selectedValue.isSame(value)
     )) {
       this.setState({
+        invalid: false,
         str,
       });
       onChange(value);
@@ -112,6 +114,13 @@ class DateInput extends React.Component {
       str: formatDate(prevProps.value, prevProps.format),
     }));
   }
+
+  onKeyDown = ({ keyCode }) => {
+    const { onSelect, value } = this.props;
+    if (keyCode === KeyCode.ENTER && onSelect) {
+      onSelect(value.clone());
+    }
+  };
 
   static getDerivedStateFromProps(nextProps, state) {
     let newState = {};
@@ -165,6 +174,7 @@ class DateInput extends React.Component {
             disabled={props.disabled}
             placeholder={placeholder}
             onChange={this.onInputChange}
+            onKeyDown={this.onKeyDown}
             onFocus={this.onFocus}
             onBlur={this.onBlur}
           />
