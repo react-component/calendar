@@ -588,7 +588,7 @@ class RangeCalendar extends React.Component {
 
   disabledEndMonth = (month) => {
     const { value } = this.state;
-    return month.isSameOrBefore(value[0], 'month');
+    return month.isBefore(value[0], 'month');
   }
 
   render() {
