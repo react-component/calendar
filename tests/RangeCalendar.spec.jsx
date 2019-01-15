@@ -130,13 +130,13 @@ describe('RangeCalendar', () => {
       .toMatch('rc-calendar-month-panel-cell-disabled');
   });
 
-  it('right panel cannot select month same or before left panel', () => {
+  it('right panel cannot select month before left panel', () => {
     const wrapper = mount(<RangeCalendar />);
     wrapper.find('.rc-calendar-range-right .rc-calendar-month-select').simulate('click');
     const monthCells = wrapper.find('.rc-calendar-range-right .rc-calendar-month-panel-cell');
     const leftPanelMonth = wrapper.state('value')[0].month();
     expect(monthCells.get(leftPanelMonth).props.className)
-      .toMatch('rc-calendar-month-panel-cell-disabled');
+      .toMatch('rc-calendar-month-panel-cell rc-calendar-month-panel-current-cell');
     expect(monthCells.get(leftPanelMonth - 1).props.className)
       .toMatch('rc-calendar-month-panel-cell-disabled');
   });
@@ -303,7 +303,7 @@ describe('RangeCalendar', () => {
         };
       }
       const timePicker = <TimePickerPanel defaultValue={[moment('00:00:00', 'HH:mm:ss'), moment('23:59:59', 'HH:mm:ss')]} />;
-      const wrapper = mount(<RangeCalendar timePicker={timePicker} disabledTime={disabledTime}/>);
+      const wrapper = mount(<RangeCalendar timePicker={timePicker} disabledTime={disabledTime} />);
 
       wrapper.find('.rc-calendar-today').at(0).simulate('click').simulate('click');
       wrapper.find('.rc-calendar-today').at(0).simulate('click').simulate('click');

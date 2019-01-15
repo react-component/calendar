@@ -2551,7 +2551,7 @@ exports[`RangeCalendar controlled panels render controlled panels correctly 1`] 
                           </a>
                         </td>
                         <td
-                          class="rc-calendar-month-panel-cell rc-calendar-month-panel-cell-disabled rc-calendar-month-panel-current-cell"
+                          class="rc-calendar-month-panel-cell rc-calendar-month-panel-current-cell"
                           role="gridcell"
                           title="Mar"
                         >
