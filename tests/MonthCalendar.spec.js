@@ -106,4 +106,12 @@ describe('MonthCalendar', () => {
       expect(wrapper.state().value.year()).toBe(2017);
     });
   });
+
+  it('controlled value should work', () => {
+    const wrapper = mount(<MonthCalendar value={moment('2000-01-01 00:00:00')} />);
+    expect(wrapper.state().value.format('YYYY-MM-DD')).toBe('2000-01-01');
+
+    wrapper.setProps({ value: moment('2049-09-03 00:00:00') });
+    expect(wrapper.state().value.format('YYYY-MM-DD')).toBe('2049-09-03');
+  });
 });

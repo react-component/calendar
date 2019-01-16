@@ -30,6 +30,26 @@ export const calendarMixinDefaultProps = {
 export const calendarMixinWrapper = ComposeComponent => class extends ComposeComponent {
   static displayName = 'CalendarMixinWrapper';
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    // Use origin function if provided
+    if (ComposeComponent.getDerivedStateFromProps) {
+      return ComposeComponent.getDerivedStateFromProps(nextProps, prevState);
+    }
+
+    const { value, selectedValue } = nextProps;
+    const newState = {};
+
+    if ('value' in nextProps) {
+      newState.value =
+        value || nextProps.defaultValue || getNowByCurrentStateValue(prevState.value);
+    }
+    if ('selectedValue' in nextProps) {
+      newState.selectedValue = selectedValue;
+    }
+
+    return newState;
+  }
+
   onSelect = (value, cause) => {
     if (value) {
       this.setValue(value);
