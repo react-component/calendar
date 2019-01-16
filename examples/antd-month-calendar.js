@@ -6196,6 +6196,27 @@ var calendarMixinWrapper = function calendarMixinWrapper(ComposeComponent) {
       }, _temp), __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn___default()(_this, _ret);
     }
 
+    _class.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, prevState) {
+      // Use origin function if provided
+      if (ComposeComponent.getDerivedStateFromProps) {
+        return ComposeComponent.getDerivedStateFromProps(nextProps, prevState);
+      }
+
+      var value = nextProps.value,
+          selectedValue = nextProps.selectedValue;
+
+      var newState = {};
+
+      if ('value' in nextProps) {
+        newState.value = value || nextProps.defaultValue || getNowByCurrentStateValue(prevState.value);
+      }
+      if ('selectedValue' in nextProps) {
+        newState.selectedValue = selectedValue;
+      }
+
+      return newState;
+    };
+
     return _class;
   }(ComposeComponent), _class.displayName = 'CalendarMixinWrapper', _temp2;
 };
