@@ -34,6 +34,7 @@ export const defaultProp = {
 
 export const commonMixinWrapper = ComposeComponent => class extends ComposeComponent {
   static displayName = 'CommonMixinWrapper';
+  static getDerivedStateFromProps = ComposeComponent.getDerivedStateFromProps;
 
   shouldComponentUpdate(nextProps) {
     return this.props.visible || nextProps.visible;
