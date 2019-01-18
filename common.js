@@ -6248,7 +6248,7 @@ var commonMixinWrapper = function commonMixinWrapper(ComposeComponent) {
     };
 
     return _class;
-  }(ComposeComponent), _class.displayName = 'CommonMixinWrapper', _temp2;
+  }(ComposeComponent), _class.displayName = 'CommonMixinWrapper', _class.getDerivedStateFromProps = ComposeComponent.getDerivedStateFromProps, _temp2;
 };
 
 /***/ }),
