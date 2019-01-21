@@ -2176,7 +2176,7 @@ var calendarMixinWrapper = function calendarMixinWrapper(ComposeComponent) {
     };
 
     return _class;
-  }(ComposeComponent), _class.displayName = 'CalendarMixinWrapper', _temp2;
+  }(ComposeComponent), _class.displayName = 'CalendarMixinWrapper', _class.defaultProps = ComposeComponent.defaultProps, _temp2;
 };
 
 /***/ }),
