@@ -29,6 +29,7 @@ export const calendarMixinDefaultProps = {
 
 export const calendarMixinWrapper = ComposeComponent => class extends ComposeComponent {
   static displayName = 'CalendarMixinWrapper';
+  static defaultProps = ComposeComponent.defaultProps;
 
   static getDerivedStateFromProps(nextProps, prevState) {
     // Use origin function if provided
