@@ -77,7 +77,7 @@
     "mockdate": "^2.0.1",
     "pre-commit": "1.x",
     "rc-dialog": "^7.0.0",
-    "rc-select": "^7.1.0",
+    "rc-select": "^8.8.1",
     "rc-time-picker": "^3.1.0",
     "rc-tools": "^7.0.3",
     "react": "^16.5.2",
