@@ -83,6 +83,8 @@ class Picker extends React.Component {
     if (event.keyCode === KeyCode.ESC) {
       event.stopPropagation();
       this.close(this.focus);
+    } else if (event.keyCode === KeyCode.TAB && !this.props.calendar.props.focusablePanel) {
+      this.close();
     }
   }
 

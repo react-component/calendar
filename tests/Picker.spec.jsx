@@ -202,6 +202,15 @@ describe('DatePicker', () => {
     expect(picker.state().open).toBe(false);
   });
 
+  it('close on Tab of DateInput when panel is not focusable', () => {
+    const picker = renderPicker({ value: moment() }, { focusablePanel: false });
+    picker.find('.rc-calendar-picker-input').simulate('click');
+    picker.find('.rc-calendar-input').simulate('keyDown', {
+      keyCode: keyCode.TAB,
+    });
+    expect(picker.state().open).toBe(false);
+  });
+
   it('auto focuses the calendar input when opening', () => {
     jest.useFakeTimers();
     const picker = renderPicker({ value: moment() });
