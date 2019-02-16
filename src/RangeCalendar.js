@@ -57,7 +57,7 @@ function generateOptions(length, extraOptionGen) {
   return arr;
 }
 
-function onInputSelect(direction, value) {
+function onInputSelect(direction, value, cause) {
   if (!value) {
     return;
   }
@@ -69,7 +69,7 @@ function onInputSelect(direction, value) {
     selectedValue[1 - index] = this.state.showTimePicker ? selectedValue[index] : undefined;
   }
   this.props.onInputSelect(selectedValue);
-  this.fireSelectValueChange(selectedValue);
+  this.fireSelectValueChange(selectedValue, null, cause || { source: 'dateInput' });
 }
 
 class RangeCalendar extends React.Component {
@@ -355,13 +355,23 @@ class RangeCalendar extends React.Component {
     }
   }
 
-  onStartInputSelect = (...oargs) => {
+  onStartInputChange = (...oargs) => {
     const args = ['left'].concat(oargs);
     return onInputSelect.apply(this, args);
   }
 
-  onEndInputSelect = (...oargs) => {
+  onEndInputChange = (...oargs) => {
     const args = ['right'].concat(oargs);
+    return onInputSelect.apply(this, args);
+  }
+
+  onStartInputSelect = (value) => {
+    const args = ['left', value, { source: 'dateInputSelect' }];
+    return onInputSelect.apply(this, args);
+  }
+
+  onEndInputSelect = (value) => {
+    const args = ['right', value, { source: 'dateInputSelect' }];
     return onInputSelect.apply(this, args);
   }
 
@@ -506,7 +516,7 @@ class RangeCalendar extends React.Component {
     return v1.diff(v2, 'days');
   }
 
-  fireSelectValueChange = (selectedValue, direct) => {
+  fireSelectValueChange = (selectedValue, direct, cause) => {
     const { timePicker } = this.props;
     const { prevSelectedValue } = this.state;
     if (timePicker && timePicker.props.defaultValue) {
@@ -546,7 +556,7 @@ class RangeCalendar extends React.Component {
         firstSelectedValue: null,
       });
       this.fireHoverValueChange([]);
-      this.props.onSelect(selectedValue);
+      this.props.onSelect(selectedValue, cause);
     }
   }
 
@@ -690,6 +700,7 @@ class RangeCalendar extends React.Component {
               value={startValue}
               mode={mode[0]}
               placeholder={placeholder1}
+              onInputChange={this.onStartInputChange}
               onInputSelect={this.onStartInputSelect}
               onValueChange={this.onStartValueChange}
               onPanelChange={this.onStartPanelChange}
@@ -711,6 +722,7 @@ class RangeCalendar extends React.Component {
               placeholder={placeholder2}
               value={endValue}
               mode={mode[1]}
+              onInputChange={this.onEndInputChange}
               onInputSelect={this.onEndInputSelect}
               onValueChange={this.onEndValueChange}
               onPanelChange={this.onEndPanelChange}
