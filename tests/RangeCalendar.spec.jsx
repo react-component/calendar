@@ -639,4 +639,30 @@ describe('RangeCalendar', () => {
     expect(onSelect.mock.calls[0][0][0].format(format)).toEqual('2000-09-30');
     expect(onSelect.mock.calls[0][0][1].format(format)).toEqual('2000-09-30');
   });
+
+  it('change input trigger calendar close', () => {
+    const value = [moment(), moment().add(1, 'months')];
+    const onSelect = jest.fn();
+
+    const wrapper = mount(
+      <RangeCalendar
+        value={value}
+        selectedValue={value}
+        onSelect={onSelect}
+      />
+    );
+
+    wrapper.find('input').at(0).simulate('change', {
+      target: {
+        value: '1/1/2000',
+      },
+    });
+
+    expect(onSelect.mock.calls[0][1].source).toEqual('dateInput');
+
+    wrapper.find('input').at(0).simulate('keyDown', {
+      keyCode: keyCode.ENTER,
+    });
+    expect(onSelect.mock.calls[1][1].source).toEqual('dateInputSelect');
+  });
 });

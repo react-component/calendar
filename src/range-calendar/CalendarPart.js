@@ -20,6 +20,7 @@ export default class CalendarPart extends React.Component {
     disabledDate: PropTypes.any,
     timePicker: PropTypes.any,
     disabledTime: PropTypes.any,
+    onInputChange: PropTypes.func,
     onInputSelect: PropTypes.func,
     timePickerDisabledTime: PropTypes.object,
     enableNext: PropTypes.any,
@@ -39,7 +40,7 @@ export default class CalendarPart extends React.Component {
       locale, format, placeholder,
       disabledDate, timePicker, disabledTime,
       timePickerDisabledTime, showTimePicker,
-      onInputSelect, enablePrev, enableNext,
+      onInputChange, onInputSelect, enablePrev, enableNext,
       clearIcon,
     } = props;
     const shouldShowTimePicker = showTimePicker && timePicker;
@@ -61,7 +62,7 @@ export default class CalendarPart extends React.Component {
         ...timePicker.props,
         ...disabledTimeConfig,
         ...timePickerDisabledTime,
-        onChange: onInputSelect,
+        onChange: onInputChange,
         defaultOpenValue: value,
         value: selectedValue[index],
       });
@@ -78,7 +79,8 @@ export default class CalendarPart extends React.Component {
         value={value}
         showClear={false}
         selectedValue={selectedValue[index]}
-        onChange={onInputSelect}
+        onChange={onInputChange}
+        onSelect={onInputSelect}
         clearIcon={clearIcon}
       />;
 
