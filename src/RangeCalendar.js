@@ -711,30 +711,34 @@ class RangeCalendar extends React.Component {
               enableNext={!isClosestMonths || this.isMonthYearPanelShow(mode[1])}
               clearIcon={clearIcon}
             />
-            <span className={`${prefixCls}-range-middle`}>{seperator}</span>
-            <CalendarPart
-              {...props}
-              {...newProps}
-              hoverValue={hoverValue}
-              direction="right"
-              format={this.getFormat()}
-              timePickerDisabledTime={this.getEndDisableTime()}
-              placeholder={placeholder2}
-              value={endValue}
-              mode={mode[1]}
-              onInputChange={this.onEndInputChange}
-              onInputSelect={this.onEndInputSelect}
-              onValueChange={this.onEndValueChange}
-              onPanelChange={this.onEndPanelChange}
-              showDateInput={this.props.showDateInput}
-              timePicker={timePicker}
-              showTimePicker={showTimePicker}
-              disabledTime={this.disabledEndTime}
-              disabledMonth={this.disabledEndMonth}
-              enablePrev={!isClosestMonths || this.isMonthYearPanelShow(mode[0])}
-              enableNext
-              clearIcon={clearIcon}
-            />
+            {mode[1] && 
+              <span className={`${prefixCls}-range-middle`}>{seperator}</span> 
+            }
+            {mode[1] && 
+              <CalendarPart
+                {...props}
+                {...newProps}
+                hoverValue={hoverValue}
+                direction="right"
+                format={this.getFormat()}
+                timePickerDisabledTime={this.getEndDisableTime()}
+                placeholder={placeholder2}
+                value={endValue}
+                mode={mode[1]}
+                onInputChange={this.onEndInputChange}
+                onInputSelect={this.onEndInputSelect}
+                onValueChange={this.onEndValueChange}
+                onPanelChange={this.onEndPanelChange}
+                showDateInput={this.props.showDateInput}
+                timePicker={timePicker}
+                showTimePicker={showTimePicker}
+                disabledTime={this.disabledEndTime}
+                disabledMonth={this.disabledEndMonth}
+                enablePrev={!isClosestMonths || this.isMonthYearPanelShow(mode[0])}
+                enableNext
+                clearIcon={clearIcon}
+              />
+            }
           </div>
           <div className={cls}>
             {(showToday || props.timePicker || showOkButton || extraFooter) ? (
