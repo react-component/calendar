@@ -28,8 +28,8 @@ export interface Props {
   timePicker?: React.ReactNode;
   dateInputPlaceholder?: string;
   onClear?: () => void;
-  onChange?: (date: Moment) => void;
-  onPanelChange?: (date: Moment, mode: Mode) => void;
+  onChange?: (date: Moment | null) => void;
+  onPanelChange?: (date: Moment | null, mode: Mode) => void;
   disabledDate?: (current: Moment | undefined) => boolean;
   disabledTime?: (current: Moment | undefined) => object;
   dateRender?: (current: Moment, value: Moment) => React.ReactNode;
