@@ -193,13 +193,24 @@ describe('DatePicker', () => {
     expect(picker.state().open).toBe(false);
   });
 
-  it('close on enter of DateInput', () => {
-    const picker = renderPicker({ value: moment() });
-    picker.find('.rc-calendar-picker-input').simulate('click');
-    picker.find('.rc-calendar-input').simulate('keyDown', {
-      keyCode: keyCode.ENTER,
+  describe('DateInput', () => {
+    it('close on enter', () => {
+      const picker = renderPicker({ value: moment() });
+      picker.find('.rc-calendar-picker-input').simulate('click');
+      picker.find('.rc-calendar-input').simulate('keyDown', {
+        keyCode: keyCode.ENTER,
+      });
+      expect(picker.state().open).toBe(false);
     });
-    expect(picker.state().open).toBe(false);
+
+    it('not close on enter if disabled date', () => {
+      const picker = renderPicker({ value: moment() }, { disabledDate: () => true });
+      picker.find('.rc-calendar-picker-input').simulate('click');
+      picker.find('.rc-calendar-input').simulate('keyDown', {
+        keyCode: keyCode.ENTER,
+      });
+      expect(picker.state().open).toBe(true);
+    });
   });
 
   it('auto focuses the calendar input when opening', () => {
