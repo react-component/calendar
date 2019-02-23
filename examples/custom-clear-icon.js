@@ -1786,10 +1786,14 @@ var _initialiseProps = function _initialiseProps() {
     var keyCode = _ref.keyCode;
     var _props2 = _this2.props,
         onSelect = _props2.onSelect,
-        value = _props2.value;
+        value = _props2.value,
+        disabledDate = _props2.disabledDate;
 
     if (keyCode === __WEBPACK_IMPORTED_MODULE_6_rc_util_es_KeyCode__["a" /* default */].ENTER && onSelect) {
-      onSelect(value.clone());
+      var validateDate = !disabledDate || !disabledDate(value);
+      if (validateDate) {
+        onSelect(value.clone());
+      }
     }
   };
 
