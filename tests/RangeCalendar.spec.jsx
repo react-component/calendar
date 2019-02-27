@@ -458,6 +458,30 @@ describe('RangeCalendar', () => {
       expect(wrapper.find('.rc-calendar-range-left .rc-calendar-next-month-btn').length).toBe(1);
     });
 
+    it('should work when start time is undefined in defaultValue', () => {
+      let wrapper = null;
+      wrapper = mount(<RangeCalendar defaultValue={[undefined, moment().endOf('month')]} />);
+      wrapper.find('.rc-calendar-range-right .rc-calendar-month-select').simulate('click');
+      expect(wrapper.find('.rc-calendar-range-left .rc-calendar-next-year-btn').length).toBe(1);
+      expect(wrapper.find('.rc-calendar-range-left .rc-calendar-next-month-btn').length).toBe(1);
+      wrapper = mount(<RangeCalendar />);
+      wrapper.find('.rc-calendar-range-right .rc-calendar-year-select').simulate('click');
+      expect(wrapper.find('.rc-calendar-range-left .rc-calendar-next-year-btn').length).toBe(1);
+      expect(wrapper.find('.rc-calendar-range-left .rc-calendar-next-month-btn').length).toBe(1);
+    });
+
+    it('should work when end time is undefined in defaultValue', () => {
+      let wrapper = null;
+      wrapper = mount(<RangeCalendar defaultValue={[moment().startOf('month'), undefined]} />);
+      wrapper.find('.rc-calendar-range-right .rc-calendar-month-select').simulate('click');
+      expect(wrapper.find('.rc-calendar-range-left .rc-calendar-next-year-btn').length).toBe(1);
+      expect(wrapper.find('.rc-calendar-range-left .rc-calendar-next-month-btn').length).toBe(1);
+      wrapper = mount(<RangeCalendar />);
+      wrapper.find('.rc-calendar-range-right .rc-calendar-year-select').simulate('click');
+      expect(wrapper.find('.rc-calendar-range-left .rc-calendar-next-year-btn').length).toBe(1);
+      expect(wrapper.find('.rc-calendar-range-left .rc-calendar-next-month-btn').length).toBe(1);
+    });
+
     it('support controlled mode', () => {
       let value = null;
       class ControlledRangeCalendar extends React.Component {
