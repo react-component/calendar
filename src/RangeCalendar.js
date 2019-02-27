@@ -39,7 +39,7 @@ function getValueFromSelectedValue(selectedValue) {
   }
 
   if (end === null) {
-    end = start.clone.add(1, 'month');
+    end = start.clone().add(1, 'month');
   }
   const newEnd = end && end.isSame(start, 'month') ? end.clone().add(1, 'month') : end;
   return [start, newEnd];
