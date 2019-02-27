@@ -70,8 +70,8 @@ class Picker extends React.Component {
 
   componentDidUpdate(_, prevState) {
     if (!prevState.open && this.state.open) {
-      // setTimeout is for making sure saveCalendarRef happen before focusCalendar
-      this.focusTimeout = setTimeout(this.focusCalendar, 0, this);
+      // setTimeout is for making sure saveCalendarRef happen before focusCalendar in this.focus
+      this.focusTimeout = setTimeout(this.focus, 0, this);
     }
   }
 
@@ -177,9 +177,9 @@ class Picker extends React.Component {
     if (!this.state.open) {
       ReactDOM.findDOMNode(this).focus();
     }
-  }
 
-  focusCalendar = () => {
+    // github.com/ant-design/ant-design/issues/11249
+    // merge popup input element focus into origin input element focus
     if (this.state.open && !!this.calendarInstance) {
       this.calendarInstance.focus();
     }
