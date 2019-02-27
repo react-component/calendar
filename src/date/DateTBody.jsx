@@ -144,11 +144,15 @@ export default class DateTBody extends React.Component {
                 cls += ` ${selectedStartDateClass}`;
               }
             }
-            if (startValue && endValue) {
+            if (startValue || endValue) {
               if (isSameDay(current, endValue)) {
                 selected = true;
                 isActiveWeek = true;
                 cls += ` ${selectedEndDateClass}`;
+              } else if (startValue === null && current.isBefore(endValue, 'day')) {
+                cls += ` ${inRangeClass}`;
+              } else if (endValue === null && current.isAfter(startValue, 'day')) {
+                cls += ` ${inRangeClass}`;
               } else if (current.isAfter(startValue, 'day') &&
                 current.isBefore(endValue, 'day')) {
                 cls += ` ${inRangeClass}`;
