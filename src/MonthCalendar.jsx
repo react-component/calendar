@@ -83,6 +83,26 @@ class MonthCalendar extends React.Component {
     }
   }
 
+  previousYear = () => {
+    const stateValue = this.state.value;
+    const value = stateValue.clone();
+    value.add(-1, 'years');
+
+    if (value !== stateValue) {
+      this.setValue(value);
+    }
+  }
+
+  nextYear = () => {
+    const stateValue = this.state.value;
+    const value = stateValue.clone();
+    value.add(1, 'years');
+
+    if (value !== stateValue) {
+      this.setValue(value);
+    }
+  }
+
   handlePanelChange = (_, mode) => {
     if (mode !== 'date') {
       this.setState({ mode });
@@ -106,6 +126,8 @@ class MonthCalendar extends React.Component {
             onMonthSelect={this.onSelect}
             onValueChange={this.setValue}
             onPanelChange={this.handlePanelChange}
+            previousYear={this.previousYear}
+            nextYear={this.nextYear}
           />
         </div>
         <CalendarFooter

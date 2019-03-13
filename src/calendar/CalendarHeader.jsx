@@ -146,6 +146,8 @@ export default class CalendarHeader extends React.Component {
       enablePrev,
       disabledMonth,
       renderFooter,
+      previousYear,
+      nextYear,
     } = props;
 
     let panel = null;
@@ -153,7 +155,7 @@ export default class CalendarHeader extends React.Component {
       panel = (
         <MonthPanel
           locale={locale}
-          defaultValue={value}
+          value={value}
           rootPrefixCls={prefixCls}
           onSelect={this.onMonthSelect}
           onYearPanelShow={() => this.showYearPanel('month')}
@@ -161,6 +163,8 @@ export default class CalendarHeader extends React.Component {
           cellRender={props.monthCellRender}
           contentRender={props.monthCellContentRender}
           renderFooter={renderFooter}
+          previousYear={previousYear}
+          nextYear={nextYear}
         />
       );
     }

@@ -74,7 +74,7 @@ class MonthPanel extends React.Component {
   render() {
     const props = this.props;
     const value = this.state.value;
-    const { locale, cellRender, contentRender, renderFooter } = props;
+    const { locale, cellRender, contentRender, renderFooter, previousYear, nextYear } = props;
     const year = value.year();
     const prefixCls = this.prefixCls;
 
@@ -87,7 +87,7 @@ class MonthPanel extends React.Component {
             <a
               className={`${prefixCls}-prev-year-btn`}
               role="button"
-              onClick={this.previousYear}
+              onClick={previousYear}
               title={locale.previousYear}
             />
 
@@ -104,7 +104,7 @@ class MonthPanel extends React.Component {
             <a
               className={`${prefixCls}-next-year-btn`}
               role="button"
-              onClick={this.nextYear}
+              onClick={nextYear}
               title={locale.nextYear}
             />
           </div>
