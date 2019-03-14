@@ -204,10 +204,10 @@ class Calendar extends React.Component {
   }
 
   onBlur = (event) => {
-    const dateInput = DateInput.getInstance();
-    const rootInstance = this.rootInstance;
-
     setTimeout(() => {
+      const dateInput = DateInput.getInstance();
+      const rootInstance = this.rootInstance;
+
       if (!rootInstance || rootInstance.contains(document.activeElement) ||
       (dateInput && dateInput.contains(document.activeElement))) {
         // focused element is still part of Calendar
