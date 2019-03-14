@@ -1,6 +1,10 @@
 # History
 ----
 
+## 9.11.0 / 2019-03-14
+
+- RangerPicker can select same month
+
 ## 9.10.0 / 2019-01-02
 
 - add `focusablePanel` prop.
