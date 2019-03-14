@@ -33,8 +33,7 @@ function isArraysEqual(a, b) {
 
 function getValueFromSelectedValue(selectedValue) {
   const [start, end] = selectedValue;
-  const newEnd = end && end.isSame(start, 'month') ? end.clone().add(1, 'month') : end;
-  return [start, newEnd];
+  return [start, end];
 }
 
 function normalizeAnchor(props, init) {
@@ -583,7 +582,7 @@ class RangeCalendar extends React.Component {
 
   disabledStartMonth = (month) => {
     const { value } = this.state;
-    return month.isSameOrAfter(value[1], 'month');
+    return month.isAfter(value[1], 'month');
   }
 
   disabledEndMonth = (month) => {

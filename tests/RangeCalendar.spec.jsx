@@ -119,13 +119,13 @@ describe('RangeCalendar', () => {
     expect(wrapper.find('.rc-calendar-range-right .rc-calendar-next-month-btn').length).toBe(1);
   });
 
-  it('left panel cannot select month same or after right panel', () => {
+  it('left panel cannot select month after right panel', () => {
     const wrapper = mount(<RangeCalendar />);
     wrapper.find('.rc-calendar-range-left .rc-calendar-month-select').simulate('click');
     const monthCells = wrapper.find('.rc-calendar-range-left .rc-calendar-month-panel-cell');
     const rightPanelMonth = wrapper.state('value')[1].month();
     expect(monthCells.get(rightPanelMonth).props.className)
-      .toMatch('rc-calendar-month-panel-cell-disabled');
+      .toMatch('rc-calendar-month-panel-cell');
     expect(monthCells.get(rightPanelMonth + 1).props.className)
       .toMatch('rc-calendar-month-panel-cell-disabled');
   });
@@ -139,24 +139,6 @@ describe('RangeCalendar', () => {
       .toMatch('rc-calendar-month-panel-cell rc-calendar-month-panel-current-cell');
     expect(monthCells.get(leftPanelMonth - 1).props.className)
       .toMatch('rc-calendar-month-panel-cell-disabled');
-  });
-
-  it('left panel and right panel should not be the same month even we try to set it', () => {
-    const wrapper = mount(<RangeCalendar value={[moment(), moment()]} />);
-    const value = wrapper.state('value');
-    expect(value[0].isSame(moment())).toBe(true);
-    expect(value[1].isSame(moment().add(1, 'month'))).toBe(true);
-  });
-
-  it('left panel and right panel should not be the same month', () => {
-    const wrapper = mount(<RangeCalendar />);
-    wrapper.find('.rc-calendar-range-left .rc-calendar-today').simulate('click').simulate('click');
-    const selectedValue = wrapper.state('selectedValue');
-    expect(selectedValue[0].isSame(moment())).toBe(true);
-    expect(selectedValue[1].isSame(moment())).toBe(true);
-    const value = wrapper.state('value');
-    expect(value[0].isSame(moment())).toBe(true);
-    expect(value[1].isSame(moment().add(1, 'month'))).toBe(true);
   });
 
   it('onSelect works', () => {
@@ -490,11 +472,11 @@ describe('RangeCalendar', () => {
     it('controlled value works correctly', () => {
       const wrapper = mount(<RangeCalendar value={[moment(), moment()]} />);
       const initialValue = wrapper.state('value');
-      expect(initialValue[0].add(1, 'month').isSame(initialValue[1], 'month')).toBe(true);
+      expect(initialValue[0].isSame(initialValue[1], 'month')).toBe(true);
 
       wrapper.setProps({ value: [moment(), moment()] });
       const updatedValue = wrapper.state('value');
-      expect(updatedValue[0].add(1, 'month').isSame(updatedValue[1], 'month')).toBe(true);
+      expect(updatedValue[0].isSame(updatedValue[1], 'month')).toBe(true);
     });
   });
 
