@@ -7254,8 +7254,7 @@ function getValueFromSelectedValue(selectedValue) {
   var start = selectedValue[0],
       end = selectedValue[1];
 
-  var newEnd = end && end.isSame(start, 'month') ? end.clone().add(1, 'month') : end;
-  return [start, newEnd];
+  return [start, end];
 }
 
 function normalizeAnchor(props, init) {
@@ -8047,13 +8046,13 @@ var _initialiseProps = function _initialiseProps() {
   this.disabledStartMonth = function (month) {
     var value = _this2.state.value;
 
-    return month.isSameOrAfter(value[1], 'month');
+    return month.isAfter(value[1], 'month');
   };
 
   this.disabledEndMonth = function (month) {
     var value = _this2.state.value;
 
-    return month.isSameOrBefore(value[0], 'month');
+    return month.isBefore(value[0], 'month');
   };
 };
 
