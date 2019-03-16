@@ -32,7 +32,14 @@ function isArraysEqual(a, b) {
 }
 
 function getValueFromSelectedValue(selectedValue) {
-  const [start, end] = selectedValue;
+  let [start, end] = selectedValue;
+  if (end && (start === undefined || start === null)) {
+    start = end.clone().subtract(1, 'month');
+  }
+
+  if (start && (end === undefined || end === null)) {
+    end = start.clone().add(1, 'month');
+  }
   return [start, end];
 }
 
