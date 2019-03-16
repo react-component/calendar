@@ -1,6 +1,10 @@
 # History
 ----
 
+## 9.12.0 / 2019-03-16
+
+- RangerPicker support null as start or end
+
 ## 9.11.0 / 2019-03-14
 
 - RangerPicker can select same month
