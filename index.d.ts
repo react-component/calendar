@@ -35,6 +35,7 @@ export interface Props {
   dateRender?: (current: Moment, value: Moment) => React.ReactNode;
   renderFooter?: () => React.ReactNode;
   renderSidebar?: () => React.ReactNode;
+  keyinputmode?:String
 }
 
 export default class ReactCalendar extends React.Component<Props> {}

@@ -53,6 +53,7 @@ class Calendar extends React.Component {
     renderSidebar: PropTypes.func,
     clearIcon: PropTypes.node,
     focusablePanel: PropTypes.bool,
+    keyinputmode: PropTypes.string,
   }
 
   static defaultProps = {
@@ -244,7 +245,7 @@ class Calendar extends React.Component {
     const {
       locale, prefixCls, disabledDate,
       dateInputPlaceholder, timePicker,
-      disabledTime, clearIcon, renderFooter,
+      disabledTime, clearIcon, renderFooter, keyinputmode,
     } = props;
     const { value, selectedValue, mode } = state;
     const showTimePicker = mode === 'time';
@@ -288,6 +289,7 @@ class Calendar extends React.Component {
         onChange={this.onDateInputChange}
         onSelect={this.onDateInputSelect}
         clearIcon={clearIcon}
+        keyinputmode={keyinputmode}
       />
     ) : null;
 

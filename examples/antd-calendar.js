@@ -118,6 +118,7 @@ class Demo extends React.Component {
       defaultValue={this.props.defaultCalendarValue}
       showDateInput={state.showDateInput}
       disabledDate={disabledDate}
+      keyinputmode={"numeric"}
     />);
     return (<div style={{ width: 400, margin: 20 }}>
       <div style={{ marginBottom: 10 }}>
@@ -174,6 +175,7 @@ class Demo extends React.Component {
                     tabIndex="-1"
                     className="ant-calendar-picker-input ant-input"
                     value={value && value.format(getFormat(state.showTime)) || ''}
+                    keyinputmode={"numeric"}
                   />
                 </span>
               );
@@ -219,6 +221,7 @@ class DemoMultiFormat extends React.Component {
         value={state.value}
         onChange={this.onChange}
         focusablePanel={false}
+        keyinputmode={"numeric"}
       />
     </div>);
   }
@@ -258,6 +261,7 @@ ReactDOM.render((<div
         disabledDate={disabledDate}
         onSelect={onStandaloneSelect}
         renderFooter={(mode) => (<span>{mode} extra footer</span>)}
+        keyinputmode={"numeric"}
       />
     </div>
     <div style={{ float: 'left', width: 300 }}>
