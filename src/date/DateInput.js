@@ -25,7 +25,7 @@ class DateInput extends React.Component {
     onSelect: PropTypes.func,
     selectedValue: PropTypes.object,
     clearIcon: PropTypes.node,
-    keyinputmode: PropTypes.string,
+    inputMode: PropTypes.string,
   }
 
   constructor(props) {
@@ -166,7 +166,7 @@ class DateInput extends React.Component {
   render() {
     const props = this.props;
     const { invalid, str } = this.state;
-    const { locale, prefixCls, placeholder, clearIcon, keyinputmode } = props;
+    const { locale, prefixCls, placeholder, clearIcon, inputMode } = props;
     const invalidClass = invalid ? `${prefixCls}-input-invalid` : '';
     return (
       <div className={`${prefixCls}-input-wrap`}>
@@ -181,7 +181,7 @@ class DateInput extends React.Component {
             onKeyDown={this.onKeyDown}
             onFocus={this.onFocus}
             onBlur={this.onBlur}
-            inputMode={keyinputmode}
+            inputMode={inputMode}
           />
         </div>
         {props.showClear ? (

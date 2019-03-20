@@ -474,7 +474,7 @@ describe('Calendar', () => {
     });
 
     it('numeric keyboard works', () => {
-      const newCalendar = mount(<Calendar keyinputmode="numeric" />);
+      const newCalendar = mount(<Calendar inputMode="numeric" />);
       expect(newCalendar.find('.rc-calendar-input').props().inputMode).toBe('numeric');
     });
 

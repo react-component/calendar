@@ -249,6 +249,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td></td>
           <td>specific the clear icon.</td>
         </tr>
+         <tr>
+          <td>inputMode</td>
+          <td>strimg</td>
+          <td>text</td>
+          <td>Change the keyboard in mobile device by passing "numeric"</td>
+        </tr>
     </tbody>
 </table>
 
