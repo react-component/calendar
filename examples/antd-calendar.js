@@ -174,7 +174,6 @@ class Demo extends React.Component {
                     tabIndex="-1"
                     className="ant-calendar-picker-input ant-input"
                     value={value && value.format(getFormat(state.showTime)) || ''}
-                    inputMode={"numeric"}
                   />
                 </span>
               );
@@ -213,10 +212,6 @@ class DemoMultiFormat extends React.Component {
         <small>{multiFormats.join(', ')}</small>
         <br/>
       </div>
-      <div style={{ marginBottom: 10 }}>
-        Try it in mobile device by using prop <code>inputMode={"numeric"}</code>
-         and numeric keyboard will be there
-      </div>
       <Calendar
         locale={cn ? zhCN : enUS}
         style={{ zIndex: 1000 }}
@@ -225,7 +220,6 @@ class DemoMultiFormat extends React.Component {
         value={state.value}
         onChange={this.onChange}
         focusablePanel={false}
-        inputMode={"numeric"}
       />
     </div>);
   }
@@ -265,7 +259,6 @@ ReactDOM.render((<div
         disabledDate={disabledDate}
         onSelect={onStandaloneSelect}
         renderFooter={(mode) => (<span>{mode} extra footer</span>)}
-        inputMode={"numeric"}
       />
     </div>
     <div style={{ float: 'left', width: 300 }}>
