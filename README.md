@@ -253,7 +253,7 @@ http://react-component.github.io/calendar/examples/index.html
           <td>inputMode</td>
           <td>strimg</td>
           <td>text</td>
-          <td>Change the keyboard in mobile device by passing "numeric"</td>
+          <td>Change the keyboard in mobile device</td>
         </tr>
     </tbody>
 </table>

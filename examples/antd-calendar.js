@@ -118,7 +118,6 @@ class Demo extends React.Component {
       defaultValue={this.props.defaultCalendarValue}
       showDateInput={state.showDateInput}
       disabledDate={disabledDate}
-      inputMode={"numeric"}
     />);
     return (<div style={{ width: 400, margin: 20 }}>
       <div style={{ marginBottom: 10 }}>
