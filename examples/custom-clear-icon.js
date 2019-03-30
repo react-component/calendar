@@ -842,11 +842,15 @@ var DateTBody = function (_React$Component) {
                 cls += ' ' + selectedStartDateClass;
               }
             }
-            if (startValue && endValue) {
+            if (startValue || endValue) {
               if (isSameDay(current, endValue)) {
                 selected = true;
                 isActiveWeek = true;
                 cls += ' ' + selectedEndDateClass;
+              } else if ((startValue === null || startValue === undefined) && current.isBefore(endValue, 'day')) {
+                cls += ' ' + inRangeClass;
+              } else if ((endValue === null || endValue === undefined) && current.isAfter(startValue, 'day')) {
+                cls += ' ' + inRangeClass;
               } else if (current.isAfter(startValue, 'day') && current.isBefore(endValue, 'day')) {
                 cls += ' ' + inRangeClass;
               }
@@ -2821,6 +2825,13 @@ function getValueFromSelectedValue(selectedValue) {
   var start = selectedValue[0],
       end = selectedValue[1];
 
+  if (end && (start === undefined || start === null)) {
+    start = end.clone().subtract(1, 'month');
+  }
+
+  if (start && (end === undefined || end === null)) {
+    end = start.clone().add(1, 'month');
+  }
   return [start, end];
 }
 
