@@ -2904,7 +2904,7 @@ var RangeCalendar = function (_React$Component) {
       newState.prevSelectedValue = nextProps.selectedValue;
     }
     if ('mode' in nextProps && !isArraysEqual(state.mode, nextProps.mode)) {
-      newState = { mode: nextProps.mode };
+      newState.mode = nextProps.mode;
     }
     return newState;
   };
