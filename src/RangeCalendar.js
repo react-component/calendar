@@ -418,7 +418,7 @@ class RangeCalendar extends React.Component {
   }
 
   static getDerivedStateFromProps(nextProps, state) {
-    let newState = {};
+    const newState = {};
     if ('value' in nextProps) {
       newState.value = normalizeAnchor(nextProps, 0);
     }
@@ -430,7 +430,7 @@ class RangeCalendar extends React.Component {
       newState.prevSelectedValue = nextProps.selectedValue;
     }
     if ('mode' in nextProps && !isArraysEqual(state.mode, nextProps.mode)) {
-      newState = { mode: nextProps.mode };
+      newState.mode = nextProps.mode;
     }
     return newState;
   }

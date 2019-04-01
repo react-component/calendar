@@ -1,4 +1,4 @@
-/* eslint-disable no-undef, max-len */
+/* eslint-disable no-undef, max-len, react/no-multi-comp */
 import React from 'react';
 import moment from 'moment';
 import { mount, render } from 'enzyme';
@@ -525,6 +525,41 @@ describe('RangeCalendar', () => {
       wrapper.setProps({ value: [moment(), moment()] });
       const updatedValue = wrapper.state('value');
       expect(updatedValue[0].isSame(updatedValue[1], 'month')).toBe(true);
+    });
+
+    // https://github.com/ant-design/ant-design/issues/15659
+    it('controlled value works correctly with mode', () => {
+      class Demo extends React.Component {
+        state = {
+          mode: ['month', 'month'],
+          value: [moment().add(-1, 'day'), moment()],
+        };
+
+        handlePanelChange = (value, mode) => {
+          this.setState({
+            value,
+            mode: [mode[0] === 'date' ? 'month' : mode[0], mode[1] === 'date' ? 'month' : mode[1]],
+          });
+        };
+
+        render() {
+          return (
+            <RangeCalendar
+              value={this.state.value}
+              selectedValue={this.state.value}
+              mode={this.state.mode}
+              onPanelChange={this.handlePanelChange}
+            />
+          );
+        }
+      }
+
+      const wrapper = mount(<Demo />);
+      wrapper.find('.rc-calendar-month-panel-year-select').first().simulate('click');
+      wrapper.find('.rc-calendar-year-panel-cell').at(1).simulate('click');
+      expect(
+        wrapper.find('.rc-calendar-month-panel-year-select-content').first(0).text()
+      ).toBe('2010');
     });
   });
 
