@@ -2130,7 +2130,8 @@ var calendarMixinWrapper = function calendarMixinWrapper(ComposeComponent) {
             className: '' + __WEBPACK_IMPORTED_MODULE_5_classnames___default()(className),
             style: _this.props.style,
             tabIndex: '0',
-            onKeyDown: _this.onKeyDown
+            onKeyDown: _this.onKeyDown,
+            onBlur: _this.onBlur
           },
           newProps.children
         );
@@ -2577,7 +2578,8 @@ Calendar.propTypes = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__
   renderFooter: __WEBPACK_IMPORTED_MODULE_6_prop_types___default.a.func,
   renderSidebar: __WEBPACK_IMPORTED_MODULE_6_prop_types___default.a.func,
   clearIcon: __WEBPACK_IMPORTED_MODULE_6_prop_types___default.a.node,
-  focusablePanel: __WEBPACK_IMPORTED_MODULE_6_prop_types___default.a.bool
+  focusablePanel: __WEBPACK_IMPORTED_MODULE_6_prop_types___default.a.bool,
+  onBlur: __WEBPACK_IMPORTED_MODULE_6_prop_types___default.a.func
 });
 Calendar.defaultProps = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, __WEBPACK_IMPORTED_MODULE_12__mixin_CalendarMixin__["a" /* calendarMixinDefaultProps */], __WEBPACK_IMPORTED_MODULE_13__mixin_CommonMixin__["b" /* defaultProp */], {
   showToday: true,
@@ -2711,6 +2713,22 @@ var _initialiseProps = function _initialiseProps() {
     _this2.onSelect(now, {
       source: 'todayButton'
     });
+  };
+
+  this.onBlur = function (event) {
+    setTimeout(function () {
+      var dateInput = __WEBPACK_IMPORTED_MODULE_14__date_DateInput__["a" /* default */].getInstance();
+      var rootInstance = _this2.rootInstance;
+
+      if (!rootInstance || rootInstance.contains(document.activeElement) || dateInput && dateInput.contains(document.activeElement)) {
+        // focused element is still part of Calendar
+        return;
+      }
+
+      if (_this2.props.onBlur) {
+        _this2.props.onBlur(event);
+      }
+    }, 0);
   };
 
   this.getRootDOMNode = function () {

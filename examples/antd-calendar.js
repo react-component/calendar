@@ -6934,7 +6934,8 @@ var calendarMixinWrapper = function calendarMixinWrapper(ComposeComponent) {
             className: '' + __WEBPACK_IMPORTED_MODULE_5_classnames___default()(className),
             style: _this.props.style,
             tabIndex: '0',
-            onKeyDown: _this.onKeyDown
+            onKeyDown: _this.onKeyDown,
+            onBlur: _this.onBlur
           },
           newProps.children
         );
@@ -7290,7 +7291,8 @@ Picker.propTypes = {
   placement: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.any,
   value: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object, __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.array]),
   defaultValue: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object, __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.array]),
-  align: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object
+  align: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object,
+  onBlur: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func
 };
 Picker.defaultProps = {
   prefixCls: 'rc-calendar-picker',
@@ -7299,7 +7301,8 @@ Picker.defaultProps = {
   placement: 'bottomLeft',
   defaultOpen: false,
   onChange: noop,
-  onOpenChange: noop
+  onOpenChange: noop,
+  onBlur: noop
 };
 
 var _initialiseProps = function _initialiseProps() {
@@ -7342,6 +7345,10 @@ var _initialiseProps = function _initialiseProps() {
     _this2.close(_this2.focus);
   };
 
+  this.onCalendarBlur = function () {
+    _this2.setOpen(false);
+  };
+
   this.onVisibleChange = function (open) {
     _this2.setOpen(open);
   };
@@ -7360,7 +7367,8 @@ var _initialiseProps = function _initialiseProps() {
       onKeyDown: _this2.onCalendarKeyDown,
       onOk: Object(__WEBPACK_IMPORTED_MODULE_7_rc_util_es_createChainedFunction__["a" /* default */])(calendarProps.onOk, _this2.onCalendarOk),
       onSelect: Object(__WEBPACK_IMPORTED_MODULE_7_rc_util_es_createChainedFunction__["a" /* default */])(calendarProps.onSelect, _this2.onCalendarSelect),
-      onClear: Object(__WEBPACK_IMPORTED_MODULE_7_rc_util_es_createChainedFunction__["a" /* default */])(calendarProps.onClear, _this2.onCalendarClear)
+      onClear: Object(__WEBPACK_IMPORTED_MODULE_7_rc_util_es_createChainedFunction__["a" /* default */])(calendarProps.onClear, _this2.onCalendarClear),
+      onBlur: Object(__WEBPACK_IMPORTED_MODULE_7_rc_util_es_createChainedFunction__["a" /* default */])(calendarProps.onBlur, _this2.onCalendarBlur)
     };
 
     return __WEBPACK_IMPORTED_MODULE_3_react___default.a.cloneElement(props.calendar, extraProps);
@@ -7716,7 +7724,8 @@ Calendar.propTypes = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__
   renderFooter: __WEBPACK_IMPORTED_MODULE_6_prop_types___default.a.func,
   renderSidebar: __WEBPACK_IMPORTED_MODULE_6_prop_types___default.a.func,
   clearIcon: __WEBPACK_IMPORTED_MODULE_6_prop_types___default.a.node,
-  focusablePanel: __WEBPACK_IMPORTED_MODULE_6_prop_types___default.a.bool
+  focusablePanel: __WEBPACK_IMPORTED_MODULE_6_prop_types___default.a.bool,
+  onBlur: __WEBPACK_IMPORTED_MODULE_6_prop_types___default.a.func
 });
 Calendar.defaultProps = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, __WEBPACK_IMPORTED_MODULE_12__mixin_CalendarMixin__["a" /* calendarMixinDefaultProps */], __WEBPACK_IMPORTED_MODULE_13__mixin_CommonMixin__["b" /* defaultProp */], {
   showToday: true,
@@ -7850,6 +7859,22 @@ var _initialiseProps = function _initialiseProps() {
     _this2.onSelect(now, {
       source: 'todayButton'
     });
+  };
+
+  this.onBlur = function (event) {
+    setTimeout(function () {
+      var dateInput = __WEBPACK_IMPORTED_MODULE_14__date_DateInput__["a" /* default */].getInstance();
+      var rootInstance = _this2.rootInstance;
+
+      if (!rootInstance || rootInstance.contains(document.activeElement) || dateInput && dateInput.contains(document.activeElement)) {
+        // focused element is still part of Calendar
+        return;
+      }
+
+      if (_this2.props.onBlur) {
+        _this2.props.onBlur(event);
+      }
+    }, 0);
   };
 
   this.getRootDOMNode = function () {
@@ -9159,33 +9184,55 @@ var Demo = function (_React$Component) {
       });
     };
 
+    _this.onOpenChange = function (open) {
+      _this.setState({
+        open: open
+      });
+    };
+
+    _this.onReadOnlyFocus = function () {
+      _this.setState({
+        open: true
+      });
+    };
+
+    _this.getCalendarContainer = function () {
+      return _this.calendarContainerRef.current;
+    };
+
     _this.toggleDisabled = function () {
       _this.setState({
         disabled: !_this.state.disabled
       });
     };
 
+    _this.calendarContainerRef = __WEBPACK_IMPORTED_MODULE_4_react___default.a.createRef();
+
     _this.state = {
       showTime: true,
       showDateInput: true,
       disabled: false,
+      open: false,
       value: props.defaultValue
     };
     return _this;
   }
 
   Demo.prototype.render = function render() {
+    var _this2 = this;
+
     var state = this.state;
     var calendar = __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7_rc_calendar__["a" /* default */], {
       locale: cn ? __WEBPACK_IMPORTED_MODULE_9_rc_calendar_src_locale_zh_CN__["a" /* default */] : __WEBPACK_IMPORTED_MODULE_10_rc_calendar_src_locale_en_US__["a" /* default */],
-      style: { zIndex: 1000 },
+      style: { zIndex: 1001 },
       dateInputPlaceholder: 'please input',
       format: getFormat(state.showTime),
       disabledTime: state.showTime ? disabledTime : null,
       timePicker: state.showTime ? timePickerElement : null,
       defaultValue: this.props.defaultCalendarValue,
       showDateInput: state.showDateInput,
-      disabledDate: disabledDate
+      disabledDate: disabledDate,
+      focusablePanel: false
     });
     return __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
       'div',
@@ -9242,14 +9289,18 @@ var Demo = function (_React$Component) {
             animation: 'slide-up',
             calendar: calendar,
             value: state.value,
-            onChange: this.onChange
+            onChange: this.onChange,
+            getCalendarContainer: this.getCalendarContainer,
+            onOpenChange: this.onOpenChange,
+            open: state.open,
+            style: { zIndex: 1001 }
           },
           function (_ref) {
             var value = _ref.value;
 
             return __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
               'span',
-              { tabIndex: '0' },
+              { tabIndex: '0', onFocus: _this2.onReadOnlyFocus },
               __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('input', {
                 placeholder: 'please select',
                 style: { width: 250 },
@@ -9258,7 +9309,8 @@ var Demo = function (_React$Component) {
                 tabIndex: '-1',
                 className: 'ant-calendar-picker-input ant-input',
                 value: value && value.format(getFormat(state.showTime)) || ''
-              })
+              }),
+              __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('div', { ref: _this2.calendarContainerRef })
             );
           }
         )
@@ -9283,19 +9335,19 @@ var DemoMultiFormat = function (_React$Component2) {
   function DemoMultiFormat(props) {
     __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default()(this, DemoMultiFormat);
 
-    var _this2 = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn___default()(this, _React$Component2.call(this, props));
+    var _this3 = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn___default()(this, _React$Component2.call(this, props));
 
-    _this2.onChange = function (value) {
+    _this3.onChange = function (value) {
       console.log('Calendar change: ', value && value.format(format));
-      _this2.setState({
+      _this3.setState({
         value: value
       });
     };
 
-    _this2.state = {
+    _this3.state = {
       value: now
     };
-    return _this2;
+    return _this3;
   }
 
   DemoMultiFormat.prototype.render = function render() {

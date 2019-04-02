@@ -5671,7 +5671,8 @@ var calendarMixinWrapper = function calendarMixinWrapper(ComposeComponent) {
             className: '' + __WEBPACK_IMPORTED_MODULE_5_classnames___default()(className),
             style: _this.props.style,
             tabIndex: '0',
-            onKeyDown: _this.onKeyDown
+            onKeyDown: _this.onKeyDown,
+            onBlur: _this.onBlur
           },
           newProps.children
         );

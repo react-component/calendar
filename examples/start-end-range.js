@@ -7026,7 +7026,8 @@ Picker.propTypes = {
   placement: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.any,
   value: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object, __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.array]),
   defaultValue: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object, __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.array]),
-  align: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object
+  align: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object,
+  onBlur: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func
 };
 Picker.defaultProps = {
   prefixCls: 'rc-calendar-picker',
@@ -7035,7 +7036,8 @@ Picker.defaultProps = {
   placement: 'bottomLeft',
   defaultOpen: false,
   onChange: noop,
-  onOpenChange: noop
+  onOpenChange: noop,
+  onBlur: noop
 };
 
 var _initialiseProps = function _initialiseProps() {
@@ -7078,6 +7080,10 @@ var _initialiseProps = function _initialiseProps() {
     _this2.close(_this2.focus);
   };
 
+  this.onCalendarBlur = function () {
+    _this2.setOpen(false);
+  };
+
   this.onVisibleChange = function (open) {
     _this2.setOpen(open);
   };
@@ -7096,7 +7102,8 @@ var _initialiseProps = function _initialiseProps() {
       onKeyDown: _this2.onCalendarKeyDown,
       onOk: Object(__WEBPACK_IMPORTED_MODULE_7_rc_util_es_createChainedFunction__["a" /* default */])(calendarProps.onOk, _this2.onCalendarOk),
       onSelect: Object(__WEBPACK_IMPORTED_MODULE_7_rc_util_es_createChainedFunction__["a" /* default */])(calendarProps.onSelect, _this2.onCalendarSelect),
-      onClear: Object(__WEBPACK_IMPORTED_MODULE_7_rc_util_es_createChainedFunction__["a" /* default */])(calendarProps.onClear, _this2.onCalendarClear)
+      onClear: Object(__WEBPACK_IMPORTED_MODULE_7_rc_util_es_createChainedFunction__["a" /* default */])(calendarProps.onClear, _this2.onCalendarClear),
+      onBlur: Object(__WEBPACK_IMPORTED_MODULE_7_rc_util_es_createChainedFunction__["a" /* default */])(calendarProps.onBlur, _this2.onCalendarBlur)
     };
 
     return __WEBPACK_IMPORTED_MODULE_3_react___default.a.cloneElement(props.calendar, extraProps);
