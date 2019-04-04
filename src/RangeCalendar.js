@@ -137,6 +137,7 @@ class RangeCalendar extends React.Component {
       value,
       showTimePicker: false,
       mode: props.mode || ['date', 'date'],
+      panelTriggerSource: '', // Trigger by which picker panel: 'start' & 'end'
     };
   }
 
@@ -399,6 +400,7 @@ class RangeCalendar extends React.Component {
     if (!('mode' in props)) {
       this.setState({
         mode: newMode,
+        panelTriggerSource: 'start',
       });
     }
     const newValue = [value || state.value[0], state.value[1]];
@@ -411,6 +413,7 @@ class RangeCalendar extends React.Component {
     if (!('mode' in props)) {
       this.setState({
         mode: newMode,
+        panelTriggerSource: 'end',
       });
     }
     const newValue = [state.value[0], value || state.value[1]];
@@ -436,29 +439,51 @@ class RangeCalendar extends React.Component {
   }
 
   getStartValue = () => {
-    let value = this.state.value[0];
-    const selectedValue = this.state.selectedValue;
+    const { selectedValue, showTimePicker, value, mode, panelTriggerSource } = this.state;
+    let startValue = value[0];
     // keep selectedTime when select date
     if (selectedValue[0] && this.props.timePicker) {
-      value = value.clone();
-      syncTime(selectedValue[0], value);
+      startValue = startValue.clone();
+      syncTime(selectedValue[0], startValue);
     }
-    if (this.state.showTimePicker && selectedValue[0]) {
-      return selectedValue[0];
+    if (showTimePicker && selectedValue[0]) {
+      startValue = selectedValue[0];
     }
-    return value;
+
+    // Adjust month if date not align
+    if (
+      panelTriggerSource === 'end' &&
+      mode[0] === 'date' &&
+      mode[1] === 'date' &&
+      startValue.isSame(value[1], 'month')
+    ) {
+      startValue = startValue.clone().subtract(1, 'month');
+    }
+
+    return startValue;
   }
 
   getEndValue = () => {
-    const { value, selectedValue, showTimePicker } = this.state;
-    const endValue = value[1] ? value[1].clone() : value[0].clone().add(1, 'month');
+    const { value, selectedValue, showTimePicker, mode, panelTriggerSource } = this.state;
+    let endValue = value[1] ? value[1].clone() : value[0].clone().add(1, 'month');
     // keep selectedTime when select date
     if (selectedValue[1] && this.props.timePicker) {
       syncTime(selectedValue[1], endValue);
     }
     if (showTimePicker) {
-      return selectedValue[1] ? selectedValue[1] : this.getStartValue();
+      endValue = selectedValue[1] ? selectedValue[1] : this.getStartValue();
     }
+
+    // Adjust month if date not align
+    if (
+      panelTriggerSource !== 'end' &&
+      mode[0] === 'date' &&
+      mode[1] === 'date' &&
+      endValue.isSame(value[0], 'month')
+    ) {
+      endValue = endValue.clone().add(1, 'month');
+    }
+
     return endValue;
   }
 
@@ -665,10 +690,6 @@ class RangeCalendar extends React.Component {
     const nextMonthOfStart = startValue.clone().add(1, 'months');
     const isClosestMonths = nextMonthOfStart.year() === endValue.year() &&
       nextMonthOfStart.month() === endValue.month();
-
-    // console.warn('Render:', selectedValue.map(t => t.format('YYYY-MM-DD')).join(', '));
-    // console.log('start:', startValue.format('YYYY-MM-DD'));
-    // console.log('end:', endValue.format('YYYY-MM-DD'));
 
     const extraFooter = props.renderFooter();
 
