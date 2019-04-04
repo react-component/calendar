@@ -397,12 +397,13 @@ class RangeCalendar extends React.Component {
   onStartPanelChange = (value, mode) => {
     const { props, state } = this;
     const newMode = [mode, state.mode[1]];
+    const newState = {
+      panelTriggerSource: 'start',
+    };
     if (!('mode' in props)) {
-      this.setState({
-        mode: newMode,
-        panelTriggerSource: 'start',
-      });
+      newState.mode = newMode;
     }
+    this.setState(newState);
     const newValue = [value || state.value[0], state.value[1]];
     props.onPanelChange(newValue, newMode);
   }
@@ -410,12 +411,13 @@ class RangeCalendar extends React.Component {
   onEndPanelChange = (value, mode) => {
     const { props, state } = this;
     const newMode = [state.mode[0], mode];
+    const newState = {
+      panelTriggerSource: 'end',
+    };
     if (!('mode' in props)) {
-      this.setState({
-        mode: newMode,
-        panelTriggerSource: 'end',
-      });
+      newState.mode = newMode;
     }
+    this.setState(newState);
     const newValue = [state.value[0], value || state.value[1]];
     props.onPanelChange(newValue, newMode);
   }
