@@ -730,4 +730,26 @@ describe('RangeCalendar', () => {
     });
     expect(onSelect.mock.calls[1][1].source).toEqual('dateInputSelect');
   });
+
+  it('date mode should not display same month', () => {
+    const FORMAT = 'YYYY-MM-DD';
+    const sameDay = moment('2000-01-01');
+    const wrapper = mount(<RangeCalendar defaultValue={[sameDay, sameDay]} />);
+
+    // Should in different month
+    expect(wrapper.find('CalendarPart').at(0).props().value.format(FORMAT)).toEqual('2000-01-01');
+    expect(wrapper.find('CalendarPart').at(1).props().value.format(FORMAT)).toEqual('2000-02-01');
+
+    // Back end to month panel
+    wrapper.find('CalendarPart').at(1).find('.rc-calendar-month-select').simulate('click');
+    wrapper.find('CalendarPart').at(1).find('.rc-calendar-month-panel-month').at(0).simulate('click');
+    expect(wrapper.find('CalendarPart').at(0).props().value.format(FORMAT)).toEqual('1999-12-01');
+    expect(wrapper.find('CalendarPart').at(1).props().value.format(FORMAT)).toEqual('2000-01-01');
+
+    // Back start to month panel
+    wrapper.find('CalendarPart').at(0).find('.rc-calendar-month-select').simulate('click');
+    wrapper.find('CalendarPart').at(0).find('.rc-calendar-month-panel-month').at(0).simulate('click');
+    expect(wrapper.find('CalendarPart').at(0).props().value.format(FORMAT)).toEqual('2000-01-01');
+    expect(wrapper.find('CalendarPart').at(1).props().value.format(FORMAT)).toEqual('2000-02-01');
+  });
 });
