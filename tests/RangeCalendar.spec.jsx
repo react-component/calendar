@@ -200,6 +200,15 @@ describe('RangeCalendar', () => {
     expect(hoverValue[1].format(format)).toBe('2017-03-18');
   });
 
+  describe('calendar header', () => {
+    it('range date has selected, calendar header match date selected', () => {
+      const rangeCalendar = <RangeCalendar selectedValue={[moment('2000-09-03', format), moment('2000-10-28', format)]} timePicker={{}}/>;
+      const wrapper = mount(rangeCalendar);
+      expect(wrapper.find('.rc-calendar-month-select').at(0).text()).toEqual('Sep');
+      expect(wrapper.find('.rc-calendar-month-select').at(1).text()).toEqual('Oct');
+    });
+  });
+
   describe('timePicker', () => {
     it('defaultOpenValue should follow RangeCalendar[selectedValue|defaultSelectedValue] when it is set', () => {
       const timePicker = <TimePickerPanel defaultValue={[moment('00:00:00', 'HH:mm:ss'), moment('23:59:59', 'HH:mm:ss')]} />;
