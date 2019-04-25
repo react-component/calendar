@@ -447,13 +447,10 @@ class RangeCalendar extends React.Component {
     if (selectedValue[0] && this.props.timePicker) {
       startValue = startValue.clone();
       syncTime(selectedValue[0], startValue);
-    }
-    if (showTimePicker && selectedValue[0]) {
+    } else if (showTimePicker && selectedValue[0]) {
       startValue = selectedValue[0];
-    }
-
-    // Adjust month if date not align
-    if (
+    } else if (
+      // Adjust month if date not align
       panelTriggerSource === 'end' &&
       mode[0] === 'date' &&
       mode[1] === 'date' &&
