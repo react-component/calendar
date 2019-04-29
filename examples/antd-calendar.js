@@ -696,7 +696,7 @@ module.exports = { "default": __webpack_require__(50), __esModule: true };
 /* harmony export (immutable) */ __webpack_exports__["a"] = getAlignFromPlacement;
 /* harmony export (immutable) */ __webpack_exports__["b"] = getAlignPopupClassName;
 /* harmony export (immutable) */ __webpack_exports__["c"] = saveRef;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
 
 function isPointsEq(a1, a2, isAlignPoint) {
@@ -1255,7 +1255,7 @@ function mapSelf(children) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty__);
@@ -2019,7 +2019,7 @@ function OkButton(_ref) {
 /* harmony export (immutable) */ __webpack_exports__["a"] = TimePickerButton;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_classnames__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_classnames__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_classnames__);
 
 
@@ -2055,7 +2055,7 @@ function TimePickerButton(_ref) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__);
@@ -2073,7 +2073,7 @@ function TimePickerButton(_ref) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_util_es_Dom_addEventListener__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rc_util_es_ContainerRender__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_rc_util_es_Portal__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_classnames__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_classnames__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_classnames__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__utils__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__Popup__ = __webpack_require__(52);
@@ -3344,7 +3344,7 @@ var DateTHead = function (_React$Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_classnames__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_classnames__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_classnames__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__DateConstants__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__util___ = __webpack_require__(11);
@@ -3815,7 +3815,7 @@ Object(__WEBPACK_IMPORTED_MODULE_5_react_lifecycles_compat__["polyfill"])(MonthP
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_classnames__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_classnames__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_classnames__);
 
 
@@ -4032,7 +4032,7 @@ YearPanel.defaultProps = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_classnames__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_classnames__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_classnames__);
 
 
@@ -4963,7 +4963,7 @@ $export($export.S + $export.F * !__webpack_require__(75), 'Object', { defineProp
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__);
@@ -6863,7 +6863,7 @@ PopupInner.propTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_classnames__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_classnames__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_classnames__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_moment__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_moment__);
@@ -6934,7 +6934,8 @@ var calendarMixinWrapper = function calendarMixinWrapper(ComposeComponent) {
             className: '' + __WEBPACK_IMPORTED_MODULE_5_classnames___default()(className),
             style: _this.props.style,
             tabIndex: '0',
-            onKeyDown: _this.onKeyDown
+            onKeyDown: _this.onKeyDown,
+            onBlur: _this.onBlur
           },
           newProps.children
         );
@@ -7030,7 +7031,7 @@ var calendarMixinWrapper = function calendarMixinWrapper(ComposeComponent) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__);
@@ -7045,7 +7046,7 @@ var calendarMixinWrapper = function calendarMixinWrapper(ComposeComponent) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prop_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_util_es_Children_mapSelf__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_classnames__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_classnames__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_classnames__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__calendar_TodayButton__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__calendar_OkButton__ = __webpack_require__(32);
@@ -7290,7 +7291,8 @@ Picker.propTypes = {
   placement: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.any,
   value: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object, __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.array]),
   defaultValue: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object, __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.array]),
-  align: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object
+  align: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object,
+  onBlur: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func
 };
 Picker.defaultProps = {
   prefixCls: 'rc-calendar-picker',
@@ -7299,7 +7301,8 @@ Picker.defaultProps = {
   placement: 'bottomLeft',
   defaultOpen: false,
   onChange: noop,
-  onOpenChange: noop
+  onOpenChange: noop,
+  onBlur: noop
 };
 
 var _initialiseProps = function _initialiseProps() {
@@ -7342,6 +7345,10 @@ var _initialiseProps = function _initialiseProps() {
     _this2.close(_this2.focus);
   };
 
+  this.onCalendarBlur = function () {
+    _this2.setOpen(false);
+  };
+
   this.onVisibleChange = function (open) {
     _this2.setOpen(open);
   };
@@ -7360,7 +7367,8 @@ var _initialiseProps = function _initialiseProps() {
       onKeyDown: _this2.onCalendarKeyDown,
       onOk: Object(__WEBPACK_IMPORTED_MODULE_7_rc_util_es_createChainedFunction__["a" /* default */])(calendarProps.onOk, _this2.onCalendarOk),
       onSelect: Object(__WEBPACK_IMPORTED_MODULE_7_rc_util_es_createChainedFunction__["a" /* default */])(calendarProps.onSelect, _this2.onCalendarSelect),
-      onClear: Object(__WEBPACK_IMPORTED_MODULE_7_rc_util_es_createChainedFunction__["a" /* default */])(calendarProps.onClear, _this2.onCalendarClear)
+      onClear: Object(__WEBPACK_IMPORTED_MODULE_7_rc_util_es_createChainedFunction__["a" /* default */])(calendarProps.onClear, _this2.onCalendarClear),
+      onBlur: Object(__WEBPACK_IMPORTED_MODULE_7_rc_util_es_createChainedFunction__["a" /* default */])(calendarProps.onBlur, _this2.onCalendarBlur)
     };
 
     return __WEBPACK_IMPORTED_MODULE_3_react___default.a.cloneElement(props.calendar, extraProps);
@@ -7463,7 +7471,7 @@ var placements = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__);
@@ -7716,7 +7724,8 @@ Calendar.propTypes = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__
   renderFooter: __WEBPACK_IMPORTED_MODULE_6_prop_types___default.a.func,
   renderSidebar: __WEBPACK_IMPORTED_MODULE_6_prop_types___default.a.func,
   clearIcon: __WEBPACK_IMPORTED_MODULE_6_prop_types___default.a.node,
-  focusablePanel: __WEBPACK_IMPORTED_MODULE_6_prop_types___default.a.bool
+  focusablePanel: __WEBPACK_IMPORTED_MODULE_6_prop_types___default.a.bool,
+  onBlur: __WEBPACK_IMPORTED_MODULE_6_prop_types___default.a.func
 });
 Calendar.defaultProps = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, __WEBPACK_IMPORTED_MODULE_12__mixin_CalendarMixin__["a" /* calendarMixinDefaultProps */], __WEBPACK_IMPORTED_MODULE_13__mixin_CommonMixin__["b" /* defaultProp */], {
   showToday: true,
@@ -7852,6 +7861,22 @@ var _initialiseProps = function _initialiseProps() {
     });
   };
 
+  this.onBlur = function (event) {
+    setTimeout(function () {
+      var dateInput = __WEBPACK_IMPORTED_MODULE_14__date_DateInput__["a" /* default */].getInstance();
+      var rootInstance = _this2.rootInstance;
+
+      if (!rootInstance || rootInstance.contains(document.activeElement) || dateInput && dateInput.contains(document.activeElement)) {
+        // focused element is still part of Calendar
+        return;
+      }
+
+      if (_this2.props.onBlur) {
+        _this2.props.onBlur(event);
+      }
+    }, 0);
+  };
+
   this.getRootDOMNode = function () {
     return __WEBPACK_IMPORTED_MODULE_5_react_dom___default.a.findDOMNode(_this2);
   };
@@ -7915,7 +7940,7 @@ Object(__WEBPACK_IMPORTED_MODULE_8_react_lifecycles_compat__["polyfill"])(Calend
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_classnames__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Header__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Combobox__ = __webpack_require__(107);
@@ -7929,11 +7954,11 @@ function _possibleConstructorReturn(self, call) { if (call && (typeof call === "
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -7984,7 +8009,7 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Panel).call(this, props));
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onChange", function (newValue) {
+    _defineProperty(_assertThisInitialized(_this), "onChange", function (newValue) {
       var onChange = _this.props.onChange;
 
       _this.setState({
@@ -7994,18 +8019,18 @@ function (_Component) {
       onChange(newValue);
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onAmPmChange", function (ampm) {
+    _defineProperty(_assertThisInitialized(_this), "onAmPmChange", function (ampm) {
       var onAmPmChange = _this.props.onAmPmChange;
       onAmPmChange(ampm);
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onCurrentSelectPanelChange", function (currentSelectPanel) {
+    _defineProperty(_assertThisInitialized(_this), "onCurrentSelectPanelChange", function (currentSelectPanel) {
       _this.setState({
         currentSelectPanel: currentSelectPanel
       });
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "disabledHours", function () {
+    _defineProperty(_assertThisInitialized(_this), "disabledHours", function () {
       var _this$props = _this.props,
           use12Hours = _this$props.use12Hours,
           disabledHours = _this$props.disabledHours;
@@ -8063,8 +8088,6 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _classNames;
-
       var _this$props2 = this.props,
           prefixCls = _this$props2.prefixCls,
           className = _this$props2.className,
@@ -8072,7 +8095,6 @@ function (_Component) {
           disabledMinutes = _this$props2.disabledMinutes,
           disabledSeconds = _this$props2.disabledSeconds,
           hideDisabledOptions = _this$props2.hideDisabledOptions,
-          allowEmpty = _this$props2.allowEmpty,
           showHour = _this$props2.showHour,
           showMinute = _this$props2.showMinute,
           showSecond = _this$props2.showSecond,
@@ -8100,7 +8122,7 @@ function (_Component) {
       var secondOptions = generateOptions(60, disabledSecondOptions, hideDisabledOptions, secondStep);
       var validDefaultOpenValue = toNearestValidTime(defaultOpenValue, hourOptions, minuteOptions, secondOptions);
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
-        className: __WEBPACK_IMPORTED_MODULE_3_classnames___default()((_classNames = {}, _defineProperty(_classNames, "".concat(prefixCls, "-inner"), true), _defineProperty(_classNames, className, !!className), _classNames))
+        className: __WEBPACK_IMPORTED_MODULE_3_classnames___default()(className, "".concat(prefixCls, "-inner"))
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Header__["a" /* default */], {
         clearText: clearText,
         prefixCls: prefixCls,
@@ -8117,7 +8139,6 @@ function (_Component) {
         disabledMinutes: disabledMinutes,
         disabledSeconds: disabledSeconds,
         onChange: this.onChange,
-        allowEmpty: allowEmpty,
         focusOnOpen: focusOnOpen,
         onKeyDown: onKeyDown,
         inputReadOnly: inputReadOnly,
@@ -8164,7 +8185,6 @@ _defineProperty(Panel, "propTypes", {
   onChange: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
   onAmPmChange: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
   onEsc: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
-  allowEmpty: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
   showHour: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
   showMinute: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
   showSecond: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
@@ -8205,6 +8225,8 @@ _defineProperty(Panel, "defaultProps", {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_classnames__);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -8215,13 +8237,14 @@ function _possibleConstructorReturn(self, call) { if (call && (typeof call === "
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -8239,7 +8262,7 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Header).call(this, props));
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onInputChange", function (event) {
+    _defineProperty(_assertThisInitialized(_this), "onInputChange", function (event) {
       var str = event.target.value;
 
       _this.setState({
@@ -8254,8 +8277,7 @@ function (_Component) {
           disabledHours = _this$props.disabledHours,
           disabledMinutes = _this$props.disabledMinutes,
           disabledSeconds = _this$props.disabledSeconds,
-          onChange = _this$props.onChange,
-          allowEmpty = _this$props.allowEmpty;
+          onChange = _this$props.onChange;
 
       if (str) {
         var originalValue = _this.props.value;
@@ -8307,14 +8329,8 @@ function (_Component) {
         } else if (originalValue !== value) {
           onChange(value);
         }
-      } else if (allowEmpty) {
-        onChange(null);
       } else {
-        _this.setState({
-          invalid: true
-        });
-
-        return;
+        onChange(null);
       }
 
       _this.setState({
@@ -8322,7 +8338,7 @@ function (_Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onKeyDown", function (e) {
+    _defineProperty(_assertThisInitialized(_this), "onKeyDown", function (e) {
       var _this$props2 = _this.props,
           onEsc = _this$props2.onEsc,
           onKeyDown = _this$props2.onKeyDown;
@@ -8392,7 +8408,7 @@ function (_Component) {
           str = _this$state.str;
       var invalidClass = invalid ? "".concat(prefixCls, "-input-invalid") : '';
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
-        className: "".concat(prefixCls, "-input  ").concat(invalidClass),
+        className: __WEBPACK_IMPORTED_MODULE_3_classnames___default()("".concat(prefixCls, "-input"), invalidClass),
         ref: function ref(_ref) {
           _this3.refInput = _ref;
         },
@@ -8432,7 +8448,6 @@ _defineProperty(Header, "propTypes", {
   disabledSeconds: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
   onChange: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
   onEsc: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
-  allowEmpty: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
   defaultOpenValue: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.object,
   currentSelectPanel: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string,
   focusOnOpen: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
@@ -8466,11 +8481,11 @@ function _possibleConstructorReturn(self, call) { if (call && (typeof call === "
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -8515,7 +8530,7 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Combobox)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onItemChange", function (type, itemValue) {
+    _defineProperty(_assertThisInitialized(_this), "onItemChange", function (type, itemValue) {
       var _this$props = _this.props,
           onChange = _this$props.onChange,
           defaultOpenValue = _this$props.defaultOpenValue,
@@ -8560,7 +8575,7 @@ function (_Component) {
       onChange(value);
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onEnterSelectPanel", function (range) {
+    _defineProperty(_assertThisInitialized(_this), "onEnterSelectPanel", function (range) {
       var onCurrentSelectPanelChange = _this.props.onCurrentSelectPanelChange;
       onCurrentSelectPanelChange(range);
     });
@@ -8761,7 +8776,7 @@ _defineProperty(Combobox, "propTypes", {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_dom__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_classnames__);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -8773,11 +8788,11 @@ function _possibleConstructorReturn(self, call) { if (call && (typeof call === "
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -8825,18 +8840,18 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Select)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
+    _defineProperty(_assertThisInitialized(_this), "state", {
       active: false
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onSelect", function (value) {
+    _defineProperty(_assertThisInitialized(_this), "onSelect", function (value) {
       var _this$props = _this.props,
           onSelect = _this$props.onSelect,
           type = _this$props.type;
       onSelect(type, value);
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleMouseEnter", function (e) {
+    _defineProperty(_assertThisInitialized(_this), "handleMouseEnter", function (e) {
       var onMouseEnter = _this.props.onMouseEnter;
 
       _this.setState({
@@ -8846,13 +8861,13 @@ function (_Component) {
       onMouseEnter(e);
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleMouseLeave", function () {
+    _defineProperty(_assertThisInitialized(_this), "handleMouseLeave", function () {
       _this.setState({
         active: false
       });
     });
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "saveList", function (node) {
+    _defineProperty(_assertThisInitialized(_this), "saveList", function (node) {
       _this.list = node;
     });
 
@@ -8884,9 +8899,9 @@ function (_Component) {
           selectedIndex = _this$props2.selectedIndex,
           prefixCls = _this$props2.prefixCls;
       return options.map(function (item, index) {
-        var _classnames;
+        var _classNames;
 
-        var cls = __WEBPACK_IMPORTED_MODULE_3_classnames___default()((_classnames = {}, _defineProperty(_classnames, "".concat(prefixCls, "-select-option-selected"), selectedIndex === index), _defineProperty(_classnames, "".concat(prefixCls, "-select-option-disabled"), item.disabled), _classnames));
+        var cls = __WEBPACK_IMPORTED_MODULE_3_classnames___default()((_classNames = {}, _defineProperty(_classNames, "".concat(prefixCls, "-select-option-selected"), selectedIndex === index), _defineProperty(_classNames, "".concat(prefixCls, "-select-option-disabled"), item.disabled), _classNames));
         var onClick = item.disabled ? undefined : function () {
           _this2.onSelect(item.value);
         };
@@ -9159,33 +9174,55 @@ var Demo = function (_React$Component) {
       });
     };
 
+    _this.onOpenChange = function (open) {
+      _this.setState({
+        open: open
+      });
+    };
+
+    _this.onReadOnlyFocus = function () {
+      _this.setState({
+        open: true
+      });
+    };
+
+    _this.getCalendarContainer = function () {
+      return _this.calendarContainerRef.current;
+    };
+
     _this.toggleDisabled = function () {
       _this.setState({
         disabled: !_this.state.disabled
       });
     };
 
+    _this.calendarContainerRef = __WEBPACK_IMPORTED_MODULE_4_react___default.a.createRef();
+
     _this.state = {
       showTime: true,
       showDateInput: true,
       disabled: false,
+      open: false,
       value: props.defaultValue
     };
     return _this;
   }
 
   Demo.prototype.render = function render() {
+    var _this2 = this;
+
     var state = this.state;
     var calendar = __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7_rc_calendar__["a" /* default */], {
       locale: cn ? __WEBPACK_IMPORTED_MODULE_9_rc_calendar_src_locale_zh_CN__["a" /* default */] : __WEBPACK_IMPORTED_MODULE_10_rc_calendar_src_locale_en_US__["a" /* default */],
-      style: { zIndex: 1000 },
+      style: { zIndex: 1001 },
       dateInputPlaceholder: 'please input',
       format: getFormat(state.showTime),
       disabledTime: state.showTime ? disabledTime : null,
       timePicker: state.showTime ? timePickerElement : null,
       defaultValue: this.props.defaultCalendarValue,
       showDateInput: state.showDateInput,
-      disabledDate: disabledDate
+      disabledDate: disabledDate,
+      focusablePanel: false
     });
     return __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
       'div',
@@ -9242,14 +9279,18 @@ var Demo = function (_React$Component) {
             animation: 'slide-up',
             calendar: calendar,
             value: state.value,
-            onChange: this.onChange
+            onChange: this.onChange,
+            getCalendarContainer: this.getCalendarContainer,
+            onOpenChange: this.onOpenChange,
+            open: state.open,
+            style: { zIndex: 1001 }
           },
           function (_ref) {
             var value = _ref.value;
 
             return __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
               'span',
-              { tabIndex: '0' },
+              { tabIndex: '0', onFocus: _this2.onReadOnlyFocus },
               __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('input', {
                 placeholder: 'please select',
                 style: { width: 250 },
@@ -9258,7 +9299,8 @@ var Demo = function (_React$Component) {
                 tabIndex: '-1',
                 className: 'ant-calendar-picker-input ant-input',
                 value: value && value.format(getFormat(state.showTime)) || ''
-              })
+              }),
+              __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('div', { ref: _this2.calendarContainerRef })
             );
           }
         )
@@ -9283,19 +9325,19 @@ var DemoMultiFormat = function (_React$Component2) {
   function DemoMultiFormat(props) {
     __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default()(this, DemoMultiFormat);
 
-    var _this2 = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn___default()(this, _React$Component2.call(this, props));
+    var _this3 = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn___default()(this, _React$Component2.call(this, props));
 
-    _this2.onChange = function (value) {
+    _this3.onChange = function (value) {
       console.log('Calendar change: ', value && value.format(format));
-      _this2.setState({
+      _this3.setState({
         value: value
       });
     };
 
-    _this2.state = {
+    _this3.state = {
       value: now
     };
-    return _this2;
+    return _this3;
   }
 
   DemoMultiFormat.prototype.render = function render() {

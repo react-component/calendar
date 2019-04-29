@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>antd-calendar.js - example - rc-calendar@9.12.4</title>
+  <title>antd-calendar.js - example - rc-calendar@9.13.2</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -263,7 +263,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
   <div class="container">
     <div class="header">
-      <h1>rc-calendar@9.12.4</h1>
+      <h1>rc-calendar@9.13.2</h1>
 
       <p>React Calendar</p>
     </div>
@@ -344,10 +344,13 @@ class Demo extends React.Component {
   constructor(props) {
     super(props);
 
+    this.calendarContainerRef = React.createRef();
+
     this.state = {
       showTime: true,
       showDateInput: true,
       disabled: false,
+      open: false,
       value: props.defaultValue,
     };
   }
@@ -371,6 +374,20 @@ class Demo extends React.Component {
     });
   }
 
+  onOpenChange = (open) =&gt; {
+    this.setState({
+      open,
+    });
+  }
+
+  onReadOnlyFocus = () =&gt; {
+    this.setState({
+      open: true,
+    });
+  }
+
+  getCalendarContainer = () =&gt; this.calendarContainerRef.current;
+
   toggleDisabled = () =&gt; {
     this.setState({
       disabled: !this.state.disabled,
@@ -381,7 +398,7 @@ class Demo extends React.Component {
     const state = this.state;
     const calendar = (&lt;Calendar
       locale={cn ? zhCN : enUS}
-      style={{ zIndex: 1000 }}
+      style={{ zIndex: 1001 }}
       dateInputPlaceholder="please input"
       format={getFormat(state.showTime)}
       disabledTime={state.showTime ? disabledTime : null}
@@ -389,6 +406,7 @@ class Demo extends React.Component {
       defaultValue={this.props.defaultCalendarValue}
       showDateInput={state.showDateInput}
       disabledDate={disabledDate}
+      focusablePanel={false}
     /&gt;);
     return (&lt;div style={{ width: 400, margin: 20 }}&gt;
       &lt;div style={{ marginBottom: 10 }}&gt;
@@ -432,11 +450,15 @@ class Demo extends React.Component {
           calendar={calendar}
           value={state.value}
           onChange={this.onChange}
+          getCalendarContainer={this.getCalendarContainer}
+          onOpenChange={this.onOpenChange}
+          open={state.open}
+          style={{ zIndex: 1001 }}
         &gt;
           {
             ({ value }) =&gt; {
               return (
-                &lt;span tabIndex="0"&gt;
+                &lt;span tabIndex="0" onFocus={this.onReadOnlyFocus}&gt;
                   &lt;input
                     placeholder="please select"
                     style={{ width: 250 }}
@@ -446,6 +468,7 @@ class Demo extends React.Component {
                     className="ant-calendar-picker-input ant-input"
                     value={value &amp;&amp; value.format(getFormat(state.showTime)) || ''}
                   /&gt;
+                  &lt;div ref={this.calendarContainerRef} /&gt;
                 &lt;/span&gt;
               );
             }
