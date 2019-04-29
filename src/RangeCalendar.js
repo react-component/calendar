@@ -478,6 +478,7 @@ class RangeCalendar extends React.Component {
 
     // Adjust month if date not align
     if (
+      !showTimePicker &&
       panelTriggerSource !== 'end' &&
       mode[0] === 'date' &&
       mode[1] === 'date' &&

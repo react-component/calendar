@@ -211,6 +211,18 @@ describe('RangeCalendar', () => {
       }
     });
 
+    it('selected start and end date can be same', () => {
+      const timePicker = <TimePickerPanel defaultValue={[moment('00:00:00', 'HH:mm:ss'), moment('23:59:59', 'HH:mm:ss')]} />;
+      const wrapper = mount(<RangeCalendar selectedValue={[moment('2000-09-03', format), moment('2000-09-03', format)]} timePicker={timePicker}/>);
+      wrapper.find('.rc-calendar-time-picker-btn').simulate('click');
+      expect(wrapper.find('.rc-calendar-year-select').at(0).text()).toBe('2000');
+      expect(wrapper.find('.rc-calendar-month-select').at(0).text()).toBe('Sep');
+      expect(wrapper.find('.rc-calendar-day-select').at(0).text()).toBe('3');
+      expect(wrapper.find('.rc-calendar-year-select').at(1).text()).toBe('2000');
+      expect(wrapper.find('.rc-calendar-month-select').at(1).text()).toBe('Sep');
+      expect(wrapper.find('.rc-calendar-day-select').at(1).text()).toBe('3');
+    });
+
     it('use timePicker\'s time', () => {
       const timePicker = <TimePickerPanel defaultValue={[moment('00:00:00', 'HH:mm:ss'), moment('23:59:59', 'HH:mm:ss')]} />;
       const wrapper = mount(<RangeCalendar timePicker={timePicker} />);
