@@ -167,8 +167,10 @@ export default class DateTBody extends React.Component {
           isActiveWeek = true;
         }
 
-        if (isSameDay(current, selectedValue)) {
+        if (isSameDay(current, selectedValue) && !Array.isArray(selectedValue)) {
           cls += ` ${selectedDateClass}`;
+        } else if (isSameDay(current, selectedValue)) {
+          cls += ` ${selectedClass}`;
         }
 
         if (isBeforeCurrentMonthYear) {
@@ -197,7 +199,9 @@ export default class DateTBody extends React.Component {
           }
         }
 
-        if (selected) {
+        if (selected && Array.isArray(selectedValue)) {
+          cls += ` ${selectedDateClass}`;
+        } else if (selected) {
           cls += ` ${selectedClass}`;
         }
 
