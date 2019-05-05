@@ -96,6 +96,10 @@ describe('MonthCalendar', () => {
       });
       expect(wrapper.state().value.month()).toBe(4);
       expect(wrapper.state().value.year()).toBe(2018);
+      const selectedValues = wrapper.find('.rc-calendar-month-panel-year-select-content');
+      for (let i = 0; i < selectedValues.length; i += 1) {
+        expect(selectedValues.at(i).text()).toBe('2018');
+      }
     });
 
     it('ignore other keys', () => {
@@ -104,6 +108,10 @@ describe('MonthCalendar', () => {
       });
       expect(wrapper.state().value.month()).toBe(4);
       expect(wrapper.state().value.year()).toBe(2017);
+      const selectedValues = wrapper.find('.rc-calendar-month-panel-year-select-content');
+      for (let i = 0; i < selectedValues.length; i += 1) {
+        expect(selectedValues.at(i).text()).toBe('2017');
+      }
     });
   });
 
