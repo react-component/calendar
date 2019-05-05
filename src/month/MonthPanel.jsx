@@ -44,9 +44,9 @@ class MonthPanel extends React.Component {
   static getDerivedStateFromProps(nextProps) {
     let newState = {};
 
-    if ('value' in nextProps) {
+    if ('defaultValue' in nextProps) {
       newState = {
-        value: nextProps.value,
+        value: nextProps.defaultValue,
       };
     }
 
