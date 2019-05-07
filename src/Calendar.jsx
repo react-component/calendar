@@ -327,6 +327,7 @@ class Calendar extends React.Component {
           renderFooter={renderFooter}
           showTimePicker={showTimePicker}
           prefixCls={prefixCls}
+          disabledDate={disabledDate}
         />
         {timePicker && showTimePicker ?
           (<div className={`${prefixCls}-time-picker`}>
