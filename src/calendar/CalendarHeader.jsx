@@ -161,7 +161,7 @@ export default class CalendarHeader extends React.Component {
       panel = (
         <MonthPanel
           locale={locale}
-          defaultValue={value}
+          value={value}
           rootPrefixCls={prefixCls}
           onSelect={this.onMonthSelect}
           onYearPanelShow={() => this.showYearPanel('month')}

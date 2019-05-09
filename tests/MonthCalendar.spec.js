@@ -88,9 +88,7 @@ describe('MonthCalendar', () => {
       expect(wrapper.state().value.month()).toBe(4);
       expect(wrapper.state().value.year()).toBe(2016);
       const selectedYear = wrapper.find('.rc-calendar-month-panel-year-select-content');
-      for (let i = 0; i < selectedYear.length; i += 1) {
-        expect(selectedYear.at(i).text()).toBe('2016');
-      }
+      expect(selectedYear.at(0).text()).toBe('2016');
     });
 
     it('CTRL + RIGHT', () => {
@@ -101,9 +99,7 @@ describe('MonthCalendar', () => {
       expect(wrapper.state().value.month()).toBe(4);
       expect(wrapper.state().value.year()).toBe(2018);
       const selectedYear = wrapper.find('.rc-calendar-month-panel-year-select-content');
-      for (let i = 0; i < selectedYear.length; i += 1) {
-        expect(selectedYear.at(i).text()).toBe('2018');
-      }
+      expect(selectedYear.at(0).text()).toBe('2018');
     });
 
     it('ignore other keys', () => {
@@ -113,9 +109,7 @@ describe('MonthCalendar', () => {
       expect(wrapper.state().value.month()).toBe(4);
       expect(wrapper.state().value.year()).toBe(2017);
       const selectedYear = wrapper.find('.rc-calendar-month-panel-year-select-content');
-      for (let i = 0; i < selectedYear.length; i += 1) {
-        expect(selectedYear.at(i).text()).toBe('2017');
-      }
+      expect(selectedYear.at(0).text()).toBe('2017');
     });
   });
 
