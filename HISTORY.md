@@ -1,6 +1,26 @@
 # History
 ----
 
+## 9.13.0 / 2019-04-02
+
+- Support close onBlur
+
+## 9.12.0 / 2019-03-16
+
+- RangerPicker support null as start or end
+
+## 9.11.0 / 2019-03-14
+
+- RangerPicker can select same month
+
+## 9.10.0 / 2019-01-02
+
+- add `focusablePanel` prop.
+
+## 9.9.0 / 2018-12-23
+
+- `renderFooter(mode)` support all modes.
+
 ## 9.8.0 / 2018-11-30
 
 - DateInput support multiple date format

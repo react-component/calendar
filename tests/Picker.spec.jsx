@@ -29,11 +29,11 @@ describe('DatePicker', () => {
       onChange={noop}
       readOnly
       value={value && `${value[0] &&
-      value[0].format(format)} - ${value[1] && value[1].format(format)}`}
+        value[0].format(format)} - ${value[1] && value[1].format(format)}`}
     />);
   }
 
-  function renderPicker(props) {
+  function renderPicker(props, calendarProps, options) {
     return mount(
       <DatePicker
         calendar={
@@ -41,13 +41,15 @@ describe('DatePicker', () => {
             locale={CalendarLocale}
             showOk
             showClear
+            {...calendarProps}
           />
         }
         defaultValue={VALUE}
         {...props}
       >
         {renderOne}
-      </DatePicker>
+      </DatePicker>,
+        options
     );
   }
 
@@ -163,12 +165,19 @@ describe('DatePicker', () => {
     expect(picker.state().open).toBe(false);
   });
 
-  it('open by DOWN key', () => {
-    const picker = renderPicker();
-    picker.find('.rc-calendar-picker-input').simulate('keyDown', {
-      keyCode: keyCode.DOWN,
+  describe('open by key', () => {
+    [
+      { name: 'Down', key: keyCode.DOWN },
+      { name: 'Enter', key: keyCode.ENTER },
+    ].forEach(({ name, key }) => {
+      it(`open by ${name} key`, () => {
+        const picker = renderPicker();
+        picker.find('.rc-calendar-picker-input').simulate('keyDown', {
+          keyCode: key,
+        });
+        expect(picker.state().open).toBe(true);
+      });
     });
-    expect(picker.state().open).toBe(true);
   });
 
   it('close on ok', () => {
@@ -183,5 +192,114 @@ describe('DatePicker', () => {
     picker.find('.rc-calendar-picker-input').simulate('click');
     picker.find('.rc-calendar-clear-btn').simulate('click');
     expect(picker.state().open).toBe(false);
+  });
+
+  describe('DateInput', () => {
+    it('close on enter', () => {
+      const picker = renderPicker({ value: moment() });
+      picker.find('.rc-calendar-picker-input').simulate('click');
+      picker.find('.rc-calendar-input').simulate('keyDown', {
+        keyCode: keyCode.ENTER,
+      });
+      expect(picker.state().open).toBe(false);
+    });
+
+    it('not close on enter if disabled date', () => {
+      const picker = renderPicker({ value: moment() }, { disabledDate: () => true });
+      picker.find('.rc-calendar-picker-input').simulate('click');
+      picker.find('.rc-calendar-input').simulate('keyDown', {
+        keyCode: keyCode.ENTER,
+      });
+      expect(picker.state().open).toBe(true);
+    });
+  });
+
+  describe('on picker blur', () => {
+    let container;
+
+    beforeEach(() => {
+      jest.useFakeTimers();
+      container = document.createElement('div');
+      container.setAttribute('tabindex', 0);
+      document.body.appendChild(container);
+    });
+
+    afterEach(() => {
+      jest.useRealTimers();
+    });
+
+    it('close panel when focus is outside of picker', () => {
+      const picker = renderPicker({ value: moment() }, undefined, {
+        attachTo: container,
+      });
+      picker.find('.rc-calendar-picker-input').simulate('click');
+
+      jest.runAllTimers();
+      container.focus();
+      jest.runAllTimers();
+      expect(picker.state().open).toBe(false);
+    });
+
+    it('call onBlur when focus is outside of picker', () => {
+      const handleOnBlur = jest.fn();
+      const picker = renderPicker({ value: moment() }, { onBlur: handleOnBlur }, {
+        attachTo: container,
+      });
+
+      picker.find('.rc-calendar-picker-input').simulate('click');
+      jest.runAllTimers();
+      container.focus();
+      jest.runAllTimers();
+      expect(handleOnBlur).toBeCalled();
+    });
+
+    it('keep panel opened when clicking on calendar next month', () => {
+      const picker = renderPicker({ value: moment() }, undefined, {
+        attachTo: container,
+      });
+
+      picker.find('.rc-calendar-picker-input').simulate('click');
+
+      jest.runAllTimers();
+      const day = picker.find('.rc-calendar-next-month-btn');
+      day.simulate('click');
+      jest.runAllTimers();
+
+      expect(picker.state().open).toBe(true);
+    });
+
+    it('does not call onBlur when clicking on calendar next month', () => {
+      const handleOnBlur = jest.fn();
+      const picker = renderPicker({ value: moment() }, { onBlur: handleOnBlur }, {
+        attachTo: container,
+      });
+
+      picker.find('.rc-calendar-picker-input').simulate('click');
+      jest.runAllTimers();
+
+      const day = picker.find('.rc-calendar-next-month-btn');
+      day.simulate('click');
+      jest.runAllTimers();
+
+      expect(handleOnBlur).not.toBeCalled();
+    });
+  });
+
+  it('auto focuses the calendar input when opening', () => {
+    jest.useFakeTimers();
+    const picker = renderPicker({ value: moment() });
+    picker.find('.rc-calendar-picker-input').simulate('click');
+    jest.runAllTimers();
+    expect(document.activeElement).toBeDefined();
+    expect(document.activeElement.classList).toContain('rc-calendar-input');
+  });
+
+  it('auto focuses the calendar div when date input is not shown', () => {
+    jest.useFakeTimers();
+    const picker = renderPicker({ value: moment() }, { showDateInput: false });
+    picker.find('.rc-calendar-picker-input').simulate('click');
+    jest.runAllTimers();
+    expect(document.activeElement).toBeDefined();
+    expect(document.activeElement.classList).toContain('rc-calendar');
   });
 });

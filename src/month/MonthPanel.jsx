@@ -1,77 +1,78 @@
 import React from 'react';
-import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
+import { polyfill } from 'react-lifecycles-compat';
 import MonthTable from './MonthTable';
 
 function goYear(direction) {
-  const next = this.state.value.clone();
-  next.add(direction, 'year');
-  this.setAndChangeValue(next);
+  this.props.changeYear(direction);
 }
 
 function noop() {
 
 }
 
-const MonthPanel = createReactClass({
-  propTypes: {
+class MonthPanel extends React.Component {
+  static propTypes = {
     onChange: PropTypes.func,
     disabledDate: PropTypes.func,
     onSelect: PropTypes.func,
-  },
+    renderFooter: PropTypes.func,
+    rootPrefixCls: PropTypes.string,
+    value: PropTypes.object,
+    defaultValue: PropTypes.object,
+  }
 
-  getDefaultProps() {
-    return {
-      onChange: noop,
-      onSelect: noop,
-    };
-  },
+  static defaultProps = {
+    onChange: noop,
+    onSelect: noop,
+  }
 
-  getInitialState() {
-    const props = this.props;
-    // bind methods
+  constructor(props) {
+    super(props);
+
     this.nextYear = goYear.bind(this, 1);
     this.previousYear = goYear.bind(this, -1);
     this.prefixCls = `${props.rootPrefixCls}-month-panel`;
-    return {
+
+    this.state = {
       value: props.value || props.defaultValue,
     };
-  },
+  }
 
-  componentWillReceiveProps(nextProps) {
-    if ('value' in nextProps) {
-      this.setState({
-        value: nextProps.value,
-      });
+  static getDerivedStateFromProps(props) {
+    let newState = {};
+
+    if ('value' in props) {
+      newState = {
+        value: props.value,
+      };
     }
-  },
 
-  setAndChangeValue(value) {
-    this.setValue(value);
-    this.props.onChange(value);
-  },
+    return newState;
+  }
 
-  setAndSelectValue(value) {
+
+  setAndSelectValue = (value) => {
     this.setValue(value);
     this.props.onSelect(value);
-  },
+  }
 
-  setValue(value) {
-    if (!('value' in this.props)) {
+  setValue = (value) => {
+    if ('value' in this.props) {
       this.setState({
         value,
       });
     }
-  },
+  }
 
   render() {
     const props = this.props;
     const value = this.state.value;
-    const cellRender = props.cellRender;
-    const contentRender = props.contentRender;
-    const { locale } = props;
+    const { locale, cellRender, contentRender, renderFooter } = props;
     const year = value.year();
     const prefixCls = this.prefixCls;
+
+    const footer = renderFooter && renderFooter('month');
 
     return (
       <div className={prefixCls} style={props.style}>
@@ -112,9 +113,15 @@ const MonthPanel = createReactClass({
               prefixCls={prefixCls}
             />
           </div>
+          {footer && (
+            <div className={`${prefixCls}-footer`}>
+              {footer}
+            </div>)}
         </div>
       </div>);
-  },
-});
+  }
+}
+
+polyfill(MonthPanel);
 
 export default MonthPanel;

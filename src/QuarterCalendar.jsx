@@ -1,24 +1,42 @@
 import React from 'react';
-import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import KeyCode from 'rc-util/lib/KeyCode';
 import CalendarHeader from './calendar/CalendarHeader';
 import CalendarFooter from './calendar/CalendarFooter';
-import CalendarMixin from './mixin/CalendarMixin';
-import CommonMixin from './mixin/CommonMixin';
+import {
+  calendarMixinWrapper,
+  calendarMixinPropTypes,
+  calendarMixinDefaultProps,
+} from './mixin/CalendarMixin';
+import { commonMixinWrapper, propType, defaultProp } from './mixin/CommonMixin';
+import moment from 'moment';
 
-const QuarterCalendar = createReactClass({
-  propTypes: {
+class QuarterCalendar extends React.Component {
+  static propTypes = {
+    ...calendarMixinPropTypes,
+    ...propType,
     quarterCellRender: PropTypes.func,
     dateCellRender: PropTypes.func,
-  },
-  mixins: [CommonMixin, CalendarMixin],
+    value: PropTypes.object,
+    defaultValue: PropTypes.object,
+    selectedValue: PropTypes.object,
+    defaultSelectedValue: PropTypes.object,
+    disabledDate: PropTypes.func,
+  }
 
-  getInitialState() {
-    return { mode: 'quarter' };
-  },
+  static defaultProps = Object.assign({}, defaultProp, calendarMixinDefaultProps);
 
-  onKeyDown(event) {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      mode: 'quarter',
+      value: props.value || props.defaultValue || moment(),
+      selectedValue: props.selectedValue || props.defaultSelectedValue,
+    };
+  }
+
+  onKeyDown = (event) => {
     const keyCode = event.keyCode;
     const ctrlKey = event.ctrlKey || event.metaKey;
     const stateValue = this.state.value;
@@ -27,18 +45,18 @@ const QuarterCalendar = createReactClass({
     switch (keyCode) {
       case KeyCode.DOWN:
         value = stateValue.clone();
-        value.add(3, 'months');
+        value.add(0, 'quarters');
         break;
       case KeyCode.UP:
         value = stateValue.clone();
-        value.add(-3, 'months');
+        value.add(0, 'quarters');
         break;
       case KeyCode.LEFT:
         value = stateValue.clone();
         if (ctrlKey) {
           value.add(-1, 'years');
         } else {
-          value.add(-1, 'months');
+          value.add(-1, 'quarters');
         }
         break;
       case KeyCode.RIGHT:
@@ -46,7 +64,7 @@ const QuarterCalendar = createReactClass({
         if (ctrlKey) {
           value.add(1, 'years');
         } else {
-          value.add(1, 'months');
+          value.add(1, 'quarters');
         }
         break;
       case KeyCode.ENTER:
@@ -63,13 +81,13 @@ const QuarterCalendar = createReactClass({
       event.preventDefault();
       return 1;
     }
-  },
+  }
 
-  handlePanelChange(_, mode) {
+  handlePanelChange = (_, mode) => {
     if (mode !== 'date') {
       this.setState({ mode });
     }
-  },
+  }
 
   render() {
     const { props, state } = this;
@@ -82,7 +100,7 @@ const QuarterCalendar = createReactClass({
             mode={mode}
             value={value}
             locale={props.locale}
-            disabledMonth={props.disabledDate}
+            disabledQuarter={props.disabledDate}
             quarterCellRender={props.quarterCellRender}
             quarterCellContentRender={props.quarterCellContentRender}
             onQuarterSelect={this.onSelect}
@@ -100,7 +118,7 @@ const QuarterCalendar = createReactClass({
       className: `${props.prefixCls}-quarter-calendar`,
       children,
     });
-  },
-});
+  }
+}
 
-export default QuarterCalendar;
+export default calendarMixinWrapper(commonMixinWrapper(QuarterCalendar));
