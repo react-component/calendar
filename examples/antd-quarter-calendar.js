@@ -64,7 +64,6 @@ class Demo extends React.Component {
 
   render() {
     const state = this.state;
-    console.log(cn);
     const calendar = (<QuarterCalendar
       locale={cn ? zhCN : enUS}
       style={{ zIndex: 1000 }}
@@ -106,7 +105,6 @@ class Demo extends React.Component {
               />);
             }
           }
-
         </DatePicker>
       </div>
     </div>);

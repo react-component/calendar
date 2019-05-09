@@ -11,9 +11,8 @@ function goYear(direction) {
 function noop() {}
 
 class QuarterPanel extends Component {
-  constructor() {
-    super();
-    const props = this.props;
+  constructor(props) {
+    super(props);
     this.nextYear = goYear.bind(this, 1);
     this.previousYear = goYear.bind(this, -1);
     this.prefixCls = `${props.rootPrefixCls}-quarter-panel`;
