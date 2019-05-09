@@ -27,6 +27,7 @@ export default class CalendarHeader extends React.Component {
     prefixCls: PropTypes.string,
     value: PropTypes.object,
     onValueChange: PropTypes.func,
+    showYear: PropTypes.func,
     showTimePicker: PropTypes.bool,
     onPanelChange: PropTypes.func,
     locale: PropTypes.object,
@@ -79,6 +80,9 @@ export default class CalendarHeader extends React.Component {
     this.setState({ yearPanelReferer: null });
     this.props.onPanelChange(value, referer);
     this.props.onValueChange(value);
+    if (this.props.showYear) {
+      this.props.showYear(false);
+    }
   }
 
   onDecadeSelect = (value) => {
@@ -147,6 +151,9 @@ export default class CalendarHeader extends React.Component {
   showYearPanel = (referer) => {
     this.setState({ yearPanelReferer: referer });
     this.props.onPanelChange(null, 'year');
+    if (this.props.showYear) {
+      this.props.showYear(true);
+    }
   }
 
   showDecadePanel = () => {
@@ -196,6 +203,7 @@ export default class CalendarHeader extends React.Component {
           disabledDate={disabledQuarter}
           cellRender={props.quarterCellRender}
           contentRender={props.quarterCellContentRender}
+          changeYear={this.changeYear}
         />
       );
     }

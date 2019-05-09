@@ -12,7 +12,7 @@ const defaultDisabledTime = {
   },
 };
 
-const quarterTitle = [['1季度', '2季度', '3季度', '四季度'], ['Q1', 'Q2', 'Q3', 'Q4']];
+const quarterTitle = [['1季度', '2季度', '3季度', '4季度'], ['Q1', 'Q2', 'Q3', 'Q4']];
 
 export function getTodayTime(value) {
   const today = moment();
