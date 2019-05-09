@@ -17,6 +17,7 @@ export interface Props {
   selectedValue?: Moment;
   mode?: Mode;
   locale?: object;
+  format?: string;
   showDateInput?: boolean;
   showWeekNumber?: boolean;
   showToday?: boolean;
@@ -27,10 +28,10 @@ export interface Props {
   timePicker?: React.ReactNode;
   dateInputPlaceholder?: string;
   onClear?: () => void;
-  onChange?: (date: Moment) => void;
-  onPanelChange?: (date: Moment, mode: Mode) => void;
-  disabledDate?: (current: Moment) => boolean;
-  disabledTime?: (current: Moment) => object;
+  onChange?: (date: Moment | null) => void;
+  onPanelChange?: (date: Moment | null, mode: Mode) => void;
+  disabledDate?: (current: Moment | undefined) => boolean;
+  disabledTime?: (current: Moment | undefined) => object;
   dateRender?: (current: Moment, value: Moment) => React.ReactNode;
   renderFooter?: () => React.ReactNode;
   renderSidebar?: () => React.ReactNode;

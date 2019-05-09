@@ -55,21 +55,21 @@ describe('QuarterCalendar', () => {
       wrapper.simulate('keydown', {
         keyCode: keyCode.DOWN,
       });
-      expect(wrapper.state().value.quarter()).toBe(3);
+      expect(wrapper.state().value.quarter()).toBe(2);
     });
 
     it('UP', () => {
       wrapper.simulate('keydown', {
         keyCode: keyCode.UP,
       });
-      expect(wrapper.state().value.quarter()).toBe(1);
+      expect(wrapper.state().value.quarter()).toBe(2);
     });
 
     it('LEFT', () => {
       wrapper.simulate('keydown', {
         keyCode: keyCode.LEFT,
       });
-      expect(wrapper.state().value.quarter()).toBe(2);
+      expect(wrapper.state().value.quarter()).toBe(1);
     });
 
     it('RIGHT', () => {

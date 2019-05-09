@@ -87,6 +87,8 @@ describe('MonthCalendar', () => {
       });
       expect(wrapper.state().value.month()).toBe(4);
       expect(wrapper.state().value.year()).toBe(2016);
+      const selectedYear = wrapper.find('.rc-calendar-month-panel-year-select-content');
+      expect(selectedYear.at(0).text()).toBe('2016');
     });
 
     it('CTRL + RIGHT', () => {
@@ -96,6 +98,8 @@ describe('MonthCalendar', () => {
       });
       expect(wrapper.state().value.month()).toBe(4);
       expect(wrapper.state().value.year()).toBe(2018);
+      const selectedYear = wrapper.find('.rc-calendar-month-panel-year-select-content');
+      expect(selectedYear.at(0).text()).toBe('2018');
     });
 
     it('ignore other keys', () => {
@@ -104,6 +108,16 @@ describe('MonthCalendar', () => {
       });
       expect(wrapper.state().value.month()).toBe(4);
       expect(wrapper.state().value.year()).toBe(2017);
+      const selectedYear = wrapper.find('.rc-calendar-month-panel-year-select-content');
+      expect(selectedYear.at(0).text()).toBe('2017');
     });
+  });
+
+  it('controlled value should work', () => {
+    const wrapper = mount(<MonthCalendar value={moment('2000-01-01 00:00:00')} />);
+    expect(wrapper.state().value.format('YYYY-MM-DD')).toBe('2000-01-01');
+
+    wrapper.setProps({ value: moment('2049-09-03 00:00:00') });
+    expect(wrapper.state().value.format('YYYY-MM-DD')).toBe('2049-09-03');
   });
 });

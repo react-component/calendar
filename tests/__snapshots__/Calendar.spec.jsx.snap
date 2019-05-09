@@ -30,6 +30,7 @@ exports[`Calendar controlled panels render controlled panels correctly 1`] = `
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -996,6 +997,7 @@ exports[`Calendar controlled panels render controlled panels correctly 2`] = `
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -1962,6 +1964,7 @@ exports[`Calendar render render correctly 1`] = `
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -2730,6 +2733,7 @@ exports[`Calendar render render correctly 2`] = `
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -3498,6 +3502,7 @@ exports[`Calendar render render correctly 3`] = `
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
