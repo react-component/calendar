@@ -1757,7 +1757,7 @@ var CalendarHeader = function (_React$Component) {
     if (mode === 'month') {
       panel = __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__month_MonthPanel__["a" /* default */], {
         locale: locale,
-        defaultValue: value,
+        value: value,
         rootPrefixCls: prefixCls,
         onSelect: this.onMonthSelect,
         onYearPanelShow: function onYearPanelShow() {
@@ -1766,7 +1766,8 @@ var CalendarHeader = function (_React$Component) {
         disabledDate: disabledMonth,
         cellRender: props.monthCellRender,
         contentRender: props.monthCellContentRender,
-        renderFooter: renderFooter
+        renderFooter: renderFooter,
+        changeYear: this.changeYear
       });
     }
     if (mode === 'year') {
@@ -1868,6 +1869,14 @@ var _initialiseProps = function _initialiseProps() {
   this.onDecadeSelect = function (value) {
     _this3.props.onPanelChange(value, 'year');
     _this3.props.onValueChange(value);
+  };
+
+  this.changeYear = function (direction) {
+    if (direction > 0) {
+      _this3.nextYear();
+    } else {
+      _this3.previousYear();
+    }
   };
 
   this.monthYearElement = function (showTimePicker) {
@@ -3647,9 +3656,7 @@ DateTBody.defaultProps = {
 
 
 function goYear(direction) {
-  var next = this.state.value.clone();
-  next.add(direction, 'year');
-  this.setAndChangeValue(next);
+  this.props.changeYear(direction);
 }
 
 function noop() {}
@@ -3662,18 +3669,13 @@ var MonthPanel = function (_React$Component) {
 
     var _this = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn___default()(this, _React$Component.call(this, props));
 
-    _this.setAndChangeValue = function (value) {
-      _this.setValue(value);
-      _this.props.onChange(value);
-    };
-
     _this.setAndSelectValue = function (value) {
       _this.setValue(value);
       _this.props.onSelect(value);
     };
 
     _this.setValue = function (value) {
-      if (!('value' in _this.props)) {
+      if ('value' in _this.props) {
         _this.setState({
           value: value
         });
@@ -3690,12 +3692,12 @@ var MonthPanel = function (_React$Component) {
     return _this;
   }
 
-  MonthPanel.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps) {
+  MonthPanel.getDerivedStateFromProps = function getDerivedStateFromProps(props) {
     var newState = {};
 
-    if ('value' in nextProps) {
+    if ('value' in props) {
       newState = {
-        value: nextProps.value
+        value: props.value
       };
     }
 
