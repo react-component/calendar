@@ -30,6 +30,7 @@ class QuarterCalendar extends React.Component {
     super(props);
 
     this.state = {
+      isShowYear: false,
       mode: 'quarter',
       value: props.value || props.defaultValue || moment(),
       selectedValue: props.selectedValue || props.defaultSelectedValue,
@@ -91,14 +92,15 @@ class QuarterCalendar extends React.Component {
 
   render() {
     const { props, state } = this;
-    const { mode, value } = state;
+    const { mode, value, isShowYear } = state;
     const children = (
       <div className={`${props.prefixCls}-quarter-calendar-content`}>
-        <div className={`${props.prefixCls}-quarter-header-wrap`}>
+        <div className={`${props.prefixCls}-quarter${isShowYear ? '-year' : ''}-header-wrap`}>
           <CalendarHeader
             prefixCls={props.prefixCls}
             mode={mode}
             value={value}
+            showYear={(bol) => this.setState({ isShowYear: bol })}
             locale={props.locale}
             disabledQuarter={props.disabledDate}
             quarterCellRender={props.quarterCellRender}
