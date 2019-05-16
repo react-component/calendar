@@ -426,6 +426,9 @@ describe('RangeCalendar', () => {
       RangeYearPicker.find('.rc-calendar-year-panel-decade-select').at(1).simulate('click');
       expect(RangeYearPicker.find('.rc-calendar-decade-panel').length).toBe(0);
       expect(RangeYearPicker.find('.rc-calendar-year-panel').length).toBe(2);
+
+      const RangeTimePicker = mount(<RangeCalendar mode={['time', 'time']} />);
+      expect(RangeTimePicker.find('.rc-calendar-time-picker').length).toBe(2);
     });
 
     it('should work when start time is null in defaultValue', () => {

@@ -87,7 +87,7 @@ class RangeCalendar extends React.Component {
     defaultValue: PropTypes.any,
     value: PropTypes.any,
     hoverValue: PropTypes.any,
-    mode: PropTypes.arrayOf(PropTypes.oneOf(['date', 'month', 'year', 'decade'])),
+    mode: PropTypes.arrayOf(PropTypes.oneOf(['time', 'date', 'month', 'year', 'decade'])),
     showDateInput: PropTypes.bool,
     timePicker: PropTypes.any,
     showOk: PropTypes.bool,
@@ -736,7 +736,7 @@ class RangeCalendar extends React.Component {
               onPanelChange={this.onStartPanelChange}
               showDateInput={this.props.showDateInput}
               timePicker={timePicker}
-              showTimePicker={showTimePicker}
+              showTimePicker={showTimePicker || mode[0] === 'time'}
               enablePrev
               enableNext={!isClosestMonths || this.isMonthYearPanelShow(mode[1])}
               clearIcon={clearIcon}
@@ -758,7 +758,7 @@ class RangeCalendar extends React.Component {
               onPanelChange={this.onEndPanelChange}
               showDateInput={this.props.showDateInput}
               timePicker={timePicker}
-              showTimePicker={showTimePicker}
+              showTimePicker={showTimePicker || mode[1] === 'time'}
               disabledTime={this.disabledEndTime}
               disabledMonth={this.disabledEndMonth}
               enablePrev={!isClosestMonths || this.isMonthYearPanelShow(mode[0])}
