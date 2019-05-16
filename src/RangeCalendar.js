@@ -135,7 +135,7 @@ class RangeCalendar extends React.Component {
       firstSelectedValue: null,
       hoverValue: props.hoverValue || [],
       value,
-      showTimePicker: props.mode && props.mode.toString() === 'time,time' || false,
+      showTimePicker: false,
       mode: props.mode || ['date', 'date'],
       panelTriggerSource: '', // Trigger by which picker panel: 'start' & 'end'
     };
