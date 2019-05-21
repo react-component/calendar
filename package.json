@@ -79,7 +79,7 @@
     "rc-dialog": "^7.0.0",
     "rc-select": "^7.1.0",
     "rc-time-picker": "^3.1.0",
-    "rc-tools": "^7.0.3",
+    "rc-tools": "^9.6.1",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-test-renderer": "^16.0.0",
