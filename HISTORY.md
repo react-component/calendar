@@ -1,6 +1,10 @@
 # History
 ----
 
+## 9.13.5 / 2019-05-23
+
+- Add Latvian
+
 ## 9.13.0 / 2019-04-02
 
 - Support close onBlur
