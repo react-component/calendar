@@ -5020,6 +5020,7 @@ function syncTime(from, to) {
   to.hour(from.hour());
   to.minute(from.minute());
   to.second(from.second());
+  to.millisecond(from.millisecond());
 }
 
 function getTimeConfig(value, disabledTime) {
