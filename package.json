@@ -67,7 +67,7 @@
   },
   "devDependencies": {
     "@types/react": "^16.3.13",
-    "async": "~2.5.0",
+    "async": "~3.0.1",
     "bootstrap": "~3.3.2",
     "dtslint": "^0.6.1",
     "enzyme": "^3.3.0",
