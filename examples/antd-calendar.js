@@ -109,9 +109,23 @@ class Demo extends React.Component {
     });
   }
 
-  onReadOnlyFocus = () => {
+  onFocus = () => {
+    if (!this.state.open && this.state.isMouseDown) {
+      // focus from a "click" event, let the picker trigger automatically open the calendar
+      this.setState({
+        isMouseDown: false,
+      });
+    } else {
+      // focus not caused by "click" (such as programmatic or via keyboard)
+      this.setState({
+        open: true,
+      });
+    }
+  }
+
+  onMouseDown = () => {
     this.setState({
-      open: true,
+      isMouseDown: true,
     });
   }
 
@@ -187,7 +201,7 @@ class Demo extends React.Component {
           {
             ({ value }) => {
               return (
-                <span tabIndex="0" onFocus={this.onReadOnlyFocus}>
+                <span tabIndex="0" onMouseDown={this.onMouseDown} onFocus={this.onFocus}>
                   <input
                     placeholder="please select"
                     style={{ width: 250 }}
