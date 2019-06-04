@@ -54,6 +54,7 @@ class Calendar extends React.Component {
     clearIcon: PropTypes.node,
     focusablePanel: PropTypes.bool,
     inputMode: PropTypes.string,
+    onBlur: PropTypes.func,
   }
 
   static defaultProps = {
@@ -66,7 +67,6 @@ class Calendar extends React.Component {
     onPanelChange: noop,
     focusablePanel: true,
   }
-
 
   constructor(props) {
     super(props);
@@ -202,6 +202,23 @@ class Calendar extends React.Component {
     this.onSelect(now, {
       source: 'todayButton',
     });
+  }
+
+  onBlur = (event) => {
+    setTimeout(() => {
+      const dateInput = DateInput.getInstance();
+      const rootInstance = this.rootInstance;
+
+      if (!rootInstance || rootInstance.contains(document.activeElement) ||
+      (dateInput && dateInput.contains(document.activeElement))) {
+        // focused element is still part of Calendar
+        return;
+      }
+
+      if (this.props.onBlur) {
+        this.props.onBlur(event);
+      }
+    }, 0);
   }
 
   static getDerivedStateFromProps(nextProps, state) {

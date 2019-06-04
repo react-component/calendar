@@ -1,6 +1,14 @@
 # History
 ----
 
+## 9.14.0 / 2019-05-24
+
+- Support Latvian locales
+
+## 9.13.0 / 2019-04-02
+
+- Support close onBlur
+
 ## 9.12.0 / 2019-03-16
 
 - RangerPicker support null as start or end

@@ -73,10 +73,13 @@ class Demo extends React.Component {
   constructor(props) {
     super(props);
 
+    this.calendarContainerRef = React.createRef();
+
     this.state = {
       showTime: true,
       showDateInput: true,
       disabled: false,
+      open: false,
       value: props.defaultValue,
     };
   }
@@ -100,6 +103,20 @@ class Demo extends React.Component {
     });
   }
 
+  onOpenChange = (open) => {
+    this.setState({
+      open,
+    });
+  }
+
+  onReadOnlyFocus = () => {
+    this.setState({
+      open: true,
+    });
+  }
+
+  getCalendarContainer = () => this.calendarContainerRef.current;
+
   toggleDisabled = () => {
     this.setState({
       disabled: !this.state.disabled,
@@ -110,7 +127,7 @@ class Demo extends React.Component {
     const state = this.state;
     const calendar = (<Calendar
       locale={cn ? zhCN : enUS}
-      style={{ zIndex: 1000 }}
+      style={{ zIndex: 1001 }}
       dateInputPlaceholder="please input"
       format={getFormat(state.showTime)}
       disabledTime={state.showTime ? disabledTime : null}
@@ -118,6 +135,7 @@ class Demo extends React.Component {
       defaultValue={this.props.defaultCalendarValue}
       showDateInput={state.showDateInput}
       disabledDate={disabledDate}
+      focusablePanel={false}
     />);
     return (<div style={{ width: 400, margin: 20 }}>
       <div style={{ marginBottom: 10 }}>
@@ -161,11 +179,15 @@ class Demo extends React.Component {
           calendar={calendar}
           value={state.value}
           onChange={this.onChange}
+          getCalendarContainer={this.getCalendarContainer}
+          onOpenChange={this.onOpenChange}
+          open={state.open}
+          style={{ zIndex: 1001 }}
         >
           {
             ({ value }) => {
               return (
-                <span tabIndex="0">
+                <span tabIndex="0" onFocus={this.onReadOnlyFocus}>
                   <input
                     placeholder="please select"
                     style={{ width: 250 }}
@@ -175,6 +197,7 @@ class Demo extends React.Component {
                     className="ant-calendar-picker-input ant-input"
                     value={value && value.format(getFormat(state.showTime)) || ''}
                   />
+                  <div ref={this.calendarContainerRef} />
                 </span>
               );
             }

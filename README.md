@@ -251,7 +251,7 @@ http://react-component.github.io/calendar/examples/index.html
         </tr>
          <tr>
           <td>inputMode</td>
-          <td>strimg</td>
+          <td>string</td>
           <td>text</td>
           <td>Change the keyboard in mobile device</td>
         </tr>

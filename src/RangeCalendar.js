@@ -87,7 +87,7 @@ class RangeCalendar extends React.Component {
     defaultValue: PropTypes.any,
     value: PropTypes.any,
     hoverValue: PropTypes.any,
-    mode: PropTypes.arrayOf(PropTypes.oneOf(['date', 'month', 'year', 'decade'])),
+    mode: PropTypes.arrayOf(PropTypes.oneOf(['time', 'date', 'month', 'year', 'decade'])),
     showDateInput: PropTypes.bool,
     timePicker: PropTypes.any,
     showOk: PropTypes.bool,
@@ -137,6 +137,7 @@ class RangeCalendar extends React.Component {
       value,
       showTimePicker: false,
       mode: props.mode || ['date', 'date'],
+      panelTriggerSource: '', // Trigger by which picker panel: 'start' & 'end'
     };
   }
 
@@ -396,11 +397,13 @@ class RangeCalendar extends React.Component {
   onStartPanelChange = (value, mode) => {
     const { props, state } = this;
     const newMode = [mode, state.mode[1]];
+    const newState = {
+      panelTriggerSource: 'start',
+    };
     if (!('mode' in props)) {
-      this.setState({
-        mode: newMode,
-      });
+      newState.mode = newMode;
     }
+    this.setState(newState);
     const newValue = [value || state.value[0], state.value[1]];
     props.onPanelChange(newValue, newMode);
   }
@@ -408,17 +411,19 @@ class RangeCalendar extends React.Component {
   onEndPanelChange = (value, mode) => {
     const { props, state } = this;
     const newMode = [state.mode[0], mode];
+    const newState = {
+      panelTriggerSource: 'end',
+    };
     if (!('mode' in props)) {
-      this.setState({
-        mode: newMode,
-      });
+      newState.mode = newMode;
     }
+    this.setState(newState);
     const newValue = [state.value[0], value || state.value[1]];
     props.onPanelChange(newValue, newMode);
   }
 
   static getDerivedStateFromProps(nextProps, state) {
-    let newState = {};
+    const newState = {};
     if ('value' in nextProps) {
       newState.value = normalizeAnchor(nextProps, 0);
     }
@@ -430,35 +435,58 @@ class RangeCalendar extends React.Component {
       newState.prevSelectedValue = nextProps.selectedValue;
     }
     if ('mode' in nextProps && !isArraysEqual(state.mode, nextProps.mode)) {
-      newState = { mode: nextProps.mode };
+      newState.mode = nextProps.mode;
     }
     return newState;
   }
 
   getStartValue = () => {
-    let value = this.state.value[0];
-    const selectedValue = this.state.selectedValue;
+    const { selectedValue, showTimePicker, value, mode, panelTriggerSource } = this.state;
+    let startValue = value[0];
     // keep selectedTime when select date
     if (selectedValue[0] && this.props.timePicker) {
-      value = value.clone();
-      syncTime(selectedValue[0], value);
+      startValue = startValue.clone();
+      syncTime(selectedValue[0], startValue);
     }
-    if (this.state.showTimePicker && selectedValue[0]) {
-      return selectedValue[0];
+    if (showTimePicker && selectedValue[0]) {
+      startValue = selectedValue[0];
     }
-    return value;
+
+    // Adjust month if date not align
+    if (
+      panelTriggerSource === 'end' &&
+      mode[0] === 'date' &&
+      mode[1] === 'date' &&
+      startValue.isSame(value[1], 'month')
+    ) {
+      startValue = startValue.clone().subtract(1, 'month');
+    }
+
+    return startValue;
   }
 
   getEndValue = () => {
-    const { value, selectedValue, showTimePicker } = this.state;
-    const endValue = value[1] ? value[1].clone() : value[0].clone().add(1, 'month');
+    const { value, selectedValue, showTimePicker, mode, panelTriggerSource } = this.state;
+    let endValue = value[1] ? value[1].clone() : value[0].clone().add(1, 'month');
     // keep selectedTime when select date
     if (selectedValue[1] && this.props.timePicker) {
       syncTime(selectedValue[1], endValue);
     }
     if (showTimePicker) {
-      return selectedValue[1] ? selectedValue[1] : this.getStartValue();
+      endValue = selectedValue[1] ? selectedValue[1] : this.getStartValue();
     }
+
+    // Adjust month if date not align
+    if (
+      !showTimePicker &&
+      panelTriggerSource !== 'end' &&
+      mode[0] === 'date' &&
+      mode[1] === 'date' &&
+      endValue.isSame(value[0], 'month')
+    ) {
+      endValue = endValue.clone().add(1, 'month');
+    }
+
     return endValue;
   }
 
@@ -666,10 +694,6 @@ class RangeCalendar extends React.Component {
     const isClosestMonths = nextMonthOfStart.year() === endValue.year() &&
       nextMonthOfStart.month() === endValue.month();
 
-    // console.warn('Render:', selectedValue.map(t => t.format('YYYY-MM-DD')).join(', '));
-    // console.log('start:', startValue.format('YYYY-MM-DD'));
-    // console.log('end:', endValue.format('YYYY-MM-DD'));
-
     const extraFooter = props.renderFooter();
 
     return (
@@ -712,7 +736,7 @@ class RangeCalendar extends React.Component {
               onPanelChange={this.onStartPanelChange}
               showDateInput={this.props.showDateInput}
               timePicker={timePicker}
-              showTimePicker={showTimePicker}
+              showTimePicker={showTimePicker || mode[0] === 'time'}
               enablePrev
               enableNext={!isClosestMonths || this.isMonthYearPanelShow(mode[1])}
               clearIcon={clearIcon}
@@ -734,7 +758,7 @@ class RangeCalendar extends React.Component {
               onPanelChange={this.onEndPanelChange}
               showDateInput={this.props.showDateInput}
               timePicker={timePicker}
-              showTimePicker={showTimePicker}
+              showTimePicker={showTimePicker || mode[1] === 'time'}
               disabledTime={this.disabledEndTime}
               disabledMonth={this.disabledEndMonth}
               enablePrev={!isClosestMonths || this.isMonthYearPanelShow(mode[0])}
