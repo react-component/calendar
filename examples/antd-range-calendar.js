@@ -4312,7 +4312,8 @@ var DateInput = function (_React$Component) {
     var locale = props.locale,
         prefixCls = props.prefixCls,
         placeholder = props.placeholder,
-        clearIcon = props.clearIcon;
+        clearIcon = props.clearIcon,
+        inputMode = props.inputMode;
 
     var invalidClass = invalid ? prefixCls + '-input-invalid' : '';
     return __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
@@ -4330,7 +4331,8 @@ var DateInput = function (_React$Component) {
           onChange: this.onInputChange,
           onKeyDown: this.onKeyDown,
           onFocus: this.onFocus,
-          onBlur: this.onBlur
+          onBlur: this.onBlur,
+          inputMode: inputMode
         })
       ),
       props.showClear ? __WEBPACK_IMPORTED_MODULE_3_react___default.a.createElement(
@@ -4361,7 +4363,8 @@ DateInput.propTypes = {
   placeholder: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.string,
   onSelect: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func,
   selectedValue: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object,
-  clearIcon: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.node
+  clearIcon: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.node,
+  inputMode: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.string
 };
 
 var _initialiseProps = function _initialiseProps() {
@@ -8177,7 +8180,8 @@ var CalendarPart = function (_React$Component) {
         onInputSelect = props.onInputSelect,
         enablePrev = props.enablePrev,
         enableNext = props.enableNext,
-        clearIcon = props.clearIcon;
+        clearIcon = props.clearIcon,
+        inputMode = props.inputMode;
 
     var shouldShowTimePicker = showTimePicker && timePicker;
     var disabledTimeConfig = shouldShowTimePicker && disabledTime ? Object(__WEBPACK_IMPORTED_MODULE_9__util_index__["c" /* getTimeConfig */])(selectedValue, disabledTime) : null;
@@ -8212,7 +8216,8 @@ var CalendarPart = function (_React$Component) {
       selectedValue: selectedValue[index],
       onChange: onInputChange,
       onSelect: onInputSelect,
-      clearIcon: clearIcon
+      clearIcon: clearIcon,
+      inputMode: inputMode
     });
 
     return __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
@@ -8280,7 +8285,8 @@ CalendarPart.propTypes = {
   timePickerDisabledTime: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object,
   enableNext: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.any,
   enablePrev: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.any,
-  clearIcon: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.node
+  clearIcon: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.node,
+  inputMode: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.string
 };
 /* harmony default export */ __webpack_exports__["a"] = (CalendarPart);
 
