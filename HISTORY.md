@@ -1,6 +1,10 @@
 # History
 ----
 
+## 9.15.0 / 2019-06-06
+
+- Add numeric keyboard support
+
 ## 9.14.0 / 2019-05-24
 
 - Support Latvian locales
