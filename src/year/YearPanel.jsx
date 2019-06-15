@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { memomizedNumeralsConverter } from '../util';
+
 const ROW = 4;
 const COL = 3;
 
@@ -89,7 +91,9 @@ export default class YearPanel extends React.Component {
             <a
               className={`${prefixCls}-year`}
             >
-              {yearData.content}
+              {locale.numerals ?
+                memomizedNumeralsConverter(yearData.content, locale.numerals) :
+                yearData.content}
             </a>
           </td>);
       });
@@ -115,7 +119,10 @@ export default class YearPanel extends React.Component {
               title={locale.decadeSelect}
             >
               <span className={`${prefixCls}-decade-select-content`}>
-                {startYear}-{endYear}
+                {locale.numerals ?
+                  `${memomizedNumeralsConverter(startYear, locale.numerals)}
+                    -${memomizedNumeralsConverter(endYear, locale.numerals)}` :
+                  `${startYear}-${endYear}`}
               </span>
               <span className={`${prefixCls}-decade-select-arrow`}>x</span>
             </a>

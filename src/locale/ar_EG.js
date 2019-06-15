@@ -24,4 +24,5 @@ export default {
   nextDecade: 'العقد التالى',
   previousCentury: 'القرن السابق',
   nextCentury: 'القرن التالى',
+  numerals: '٠,١,٢,٣,٤,٥,٦,٧,٨,٩',
 };

@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
+import { memomizedNumeralsConverter } from '../util';
 const ROW = 4;
 const COL = 3;
-import classnames from 'classnames';
 
 function goYear(direction) {
   const next = this.state.value.clone();
@@ -89,7 +90,8 @@ export default class DecadePanel extends React.Component {
           <a
             className={`${prefixCls}-decade`}
           >
-            {content}
+            {locale.numerals ?
+              memomizedNumeralsConverter(content, locale.numerals) : content}
           </a>
         </td>);
       });
@@ -107,7 +109,11 @@ export default class DecadePanel extends React.Component {
           />
 
           <div className={`${prefixCls}-century`}>
-            {startYear}-{endYear}
+            {/* {startYear}-{endYear} */}
+            {locale.numerals ?
+              `${memomizedNumeralsConverter(startYear, locale.numerals)}
+                -${memomizedNumeralsConverter(endYear, locale.numerals)}` :
+              `${startYear}-${endYear}`}
           </div>
           <a
             className={`${prefixCls}-next-century-btn`}

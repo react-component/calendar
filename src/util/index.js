@@ -102,3 +102,35 @@ export function formatDate(value, format) {
 
   return value.format(format);
 }
+
+function memo(func) {
+  const cache = {};
+  return function internalMemo() {
+      // Memomization using only the first argument
+      // as the second argument is constant during the conversion
+    const key = JSON.stringify(arguments[0]);
+    if (cache[key]) {
+      return cache[key];
+    }
+    const val = func.apply(null, arguments);
+    cache[key] = val;
+    return val;
+  };
+}
+
+function convertNumerals(numeral, numerals) {
+  const numeralsArr = numerals.split(',');
+  return String(numeral)
+    .replace(/0/g, numeralsArr[0])
+    .replace(/1/g, numeralsArr[1])
+    .replace(/2/g, numeralsArr[2])
+    .replace(/3/g, numeralsArr[3])
+    .replace(/4/g, numeralsArr[4])
+    .replace(/5/g, numeralsArr[5])
+    .replace(/6/g, numeralsArr[6])
+    .replace(/7/g, numeralsArr[7])
+    .replace(/8/g, numeralsArr[8])
+    .replace(/9/g, numeralsArr[9]);
+}
+
+export const memomizedNumeralsConverter = memo(convertNumerals);

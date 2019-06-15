@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
 import MonthTable from './MonthTable';
+import { memomizedNumeralsConverter } from '../util';
 
 function goYear(direction) {
   this.props.changeYear(direction);
@@ -91,7 +92,9 @@ class MonthPanel extends React.Component {
               onClick={props.onYearPanelShow}
               title={locale.yearSelect}
             >
-              <span className={`${prefixCls}-year-select-content`}>{year}</span>
+              <span className={`${prefixCls}-year-select-content`}>
+                {locale.numerals ? memomizedNumeralsConverter(year, locale.numerals) : year}
+              </span>
               <span className={`${prefixCls}-year-select-arrow`}>x</span>
             </a>
 

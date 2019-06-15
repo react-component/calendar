@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import DateConstants from './DateConstants';
-import { getTitleString, getTodayTime } from '../util/';
+import { getTitleString, getTodayTime, memomizedNumeralsConverter } from '../util';
 
 function isSameDay(one, two) {
   return one && two && one.isSame(two, 'day');
@@ -49,7 +49,7 @@ export default class DateTBody extends React.Component {
     const {
       contentRender, prefixCls, selectedValue, value,
       showWeekNumber, dateRender, disabledDate,
-      hoverValue,
+      hoverValue, locale,
     } = props;
     let iIndex;
     let jIndex;
@@ -217,7 +217,8 @@ export default class DateTBody extends React.Component {
               aria-selected={selected}
               aria-disabled={disabled}
             >
-              {content}
+              {locale.numerals ?
+                memomizedNumeralsConverter(content, locale.numerals) : content}
             </div>);
         }
 

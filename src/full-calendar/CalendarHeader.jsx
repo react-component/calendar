@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getMonthName } from '../util';
+import { getMonthName, memomizedNumeralsConverter } from '../util';
 
 function noop() {
 }
@@ -19,13 +19,17 @@ class CalendarHeader extends Component {
   }
 
   yearSelectElement(year) {
-    const { yearSelectOffset, yearSelectTotal, prefixCls, Select } = this.props;
+    const { yearSelectOffset, yearSelectTotal, prefixCls, Select, locale } = this.props;
     const start = year - yearSelectOffset;
     const end = start + yearSelectTotal;
 
     const options = [];
     for (let index = start; index < end; index++) {
-      options.push(<Select.Option key={`${index}`}>{index}</Select.Option>);
+      options.push(
+        <Select.Option key={`${index}`}>
+          {locale.numerals ? memomizedNumeralsConverter(index, locale.numerals) : index}
+        </Select.Option>
+      );
     }
     return (
       <Select
