@@ -737,7 +737,6 @@ http://react-component.github.io/calendar/examples/index.html
 
 ```
 npm test
-npm run chrome-test
 ```
 
 ## Coverage
