@@ -109,7 +109,6 @@ export default class DecadePanel extends React.Component {
           />
 
           <div className={`${prefixCls}-century`}>
-            {/* {startYear}-{endYear} */}
             {locale.numerals ?
               `${memomizedNumeralsConverter(startYear, locale.numerals)}
                 -${memomizedNumeralsConverter(endYear, locale.numerals)}` :
