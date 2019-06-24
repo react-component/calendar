@@ -577,14 +577,14 @@ describe('RangeCalendar', () => {
       ).toBe('2010');
     });
 
-    //https://github.com/ant-design/ant-design/issues/15659
+    // https://github.com/ant-design/ant-design/issues/15659
     it('selected item style works correctly with mode year', () => {
       class Demo extends React.Component {
         state = {
           value: [moment().add(-1, 'year'), moment()],
         };
 
-        handlePanelChange = (value, mode) => {
+        handlePanelChange = (value) => {
           this.setState({
             value,
           });
@@ -595,7 +595,7 @@ describe('RangeCalendar', () => {
             <RangeCalendar
               value={this.state.value}
               selectedValue={this.state.value}
-              mode={['year','year']}
+              mode={['year', 'year']}
               onPanelChange={this.handlePanelChange}
             />
           );

@@ -17,8 +17,8 @@ function chooseYear(year) {
   value.year(year);
   value.month(this.state.value.month());
   this.setState({
-    value
-  })
+    value,
+  });
   this.props.onSelect(value);
 }
 
