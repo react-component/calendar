@@ -576,6 +576,38 @@ describe('RangeCalendar', () => {
         wrapper.find('.rc-calendar-month-panel-year-select-content').first(0).text()
       ).toBe('2010');
     });
+
+    //https://github.com/ant-design/ant-design/issues/15659
+    it('selected item style works correctly with mode year', () => {
+      class Demo extends React.Component {
+        state = {
+          value: [moment().add(-1, 'year'), moment()],
+        };
+
+        handlePanelChange = (value, mode) => {
+          this.setState({
+            value,
+          });
+        };
+
+        render() {
+          return (
+            <RangeCalendar
+              value={this.state.value}
+              selectedValue={this.state.value}
+              mode={['year','year']}
+              onPanelChange={this.handlePanelChange}
+            />
+          );
+        }
+      }
+
+      const wrapper = mount(<Demo />);
+      wrapper.find('.rc-calendar-year-panel-cell').at(1).simulate('click');
+      expect(
+        wrapper.find('.rc-calendar-year-panel-selected-cell').first(0).text()
+      ).toBe('2010');
+    });
   });
 
   it('can hide date inputs with showDateInput={false}', () => {
