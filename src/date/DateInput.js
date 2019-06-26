@@ -116,13 +116,15 @@ class DateInput extends React.Component {
     }));
   }
 
-  onKeyDown = ({ keyCode }) => {
+  onKeyDown = (event) => {
+    const { keyCode } = event;
     const { onSelect, value, disabledDate } = this.props;
     if (keyCode === KeyCode.ENTER && onSelect) {
       const validateDate = !disabledDate || !disabledDate(value);
       if (validateDate) {
         onSelect(value.clone());
       }
+      event.preventDefault();
     }
   };
 
