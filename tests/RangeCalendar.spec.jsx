@@ -682,11 +682,13 @@ describe('RangeCalendar', () => {
   it('key control', () => {
     const onChange = jest.fn();
     const onSelect = jest.fn();
+    let keyDownEvent = 0;
     const wrapper = mount(
       <RangeCalendar
         defaultSelectedValue={[moment('2000-09-03', format), moment('2000-11-28', format)]}
         onChange={onChange}
         onSelect={onSelect}
+        onKeyDown={() => keyDownEvent = 1}
       />
     );
     expect(wrapper.render()).toMatchSnapshot();
@@ -716,6 +718,9 @@ describe('RangeCalendar', () => {
     // 09-09 right 09-10
     keySimulateCheck(keyCode.RIGHT, 'Sep', 10);
 
+    // 09-10 right 09-03
+    keySimulateCheck(keyCode.UP, 'Sep', 3);
+
     // 09-10 home 09-01
     keySimulateCheck(keyCode.HOME, 'Sep', 1);
 
@@ -727,6 +732,9 @@ describe('RangeCalendar', () => {
 
     // 08-30 page down 09-30
     keySimulateCheck(keyCode.PAGE_DOWN, 'Sep', 30);
+
+    keyDown(keyCode.BACKSLASH);
+    expect(keyDownEvent).toEqual(1);
 
     keyDown(keyCode.ENTER);
 
