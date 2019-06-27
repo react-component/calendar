@@ -33,6 +33,13 @@ describe('Calendar', () => {
       expect(enWrapperWithMonthFormatWrapper).toMatchSnapshot();
     });
 
+    it('render correctly with invalid moment object', () => {
+      const enWrapper = render(
+          <Calendar locale={enUS} defaultValue={moment('invalid').locale('en')} />
+      );
+      expect(enWrapper).toMatchSnapshot();
+    });
+
     it('render showToday false correctly', () => {
       const wrapper = mount(<Calendar showToday={false}/>);
       expect(wrapper.find('.rc-calendar-today-btn').length).toBe(0);
