@@ -26,6 +26,7 @@ export default class CalendarPart extends React.Component {
     enableNext: PropTypes.any,
     enablePrev: PropTypes.any,
     clearIcon: PropTypes.node,
+    inputMode: PropTypes.string,
   }
 
   render() {
@@ -43,6 +44,7 @@ export default class CalendarPart extends React.Component {
       onInputChange, onInputSelect, enablePrev, enableNext,
       clearIcon,
       showClear,
+      inputMode,
     } = props;
     const shouldShowTimePicker = showTimePicker && timePicker;
     const disabledTimeConfig = shouldShowTimePicker && disabledTime ?
@@ -83,6 +85,7 @@ export default class CalendarPart extends React.Component {
         onChange={onInputChange}
         onSelect={onInputSelect}
         clearIcon={clearIcon}
+        inputMode={inputMode}
       />;
 
     return (

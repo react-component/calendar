@@ -473,6 +473,11 @@ describe('Calendar', () => {
       expect(calendar.find('.rc-calendar-decade-panel-decade').hostNodes().length).toBe(12);
     });
 
+    it('numeric keyboard works', () => {
+      const newCalendar = mount(<Calendar inputMode="numeric" />);
+      expect(newCalendar.find('.rc-calendar-input').props().inputMode).toBe('numeric');
+    });
+
     it('extra footer works', () => {
       const renderFooter = (mode) => (<span className="extra-node">{mode}</span>);
 

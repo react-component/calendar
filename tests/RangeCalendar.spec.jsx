@@ -1,4 +1,4 @@
-/* eslint-disable no-undef, max-len */
+/* eslint-disable no-undef, max-len, react/no-multi-comp */
 import React from 'react';
 import moment from 'moment';
 import { mount, render } from 'enzyme';
@@ -211,6 +211,18 @@ describe('RangeCalendar', () => {
       }
     });
 
+    it('selected start and end date can be same', () => {
+      const timePicker = <TimePickerPanel defaultValue={[moment('00:00:00', 'HH:mm:ss'), moment('23:59:59', 'HH:mm:ss')]} />;
+      const wrapper = mount(<RangeCalendar selectedValue={[moment('2000-09-03', format), moment('2000-09-03', format)]} timePicker={timePicker}/>);
+      wrapper.find('.rc-calendar-time-picker-btn').simulate('click');
+      expect(wrapper.find('.rc-calendar-year-select').at(0).text()).toBe('2000');
+      expect(wrapper.find('.rc-calendar-month-select').at(0).text()).toBe('Sep');
+      expect(wrapper.find('.rc-calendar-day-select').at(0).text()).toBe('3');
+      expect(wrapper.find('.rc-calendar-year-select').at(1).text()).toBe('2000');
+      expect(wrapper.find('.rc-calendar-month-select').at(1).text()).toBe('Sep');
+      expect(wrapper.find('.rc-calendar-day-select').at(1).text()).toBe('3');
+    });
+
     it('use timePicker\'s time', () => {
       const timePicker = <TimePickerPanel defaultValue={[moment('00:00:00', 'HH:mm:ss'), moment('23:59:59', 'HH:mm:ss')]} />;
       const wrapper = mount(<RangeCalendar timePicker={timePicker} />);
@@ -414,6 +426,9 @@ describe('RangeCalendar', () => {
       RangeYearPicker.find('.rc-calendar-year-panel-decade-select').at(1).simulate('click');
       expect(RangeYearPicker.find('.rc-calendar-decade-panel').length).toBe(0);
       expect(RangeYearPicker.find('.rc-calendar-year-panel').length).toBe(2);
+
+      const RangeTimePicker = mount(<RangeCalendar mode={['time', 'time']} />);
+      expect(RangeTimePicker.find('.rc-calendar-time-picker').length).toBe(2);
     });
 
     it('should work when start time is null in defaultValue', () => {
@@ -525,6 +540,73 @@ describe('RangeCalendar', () => {
       wrapper.setProps({ value: [moment(), moment()] });
       const updatedValue = wrapper.state('value');
       expect(updatedValue[0].isSame(updatedValue[1], 'month')).toBe(true);
+    });
+
+    // https://github.com/ant-design/ant-design/issues/15659
+    it('controlled value works correctly with mode', () => {
+      class Demo extends React.Component {
+        state = {
+          mode: ['month', 'month'],
+          value: [moment().add(-1, 'day'), moment()],
+        };
+
+        handlePanelChange = (value, mode) => {
+          this.setState({
+            value,
+            mode: [mode[0] === 'date' ? 'month' : mode[0], mode[1] === 'date' ? 'month' : mode[1]],
+          });
+        };
+
+        render() {
+          return (
+            <RangeCalendar
+              value={this.state.value}
+              selectedValue={this.state.value}
+              mode={this.state.mode}
+              onPanelChange={this.handlePanelChange}
+            />
+          );
+        }
+      }
+
+      const wrapper = mount(<Demo />);
+      wrapper.find('.rc-calendar-month-panel-year-select').first().simulate('click');
+      wrapper.find('.rc-calendar-year-panel-cell').at(1).simulate('click');
+      expect(
+        wrapper.find('.rc-calendar-month-panel-year-select-content').first(0).text()
+      ).toBe('2010');
+    });
+
+    // https://github.com/ant-design/ant-design/issues/15659
+    it('selected item style works correctly with mode year', () => {
+      class Demo extends React.Component {
+        state = {
+          value: [moment().add(-1, 'year'), moment()],
+        };
+
+        handlePanelChange = (value) => {
+          this.setState({
+            value,
+          });
+        };
+
+        render() {
+          return (
+            <RangeCalendar
+              value={this.state.value}
+              selectedValue={this.state.value}
+              mode={['year', 'year']}
+              onPanelChange={this.handlePanelChange}
+            />
+          );
+        }
+      }
+
+      const wrapper = mount(<Demo />);
+      wrapper.find('.rc-calendar-year-panel-cell').at(1).simulate('click');
+      expect(
+        wrapper.find('.rc-calendar-year-panel-selected-cell').first(0).text()
+      ).toBe('2010');
     });
   });
 
@@ -694,5 +776,27 @@ describe('RangeCalendar', () => {
       keyCode: keyCode.ENTER,
     });
     expect(onSelect.mock.calls[1][1].source).toEqual('dateInputSelect');
+  });
+
+  it('date mode should not display same month', () => {
+    const FORMAT = 'YYYY-MM-DD';
+    const sameDay = moment('2000-01-01');
+    const wrapper = mount(<RangeCalendar defaultValue={[sameDay, sameDay]} />);
+
+    // Should in different month
+    expect(wrapper.find('CalendarPart').at(0).props().value.format(FORMAT)).toEqual('2000-01-01');
+    expect(wrapper.find('CalendarPart').at(1).props().value.format(FORMAT)).toEqual('2000-02-01');
+
+    // Back end to month panel
+    wrapper.find('CalendarPart').at(1).find('.rc-calendar-month-select').simulate('click');
+    wrapper.find('CalendarPart').at(1).find('.rc-calendar-month-panel-month').at(0).simulate('click');
+    expect(wrapper.find('CalendarPart').at(0).props().value.format(FORMAT)).toEqual('1999-12-01');
+    expect(wrapper.find('CalendarPart').at(1).props().value.format(FORMAT)).toEqual('2000-01-01');
+
+    // Back start to month panel
+    wrapper.find('CalendarPart').at(0).find('.rc-calendar-month-select').simulate('click');
+    wrapper.find('CalendarPart').at(0).find('.rc-calendar-month-panel-month').at(0).simulate('click');
+    expect(wrapper.find('CalendarPart').at(0).props().value.format(FORMAT)).toEqual('2000-01-01');
+    expect(wrapper.find('CalendarPart').at(1).props().value.format(FORMAT)).toEqual('2000-02-01');
   });
 });

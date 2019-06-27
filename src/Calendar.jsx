@@ -53,6 +53,8 @@ class Calendar extends React.Component {
     renderSidebar: PropTypes.func,
     clearIcon: PropTypes.node,
     focusablePanel: PropTypes.bool,
+    inputMode: PropTypes.string,
+    onBlur: PropTypes.func,
   }
 
   static defaultProps = {
@@ -65,7 +67,6 @@ class Calendar extends React.Component {
     onPanelChange: noop,
     focusablePanel: true,
   }
-
 
   constructor(props) {
     super(props);
@@ -203,6 +204,23 @@ class Calendar extends React.Component {
     });
   }
 
+  onBlur = (event) => {
+    setTimeout(() => {
+      const dateInput = DateInput.getInstance();
+      const rootInstance = this.rootInstance;
+
+      if (!rootInstance || rootInstance.contains(document.activeElement) ||
+      (dateInput && dateInput.contains(document.activeElement))) {
+        // focused element is still part of Calendar
+        return;
+      }
+
+      if (this.props.onBlur) {
+        this.props.onBlur(event);
+      }
+    }, 0);
+  }
+
   static getDerivedStateFromProps(nextProps, state) {
     const { value, selectedValue } = nextProps;
     let newState = {};
@@ -244,7 +262,7 @@ class Calendar extends React.Component {
     const {
       locale, prefixCls, disabledDate,
       dateInputPlaceholder, timePicker,
-      disabledTime, clearIcon, renderFooter,
+      disabledTime, clearIcon, renderFooter, inputMode,
     } = props;
     const { value, selectedValue, mode } = state;
     const showTimePicker = mode === 'time';
@@ -288,6 +306,7 @@ class Calendar extends React.Component {
         onChange={this.onDateInputChange}
         onSelect={this.onDateInputSelect}
         clearIcon={clearIcon}
+        inputMode={inputMode}
       />
     ) : null;
 

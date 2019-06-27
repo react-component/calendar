@@ -249,6 +249,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td></td>
           <td>specific the clear icon.</td>
         </tr>
+         <tr>
+          <td>inputMode</td>
+          <td>string</td>
+          <td>text</td>
+          <td>Change the keyboard in mobile device</td>
+        </tr>
     </tbody>
 </table>
 
@@ -731,7 +737,6 @@ http://react-component.github.io/calendar/examples/index.html
 
 ```
 npm test
-npm run chrome-test
 ```
 
 ## Coverage

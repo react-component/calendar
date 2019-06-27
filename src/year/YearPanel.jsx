@@ -16,6 +16,9 @@ function chooseYear(year) {
   const value = this.state.value.clone();
   value.year(year);
   value.month(this.state.value.month());
+  this.setState({
+    value,
+  });
   this.props.onSelect(value);
 }
 
