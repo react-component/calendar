@@ -4,9 +4,7 @@ import { polyfill } from 'react-lifecycles-compat';
 import MonthTable from './MonthTable';
 
 function goYear(direction) {
-  const next = this.state.value.clone();
-  next.add(direction, 'year');
-  this.setAndChangeValue(next);
+  this.props.changeYear(direction);
 }
 
 function noop() {
@@ -41,22 +39,18 @@ class MonthPanel extends React.Component {
     };
   }
 
-  static getDerivedStateFromProps(nextProps) {
+  static getDerivedStateFromProps(props) {
     let newState = {};
 
-    if ('value' in nextProps) {
+    if ('value' in props) {
       newState = {
-        value: nextProps.value,
+        value: props.value,
       };
     }
 
     return newState;
   }
 
-  setAndChangeValue = (value) => {
-    this.setValue(value);
-    this.props.onChange(value);
-  }
 
   setAndSelectValue = (value) => {
     this.setValue(value);
@@ -64,7 +58,7 @@ class MonthPanel extends React.Component {
   }
 
   setValue = (value) => {
-    if (!('value' in this.props)) {
+    if ('value' in this.props) {
       this.setState({
         value,
       });
