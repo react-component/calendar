@@ -26,6 +26,7 @@ export default class CalendarPart extends React.Component {
     enableNext: PropTypes.any,
     enablePrev: PropTypes.any,
     clearIcon: PropTypes.node,
+    dateRender: PropTypes.func,
     inputMode: PropTypes.string,
   }
 

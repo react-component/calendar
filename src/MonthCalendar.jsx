@@ -16,7 +16,6 @@ class MonthCalendar extends React.Component {
     ...calendarMixinPropTypes,
     ...propType,
     monthCellRender: PropTypes.func,
-    dateCellRender: PropTypes.func,
     value: PropTypes.object,
     defaultValue: PropTypes.object,
     selectedValue: PropTypes.object,

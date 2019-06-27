@@ -515,12 +515,6 @@ http://react-component.github.io/calendar/examples/index.html
           <td>Custom month cell render method</td>
         </tr>
         <tr>
-          <td>dateCellRender</td>
-          <td>function</td>
-          <td></td>
-          <td>Custom date cell render method</td>
-        </tr>
-        <tr>
           <td>monthCellContentRender</td>
           <td>function</td>
           <td></td>
