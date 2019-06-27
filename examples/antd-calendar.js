@@ -233,6 +233,7 @@ class DemoMultiFormat extends React.Component {
         Accepts multiple input formats
         <br />
         <small>{multiFormats.join(', ')}</small>
+        <br/>
       </div>
       <Calendar
         locale={cn ? zhCN : enUS}

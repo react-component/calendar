@@ -17,7 +17,7 @@ export interface Props {
   selectedValue?: Moment;
   mode?: Mode;
   locale?: object;
-  format?: string;
+  format?: string | string[];
   showDateInput?: boolean;
   showWeekNumber?: boolean;
   showToday?: boolean;
@@ -35,6 +35,7 @@ export interface Props {
   dateRender?: (current: Moment, value: Moment) => React.ReactNode;
   renderFooter?: () => React.ReactNode;
   renderSidebar?: () => React.ReactNode;
+  inputMode?:String
 }
 
 export default class ReactCalendar extends React.Component<Props> {}

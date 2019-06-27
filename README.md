@@ -249,6 +249,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td></td>
           <td>specific the clear icon.</td>
         </tr>
+         <tr>
+          <td>inputMode</td>
+          <td>string</td>
+          <td>text</td>
+          <td>Change the keyboard in mobile device</td>
+        </tr>
     </tbody>
 </table>
 
@@ -509,12 +515,6 @@ http://react-component.github.io/calendar/examples/index.html
           <td>Custom month cell render method</td>
         </tr>
         <tr>
-          <td>dateCellRender</td>
-          <td>function</td>
-          <td></td>
-          <td>Custom date cell render method</td>
-        </tr>
-        <tr>
           <td>monthCellContentRender</td>
           <td>function</td>
           <td></td>
@@ -731,7 +731,6 @@ http://react-component.github.io/calendar/examples/index.html
 
 ```
 npm test
-npm run chrome-test
 ```
 
 ## Coverage

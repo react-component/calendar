@@ -33,6 +33,13 @@ describe('Calendar', () => {
       expect(enWrapperWithMonthFormatWrapper).toMatchSnapshot();
     });
 
+    it('render correctly with invalid moment object', () => {
+      const enWrapper = render(
+          <Calendar locale={enUS} defaultValue={moment('invalid').locale('en')} />
+      );
+      expect(enWrapper).toMatchSnapshot();
+    });
+
     it('render showToday false correctly', () => {
       const wrapper = mount(<Calendar showToday={false}/>);
       expect(wrapper.find('.rc-calendar-today-btn').length).toBe(0);
@@ -471,6 +478,11 @@ describe('Calendar', () => {
 
       expect(calendar.find('.rc-calendar-decade-panel').hostNodes().length).toBe(1);
       expect(calendar.find('.rc-calendar-decade-panel-decade').hostNodes().length).toBe(12);
+    });
+
+    it('numeric keyboard works', () => {
+      const newCalendar = mount(<Calendar inputMode="numeric" />);
+      expect(newCalendar.find('.rc-calendar-input').props().inputMode).toBe('numeric');
     });
 
     it('extra footer works', () => {
