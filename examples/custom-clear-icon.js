@@ -1,6 +1,6 @@
 webpackJsonp([9],{
 
-/***/ 15:
+/***/ 16:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11,15 +11,15 @@ webpackJsonp([9],{
 
 /***/ }),
 
-/***/ 235:
+/***/ 237:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(236);
+module.exports = __webpack_require__(238);
 
 
 /***/ }),
 
-/***/ 236:
+/***/ 238:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -132,7 +132,7 @@ __WEBPACK_IMPORTED_MODULE_2_react_dom___default.a.render(__WEBPACK_IMPORTED_MODU
 
 /***/ }),
 
-/***/ 26:
+/***/ 27:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -215,7 +215,7 @@ var DateTable = function (_React$Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rc_util_es_Children_mapSelf__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rc_util_es_Children_mapSelf__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__month_MonthPanel__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__year_YearPanel__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__decade_DecadePanel__ = __webpack_require__(43);
@@ -602,7 +602,7 @@ function TimePickerButton(_ref) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__DateConstants__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__DateConstants__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_moment__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_moment__);
 
@@ -703,7 +703,7 @@ var DateTHead = function (_React$Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_classnames__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_classnames__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__DateConstants__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__DateConstants__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__util___ = __webpack_require__(11);
 
 
@@ -1794,8 +1794,8 @@ var _initialiseProps = function _initialiseProps() {
     });
   };
 
-  this.onKeyDown = function (_ref) {
-    var keyCode = _ref.keyCode;
+  this.onKeyDown = function (event) {
+    var keyCode = event.keyCode;
     var _props2 = _this2.props,
         onSelect = _props2.onSelect,
         value = _props2.value,
@@ -1806,6 +1806,7 @@ var _initialiseProps = function _initialiseProps() {
       if (validateDate) {
         onSelect(value.clone());
       }
+      event.preventDefault();
     }
   };
 
@@ -2216,7 +2217,7 @@ var calendarMixinWrapper = function calendarMixinWrapper(ComposeComponent) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prop_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_util_es_Children_mapSelf__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_util_es_Children_mapSelf__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_classnames__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_classnames__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__calendar_TodayButton__ = __webpack_require__(31);
@@ -2380,6 +2381,13 @@ CalendarFooter.propTypes = {
 
 function noop() {}
 
+var getMomentObjectIfValid = function getMomentObjectIfValid(date) {
+  if (__WEBPACK_IMPORTED_MODULE_17_moment___default.a.isMoment(date) && date.isValid()) {
+    return date;
+  }
+  return false;
+};
+
 var Calendar = function (_React$Component) {
   __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits___default()(Calendar, _React$Component);
 
@@ -2392,7 +2400,7 @@ var Calendar = function (_React$Component) {
 
     _this.state = {
       mode: _this.props.mode || 'date',
-      value: props.value || props.defaultValue || __WEBPACK_IMPORTED_MODULE_17_moment___default()(),
+      value: getMomentObjectIfValid(props.value) || getMomentObjectIfValid(props.defaultValue) || __WEBPACK_IMPORTED_MODULE_17_moment___default()(),
       selectedValue: props.selectedValue || props.defaultSelectedValue
     };
     return _this;
@@ -2414,7 +2422,7 @@ var Calendar = function (_React$Component) {
       newState = { mode: nextProps.mode };
     }
     if ('value' in nextProps) {
-      newState.value = value || nextProps.defaultValue || Object(__WEBPACK_IMPORTED_MODULE_12__mixin_CalendarMixin__["d" /* getNowByCurrentStateValue */])(state.value);
+      newState.value = getMomentObjectIfValid(value) || getMomentObjectIfValid(nextProps.defaultValue) || Object(__WEBPACK_IMPORTED_MODULE_12__mixin_CalendarMixin__["d" /* getNowByCurrentStateValue */])(state.value);
     }
     if ('selectedValue' in nextProps) {
       newState.selectedValue = selectedValue;
@@ -3751,6 +3759,7 @@ var CalendarPart = function (_React$Component) {
         enablePrev = props.enablePrev,
         enableNext = props.enableNext,
         clearIcon = props.clearIcon,
+        showClear = props.showClear,
         inputMode = props.inputMode;
 
     var shouldShowTimePicker = showTimePicker && timePicker;
@@ -3782,7 +3791,7 @@ var CalendarPart = function (_React$Component) {
       placeholder: placeholder,
       disabledTime: disabledTime,
       value: value,
-      showClear: false,
+      showClear: showClear || false,
       selectedValue: selectedValue[index],
       onChange: onInputChange,
       onSelect: onInputSelect,
@@ -3856,11 +3865,12 @@ CalendarPart.propTypes = {
   enableNext: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.any,
   enablePrev: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.any,
   clearIcon: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.node,
+  dateRender: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func,
   inputMode: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.string
 };
 /* harmony default export */ __webpack_exports__["a"] = (CalendarPart);
 
 /***/ })
 
-},[235]);
+},[237]);
 //# sourceMappingURL=custom-clear-icon.js.map
