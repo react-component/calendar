@@ -1,5 +1,8 @@
 # History
 ----
+## 9.15.0 / 2019-05-26
+
+- Support Malay locales
 
 ## 9.15.0 / 2019-06-06
 
