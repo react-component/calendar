@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import KeyCode from 'rc-util/lib/KeyCode';
+import { polyfill } from 'react-lifecycles-compat';
 import CalendarHeader from './calendar/CalendarHeader';
 import CalendarFooter from './calendar/CalendarFooter';
 import {
@@ -120,4 +121,4 @@ class MonthCalendar extends React.Component {
   }
 }
 
-export default calendarMixinWrapper(commonMixinWrapper(MonthCalendar));
+export default polyfill(calendarMixinWrapper(commonMixinWrapper(MonthCalendar)));
