@@ -43,7 +43,12 @@ export const commonMixinWrapper = ComposeComponent => class extends ComposeCompo
 
   getFormat = () => {
     let { format } = this.props;
-    const { locale, timePicker } = this.props;
+    const { locale, timePicker, value } = this.props;
+
+    if (typeof format === 'function') {
+      format = value ? format(value) : '';
+    }
+
     if (!format) {
       if (timePicker) {
         format = locale.dateTimeFormat;
@@ -51,6 +56,7 @@ export const commonMixinWrapper = ComposeComponent => class extends ComposeCompo
         format = locale.dateFormat;
       }
     }
+
     return format;
   }
 

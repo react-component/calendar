@@ -100,5 +100,9 @@ export function formatDate(value, format) {
     format = format[0];
   }
 
+  if (typeof format === 'function') {
+    format = format(value);
+  }
+
   return value.format(format);
 }

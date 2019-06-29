@@ -559,6 +559,31 @@ describe('Calendar', () => {
       expect(onChange.mock.calls[0][0].format('DD/MM/YYYY')).toBe(expected);
     });
 
+    it('supports function format', () => {
+      const expected = '2019/06/28 a day ago';
+      const value = '2019/06/28 a day ago';
+      const funcFormat = (currentMoment) => {
+        return `YYYY/MM/DD ${currentMoment.from(moment('2019/06/29', 'YYYY/MM/DD'))}`;
+      };
+
+      const onSelect = jest.fn();
+      const onChange = jest.fn();
+
+      const calendar = mount(<Calendar
+        format={funcFormat}
+        showToday
+        onSelect={onSelect}
+        onChange={onChange}
+      />);
+
+      const input = calendar.find('.rc-calendar-input').hostNodes().at(0);
+      input.simulate('focus');
+      input.simulate('change', { target: { value } });
+
+      const inputValue = calendar.find('.rc-calendar-input').props().value;
+      expect(inputValue).toBe(expected);
+    });
+
     it('only reformat the date when the input loses focus', () => {
       const value = '21/01/17';
 
