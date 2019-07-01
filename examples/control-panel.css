@@ -1,3 +1,19 @@
+@-webkit-keyframes select-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes select-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .rc-select {
   box-sizing: border-box;
   display: inline-block;
@@ -5,9 +21,6 @@
   vertical-align: middle;
   color: #666;
   line-height: 28px;
-}
-.rc-select-allow-clear .rc-select-selection--single .rc-select-selection__rendered {
-  padding-right: 40px;
 }
 .rc-select ul,
 .rc-select li {
@@ -27,7 +40,26 @@
   width: 20px;
   outline: none;
 }
-.rc-select-arrow b {
+.rc-select-arrow .rc-select-arrow-loading {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-top: 6px;
+  margin-left: -4px;
+}
+.rc-select-arrow .rc-select-arrow-loading:after {
+  content: ' ';
+  display: block;
+  width: 12px;
+  height: 12px;
+  margin: 2px;
+  border-radius: 50%;
+  border: 2px solid #999999;
+  border-color: #999999 transparent #999999 transparent;
+  -webkit-animation: select-ring 1.2s linear infinite;
+          animation: select-ring 1.2s linear infinite;
+}
+.rc-select-arrow .rc-select-arrow-icon {
   border-color: #999999 transparent transparent transparent;
   border-style: solid;
   border-width: 5px 4px 0 4px;
@@ -38,6 +70,10 @@
   position: absolute;
   top: 50%;
   left: 50%;
+}
+.rc-select:not(.rc-select-no-arrow) .rc-select-selection--multiple .rc-select-selection__clear,
+.rc-select-loading .rc-select-selection--multiple .rc-select-selection__clear {
+  right: 20px;
 }
 .rc-select-selection {
   outline: none;
@@ -61,8 +97,8 @@
   position: absolute;
   line-height: 28px;
 }
-.rc-select-selection__clear:after {
-  content: '\D7';
+.rc-select-selection__clear-icon {
+  font-style: normal;
 }
 .rc-select-focused .rc-select-selection {
   border-color: #23c0fa;
@@ -95,7 +131,6 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   margin-left: 10px;
-  padding-right: 20px;
   line-height: 28px;
 }
 .rc-select-selection--single .rc-select-selection__clear {
@@ -221,25 +256,44 @@
 .rc-select .rc-select-selection__choice-zoom-enter,
 .rc-select .rc-select-selection__choice-zoom-appear,
 .rc-select .rc-select-selection__choice-zoom-leave {
-  animation-duration: .3s;
-  animation-fill-mode: both;
+  -webkit-animation-duration: 0.3s;
+          animation-duration: 0.3s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
   transform-origin: 0 0;
   opacity: 0;
-  animation-play-state: paused;
-  animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -webkit-animation-play-state: paused;
+          animation-play-state: paused;
+  -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .rc-select .rc-select-selection__choice-zoom-leave {
   opacity: 1;
-  animation-timing-function: cubic-bezier(0.6, -0.28, 0.735, 0.045);
+  -webkit-animation-timing-function: cubic-bezier(0.6, -0.28, 0.735, 0.045);
+          animation-timing-function: cubic-bezier(0.6, -0.28, 0.735, 0.045);
 }
 .rc-select .rc-select-selection__choice-zoom-enter.rc-select-selection__choice-zoom-enter-active,
 .rc-select .rc-select-selection__choice-zoom-appear.rc-select-selection__choice-zoom-appear-active {
-  animation-play-state: running;
-  animation-name: rcSelectChoiceZoomIn;
+  -webkit-animation-play-state: running;
+          animation-play-state: running;
+  -webkit-animation-name: rcSelectChoiceZoomIn;
+          animation-name: rcSelectChoiceZoomIn;
 }
 .rc-select .rc-select-selection__choice-zoom-leave.rc-select-selection__choice-zoom-leave-active {
-  animation-play-state: running;
-  animation-name: rcSelectChoiceZoomOut;
+  -webkit-animation-play-state: running;
+          animation-play-state: running;
+  -webkit-animation-name: rcSelectChoiceZoomOut;
+          animation-name: rcSelectChoiceZoomOut;
+}
+@-webkit-keyframes rcSelectChoiceZoomIn {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 @keyframes rcSelectChoiceZoomIn {
   0% {
@@ -249,6 +303,12 @@
   100% {
     transform: scale(1);
     opacity: 1;
+  }
+}
+@-webkit-keyframes rcSelectChoiceZoomOut {
+  to {
+    transform: scale(0);
+    opacity: 0;
   }
 }
 @keyframes rcSelectChoiceZoomOut {
@@ -267,10 +327,10 @@
   transform: scale(0);
   top: 0;
   right: 2px;
-  transition: opacity .3s, transform .3s;
+  transition: opacity 0.3s, transform 0.3s;
 }
-.rc-select .rc-select-selection__choice__remove:before {
-  content: '\D7';
+.rc-select .rc-select-selection__choice__remove-icon {
+  font-style: normal;
 }
 .rc-select .rc-select-selection__choice__remove:hover {
   color: #333;
@@ -346,38 +406,66 @@ li.rc-select-dropdown-menu-item-divider {
 }
 .rc-select-dropdown-slide-up-enter,
 .rc-select-dropdown-slide-up-appear {
-  animation-duration: .3s;
-  animation-fill-mode: both;
+  -webkit-animation-duration: 0.3s;
+          animation-duration: 0.3s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
   transform-origin: 0 0;
   opacity: 0;
-  animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
-  animation-play-state: paused;
+  -webkit-animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
+          animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
+  -webkit-animation-play-state: paused;
+          animation-play-state: paused;
 }
 .rc-select-dropdown-slide-up-leave {
-  animation-duration: .3s;
-  animation-fill-mode: both;
+  -webkit-animation-duration: 0.3s;
+          animation-duration: 0.3s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
   transform-origin: 0 0;
   opacity: 1;
-  animation-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.34);
-  animation-play-state: paused;
+  -webkit-animation-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.34);
+          animation-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.34);
+  -webkit-animation-play-state: paused;
+          animation-play-state: paused;
 }
 .rc-select-dropdown-slide-up-enter.rc-select-dropdown-slide-up-enter-active.rc-select-dropdown-placement-bottomLeft,
 .rc-select-dropdown-slide-up-appear.rc-select-dropdown-slide-up-appear-active.rc-select-dropdown-placement-bottomLeft {
-  animation-name: rcSelectDropdownSlideUpIn;
-  animation-play-state: running;
+  -webkit-animation-name: rcSelectDropdownSlideUpIn;
+          animation-name: rcSelectDropdownSlideUpIn;
+  -webkit-animation-play-state: running;
+          animation-play-state: running;
 }
 .rc-select-dropdown-slide-up-leave.rc-select-dropdown-slide-up-leave-active.rc-select-dropdown-placement-bottomLeft {
-  animation-name: rcSelectDropdownSlideUpOut;
-  animation-play-state: running;
+  -webkit-animation-name: rcSelectDropdownSlideUpOut;
+          animation-name: rcSelectDropdownSlideUpOut;
+  -webkit-animation-play-state: running;
+          animation-play-state: running;
 }
 .rc-select-dropdown-slide-up-enter.rc-select-dropdown-slide-up-enter-active.rc-select-dropdown-placement-topLeft,
 .rc-select-dropdown-slide-up-appear.rc-select-dropdown-slide-up-appear-active.rc-select-dropdown-placement-topLeft {
-  animation-name: rcSelectDropdownSlideDownIn;
-  animation-play-state: running;
+  -webkit-animation-name: rcSelectDropdownSlideDownIn;
+          animation-name: rcSelectDropdownSlideDownIn;
+  -webkit-animation-play-state: running;
+          animation-play-state: running;
 }
 .rc-select-dropdown-slide-up-leave.rc-select-dropdown-slide-up-leave-active.rc-select-dropdown-placement-topLeft {
-  animation-name: rcSelectDropdownSlideDownOut;
-  animation-play-state: running;
+  -webkit-animation-name: rcSelectDropdownSlideDownOut;
+          animation-name: rcSelectDropdownSlideDownOut;
+  -webkit-animation-play-state: running;
+          animation-play-state: running;
+}
+@-webkit-keyframes rcSelectDropdownSlideUpIn {
+  0% {
+    opacity: 0;
+    transform-origin: 0% 0%;
+    transform: scaleY(0);
+  }
+  100% {
+    opacity: 1;
+    transform-origin: 0% 0%;
+    transform: scaleY(1);
+  }
 }
 @keyframes rcSelectDropdownSlideUpIn {
   0% {
@@ -389,6 +477,18 @@ li.rc-select-dropdown-menu-item-divider {
     opacity: 1;
     transform-origin: 0% 0%;
     transform: scaleY(1);
+  }
+}
+@-webkit-keyframes rcSelectDropdownSlideUpOut {
+  0% {
+    opacity: 1;
+    transform-origin: 0% 0%;
+    transform: scaleY(1);
+  }
+  100% {
+    opacity: 0;
+    transform-origin: 0% 0%;
+    transform: scaleY(0);
   }
 }
 @keyframes rcSelectDropdownSlideUpOut {
@@ -403,6 +503,18 @@ li.rc-select-dropdown-menu-item-divider {
     transform: scaleY(0);
   }
 }
+@-webkit-keyframes rcSelectDropdownSlideDownIn {
+  0% {
+    opacity: 0;
+    transform-origin: 0% 100%;
+    transform: scaleY(0);
+  }
+  100% {
+    opacity: 1;
+    transform-origin: 0% 100%;
+    transform: scaleY(1);
+  }
+}
 @keyframes rcSelectDropdownSlideDownIn {
   0% {
     opacity: 0;
@@ -413,6 +525,18 @@ li.rc-select-dropdown-menu-item-divider {
     opacity: 1;
     transform-origin: 0% 100%;
     transform: scaleY(1);
+  }
+}
+@-webkit-keyframes rcSelectDropdownSlideDownOut {
+  0% {
+    opacity: 1;
+    transform-origin: 0% 100%;
+    transform: scaleY(1);
+  }
+  100% {
+    opacity: 0;
+    transform-origin: 0% 100%;
+    transform: scaleY(0);
   }
 }
 @keyframes rcSelectDropdownSlideDownOut {
