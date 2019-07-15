@@ -807,4 +807,18 @@ describe('RangeCalendar', () => {
     expect(wrapper.find('CalendarPart').at(0).props().value.format(FORMAT)).toEqual('2000-01-01');
     expect(wrapper.find('CalendarPart').at(1).props().value.format(FORMAT)).toEqual('2000-02-01');
   });
+
+  it('render text correctly when range mode is both time', () => {
+    const RangeTimePicker = mount(
+      <RangeCalendar
+        mode={['time', 'time']}
+        timePicker={
+          <TimePickerPanel
+            defaultValue={[moment('00:00:00', 'HH:mm:ss'), moment('23:59:59', 'HH:mm:ss')]}
+          />
+        }
+      />,
+    );
+    expect(RangeTimePicker.find('.rc-calendar-time-picker-btn').text()).toBe('select date');
+  });
 });

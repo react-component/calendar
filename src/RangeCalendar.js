@@ -782,7 +782,7 @@ class RangeCalendar extends React.Component {
                 {props.timePicker ?
                   <TimePickerButton
                     {...props}
-                    showTimePicker={showTimePicker}
+                    showTimePicker={showTimePicker || (mode[0] === 'time' && mode[1] === 'time')}
                     onOpenTimePicker={this.onOpenTimePicker}
                     onCloseTimePicker={this.onCloseTimePicker}
                     timePickerDisabled={!this.hasSelectedValue() || hoverValue.length}
