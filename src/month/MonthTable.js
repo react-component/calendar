@@ -77,8 +77,8 @@ class MonthTable extends Component {
           testValue.month(monthData.value);
 
           if (props.disabledDate) {
-          disabled = props.disabledDate(testValue);
-        }
+            disabled = props.disabledDate(testValue);
+          }
 
           if (props.disabledMonth) {
             disabled = props.disabledMonth(testValue);
