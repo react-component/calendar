@@ -119,6 +119,18 @@ class Demo extends React.Component {
     return endValue.diff(startValue, 'days') < 0;
   }
 
+  disabledDate = (current) => {
+    if (!current) {
+      // allow empty select
+      return false;
+    }
+    const date = moment();
+    date.hour(0);
+    date.minute(0);
+    date.second(0);
+    return current.valueOf() < date.valueOf();  // can not select days before today
+  }
+
   render() {
     const state = this.state;
     return (
@@ -132,6 +144,7 @@ class Demo extends React.Component {
             open={this.state.startOpen}
             value={[state.startValue, state.endValue]}
             onChange={this.onStartChange}
+            disabledDate={ this.disabledDate}
           />
         </p>
 

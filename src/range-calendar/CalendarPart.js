@@ -18,6 +18,7 @@ export default class CalendarPart extends React.Component {
     format: PropTypes.any,
     placeholder: PropTypes.any,
     disabledDate: PropTypes.any,
+    disabledMonth: PropTypes.any,
     timePicker: PropTypes.any,
     disabledTime: PropTypes.any,
     onInputChange: PropTypes.func,
@@ -40,7 +41,7 @@ export default class CalendarPart extends React.Component {
       mode,
       direction,
       locale, format, placeholder,
-      disabledDate, timePicker, disabledTime,
+      disabledDate, timePicker, disabledTime, disabledMonth,
       timePickerDisabledTime, showTimePicker,
       onInputChange, onInputSelect, enablePrev, enableNext,
       clearIcon,
@@ -102,7 +103,8 @@ export default class CalendarPart extends React.Component {
             enablePrev={enablePrev}
             onValueChange={props.onValueChange}
             onPanelChange={props.onPanelChange}
-            disabledMonth={props.disabledMonth}
+            disabledMonth={disabledMonth}
+            disabledDate={disabledDate}
           />
           {showTimePicker ? <div className={`${prefixCls}-time-picker`}>
             <div className={`${prefixCls}-time-picker-panel`}>
@@ -118,6 +120,7 @@ export default class CalendarPart extends React.Component {
               onSelect={props.onSelect}
               onDayHover={props.onDayHover}
               disabledDate={disabledDate}
+              disabledMonth={disabledMonth}
               showWeekNumber={props.showWeekNumber}
             />
           </div>
