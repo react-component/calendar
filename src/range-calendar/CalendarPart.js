@@ -115,6 +115,7 @@ export default class CalendarPart extends React.Component {
               hoverValue={hoverValue}
               selectedValue={selectedValue}
               dateRender={props.dateRender}
+              contentRender={props.contentRender}
               onSelect={props.onSelect}
               onDayHover={props.onDayHover}
               disabledDate={disabledDate}
