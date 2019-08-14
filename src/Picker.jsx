@@ -150,7 +150,7 @@ class Picker extends React.Component {
     const extraProps = {
       ref: this.saveCalendarRef,
       defaultValue: defaultValue || calendarProps.defaultValue,
-      selectedValue: value,
+      selectedValue: value || calendarProps.selectedValue,
       onKeyDown: this.onCalendarKeyDown,
       onOk: createChainedFunction(calendarProps.onOk, this.onCalendarOk),
       onSelect: createChainedFunction(calendarProps.onSelect, this.onCalendarSelect),
