@@ -196,6 +196,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>whether has ok button in footer</td>
         </tr>
         <tr>
+          <td>showHourAndMinute</td>
+          <td>Boolean</td>
+          <td>auto</td>
+          <td>whether has hour-minute chooser in the right panel(for dtable date column)</td>
+        </tr>
+        <tr>
           <td>timePicker</td>
           <td>React Element</td>
           <td></td>
