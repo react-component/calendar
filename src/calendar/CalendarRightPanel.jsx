@@ -43,6 +43,7 @@ export default class CalendarRightPanel extends React.Component {
       times.push(str);
       times.push(str1);
     }
+    const highlightTime = this.state.highlightTime ? this.state.highlightTime.format().slice(11, 16) : null;
     return (
       <div className={`${prefixCls}-right-panel`}>
         <div className={`${prefixCls}-right-panel-header`} onClick={this.scrollUp}>
@@ -52,12 +53,11 @@ export default class CalendarRightPanel extends React.Component {
           <ul>
             {times.map((time) => {
               const current = moment(selectedDate + ' ' + time);
-              const isHightlight = current.isSame(this.state.highlightTime) ? 'highlight' : '';
               return (
                 <li
                   key={time}
-                  onClick={this.onSelect.bind(null, current)}
-                  className={`${isHightlight}`}
+                  onClick={this.onSelect.bind(this, current)}
+                  className={`${highlightTime === time ? 'highlight' : ''}`}
                 >{time}</li>
               );
             })}

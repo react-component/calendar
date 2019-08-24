@@ -390,7 +390,7 @@ class Calendar extends React.Component {
           onCloseTimePicker={this.closeTimePicker}
         />
       </div>
-      {showTimeAndHour &&
+      {!showTimeAndHour &&
         <CalendarRightPanel
           prefixCls={prefixCls}
           value={value}
