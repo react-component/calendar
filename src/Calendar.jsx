@@ -6,6 +6,7 @@ import { polyfill } from 'react-lifecycles-compat';
 import DateTable from './date/DateTable';
 import CalendarHeader from './calendar/CalendarHeader';
 import CalendarFooter from './calendar/CalendarFooter';
+import CalendarRightPanel from './calendar/CalendarRightPanel';
 import {
   calendarMixinWrapper,
   calendarMixinPropTypes,
@@ -45,6 +46,7 @@ class Calendar extends React.Component {
     showWeekNumber: PropTypes.bool,
     showToday: PropTypes.bool,
     showOk: PropTypes.bool,
+    showTimeAndHour: PropTypes.bool,
     onSelect: PropTypes.func,
     onOk: PropTypes.func,
     onKeyDown: PropTypes.func,
@@ -69,6 +71,7 @@ class Calendar extends React.Component {
     ...defaultProp,
     showToday: true,
     showDateInput: true,
+    showTimeAndHour: false,
     timePicker: null,
     onOk: noop,
     onPanelChange: noop,
@@ -274,7 +277,7 @@ class Calendar extends React.Component {
     const {
       locale, prefixCls, disabledDate,
       dateInputPlaceholder, timePicker,
-      disabledTime, clearIcon, renderFooter, inputMode,
+      disabledTime, clearIcon, renderFooter, inputMode, showTimeAndHour,
     } = props;
     const { value, selectedValue, mode } = state;
     const showTimePicker = mode === 'time';
@@ -328,6 +331,7 @@ class Calendar extends React.Component {
     }
     children.push(<div className={`${prefixCls}-panel`} key="panel">
       {dateInputElement}
+      <div className={`${prefixCls}-date-panel-container`}>
       <div
         tabIndex={this.props.focusablePanel ? 0 : undefined}
         className={`${prefixCls}-date-panel`}
@@ -386,6 +390,14 @@ class Calendar extends React.Component {
           onCloseTimePicker={this.closeTimePicker}
         />
       </div>
+      {showTimeAndHour &&
+        <CalendarRightPanel
+          prefixCls={prefixCls}
+          value={value}
+          onSelect={this.onDateTableSelect}
+        />
+      }
+    </div>
     </div>);
 
     return this.renderRoot({

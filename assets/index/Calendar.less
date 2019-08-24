@@ -2,7 +2,7 @@
   position: relative;
   outline: none;
   font-family: Arial, "Hiragino Sans GB", "Microsoft Yahei", "Microsoft Sans Serif", "WenQuanYi Micro Hei", sans-serif;
-  width: 253px;
+  width: fit-content;
   border: 1px solid #ccc;
   list-style: none;
   font-size: 12px;
@@ -14,9 +14,15 @@
   border: 1px solid #ccc;
   line-height: 1.5;
 
+
+  &-date-panel, &-date-panel-container {
+    display: flex;
+  }
+
   &-date-panel, &-panel {
     position: relative;
     outline: none;
+    display: block;
   }
 
   &-week-number {
@@ -125,6 +131,66 @@
   &-body {
     padding: 9px 10px 10px;
     height: 217px;
+  }
+
+  &-right-panel {
+    width: 68px;
+    height: inherit;
+  }
+
+  &-right-panel-header {
+    height: 34px;
+    line-height: 34px;
+    span {
+      transform: rotate(-90deg);
+    }
+  }
+
+  &-right-panel-body {
+    height: 217px;
+    border-left: 1px solid #ccc;
+    overflow-y: scroll;
+    ul {
+      list-style: none;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+    }
+    ul li {
+      text-align: center;
+      padding: 8px 0;
+      cursor: pointer;
+    }
+    ul li:hover {
+      color: #e8bf6a;
+    }
+    ul li.highlight {
+      color: #f09f3f;
+    }
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+  }
+
+  &-right-panel-footer {
+    height: 39px;
+    line-height: 34px;
+    border-left: 1px solid #ccc;
+    span {
+      transform: rotate(90deg);
+    }
+  }
+
+  &-right-panel-header, &-right-panel-footer {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    color: #999;
+    font-size: 16px;
+    span:after {
+      content: '›';
+    }
   }
 
   table {

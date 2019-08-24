@@ -1,13 +1,13 @@
 /* eslint react/no-multi-comp:0, no-console:0, react/prop-types:0 */
 
-import 'rc-calendar/assets/index.less';
+import '@seafile/seafile-calendar/assets/index.less';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import RangeCalendar from 'rc-calendar/src/RangeCalendar';
-import DatePicker from 'rc-calendar/src/Picker';
+import RangeCalendar from '@seafile/seafile-calendar/src/RangeCalendar';
+import DatePicker from '@seafile/seafile-calendar/src/Picker';
 
-import zhCN from 'rc-calendar/src/locale/zh_CN';
-import enUS from 'rc-calendar/src/locale/en_US';
+import zhCN from '@seafile/seafile-calendar/src/locale/zh_CN';
+import enUS from '@seafile/seafile-calendar/src/locale/en_US';
 
 import moment from 'moment';
 import 'moment/locale/zh-cn';

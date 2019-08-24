@@ -1,13 +1,13 @@
 /* eslint react/no-multi-comp:0, no-console:0 */
 
-import 'rc-calendar/assets/index.less';
+import '@seafile/seafile-calendar/assets/index.less';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import Calendar from 'rc-calendar';
-import DatePicker from 'rc-calendar/src/Picker';
-import zhCN from 'rc-calendar/src/locale/zh_CN';
-import enUS from 'rc-calendar/src/locale/en_US';
+import Calendar from '@seafile/seafile-calendar';
+import DatePicker from '@seafile/seafile-calendar/src/Picker';
+import zhCN from '@seafile/seafile-calendar/src/locale/zh_CN';
+import enUS from '@seafile/seafile-calendar/src/locale/en_US';
 
 import moment from 'moment';
 import 'moment/locale/zh-cn';
@@ -27,13 +27,13 @@ const style = `
 .week-calendar {
   width: 386px;
 }
-.week-calendar .rc-calendar-tbody > tr:hover
-.rc-calendar-date {
+.week-calendar .@seafile/seafile-calendar-tbody > tr:hover
+.@seafile/seafile-calendar-date {
   background: #ebfaff;
 }
 
-.week-calendar .rc-calendar-tbody > tr:hover
-.rc-calendar-selected-day .rc-calendar-date {
+.week-calendar .@seafile/seafile-calendar-tbody > tr:hover
+.@seafile/seafile-calendar-selected-day .@seafile/seafile-calendar-date {
     background: #3fc7fa;
 }
 
@@ -45,7 +45,7 @@ const style = `
   width:100px;
   border-right: 1px solid #ccc;
 }
-.week-calendar .rc-calendar-panel {
+.week-calendar .@seafile/seafile-calendar-panel {
   margin-left: 100px;
 }
 `;
@@ -78,14 +78,14 @@ class Demo extends React.Component {
     const selectedValue = this.state.value;
     if (selectedValue && current.year() === selectedValue.year() &&
       current.week() === selectedValue.week()) {
-      return (<div className="rc-calendar-selected-day">
-        <div className="rc-calendar-date">
+      return (<div className="@seafile/seafile-calendar-selected-day">
+        <div className="@seafile/seafile-calendar-date">
           {current.date()}
         </div>
       </div>);
     }
     return (
-      <div className="rc-calendar-date">
+      <div className="@seafile/seafile-calendar-date">
         {current.date()}
       </div>);
   }

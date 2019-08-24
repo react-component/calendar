@@ -1,6 +1,6 @@
 {
-  "name": "rc-calendar",
-  "version": "9.15.5",
+  "name": "@seafile/seafile-calendar",
+  "version": "0.0.3",
   "description": "React Calendar",
   "keywords": [
     "react",
@@ -20,14 +20,14 @@
   ],
   "main": "lib/index",
   "module": "es/index",
-  "homepage": "http://github.com/react-component/calendar",
-  "author": "yiminghe@gmail.com",
+  "homepage": "https://github.com/seafileltd/calendar",
+  "author": "seafile",
   "repository": {
     "type": "git",
-    "url": "git@github.com:react-component/calendar.git"
+    "url": "https://github.com/seafileltd/calendar.git"
   },
   "bugs": {
-    "url": "http://github.com/react-component/calendar/issues"
+    "url": "https://github.com/seafileltd/calendar/issues"
   },
   "licenses": "MIT",
   "config": {
