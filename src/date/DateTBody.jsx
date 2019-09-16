@@ -1,5 +1,4 @@
 import React from 'react';
-import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import DateConstants from './DateConstants';
@@ -35,8 +34,8 @@ function getIdFromDate(date) {
   return `rc-calendar-${date.year()}-${date.month()}-${date.date()}`;
 }
 
-const DateTBody = createReactClass({
-  propTypes: {
+export default class DateTBody extends React.Component {
+  static propTypes = {
     contentRender: PropTypes.func,
     dateRender: PropTypes.func,
     disabledDate: PropTypes.func,
@@ -45,13 +44,11 @@ const DateTBody = createReactClass({
     value: PropTypes.object,
     hoverValue: PropTypes.any,
     showWeekNumber: PropTypes.bool,
-  },
+  }
 
-  getDefaultProps() {
-    return {
-      hoverValue: [],
-    };
-  },
+  static defaultProps = {
+    hoverValue: [],
+  }
 
   render() {
     const props = this.props;
@@ -157,11 +154,17 @@ const DateTBody = createReactClass({
                 cls += ` ${selectedStartDateClass}`;
               }
             }
-            if (startValue && endValue) {
+            if (startValue || endValue) {
               if (isSameDay(current, endValue)) {
                 selected = true;
                 isActiveWeek = true;
                 cls += ` ${selectedEndDateClass}`;
+              } else if ((startValue === null || startValue === undefined) &&
+                current.isBefore(endValue, 'day')) {
+                cls += ` ${inRangeClass}`;
+              } else if ((endValue === null || endValue === undefined) &&
+                current.isAfter(startValue, 'day')) {
+                cls += ` ${inRangeClass}`;
               } else if (current.isAfter(startValue, 'day') &&
                 current.isBefore(endValue, 'day')) {
                 cls += ` ${inRangeClass}`;
@@ -259,7 +262,5 @@ const DateTBody = createReactClass({
     return (<tbody className={`${prefixCls}-tbody`}>
       {tableHtml}
     </tbody>);
-  },
-});
-
-export default DateTBody;
+  }
+}

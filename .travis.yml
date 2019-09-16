@@ -8,7 +8,7 @@ notifications:
   - hust2012jiangkai@gmail.com
 
 node_js:
-- 6.9.1
+- 10
 
 before_install:
 - |
@@ -31,4 +31,3 @@ env:
   matrix:
   - TEST_TYPE=lint
   - TEST_TYPE=test
-  - TEST_TYPE=types

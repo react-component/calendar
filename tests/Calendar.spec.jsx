@@ -33,6 +33,13 @@ describe('Calendar', () => {
       expect(enWrapperWithMonthFormatWrapper).toMatchSnapshot();
     });
 
+    it('render correctly with invalid moment object', () => {
+      const enWrapper = render(
+          <Calendar locale={enUS} defaultValue={moment('invalid').locale('en')} />
+      );
+      expect(enWrapper).toMatchSnapshot();
+    });
+
     it('render showToday false correctly', () => {
       const wrapper = mount(<Calendar showToday={false}/>);
       expect(wrapper.find('.rc-calendar-today-btn').length).toBe(0);
@@ -84,6 +91,18 @@ describe('Calendar', () => {
       expect(
         wrapper.find('.rc-calendar-input').at(0).getDOMNode().value
       ).toBe('3/8/2017 06:00:00');
+    });
+    it('timePicker date have no changes when hover', () => {
+      const timePicker = <TimePickerPanel defaultValue={moment('00:00:00', 'HH:mm:ss')} />;
+      const wrapper = mount(<Calendar timePicker={timePicker} />);
+      wrapper.find('.rc-calendar-time-picker-btn').simulate('click');
+      const dateBtns = wrapper.find('.rc-calendar-my-select a');
+      const btnClassName = 'rc-calendar-time-status';
+      for (let i = 0; i < dateBtns.length; i += 1) {
+        dateBtns.at(i).simulate('mouseEnter');
+        expect(dateBtns.get(i).props.title).toBeFalsy();
+        expect(dateBtns.get(i).props.className).toEqual(expect.stringContaining(btnClassName));
+      }
     });
   });
 
@@ -460,6 +479,43 @@ describe('Calendar', () => {
       expect(calendar.find('.rc-calendar-decade-panel').hostNodes().length).toBe(1);
       expect(calendar.find('.rc-calendar-decade-panel-decade').hostNodes().length).toBe(12);
     });
+
+    it('numeric keyboard works', () => {
+      const newCalendar = mount(<Calendar inputMode="numeric" />);
+      expect(newCalendar.find('.rc-calendar-input').props().inputMode).toBe('numeric');
+    });
+
+    it('extra footer works', () => {
+      const renderFooter = (mode) => (<span className="extra-node">{mode}</span>);
+
+      calendar = mount(
+        <Calendar
+          format={format}
+          showToday
+          showWeekNumber
+          renderFooter={renderFooter}
+        />
+      );
+
+      let extraNode = calendar.find('.extra-node');
+      expect(extraNode.length).toBe(1);
+      expect(extraNode.text()).toBe('date');
+
+      calendar.find('.rc-calendar-month-select').hostNodes().simulate('click');
+      extraNode = calendar.find('.rc-calendar-month-panel .extra-node');
+      expect(extraNode.length).toBe(1);
+      expect(extraNode.text()).toBe('month');
+
+      calendar.find('.rc-calendar-year-select').hostNodes().simulate('click');
+      extraNode = calendar.find('.rc-calendar-year-panel .extra-node');
+      expect(extraNode.length).toBe(1);
+      expect(extraNode.text()).toBe('year');
+
+      calendar.find('.rc-calendar-year-panel-decade-select').hostNodes().simulate('click');
+      extraNode = calendar.find('.rc-calendar-decade-panel .extra-node');
+      expect(extraNode.length).toBe(1);
+      expect(extraNode.text()).toBe('decade');
+    });
   });
 
 
@@ -482,6 +538,52 @@ describe('Calendar', () => {
       expect(onSelect.mock.calls[0][0].format(format)).toBe(expected);
       expect(onChange.mock.calls[0][0].format(format)).toBe(expected);
     });
+
+    it('supports an array of formats when parsing and formats using the first format', () => {
+      const expected = '21/01/2017';
+      const value = '21/01/17';
+
+      const onSelect = jest.fn();
+      const onChange = jest.fn();
+
+      const calendar = mount(<Calendar
+        format={['DD/MM/YYYY', 'DD/MM/YY']}
+        showToday
+        onSelect={onSelect}
+        onChange={onChange}
+      />);
+      const input = calendar.find('.rc-calendar-input').hostNodes().at(0);
+      input.simulate('change', { target: { value } });
+
+      expect(onSelect.mock.calls[0][0].format('DD/MM/YYYY')).toBe(expected);
+      expect(onChange.mock.calls[0][0].format('DD/MM/YYYY')).toBe(expected);
+    });
+
+    it('only reformat the date when the input loses focus', () => {
+      const value = '21/01/17';
+
+      const onSelect = jest.fn();
+      const onChange = jest.fn();
+
+      const calendar = mount(<Calendar
+        format={['DD/MM/YYYY', 'DD/MM/YY']}
+        showToday
+        onSelect={onSelect}
+        onChange={onChange}
+      />);
+
+      const input = calendar.find('.rc-calendar-input').hostNodes().at(0);
+      input.simulate('focus');
+      input.simulate('change', { target: { value } });
+
+      let inputValue = calendar.find('.rc-calendar-input').props().value;
+      expect(inputValue).toBe('21/01/17');
+
+      input.simulate('blur');
+
+      inputValue = calendar.find('.rc-calendar-input').props().value;
+      expect(inputValue).toBe('21/01/2017');
+    });
   });
 
   it('handle clear', () => {
@@ -503,6 +605,16 @@ describe('Calendar', () => {
       );
       calendar.find('.rc-calendar-ok-btn').simulate('click');
       expect(handleOk).toHaveBeenCalledWith(selected);
+    });
+
+    it('Ok Button disabled', () => {
+      const calendar = mount(
+        <Calendar showOk />
+      );
+
+      expect(
+        calendar.find('OkButton').props().okDisabled
+      ).toBe(true);
     });
 
     it('does not triggers onOk if selected date is disabled', () => {

@@ -16,5 +16,6 @@ export default () => (
     onChange={action}
     disabledDate={(now: moment.Moment) => false}
     onSelect={action}
+    inputMode="numeric"
   />
 );

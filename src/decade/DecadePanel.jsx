@@ -21,8 +21,7 @@ function chooseDecade(year, event) {
   event.preventDefault();
 }
 
-export default
-class DecadePanel extends React.Component {
+export default class DecadePanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -37,8 +36,7 @@ class DecadePanel extends React.Component {
 
   render() {
     const value = this.state.value;
-    const locale = this.props.locale;
-    const calendarType = this.props.calendarType;
+    const { locale, renderFooter, calendarType } = this.props;
     const currentYear = value.year();
     const startYear = parseInt(currentYear / 100, 10) * 100;
     const preYear = startYear - 10;
@@ -59,6 +57,8 @@ class DecadePanel extends React.Component {
         index++;
       }
     }
+
+    const footer = renderFooter && renderFooter('decade');
 
     const decadesEls = decades.map((row, decadeIndex) => {
       const tds = row.map(decadeData => {
@@ -123,10 +123,15 @@ class DecadePanel extends React.Component {
         <div className={`${prefixCls}-body`}>
           <table className={`${prefixCls}-table`} cellSpacing="0" role="grid">
             <tbody className={`${prefixCls}-tbody`}>
-            {decadesEls}
+              {decadesEls}
             </tbody>
           </table>
         </div>
+
+        {footer && (
+          <div className={`${prefixCls}-footer`}>
+            {footer}
+          </div>)}
       </div>);
   }
 }
@@ -137,6 +142,7 @@ DecadePanel.propTypes = {
   defaultValue: PropTypes.object,
   rootPrefixCls: PropTypes.string,
   calendarType: PropTypes.any,
+  renderFooter: PropTypes.func,
 };
 
 DecadePanel.defaultProps = {

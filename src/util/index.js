@@ -49,6 +49,7 @@ export function syncTime(from, to) {
   to.hour(from.hour());
   to.minute(from.minute());
   to.second(from.second());
+  to.millisecond(from.millisecond());
 }
 
 export function getTimeConfig(value, disabledTime) {
@@ -117,4 +118,16 @@ export function getMonthValue(month) {
 
 export function getDateString(value, calendarType) {
   return calendarType === 'jalali' ? value.format('jD') : value.format('D');
+}
+
+export function formatDate(value, format) {
+  if (!value) {
+    return '';
+  }
+
+  if (Array.isArray(format)) {
+    format = format[0];
+  }
+
+  return value.format(format);
 }

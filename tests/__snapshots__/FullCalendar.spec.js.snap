@@ -711,6 +711,7 @@ exports[`FullCalendar renders date mode correctly 1`] = `
     >
       <div
         aria-autocomplete="list"
+        aria-controls=""
         aria-expanded="false"
         aria-haspopup="true"
         class="rc-select-selection
@@ -732,9 +733,11 @@ exports[`FullCalendar renders date mode correctly 1`] = `
         <span
           class="rc-select-arrow"
           style="user-select:none;-webkit-user-select:none"
-          unselectable="unselectable"
+          unselectable="on"
         >
-          <b />
+          <i
+            class="rc-select-arrow-icon"
+          />
         </span>
       </div>
     </div>
@@ -743,6 +746,7 @@ exports[`FullCalendar renders date mode correctly 1`] = `
     >
       <div
         aria-autocomplete="list"
+        aria-controls=""
         aria-expanded="false"
         aria-haspopup="true"
         class="rc-select-selection
@@ -756,7 +760,7 @@ exports[`FullCalendar renders date mode correctly 1`] = `
           <div
             class="rc-select-selection-selected-value"
             style="display:block;opacity:1"
-            title="2017"
+            title=""
           >
             2017
           </div>
@@ -764,9 +768,11 @@ exports[`FullCalendar renders date mode correctly 1`] = `
         <span
           class="rc-select-arrow"
           style="user-select:none;-webkit-user-select:none"
-          unselectable="unselectable"
+          unselectable="on"
         >
-          <b />
+          <i
+            class="rc-select-arrow-icon"
+          />
         </span>
       </div>
     </div>
@@ -1474,6 +1480,7 @@ exports[`FullCalendar renders fullscreen correctly 1`] = `
     >
       <div
         aria-autocomplete="list"
+        aria-controls=""
         aria-expanded="false"
         aria-haspopup="true"
         class="rc-select-selection
@@ -1495,9 +1502,11 @@ exports[`FullCalendar renders fullscreen correctly 1`] = `
         <span
           class="rc-select-arrow"
           style="user-select:none;-webkit-user-select:none"
-          unselectable="unselectable"
+          unselectable="on"
         >
-          <b />
+          <i
+            class="rc-select-arrow-icon"
+          />
         </span>
       </div>
     </div>
@@ -1506,6 +1515,7 @@ exports[`FullCalendar renders fullscreen correctly 1`] = `
     >
       <div
         aria-autocomplete="list"
+        aria-controls=""
         aria-expanded="false"
         aria-haspopup="true"
         class="rc-select-selection
@@ -1519,7 +1529,7 @@ exports[`FullCalendar renders fullscreen correctly 1`] = `
           <div
             class="rc-select-selection-selected-value"
             style="display:block;opacity:1"
-            title="2017"
+            title=""
           >
             2017
           </div>
@@ -1527,9 +1537,11 @@ exports[`FullCalendar renders fullscreen correctly 1`] = `
         <span
           class="rc-select-arrow"
           style="user-select:none;-webkit-user-select:none"
-          unselectable="unselectable"
+          unselectable="on"
         >
-          <b />
+          <i
+            class="rc-select-arrow-icon"
+          />
         </span>
       </div>
     </div>
@@ -2237,6 +2249,7 @@ exports[`FullCalendar renders month mode correctly 1`] = `
     >
       <div
         aria-autocomplete="list"
+        aria-controls=""
         aria-expanded="false"
         aria-haspopup="true"
         class="rc-select-selection
@@ -2250,7 +2263,7 @@ exports[`FullCalendar renders month mode correctly 1`] = `
           <div
             class="rc-select-selection-selected-value"
             style="display:block;opacity:1"
-            title="2017"
+            title=""
           >
             2017
           </div>
@@ -2258,9 +2271,11 @@ exports[`FullCalendar renders month mode correctly 1`] = `
         <span
           class="rc-select-arrow"
           style="user-select:none;-webkit-user-select:none"
-          unselectable="unselectable"
+          unselectable="on"
         >
-          <b />
+          <i
+            class="rc-select-arrow-icon"
+          />
         </span>
       </div>
     </div>
@@ -2457,6 +2472,7 @@ exports[`FullCalendar type renders defaultType correctly 1`] = `
     >
       <div
         aria-autocomplete="list"
+        aria-controls=""
         aria-expanded="false"
         aria-haspopup="true"
         class="rc-select-selection
@@ -2478,9 +2494,11 @@ exports[`FullCalendar type renders defaultType correctly 1`] = `
         <span
           class="rc-select-arrow"
           style="user-select:none;-webkit-user-select:none"
-          unselectable="unselectable"
+          unselectable="on"
         >
-          <b />
+          <i
+            class="rc-select-arrow-icon"
+          />
         </span>
       </div>
     </div>
@@ -2489,6 +2507,7 @@ exports[`FullCalendar type renders defaultType correctly 1`] = `
     >
       <div
         aria-autocomplete="list"
+        aria-controls=""
         aria-expanded="false"
         aria-haspopup="true"
         class="rc-select-selection
@@ -2502,7 +2521,7 @@ exports[`FullCalendar type renders defaultType correctly 1`] = `
           <div
             class="rc-select-selection-selected-value"
             style="display:block;opacity:1"
-            title="2017"
+            title=""
           >
             2017
           </div>
@@ -2510,9 +2529,11 @@ exports[`FullCalendar type renders defaultType correctly 1`] = `
         <span
           class="rc-select-arrow"
           style="user-select:none;-webkit-user-select:none"
-          unselectable="unselectable"
+          unselectable="on"
         >
-          <b />
+          <i
+            class="rc-select-arrow-icon"
+          />
         </span>
       </div>
     </div>

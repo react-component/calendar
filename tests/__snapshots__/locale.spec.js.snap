@@ -20,13 +20,17 @@ exports[`locales renders ar_EG correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="مسح"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -785,13 +789,17 @@ exports[`locales renders bg_BG correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Изчистване"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -1550,13 +1558,17 @@ exports[`locales renders ca_ES correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Netejar"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -2315,13 +2327,17 @@ exports[`locales renders cs_CZ correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Vymazat"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -3080,13 +3096,17 @@ exports[`locales renders da_DK correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Annuller"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -3845,13 +3865,17 @@ exports[`locales renders de_DE correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Zurücksetzen"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -4610,13 +4634,17 @@ exports[`locales renders el_GR correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Καθαρισμός"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -5375,13 +5403,17 @@ exports[`locales renders en_GB correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Clear"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -6140,13 +6172,17 @@ exports[`locales renders en_US correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Clear"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -6905,13 +6941,17 @@ exports[`locales renders es_ES correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Limpiar"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -7670,13 +7710,17 @@ exports[`locales renders et_EE correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Tühista"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -8435,13 +8479,17 @@ exports[`locales renders fa_IR correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="پاک کردن"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -9200,13 +9248,17 @@ exports[`locales renders fi_FI correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Tyhjennä"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -9965,13 +10017,17 @@ exports[`locales renders fr_BE correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Rétablir"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -10730,13 +10786,17 @@ exports[`locales renders fr_FR correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Rétablir"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -11495,13 +11555,17 @@ exports[`locales renders hu_HU correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Törlés"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -12260,13 +12324,17 @@ exports[`locales renders is_IS correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Hreinsa"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -13025,13 +13093,17 @@ exports[`locales renders it_IT correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
-        title="Chiaro"
-      />
+        title="Cancella"
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -13055,14 +13127,14 @@ exports[`locales renders it_IT correctly 1`] = `
             <a
               class="rc-calendar-month-select"
               role="button"
-              title="Seleziona la data"
+              title="Seleziona il mese"
             >
               Mar
             </a>
             <a
               class="rc-calendar-year-select"
               role="button"
-              title="Scegli un anno"
+              title="Seleziona l'anno"
             >
               2017
             </a>
@@ -13790,13 +13862,17 @@ exports[`locales renders ja_JP correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="クリア"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -14555,13 +14631,17 @@ exports[`locales renders ko_KR correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="지우기"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -15320,13 +15400,17 @@ exports[`locales renders ku_IQ correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Paqij bike"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -16085,13 +16169,17 @@ exports[`locales renders nb_NO correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Annuller"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -16850,13 +16938,17 @@ exports[`locales renders nl_BE correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Reset"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -17615,13 +17707,17 @@ exports[`locales renders nl_NL correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Reset"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -18380,13 +18476,17 @@ exports[`locales renders pl_PL correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Wyczyść"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -19145,13 +19245,17 @@ exports[`locales renders pt_BR correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Limpar"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -19910,13 +20014,17 @@ exports[`locales renders pt_PT correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Limpar"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -20675,13 +20783,17 @@ exports[`locales renders ru_RU correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Очистить"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -21440,13 +21552,17 @@ exports[`locales renders sk_SK correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Vymazať"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -22205,13 +22321,17 @@ exports[`locales renders sl_SI correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Počisti"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -22970,13 +23090,17 @@ exports[`locales renders sr_RS correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Obriši"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -23735,13 +23859,17 @@ exports[`locales renders sv_SE correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Avbryt"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -24500,13 +24628,17 @@ exports[`locales renders th_TH correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="ลบล้าง"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -25265,13 +25397,17 @@ exports[`locales renders tr_TR correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Temizle"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -26030,13 +26166,17 @@ exports[`locales renders ug_CN correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="تازىلاش"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -26795,13 +26935,17 @@ exports[`locales renders uk_UA correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="Очистити"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -27540,6 +27684,775 @@ exports[`locales renders uk_UA correctly 1`] = `
 </div>
 `;
 
+exports[`locales renders vi_VN correctly 1`] = `
+<div
+  class="rc-calendar"
+  tabindex="0"
+>
+  <div
+    class="rc-calendar-panel"
+  >
+    <div
+      class="rc-calendar-input-wrap"
+    >
+      <div
+        class="rc-calendar-date-input-wrap"
+      >
+        <input
+          class="rc-calendar-input "
+          value=""
+        />
+      </div>
+      <a
+        role="button"
+        title="Xóa"
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
+    </div>
+    <div
+      class="rc-calendar-date-panel"
+      tabindex="0"
+    >
+      <div
+        class="rc-calendar-header"
+      >
+        <div
+          style="position:relative"
+        >
+          <a
+            class="rc-calendar-prev-year-btn"
+            role="button"
+            title="Năm trước (Control + left)"
+          />
+          <a
+            class="rc-calendar-prev-month-btn"
+            role="button"
+            title="Tháng trước (PageUp)"
+          />
+          <span
+            class="rc-calendar-my-select"
+          >
+            <a
+              class="rc-calendar-month-select"
+              role="button"
+              title="Chọn tháng"
+            >
+              Mar
+            </a>
+            <a
+              class="rc-calendar-year-select"
+              role="button"
+              title="Chọn năm"
+            >
+              2017
+            </a>
+          </span>
+          <a
+            class="rc-calendar-next-month-btn"
+            title="Tháng sau (PageDown)"
+          />
+          <a
+            class="rc-calendar-next-year-btn"
+            title="Năm sau (Control + right)"
+          />
+        </div>
+      </div>
+      <div
+        class="rc-calendar-body"
+      >
+        <table
+          cellspacing="0"
+          class="rc-calendar-table"
+          role="grid"
+        >
+          <thead>
+            <tr
+              role="row"
+            >
+              <th
+                class="rc-calendar-column-header"
+                role="columnheader"
+                title="Sun"
+              >
+                <span
+                  class="rc-calendar-column-header-inner"
+                >
+                  Su
+                </span>
+              </th>
+              <th
+                class="rc-calendar-column-header"
+                role="columnheader"
+                title="Mon"
+              >
+                <span
+                  class="rc-calendar-column-header-inner"
+                >
+                  Mo
+                </span>
+              </th>
+              <th
+                class="rc-calendar-column-header"
+                role="columnheader"
+                title="Tue"
+              >
+                <span
+                  class="rc-calendar-column-header-inner"
+                >
+                  Tu
+                </span>
+              </th>
+              <th
+                class="rc-calendar-column-header"
+                role="columnheader"
+                title="Wed"
+              >
+                <span
+                  class="rc-calendar-column-header-inner"
+                >
+                  We
+                </span>
+              </th>
+              <th
+                class="rc-calendar-column-header"
+                role="columnheader"
+                title="Thu"
+              >
+                <span
+                  class="rc-calendar-column-header-inner"
+                >
+                  Th
+                </span>
+              </th>
+              <th
+                class="rc-calendar-column-header"
+                role="columnheader"
+                title="Fri"
+              >
+                <span
+                  class="rc-calendar-column-header-inner"
+                >
+                  Fr
+                </span>
+              </th>
+              <th
+                class="rc-calendar-column-header"
+                role="columnheader"
+                title="Sat"
+              >
+                <span
+                  class="rc-calendar-column-header-inner"
+                >
+                  Sa
+                </span>
+              </th>
+            </tr>
+          </thead>
+          <tbody
+            class="rc-calendar-tbody"
+          >
+            <tr
+              class=""
+              role="row"
+            >
+              <td
+                class="rc-calendar-cell rc-calendar-last-month-cell"
+                role="gridcell"
+                title="February 26, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  26
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell rc-calendar-last-month-cell"
+                role="gridcell"
+                title="February 27, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  27
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell rc-calendar-last-month-cell rc-calendar-last-day-of-month"
+                role="gridcell"
+                title="February 28, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  28
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell"
+                role="gridcell"
+                title="March 1, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  1
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell"
+                role="gridcell"
+                title="March 2, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  2
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell"
+                role="gridcell"
+                title="March 3, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  3
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell"
+                role="gridcell"
+                title="March 4, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  4
+                </div>
+              </td>
+            </tr>
+            <tr
+              class=""
+              role="row"
+            >
+              <td
+                class="rc-calendar-cell"
+                role="gridcell"
+                title="March 5, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  5
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell"
+                role="gridcell"
+                title="March 6, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  6
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell"
+                role="gridcell"
+                title="March 7, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  7
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell"
+                role="gridcell"
+                title="March 8, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  8
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell"
+                role="gridcell"
+                title="March 9, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  9
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell"
+                role="gridcell"
+                title="March 10, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  10
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell"
+                role="gridcell"
+                title="March 11, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  11
+                </div>
+              </td>
+            </tr>
+            <tr
+              class=""
+              role="row"
+            >
+              <td
+                class="rc-calendar-cell"
+                role="gridcell"
+                title="March 12, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  12
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell"
+                role="gridcell"
+                title="March 13, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  13
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell"
+                role="gridcell"
+                title="March 14, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  14
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell"
+                role="gridcell"
+                title="March 15, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  15
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell"
+                role="gridcell"
+                title="March 16, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  16
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell"
+                role="gridcell"
+                title="March 17, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  17
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell"
+                role="gridcell"
+                title="March 18, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  18
+                </div>
+              </td>
+            </tr>
+            <tr
+              class=""
+              role="row"
+            >
+              <td
+                class="rc-calendar-cell"
+                role="gridcell"
+                title="March 19, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  19
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell"
+                role="gridcell"
+                title="March 20, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  20
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell"
+                role="gridcell"
+                title="March 21, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  21
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell"
+                role="gridcell"
+                title="March 22, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  22
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell"
+                role="gridcell"
+                title="March 23, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  23
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell"
+                role="gridcell"
+                title="March 24, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  24
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell"
+                role="gridcell"
+                title="March 25, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  25
+                </div>
+              </td>
+            </tr>
+            <tr
+              class="rc-calendar-current-week rc-calendar-active-week"
+              role="row"
+            >
+              <td
+                class="rc-calendar-cell"
+                role="gridcell"
+                title="March 26, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  26
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell"
+                role="gridcell"
+                title="March 27, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  27
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell"
+                role="gridcell"
+                title="March 28, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  28
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell rc-calendar-today rc-calendar-selected-day"
+                role="gridcell"
+                title="March 29, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="true"
+                  class="rc-calendar-date"
+                >
+                  29
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell"
+                role="gridcell"
+                title="March 30, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  30
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell rc-calendar-last-day-of-month"
+                role="gridcell"
+                title="March 31, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  31
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell rc-calendar-next-month-btn-day"
+                role="gridcell"
+                title="April 1, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  1
+                </div>
+              </td>
+            </tr>
+            <tr
+              class=""
+              role="row"
+            >
+              <td
+                class="rc-calendar-cell rc-calendar-next-month-btn-day"
+                role="gridcell"
+                title="April 2, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  2
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell rc-calendar-next-month-btn-day"
+                role="gridcell"
+                title="April 3, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  3
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell rc-calendar-next-month-btn-day"
+                role="gridcell"
+                title="April 4, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  4
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell rc-calendar-next-month-btn-day"
+                role="gridcell"
+                title="April 5, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  5
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell rc-calendar-next-month-btn-day"
+                role="gridcell"
+                title="April 6, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  6
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell rc-calendar-next-month-btn-day"
+                role="gridcell"
+                title="April 7, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  7
+                </div>
+              </td>
+              <td
+                class="rc-calendar-cell rc-calendar-next-month-btn-day"
+                role="gridcell"
+                title="April 8, 2017"
+              >
+                <div
+                  aria-disabled="false"
+                  aria-selected="false"
+                  class="rc-calendar-date"
+                >
+                  8
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div
+        class="rc-calendar-footer"
+      >
+        <span
+          class="rc-calendar-footer-btn"
+        >
+          <a
+            class="rc-calendar-today-btn "
+            role="button"
+            title="March 29, 2017"
+          >
+            Hôm nay
+          </a>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`locales renders zh_CN correctly 1`] = `
 <div
   class="rc-calendar"
@@ -27560,13 +28473,17 @@ exports[`locales renders zh_CN correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="清除"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"
@@ -28325,13 +29242,17 @@ exports[`locales renders zh_TW correctly 1`] = `
         />
       </div>
       <a
-        class="rc-calendar-clear-btn"
         role="button"
         title="清除"
-      />
+      >
+        <span
+          class="rc-calendar-clear-btn"
+        />
+      </a>
     </div>
     <div
       class="rc-calendar-date-panel"
+      tabindex="0"
     >
       <div
         class="rc-calendar-header"

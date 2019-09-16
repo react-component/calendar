@@ -8,6 +8,8 @@ React Calendar
 [![Test coverage][codecov-image]][codecov-url]
 [![gemnasium deps][gemnasium-image]][gemnasium-url]
 [![npm download][download-image]][download-url]
+[![Code Quality: Javascript][lgtm-badge]][lgtm-badge-url]
+[![Total alerts][lgtm-alerts]][lgtm-alerts-url]
 
 [npm-image]: http://img.shields.io/npm/v/rc-calendar.svg?style=flat-square
 [npm-url]: http://npmjs.org/package/rc-calendar
@@ -21,6 +23,10 @@ React Calendar
 [node-url]: http://nodejs.org/download/
 [download-image]: https://img.shields.io/npm/dm/rc-calendar.svg?style=flat-square
 [download-url]: https://npmjs.org/package/rc-calendar
+[lgtm-badge]: https://img.shields.io/lgtm/grade/javascript/g/react-component/calendar.svg?logo=lgtm&logoWidth=18
+[lgtm-badge-url]: https://lgtm.com/projects/g/react-component/calendar/context:javascript
+[lgtm-alerts]: https://img.shields.io/lgtm/alerts/g/react-component/calendar.svg?logo=lgtm&logoWidth=18
+[lgtm-alerts-url]: https://lgtm.com/projects/g/react-component/calendar/alerts
 
 ## Screenshots
 
@@ -124,7 +130,7 @@ http://react-component.github.io/calendar/examples/index.html
         </tr>
         <tr>
           <td>renderFooter</td>
-          <td>() => React.Node</td>
+          <td>(mode) => React.Node</td>
           <td></td>
           <td>extra footer</td>
         </tr>
@@ -148,9 +154,10 @@ http://react-component.github.io/calendar/examples/index.html
         </tr>
         <tr>
           <td>format</td>
-          <td>String</td>
+          <td>String | String[]</td>
           <td>depends on whether you set timePicker and your locale</td>
-          <td>use to format/parse date(without time) value to/from input</td>
+          <td>use to format/parse date(without time) value to/from input.  
+          When an array is provided, all values are used for parsing and first value for display.</td>
         </tr>
         <tr>
           <td>disabledDate</td>
@@ -213,6 +220,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>called when a date is changed inside calendar (next year/next month/keyboard)</td>
         </tr>
         <tr>
+          <td>onOk</td>
+          <td>Function(date: moment)</td>
+          <td></td>
+          <td>called when ok button is pressed, only if it's visible</td>
+        </tr>
+        <tr>
           <td>dateInputPlaceholder</td>
           <td>String</td>
           <td></td>
@@ -229,6 +242,18 @@ http://react-component.github.io/calendar/examples/index.html
           <td>Function(date: moment, mode)</td>
           <td></td>
           <td>called when panel changed</td>
+        </tr>
+        <tr>
+          <td>clearIcon</td>
+          <td>ReactNode</td>
+          <td></td>
+          <td>specific the clear icon.</td>
+        </tr>
+         <tr>
+          <td>inputMode</td>
+          <td>string</td>
+          <td>text</td>
+          <td>Change the keyboard in mobile device</td>
         </tr>
     </tbody>
 </table>
@@ -361,6 +386,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>called when a date range is changed inside calendar (next year/next month/keyboard)</td>
         </tr>
         <tr>
+          <td>onOk</td>
+          <td>Function(date: moment)</td>
+          <td></td>
+          <td>called when ok button is pressed, only if it's visible</td>
+        </tr>
+        <tr>
           <td>dateInputPlaceholder</td>
           <td>String[]</td>
           <td></td>
@@ -407,6 +438,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>Function(hoverValue: moment[])</td>
           <td></td>
           <td>called when hover value change</td>
+        </tr>
+        <tr>
+          <td>clearIcon</td>
+          <td>ReactNode</td>
+          <td></td>
+          <td>specific the clear icon.</td>
         </tr>
     </tbody>
 </table>
@@ -476,12 +513,6 @@ http://react-component.github.io/calendar/examples/index.html
           <td>function</td>
           <td></td>
           <td>Custom month cell render method</td>
-        </tr>
-        <tr>
-          <td>dateCellRender</td>
-          <td>function</td>
-          <td></td>
-          <td>Custom date cell render method</td>
         </tr>
         <tr>
           <td>monthCellContentRender</td>
@@ -700,7 +731,6 @@ http://react-component.github.io/calendar/examples/index.html
 
 ```
 npm test
-npm run chrome-test
 ```
 
 ## Coverage

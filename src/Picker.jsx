@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
+import { polyfill } from 'react-lifecycles-compat';
 import createChainedFunction from 'rc-util/lib/createChainedFunction';
 import KeyCode from 'rc-util/lib/KeyCode';
 import placements from './picker/placements';
@@ -14,8 +14,8 @@ function refFn(field, component) {
   this[field] = component;
 }
 
-const Picker = createReactClass({
-  propTypes: {
+class Picker extends React.Component {
+  static propTypes = {
     animation: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     disabled: PropTypes.bool,
     transitionName: PropTypes.string,
@@ -38,22 +38,24 @@ const Picker = createReactClass({
       PropTypes.array,
     ]),
     align: PropTypes.object,
-  },
+    dateRender: PropTypes.func,
+    onBlur: PropTypes.func,
+  }
 
-  getDefaultProps() {
-    return {
-      prefixCls: 'rc-calendar-picker',
-      style: {},
-      align: {},
-      placement: 'bottomLeft',
-      defaultOpen: false,
-      onChange: noop,
-      onOpenChange: noop,
-    };
-  },
+  static defaultProps = {
+    prefixCls: 'rc-calendar-picker',
+    style: {},
+    align: {},
+    placement: 'bottomLeft',
+    defaultOpen: false,
+    onChange: noop,
+    onOpenChange: noop,
+    onBlur: noop,
+  }
 
-  getInitialState() {
-    const props = this.props;
+  constructor(props) {
+    super(props);
+
     let open;
     if ('open' in props) {
       open = props.open;
@@ -62,45 +64,32 @@ const Picker = createReactClass({
     }
     const value = props.value || props.defaultValue;
     this.saveCalendarRef = refFn.bind(this, 'calendarInstance');
-    return {
+
+    this.state = {
       open,
       value,
     };
-  },
-
-  componentWillReceiveProps(nextProps) {
-    const { value, open } = nextProps;
-    if ('value' in nextProps) {
-      this.setState({
-        value,
-      });
-    }
-    if (open !== undefined) {
-      this.setState({
-        open,
-      });
-    }
-  },
+  }
 
   componentDidUpdate(_, prevState) {
     if (!prevState.open && this.state.open) {
       // setTimeout is for making sure saveCalendarRef happen before focusCalendar
       this.focusTimeout = setTimeout(this.focusCalendar, 0, this);
     }
-  },
+  }
 
   componentWillUnmount() {
     clearTimeout(this.focusTimeout);
-  },
+  }
 
-  onCalendarKeyDown(event) {
+  onCalendarKeyDown = (event) => {
     if (event.keyCode === KeyCode.ESC) {
       event.stopPropagation();
       this.close(this.focus);
     }
-  },
+  }
 
-  onCalendarSelect(value, cause = {}) {
+  onCalendarSelect = (value, cause = {}) => {
     const props = this.props;
     if (!('value' in props)) {
       this.setState({
@@ -109,33 +98,50 @@ const Picker = createReactClass({
     }
     if (
       cause.source === 'keyboard' ||
+      cause.source === 'dateInputSelect' ||
       (!props.calendar.props.timePicker && cause.source !== 'dateInput') ||
       cause.source === 'todayButton') {
       this.close(this.focus);
     }
     props.onChange(value);
-  },
+  }
 
-  onKeyDown(event) {
-    if (event.keyCode === KeyCode.DOWN && !this.state.open) {
+  onKeyDown = (event) => {
+    if (!this.state.open && (event.keyCode === KeyCode.DOWN || event.keyCode === KeyCode.ENTER)) {
       this.open();
       event.preventDefault();
     }
-  },
+  }
 
-  onCalendarOk() {
+  onCalendarOk = () => {
     this.close(this.focus);
-  },
+  }
 
-  onCalendarClear() {
+  onCalendarClear = () => {
     this.close(this.focus);
-  },
+  }
 
-  onVisibleChange(open) {
+  onCalendarBlur = () => {
+    this.setOpen(false);
+  }
+
+  onVisibleChange = (open) => {
     this.setOpen(open);
-  },
+  }
 
-  getCalendarElement() {
+  static getDerivedStateFromProps(nextProps) {
+    const newState = {};
+    const { value, open } = nextProps;
+    if ('value' in nextProps) {
+      newState.value = value;
+    }
+    if (open !== undefined) {
+      newState.open = open;
+    }
+    return newState;
+  }
+
+  getCalendarElement = () => {
     const props = this.props;
     const state = this.state;
     const calendarProps = props.calendar.props;
@@ -149,12 +155,13 @@ const Picker = createReactClass({
       onOk: createChainedFunction(calendarProps.onOk, this.onCalendarOk),
       onSelect: createChainedFunction(calendarProps.onSelect, this.onCalendarSelect),
       onClear: createChainedFunction(calendarProps.onClear, this.onCalendarClear),
+      onBlur: createChainedFunction(calendarProps.onBlur, this.onCalendarBlur),
     };
 
     return React.cloneElement(props.calendar, extraProps);
-  },
+  }
 
-  setOpen(open, callback) {
+  setOpen = (open, callback) => {
     const { onOpenChange } = this.props;
     if (this.state.open !== open) {
       if (!('open' in this.props)) {
@@ -164,27 +171,27 @@ const Picker = createReactClass({
       }
       onOpenChange(open);
     }
-  },
+  }
 
-  open(callback) {
+  open = (callback) => {
     this.setOpen(true, callback);
-  },
+  }
 
-  close(callback) {
+  close = (callback) => {
     this.setOpen(false, callback);
-  },
+  }
 
-  focus() {
+  focus = () => {
     if (!this.state.open) {
       ReactDOM.findDOMNode(this).focus();
     }
-  },
+  }
 
-  focusCalendar() {
+  focusCalendar = () => {
     if (this.state.open && !!this.calendarInstance) {
       this.calendarInstance.focus();
     }
-  },
+  }
 
   render() {
     const props = this.props;
@@ -197,25 +204,29 @@ const Picker = createReactClass({
       transitionName, children,
     } = props;
     const state = this.state;
-    return (<Trigger
-      popup={this.getCalendarElement()}
-      popupAlign={align}
-      builtinPlacements={placements}
-      popupPlacement={placement}
-      action={(disabled && !state.open) ? [] : ['click']}
-      destroyPopupOnHide
-      getPopupContainer={getCalendarContainer}
-      popupStyle={style}
-      popupAnimation={animation}
-      popupTransitionName={transitionName}
-      popupVisible={state.open}
-      onPopupVisibleChange={this.onVisibleChange}
-      prefixCls={prefixCls}
-      popupClassName={dropdownClassName}
-    >
-      {React.cloneElement(children(state, props), { onKeyDown: this.onKeyDown })}
-    </Trigger>);
-  },
-});
+    return (
+      <Trigger
+        popup={this.getCalendarElement()}
+        popupAlign={align}
+        builtinPlacements={placements}
+        popupPlacement={placement}
+        action={(disabled && !state.open) ? [] : ['click']}
+        destroyPopupOnHide
+        getPopupContainer={getCalendarContainer}
+        popupStyle={style}
+        popupAnimation={animation}
+        popupTransitionName={transitionName}
+        popupVisible={state.open}
+        onPopupVisibleChange={this.onVisibleChange}
+        prefixCls={prefixCls}
+        popupClassName={dropdownClassName}
+      >
+        {React.cloneElement(children(state, props), { onKeyDown: this.onKeyDown })}
+      </Trigger>
+    );
+  }
+}
+
+polyfill(Picker);
 
 export default Picker;

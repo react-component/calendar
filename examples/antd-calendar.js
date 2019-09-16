@@ -73,10 +73,13 @@ class Demo extends React.Component {
   constructor(props) {
     super(props);
 
+    this.calendarContainerRef = React.createRef();
+
     this.state = {
       showTime: true,
       showDateInput: true,
       disabled: false,
+      open: false,
       value: props.defaultValue,
     };
   }
@@ -100,6 +103,34 @@ class Demo extends React.Component {
     });
   }
 
+  onOpenChange = (open) => {
+    this.setState({
+      open,
+    });
+  }
+
+  onFocus = () => {
+    if (!this.state.open && this.state.isMouseDown) {
+      // focus from a "click" event, let the picker trigger automatically open the calendar
+      this.setState({
+        isMouseDown: false,
+      });
+    } else {
+      // focus not caused by "click" (such as programmatic or via keyboard)
+      this.setState({
+        open: true,
+      });
+    }
+  }
+
+  onMouseDown = () => {
+    this.setState({
+      isMouseDown: true,
+    });
+  }
+
+  getCalendarContainer = () => this.calendarContainerRef.current;
+
   toggleDisabled = () => {
     this.setState({
       disabled: !this.state.disabled,
@@ -110,14 +141,15 @@ class Demo extends React.Component {
     const state = this.state;
     const calendar = (<Calendar
       locale={cn ? zhCN : enUS}
-      style={{ zIndex: 1000 }}
+      style={{ zIndex: 1001 }}
       dateInputPlaceholder="please input"
-      formatter={getFormat(state.showTime)}
+      format={getFormat(state.showTime)}
       disabledTime={state.showTime ? disabledTime : null}
       timePicker={state.showTime ? timePickerElement : null}
       defaultValue={this.props.defaultCalendarValue}
       showDateInput={state.showDateInput}
       disabledDate={disabledDate}
+      focusablePanel={false}
     />);
     return (<div style={{ width: 400, margin: 20 }}>
       <div style={{ marginBottom: 10 }}>
@@ -158,30 +190,74 @@ class Demo extends React.Component {
       >
         <DatePicker
           animation="slide-up"
-          disabled={state.disabled}
           calendar={calendar}
           value={state.value}
           onChange={this.onChange}
+          getCalendarContainer={this.getCalendarContainer}
+          onOpenChange={this.onOpenChange}
+          open={state.open}
+          style={{ zIndex: 1001 }}
         >
           {
             ({ value }) => {
               return (
-                <span tabIndex="0">
-                <input
-                  placeholder="please select"
-                  style={{ width: 250 }}
-                  disabled={state.disabled}
-                  readOnly
-                  tabIndex="-1"
-                  className="ant-calendar-picker-input ant-input"
-                  value={value && value.format(getFormat(state.showTime)) || ''}
-                />
+                <span tabIndex="0" onMouseDown={this.onMouseDown} onFocus={this.onFocus}>
+                  <input
+                    placeholder="please select"
+                    style={{ width: 250 }}
+                    disabled={state.disabled}
+                    readOnly
+                    tabIndex="-1"
+                    className="ant-calendar-picker-input ant-input"
+                    value={value && value.format(getFormat(state.showTime)) || ''}
+                  />
+                  <div ref={this.calendarContainerRef} />
                 </span>
               );
             }
           }
         </DatePicker>
       </div>
+    </div>);
+  }
+}
+
+const multiFormats = ['DD/MM/YYYY', 'DD/MM/YY', 'DDMMYY', 'D/M/YY'];
+
+class DemoMultiFormat extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      value: now,
+    };
+  }
+
+  onChange = (value) => {
+    console.log('Calendar change: ', (value && value.format(format)));
+    this.setState({
+      value,
+    });
+  }
+
+  render() {
+    const state = this.state;
+    return (<div style={{ width: 400, margin: 20 }}>
+      <div style={{ marginBottom: 10 }}>
+        Accepts multiple input formats
+        <br />
+        <small>{multiFormats.join(', ')}</small>
+        <br/>
+      </div>
+      <Calendar
+        locale={cn ? zhCN : enUS}
+        style={{ zIndex: 1000 }}
+        dateInputPlaceholder="please input"
+        format={multiFormats}
+        value={state.value}
+        onChange={this.onChange}
+        focusablePanel={false}
+      />
     </div>);
   }
 }
@@ -213,12 +289,13 @@ ReactDOM.render((<div
         defaultValue={now}
         disabledTime={disabledTime}
         showToday
-        formatter={getFormat(true)}
+        format={getFormat(true)}
         showOk={false}
         timePicker={timePickerElement}
         onChange={onStandaloneChange}
         disabledDate={disabledDate}
         onSelect={onStandaloneSelect}
+        renderFooter={(mode) => (<span>{mode} extra footer</span>)}
       />
     </div>
     <div style={{ float: 'left', width: 300 }}>
@@ -228,5 +305,8 @@ ReactDOM.render((<div
       <Demo defaultCalendarValue={defaultCalendarValue} />
     </div>
     <div style={{ clear: 'both' }}></div>
+    <div>
+      <DemoMultiFormat />
+    </div>
   </div>
 </div>), document.getElementById('__react-content'));
