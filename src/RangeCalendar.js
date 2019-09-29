@@ -102,7 +102,7 @@ class RangeCalendar extends React.Component {
     onValueChange: PropTypes.func,
     onHoverChange: PropTypes.func,
     onPanelChange: PropTypes.func,
-    format: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+    format: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
     onClear: PropTypes.func,
     type: PropTypes.any,
     disabledDate: PropTypes.func,
