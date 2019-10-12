@@ -71,11 +71,20 @@ class MonthTable extends Component {
     const monthsEls = months.map((month, index) => {
       const tds = month.map(monthData => {
         let disabled = false;
-        if (props.disabledDate) {
+
+        if (props.disabledDate || props.disabledMonth) {
           const testValue = value.clone();
           testValue.month(monthData.value);
-          disabled = props.disabledDate(testValue);
+
+          if (props.disabledDate) {
+            disabled = props.disabledDate(testValue);
+          }
+
+          if (props.disabledMonth) {
+            disabled = props.disabledMonth(testValue);
+          }
         }
+
         const classNameMap = {
           [`${prefixCls}-cell`]: 1,
           [`${prefixCls}-cell-disabled`]: disabled,

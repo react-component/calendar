@@ -95,6 +95,16 @@
 
 .@{prefixClass}-year-panel-cell {
   text-align: center;
+
+  &-disabled {
+      .@{prefixClass}-year-panel-year {
+          color: #bfbfbf;
+          &:hover {
+              background: white;
+              cursor: not-allowed;
+          }
+      }
+  }
 }
 
 .@{prefixClass}-year-panel-year {

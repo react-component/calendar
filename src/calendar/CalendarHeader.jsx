@@ -31,6 +31,7 @@ export default class CalendarHeader extends React.Component {
     locale: PropTypes.object,
     enablePrev: PropTypes.any,
     enableNext: PropTypes.any,
+    disabledDate: PropTypes.func,
     disabledMonth: PropTypes.func,
     renderFooter: PropTypes.func,
     onMonthSelect: PropTypes.func,
@@ -152,6 +153,7 @@ export default class CalendarHeader extends React.Component {
       showTimePicker,
       enableNext,
       enablePrev,
+      disabledDate,
       disabledMonth,
       renderFooter,
     } = props;
@@ -165,7 +167,8 @@ export default class CalendarHeader extends React.Component {
           rootPrefixCls={prefixCls}
           onSelect={this.onMonthSelect}
           onYearPanelShow={() => this.showYearPanel('month')}
-          disabledDate={disabledMonth}
+          disabledDate={disabledDate}
+          disabledMonth={disabledMonth}
           cellRender={props.monthCellRender}
           contentRender={props.monthCellContentRender}
           renderFooter={renderFooter}
@@ -182,6 +185,7 @@ export default class CalendarHeader extends React.Component {
           onSelect={this.onYearSelect}
           onDecadePanelShow={this.showDecadePanel}
           renderFooter={renderFooter}
+          disabledDate={disabledDate}
         />
       );
     }

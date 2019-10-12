@@ -33,6 +33,7 @@ export default class DateTBody extends React.Component {
     contentRender: PropTypes.func,
     dateRender: PropTypes.func,
     disabledDate: PropTypes.func,
+    disabledMonth: PropTypes.func,
     prefixCls: PropTypes.string,
     selectedValue: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
     value: PropTypes.object,
@@ -48,7 +49,7 @@ export default class DateTBody extends React.Component {
     const props = this.props;
     const {
       contentRender, prefixCls, selectedValue, value,
-      showWeekNumber, dateRender, disabledDate,
+      showWeekNumber, dateRender, disabledDate, disabledMonth,
       hoverValue,
     } = props;
     let iIndex;
@@ -183,15 +184,26 @@ export default class DateTBody extends React.Component {
           cls += ` ${lastDayOfMonthClass}`;
         }
 
-        if (disabledDate) {
-          if (disabledDate(current, value)) {
+        if (disabledDate || disabledMonth) {
+          if (
+            (disabledDate && disabledDate(current, value))
+            || (disabledMonth && disabledMonth(value))
+          ) {
             disabled = true;
 
-            if (!last || !disabledDate(last, value)) {
+            if (
+              !last
+              || (disabledDate && !disabledDate(last, value))
+              || (disabledMonth && disabledMonth(last))
+            ) {
               cls += ` ${firstDisableClass}`;
             }
 
-            if (!next || !disabledDate(next, value)) {
+            if (
+              !next
+              || (disabledDate && !disabledDate(next, value))
+              || (disabledMonth && disabledMonth(next))
+            ) {
               cls += ` ${lastDisableClass}`;
             }
           }
