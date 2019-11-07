@@ -30,7 +30,7 @@ class DateInput extends React.Component {
 
   constructor(props) {
     super(props);
-    const selectedValue = props.selectedValue;
+    const { selectedValue } = props;
 
     this.state = {
       str: formatDate(selectedValue, this.props.format),
@@ -53,7 +53,7 @@ class DateInput extends React.Component {
     this.props.onClear(null);
   }
 
-  onInputChange = (event) => {
+  onInputChange = event => {
     const str = event.target.value;
     const { disabledDate, format, onChange, selectedValue } = this.props;
 
@@ -116,7 +116,7 @@ class DateInput extends React.Component {
     }));
   }
 
-  onKeyDown = (event) => {
+  onKeyDown = event => {
     const { keyCode } = event;
     const { onSelect, value, disabledDate } = this.props;
     if (keyCode === KeyCode.ENTER && onSelect) {
@@ -136,7 +136,7 @@ class DateInput extends React.Component {
       cachedSelectionEnd = dateInputInstance.selectionEnd;
     }
     // when popup show, click body will call this, bug!
-    const selectedValue = nextProps.selectedValue;
+    const { selectedValue } = nextProps;
     if (!state.hasFocus) {
       newState = {
         str: formatDate(selectedValue, nextProps.format),
@@ -151,9 +151,7 @@ class DateInput extends React.Component {
     return dateInputInstance;
   }
 
-  getRootDOMNode = () => {
-    return ReactDOM.findDOMNode(this);
-  }
+  getRootDOMNode = () => ReactDOM.findDOMNode(this)
 
   focus = () => {
     if (dateInputInstance) {
@@ -161,12 +159,12 @@ class DateInput extends React.Component {
     }
   }
 
-  saveDateInput = (dateInput) => {
+  saveDateInput = dateInput => {
     dateInputInstance = dateInput;
   }
 
   render() {
-    const props = this.props;
+    const { props } = this;
     const { invalid, str } = this.state;
     const { locale, prefixCls, placeholder, clearIcon, inputMode } = props;
     const invalidClass = invalid ? `${prefixCls}-input-invalid` : '';

@@ -1,13 +1,13 @@
 import React from 'react';
-import DateConstants from './DateConstants';
 import moment from 'moment';
+import DateConstants from './DateConstants';
 
 export default class DateTHead extends React.Component {
   render() {
-    const props = this.props;
-    const value = props.value;
+    const { props } = this;
+    const { value } = props;
     const localeData = value.localeData();
-    const prefixCls = props.prefixCls;
+    const { prefixCls } = props;
     const veryShortWeekdays = [];
     const weekDays = [];
     const firstDayOfWeek = localeData.firstDayOfWeek();
@@ -29,8 +29,7 @@ export default class DateTHead extends React.Component {
           <span className={`${prefixCls}-column-header-inner`}>x</span>
         </th>);
     }
-    const weekDaysEls = weekDays.map((day, xindex) => {
-      return (
+    const weekDaysEls = weekDays.map((day, xindex) => (
         <th
           key={xindex}
           role="columnheader"
@@ -40,8 +39,7 @@ export default class DateTHead extends React.Component {
           <span className={`${prefixCls}-column-header-inner`}>
           {veryShortWeekdays[xindex]}
           </span>
-        </th>);
-    });
+        </th>));
     return (<thead>
     <tr role="row">
       {showWeekNumberEl}

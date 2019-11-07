@@ -1,13 +1,13 @@
 /* eslint react/no-multi-comp:0, no-console:0 */
 
-import 'rc-calendar/assets/index.less';
+import '../assets/index.less';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Calendar from 'rc-calendar';
-import DatePicker from 'rc-calendar/src/Picker';
+import Calendar from '..';
+import DatePicker from '../src/Picker';
 
-import zhCN from 'rc-calendar/src/locale/zh_CN';
-import enUS from 'rc-calendar/src/locale/en_US';
+import zhCN from '../src/locale/zh_CN';
+import enUS from '../src/locale/en_US';
 import 'rc-time-picker/assets/index.css';
 import TimePickerPanel from 'rc-time-picker/lib/Panel';
 
@@ -29,12 +29,10 @@ function getFormat(time) {
   return time ? format : 'YYYY-MM-DD';
 }
 
-
 const defaultCalendarValue = now.clone();
 defaultCalendarValue.add(-1, 'month');
 
 const timePickerElement = <TimePickerPanel />;
-
 
 const SHOW_TIME = true;
 
@@ -45,36 +43,36 @@ class Picker extends React.Component {
   };
 
   render() {
-    const props = this.props;
-    const calendar = (<Calendar
-      locale={cn ? zhCN : enUS}
-      defaultValue={now}
-      timePicker={props.showTime ? timePickerElement : null}
-      disabledDate={props.disabledDate}
-    />);
-    return (<DatePicker
-      animation="slide-up"
-      disabled={props.disabled}
-      calendar={calendar}
-      value={props.value}
-      onChange={props.onChange}
-    >
-      {
-        ({ value }) => {
-          return (
+    const { props } = this;
+    const calendar = (
+      <Calendar
+        locale={cn ? zhCN : enUS}
+        defaultValue={now}
+        timePicker={props.showTime ? timePickerElement : null}
+        disabledDate={props.disabledDate}
+      />
+    );
+    return (
+      <DatePicker
+        animation="slide-up"
+        disabled={props.disabled}
+        calendar={calendar}
+        value={props.value}
+        onChange={props.onChange}
+      >
+        {({ value }) => (
             <span>
-                <input
-                  placeholder="请选择日期"
-                  style={{ width: 250 }}
-                  disabled={props.disabled}
-                  readOnly
-                  value={value && value.format(getFormat(props.showTime)) || ''}
-                />
-                </span>
-          );
-        }
-      }
-    </DatePicker>);
+              <input
+                placeholder="请选择日期"
+                style={{ width: 250 }}
+                disabled={props.disabled}
+                readOnly
+                value={(value && value.format(getFormat(props.showTime))) || ''}
+              />
+            </span>
+          )}
+      </DatePicker>
+    );
   }
 }
 
@@ -89,55 +87,54 @@ class Demo extends React.Component {
     this.setState({
       [field]: value,
     });
-  }
+  };
 
-  disabledEndDate = (endValue) => {
+  disabledEndDate = endValue => {
     if (!endValue) {
       return false;
     }
-    const startValue = this.state.startValue;
+    const { startValue } = this.state;
     if (!startValue) {
       return false;
     }
-    return SHOW_TIME ? endValue.isBefore(startValue) :
-    endValue.diff(startValue, 'days') <= 0;
-  }
+    return SHOW_TIME ? endValue.isBefore(startValue) : endValue.diff(startValue, 'days') <= 0;
+  };
 
-  disabledStartDate = (startValue) => {
+  disabledStartDate = startValue => {
     if (!startValue) {
       return false;
     }
-    const endValue = this.state.endValue;
+    const { endValue } = this.state;
     if (!endValue) {
       return false;
     }
-    return SHOW_TIME ? endValue.isBefore(startValue) :
-    endValue.diff(startValue, 'days') <= 0;
-  }
+    return SHOW_TIME ? endValue.isBefore(startValue) : endValue.diff(startValue, 'days') <= 0;
+  };
 
   render() {
-    const state = this.state;
-    return (<div style={{ width: 240, margin: 20 }}>
-      <p>
-        开始时间：
-        <Picker
-          disabledDate={this.disabledStartDate}
-          value={state.startValue}
-          onChange={this.onChange.bind(this, 'startValue')}
-        />
-      </p>
+    const { state } = this;
+    return (
+      <div style={{ width: 240, margin: 20 }}>
+        <p>
+          开始时间：
+          <Picker
+            disabledDate={this.disabledStartDate}
+            value={state.startValue}
+            onChange={this.onChange.bind(this, 'startValue')}
+          />
+        </p>
 
-      <p>
-        结束时间：
-        <Picker
-          disabledDate={this.disabledEndDate}
-          value={state.endValue}
-          onChange={this.onChange.bind(this, 'endValue')}
-        />
-      </p>
-    </div>);
+        <p>
+          结束时间：
+          <Picker
+            disabledDate={this.disabledEndDate}
+            value={state.endValue}
+            onChange={this.onChange.bind(this, 'endValue')}
+          />
+        </p>
+      </div>
+    );
   }
 }
 
-
-ReactDOM.render(<Demo />, document.getElementById('__react-content'));
+export default Demo;

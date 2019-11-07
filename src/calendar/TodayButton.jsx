@@ -1,5 +1,5 @@
 import React from 'react';
-import { getTodayTimeStr, getTodayTime, isAllowedDate } from '../util/';
+import { getTodayTimeStr, getTodayTime, isAllowedDate } from '../util';
 
 export default function TodayButton({
   prefixCls,

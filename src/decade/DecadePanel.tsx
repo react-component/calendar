@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
+
 const ROW = 4;
 const COL = 3;
-import classnames from 'classnames';
 
 function goYear(direction) {
   const next = this.state.value.clone();
@@ -34,7 +35,7 @@ export default class DecadePanel extends React.Component {
   }
 
   render() {
-    const value = this.state.value;
+    const { value } = this.state;
     const { locale, renderFooter } = this.props;
     const currentYear = value.year();
     const startYear = parseInt(currentYear / 100, 10) * 100;
@@ -42,7 +43,7 @@ export default class DecadePanel extends React.Component {
     const endYear = startYear + 99;
     const decades = [];
     let index = 0;
-    const prefixCls = this.prefixCls;
+    const { prefixCls } = this;
 
     for (let rowIndex = 0; rowIndex < ROW; rowIndex++) {
       decades[rowIndex] = [];

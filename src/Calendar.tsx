@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import KeyCode from 'rc-util/lib/KeyCode';
 import { polyfill } from 'react-lifecycles-compat';
+import moment, { Moment } from 'moment';
 import DateTable from './date/DateTable';
 import CalendarHeader from './calendar/CalendarHeader';
 import CalendarFooter from './calendar/CalendarFooter';
@@ -16,10 +17,8 @@ import { commonMixinWrapper, propType, defaultProp } from './mixin/CommonMixin';
 import DateInput from './date/DateInput';
 import { getTimeConfig, getTodayTime, syncTime } from './util';
 import { goStartMonth, goEndMonth, goTime } from './util/toTime';
-import moment from 'moment';
 
-function noop() {
-}
+function noop() {}
 
 const getMomentObjectIfValid = date => {
   if (moment.isMoment(date) && date.isValid()) {
@@ -28,42 +27,52 @@ const getMomentObjectIfValid = date => {
   return false;
 };
 
-class Calendar extends React.Component {
-  static propTypes = {
-    ...calendarMixinPropTypes,
-    ...propType,
-    prefixCls: PropTypes.string,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    defaultValue: PropTypes.object,
-    value: PropTypes.object,
-    selectedValue: PropTypes.object,
-    defaultSelectedValue: PropTypes.object,
-    mode: PropTypes.oneOf(['time', 'date', 'month', 'year', 'decade']),
-    locale: PropTypes.object,
-    showDateInput: PropTypes.bool,
-    showWeekNumber: PropTypes.bool,
-    showToday: PropTypes.bool,
-    showOk: PropTypes.bool,
-    onSelect: PropTypes.func,
-    onOk: PropTypes.func,
-    onKeyDown: PropTypes.func,
-    timePicker: PropTypes.element,
-    dateInputPlaceholder: PropTypes.any,
-    onClear: PropTypes.func,
-    onChange: PropTypes.func,
-    onPanelChange: PropTypes.func,
-    disabledDate: PropTypes.func,
-    disabledTime: PropTypes.any,
-    dateRender: PropTypes.func,
-    renderFooter: PropTypes.func,
-    renderSidebar: PropTypes.func,
-    clearIcon: PropTypes.node,
-    focusablePanel: PropTypes.bool,
-    inputMode: PropTypes.string,
-    onBlur: PropTypes.func,
-  }
+export type CalendarType = 'time' | 'date' | 'month' | 'year' | 'decade';
 
+export interface CalendarProps {
+  prefixCls: string;
+  className: string;
+  style: CSSProperties;
+  defaultValue: Moment;
+  value: Moment;
+  selectedValue: Moment;
+  defaultSelectedValue: Moment;
+  mode: CalendarType;
+  locale: {
+    [key: string]: any;
+  };
+  showDateInput: boolean;
+  showWeekNumber: boolean;
+  showToday: boolean;
+  showOk: boolean;
+  onSelect: () => void;
+  onOk: () => void;
+  onKeyDown: () => void;
+  timePicker: React.ReactNode;
+  dateInputPlaceholder: string;
+  onClear: () => void;
+  onChange: () => void;
+  onPanelChange: (value: Moment, mode: CalendarType) => void;
+  disabledDate: () => boolean;
+  disabledTime: () => boolean;
+  dateRender: () => boolean;
+  renderFooter: () => React.ReactNode;
+  renderSidebar: () => React.ReactNode;
+  clearIcon: React.ReactNode;
+  focusablePanel: boolean;
+  inputMode: string;
+  onBlur: () => void;
+  monthCellRender: () => React.ReactNode;
+  monthCellContentRender: () => React.ReactNode;
+}
+
+export interface CalendarState {
+  value: Moment;
+  mode: CalendarType;
+  selectedValue: Moment;
+}
+
+class Calendar extends React.Component<CalendarProps, CalendarState> {
   static defaultProps = {
     ...calendarMixinDefaultProps,
     ...defaultProp,
@@ -73,16 +82,16 @@ class Calendar extends React.Component {
     onOk: noop,
     onPanelChange: noop,
     focusablePanel: true,
-  }
+  };
 
   constructor(props) {
     super(props);
     this.state = {
       mode: this.props.mode || 'date',
       value:
-          getMomentObjectIfValid(props.value) ||
-          getMomentObjectIfValid(props.defaultValue) ||
-          moment(),
+        getMomentObjectIfValid(props.value) ||
+        getMomentObjectIfValid(props.defaultValue) ||
+        moment(),
       selectedValue: props.selectedValue || props.defaultSelectedValue,
     };
   }
@@ -99,13 +108,13 @@ class Calendar extends React.Component {
       this.setState({ mode });
     }
     props.onPanelChange(value || state.value, mode);
-  }
+  };
 
-  onKeyDown = (event) => {
+  onKeyDown = event => {
     if (event.target.nodeName.toLowerCase() === 'input') {
       return undefined;
     }
-    const keyCode = event.keyCode;
+    const { keyCode } = event;
     // mac
     const ctrlKey = event.ctrlKey || event.metaKey;
     const { disabledDate } = this.props;
@@ -136,15 +145,11 @@ class Calendar extends React.Component {
         event.preventDefault();
         return 1;
       case KeyCode.HOME:
-        this.setValue(
-          goStartMonth(this.state.value),
-        );
+        this.setValue(goStartMonth(this.state.value));
         event.preventDefault();
         return 1;
       case KeyCode.END:
-        this.setValue(
-          goEndMonth(this.state.value),
-        );
+        this.setValue(goEndMonth(this.state.value));
         event.preventDefault();
         return 1;
       case KeyCode.PAGE_DOWN:
@@ -167,33 +172,33 @@ class Calendar extends React.Component {
         this.props.onKeyDown(event);
         return 1;
     }
-  }
+  };
 
   onClear = () => {
     this.onSelect(null);
     this.props.onClear();
-  }
+  };
 
   onOk = () => {
     const { selectedValue } = this.state;
     if (this.isAllowedDate(selectedValue)) {
       this.props.onOk(selectedValue);
     }
-  }
+  };
 
-  onDateInputChange = (value) => {
+  onDateInputChange = value => {
     this.onSelect(value, {
       source: 'dateInput',
     });
-  }
+  };
 
-  onDateInputSelect = (value) => {
+  onDateInputSelect = value => {
     this.onSelect(value, {
       source: 'dateInputSelect',
     });
-  }
+  };
 
-  onDateTableSelect = (value) => {
+  onDateTableSelect = value => {
     const { timePicker } = this.props;
     const { selectedValue } = this.state;
     if (!selectedValue && timePicker) {
@@ -203,7 +208,7 @@ class Calendar extends React.Component {
       }
     }
     this.onSelect(value);
-  }
+  };
 
   onToday = () => {
     const { value } = this.state;
@@ -211,15 +216,18 @@ class Calendar extends React.Component {
     this.onSelect(now, {
       source: 'todayButton',
     });
-  }
+  };
 
-  onBlur = (event) => {
+  onBlur = event => {
     setTimeout(() => {
       const dateInput = DateInput.getInstance();
-      const rootInstance = this.rootInstance;
+      const { rootInstance } = this;
 
-      if (!rootInstance || rootInstance.contains(document.activeElement) ||
-      (dateInput && dateInput.contains(document.activeElement))) {
+      if (
+        !rootInstance ||
+        rootInstance.contains(document.activeElement) ||
+        (dateInput && dateInput.contains(document.activeElement))
+      ) {
         // focused element is still part of Calendar
         return;
       }
@@ -228,7 +236,7 @@ class Calendar extends React.Component {
         this.props.onBlur(event);
       }
     }, 0);
-  }
+  };
 
   static getDerivedStateFromProps(nextProps, state) {
     const { value, selectedValue } = nextProps;
@@ -239,9 +247,9 @@ class Calendar extends React.Component {
     }
     if ('value' in nextProps) {
       newState.value =
-          getMomentObjectIfValid(value) ||
-          getMomentObjectIfValid(nextProps.defaultValue) ||
-          getNowByCurrentStateValue(state.value);
+        getMomentObjectIfValid(value) ||
+        getMomentObjectIfValid(nextProps.defaultValue) ||
+        getNowByCurrentStateValue(state.value);
     }
     if ('selectedValue' in nextProps) {
       newState.selectedValue = selectedValue;
@@ -250,37 +258,42 @@ class Calendar extends React.Component {
     return newState;
   }
 
-  getRootDOMNode = () => {
-    return ReactDOM.findDOMNode(this);
-  }
+  // eslint-disable-next-line react/no-find-dom-node
+  getRootDOMNode = () => ReactDOM.findDOMNode(this);
 
   openTimePicker = () => {
     this.onPanelChange(null, 'time');
-  }
+  };
 
   closeTimePicker = () => {
     this.onPanelChange(null, 'date');
-  }
-
+  };
 
   goTime = (direction, unit) => {
-    this.setValue(
-      goTime(this.state.value, direction, unit),
-    );
-  }
+    this.setValue(goTime(this.state.value, direction, unit));
+  };
 
   render() {
     const { props, state } = this;
     const {
-      locale, prefixCls, disabledDate,
-      dateInputPlaceholder, timePicker,
-      disabledTime, clearIcon, renderFooter, inputMode,
-      monthCellRender, monthCellContentRender,
+      locale,
+      prefixCls,
+      disabledDate,
+      dateInputPlaceholder,
+      timePicker,
+      disabledTime,
+      clearIcon,
+      renderFooter,
+      inputMode,
+      monthCellRender,
+      monthCellContentRender,
     } = props;
     const { value, selectedValue, mode } = state;
     const showTimePicker = mode === 'time';
-    const disabledTimeConfig = showTimePicker && disabledTime && timePicker ?
-      getTimeConfig(selectedValue, disabledTime) : null;
+    const disabledTimeConfig =
+      showTimePicker && disabledTime && timePicker
+        ? getTimeConfig(selectedValue, disabledTime)
+        : null;
 
     let timePickerEle = null;
 
@@ -327,69 +340,69 @@ class Calendar extends React.Component {
     if (props.renderSidebar) {
       children.push(props.renderSidebar());
     }
-    children.push(<div className={`${prefixCls}-panel`} key="panel">
-      {dateInputElement}
-      <div
-        tabIndex={this.props.focusablePanel ? 0 : undefined}
-        className={`${prefixCls}-date-panel`}
-      >
-        <CalendarHeader
-          locale={locale}
-          mode={mode}
-          value={value}
-          onValueChange={this.setValue}
-          onPanelChange={this.onPanelChange}
-          renderFooter={renderFooter}
-          showTimePicker={showTimePicker}
-          prefixCls={prefixCls}
-          monthCellRender={monthCellRender}
-          monthCellContentRender={monthCellContentRender}
-        />
-        {timePicker && showTimePicker ?
-          (<div className={`${prefixCls}-time-picker`}>
-            <div className={`${prefixCls}-time-picker-panel`}>
-              {timePickerEle}
-            </div>
-          </div>)
-          : null}
-        <div className={`${prefixCls}-body`}>
-          <DateTable
+    children.push(
+      <div className={`${prefixCls}-panel`} key="panel">
+        {dateInputElement}
+        <div
+          tabIndex={this.props.focusablePanel ? 0 : undefined}
+          className={`${prefixCls}-date-panel`}
+        >
+          <CalendarHeader
             locale={locale}
+            mode={mode}
             value={value}
-            selectedValue={selectedValue}
+            onValueChange={this.setValue}
+            onPanelChange={this.onPanelChange}
+            renderFooter={renderFooter}
+            showTimePicker={showTimePicker}
             prefixCls={prefixCls}
-            dateRender={props.dateRender}
-            onSelect={this.onDateTableSelect}
+            monthCellRender={monthCellRender}
+            monthCellContentRender={monthCellContentRender}
+          />
+          {timePicker && showTimePicker ? (
+            <div className={`${prefixCls}-time-picker`}>
+              <div className={`${prefixCls}-time-picker-panel`}>{timePickerEle}</div>
+            </div>
+          ) : null}
+          <div className={`${prefixCls}-body`}>
+            <DateTable
+              locale={locale}
+              value={value}
+              selectedValue={selectedValue}
+              prefixCls={prefixCls}
+              dateRender={props.dateRender}
+              onSelect={this.onDateTableSelect}
+              disabledDate={disabledDate}
+              showWeekNumber={props.showWeekNumber}
+            />
+          </div>
+
+          <CalendarFooter
+            showOk={props.showOk}
+            mode={mode}
+            renderFooter={props.renderFooter}
+            locale={locale}
+            prefixCls={prefixCls}
+            showToday={props.showToday}
+            disabledTime={disabledTime}
+            showTimePicker={showTimePicker}
+            showDateInput={props.showDateInput}
+            timePicker={timePicker}
+            selectedValue={selectedValue}
+            value={value}
             disabledDate={disabledDate}
-            showWeekNumber={props.showWeekNumber}
+            okDisabled={
+              props.showOk !== false && (!selectedValue || !this.isAllowedDate(selectedValue))
+            }
+            onOk={this.onOk}
+            onSelect={this.onSelect}
+            onToday={this.onToday}
+            onOpenTimePicker={this.openTimePicker}
+            onCloseTimePicker={this.closeTimePicker}
           />
         </div>
-
-        <CalendarFooter
-          showOk={props.showOk}
-          mode={mode}
-          renderFooter={props.renderFooter}
-          locale={locale}
-          prefixCls={prefixCls}
-          showToday={props.showToday}
-          disabledTime={disabledTime}
-          showTimePicker={showTimePicker}
-          showDateInput={props.showDateInput}
-          timePicker={timePicker}
-          selectedValue={selectedValue}
-          value={value}
-          disabledDate={disabledDate}
-          okDisabled={
-            props.showOk !== false && (!selectedValue || !this.isAllowedDate(selectedValue))
-          }
-          onOk={this.onOk}
-          onSelect={this.onSelect}
-          onToday={this.onToday}
-          onOpenTimePicker={this.openTimePicker}
-          onCloseTimePicker={this.closeTimePicker}
-        />
-      </div>
-    </div>);
+      </div>,
+    );
 
     return this.renderRoot({
       children,

@@ -152,11 +152,11 @@
 
 - refactor!
 - support input inside rc-calendar
-- change MonthCalendar to require('rc-calendar/lib/MonthCalendar')
-- change Picker to require('rc-calendar/lib/Picker')
+- change MonthCalendar to require('../lib/MonthCalendar')
+- change Picker to require('../lib/Picker')
 - change Picker's orient to placement and align as rc-trigger
-- add RangeCalendar: require('rc-calendar/lib/RangeCalendar')
-- add FullCalendar: require('rc-calendar/lib/FullCalendar')
+- add RangeCalendar: require('../lib/RangeCalendar')
+- add FullCalendar: require('../lib/FullCalendar')
 
 ## 3.16.0 / 2015-08-25
 

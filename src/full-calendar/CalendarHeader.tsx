@@ -43,18 +43,18 @@ class CalendarHeader extends Component {
   }
 
   monthSelectElement(month) {
-    const props = this.props;
+    const { props } = this;
     const t = props.value.clone();
     const { prefixCls } = props;
     const options = [];
-    const Select = props.Select;
+    const { Select } = props;
 
     for (let index = 0; index < 12; index++) {
       t.month(index);
       options.push(
         <Select.Option key={`${index}`}>
           {getMonthName(t)}
-        </Select.Option>
+        </Select.Option>,
       );
     }
 

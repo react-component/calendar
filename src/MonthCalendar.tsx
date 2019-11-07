@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import KeyCode from 'rc-util/lib/KeyCode';
 import { polyfill } from 'react-lifecycles-compat';
+import moment from 'moment';
 import CalendarHeader from './calendar/CalendarHeader';
 import CalendarFooter from './calendar/CalendarFooter';
 import {
@@ -10,7 +11,6 @@ import {
   calendarMixinDefaultProps,
 } from './mixin/CalendarMixin';
 import { commonMixinWrapper, propType, defaultProp } from './mixin/CommonMixin';
-import moment from 'moment';
 
 class MonthCalendar extends React.Component {
   static propTypes = {
@@ -36,8 +36,8 @@ class MonthCalendar extends React.Component {
     };
   }
 
-  onKeyDown = (event) => {
-    const keyCode = event.keyCode;
+  onKeyDown = event => {
+    const { keyCode } = event;
     const ctrlKey = event.ctrlKey || event.metaKey;
     const stateValue = this.state.value;
     const { disabledDate } = this.props;

@@ -52,12 +52,12 @@ class MonthPanel extends React.Component {
   }
 
 
-  setAndSelectValue = (value) => {
+  setAndSelectValue = value => {
     this.setValue(value);
     this.props.onSelect(value);
   }
 
-  setValue = (value) => {
+  setValue = value => {
     if ('value' in this.props) {
       this.setState({
         value,
@@ -66,11 +66,11 @@ class MonthPanel extends React.Component {
   }
 
   render() {
-    const props = this.props;
-    const value = this.state.value;
+    const { props } = this;
+    const { value } = this.state;
     const { locale, cellRender, contentRender, renderFooter } = props;
     const year = value.year();
-    const prefixCls = this.prefixCls;
+    const { prefixCls } = this;
 
     const footer = renderFooter && renderFooter('month');
 

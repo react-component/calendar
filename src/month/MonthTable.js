@@ -41,7 +41,7 @@ class MonthTable extends Component {
   }
 
   months() {
-    const value = this.state.value;
+    const { value } = this.state;
     const current = value.clone();
     const months = [];
     let index = 0;
@@ -62,8 +62,8 @@ class MonthTable extends Component {
   }
 
   render() {
-    const props = this.props;
-    const value = this.state.value;
+    const { props } = this;
+    const { value } = this.state;
     const today = getTodayTime(value);
     const months = this.months();
     const currentMonth = value.month();

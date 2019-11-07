@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
+import moment from 'moment';
 import DateTable from './date/DateTable';
 import MonthTable from './month/MonthTable';
 import {
@@ -11,7 +12,6 @@ import {
 } from './mixin/CalendarMixin';
 import { commonMixinWrapper, propType, defaultProp } from './mixin/CommonMixin';
 import CalendarHeader from './full-calendar/CalendarHeader';
-import moment from 'moment';
 
 class FullCalendar extends React.Component {
   static propTypes = {
@@ -66,7 +66,7 @@ class FullCalendar extends React.Component {
     };
   }
 
-  onMonthSelect = (value) => {
+  onMonthSelect = value => {
     this.onSelect(value, {
       target: 'month',
     });
@@ -91,7 +91,7 @@ class FullCalendar extends React.Component {
     return newState;
   }
 
-  setType = (type) => {
+  setType = type => {
     if (!('type' in this.props)) {
       this.setState({
         type,
@@ -101,7 +101,7 @@ class FullCalendar extends React.Component {
   }
 
   render() {
-    const props = this.props;
+    const { props } = this;
     const {
       locale,
       prefixCls,

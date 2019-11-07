@@ -1,15 +1,15 @@
 /* eslint react/no-multi-comp:0, no-console:0 */
 
-import 'rc-calendar/assets/index.less';
+import '../assets/index.less';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import FullCalendar from 'rc-calendar/src/FullCalendar';
+import FullCalendar from '../src/FullCalendar';
 
 import 'rc-select/assets/index.css';
 import Select from 'rc-select';
 
-import zhCN from 'rc-calendar/src/locale/zh_CN';
-import enUS from 'rc-calendar/src/locale/en_US';
+import zhCN from '../src/locale/zh_CN';
+import enUS from '../src/locale/en_US';
 
 import moment from 'moment';
 import 'moment/locale/zh-cn';
@@ -37,11 +37,11 @@ class Demo extends React.Component {
     type: 'month',
   };
 
-  onTypeChange = (type) => {
+  onTypeChange = type => {
     this.setState({
       type,
     });
-  }
+  };
 
   render() {
     return (
@@ -69,4 +69,4 @@ class Demo extends React.Component {
   }
 }
 
-ReactDOM.render(<Demo />, document.getElementById('__react-content'));
+export default Demo;

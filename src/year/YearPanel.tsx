@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+
 const ROW = 4;
 const COL = 3;
 
@@ -34,7 +35,7 @@ export default class YearPanel extends React.Component {
   }
 
   years() {
-    const value = this.state.value;
+    const { value } = this.state;
     const currentYear = value.year();
     const startYear = parseInt(currentYear / 10, 10) * 10;
     const previousYear = startYear - 1;
@@ -55,15 +56,16 @@ export default class YearPanel extends React.Component {
     }
     return years;
   }
+
   render() {
-    const props = this.props;
-    const value = this.state.value;
+    const { props } = this;
+    const { value } = this.state;
     const { locale, renderFooter } = props;
     const years = this.years();
     const currentYear = value.year();
     const startYear = parseInt(currentYear / 10, 10) * 10;
     const endYear = startYear + 9;
-    const prefixCls = this.prefixCls;
+    const { prefixCls } = this;
 
     const yeasEls = years.map((row, index) => {
       const tds = row.map(yearData => {
@@ -89,14 +91,15 @@ export default class YearPanel extends React.Component {
             onClick={clickHandler}
             className={classnames(classNameMap)}
           >
-            <a
-              className={`${prefixCls}-year`}
-            >
-              {yearData.content}
-            </a>
-          </td>);
+            <a className={`${prefixCls}-year`}>{yearData.content}</a>
+          </td>
+        );
       });
-      return (<tr key={index} role="row">{tds}</tr>);
+      return (
+        <tr key={index} role="row">
+          {tds}
+        </tr>
+      );
     });
 
     const footer = renderFooter && renderFooter('year');
@@ -132,18 +135,14 @@ export default class YearPanel extends React.Component {
           </div>
           <div className={`${prefixCls}-body`}>
             <table className={`${prefixCls}-table`} cellSpacing="0" role="grid">
-              <tbody className={`${prefixCls}-tbody`}>
-                {yeasEls}
-              </tbody>
+              <tbody className={`${prefixCls}-tbody`}>{yeasEls}</tbody>
             </table>
           </div>
 
-          {footer && (
-            <div className={`${prefixCls}-footer`}>
-              {footer}
-            </div>)}
+          {footer && <div className={`${prefixCls}-footer`}>{footer}</div>}
         </div>
-      </div>);
+      </div>
+    );
   }
 }
 
@@ -155,6 +154,5 @@ YearPanel.propTypes = {
 };
 
 YearPanel.defaultProps = {
-  onSelect() {
-  },
+  onSelect() {},
 };

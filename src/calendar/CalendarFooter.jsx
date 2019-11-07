@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import toFragment from 'rc-util/lib/Children/mapSelf';
 import cx from 'classnames';
-import TodayButton from '../calendar/TodayButton';
-import OkButton from '../calendar/OkButton';
-import TimePickerButton from '../calendar/TimePickerButton';
+import TodayButton from './TodayButton';
+import OkButton from './OkButton';
+import TimePickerButton from './TimePickerButton';
 
 export default class CalendarFooter extends React.Component {
   static propTypes = {
@@ -31,7 +31,7 @@ export default class CalendarFooter extends React.Component {
   }
 
   render() {
-    const props = this.props;
+    const { props } = this;
     const { value, prefixCls, showOk, timePicker, renderFooter, mode } = props;
     let footerEl = null;
     const extraFooter = renderFooter && renderFooter(mode);
@@ -45,7 +45,7 @@ export default class CalendarFooter extends React.Component {
         okBtn = <OkButton {...props} />;
       }
       let timePickerBtn;
-      if (!!props.timePicker) {
+      if (props.timePicker) {
         timePickerBtn = <TimePickerButton {...props} />;
       }
 

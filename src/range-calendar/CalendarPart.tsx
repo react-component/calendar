@@ -28,10 +28,10 @@ export default class CalendarPart extends React.Component {
     clearIcon: PropTypes.node,
     dateRender: PropTypes.func,
     inputMode: PropTypes.string,
-  }
+  };
 
   render() {
-    const props = this.props;
+    const { props } = this;
     const {
       prefixCls,
       value,
@@ -39,17 +39,25 @@ export default class CalendarPart extends React.Component {
       selectedValue,
       mode,
       direction,
-      locale, format, placeholder,
-      disabledDate, timePicker, disabledTime,
-      timePickerDisabledTime, showTimePicker,
-      onInputChange, onInputSelect, enablePrev, enableNext,
+      locale,
+      format,
+      placeholder,
+      disabledDate,
+      timePicker,
+      disabledTime,
+      timePickerDisabledTime,
+      showTimePicker,
+      onInputChange,
+      onInputSelect,
+      enablePrev,
+      enableNext,
       clearIcon,
       showClear,
       inputMode,
     } = props;
     const shouldShowTimePicker = showTimePicker && timePicker;
-    const disabledTimeConfig = shouldShowTimePicker && disabledTime ?
-      getTimeConfig(selectedValue, disabledTime) : null;
+    const disabledTimeConfig =
+      shouldShowTimePicker && disabledTime ? getTimeConfig(selectedValue, disabledTime) : null;
     const rangeClassName = `${prefixCls}-range`;
     const newProps = {
       locale,
@@ -58,7 +66,8 @@ export default class CalendarPart extends React.Component {
       showTimePicker,
     };
     const index = direction === 'left' ? 0 : 1;
-    const timePickerEle = shouldShowTimePicker &&
+    const timePickerEle =
+      shouldShowTimePicker &&
       React.cloneElement(timePicker, {
         showHour: true,
         showMinute: true,
@@ -71,7 +80,7 @@ export default class CalendarPart extends React.Component {
         value: selectedValue[index],
       });
 
-    const dateInputElement = props.showDateInput &&
+    const dateInputElement = props.showDateInput && (
       <DateInput
         format={format}
         locale={locale}
@@ -87,12 +96,11 @@ export default class CalendarPart extends React.Component {
         onSelect={onInputSelect}
         clearIcon={clearIcon}
         inputMode={inputMode}
-      />;
+      />
+    );
 
     return (
-      <div
-        className={`${rangeClassName}-part ${rangeClassName}-${direction}`}
-      >
+      <div className={`${rangeClassName}-part ${rangeClassName}-${direction}`}>
         {dateInputElement}
         <div style={{ outline: 'none' }}>
           <CalendarHeader
@@ -104,11 +112,11 @@ export default class CalendarPart extends React.Component {
             onPanelChange={props.onPanelChange}
             disabledMonth={props.disabledMonth}
           />
-          {showTimePicker ? <div className={`${prefixCls}-time-picker`}>
-            <div className={`${prefixCls}-time-picker-panel`}>
-              {timePickerEle}
+          {showTimePicker ? (
+            <div className={`${prefixCls}-time-picker`}>
+              <div className={`${prefixCls}-time-picker-panel`}>{timePickerEle}</div>
             </div>
-          </div> : null}
+          ) : null}
           <div className={`${prefixCls}-body`}>
             <DateTable
               {...newProps}
@@ -122,6 +130,7 @@ export default class CalendarPart extends React.Component {
             />
           </div>
         </div>
-      </div>);
+      </div>
+    );
   }
 }

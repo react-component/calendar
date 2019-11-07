@@ -1,11 +1,11 @@
 /* eslint react/no-multi-comp:0, no-console:0, no-unused-vars:0 */
-import 'rc-calendar/assets/index.less';
+import '../assets/index.less';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Calendar from 'rc-calendar/src';
-import RangeCalendar from 'rc-calendar/src/RangeCalendar';
-
 import Select, { Option } from 'rc-select';
+import Calendar from '../src';
+import RangeCalendar from '../src/RangeCalendar';
+
 import 'rc-select/assets/index.css';
 
 class Demo extends React.Component {
@@ -15,8 +15,7 @@ class Demo extends React.Component {
     rangeEndMode: 'date',
   };
 
-  onModeChange = (key) => {
-    return function _handleChange(e) {
+  onModeChange = key => function _handleChange(e) {
       let mode;
       if (e && e.target) {
         mode = e.target.value;
@@ -28,33 +27,27 @@ class Demo extends React.Component {
         [key]: mode,
       });
     }.bind(this);
-  }
 
   handlePanelChange = (...args) => {
     console.log('on panel change', ...args);
-  }
+  };
 
   handleRangePanelChange = (...args) => {
     console.log('on range panel change', ...args);
-  }
+  };
 
   render() {
     return (
       <div style={{ zIndex: 1000, position: 'relative' }}>
         <h2>controle Calendar panel</h2>
-        <select
-          value={this.state.mode}
-          style={{ width: 500 }}
-          onChange={this.onModeChange('mode')}
-        >
+        <select value={this.state.mode} style={{ width: 500 }} onChange={this.onModeChange('mode')}>
           {['time', 'date', 'month', 'year', 'decade'].map(item => (
-            <option value={item} key={item}>{item}</option>
+            <option value={item} key={item}>
+              {item}
+            </option>
           ))}
         </select>
-        <Calendar
-          mode={this.state.mode}
-          onPanelChange={this.handlePanelChange}
-        />
+        <Calendar mode={this.state.mode} onPanelChange={this.handlePanelChange} />
         <h2>controle RangeCalendar panel</h2>
         <select
           value={this.state.rangeStartMode}
@@ -62,7 +55,9 @@ class Demo extends React.Component {
           onChange={this.onModeChange('rangeStartMode')}
         >
           {['date', 'month', 'year', 'decade'].map(item => (
-            <option value={item} key={item}>{item}</option>
+            <option value={item} key={item}>
+              {item}
+            </option>
           ))}
         </select>
         <select
@@ -71,7 +66,9 @@ class Demo extends React.Component {
           onChange={this.onModeChange('rangeEndMode')}
         >
           {['date', 'month', 'year', 'decade'].map(item => (
-            <option value={item} key={item}>{item}</option>
+            <option value={item} key={item}>
+              {item}
+            </option>
           ))}
         </select>
         <RangeCalendar
@@ -83,4 +80,4 @@ class Demo extends React.Component {
   }
 }
 
-ReactDOM.render(<Demo />, document.getElementById('__react-content'));
+export default Demo;

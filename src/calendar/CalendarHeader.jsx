@@ -54,7 +54,7 @@ export default class CalendarHeader extends React.Component {
     this.state = { yearPanelReferer: null };
   }
 
-  onMonthSelect = (value) => {
+  onMonthSelect = value => {
     this.props.onPanelChange(value, 'date');
     if (this.props.onMonthSelect) {
       this.props.onMonthSelect(value);
@@ -63,19 +63,19 @@ export default class CalendarHeader extends React.Component {
     }
   }
 
-  onYearSelect = (value) => {
+  onYearSelect = value => {
     const referer = this.state.yearPanelReferer;
     this.setState({ yearPanelReferer: null });
     this.props.onPanelChange(value, referer);
     this.props.onValueChange(value);
   }
 
-  onDecadeSelect = (value) => {
+  onDecadeSelect = value => {
     this.props.onPanelChange(value, 'year');
     this.props.onValueChange(value);
   }
 
-  changeYear = (direction) => {
+  changeYear = direction => {
     if (direction > 0) {
       this.nextYear();
     } else {
@@ -83,13 +83,13 @@ export default class CalendarHeader extends React.Component {
     }
   }
 
-  monthYearElement = (showTimePicker) => {
-    const props = this.props;
-    const prefixCls = props.prefixCls;
-    const locale = props.locale;
-    const value = props.value;
+  monthYearElement = showTimePicker => {
+    const { props } = this;
+    const { prefixCls } = props;
+    const { locale } = props;
+    const { value } = props;
     const localeData = value.localeData();
-    const monthBeforeYear = locale.monthBeforeYear;
+    const { monthBeforeYear } = locale;
     const selectClassName = `${prefixCls}-${monthBeforeYear ? 'my-select' : 'ym-select'}`;
     const timeClassName = showTimePicker ? ` ${prefixCls}-time-status` : '';
     const year = (<a
@@ -133,7 +133,7 @@ export default class CalendarHeader extends React.Component {
     this.props.onPanelChange(null, 'month');
   }
 
-  showYearPanel = (referer) => {
+  showYearPanel = referer => {
     this.setState({ yearPanelReferer: referer });
     this.props.onPanelChange(null, 'year');
   }

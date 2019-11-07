@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import DateConstants from './DateConstants';
-import { getTitleString, getTodayTime } from '../util/';
+import { getTitleString, getTodayTime } from '../util';
 
 function isSameDay(one, two) {
   return one && two && one.isSame(two, 'day');
@@ -45,7 +45,7 @@ export default class DateTBody extends React.Component {
   }
 
   render() {
-    const props = this.props;
+    const { props } = this;
     const {
       contentRender, prefixCls, selectedValue, value,
       showWeekNumber, dateRender, disabledDate,
@@ -61,7 +61,7 @@ export default class DateTBody extends React.Component {
     const dateClass = `${prefixCls}-date`;
     const todayClass = `${prefixCls}-today`;
     const selectedClass = `${prefixCls}-selected-day`;
-    const selectedDateClass = `${prefixCls}-selected-date`;  // do not move with mouse operation
+    const selectedDateClass = `${prefixCls}-selected-date`; // do not move with mouse operation
     const selectedStartDateClass = `${prefixCls}-selected-start-date`;
     const selectedEndDateClass = `${prefixCls}-selected-end-date`;
     const inRangeClass = `${prefixCls}-in-range-cell`;
