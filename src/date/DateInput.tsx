@@ -1,33 +1,44 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import KeyCode from 'rc-util/lib/KeyCode';
 import { polyfill } from 'react-lifecycles-compat';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import { formatDate } from '../util';
 
 let cachedSelectionStart;
 let cachedSelectionEnd;
 let dateInputInstance;
 
-class DateInput extends React.Component {
-  static propTypes = {
-    prefixCls: PropTypes.string,
-    timePicker: PropTypes.object,
-    value: PropTypes.object,
-    disabledTime: PropTypes.any,
-    format: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-    locale: PropTypes.object,
-    disabledDate: PropTypes.func,
-    onChange: PropTypes.func,
-    onClear: PropTypes.func,
-    placeholder: PropTypes.string,
-    onSelect: PropTypes.func,
-    selectedValue: PropTypes.object,
-    clearIcon: PropTypes.node,
-    inputMode: PropTypes.string,
-  }
+export type CalendarType = 'time' | 'date' | 'month' | 'year' | 'decade';
 
+export interface DateInputProps {
+  prefixCls?: string;
+  value?: Moment;
+  format?: string | string[];
+  onClear?: (value) => void;
+  disabledDate: (value: Moment) => boolean;
+  onChange?: (value: Moment) => void;
+  selectedValue?: Moment;
+  onSelect?: (value: Moment) => void;
+  mode?: CalendarType;
+  locale?: {
+    [key: string]: any;
+  };
+  placeholder?: string;
+  disabled?: boolean;
+  showClear?: boolean;
+  clearIcon?: React.ReactNode;
+  inputMode?: 'none' | 'text' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search';
+}
+
+class DateInput extends React.Component<
+  DateInputProps,
+  {
+    hasFocus: boolean;
+    invalid: boolean;
+    str: string;
+  }
+> {
   constructor(props) {
     super(props);
     const { selectedValue } = props;
@@ -40,8 +51,12 @@ class DateInput extends React.Component {
   }
 
   componentDidUpdate() {
-    if (dateInputInstance && this.state.hasFocus && !this.state.invalid &&
-      !(cachedSelectionStart === 0 && cachedSelectionEnd === 0)) {
+    if (
+      dateInputInstance &&
+      this.state.hasFocus &&
+      !this.state.invalid &&
+      !(cachedSelectionStart === 0 && cachedSelectionEnd === 0)
+    ) {
       dateInputInstance.setSelectionRange(cachedSelectionStart, cachedSelectionEnd);
     }
   }
@@ -51,7 +66,7 @@ class DateInput extends React.Component {
       str: '',
     });
     this.props.onClear(null);
-  }
+  };
 
   onInputChange = event => {
     const str = event.target.value;
@@ -94,27 +109,25 @@ class DateInput extends React.Component {
       return;
     }
 
-    if (selectedValue !== value || (
-      selectedValue && value && !selectedValue.isSame(value)
-    )) {
+    if (selectedValue !== value || (selectedValue && value && !selectedValue.isSame(value))) {
       this.setState({
         invalid: false,
         str,
       });
       onChange(value);
     }
-  }
+  };
 
   onFocus = () => {
     this.setState({ hasFocus: true });
-  }
+  };
 
   onBlur = () => {
     this.setState((prevState, prevProps) => ({
       hasFocus: false,
       str: formatDate(prevProps.value, prevProps.format),
     }));
-  }
+  };
 
   onKeyDown = event => {
     const { keyCode } = event;
@@ -151,17 +164,18 @@ class DateInput extends React.Component {
     return dateInputInstance;
   }
 
-  getRootDOMNode = () => ReactDOM.findDOMNode(this)
+  // eslint-disable-next-line react/no-find-dom-node
+  getRootDOMNode = () => ReactDOM.findDOMNode(this);
 
   focus = () => {
     if (dateInputInstance) {
       dateInputInstance.focus();
     }
-  }
+  };
 
   saveDateInput = dateInput => {
     dateInputInstance = dateInput;
-  }
+  };
 
   render() {
     const { props } = this;
@@ -185,11 +199,7 @@ class DateInput extends React.Component {
           />
         </div>
         {props.showClear ? (
-          <a
-            role="button"
-            title={locale.clear}
-            onClick={this.onClear}
-          >
+          <a role="button" title={locale.clear} onClick={this.onClear}>
             {clearIcon || <span className={`${prefixCls}-clear-btn`} />}
           </a>
         ) : null}

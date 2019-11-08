@@ -1,6 +1,5 @@
 import React, { CSSProperties } from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import KeyCode from 'rc-util/lib/KeyCode';
 import { polyfill } from 'react-lifecycles-compat';
 import moment, { Moment } from 'moment';
@@ -9,12 +8,11 @@ import CalendarHeader from './calendar/CalendarHeader';
 import CalendarFooter from './calendar/CalendarFooter';
 import {
   calendarMixinWrapper,
-  calendarMixinPropTypes,
   calendarMixinDefaultProps,
   getNowByCurrentStateValue,
 } from './mixin/CalendarMixin';
-import { commonMixinWrapper, propType, defaultProp } from './mixin/CommonMixin';
-import DateInput from './date/DateInput';
+import { commonMixinWrapper, defaultProp } from './mixin/CommonMixin';
+import DateInput, { CalendarType, DateInputProps } from './date/DateInput';
 import { getTimeConfig, getTodayTime, syncTime } from './util';
 import { goStartMonth, goEndMonth, goTime } from './util/toTime';
 
@@ -27,49 +25,52 @@ const getMomentObjectIfValid = date => {
   return false;
 };
 
-export type CalendarType = 'time' | 'date' | 'month' | 'year' | 'decade';
-
 export interface CalendarProps {
-  prefixCls: string;
-  className: string;
-  style: CSSProperties;
-  defaultValue: Moment;
-  value: Moment;
-  selectedValue: Moment;
-  defaultSelectedValue: Moment;
-  mode: CalendarType;
-  locale: {
+  prefixCls?: string;
+  className?: string;
+  style?: CSSProperties;
+  defaultValue?: Moment;
+  value?: Moment;
+  selectedValue?: Moment;
+  defaultSelectedValue?: Moment;
+  mode?: CalendarType;
+  locale?: {
     [key: string]: any;
   };
-  showDateInput: boolean;
-  showWeekNumber: boolean;
-  showToday: boolean;
-  showOk: boolean;
-  onSelect: () => void;
-  onOk: () => void;
-  onKeyDown: () => void;
-  timePicker: React.ReactNode;
-  dateInputPlaceholder: string;
-  onClear: () => void;
-  onChange: () => void;
-  onPanelChange: (value: Moment, mode: CalendarType) => void;
-  disabledDate: () => boolean;
-  disabledTime: () => boolean;
-  dateRender: () => boolean;
-  renderFooter: () => React.ReactNode;
-  renderSidebar: () => React.ReactNode;
-  clearIcon: React.ReactNode;
-  focusablePanel: boolean;
-  inputMode: string;
-  onBlur: () => void;
-  monthCellRender: () => React.ReactNode;
-  monthCellContentRender: () => React.ReactNode;
+  showDateInput?: boolean;
+  showWeekNumber?: boolean;
+  showToday?: boolean;
+  showOk?: boolean;
+  onSelect?: (
+    value: Moment,
+    cause: {
+      source: string;
+    },
+  ) => void;
+  onOk?: (value: Moment) => void;
+  onKeyDown?: (event: React.KeyboardEvent<HTMLDivElement>) => void;
+  timePicker?: React.ReactNode;
+  dateInputPlaceholder?: string;
+  onClear?: () => void;
+  onChange?: () => void;
+  onPanelChange?: (value: Moment, mode: CalendarType) => void;
+  disabledDate?: (value: Moment) => boolean;
+  disabledTime?: () => boolean;
+  dateRender?: () => boolean;
+  renderFooter?: () => React.ReactNode;
+  renderSidebar?: () => React.ReactNode;
+  clearIcon?: React.ReactNode;
+  focusablePanel?: boolean;
+  inputMode?: DateInputProps['inputMode'];
+  onBlur?: (e: React.MouseEvent<HTMLDivElement>) => void;
+  monthCellRender?: () => React.ReactNode;
+  monthCellContentRender?: () => React.ReactNode;
 }
 
 export interface CalendarState {
-  value: Moment;
-  mode: CalendarType;
-  selectedValue: Moment;
+  value?: Moment;
+  mode?: CalendarType;
+  selectedValue?: Moment;
 }
 
 class Calendar extends React.Component<CalendarProps, CalendarState> {
@@ -83,6 +84,27 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
     onPanelChange: noop,
     focusablePanel: true,
   };
+
+  // from mix
+  // to remove it, refactor to hooks
+  saveFocusElement;
+
+  rootInstance: HTMLDivElement;
+
+  setValue: (value: Moment) => void;
+
+  onSelect: (
+    value: Moment | null,
+    cause?: {
+      source: string;
+    },
+  ) => void;
+
+  isAllowedDate: (value: Moment) => boolean;
+
+  getFormat: () => string[] | string;
+
+  renderRoot: (option: { children: React.ReactNode; className: string }) => React.ReactNode;
 
   constructor(props) {
     super(props);
@@ -238,9 +260,9 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
     }, 0);
   };
 
-  static getDerivedStateFromProps(nextProps, state) {
+  static getDerivedStateFromProps(nextProps: CalendarProps, state: CalendarState) {
     const { value, selectedValue } = nextProps;
-    let newState = {};
+    let newState: CalendarState = {};
 
     if ('mode' in nextProps && state.mode !== nextProps.mode) {
       newState = { mode: nextProps.mode };
@@ -324,7 +346,6 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
         locale={locale}
         placeholder={dateInputPlaceholder}
         showClear
-        disabledTime={disabledTime}
         disabledDate={disabledDate}
         onClear={this.onClear}
         prefixCls={prefixCls}
