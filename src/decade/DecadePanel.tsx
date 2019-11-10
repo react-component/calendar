@@ -18,7 +18,6 @@ interface DecadePanelProps {
 
 const DecadePanel: React.FC<DecadePanelProps> = props => {
   const [value, setValue] = useState(props.value || props.defaultValue);
-
   function chooseDecade(year, event) {
     const next = value.clone();
     next.year(year);

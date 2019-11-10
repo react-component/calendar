@@ -3,7 +3,7 @@ import React from 'react';
 import Dialog from 'rc-dialog';
 import moment from 'moment';
 
-import Calendar from '..';
+import Calendar from '../src';
 import DatePicker from '../src/Picker';
 import 'rc-dialog/assets/index.css';
 

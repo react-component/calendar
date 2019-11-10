@@ -427,7 +427,6 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
         </div>
       </div>,
     );
-
     return this.renderRoot({
       children,
       className: props.showWeekNumber ? `${prefixCls}-week-number` : '',

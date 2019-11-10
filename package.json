@@ -15,8 +15,7 @@
     "lib",
     "es",
     "assets/*.css",
-    "dist",
-    "index.d.ts"
+    "dist"
   ],
   "main": "lib/index",
   "module": "es/index",

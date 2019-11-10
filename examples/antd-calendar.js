@@ -5,7 +5,7 @@ import React from 'react';
 import moment from 'moment';
 import TimePickerPanel from 'rc-time-picker/lib/Panel';
 
-import Calendar from '..';
+import Calendar from '../src';
 import DatePicker from '../src/Picker';
 import zhCN from '../src/locale/zh_CN';
 import enUS from '../src/locale/en_US';

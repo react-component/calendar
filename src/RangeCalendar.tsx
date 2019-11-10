@@ -735,7 +735,6 @@ class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarSta
       nextMonthOfStart.year() === endValue.year() && nextMonthOfStart.month() === endValue.month();
 
     const extraFooter = props.renderFooter();
-
     return (
       <div
         ref={this.saveRoot}

@@ -5,7 +5,7 @@ import React from 'react';
 import moment from 'moment';
 import TimePickerPanel from 'rc-time-picker/lib/Panel';
 
-import Calendar from '..';
+import Calendar from '../src';
 import DatePicker from '../src/Picker';
 
 import zhCN from '../src/locale/zh_CN';
@@ -36,8 +36,7 @@ const timePickerElement = <TimePickerPanel />;
 
 const SHOW_TIME = true;
 
-const Picker = () => {
-  const { props } = this;
+const Picker = props => {
   const calendar = (
     <Calendar
       locale={cn ? zhCN : enUS}

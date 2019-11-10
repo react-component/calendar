@@ -210,7 +210,6 @@ class Picker extends React.Component<PickerProps, PickerState> {
   };
 
   render() {
-    const { props } = this;
     const {
       prefixCls,
       placement,
@@ -222,7 +221,7 @@ class Picker extends React.Component<PickerProps, PickerState> {
       dropdownClassName,
       transitionName,
       children,
-    } = props;
+    } = this.props;
     const { state } = this;
     return (
       <Trigger
@@ -241,7 +240,7 @@ class Picker extends React.Component<PickerProps, PickerState> {
         prefixCls={prefixCls}
         popupClassName={dropdownClassName}
       >
-        {React.cloneElement(children(state, props), { onKeyDown: this.onKeyDown })}
+        {React.cloneElement(children(state, this.props), { onKeyDown: this.onKeyDown })}
       </Trigger>
     );
   }

@@ -2,7 +2,7 @@
 
 import '../assets/index.less';
 import React from 'react';
-import Calendar from '..';
+import Calendar from '../src';
 import RangeCalendar from '../src/RangeCalendar';
 import 'rc-time-picker/assets/index.css';
 

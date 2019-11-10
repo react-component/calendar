@@ -3,7 +3,7 @@
 import '../assets/index.less';
 import React from 'react';
 import moment from 'moment';
-import Calendar from '..';
+import Calendar from '../src';
 import DatePicker from '../src/Picker';
 import zhCN from '../src/locale/zh_CN';
 import enUS from '../src/locale/en_US';
@@ -93,15 +93,13 @@ class Demo extends React.Component {
     });
   };
 
-  renderSidebar() {
-    return (
-      <div className="week-calendar-sidebar" key="sidebar">
-        <button onClick={this.lastWeek} type="button" style={{ margin: 20 }}>
-          上一周
-        </button>
-      </div>
-    );
-  }
+  renderSidebar = () => (
+    <div className="week-calendar-sidebar" key="sidebar">
+      <button onClick={() => this.lastWeek()} type="button" style={{ margin: 20 }}>
+        上一周
+      </button>
+    </div>
+  );
 
   render() {
     const { state } = this;
