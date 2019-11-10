@@ -1,7 +1,8 @@
 import '../assets/index.less';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Dialog from 'rc-dialog';
+import moment from 'moment';
+
 import Calendar from '..';
 import DatePicker from '../src/Picker';
 import 'rc-dialog/assets/index.css';
@@ -9,12 +10,11 @@ import 'rc-dialog/assets/index.css';
 import zhCN from '../src/locale/zh_CN';
 import enUS from '../src/locale/en_US';
 
-import moment from 'moment';
 import 'moment/locale/zh-cn';
 import 'moment/locale/en-gb';
 
 const format = 'YYYY-MM-DD';
-const cn = location.search.indexOf('cn') !== -1;
+const cn = window.location.search.indexOf('cn') !== -1;
 
 const now = moment();
 if (cn) {
@@ -62,25 +62,34 @@ class Demo extends React.Component {
     }
     return (
       <div>
-        <button onClick={this.open}>open</button>
+        <button type="button" onClick={this.open}>
+          open
+        </button>
         &nbsp;
-        <button onClick={this.destroy}>destroy</button>
+        <button type="button" onClick={this.destroy}>
+          destroy
+        </button>
         <Dialog visible={this.state.open} onClose={this.close}>
-          <div id="d" ref={n => (this.d = n)} />
+          <div
+            id="d"
+            ref={n => {
+              this.d = n;
+            }}
+          />
           <div style={{ marginTop: 20 }}>
             <DatePicker
               getCalendarContainer={this.getCalendarContainer}
               calendar={<Calendar locale={cn ? zhCN : enUS} />}
             >
               {({ value }) => (
-                  <span>
-                    <input
-                      style={{ width: 250 }}
-                      readOnly
-                      value={(value && value.format(format)) || ''}
-                    />
-                  </span>
-                )}
+                <span>
+                  <input
+                    style={{ width: 250 }}
+                    readOnly
+                    value={(value && value.format(format)) || ''}
+                  />
+                </span>
+              )}
             </DatePicker>
           </div>
         </Dialog>

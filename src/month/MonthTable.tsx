@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, ReactNode } from 'react';
+import { Moment } from 'moment';
+
 import classnames from 'classnames';
 import { getTodayTime, getMonthName } from '../util/index';
 
@@ -12,11 +13,20 @@ function chooseMonth(month) {
   this.setAndSelectValue(next);
 }
 
-function noop() {
-
+interface MonthTableProps {
+  value?: Moment;
+  onSelect?: (value: Moment) => void;
+  prefixCls?: string;
+  locale?: { [key: string]: any };
+  contentRender?: (value: Moment, locale: { [key: string]: any }) => ReactNode;
+  cellRender?: (value: Moment, locale: { [key: string]: any }) => ReactNode;
+  disabledDate?: (value: Moment) => boolean;
+}
+interface MonthTableState {
+  value: Moment;
 }
 
-class MonthTable extends Component {
+class MonthTable extends Component<MonthTableProps, MonthTableState> {
   constructor(props) {
     super(props);
 
@@ -25,19 +35,23 @@ class MonthTable extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  static getDerivedStateFromProps(nextProps) {
     if ('value' in nextProps) {
-      this.setState({
+      return {
         value: nextProps.value,
-      });
+      };
     }
+    return null;
   }
 
   setAndSelectValue(value) {
     this.setState({
       value,
     });
-    this.props.onSelect(value);
+    const { onSelect } = this.props;
+    if (onSelect) {
+      onSelect(value);
+    }
   }
 
   months() {
@@ -45,9 +59,9 @@ class MonthTable extends Component {
     const current = value.clone();
     const months = [];
     let index = 0;
-    for (let rowIndex = 0; rowIndex < ROW; rowIndex++) {
+    for (let rowIndex = 0; rowIndex < ROW; rowIndex += 1) {
       months[rowIndex] = [];
-      for (let colIndex = 0; colIndex < COL; colIndex++) {
+      for (let colIndex = 0; colIndex < COL; colIndex += 1) {
         current.month(index);
         const content = getMonthName(current);
         months[rowIndex][colIndex] = {
@@ -55,7 +69,7 @@ class MonthTable extends Component {
           content,
           title: content,
         };
-        index++;
+        index += 1;
       }
     }
     return months;
@@ -80,8 +94,8 @@ class MonthTable extends Component {
           [`${prefixCls}-cell`]: 1,
           [`${prefixCls}-cell-disabled`]: disabled,
           [`${prefixCls}-selected-cell`]: monthData.value === currentMonth,
-          [`${prefixCls}-current-cell`]: today.year() === value.year() &&
-          monthData.value === today.month(),
+          [`${prefixCls}-current-cell`]:
+            today.year() === value.year() && monthData.value === today.month(),
         };
         let cellEl;
         if (cellRender) {
@@ -95,13 +109,10 @@ class MonthTable extends Component {
             currentValue.month(monthData.value);
             content = contentRender(currentValue, locale);
           } else {
+            // eslint-disable-next-line prefer-destructuring
             content = monthData.content;
           }
-          cellEl = (
-            <a className={`${prefixCls}-month`}>
-              {content}
-            </a>
-          );
+          cellEl = <a className={`${prefixCls}-month`}>{content}</a>;
         }
         return (
           <td
@@ -112,28 +123,22 @@ class MonthTable extends Component {
             className={classnames(classNameMap)}
           >
             {cellEl}
-          </td>);
+          </td>
+        );
       });
-      return (<tr key={index} role="row">{tds}</tr>);
+      return (
+        <tr key={index} role="row">
+          {tds}
+        </tr>
+      );
     });
 
     return (
       <table className={`${prefixCls}-table`} cellSpacing="0" role="grid">
-        <tbody className={`${prefixCls}-tbody`}>
-        {monthsEls}
-        </tbody>
+        <tbody className={`${prefixCls}-tbody`}>{monthsEls}</tbody>
       </table>
     );
   }
 }
 
-MonthTable.defaultProps = {
-  onSelect: noop,
-};
-MonthTable.propTypes = {
-  onSelect: PropTypes.func,
-  cellRender: PropTypes.func,
-  prefixCls: PropTypes.string,
-  value: PropTypes.object,
-};
 export default MonthTable;

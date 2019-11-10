@@ -1,8 +1,13 @@
 import React from 'react';
-import DateTHead from './DateTHead';
-import DateTBody from './DateTBody';
+import DateTHead, { DateTHeadProps } from './DateTHead';
+import DateTBody, { DateTBodyProps } from './DateTBody';
 
-const DateTable: React.FC<{}> = props => {
+interface DateTableProps extends DateTHeadProps, DateTBodyProps {
+  prefixCls?: string;
+  locale?: { [key: string]: any };
+}
+
+const DateTable: React.FC<DateTableProps> = props => {
   const { prefixCls } = props;
   return (
     <table className={`${prefixCls}-table`} cellSpacing="0" role="grid">

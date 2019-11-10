@@ -2,21 +2,21 @@
 
 import '../assets/index.less';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import moment from 'moment';
+import TimePickerPanel from 'rc-time-picker/lib/Panel';
+
 import Calendar from '..';
 import DatePicker from '../src/Picker';
 
 import zhCN from '../src/locale/zh_CN';
 import enUS from '../src/locale/en_US';
 import 'rc-time-picker/assets/index.css';
-import TimePickerPanel from 'rc-time-picker/lib/Panel';
 
-import moment from 'moment';
 import 'moment/locale/zh-cn';
 import 'moment/locale/en-gb';
 
 const format = 'YYYY-MM-DD HH:mm:ss';
-const cn = location.search.indexOf('cn') !== -1;
+const cn = window.location.search.indexOf('cn') !== -1;
 
 const now = moment();
 if (cn) {
@@ -36,45 +36,38 @@ const timePickerElement = <TimePickerPanel />;
 
 const SHOW_TIME = true;
 
-class Picker extends React.Component {
-  state = {
-    showTime: SHOW_TIME,
-    disabled: false,
-  };
-
-  render() {
-    const { props } = this;
-    const calendar = (
-      <Calendar
-        locale={cn ? zhCN : enUS}
-        defaultValue={now}
-        timePicker={props.showTime ? timePickerElement : null}
-        disabledDate={props.disabledDate}
-      />
-    );
-    return (
-      <DatePicker
-        animation="slide-up"
-        disabled={props.disabled}
-        calendar={calendar}
-        value={props.value}
-        onChange={props.onChange}
-      >
-        {({ value }) => (
-            <span>
-              <input
-                placeholder="请选择日期"
-                style={{ width: 250 }}
-                disabled={props.disabled}
-                readOnly
-                value={(value && value.format(getFormat(props.showTime))) || ''}
-              />
-            </span>
-          )}
-      </DatePicker>
-    );
-  }
-}
+const Picker = () => {
+  const { props } = this;
+  const calendar = (
+    <Calendar
+      locale={cn ? zhCN : enUS}
+      defaultValue={now}
+      timePicker={props.showTime ? timePickerElement : null}
+      disabledDate={props.disabledDate}
+    />
+  );
+  return (
+    <DatePicker
+      animation="slide-up"
+      disabled={props.disabled}
+      calendar={calendar}
+      value={props.value}
+      onChange={props.onChange}
+    >
+      {({ value }) => (
+        <span>
+          <input
+            placeholder="请选择日期"
+            style={{ width: 250 }}
+            disabled={props.disabled}
+            readOnly
+            value={(value && value.format(getFormat(props.showTime))) || ''}
+          />
+        </span>
+      )}
+    </DatePicker>
+  );
+};
 
 class Demo extends React.Component {
   state = {
@@ -120,7 +113,7 @@ class Demo extends React.Component {
           <Picker
             disabledDate={this.disabledStartDate}
             value={state.startValue}
-            onChange={this.onChange.bind(this, 'startValue')}
+            onChange={value => this.onChange('startValue', value)}
           />
         </p>
 
@@ -129,7 +122,7 @@ class Demo extends React.Component {
           <Picker
             disabledDate={this.disabledEndDate}
             value={state.endValue}
-            onChange={this.onChange.bind(this, 'endValue')}
+            onChange={value => this.onChange('endValue', value)}
           />
         </p>
       </div>

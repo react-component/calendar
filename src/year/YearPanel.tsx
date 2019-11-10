@@ -1,49 +1,70 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { Moment } from 'moment';
+
+import { CalendarTypeMode } from '../date/DateInput';
 
 const ROW = 4;
 const COL = 3;
 
-function goYear(direction) {
-  const value = this.state.value.clone();
-  value.add(direction, 'year');
-  this.setState({
-    value,
-  });
+interface YearPanelProps {
+  locale?: { [key: string]: any };
+  defaultValue?: Moment;
+  value?: Moment;
+  onSelect?: (value: Moment) => void;
+  rootPrefixCls?: string;
+  renderFooter?: (mode: CalendarTypeMode) => React.ReactNode;
+  onDecadePanelShow?: () => void;
 }
 
-function chooseYear(year) {
-  const value = this.state.value.clone();
-  value.year(year);
-  value.month(this.state.value.month());
-  this.setState({
-    value,
-  });
-  this.props.onSelect(value);
+interface YearPanelState {
+  value: Moment;
 }
 
-export default class YearPanel extends React.Component {
-  constructor(props) {
+export default class YearPanel extends React.Component<YearPanelProps, YearPanelState> {
+  constructor(props: YearPanelProps) {
     super(props);
-    this.prefixCls = `${props.rootPrefixCls}-year-panel`;
     this.state = {
       value: props.value || props.defaultValue,
     };
-    this.nextDecade = goYear.bind(this, 10);
-    this.previousDecade = goYear.bind(this, -10);
   }
+
+  goYear = direction => {
+    const { value: stateValue } = this.state;
+    const value = stateValue.clone();
+    value.add(direction, 'year');
+    this.setState({
+      value,
+    });
+  };
+
+  chooseYear = year => {
+    const { value: stateValue } = this.state;
+    const value = stateValue.clone();
+    value.year(year);
+    value.month(this.state.value.month());
+    this.setState({
+      value,
+    });
+    this.props.onSelect(value);
+  };
+
+  nextDecade = () => this.goYear(10);
+
+  previousDecade = () => this.goYear(-10);
+
+  prefixCls = `${this.props.rootPrefixCls}-year-panel`;
 
   years() {
     const { value } = this.state;
     const currentYear = value.year();
-    const startYear = parseInt(currentYear / 10, 10) * 10;
+    const startYear = parseInt(`${currentYear / 10}`, 10) * 10;
     const previousYear = startYear - 1;
     const years = [];
     let index = 0;
-    for (let rowIndex = 0; rowIndex < ROW; rowIndex++) {
+    for (let rowIndex = 0; rowIndex < ROW; rowIndex += 1) {
       years[rowIndex] = [];
-      for (let colIndex = 0; colIndex < COL; colIndex++) {
+      for (let colIndex = 0; colIndex < COL; colIndex += 1) {
         const year = previousYear + index;
         const content = String(year);
         years[rowIndex][colIndex] = {
@@ -51,7 +72,7 @@ export default class YearPanel extends React.Component {
           year,
           title: content,
         };
-        index++;
+        index += 1;
       }
     }
     return years;
@@ -63,7 +84,7 @@ export default class YearPanel extends React.Component {
     const { locale, renderFooter } = props;
     const years = this.years();
     const currentYear = value.year();
-    const startYear = parseInt(currentYear / 10, 10) * 10;
+    const startYear = parseInt(`${currentYear / 10}`, 10) * 10;
     const endYear = startYear + 9;
     const { prefixCls } = this;
 
@@ -81,7 +102,7 @@ export default class YearPanel extends React.Component {
         } else if (yearData.year > endYear) {
           clickHandler = this.nextDecade;
         } else {
-          clickHandler = chooseYear.bind(this, yearData.year);
+          clickHandler = () => this.chooseYear(yearData.year);
         }
         return (
           <td
@@ -145,14 +166,3 @@ export default class YearPanel extends React.Component {
     );
   }
 }
-
-YearPanel.propTypes = {
-  rootPrefixCls: PropTypes.string,
-  value: PropTypes.object,
-  defaultValue: PropTypes.object,
-  renderFooter: PropTypes.func,
-};
-
-YearPanel.defaultProps = {
-  onSelect() {},
-};

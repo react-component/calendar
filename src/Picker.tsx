@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
+import { Moment } from 'moment';
+
 import { polyfill } from 'react-lifecycles-compat';
 import createChainedFunction from 'rc-util/lib/createChainedFunction';
 import KeyCode from 'rc-util/lib/KeyCode';
@@ -13,28 +14,34 @@ function refFn(field, component) {
   this[field] = component;
 }
 
-class Picker extends React.Component {
-  static propTypes = {
-    animation: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    disabled: PropTypes.bool,
-    transitionName: PropTypes.string,
-    onChange: PropTypes.func,
-    onOpenChange: PropTypes.func,
-    children: PropTypes.func,
-    getCalendarContainer: PropTypes.func,
-    calendar: PropTypes.element,
-    style: PropTypes.object,
-    open: PropTypes.bool,
-    defaultOpen: PropTypes.bool,
-    prefixCls: PropTypes.string,
-    placement: PropTypes.any,
-    value: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-    defaultValue: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-    align: PropTypes.object,
-    dateRender: PropTypes.func,
-    onBlur: PropTypes.func,
-  };
+export interface PickerProps {
+  animation?: string;
+  disabled?: boolean;
+  transitionName?: string;
+  onChange?: (value: Moment) => void;
+  onOpenChange?: (open: boolean) => void;
+  getCalendarContainer?: (ref: HTMLElement) => HTMLElement;
+  calendar?: JSX.Element;
+  style?: CSSProperties;
+  open?: boolean;
+  defaultOpen?: boolean;
+  prefixCls?: string;
+  placement?: string;
+  value?: Moment | Moment[];
+  defaultValue?: Moment | Moment[];
+  align?: any;
+  dateRender?: (value: Moment) => React.ReactNode;
+  onBlur?: () => void;
+  dropdownClassName?: string;
+  children?: any;
+}
 
+export interface PickerState {
+  open?: boolean;
+  value?: Moment | Moment[];
+}
+
+class Picker extends React.Component<PickerProps, PickerState> {
   static defaultProps = {
     prefixCls: 'rc-calendar-picker',
     style: {},
@@ -46,17 +53,19 @@ class Picker extends React.Component {
     onBlur: noop,
   };
 
+  saveCalendarRef = refFn.bind(this, 'calendarInstance');
+
   constructor(props) {
     super(props);
 
     let open;
     if ('open' in props) {
+      // eslint-disable-next-line prefer-destructuring
       open = props.open;
     } else {
       open = props.defaultOpen;
     }
     const value = props.value || props.defaultValue;
-    this.saveCalendarRef = refFn.bind(this, 'calendarInstance');
 
     this.state = {
       open,
@@ -64,10 +73,12 @@ class Picker extends React.Component {
     };
   }
 
+  focusTimeout: number;
+
   componentDidUpdate(_, prevState) {
     if (!prevState.open && this.state.open) {
       // setTimeout is for making sure saveCalendarRef happen before focusCalendar
-      this.focusTimeout = setTimeout(this.focusCalendar, 0, this);
+      this.focusTimeout = window.setTimeout(this.focusCalendar, 0, this);
     }
   }
 
@@ -82,7 +93,12 @@ class Picker extends React.Component {
     }
   };
 
-  onCalendarSelect = (value, cause = {}) => {
+  onCalendarSelect = (
+    value,
+    cause = {
+      source: '',
+    },
+  ) => {
     const { props } = this;
     if (!('value' in props)) {
       this.setState({
@@ -124,7 +140,7 @@ class Picker extends React.Component {
   };
 
   static getDerivedStateFromProps(nextProps) {
-    const newState = {};
+    const newState: PickerState = {};
     const { value, open } = nextProps;
     if ('value' in nextProps) {
       newState.value = value;
@@ -155,7 +171,7 @@ class Picker extends React.Component {
     return React.cloneElement(props.calendar, extraProps);
   };
 
-  setOpen = (open, callback) => {
+  setOpen = (open: boolean, callback?: () => void) => {
     const { onOpenChange } = this.props;
     if (this.state.open !== open) {
       if (!('open' in this.props)) {
@@ -170,7 +186,7 @@ class Picker extends React.Component {
     }
   };
 
-  open = callback => {
+  open = (callback?: () => void) => {
     this.setOpen(true, callback);
   };
 
@@ -180,9 +196,12 @@ class Picker extends React.Component {
 
   focus = () => {
     if (!this.state.open) {
+      // eslint-disable-next-line react/no-find-dom-node
       ReactDOM.findDOMNode(this).focus();
     }
   };
+
+  calendarInstance?: HTMLElement;
 
   focusCalendar = () => {
     if (this.state.open && !!this.calendarInstance) {
@@ -210,7 +229,7 @@ class Picker extends React.Component {
         popup={this.getCalendarElement()}
         popupAlign={align}
         builtinPlacements={placements}
-        popupPlacement={placement}
+        popupPlacement={placement as string}
         action={disabled && !state.open ? [] : ['click']}
         destroyPopupOnHide
         getPopupContainer={getCalendarContainer}

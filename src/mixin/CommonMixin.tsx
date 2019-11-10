@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import enUs from '../locale/en_US';
-import { CalendarProps, CalendarState } from '../Calendar';
 
 function noop() {}
 
@@ -33,9 +32,7 @@ export const defaultProp = {
   },
 };
 
-export const commonMixinWrapper = (
-  ComposeComponent: React.ComponentClass<CalendarProps, CalendarState>,
-) => {
+export const commonMixinWrapper = (ComposeComponent: React.ComponentClass<any, any>) => {
   class Wrapper extends ComposeComponent {
     static displayName = 'CommonMixinWrapper';
 
@@ -60,6 +57,10 @@ export const commonMixinWrapper = (
       return format;
     };
 
+    focusElement: HTMLElement;
+
+    rootInstance: HTMLElement;
+
     focus = () => {
       if (this.focusElement) {
         this.focusElement.focus();
@@ -68,7 +69,7 @@ export const commonMixinWrapper = (
       }
     };
 
-    saveFocusElement = focusElement => {
+    saveFocusElement = (focusElement: HTMLElement) => {
       this.focusElement = focusElement;
     };
 

@@ -2,7 +2,6 @@
 
 import '../assets/index.less';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import moment from 'moment';
 import RangeCalendar from '../src/RangeCalendar';
 import DatePicker from '../src/Picker';
@@ -16,7 +15,7 @@ import 'moment/locale/en-gb';
 const format = 'YYYY-MM-DD';
 
 const fullFormat = 'YYYY-MM-DD dddd';
-const cn = location.search.indexOf('cn') !== -1;
+const cn = window.location.search.indexOf('cn') !== -1;
 
 const now = moment();
 if (cn) {
@@ -58,15 +57,15 @@ class Picker extends React.Component {
         value={props.value}
       >
         {() => (
-            <span>
-              <input
-                placeholder="请选择日期"
-                style={{ width: 250 }}
-                readOnly
-                value={(showValue && showValue.format(fullFormat)) || ''}
-              />
-            </span>
-          )}
+          <span>
+            <input
+              placeholder="请选择日期"
+              style={{ width: 250 }}
+              readOnly
+              value={(showValue && showValue.format(fullFormat)) || ''}
+            />
+          </span>
+        )}
       </DatePicker>
     );
   }

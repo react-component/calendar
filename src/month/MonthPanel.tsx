@@ -1,38 +1,45 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactNode, CSSProperties } from 'react';
+import { Moment } from 'moment';
+
 import { polyfill } from 'react-lifecycles-compat';
 import MonthTable from './MonthTable';
 
-function goYear(direction) {
-  this.props.changeYear(direction);
+export interface MonthPanelProps {
+  value?: Moment;
+  onSelect?: (value: Moment) => void;
+  prefixCls?: string;
+  rootPrefixCls?: string;
+  locale?: { [key: string]: any };
+  contentRender?: (value: Moment, locale: { [key: string]: any }) => ReactNode;
+  cellRender?: (value: Moment, locale: { [key: string]: any }) => ReactNode;
+  disabledDate?: (value: Moment) => boolean;
+  renderFooter?: (key: string) => ReactNode;
+  changeYear?: (direction: number) => void;
+  style?: CSSProperties;
+  onYearPanelShow: React.MouseEventHandler<HTMLAnchorElement>;
+}
+export interface MonthPanelState {
+  value: Moment;
 }
 
-function noop() {
-
-}
-
-class MonthPanel extends React.Component {
-  static propTypes = {
-    onChange: PropTypes.func,
-    disabledDate: PropTypes.func,
-    onSelect: PropTypes.func,
-    renderFooter: PropTypes.func,
-    rootPrefixCls: PropTypes.string,
-    value: PropTypes.object,
-    defaultValue: PropTypes.object,
-  }
-
+class MonthPanel extends React.Component<MonthPanelProps, MonthPanelState> {
   static defaultProps = {
-    onChange: noop,
-    onSelect: noop,
-  }
+    onChange: () => null,
+    onSelect: () => null,
+  };
+
+  goYear = (direction: number) => {
+    this.props.changeYear(direction);
+  };
+
+  nextYear = () => this.goYear(1);
+
+  previousYear = () => this.goYear(-1);
+
+  prefixCls = `${this.props.rootPrefixCls}-month-panel`;
 
   constructor(props) {
     super(props);
-
-    this.nextYear = goYear.bind(this, 1);
-    this.previousYear = goYear.bind(this, -1);
-    this.prefixCls = `${props.rootPrefixCls}-month-panel`;
 
     this.state = {
       value: props.value || props.defaultValue,
@@ -51,11 +58,10 @@ class MonthPanel extends React.Component {
     return newState;
   }
 
-
   setAndSelectValue = value => {
     this.setValue(value);
     this.props.onSelect(value);
-  }
+  };
 
   setValue = value => {
     if ('value' in this.props) {
@@ -63,7 +69,7 @@ class MonthPanel extends React.Component {
         value,
       });
     }
-  }
+  };
 
   render() {
     const { props } = this;
@@ -113,12 +119,10 @@ class MonthPanel extends React.Component {
               prefixCls={prefixCls}
             />
           </div>
-          {footer && (
-            <div className={`${prefixCls}-footer`}>
-              {footer}
-            </div>)}
+          {footer && <div className={`${prefixCls}-footer`}>{footer}</div>}
         </div>
-      </div>);
+      </div>
+    );
   }
 }
 

@@ -1,7 +1,9 @@
 /* eslint react/no-multi-comp:0, no-console:0 */
 
 import React from 'react';
+import moment from 'moment';
 import TimePickerPanel from 'rc-time-picker/lib/Panel';
+
 import Picker from '../src/Picker';
 import RangeCalendar from '../src/RangeCalendar';
 import zhCN from '../src/locale/zh_CN';
@@ -9,11 +11,10 @@ import enUS from '../src/locale/en_US';
 import '../assets/index.less';
 import 'rc-time-picker/assets/index.css';
 
-import moment from 'moment';
 import 'moment/locale/zh-cn';
 import 'moment/locale/en-gb';
 
-const cn = location.search.indexOf('cn') !== -1;
+const cn = window.location.search.indexOf('cn') !== -1;
 
 if (cn) {
   moment.locale('zh-cn');
@@ -39,7 +40,7 @@ const timePickerElement = (
 
 function newArray(start, end) {
   const result = [];
-  for (let i = start; i < end; i++) {
+  for (let i = start; i < end; i += 1) {
     result.push(i);
   }
   return result;
@@ -65,7 +66,8 @@ function disabledTime(time, type) {
       disabledMinutes(h) {
         if (h === 20) {
           return newArray(0, 31);
-        } if (h === 23) {
+        }
+        if (h === 23) {
           return newArray(30, 60);
         }
         return [];
@@ -84,7 +86,8 @@ function disabledTime(time, type) {
     disabledMinutes(h) {
       if (h === 20) {
         return newArray(0, 31);
-      } if (h === 23) {
+      }
+      if (h === 23) {
         return newArray(30, 60);
       }
       return [];
@@ -146,17 +149,17 @@ class Demo extends React.Component {
     return (
       <Picker value={state.value} onChange={this.onChange} animation="slide-up" calendar={calendar}>
         {({ value }) => (
-            <span>
-              <input
-                placeholder="please select"
-                style={{ width: 350 }}
-                disabled={state.disabled}
-                readOnly
-                className="ant-calendar-picker-input ant-input"
-                value={(isValidRange(value) && `${format(value[0])} - ${format(value[1])}`) || ''}
-              />
-            </span>
-          )}
+          <span>
+            <input
+              placeholder="please select"
+              style={{ width: 350 }}
+              disabled={state.disabled}
+              readOnly
+              className="ant-calendar-picker-input ant-input"
+              value={(isValidRange(value) && `${format(value[0])} - ${format(value[1])}`) || ''}
+            />
+          </span>
+        )}
       </Picker>
     );
   }

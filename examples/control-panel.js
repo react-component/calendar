@@ -1,8 +1,6 @@
 /* eslint react/no-multi-comp:0, no-console:0, no-unused-vars:0 */
 import '../assets/index.less';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Select, { Option } from 'rc-select';
 import Calendar from '../src';
 import RangeCalendar from '../src/RangeCalendar';
 
@@ -15,7 +13,8 @@ class Demo extends React.Component {
     rangeEndMode: 'date',
   };
 
-  onModeChange = key => function _handleChange(e) {
+  onModeChange = key =>
+    function _handleChange(e) {
       let mode;
       if (e && e.target) {
         mode = e.target.value;

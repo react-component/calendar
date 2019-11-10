@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import { isAllowedDate, getTodayTime } from '../util/index';
+import { CalendarProps, CalendarState } from '../Calendar';
 
 function noop() {}
 
@@ -34,14 +35,14 @@ export const calendarMixinWrapper = (
 
     static defaultProps = ComposeComponent.defaultProps;
 
-    static getDerivedStateFromProps(nextProps, prevState) {
+    static getDerivedStateFromProps(nextProps: CalendarProps, prevState: CalendarState) {
       // Use origin function if provided
       if (ComposeComponent.getDerivedStateFromProps) {
         return ComposeComponent.getDerivedStateFromProps(nextProps, prevState);
       }
 
       const { value, selectedValue } = nextProps;
-      const newState = {};
+      const newState: CalendarState = {};
 
       if ('value' in nextProps) {
         newState.value =
@@ -61,6 +62,12 @@ export const calendarMixinWrapper = (
       this.setSelectedValue(value, cause);
     };
 
+    onKeyDown: (event: React.KeyboardEvent<HTMLDivElement>) => void;
+
+    onBlur: (event: React.FocusEvent<HTMLDivElement>) => void;
+
+    saveRoot: (ref: HTMLDivElement) => void;
+
     renderRoot = newProps => {
       const { props } = this;
       const { prefixCls } = props;
@@ -77,7 +84,7 @@ export const calendarMixinWrapper = (
           ref={this.saveRoot}
           className={`${classnames(className)}`}
           style={this.props.style}
-          tabIndex="0"
+          tabIndex={0}
           onKeyDown={this.onKeyDown}
           onBlur={this.onBlur}
         >
@@ -99,7 +106,7 @@ export const calendarMixinWrapper = (
       // }
     };
 
-    setValue = value => {
+    setValue = (value: Moment) => {
       const originalValue = this.state.value;
       if (!('value' in this.props)) {
         this.setState({

@@ -2,8 +2,6 @@
 
 import '../assets/index.less';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import moment from 'moment';
 import MonthCalendar from '../src/MonthCalendar';
 import DatePicker from '../src/Picker';
@@ -15,7 +13,7 @@ import 'moment/locale/zh-cn';
 import 'moment/locale/en-gb';
 
 const format = 'YYYY-MM';
-const cn = location.search.indexOf('cn') !== -1;
+const cn = window.location.search.indexOf('cn') !== -1;
 
 const now = moment();
 if (cn) {
@@ -28,15 +26,10 @@ const defaultCalendarValue = now.clone();
 defaultCalendarValue.add(-1, 'month');
 
 class Demo extends React.Component {
-  static propTypes = {
-    defaultValue: PropTypes.object,
-  };
-
   constructor(props) {
     super(props);
 
     this.state = {
-      showTime: true,
       disabled: false,
       value: props.defaultValue,
     };
@@ -49,15 +42,10 @@ class Demo extends React.Component {
     });
   };
 
-  onShowTimeChange = e => {
-    this.setState({
-      showTime: e.target.checked,
-    });
-  };
-
   toggleDisabled = () => {
+    const { disabled } = this.state;
     this.setState({
-      disabled: !this.state.disabled,
+      disabled: !disabled,
     });
   };
 
@@ -68,8 +56,13 @@ class Demo extends React.Component {
       <div style={{ width: 240, margin: 20 }}>
         <div style={{ marginBottom: 10 }}>
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <label>
-            <input checked={state.disabled} onChange={this.toggleDisabled} type="checkbox" />{' '}
+          <label htmlFor="disabled">
+            <input
+              id="disabled"
+              checked={state.disabled}
+              onChange={this.toggleDisabled}
+              type="checkbox"
+            />{' '}
             disabled
           </label>
         </div>
@@ -90,14 +83,14 @@ class Demo extends React.Component {
             onChange={this.onChange}
           >
             {({ value }) => (
-                <input
-                  style={{ width: 200 }}
-                  readOnly
-                  disabled={state.disabled}
-                  value={value && value.format(format)}
-                  placeholder="请选择日期"
-                />
-              )}
+              <input
+                style={{ width: 200 }}
+                readOnly
+                disabled={state.disabled}
+                value={value && value.format(format)}
+                placeholder="请选择日期"
+              />
+            )}
           </DatePicker>
         </div>
       </div>

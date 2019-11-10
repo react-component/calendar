@@ -9,18 +9,18 @@ let cachedSelectionStart;
 let cachedSelectionEnd;
 let dateInputInstance;
 
-export type CalendarType = 'time' | 'date' | 'month' | 'year' | 'decade';
+export type CalendarTypeMode = 'time' | 'date' | 'month' | 'year' | 'decade';
 
 export interface DateInputProps {
   prefixCls?: string;
   value?: Moment;
   format?: string | string[];
   onClear?: (value) => void;
-  disabledDate: (value: Moment) => boolean;
+  disabledDate?: (value: Moment) => boolean;
   onChange?: (value: Moment) => void;
   selectedValue?: Moment;
   onSelect?: (value: Moment) => void;
-  mode?: CalendarType;
+  mode?: CalendarTypeMode;
   locale?: {
     [key: string]: any;
   };
@@ -28,6 +28,7 @@ export interface DateInputProps {
   disabled?: boolean;
   showClear?: boolean;
   clearIcon?: React.ReactNode;
+
   inputMode?: 'none' | 'text' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search';
 }
 

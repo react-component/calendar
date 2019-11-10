@@ -2,7 +2,6 @@
 
 import '../assets/index.less';
 import React from 'react';
-import PropTypes from 'prop-types';
 import moment from 'moment';
 import Calendar from '..';
 import DatePicker from '../src/Picker';
@@ -50,11 +49,6 @@ const style = `
 `;
 
 class Demo extends React.Component {
-  static propTypes = {
-    defaultValue: PropTypes.object,
-    defaultCalendarValue: PropTypes.object,
-  };
-
   state = {
     value: undefined,
     open: false,
@@ -145,18 +139,18 @@ class Demo extends React.Component {
             onChange={this.onChange}
           >
             {({ value }) => (
-                <span tabIndex="0">
-                  <input
-                    placeholder="please select week"
-                    style={{ width: 250 }}
-                    disabled={state.disabled}
-                    readOnly
-                    tabIndex="-1"
-                    className="ant-calendar-picker-input ant-input"
-                    value={(value && value.format(format)) || ''}
-                  />
-                </span>
-              )}
+              <span tabIndex="0">
+                <input
+                  placeholder="please select week"
+                  style={{ width: 250 }}
+                  disabled={state.disabled}
+                  readOnly
+                  tabIndex="-1"
+                  className="ant-calendar-picker-input ant-input"
+                  value={(value && value.format(format)) || ''}
+                />
+              </span>
+            )}
           </DatePicker>
         </div>
       </div>

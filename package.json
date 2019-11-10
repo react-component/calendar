@@ -84,7 +84,7 @@
     "father": "^2.24.1",
     "moment": "2.x",
     "prop-types": "^15.5.8",
-    "rc-trigger": "^2.2.0",
+    "rc-trigger": "^4.0.0-alpha.5",
     "rc-util": "^4.1.1",
     "react-lifecycles-compat": "^3.0.4"
   },

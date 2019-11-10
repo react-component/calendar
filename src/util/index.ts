@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 
 const defaultDisabledTime = {
   disabledHours() {
@@ -77,7 +77,11 @@ export function isTimeValid(value, disabledTime) {
   return isTimeValidByConfig(value, disabledTimeConfig);
 }
 
-export function isAllowedDate(value, disabledDate, disabledTime) {
+export function isAllowedDate(
+  value: Moment,
+  disabledDate: (value: Moment) => boolean,
+  disabledTime?: any,
+) {
   if (disabledDate) {
     if (disabledDate(value)) {
       return false;
@@ -92,13 +96,15 @@ export function isAllowedDate(value, disabledDate, disabledTime) {
 }
 
 export function formatDate(value, format) {
+  let tempFormat = format;
   if (!value) {
     return '';
   }
 
   if (Array.isArray(format)) {
-    format = format[0];
+    // eslint-disable-next-line prefer-destructuring
+    tempFormat = format[0];
   }
 
-  return value.format(format);
+  return value.format(tempFormat);
 }

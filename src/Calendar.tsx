@@ -12,7 +12,7 @@ import {
   getNowByCurrentStateValue,
 } from './mixin/CalendarMixin';
 import { commonMixinWrapper, defaultProp } from './mixin/CommonMixin';
-import DateInput, { CalendarType, DateInputProps } from './date/DateInput';
+import DateInput, { CalendarTypeMode, DateInputProps } from './date/DateInput';
 import { getTimeConfig, getTodayTime, syncTime } from './util';
 import { goStartMonth, goEndMonth, goTime } from './util/toTime';
 
@@ -33,7 +33,7 @@ export interface CalendarProps {
   value?: Moment;
   selectedValue?: Moment;
   defaultSelectedValue?: Moment;
-  mode?: CalendarType;
+  mode?: CalendarTypeMode;
   locale?: {
     [key: string]: any;
   };
@@ -47,13 +47,15 @@ export interface CalendarProps {
       source: string;
     },
   ) => void;
+  visible?: boolean;
   onOk?: (value: Moment) => void;
   onKeyDown?: (event: React.KeyboardEvent<HTMLDivElement>) => void;
-  timePicker?: React.ReactNode;
+  timePicker?: JSX.Element;
+  format?: string | string[];
   dateInputPlaceholder?: string;
   onClear?: () => void;
-  onChange?: () => void;
-  onPanelChange?: (value: Moment, mode: CalendarType) => void;
+  onChange?: (value: Moment) => void;
+  onPanelChange?: (value: Moment, mode: CalendarTypeMode) => void;
   disabledDate?: (value: Moment) => boolean;
   disabledTime?: () => boolean;
   dateRender?: () => boolean;
@@ -69,7 +71,7 @@ export interface CalendarProps {
 
 export interface CalendarState {
   value?: Moment;
-  mode?: CalendarType;
+  mode?: CalendarTypeMode;
   selectedValue?: Moment;
 }
 
@@ -304,6 +306,7 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
       dateInputPlaceholder,
       timePicker,
       disabledTime,
+      showWeekNumber,
       clearIcon,
       renderFooter,
       inputMode,
@@ -394,7 +397,7 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
               dateRender={props.dateRender}
               onSelect={this.onDateTableSelect}
               disabledDate={disabledDate}
-              showWeekNumber={props.showWeekNumber}
+              showWeekNumber={showWeekNumber}
             />
           </div>
 

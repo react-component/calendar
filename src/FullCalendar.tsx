@@ -1,42 +1,64 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactNode } from 'react';
 import { polyfill } from 'react-lifecycles-compat';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import DateTable from './date/DateTable';
 import MonthTable from './month/MonthTable';
 import {
   calendarMixinWrapper,
-  calendarMixinPropTypes,
   calendarMixinDefaultProps,
   getNowByCurrentStateValue,
 } from './mixin/CalendarMixin';
-import { commonMixinWrapper, propType, defaultProp } from './mixin/CommonMixin';
+import { commonMixinWrapper, defaultProp } from './mixin/CommonMixin';
 import CalendarHeader from './full-calendar/CalendarHeader';
+import { CalendarProps, CalendarState } from './Calendar';
+import { CalendarTypeMode } from './date/DateInput';
 
-class FullCalendar extends React.Component {
-  static propTypes = {
-    ...calendarMixinPropTypes,
-    ...propType,
-    defaultType: PropTypes.string,
-    type: PropTypes.string,
-    prefixCls: PropTypes.string,
-    locale: PropTypes.object,
-    onTypeChange: PropTypes.func,
-    fullscreen: PropTypes.bool,
-    monthCellRender: PropTypes.func,
-    dateCellRender: PropTypes.func,
-    showTypeSwitch: PropTypes.bool,
-    Select: PropTypes.func.isRequired,
-    headerComponents: PropTypes.array,
-    headerComponent: PropTypes.object, // The whole header component
-    headerRender: PropTypes.func,
-    showHeader: PropTypes.bool,
-    disabledDate: PropTypes.func,
-    value: PropTypes.object,
-    defaultValue: PropTypes.object,
-    selectedValue: PropTypes.object,
-    defaultSelectedValue: PropTypes.object,
-  }
+export interface FullCalendarProps extends CalendarProps {
+  fullscreen?: boolean;
+  showHeader?: boolean;
+  /**
+   * 这个做成了组件有点奇怪，应该用 render 的
+   */
+  headerComponent?: React.ComponentClass<any, any>;
+  type?: CalendarTypeMode;
+  defaultType?: FullCalendarProps['type'];
+  headerRender?: (
+    value: Moment,
+    type: FullCalendarProps['type'],
+    locale: CalendarProps['locale'],
+  ) => void;
+  onTypeChange?: (type: FullCalendarProps['type']) => void;
+  dateCellRender?: (value: Moment) => ReactNode;
+  dateCellContentRender?: (value: Moment) => ReactNode;
+}
+
+export interface FullCalendarState extends CalendarState {
+  type?: FullCalendarProps['type'];
+  selectedValue?: Moment;
+}
+
+class FullCalendar extends React.Component<FullCalendarProps, FullCalendarState> {
+  // from mix
+  // to remove it, refactor to hooks
+  saveFocusElement;
+
+  rootInstance: HTMLDivElement;
+
+  setValue: (value: Moment) => void;
+
+  onSelect: (
+    value: Moment | null,
+    cause?: {
+      target?: string;
+      source?: string;
+    },
+  ) => void;
+
+  isAllowedDate: (value: Moment) => boolean;
+
+  getFormat: () => string[] | string;
+
+  renderRoot: (option: { children: React.ReactNode; className: string }) => React.ReactNode;
 
   static defaultProps = {
     ...calendarMixinDefaultProps,
@@ -45,24 +67,22 @@ class FullCalendar extends React.Component {
     fullscreen: false,
     showTypeSwitch: true,
     showHeader: true,
-    onTypeChange() {
-    },
-  }
+    onTypeChange() {},
+  };
 
-  constructor(props) {
+  constructor(props: FullCalendarProps) {
     super(props);
 
-    let type;
+    let stateType;
     if ('type' in props) {
-      type = props.type;
+      stateType = props.type;
     } else {
-      type = props.defaultType;
+      stateType = props.defaultType;
     }
 
     this.state = {
-      type,
+      type: stateType,
       value: props.value || props.defaultValue || moment(),
-      selectedValue: props.selectedValue || props.defaultSelectedValue,
     };
   }
 
@@ -70,11 +90,11 @@ class FullCalendar extends React.Component {
     this.onSelect(value, {
       target: 'month',
     });
-  }
+  };
 
-  static getDerivedStateFromProps(nextProps, state) {
-    let newState = {};
-    const { value, selectedValue } = nextProps;
+  static getDerivedStateFromProps(nextProps: FullCalendarProps, state: FullCalendarState) {
+    let newState: FullCalendarState = {};
+    const { value } = nextProps;
 
     if ('type' in nextProps) {
       newState = {
@@ -83,9 +103,6 @@ class FullCalendar extends React.Component {
     }
     if ('value' in nextProps) {
       newState.value = value || nextProps.defaultValue || getNowByCurrentStateValue(state.value);
-    }
-    if ('selectedValue' in nextProps) {
-      newState.selectedValue = selectedValue;
     }
 
     return newState;
@@ -98,7 +115,7 @@ class FullCalendar extends React.Component {
       });
     }
     this.props.onTypeChange(type);
-  }
+  };
 
   render() {
     const { props } = this;
@@ -133,35 +150,35 @@ class FullCalendar extends React.Component {
       }
     }
 
-    const table = type === 'date' ? (
-      <DateTable
-        dateRender={props.dateCellRender}
-        contentRender={props.dateCellContentRender}
-        locale={locale}
-        prefixCls={prefixCls}
-        onSelect={this.onSelect}
-        value={value}
-        disabledDate={disabledDate}
-      />
-    ) : (
-      <MonthTable
-        cellRender={props.monthCellRender}
-        contentRender={props.monthCellContentRender}
-        locale={locale}
-        onSelect={this.onMonthSelect}
-        prefixCls={`${prefixCls}-month-panel`}
-        value={value}
-        disabledDate={disabledDate}
-      />
-    );
+    const table =
+      type === 'date' ? (
+        <DateTable
+          dateRender={props.dateCellRender}
+          contentRender={props.dateCellContentRender}
+          locale={locale}
+          prefixCls={prefixCls}
+          onSelect={this.onSelect}
+          value={value}
+          disabledDate={disabledDate}
+        />
+      ) : (
+        <MonthTable
+          cellRender={props.monthCellRender}
+          contentRender={props.monthCellContentRender}
+          locale={locale}
+          onSelect={this.onMonthSelect}
+          prefixCls={`${prefixCls}-month-panel`}
+          value={value}
+          disabledDate={disabledDate}
+        />
+      );
 
     const children = [
       header,
-      (<div key="calendar-body" className={`${prefixCls}-calendar-body`}>
-        { table }
-      </div>),
+      <div key="calendar-body" className={`${prefixCls}-calendar-body`}>
+        {table}
+      </div>,
     ];
-
 
     const className = [`${prefixCls}-full`];
 

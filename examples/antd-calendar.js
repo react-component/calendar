@@ -2,15 +2,15 @@
 
 import '../assets/index.less';
 import React from 'react';
-import PropTypes from 'prop-types';
+import moment from 'moment';
+import TimePickerPanel from 'rc-time-picker/lib/Panel';
+
 import Calendar from '..';
 import DatePicker from '../src/Picker';
 import zhCN from '../src/locale/zh_CN';
 import enUS from '../src/locale/en_US';
 import 'rc-time-picker/assets/index.css';
-import TimePickerPanel from 'rc-time-picker/lib/Panel';
 
-import moment from 'moment';
 import 'moment/locale/zh-cn';
 import 'moment/locale/en-gb';
 
@@ -124,8 +124,9 @@ class Demo extends React.Component {
   getCalendarContainer = () => this.calendarContainerRef.current;
 
   toggleDisabled = () => {
+    const { disabled } = this.state;
     this.setState({
-      disabled: !this.state.disabled,
+      disabled: !disabled,
     });
   };
 
@@ -148,22 +149,33 @@ class Demo extends React.Component {
     return (
       <div style={{ width: 400, margin: 20 }}>
         <div style={{ marginBottom: 10 }}>
-          <label>
-            <input type="checkbox" checked={state.showTime} onChange={this.onShowTimeChange} />
+          <label htmlFor="showTime">
+            <input
+              type="checkbox"
+              id="showTime"
+              checked={state.showTime}
+              onChange={this.onShowTimeChange}
+            />
             showTime
           </label>
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <label>
+          <label htmlFor="showDateInput">
             <input
               type="checkbox"
+              id="showDateInput"
               checked={state.showDateInput}
               onChange={this.onShowDateInputChange}
             />
             showDateInput
           </label>
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <label>
-            <input checked={state.disabled} onChange={this.toggleDisabled} type="checkbox" />
+          <label htmlFor="disabled">
+            <input
+              id="disabled"
+              checked={state.disabled}
+              onChange={this.toggleDisabled}
+              type="checkbox"
+            />
             disabled
           </label>
         </div>
@@ -187,19 +199,19 @@ class Demo extends React.Component {
             style={{ zIndex: 1001 }}
           >
             {({ value }) => (
-                <span tabIndex="0" onMouseDown={this.onMouseDown} onFocus={this.onFocus}>
-                  <input
-                    placeholder="please select"
-                    style={{ width: 250 }}
-                    disabled={state.disabled}
-                    readOnly
-                    tabIndex="-1"
-                    className="ant-calendar-picker-input ant-input"
-                    value={(value && value.format(getFormat(state.showTime))) || ''}
-                  />
-                  <div ref={this.calendarContainerRef} />
-                </span>
-              )}
+              <span tabIndex="0" onMouseDown={this.onMouseDown} onFocus={this.onFocus}>
+                <input
+                  placeholder="please select"
+                  style={{ width: 250 }}
+                  disabled={state.disabled}
+                  readOnly
+                  tabIndex="-1"
+                  className="ant-calendar-picker-input ant-input"
+                  value={(value && value.format(getFormat(state.showTime))) || ''}
+                />
+                <div ref={this.calendarContainerRef} />
+              </span>
+            )}
           </DatePicker>
         </div>
       </div>

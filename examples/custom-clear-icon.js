@@ -55,11 +55,11 @@ const svg = (
 );
 
 const calendars = ['time', 'date', 'month', 'year', 'decade'].map(mode => (
-    <div key={mode} style={{ marginBottom: '1rem' }}>
-      <div>{mode}</div>
-      <Calendar mode={mode} clearIcon={svg} />
-    </div>
-  ));
+  <div key={mode} style={{ marginBottom: '1rem' }}>
+    <div>{mode}</div>
+    <Calendar mode={mode} clearIcon={svg} />
+  </div>
+));
 
 export default () => (
   <div

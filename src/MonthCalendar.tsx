@@ -1,29 +1,33 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import KeyCode from 'rc-util/lib/KeyCode';
 import { polyfill } from 'react-lifecycles-compat';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import CalendarHeader from './calendar/CalendarHeader';
 import CalendarFooter from './calendar/CalendarFooter';
-import {
-  calendarMixinWrapper,
-  calendarMixinPropTypes,
-  calendarMixinDefaultProps,
-} from './mixin/CalendarMixin';
-import { commonMixinWrapper, propType, defaultProp } from './mixin/CommonMixin';
+import { calendarMixinWrapper, calendarMixinDefaultProps } from './mixin/CalendarMixin';
+import { commonMixinWrapper, defaultProp } from './mixin/CommonMixin';
+import { CalendarTypeMode } from './date/DateInput';
 
-class MonthCalendar extends React.Component {
-  static propTypes = {
-    ...calendarMixinPropTypes,
-    ...propType,
-    monthCellRender: PropTypes.func,
-    value: PropTypes.object,
-    defaultValue: PropTypes.object,
-    selectedValue: PropTypes.object,
-    defaultSelectedValue: PropTypes.object,
-    disabledDate: PropTypes.func,
-  };
+interface MonthCalendarProps {
+  monthCellRender?: () => React.ReactNode;
+  value?: Moment;
+  defaultValue?: Moment;
+  selectedValue?: Moment;
+  defaultSelectedValue?: Moment;
+  disabledDate?: (value: Moment) => boolean;
+  prefixCls?: string;
+  renderFooter?: (mode: CalendarTypeMode) => void;
+  monthCellContentRender?: () => React.ReactNode;
+  locale: { [key: string]: any };
+}
 
+interface MonthCalendarState {
+  mode: CalendarTypeMode;
+  value?: Moment;
+  selectedValue?: Moment;
+}
+
+class MonthCalendar extends React.Component<MonthCalendarProps, MonthCalendarState> {
   static defaultProps = Object.assign({}, defaultProp, calendarMixinDefaultProps);
 
   constructor(props) {
@@ -32,9 +36,12 @@ class MonthCalendar extends React.Component {
     this.state = {
       mode: 'month',
       value: props.value || props.defaultValue || moment(),
-      selectedValue: props.selectedValue || props.defaultSelectedValue,
     };
   }
+
+  onSelect: (stateValue: Moment) => React.ReactNode;
+
+  setValue: (stateValue: Moment) => React.ReactNode;
 
   onKeyDown = event => {
     const { keyCode } = event;
@@ -81,6 +88,7 @@ class MonthCalendar extends React.Component {
       event.preventDefault();
       return 1;
     }
+    return undefined;
   };
 
   handlePanelChange = (_, mode) => {
@@ -88,6 +96,8 @@ class MonthCalendar extends React.Component {
       this.setState({ mode });
     }
   };
+
+  renderRoot: (option: { children: React.ReactNode; className: string }) => React.ReactNode;
 
   render() {
     const { props, state } = this;
