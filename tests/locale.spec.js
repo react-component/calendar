@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import React from 'react';
 import { render } from 'enzyme';
 import Calendar from '../src/Calendar';
