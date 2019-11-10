@@ -72,9 +72,7 @@
     "rc-time-picker": "^3.1.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "react-test-renderer": "^16.0.0",
-    "tslint": "^5.9.1",
-    "typescript": "^3.4.1"
+    "react-test-renderer": "^16.0.0"
   },
   "pre-commit": [
     "lint"

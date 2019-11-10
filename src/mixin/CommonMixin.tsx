@@ -32,8 +32,8 @@ export const defaultProp = {
   },
 };
 
-export const commonMixinWrapper = (ComposeComponent: React.ComponentClass<any, any>) => {
-  class Wrapper extends ComposeComponent {
+export const commonMixinWrapper = (ComposeComponent: React.ComponentClass<any, any>) =>
+  class extends ComposeComponent {
     static displayName = 'CommonMixinWrapper';
 
     static defaultProps = ComposeComponent.defaultProps;
@@ -76,6 +76,4 @@ export const commonMixinWrapper = (ComposeComponent: React.ComponentClass<any, a
     saveRoot = root => {
       this.rootInstance = root;
     };
-  }
-  return Wrapper;
-};
+  };

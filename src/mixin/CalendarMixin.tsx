@@ -29,8 +29,8 @@ export const calendarMixinDefaultProps = {
 
 export const calendarMixinWrapper = (
   ComposeComponent: React.ComponentClass<CalendarProps, CalendarState>,
-) => {
-  class Wrapper extends ComposeComponent {
+) =>
+  class extends ComposeComponent {
     static displayName = 'CalendarMixinWrapper';
 
     static defaultProps = ComposeComponent.defaultProps;
@@ -127,6 +127,4 @@ export const calendarMixinWrapper = (
       const { disabledTime } = this.props;
       return isAllowedDate(value, disabledDate, disabledTime);
     };
-  }
-  return Wrapper;
-};
+  };
