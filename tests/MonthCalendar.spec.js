@@ -23,7 +23,7 @@ describe('MonthCalendar', () => {
       wrapper = mount(<MonthCalendar defaultValue={selected} />);
     });
 
-    it('enter to select works', () => {
+    fit('enter to select works', () => {
       const onSelect = jest.fn();
       wrapper = mount(<MonthCalendar onSelect={onSelect} />);
       wrapper.simulate('keydown', {
@@ -91,7 +91,7 @@ describe('MonthCalendar', () => {
       expect(selectedYear.at(0).text()).toBe('2016');
     });
 
-    it('CTRL + RIGHT', () => {
+    fit('CTRL + RIGHT', () => {
       wrapper.simulate('keydown', {
         keyCode: keyCode.RIGHT,
         ctrlKey: 1,

@@ -115,9 +115,7 @@ const DecadePanel: React.FC<DecadePanelProps> = props => {
           role="button"
           onClick={previousCentury}
           title={locale.previousCentury}
-        >
-          {' '}
-        </a>
+        />
 
         <div className={`${prefixCls}-century`}>
           {startYear}-{endYear}
@@ -127,9 +125,7 @@ const DecadePanel: React.FC<DecadePanelProps> = props => {
           role="button"
           onClick={nextCentury}
           title={locale.nextCentury}
-        >
-          {' '}
-        </a>
+        />
       </div>
       <div className={`${prefixCls}-body`}>
         <table className={`${prefixCls}-table`} cellSpacing="0" role="grid">

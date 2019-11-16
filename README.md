@@ -142,7 +142,7 @@ http://react-component.github.io/calendar/examples/index.html
         <tr>
           <td>locale</td>
           <td>Object</td>
-          <td>import from '../lib/locale/en_US'</td>
+          <td>import from 'rc-calendar/lib/locale/en_US'</td>
           <td>calendar locale</td>
         </tr>
         <tr>
@@ -308,7 +308,7 @@ http://react-component.github.io/calendar/examples/index.html
         <tr>
           <td>locale</td>
           <td>Object</td>
-          <td>import from '../lib/locale/en_US'</td>
+          <td>import from 'rc-calendar/lib/locale/en_US'</td>
           <td>calendar locale</td>
         </tr>
         <tr>
@@ -485,7 +485,7 @@ http://react-component.github.io/calendar/examples/index.html
         <tr>
           <td>locale</td>
           <td>Object</td>
-          <td>import from '../lib/locale/en_US'</td>
+          <td>import from 'rc-calendar/lib/locale/en_US'</td>
           <td>calendar locale</td>
         </tr>
         <tr>

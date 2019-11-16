@@ -78,7 +78,6 @@ export const calendarMixinWrapper = (
         [props.className]: !!props.className,
         [newProps.className]: !!newProps.className,
       };
-
       return (
         <div
           ref={this.saveRoot}

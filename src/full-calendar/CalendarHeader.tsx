@@ -35,11 +35,11 @@ class CalendarHeader extends Component<CalendarHeaderProps, {}> {
     onTypeChange: noop,
   };
 
-  onYearChange(year) {
+  onYearChange = year => {
     const newValue = this.props.value.clone();
     newValue.year(parseInt(year, 10));
     this.props.onValueChange(newValue);
-  }
+  };
 
   onMonthChange = (month: number) => {
     const newValue = this.props.value.clone();
@@ -56,6 +56,9 @@ class CalendarHeader extends Component<CalendarHeaderProps, {}> {
     for (let index = start; index < end; index += 1) {
       options.push(<Select.Option key={`${index}`}>{index}</Select.Option>);
     }
+    if (options.length < 1) {
+      return null;
+    }
     return (
       <Select
         className={`${prefixCls}-header-year-select`}
@@ -71,7 +74,7 @@ class CalendarHeader extends Component<CalendarHeaderProps, {}> {
     );
   };
 
-  monthSelectElement(month) {
+  monthSelectElement = month => {
     const { props } = this;
     const t = props.value.clone();
     const { prefixCls } = props;
@@ -96,15 +99,15 @@ class CalendarHeader extends Component<CalendarHeaderProps, {}> {
         {options}
       </Select>
     );
-  }
+  };
 
-  changeTypeToDate() {
+  changeTypeToDate = () => {
     this.props.onTypeChange('date');
-  }
+  };
 
-  changeTypeToMonth() {
+  changeTypeToMonth = () => {
     this.props.onTypeChange('month');
-  }
+  };
 
   render() {
     const { value, locale, prefixCls, type, showTypeSwitch, headerComponents } = this.props;
@@ -131,7 +134,6 @@ class CalendarHeader extends Component<CalendarHeaderProps, {}> {
         )}
       </span>
     ) : null;
-
     return (
       <div className={`${prefixCls}-header`}>
         {typeSwitcher}

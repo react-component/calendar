@@ -130,7 +130,7 @@ class FullCalendar extends React.Component<FullCalendarProps, FullCalendarState>
     } = props;
     const { value, type } = this.state;
 
-    let header = null;
+    let header;
     if (showHeader) {
       if (headerRender) {
         header = headerRender(value, type, locale);
