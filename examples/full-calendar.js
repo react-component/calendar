@@ -7,7 +7,7 @@ import moment from 'moment';
 
 import FullCalendar from '../src/FullCalendar';
 
-import 'rc-select/assets/index.css';
+import 'rc-select/assets/index.less';
 
 import zhCN from '../src/locale/zh_CN';
 import enUS from '../src/locale/en_US';

@@ -4,7 +4,7 @@ import React from 'react';
 import Calendar from '../src';
 import RangeCalendar from '../src/RangeCalendar';
 
-import 'rc-select/assets/index.css';
+import 'rc-select/assets/index.less';
 
 class Demo extends React.Component {
   state = {
