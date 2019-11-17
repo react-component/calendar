@@ -1,19 +1,16 @@
 import React, { CSSProperties } from 'react';
 import ReactDOM from 'react-dom';
+import classnames from 'classnames';
 import KeyCode from 'rc-util/lib/KeyCode';
 import { polyfill } from 'react-lifecycles-compat';
 import moment, { Moment } from 'moment';
 import DateTable from './date/DateTable';
 import CalendarHeader from './calendar/CalendarHeader';
 import CalendarFooter from './calendar/CalendarFooter';
-import {
-  calendarMixinWrapper,
-  calendarMixinDefaultProps,
-  getNowByCurrentStateValue,
-} from './mixin/CalendarMixin';
-import { commonMixinWrapper, defaultProp } from './mixin/CommonMixin';
+import { calendarMixinDefaultProps, getNowByCurrentStateValue } from './mixin/CalendarMixin';
+import { defaultProp } from './mixin/CommonMixin';
 import DateInput, { CalendarTypeMode, DateInputProps } from './date/DateInput';
-import { getTimeConfig, getTodayTime, syncTime } from './util';
+import { getTimeConfig, getTodayTime, syncTime, isAllowedDate } from './util';
 import { goStartMonth, goEndMonth, goTime } from './util/toTime';
 
 function noop() {}
@@ -87,26 +84,106 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
     focusablePanel: true,
   };
 
+  focusElement: HTMLElement;
+
   // from mix
   // to remove it, refactor to hooks
-  saveFocusElement;
+  saveFocusElement = (focusElement: HTMLElement) => {
+    this.focusElement = focusElement;
+  };
+
+  focus = () => {
+    if (this.focusElement) {
+      this.focusElement.focus();
+    } else if (this.rootInstance) {
+      this.rootInstance.focus();
+    }
+  };
 
   rootInstance: HTMLDivElement;
 
-  setValue: (value: Moment) => void;
+  setValue = (value: Moment) => {
+    const originalValue = this.state.value;
+    if (!('value' in this.props)) {
+      this.setState({
+        value,
+      });
+    }
+    if (
+      (originalValue && value && !originalValue.isSame(value)) ||
+      (!originalValue && value) ||
+      (originalValue && !value)
+    ) {
+      this.props.onChange(value);
+    }
+  };
 
-  onSelect: (
-    value: Moment | null,
-    cause?: {
-      source: string;
-    },
-  ) => void;
+  onSelect = (value, cause?) => {
+    if (value) {
+      this.setValue(value);
+    }
+    this.setSelectedValue(value, cause);
+  };
 
-  isAllowedDate: (value: Moment) => boolean;
+  setSelectedValue = (selectedValue, cause?) => {
+    // if (this.isAllowedDate(selectedValue)) {
+    if (!('selectedValue' in this.props)) {
+      this.setState({
+        selectedValue,
+      });
+    }
+    if (this.props.onSelect) {
+      this.props.onSelect(selectedValue, cause);
+    }
+    // }
+  };
 
-  getFormat: () => string[] | string;
+  isAllowedDate = value => {
+    const { disabledDate } = this.props;
+    const { disabledTime } = this.props;
+    return isAllowedDate(value, disabledDate, disabledTime);
+  };
 
-  renderRoot: (option: { children: React.ReactNode; className: string }) => React.ReactNode;
+  getFormat = () => {
+    let { format } = this.props;
+    const { locale, timePicker } = this.props;
+    if (!format) {
+      if (timePicker) {
+        format = locale.dateTimeFormat;
+      } else {
+        format = locale.dateFormat;
+      }
+    }
+    return format;
+  };
+
+  saveRoot = root => {
+    this.rootInstance = root;
+  };
+
+  renderRoot = newProps => {
+    const { props } = this;
+    const { prefixCls } = props;
+
+    const className = {
+      [prefixCls]: 1,
+      [`${prefixCls}-hidden`]: !props.visible,
+      [props.className]: !!props.className,
+      [newProps.className]: !!newProps.className,
+    };
+    return (
+      <div
+        ref={this.saveRoot}
+        className={`${classnames(className)}`}
+        style={this.props.style}
+        tabIndex={0}
+        onKeyDown={this.onKeyDown}
+        onBlur={this.onBlur}
+      >
+        {newProps.children}
+      </div>
+    );
+  };
 
   constructor(props) {
     super(props);
@@ -436,4 +513,4 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
 
 polyfill(Calendar);
 
-export default calendarMixinWrapper(commonMixinWrapper(Calendar));
+export default Calendar;

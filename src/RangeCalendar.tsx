@@ -124,6 +124,7 @@ interface RangeCalendarProps {
   className?: string;
   visible?: boolean;
   renderFooter?: () => void;
+  format?: string;
 }
 
 interface RangeCalendarState {
@@ -152,9 +153,34 @@ class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarSta
     showDateInput: true,
   };
 
-  saveRoot: (ref: HTMLDivElement) => void;
+  rootInstance: HTMLElement;
 
-  getFormat?: () => string | string[];
+  saveRoot = root => {
+    this.rootInstance = root;
+  };
+
+  focus = () => {
+    if (this.rootInstance) {
+      this.rootInstance.focus();
+    }
+  };
+
+  getFormat = () => {
+    let { format } = this.props;
+    const { locale, timePicker } = this.props;
+    if (!format) {
+      if (timePicker) {
+        format = locale.dateTimeFormat;
+      } else {
+        format = locale.dateFormat;
+      }
+    }
+    return format;
+  };
+
+  shouldComponentUpdate(nextProps) {
+    return this.props.visible || nextProps.visible;
+  }
 
   constructor(props) {
     super(props);
@@ -846,4 +872,4 @@ class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarSta
 
 polyfill(RangeCalendar);
 
-export default commonMixinWrapper(RangeCalendar);
+export default RangeCalendar;

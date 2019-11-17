@@ -1,17 +1,15 @@
 import React, { ReactNode } from 'react';
+import classnames from 'classnames';
 import { polyfill } from 'react-lifecycles-compat';
 import moment, { Moment } from 'moment';
 import DateTable from './date/DateTable';
 import MonthTable from './month/MonthTable';
-import {
-  calendarMixinWrapper,
-  calendarMixinDefaultProps,
-  getNowByCurrentStateValue,
-} from './mixin/CalendarMixin';
-import { commonMixinWrapper, defaultProp } from './mixin/CommonMixin';
+import { calendarMixinDefaultProps, getNowByCurrentStateValue } from './mixin/CalendarMixin';
+import { defaultProp } from './mixin/CommonMixin';
 import CalendarHeader from './full-calendar/CalendarHeader';
 import { CalendarProps, CalendarState } from './Calendar';
 import { CalendarTypeMode } from './date/DateInput';
+import { isAllowedDate } from './util/index';
 
 export interface FullCalendarProps extends CalendarProps {
   fullscreen?: boolean;
@@ -38,28 +36,6 @@ export interface FullCalendarState extends CalendarState {
 }
 
 class FullCalendar extends React.Component<FullCalendarProps, FullCalendarState> {
-  // from mix
-  // to remove it, refactor to hooks
-  saveFocusElement;
-
-  rootInstance: HTMLDivElement;
-
-  setValue: (value: Moment) => void;
-
-  onSelect: (
-    value: Moment | null,
-    cause?: {
-      target?: string;
-      source?: string;
-    },
-  ) => void;
-
-  isAllowedDate: (value: Moment) => boolean;
-
-  getFormat: () => string[] | string;
-
-  renderRoot: (option: { children: React.ReactNode; className: string }) => React.ReactNode;
-
   static defaultProps = {
     ...calendarMixinDefaultProps,
     ...defaultProp,
@@ -85,6 +61,116 @@ class FullCalendar extends React.Component<FullCalendarProps, FullCalendarState>
       value: props.value || props.defaultValue || moment(),
     };
   }
+
+  // from mix
+  // to remove it, refactor to hooks
+  shouldComponentUpdate(nextProps) {
+    return this.props.visible || nextProps.visible;
+  }
+
+  onSelect = (value, cause) => {
+    if (value) {
+      this.setValue(value);
+    }
+    this.setSelectedValue(value, cause);
+  };
+
+  onKeyDown: (event: React.KeyboardEvent<HTMLDivElement>) => void;
+
+  onBlur: (event: React.FocusEvent<HTMLDivElement>) => void;
+
+  renderRoot = newProps => {
+    const { props } = this;
+    const { prefixCls } = props;
+
+    const className = {
+      [prefixCls]: 1,
+      [`${prefixCls}-hidden`]: !props.visible,
+      [props.className]: !!props.className,
+      [newProps.className]: !!newProps.className,
+    };
+    return (
+      <div
+        ref={this.saveRoot}
+        className={`${classnames(className)}`}
+        style={this.props.style}
+        tabIndex={0}
+        onKeyDown={this.onKeyDown}
+        onBlur={this.onBlur}
+      >
+        {newProps.children}
+      </div>
+    );
+  };
+
+  setSelectedValue = (selectedValue, cause?) => {
+    if (!('selectedValue' in this.props)) {
+      this.setState({
+        // 这个值没有什么用，但是有个测试测试了
+        // 强行增加了一下
+        // eslint-disable-next-line react/no-unused-state
+        selectedValue,
+      });
+    }
+    if (this.props.onSelect) {
+      this.props.onSelect(selectedValue, cause);
+    }
+  };
+
+  setValue = (value: Moment) => {
+    const originalValue = this.state.value;
+    if (!('value' in this.props)) {
+      this.setState({
+        value,
+      });
+    }
+    if (
+      (originalValue && value && !originalValue.isSame(value)) ||
+      (!originalValue && value) ||
+      (originalValue && !value)
+    ) {
+      this.props.onChange(value);
+    }
+  };
+
+  isAllowedDate = value => {
+    const { disabledDate } = this.props;
+    const { disabledTime } = this.props;
+    return isAllowedDate(value, disabledDate, disabledTime);
+  };
+
+  getFormat = () => {
+    let { format } = this.props;
+    const { locale, timePicker } = this.props;
+    if (!format) {
+      if (timePicker) {
+        format = locale.dateTimeFormat;
+      } else {
+        format = locale.dateFormat;
+      }
+    }
+    return format;
+  };
+
+  focusElement: HTMLElement;
+
+  rootInstance: HTMLElement;
+
+  focus = () => {
+    if (this.focusElement) {
+      this.focusElement.focus();
+    } else if (this.rootInstance) {
+      this.rootInstance.focus();
+    }
+  };
+
+  saveFocusElement = (focusElement: HTMLElement) => {
+    this.focusElement = focusElement;
+  };
+
+  saveRoot = root => {
+    this.rootInstance = root;
+  };
 
   onMonthSelect = value => {
     this.onSelect(value, {
@@ -195,4 +281,4 @@ class FullCalendar extends React.Component<FullCalendarProps, FullCalendarState>
 
 polyfill(FullCalendar);
 
-export default calendarMixinWrapper(commonMixinWrapper(FullCalendar));
+export default FullCalendar;

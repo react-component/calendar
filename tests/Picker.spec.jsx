@@ -199,17 +199,18 @@ describe('DatePicker', () => {
   });
 
   describe('open by key', () => {
-    [{ name: 'Down', key: keyCode.DOWN }, { name: 'Enter', key: keyCode.ENTER }].forEach(
-      ({ name, key }) => {
-        it(`open by ${name} key`, () => {
-          const picker = renderPicker();
-          picker.find('.rc-calendar-picker-input').simulate('keyDown', {
-            keyCode: key,
-          });
-          expect(picker.state().open).toBe(true);
+    [
+      { name: 'Down', key: keyCode.DOWN },
+      { name: 'Enter', key: keyCode.ENTER },
+    ].forEach(({ name, key }) => {
+      it(`open by ${name} key`, () => {
+        const picker = renderPicker();
+        picker.find('.rc-calendar-picker-input').simulate('keyDown', {
+          keyCode: key,
         });
-      },
-    );
+        expect(picker.state().open).toBe(true);
+      });
+    });
   });
 
   it('close on ok', () => {
