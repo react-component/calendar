@@ -73,12 +73,12 @@ class Picker extends React.Component<PickerProps, PickerState> {
     };
   }
 
-  focusTimeout: number;
+  focusTimeout: number | any;
 
   componentDidUpdate(_, prevState) {
     if (!prevState.open && this.state.open) {
       // setTimeout is for making sure saveCalendarRef happen before focusCalendar
-      this.focusTimeout = window.setTimeout(this.focusCalendar, 0, this);
+      this.focusTimeout = setTimeout(this.focusCalendar, 0, this);
     }
   }
 
