@@ -35,7 +35,7 @@
     "coverage": "father test --coverage",
     "lint": "eslint src/ examples/ --ext .tsx,.ts,.jsx,.js --fix",
     "prepublishOnly": "npm run compile && np --no-cleanup --yolo --no-publish",
-    "start": "cross-env NODE_ENV=development father doc dev --storybook",
+    "start": "cross-env NODE_ENV=development storybook_theme=dark  father doc dev --storybook",
     "test": "father test"
   },
   "dependencies": {
