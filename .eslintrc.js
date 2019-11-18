@@ -1,7 +1,6 @@
 module.exports = {
   extends: [require.resolve('@umijs/fabric/dist/eslint')],
   rules: {
-    ...base.rules,
     'default-case': 0,
     'react/sort-comp': 0,
     'jsx-a11y/no-noninteractive-tabindex': 0,
