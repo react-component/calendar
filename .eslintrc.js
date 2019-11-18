@@ -1,7 +1,5 @@
-const base = require('@umijs/fabric/dist/eslint');
-
 module.exports = {
-  ...base,
+  extends: [require.resolve('@umijs/fabric/dist/eslint')],
   rules: {
     ...base.rules,
     'default-case': 0,

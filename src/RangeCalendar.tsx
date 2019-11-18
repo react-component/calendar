@@ -7,7 +7,7 @@ import CalendarPart from './range-calendar/CalendarPart';
 import TodayButton from './calendar/TodayButton';
 import OkButton from './calendar/OkButton';
 import TimePickerButton from './calendar/TimePickerButton';
-import { commonMixinWrapper, defaultProp } from './mixin/CommonMixin';
+import { defaultProp } from './mixin/CommonMixin';
 import { syncTime, getTodayTime, isAllowedDate } from './util';
 import { goTime, goStartMonth, goEndMonth, includesTime } from './util/toTime';
 import { CalendarTypeMode } from './date/DateInput';
