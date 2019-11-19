@@ -849,7 +849,7 @@ exports[`Calendar controlled panels render controlled panels correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -1816,7 +1816,7 @@ exports[`Calendar controlled panels render controlled panels correctly 2`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -2585,7 +2585,7 @@ exports[`Calendar render render correctly 1`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
@@ -4123,7 +4123,7 @@ exports[`Calendar render render correctly 3`] = `
               </td>
             </tr>
             <tr
-              class=""
+              class="rc-calendar-next-month-row"
               role="row"
             >
               <td
