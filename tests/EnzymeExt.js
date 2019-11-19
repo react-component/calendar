@@ -10,6 +10,8 @@ Object.assign(ReactWrapper.prototype, {
   },
 
   selectMonth(month) {
-    this.find('.rc-calendar-month-panel-cell').at(month).simulate('click');
+    this.find('.rc-calendar-month-panel-cell')
+      .at(month)
+      .simulate('click');
   },
 });

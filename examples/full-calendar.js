@@ -1,22 +1,22 @@
 /* eslint react/no-multi-comp:0, no-console:0 */
 
-import 'rc-calendar/assets/index.less';
+import '../assets/index.less';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import FullCalendar from 'rc-calendar/src/FullCalendar';
-
-import 'rc-select/assets/index.css';
 import Select from 'rc-select';
-
-import zhCN from 'rc-calendar/src/locale/zh_CN';
-import enUS from 'rc-calendar/src/locale/en_US';
-
 import moment from 'moment';
+
+import FullCalendar from '../src/FullCalendar';
+
+import 'rc-select/assets/index.less';
+
+import zhCN from '../src/locale/zh_CN';
+import enUS from '../src/locale/en_US';
+
 import 'moment/locale/zh-cn';
 import 'moment/locale/en-gb';
 
 const format = 'YYYY-MM-DD';
-const cn = location.search.indexOf('cn') !== -1;
+const cn = window.location.search.indexOf('cn') !== -1;
 
 const now = moment();
 if (cn) {
@@ -37,11 +37,11 @@ class Demo extends React.Component {
     type: 'month',
   };
 
-  onTypeChange = (type) => {
+  onTypeChange = type => {
     this.setState({
       type,
     });
-  }
+  };
 
   render() {
     return (
@@ -69,4 +69,4 @@ class Demo extends React.Component {
   }
 }
 
-ReactDOM.render(<Demo />, document.getElementById('__react-content'));
+export default Demo;

@@ -1,15 +1,8 @@
 # rc-calendar
----
 
 React Calendar
 
-[![NPM version][npm-image]][npm-url]
-[![build status][travis-image]][travis-url]
-[![Test coverage][codecov-image]][codecov-url]
-[![gemnasium deps][gemnasium-image]][gemnasium-url]
-[![npm download][download-image]][download-url]
-[![Code Quality: Javascript][lgtm-badge]][lgtm-badge-url]
-[![Total alerts][lgtm-alerts]][lgtm-alerts-url]
+[![NPM version][npm-image]][npm-url] [![build status][travis-image]][travis-url] [![Test coverage][codecov-image]][codecov-url] [![gemnasium deps][gemnasium-image]][gemnasium-url] [![npm download][download-image]][download-url] [![Code Quality: Javascript][lgtm-badge]][lgtm-badge-url] [![Total alerts][lgtm-alerts]][lgtm-alerts-url]
 
 [npm-image]: http://img.shields.io/npm/v/rc-calendar.svg?style=flat-square
 [npm-url]: http://npmjs.org/package/rc-calendar
@@ -40,21 +33,21 @@ React Calendar
 
 ## Feature
 
-* support ie9,ie9+,chrome,firefox,safari
-* support date, month, year, decade select panel
-* support week number
-* support en_US and zh_CN locale(UI), use moment.utcOffset to set timezone
-* support aria and keyboard accessibility
+- support ie9,ie9+,chrome,firefox,safari
+- support date, month, year, decade select panel
+- support week number
+- support en_US and zh_CN locale(UI), use moment.utcOffset to set timezone
+- support aria and keyboard accessibility
 
 ### Keyboard
 
-* Previous month (PageUp)
-* Next month (PageDown)
-* tab into hour input: Last hour(Up), Next hour(Down)
-* tab into hour input: Last minute(Up), Next minute(Down)
-* tab into hour input: Last second(Up), Next second(Down)
-* Last year (Control + left)
-* Next year (Control + right)
+- Previous month (PageUp)
+- Next month (PageDown)
+- tab into hour input: Last hour(Up), Next hour(Down)
+- tab into hour input: Last minute(Up), Next minute(Down)
+- tab into hour input: Last second(Up), Next second(Down)
+- Last year (Control + left)
+- Next year (Control + right)
 
 ## install
 
@@ -257,7 +250,6 @@ http://react-component.github.io/calendar/examples/index.html
         </tr>
     </tbody>
 </table>
-
 
 ### rc-calendar/lib/RangeCalendar props
 

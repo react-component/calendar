@@ -1,20 +1,20 @@
 /* eslint react/no-multi-comp:0, no-console:0 */
 
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Picker from 'rc-calendar/src/Picker';
-import RangeCalendar from 'rc-calendar/src/RangeCalendar';
-import zhCN from 'rc-calendar/src/locale/zh_CN';
-import enUS from 'rc-calendar/src/locale/en_US';
+import moment from 'moment';
 import TimePickerPanel from 'rc-time-picker/lib/Panel';
-import 'rc-calendar/assets/index.less';
+
+import Picker from '../src/Picker';
+import RangeCalendar from '../src/RangeCalendar';
+import zhCN from '../src/locale/zh_CN';
+import enUS from '../src/locale/en_US';
+import '../assets/index.less';
 import 'rc-time-picker/assets/index.css';
 
-import moment from 'moment';
 import 'moment/locale/zh-cn';
 import 'moment/locale/en-gb';
 
-const cn = location.search.indexOf('cn') !== -1;
+const cn = window.location.search.indexOf('cn') !== -1;
 
 if (cn) {
   moment.locale('zh-cn');
@@ -40,7 +40,7 @@ const timePickerElement = (
 
 function newArray(start, end) {
   const result = [];
-  for (let i = start; i < end; i++) {
+  for (let i = start; i < end; i += 1) {
     result.push(i);
   }
   return result;
@@ -51,7 +51,7 @@ function disabledDate(current) {
   date.hour(0);
   date.minute(0);
   date.second(0);
-  return current.isBefore(date);  // can not select days before today
+  return current.isBefore(date); // can not select days before today
 }
 
 function disabledTime(time, type) {
@@ -66,7 +66,8 @@ function disabledTime(time, type) {
       disabledMinutes(h) {
         if (h === 20) {
           return newArray(0, 31);
-        } else if (h === 23) {
+        }
+        if (h === 23) {
           return newArray(30, 60);
         }
         return [];
@@ -85,7 +86,8 @@ function disabledTime(time, type) {
     disabledMinutes(h) {
       if (h === 20) {
         return newArray(0, 31);
-      } else if (h === 23) {
+      }
+      if (h === 23) {
         return newArray(30, 60);
       }
       return [];
@@ -119,19 +121,19 @@ class Demo extends React.Component {
   state = {
     value: [],
     hoverValue: [],
-  }
+  };
 
-  onChange = (value) => {
+  onChange = value => {
     console.log('onChange', value);
     this.setState({ value });
-  }
+  };
 
-  onHoverChange = (hoverValue) => {
+  onHoverChange = hoverValue => {
     this.setState({ hoverValue });
-  }
+  };
 
   render() {
-    const state = this.state;
+    const { state } = this;
     const calendar = (
       <RangeCalendar
         hoverValue={state.hoverValue}
@@ -145,31 +147,25 @@ class Demo extends React.Component {
       />
     );
     return (
-      <Picker
-        value={state.value}
-        onChange={this.onChange}
-        animation="slide-up"
-        calendar={calendar}
-      >
-        {
-          ({ value }) => {
-            return (<span>
-                <input
-                  placeholder="please select"
-                  style={{ width: 350 }}
-                  disabled={state.disabled}
-                  readOnly
-                  className="ant-calendar-picker-input ant-input"
-                  value={isValidRange(value) && `${format(value[0])} - ${format(value[1])}` || ''}
-                />
-                </span>);
-          }
-        }
-      </Picker>);
+      <Picker value={state.value} onChange={this.onChange} animation="slide-up" calendar={calendar}>
+        {({ value }) => (
+          <span>
+            <input
+              placeholder="please select"
+              style={{ width: 350 }}
+              disabled={state.disabled}
+              readOnly
+              className="ant-calendar-picker-input ant-input"
+              value={(isValidRange(value) && `${format(value[0])} - ${format(value[1])}`) || ''}
+            />
+          </span>
+        )}
+      </Picker>
+    );
   }
 }
 
-ReactDOM.render(
+export default () => (
   <div>
     <h2>calendar</h2>
     <div style={{ margin: 10 }}>
@@ -194,4 +190,5 @@ ReactDOM.render(
     <div style={{ margin: 20 }}>
       <Demo />
     </div>
-  </div>, document.getElementById('__react-content'));
+  </div>
+);

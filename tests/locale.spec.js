@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import React from 'react';
 import { render } from 'enzyme';
 import Calendar from '../src/Calendar';
@@ -47,7 +48,7 @@ const locales = {
 describe('locales', () => {
   Object.keys(locales).forEach(localeCode => {
     it(`renders ${localeCode} correctly`, () => {
-      const wrapper = render(<Calendar locale={locales[localeCode]} />);
+      const wrapper = render(<Calendar locale={locales[localeCode].default} />);
       expect(wrapper).toMatchSnapshot();
     });
   });

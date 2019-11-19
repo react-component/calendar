@@ -1,20 +1,18 @@
 /* eslint react/no-multi-comp:0, no-console:0 */
 
-import 'rc-calendar/assets/index.less';
+import '../assets/index.less';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
-import Calendar from 'rc-calendar';
-import DatePicker from 'rc-calendar/src/Picker';
-import zhCN from 'rc-calendar/src/locale/zh_CN';
-import enUS from 'rc-calendar/src/locale/en_US';
-
 import moment from 'moment';
+import Calendar from '../src';
+import DatePicker from '../src/Picker';
+import zhCN from '../src/locale/zh_CN';
+import enUS from '../src/locale/en_US';
+
 import 'moment/locale/zh-cn';
 import 'moment/locale/en-gb';
 
 const format = 'YYYY-Wo';
-const cn = location.search.indexOf('cn') !== -1;
+const cn = window.location.search.indexOf('cn') !== -1;
 
 const now = moment();
 if (cn) {
@@ -51,63 +49,60 @@ const style = `
 `;
 
 class Demo extends React.Component {
-  static propTypes = {
-    defaultValue: PropTypes.object,
-    defaultCalendarValue: PropTypes.object,
-  }
-
   state = {
     value: undefined,
     open: false,
   };
 
-  onChange = (value) => {
-    console.log('DatePicker change: ', (value && value.format(format)));
+  onChange = value => {
+    console.log('DatePicker change: ', value && value.format(format));
     this.setState({
       value,
     });
-  }
+  };
 
-  onOpenChange = (open) => {
+  onOpenChange = open => {
     this.setState({
       open,
     });
-  }
+  };
 
-  dateRender = (current) => {
+  dateRender = current => {
     const selectedValue = this.state.value;
-    if (selectedValue && current.year() === selectedValue.year() &&
-      current.week() === selectedValue.week()) {
-      return (<div className="rc-calendar-selected-day">
-        <div className="rc-calendar-date">
-          {current.date()}
+    if (
+      selectedValue &&
+      current.year() === selectedValue.year() &&
+      current.week() === selectedValue.week()
+    ) {
+      return (
+        <div className="rc-calendar-selected-day">
+          <div className="rc-calendar-date">{current.date()}</div>
         </div>
-      </div>);
+      );
     }
-    return (
-      <div className="rc-calendar-date">
-        {current.date()}
-      </div>);
-  }
+    return <div className="rc-calendar-date">{current.date()}</div>;
+  };
 
   lastWeek = () => {
-    const value = this.state.value || now;
+    const { state } = this;
+    const value = state.value || now;
     value.add(-1, 'weeks');
     this.setState({
       value,
       open: false,
     });
-  }
+  };
 
-  renderSidebar() {
-    return (
-      <div className="week-calendar-sidebar" key="sidebar">
-        <button onClick={this.lastWeek} style={{ margin: 20 }}>上一周</button>
-      </div>);
-  }
+  renderSidebar = () => (
+    <div className="week-calendar-sidebar" key="sidebar">
+      <button onClick={() => this.lastWeek()} type="button" style={{ margin: 20 }}>
+        上一周
+      </button>
+    </div>
+  );
 
   render() {
-    const state = this.state;
+    const { state } = this;
     const calendar = (
       <Calendar
         className="week-calendar"
@@ -120,28 +115,29 @@ class Demo extends React.Component {
         dateInputPlaceholder="please input"
         defaultValue={now}
         showDateInput
-      />);
-    return (<div style={{ width: 400, margin: 20 }}>
-      <div style={{
-        boxSizing: 'border-box',
-        position: 'relative',
-        display: 'block',
-        lineHeight: 1.5,
-        marginBottom: 22,
-      }}
-      >
-        <DatePicker
-          onOpenChange={this.onOpenChange}
-          open={this.state.open}
-          animation="slide-up"
-          calendar={calendar}
-          value={state.value}
-          onChange={this.onChange}
+      />
+    );
+    return (
+      <div style={{ width: 400, margin: 20 }}>
+        <div
+          style={{
+            boxSizing: 'border-box',
+            position: 'relative',
+            display: 'block',
+            lineHeight: 1.5,
+            marginBottom: 22,
+          }}
         >
-          {
-            ({ value }) => {
-              return (
-                <span tabIndex="0">
+          <DatePicker
+            onOpenChange={this.onOpenChange}
+            open={this.state.open}
+            animation="slide-up"
+            calendar={calendar}
+            value={state.value}
+            onChange={this.onChange}
+          >
+            {({ value }) => (
+              <span tabIndex="0">
                 <input
                   placeholder="please select week"
                   style={{ width: 250 }}
@@ -149,28 +145,29 @@ class Demo extends React.Component {
                   readOnly
                   tabIndex="-1"
                   className="ant-calendar-picker-input ant-input"
-                  value={value && value.format(format) || ''}
+                  value={(value && value.format(format)) || ''}
                 />
-                </span>
-              );
-            }
-          }
-        </DatePicker>
+              </span>
+            )}
+          </DatePicker>
+        </div>
       </div>
-    </div>);
+    );
   }
 }
 
-ReactDOM.render((<div
-  style={{
-    zIndex: 1000,
-    position: 'relative',
-    width: 900,
-    margin: '20px auto',
-  }}
->
-  <style dangerouslySetInnerHTML={{ __html: style }} />
-  <div>
-    <Demo />
+export default () => (
+  <div
+    style={{
+      zIndex: 1000,
+      position: 'relative',
+      width: 900,
+      margin: '20px auto',
+    }}
+  >
+    <style dangerouslySetInnerHTML={{ __html: style }} />
+    <div>
+      <Demo />
+    </div>
   </div>
-</div>), document.getElementById('__react-content'));
+);

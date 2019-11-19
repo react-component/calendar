@@ -1,20 +1,20 @@
-import 'rc-calendar/assets/index.less';
+import '../assets/index.less';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Calendar from 'rc-calendar';
-import DatePicker from 'rc-calendar/src/Picker';
 import Dialog from 'rc-dialog';
+import moment from 'moment';
+
+import Calendar from '../src';
+import DatePicker from '../src/Picker';
 import 'rc-dialog/assets/index.css';
 
-import zhCN from 'rc-calendar/src/locale/zh_CN';
-import enUS from 'rc-calendar/src/locale/en_US';
+import zhCN from '../src/locale/zh_CN';
+import enUS from '../src/locale/en_US';
 
-import moment from 'moment';
 import 'moment/locale/zh-cn';
 import 'moment/locale/en-gb';
 
 const format = 'YYYY-MM-DD';
-const cn = location.search.indexOf('cn') !== -1;
+const cn = window.location.search.indexOf('cn') !== -1;
 
 const now = moment();
 if (cn) {
@@ -44,51 +44,58 @@ class Demo extends React.Component {
 
   open = () => {
     this.setVisible(true);
-  }
+  };
 
   close = () => {
     this.setVisible(false);
-  }
+  };
 
   destroy = () => {
     this.setState({
       destroy: true,
     });
-  }
+  };
 
   render() {
     if (this.state.destroy) {
       return null;
     }
-    return (<div>
-      <button onClick={this.open}>open</button>
-      &nbsp;
-      <button onClick={this.destroy}>destroy</button>
-      <Dialog visible={this.state.open} onClose={this.close}>
-        <div id="d" ref={n => (this.d = n)} />
-        <div style={{ marginTop: 20 }}>
-          <DatePicker
-            getCalendarContainer={this.getCalendarContainer}
-            calendar={<Calendar locale={cn ? zhCN : enUS}/>}
-          >
-            {
-              ({ value }) => {
-                return (
-                  <span>
-                <input
-                  style={{ width: 250 }}
-                  readOnly
-                  value={value && value.format(format) || ''}
-                />
+    return (
+      <div>
+        <button type="button" onClick={this.open}>
+          open
+        </button>
+        &nbsp;
+        <button type="button" onClick={this.destroy}>
+          destroy
+        </button>
+        <Dialog visible={this.state.open} onClose={this.close}>
+          <div
+            id="d"
+            ref={n => {
+              this.d = n;
+            }}
+          />
+          <div style={{ marginTop: 20 }}>
+            <DatePicker
+              getCalendarContainer={this.getCalendarContainer}
+              calendar={<Calendar locale={cn ? zhCN : enUS} />}
+            >
+              {({ value }) => (
+                <span>
+                  <input
+                    style={{ width: 250 }}
+                    readOnly
+                    value={(value && value.format(format)) || ''}
+                  />
                 </span>
-                );
-              }
-            }
-          </DatePicker>
-        </div>
-      </Dialog>
-    </div>);
+              )}
+            </DatePicker>
+          </div>
+        </Dialog>
+      </div>
+    );
   }
 }
 
-ReactDOM.render(<Demo />, document.getElementById('__react-content'));
+export default Demo;

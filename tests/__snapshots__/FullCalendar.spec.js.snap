@@ -707,74 +707,84 @@ exports[`FullCalendar renders date mode correctly 1`] = `
       </span>
     </span>
     <div
-      class="rc-calendar-full-header-month-select rc-select rc-select-enabled"
+      class="rc-select rc-calendar-full-header-month-select rc-select-single rc-select-show-arrow"
+      dropdownmenustyle="[object Object]"
     >
       <div
-        aria-autocomplete="list"
-        aria-controls=""
-        aria-expanded="false"
-        aria-haspopup="true"
-        class="rc-select-selection
-            rc-select-selection--single"
-        role="combobox"
-        tabindex="0"
+        class="rc-select-selector"
       >
-        <div
-          class="rc-select-selection__rendered"
-        >
-          <div
-            class="rc-select-selection-selected-value"
-            style="display:block;opacity:1"
-            title="Mar"
-          >
-            Mar
-          </div>
-        </div>
         <span
-          class="rc-select-arrow"
-          style="user-select:none;-webkit-user-select:none"
-          unselectable="on"
+          class="rc-select-selection-search"
         >
-          <i
-            class="rc-select-arrow-icon"
+          <input
+            aria-activedescendant="undefined_list_0"
+            aria-autocomplete="list"
+            aria-controls="undefined_list"
+            aria-haspopup="listbox"
+            aria-owns="undefined_list"
+            autocomplete="off"
+            class="rc-select-selection-search-input"
+            role="combobox"
+            style="opacity:0"
+            value=""
           />
         </span>
+        <span
+          class="rc-select-selection-item"
+        >
+          Mar
+        </span>
       </div>
+      <span
+        aria-hidden="true"
+        class="rc-select-arrow"
+        style="user-select:none;-webkit-user-select:none"
+        unselectable="on"
+      >
+        <span
+          class="rc-select-arrow-icon"
+        />
+      </span>
     </div>
     <div
-      class="rc-calendar-full-header-year-select rc-select rc-select-enabled"
+      class="rc-select rc-calendar-full-header-year-select rc-select-single rc-select-show-arrow"
+      dropdownmenustyle="[object Object]"
     >
       <div
-        aria-autocomplete="list"
-        aria-controls=""
-        aria-expanded="false"
-        aria-haspopup="true"
-        class="rc-select-selection
-            rc-select-selection--single"
-        role="combobox"
-        tabindex="0"
+        class="rc-select-selector"
       >
-        <div
-          class="rc-select-selection__rendered"
-        >
-          <div
-            class="rc-select-selection-selected-value"
-            style="display:block;opacity:1"
-            title=""
-          >
-            2017
-          </div>
-        </div>
         <span
-          class="rc-select-arrow"
-          style="user-select:none;-webkit-user-select:none"
-          unselectable="on"
+          class="rc-select-selection-search"
         >
-          <i
-            class="rc-select-arrow-icon"
+          <input
+            aria-activedescendant="undefined_list_0"
+            aria-autocomplete="list"
+            aria-controls="undefined_list"
+            aria-haspopup="listbox"
+            aria-owns="undefined_list"
+            autocomplete="off"
+            class="rc-select-selection-search-input"
+            role="combobox"
+            style="opacity:0"
+            value=""
           />
         </span>
+        <span
+          class="rc-select-selection-item"
+        >
+          2017
+        </span>
       </div>
+      <span
+        aria-hidden="true"
+        class="rc-select-arrow"
+        style="user-select:none;-webkit-user-select:none"
+        unselectable="on"
+      >
+        <span
+          class="rc-select-arrow-icon"
+        />
+      </span>
     </div>
   </div>
   <div
@@ -1476,74 +1486,84 @@ exports[`FullCalendar renders fullscreen correctly 1`] = `
       </span>
     </span>
     <div
-      class="rc-calendar-full-header-month-select rc-select rc-select-enabled"
+      class="rc-select rc-calendar-full-header-month-select rc-select-single rc-select-show-arrow"
+      dropdownmenustyle="[object Object]"
     >
       <div
-        aria-autocomplete="list"
-        aria-controls=""
-        aria-expanded="false"
-        aria-haspopup="true"
-        class="rc-select-selection
-            rc-select-selection--single"
-        role="combobox"
-        tabindex="0"
+        class="rc-select-selector"
       >
-        <div
-          class="rc-select-selection__rendered"
-        >
-          <div
-            class="rc-select-selection-selected-value"
-            style="display:block;opacity:1"
-            title="Mar"
-          >
-            Mar
-          </div>
-        </div>
         <span
-          class="rc-select-arrow"
-          style="user-select:none;-webkit-user-select:none"
-          unselectable="on"
+          class="rc-select-selection-search"
         >
-          <i
-            class="rc-select-arrow-icon"
+          <input
+            aria-activedescendant="undefined_list_0"
+            aria-autocomplete="list"
+            aria-controls="undefined_list"
+            aria-haspopup="listbox"
+            aria-owns="undefined_list"
+            autocomplete="off"
+            class="rc-select-selection-search-input"
+            role="combobox"
+            style="opacity:0"
+            value=""
           />
         </span>
+        <span
+          class="rc-select-selection-item"
+        >
+          Mar
+        </span>
       </div>
+      <span
+        aria-hidden="true"
+        class="rc-select-arrow"
+        style="user-select:none;-webkit-user-select:none"
+        unselectable="on"
+      >
+        <span
+          class="rc-select-arrow-icon"
+        />
+      </span>
     </div>
     <div
-      class="rc-calendar-full-header-year-select rc-select rc-select-enabled"
+      class="rc-select rc-calendar-full-header-year-select rc-select-single rc-select-show-arrow"
+      dropdownmenustyle="[object Object]"
     >
       <div
-        aria-autocomplete="list"
-        aria-controls=""
-        aria-expanded="false"
-        aria-haspopup="true"
-        class="rc-select-selection
-            rc-select-selection--single"
-        role="combobox"
-        tabindex="0"
+        class="rc-select-selector"
       >
-        <div
-          class="rc-select-selection__rendered"
-        >
-          <div
-            class="rc-select-selection-selected-value"
-            style="display:block;opacity:1"
-            title=""
-          >
-            2017
-          </div>
-        </div>
         <span
-          class="rc-select-arrow"
-          style="user-select:none;-webkit-user-select:none"
-          unselectable="on"
+          class="rc-select-selection-search"
         >
-          <i
-            class="rc-select-arrow-icon"
+          <input
+            aria-activedescendant="undefined_list_0"
+            aria-autocomplete="list"
+            aria-controls="undefined_list"
+            aria-haspopup="listbox"
+            aria-owns="undefined_list"
+            autocomplete="off"
+            class="rc-select-selection-search-input"
+            role="combobox"
+            style="opacity:0"
+            value=""
           />
         </span>
+        <span
+          class="rc-select-selection-item"
+        >
+          2017
+        </span>
       </div>
+      <span
+        aria-hidden="true"
+        class="rc-select-arrow"
+        style="user-select:none;-webkit-user-select:none"
+        unselectable="on"
+      >
+        <span
+          class="rc-select-arrow-icon"
+        />
+      </span>
     </div>
   </div>
   <div
@@ -2245,39 +2265,44 @@ exports[`FullCalendar renders month mode correctly 1`] = `
       </span>
     </span>
     <div
-      class="rc-calendar-full-header-year-select rc-select rc-select-enabled"
+      class="rc-select rc-calendar-full-header-year-select rc-select-single rc-select-show-arrow"
+      dropdownmenustyle="[object Object]"
     >
       <div
-        aria-autocomplete="list"
-        aria-controls=""
-        aria-expanded="false"
-        aria-haspopup="true"
-        class="rc-select-selection
-            rc-select-selection--single"
-        role="combobox"
-        tabindex="0"
+        class="rc-select-selector"
       >
-        <div
-          class="rc-select-selection__rendered"
-        >
-          <div
-            class="rc-select-selection-selected-value"
-            style="display:block;opacity:1"
-            title=""
-          >
-            2017
-          </div>
-        </div>
         <span
-          class="rc-select-arrow"
-          style="user-select:none;-webkit-user-select:none"
-          unselectable="on"
+          class="rc-select-selection-search"
         >
-          <i
-            class="rc-select-arrow-icon"
+          <input
+            aria-activedescendant="undefined_list_0"
+            aria-autocomplete="list"
+            aria-controls="undefined_list"
+            aria-haspopup="listbox"
+            aria-owns="undefined_list"
+            autocomplete="off"
+            class="rc-select-selection-search-input"
+            role="combobox"
+            style="opacity:0"
+            value=""
           />
         </span>
+        <span
+          class="rc-select-selection-item"
+        >
+          2017
+        </span>
       </div>
+      <span
+        aria-hidden="true"
+        class="rc-select-arrow"
+        style="user-select:none;-webkit-user-select:none"
+        unselectable="on"
+      >
+        <span
+          class="rc-select-arrow-icon"
+        />
+      </span>
     </div>
   </div>
   <div
@@ -2468,74 +2493,84 @@ exports[`FullCalendar type renders defaultType correctly 1`] = `
       </span>
     </span>
     <div
-      class="rc-calendar-full-header-month-select rc-select rc-select-enabled"
+      class="rc-select rc-calendar-full-header-month-select rc-select-single rc-select-show-arrow"
+      dropdownmenustyle="[object Object]"
     >
       <div
-        aria-autocomplete="list"
-        aria-controls=""
-        aria-expanded="false"
-        aria-haspopup="true"
-        class="rc-select-selection
-            rc-select-selection--single"
-        role="combobox"
-        tabindex="0"
+        class="rc-select-selector"
       >
-        <div
-          class="rc-select-selection__rendered"
-        >
-          <div
-            class="rc-select-selection-selected-value"
-            style="display:block;opacity:1"
-            title="Mar"
-          >
-            Mar
-          </div>
-        </div>
         <span
-          class="rc-select-arrow"
-          style="user-select:none;-webkit-user-select:none"
-          unselectable="on"
+          class="rc-select-selection-search"
         >
-          <i
-            class="rc-select-arrow-icon"
+          <input
+            aria-activedescendant="undefined_list_0"
+            aria-autocomplete="list"
+            aria-controls="undefined_list"
+            aria-haspopup="listbox"
+            aria-owns="undefined_list"
+            autocomplete="off"
+            class="rc-select-selection-search-input"
+            role="combobox"
+            style="opacity:0"
+            value=""
           />
         </span>
+        <span
+          class="rc-select-selection-item"
+        >
+          Mar
+        </span>
       </div>
+      <span
+        aria-hidden="true"
+        class="rc-select-arrow"
+        style="user-select:none;-webkit-user-select:none"
+        unselectable="on"
+      >
+        <span
+          class="rc-select-arrow-icon"
+        />
+      </span>
     </div>
     <div
-      class="rc-calendar-full-header-year-select rc-select rc-select-enabled"
+      class="rc-select rc-calendar-full-header-year-select rc-select-single rc-select-show-arrow"
+      dropdownmenustyle="[object Object]"
     >
       <div
-        aria-autocomplete="list"
-        aria-controls=""
-        aria-expanded="false"
-        aria-haspopup="true"
-        class="rc-select-selection
-            rc-select-selection--single"
-        role="combobox"
-        tabindex="0"
+        class="rc-select-selector"
       >
-        <div
-          class="rc-select-selection__rendered"
-        >
-          <div
-            class="rc-select-selection-selected-value"
-            style="display:block;opacity:1"
-            title=""
-          >
-            2017
-          </div>
-        </div>
         <span
-          class="rc-select-arrow"
-          style="user-select:none;-webkit-user-select:none"
-          unselectable="on"
+          class="rc-select-selection-search"
         >
-          <i
-            class="rc-select-arrow-icon"
+          <input
+            aria-activedescendant="undefined_list_0"
+            aria-autocomplete="list"
+            aria-controls="undefined_list"
+            aria-haspopup="listbox"
+            aria-owns="undefined_list"
+            autocomplete="off"
+            class="rc-select-selection-search-input"
+            role="combobox"
+            style="opacity:0"
+            value=""
           />
         </span>
+        <span
+          class="rc-select-selection-item"
+        >
+          2017
+        </span>
       </div>
+      <span
+        aria-hidden="true"
+        class="rc-select-arrow"
+        style="user-select:none;-webkit-user-select:none"
+        unselectable="on"
+      >
+        <span
+          class="rc-select-arrow-icon"
+        />
+      </span>
     </div>
   </div>
   <div
