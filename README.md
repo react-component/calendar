@@ -123,6 +123,12 @@ http://react-component.github.io/calendar/examples/index.html
           <td>date cell</td>
         </tr>
         <tr>
+          <td>contentRender</td>
+          <td>(current, value) => React.Node</td>
+          <td></td>
+          <td>date content cell (with style wrap and etc.)</td>
+        </tr>
+        <tr>
           <td>renderSidebar</td>
           <td>() => React.Node</td>
           <td></td>
