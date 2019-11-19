@@ -12,6 +12,8 @@ const defaultDisabledTime = {
   },
 };
 
+const quarterTitle = [['1季度', '2季度', '3季度', '4季度'], ['Q1', 'Q2', 'Q3', 'Q4']];
+
 export function getTodayTime(value) {
   const today = moment();
   today.locale(value.locale()).utcOffset(value.utcOffset());
@@ -31,6 +33,12 @@ export function getMonthName(month) {
   const locale = month.locale();
   const localeData = month.localeData();
   return localeData[locale === 'zh-cn' ? 'months' : 'monthsShort'](month);
+}
+
+export function getQuarterName(quarterM) {
+  const locale = quarterM.locale();
+  const quarterN = quarterM.quarter();
+  return quarterTitle[locale === 'zh-cn' ? 0 : 1][quarterN - 1];
 }
 
 export function syncTime(from, to) {
