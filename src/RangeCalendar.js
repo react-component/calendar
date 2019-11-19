@@ -573,9 +573,15 @@ class RangeCalendar extends React.Component {
     if (!this.state.selectedValue[0] || !this.state.selectedValue[1]) {
       const startValue = selectedValue[0] || moment();
       const endValue = selectedValue[1] || startValue.clone().add(1, 'months');
+
+      if (this.state.selectedValue[0]) {
+          this.setState({
+              value: getValueFromSelectedValue([startValue, endValue])
+          });
+      }
+
       this.setState({
-        selectedValue,
-        value: getValueFromSelectedValue([startValue, endValue]),
+        selectedValue
       });
     }
 
