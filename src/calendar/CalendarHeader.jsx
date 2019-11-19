@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import toFragment from 'rc-util/lib/Children/mapSelf';
 import MonthPanel from '../month/MonthPanel';
+import QuarterPanel from '../quarter/QuarterPanel';
 import YearPanel from '../year/YearPanel';
 import DecadePanel from '../decade/DecadePanel';
 
@@ -26,6 +27,7 @@ export default class CalendarHeader extends React.Component {
     prefixCls: PropTypes.string,
     value: PropTypes.object,
     onValueChange: PropTypes.func,
+    showYear: PropTypes.func,
     showTimePicker: PropTypes.bool,
     onPanelChange: PropTypes.func,
     locale: PropTypes.object,
@@ -34,6 +36,7 @@ export default class CalendarHeader extends React.Component {
     disabledMonth: PropTypes.func,
     renderFooter: PropTypes.func,
     onMonthSelect: PropTypes.func,
+    onQuarterSelect: PropTypes.func,
   }
 
   static defaultProps = {
@@ -63,11 +66,23 @@ export default class CalendarHeader extends React.Component {
     }
   }
 
+  onQuarterSelect = (value) => {
+    this.props.onPanelChange(value, 'date');
+    if (this.props.onQuarterSelect) {
+      this.props.onQuarterSelect(value);
+    } else {
+      this.props.onValueChange(value);
+    }
+  }
+
   onYearSelect = (value) => {
     const referer = this.state.yearPanelReferer;
     this.setState({ yearPanelReferer: null });
     this.props.onPanelChange(value, referer);
     this.props.onValueChange(value);
+    if (this.props.showYear) {
+      this.props.showYear(false);
+    }
   }
 
   onDecadeSelect = (value) => {
@@ -136,6 +151,9 @@ export default class CalendarHeader extends React.Component {
   showYearPanel = (referer) => {
     this.setState({ yearPanelReferer: referer });
     this.props.onPanelChange(null, 'year');
+    if (this.props.showYear) {
+      this.props.showYear(true);
+    }
   }
 
   showDecadePanel = () => {
@@ -153,6 +171,7 @@ export default class CalendarHeader extends React.Component {
       enableNext,
       enablePrev,
       disabledMonth,
+      disabledQuarter,
       renderFooter,
     } = props;
 
@@ -169,6 +188,21 @@ export default class CalendarHeader extends React.Component {
           cellRender={props.monthCellRender}
           contentRender={props.monthCellContentRender}
           renderFooter={renderFooter}
+          changeYear={this.changeYear}
+        />
+      );
+    }
+    if (mode === 'quarter') {
+      panel = (
+        <QuarterPanel
+          locale={locale}
+          defaultValue={value}
+          rootPrefixCls={prefixCls}
+          onSelect={this.onQuarterSelect}
+          onYearPanelShow={() => this.showYearPanel('quarter')}
+          disabledDate={disabledQuarter}
+          cellRender={props.quarterCellRender}
+          contentRender={props.quarterCellContentRender}
           changeYear={this.changeYear}
         />
       );
