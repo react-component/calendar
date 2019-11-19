@@ -57,7 +57,7 @@ class Picker extends React.Component {
     super(props);
 
     let open;
-    if ('open' in props) {
+    if ('open' in props && props.open !== undefined) {
       open = props.open;
     } else {
       open = props.defaultOpen;
@@ -164,7 +164,7 @@ class Picker extends React.Component {
   setOpen = (open, callback) => {
     const { onOpenChange } = this.props;
     if (this.state.open !== open) {
-      if (!('open' in this.props)) {
+      if (!('open' in this.props) || this.props.open === undefined) {
         this.setState({
           open,
         }, callback);
