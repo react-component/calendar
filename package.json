@@ -1,6 +1,6 @@
 {
   "name": "rc-calendar",
-  "version": "9.15.8",
+  "version": "10.0.0-alpha.6",
   "description": "React Calendar",
   "keywords": [
     "calendar",
@@ -53,10 +53,10 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "enzyme-to-json": "^3.4.3",
+    "eslint": "^6.6.0",
     "father": "^2.26.0",
     "mockdate": "^2.0.1",
     "np": "^5.0.3",
-    "eslint": "^6.6.0",
     "rc-dialog": "^7.0.0",
     "rc-select": "^10.0.0-alpha.29",
     "rc-time-picker": "^4.0.0-alpha.2",
