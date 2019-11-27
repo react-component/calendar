@@ -1,6 +1,5 @@
-import { PropTypes } from 'react';
+import PropTypes from 'prop-types';
 import enUs from '../locale/en_US';
-import { getFormatter } from '../util/index';
 
 function noop() {
 }
@@ -23,11 +22,16 @@ export default {
       style: {},
       visible: true,
       prefixCls: 'rc-calendar',
-      formatter: 'yyyy-MM-dd',
       className: '',
       onSelect: noop,
       onChange: noop,
       onClear: noop,
+      renderFooter() {
+        return null;
+      },
+      renderSidebar() {
+        return null;
+      },
     };
   },
 
@@ -35,14 +39,26 @@ export default {
     return this.props.visible || nextProps.visible;
   },
 
-  getFormatter() {
-    const formatter = this.props.formatter;
-    const locale = this.props.locale;
-    if (this.normalFormatter && formatter === this.lastFormatter) {
-      return this.normalFormatter;
+  getFormat() {
+    let { format } = this.props;
+    const { locale, timePicker } = this.props;
+    if (!format) {
+      if (timePicker) {
+        format = locale.dateTimeFormat;
+      } else {
+        format = locale.dateFormat;
+      }
     }
-    this.normalFormatter = getFormatter(formatter, locale);
-    this.lastFormatter = formatter;
-    return this.normalFormatter;
+    return format;
+  },
+
+  focus() {
+    if (this.rootInstance) {
+      this.rootInstance.focus();
+    }
+  },
+
+  saveRoot(root) {
+    this.rootInstance = root;
   },
 };

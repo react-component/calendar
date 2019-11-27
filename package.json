@@ -1,6 +1,6 @@
 {
   "name": "rc-calendar",
-  "version": "5.5.6",
+  "version": "9.7.11",
   "description": "React Calendar",
   "keywords": [
     "react",
@@ -13,9 +13,13 @@
   ],
   "files": [
     "lib",
-    "assets/*.css"
+    "es",
+    "assets/*.css",
+    "dist",
+    "index.d.ts"
   ],
   "main": "lib/index",
+  "module": "es/index",
   "homepage": "http://github.com/react-component/calendar",
   "author": "yiminghe@gmail.com",
   "repository": {
@@ -27,43 +31,72 @@
   },
   "licenses": "MIT",
   "config": {
-    "port": 8001
+    "port": 8002,
+    "entry": {
+      "rc-calendar": [
+        "./assets/index.less",
+        "./src/index.js"
+      ]
+    }
   },
   "scripts": {
     "build": "rc-tools run build",
     "gh-pages": "rc-tools run gh-pages",
     "start": "rc-tools run server",
-    "pub": "rc-tools run pub",
+    "compile": "rc-tools run compile --babel-runtime",
+    "pub": "rc-tools run pub --babel-runtime",
     "lint": "rc-tools run lint",
-    "karma": "rc-tools run karma",
-    "saucelabs": "rc-tools run saucelabs",
-    "test": "rc-tools run test",
-    "chrome-test": "rc-tools run chrome-test",
-    "coverage": "rc-tools run coverage"
+    "test": "jest",
+    "types": "tslint *.ts{,x} && tsc",
+    "coverage": "jest --coverage"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ],
+    "setupFiles": [
+      "./tests/setup.js"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "transform": {
+      "\\.jsx?$": "./node_modules/rc-tools/scripts/jestPreprocessor.js"
+    },
+    "testURL": "http://localhost"
   },
   "devDependencies": {
-    "async": "~0.9.0",
+    "@types/react": "^16.3.13",
+    "async": "~2.5.0",
     "bootstrap": "~3.3.2",
-    "expect.js": "~0.3.1",
-    "jquery": "~1.11.3",
-    "object-assign": "4.x",
+    "dtslint": "^0.3.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.1",
+    "jest": "^22.1.4",
+    "mockdate": "^2.0.1",
     "pre-commit": "1.x",
-    "rc-dialog": "^6.0.1",
-    "rc-select": "^6.0.6",
-    "rc-time-picker": "^1.1.4",
-    "rc-tools": "^5.3.4",
-    "react": "15.x",
-    "react-addons-test-utils": "15.x",
-    "react-dom": "15.x"
+    "rc-dialog": "^7.0.0",
+    "rc-select": "^7.1.0",
+    "rc-time-picker": "^3.1.0",
+    "rc-tools": "^7.0.3",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-test-renderer": "^16.0.0",
+    "tslint": "^5.9.1",
+    "typescript": "^2.8.3"
   },
   "pre-commit": [
     "lint"
   ],
   "dependencies": {
+    "babel-runtime": "6.x",
     "classnames": "2.x",
-    "gregorian-calendar": "4.x",
-    "gregorian-calendar-format": "4.x",
-    "rc-trigger": "1.x",
-    "rc-util": "3.x"
-  }
+    "create-react-class": "^15.5.2",
+    "moment": "2.x",
+    "prop-types": "^15.5.8",
+    "rc-trigger": "^2.2.0",
+    "rc-util": "^4.1.1"
+  },
+  "types": "index.d.ts"
 }

@@ -1,4 +1,4 @@
-import DateTimeFormat from 'gregorian-calendar-format';
+import moment from 'moment';
 
 const defaultDisabledTime = {
   disabledHours() {
@@ -13,13 +13,13 @@ const defaultDisabledTime = {
 };
 
 export function getTodayTime(value) {
-  const today = value.clone();
-  today.setTime(Date.now());
+  const today = moment();
+  today.locale(value.locale()).utcOffset(value.utcOffset());
   return today;
 }
 
 export function getTitleString(value) {
-  return `${value.getYear()}-${value.getMonth() + 1}-${value.getDayOfMonth()}`;
+  return value.format('LL');
 }
 
 export function getTodayTimeStr(value) {
@@ -27,17 +27,17 @@ export function getTodayTimeStr(value) {
   return getTitleString(today);
 }
 
-export function getFormatter(format, locale) {
-  if (typeof format === 'string') {
-    return new DateTimeFormat(format, locale.format);
-  }
-  return format;
+export function getMonthName(month) {
+  const locale = month.locale();
+  const localeData = month.localeData();
+  return localeData[locale === 'zh-cn' ? 'months' : 'monthsShort'](month);
 }
 
 export function syncTime(from, to) {
-  to.setHourOfDay(from.getHourOfDay());
-  to.setMinutes(from.getMinutes());
-  to.setSeconds(from.getSeconds());
+  if (!moment.isMoment(from) || !moment.isMoment(to)) return;
+  to.hour(from.hour());
+  to.minute(from.minute());
+  to.second(from.second());
 }
 
 export function getTimeConfig(value, disabledTime) {
@@ -52,9 +52,9 @@ export function getTimeConfig(value, disabledTime) {
 export function isTimeValidByConfig(value, disabledTimeConfig) {
   let invalidTime = false;
   if (value) {
-    const hour = value.getHourOfDay();
-    const minutes = value.getMinutes();
-    const seconds = value.getSeconds();
+    const hour = value.hour();
+    const minutes = value.minute();
+    const seconds = value.second();
     const disabledHours = disabledTimeConfig.disabledHours();
     if (disabledHours.indexOf(hour) === -1) {
       const disabledMinutes = disabledTimeConfig.disabledMinutes(hour);

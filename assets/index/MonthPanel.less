@@ -42,9 +42,19 @@
   top: 0;
 }
 
+.@{prefixClass}-month-panel-next-year-btn {
+  &:after {
+    content: '»'
+  }
+}
+
 .@{prefixClass}-month-panel-prev-year-btn {
   user-select: none;
   left: 0;
+
+  &:after {
+    content: '«'
+  }
 }
 
 .@{prefixClass}-month-panel .@{prefixClass}-month-panel-year-select {
@@ -62,12 +72,15 @@
 
 .@{prefixClass}-month-panel-body {
   padding: 9px 10px 10px;
+  position: absolute;
+  top: 34px;
+  bottom: 0;
 }
 
 .@{prefixClass}-month-panel-table {
   table-layout: fixed;
   width: 100%;
-  height:255px;
+  height: 100%;
   border-collapse: separate;
 }
 
@@ -106,8 +119,6 @@
   }
 }
 
-
-
 .@{prefixClass}-month-panel-selected-cell .@{prefixClass}-month-panel-month {
   background: #3fc7fa;
   color: #fff;
@@ -116,4 +127,9 @@
     background: #3fc7fa;
     color: #fff;
   }
+}
+
+.@{prefixClass}-month-header-wrap {
+  position: relative;
+  height: 308px;
 }

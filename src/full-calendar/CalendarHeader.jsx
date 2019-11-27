@@ -1,4 +1,6 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { getMonthName } from '../util';
 
 function noop() {
 }
@@ -6,25 +8,24 @@ function noop() {
 class CalendarHeader extends Component {
   onYearChange(year) {
     const newValue = this.props.value.clone();
-    newValue.setYear(parseInt(year, 10));
+    newValue.year(parseInt(year, 10));
     this.props.onValueChange(newValue);
   }
 
   onMonthChange(month) {
     const newValue = this.props.value.clone();
-    newValue.setMonth(parseInt(month, 10));
+    newValue.month(parseInt(month, 10));
     this.props.onValueChange(newValue);
   }
 
-  getYearSelectElement(year) {
-    const { yearSelectOffset, yearSelectTotal, locale, prefixCls, Select } = this.props;
+  yearSelectElement(year) {
+    const { yearSelectOffset, yearSelectTotal, prefixCls, Select } = this.props;
     const start = year - yearSelectOffset;
     const end = start + yearSelectTotal;
-    const suffix = locale.year === '年' ? '年' : '';
 
     const options = [];
     for (let index = start; index < end; index++) {
-      options.push(<Select.Option key={`${index}`}>{index + suffix}</Select.Option>);
+      options.push(<Select.Option key={`${index}`}>{index}</Select.Option>);
     }
     return (
       <Select
@@ -41,15 +42,20 @@ class CalendarHeader extends Component {
     );
   }
 
-  getMonthSelectElement(month) {
+  monthSelectElement(month) {
     const props = this.props;
-    const months = props.locale.format.months;
+    const t = props.value.clone();
     const { prefixCls } = props;
     const options = [];
     const Select = props.Select;
 
     for (let index = 0; index < 12; index++) {
-      options.push(<Select.Option key={`${index}`}>{months[index]}</Select.Option>);
+      t.month(index);
+      options.push(
+        <Select.Option key={`${index}`}>
+          {getMonthName(t)}
+        </Select.Option>
+      );
     }
 
     return (
@@ -77,10 +83,10 @@ class CalendarHeader extends Component {
 
   render() {
     const { value, locale, prefixCls, type, showTypeSwitch, headerComponents } = this.props;
-    const year = value.getYear();
-    const month = value.getMonth();
-    const yearSelect = this.getYearSelectElement(year);
-    const monthSelect = type === 'month' ? null : this.getMonthSelectElement(month);
+    const year = value.year();
+    const month = value.month();
+    const yearSelect = this.yearSelectElement(year);
+    const monthSelect = type === 'month' ? null : this.monthSelectElement(month);
     const switchCls = `${prefixCls}-header-switcher`;
     const typeSwitcher = showTypeSwitch ? (
       <span className={switchCls}>

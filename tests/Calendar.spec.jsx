@@ -1,375 +1,544 @@
-import { KeyCode as keyCode } from 'rc-util';
-import expect from 'expect.js';
-import Calendar from '../index';
+/* eslint-disable no-undef */
 import React from 'react';
-import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
-const Simulate = TestUtils.Simulate;
-import async from 'async';
-import DateTimeFormat from 'gregorian-calendar-format';
-const formatter = new DateTimeFormat('yyyy-MM-dd');
+import keyCode from 'rc-util/lib/KeyCode';
+import moment from 'moment';
+import { mount, render } from 'enzyme';
+import TimePickerPanel from 'rc-time-picker/lib/Panel';
+import Calendar from '../src/Calendar';
+import zhCN from '../src/locale/zh_CN';
+import enUS from '../src/locale/en_US';
+
+const format = ('YYYY-MM-DD');
 
 describe('Calendar', () => {
-  let calendar;
-  let input;
-  const container = document.createElement('div');
-  document.body.appendChild(container);
+  describe('render', () => {
+    it('render correctly', () => {
+      const zhWrapper = render(
+        <Calendar locale={zhCN} defaultValue={moment('2017-03-29').locale('zh-cn')} />
+      );
+      expect(zhWrapper).toMatchSnapshot();
 
-  afterEach(() => {
-    ReactDOM.unmountComponentAtNode(container);
+      const enWrapper = render(
+        <Calendar locale={enUS} defaultValue={moment('2017-03-29').locale('en')} />
+      );
+      expect(enWrapper).toMatchSnapshot();
+
+      const customEnUSLocalWithMonthFormat = { ...enUS, monthFormat: 'MMMM' };
+      const enWrapperWithMonthFormatWrapper = render(
+        <Calendar
+          locale={customEnUSLocalWithMonthFormat}
+          defaultValue={moment('2017-03-29').local('en')}
+        />
+      );
+      expect(enWrapperWithMonthFormatWrapper).toMatchSnapshot();
+    });
+
+    it('render showToday false correctly', () => {
+      const wrapper = mount(<Calendar showToday={false}/>);
+      expect(wrapper.find('.rc-calendar-today-btn').length).toBe(0);
+    });
   });
 
-  describe('render', () => {
-    describe('render', () => {
-      it('render showToday false', () => {
-        calendar = ReactDOM.render(<Calendar showToday={false}/>, container);
-        expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
-          'rc-calendar-today-btn').length).to.be(0);
-      });
+  describe('timePicker', () => {
+    it('set defaultOpenValue if timePicker.props.defaultValue is set', () => {
+      const timePicker = <TimePickerPanel defaultValue={moment('00:00:00', 'HH:mm:ss')} />;
+      const wrapper = mount(<Calendar timePicker={timePicker} />);
+      wrapper.find('.rc-calendar-time-picker-btn').simulate('click');
+      const selectedValues = wrapper.find('.rc-time-picker-panel-select-option-selected');
+      for (let i = 0; i < selectedValues.length; i += 1) {
+        expect(selectedValues.at(i).text()).toBe('00');
+      }
+    });
+
+    it('follow Calendar[selectedValue|defaultSelectedValue] when it is set', () => {
+      const timePicker = <TimePickerPanel defaultValue={moment('00:00:00', 'HH:mm:ss')} />;
+      const wrapper = mount(
+        <Calendar timePicker={timePicker} defaultSelectedValue={moment('01:01:01', 'HH:mm:ss')} />
+      );
+      wrapper.find('.rc-calendar-time-picker-btn').simulate('click');
+      const selectedValues = wrapper.find('.rc-time-picker-panel-select-option-selected');
+      for (let i = 0; i < selectedValues.length; i += 1) {
+        expect(selectedValues.at(i).text()).toBe('01');
+      }
+    });
+
+    it('use timePicker\'s time', () => {
+      const timePicker = <TimePickerPanel defaultValue={moment('00:00:00', 'HH:mm:ss')} />;
+      const wrapper = mount(<Calendar timePicker={timePicker} />);
+
+      wrapper.find('.rc-calendar-today').simulate('click');
+      // use timePicker's defaultValue if users haven't select a time
+      expect(
+        wrapper.find('.rc-calendar-input').at(0).getDOMNode().value
+      ).toBe('3/29/2017 00:00:00');
+
+      wrapper.find('.rc-calendar-time-picker-btn').simulate('click');
+      wrapper.find('.rc-time-picker-panel-select ul').at(0).find('li').at(6).simulate('click');
+      // update time to timePicker's time
+      expect(
+        wrapper.find('.rc-calendar-input').at(0).getDOMNode().value
+      ).toBe('3/29/2017 06:00:00');
+
+      wrapper.find('.rc-calendar-cell').at(10).simulate('click');
+      // still use timePicker's time
+      expect(
+        wrapper.find('.rc-calendar-input').at(0).getDOMNode().value
+      ).toBe('3/8/2017 06:00:00');
+    });
+    it('timePicker date have no changes when hover', () => {
+      const timePicker = <TimePickerPanel defaultValue={moment('00:00:00', 'HH:mm:ss')} />;
+      const wrapper = mount(<Calendar timePicker={timePicker} selectedValue={moment()} />);
+      wrapper.find('.rc-calendar-time-picker-btn').simulate('click');
+      const dateBtns = wrapper.find('.rc-calendar-my-select a');
+      const btnClassName = 'rc-calendar-time-status';
+      for (let i = 0; i < dateBtns.length; i += 1) {
+        dateBtns.at(i).simulate('mouseEnter');
+        expect(dateBtns.get(i).props.title).toBeFalsy();
+        expect(dateBtns.get(i).props.className).toEqual(expect.stringContaining(btnClassName));
+      }
+    });
+  });
+
+  describe('controlled panels', () => {
+    it('render controlled panels correctly', () => {
+      const MonthPicker = mount(<Calendar mode="month" />);
+      expect(MonthPicker.render()).toMatchSnapshot();
+      MonthPicker.find('.rc-calendar-month-panel-year-select').at(0).simulate('click');
+      expect(MonthPicker.find('.rc-calendar-year-panel').length).toBe(0);
+      expect(MonthPicker.find('.rc-calendar-month-panel').length).toBe(1);
+
+      const YearPicker = mount(<Calendar mode="year" />);
+      expect(YearPicker.render()).toMatchSnapshot();
+      YearPicker.find('.rc-calendar-year-panel-decade-select').at(0).simulate('click');
+      expect(YearPicker.find('.rc-calendar-decade-panel').length).toBe(0);
+      expect(YearPicker.find('.rc-calendar-year-panel').length).toBe(1);
+    });
+
+    it('support controlled mode', () => {
+      const timePicker = <TimePickerPanel defaultValue={moment('00:00:00', 'HH:mm:ss')} />;
+      let value = null;
+      class ControlledCalendar extends React.Component {
+        state = { mode: 'date' };
+
+        handlePanelChange = (v, mode) => {
+          value = v;
+          this.setState({ mode });
+        }
+
+        render() {
+          return (
+            <Calendar
+              mode={this.state.mode}
+              onPanelChange={this.handlePanelChange}
+              timePicker={timePicker}
+            />
+          );
+        }
+      }
+      const wrapper = mount(<ControlledCalendar />);
+
+      wrapper.find('.rc-calendar-time-picker-btn').simulate('click');
+      expect(wrapper.find('.rc-calendar-time-picker').length).toBe(0);
+      wrapper.find('.rc-calendar-time-picker-btn').simulate('click');
+      expect(wrapper.find('.rc-calendar-time-picker').length).toBe(0);
+
+      wrapper.find('.rc-calendar-month-select').simulate('click');
+      expect(wrapper.find('.rc-calendar-month-panel').length).toBe(1);
+      wrapper.find('.rc-calendar-month-panel-year-select').simulate('click');
+      expect(wrapper.find('.rc-calendar-year-panel').length).toBe(1);
+      wrapper.find('.rc-calendar-year-panel-decade-select').simulate('click');
+      expect(wrapper.find('.rc-calendar-decade-panel').length).toBe(1);
+      expect(value.isSame(moment(), 'day'));
+      wrapper.find('.rc-calendar-decade-panel-selected-cell').simulate('click');
+      expect(wrapper.find('.rc-calendar-decade-panel').length).toBe(0);
+      wrapper.find('.rc-calendar-year-panel-selected-cell').simulate('click');
+      expect(wrapper.find('.rc-calendar-year-panel').length).toBe(0);
+      wrapper.find('.rc-calendar-month-panel-selected-cell').simulate('click');
+      expect(wrapper.find('.rc-calendar-month-panel').length).toBe(0);
+      expect(value.isSame(moment('2010-03-29'), 'day'));
+
+      wrapper.find('.rc-calendar-year-select').simulate('click');
+      expect(wrapper.find('.rc-calendar-year-panel').length).toBe(1);
+      wrapper.find('.rc-calendar-year-panel-decade-select').simulate('click');
+      expect(wrapper.find('.rc-calendar-decade-panel').length).toBe(1);
+      wrapper.find('.rc-calendar-decade-panel-selected-cell').simulate('click');
+      expect(wrapper.find('.rc-calendar-decade-panel').length).toBe(0);
+      wrapper.find('.rc-calendar-year-panel-selected-cell').simulate('click');
+      expect(wrapper.find('.rc-calendar-year-panel').length).toBe(0);
     });
   });
 
   describe('after render', () => {
-    beforeEach((done) => {
-      ReactDOM.render(<Calendar showToday showWeekNumber/>, container, function ok() {
-        calendar = this;
-        input = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
-          'rc-calendar-input')[0];
-        done();
-      });
+    let calendar;
+    let input;
+    beforeEach(() => {
+      calendar = mount(<Calendar showToday showWeekNumber/>);
+      input = calendar.find('.rc-calendar-input').hostNodes().at(0);
     });
 
     describe('keyboard works', () => {
-      it('left works', (done) => {
-        const original = calendar.state.value;
+      it('ignore event from input', () => {
+        const original = calendar.state().value;
         const expected = original.clone();
-        expected.addDayOfMonth(-1);
-        Simulate.keyDown(ReactDOM.findDOMNode(calendar), {
-          keyCode: keyCode.LEFT,
-        });
-        setTimeout(() => {
-          expect(calendar.state.value.getDayOfMonth())
-            .to.be(expected.getDayOfMonth());
-          expect(ReactDOM.findDOMNode(input).value).to.be('');
-          done();
-        }, 10);
+        input.simulate('keyDown', { keyCode: keyCode.LEFT });
+        expect(calendar.state().value.date()).toBe(expected.date());
+      });
+
+      it('triggers onKeyDown', () => {
+        const handleKeyDown = jest.fn();
+        calendar = mount(<Calendar showToday showWeekNumber onKeyDown={handleKeyDown} />);
+        const original = calendar.state().value;
+        const expected = original.clone();
+        calendar.simulate('keyDown', { keyCode: keyCode.A });
+        expect(calendar.state().value.date()).toBe(expected.date());
+        expect(handleKeyDown).toHaveBeenCalledWith(expect.anything());
+      });
+
+      it('left works', () => {
+        const original = calendar.state().value;
+        const expected = original.clone();
+        expected.add(-1, 'day');
+
+        calendar.simulate('keyDown', { keyCode: keyCode.LEFT });
+        expect(calendar.state().value.date()).toBe(expected.date());
+        expect(input.getDOMNode().value).toBe('');
       });
 
 
-      it('right works', (done) => {
-        const original = calendar.state.value;
+      it('right works', () => {
+        const original = calendar.state().value;
         const expected = original.clone();
-        expected.addDayOfMonth(1);
-        Simulate.keyDown(ReactDOM.findDOMNode(calendar), {
-          keyCode: keyCode.RIGHT,
-        });
-        setTimeout(() => {
-          expect(calendar.state.value.getDayOfMonth())
-            .to.be(expected.getDayOfMonth());
-          expect(ReactDOM.findDOMNode(input).value).to.be('');
-          done();
-        }, 10);
+        expected.add(1, 'day');
+        calendar.simulate('keyDown', { keyCode: keyCode.RIGHT });
+        expect(calendar.state().value.date()).toBe(expected.date());
+        expect(input.getDOMNode().value).toBe('');
       });
 
-      it('up works', (done) => {
-        const original = calendar.state.value;
+      it('up works', () => {
+        const original = calendar.state().value;
         const expected = original.clone();
-        expected.addDayOfMonth(-7);
-        Simulate.keyDown(ReactDOM.findDOMNode(calendar), {
-          keyCode: keyCode.UP,
-        });
-        setTimeout(() => {
-          expect(calendar.state.value.getDayOfMonth())
-            .to.be(expected.getDayOfMonth());
-          expect(ReactDOM.findDOMNode(input).value).to.be('');
-          done();
-        }, 10);
+        expected.add(-7, 'day');
       });
 
-      it('down works', (done) => {
-        const original = calendar.state.value;
+      it('left works', () => {
+        const original = calendar.state().value;
         const expected = original.clone();
-        expected.addDayOfMonth(7);
-        Simulate.keyDown(ReactDOM.findDOMNode(calendar), {
-          keyCode: keyCode.DOWN,
-        });
-        setTimeout(() => {
-          expect(calendar.state.value.getDayOfMonth())
-            .to.be(expected.getDayOfMonth());
-          expect(ReactDOM.findDOMNode(input).value).to.be('');
-          done();
-        }, 10);
+        expected.add(-1, 'day');
+
+        calendar.simulate('keyDown', { keyCode: keyCode.LEFT });
+        expect(calendar.state().value.date()).toBe(expected.date());
+        expect(input.getDOMNode().value).toBe('');
       });
 
-      it('pageDown works', (done) => {
-        const original = calendar.state.value;
+
+      it('right works', () => {
+        const original = calendar.state().value;
         const expected = original.clone();
-        expected.addMonth(1);
-        Simulate.keyDown(ReactDOM.findDOMNode(calendar), {
-          keyCode: keyCode.PAGE_DOWN,
-        });
-        setTimeout(() => {
-          expect(calendar.state.value.getMonth())
-            .to.be(expected.getMonth());
-          expect(ReactDOM.findDOMNode(input).value).to.be('');
-          done();
-        }, 10);
+        expected.add(1, 'day');
+        calendar.simulate('keyDown', { keyCode: keyCode.RIGHT });
+        expect(calendar.state().value.date()).toBe(expected.date());
+        expect(input.getDOMNode().value).toBe('');
       });
 
-      it('pageUp works', (done) => {
-        const original = calendar.state.value;
+      it('up works', () => {
+        const original = calendar.state().value;
         const expected = original.clone();
-        expected.addMonth(-1);
-        Simulate.keyDown(ReactDOM.findDOMNode(calendar), {
-          keyCode: keyCode.PAGE_UP,
-        });
-        setTimeout(() => {
-          expect(calendar.state.value.getMonth())
-            .to.be(expected.getMonth());
-          expect(ReactDOM.findDOMNode(input).value).to.be('');
-          done();
-        }, 10);
+        expected.add(-7, 'day');
+        calendar.simulate('keyDown', { keyCode: keyCode.UP });
+        expect(calendar.state().value.date()).toBe(expected.date());
+        expect(input.getDOMNode().value).toBe('');
       });
 
-      it('ctrl left works', (done) => {
-        const original = calendar.state.value;
+      it('down works', () => {
+        const original = calendar.state().value;
         const expected = original.clone();
-        expected.addYear(-1);
-        Simulate.keyDown(ReactDOM.findDOMNode(calendar), {
+        expected.add(7, 'day');
+        calendar.simulate('keyDown', { keyCode: keyCode.DOWN });
+        expect(calendar.state().value.date()).toBe(expected.date());
+        expect(input.getDOMNode().value).toBe('');
+      });
+
+      it('pageDown works', () => {
+        const original = calendar.state().value;
+        const expected = original.clone();
+        expected.add(1, 'month');
+        calendar.simulate('keyDown', { keyCode: keyCode.PAGE_DOWN });
+        expect(calendar.state().value.month()).toBe(expected.month());
+        expect(input.getDOMNode().value).toBe('');
+      });
+
+      it('pageUp works', () => {
+        const original = calendar.state().value;
+        const expected = original.clone();
+        expected.add(-1, 'month');
+        calendar.simulate('keyDown', { keyCode: keyCode.PAGE_UP });
+        expect(calendar.state().value.month()).toBe(expected.month());
+        expect(input.getDOMNode().value).toBe('');
+      });
+
+      it('ctrl left works', () => {
+        const original = calendar.state().value;
+        const expected = original.clone();
+        expected.add(-1, 'year');
+        calendar.simulate('keyDown', {
           keyCode: keyCode.LEFT,
           ctrlKey: 1,
         });
-        setTimeout(() => {
-          expect(calendar.state.value.getYear())
-            .to.be(expected.getYear());
-          expect(ReactDOM.findDOMNode(input).value).to.be('');
-          done();
-        }, 10);
+        expect(calendar.state().value.year()).toBe(expected.year());
+        expect(input.getDOMNode().value).toBe('');
       });
 
-
-      it('ctrl right works', (done) => {
-        const original = calendar.state.value;
+      it('ctrl right works', () => {
+        const original = calendar.state().value;
         const expected = original.clone();
-        expected.addYear(1);
-        Simulate.keyDown(ReactDOM.findDOMNode(calendar), {
+        expected.add(1, 'year');
+        calendar.simulate('keyDown', {
           keyCode: keyCode.RIGHT,
           ctrlKey: 1,
         });
-        setTimeout(() => {
-          expect(calendar.state.value.getYear())
-            .to.be(expected.getYear());
-          expect(ReactDOM.findDOMNode(input).value).to.be('');
-          done();
-        }, 10);
+        expect(calendar.state().value.year()).toBe(expected.year());
+        expect(input.getDOMNode().value).toBe('');
+      });
+
+      it('HOME works', () => {
+        const original = calendar.state().value;
+        const expected = original.clone().startOf('month');
+        calendar.setState({ value: original.add(2, 'day') });
+
+        calendar.simulate('keyDown', {
+          keyCode: keyCode.HOME,
+        });
+        expect(calendar.state().value.date()).toBe(expected.date());
+      });
+
+      it('END works', () => {
+        const original = calendar.state().value;
+        const expected = original.clone().endOf('month');
+        calendar.setState({ value: original.add(2, 'day') });
+
+        calendar.simulate('keyDown', {
+          keyCode: keyCode.END,
+        });
+        expect(calendar.state().value.date()).toBe(expected.date());
+      });
+
+      it('enter to select works', () => {
+        const onSelect = jest.fn();
+        let today;
+        calendar = mount(
+          <Calendar onSelect={onSelect} />
+        );
+        today = calendar.state().value;
+
+        calendar.simulate('keyDown', {
+          keyCode: keyCode.ENTER,
+        });
+        expect(onSelect).toHaveBeenCalledWith(today, {
+          source: 'keyboard',
+        });
+      });
+
+      it('enter not to select disabled date', () => {
+        const onSelect = jest.fn();
+        function disabledDate(current) {
+          if (!current) {
+            return false;
+          }
+          const date = moment();
+          date.hour(0);
+          date.minute(0);
+          date.second(0);
+          return current.valueOf() < date.valueOf();
+        }
+
+        calendar = mount(
+          <Calendar onSelect={onSelect} disabledDate={disabledDate} />
+        );
+
+        calendar.simulate('keyDown', {
+          keyCode: keyCode.LEFT,
+        });
+        calendar.simulate('keyDown', {
+          keyCode: keyCode.ENTER,
+        });
+
+        expect(onSelect).not.toHaveBeenCalled();
       });
     });
 
-    it('next month works', (done) => {
-      let month = calendar.state.value.getMonth();
+    it('next month works', () => {
+      let month = calendar.state().value.month();
       if (month === 11) {
         month = -1;
       }
-      Simulate.click(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
-        'rc-calendar-next-month-btn')[0]);
-      setTimeout(() => {
-        expect(calendar.state.value.getMonth()).to.be(month + 1);
-        expect(ReactDOM.findDOMNode(input).value).to.be('');
-        done();
-      }, 10);
+
+      calendar.find('.rc-calendar-next-month-btn').hostNodes().at(0).simulate('click');
+
+      expect(calendar.state().value.month()).toBe(month + 1);
+      expect(input.getDOMNode().value).toBe('');
     });
 
-    it('previous month works', (done) => {
-      let month = calendar.state.value.getMonth();
+    it('previous month works', () => {
+      let month = calendar.state().value.month();
       if (month === 0) {
         month = 12;
       }
-      Simulate.click(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
-        'rc-calendar-prev-month-btn')[0]);
-      setTimeout(() => {
-        expect(calendar.state.value.getMonth()).to.be(month - 1);
-        expect(ReactDOM.findDOMNode(input).value).to.be('');
-        done();
-      }, 10);
+
+      calendar.find('.rc-calendar-prev-month-btn').hostNodes().at(0).simulate('click');
+
+      expect(calendar.state().value.month()).toBe(month - 1);
+      expect(input.getDOMNode().value).toBe('');
     });
 
-    it('next year works', (done) => {
-      const year = calendar.state.value.getYear();
-      Simulate.click(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
-        'rc-calendar-next-year-btn')[0]);
-      setTimeout(() => {
-        expect(calendar.state.value.getYear()).to.be(year + 1);
-        done();
-      }, 10);
+    it('next year works', () => {
+      const year = calendar.state().value.year();
+
+      calendar.find('.rc-calendar-next-year-btn').hostNodes().at(0).simulate('click');
+
+      expect(calendar.state().value.year()).toBe(year + 1);
     });
 
-    it('previous year works', (done) => {
-      const year = calendar.state.value.getYear();
-      Simulate.click(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
-        'rc-calendar-prev-year-btn')[0]);
-      setTimeout(() => {
-        expect(calendar.state.value.getYear()).to.be(year - 1);
-        done();
-      }, 10);
+    it('previous year works', () => {
+      const year = calendar.state().value.year();
+
+      calendar.find('.rc-calendar-prev-year-btn').hostNodes().at(0).simulate('click');
+
+      expect(calendar.state().value.year()).toBe(year - 1);
     });
 
-    it('render works', () => {
-      expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
-        'rc-calendar-cell').length).to.above(0);
-    });
-
-    it('onSelect works', (done) => {
+    it('onSelect works', () => {
       let day;
 
-      function onSelect(d) {
-        expect(d.getDayOfMonth()).to.be(parseInt(day.innerHTML, 10));
-        done();
-      }
+      const onSelect = jest.fn();
 
-      calendar = ReactDOM.render(<Calendar
-        showToday
-        onSelect={onSelect}
-        showWeekNumber
-      />, container);
-      day = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
-        'rc-calendar-date')[5];
-      Simulate.click(day);
-      expect(ReactDOM.findDOMNode(input).value)
-        .to.be(formatter.format(calendar.state.value));
+      calendar = mount(
+        <Calendar
+          format={format}
+          showToday
+          onSelect={onSelect}
+          showWeekNumber
+        />
+      );
+
+      day = calendar.find('.rc-calendar-date').hostNodes().at(5);
+      day.simulate('click');
+
+      input = calendar.find('.rc-calendar-input').hostNodes().at(0);
+
+      expect(input.getDOMNode().value).toBe(calendar.state().value.format(format));
+      expect(onSelect.mock.calls[0][0].date()).toBe(parseInt(day.text(), 10));
     });
 
-    it('month panel shows', (done) => {
-      expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
-        'rc-calendar-month-panel').length).to.be(0);
-      Simulate.click(TestUtils.findRenderedDOMComponentWithClass(calendar,
-        'rc-calendar-month-select'));
-      async.series([(next) => {
-        expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
-          'rc-calendar-month-panel').length).to.be(1);
-        expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
-          'rc-calendar-month-panel-month').length).to.be(12);
-        const m = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
-          'rc-calendar-month-panel-month')[9];
-        Simulate.click(m);
-        setTimeout(next, 10);
-      }, (next) => {
-        expect(calendar.state.value.getMonth()).to.be(9);
-        next();
-      }], done);
+    it('month panel shows', () => {
+      expect(calendar.find('.rc-calendar-month-panel').length).toBe(0);
+      calendar.find('.rc-calendar-month-select').hostNodes().simulate('click');
+      expect(calendar.find('.rc-calendar-month-panel').hostNodes().length).toBe(1);
+      expect(calendar.find('.rc-calendar-month-panel-month').hostNodes().length).toBe(12);
+      calendar.find('.rc-calendar-month-panel-month').hostNodes().at(9).simulate('click');
+      expect(calendar.state().value.month()).toBe(9);
     });
 
-    it('top year panel shows', (done) => {
+    it('top year panel shows', () => {
       let text;
-      expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
-        'rc-calendar-year-panel').length).to.be(0);
-      Simulate.click(TestUtils.findRenderedDOMComponentWithClass(calendar,
-        'rc-calendar-year-select'));
-      async.series([(next) => {
-        expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
-          'rc-calendar-year-panel').length).to.be(1);
-        expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
-          'rc-calendar-year-panel-year').length).to.be(12);
-        const year = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
-          'rc-calendar-year-panel-year')[9];
-        text = year.innerHTML;
-        Simulate.click(year);
-        setTimeout(next, 10);
-      }, (next) => {
-        expect(String(calendar.state.value.getYear())).to.be(text);
-        next();
-      }], done);
+      expect(calendar.find('.rc-calendar-year-panel').length).toBe(0);
+      calendar.find('.rc-calendar-year-select').hostNodes().simulate('click');
+      expect(calendar.find('.rc-calendar-year-panel').hostNodes().length).toBe(1);
+      expect(calendar.find('.rc-calendar-year-panel-year').hostNodes().length).toBe(12);
+      const year = calendar.find('.rc-calendar-year-panel-year').hostNodes().at(9);
+      year.simulate('click');
+      text = year.text();
+      expect(String(calendar.state().value.year())).toBe(text);
     });
 
-    it('year panel works', (done) => {
+    it('year panel works', () => {
       let text;
-      async.series([(next) => {
-        Simulate.click(TestUtils.findRenderedDOMComponentWithClass(calendar,
-          'rc-calendar-month-select'));
-        setTimeout(next, 10);
-      }, (next) => {
-        Simulate.click(TestUtils.findRenderedDOMComponentWithClass(calendar,
-          'rc-calendar-month-panel-year-select'));
-        setTimeout(next, 10);
-      }, (next) => {
-        expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
-          'rc-calendar-year-panel').length).to.be(1);
-        expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
-          'rc-calendar-year-panel-year').length).to.be(12);
-        const year = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
-          'rc-calendar-year-panel-year')[9];
-        text = year.innerHTML;
-        Simulate.click(year);
-        setTimeout(next, 10);
-      }, (next) => {
-        const m = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
-          'rc-calendar-month-panel-month')[9];
-        Simulate.click(m);
-        setTimeout(next, 10);
-      }, (next) => {
-        expect(String(calendar.state.value.getYear())).to.be(text);
-        expect(ReactDOM.findDOMNode(input).value).to.be('');
-        next();
-      }], done);
+      calendar.find('.rc-calendar-month-select').hostNodes().simulate('click');
+      calendar.find('.rc-calendar-month-panel-year-select').hostNodes().simulate('click');
+      expect(calendar.find('.rc-calendar-year-panel').hostNodes().length).toBe(1);
+      expect(calendar.find('.rc-calendar-year-panel-year').hostNodes().length).toBe(12);
+      const year = calendar.find('.rc-calendar-year-panel-year').hostNodes().at(9);
+      year.simulate('click');
+      text = year.text();
+      calendar.find('.rc-calendar-month-panel-month').hostNodes().at(9).simulate('click');
+      expect(String(calendar.state().value.year())).toBe(text);
+      expect(input.getDOMNode().value).toBe('');
     });
 
-    it('decade panel works', (done) => {
-      async.series([(next) => {
-        Simulate.click(TestUtils.findRenderedDOMComponentWithClass(calendar,
-          'rc-calendar-month-select'));
-        setTimeout(next, 10);
-      }, (next) => {
-        Simulate.click(TestUtils.findRenderedDOMComponentWithClass(calendar,
-          'rc-calendar-month-panel-year-select'));
-        setTimeout(next, 10);
-      }, (next) => {
-        Simulate.click(TestUtils.findRenderedDOMComponentWithClass(calendar,
-          'rc-calendar-year-panel-decade-select'));
-        setTimeout(next, 10);
-      }, (next) => {
-        expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
-          'rc-calendar-decade-panel').length).to.be(1);
-        expect(TestUtils.scryRenderedDOMComponentsWithClass(calendar,
-          'rc-calendar-decade-panel-decade').length).to.be(12);
-        next();
-      }], done);
+    it('decade panel works', () => {
+      calendar.find('.rc-calendar-month-select').hostNodes().simulate('click');
+      calendar.find('.rc-calendar-month-panel-year-select').hostNodes().simulate('click');
+      calendar.find('.rc-calendar-year-panel-decade-select').hostNodes().simulate('click');
+
+      expect(calendar.find('.rc-calendar-decade-panel').hostNodes().length).toBe(1);
+      expect(calendar.find('.rc-calendar-decade-panel-decade').hostNodes().length).toBe(12);
     });
   });
 
 
   describe('input', () => {
-    it('blur will fire onSelect/onChange', (done) => {
-      let count = 0;
+    it('change will fire onSelect/onChange', () => {
       const expected = '2017-01-21';
 
-      function check() {
-        count++;
-        if (count === 2) {
-          done();
-        }
-      }
+      const onSelect = jest.fn();
+      const onChange = jest.fn();
 
-      function onSelect(d) {
-        expect(formatter.format(d)).to.be(expected);
-        check();
-      }
-
-      function onChange(d) {
-        expect(formatter.format(d)).to.be(expected);
-        check();
-      }
-
-      ReactDOM.render(<Calendar
+      const calendar = mount(<Calendar
+        format={format}
         showToday
         onSelect={onSelect}
         onChange={onChange}
-      />, container, function ok() {
-        calendar = this;
-        input = TestUtils.scryRenderedDOMComponentsWithClass(calendar,
-          'rc-calendar-input')[0];
-      });
-      ReactDOM.findDOMNode(input).value = expected;
-      Simulate.change(input);
-      Simulate.blur(input);
+      />);
+      const input = calendar.find('.rc-calendar-input').hostNodes().at(0);
+      input.simulate('change', { target: { value: expected } });
+
+      expect(onSelect.mock.calls[0][0].format(format)).toBe(expected);
+      expect(onChange.mock.calls[0][0].format(format)).toBe(expected);
     });
+  });
+
+  it('handle clear', () => {
+    const now = moment();
+    const calendar = mount(
+      <Calendar defaultSelectedValue={now} />
+    );
+    calendar.find('.rc-calendar-clear-btn').simulate('click');
+    expect(calendar.state().selectedValue).toBe(null);
+    expect(now.isSame(calendar.state().value)).toBe(true);
+  });
+
+  describe('onOk', () => {
+    it('triggers onOk', () => {
+      const selected = moment().add(1, 'day');
+      const handleOk = jest.fn();
+      const calendar = mount(
+        <Calendar showOk defaultSelectedValue={selected} onOk={handleOk} />
+      );
+      calendar.find('.rc-calendar-ok-btn').simulate('click');
+      expect(handleOk).toHaveBeenCalledWith(selected);
+    });
+
+    it('does not triggers onOk if selected date is disabled', () => {
+      const selected = moment().add(1, 'day');
+      const handleOk = jest.fn();
+      const calendar = mount(
+        <Calendar
+          showOk
+          defaultSelectedValue={selected}
+          onOk={handleOk}
+          disabledDate={() => true}
+        />
+      );
+      calendar.find('.rc-calendar-ok-btn').simulate('click');
+      expect(handleOk).not.toBeCalled();
+    });
+  });
+
+  it('today button', () => {
+    const selected = moment().add(1, 'day').utcOffset(480);
+    const calendar = mount(
+      <Calendar defaultSelectedValue={selected} />
+    );
+    calendar.find('.rc-calendar-today-btn').simulate('click');
+    expect(moment().isSame(calendar.state().selectedValue)).toBe(true);
   });
 });

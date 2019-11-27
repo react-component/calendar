@@ -42,9 +42,18 @@
   top: 0;
 }
 
+.@{prefixClass}-decade-panel-next-century-btn {
+  &:after {
+    content: '»'
+  }
+}
+
 .@{prefixClass}-decade-panel-prev-century-btn {
   user-select: none;
   left: 0;
+  &:after {
+    content: '«'
+  }
 }
 
 .@{prefixClass}-decade-panel-next-century-btn {
@@ -54,12 +63,15 @@
 
 .@{prefixClass}-decade-panel-body {
   padding: 9px 10px 10px;
+  position: absolute;
+  bottom: 0;
+  top: 34px;
 }
 
 .@{prefixClass}-decade-panel-table {
   table-layout: fixed;
   width: 100%;
-  height: 255px;
+  height: 100%;
   border-collapse: separate;
 }
 
@@ -98,16 +110,6 @@
   .@{prefixClass}-decade-panel-decade{
     user-select: none;
     -webkit-user-select: none;
-  }
-  .@{prefixClass}-decade-panel-decade:before {
-    content: ">";
-    font-family: "iconfont" !important;
-  }
-}
-
-.@{prefixClass}-decade-panel-last-century-cell {
-  .@{prefixClass}-decade-panel-decade {
-    transform: rotate(180deg);
-    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+    color: rgba(0, 0, 0, 0.25);
   }
 }

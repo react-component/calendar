@@ -3,55 +3,68 @@
 import 'rc-calendar/assets/index.less';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import MonthCalendar from 'rc-calendar/src/MonthCalendar';
 import DatePicker from 'rc-calendar/src/Picker';
-import zhCn from 'gregorian-calendar/lib/locale/zh_CN'; // spm error
-import DateTimeFormat from 'gregorian-calendar-format';
-import GregorianCalendar from 'gregorian-calendar';
-import CalendarLocale from 'rc-calendar/src/locale/zh_CN';
-const now = new GregorianCalendar(zhCn);
-now.setTime(Date.now());
-const formatter = new DateTimeFormat('yyyy-MM');
 
-const defaultCalendarValue = new GregorianCalendar(zhCn);
-defaultCalendarValue.setTime(Date.now());
-defaultCalendarValue.addMonth(-1);
+import zhCN from 'rc-calendar/src/locale/zh_CN';
+import enUS from 'rc-calendar/src/locale/en_US';
 
-const Test = React.createClass({
-  propTypes: {
-    defaultValue: React.PropTypes.object,
-  },
-  getInitialState() {
-    return {
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+import 'moment/locale/en-gb';
+
+const format = 'YYYY-MM';
+const cn = location.search.indexOf('cn') !== -1;
+
+const now = moment();
+if (cn) {
+  now.locale('zh-cn').utcOffset(8);
+} else {
+  now.locale('en-gb').utcOffset(0);
+}
+
+const defaultCalendarValue = now.clone();
+defaultCalendarValue.add(-1, 'month');
+
+class Demo extends React.Component {
+  static propTypes = {
+    defaultValue: PropTypes.object,
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
       showTime: true,
       disabled: false,
-      value: this.props.defaultValue,
+      value: props.defaultValue,
     };
-  },
+  }
 
-  onChange(value) {
-    console.log(`DatePicker change: ${value && formatter.format(value)}`);
+  onChange = (value) => {
+    console.log(`DatePicker change: ${value && value.format(format)}`);
     this.setState({
       value,
     });
-  },
+  }
 
-  onShowTimeChange(e) {
+  onShowTimeChange = (e) => {
     this.setState({
       showTime: e.target.checked,
     });
-  },
+  }
 
-  toggleDisabled() {
+  toggleDisabled = () => {
     this.setState({
       disabled: !this.state.disabled,
     });
-  },
+  }
 
   render() {
     const state = this.state;
     const calendar = (<MonthCalendar
-      locale={CalendarLocale}
+      locale={cn ? zhCN : enUS}
       style={{ zIndex: 1000 }}
     />);
     return (<div style={{ width: 240, margin: 20 }}>
@@ -77,7 +90,8 @@ const Test = React.createClass({
           animation="slide-up"
           disabled={state.disabled}
           calendar={calendar}
-          value={state.value} onChange={this.onChange}
+          value={state.value}
+          onChange={this.onChange}
         >
           {
             ({ value }) => {
@@ -85,7 +99,7 @@ const Test = React.createClass({
                 style={{ width: 200 }}
                 readOnly
                 disabled={state.disabled}
-                value={value && formatter.format(value)}
+                value={value && value.format(format)}
                 placeholder="请选择日期"
               />);
             }
@@ -94,20 +108,25 @@ const Test = React.createClass({
         </DatePicker>
       </div>
     </div>);
-  },
-});
+  }
+}
 
 function onStandaloneSelect(value) {
-  console.log('month-calendar select', (value && formatter.format(value)));
+  console.log('month-calendar select', (value && value.format(format)));
 }
 
 function onStandaloneChange(value) {
-  console.log('month-calendar change', (value && formatter.format(value)));
+  console.log('month-calendar change', (value && value.format(format)));
 }
 
 function disabledDate(value) {
-  return value.getYear() > now.getYear() ||
-    value.getYear() === now.getYear() && value.getMonth() > now.getMonth();
+  return value.year() > now.year() ||
+    value.year() === now.year() && value.month() > now.month();
+}
+
+function onMonthCellContentRender(value) {
+  // console.log('month-calendar onMonthCellContentRender', (value && value.format(format)));
+  return `${value.month() + 1}月`;
 }
 
 ReactDOM.render(
@@ -119,18 +138,19 @@ ReactDOM.render(
       margin: '0 auto',
     }}
   >
-    <h2>zh-cn</h2>
     <MonthCalendar
-      locale={CalendarLocale}
+      locale={cn ? zhCN : enUS}
       style={{ zIndex: 1000 }}
       disabledDate={disabledDate}
       onSelect={onStandaloneSelect}
       onChange={onStandaloneChange}
+      monthCellContentRender={onMonthCellContentRender}
       defaultValue={defaultCalendarValue}
+      renderFooter={() => 'extra footer'}
     />
 
     <div style={{ marginTop: 200 }}>
-      <Test defaultValue={now}/>
+      <Demo defaultValue={now} />
     </div>
   </div>)
   , document.getElementById('__react-content'));

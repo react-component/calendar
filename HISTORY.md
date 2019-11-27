@@ -1,6 +1,100 @@
 # History
 ----
 
+## 9.7.0 / 2018-08-07
+
+- Add clearIcon.
+
+## 9.6.0 / 2018-02-08
+
+- Add Picker[dropdownClassName]
+
+## 9.5.0 / 2017-12-26
+
+- Add Kurdish
+
+## 9.4.0 / 2017-12-26
+
+- Add Uyghur
+
+## 9.2.0 / 2017-11-06
+
+- React 16 support
+
+## 9.1.0 / 2017-07-27
+- Support control panel [#284](https://github.com/react-component/calendar/pull/284)
+
+## 9.0.0 / 2017-07-27
+- Replace react string refs with function way [#282](https://github.com/react-component/calendar/pull/282)
+
+## 8.4.0 / 2017-05-31
+
+- Supporting Bulgarian.
+- UX: can select end date first, and then start date.
+
+## 8.3.0 / 2017-05-18
+
+- expose hoverValue as controlled property and onHoverChange
+
+## 8.2.0 / 2017-05-16
+
+- Time of `Calendar[timePicker]` & `RangeCalendar[timePicker]` could be set now
+- Fix that two panels of RangeCalendar should not be the same month
+
+## 8.1.0 / 2017-04-10
+
+- Add locale fi_FI
+
+## 8.0.0 / 2017-04-07
+
+- Improve UX of RangeCalendar
+- A breaking change for hidden API
+
+## 7.8.0 / 2017-04-01
+
+- zh-TW locale
+- tr-TR locale
+
+## 7.6.0 / 2017-01-11
+
+- remove arrow inside year and century panel
+
+## 7.5.0 / 2016-11-16
+
+- add showToday for RangeCalendar
+
+## 7.4.0 / 2016-11-01
+
+- add monthCellContentRender/cellContentRender for MonthCalendar
+
+## 7.3.0 / 2016-10-18
+
+- disabledTime support type param for range-calendar
+
+## 7.2.0 / 2016-09-23
+
+- add week calendar example
+- support renderSidebar, renderFooter prop
+- add type prop to support start-end-range example
+- picker remove onClose, change onOpen to onOpenChange
+
+## 7.1.0 / 2016-09-10
+
+- use css pseudo after: https://github.com/react-component/calendar/pull/152
+
+## 7.0.0 / 2016-08-06
+
+- goodbye gregorian-calendar, hello moment
+
+## 6.0.0 / 2016-07-13
+
+- use rc-time-picker/lib/module/panel as timepicker element
+- merge date input and time input. formatter can control time part.
+
+## 5.6.0 / 2016-06-20
+
+- optimize keyboard, add onKeyDown for Picker children
+
 ## 5.5.0 / 2016-03-22
 
 - support monthCellContentRender/dateCellContentRender

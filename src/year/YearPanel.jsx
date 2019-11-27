@@ -1,12 +1,12 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import DecadePanel from '../decade/DecadePanel';
 const ROW = 4;
 const COL = 3;
 
 function goYear(direction) {
   const value = this.state.value.clone();
-  value.addYear(direction);
+  value.add(direction, 'year');
   this.setState({
     value,
   });
@@ -14,13 +14,13 @@ function goYear(direction) {
 
 function chooseYear(year) {
   const value = this.state.value.clone();
-  value.setYear(year);
-  value.rollSetMonth(this.state.value.getMonth());
+  value.year(year);
+  value.month(this.state.value.month());
   this.props.onSelect(value);
 }
 
 export default
-class YearPanel extends React.Component {
+  class YearPanel extends React.Component {
   constructor(props) {
     super(props);
     this.prefixCls = `${props.rootPrefixCls}-year-panel`;
@@ -29,38 +29,20 @@ class YearPanel extends React.Component {
     };
     this.nextDecade = goYear.bind(this, 10);
     this.previousDecade = goYear.bind(this, -10);
-    ['showDecadePanel', 'onDecadePanelSelect'].forEach(method => {
-      this[method] = this[method].bind(this);
-    });
   }
 
-  onDecadePanelSelect(current) {
-    this.setState({
-      value: current,
-      showDecadePanel: 0,
-    });
-  }
-
-  getYears() {
+  years() {
     const value = this.state.value;
-    const currentYear = value.getYear();
+    const currentYear = value.year();
     const startYear = parseInt(currentYear / 10, 10) * 10;
     const previousYear = startYear - 1;
-    const endYear = startYear + 9;
     const years = [];
     let index = 0;
     for (let rowIndex = 0; rowIndex < ROW; rowIndex++) {
       years[rowIndex] = [];
       for (let colIndex = 0; colIndex < COL; colIndex++) {
         const year = previousYear + index;
-        let content;
-        if (year < startYear) {
-          content = '';
-        } else if (year > endYear) {
-          content = '';
-        } else {
-          content = String(year);
-        }
+        const content = String(year);
         years[rowIndex][colIndex] = {
           content,
           year,
@@ -71,19 +53,12 @@ class YearPanel extends React.Component {
     }
     return years;
   }
-
-  showDecadePanel() {
-    this.setState({
-      showDecadePanel: 1,
-    });
-  }
-
   render() {
     const props = this.props;
     const value = this.state.value;
-    const locale = props.locale;
-    const years = this.getYears();
-    const currentYear = value.getYear();
+    const { locale } = props;
+    const years = this.years();
+    const currentYear = value.year();
     const startYear = parseInt(currentYear / 10, 10) * 10;
     const endYear = startYear + 9;
     const prefixCls = this.prefixCls;
@@ -122,15 +97,6 @@ class YearPanel extends React.Component {
       return (<tr key={index} role="row">{tds}</tr>);
     });
 
-    let decadePanel;
-    if (this.state.showDecadePanel) {
-      decadePanel = (<DecadePanel
-        locale={locale}
-        value={value}
-        rootPrefixCls={props.rootPrefixCls}
-        onSelect={this.onDecadePanelSelect}
-      />);
-    }
 
     return (
       <div className={this.prefixCls}>
@@ -141,13 +107,11 @@ class YearPanel extends React.Component {
               role="button"
               onClick={this.previousDecade}
               title={locale.previousDecade}
-            >
-              «
-            </a>
+            />
             <a
               className={`${prefixCls}-decade-select`}
               role="button"
-              onClick={this.showDecadePanel}
+              onClick={props.onDecadePanelShow}
               title={locale.decadeSelect}
             >
               <span className={`${prefixCls}-decade-select-content`}>
@@ -161,19 +125,16 @@ class YearPanel extends React.Component {
               role="button"
               onClick={this.nextDecade}
               title={locale.nextDecade}
-            >
-              »
-            </a>
+            />
           </div>
           <div className={`${prefixCls}-body`}>
             <table className={`${prefixCls}-table`} cellSpacing="0" role="grid">
               <tbody className={`${prefixCls}-tbody`}>
-              {yeasEls}
+                {yeasEls}
               </tbody>
             </table>
           </div>
         </div>
-        {decadePanel}
       </div>);
   }
 }

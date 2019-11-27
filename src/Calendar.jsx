@@ -1,5 +1,7 @@
-import React, { PropTypes } from 'react';
-import GregorianCalendar from 'gregorian-calendar';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import createReactClass from 'create-react-class';
+import PropTypes from 'prop-types';
 import KeyCode from 'rc-util/lib/KeyCode';
 import DateTable from './date/DateTable';
 import CalendarHeader from './calendar/CalendarHeader';
@@ -7,69 +9,40 @@ import CalendarFooter from './calendar/CalendarFooter';
 import CalendarMixin from './mixin/CalendarMixin';
 import CommonMixin from './mixin/CommonMixin';
 import DateInput from './date/DateInput';
+import { getTimeConfig, getTodayTime, syncTime } from './util';
+import { goStartMonth, goEndMonth, goTime } from './util/toTime';
 
 function noop() {
 }
 
-function goStartMonth() {
-  const next = this.state.value.clone();
-  next.setDayOfMonth(1);
-  this.setValue(next);
-}
-
-function goEndMonth() {
-  const next = this.state.value.clone();
-  next.setDayOfMonth(next.getActualMaximum(GregorianCalendar.MONTH));
-  this.setValue(next);
-}
-
-function goMonth(direction) {
-  const next = this.state.value.clone();
-  next.addMonth(direction);
-  this.setValue(next);
-}
-
-function goYear(direction) {
-  const next = this.state.value.clone();
-  next.addYear(direction);
-  this.setValue(next);
-}
-
-function goWeek(direction) {
-  const next = this.state.value.clone();
-  next.addWeekOfYear(direction);
-  this.setValue(next);
-}
-
-function goDay(direction) {
-  const next = this.state.value.clone();
-  next.addDayOfMonth(direction);
-  this.setValue(next);
-}
-
-const Calendar = React.createClass({
+const Calendar = createReactClass({
   propTypes: {
-    disabledDate: PropTypes.func,
-    disabledTime: PropTypes.any,
+    prefixCls: PropTypes.string,
+    className: PropTypes.string,
+    style: PropTypes.object,
+    defaultValue: PropTypes.object,
     value: PropTypes.object,
     selectedValue: PropTypes.object,
-    defaultValue: PropTypes.object,
-    className: PropTypes.string,
+    mode: PropTypes.oneOf(['time', 'date', 'month', 'year', 'decade']),
     locale: PropTypes.object,
-    showWeekNumber: PropTypes.bool,
-    style: PropTypes.object,
-    showToday: PropTypes.bool,
     showDateInput: PropTypes.bool,
-    visible: PropTypes.bool,
+    showWeekNumber: PropTypes.bool,
+    showToday: PropTypes.bool,
+    showOk: PropTypes.bool,
     onSelect: PropTypes.func,
     onOk: PropTypes.func,
-    showOk: PropTypes.bool,
-    prefixCls: PropTypes.string,
     onKeyDown: PropTypes.func,
     timePicker: PropTypes.element,
     dateInputPlaceholder: PropTypes.any,
     onClear: PropTypes.func,
     onChange: PropTypes.func,
+    onPanelChange: PropTypes.func,
+    disabledDate: PropTypes.func,
+    disabledTime: PropTypes.any,
+    dateRender: PropTypes.func,
+    renderFooter: PropTypes.func,
+    renderSidebar: PropTypes.func,
+    clearIcon: PropTypes.node,
   },
 
   mixins: [CommonMixin, CalendarMixin],
@@ -80,18 +53,19 @@ const Calendar = React.createClass({
       showDateInput: true,
       timePicker: null,
       onOk: noop,
+      onPanelChange: noop,
     };
   },
-
   getInitialState() {
-    // bind methods
-    this.nextMonth = goMonth.bind(this, 1);
-    this.previousMonth = goMonth.bind(this, -1);
-    this.nextYear = goYear.bind(this, 1);
-    this.previousYear = goYear.bind(this, -1);
-    return {};
+    return {
+      mode: this.props.mode || 'date',
+    };
   },
-
+  componentWillReceiveProps(nextProps) {
+    if ('mode' in nextProps && this.state.mode !== nextProps.mode) {
+      this.setState({ mode: nextProps.mode });
+    }
+  },
   onKeyDown(event) {
     if (event.target.nodeName.toLowerCase() === 'input') {
       return undefined;
@@ -99,49 +73,59 @@ const Calendar = React.createClass({
     const keyCode = event.keyCode;
     // mac
     const ctrlKey = event.ctrlKey || event.metaKey;
+    const { disabledDate } = this.props;
+    const { value } = this.state;
     switch (keyCode) {
       case KeyCode.DOWN:
-        goWeek.call(this, 1);
+        this.goTime(1, 'weeks');
         event.preventDefault();
         return 1;
       case KeyCode.UP:
-        goWeek.call(this, -1);
+        this.goTime(-1, 'weeks');
         event.preventDefault();
         return 1;
       case KeyCode.LEFT:
         if (ctrlKey) {
-          this.previousYear();
+          this.goTime(-1, 'years');
         } else {
-          goDay.call(this, -1);
+          this.goTime(-1, 'days');
         }
         event.preventDefault();
         return 1;
       case KeyCode.RIGHT:
         if (ctrlKey) {
-          this.nextYear();
+          this.goTime(1, 'years');
         } else {
-          goDay.call(this, 1);
+          this.goTime(1, 'days');
         }
         event.preventDefault();
         return 1;
       case KeyCode.HOME:
-        goStartMonth.call(this);
+        this.setValue(
+          goStartMonth(this.state.value),
+        );
         event.preventDefault();
         return 1;
       case KeyCode.END:
-        goEndMonth.call(this);
+        this.setValue(
+          goEndMonth(this.state.value),
+        );
         event.preventDefault();
         return 1;
       case KeyCode.PAGE_DOWN:
-        this.nextMonth();
+        this.goTime(1, 'month');
         event.preventDefault();
         return 1;
       case KeyCode.PAGE_UP:
-        this.previousMonth();
+        this.goTime(-1, 'month');
         event.preventDefault();
         return 1;
       case KeyCode.ENTER:
-        this.onSelect(this.state.value);
+        if (!disabledDate || !disabledDate(value)) {
+          this.onSelect(value, {
+            source: 'keyboard',
+          });
+        }
         event.preventDefault();
         return 1;
       default:
@@ -167,31 +151,85 @@ const Calendar = React.createClass({
       source: 'dateInput',
     });
   },
-
   onDateTableSelect(value) {
+    const { timePicker } = this.props;
+    const { selectedValue } = this.state;
+    if (!selectedValue && timePicker) {
+      const timePickerDefaultValue = timePicker.props.defaultValue;
+      if (timePickerDefaultValue) {
+        syncTime(timePickerDefaultValue, value);
+      }
+    }
     this.onSelect(value);
   },
-
-  chooseToday() {
-    const today = this.state.value.clone();
-    today.setTime(Date.now());
-    this.onSelect(today, {
+  onToday() {
+    const { value } = this.state;
+    const now = getTodayTime(value);
+    this.onSelect(now, {
       source: 'todayButton',
     });
   },
+  onPanelChange(value, mode) {
+    const { props, state } = this;
+    if (!('mode' in props)) {
+      this.setState({ mode });
+    }
+    props.onPanelChange(value || state.value, mode);
+  },
+  getRootDOMNode() {
+    return ReactDOM.findDOMNode(this);
+  },
+  openTimePicker() {
+    this.onPanelChange(null, 'time');
+  },
+  closeTimePicker() {
+    this.onPanelChange(null, 'date');
+  },
+
+  goTime(direction, unit) {
+    this.setValue(
+      goTime(this.state.value, direction, unit),
+    );
+  },
 
   render() {
-    const props = this.props;
-    const { locale, prefixCls, disabledDate,
-      dateInputPlaceholder, timePicker, disabledTime } = props;
-    const state = this.state;
-    const { value, selectedValue } = state;
+    const { props, state } = this;
+    const {
+      locale, prefixCls, disabledDate,
+      dateInputPlaceholder, timePicker,
+      disabledTime, clearIcon,
+    } = props;
+    const { value, selectedValue, mode } = state;
+    const showTimePicker = mode === 'time';
+    const disabledTimeConfig = showTimePicker && disabledTime && timePicker ?
+      getTimeConfig(selectedValue, disabledTime) : null;
+
+    let timePickerEle = null;
+
+    if (timePicker && showTimePicker) {
+      const timePickerProps = {
+        showHour: true,
+        showSecond: true,
+        showMinute: true,
+        ...timePicker.props,
+        ...disabledTimeConfig,
+        onChange: this.onDateInputChange,
+        value: selectedValue,
+        disabledTime,
+      };
+
+      if (timePicker.props.defaultValue !== undefined) {
+        timePickerProps.defaultOpenValue = timePicker.props.defaultValue;
+      }
+
+      timePickerEle = React.cloneElement(timePicker, timePickerProps);
+    }
+
     const dateInputElement = props.showDateInput ? (
       <DateInput
-        formatter={this.getFormatter()}
+        format={this.getFormat()}
         key="date-input"
-        timePicker={timePicker}
-        gregorianCalendarLocale={value.locale}
+        value={value}
         locale={locale}
         placeholder={dateInputPlaceholder}
         showClear
@@ -201,49 +239,66 @@ const Calendar = React.createClass({
         prefixCls={prefixCls}
         selectedValue={selectedValue}
         onChange={this.onDateInputChange}
+        clearIcon={clearIcon}
       />
     ) : null;
-    const children = [dateInputElement, (<div
-      key="date-panel"
-      className={`${prefixCls}-date-panel`}
-    >
-      <CalendarHeader
-        locale={locale}
-        onValueChange={this.setValue}
-        value={value}
-        prefixCls={prefixCls}
-      />
+    const children = [
+      props.renderSidebar(),
+      (<div className={`${prefixCls}-panel`} key="panel">
+        {dateInputElement}
+        <div className={`${prefixCls}-date-panel`}>
+          <CalendarHeader
+            locale={locale}
+            mode={mode}
+            value={value}
+            onValueChange={this.setValue}
+            onPanelChange={this.onPanelChange}
+            showTimePicker={showTimePicker}
+            prefixCls={prefixCls}
+          />
+          {timePicker && showTimePicker ?
+            (<div className={`${prefixCls}-time-picker`}>
+              <div className={`${prefixCls}-time-picker-panel`}>
+                {timePickerEle}
+              </div>
+            </div>)
+            : null}
+          <div className={`${prefixCls}-body`}>
+            <DateTable
+              locale={locale}
+              value={value}
+              selectedValue={selectedValue}
+              prefixCls={prefixCls}
+              dateRender={props.dateRender}
+              onSelect={this.onDateTableSelect}
+              disabledDate={disabledDate}
+              showWeekNumber={props.showWeekNumber}
+            />
+          </div>
 
-      <div className={`${prefixCls}-calendar-body`}>
-        <DateTable
-          locale={locale}
-          value={value}
-          selectedValue={selectedValue}
-          prefixCls={prefixCls}
-          dateRender={props.dateRender}
-          onSelect={this.onDateTableSelect}
-          disabledDate={disabledDate}
-          showWeekNumber={props.showWeekNumber}
-        />
-      </div>
-
-      <CalendarFooter
-        showOk={props.showOk}
-        locale={locale}
-        prefixCls={prefixCls}
-        showToday={props.showToday}
-        disabledTime={disabledTime}
-        gregorianCalendarLocale={value.locale}
-        showDateInput={props.showDateInput}
-        timePicker={timePicker}
-        selectedValue={selectedValue}
-        value={value}
-        disabledDate={disabledDate}
-        onOk={this.onOk}
-        onSelect={this.onSelect}
-        onToday={this.chooseToday}
-      />
-    </div>)];
+          <CalendarFooter
+            showOk={props.showOk}
+            renderFooter={props.renderFooter}
+            locale={locale}
+            prefixCls={prefixCls}
+            showToday={props.showToday}
+            disabledTime={disabledTime}
+            showTimePicker={showTimePicker}
+            showDateInput={props.showDateInput}
+            timePicker={timePicker}
+            selectedValue={selectedValue}
+            value={value}
+            disabledDate={disabledDate}
+            okDisabled={props.showOk && !this.isAllowedDate(selectedValue)}
+            onOk={this.onOk}
+            onSelect={this.onSelect}
+            onToday={this.onToday}
+            onOpenTimePicker={this.openTimePicker}
+            onCloseTimePicker={this.closeTimePicker}
+          />
+        </div>
+      </div>),
+    ];
 
     return this.renderRoot({
       children,

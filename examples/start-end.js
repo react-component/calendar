@@ -5,37 +5,49 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Calendar from 'rc-calendar';
 import DatePicker from 'rc-calendar/src/Picker';
-import zhCn from 'gregorian-calendar/lib/locale/zh_CN'; // spm error
-import DateTimeFormat from 'gregorian-calendar-format';
-import GregorianCalendar from 'gregorian-calendar';
-import CalendarLocale from 'rc-calendar/src/locale/zh_CN';
-import TimePickerLocale from 'rc-time-picker/lib/locale/zh_CN';
+
+import zhCN from 'rc-calendar/src/locale/zh_CN';
+import enUS from 'rc-calendar/src/locale/en_US';
 import 'rc-time-picker/assets/index.css';
-import TimePicker from 'rc-time-picker';
+import TimePickerPanel from 'rc-time-picker/lib/Panel';
 
-const timePickerElement = <TimePicker locale={TimePickerLocale}/>;
-const formatter = new DateTimeFormat('yyyy-MM-dd HH:mm:ss');
-const dateFormatter = new DateTimeFormat('yyyy-MM-dd');
-const SHOW_TIME = true;
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+import 'moment/locale/en-gb';
 
-const now = new GregorianCalendar(zhCn);
-now.setTime(Date.now());
+const format = 'YYYY-MM-DD HH:mm:ss';
+const cn = location.search.indexOf('cn') !== -1;
 
-function getFormatter(showTime) {
-  return showTime ? formatter : dateFormatter;
+const now = moment();
+if (cn) {
+  now.locale('zh-cn').utcOffset(8);
+} else {
+  now.locale('en-gb').utcOffset(0);
 }
 
-const Picker = React.createClass({
-  getDefaultProps() {
-    return {
-      showTime: SHOW_TIME,
-      disabled: false,
-    };
-  },
+function getFormat(time) {
+  return time ? format : 'YYYY-MM-DD';
+}
+
+
+const defaultCalendarValue = now.clone();
+defaultCalendarValue.add(-1, 'month');
+
+const timePickerElement = <TimePickerPanel />;
+
+
+const SHOW_TIME = true;
+
+class Picker extends React.Component {
+  state = {
+    showTime: SHOW_TIME,
+    disabled: false,
+  };
+
   render() {
     const props = this.props;
     const calendar = (<Calendar
-      locale={CalendarLocale}
+      locale={cn ? zhCN : enUS}
       defaultValue={now}
       timePicker={props.showTime ? timePickerElement : null}
       disabledDate={props.disabledDate}
@@ -56,32 +68,30 @@ const Picker = React.createClass({
                   style={{ width: 250 }}
                   disabled={props.disabled}
                   readOnly
-                  value={value && getFormatter(props.showTime).format(value) || ''}
+                  value={value && value.format(getFormat(props.showTime)) || ''}
                 />
                 </span>
           );
         }
       }
     </DatePicker>);
-  },
-});
+  }
+}
 
-const Test = React.createClass({
-  getInitialState() {
-    return {
-      startValue: null,
-      endValue: null,
-    };
-  },
+class Demo extends React.Component {
+  state = {
+    startValue: null,
+    endValue: null,
+  };
 
-  onChange(field, value) {
-    console.log('onChange', field, value && getFormatter(SHOW_TIME).format(value));
+  onChange = (field, value) => {
+    console.log('onChange', field, value && value.format(getFormat(SHOW_TIME)));
     this.setState({
       [field]: value,
     });
-  },
+  }
 
-  disabledEndDate(endValue) {
+  disabledEndDate = (endValue) => {
     if (!endValue) {
       return false;
     }
@@ -89,13 +99,11 @@ const Test = React.createClass({
     if (!startValue) {
       return false;
     }
-    // console.log(getFormatter(SHOW_TIME).format(startValue),
-    // getFormatter(SHOW_TIME).format(endValue));
-    return SHOW_TIME ? endValue.getTime() < startValue.getTime() :
-    endValue.compareToDay(startValue) <= 0;
-  },
+    return SHOW_TIME ? endValue.isBefore(startValue) :
+    endValue.diff(startValue, 'days') <= 0;
+  }
 
-  disabledStartDate(startValue) {
+  disabledStartDate = (startValue) => {
     if (!startValue) {
       return false;
     }
@@ -103,11 +111,9 @@ const Test = React.createClass({
     if (!endValue) {
       return false;
     }
-    // console.log(getFormatter(SHOW_TIME).format(startValue),
-    // getFormatter(SHOW_TIME).format(endValue));
-    return SHOW_TIME ? endValue.getTime() < startValue.getTime() :
-    startValue.compareToDay(endValue) >= 0;
-  },
+    return SHOW_TIME ? endValue.isBefore(startValue) :
+    endValue.diff(startValue, 'days') <= 0;
+  }
 
   render() {
     const state = this.state;
@@ -130,8 +136,8 @@ const Test = React.createClass({
         />
       </p>
     </div>);
-  },
-});
+  }
+}
 
 
-ReactDOM.render(<Test />, document.getElementById('__react-content'));
+ReactDOM.render(<Demo />, document.getElementById('__react-content'));

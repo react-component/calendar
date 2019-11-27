@@ -12,13 +12,41 @@
   &-date-input-wrap {
     overflow: hidden;
   }
-
+  &-time-picker {
+    position: absolute;
+    width: 100%;
+    top: 34px;
+    background-color: white;
+    height: 217px;
+    &-panel {
+      width: 100%;
+      position: relative;
+      .@{timePickerClass}-panel {
+        &-input-wrap {
+          display: none;
+        }
+        &-inner {
+          border: none;
+          box-shadow: none;
+        }
+        &-select {
+          width: 84px;
+          max-height: 217px;
+          li {
+            text-align: center;
+            padding: 0;
+          }
+        }
+      }
+    }
+  }
   &-time-picker-wrap {
-    float: right;
-    width: 170px;
+    float: left;
+    width: 100%;
 
     .@{timePickerClass} {
       width: 100%;
+
       &-input {
         padding: 0;
         border: 1px solid transparent;

@@ -1,11 +1,13 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import createReactClass from 'create-react-class';
+import PropTypes from 'prop-types';
 import DateTable from './date/DateTable';
 import MonthTable from './month/MonthTable';
 import CalendarMixin from './mixin/CalendarMixin';
 import CommonMixin from './mixin/CommonMixin';
 import CalendarHeader from './full-calendar/CalendarHeader';
 
-const FullCalendar = React.createClass({
+const FullCalendar = createReactClass({
   propTypes: {
     defaultType: PropTypes.string,
     type: PropTypes.string,
@@ -21,6 +23,7 @@ const FullCalendar = React.createClass({
     headerComponent: PropTypes.object, // The whole header component
     headerRender: PropTypes.func,
     showHeader: PropTypes.bool,
+    disabledDate: PropTypes.func,
   },
   mixins: [CommonMixin, CalendarMixin],
   getDefaultProps() {
@@ -66,7 +69,15 @@ const FullCalendar = React.createClass({
   },
   render() {
     const props = this.props;
-    const { locale, prefixCls, fullscreen, showHeader, headerComponent, headerRender } = props;
+    const {
+      locale,
+      prefixCls,
+      fullscreen,
+      showHeader,
+      headerComponent,
+      headerRender,
+      disabledDate,
+    } = props;
     const { value, type } = this.state;
 
     let header = null;
@@ -97,6 +108,7 @@ const FullCalendar = React.createClass({
         prefixCls={prefixCls}
         onSelect={this.onSelect}
         value={value}
+        disabledDate={disabledDate}
       />
     ) : (
       <MonthTable
@@ -106,6 +118,7 @@ const FullCalendar = React.createClass({
         onSelect={this.onMonthSelect}
         prefixCls={`${prefixCls}-month-panel`}
         value={value}
+        disabledDate={disabledDate}
       />
     );
 

@@ -1,11 +1,12 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 const ROW = 4;
 const COL = 3;
 import classnames from 'classnames';
 
 function goYear(direction) {
   const next = this.state.value.clone();
-  next.addYear(direction);
+  next.add(direction, 'years');
   this.setState({
     value: next,
   });
@@ -13,14 +14,14 @@ function goYear(direction) {
 
 function chooseDecade(year, event) {
   const next = this.state.value.clone();
-  next.setYear(year);
-  next.rollSetMonth(this.state.value.getMonth());
+  next.year(year);
+  next.month(this.state.value.month());
   this.props.onSelect(next);
   event.preventDefault();
 }
 
 export default
-class DecadePanel extends React.Component {
+  class DecadePanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,8 +36,8 @@ class DecadePanel extends React.Component {
 
   render() {
     const value = this.state.value;
-    const locale = this.props.locale;
-    const currentYear = value.getYear();
+    const { locale } = this.props;
+    const currentYear = value.year();
     const startYear = parseInt(currentYear / 100, 10) * 100;
     const preYear = startYear - 10;
     const endYear = startYear + 99;
@@ -69,14 +70,13 @@ class DecadePanel extends React.Component {
           [`${prefixCls}-last-century-cell`]: isLast,
           [`${prefixCls}-next-century-cell`]: isNext,
         };
-        let content;
+        const content = `${dStartDecade}-${dEndDecade}`;
         let clickHandler;
         if (isLast) {
           clickHandler = this.previousCentury;
         } else if (isNext) {
           clickHandler = this.nextCentury;
         } else {
-          content = `${dStartDecade}-${dEndDecade}`;
           clickHandler = chooseDecade.bind(this, dStartDecade);
         }
         return (<td
@@ -103,9 +103,7 @@ class DecadePanel extends React.Component {
             role="button"
             onClick={this.previousCentury}
             title={locale.previousCentury}
-          >
-            «
-          </a>
+          />
 
           <div className={`${prefixCls}-century`}>
             {startYear}-{endYear}
@@ -115,14 +113,12 @@ class DecadePanel extends React.Component {
             role="button"
             onClick={this.nextCentury}
             title={locale.nextCentury}
-          >
-            »
-          </a>
+          />
         </div>
         <div className={`${prefixCls}-body`}>
           <table className={`${prefixCls}-table`} cellSpacing="0" role="grid">
             <tbody className={`${prefixCls}-tbody`}>
-            {decadesEls}
+              {decadesEls}
             </tbody>
           </table>
         </div>

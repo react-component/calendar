@@ -5,9 +5,10 @@ sudo: false
 notifications:
   email:
   - yiminghe@gmail.com
+  - hust2012jiangkai@gmail.com
 
 node_js:
-- 4.0.0
+- 6.9.1
 
 before_install:
 - |
@@ -21,7 +22,8 @@ before_install:
 script:
 - |
     if [ "$TEST_TYPE" = test ]; then
-      npm test
+      npm test -- --coverage && \
+      bash <(curl -s https://codecov.io/bash)
     else
       npm run $TEST_TYPE
     fi
@@ -29,9 +31,3 @@ env:
   matrix:
   - TEST_TYPE=lint
   - TEST_TYPE=test
-  - TEST_TYPE=coverage
-
-
-matrix:
-  allow_failures:
-  - env: "TEST_TYPE=saucelabs"

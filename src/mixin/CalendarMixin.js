@@ -1,22 +1,20 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import GregorianCalendar from 'gregorian-calendar';
-import { isAllowedDate } from '../util/index';
+import moment from 'moment';
+import { isAllowedDate, getTodayTime } from '../util/index';
 
 function noop() {
 }
 
 function getNow() {
-  const value = new GregorianCalendar();
-  value.setTime(Date.now());
-  return value;
+  return moment();
 }
 
 function getNowByCurrentStateValue(value) {
   let ret;
   if (value) {
-    ret = value.clone();
-    ret.setTime(Date.now());
+    ret = getTodayTime(value);
   } else {
     ret = getNow();
   }
@@ -81,9 +79,11 @@ const CalendarMixin = {
 
     return (
       <div
+        ref={this.saveRoot}
         className={`${classnames(className)}`}
         style={this.props.style}
-        tabIndex="0" onKeyDown={this.onKeyDown}
+        tabIndex="0"
+        onKeyDown={this.onKeyDown}
       >
         {newProps.children}
       </div>
@@ -91,14 +91,14 @@ const CalendarMixin = {
   },
 
   setSelectedValue(selectedValue, cause) {
-    if (this.isAllowedDate(selectedValue)) {
-      if (!('selectedValue' in this.props)) {
-        this.setState({
-          selectedValue,
-        });
-      }
-      this.props.onSelect(selectedValue, cause);
+    // if (this.isAllowedDate(selectedValue)) {
+    if (!('selectedValue' in this.props)) {
+      this.setState({
+        selectedValue,
+      });
     }
+    this.props.onSelect(selectedValue, cause);
+    // }
   },
 
   setValue(value) {
@@ -108,9 +108,11 @@ const CalendarMixin = {
         value,
       });
     }
-    if (originalValue && value && originalValue.getTime() !== value.getTime() ||
-      (!originalValue && value) ||
-      (originalValue && !value)) {
+    if (
+      originalValue && value && !originalValue.isSame(value) ||
+        (!originalValue && value) ||
+        (originalValue && !value)
+    ) {
       this.props.onChange(value);
     }
   },

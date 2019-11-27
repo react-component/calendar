@@ -1,20 +1,24 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
+import createReactClass from 'create-react-class';
+import PropTypes from 'prop-types';
 import toFragment from 'rc-util/lib/Children/mapSelf';
+import cx from 'classnames';
 import TodayButton from '../calendar/TodayButton';
 import OkButton from '../calendar/OkButton';
-import { getTimeConfig } from '../util/index';
+import TimePickerButton from '../calendar/TimePickerButton';
 
-const CalendarFooter = React.createClass({
+const CalendarFooter = createReactClass({
   propTypes: {
     prefixCls: PropTypes.string,
     showDateInput: PropTypes.bool,
     disabledTime: PropTypes.any,
-    gregorianCalendarLocale: PropTypes.object,
+    timePicker: PropTypes.element,
     selectedValue: PropTypes.any,
     showOk: PropTypes.bool,
     onSelect: PropTypes.func,
     value: PropTypes.object,
+    renderFooter: PropTypes.func,
     defaultValue: PropTypes.object,
   },
 
@@ -28,42 +32,40 @@ const CalendarFooter = React.createClass({
 
   render() {
     const props = this.props;
-    const { value, prefixCls, showDateInput, disabledTime,
-      gregorianCalendarLocale, selectedValue, showOk } = props;
-    let timePicker = !showDateInput && props.timePicker || null;
-    const disabledTimeConfig = disabledTime && timePicker ?
-      getTimeConfig(selectedValue, disabledTime) : null;
+    const { value, prefixCls, showOk, timePicker, renderFooter } = props;
     let footerEl = null;
-    if (props.showToday || timePicker) {
+    const extraFooter = renderFooter();
+    if (props.showToday || timePicker || extraFooter) {
       let nowEl;
       if (props.showToday) {
-        nowEl = <TodayButton {...props} value={value}/>;
+        nowEl = <TodayButton {...props} value={value} />;
       }
       let okBtn;
       if (showOk === true || showOk !== false && !!props.timePicker) {
-        okBtn = <OkButton {...props}/>;
+        okBtn = <OkButton {...props} />;
       }
+      let timePickerBtn;
+      if (!!props.timePicker) {
+        timePickerBtn = <TimePickerButton {...props} />;
+      }
+
       let footerBtn;
-      if (nowEl || okBtn) {
-        footerBtn = (<span className={`${prefixCls}-footer-btn`}>
-          {toFragment([nowEl, okBtn])}
-        </span>);
+      if (nowEl || timePickerBtn || okBtn || extraFooter) {
+        footerBtn = (
+          <span className={`${prefixCls}-footer-btn`}>
+            {extraFooter}
+            {toFragment([nowEl, timePickerBtn, okBtn])}
+          </span>
+        );
       }
-      if (timePicker) {
-        timePicker = React.cloneElement(timePicker, {
-          onChange: this.onSelect,
-          allowEmpty: false,
-          gregorianCalendarLocale,
-          ...disabledTimeConfig,
-          getPopupContainer: this.getRootDOMNode,
-          value: selectedValue,
-        });
-      }
+      const cls = cx(`${prefixCls}-footer`, {
+        [`${prefixCls}-footer-show-ok`]: okBtn,
+      });
       footerEl = (
-        <div className={`${prefixCls}-footer`}>
-          {timePicker}
+        <div className={cls}>
           {footerBtn}
-        </div>);
+        </div>
+      );
     }
     return footerEl;
   },

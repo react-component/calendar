@@ -14,7 +14,7 @@
   border: 1px solid #ccc;
   line-height: 1.5;
 
-  &-date-panel {
+  &-date-panel, &-panel {
     position: relative;
     outline: none;
   }
@@ -53,15 +53,23 @@
     .@{prefixClass}-prev-month-btn {
       position: absolute;
       left: 25px;
+
+      &:after {
+        content: '‹'
+      }
     }
 
     .@{prefixClass}-next-month-btn {
       position: absolute;
       right: 25px;
+
+      &:after {
+        content: '›'
+      }
     }
   }
 
-  &-year-select, &-month-select {
+  &-year-select, &-month-select, &-day-select {
     display: inline-block;
     font-size: 12px;
     font-weight: bold;
@@ -72,6 +80,10 @@
     &:hover {
       cursor: pointer;
       color: #23c0fa;
+    }
+    &.@{prefixClass}-time-status:hover{
+      cursor: pointer;
+      color: #666;
     }
   }
 
@@ -96,14 +108,23 @@
 
   &-next-year-btn {
     right: 0;
+
+    &:after {
+      content: '»'
+    }
   }
 
   &-prev-year-btn {
     left: 0;
+
+    &:after {
+      content: '«'
+    }
   }
 
-  &-calendar-body {
+  &-body {
     padding: 9px 10px 10px;
+    height: 217px;
   }
 
   table {
@@ -117,7 +138,7 @@
     border: none;
   }
 
-  &-calendar-table {
+  &-table {
     border-spacing: 0;
     margin-bottom: 0;
   }
@@ -162,9 +183,12 @@
   }
 
   &-selected-day &-date {
+    background: tint(#3fc7fa, 80%);
+  }
+
+  &-selected-date &-date {
     background: #3fc7fa;
     color: #fff;
-
     &:hover {
       background: #3fc7fa;
     }
@@ -212,15 +236,43 @@
         height: 24px;
       }
     }
+    &-show-ok {
+      text-align: right;
+      .@{prefixClass} {
+        &-footer-btn {
+          padding-right: 12px;
+        }
+
+        &-time-picker-btn {
+          margin-left: 0;
+          padding: 0 12px;
+        }
+        &-today-btn {
+          float: left;
+          padding-left: 12px;
+        }
+      }
+    }
   }
 
   &-footer-btn {
     margin-top: 2px;
+
+    &:after {
+      content: 'x';
+      height: 0;
+      font-size: 0;
+      overflow: hidden;
+      clear: both;
+    }
   }
 
-  &-today-btn, &-ok-btn {
+  &-time-picker-btn {
+    margin-left: 10px;
+  }
+
+  &-today-btn, &-ok-btn, &-time-picker-btn {
     display: inline-block;
-    padding: 4px 5px;
     text-align: center;
     color: #f46830;
 
