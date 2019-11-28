@@ -297,6 +297,22 @@ export default () => (
           renderFooter={mode => <span>{mode} extra footer</span>}
         />
       </div>
+      <div style={{ margin: 10 }}>
+        <p>disabled today select time</p>
+        <Calendar
+          showWeekNumber={false}
+          locale={cn ? zhCN : enUS}
+          defaultValue={now}
+          showToday
+          format={getFormat(true)}
+          showOk={false}
+          timePicker={timePickerElement}
+          onChange={onStandaloneChange}
+          disabledDate={current => current && current <= moment()}
+          onSelect={onStandaloneSelect}
+          renderFooter={mode => <span>{mode} extra footer</span>}
+        />
+      </div>
       <div style={{ float: 'left', width: 300 }}>
         <Demo defaultValue={now} />
       </div>
