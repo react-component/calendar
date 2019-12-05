@@ -28,6 +28,7 @@ export interface FullCalendarProps extends CalendarProps {
   onTypeChange?: (type: FullCalendarProps['type']) => void;
   dateCellRender?: (value: Moment) => ReactNode;
   dateCellContentRender?: (value: Moment) => ReactNode;
+  weekOnly?: boolean;
 }
 
 export interface FullCalendarState extends CalendarState {
@@ -213,6 +214,7 @@ class FullCalendar extends React.Component<FullCalendarProps, FullCalendarState>
       headerComponent,
       headerRender,
       disabledDate,
+      weekOnly,
     } = props;
     const { value, type } = this.state;
 
@@ -246,6 +248,7 @@ class FullCalendar extends React.Component<FullCalendarProps, FullCalendarState>
           onSelect={this.onSelect}
           value={value}
           disabledDate={disabledDate}
+          weekOnly={weekOnly}
         />
       ) : (
         <MonthTable
