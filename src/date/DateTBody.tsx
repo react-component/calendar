@@ -57,6 +57,7 @@ const DateTBody: React.FC<DateTBodyProps> = props => {
 
   // very much className
   const cellClass = `${prefixCls}-cell`;
+  const weekCellClass = `${prefixCls}-week-cell`;
   const weekNumberCellClass = `${prefixCls}-week-number-cell`;
   const dateClass = `${prefixCls}-date`;
   const todayClass = `${prefixCls}-today`;
@@ -134,7 +135,7 @@ const DateTBody: React.FC<DateTBodyProps> = props => {
       if (jIndex > 0) {
         last = dateTable[passed - 1];
       }
-      let cls = cellClass;
+      let cls = weekOnly ? weekCellClass : cellClass;
       let disabled = false;
       let selected = false;
 

@@ -71,6 +71,7 @@
       padding: 0;
     }
     &-cell .@{prefixClass}-date,
+    &-week-cell .@{prefixClass}-date,
     &-month-panel-cell .@{prefixClass}-month-panel-month {
       display: block;
       height: 116px;
@@ -81,6 +82,10 @@
       border-top: 2px solid #eee;
       text-align: right;
       padding-right: 8px;
+    }
+    &-week-cell .@{prefixClass}-date {
+      min-height: 400px;
+      height: 80vh;
     }
     &-selected-day .@{prefixClass}-date,
     &-month-panel-selected-cell .@{prefixClass}-month-panel-month {
