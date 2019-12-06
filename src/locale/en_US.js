@@ -4,6 +4,7 @@ export default {
   backToToday: 'Back to today',
   ok: 'Ok',
   clear: 'Clear',
+  week: 'Week',
   month: 'Month',
   year: 'Year',
   timeSelect: 'select time',

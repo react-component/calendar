@@ -33,6 +33,20 @@ export function getMonthName(month) {
   return localeData[locale === 'zh-cn' ? 'months' : 'monthsShort'](month);
 }
 
+export function getWeekRangeStr(week: number, format: string = 'MMM D') {
+  // Get the beginning and end of the week according to the locale
+  const first = moment()
+    .localeData()
+    .firstDayOfWeek();
+  return `${moment()
+    .week(week)
+    .weekday(first)
+    .format(format)} - ${moment()
+    .week(week)
+    .weekday(first + 6)
+    .format(format)}`;
+}
+
 export function syncTime(from, to) {
   if (!moment.isMoment(from) || !moment.isMoment(to)) return;
   to.hour(from.hour());

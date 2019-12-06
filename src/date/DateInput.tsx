@@ -9,7 +9,7 @@ let cachedSelectionStart;
 let cachedSelectionEnd;
 let dateInputInstance;
 
-export type CalendarTypeMode = 'time' | 'date' | 'month' | 'year' | 'decade';
+export type CalendarTypeMode = 'time' | 'week' | 'date' | 'month' | 'year' | 'decade';
 
 export interface DateInputProps {
   prefixCls?: string;
