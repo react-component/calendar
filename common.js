@@ -6507,7 +6507,9 @@ exports.default = typeof _symbol2.default === "function" && _typeof(_iterator2.d
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_classnames__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_classnames__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__util_index__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react_lifecycles_compat__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__util_index__ = __webpack_require__(10);
+
 
 
 
@@ -6519,34 +6521,28 @@ exports.default = typeof _symbol2.default === "function" && _typeof(_iterator2.d
 var ROW = 4;
 var COL = 3;
 
-function chooseMonth(month) {
-  var next = this.state.value.clone();
-  next.month(month);
-  this.setAndSelectValue(next);
-}
-
 function noop() {}
 
 var MonthTable = function (_Component) {
   __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_inherits___default()(MonthTable, _Component);
 
-  function MonthTable(props) {
+  function MonthTable() {
+    var _temp, _this, _ret;
+
     __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default()(this, MonthTable);
 
-    var _this = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn___default()(this, _Component.call(this, props));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this.state = {
-      value: props.value
-    };
-    return _this;
+    return _ret = (_temp = (_this = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn___default()(this, _Component.call.apply(_Component, [this].concat(args))), _this), _this.state = {}, _temp), __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_possibleConstructorReturn___default()(_this, _ret);
   }
 
-  MonthTable.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-    if ('value' in nextProps) {
-      this.setState({
-        value: nextProps.value
-      });
+  MonthTable.getDerivedStateFromProps = function getDerivedStateFromProps(props) {
+    if ('value' in props) {
+      return { value: props.value };
     }
+    return null;
   };
 
   MonthTable.prototype.setAndSelectValue = function setAndSelectValue(value) {
@@ -6554,6 +6550,12 @@ var MonthTable = function (_Component) {
       value: value
     });
     this.props.onSelect(value);
+  };
+
+  MonthTable.prototype.chooseMonth = function chooseMonth(month) {
+    var next = this.state.value.clone();
+    next.month(month);
+    this.setAndSelectValue(next);
   };
 
   MonthTable.prototype.months = function months() {
@@ -6565,7 +6567,7 @@ var MonthTable = function (_Component) {
       months[rowIndex] = [];
       for (var colIndex = 0; colIndex < COL; colIndex++) {
         current.month(index);
-        var content = Object(__WEBPACK_IMPORTED_MODULE_6__util_index__["b" /* getMonthName */])(current);
+        var content = Object(__WEBPACK_IMPORTED_MODULE_7__util_index__["b" /* getMonthName */])(current);
         months[rowIndex][colIndex] = {
           value: index,
           content: content,
@@ -6582,7 +6584,7 @@ var MonthTable = function (_Component) {
 
     var props = this.props;
     var value = this.state.value;
-    var today = Object(__WEBPACK_IMPORTED_MODULE_6__util_index__["e" /* getTodayTime */])(value);
+    var today = Object(__WEBPACK_IMPORTED_MODULE_7__util_index__["e" /* getTodayTime */])(value);
     var months = this.months();
     var currentMonth = value.month();
     var prefixCls = props.prefixCls,
@@ -6626,7 +6628,9 @@ var MonthTable = function (_Component) {
           {
             role: 'gridcell',
             key: monthData.value,
-            onClick: disabled ? null : chooseMonth.bind(_this2, monthData.value),
+            onClick: disabled ? null : function () {
+              return _this2.chooseMonth(monthData.value);
+            },
             title: monthData.title,
             className: __WEBPACK_IMPORTED_MODULE_5_classnames___default()(classNameMap)
           },
@@ -6657,12 +6661,16 @@ var MonthTable = function (_Component) {
 MonthTable.defaultProps = {
   onSelect: noop
 };
+
 MonthTable.propTypes = {
   onSelect: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.func,
   cellRender: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.func,
   prefixCls: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.string,
   value: __WEBPACK_IMPORTED_MODULE_4_prop_types___default.a.object
 };
+
+Object(__WEBPACK_IMPORTED_MODULE_6_react_lifecycles_compat__["polyfill"])(MonthTable);
+
 /* harmony default export */ __webpack_exports__["a"] = (MonthTable);
 
 /***/ }),
