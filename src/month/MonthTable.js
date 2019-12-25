@@ -1,36 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { polyfill } from 'react-lifecycles-compat';
 import { getTodayTime, getMonthName } from '../util/index';
 
 const ROW = 4;
 const COL = 3;
 
-function chooseMonth(month) {
-  const next = this.state.value.clone();
-  next.month(month);
-  this.setAndSelectValue(next);
-}
-
-function noop() {
-
-}
+function noop() {}
 
 class MonthTable extends Component {
-  constructor(props) {
-    super(props);
+  state = {
+  };
 
-    this.state = {
-      value: props.value,
-    };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if ('value' in nextProps) {
-      this.setState({
-        value: nextProps.value,
-      });
+  static getDerivedStateFromProps(props) {
+    if ('value' in props) {
+      return { value: props.value };
     }
+    return null;
   }
 
   setAndSelectValue(value) {
@@ -38,6 +25,12 @@ class MonthTable extends Component {
       value,
     });
     this.props.onSelect(value);
+  }
+
+  chooseMonth(month) {
+    const next = this.state.value.clone();
+    next.month(month);
+    this.setAndSelectValue(next);
   }
 
   months() {
@@ -107,7 +100,7 @@ class MonthTable extends Component {
           <td
             role="gridcell"
             key={monthData.value}
-            onClick={disabled ? null : chooseMonth.bind(this, monthData.value)}
+            onClick={disabled ? null : () => this.chooseMonth(monthData.value)}
             title={monthData.title}
             className={classnames(classNameMap)}
           >
@@ -130,10 +123,14 @@ class MonthTable extends Component {
 MonthTable.defaultProps = {
   onSelect: noop,
 };
+
 MonthTable.propTypes = {
   onSelect: PropTypes.func,
   cellRender: PropTypes.func,
   prefixCls: PropTypes.string,
   value: PropTypes.object,
 };
+
+polyfill(MonthTable);
+
 export default MonthTable;
