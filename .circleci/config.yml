@@ -27,10 +27,6 @@ jobs:
             - /node_modules
 
       - run:
-          name: Run Linting
-          command: npm run lint
-
-      - run:
           name: Run Tests
           command: npm test
 
