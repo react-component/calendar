@@ -37,4 +37,4 @@ workflows:
   build-and-publish:
     jobs:
       - build:
-          context: release-manager
+          context: release-manager-v2
