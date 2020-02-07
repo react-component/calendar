@@ -11,13 +11,13 @@
     "ui",
     "ui component"
   ],
-  "homepage": "http://github.com/react-component/calendar",
+  "homepage": "http://github.com/riskalyze/calendar",
   "bugs": {
-    "url": "http://github.com/react-component/calendar/issues"
+    "url": "http://github.com/riskalyze/calendar/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:react-component/calendar.git"
+    "url": "git@github.com:riskalyze/calendar.git"
   },
   "author": "yiminghe@gmail.com",
   "files": [
