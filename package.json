@@ -1,6 +1,6 @@
 {
-  "name": "rc-calendar",
-  "version": "10.0.0-alpha.1",
+  "name": "@riskalyze/calendar",
+  "version": "0.0.1",
   "description": "React Calendar",
   "keywords": [
     "calendar",
@@ -11,13 +11,13 @@
     "ui",
     "ui component"
   ],
-  "homepage": "http://github.com/react-component/calendar",
+  "homepage": "http://github.com/riskalyze/calendar",
   "bugs": {
-    "url": "http://github.com/react-component/calendar/issues"
+    "url": "http://github.com/riskalyze/calendar/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:react-component/calendar.git"
+    "url": "git@github.com:riskalyze/calendar.git"
   },
   "author": "yiminghe@gmail.com",
   "files": [
@@ -62,6 +62,5 @@
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-test-renderer": "^16.0.0"
-  },
-  "licenses": "MIT"
+  }
 }
