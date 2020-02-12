@@ -29,6 +29,10 @@ jobs:
           command: npm test
 
       - run:
+          name: Compile
+          command: npm run compile
+
+      - run:
           name: Publish to NPM Registry
           command: release-manager publish npm
 
