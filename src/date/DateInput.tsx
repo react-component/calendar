@@ -73,17 +73,14 @@ class DateInput extends React.Component<
     let str = event.target.value;
     const { disabledDate, format, onChange, selectedValue } = this.props;
 
-    // eslint-disable-next-line
-    if (isNaN(str)) {
-      str = str.replace(/[^0-9]+/g, '');
-    }
+    if (format === 'MM/DD/YYYY') {
+      if (str.length >= 3) {
+        str = `${str.substr(0, 2)}/${str.substr(2)}`;
+      }
 
-    if (str.length >= 3) {
-      str = `${str.substr(0, 2)}/${str.substr(2)}`;
-    }
-
-    if (str.length >= 6) {
-      str = `${str.substr(0, 5)}/${str.substr(5)}`;
+      if (str.length >= 6) {
+        str = `${str.substr(0, 5)}/${str.substr(5)}`;
+      }
     }
 
     // 没有内容，合法并直接退出
