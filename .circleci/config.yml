@@ -19,6 +19,10 @@ jobs:
           name: Install Dependencies
           command: npm install
 
+      - run:
+          name: Install Less for Compiler
+          command: npm i -g less
+
       - save_cache:
           key: v1-dependencies-{{ checksum "package.json" }}
           paths:
