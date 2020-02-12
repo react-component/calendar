@@ -34,7 +34,7 @@ jobs:
 
       - run:
           name: Compile CSS
-          command: cd assets && less index.less > index.css
+          command: cd assets && lessc index.less index.css
 
       - run:
           name: Publish to NPM Registry
