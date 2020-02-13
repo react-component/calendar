@@ -19,14 +19,22 @@ jobs:
           name: Install Dependencies
           command: npm install
 
+      - run:
+          name: Install Less for Compiler
+          command: npm i -g less
+
       - save_cache:
           key: v1-dependencies-{{ checksum "package.json" }}
           paths:
             - /node_modules
 
       - run:
-          name: Run Tests
-          command: npm test
+          name: Compile
+          command: npm run compile
+
+      - run:
+          name: Compile CSS
+          command: cd assets && lessc index.less index.css
 
       - run:
           name: Publish to NPM Registry
