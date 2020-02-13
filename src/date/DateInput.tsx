@@ -74,13 +74,10 @@ class DateInput extends React.Component<
     const { disabledDate, format, onChange, selectedValue } = this.props;
 
     if (format === 'MM/DD/YYYY') {
-      if (str.length >= 3) {
-        str = `${str.substr(0, 2)}/${str.substr(2)}`;
-      }
-
-      if (str.length >= 6) {
-        str = `${str.substr(0, 5)}/${str.substr(5)}`;
-      }
+      const strArray = str.replace(/\D/g, '').match(/(\d{0,2})(\d{0,2})(\d{0,4})/);
+      str = !strArray[2]
+        ? strArray[1]
+        : `${strArray[1]}/${strArray[2]}${strArray[3] ? `/${strArray[3]}` : ''}`;
     }
 
     // 没有内容，合法并直接退出
@@ -192,7 +189,7 @@ class DateInput extends React.Component<
     const { props } = this;
     const { invalid, str } = this.state;
     const { locale, prefixCls, placeholder, clearIcon, inputMode } = props;
-    const invalidClass = invalid && str.length === 10 ? `${prefixCls}-input-invalid` : '';
+    const invalidClass = invalid && str.length >= 10 ? `${prefixCls}-input-invalid` : '';
     return (
       <div className={`${prefixCls}-input-wrap`}>
         <div className={`${prefixCls}-date-input-wrap`}>

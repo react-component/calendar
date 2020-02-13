@@ -9,6 +9,6 @@ export default () => (
         console.log(value);
       }}
     />
-    <Calendar onSelect={(rest, ca) => console.log(rest, ca)} />
+    <Calendar onSelect={(rest, ca) => console.log(rest, ca)} format="MM/DD/YYYY" />
   </>
 );
