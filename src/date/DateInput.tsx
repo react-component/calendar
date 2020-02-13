@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import KeyCode from 'rc-util/lib/KeyCode';
 import { polyfill } from 'react-lifecycles-compat';
 import moment, { Moment } from 'moment';
+import InputMask from 'react-input-mask';
 import { formatDate } from '../util';
 
 let cachedSelectionStart;
@@ -70,16 +71,8 @@ class DateInput extends React.Component<
   };
 
   onInputChange = event => {
-    let str = event.target.value;
+    const str = event.target.value;
     const { disabledDate, format, onChange, selectedValue } = this.props;
-
-    if (format === 'MM/DD/YYYY') {
-      const strArray = str.replace(/\D/g, '').match(/(\d{0,2})(\d{0,2})(\d{0,4})/);
-      str = !strArray[2]
-        ? strArray[1]
-        : `${strArray[1]}/${strArray[2]}${strArray[3] ? `/${strArray[3]}` : ''}`;
-      console.log(str);
-    }
 
     // 没有内容，合法并直接退出
     if (!str) {
@@ -190,12 +183,13 @@ class DateInput extends React.Component<
     const { props } = this;
     const { invalid, str } = this.state;
     const { locale, prefixCls, placeholder, clearIcon, inputMode } = props;
-    const invalidClass = invalid && str.length >= 10 ? `${prefixCls}-input-invalid` : '';
+    const invalidClass = invalid && !str.includes('_') ? `${prefixCls}-input-invalid` : '';
     return (
       <div className={`${prefixCls}-input-wrap`}>
         <div className={`${prefixCls}-date-input-wrap`}>
-          <input
-            ref={this.saveDateInput}
+          <InputMask
+            mask={this.props.format === 'MM/DD/YYYY' ? '99/99/9999' : undefined}
+            innerRef={this.saveDateInput}
             className={`${prefixCls}-input ${invalidClass}`}
             value={str}
             disabled={props.disabled}

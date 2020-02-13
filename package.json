@@ -43,6 +43,7 @@
     "prop-types": "^15.5.8",
     "rc-trigger": "^4.0.0-alpha.6",
     "rc-util": "^4.1.1",
+    "react-input-mask": "^2.0.4",
     "react-lifecycles-compat": "^3.0.4"
   },
   "devDependencies": {
