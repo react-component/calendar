@@ -29,10 +29,6 @@ jobs:
             - /node_modules
 
       - run:
-          name: Run Tests
-          command: npm test
-
-      - run:
           name: Compile
           command: npm run compile
 
