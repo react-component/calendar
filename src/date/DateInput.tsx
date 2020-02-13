@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import KeyCode from 'rc-util/lib/KeyCode';
 import { polyfill } from 'react-lifecycles-compat';
 import moment, { Moment } from 'moment';
-import InputMask from 'react-input-mask';
 import { formatDate } from '../util';
 
 let cachedSelectionStart;
@@ -183,13 +182,12 @@ class DateInput extends React.Component<
     const { props } = this;
     const { invalid, str } = this.state;
     const { locale, prefixCls, placeholder, clearIcon, inputMode } = props;
-    const invalidClass = invalid && !str.includes('_') ? `${prefixCls}-input-invalid` : '';
+    const invalidClass = invalid && str.length >= 10 ? `${prefixCls}-input-invalid` : '';
     return (
       <div className={`${prefixCls}-input-wrap`}>
         <div className={`${prefixCls}-date-input-wrap`}>
-          <InputMask
-            mask={this.props.format === 'MM/DD/YYYY' ? '99/99/9999' : undefined}
-            innerRef={this.saveDateInput}
+          <input
+            ref={this.saveDateInput}
             className={`${prefixCls}-input ${invalidClass}`}
             value={str}
             disabled={props.disabled}
