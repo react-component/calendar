@@ -114,7 +114,7 @@ interface RangeCalendarProps {
   onOk?: (value: Moment[]) => void;
   clearIcon?: React.ReactNode;
   showOk?: boolean;
-  locale: { [key: string]: any };
+  locale?: { [key: string]: any };
   showClear?: boolean;
   showToday?: boolean;
   showWeekNumber?: boolean;
