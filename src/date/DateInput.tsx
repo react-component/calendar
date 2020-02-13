@@ -78,6 +78,7 @@ class DateInput extends React.Component<
       str = !strArray[2]
         ? strArray[1]
         : `${strArray[1]}/${strArray[2]}${strArray[3] ? `/${strArray[3]}` : ''}`;
+      console.log(str);
     }
 
     // 没有内容，合法并直接退出
