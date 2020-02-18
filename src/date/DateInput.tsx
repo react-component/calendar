@@ -72,7 +72,7 @@ class DateInput extends React.Component<
 
   onInputChange = event => {
     const str = event.target.value;
-    const { disabledDate, format, onChange, selectedValue } = this.props;
+    const { disabledDate, format, onChange, onSelect, selectedValue } = this.props;
 
     // 没有内容，合法并直接退出
     if (!str) {
@@ -117,6 +117,7 @@ class DateInput extends React.Component<
         str,
       });
       onChange(value);
+      onSelect(value);
     }
   };
 
@@ -133,8 +134,7 @@ class DateInput extends React.Component<
 
   onKeyDown = event => {
     const { keyCode } = event;
-    const { onSelect, disabledDate } = this.props;
-    const value = moment(this.state.str);
+    const { onSelect, value, disabledDate } = this.props;
     if (keyCode === KeyCode.ENTER && onSelect) {
       const validateDate = !disabledDate || !disabledDate(value);
       if (validateDate) {
