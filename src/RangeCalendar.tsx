@@ -434,13 +434,15 @@ class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarSta
 
   onStartInputSelect = value => {
     const args = ['left', value, { source: 'dateInputSelect' }];
-    this.fireValueChange(value);
+    const newValue = [value, this.state.value[1]];
+    this.fireValueChange(newValue);
     return onInputSelect.apply(this, args);
   };
 
   onEndInputSelect = value => {
     const args = ['right', value, { source: 'dateInputSelect' }];
-    this.fireValueChange(value);
+    const newValue = [this.state.value[0], value];
+    this.fireValueChange(newValue);
     return onInputSelect.apply(this, args);
   };
 
