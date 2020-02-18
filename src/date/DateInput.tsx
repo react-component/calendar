@@ -112,11 +112,16 @@ class DateInput extends React.Component<
     }
 
     if (selectedValue !== value || (selectedValue && value && !selectedValue.isSame(value))) {
-      this.setState({
-        invalid: false,
-        str,
-      });
-      onChange(value);
+      this.setState(
+        {
+          invalid: false,
+          str,
+        },
+        () => {
+          onChange(value);
+          this.onSelect();
+        },
+      );
     }
   };
 
@@ -131,14 +136,19 @@ class DateInput extends React.Component<
     }));
   };
 
+  onSelect = () => {
+    const value = moment(this.state.str);
+    const { onSelect, disabledDate } = this.props;
+    const validateDate = !disabledDate || !disabledDate(value);
+    if (validateDate && onSelect) {
+      onSelect(value.clone());
+    }
+  };
+
   onKeyDown = event => {
     const { keyCode } = event;
-    const { onSelect, value, disabledDate } = this.props;
-    if (keyCode === KeyCode.ENTER && onSelect) {
-      const validateDate = !disabledDate || !disabledDate(value);
-      if (validateDate) {
-        onSelect(value.clone());
-      }
+    if (keyCode === KeyCode.ENTER) {
+      this.onSelect();
       event.preventDefault();
     }
   };
