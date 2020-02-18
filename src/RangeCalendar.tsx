@@ -533,7 +533,12 @@ class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarSta
 
   getEndValue = () => {
     const { value, selectedValue, showTimePicker, mode, panelTriggerSource } = this.state;
-    let endValue = value[1] ? value[1].clone() : value[0].clone().add(1, 'month');
+    // eslint-disable-next-line
+    let endValue = value[1]
+      ? value[1].clone()
+      : value[0]
+      ? value[0].clone().add(1, 'month')
+      : selectedValue[0].clone().add(1, 'month');
 
     // keep selectedTime when select date
     if (selectedValue[1] && this.props.timePicker) {
