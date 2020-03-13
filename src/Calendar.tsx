@@ -490,6 +490,7 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
             showDateInput={props.showDateInput}
             timePicker={timePicker}
             selectedValue={selectedValue}
+            timePickerDisabled={!selectedValue}
             value={value}
             disabledDate={disabledDate}
             okDisabled={
