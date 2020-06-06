@@ -93,7 +93,7 @@ describe('Calendar', () => {
       ).toBe('3/8/2017 06:00:00');
     });
     it('timePicker date have no changes when hover', () => {
-      const timePicker = <TimePickerPanel defaultValue={moment('00:00:00', 'HH:mm:ss')} />;      
+      const timePicker = <TimePickerPanel defaultValue={moment('00:00:00', 'HH:mm:ss')} />;
       const wrapper = mount(
         <Calendar defaultSelectedValue={moment('01:01:01', 'HH:mm:ss')} timePicker={timePicker} />,
       );
