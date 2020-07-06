@@ -8,6 +8,7 @@ export default {
   year: 'Yıl',
   timeSelect: 'Zaman Seç',
   dateSelect: 'Tarih Seç',
+  weekSelect: 'Hafta Seç',
   monthSelect: 'Ay Seç',
   yearSelect: 'Yıl Seç',
   decadeSelect: 'On Yıl Seç',
