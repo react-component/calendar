@@ -121,6 +121,8 @@ class Demo extends React.Component {
   state = {
     value: [],
     hoverValue: [],
+    // control mode
+    mode: ['date', 'date'],
   };
 
   onChange = value => {
@@ -130,6 +132,13 @@ class Demo extends React.Component {
 
   onHoverChange = hoverValue => {
     this.setState({ hoverValue });
+  };
+
+  onPanelChange = (_, mode) => {
+    console.log('onPanelChange', mode);
+    this.setState({
+      mode,
+    });
   };
 
   render() {
@@ -144,6 +153,8 @@ class Demo extends React.Component {
         locale={cn ? zhCN : enUS}
         disabledTime={disabledTime}
         timePicker={timePickerElement}
+        mode={this.state.mode}
+        onPanelChange={this.onPanelChange}
       />
     );
     return (
@@ -183,6 +194,9 @@ export default () => (
         timePicker={timePickerElement}
         disabledTime={disabledTime}
         renderFooter={() => <span>extra footer</span>}
+        // onPanelChange={(_,mode) => {
+        //   console.log("onPanelChange", mode);
+        // }}
       />
     </div>
     <br />

@@ -86,7 +86,7 @@ function onInputSelect(
 }
 
 interface RangeCalendarProps {
-  mode?: CalendarTypeMode;
+  mode?: [CalendarTypeMode, CalendarTypeMode];
   selectedValue?: Moment[];
   defaultSelectedValue?: Moment[];
   type?: 'both' | 'start' | 'end';
@@ -129,7 +129,7 @@ interface RangeCalendarProps {
 
 interface RangeCalendarState {
   value?: Moment[];
-  mode?: CalendarTypeMode[];
+  mode?: [CalendarTypeMode, CalendarTypeMode];
   selectedValue?: Moment[];
   showTimePicker?: boolean;
   hoverValue?: Moment[];
@@ -146,7 +146,7 @@ class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarSta
     defaultSelectedValue: [],
     onValueChange: noop,
     onHoverChange: noop,
-    onPanelChange: noop,
+    // onPanelChange: noop,
     disabledTime: noop,
     onInputSelect: noop,
     showToday: true,
@@ -404,15 +404,25 @@ class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarSta
   };
 
   onOpenTimePicker = () => {
-    this.setState({
-      showTimePicker: true,
-    });
+    const { props, state } = this;
+    if (props.onPanelChange) {
+      props.onPanelChange(state.value, ['time', 'time']);
+    } else {
+      this.setState({
+        showTimePicker: true,
+      });
+    }
   };
 
   onCloseTimePicker = () => {
-    this.setState({
-      showTimePicker: false,
-    });
+    const { props, state } = this;
+    if (props.onPanelChange) {
+      props.onPanelChange(state.value, ['date', 'date']);
+    } else {
+      this.setState({
+        showTimePicker: false,
+      });
+    }
   };
 
   onOk = () => {
@@ -454,32 +464,39 @@ class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarSta
     return this.fireValueChange(value);
   };
 
-  onStartPanelChange = (value, mode) => {
+  onStartPanelChange = (value, mode: CalendarTypeMode) => {
     const { props, state } = this;
-    const newMode = [mode, state.mode[1]];
-    const newState: RangeCalendarState = {
-      panelTriggerSource: 'start',
-    };
-    if (!('mode' in props)) {
-      newState.mode = newMode;
+    const newMode: [CalendarTypeMode, CalendarTypeMode] = [mode, state.mode[1]];
+    if (props.onPanelChange) {
+      // control mode
+      const newValue: Moment[] = [value || state.value[0], state.value[1]];
+      props.onPanelChange(newValue, newMode);
+    } else {
+      const newState: RangeCalendarState = {
+        panelTriggerSource: 'start',
+      };
+      if (!('mode' in props)) {
+        newState.mode = newMode;
+      }
+      this.setState(newState);
     }
-    this.setState(newState);
-    const newValue: Moment[] = [value || state.value[0], state.value[1]];
-    props.onPanelChange(newValue, newMode);
   };
 
-  onEndPanelChange = (value, mode) => {
+  onEndPanelChange = (value, mode: CalendarTypeMode) => {
     const { props, state } = this;
-    const newMode = [state.mode[0], mode];
-    const newState: RangeCalendarState = {
-      panelTriggerSource: 'end',
-    };
-    if (!('mode' in props)) {
-      newState.mode = newMode;
+    const newMode: [CalendarTypeMode, CalendarTypeMode] = [state.mode[0], mode];
+    if (props.onPanelChange) {
+      const newValue: Moment[] = [state.value[0], value || state.value[1]];
+      props.onPanelChange(newValue, newMode);
+    } else {
+      const newState: RangeCalendarState = {
+        panelTriggerSource: 'end',
+      };
+      if (!('mode' in props)) {
+        newState.mode = newMode;
+      }
+      this.setState(newState);
     }
-    this.setState(newState);
-    const newValue: Moment[] = [state.value[0], value || state.value[1]];
-    props.onPanelChange(newValue, newMode);
   };
 
   static getDerivedStateFromProps(nextProps, state) {
