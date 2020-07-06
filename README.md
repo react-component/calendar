@@ -1,5 +1,7 @@
 # rc-calendar
 
+[Deprecated] `rc-calendar` is deprecated. Please use `rc-picker` instead.
+
 React Calendar
 
 [![NPM version][npm-image]][npm-url] [![build status][travis-image]][travis-url] [![Test coverage][codecov-image]][codecov-url] [![gemnasium deps][gemnasium-image]][gemnasium-url] [![npm download][download-image]][download-url] [![Code Quality: Javascript][lgtm-badge]][lgtm-badge-url] [![Total alerts][lgtm-alerts]][lgtm-alerts-url]
