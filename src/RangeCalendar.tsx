@@ -802,6 +802,7 @@ class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarSta
               enablePrev
               enableNext={!isClosestMonths || this.isMonthYearPanelShow(mode[1])}
               clearIcon={clearIcon}
+              onClear={this.clear}
             />
             <span className={`${prefixCls}-range-middle`}>{seperator}</span>
             <CalendarPart
@@ -826,6 +827,7 @@ class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarSta
               enablePrev={!isClosestMonths || this.isMonthYearPanelShow(mode[0])}
               enableNext
               clearIcon={clearIcon}
+              onClear={this.clear}
             />
           </div>
           <div className={cls}>

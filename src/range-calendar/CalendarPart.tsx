@@ -83,6 +83,7 @@ const CalendarPart: React.FC<CalendarPartProps> = props => {
     enablePrev,
     enableNext,
     clearIcon,
+    onClear,
     showClear,
     inputMode,
   } = props;
@@ -120,6 +121,7 @@ const CalendarPart: React.FC<CalendarPartProps> = props => {
       placeholder={placeholder}
       value={value as Moment}
       showClear={showClear || false}
+      onClear={onClear}
       selectedValue={selectedValue[index]}
       onChange={onInputChange}
       onSelect={onInputSelect}
