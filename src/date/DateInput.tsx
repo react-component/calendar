@@ -199,7 +199,7 @@ class DateInput extends React.Component<
         <div className={`${prefixCls}-date-input-wrap`}>
           <InputMask
             mask={this.props.format === 'MM/DD/YYYY' ? '99/99/9999' : undefined}
-            innerRef={this.saveDateInput}
+            inputRef={this.saveDateInput}
             className={`${prefixCls}-input ${invalidClass}`}
             value={str}
             disabled={props.disabled}
