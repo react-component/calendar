@@ -162,7 +162,9 @@ class RangeCalendar extends React.Component {
         syncTime(prevSelectedValue[0], value);
         nextSelectedValue = [value];
       } else if (this.compare(firstSelectedValue, value) <= 0) {
-        if (prevSelectedValue.length === 2 && this.compare(prevSelectedValue[0], prevSelectedValue[1]) == 0) {
+        if (
+          prevSelectedValue.length === 2 && this.compare(prevSelectedValue[0], prevSelectedValue[1]) === 0
+        ) {
           syncTime(prevSelectedValue[1], prevSelectedValue[0]);
         } else {
           syncTime(prevSelectedValue[1], value);
