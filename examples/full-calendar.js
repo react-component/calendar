@@ -38,7 +38,7 @@ class Demo extends React.Component {
   };
 
   componentWillMount() {
-    document.title = 'Full Calendar';
+    document.title = 'RC Full Calendar';
   }
 
   onTypeChange = (type) => {
