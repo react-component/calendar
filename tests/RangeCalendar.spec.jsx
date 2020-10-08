@@ -577,6 +577,42 @@ describe('RangeCalendar', () => {
       ).toBe('2010');
     });
 
+    it('controlled value works correctly with date mode and defaultValue is the same day, but the start time is less than the end time', () => {
+      const jsetHandleChange = jest.fn();
+      class Demo extends React.Component {
+        state = {
+          mode: ['date', 'date'],
+          value: [moment.unix(1586447407), moment.unix(1586487007)],
+        };
+
+        // onChange = value => {
+        //   jsetHandleChange(value);
+        //   // this.setState({
+        //   //   value,
+        //   // });
+        // };
+
+        render() {
+          return (
+            <RangeCalendar
+              value={this.state.value}
+              selectedValue={this.state.value}
+              mode={this.state.mode}
+              onChange={jsetHandleChange}
+            />
+          );
+        }
+      }
+
+      const wrapper = mount(<Demo />);
+      wrapper.find('.rc-calendar-range').first().simulate('click');
+      wrapper.find('.rc-calendar-range-left').first().find('.rc-calendar-date').at(11).simulate('click');
+      wrapper.find('.rc-calendar-range-left').first().find('.rc-calendar-date').at(11).simulate('click');
+      expect(jsetHandleChange.mock.calls[0][0][0].unix()).toEqual(1586447407);
+      expect(jsetHandleChange.mock.calls[1][0][0].unix()).toEqual(1586447407);
+      expect(jsetHandleChange.mock.calls[1][0][1].unix()).toEqual(1586447407);
+    });
+
     // https://github.com/ant-design/ant-design/issues/15659
     it('selected item style works correctly with mode year', () => {
       class Demo extends React.Component {
