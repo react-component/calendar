@@ -24,5 +24,6 @@ export default {
     previousDecade: 'წინა ათწლეული',
     nextDecade: 'მომდევნო ათწლეული',
     previousCentury: 'გასული საუკუნე',
-    nextCentury: 'მომდევნო საუკუნე ',
+    nextCentury: 'მომდევნო საუკუნე',
   };
+  
