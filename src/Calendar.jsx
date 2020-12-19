@@ -103,6 +103,7 @@ class Calendar extends React.Component {
 
   onKeyDown = (event) => {
     if (event.target.nodeName.toLowerCase() === 'input') {
+      this.props.onKeyDown(event);
       return undefined;
     }
     const keyCode = event.keyCode;
