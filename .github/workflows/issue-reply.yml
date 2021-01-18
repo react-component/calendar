@@ -1,0 +1,28 @@
+name: Issue reply
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  reply-help:
+    runs-on: ubuntu-latest
+    steps:
+      - name: help wanted
+        if: github.event.label.name == 'help wanted' || github.event.label.name == 'PR welcome'
+        uses: actions-cool/issues-helper@v1.11
+        with:
+          actions: 'create-comment'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            Hello @${{ github.event.issue.user.login }}. We totally like your proposal/feedback, welcome to send us a Pull Request for it. Please provide changelog/TypeScript/documentation/test cases if needed and make sure CI passed, we will review it soon. We appreciate your effort in advance and looking forward to your contribution!
+
+      - name: need reproduce
+        if: github.event.label.name == 'need reproduce'
+        uses: actions-cool/issues-helper@v1.11
+        with:
+          actions: 'create-comment'
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            Hello @${{ github.event.issue.user.login }}. Please provide a online reproduction by forking this link https://codesandbox.io or a minimal GitHub repository.
