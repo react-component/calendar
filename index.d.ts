@@ -23,7 +23,7 @@ export interface Props {
   showToday?: boolean;
   showOk?: boolean;
   onSelect?: (date: Moment) => void;
-  onOk?: () => void;
+  onOk?: (date: Moment) => void;
   onKeyDown?: () => void;
   timePicker?: React.ReactNode;
   dateInputPlaceholder?: string;
