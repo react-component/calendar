@@ -73,7 +73,7 @@
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.3.1",
     "jest": "^22.1.4",
-    "mockdate": "^2.0.1",
+    "mockdate": "^3.0.4",
     "pre-commit": "1.x",
     "rc-dialog": "^7.0.0",
     "rc-select": "^9.1.5",
