@@ -1,0 +1,4 @@
+steps:
+  - label: ":zap: Auto Pipeline"
+    plugins:
+      - ssh://git@github.com/riskalyze/buildkite-auto-pipeline-plugin.git#v2: ~
