@@ -7,7 +7,6 @@
     "": {
       "name": "@riskalyze/calendar",
       "version": "0.0.0",
-      "hasInstallScript": true,
       "dependencies": {
         "classnames": "2.x",
         "moment": "2.x",
@@ -27,6 +26,7 @@
         "eslint": "^7.25.0",
         "eslint-plugin-unicorn": "^31.0.0",
         "father": "^2.26.0",
+        "less": "^3.13.1",
         "mockdate": "^2.0.1",
         "np": "^5.0.3",
         "rc-dialog": "^7.0.0",
