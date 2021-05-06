@@ -1,4 +1,6 @@
 steps:
-  - label: ":zap: Auto Pipeline"
+  - label: ':rocket: Release'
     plugins:
-      - ssh://git@github.com/riskalyze/buildkite-auto-pipeline-plugin.git#v2: ~
+      - ssh://git@github.com/riskalyze/buildkite-semantic-release-plugin.git#v2:
+          plugins: [ '@semantic-release/npm' ]
+          prerelease: [ 'npm install --no-audit', 'npm run compile', 'lessc assets/index.less assets/index.css' ]
