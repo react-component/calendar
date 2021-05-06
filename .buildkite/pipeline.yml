@@ -1,0 +1,18 @@
+cache: &cache
+  key: v1-cache-{{ runner.os }}-{{ checksum 'npm-shrinkwrap.json' }}
+  restore-keys:
+    - v1-cache-{{ runner.os }}-
+    - v1-cache-
+  backend: s3
+  s3:
+    bucket: ${BUILDKITE_ARTIFACT_BUCKET}
+  paths:
+    - node_modules
+
+steps:
+  - label: ':rocket: Release'
+    plugins:
+      - gencer/cache#v2.4.0: *cache
+      - ssh://git@github.com/riskalyze/buildkite-semantic-release-plugin.git#v2:
+          plugins: [ '@semantic-release/npm' ]
+          prerelease: [ 'npm install --no-audit', 'npm run compile', 'npm run lessc' ]
