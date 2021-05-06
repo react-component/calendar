@@ -33,8 +33,8 @@
     "build": "father doc build --storybook",
     "compile": "father build",
     "coverage": "father test --coverage",
+    "lessc": "cd assets && lessc index.less index.css",
     "lint": "eslint src/ examples/ --ext .tsx,.ts,.jsx,.js --fix",
-    "postinstall": "npm run compile && cd assets && lessc index.less index.css",
     "start": "cross-env NODE_ENV=development STORYBOOK_THEME=dark  father doc dev --storybook",
     "test": "father test"
   },
