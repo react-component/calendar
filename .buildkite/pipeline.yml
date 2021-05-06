@@ -3,4 +3,4 @@ steps:
     plugins:
       - ssh://git@github.com/riskalyze/buildkite-semantic-release-plugin.git#v2:
           plugins: [ '@semantic-release/npm' ]
-          prerelease: [ 'npm install --no-audit', 'npm run compile', 'lessc assets/index.less assets/index.css' ]
+          prerelease: [ 'npm install --no-audit' ]
