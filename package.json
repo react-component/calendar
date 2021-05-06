@@ -93,7 +93,7 @@
     "classnames": "2.x",
     "moment": "2.x",
     "prop-types": "^15.5.8",
-    "rc-trigger": "^2.2.0",
+    "rc-trigger": "^5.2.7",
     "rc-util": "^4.1.1",
     "react-lifecycles-compat": "^3.0.4"
   },
