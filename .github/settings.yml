@@ -1,0 +1,9 @@
+_extends: probot-settings
+
+repository:
+  name: calendar
+  description: React Calendar
+
+teams:
+  - name: design
+    permission: push
