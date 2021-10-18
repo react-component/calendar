@@ -13,5 +13,5 @@ steps:
   - label: ':rocket: Release'
     plugins:
       - gencer/cache#v2.4.0: *cache
-      - ssh://git@github.com/riskalyze/buildkite-semantic-release-plugin.git#v3:
+      - ssh://git@github.com/riskalyze/buildkite-semantic-release-plugin.git#v4:
           prerelease: [ 'npm install --no-audit ', 'npm run compile', 'npm run lessc' ]
