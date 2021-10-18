@@ -15,4 +15,4 @@ steps:
       - gencer/cache#v2.4.0: *cache
       - ssh://git@github.com/riskalyze/buildkite-semantic-release-plugin.git#v2:
           plugins: [ '@semantic-release/npm' ]
-          prerelease: [ 'NODE_OPTIONS=--max_old_space_size=4096 npm install --no-audit ', 'npm run compile', 'npm run lessc' ]
+          prerelease: [ 'npm install --no-audit ', 'npm run compile', 'npm run lessc' ]
