@@ -48,7 +48,7 @@
     "react-lifecycles-compat": "^3.0.4"
   },
   "devDependencies": {
-    "@types/react": "^16.3.13",
+    "@types/react": "16.9.0",
     "@umijs/fabric": "^2.0.0-beta.3",
     "cross-env": "^6.0.3",
     "enzyme": "^3.10.0",
@@ -63,8 +63,13 @@
     "rc-dialog": "^7.0.0",
     "rc-select": "^10.0.0-alpha.29",
     "rc-time-picker": "^4.0.0-alpha.2",
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
-    "react-test-renderer": "^16.0.0"
+    "react": "16.9.0",
+    "react-dom": "16.9.0",
+    "react-test-renderer": "16.9.0"
+  },
+  "peerDependencies": {
+    "@types/react": ">= 16.8.0 < 17",
+    "react": ">= 16.8 < 17",
+    "react-dom": ">= 16.8 < 17"
   }
 }
