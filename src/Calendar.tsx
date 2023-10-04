@@ -5,7 +5,7 @@ import KeyCode from 'rc-util/lib/KeyCode';
 import { polyfill } from 'react-lifecycles-compat';
 import moment, { Moment } from 'moment';
 import DateTable from './date/DateTable';
-import CalendarHeader from './calendar/CalendarHeader';
+import CalendarHeader, { chevronIcons } from './calendar/CalendarHeader';
 import CalendarFooter from './calendar/CalendarFooter';
 import { calendarMixinDefaultProps, getNowByCurrentStateValue } from './mixin/CalendarMixin';
 import { defaultProp } from './mixin/CommonMixin';
@@ -15,7 +15,7 @@ import { goStartMonth, goEndMonth, goTime } from './util/toTime';
 
 function noop() {}
 
-const getMomentObjectIfValid = date => {
+const getMomentObjectIfValid = (date) => {
   if (moment.isMoment(date) && date.isValid()) {
     return date;
   }
@@ -64,6 +64,7 @@ export interface CalendarProps {
   onBlur?: (e: React.MouseEvent<HTMLDivElement>) => void;
   monthCellRender?: () => React.ReactNode;
   monthCellContentRender?: () => React.ReactNode;
+  arrowElements?: chevronIcons;
 }
 
 export interface CalendarState {
@@ -138,7 +139,7 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
     // }
   };
 
-  isAllowedDate = value => {
+  isAllowedDate = (value) => {
     const { disabledDate } = this.props;
     const { disabledTime } = this.props;
     return isAllowedDate(value, disabledDate, disabledTime);
@@ -157,11 +158,11 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
     return format;
   };
 
-  saveRoot = root => {
+  saveRoot = (root) => {
     this.rootInstance = root;
   };
 
-  renderRoot = newProps => {
+  renderRoot = (newProps) => {
     const { props } = this;
     const { prefixCls } = props;
 
@@ -211,7 +212,7 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
     props.onPanelChange(value || state.value, mode);
   };
 
-  onKeyDown = event => {
+  onKeyDown = (event) => {
     if (event.target.nodeName.toLowerCase() === 'input') {
       return undefined;
     }
@@ -287,19 +288,19 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
     }
   };
 
-  onDateInputChange = value => {
+  onDateInputChange = (value) => {
     this.onSelect(value, {
       source: 'dateInput',
     });
   };
 
-  onDateInputSelect = value => {
+  onDateInputSelect = (value) => {
     this.onSelect(value, {
       source: 'dateInputSelect',
     });
   };
 
-  onDateTableSelect = value => {
+  onDateTableSelect = (value) => {
     const { timePicker } = this.props;
     const { selectedValue } = this.state;
     if (!selectedValue && timePicker) {
@@ -319,7 +320,7 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
     });
   };
 
-  onBlur = event => {
+  onBlur = (event) => {
     setTimeout(() => {
       const dateInput = DateInput.getInstance();
       const { rootInstance } = this;
@@ -459,6 +460,7 @@ class Calendar extends React.Component<CalendarProps, CalendarState> {
             prefixCls={prefixCls}
             monthCellRender={monthCellRender}
             monthCellContentRender={monthCellContentRender}
+            arrowElements={props.arrowElements}
           />
           {timePicker && showTimePicker ? (
             <div className={`${prefixCls}-time-picker`}>

@@ -33,7 +33,7 @@ interface MonthCalendarState {
 }
 
 class MonthCalendar extends React.Component<MonthCalendarProps, MonthCalendarState> {
-  static defaultProps = Object.assign({}, defaultProp, calendarMixinDefaultProps);
+  static defaultProps = { ...defaultProp, ...calendarMixinDefaultProps };
 
   constructor(props) {
     super(props);
@@ -81,7 +81,7 @@ class MonthCalendar extends React.Component<MonthCalendarProps, MonthCalendarSta
     }
   };
 
-  onKeyDown = event => {
+  onKeyDown = (event) => {
     const { keyCode } = event;
     const ctrlKey = event.ctrlKey || event.metaKey;
     const stateValue = this.state.value;
@@ -153,13 +153,13 @@ class MonthCalendar extends React.Component<MonthCalendarProps, MonthCalendarSta
 
   rootInstance: HTMLElement;
 
-  saveRoot = root => {
+  saveRoot = (root) => {
     this.rootInstance = root;
   };
 
   onBlur: (event: React.FocusEvent<HTMLDivElement>) => void;
 
-  renderRoot = newProps => {
+  renderRoot = (newProps) => {
     const { props } = this;
     const { prefixCls } = props;
 

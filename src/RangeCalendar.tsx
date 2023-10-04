@@ -11,11 +11,12 @@ import { defaultProp } from './mixin/CommonMixin';
 import { syncTime, getTodayTime, isAllowedDate } from './util';
 import { goTime, goStartMonth, goEndMonth, includesTime } from './util/toTime';
 import { CalendarTypeMode } from './date/DateInput';
+import { chevronIcons } from '.';
 
 function noop() {}
 
 function isEmptyArray(arr) {
-  return Array.isArray(arr) && (arr.length === 0 || arr.every(i => !i));
+  return Array.isArray(arr) && (arr.length === 0 || arr.every((i) => !i));
 }
 
 function isArraysEqual(a, b) {
@@ -125,6 +126,7 @@ interface RangeCalendarProps {
   visible?: boolean;
   renderFooter?: () => void;
   format?: string;
+  arrowElements?: chevronIcons;
 }
 
 interface RangeCalendarState {
@@ -155,7 +157,7 @@ class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarSta
 
   rootInstance: HTMLElement;
 
-  saveRoot = root => {
+  saveRoot = (root) => {
     this.rootInstance = root;
   };
 
@@ -210,7 +212,7 @@ class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarSta
     }
   };
 
-  onSelect = value => {
+  onSelect = (value) => {
     const { type } = this.props;
     const { selectedValue, prevSelectedValue, firstSelectedValue } = this.state;
     let nextSelectedValue;
@@ -246,7 +248,7 @@ class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarSta
     this.fireSelectValueChange(nextSelectedValue);
   };
 
-  onKeyDown = event => {
+  onKeyDown = (event) => {
     if (event.target.nodeName.toLowerCase() === 'input') {
       return;
     }
@@ -263,7 +265,7 @@ class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarSta
     const { onKeyDown, disabledDate } = this.props;
 
     // Update last time of the picker
-    const updateHoverPoint = func => {
+    const updateHoverPoint = (func) => {
       // Change hover to make focus in UI
       let currentHoverTime;
       let nextHoverTime;
@@ -288,7 +290,7 @@ class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarSta
 
       // Find origin hover time on value index
       if (nextHoverValue.length >= 2) {
-        const miss = nextHoverValue.some(ht => !includesTime(value, ht, 'month'));
+        const miss = nextHoverValue.some((ht) => !includesTime(value, ht, 'month'));
         if (miss) {
           const newValue = nextHoverValue.slice().sort((t1, t2) => t1.valueOf() - t2.valueOf());
           if (newValue[0].isSame(newValue[1], 'month')) {
@@ -298,10 +300,10 @@ class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarSta
         }
       } else if (nextHoverValue.length === 1) {
         // If only one value, let's keep the origin panel
-        let oriValueIndex = value.findIndex(time => time.isSame(currentHoverTime, 'month'));
+        let oriValueIndex = value.findIndex((time) => time.isSame(currentHoverTime, 'month'));
         if (oriValueIndex === -1) oriValueIndex = 0;
 
-        if (value.every(time => !time.isSame(nextHoverTime, 'month'))) {
+        if (value.every((time) => !time.isSame(nextHoverTime, 'month'))) {
           const newValue = value.slice();
           newValue[oriValueIndex] = nextHoverTime.clone();
           this.fireValueChange(newValue);
@@ -315,41 +317,41 @@ class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarSta
 
     switch (keyCode) {
       case KeyCode.DOWN:
-        updateHoverPoint(time => goTime(time, 1, 'weeks'));
+        updateHoverPoint((time) => goTime(time, 1, 'weeks'));
         return;
       case KeyCode.UP:
-        updateHoverPoint(time => goTime(time, -1, 'weeks'));
+        updateHoverPoint((time) => goTime(time, -1, 'weeks'));
         return;
       case KeyCode.LEFT:
         if (ctrlKey) {
-          updateHoverPoint(time => goTime(time, -1, 'years'));
+          updateHoverPoint((time) => goTime(time, -1, 'years'));
         } else {
-          updateHoverPoint(time => goTime(time, -1, 'days'));
+          updateHoverPoint((time) => goTime(time, -1, 'days'));
         }
         return;
       case KeyCode.RIGHT:
         if (ctrlKey) {
-          updateHoverPoint(time => goTime(time, 1, 'years'));
+          updateHoverPoint((time) => goTime(time, 1, 'years'));
         } else {
-          updateHoverPoint(time => goTime(time, 1, 'days'));
+          updateHoverPoint((time) => goTime(time, 1, 'days'));
         }
         return;
       case KeyCode.HOME:
-        updateHoverPoint(time => goStartMonth(time));
+        updateHoverPoint((time) => goStartMonth(time));
         return;
       case KeyCode.END:
-        updateHoverPoint(time => goEndMonth(time));
+        updateHoverPoint((time) => goEndMonth(time));
         return;
       case KeyCode.PAGE_DOWN:
-        updateHoverPoint(time => goTime(time, 1, 'month'));
+        updateHoverPoint((time) => goTime(time, 1, 'month'));
         return;
       case KeyCode.PAGE_UP:
-        updateHoverPoint(time => goTime(time, -1, 'month'));
+        updateHoverPoint((time) => goTime(time, -1, 'month'));
         return;
       case KeyCode.ENTER: {
         let lastValue: Moment;
         if (hoverValue.length === 0) {
-          lastValue = updateHoverPoint(time => time);
+          lastValue = updateHoverPoint((time) => time);
         } else if (hoverValue.length === 1) {
           // eslint-disable-next-line prefer-destructuring
           lastValue = hoverValue[0];
@@ -371,7 +373,7 @@ class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarSta
     }
   };
 
-  onDayHover = value => {
+  onDayHover = (value) => {
     let hoverValue = [];
     const { selectedValue, firstSelectedValue } = this.state;
 
@@ -432,27 +434,27 @@ class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarSta
     return onInputSelect.apply(this, args);
   };
 
-  onStartInputSelect = value => {
+  onStartInputSelect = (value) => {
     const args = ['left', value, { source: 'dateInputSelect' }];
     const newValue = [value, this.state.value[1]];
     this.fireValueChange(newValue);
     return onInputSelect.apply(this, args);
   };
 
-  onEndInputSelect = value => {
+  onEndInputSelect = (value) => {
     const args = ['right', value, { source: 'dateInputSelect' }];
     const newValue = [this.state.value[0], value];
     this.fireValueChange(newValue);
     return onInputSelect.apply(this, args);
   };
 
-  onStartValueChange = leftValue => {
+  onStartValueChange = (leftValue) => {
     const value = [...this.state.value];
     value[0] = leftValue;
     return this.fireValueChange(value);
   };
 
-  onEndValueChange = rightValue => {
+  onEndValueChange = (rightValue) => {
     const value = [...this.state.value];
     value[1] = rightValue;
     return this.fireValueChange(value);
@@ -607,11 +609,11 @@ class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarSta
     return userSettingDisabledTime;
   };
 
-  isAllowedDateAndTime = selectedValue =>
+  isAllowedDateAndTime = (selectedValue) =>
     isAllowedDate(selectedValue[0], this.props.disabledDate, this.disabledStartTime) &&
     isAllowedDate(selectedValue[1], this.props.disabledDate, this.disabledEndTime);
 
-  isMonthYearPanelShow = mode => ['month', 'year', 'decade'].indexOf(mode) > -1;
+  isMonthYearPanelShow = (mode) => ['month', 'year', 'decade'].indexOf(mode) > -1;
 
   hasSelectedValue = () => {
     const { selectedValue } = this.state;
@@ -669,7 +671,7 @@ class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarSta
     }
   };
 
-  fireValueChange = value => {
+  fireValueChange = (value) => {
     const { props } = this;
     if (!('value' in props)) {
       this.setState({
@@ -679,7 +681,7 @@ class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarSta
     props.onValueChange(value);
   };
 
-  fireHoverValueChange = hoverValue => {
+  fireHoverValueChange = (hoverValue) => {
     const { props } = this;
     if (!('hoverValue' in props)) {
       this.setState({ hoverValue });
@@ -692,16 +694,16 @@ class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarSta
     this.props.onClear();
   };
 
-  disabledStartTime = time => this.props.disabledTime(time, 'start');
+  disabledStartTime = (time) => this.props.disabledTime(time, 'start');
 
-  disabledEndTime = time => this.props.disabledTime(time, 'end');
+  disabledEndTime = (time) => this.props.disabledTime(time, 'end');
 
-  disabledStartMonth = month => {
+  disabledStartMonth = (month) => {
     const { value } = this.state;
     return month.isAfter(value[1], 'month');
   };
 
-  disabledEndMonth = month => {
+  disabledEndMonth = (month) => {
     const { value } = this.state;
     return month.isBefore(value[0], 'month');
   };
@@ -719,6 +721,7 @@ class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarSta
       showToday,
       type,
       clearIcon,
+      arrowElements,
     } = props;
     const { hoverValue, selectedValue, mode, showTimePicker } = state;
     const className = {
@@ -814,6 +817,7 @@ class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarSta
               enableNext={!isClosestMonths || this.isMonthYearPanelShow(mode[1])}
               clearIcon={clearIcon}
               onClear={this.clear}
+              arrowElements={arrowElements}
             />
             <span className={`${prefixCls}-range-middle`}>{seperator}</span>
             <CalendarPart
@@ -839,6 +843,7 @@ class RangeCalendar extends React.Component<RangeCalendarProps, RangeCalendarSta
               enableNext
               clearIcon={clearIcon}
               onClear={this.clear}
+              arrowElements={arrowElements}
             />
           </div>
           <div className={cls}>

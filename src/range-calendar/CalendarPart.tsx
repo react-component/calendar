@@ -1,7 +1,7 @@
 import React, { CSSProperties } from 'react';
 import { Moment } from 'moment';
 
-import CalendarHeader from '../calendar/CalendarHeader';
+import CalendarHeader, { chevronIcons } from '../calendar/CalendarHeader';
 import DateTable from '../date/DateTable';
 import DateInput, { CalendarTypeMode } from '../date/DateInput';
 import { getTimeConfig } from '../util/index';
@@ -61,8 +61,9 @@ interface CalendarPartProps {
   disabledMonth?: (value: Moment) => boolean;
   onDayHover?: (current: Moment, value: Moment) => void;
   dateRender?: (current: Moment, value: Moment) => React.ReactNode;
+  arrowElements?: chevronIcons;
 }
-const CalendarPart: React.FC<CalendarPartProps> = props => {
+const CalendarPart: React.FC<CalendarPartProps> = (props) => {
   const {
     prefixCls,
     value,
@@ -86,6 +87,7 @@ const CalendarPart: React.FC<CalendarPartProps> = props => {
     onClear,
     showClear,
     inputMode,
+    arrowElements,
   } = props;
   const shouldShowTimePicker = showTimePicker && timePicker;
   const disabledTimeConfig =
@@ -143,6 +145,7 @@ const CalendarPart: React.FC<CalendarPartProps> = props => {
           onValueChange={props.onValueChange}
           onPanelChange={props.onPanelChange}
           disabledMonth={props.disabledMonth}
+          arrowElements={arrowElements}
         />
         {showTimePicker ? (
           <div className={`${prefixCls}-time-picker`}>
