@@ -10,8 +10,8 @@ import Select from 'rc-select';
 
 import zhCN from 'rc-calendar/src/locale/zh_CN';
 import enUS from 'rc-calendar/src/locale/en_US';
-
 import moment from 'moment';
+
 import 'moment/locale/zh-cn';
 import 'moment/locale/en-gb';
 
@@ -36,6 +36,10 @@ class Demo extends React.Component {
   state = {
     type: 'month',
   };
+
+  componentWillMount() {
+    document.title = 'RC Full Calendar';
+  }
 
   onTypeChange = (type) => {
     this.setState({
